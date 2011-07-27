@@ -120,6 +120,9 @@ namespace Europlan.Common {
 						this.connectedPlanPanel.InvalidateGraphics();
 					}
 				}
+				if (this.mode != KlimaBodenMode.KDM_CONNECTIONS) {
+					this.possibleAnbindungspunkte = new List<GraphicalConnectionAnbindungsPunkt>();
+				}
 				if (this.ModeChanged != null) {
 					this.ModeChanged(this, EventArgs.Empty);
 				}
@@ -238,9 +241,15 @@ namespace Europlan.Common {
 			this.PaintAfterPlanPannel(e.Graphics, additionalTransformation, mousePositionInPlan, mousePositionInControl);
 		}
 
+		private List<GraphicalConnectionAnbindungsPunkt> possibleAnbindungspunkte = new List<GraphicalConnectionAnbindungsPunkt>();
+
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
+
+				// paint anbindeleitungen
 				this.connectionDrawer.Paint(g, additionalTransformation);
+
+				// generate clip for product
 				GraphicsPath path = new GraphicsPath();
 				List<PointF> transformedPoints = new List<PointF>();
 				foreach (Point2D point in this.product.AssociatedRoom.RoomCoordinates) {
@@ -252,6 +261,8 @@ namespace Europlan.Common {
 				clipDisabled.MakeInfinite();
 				clipDisabled.Exclude(path);
 				path.Dispose();
+
+				// select color for painting depending depending on the background color of the plan
 				Color c = Color.Black;
 				if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
 					c = Color.White;
@@ -264,23 +275,15 @@ namespace Europlan.Common {
 					g.FillRegion(b, clipDisabled);
 				}
 
+				// paint construction
 				if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
 					if (this.product.GraphConstruction != null) {
 						this.product.GraphConstruction.Paint(g, this.Mode);
 					}
 				}
 
-				/*if (this.mode != KlimaBodenMode.KDM_CONSTRUCTION) {
-					foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-						Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-						Matrix3D invRotation = rotation.GetInverse();
-
-						double left = rotation.Transform(lane.BorderLeft.Origin).X;
-
-					}
-				}*/
-
 				if (this.layoutAddArea != null) {
+					// calculate and draw rectangle that is currently selected for adding modules
 					PointF[] drawArea = new PointF[this.layoutAddArea.Count];
 					for (int i = 0; i < this.layoutAddArea.Count; i++) {
 						Point2D tmp = additionalTransformation.TransformTo2D(this.layoutAddArea[i]);
@@ -288,6 +291,7 @@ namespace Europlan.Common {
 					}
 					g.DrawPolygon(Pens.Red, drawArea);
 
+					// draw modules that are currently being added
 					int count = 0;
 					this.AddModulesForLayoutArea(delegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulBodenCircuit circuitOfModul, bool fits) {
 						added = this.TryDrawModule(g, additionalTransformation, x, y, rotation, orientation, bottomUp, fits ? Color.Green : Color.FromArgb(63, Color.Red));
@@ -302,6 +306,7 @@ namespace Europlan.Common {
 					}
 				}
 
+				// paint unused areas of room
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
 					List<PointF> unusedPoints = new List<PointF>();
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
@@ -316,6 +321,7 @@ namespace Europlan.Common {
 					}
 				}
 
+				// paint expansion gaps
 				if (drawExpansionGaps) {
 					foreach (Segment2D expansionGap in this.Product.AssociatedRoom.AssociatedFloor.ExpansionGaps) {
 						Point2D start = additionalTransformation.TransformTo2D(expansionGap.Start);
@@ -324,31 +330,28 @@ namespace Europlan.Common {
 					}
 				}
 
-
+				// draw rectangle for module selection
 				if (this.dragStartedInPlan.HasValue && this.dragEndedInPlan.HasValue) {
-					//Matrix3D rotation = Transformation3D.Rotate(this.Product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
-					//Point2D rotatedStart = rotation.Transform(this.dragStartedInPlan.Value);
-					//Point2D rotatedEnd = rotation.Transform(this.dragEndedInPlan.Value);
-					//Matrix3D invRotation = rotation.GetInverse();
-					/*Polygon2D selectedPoly = new Polygon2D();
-					selectedPoly.Add(this.dragStartedInPlan.Value);
-					selectedPoly.Add(new);
-					selectedPoly.Add(this.dragEndedInPlan.Value);
-					selectedPoly.Add(invRotation.Transform(new Point2D(rotatedEnd.X, rotatedStart.Y)));
-
-					PointF[] arr = new PointF[selectedPoly.Count];
-					int i = 0;
-					foreach (Point2D point in selectedPoly) {
-						Point2D tmp = additionalTransformation.TransformTo2D(new Point3D(point, 0));
-						arr[i] = new PointF((float)tmp.X, (float)tmp.Y);
-						i++;
-					}*/
 					Matrix transform = g.Transform;
 					g.Transform = new Matrix();
 					g.DrawPolygon(new Pen(Color.Red), new Point[] { this.dragStartedInControl.Value, new Point(this.dragStartedInControl.Value.X, this.dragEndedInControl.Value.Y), this.dragEndedInControl.Value, new Point(this.dragEndedInControl.Value.X, this.dragStartedInControl.Value.Y) });
 					g.Transform = transform;
 				}
 
+				// paint distributors in floor
+				Floor floor = this.product.AssociatedRoom.AssociatedFloor;
+				double measure = floor.AssociatedPlan.Measure.Value;
+				bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
+				Region oldClip = g.Clip;
+				Region newClip = new Region();
+				newClip.MakeInfinite();
+				g.Clip = newClip;
+				foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+					dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
+				}
+				g.Clip = oldClip;
+
+				// paint modules
 				List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
 				foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
 					foreach (KlimaFlaechenModul modul in circuit.Row.List) {
@@ -361,16 +364,15 @@ namespace Europlan.Common {
 					}
 				}
 
-				// draw connection that is currently beeing added
 				if (this.mode == KlimaBodenMode.KDM_CONNECTIONS) {
 					if (hoverAnbindungen) {
+						// paint possible connections to anbindeleitung
 						g.ResetClip();
 						Brush bi = new SolidBrush(Color.FromArgb(127, Color.Red));
 						Brush bo = new SolidBrush(Color.FromArgb(127, Color.Blue));
-						//Brush bi = new SolidBrush(Color.Red);
-						//Brush bo = new SolidBrush(Color.Blue);
 						if (!this.newConnectionStartAtOutput) {
-							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, true)) {
+							//foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, mousePositionInPlan)) {
+							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.possibleAnbindungspunkte) {
 								PointF[] points = new PointF[anbindung.Area.Count];
 								for (int i = 0; i < anbindung.Area.Count; i++) {
 									Point2D tmp = additionalTransformation.TransformTo2D(anbindung.Area[i]);
@@ -380,7 +382,8 @@ namespace Europlan.Common {
 								g.DrawPolygon(Pens.Red, points);
 							}
 						} else {
-							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, false)) {
+							//foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, mousePositionInPlan)) {
+							foreach (GraphicalConnectionAnbindungsPunkt anbindung in this.possibleAnbindungspunkte) {
 								PointF[] points = new PointF[anbindung.Area.Count];
 								for (int i = 0; i < anbindung.Area.Count; i++) {
 									Point2D tmp = additionalTransformation.TransformTo2D(anbindung.Area[i]);
@@ -391,6 +394,8 @@ namespace Europlan.Common {
 							}
 						}
 					}
+
+					// paint connection that is currently beeing added
 					Pen p = new Pen(Color.Green, (float)(0.021 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * additionalTransformation.M00));
 					if (this.newConnectionVertices != null && this.newConnectionVertices.Count > 0) {
 						PointF oldVertex = PointF.Empty;
@@ -407,15 +412,12 @@ namespace Europlan.Common {
 							}
 							oldVertex = newVertex;
 						}
-						bool horizontal;
 						foreach (Point2D vertex in this.nextConnectionPoints) {
 							newVertex2D = additionalTransformation.TransformTo2D(vertex);
 							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
 							g.DrawLine(p, oldVertex, newVertex);
 							oldVertex = newVertex;
 						}
-						//newVertex2D = this.GetNextConnectionVertex(mousePositionInPlan, this.newConnectionStart.GraphRotation, out horizontal);
-						//g.DrawLine(p, oldVertex, new PointF((float)newVertex2D.X, (float)newVertex2D.Y));
 					}
 				}
 			}
@@ -424,7 +426,8 @@ namespace Europlan.Common {
 		private List<Point2D> newConnectionVertices = null;
 		private KlimaFlaechenModul newConnectionStart = null;
 		private bool newConnectionStartAtOutput = true;
-		//private bool newConnectionLastSegmentHorizontal = true;
+		private ModulBodenCircuit newConnectionCircuit = null;
+		private int newConnectionCircuitDistributorIndex = -1;
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
@@ -443,7 +446,6 @@ namespace Europlan.Common {
 					Matrix3D rotation = Transformation3D.Rotate(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 					Matrix3D invRotation = rotation.GetInverse();
 
-					//Polygon2D rotatedAddArea = new Polygon2D();
 					double top = double.MaxValue;
 					double bottom = double.MinValue;
 					double left = double.MaxValue;
@@ -470,14 +472,8 @@ namespace Europlan.Common {
 
 					double stepX = width;
 					stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
-					/*if (!this.newModulesXDicht) {
-						stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					}*/
 					double stepY = height;
 					stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesYDicht;
-					/*if (!this.newModulesYDicht) {
-						stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					}*/
 
 					double refLeft = referencePoint.X;
 					while (refLeft - stepX > left) {
@@ -509,9 +505,12 @@ namespace Europlan.Common {
 					foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> input in this.GetModuleInputs()) {
 						if (input.Value.IsInside(planPoint)) {
 							int tmp;
-							if (input.Key.GetInputLink(this.product.GetCircuitForModul(input.Key, out tmp), this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null) {
+							ModulBodenCircuit circuit = this.product.GetCircuitForModul(input.Key, out tmp);
+							if (input.Key.GetInputLink(circuit, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null) {
 								this.newConnectionStart = input.Key;
 								this.newConnectionStartAtOutput = false;
+								this.newConnectionCircuit = circuit;
+								this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex();
 							}
 							break;
 						}
@@ -520,9 +519,12 @@ namespace Europlan.Common {
 						foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> output in this.GetModuleOutputs()) {
 							if (output.Value.IsInside(planPoint)) {
 								int tmp;
-								if (output.Key.GetOutputLink(this.product.GetCircuitForModul(output.Key, out tmp), this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null) {
+								ModulBodenCircuit circuit = this.product.GetCircuitForModul(output.Key, out tmp);
+								if (output.Key.GetOutputLink(circuit, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null) {
 									this.newConnectionStart = output.Key;
 									this.newConnectionStartAtOutput = true;
+									this.newConnectionCircuit = circuit;
+									this.newConnectionCircuitDistributorIndex = this.newConnectionCircuit.GetDistributorConnectionIndex();
 								}
 								break;
 							}
@@ -537,50 +539,9 @@ namespace Europlan.Common {
 						}
 					}
 				} else {
-/*					KlimaFlaechenModul endModule = null;
-					int index;
-					if (this.newConnectionStartAtOutput) {
-						foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> input in this.GetModuleInputs()) {
-							if (input.Value.IsInside(planPoint)) {
-								if (this.product.GetCircuitForModul(input.Key, out index) == this.product.GetCircuitForModul(this.newConnectionStart, out index)) {
-									endModule = input.Key;
-								}
-								break;
-							}
-						}
-					} else {
-						foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> output in this.GetModuleOutputs()) {
-							if (output.Value.IsInside(planPoint)) {
-								if (this.product.GetCircuitForModul(output.Key, out index) == this.product.GetCircuitForModul(this.newConnectionStart, out index)) {
-									endModule = output.Key;
-								}
-								break;
-							}
-						}
-					}
-					if (this.product.GetCircuitForModul(this.newConnectionStart, out index).GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
-						endModule = null;
-					}
-					if (endModule == null) {
-						bool horizontal;
-						this.newConnectionVertices.Add(this.GetNextConnectionVertex(planPoint, this.newConnectionStart.GraphRotation, out horizontal));
-						//if (this.newConnectionLastSegmentHorizontal == horizontal) {
-						//	this.newConnectionVertices.RemoveAt(this.newConnectionVertices.Count - 2);
-						//}
-						//this.newConnectionLastSegmentHorizontal = horizontal;
-					} else {
-						this.newConnectionVertices.Add(this.newConnectionStartAtOutput ? endModule.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value) : endModule.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
-						ModulBodenCircuit c = this.product.GetCircuitForModul(this.newConnectionStart, out index);
-						if (c.Links == null) {
-							c.Links = new List<KlimaFlaechenModulVerbindung>();
-						}
-						c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, endModule, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
-						this.newConnectionVertices = null;
-						this.newConnectionStart = null;
-					}*/
 					KlimaFlaechenModul endModul;
-					bool endsAtAnbindung;
-					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endModul, out endsAtAnbindung));
+					GraphicalConnectionAnbindungsPunkt endAnbindung;
+					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endModul, out endAnbindung));
 					this.nextConnectionPoints.Clear();
 					if (endModul != null) {
 						int index;
@@ -595,16 +556,22 @@ namespace Europlan.Common {
 						}
 						this.newConnectionVertices = null;
 						this.newConnectionStart = null;
-					} else if (endsAtAnbindung) {
+					} else if (endAnbindung != null) {
 						int index;
+						if (endAnbindung.NewProductConnection != null) {
+							if (this.product.Connections == null) {
+								this.product.Connections = new List<GraphicalProductConnection>();
+							}
+							this.product.Connections.Add(endAnbindung.NewProductConnection);
+						}
 						ModulBodenCircuit c = this.product.GetCircuitForModul(this.newConnectionStart, out index);
 						if (c.Links == null) {
 							c.Links = new List<KlimaFlaechenModulVerbindung>();
 						}
 						if (this.newConnectionStartAtOutput) {
-							c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, null, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
+							c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, true, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product), endAnbindung.Index));
 						} else {
-							c.Links.Add(new KlimaFlaechenModulVerbindung(null, this.newConnectionStart, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product)));
+							c.Links.Add(new KlimaFlaechenModulVerbindung(this.newConnectionStart, false, this.newConnectionVertices, c, Project.Instance.GetPlannedProduct(this.product), endAnbindung.Index));
 						}
 						this.newConnectionVertices = null;
 						this.newConnectionStart = null;
@@ -656,12 +623,11 @@ namespace Europlan.Common {
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
 
-		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out KlimaFlaechenModul endModule, out bool endsAtAnbindung) {
+		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out KlimaFlaechenModul endModule, out GraphicalConnectionAnbindungsPunkt endAnbindungsPunkt) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
 			endModule = null;
-			endsAtAnbindung = false;
+			endAnbindungsPunkt = null;
 			int index;
-			GraphicalConnectionAnbindungsPunkt anbindungsPunkt = null;
 			if (this.newConnectionStartAtOutput) {
 				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> input in this.GetModuleInputs()) {
 					if (input.Value.IsInside(mousePoint)) {
@@ -672,10 +638,10 @@ namespace Europlan.Common {
 					}
 				}
 				if (endModule == null) {
-					foreach (GraphicalConnectionAnbindungsPunkt output in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, false)) {
+					//foreach (GraphicalConnectionAnbindungsPunkt output in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, mousePoint)) {
+					foreach (GraphicalConnectionAnbindungsPunkt output in this.possibleAnbindungspunkte) {
 						if (output.Area.IsInside(mousePoint)) {
-							endsAtAnbindung = true;
-							anbindungsPunkt = output;
+							endAnbindungsPunkt = output;
 							break;
 						}
 					}
@@ -690,10 +656,10 @@ namespace Europlan.Common {
 					}
 				}
 				if (endModule == null) {
-					foreach (GraphicalConnectionAnbindungsPunkt input in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, true)) {
+					//foreach (GraphicalConnectionAnbindungsPunkt input in this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, mousePoint)) {
+					foreach (GraphicalConnectionAnbindungsPunkt input in this.possibleAnbindungspunkte) {
 						if (input.Area.IsInside(mousePoint)) {
-							endsAtAnbindung = true;
-							anbindungsPunkt = input;
+							endAnbindungsPunkt = input;
 							break;
 						}
 					}
@@ -715,8 +681,8 @@ namespace Europlan.Common {
 					}
 				}
 				nextConnectionPoints.Add(connectionPoint);
-			} else if (endsAtAnbindung == true) {
-				Point2D connectionPoint = anbindungsPunkt.Point;
+			} else if (endAnbindungsPunkt != null) {
+				Point2D connectionPoint = endAnbindungsPunkt.Point;
 				if (this.newConnectionVertices.Count > 1) {
 					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
 					Point2D p2 = this.newConnectionVertices[this.newConnectionVertices.Count - 1];
@@ -755,6 +721,14 @@ namespace Europlan.Common {
 				}
 			} else if (this.Mode == KlimaBodenMode.KDM_CONNECTIONS) {
 
+				if (this.newConnectionStart != null) {
+					if (!this.newConnectionStartAtOutput) {
+						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, planPoint);
+					} else {
+						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, planPoint);
+					}
+				}
+
 				Dictionary<KlimaFlaechenModul, Polygon2D> areas = this.GetModuleAreas();
 				KlimaFlaechenModul modul = null;
 				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> area in areas) {
@@ -789,7 +763,7 @@ namespace Europlan.Common {
 
 				
 				Point2D lastVertex = this.product.AssociatedRoom.RoomCoordinates[this.product.AssociatedRoom.RoomCoordinates.Count - 1];
-				Segment2D segment;
+				//Segment2D segment;
 				this.hoverAnbindungen = this.newConnectionStart != null;
 				/*foreach (Point2D vertex in this.product.AssociatedRoom.RoomCoordinates) {
 					segment = new Segment2D(lastVertex, vertex);
@@ -802,7 +776,7 @@ namespace Europlan.Common {
 
 				if (this.newConnectionStart != null) {
 					KlimaFlaechenModul tmp;
-					bool tmp2;
+					GraphicalConnectionAnbindungsPunkt tmp2;
 					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp, out tmp2);
 				} else {
 					this.nextConnectionPoints = new List<Point2D>();
@@ -818,7 +792,7 @@ namespace Europlan.Common {
 		private PointF layoutAddAreaStartScreen;
 		private Polygon2D layoutAddArea = null;
 		private bool layoutAddAreaBottomUp = false;
-		private bool layoutAddAreaRightToLeft = false;
+		//private bool layoutAddAreaRightToLeft = false;
 
 		private Nullable<Point> dragStartedInControl;
 		private Nullable<Point2D> dragStartedInPlan;

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class KlimaFlaechenSubAreaVerbindung {
+	public class KlimaFlaechenSubAreaVerbindung : IKlimaFlaechenVerbindung {
 		private List<KlimaFlaechenModul> start;
 		private List<KlimaFlaechenModul> end;
 		private List<List<Point2D>> vertices;
@@ -86,21 +86,26 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
-			//Point2D oldVertex2D;
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
 			foreach (List<Point2D> v in vertices) {
 				Point2D newVertex2D;
-				PointF oldVertex = PointF.Empty;
+				Point2D oldVertex2D = additionalTransformation.TransformTo2D(v[0]);
 				PointF newVertex;
-				bool first = true;
-				foreach (Point2D vertex in v) {
+				PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
+				p.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+				p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+				Point2D vertex;
+				for (int i = 1; i < v.Count; i++) {
+					vertex = v[i];
 					newVertex2D = additionalTransformation.TransformTo2D(vertex);
 					newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-					if (first) {
-						first = false;
-					} else {
-						g.DrawLine(p, oldVertex, newVertex);
+					if (i == 2) {
+						p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 					}
+					if (i == v.Count - 1) {
+						p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+					}
+					g.DrawLine(p, oldVertex, newVertex);
 					oldVertex = newVertex;
 				}
 			}
@@ -505,6 +510,48 @@ namespace Europlan.Common {
 				}
 			}
 			return bestPoint;
+		}
+
+		public void InvertDirection() {
+			List<KlimaFlaechenModul> tmpM = this.start;
+			this.start = this.end;
+			this.end = tmpM;
+
+			List<int> tmpI = this.moduleStartIndices;
+			this.moduleStartIndices = this.moduleEndIndices;
+			this.moduleEndIndices = tmpI;
+
+			tmpI = this.subAreaStartIndices;
+			this.subAreaStartIndices = this.subAreaEndIndices;
+			this.subAreaEndIndices = tmpI;
+
+			tmpI = this.rowStartIndices;
+			this.rowStartIndices = this.rowEndIndices;
+			this.rowEndIndices = tmpI;
+
+			foreach (List<Point2D> vs in this.vertices) {
+				vs.Reverse();
+			}
+		}
+
+		public List<KlimaFlaechenModul> GetEnds() {
+			return this.End;
+		}
+
+		public List<KlimaFlaechenModul> GetStarts() {
+			return this.Start;
+		}
+
+		public bool StartConnectedToAnbindung {
+			get {
+				return (this.Start == null || this.Start.Count == 0);
+			}
+		}
+
+		public bool EndConnectedToAnbindung {
+			get {
+				return (this.End == null || this.End.Count == 0);
+			}
 		}
 	}
 }

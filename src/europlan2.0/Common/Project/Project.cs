@@ -517,17 +517,25 @@ namespace Europlan.Common {
 
 		public static void Save(string filename) {
 			lock (padlock) {
-				Instance.ProjectLastChanged = DateTime.Now;
+				try {
+					Instance.ProjectLastChanged = DateTime.Now;
 
-				XmlSerializer s = new XmlSerializer(typeof(Project));
-				Stream w = new FileStream(filename, FileMode.Create);
-				Instance.ProjectFileName = filename;
-				s.Serialize(w, Instance);
-				w.Close();
-				FileUtils.SetAccessForEveryone(filename);
-			}
-			if (ProjectSaved != null) {
-				Project.ProjectSaved(Instance);
+					XmlSerializer s = new XmlSerializer(typeof(Project));
+					MemoryStream w = new MemoryStream();
+					//Stream w = new FileStream(filename, FileMode.Create);
+					Instance.ProjectFileName = filename;
+					s.Serialize(w, Instance);
+					Stream fs = new FileStream(filename, FileMode.Create);
+					w.WriteTo(fs);
+					w.Close();
+					fs.Close();
+					FileUtils.SetAccessForEveryone(filename);
+					if (ProjectSaved != null) {
+						Project.ProjectSaved(Instance);
+					}
+				} catch (Exception e) {
+					MessageBox.Show("Das Projekt konnte leider nicht gespeichert werden, da beim Speichern ein Fehler aufgetreten ist!", "Fehler beim Speichern", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 

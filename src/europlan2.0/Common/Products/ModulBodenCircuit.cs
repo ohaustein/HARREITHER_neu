@@ -467,5 +467,14 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+
+		public int GetDistributorConnectionIndex() {
+			foreach (KlimaFlaechenModulVerbindung link in this.Links) {
+				if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
+					return link.DistributorIndex;
+				}
+			}
+			return -1;
+		}
 	}
 }

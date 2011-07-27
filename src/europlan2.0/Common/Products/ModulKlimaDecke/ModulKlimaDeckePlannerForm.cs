@@ -1464,13 +1464,97 @@ namespace Europlan.Common.Products {
 		}
 
 		private void btnInvertDirection_Click(object sender, EventArgs e) {
-			this.changed = true;
+			/*this.changed = true;
 			List<KlimaFlaechenModul> modules = this.modulKlimaDeckePlanner.GetAllSelectedModules();
 			foreach (KlimaFlaechenModul modul in modules) {
 				modul.GraphBottomUp = !modul.GraphBottomUp;
 			}
 			this.UpdateSelectedModules();
+			this.planPanel.InvalidateGraphics();*/
+
+			this.changed = true;
+			List<KlimaFlaechenModul> selectedModules = this.modulKlimaDeckePlanner.GetAllSelectedModules();
+			List<KlimaFlaechenModul> modulesToInvert = new List<KlimaFlaechenModul>();
+			List<IKlimaFlaechenVerbindung> linksToInvert = new List<IKlimaFlaechenVerbindung>();
+
+			bool invertUnselected = false;
+			//bool connectedToAnbindung = false;
+			//List<KlimaFlaechenModul> ruecklaufConnected = new List<KlimaFlaechenModul>();
+			//List<KlimaFlaechenModul> vorlaufConnected = new List<KlimaFlaechenModul>();
+			Dictionary<IKlimaFlaechenVerbindung, ModulDeckeCircuit> anbindungen = new Dictionary<IKlimaFlaechenVerbindung, ModulDeckeCircuit>();
+
+			foreach (KlimaFlaechenModul m1 in selectedModules) {
+				int tmp;
+				ModulDeckeCircuit c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(m1, out tmp);
+				IKlimaFlaechenVerbindung link = c.GetNextLink(m1);
+				if (link != null) {
+					if (!linksToInvert.Contains(link)) {
+						linksToInvert.Add(link);
+					}
+					if (link.EndConnectedToAnbindung) {
+						anbindungen[link] = c;
+					}
+				}
+				link = c.GetPreviousLink(m1);
+				if (link != null) {
+					if (!linksToInvert.Contains(link)) {
+						linksToInvert.Add(link);
+					}
+					if (link.StartConnectedToAnbindung) {
+						anbindungen[link] = c;
+					}
+				}
+				foreach (KlimaFlaechenModul m2 in c.GetAllLinkedModules(m1)) {
+					link = c.GetNextLink(m2);
+					if (link != null) {
+						if (!linksToInvert.Contains(link)) {
+							linksToInvert.Add(link);
+						}
+						if (link.EndConnectedToAnbindung) {
+							anbindungen[link] = c;
+						}
+					}
+					link = c.GetPreviousLink(m2);
+					if (link != null) {
+						if (!linksToInvert.Contains(link)) {
+							linksToInvert.Add(link);
+						}
+						if (link.StartConnectedToAnbindung) {
+							anbindungen[link] = c;
+						}
+					}
+					if (!modulesToInvert.Contains(m2)) {
+						if (!selectedModules.Contains(m2)) {
+							invertUnselected = true;
+						}
+						modulesToInvert.Add(m2);
+					}
+				}
+			}
+
+			if (anbindungen.Count > 0) {
+				if (MessageBox.Show("Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?", "Anbindeleitungen löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+					return;
+				}
+				foreach (KeyValuePair<IKlimaFlaechenVerbindung, ModulDeckeCircuit> kvp in anbindungen) {
+					if (kvp.Key is KlimaFlaechenSubAreaVerbindung) {
+						kvp.Value.Links.Remove(kvp.Key as KlimaFlaechenSubAreaVerbindung);
+					}
+				}
+			}
+
+			foreach (KlimaFlaechenModul modul in modulesToInvert) {
+				modul.GraphBottomUp = !modul.GraphBottomUp;
+			}
+			foreach (IKlimaFlaechenVerbindung link in linksToInvert) {
+				link.InvertDirection();
+				//KlimaFlaechenModul tmp = link.Start;
+				//link.Start = link.End;
+				//link.End = tmp;
+			}
+			this.UpdateSelectedModules();
 			this.planPanel.InvalidateGraphics();
+
 		}
 		private void lst_KeyDown(object sender, KeyEventArgs e) {
 			this.modulKlimaDeckePlanner.PlannerKeyPress(e.KeyCode);

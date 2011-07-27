@@ -7,7 +7,47 @@ using System.Xml.Serialization;
 using WW.Math.Geometry;
 
 namespace Europlan.Common {
-	public class KlimaFlaechenModulVerbindung {
+	public interface IKlimaFlaechenVerbindung {
+		void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure);
+		bool HitTest(Point2D planPoint, double maxDist);
+		double GetDistance(Point2D planPoint);
+
+		Circuit Circuit {
+			get;
+		}
+
+		int CircuitIndex {
+			get;
+			set;
+		}
+
+		[XmlIgnore]
+		PlannedProduct Product {
+			get;
+		}
+
+		string ProductGuid {
+			set;
+			get;
+		}
+
+		//double GetLength(double measure);
+
+		void InvertDirection();
+
+		List<KlimaFlaechenModul> GetEnds();
+		List<KlimaFlaechenModul> GetStarts();
+
+		bool StartConnectedToAnbindung {
+			get;
+		}
+
+		bool EndConnectedToAnbindung {
+			get;
+		}
+	}
+
+	public class KlimaFlaechenModulVerbindung : IKlimaFlaechenVerbindung {
 		private KlimaFlaechenModul start;
 		private KlimaFlaechenModul end;
 		private List<Point2D> vertices;
@@ -21,6 +61,7 @@ namespace Europlan.Common {
 		private int circuitIndex = -1;
 		private PlannedProduct product;
 		private string productGuid = null;
+		private int distributorIndex = -1;
 
 		public List<Point2D> Vertices {
 		  get { return vertices; }
@@ -30,7 +71,20 @@ namespace Europlan.Common {
 		internal KlimaFlaechenModulVerbindung() {
 		}
 
+		public KlimaFlaechenModulVerbindung(KlimaFlaechenModul start, KlimaFlaechenModul end, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product, int distributorIndex) {
+			this.Initialize(start, end, vertices, circuit, product, distributorIndex);
+		}
+
 		public KlimaFlaechenModulVerbindung(KlimaFlaechenModul start, KlimaFlaechenModul end, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product) {
+			this.Initialize(start, end, vertices, circuit, product, -1);
+		}
+
+		public KlimaFlaechenModulVerbindung(KlimaFlaechenModul modul, bool isStart, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product, int distributorIndex) {
+			this.Initialize(isStart ? modul : null, isStart ? null : modul, vertices, circuit, product, distributorIndex);
+		}
+
+		private void Initialize(KlimaFlaechenModul start, KlimaFlaechenModul end, IEnumerable<Point2D> vertices, Circuit circuit, PlannedProduct product, int distributorIndex) {
+			this.distributorIndex = distributorIndex;
 			this.start = start;
 			this.end = end;
 			this.vertices = new List<Point2D>(vertices);
@@ -454,7 +508,12 @@ namespace Europlan.Common {
 		}
 
 		public bool IsLangerFitting(double measure) {
-			return this.vertices.Count == 2 && Math.Abs((this.vertices[0] - this.vertices[1]).GetLength() / measure - (0.1 + 2 * KlimaFlaechenModul.CONNECTION_DISTANCE)) < 0.0001;
+			return this.vertices.Count == 2 && this.Start != null && this.End != null && Math.Abs((this.vertices[0] - this.vertices[1]).GetLength() / measure - (0.1 + 2 * KlimaFlaechenModul.CONNECTION_DISTANCE)) < 0.0001;
+		}
+
+		public int DistributorIndex {
+			get { return this.distributorIndex; }
+			set { this.distributorIndex = value; }
 		}
 
 		public double GetLength(double measure) {
@@ -473,6 +532,50 @@ namespace Europlan.Common {
 				length = 0;
 			}
 			return length;
+		}
+
+		public void InvertDirection() {
+			KlimaFlaechenModul tmpM = this.start;
+			this.start = this.end;
+			this.end = tmpM;
+
+			int tmpI = this.startIndex;
+			this.startIndex = this.endIndex;
+			this.endIndex = tmpI;
+
+			tmpI = this.startSubarea;
+			this.startSubarea = this.endSubarea;
+			this.endSubarea = tmpI;
+
+			tmpI = this.startRow;
+			this.startRow = this.endRow;
+			this.endRow = tmpI;
+
+			this.vertices.Reverse();
+		}
+
+		public List<KlimaFlaechenModul> GetEnds() {
+			List < KlimaFlaechenModul > ends = new List<KlimaFlaechenModul>();
+			ends.Add(this.End);
+			return ends;
+		}
+
+		public List<KlimaFlaechenModul> GetStarts() {
+			List<KlimaFlaechenModul> start = new List<KlimaFlaechenModul>();
+			start.Add(this.Start);
+			return start;
+		}
+
+		public bool StartConnectedToAnbindung {
+			get {
+				return (this.Start == null);
+			}
+		}
+
+		public bool EndConnectedToAnbindung {
+			get {
+				return (this.End == null);
+			}
 		}
 	}
 }

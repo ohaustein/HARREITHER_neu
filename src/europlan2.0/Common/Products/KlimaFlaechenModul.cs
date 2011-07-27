@@ -526,8 +526,8 @@ namespace Europlan.Common {
 			set { this.graphModulierendY = value; }
 		}
 
-		public Point2D GetOutputConnection(double measure, bool invertXAxis, Product product) {
-			if (invertXAxis) {
+		public Point2D GetOutputConnection(double measure, bool invertYAxis, Product product) {
+			if (invertYAxis) {
 				return GetInputConnection(measure, false, product);
 			}
 			if (product is ModulKlimaBodenProduct) {
@@ -579,8 +579,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		public Point2D GetInputConnection(double measure, bool invertXAxis, Product product) {
-			if (invertXAxis) {
+		public Point2D GetInputConnection(double measure, bool invertYAxis, Product product) {
+			if (invertYAxis) {
 				return GetOutputConnection(measure, false, product);
 			}
 			if (product is ModulKlimaBodenProduct) {
@@ -632,8 +632,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		public KlimaFlaechenModulVerbindung GetInputLink(Circuit circuit, bool invertXAxis) {
-			//if (invertXAxis) {
+		public KlimaFlaechenModulVerbindung GetInputLink(Circuit circuit, bool invertYAxis) {
+			//if (invertYAxis) {
 			//	return GetOutputLink(circuit, false);
 			//}
 			KlimaFlaechenModulVerbindung link = null;
@@ -692,8 +692,8 @@ namespace Europlan.Common {
 			return null;
 		}*/
 
-		public KlimaFlaechenModulVerbindung GetOutputLink(Circuit circuit, bool invertXAxis) {
-			//if (invertXAxis) {
+		public KlimaFlaechenModulVerbindung GetOutputLink(Circuit circuit, bool invertYAxis) {
+			//if (invertYAxis) {
 			//	return GetInputLink(circuit, false);
 			//}
 			KlimaFlaechenModulVerbindung link = null;
@@ -724,7 +724,7 @@ namespace Europlan.Common {
 			return link;
 		}
 
-		public KlimaFlaechenSubAreaVerbindung GetSubareaInputLink(Circuit circuit, bool invertXAxis) {
+		public KlimaFlaechenSubAreaVerbindung GetSubareaInputLink(Circuit circuit, bool invertYAxis) {
 			KlimaFlaechenSubAreaVerbindung link = null;
 			// no subareas for boden!
 			if (circuit is ModulDeckeCircuit) {
@@ -741,7 +741,7 @@ namespace Europlan.Common {
 			return link;
 		}
 
-		public KlimaFlaechenSubAreaVerbindung GetSubareaOutputLink(Circuit circuit, bool invertXAxis) {
+		public KlimaFlaechenSubAreaVerbindung GetSubareaOutputLink(Circuit circuit, bool invertYAxis) {
 			KlimaFlaechenSubAreaVerbindung link = null;
 			// no subareas for boden!
 			if (circuit is ModulDeckeCircuit) {

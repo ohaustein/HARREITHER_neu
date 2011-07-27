@@ -704,7 +704,7 @@ namespace Europlan.Common {
 							circuitCount += productToUse.PlannedCircuitCount - 1;
 						}
 						if (circuitCount > 0) {
-							possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount);
+							possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount, false, 0.0);
 							if (possibleProductConnection != null) {
 								break;
 							}

@@ -439,7 +439,7 @@ namespace Europlan.Common {
 			get;
 		}
 
-		PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertXAxis, Point2D currentMousePoint);
+		PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint);
 
 		List<GraphicalProductConnection> Connections {
 			get;

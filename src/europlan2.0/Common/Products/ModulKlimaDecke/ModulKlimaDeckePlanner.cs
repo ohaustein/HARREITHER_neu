@@ -442,29 +442,29 @@ namespace Europlan.Common {
 					}
 					Pen p = new Pen(Color.Green, (float)(0.021 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * additionalTransformation.M00));
 					if (this.newConnectionVertices != null && this.newConnectionVertices.Count > 0) {
-						PointF oldVertex = PointF.Empty;
 						Point2D newVertex2D;
+						Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.newConnectionVertices[0]);
 						PointF newVertex;
-						bool first = true;
-						foreach (Point2D vertex in this.newConnectionVertices) {
+						PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
+						p.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+						p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+						Point2D vertex;
+						int countNew = this.newConnectionVertices.Count;
+						int countNext = this.nextConnectionPoints.Count;
+						int countSum = countNew + countNext;
+						for (int i = 1; i < countSum; i++) {
+							vertex = i < countNew ? this.newConnectionVertices[i] : this.nextConnectionPoints[i - countNew];
 							newVertex2D = additionalTransformation.TransformTo2D(vertex);
 							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-							if (first) {
-								first = false;
-							} else {
-								g.DrawLine(p, oldVertex, newVertex);
+							if (i == 2) {
+								p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 							}
-							oldVertex = newVertex;
-						}
-						bool horizontal;
-						foreach (Point2D vertex in this.nextConnectionPoints) {
-							newVertex2D = additionalTransformation.TransformTo2D(vertex);
-							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
+							if (i == countSum - 1) {
+								p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+							}
 							g.DrawLine(p, oldVertex, newVertex);
 							oldVertex = newVertex;
 						}
-						//newVertex2D = this.GetNextConnectionVertex(mousePositionInPlan, this.newConnectionStart.GraphRotation, out horizontal);
-						//g.DrawLine(p, oldVertex, new PointF((float)newVertex2D.X, (float)newVertex2D.Y));
 					}
 				}
 			}

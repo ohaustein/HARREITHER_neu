@@ -720,7 +720,7 @@ namespace Europlan.Common {
 			return openOutputs;
 		}
 
-		public PossibleProductConnection GetPossibleProductConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint, Product product, Floor floor, int nrOfCircuits) {
+		public PossibleProductConnection GetPossibleProductConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint1, Product product, Floor floor, int nrOfCircuits, bool useFirstConnection, double moveMousePoint) {
 			// TODO
 			double width = this.Width * measure;
 			double height = this.Height * measure;
@@ -750,6 +750,8 @@ namespace Europlan.Common {
 			List<int> openInputs = this.GetOpenInputs();
 			List<int> openOutputs = this.GetOpenOutputs();
 
+			Point2D mousePoint;
+
 			if (invertYAxis) {
 				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
 				transformation = transformation * Transformation3D.Rotate(-representation.Value.rotation * Math.PI / 180.0);
@@ -758,6 +760,7 @@ namespace Europlan.Common {
 				leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y + height));
 				rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y + height));
 				rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+				mousePoint = currentMousePoint1 + new Vector2D(moveMousePoint * measure * Math.Sin((representation.Value.rotation + 90.0) * Math.PI / 180.0), moveMousePoint * measure * Math.Cos((representation.Value.rotation + 90.0) * Math.PI / 180.0));
 			} else {
 				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
 				transformation = transformation * Transformation3D.Rotate(representation.Value.rotation * Math.PI / 180.0);
@@ -766,9 +769,10 @@ namespace Europlan.Common {
 				leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y - height));
 				rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y - height));
 				rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+				mousePoint = currentMousePoint1 + new Vector2D(moveMousePoint * measure * Math.Sin((representation.Value.rotation - 90.0) * Math.PI / 180.0), moveMousePoint * measure * Math.Cos((representation.Value.rotation + 90.0) * Math.PI / 180.0));
 			}
 			Polygon2D distPoly = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
-			if (!distPoly.IsInside(currentMousePoint)) {
+			if (!distPoly.IsInside(currentMousePoint1)) {
 				return possibleConnection;
 			}
 
@@ -787,9 +791,9 @@ namespace Europlan.Common {
 				}
 				if (ok) {
 					if (invertYAxis) {
-						possibleStarts.Add(i, transformation.Transform(new Point2D(representation.Value.position.X + border + (i + nrOfCircuits / 2.0) * connectionWidth, representation.Value.position.Y + height / 2.0)));
+						possibleStarts.Add(i, transformation.Transform(new Point2D(representation.Value.position.X + border + (i + (useFirstConnection ? 1 : nrOfCircuits) / 2.0) * connectionWidth, representation.Value.position.Y + height / 2.0)));
 					} else {
-						possibleStarts.Add(i, transformation.Transform(new Point2D(representation.Value.position.X + border + (i + nrOfCircuits / 2.0) * connectionWidth, representation.Value.position.Y - height / 2.0)));
+						possibleStarts.Add(i, transformation.Transform(new Point2D(representation.Value.position.X + border + (i + (useFirstConnection ? 1 : nrOfCircuits) / 2.0) * connectionWidth, representation.Value.position.Y - height / 2.0)));
 					}
 				}
 			}
@@ -800,7 +804,7 @@ namespace Europlan.Common {
 			double bestDist = double.MaxValue;
 			int bestStart = -1;
 			foreach (KeyValuePair<int, Point2D> start in possibleStarts) {
-				double dist = (start.Value - currentMousePoint).GetLength();
+				double dist = (start.Value - mousePoint).GetLength();
 				if (dist < bestDist) {
 					bestStart = start.Key;
 					bestDist = dist;
@@ -838,6 +842,190 @@ namespace Europlan.Common {
 					}
 				}
 				return false;
+			}
+		}
+
+		public bool IsInsideProduct(Product product) {
+			if (product.GraphicalArea == null || product.GraphicalArea.Count < 3) {
+				return false;
+			}
+			Nullable<GraphicalRepresentation> representation = null;
+			Floor floor = product.AssociatedRoom.AssociatedFloor;
+			foreach (GraphicalRepresentation gr in this.graphicalRepresentations) {
+				if (gr.floorId == floor.Id) {
+					representation = gr;
+					break;
+				}
+			}
+
+			return representation.HasValue && product.GraphicalArea.IsInside(representation.Value.position);
+		}
+
+		public bool IsPointInside(Point2D point, Floor floor, double measure, bool invertYAxis) {
+			double width = this.Width * measure;
+			double height = this.Height * measure;
+			double connectionWidth = 0.055 * measure;
+			double border = (width - this.maxCircuits * connectionWidth) / 2.0;
+
+			Point2D leftBottom = Point2D.Zero;
+			Point2D leftTop = Point2D.Zero;
+			Point2D rightTop = Point2D.Zero;
+			Point2D rightBottom = Point2D.Zero;
+			Matrix3D transformation = Matrix3D.Identity;
+
+			Nullable<GraphicalRepresentation> representation = null;
+			foreach (GraphicalRepresentation gr in this.graphicalRepresentations) {
+				if (gr.floorId == floor.Id) {
+					representation = gr;
+					break;
+				}
+			}
+
+			if (representation == null) {
+				return false;
+			}
+
+			List<int> openInputs = this.GetOpenInputs();
+			List<int> openOutputs = this.GetOpenOutputs();
+
+			if (invertYAxis) {
+				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
+				transformation = transformation * Transformation3D.Rotate(-representation.Value.rotation * Math.PI / 180.0);
+				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
+				leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
+				leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y + height));
+				rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y + height));
+				rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+			} else {
+				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
+				transformation = transformation * Transformation3D.Rotate(representation.Value.rotation * Math.PI / 180.0);
+				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
+				leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
+				leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y - height));
+				rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y - height));
+				rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+			}
+			Polygon2D distPoly = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
+			return distPoly.IsInside(point);
+		}
+
+		/*public List<GraphicalConnectionAnbindungsPunkt> GetPossibleAnbindungsPunkte(Product product, double measure, bool invertYAxis, bool input, int distributorIndex) {
+			double width = this.Width * measure;
+			double height = this.Height * measure;
+			double connectionWidth = 0.055 * measure;
+			double border = (width - this.maxCircuits * connectionWidth) / 2.0;
+
+			Point2D leftBottom = Point2D.Zero;
+			Point2D leftTop = Point2D.Zero;
+			Point2D rightTop = Point2D.Zero;
+			Point2D rightBottom = Point2D.Zero;
+			Matrix3D transformation = Matrix3D.Identity;
+
+			Nullable<GraphicalRepresentation> representation = null;
+			Floor floor = product.AssociatedRoom.AssociatedFloor;
+			foreach (GraphicalRepresentation gr in this.graphicalRepresentations) {
+				if (gr.floorId == floor.Id) {
+					representation = gr;
+					break;
+				}
+			}
+
+			if (representation == null) {
+				return new List<GraphicalConnectionAnbindungsPunkt>();
+			}
+
+			List<int> openInputs = this.GetOpenInputs();
+			List<int> openOutputs = this.GetOpenOutputs();
+
+			if (invertYAxis) {
+				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
+				transformation = transformation * Transformation3D.Rotate(-representation.Value.rotation * Math.PI / 180.0);
+				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
+				//leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
+				//leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y + height));
+				//rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y + height));
+				//rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+			} else {
+				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
+				transformation = transformation * Transformation3D.Rotate(representation.Value.rotation * Math.PI / 180.0);
+				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
+				//leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
+				//leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y - height));
+				//rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y - height));
+				//rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
+			}
+			//Polygon2D distPoly = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
+			//if (!distPoly.IsInside(currentMousePoint)) {
+			//	return possibleConnection;
+			//}
+
+			Dictionary<int, Point2D> possibleStarts = new Dictionary<int, Point2D>();
+			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
+			for (int i = 0; i < this.maxCircuits; i++) {
+				if ((distributorIndex < 0 || distributorIndex == i) && ((!input && !openOutputs.Contains(i)) || (input && !openInputs.Contains(i)))) {
+					if (invertYAxis) {
+						Point2D connectionPoint = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y + height / 2.0));
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y + height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y + height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
+						Polygon2D connectionArea = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
+						GraphicalConnectionAnbindungsPunkt anbindungsPunkt = new GraphicalConnectionAnbindungsPunkt(connectionPoint, connectionArea, i);
+						anbindungsPunkte.Add(anbindungsPunkt);
+					} else {
+						Point2D connectionPoint = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y - height / 2.0));
+						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
+						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y - height));
+						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y - height));
+						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
+						Polygon2D connectionArea = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
+						GraphicalConnectionAnbindungsPunkt anbindungsPunkt = new GraphicalConnectionAnbindungsPunkt(connectionPoint, connectionArea, i);
+						anbindungsPunkte.Add(anbindungsPunkt);
+					}
+				}
+			}
+			return anbindungsPunkte;
+		}*/
+
+		public void Draw(System.Drawing.Graphics g, Matrix4D additionalTransformation, double measure, bool invertYAxis, Floor floor) {
+			g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+			System.Drawing.Pen pen = System.Drawing.Pens.Red;
+			double width = this.Width * measure;
+			double height = this.Height * measure;
+
+			Point2D leftBottom = Point2D.Zero;
+			Point2D leftTop = Point2D.Zero;
+			Point2D rightTop = Point2D.Zero;
+			Point2D rightBottom = Point2D.Zero;
+
+			foreach (Distributor.GraphicalRepresentation gp in this.GraphicalRepresentations) {
+				if (gp.floorId == floor.Id) {
+					if (invertYAxis) {
+						Matrix4D transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
+						transformation = transformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
+						transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
+
+						leftBottom = transformation.TransformTo2D(gp.position);
+						leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
+						rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
+						rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
+					} else {
+						Matrix4D transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
+						transformation = transformation * Transformation4D.RotateZ(gp.rotation * Math.PI / 180.0);
+						transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
+
+						leftBottom = transformation.TransformTo2D(gp.position);
+						leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y - height));
+						rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y - height));
+						rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
+					}
+					g.DrawLine(pen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
+					g.DrawLine(pen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
+					g.DrawLine(pen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
+					g.DrawLine(pen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
+					g.FillPolygon(System.Drawing.Brushes.Red, new System.Drawing.PointF[] { new System.Drawing.PointF((float)leftBottom.X, (float)leftBottom.Y), new System.Drawing.PointF((float)rightBottom.X, (float)rightBottom.Y), new System.Drawing.PointF((float)rightTop.X, (float)rightTop.Y) });
+					break;
+				}
 			}
 		}
 	}

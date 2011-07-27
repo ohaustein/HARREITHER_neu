@@ -482,6 +482,48 @@ namespace Europlan.Common {
 			return linkedModules;
 		}
 
+		public IKlimaFlaechenVerbindung GetNextLink(KlimaFlaechenModul modul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung link in this.verbindungen) {
+					if (link.Start.Contains(modul)) {
+						return link;
+					}
+				}
+			}
+
+			foreach (ModulDeckeSubArea sa in this.SubAreas) {
+				foreach (KlimaFlaechenList row in sa.Rows) {
+					foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+						if (link.Start == modul) {
+							return link;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		public IKlimaFlaechenVerbindung GetPreviousLink(KlimaFlaechenModul modul) {
+			if (this.verbindungen != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung link in this.verbindungen) {
+					if (link.End.Contains(modul)) {
+						return link;
+					}
+				}
+			}
+
+			foreach (ModulDeckeSubArea sa in this.SubAreas) {
+				foreach (KlimaFlaechenList row in sa.Rows) {
+					foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+						if (link.End == modul) {
+							return link;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
 		private List<KlimaFlaechenModul> GetNextLinkedModules(KlimaFlaechenModul referenceModul) {
 			List<KlimaFlaechenModul> nextModules = new List<KlimaFlaechenModul>();
 			foreach (ModulDeckeSubArea sa in this.subAreas) {

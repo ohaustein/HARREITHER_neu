@@ -133,7 +133,11 @@ namespace Europlan.Common {
 		public GraphicalProductConnection(PlannedProduct product, Distributor distributor, IEnumerable<Point2D> vertices, bool firstCircuit, bool otherCircuits, int distributorStartIndex, bool vorlauf, bool ruecklauf, Product.ProductType connectionType) {
 			this.product = product;
 			this.distributor = distributor;
-			this.vertices = new List<Point2D>(vertices);
+			if (vertices != null) {
+				this.vertices = new List<Point2D>(vertices);
+			} else {
+				this.vertices = new List<Point2D>();
+			}
 			Point2D oldVertex = new Point2D();
 			Vector2D oldVector = new Vector2D();
 			Vector2D newVector = new Vector2D();
@@ -631,7 +635,10 @@ namespace Europlan.Common {
 			//throw new Exception("The method or operation is not implemented.");
 		}
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input) {
+		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, bool newProductConnection, double moveConnection) {
+			if (this.Vertices == null || this.Vertices.Count < 2) {
+				return new List<GraphicalConnectionAnbindungsPunkt>();
+			}
 			if (this.CalculateFactor() < 0) {
 				input = !input;
 			}
@@ -642,10 +649,10 @@ namespace Europlan.Common {
 				Vector2D v = new Vector2D(-startVector.Y, startVector.X);
 				Point2D po1, po2, po3, po4, pi1, pi2, pi3, pi4, po, pi;
 				Point2D connectionPoint = this.Vertices[0];
-				double connectionWidth = 0.05 * measure;
+				double connectionWidth = (this.Vertices.Count > 2 ? 0.05 : 0.055 / 2.0) * measure;
 				double connectionDepth = 0.1 * measure;
 				for (int i = 0; i < this.NrOfCircuits; i++) {
-					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i /*+ 0.5*/) * connectionWidth * 2;
+					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i /*+ 0.5*/) * connectionWidth * 2 - startVector * (moveConnection * measure);
 					pi2 = pi1 + v * connectionWidth;
 					pi3 = pi2 + startVector * connectionDepth;
 					pi4 = pi1 + startVector * connectionDepth;
@@ -653,12 +660,14 @@ namespace Europlan.Common {
 					po2 = po1 + v * connectionWidth;
 					po3 = po2 + startVector * connectionDepth;
 					po4 = pi3;
-					po = po1 + ((po2 - po1) / 2);
-					pi = pi1 + ((pi2 - pi1) / 2);
-					if (input) {
-						anbindungsPunkte.Add(new GraphicalConnectionAnbindungsPunkt(pi, new Polygon2D(new Point2D[] { pi1, pi2, pi3, pi4 })));
-					} else {
-						anbindungsPunkte.Add(new GraphicalConnectionAnbindungsPunkt(po, new Polygon2D(new Point2D[] { po1, po2, po3, po4 })));
+					po = po1 + ((po2 - po1) / 2) + startVector * (moveConnection * measure);
+					pi = pi1 + ((pi2 - pi1) / 2) + startVector * (moveConnection * measure);
+					if (distributorIndex < 0 || this.distributorStartIndex + i == distributorIndex) {
+						if (input) {
+							anbindungsPunkte.Add(new GraphicalConnectionAnbindungsPunkt(pi, new Polygon2D(new Point2D[] { pi1, pi2, pi3, pi4 }), this.distributorStartIndex + i, newProductConnection ? this : null));
+						} else {
+							anbindungsPunkte.Add(new GraphicalConnectionAnbindungsPunkt(po, new Polygon2D(new Point2D[] { po1, po2, po3, po4 }), this.distributorStartIndex + i, newProductConnection ? this : null));
+						}
 					}
 				}
 			}
@@ -669,10 +678,20 @@ namespace Europlan.Common {
 	public class GraphicalConnectionAnbindungsPunkt {
 		private Point2D point;
 		private Polygon2D area;
+		private int index;
+		public GraphicalProductConnection newProductConnection = null;
 
-		public GraphicalConnectionAnbindungsPunkt(Point2D point, Polygon2D area) {
+		public GraphicalConnectionAnbindungsPunkt(Point2D point, Polygon2D area, int index) {
 			this.point = point;
 			this.area = area;
+			this.index = index;
+		}
+
+		public GraphicalConnectionAnbindungsPunkt(Point2D point, Polygon2D area, int index, GraphicalProductConnection newProductConnection) {
+			this.point = point;
+			this.area = area;
+			this.index = index;
+			this.newProductConnection = newProductConnection;
 		}
 
 		public Point2D Point {
@@ -681,6 +700,14 @@ namespace Europlan.Common {
 
 		public Polygon2D Area {
 			get { return this.area; }
+		}
+
+		public int Index {
+			get { return this.index; }
+		}
+
+		public GraphicalProductConnection NewProductConnection {
+			get { return this.newProductConnection; }
 		}
 	}
 
