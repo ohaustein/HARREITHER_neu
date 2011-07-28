@@ -47,6 +47,7 @@ namespace Europlan.Common {
 		private Point2D newUnheatedAreaPos = new Point2D();
 		private Size2D newUnheatedAreaSize = new Size2D();
 		private Point2D expansionGapStart = Point2D.Zero;
+		private List<List<Point2D>> otherRoomCoordinates;
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -59,6 +60,20 @@ namespace Europlan.Common {
 						this.ConnectedPlanPanel.Plan = null;
 					} else {
 						this.ConnectedPlanPanel.Plan = this.room.AssociatedPlan;
+					}
+				}
+				otherRoomCoordinates = new List<List<Point2D>>();
+				foreach (Room r in this.room.AssociatedFloor.Rooms) {
+					if (r.Id != this.room.Id) {
+						if (IsCeiling) {
+							if (r.CeilingCoordinatesToUse != null && r.CeilingCoordinatesToUse.Count > 2) {
+								otherRoomCoordinates.Add(r.CeilingCoordinatesToUse);
+							}
+						} else {
+							if (r.RoomCoordinates != null && r.RoomCoordinates.Count > 2) {
+								otherRoomCoordinates.Add(r.RoomCoordinates);
+							}
+						}
 					}
 				}
 			}
@@ -101,20 +116,6 @@ namespace Europlan.Common {
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			Graphics g = e.Graphics;
 
-			List<List<Point2D>> otherRoomCoordinates = new List<List<Point2D>>();
-			foreach (Room r in this.room.AssociatedFloor.Rooms) {
-				if (r.Id != this.room.Id) {
-					if (IsCeiling) {
-						if (r.CeilingCoordinatesToUse != null && r.CeilingCoordinatesToUse.Count > 2) {
-							otherRoomCoordinates.Add(r.CeilingCoordinatesToUse);
-						}
-					} else {
-						if (r.RoomCoordinates != null && r.RoomCoordinates.Count > 2) {
-							otherRoomCoordinates.Add(r.RoomCoordinates);
-						}
-					}
-				}
-			}
 			foreach (List<Point2D> otherRoomCoordinate in otherRoomCoordinates) {
 				GraphicsPath fillPath = new GraphicsPath();
 				fillPath.StartFigure();
@@ -317,11 +318,13 @@ namespace Europlan.Common {
 						}
 						roomCoordinates.Clear();
 					}*/
-					unsavedChanges = true;
-					coordsPickedSoFar.Add(normalizedPoint);
-					this.SimplifyPolygon(coordsPickedSoFar, false);
-					inDesign = true;
-				} else if (finishPick) {
+					if (RoomAreaIsValid(normalizedPoint)) {
+						unsavedChanges = true;
+						coordsPickedSoFar.Add(normalizedPoint);
+						this.SimplifyPolygon(coordsPickedSoFar, false);
+						inDesign = true;
+					}
+				} else if (finishPick && RoomAreaIsValid(normalizedPoint)) {
 					if (addFinishinigPick) {
 						coordsPickedSoFar.Add(normalizedPoint);
 					}
@@ -448,6 +451,31 @@ namespace Europlan.Common {
 			}
 		}
 
+		private bool RoomAreaIsValid(Point2D normalizedPoint) {
+			Polygon2D polygon = null;
+			foreach (List<Point2D> otherRoomCoordinate in otherRoomCoordinates) {
+				polygon = new Polygon2D(otherRoomCoordinate);
+				if (polygon.IsInside(normalizedPoint)) {
+					return false;
+				}
+				if (inDesign) {
+					if (coordsPickedSoFar.Count > 0) {
+						if (Intersects(polygon, new Segment2D(coordsPickedSoFar[0], normalizedPoint))) {
+							// the line from the current point to the next point intersects the room borders
+							return false;
+						}
+						if (coordsPickedSoFar.Count > 1) {
+							if (Intersects(polygon, new Segment2D(normalizedPoint, coordsPickedSoFar[coordsPickedSoFar.Count - 1]))) {
+								// the line from the last point to the current point intersects the room borders
+								return false;
+							}
+						}
+					}
+				}
+			}
+			return true;
+		}
+
 		private bool UnusedAreaIsValid(Point2D normalizedPoint) {
 			Polygon2D polygon = new Polygon2D(roomCoordinates);
 			if (!polygon.IsInside(normalizedPoint)) {
@@ -530,7 +558,11 @@ namespace Europlan.Common {
 						normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], planPoint, coordsPickedSoFar[0], out isStart);
 					}
 				}
-				this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
+				if (RoomAreaIsValid(normalizedPoint)) {
+					this.ConnectedPlanPanel.PlanCursor = isStart ? Cursors.Hand : Cursors.Cross;
+				} else {
+					this.ConnectedPlanPanel.PlanCursor = Cursors.No;
+				}
 				return inDesign;
 			} else if (this.Mode == RoomPickerMode.RPM_SET_REFERENCE) {
 				this.ConnectedPlanPanel.PlanCursor = Cursors.Cross;
