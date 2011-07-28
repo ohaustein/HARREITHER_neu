@@ -164,8 +164,14 @@ namespace Europlan.Common {
 					double height = form.Height / 100.0;
 					double measure = this.graphicalWallPanel.Room.AssociatedPlan.Measure.Value;
 					Polygon2D roomCoords = new Polygon2D(this.graphicalWallPanel.Room.RoomCoordinates);
-					if (!roomCoords.IsClockwise()) {
-						roomCoords.Reverse();
+					if (this.graphicalWallPanel.Room.AssociatedPlan.InvertYAxis) {
+						if (!roomCoords.IsClockwise()) {
+							roomCoords.Reverse();
+						}
+					} else {
+						if (roomCoords.IsClockwise()) {
+							roomCoords.Reverse();
+						}
 					}
 					Point2D lastVertex = roomCoords[roomCoords.Count - 1];
 					foreach (Point2D vertex in roomCoords) {
