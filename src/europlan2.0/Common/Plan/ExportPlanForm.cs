@@ -285,6 +285,9 @@ namespace Europlan.Common {
 
 							}
 						}
+						ConnectionDrawer connectionDrawer = new ConnectionDrawer();
+						connectionDrawer.Floor = floor;
+						connectionDrawer.Paint(g, Matrix4D.Identity);
 					}
 				}
 				ImageFormat format = null;
@@ -308,6 +311,8 @@ namespace Europlan.Common {
 				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
 				DxfLayer dehnfugenLayer = new DxfLayer("Dehnfugen");
 				DxfLayer wandLayer = new DxfLayer("Wandnumerierungen");
+				DxfLayer distributorLayer = new DxfLayer("Verteiler");
+				DxfLayer anbindeLayer = new DxfLayer("Anbindeleitungen");
 
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
@@ -316,6 +321,10 @@ namespace Europlan.Common {
 							line.Layer = dehnfugenLayer;
 							model.Entities.Add(line);
 						}
+						ConnectionDrawer connectionDrawer = new ConnectionDrawer();
+						connectionDrawer.Floor = floor;
+						connectionDrawer.DrawDxf(model, distributorLayer, anbindeLayer);
+
 						foreach (Room room in floor.Rooms) {
 							if (chkExportWallNumbers.Enabled && chkExportWallNumbers.Checked) {
 								if (!model.TextStyles.Contains("HarreitherStyle")) {

@@ -43,7 +43,7 @@ namespace Europlan.Common {
 		}
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		private Floor Floor {
+		public Floor Floor {
 			get { return this.floor; }
 			set {
 				this.floor = value;
@@ -63,7 +63,7 @@ namespace Europlan.Common {
 		}
 
 		public bool PlanCeiling {
-			get { return !this.planFloor; }
+			get { return this.planCeiling; }
 			set { this.planCeiling = value; }
 		}
 
@@ -136,11 +136,29 @@ namespace Europlan.Common {
 				foreach (Product product in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in product.Connections) {
 						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
-							connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != product);
+							connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != null && this.product != product);
 						}
 					}
 				}
 			}
 		}
+
+		public void DrawDxf(DxfModel model, DxfLayer distributorLayer, DxfLayer connectionLayer) {
+			if (this.Plan != null && this.floor != null && this.Plan.Measure.HasValue) {
+				foreach (Distributor distributor in this.distributorsInFloor) {
+					distributor.DrawDxf(model, distributorLayer, this.floor, this.Plan.Measure.Value);
+				}
+
+				foreach (Product product in this.productsInFloor) {
+					foreach (GraphicalProductConnection connection in product.Connections) {
+						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
+							connection.DrawDxf(model, connectionLayer, this.Plan.Measure.Value);
+						}
+					}
+				}
+			}
+		}
+
+
 	}
 }

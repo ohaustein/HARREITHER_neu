@@ -6,6 +6,10 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using WW.Math;
 using WW.Math.Geometry;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
+using System.Drawing;
 
 namespace Europlan.Common {
 
@@ -1028,5 +1032,60 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public void DrawDxf(DxfModel model, DxfLayer distributorLayer, Floor floor, double measure) {
+			Matrix4D additionalTransformation = Matrix4D.Identity;
+
+			double width = this.Width * measure;
+			double height = this.Height * measure;
+
+			Point2D leftBottom = Point2D.Zero;
+			Point2D leftTop = Point2D.Zero;
+			Point2D rightTop = Point2D.Zero;
+			Point2D rightBottom = Point2D.Zero;
+
+			foreach (Distributor.GraphicalRepresentation gp in this.GraphicalRepresentations) {
+				if (gp.floorId == floor.Id) {
+				
+					Matrix4D transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
+					transformation = transformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
+					transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
+
+					leftBottom = transformation.TransformTo2D(gp.position);
+					leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
+					rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
+					rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
+					
+
+					DxfLine line = new DxfLine(Color.Red, leftBottom, rightBottom);
+					line.Layer = distributorLayer;
+					model.Entities.Add(line);
+					line = new DxfLine(Color.Red, rightBottom, rightTop);
+					line.Layer = distributorLayer;
+					model.Entities.Add(line);
+					line = new DxfLine(Color.Red, rightTop, leftTop);
+					line.Layer = distributorLayer;
+					model.Entities.Add(line);
+					line = new DxfLine(Color.Red, leftTop, leftBottom);
+					line.Layer = distributorLayer;
+					model.Entities.Add(line);
+
+					DxfHatch hatch = new DxfHatch();
+					hatch.Color = Color.Red;
+					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+					boundaryPath.Type = BoundaryPathType.Polyline;
+					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(new Point2D[] { leftBottom, rightBottom, rightTop});
+					boundaryPath.PolylineData.Closed = true;
+					hatch.BoundaryPaths.Add(boundaryPath);
+
+					hatch.Layer = distributorLayer;
+					model.Entities.Add(hatch);
+
+					//g.FillPolygon(System.Drawing.Brushes.Red, new System.Drawing.PointF[] { new System.Drawing.PointF((float)leftBottom.X, (float)leftBottom.Y), new System.Drawing.PointF((float)rightBottom.X, (float)rightBottom.Y), new System.Drawing.PointF((float)rightTop.X, (float)rightTop.Y) });
+					break;
+				}
+			}
+		}
+
 	}
 }

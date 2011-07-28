@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
 using System.Windows.Forms;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class GraphicalProductConnection {
@@ -287,6 +290,22 @@ namespace Europlan.Common {
 			}
 		}
 
+		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
+			if (this.vertices.Count < 2) {
+				return;
+			}
+
+			if (this.vorlaufVerticesForDrawing == null || this.ruecklaufVerticesForDrawing == null) {
+				this.CalculateVerticesForDrawing(measure);
+			}
+			foreach (List<Point2D> singleConnection in this.vorlaufVerticesForDrawing) {
+				this.DrawDxfSingleConnection(model, connectionLayer, singleConnection, Color.Red);
+			}
+			foreach (List<Point2D> singleConnection in this.ruecklaufVerticesForDrawing) {
+				this.DrawDxfSingleConnection(model, connectionLayer, singleConnection, Color.Blue);
+			}
+		}
+
 		private void DrawSingleConnection(Graphics g, Matrix4D additionalTransformation, List<Point2D> singleConnection, Color c, double measure) {
 			if (singleConnection.Count < 2) {
 				return;
@@ -311,6 +330,24 @@ namespace Europlan.Common {
 				} catch (Exception e) {
 					Console.WriteLine(e);
 				}
+				oldVertex = newVertex;
+			}
+		}
+
+		private void DrawDxfSingleConnection(DxfModel model, DxfLayer connectionLayer, List<Point2D> singleConnection, Color c) {
+			if (singleConnection.Count < 2) {
+				return;
+			}
+			Point2D oldVertex = singleConnection[0];
+			Point2D newVertex;
+
+			for (int i = 1; i < singleConnection.Count; i++) {
+				newVertex = singleConnection[i];
+
+				DxfLine line = new DxfLine(c, oldVertex, newVertex);
+				line.Layer = connectionLayer;
+				model.Entities.Add(line);
+
 				oldVertex = newVertex;
 			}
 		}
