@@ -27,10 +27,11 @@ namespace Europlan.Common {
 		}
 
 		private List<Product> productsInFloor = new List<Product>();
-		//private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
+		private List<Distributor> distributorsInFloor = new List<Distributor>();
 		private Product product = null;
 		private Floor floor = null;
 		private bool planFloor = true;
+		private bool planCeiling = false;
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public Product Product {
@@ -46,42 +47,24 @@ namespace Europlan.Common {
 			get { return this.floor; }
 			set {
 				this.floor = value;
-				//this.distributorsInFloor.Clear();
 				if (this.floor == null) {
+					this.distributorsInFloor.Clear();
 					this.Plan = null;
 				} else {
-					this.Plan = floor.AssociatedPlan;
-					/*DistributorPositioner positioner;
-					foreach (Distributor d in this.GetAllDistributors()) {
-						positioner = new DistributorPositioner();
-						positioner.Floor = floor;
-						positioner.Distributor = d;
-						this.distributorsInFloor.Add(d, positioner);
-					}*/
+					this.Plan = this.floor.AssociatedPlan;
+					this.distributorsInFloor = this.floor.GetAllAvailableDistributors(true);
 				}
 			}
 		}
 
 		public bool PlanFloor {
 			get { return this.planFloor; }
-			set {
-				if (this.planFloor != value) {
-					this.planFloor = value;
-					// quick workaround to get affected products
-					//this.Plan = this.Plan;
-				}
-			}
+			set { this.planFloor = value; }
 		}
 
 		public bool PlanCeiling {
 			get { return !this.planFloor; }
-			set {
-				if (this.planFloor == value) {
-					this.planFloor = !value;
-					// quick workaround to get affected products
-					//this.Plan = this.Plan;
-				}
-			}
+			set { this.planCeiling = value; }
 		}
 
 		private Plan tmpPlan = null;
@@ -98,25 +81,7 @@ namespace Europlan.Common {
 
 		private void ResetProducts() {
 			this.productsInFloor = this.GetAllProducts();
-			/*this.productsInFloor.Clear();
-			foreach (Product p in this.GetAllProducts()) {
-				// TODO add other products
-				//if (this.planFloor) {
-					if (p is ModulKlimaBodenProduct) {
-						productsInFloor.Add(p);
-					} else if (p is EurovalProduct) {
-						productsInFloor.Add(p);
-					} else if (p is EcothermProduct) {
-						productsInFloor.Add(p);
-					} else if (p is HithermProduct) {
-						productsInFloor.Add(p);
-					} else
-				//} else {
-					if (p is ModulKlimaDeckeProduct) {
-						productsInFloor.Add(p);
-					}
-				//}
-			}*/
+			this.distributorsInFloor = this.floor != null ? this.floor.GetAllAvailableDistributors(true) : new List<Distributor>();
 		}
 
 		private List<Floor> GetAllFloors() {
@@ -152,10 +117,7 @@ namespace Europlan.Common {
 					if (floor.AssociatedPlanId == this.Plan.Id) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct product in room.PlannedProducts) {
-								//if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
-									//(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
-									products.Add(product.Product);
-								//}
+								products.Add(product.Product);
 							}
 						}
 					}
@@ -164,22 +126,12 @@ namespace Europlan.Common {
 			return products;
 		}
 
-		/*private List<Distributor> GetAllDistributors() {
-			List<Distributor> distributors = new List<Distributor>();
-			if (this.Plan != null) {
-				foreach (Floor floor in Project.Instance.Floors) {
-					distributors.AddRange(floor.GetAllAvailableDistributors());
-				}
-			}
-			return distributors;
-		}*/
-
 		public void Paint(Graphics g, Matrix4D additionalTransformation) {
-			if (this.Plan != null) {
+			if (this.Plan != null && this.floor != null && this.Plan.Measure.HasValue) {
 				Region clip = g.Clip;
-				/*foreach (KeyValuePair<Distributor, DistributorPositioner> kvp in this.distributorsInFloor) {
-					kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, new Point2D(), new Point());
-				}*/
+				foreach (Distributor distributor in this.distributorsInFloor) {
+					distributor.Draw(g, additionalTransformation, this.Plan.Measure.Value, this.Plan.InvertYAxis, this.floor);
+				}
 				g.Clip = clip;
 				foreach (Product product in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in product.Connections) {

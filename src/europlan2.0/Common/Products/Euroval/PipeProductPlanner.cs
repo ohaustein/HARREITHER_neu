@@ -186,20 +186,7 @@ namespace Europlan.Common {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 
 				if (!export) {
-					// paint distributors in floor
-					Floor floor = this.product.AssociatedRoom.AssociatedFloor;
-					double measure = floor.AssociatedPlan.Measure.Value;
-					bool invertYAxis = floor.AssociatedPlan.InvertYAxis;
-					Region oldClip = g.Clip;
-					Region newClip = new Region();
-					newClip.MakeInfinite();
-					g.Clip = newClip;
-					foreach (Distributor dist in this.product.AssociatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
-						dist.Draw(g, additionalTransformation, measure, invertYAxis, floor);
-					}
-					g.Clip = oldClip;
-
-					// paint anbindeleitungen
+					// paint anbindeleitungen and distributors
 					this.connectionDrawer.Paint(g, additionalTransformation);
 				}
 
