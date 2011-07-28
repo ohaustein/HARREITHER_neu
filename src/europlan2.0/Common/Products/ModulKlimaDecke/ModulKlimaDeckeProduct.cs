@@ -604,6 +604,12 @@ namespace Europlan.Common {
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
 
 			this.CalculateHeatAndCoolFlow();
+			bool graphical = (this.GraphicalMode.HasValue && this.GraphicalMode.Value);
+			double measure = 1;
+			if (this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+				measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+			}
+
 			int i = 0;
 			foreach (ModulDeckeCircuit mc in this.circuits) {
 				mc.NrOfCircuit = i;
@@ -616,6 +622,26 @@ namespace Europlan.Common {
 				mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+				if (graphical) {
+					foreach (ModulDeckeSubArea sa in mc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							double verbindeleitung = 0;
+							if (row.Links != null) {
+								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+									verbindeleitung += link.GetLength(measure);
+								}
+							}
+							row.LengthVerbindeleitungen = verbindeleitung;
+						}
+					}
+					/*TODO add verbindeleitungen of subarea
+					 * if (c.Links != null) {
+						foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
+							double verbindeleitung = link.GetLength(measure);
+							link.En
+						}
+					}*/
+				}
 				mc.Calculate();
 				i++;
 			}
