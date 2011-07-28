@@ -129,10 +129,13 @@ namespace Europlan.Common {
 		public void Paint(Graphics g, Matrix4D additionalTransformation) {
 			if (this.Plan != null && this.floor != null && this.Plan.Measure.HasValue) {
 				Region clip = g.Clip;
+				Region newClip = new Region();
+				newClip.MakeInfinite();
+				g.Clip = newClip;
 				foreach (Distributor distributor in this.distributorsInFloor) {
 					distributor.Draw(g, additionalTransformation, this.Plan.Measure.Value, this.Plan.InvertYAxis, this.floor);
 				}
-				g.Clip = clip;
+				g.Clip = newClip;
 				foreach (Product product in this.productsInFloor) {
 					foreach (GraphicalProductConnection connection in product.Connections) {
 						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
@@ -140,6 +143,7 @@ namespace Europlan.Common {
 						}
 					}
 				}
+				g.Clip = clip;
 			}
 		}
 

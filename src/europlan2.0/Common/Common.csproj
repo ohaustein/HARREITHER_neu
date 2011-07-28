@@ -364,6 +364,12 @@
     </Compile>
     <Compile Include="Products\Hitherm\GraphicalHithermVerbindung.cs" />
     <Compile Include="Products\KlimaFlaechenSubAreaVerbindung.cs" />
+    <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.Designer.cs">
+      <DependentUpon>SelectMoveTargetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\ConnectionDrawer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1131,6 +1137,10 @@
     <EmbeddedResource Include="Products\ModulKlimaBoden\ModulKlimaBodenPlanner.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ModulKlimaBodenPlanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\ModulKlimaDecke\SelectMoveTargetForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectMoveTargetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\ModulKlimaDecke\ModulKlimaDeckePlanner.resx">
       <SubType>Designer</SubType>

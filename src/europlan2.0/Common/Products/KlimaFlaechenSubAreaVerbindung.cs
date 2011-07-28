@@ -5,6 +5,9 @@ using WW.Math;
 using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenSubAreaVerbindung : IKlimaFlaechenVerbindung {
@@ -21,6 +24,7 @@ namespace Europlan.Common {
 		private int circuitIndex = -1;
 		private PlannedProduct product;
 		private string productGuid = null;
+		private int distributorIndex = -1;
 
 		public List<List<Point2D>> Vertices {
 		  get { return vertices; }
@@ -37,6 +41,15 @@ namespace Europlan.Common {
 		}
 
 		public KlimaFlaechenSubAreaVerbindung(IEnumerable<KlimaFlaechenModul> start, IEnumerable<KlimaFlaechenModul> end, IEnumerable<IEnumerable<Point2D>> vertices, Circuit circuit, PlannedProduct product) {
+			this.Initialize(start, end, vertices, circuit, product, -1);
+		}
+
+		public KlimaFlaechenSubAreaVerbindung(IEnumerable<KlimaFlaechenModul> start, IEnumerable<KlimaFlaechenModul> end, IEnumerable<IEnumerable<Point2D>> vertices, Circuit circuit, PlannedProduct product, int distributorIndex) {
+			this.Initialize(start, end, vertices, circuit, product, distributorIndex);
+		}
+
+		private void Initialize(IEnumerable<KlimaFlaechenModul> start, IEnumerable<KlimaFlaechenModul> end, IEnumerable<IEnumerable<Point2D>> vertices, Circuit circuit, PlannedProduct product, int distributorIndex) {
+			this.distributorIndex = distributorIndex;
 			this.start = new List<KlimaFlaechenModul>();
 			if (start != null) {
 				this.start.AddRange(start);
@@ -112,6 +125,23 @@ namespace Europlan.Common {
 			// TODO
 		}
 
+		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, Color c) {
+			foreach (List<Point2D> v in vertices) {
+				Point2D oldVertex = v[0];
+				Point2D newVertex;
+
+				for (int i = 1; i < v.Count; i++) {
+					newVertex = v[i];
+
+					DxfLine line = new DxfLine(c, oldVertex, newVertex);
+					line.Layer = connectionLayer;
+					model.Entities.Add(line);
+
+					oldVertex = newVertex;
+				}
+			}
+		}
+
 		public bool HitTest(Point2D planPoint, double maxDist) {
 			return this.GetDistance(planPoint) <= maxDist;
 		}
@@ -120,7 +150,7 @@ namespace Europlan.Common {
 			Point2D oldVertex = new Point2D();
 			double bestDist = double.MaxValue;
 			foreach (List<Point2D> v in this.vertices) {
-				bool first = false;
+				bool first = true;
 				foreach (Point2D newVertex in v) {
 					if (first) {
 						first = false;
@@ -489,12 +519,17 @@ namespace Europlan.Common {
 			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
+		public int DistributorIndex {
+			get { return this.distributorIndex; }
+			set { this.distributorIndex = value; }
+		}
+
 		public Nullable<Point2D> GetClosestPoint(Point2D planPoint, out double bestDist) {
 			Point2D oldVertex = new Point2D();
 			bestDist = double.MaxValue;
 			Nullable<Point2D> bestPoint = null;
 			foreach (List<Point2D> v in this.vertices) {
-				bool first = false;
+				bool first = true;
 				foreach (Point2D newVertex in v) {
 					if (first) {
 						first = false;

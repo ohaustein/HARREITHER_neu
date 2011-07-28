@@ -573,5 +573,29 @@ namespace Europlan.Common {
 
 			return prevModules;
 		}
+
+		public int GetDistributorConnectionIndex(bool checkVorlauf, bool checkRuecklauf) {
+			if (this.Links != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
+					if ((checkRuecklauf && link.EndConnectedToAnbindung) ||
+						(checkVorlauf && link.StartConnectedToAnbindung)) {
+						return link.DistributorIndex;
+					}
+				}
+			}
+			foreach (ModulDeckeSubArea sa in this.subAreas) {
+				foreach (KlimaFlaechenList row in sa.Rows) {
+					if (row.Links != null) {
+						foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+							if ((checkRuecklauf && link.EndConnectedToAnbindung) ||
+								(checkVorlauf && link.StartConnectedToAnbindung)) {
+								return link.DistributorIndex;
+							}
+						}
+					}
+				}
+			}
+			return -1;
+		}
 	}
 }

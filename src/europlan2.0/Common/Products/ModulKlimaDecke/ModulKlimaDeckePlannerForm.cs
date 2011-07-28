@@ -917,6 +917,9 @@ namespace Europlan.Common.Products {
 			this.UpdateSelectedModules();
 		}
 
+		private ModulDeckeSubArea subAreaToMove = null;
+		private KlimaFlaechenList rowToMove = null;
+
 		private void UpdateSelectedModules() {
 			this.ignoreModuleOrientationChange++;
 			this.ignoreModuleTypeChange++;
@@ -1064,26 +1067,32 @@ namespace Europlan.Common.Products {
 					this.llHk.Text = "verschiende";
 				}
 				if (subAreaOk) {
+					this.subAreaToMove = subArea;
 					this.llSubarea.Tag = subAreaIndex;
 					subAreaIndex++;
 					this.llSubarea.Text = "Teilfäche " + subAreaIndex.ToString();
 					this.llSubarea.Enabled = true;
 				} else {
+					this.subAreaToMove = null;
 					this.llSubarea.Tag = null;
 					this.llSubarea.Enabled = false;
 					this.llSubarea.Text = "verschiende";
 				}
 				if (rowOk) {
+					this.rowToMove = row;
 					this.llReihe.Tag = rowIndex;
 					rowIndex++;
 					this.llReihe.Text = "Reihe " + rowIndex.ToString();
 					this.llReihe.Enabled = true;
 				} else {
+					this.rowToMove = null;
 					this.llReihe.Tag = null;
 					this.llReihe.Enabled = false;
 					this.llReihe.Text = "verschiende";
 				}
 			}
+			btnMoveSubarea.Enabled = this.subAreaToMove != null;
+			btnMoveRow.Enabled = this.rowToMove != null;
 		}
 
 		private int ignoreModuleTypeChange = 0;
@@ -1587,6 +1596,30 @@ namespace Europlan.Common.Products {
 				this.planPanel.PlanScale = scale;
 				this.planPanel.PlanTranslation = translation;
 			}
+		}
+
+		private void btnMoveRow_Click(object sender, EventArgs e) {
+			if (this.modulKlimaDeckePlanner.MoveRow(this.rowToMove)) {
+				this.UpdateLists(true, true, true, true);
+			}
+			/*SelectMoveTargetForm form = new SelectMoveTargetForm(this.modulKlimaDeckePlanner.Product, true);
+			if (form.ShowDialog() == DialogResult.OK) {
+				this.modulKlimaDeckePlanner.Product.MoveRow(this.rowToMove, form.SelectedSubarea);
+				this.planPanel.InvalidateGraphics();
+			}
+			form.Dispose();*/
+		}
+
+		private void btnMoveSubarea_Click(object sender, EventArgs e) {
+			if (this.modulKlimaDeckePlanner.MoveSubarea(this.subAreaToMove)) {
+				this.UpdateLists(true, true, true, true);
+			}
+			/*SelectMoveTargetForm form = new SelectMoveTargetForm(this.modulKlimaDeckePlanner.Product, false);
+			if (form.ShowDialog() == DialogResult.OK) {
+				this.modulKlimaDeckePlanner.Product.MoveSubarea(this.subAreaToMove, form.SelectedCircuit);
+				this.planPanel.InvalidateGraphics();
+			}
+			form.Dispose();*/
 		}
 	}
 }

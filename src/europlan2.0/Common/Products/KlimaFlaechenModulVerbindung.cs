@@ -5,6 +5,9 @@ using WW.Math;
 using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
 	public interface IKlimaFlaechenVerbindung {
@@ -44,6 +47,11 @@ namespace Europlan.Common {
 
 		bool EndConnectedToAnbindung {
 			get;
+		}
+
+		int DistributorIndex {
+			get;
+			set;
 		}
 	}
 
@@ -151,6 +159,24 @@ namespace Europlan.Common {
 				oldVertex = newVertex;
 			}
 			// TODO
+		}
+
+		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, Color c) {
+			if (this.vertices.Count < 2) {
+				return;
+			}
+			Point2D oldVertex = this.vertices[0];
+			Point2D newVertex;
+
+			for (int i = 1; i < this.vertices.Count; i++) {
+				newVertex = this.vertices[i];
+
+				DxfLine line = new DxfLine(c, oldVertex, newVertex);
+				line.Layer = connectionLayer;
+				model.Entities.Add(line);
+
+				oldVertex = newVertex;
+			}
 		}
 
 		public bool HitTest(Point2D planPoint, double maxDist) {

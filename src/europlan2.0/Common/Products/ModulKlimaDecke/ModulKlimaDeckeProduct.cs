@@ -1557,11 +1557,29 @@ namespace Europlan.Common {
 			return possibleConnection;
 		}
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input) {
+		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool invertYAxis, bool input, int distributorIndex, List<int> ignoreDistributorIndices, Nullable<Point2D> mousePoint) {
 			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 			if (this.connections != null) {
 				foreach (GraphicalProductConnection connection in this.connections) {
-					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, -1, null, false));
+					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, distributorIndex, ignoreDistributorIndices, false));
+				}
+			}
+			if (mousePoint.HasValue && (this.connections == null || this.connections.Count == 0)) {
+				double planRotation = this.associatedRoom.AssociatedPlan.Rotation;
+				foreach (Distributor d in this.associatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
+					if (d.IsInsideProduct(this)) {
+						if (d.IsPointInside(mousePoint.Value, this.AssociatedRoom.AssociatedFloor, measure, invertYAxis)) {
+							PossibleProductConnection ppc = d.GetPossibleProductConnections(true, true, measure, invertYAxis, mousePoint.Value, this, this.AssociatedRoom.AssociatedFloor, this.PlannedCircuitCount, true, input ? -0.055 / 4.0 : 0.055 / 4.0);
+							Vector2D vector = new Vector2D(0.01 * measure * Math.Sin((-ppc.Rotation + 0) * Math.PI / 180.0), 0.01 * measure * Math.Cos((-ppc.Rotation + 0) * Math.PI / 180.0));
+							Point2D firstPoint = ppc.ConnectionPoint + vector;
+							Point2D secondPoint = ppc.ConnectionPoint - vector;
+							if (ppc != null) {
+								GraphicalProductConnection gpc = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this), d, new Point2D[] { firstPoint, secondPoint }, true, true, ppc.DistributorStartPosition, true, true, ProductType.DH);
+								gpc.Automatic = true;
+								anbindungsPunkte.AddRange(gpc.GetAnbindungsPunkte(measure, input, ppc.DistributorStartPosition, ignoreDistributorIndices, true));
+							}
+						}
+					}
 				}
 			}
 			return anbindungsPunkte;
@@ -1598,6 +1616,117 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+
+		public void MoveRow(KlimaFlaechenList row, ModulDeckeSubArea target, ModulDeckeCircuit targetCircuit, System.Drawing.Color newCircuitColor) {
+			ModulDeckeSubArea oldSa = null;
+			ModulDeckeCircuit oldCircuit = null;
+			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+				foreach (ModulDeckeSubArea sa in c.SubAreas) {
+					if (sa.Rows.Contains(row)) {
+						oldSa = sa;
+						oldCircuit = c;
+						break;
+					}
+				}
+				if (oldSa != null) {
+					break;
+				}
+			}
+			if (oldSa == null || oldSa == target) {
+				return;
+			}
+			if (oldCircuit.Links != null) {
+				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
+					if (link.Start != null) {
+						foreach (KlimaFlaechenModul m in link.Start) {
+							if (row.ContainsModul(m)) {
+								linksToDelete.Add(link);
+								break;
+							}
+						}
+					}
+					if (link.End != null) {
+						foreach (KlimaFlaechenModul m in link.End) {
+							if (row.ContainsModul(m)) {
+								linksToDelete.Add(link);
+								break;
+							}
+						}
+					}
+				}
+				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
+					oldCircuit.Links.Remove(link);
+				}
+			}
+			if (targetCircuit == null) {
+				targetCircuit = new ModulDeckeCircuit();
+				targetCircuit.CircuitColor = newCircuitColor;
+				targetCircuit.SubAreas.Clear();
+				this.PlannedCircuits.Add(targetCircuit);
+			}
+			if (target == null) {
+				target = new ModulDeckeSubArea();
+				target.Rows.Clear();
+				targetCircuit.SubAreas.Add(target);
+			}
+			oldSa.Rows.Remove(row);
+			if (oldSa.Rows.Count == 0) {
+				oldCircuit.SubAreas.Remove(oldSa);
+			}
+			if (oldCircuit.SubAreas.Count == 0) {
+				this.PlannedCircuits.Remove(oldCircuit);
+			}
+			target.Rows.Add(row);
+		}
+
+		public void MoveSubarea(ModulDeckeSubArea subArea, ModulDeckeCircuit target, System.Drawing.Color newCircuitColor) {
+			ModulDeckeCircuit oldCircuit = null;
+			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+				if (c.SubAreas.Contains(subArea)) {
+					oldCircuit = c;
+					break;
+				}
+			}
+			if (oldCircuit == null || oldCircuit == target) {
+				return;
+			}
+			if (oldCircuit.Links != null) {
+				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
+					if (link.Start != null) {
+						foreach (KlimaFlaechenModul m in link.Start) {
+							if (subArea.ContainsModul(m)) {
+								linksToDelete.Add(link);
+								break;
+							}
+						}
+					}
+					if (link.End != null) {
+						foreach (KlimaFlaechenModul m in link.End) {
+							if (subArea.ContainsModul(m)) {
+								linksToDelete.Add(link);
+								break;
+							}
+						}
+					}
+				}
+				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
+					oldCircuit.Links.Remove(link);
+				}
+			}
+			if (target == null) {
+				target = new ModulDeckeCircuit();
+				target.SubAreas.Clear();
+				target.CircuitColor = newCircuitColor;
+				this.PlannedCircuits.Add(target);
+			}
+			oldCircuit.SubAreas.Remove(subArea);
+			if (oldCircuit.SubAreas.Count == 0) {
+				this.PlannedCircuits.Remove(oldCircuit);
+			}
+			target.SubAreas.Add(subArea);
 		}
 	}
 

@@ -287,6 +287,8 @@ namespace Europlan.Common {
 						}
 						ConnectionDrawer connectionDrawer = new ConnectionDrawer();
 						connectionDrawer.Floor = floor;
+						connectionDrawer.PlanCeiling = cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) || cmbExportOption.SelectedValue.Equals(ExportOptionType.DH);
+						connectionDrawer.PlanFloor = cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) || cmbExportOption.SelectedValue.Equals(ExportOptionType.FBH);
 						connectionDrawer.Paint(g, Matrix4D.Identity);
 					}
 				}
@@ -323,6 +325,8 @@ namespace Europlan.Common {
 						}
 						ConnectionDrawer connectionDrawer = new ConnectionDrawer();
 						connectionDrawer.Floor = floor;
+						connectionDrawer.PlanCeiling = cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) || cmbExportOption.SelectedValue.Equals(ExportOptionType.DH);
+						connectionDrawer.PlanFloor = cmbExportOption.SelectedValue.Equals(ExportOptionType.DH_FBH) || cmbExportOption.SelectedValue.Equals(ExportOptionType.FBH);
 						connectionDrawer.DrawDxf(model, distributorLayer, anbindeLayer);
 
 						foreach (Room room in floor.Rooms) {
@@ -384,6 +388,13 @@ namespace Europlan.Common {
 											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(EurovalProduct), model);
 											EurovalPlanner planner = new EurovalPlanner();
 											planner.Product = p as EurovalProduct;
+											planner.HighlightRoomCoordinates = false;
+											planner.DrawExpansionGaps = false;
+											planner.DrawDxf(model, layer);
+										} else if (p is EcothermProduct) {
+											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(EcothermProduct), model);
+											EcothermPlanner planner = new EcothermPlanner();
+											planner.Product = p as EcothermProduct;
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
 											planner.DrawDxf(model, layer);
