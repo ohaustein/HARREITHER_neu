@@ -56,15 +56,22 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false/*, this == selectedObject*/);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, false/*, this == selectedObject*/);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false, false/*, false*/);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false/*, false*/);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error/*, bool drawAnchors*/) {
-			highlightConnections = false;
+		private const float parapet_distLeft = 3.5f;
+		private const float parapet_distRight = 3.5f;
+		private const float parapet_distPipeToRegister = 7.5f;
+		private const float parapet_pipeWidth = 2.0f;
+		private const float parapet_registerPipeWidth = 2.0f;
+		private const float parapet_distBottomLeftRegisterPipe = 2.5f;
+		private const float parapet_distTopPipe = 2.5f;
+
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool error/*, bool drawAnchors*/) {
 			if (register == null) {
 				return;
 			}
@@ -75,7 +82,7 @@ namespace Europlan.Common {
 			Pen pOutput = new Pen(Color.Blue, (float)(1.0 / scale));
 			Pen connectionPen = new Pen(registerPen.Color, 2);
 			Pen plattePen = new Pen(color, (float)(1 / scale));
-			plattePen.DashPattern = new float[] { 1, 2 };
+			plattePen.DashPattern = new float[] { 5, 5 };
 			if (error || this.error) {
 				registerPen.DashPattern = new float[] { 1, 2 };
 				pInput.DashPattern = new float[] { 1, 2 };
@@ -84,27 +91,27 @@ namespace Europlan.Common {
 				bOutput = new SolidBrush(Color.FromArgb(63, Color.Blue));
 			}
 			if (register.IsParapet) {
-				float x1 = (float)(xOffset + register.GraphPosX + 2.5 + 2 + 10);
-				float x2 = (float)(xOffset + register.GraphPosX + this.Width - 3.5 - 2);
+				float x1 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth + parapet_distPipeToRegister);
+				float x2 = (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_registerPipeWidth);
 				float y = (float)(yOffset + register.GraphPosY);
 				float hoehe = 55;
-				g.DrawRectangle(registerPen, x1, y, 2, hoehe);
-				g.DrawRectangle(registerPen, x2, y, 2, hoehe);
-				x1 = (float)(xOffset + register.GraphPosX + 2.5 + 2 + 10 + 1);
-				x2 = (float)(xOffset + register.GraphPosX + this.Width - 3.5 - 2 - 1);
+				g.DrawRectangle(registerPen, x1, y + parapet_distBottomLeftRegisterPipe, parapet_registerPipeWidth, hoehe - parapet_distBottomLeftRegisterPipe);
+				g.DrawRectangle(registerPen, x2, y, parapet_registerPipeWidth, hoehe);
+				x1 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth + parapet_distPipeToRegister + parapet_registerPipeWidth / 2.0f);
+				x2 = (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_registerPipeWidth / 2.0);
 				for (int pos = 5; pos <= 50; pos += 5) {
 					y = (float)(yOffset + register.GraphPosY + pos);
 					g.DrawLine(registerPen, x1, y, x2, y);
 				}
 				connectionPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 				connectionPen.StartCap = LineCap.Flat;
-				float x = (float)(xOffset + register.GraphPosX + 2.5 + 1);
-				float y1 = (float)(yOffset + register.GraphPosY);
-				float y2 = (float)(yOffset + register.GraphPosY + this.Height - 2.5 - 1);
+				float x = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0);
+				float y1 = (float)(yOffset + register.GraphPosY + parapet_pipeWidth);
+				float y2 = (float)(yOffset + register.GraphPosY + this.Height - parapet_distTopPipe - parapet_pipeWidth / 2.0);
 				g.DrawLine(connectionPen, x, y1, x, y2);
 				connectionPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 				x1 = x;
-				x2 = x + 12;
+				x2 = x + parapet_distPipeToRegister + parapet_pipeWidth;
 				y = y2;
 				g.DrawLine(connectionPen, x1, y, x2, y);
 				connectionPen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
@@ -113,10 +120,12 @@ namespace Europlan.Common {
 				y2 = (float)(yOffset + register.GraphPosY + 55);
 				g.DrawLine(connectionPen, x, y1, x, y2);
 				g.DrawRectangle(plattePen, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY), (float)this.Width, (float)this.Height);
-				if (highlightConnections) {
-				}
+				g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
 			} else {
-				// TODO
+				throw new Exception("TODO");
 			}
 #if BLUB
 			if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
@@ -279,6 +288,11 @@ namespace Europlan.Common {
 		}
 
 		public Point2D GetOutputConnectionPoint(double xOffset, double yOffset, double dist) {
+			if (this.register.IsParapet) {
+				return new Point2D(xOffset + this.register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
+			} else {
+				throw new Exception("TODO");
+			}
 #if BLUB
 			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				if (this.register.GraphVorlaufRight) {
@@ -293,8 +307,6 @@ namespace Europlan.Common {
 					return new Point2D(xOffset + this.register.GraphPosX + this.Width - 1, yOffset + this.register.GraphPosY + this.Height + dist);
 				}
 			}
-#else
-			return new Point2D();
 #endif
 		}
 
@@ -302,16 +314,20 @@ namespace Europlan.Common {
 
 		public Polygon2D GetOutputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
-#if BLUB
-			area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX - connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height + connectionSize / 2 - 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + connectionSize / 2 + 1.0, yOffset + register.GraphPosY + this.Height - connectionSize / 2 - 1.0));
-#endif
+			Point2D connectionPoint = this.GetOutputConnectionPoint(xOffset, yOffset, 0);
+			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
 			return area;
 		}
 
 		public Point2D GetInputConnectionPoint(double xOffset, double yOffset, double dist) {
+			if (this.register.IsParapet) {
+				return new Point2D(xOffset + this.register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
+			} else {
+				throw new Exception("TODO");
+			}
 #if BLUB
 			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 				if (this.register.GraphVorlaufRight) {
@@ -326,36 +342,25 @@ namespace Europlan.Common {
 					return new Point2D(xOffset + this.register.GraphPosX + 1, yOffset + this.register.GraphPosY - dist);
 				}
 			}
-#else
-			return new Point2D();
 #endif
 		}
 
 		public Polygon2D GetInputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
-#if BLUB
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width - connectionSize / 2 - 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY + connectionSize / 2 + 1.0));
-			area.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width + connectionSize / 2 - 1.0, yOffset + register.GraphPosY - connectionSize / 2 + 1.0));
-#endif
+			Point2D connectionPoint = this.GetInputConnectionPoint(xOffset, yOffset, 0);
+			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
+			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
 			return area;
 		}
 
-		public PossibleHithermRegisterConnection GetOutputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-#if BLUB
-			return new PossibleHithermRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset, 0), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? new Vector2D(this.register.GraphVorlaufRight ? -5 : 5, 0) : new Vector2D(0, 5));
-#else
-			return null;
-#endif
+		public PossibleHithermCompactRegisterConnection GetOutputConnection(double xOffset, double yOffset, HithermCompactProduct product, HithermCompactCircuit circuit) {
+			return new PossibleHithermCompactRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset, 0), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register, false, true, new Vector2D(0, -5));
 		}
 
-		public PossibleHithermRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermProduct product, HithermCircuit circuit) {
-#if blub
-			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? new Vector2D(this.register.GraphVorlaufRight ? 5 : -5, 0) : new Vector2D(0, -5));
-#else
-			return null;
-#endif
+		public PossibleHithermCompactRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermCompactProduct product, HithermCompactCircuit circuit) {
+			return new PossibleHithermCompactRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, false, true, new Vector2D(0, -5));
 		}
 
 		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {

@@ -333,6 +333,25 @@ namespace Europlan.Common {
 					throw new Exception("Unknown Register Type");
 			}*/
 		}
+
+		public static Nullable<HithermCompactRegisterTypeEnum> GetRegisterTypeForSize(double width, double height, bool isParapet, bool isDachschraege) {
+			width = width * 10;
+			height = height * 10;
+			HithermCompactRegisterTypeEnum[] possibleTypes;
+			if (isParapet) {
+				possibleTypes = new HithermCompactRegisterTypeEnum[] { HithermCompactRegisterTypeEnum.HITC_2000_Par, HithermCompactRegisterTypeEnum.HITC_1500_Par, HithermCompactRegisterTypeEnum.HITC_1000_Par };
+			} else if (isDachschraege) {
+				possibleTypes = new HithermCompactRegisterTypeEnum[] { HithermCompactRegisterTypeEnum.HITC_2500_Ds, HithermCompactRegisterTypeEnum.HITC_2000_Ds, HithermCompactRegisterTypeEnum.HITC_1500_Ds, HithermCompactRegisterTypeEnum.HITC_1000_Ds, HithermCompactRegisterTypeEnum.HITC_620_Ds };
+			} else {
+				possibleTypes = new HithermCompactRegisterTypeEnum[] { HithermCompactRegisterTypeEnum.HITC_2500_Std, HithermCompactRegisterTypeEnum.HITC_2000_Std, HithermCompactRegisterTypeEnum.HITC_1500_Std, HithermCompactRegisterTypeEnum.HITC_1000_Std, HithermCompactRegisterTypeEnum.HITC_620_Std };
+			}
+			foreach (HithermCompactRegisterTypeEnum possibleType in possibleTypes) {
+				if (width >= GetRegisterBreite(possibleType) && height >= GetRegisterHoehe(possibleType)) {
+					return possibleType;
+				}
+			}
+			return null;
+		}
 		#endregion Static Methods
 
 		private HithermCompactRegisterTypeEnum registerType = HithermCompactRegisterTypeEnum.HITC_620_Std;

@@ -1225,6 +1225,63 @@ namespace Europlan.Common {
 			// TODO
 			get { return null; }
 		}
+
+		public void ResetProduct() {
+			registerCircuits = new Dictionary<HithermCompactRegister, int>();
+			circuitIds = new Dictionary<int, HithermCompactCircuit>();
+
+			hithermCompactType = ProductType.WH;
+			plannedFloorArea = 0;
+			plannedCeilingArea = 0;
+			this.circuits.Clear();
+		}
+
+		public int GetNewHkId() {
+			bool[] hkUsed = new bool[this.PlannedCircuits.Count + 1];
+			for (int i = 0; i < hkUsed.Length; i++) {
+				hkUsed[i] = false;
+			}
+			foreach (HithermCompactCircuit c in this.PlannedCircuits) {
+				int labelNr = c.HkLabelNr - 1;
+				if (labelNr >= 0 && labelNr < hkUsed.Length) {
+					hkUsed[labelNr] = true;
+				}
+			}
+			int newHkId = hkUsed.Length;
+			for (int i = 0; i < hkUsed.Length; i++) {
+				if (!hkUsed[i]) {
+					newHkId = i + 1;
+					break;
+				}
+			}
+			return newHkId;
+		}
+
+		public void CorrectCircuitIds() {
+			List<HithermCompactCircuit> notConnectedCircuits = new List<HithermCompactCircuit>();
+			for (int i = 0; i < this.PlannedCircuits.Count; i++) {
+				HithermCompactCircuit hc = this.PlannedCircuits[i] as HithermCompactCircuit;
+				if (!hc.IsConnectedToGround(false, false)) {
+					notConnectedCircuits.Add(hc);
+					this.PlannedCircuits.RemoveAt(i);
+					i--;
+				}
+			}
+			foreach (HithermCompactCircuit hc in notConnectedCircuits) {
+				this.PlannedCircuits.Add(hc);
+			}
+			this.circuitIds.Clear();
+			this.registerCircuits.Clear();
+			int nr = 1;
+			PlannedProduct pp = Project.Instance.GetPlannedProduct(this);
+			foreach (HithermCompactCircuit hc in this.circuits) {
+				this.circuitIds[nr] = hc;
+				foreach (HithermCompactRegister hr in hc.Registers) {
+					this.registerCircuits[hr] = nr;
+					hr.PlannedProduct = pp;
+				}
+				nr++;
+			}
+		}
 	}
-	
 }

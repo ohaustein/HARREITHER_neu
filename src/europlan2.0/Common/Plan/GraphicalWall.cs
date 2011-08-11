@@ -691,8 +691,21 @@ namespace Europlan.Common {
 			if (this.DachSchraege != null) {
 				this.DachSchraege.RemoveAllRegisters(hithermProduct);
 			}
-			foreach (GraphicalHithermRegisterWrapper wrapper in this.Registers) {
-				hithermProduct.RemoveRegisterFromCircuit(wrapper.Register);
+			foreach (GraphicalRegisterWrapper wrapper in this.Registers) {
+				if (wrapper is GraphicalHithermRegisterWrapper) {
+					hithermProduct.RemoveRegisterFromCircuit((wrapper as GraphicalHithermRegisterWrapper).Register);
+				}
+			}
+		}
+
+		public void RemoveAllRegisters(HithermCompactProduct hithermCompactProduct) {
+			if (this.DachSchraege != null) {
+				this.DachSchraege.RemoveAllRegisters(hithermCompactProduct);
+			}
+			foreach (GraphicalRegisterWrapper wrapper in this.Registers) {
+				if (wrapper is GraphicalHithermCompactRegisterWrapper) {
+					hithermCompactProduct.RemoveRegisterFromCircuit((wrapper as GraphicalHithermCompactRegisterWrapper).Register);
+				}
 			}
 		}
 

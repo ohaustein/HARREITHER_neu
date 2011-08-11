@@ -12,6 +12,7 @@ namespace Europlan.Common {
 		private PlannedProduct product = null;
 
 		private bool gridContentChanged = false;
+		private bool updateOngoing = false;
 
 		public PlannedHithermCompactProductPanel() {
 			InitializeComponent();
@@ -146,6 +147,7 @@ namespace Europlan.Common {
 			REGISTER = 65536,
 			WALLS = 131072,
 			TYPE = 262144,
+			LAYOUT_TYPE = 524288
 		}
 
 
@@ -185,6 +187,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationMode = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
+			updateOngoing = true;
 			if (this.product != null) {
 				ignoreCoverHeatLoad++;
 				ignoreHeatLoad++;
@@ -205,7 +208,27 @@ namespace Europlan.Common {
 				ignoreCalculationMode++;
 
 				HithermCompactProduct hcp = this.product.Product as HithermCompactProduct;
-
+				bool graphicalMode = false;
+				if (this.product.Product.GraphicalMode.HasValue) {
+					graphicalMode = this.product.Product.GraphicalMode.Value;
+				} else {
+					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+						graphicalMode = true;
+						this.product.Product.GraphicalMode = true;
+					} else {
+						graphicalMode = false;
+						this.product.Product.GraphicalMode = false;
+					}
+				}
+				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
+					if (graphicalMode) {
+						this.rbLayoutGraphical.Checked = true;
+					} else {
+						this.rbLayoutTable.Checked = true;
+					}
+				}
+				dgvRegisters.Enabled = !graphicalMode;
+				this.btnGrafischeAuslegung.Enabled = graphicalMode;
 				int selectedCircuit = (this.dgvRegisters.SelectedCells.Count > 0 &&
 					this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem is HithermCompactRegister) ?
 					(this.dgvRegisters.Rows[this.dgvRegisters.SelectedCells[0].RowIndex].DataBoundItem as HithermCompactRegister).Heizkreis : -1;
@@ -535,6 +558,7 @@ namespace Europlan.Common {
 				ignoreCalculationMode--;
 			}
 			// TODO
+			updateOngoing = false;
 		}
 
 		public bool AllowLeave() {
@@ -1009,6 +1033,50 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.NONE);
 			if (this.ProjectChanged != null) {
 				this.ProjectChanged(this);
+			}
+		}
+
+		private void btnGrafischeAuslegung_Click(object sender, EventArgs e) {
+			HithermCompactPlannerForm form = new HithermCompactPlannerForm(this.product.Product as HithermCompactProduct);
+			form.ShowDialog();
+			this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+			form.Dispose();
+			// TODO
+			if (this.ProjectChanged != null) {
+				this.ProjectChanged(this);
+			}
+		}
+
+		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
+			if (!updateOngoing && (sender as RadioButton).Checked) {
+				if (this.product.Product.GraphicalMode.HasValue && this.product.Product.GraphicalMode.Value != rbLayoutGraphical.Checked) {
+					// change from graphical to table based
+					if (this.product.Product.GraphicalMode.Value) {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							}
+						}
+						// change from table based to graphical  
+					} else {
+						if (!this.product.Product.AllowToSwitchMode) {
+							DialogResult result = MessageBox.Show(EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch, EuroplanRes.PlannedEurovalProductPanel_Auslegung_Aendern_Titel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								this.UpdateControl(FieldEnum.NONE);
+								return;
+							} else {
+								(this.product.Product as HithermProduct).ResetProduct();
+							}
+						}
+					}
+				}
+				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
+				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
+				if (this.ProjectChanged != null) {
+					this.ProjectChanged(this);
+				}
 			}
 		}
 	}
