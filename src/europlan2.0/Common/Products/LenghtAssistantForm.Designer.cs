@@ -60,7 +60,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(601, 264);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 1;
+			this.btnCancel.TabIndex = 11;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -71,7 +71,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(520, 264);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 10;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -105,7 +105,7 @@ namespace Europlan.Common {
 			this.groupBox1.Location = new System.Drawing.Point(12, 29);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(664, 229);
-			this.groupBox1.TabIndex = 3;
+			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			// 
 			// lblAvailableArea
@@ -149,7 +149,7 @@ namespace Europlan.Common {
 			this.btnRestAreaRuecklauf.Location = new System.Drawing.Point(499, 127);
 			this.btnRestAreaRuecklauf.Name = "btnRestAreaRuecklauf";
 			this.btnRestAreaRuecklauf.Size = new System.Drawing.Size(143, 23);
-			this.btnRestAreaRuecklauf.TabIndex = 17;
+			this.btnRestAreaRuecklauf.TabIndex = 9;
 			this.btnRestAreaRuecklauf.Text = "Restliche Fläche";
 			this.btnRestAreaRuecklauf.UseVisualStyleBackColor = true;
 			this.btnRestAreaRuecklauf.Click += new System.EventHandler(this.btnRestAreaRuecklauf_Click);
@@ -159,7 +159,7 @@ namespace Europlan.Common {
 			this.btnAvailableAreaRuecklauf.Location = new System.Drawing.Point(346, 127);
 			this.btnAvailableAreaRuecklauf.Name = "btnAvailableAreaRuecklauf";
 			this.btnAvailableAreaRuecklauf.Size = new System.Drawing.Size(143, 23);
-			this.btnAvailableAreaRuecklauf.TabIndex = 16;
+			this.btnAvailableAreaRuecklauf.TabIndex = 8;
 			this.btnAvailableAreaRuecklauf.Text = "Verfügbare Fläche";
 			this.btnAvailableAreaRuecklauf.UseVisualStyleBackColor = true;
 			this.btnAvailableAreaRuecklauf.Click += new System.EventHandler(this.btnAvailableAreaRuecklauf_Click);
@@ -190,7 +190,7 @@ namespace Europlan.Common {
             0});
 			this.numRuecklaufArea.Name = "numRuecklaufArea";
 			this.numRuecklaufArea.Size = new System.Drawing.Size(144, 20);
-			this.numRuecklaufArea.TabIndex = 14;
+			this.numRuecklaufArea.TabIndex = 7;
 			this.numRuecklaufArea.Text = "0";
 			this.numRuecklaufArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numRuecklaufArea.Value = new decimal(new int[] {
@@ -235,7 +235,7 @@ namespace Europlan.Common {
             0});
 			this.numRuecklauf.Name = "numRuecklauf";
 			this.numRuecklauf.Size = new System.Drawing.Size(144, 20);
-			this.numRuecklauf.TabIndex = 11;
+			this.numRuecklauf.TabIndex = 6;
 			this.numRuecklauf.Text = "0";
 			this.numRuecklauf.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numRuecklauf.Value = new decimal(new int[] {
@@ -259,7 +259,7 @@ namespace Europlan.Common {
 			this.btnRestAreaVorlauf.Location = new System.Drawing.Point(499, 71);
 			this.btnRestAreaVorlauf.Name = "btnRestAreaVorlauf";
 			this.btnRestAreaVorlauf.Size = new System.Drawing.Size(143, 23);
-			this.btnRestAreaVorlauf.TabIndex = 9;
+			this.btnRestAreaVorlauf.TabIndex = 5;
 			this.btnRestAreaVorlauf.Text = "Restliche Fläche";
 			this.btnRestAreaVorlauf.UseVisualStyleBackColor = true;
 			this.btnRestAreaVorlauf.Click += new System.EventHandler(this.btnRestAreaVorlauf_Click);
@@ -269,7 +269,7 @@ namespace Europlan.Common {
 			this.btnAvailableAreaVorlauf.Location = new System.Drawing.Point(346, 71);
 			this.btnAvailableAreaVorlauf.Name = "btnAvailableAreaVorlauf";
 			this.btnAvailableAreaVorlauf.Size = new System.Drawing.Size(143, 23);
-			this.btnAvailableAreaVorlauf.TabIndex = 8;
+			this.btnAvailableAreaVorlauf.TabIndex = 4;
 			this.btnAvailableAreaVorlauf.Text = "Verfügbare Fläche";
 			this.btnAvailableAreaVorlauf.UseVisualStyleBackColor = true;
 			this.btnAvailableAreaVorlauf.Click += new System.EventHandler(this.btnAvailableAreaVorlauf_Click);
@@ -300,7 +300,7 @@ namespace Europlan.Common {
             0});
 			this.numVorlaufArea.Name = "numVorlaufArea";
 			this.numVorlaufArea.Size = new System.Drawing.Size(144, 20);
-			this.numVorlaufArea.TabIndex = 6;
+			this.numVorlaufArea.TabIndex = 3;
 			this.numVorlaufArea.Text = "0";
 			this.numVorlaufArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numVorlaufArea.Value = new decimal(new int[] {
@@ -345,7 +345,7 @@ namespace Europlan.Common {
             0});
 			this.numVorlauf.Name = "numVorlauf";
 			this.numVorlauf.Size = new System.Drawing.Size(144, 20);
-			this.numVorlauf.TabIndex = 3;
+			this.numVorlauf.TabIndex = 2;
 			this.numVorlauf.Text = "0";
 			this.numVorlauf.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numVorlauf.Value = new decimal(new int[] {

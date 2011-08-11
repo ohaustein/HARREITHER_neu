@@ -136,7 +136,7 @@ namespace Europlan.Common {
 			this.cmbHeatFlowTemperature.Location = new System.Drawing.Point(629, 53);
 			this.cmbHeatFlowTemperature.Name = "cmbHeatFlowTemperature";
 			this.cmbHeatFlowTemperature.Size = new System.Drawing.Size(56, 21);
-			this.cmbHeatFlowTemperature.TabIndex = 30;
+			this.cmbHeatFlowTemperature.TabIndex = 18;
 			this.cmbHeatFlowTemperature.SelectedIndexChanged += new System.EventHandler(this.cmbHeatFlowTemperature_SelectedIndexChanged);
 			// 
 			// lblTemp4
@@ -258,7 +258,7 @@ namespace Europlan.Common {
 			this.btnRevert.Margin = new System.Windows.Forms.Padding(0);
 			this.btnRevert.Name = "btnRevert";
 			this.btnRevert.Size = new System.Drawing.Size(323, 23);
-			this.btnRevert.TabIndex = 29;
+			this.btnRevert.TabIndex = 17;
 			this.btnRevert.Text = "Flächenaufstellung zurücksetzen";
 			this.btnRevert.UseVisualStyleBackColor = true;
 			this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
@@ -271,7 +271,7 @@ namespace Europlan.Common {
 			this.cbEurovalHeat.Location = new System.Drawing.Point(174, 49);
 			this.cbEurovalHeat.Name = "cbEurovalHeat";
 			this.cbEurovalHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbEurovalHeat.TabIndex = 2;
+			this.cbEurovalHeat.TabIndex = 1;
 			this.cbEurovalHeat.UseVisualStyleBackColor = false;
 			this.cbEurovalHeat.CheckedChanged += new System.EventHandler(this.cbEurovalHeat_CheckedChanged);
 			// 
@@ -293,7 +293,7 @@ namespace Europlan.Common {
 			this.cbEurovalCool.Location = new System.Drawing.Point(250, 49);
 			this.cbEurovalCool.Name = "cbEurovalCool";
 			this.cbEurovalCool.Size = new System.Drawing.Size(70, 17);
-			this.cbEurovalCool.TabIndex = 3;
+			this.cbEurovalCool.TabIndex = 2;
 			this.cbEurovalCool.UseVisualStyleBackColor = false;
 			this.cbEurovalCool.CheckedChanged += new System.EventHandler(this.cbEurovalCool_CheckedChanged);
 			// 
@@ -351,7 +351,7 @@ namespace Europlan.Common {
 			this.cmbDistance.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
 			this.cmbDistance.Name = "cmbDistance";
 			this.cmbDistance.Size = new System.Drawing.Size(85, 21);
-			this.cmbDistance.TabIndex = 5;
+			this.cmbDistance.TabIndex = 3;
 			this.cmbDistance.SelectedIndexChanged += new System.EventHandler(this.cmbDistance_SelectedIndexChanged);
 			// 
 			// lblCool
@@ -375,7 +375,7 @@ namespace Europlan.Common {
 			this.cbHithermCompactCool.Location = new System.Drawing.Point(250, 118);
 			this.cbHithermCompactCool.Name = "cbHithermCompactCool";
 			this.cbHithermCompactCool.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermCompactCool.TabIndex = 15;
+			this.cbHithermCompactCool.TabIndex = 9;
 			this.cbHithermCompactCool.UseVisualStyleBackColor = false;
 			this.cbHithermCompactCool.CheckedChanged += new System.EventHandler(this.cbHithermCompactCool_CheckedChanged);
 			// 
@@ -387,7 +387,7 @@ namespace Europlan.Common {
 			this.cbHithermCompactHeat.Location = new System.Drawing.Point(174, 118);
 			this.cbHithermCompactHeat.Name = "cbHithermCompactHeat";
 			this.cbHithermCompactHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermCompactHeat.TabIndex = 12;
+			this.cbHithermCompactHeat.TabIndex = 8;
 			this.cbHithermCompactHeat.UseVisualStyleBackColor = false;
 			this.cbHithermCompactHeat.CheckedChanged += new System.EventHandler(this.cbHithermCompactHeat_CheckedChanged);
 			// 
@@ -411,7 +411,7 @@ namespace Europlan.Common {
 			this.cbHithermCool.Location = new System.Drawing.Point(250, 95);
 			this.cbHithermCool.Name = "cbHithermCool";
 			this.cbHithermCool.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermCool.TabIndex = 11;
+			this.cbHithermCool.TabIndex = 7;
 			this.cbHithermCool.UseVisualStyleBackColor = false;
 			this.cbHithermCool.CheckedChanged += new System.EventHandler(this.cbHithermCool_CheckedChanged);
 			// 
@@ -423,7 +423,7 @@ namespace Europlan.Common {
 			this.cbHithermHeat.Location = new System.Drawing.Point(174, 95);
 			this.cbHithermHeat.Name = "cbHithermHeat";
 			this.cbHithermHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermHeat.TabIndex = 10;
+			this.cbHithermHeat.TabIndex = 6;
 			this.cbHithermHeat.UseVisualStyleBackColor = false;
 			this.cbHithermHeat.CheckedChanged += new System.EventHandler(this.cbHithermHeat_CheckedChanged);
 			// 
@@ -459,7 +459,7 @@ namespace Europlan.Common {
 			this.cbBkaHeat.Location = new System.Drawing.Point(174, 72);
 			this.cbBkaHeat.Name = "cbBkaHeat";
 			this.cbBkaHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbBkaHeat.TabIndex = 2;
+			this.cbBkaHeat.TabIndex = 4;
 			this.cbBkaHeat.UseVisualStyleBackColor = false;
 			this.cbBkaHeat.CheckedChanged += new System.EventHandler(this.cbBkaHeat_CheckedChanged);
 			// 
@@ -470,7 +470,7 @@ namespace Europlan.Common {
 			this.cbBkaCool.Location = new System.Drawing.Point(250, 72);
 			this.cbBkaCool.Name = "cbBkaCool";
 			this.cbBkaCool.Size = new System.Drawing.Size(70, 17);
-			this.cbBkaCool.TabIndex = 3;
+			this.cbBkaCool.TabIndex = 5;
 			this.cbBkaCool.UseVisualStyleBackColor = false;
 			this.cbBkaCool.CheckedChanged += new System.EventHandler(this.cbBkaCool_CheckedChanged);
 			// 
@@ -494,7 +494,7 @@ namespace Europlan.Common {
 			this.cbModulKlimaDeckeHeat.Location = new System.Drawing.Point(174, 187);
 			this.cbModulKlimaDeckeHeat.Name = "cbModulKlimaDeckeHeat";
 			this.cbModulKlimaDeckeHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbModulKlimaDeckeHeat.TabIndex = 17;
+			this.cbModulKlimaDeckeHeat.TabIndex = 14;
 			this.cbModulKlimaDeckeHeat.UseVisualStyleBackColor = false;
 			this.cbModulKlimaDeckeHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeHeat_CheckedChanged);
 			// 
@@ -506,7 +506,7 @@ namespace Europlan.Common {
 			this.cbModulKlimaDeckeCool.Location = new System.Drawing.Point(250, 187);
 			this.cbModulKlimaDeckeCool.Name = "cbModulKlimaDeckeCool";
 			this.cbModulKlimaDeckeCool.Size = new System.Drawing.Size(70, 17);
-			this.cbModulKlimaDeckeCool.TabIndex = 16;
+			this.cbModulKlimaDeckeCool.TabIndex = 15;
 			this.cbModulKlimaDeckeCool.UseVisualStyleBackColor = false;
 			this.cbModulKlimaDeckeCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaDeckeCool_CheckedChanged);
 			// 
@@ -530,7 +530,7 @@ namespace Europlan.Common {
 			this.cbModulKlimaBodenHeat.Location = new System.Drawing.Point(174, 164);
 			this.cbModulKlimaBodenHeat.Name = "cbModulKlimaBodenHeat";
 			this.cbModulKlimaBodenHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbModulKlimaBodenHeat.TabIndex = 13;
+			this.cbModulKlimaBodenHeat.TabIndex = 12;
 			this.cbModulKlimaBodenHeat.UseVisualStyleBackColor = false;
 			this.cbModulKlimaBodenHeat.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenHeat_CheckedChanged);
 			// 
@@ -542,7 +542,7 @@ namespace Europlan.Common {
 			this.cbModulKlimaBodenCool.Location = new System.Drawing.Point(250, 164);
 			this.cbModulKlimaBodenCool.Name = "cbModulKlimaBodenCool";
 			this.cbModulKlimaBodenCool.Size = new System.Drawing.Size(70, 17);
-			this.cbModulKlimaBodenCool.TabIndex = 14;
+			this.cbModulKlimaBodenCool.TabIndex = 13;
 			this.cbModulKlimaBodenCool.UseVisualStyleBackColor = false;
 			this.cbModulKlimaBodenCool.CheckedChanged += new System.EventHandler(this.cbModulKlimaBodenCool_CheckedChanged);
 			// 
@@ -566,7 +566,7 @@ namespace Europlan.Common {
 			this.cbHithermCompactRoofHeat.Location = new System.Drawing.Point(174, 141);
 			this.cbHithermCompactRoofHeat.Name = "cbHithermCompactRoofHeat";
 			this.cbHithermCompactRoofHeat.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermCompactRoofHeat.TabIndex = 12;
+			this.cbHithermCompactRoofHeat.TabIndex = 10;
 			this.cbHithermCompactRoofHeat.UseVisualStyleBackColor = false;
 			this.cbHithermCompactRoofHeat.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofHeat_CheckedChanged);
 			// 
@@ -578,7 +578,7 @@ namespace Europlan.Common {
 			this.cbHithermCompactRoofCool.Location = new System.Drawing.Point(250, 141);
 			this.cbHithermCompactRoofCool.Name = "cbHithermCompactRoofCool";
 			this.cbHithermCompactRoofCool.Size = new System.Drawing.Size(70, 17);
-			this.cbHithermCompactRoofCool.TabIndex = 15;
+			this.cbHithermCompactRoofCool.TabIndex = 11;
 			this.cbHithermCompactRoofCool.UseVisualStyleBackColor = false;
 			this.cbHithermCompactRoofCool.CheckedChanged += new System.EventHandler(this.cbHithermCompactRoofCool_CheckedChanged);
 			// 
@@ -615,7 +615,7 @@ namespace Europlan.Common {
             0});
 			this.txtAllocation.Name = "txtAllocation";
 			this.txtAllocation.Size = new System.Drawing.Size(64, 20);
-			this.txtAllocation.TabIndex = 25;
+			this.txtAllocation.TabIndex = 16;
 			this.txtAllocation.Text = "0";
 			this.txtAllocation.Value = new decimal(new int[] {
             0,
@@ -628,7 +628,7 @@ namespace Europlan.Common {
 			// 
 			this.txtCoolTemperature.EditType = Europlan.Common.NumericBox.NumericEditType.FLOW_TEMPERATURE;
 			this.txtCoolTemperature.InternalValue = new decimal(new int[] {
-            16,
+            19,
             0,
             0,
             0});
@@ -643,9 +643,9 @@ namespace Europlan.Common {
 			this.txtCoolTemperature.ReadOnly = true;
 			this.txtCoolTemperature.Size = new System.Drawing.Size(56, 20);
 			this.txtCoolTemperature.TabIndex = 28;
-			this.txtCoolTemperature.Text = "16";
+			this.txtCoolTemperature.Text = "19";
 			this.txtCoolTemperature.Value = new decimal(new int[] {
-            16,
+            19,
             0,
             0,
             0});
@@ -674,7 +674,7 @@ namespace Europlan.Common {
 			this.quickDimensioningDistributorsSummary.ModulKlimaDecke = true;
 			this.quickDimensioningDistributorsSummary.Name = "quickDimensioningDistributorsSummary";
 			this.quickDimensioningDistributorsSummary.Size = new System.Drawing.Size(851, 489);
-			this.quickDimensioningDistributorsSummary.TabIndex = 0;
+			this.quickDimensioningDistributorsSummary.TabIndex = 20;
 			this.quickDimensioningDistributorsSummary.ProjectChanged += new Europlan.Common.ProjectChangedHandler(this.quickDimensioningDistributorsSummary_ProjectChanged);
 			// 
 			// label3

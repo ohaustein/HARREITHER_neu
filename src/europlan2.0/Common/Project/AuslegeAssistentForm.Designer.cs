@@ -62,7 +62,7 @@ namespace Europlan.Common {
 			this.splitContainer1.Panel2.Controls.Add(this.graphicsPanel);
 			this.splitContainer1.Size = new System.Drawing.Size(722, 419);
 			this.splitContainer1.SplitterDistance = 240;
-			this.splitContainer1.TabIndex = 1;
+			this.splitContainer1.TabIndex = 2;
 			// 
 			// treeProducts
 			// 
@@ -72,7 +72,7 @@ namespace Europlan.Common {
 			this.treeProducts.Location = new System.Drawing.Point(0, 0);
 			this.treeProducts.Name = "treeProducts";
 			this.treeProducts.Size = new System.Drawing.Size(240, 419);
-			this.treeProducts.TabIndex = 0;
+			this.treeProducts.TabIndex = 3;
 			this.treeProducts.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterCheck);
 			this.treeProducts.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeProducts_AfterSelect);
 			// 
@@ -83,7 +83,7 @@ namespace Europlan.Common {
 			this.graphicsPanel.Location = new System.Drawing.Point(0, 0);
 			this.graphicsPanel.Name = "graphicsPanel";
 			this.graphicsPanel.Size = new System.Drawing.Size(478, 419);
-			this.graphicsPanel.TabIndex = 0;
+			this.graphicsPanel.TabIndex = 4;
 			this.graphicsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel_Paint);
 			// 
 			// chkEuroval
@@ -94,7 +94,7 @@ namespace Europlan.Common {
 			this.chkEuroval.Location = new System.Drawing.Point(29, 38);
 			this.chkEuroval.Name = "chkEuroval";
 			this.chkEuroval.Size = new System.Drawing.Size(62, 17);
-			this.chkEuroval.TabIndex = 2;
+			this.chkEuroval.TabIndex = 0;
 			this.chkEuroval.Text = "Euroval";
 			this.chkEuroval.UseVisualStyleBackColor = true;
 			this.chkEuroval.CheckStateChanged += new System.EventHandler(this.chk_CheckStateChanged);
@@ -107,7 +107,7 @@ namespace Europlan.Common {
 			this.chkEcotherm.Location = new System.Drawing.Point(29, 61);
 			this.chkEcotherm.Name = "chkEcotherm";
 			this.chkEcotherm.Size = new System.Drawing.Size(71, 17);
-			this.chkEcotherm.TabIndex = 3;
+			this.chkEcotherm.TabIndex = 1;
 			this.chkEcotherm.Text = "Ecotherm";
 			this.chkEcotherm.UseVisualStyleBackColor = true;
 			this.chkEcotherm.CheckStateChanged += new System.EventHandler(this.chk_CheckStateChanged);

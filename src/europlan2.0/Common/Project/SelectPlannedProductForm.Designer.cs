@@ -57,7 +57,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(156, 193);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 1;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -68,7 +68,7 @@ namespace Europlan.Common {
 			this.button2.Location = new System.Drawing.Point(237, 193);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 3;
+			this.button2.TabIndex = 2;
 			this.button2.Text = "Abbrechen";
 			this.button2.UseVisualStyleBackColor = true;
 			// 

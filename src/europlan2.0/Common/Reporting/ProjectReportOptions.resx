@@ -126,7 +126,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Abbrechen</value>
@@ -150,7 +150,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>10</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
@@ -184,7 +184,7 @@
     <value>55, 17</value>
   </data>
   <data name="chkPrice.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="chkPrice.Text" xml:space="preserve">
     <value>Preise</value>
@@ -214,7 +214,7 @@
     <value>97, 17</value>
   </data>
   <data name="chkKonstruktionen.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="chkKonstruktionen.Text" xml:space="preserve">
     <value>Konstruktionen</value>
@@ -244,7 +244,7 @@
     <value>103, 17</value>
   </data>
   <data name="chkRecommendedMaterial.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="chkRecommendedMaterial.Text" xml:space="preserve">
     <value>Bestellvorschlag</value>
@@ -274,7 +274,7 @@
     <value>93, 17</value>
   </data>
   <data name="chkRequiredMaterial.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="chkRequiredMaterial.Text" xml:space="preserve">
     <value>Materialbedarf</value>
@@ -304,7 +304,7 @@
     <value>89, 17</value>
   </data>
   <data name="chkVerlegedaten.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkVerlegedaten.Text" xml:space="preserve">
     <value>Verlegedaten</value>
@@ -334,7 +334,7 @@
     <value>54, 17</value>
   </data>
   <data name="chkAuslegungBilanz.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="chkAuslegungBilanz.Text" xml:space="preserve">
     <value>Bilanz</value>
@@ -364,7 +364,7 @@
     <value>76, 17</value>
   </data>
   <data name="chkAuslegung.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkAuslegung.Text" xml:space="preserve">
     <value>Auslegung</value>
@@ -394,7 +394,7 @@
     <value>107, 17</value>
   </data>
   <data name="chkAreaOverview.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkAreaOverview.Text" xml:space="preserve">
     <value>Flächenübersicht</value>
@@ -421,7 +421,7 @@
     <value>102, 17</value>
   </data>
   <data name="chkProjectOverview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="chkProjectOverview.Text" xml:space="preserve">
     <value>Projektübersicht</value>
@@ -445,7 +445,7 @@
     <value>430, 220</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Bitte wählen Sie die gewünschten Druckbereiche:</value>

@@ -36,7 +36,7 @@ namespace Europlan.Common {
 			this.lstSubarea.Location = new System.Drawing.Point(103, 55);
 			this.lstSubarea.Name = "lstSubarea";
 			this.lstSubarea.Size = new System.Drawing.Size(129, 134);
-			this.lstSubarea.TabIndex = 150;
+			this.lstSubarea.TabIndex = 1;
 			// 
 			// lstCircuits
 			// 
@@ -44,7 +44,7 @@ namespace Europlan.Common {
 			this.lstCircuits.Location = new System.Drawing.Point(12, 55);
 			this.lstCircuits.Name = "lstCircuits";
 			this.lstCircuits.Size = new System.Drawing.Size(85, 134);
-			this.lstCircuits.TabIndex = 149;
+			this.lstCircuits.TabIndex = 0;
 			this.lstCircuits.SelectedIndexChanged += new System.EventHandler(this.lstCircuits_SelectedIndexChanged);
 			// 
 			// btnCancel
@@ -53,7 +53,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(157, 197);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 151;
+			this.btnCancel.TabIndex = 3;
 			this.btnCancel.Text = "Abbrechen";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -62,7 +62,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(76, 197);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 152;
+			this.btnOk.TabIndex = 2;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

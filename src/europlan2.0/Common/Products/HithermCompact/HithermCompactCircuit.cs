@@ -8,6 +8,7 @@ namespace Europlan.Common {
 	public class HithermCompactCircuit : Circuit {
 
 		private List<HithermCompactRegister> registers = new List<HithermCompactRegister>();
+		private List<GraphicalHithermCompactVerbindung> links = new List<GraphicalHithermCompactVerbindung>();
 
 		public HithermCompactCircuit() {
 
@@ -16,6 +17,11 @@ namespace Europlan.Common {
 		public List<HithermCompactRegister> Registers {
 			get { return this.registers; }
 			set { this.registers = value; }
+		}
+
+		public List<GraphicalHithermCompactVerbindung> Links {
+			get { return this.links; }
+			set { this.links = value; }
 		}
 
 		[XmlIgnore]
@@ -40,6 +46,13 @@ namespace Europlan.Common {
 		public override PlannedProduct PlannedProduct {
 			get {
 				return this.plannedProduct;
+			}
+		}
+
+		[XmlIgnore]
+		public int HkLabelNr {
+			get {
+				return this.registers.Count == 0 ? -1 : this.registers[0].Heizkreis;
 			}
 		}
 
@@ -391,6 +404,99 @@ namespace Europlan.Common {
 
 		public override double CircuitArea {
 			get { return this.CoveredArea; }
+		}
+
+		public bool IsConnectionAvailable(HithermCompactRegister register, bool input) {
+			foreach (GraphicalHithermCompactVerbindung link in this.links) {
+				if (input) {
+					if (link.End == register) {
+						return false;
+					}
+				} else {
+					if (link.Start == register) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
+		public List<HithermCompactRegister> GetAllConnectedRegisters(HithermCompactRegister register) {
+			List<HithermCompactRegister> connectedRegisters = new List<HithermCompactRegister>();
+			HithermCompactRegister cur = register;
+			while (cur != null) {
+				connectedRegisters.Add(cur);
+				cur = GetNextConnectedRegister(cur);
+			}
+			cur = GetPreviousConnectedRegister(cur);
+			while (cur != null) {
+				connectedRegisters.Add(cur);
+				cur = GetPreviousConnectedRegister(cur);
+			}
+			return connectedRegisters;
+		}
+
+		public HithermCompactRegister GetNextConnectedRegister(HithermCompactRegister register) {
+			GraphicalHithermCompactVerbindung link = this.GetOutputLink(register);
+			if (link != null) {
+				return link.End;
+			}
+			return null;
+		}
+
+		public HithermCompactRegister GetPreviousConnectedRegister(HithermCompactRegister register) {
+			GraphicalHithermCompactVerbindung link = this.GetInputLink(register);
+			if (link != null) {
+				return link.Start;
+			}
+			return null;
+		}
+
+		public GraphicalHithermCompactVerbindung GetOutputLink(HithermCompactRegister register) {
+			if (register == null) {
+				return null;
+			}
+			foreach (GraphicalHithermCompactVerbindung link in this.Links) {
+				if (link.Start == register) {
+					return link;
+				}
+			}
+			return null;
+		}
+
+		public GraphicalHithermCompactVerbindung GetInputLink(HithermCompactRegister register) {
+			if (register == null) {
+				return null;
+			}
+			foreach (GraphicalHithermCompactVerbindung link in this.Links) {
+				if (link.End == register) {
+					return link;
+				}
+			}
+			return null;
+		}
+
+		public bool IsConnectedToGround(bool checkVorlauf, bool checkRuecklauf) {
+			bool vorlaufConnected = false;
+			bool ruecklaufConnected = false;
+			foreach (GraphicalHithermCompactVerbindung link in this.Links) {
+				if (link.Start == null) {
+					ruecklaufConnected = true;
+					if (vorlaufConnected) {
+						break;
+					}
+				}
+				if (link.End == null) {
+					vorlaufConnected = true;
+					if (ruecklaufConnected) {
+						break;
+					}
+				}
+			}
+			if (!checkVorlauf && !checkRuecklauf) {
+				return vorlaufConnected || ruecklaufConnected;
+			}
+			return (vorlaufConnected || !checkVorlauf) && (ruecklaufConnected || !checkRuecklauf);
 		}
 	}
 }

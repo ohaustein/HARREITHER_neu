@@ -232,31 +232,31 @@ namespace Europlan.Common {
 					g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b), fillPath);
 					fillPath.Dispose();
-				}
 
-				// paint rim
-				path.Reset();
-				transformedPoints.Clear();
-				if (this.product.PlannedRimLength > 0) {
-					path.StartFigure();
-					PointF[] array = new PointF[this.product.PlannedAreaGraphical.Count];
-					int i = 0;
-					foreach (Point2D point in this.product.PlannedAreaGraphical) {
-						Point2D tmp = additionalTransformation.TransformTo2D(point);
-						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
-					}
-					path.AddPolygon(array);
-					path.CloseFigure();
-					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
-					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
-						float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
-						Pen pen = new Pen(rzBrush, (float)((width * 2.0 / 100.0) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * Math.Abs(additionalTransformation.M00)));
-						Region oldClip = g.Clip;
-						g.Clip = new Region(path);
-						Point2D start = additionalTransformation.TransformTo2D(rimSegment.Start);
-						Point2D end = additionalTransformation.TransformTo2D(rimSegment.End);
-						g.DrawLine(pen, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
-						g.Clip = oldClip;
+					// paint rim
+					path.Reset();
+					transformedPoints.Clear();
+					if (this.product.PlannedRimLength > 0) {
+						path.StartFigure();
+						array = new PointF[this.product.PlannedAreaGraphical.Count];
+						i = 0;
+						foreach (Point2D point in this.product.PlannedAreaGraphical) {
+							Point2D tmp = additionalTransformation.TransformTo2D(point);
+							array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
+						}
+						path.AddPolygon(array);
+						path.CloseFigure();
+						Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
+						foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
+							float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
+							Pen pen = new Pen(rzBrush, (float)((width * 2.0 / 100.0) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * Math.Abs(additionalTransformation.M00)));
+							Region oldClip = g.Clip;
+							g.Clip = new Region(path);
+							Point2D start = additionalTransformation.TransformTo2D(rimSegment.Start);
+							Point2D end = additionalTransformation.TransformTo2D(rimSegment.End);
+							g.DrawLine(pen, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
+							g.Clip = oldClip;
+						}
 					}
 				}
 				path.Reset();

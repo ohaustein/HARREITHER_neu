@@ -178,6 +178,27 @@ namespace Europlan.Common {
 		}
 	}
 
+	public class PossibleHithermCompactRegisterConnection : PossibleConnection {
+		private HithermCompactRegister register;
+
+		public PossibleHithermCompactRegisterConnection() {
+		}
+
+		public PossibleHithermCompactRegisterConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, HithermCompactProduct product, HithermCompactCircuit circuit, HithermCompactRegister register, bool connectHorizontal, bool connectVertical)
+			: base(connectionPoint, connectionArea, possibleInput, possibleOutput, product, circuit, 0, 0, connectHorizontal, connectVertical) {
+			this.register = register;
+		}
+
+		public PossibleHithermCompactRegisterConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, HithermCompactProduct product, HithermCompactCircuit circuit, HithermCompactRegister register, bool connectHorizontal, bool connectVertical, Vector2D preferredStartVector)
+			: base(connectionPoint, connectionArea, possibleInput, possibleOutput, product, circuit, 0, 0, connectHorizontal, connectVertical, preferredStartVector) {
+			this.register = register;
+		}
+
+		public HithermCompactRegister Register {
+			get { return this.register; }
+		}
+	}
+
 	public class PossibleProductConnection {
 		protected Point2D connectionPoint;
 		protected Polygon2D connectionArea;

@@ -8,19 +8,19 @@ using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
-	public class GraphicalHithermVerbindung : GraphicalWallVerbindung {
+	public class GraphicalHithermCompactVerbindung : GraphicalWallVerbindung {
 
-		private HithermRegister start;
-		private HithermRegister end;
-		private HithermCircuit circuit;
+		private HithermCompactRegister start;
+		private HithermCompactRegister end;
+		private HithermCompactCircuit circuit;
 
-		internal GraphicalHithermVerbindung() : base() {
+		internal GraphicalHithermCompactVerbindung() : base() {
 		}
 
-		internal GraphicalHithermVerbindung(bool finished) : base(finished) {
+		internal GraphicalHithermCompactVerbindung(bool finished) : base(finished) {
 		}
 
-		public GraphicalHithermVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, HithermCircuit circuit, PlannedProduct product) {
+		public GraphicalHithermCompactVerbindung(HithermCompactRegister start, HithermCompactRegister end, IEnumerable<Point2D> vertices, HithermCompactCircuit circuit, PlannedProduct product) {
 			this.start = start;
 			this.end = end;
 			this.InitializeVertices(vertices);
@@ -30,17 +30,17 @@ namespace Europlan.Common {
 
 		public void FinalizeLoading() {
 			PlannedProduct tmpProduct = this.Product;
-			HithermCircuit tmpCircuit = this.Circuit;
-			HithermRegister tmpRegister = this.End;
+			HithermCompactCircuit tmpCircuit = this.Circuit;
+			HithermCompactRegister tmpRegister = this.End;
 			tmpRegister = this.Start;
 		}
 
 		[XmlIgnore]
-		public HithermRegister Start {
+		public HithermCompactRegister Start {
 			get {
 				if (this.startIndex >= 0) {
-					if (this.Circuit is HithermCircuit) {
-						HithermCircuit hc = this.Circuit as HithermCircuit;
+					if (this.Circuit is HithermCompactCircuit) {
+						HithermCompactCircuit hc = this.Circuit as HithermCompactCircuit;
 						this.start = hc.Registers[this.startIndex];
 						this.startIndex = -1;
 					}
@@ -50,11 +50,11 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public HithermRegister End {
+		public HithermCompactRegister End {
 			get {
 				if (this.endIndex >= 0) {
-					if (this.Circuit is HithermCircuit) {
-						HithermCircuit hc = this.Circuit as HithermCircuit;
+					if (this.Circuit is HithermCompactCircuit) {
+						HithermCompactCircuit hc = this.Circuit as HithermCompactCircuit;
 						this.end = hc.Registers[this.endIndex];
 						this.endIndex = -1;
 					}
@@ -69,10 +69,10 @@ namespace Europlan.Common {
 					return this.startIndex;
 				}
 				int index = -1;
-				if (this.Circuit is HithermCircuit) {
-					HithermCircuit hc = this.Circuit as HithermCircuit;
+				if (this.Circuit is HithermCompactCircuit) {
+					HithermCompactCircuit hc = this.Circuit as HithermCompactCircuit;
 					int i = 0;
-					foreach (HithermRegister r in hc.Registers) {
+					foreach (HithermCompactRegister r in hc.Registers) {
 						if (r == this.start) {
 							index = i;
 							break;
@@ -91,10 +91,10 @@ namespace Europlan.Common {
 					return this.endIndex;
 				}
 				int index = -1;
-				if (this.Circuit is HithermCircuit) {
-					HithermCircuit hc = this.Circuit as HithermCircuit;
+				if (this.Circuit is HithermCompactCircuit) {
+					HithermCompactCircuit hc = this.Circuit as HithermCompactCircuit;
 					int i = 0;
-					foreach (HithermRegister r in hc.Registers) {
+					foreach (HithermCompactRegister r in hc.Registers) {
 						if (r == this.end) {
 							index = i;
 							break;
@@ -108,10 +108,10 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public HithermCircuit Circuit {
+		public HithermCompactCircuit Circuit {
 			get {
 				if (this.circuitIndex >= 0) {
-					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex] as HithermCircuit;
+					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex] as HithermCompactCircuit;
 					this.circuitIndex = -1;
 				}
 				return this.circuit;

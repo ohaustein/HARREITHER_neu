@@ -105,7 +105,7 @@ namespace Europlan.Common {
 			this.txtName.Location = new System.Drawing.Point(171, 77);
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(503, 20);
-			this.txtName.TabIndex = 23;
+			this.txtName.TabIndex = 1;
 			this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
 			// 
 			// cmbCircuit
@@ -117,7 +117,7 @@ namespace Europlan.Common {
 			this.cmbCircuit.Location = new System.Drawing.Point(172, 105);
 			this.cmbCircuit.Name = "cmbCircuit";
 			this.cmbCircuit.Size = new System.Drawing.Size(502, 21);
-			this.cmbCircuit.TabIndex = 25;
+			this.cmbCircuit.TabIndex = 2;
 			this.cmbCircuit.SelectedIndexChanged += new System.EventHandler(this.cmbCircuit_SelectedIndexChanged);
 			// 
 			// label4
@@ -148,7 +148,7 @@ namespace Europlan.Common {
             0});
 			this.numMaxCircuits.Name = "numMaxCircuits";
 			this.numMaxCircuits.Size = new System.Drawing.Size(51, 20);
-			this.numMaxCircuits.TabIndex = 27;
+			this.numMaxCircuits.TabIndex = 7;
 			this.numMaxCircuits.ValueChanged += new System.EventHandler(this.numMaxCircuits_ValueChanged);
 			// 
 			// listFloors
@@ -160,7 +160,7 @@ namespace Europlan.Common {
 			this.listFloors.Location = new System.Drawing.Point(172, 268);
 			this.listFloors.Name = "listFloors";
 			this.listFloors.Size = new System.Drawing.Size(502, 79);
-			this.listFloors.TabIndex = 28;
+			this.listFloors.TabIndex = 10;
 			this.listFloors.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listFloors_ItemCheck);
 			// 
 			// label6
@@ -178,7 +178,7 @@ namespace Europlan.Common {
 			this.chkEinbauschrank.Location = new System.Drawing.Point(375, 170);
 			this.chkEinbauschrank.Name = "chkEinbauschrank";
 			this.chkEinbauschrank.Size = new System.Drawing.Size(97, 17);
-			this.chkEinbauschrank.TabIndex = 33;
+			this.chkEinbauschrank.TabIndex = 5;
 			this.chkEinbauschrank.Text = "Einbauschrank";
 			this.chkEinbauschrank.UseVisualStyleBackColor = true;
 			this.chkEinbauschrank.CheckedChanged += new System.EventHandler(this.chkEinbauschrank_CheckedChanged);
@@ -189,7 +189,7 @@ namespace Europlan.Common {
 			this.chkFlansch.Location = new System.Drawing.Point(172, 170);
 			this.chkFlansch.Name = "chkFlansch";
 			this.chkFlansch.Size = new System.Drawing.Size(119, 17);
-			this.chkFlansch.TabIndex = 34;
+			this.chkFlansch.TabIndex = 4;
 			this.chkFlansch.Text = "Flanschkugelhähne";
 			this.chkFlansch.UseVisualStyleBackColor = true;
 			this.chkFlansch.CheckedChanged += new System.EventHandler(this.chkFlansch_CheckedChanged);
@@ -201,7 +201,7 @@ namespace Europlan.Common {
 			this.cmbDistributorType.Location = new System.Drawing.Point(389, 49);
 			this.cmbDistributorType.Name = "cmbDistributorType";
 			this.cmbDistributorType.Size = new System.Drawing.Size(51, 21);
-			this.cmbDistributorType.TabIndex = 36;
+			this.cmbDistributorType.TabIndex = 0;
 			this.cmbDistributorType.Visible = false;
 			// 
 			// label9
@@ -223,7 +223,7 @@ namespace Europlan.Common {
 			this.cmbAnschlussHollaender.Location = new System.Drawing.Point(172, 132);
 			this.cmbAnschlussHollaender.Name = "cmbAnschlussHollaender";
 			this.cmbAnschlussHollaender.Size = new System.Drawing.Size(502, 21);
-			this.cmbAnschlussHollaender.TabIndex = 38;
+			this.cmbAnschlussHollaender.TabIndex = 3;
 			this.cmbAnschlussHollaender.SelectedIndexChanged += new System.EventHandler(this.cmbAnschlussHollaender_SelectedIndexChanged);
 			// 
 			// label10
@@ -250,7 +250,7 @@ namespace Europlan.Common {
 			this.chkAnschluss.Location = new System.Drawing.Point(172, 193);
 			this.chkAnschluss.Name = "chkAnschluss";
 			this.chkAnschluss.Size = new System.Drawing.Size(137, 17);
-			this.chkAnschluss.TabIndex = 41;
+			this.chkAnschluss.TabIndex = 6;
 			this.chkAnschluss.Text = "Lange Anschlussbögen";
 			this.chkAnschluss.UseVisualStyleBackColor = true;
 			this.chkAnschluss.CheckedChanged += new System.EventHandler(this.chkAnschluss_CheckedChanged);
@@ -265,7 +265,7 @@ namespace Europlan.Common {
             0});
 			this.numAdditionalCircuits.Name = "numAdditionalCircuits";
 			this.numAdditionalCircuits.Size = new System.Drawing.Size(51, 20);
-			this.numAdditionalCircuits.TabIndex = 43;
+			this.numAdditionalCircuits.TabIndex = 8;
 			this.numAdditionalCircuits.ValueChanged += new System.EventHandler(this.numAdditionalCircuits_ValueChanged);
 			// 
 			// label7
@@ -289,7 +289,7 @@ namespace Europlan.Common {
             0});
 			this.numZusStellantriebe.Name = "numZusStellantriebe";
 			this.numZusStellantriebe.Size = new System.Drawing.Size(284, 20);
-			this.numZusStellantriebe.TabIndex = 45;
+			this.numZusStellantriebe.TabIndex = 9;
 			this.numZusStellantriebe.ValueChanged += new System.EventHandler(this.numZusStellantriebe_ValueChanged);
 			// 
 			// label8
@@ -310,7 +310,7 @@ namespace Europlan.Common {
 			this.lstSystems.Location = new System.Drawing.Point(172, 354);
 			this.lstSystems.Name = "lstSystems";
 			this.lstSystems.Size = new System.Drawing.Size(502, 79);
-			this.lstSystems.TabIndex = 46;
+			this.lstSystems.TabIndex = 11;
 			this.lstSystems.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lstSystems_ItemCheck);
 			// 
 			// label12
@@ -385,7 +385,7 @@ namespace Europlan.Common {
 			this.btnGraphicalPosition.Location = new System.Drawing.Point(507, 8);
 			this.btnGraphicalPosition.Name = "btnGraphicalPosition";
 			this.btnGraphicalPosition.Size = new System.Drawing.Size(166, 23);
-			this.btnGraphicalPosition.TabIndex = 76;
+			this.btnGraphicalPosition.TabIndex = 12;
 			this.btnGraphicalPosition.Text = "Grafische Positionierung";
 			this.btnGraphicalPosition.UseVisualStyleBackColor = true;
 			this.btnGraphicalPosition.Click += new System.EventHandler(this.btnGraphicalPosition_Click);

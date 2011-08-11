@@ -1512,7 +1512,7 @@ namespace Europlan.Common {
 								this.UpdateControl(FieldEnum.NONE);
 								return;
 							} else {
-								(this.product.Product as EurovalProduct).ResetProduct();
+								(this.product.Product as EcothermProduct).ResetProduct();
 							}
 						}
 					}

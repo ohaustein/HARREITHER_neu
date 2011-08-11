@@ -37,7 +37,7 @@ namespace Europlan.Common {
 			this.cmbDistributors.Location = new System.Drawing.Point(82, 2);
 			this.cmbDistributors.Name = "cmbDistributors";
 			this.cmbDistributors.Size = new System.Drawing.Size(232, 21);
-			this.cmbDistributors.TabIndex = 6;
+			this.cmbDistributors.TabIndex = 0;
 			this.cmbDistributors.SelectedIndexChanged += new System.EventHandler(this.cmbDistributors_SelectedIndexChanged);
 			// 
 			// label1
@@ -84,7 +84,7 @@ namespace Europlan.Common {
 			this.distributorGrid.ModulKlimaDecke = true;
 			this.distributorGrid.Name = "distributorGrid";
 			this.distributorGrid.Size = new System.Drawing.Size(695, 303);
-			this.distributorGrid.TabIndex = 5;
+			this.distributorGrid.TabIndex = 1;
 			// 
 			// QuickDimensioningDistributorsSummary
 			// 

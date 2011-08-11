@@ -45,7 +45,7 @@ namespace Europlan.Common {
 			this.button2.Location = new System.Drawing.Point(796, 451);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 3;
+			this.button2.TabIndex = 2;
 			this.button2.Text = "Schlieﬂen";
 			this.button2.UseVisualStyleBackColor = true;
 			// 
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Name = "connectionPipePanel";
 			this.connectionPipePanel.ShowPipesThroughProduct = true;
 			this.connectionPipePanel.Size = new System.Drawing.Size(859, 390);
-			this.connectionPipePanel.TabIndex = 4;
+			this.connectionPipePanel.TabIndex = 0;
 			this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel_GridContentChanged);
 			// 
 			// btnLengthAssistant
@@ -159,7 +159,7 @@ namespace Europlan.Common {
 			this.btnLengthAssistant.Location = new System.Drawing.Point(622, 451);
 			this.btnLengthAssistant.Name = "btnLengthAssistant";
 			this.btnLengthAssistant.Size = new System.Drawing.Size(168, 23);
-			this.btnLengthAssistant.TabIndex = 14;
+			this.btnLengthAssistant.TabIndex = 1;
 			this.btnLengthAssistant.Text = "&L‰ngenassistent";
 			this.btnLengthAssistant.UseVisualStyleBackColor = true;
 			this.btnLengthAssistant.Click += new System.EventHandler(this.btnLengthAssistant_Click);

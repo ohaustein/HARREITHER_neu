@@ -346,6 +346,12 @@
     <Compile Include="Products\Euroval\PipeProductPlanner.Designer.cs">
       <DependentUpon>PipeProductPlanner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\HithermCompact\GraphicalHithermCompactRegisterWrapper.cs" />
+    <Compile Include="Products\HithermCompact\GraphicalHithermCompactVerbindung.cs" />
+    <Compile Include="Products\HithermCompact\HithermCompactPlanner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\Hitherm\GraphicalWallVerbindung.cs" />
     <Compile Include="Products\Hitherm\HithermDrawer.cs">
       <SubType>Component</SubType>
     </Compile>

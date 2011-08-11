@@ -24,8 +24,8 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tvDistributors = new System.Windows.Forms.TreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@ namespace Europlan.Common {
 			this.btnCancel.Location = new System.Drawing.Point(676, 440);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 1;
+			this.btnCancel.TabIndex = 8;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -78,7 +78,7 @@ namespace Europlan.Common {
 			this.btnOk.Location = new System.Drawing.Point(595, 440);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 7;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			// 
@@ -113,7 +113,7 @@ namespace Europlan.Common {
 			this.grpConnection.Location = new System.Drawing.Point(318, 73);
 			this.grpConnection.Name = "grpConnection";
 			this.grpConnection.Size = new System.Drawing.Size(433, 72);
-			this.grpConnection.TabIndex = 4;
+			this.grpConnection.TabIndex = 1;
 			this.grpConnection.TabStop = false;
 			this.grpConnection.Text = "Heizkreisanschluﬂ (nur bei Anschluﬂ an anderen Heizkreis)";
 			// 
@@ -123,7 +123,7 @@ namespace Europlan.Common {
 			this.rbRuecklauf.Location = new System.Drawing.Point(9, 42);
 			this.rbRuecklauf.Name = "rbRuecklauf";
 			this.rbRuecklauf.Size = new System.Drawing.Size(87, 17);
-			this.rbRuecklauf.TabIndex = 1;
+			this.rbRuecklauf.TabIndex = 3;
 			this.rbRuecklauf.Text = "r¸cklaufseitig";
 			this.rbRuecklauf.UseVisualStyleBackColor = true;
 			// 
@@ -134,7 +134,7 @@ namespace Europlan.Common {
 			this.rbVorlauf.Location = new System.Drawing.Point(9, 19);
 			this.rbVorlauf.Name = "rbVorlauf";
 			this.rbVorlauf.Size = new System.Drawing.Size(81, 17);
-			this.rbVorlauf.TabIndex = 0;
+			this.rbVorlauf.TabIndex = 2;
 			this.rbVorlauf.TabStop = true;
 			this.rbVorlauf.Text = "vorlaufseitig";
 			this.rbVorlauf.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@ namespace Europlan.Common {
 			this.grpUserDefinedConnection.Location = new System.Drawing.Point(318, 151);
 			this.grpUserDefinedConnection.Name = "grpUserDefinedConnection";
 			this.grpUserDefinedConnection.Size = new System.Drawing.Size(433, 283);
-			this.grpUserDefinedConnection.TabIndex = 5;
+			this.grpUserDefinedConnection.TabIndex = 4;
 			this.grpUserDefinedConnection.TabStop = false;
 			this.grpUserDefinedConnection.Text = "Benuzerdefinierte Zuordnung (nur bei Anschluﬂ an anderen Heizkreis)";
 			// 
@@ -164,14 +164,14 @@ namespace Europlan.Common {
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.gridUserDefinedConnection.AutoGenerateColumns = false;
 			this.gridUserDefinedConnection.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridUserDefinedConnection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gridUserDefinedConnection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gridUserDefinedConnection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridUserDefinedConnection.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.hk1DataGridViewTextBoxColumn,
@@ -181,7 +181,7 @@ namespace Europlan.Common {
 			this.gridUserDefinedConnection.Name = "gridUserDefinedConnection";
 			this.gridUserDefinedConnection.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridUserDefinedConnection.Size = new System.Drawing.Size(421, 228);
-			this.gridUserDefinedConnection.TabIndex = 1;
+			this.gridUserDefinedConnection.TabIndex = 6;
 			this.gridUserDefinedConnection.Visible = false;
 			this.gridUserDefinedConnection.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUserDefinedConnection_CellValueChanged);
 			this.gridUserDefinedConnection.CurrentCellDirtyStateChanged += new System.EventHandler(this.gridUserDefinedConnection_CurrentCellDirtyStateChanged);
@@ -189,8 +189,8 @@ namespace Europlan.Common {
 			// hk1DataGridViewTextBoxColumn
 			// 
 			this.hk1DataGridViewTextBoxColumn.DataPropertyName = "Hk1";
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			this.hk1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			this.hk1DataGridViewTextBoxColumn.HeaderText = global::Europlan.Common.EuroplanRes.LL_Report_VerlegedatenEurovalRaumNameZeile2;
 			this.hk1DataGridViewTextBoxColumn.Name = "hk1DataGridViewTextBoxColumn";
 			this.hk1DataGridViewTextBoxColumn.ReadOnly = true;
@@ -213,7 +213,7 @@ namespace Europlan.Common {
 			this.cbActivateUserDefinedConnection.Location = new System.Drawing.Point(9, 26);
 			this.cbActivateUserDefinedConnection.Name = "cbActivateUserDefinedConnection";
 			this.cbActivateUserDefinedConnection.Size = new System.Drawing.Size(255, 17);
-			this.cbActivateUserDefinedConnection.TabIndex = 0;
+			this.cbActivateUserDefinedConnection.TabIndex = 5;
 			this.cbActivateUserDefinedConnection.Text = "benutzerdefinierte Heizkreiszuordnung aktivieren";
 			this.cbActivateUserDefinedConnection.UseVisualStyleBackColor = true;
 			this.cbActivateUserDefinedConnection.CheckedChanged += new System.EventHandler(this.cbActivateUserDefinedConnection_CheckedChanged);

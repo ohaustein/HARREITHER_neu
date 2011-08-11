@@ -342,6 +342,10 @@ namespace Europlan.Common {
 		private HithermWall wall;
 		private String wallId = null;
 
+		private String graphWallId = null;
+		private double graphPosX = 0;
+		private double graphPosY = 0;
+
 		/*private Nullable<Point> origin = null;*/
 
 		public HithermCompactRegister() {
@@ -681,6 +685,21 @@ namespace Europlan.Common {
 						throw new Exception("Unknown Register Type");
 				}
 			}
+		}
+
+		public String GraphWallId {
+			get { return this.graphWallId; }
+			set { this.graphWallId = value; }
+		}
+
+		public double GraphPosX {
+			get { return this.graphPosX; }
+			set { this.graphPosX = value; }
+		}
+
+		public double GraphPosY {
+			get { return this.graphPosY; }
+			set { this.graphPosY = value; }
 		}
 	}
 }

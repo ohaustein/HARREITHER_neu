@@ -155,7 +155,7 @@ namespace Europlan.Common {
 			this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
 				// TODO add other products
-				//if (this.planFloor) {
+				if (p.GraphicalMode == true) {
 					if (p is ModulKlimaBodenProduct) {
 						ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
 						pp.Product = p as ModulKlimaBodenProduct;
@@ -180,7 +180,6 @@ namespace Europlan.Common {
 					} else if (p is HithermProduct) {
 						productsInFloor.Add(p, null);
 					} else
-				//} else {
 					if (p is ModulKlimaDeckeProduct) {
 						ModulKlimaDeckePlanner pp = new ModulKlimaDeckePlanner();
 						pp.Product = p as ModulKlimaDeckeProduct;
@@ -188,7 +187,7 @@ namespace Europlan.Common {
 						pp.HighlightRoomCoordinates = false;
 						productsInFloor.Add(p, pp);
 					}
-				//}
+				}
 			}
 			if (this.connectedPlanPanel as Control != null) {
 				this.connectedPlanPanel.InvalidateGraphics();
@@ -299,10 +298,7 @@ namespace Europlan.Common {
 					if (floor.AssociatedPlanId == this.Plan.Id) {
 						foreach (Room room in floor.Rooms) {
 							foreach (PlannedProduct product in room.PlannedProducts) {
-								//if ((this.PlanFloor && product.Product.Type == Product.ProductType.FBH) ||
-									//(this.PlanCeiling && product.Product.Type == Product.ProductType.DH)) {
-									products.Add(product.Product);
-								//}
+								products.Add(product.Product);
 							}
 						}
 					}

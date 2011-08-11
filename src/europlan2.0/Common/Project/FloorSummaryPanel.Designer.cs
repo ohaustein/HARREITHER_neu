@@ -105,7 +105,7 @@ namespace Europlan.Common {
 			this.gridRooms.MultiSelect = false;
 			this.gridRooms.Name = "gridRooms";
 			this.gridRooms.Size = new System.Drawing.Size(690, 291);
-			this.gridRooms.TabIndex = 16;
+			this.gridRooms.TabIndex = 5;
 			this.gridRooms.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRooms_CellValueChanged);
 			this.gridRooms.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridRooms_UserDeletingRow);
 			this.gridRooms.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gridRooms_CellBeginEdit);
@@ -265,7 +265,7 @@ namespace Europlan.Common {
 			this.btnAddDistributor.Location = new System.Drawing.Point(3, 33);
 			this.btnAddDistributor.Name = "btnAddDistributor";
 			this.btnAddDistributor.Size = new System.Drawing.Size(118, 23);
-			this.btnAddDistributor.TabIndex = 17;
+			this.btnAddDistributor.TabIndex = 0;
 			this.btnAddDistributor.Text = "Verteiler anlegen";
 			this.btnAddDistributor.UseVisualStyleBackColor = true;
 			this.btnAddDistributor.Click += new System.EventHandler(this.btnAddDistributor_Click);
@@ -294,7 +294,7 @@ namespace Europlan.Common {
 			this.btnRemoveDistributor.Location = new System.Drawing.Point(127, 33);
 			this.btnRemoveDistributor.Name = "btnRemoveDistributor";
 			this.btnRemoveDistributor.Size = new System.Drawing.Size(118, 23);
-			this.btnRemoveDistributor.TabIndex = 20;
+			this.btnRemoveDistributor.TabIndex = 1;
 			this.btnRemoveDistributor.Text = "Verteiler löschen";
 			this.btnRemoveDistributor.UseVisualStyleBackColor = true;
 			this.btnRemoveDistributor.Click += new System.EventHandler(this.btnRemoveDistributor_Click);
@@ -305,7 +305,7 @@ namespace Europlan.Common {
 			this.btnWhatIsNext.Location = new System.Drawing.Point(584, 353);
 			this.btnWhatIsNext.Name = "btnWhatIsNext";
 			this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
-			this.btnWhatIsNext.TabIndex = 21;
+			this.btnWhatIsNext.TabIndex = 7;
 			this.btnWhatIsNext.Text = "Wie geht\'s weiter?";
 			this.btnWhatIsNext.UseVisualStyleBackColor = true;
 			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);
@@ -333,7 +333,7 @@ namespace Europlan.Common {
 			this.chkAssignPlan.Location = new System.Drawing.Point(531, 12);
 			this.chkAssignPlan.Name = "chkAssignPlan";
 			this.chkAssignPlan.Size = new System.Drawing.Size(162, 17);
-			this.chkAssignPlan.TabIndex = 78;
+			this.chkAssignPlan.TabIndex = 3;
 			this.chkAssignPlan.Text = "Plan für Geschoß vorhanden";
 			this.chkAssignPlan.UseVisualStyleBackColor = true;
 			this.chkAssignPlan.CheckedChanged += new System.EventHandler(this.chkAssignPlan_CheckedChanged);
@@ -349,7 +349,7 @@ namespace Europlan.Common {
 			this.cmbPlans.Location = new System.Drawing.Point(457, 33);
 			this.cmbPlans.Name = "cmbPlans";
 			this.cmbPlans.Size = new System.Drawing.Size(236, 21);
-			this.cmbPlans.TabIndex = 79;
+			this.cmbPlans.TabIndex = 4;
 			this.cmbPlans.SelectedValueChanged += new System.EventHandler(this.cmbPlans_SelectedValueChanged);
 			// 
 			// planBindingSource
@@ -361,7 +361,7 @@ namespace Europlan.Common {
 			this.btnDefineConnections.Location = new System.Drawing.Point(251, 33);
 			this.btnDefineConnections.Name = "btnDefineConnections";
 			this.btnDefineConnections.Size = new System.Drawing.Size(153, 23);
-			this.btnDefineConnections.TabIndex = 80;
+			this.btnDefineConnections.TabIndex = 2;
 			this.btnDefineConnections.Text = "grafische Anbindeleitungen";
 			this.btnDefineConnections.UseVisualStyleBackColor = true;
 			this.btnDefineConnections.Click += new System.EventHandler(this.btnDefineConnections_Click);
@@ -398,7 +398,7 @@ namespace Europlan.Common {
             0});
 			this.numRoomHeight.Name = "numRoomHeight";
 			this.numRoomHeight.Size = new System.Drawing.Size(67, 20);
-			this.numRoomHeight.TabIndex = 82;
+			this.numRoomHeight.TabIndex = 6;
 			this.numRoomHeight.Text = "0";
 			this.numRoomHeight.Value = new decimal(new int[] {
             0,

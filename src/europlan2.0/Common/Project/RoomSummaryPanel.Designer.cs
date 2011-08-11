@@ -243,7 +243,7 @@ namespace Europlan.Common {
 			this.grpBoxSummary.Location = new System.Drawing.Point(3, 27);
 			this.grpBoxSummary.Name = "grpBoxSummary";
 			this.grpBoxSummary.Size = new System.Drawing.Size(733, 63);
-			this.grpBoxSummary.TabIndex = 39;
+			this.grpBoxSummary.TabIndex = 0;
 			this.grpBoxSummary.TabStop = false;
 			// 
 			// chkCeilingGeometry
@@ -253,7 +253,7 @@ namespace Europlan.Common {
 			this.chkCeilingGeometry.Location = new System.Drawing.Point(357, 44);
 			this.chkCeilingGeometry.Name = "chkCeilingGeometry";
 			this.chkCeilingGeometry.Size = new System.Drawing.Size(203, 17);
-			this.chkCeilingGeometry.TabIndex = 28;
+			this.chkCeilingGeometry.TabIndex = 2;
 			this.chkCeilingGeometry.Text = "Deckengeometrie gesondert erfassen";
 			this.chkCeilingGeometry.UseVisualStyleBackColor = true;
 			this.chkCeilingGeometry.CheckedChanged += new System.EventHandler(this.chkCeilingGeometry_CheckedChanged);
@@ -264,7 +264,7 @@ namespace Europlan.Common {
 			this.btnCeilingGeometry.Location = new System.Drawing.Point(566, 40);
 			this.btnCeilingGeometry.Name = "btnCeilingGeometry";
 			this.btnCeilingGeometry.Size = new System.Drawing.Size(160, 23);
-			this.btnCeilingGeometry.TabIndex = 27;
+			this.btnCeilingGeometry.TabIndex = 3;
 			this.btnCeilingGeometry.Text = "Deckengeometrie";
 			this.btnCeilingGeometry.UseVisualStyleBackColor = true;
 			this.btnCeilingGeometry.Visible = false;
@@ -276,7 +276,7 @@ namespace Europlan.Common {
 			this.btnGeometry.Location = new System.Drawing.Point(503, 11);
 			this.btnGeometry.Name = "btnGeometry";
 			this.btnGeometry.Size = new System.Drawing.Size(223, 23);
-			this.btnGeometry.TabIndex = 26;
+			this.btnGeometry.TabIndex = 1;
 			this.btnGeometry.Text = "Raumgeometrie / Dehnfugen";
 			this.btnGeometry.UseVisualStyleBackColor = true;
 			this.btnGeometry.Click += new System.EventHandler(this.btnGeometry_Click);
@@ -335,7 +335,7 @@ namespace Europlan.Common {
 			this.grpBoxSystems.Location = new System.Drawing.Point(3, 94);
 			this.grpBoxSystems.Name = "grpBoxSystems";
 			this.grpBoxSystems.Size = new System.Drawing.Size(733, 289);
-			this.grpBoxSystems.TabIndex = 42;
+			this.grpBoxSystems.TabIndex = 4;
 			this.grpBoxSystems.TabStop = false;
 			this.grpBoxSystems.Text = "Heizsysteme";
 			// 
@@ -344,7 +344,7 @@ namespace Europlan.Common {
 			this.btnDelete.Location = new System.Drawing.Point(85, 19);
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(75, 23);
-			this.btnDelete.TabIndex = 3;
+			this.btnDelete.TabIndex = 6;
 			this.btnDelete.Text = "Löschen";
 			this.btnDelete.UseVisualStyleBackColor = true;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -378,7 +378,7 @@ namespace Europlan.Common {
 			this.dgvProducts.MultiSelect = false;
 			this.dgvProducts.Name = "dgvProducts";
 			this.dgvProducts.Size = new System.Drawing.Size(721, 235);
-			this.dgvProducts.TabIndex = 2;
+			this.dgvProducts.TabIndex = 7;
 			this.dgvProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellValueChanged);
 			this.dgvProducts.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
 			this.dgvProducts.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserDeletedRow);
@@ -487,7 +487,7 @@ namespace Europlan.Common {
 			this.btnAdd.Location = new System.Drawing.Point(4, 19);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 0;
+			this.btnAdd.TabIndex = 5;
 			this.btnAdd.Text = "Hinzufügen";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -498,7 +498,7 @@ namespace Europlan.Common {
 			this.btnWhatIsNext.Location = new System.Drawing.Point(627, 389);
 			this.btnWhatIsNext.Name = "btnWhatIsNext";
 			this.btnWhatIsNext.Size = new System.Drawing.Size(109, 23);
-			this.btnWhatIsNext.TabIndex = 23;
+			this.btnWhatIsNext.TabIndex = 8;
 			this.btnWhatIsNext.Text = "Wie geht\'s weiter?";
 			this.btnWhatIsNext.UseVisualStyleBackColor = true;
 			this.btnWhatIsNext.Click += new System.EventHandler(this.btnWhatIsNext_Click);

@@ -23,14 +23,14 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("fsdafasdfdas");
 			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("fdas");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WarningsAndErrorsForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WarningsAndErrorsForm));
 			this.btnClose = new System.Windows.Forms.Button();
 			this.lstErrors = new System.Windows.Forms.ListView();
 			this.columnText = new System.Windows.Forms.ColumnHeader();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -40,7 +40,7 @@ namespace Europlan.Common {
 			this.btnClose.Location = new System.Drawing.Point(590, 359);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(105, 23);
-			this.btnClose.TabIndex = 0;
+			this.btnClose.TabIndex = 1;
 			this.btnClose.Text = "&Schlieﬂen";
 			this.btnClose.UseVisualStyleBackColor = true;
 			// 
@@ -62,22 +62,22 @@ namespace Europlan.Common {
 			this.lstErrors.Name = "lstErrors";
 			this.lstErrors.ShowGroups = false;
 			this.lstErrors.Size = new System.Drawing.Size(683, 341);
-            this.lstErrors.SmallImageList = this.imageList;
-			this.lstErrors.TabIndex = 1;
+			this.lstErrors.SmallImageList = this.imageList;
+			this.lstErrors.TabIndex = 0;
 			this.lstErrors.UseCompatibleStateImageBehavior = false;
 			this.lstErrors.View = System.Windows.Forms.View.Details;
 			// 
 			// columnText
 			// 
-			this.columnText.Text = "";
+			this.columnText.Text = global::Europlan.Common.EuroplanRes.Material_a834583d_750c_4695_ba45_7e346108551f;
 			// 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "error.png");
-            this.imageList.Images.SetKeyName(1, "warning.png");
-            // 
+			// imageList
+			// 
+			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+			this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.imageList.Images.SetKeyName(0, "error.png");
+			this.imageList.Images.SetKeyName(1, "warning.png");
+			// 
 			// WarningsAndErrorsForm
 			// 
 			this.AcceptButton = this.btnClose;
