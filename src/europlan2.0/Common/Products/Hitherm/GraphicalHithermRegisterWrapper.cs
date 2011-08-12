@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Xml.Serialization;
 
 namespace Europlan.Common {
-	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper {
+	public class GraphicalHithermRegisterWrapper : GraphicalRegisterWrapper, IWallRegisterWrapper<HithermRegister> {
 		public class RegisterGapAnchor : Anchor {
 			private int gapNr = 0;
 			private bool left = true;
@@ -89,6 +89,10 @@ namespace Europlan.Common {
 
 		public HithermProduct Product {
 			get { return this.product; }
+		}
+
+		public Room AssociatedRoom {
+			get { return this.product != null ? this.product.AssociatedRoom : null; }
 		}
 
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {

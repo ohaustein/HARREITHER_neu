@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Xml.Serialization;
 
 namespace Europlan.Common {
-	public class GraphicalHithermCompactRegisterWrapper : GraphicalRegisterWrapper {
+	public class GraphicalHithermCompactRegisterWrapper : GraphicalRegisterWrapper, IWallRegisterWrapper<HithermCompactRegister> {
 		private HithermCompactRegister register;
 		private HithermCompactProduct product;
 
@@ -30,6 +30,10 @@ namespace Europlan.Common {
 			get { return this.product; }
 		}
 
+		public Room AssociatedRoom {
+			get { return this.product != null ? this.product.AssociatedRoom : null; }
+		}
+
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
 			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
 		}
@@ -40,8 +44,8 @@ namespace Europlan.Common {
 				if (this.register.IsParapet) {
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.Height));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosY + this.Width, yOffset + this.register.GraphPosY + this.Height));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosY + this.Width, yOffset + this.register.GraphPosY));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY + this.Height));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY));
 				} else {
 					// TODO: check if dachschraegen register are different!
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));

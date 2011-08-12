@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.Threading;
 
 namespace Europlan.Common {
-	public class HithermRegister {
+	public class HithermRegister : IWallRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string hit_50_10 = EuroplanRes.HithermRegister_Hit50L; //"HIT 50/10";

@@ -820,44 +820,144 @@ namespace Europlan.Common {
 			return this.MarkErrors(obj, owningWall, true);
 		}
 
+#region Generic MarkErrors Methods
+		private void MarkProductErrors<Product, Circuit, Register, Wrapper, Verbindung>(GraphicalWall wall, GraphicalWall owningWall, bool resetLinkErrors, Product product)
+				where Circuit: Europlan.Common.Circuit, IWallCircuit<Circuit, Verbindung, Register>
+				where Product: Europlan.Common.Product, IWallProduct<Circuit, Register>
+				where Register : IWallRegister
+				where Wrapper : Europlan.Common.GraphicalRegisterWrapper, IWallRegisterWrapper<Register>
+				where Verbindung : Europlan.Common.GraphicalWallVerbindung {
+
+			if (resetLinkErrors) {
+				foreach (Circuit c in product.PlannedCircuits) {
+					foreach (Verbindung link in c.Links) {
+						link.Error = false;
+					}
+				}
+			}
+			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+			foreach (Wrapper register in owningWall.Registers) {
+				WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
+				register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
+				if (register.Error) {
+					Circuit c = product.GetCircuitForRegister(register.Register);
+					Verbindung link = c.GetInputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+					link = c.GetOutputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+				}
+			}
+			foreach (Circuit c in product.PlannedCircuits) {
+				foreach (Verbindung link in c.Links) {
+					link.Error = link.Error || !link.CheckValidity(owningWall, 0, 0);
+				}
+			}
+		}
+
+		private void MarkProductErrors<Product, Circuit, Register, Wrapper, Verbindung>(GraphicalWallObstacle obstacle, GraphicalWall owningWall, bool resetLinkErrors, Product product)
+				where Circuit : Europlan.Common.Circuit, IWallCircuit<Circuit, Verbindung, Register>
+				where Product : Europlan.Common.Product, IWallProduct<Circuit, Register>
+				where Register : IWallRegister
+				where Wrapper : Europlan.Common.GraphicalRegisterWrapper, IWallRegisterWrapper<Register>
+				where Verbindung : Europlan.Common.GraphicalWallVerbindung {
+
+			if (resetLinkErrors) {
+				foreach (Circuit c in product.PlannedCircuits) {
+					foreach (Verbindung link in c.Links) {
+						link.Error = false;
+					}
+				}
+			}
+			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+			WW.Math.Geometry.Polygon2D objBorder = obstacle.GetObjectBorders(offset.X, offset.Y);
+			WW.Math.Geometry.Polygon2D unsableBorder = obstacle.GetOutsideBorder(offset.X, offset.Y);
+			foreach (Wrapper register in owningWall.Registers) {
+				register.Error = register.CollisionTest(unsableBorder, offset.X, offset.Y, false);
+				if (register.Error) {
+					Circuit c = product.GetCircuitForRegister(register.Register);
+					Verbindung link = c.GetInputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+					link = c.GetOutputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+				}
+			}
+			foreach (Circuit c in product.PlannedCircuits) {
+				foreach (Verbindung link in c.Links) {
+					link.Error = link.Error || link.CollisionTest(objBorder, 0, 0, true);
+				}
+			}
+		}
+
+
+		private void MarkProductErrors<Product, Circuit, Register, Wrapper, Verbindung>(GraphicalRegisterWrapper register, GraphicalWall owningWall, bool resetLinkErrors, Product product)
+				where Circuit : Europlan.Common.Circuit, IWallCircuit<Circuit, Verbindung, Register>
+				where Product : Europlan.Common.Product, IWallProduct<Circuit, Register>
+				where Register : IWallRegister
+				where Wrapper : Europlan.Common.GraphicalRegisterWrapper, IWallRegisterWrapper<Register>
+				where Verbindung : Europlan.Common.GraphicalWallVerbindung {
+
+			Vector2D offset = this.GetWallOffset(owningWall).Value * 100.0;
+			WW.Math.Geometry.Polygon2D poly = register.GetObjectBorders(offset.X, offset.Y);
+			foreach (Circuit c in product.PlannedCircuits) {
+				foreach (Verbindung link in c.Links) {
+					link.Error = link.CollisionTest(poly, 0, 0, false);
+				}
+			}
+		}
+
+		private void MarkProductErrors<Product, Circuit, Register, Wrapper, Verbindung>(GraphicalWallSchraege schraege, GraphicalWall owningWall, bool resetLinkErrors, Product product)
+				where Circuit : Europlan.Common.Circuit, IWallCircuit<Circuit, Verbindung, Register>
+				where Product : Europlan.Common.Product, IWallProduct<Circuit, Register>
+				where Register : IWallRegister
+				where Wrapper : Europlan.Common.GraphicalRegisterWrapper, IWallRegisterWrapper<Register>
+				where Verbindung : Europlan.Common.GraphicalWallVerbindung {
+
+			if (resetLinkErrors) {
+				foreach (Circuit c in product.PlannedCircuits) {
+					foreach (Verbindung link in c.Links) {
+						link.Error = false;
+					}
+				}
+			}
+			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
+			foreach (Wrapper register in owningWall.Registers) {
+				WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
+				register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
+				if (register.Error) {
+					Circuit c = product.GetCircuitForRegister(register.Register);
+					Verbindung link = c.GetInputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+					link = c.GetOutputLink(register.Register);
+					if (link != null) {
+						link.Error = true;
+					}
+				}
+			}
+			foreach (Circuit c in product.PlannedCircuits) {
+				foreach (Verbindung link in c.Links) {
+					link.Error = link.Error || !link.CheckValidity(owningWall, 0, 0);
+				}
+			}
+		}
+#endregion Generic MarkErrors Methods
+
 		private bool MarkErrors(IGraphicalWallObject obj, GraphicalWall owningWall, bool resetLinkErrors) {
 			if (obj is GraphicalWall) {
 				foreach (PlannedProduct pp in this.PlannedProducts) {
 					if (pp.Product is HithermProduct) {
-						HithermProduct hp = pp.Product as HithermProduct;
-						if (resetLinkErrors) {
-							foreach (HithermCircuit c in hp.PlannedCircuits) {
-								foreach (GraphicalHithermVerbindung link in c.Links) {
-									link.Error = false;
-								}
-							}
-						}
-						Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-						foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
-							WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
-							register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
-							if (register.Error) {
-								HithermCircuit c = hp.GetCircuitForRegister(register.Register);
-								GraphicalHithermVerbindung link = c.GetInputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-								link = c.GetOutputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-							}
-						}
-						foreach (HithermCircuit c in hp.PlannedCircuits) {
-							foreach (GraphicalHithermVerbindung link in c.Links) {
-								link.Error = link.Error || !link.CheckValidity(owningWall, 0, 0);
-							}
-						}
+						this.MarkProductErrors<HithermProduct, HithermCircuit, HithermRegister, GraphicalHithermRegisterWrapper, GraphicalHithermVerbindung>(obj as GraphicalWall, owningWall, resetLinkErrors, pp.Product as HithermProduct);
 					} else if (pp.Product is HithermCompactProduct) {
-						HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
-						if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-							throw new Exception("TODO");
-						}
+						this.MarkProductErrors<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister, GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung>(obj as GraphicalWall, owningWall, resetLinkErrors, pp.Product as HithermCompactProduct);
 					}
 				}
 				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
@@ -871,38 +971,9 @@ namespace Europlan.Common {
 			} else if (obj is GraphicalWallObstacle) {
 				foreach (PlannedProduct pp in this.PlannedProducts) {
 					if (pp.Product is HithermProduct) {
-						HithermProduct hp = pp.Product as HithermProduct;
-						if (resetLinkErrors) {
-							foreach (HithermCircuit c in hp.PlannedCircuits) {
-								foreach (GraphicalHithermVerbindung link in c.Links) {
-									link.Error = false;
-								}
-							}
-						}
-						Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-						WW.Math.Geometry.Polygon2D objBorder = obj.GetObjectBorders(offset.X, offset.Y);
-						WW.Math.Geometry.Polygon2D unsableBorder = (obj as GraphicalWallObstacle).GetOutsideBorder(offset.X, offset.Y);
-						foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
-							register.Error = register.CollisionTest(unsableBorder, offset.X, offset.Y, false);
-							if (register.Error) {
-								HithermCircuit c = hp.GetCircuitForRegister(register.Register);
-								GraphicalHithermVerbindung link = c.GetInputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-								link = c.GetOutputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-							}
-						}
-						foreach (HithermCircuit c in hp.PlannedCircuits) {
-							foreach (GraphicalHithermVerbindung link in c.Links) {
-								link.Error = link.Error || link.CollisionTest(objBorder, 0, 0, true);
-							}
-						}
+						this.MarkProductErrors<HithermProduct, HithermCircuit, HithermRegister, GraphicalHithermRegisterWrapper, GraphicalHithermVerbindung>(obj as GraphicalWallObstacle, owningWall, resetLinkErrors, pp.Product as HithermProduct);
 					} else if (pp.Product is HithermCompactProduct) {
-						// TODO
+						this.MarkProductErrors<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister, GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung>(obj as GraphicalWallObstacle, owningWall, resetLinkErrors, pp.Product as HithermCompactProduct);
 					}
 				}
 			} else if (obj is GraphicalHithermVerbindung) {
@@ -910,55 +981,17 @@ namespace Europlan.Common {
 			} else if (obj is GraphicalRegisterWrapper) {
 				foreach (PlannedProduct pp in this.PlannedProducts) {
 					if (pp.Product is HithermProduct) {
-						HithermProduct hp = pp.Product as HithermProduct;
-						Vector2D offset = this.GetWallOffset(owningWall).Value * 100.0;
-						WW.Math.Geometry.Polygon2D poly = obj.GetObjectBorders(offset.X, offset.Y);
-						foreach (HithermCircuit c in hp.PlannedCircuits) {
-							foreach (GraphicalHithermVerbindung link in c.Links) {
-								link.Error = link.CollisionTest(poly, 0, 0, false);
-							}
-						}
+						this.MarkProductErrors<HithermProduct, HithermCircuit, HithermRegister, GraphicalHithermRegisterWrapper, GraphicalHithermVerbindung>(obj as GraphicalRegisterWrapper, owningWall, resetLinkErrors, pp.Product as HithermProduct);
 					} else if (pp.Product is HithermCompactProduct) {
-						// TODO
+						this.MarkProductErrors<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister, GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung>(obj as GraphicalRegisterWrapper, owningWall, resetLinkErrors, pp.Product as HithermCompactProduct);
 					}
 				}
 			} else if (obj is GraphicalWallSchraege) {
 				foreach (PlannedProduct pp in this.PlannedProducts) {
 					if (pp.Product is HithermProduct) {
-						HithermProduct hp = pp.Product as HithermProduct;
-						if (resetLinkErrors) {
-							foreach (HithermCircuit c in hp.PlannedCircuits) {
-								foreach (GraphicalHithermVerbindung link in c.Links) {
-									link.Error = false;
-								}
-							}
-						}
-						Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-						foreach (GraphicalHithermRegisterWrapper register in owningWall.Registers) {
-							WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
-							register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
-							if (register.Error) {
-								HithermCircuit c = hp.GetCircuitForRegister(register.Register);
-								GraphicalHithermVerbindung link = c.GetInputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-								link = c.GetOutputLink(register.Register);
-								if (link != null) {
-									link.Error = true;
-								}
-							}
-						}
-						foreach (HithermCircuit c in hp.PlannedCircuits) {
-							foreach (GraphicalHithermVerbindung link in c.Links) {
-								link.Error = link.Error || !link.CheckValidity(owningWall, 0, 0);
-							}
-						}
+						this.MarkProductErrors<HithermProduct, HithermCircuit, HithermRegister, GraphicalHithermRegisterWrapper, GraphicalHithermVerbindung>(obj as GraphicalWallSchraege, owningWall, resetLinkErrors, pp.Product as HithermProduct);
 					} else if (pp.Product is HithermCompactProduct) {
-						HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
-						if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-							throw new Exception("TODO");
-						}
+						this.MarkProductErrors<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister, GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung>(obj as GraphicalWallSchraege, owningWall, resetLinkErrors, pp.Product as HithermCompactProduct);
 					}
 				}
 				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
@@ -983,7 +1016,12 @@ namespace Europlan.Common {
 						}
 					}
 				} else if (pp.Product is HithermCompactProduct) {
-					// TODO
+					HithermCompactProduct hp = pp.Product as HithermCompactProduct;
+					foreach (HithermCompactCircuit hc in hp.PlannedCircuits) {
+						foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+							link.Error = false;
+						}
+					}
 				}
 			}
 			foreach (GraphicalWall baseWall in this.Walls) {
@@ -1024,9 +1062,8 @@ namespace Europlan.Common {
 							registersToDelete.Add(register);
 							if (register is GraphicalHithermRegisterWrapper) {
 								hithermRegistersToDelete.Add((register as GraphicalHithermRegisterWrapper).Register);
-							// TODO for hitherm compact
-							//} else if (register is GraphicalHithermCompactRegisterWrapper) {
-								//hithermCompactRegistersToDelete.Add(register as HithermCompactRegister);
+							} else if (register is GraphicalHithermCompactRegisterWrapper) {
+								hithermCompactRegistersToDelete.Add((register as GraphicalHithermCompactRegisterWrapper).Register);
 							}
 						}
 					}
@@ -1066,7 +1103,33 @@ namespace Europlan.Common {
 						}
 					}
 				} else if (pp.Product is HithermCompactProduct) {
-					// TODO
+					HithermCompactProduct hp = pp.Product as HithermCompactProduct;
+					foreach (HithermCompactRegister register in hithermCompactRegistersToDelete) {
+						hp.RemoveRegisterFromCircuit(register);
+					}
+					Dictionary<HithermCompactCircuit, List<GraphicalHithermCompactVerbindung>> linksToDelete = new Dictionary<HithermCompactCircuit, List<GraphicalHithermCompactVerbindung>>();
+					foreach (HithermCompactCircuit hc in hp.PlannedCircuits) {
+						List<GraphicalHithermCompactVerbindung> linksToDeleteInCircuit = new List<GraphicalHithermCompactVerbindung>();
+						foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+							if (link.Error) {
+								linksToDeleteInCircuit.Add(link);
+							}
+						}
+						foreach (GraphicalHithermCompactVerbindung link in linksToDeleteInCircuit) {
+							hc.Links.Remove(link);
+						}
+						if (linksToDeleteInCircuit.Count > 0) {
+							linksToDelete.Add(hc, linksToDeleteInCircuit);
+						}
+					}
+					foreach (List<GraphicalHithermCompactVerbindung> links in linksToDelete.Values) {
+						foreach (GraphicalHithermCompactVerbindung link in links) {
+							if (link.Start != null && link.End != null) {
+								hp.MoveRegisterToCircuit(link.End, hp.GetNewHkId());
+								hp.CorrectCircuitIds();
+							}
+						}
+					}
 				}
 			}
 			return true;

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.Threading;
 
 namespace Europlan.Common {
-	public class HithermCompactRegister {
+	public class HithermCompactRegister: IWallRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string hitc_620_std = EuroplanRes.HithermCompactRegister_Hit620Std; //"HIT 620 Std";
@@ -719,6 +719,11 @@ namespace Europlan.Common {
 		public double GraphPosY {
 			get { return this.graphPosY; }
 			set { this.graphPosY = value; }
+		}
+
+		public bool GraphVorlaufRight {
+			get { return true; }
+			set { /* nothing to do as hitherm compact modules cannot be inverted */ }
 		}
 	}
 }

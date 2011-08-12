@@ -13,7 +13,7 @@ namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Product_HithermName", "Product_HithermFullName")]
-	public class HithermProduct : Product {
+	public class HithermProduct : Product, IWallProduct<HithermCircuit, HithermRegister> {
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 100;

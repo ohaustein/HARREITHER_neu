@@ -49,7 +49,6 @@ namespace Europlan.Common {
 			set { this.isNew = value; }
 		}
 
-
 		public abstract bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom);
 	}
 }

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 
-	public class HithermCompactCircuit : Circuit {
+	public class HithermCompactCircuit : Circuit, IWallCircuit<HithermCompactCircuit, GraphicalHithermCompactVerbindung, HithermCompactRegister> {
 
 		private List<HithermCompactRegister> registers = new List<HithermCompactRegister>();
 		private List<GraphicalHithermCompactVerbindung> links = new List<GraphicalHithermCompactVerbindung>();

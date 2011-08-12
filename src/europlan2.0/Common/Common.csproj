@@ -375,6 +375,7 @@
       <DependentUpon>HithermPlannerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\Hitherm\GraphicalHithermVerbindung.cs" />
+    <Compile Include="Products\Hitherm\WallInterfaces.cs" />
     <Compile Include="Products\KlimaFlaechenSubAreaVerbindung.cs" />
     <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.cs">
       <SubType>Form</SubType>

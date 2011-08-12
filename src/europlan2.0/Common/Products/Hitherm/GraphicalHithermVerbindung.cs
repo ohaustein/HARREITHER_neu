@@ -8,9 +8,21 @@ using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
-	public class GraphicalHithermVerbindung : GraphicalWallVerbindung {
+	public class GraphicalHithermVerbindung : GenericGraphicalWallVerbindungImplementation<HithermProduct, HithermCircuit, HithermRegister, GraphicalHithermRegisterWrapper, GraphicalHithermVerbindung> {
 
-		private HithermRegister start;
+		internal GraphicalHithermVerbindung()
+			: base() {
+		}
+
+		internal GraphicalHithermVerbindung(bool finished)
+			: base(finished) {
+		}
+
+		public GraphicalHithermVerbindung(HithermRegister start, HithermRegister end, IEnumerable<Point2D> vertices, HithermCircuit circuit, PlannedProduct product)
+			: base (start, end, vertices, circuit, product) {
+		}
+
+		/*private HithermRegister start;
 		private HithermRegister end;
 		private HithermCircuit circuit;
 
@@ -155,13 +167,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*[XmlIgnore]
-		public override bool CircuitHasRegister {
-			get {
-				return this.circuit != null && this.circuit.Registers.Count > 0;
-			}
-		}*/
-
 		[XmlIgnore]
 		public override int HkId {
 			get {
@@ -170,6 +175,6 @@ namespace Europlan.Common {
 				}
 				return -1;
 			}
-		}
+		}*/
 	}
 }

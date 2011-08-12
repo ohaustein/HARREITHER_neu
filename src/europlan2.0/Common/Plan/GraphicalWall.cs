@@ -798,7 +798,11 @@ namespace Europlan.Common {
 				} else if (pp.Product is HithermCompactProduct) {
 					HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
 					if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-						throw new Exception("TODO");
+						foreach (HithermCompactCircuit hc in hcp.PlannedCircuits) {
+							foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+								link.BackupState();
+							}
+						}
 					}
 				}
 			}
@@ -833,7 +837,11 @@ namespace Europlan.Common {
 				} else if (pp.Product is HithermCompactProduct) {
 					HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
 					if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-						throw new Exception("TODO");
+						foreach (HithermCompactCircuit hc in hcp.PlannedCircuits) {
+							foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+								link.RevertState();
+							}
+						}
 					}
 				}
 			}
