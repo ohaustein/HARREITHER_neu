@@ -232,8 +232,13 @@ namespace Europlan.Common {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
 					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
-						graphicalMode = true;
-						this.product.Product.GraphicalMode = true;
+						if (mbProduct.ContainsModules) {
+							graphicalMode = false;
+							this.product.Product.GraphicalMode = false;
+						} else {
+							graphicalMode = true;
+							this.product.Product.GraphicalMode = true;
+						}
 					} else {
 						graphicalMode = false;
 						this.product.Product.GraphicalMode = false;
@@ -1113,6 +1118,17 @@ namespace Europlan.Common {
 							if (result == DialogResult.No) {
 								this.UpdateControl(FieldEnum.NONE);
 								return;
+							} else {
+								ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
+								mbProduct.GraphConstruction = null;
+								mbProduct.Connections = null;
+								foreach (ModulBodenCircuit c in mbProduct.PlannedCircuits) {
+									c.Links = null;
+									c.Row.Links = null;
+									foreach (KlimaFlaechenModul modul in c.Row.List) {
+										modul.ClearGraphicalRepresentation();
+									}
+								}
 							}
 						}
 						// change from table based to graphical  

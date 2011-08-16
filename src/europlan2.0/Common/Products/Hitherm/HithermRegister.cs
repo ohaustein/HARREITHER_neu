@@ -363,6 +363,13 @@ namespace Europlan.Common {
 			this.rohre = rohre;
 		}
 
+		public void ClearGraphicalRepresentation() {
+			graphWallId = null;
+			graphPosX = 0;
+			graphPosY = 0;
+			graphVorlaufRight = true;
+		}
+
 		public HithermRegisterTypeEnum RegisterType {
 			get { return this.registerType; }
 			set {

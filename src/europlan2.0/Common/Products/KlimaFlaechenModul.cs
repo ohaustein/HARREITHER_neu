@@ -242,6 +242,18 @@ namespace Europlan.Common {
 			this.orientation = other.orientation;
 		}
 
+		public void ClearGraphicalRepresentation() {
+			graphLane = -1;
+			graphPositionInLane = double.NaN;
+			graphBottomUp = false;
+
+			graphPosX = double.NaN;
+			graphPosY = double.NaN;
+			graphRotation = 0;
+			graphModulierendX = false;
+			graphModulierendY = false;
+		}
+
 		public ModulTypeEnum ModulType {
 			get { return this.modulType; }
 			set { this.modulType = value; }

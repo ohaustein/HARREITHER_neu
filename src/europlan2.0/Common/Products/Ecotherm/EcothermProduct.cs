@@ -254,6 +254,14 @@ namespace Europlan.Common {
 		protected EcothermProduct(EcothermProduct product) : base(product) {
 		}
 
+		public void ClearGraphicalRepresentation() {
+			plannedRimSegments = new List<Segment2D>();
+			plannedAreaGraphical = new List<Point2D>();
+			plannedReducedAreas = new List<List<Point2D>>();
+			textBoxPosition = Point2D.Zero;
+			textBoxFontSize = 5.0f;
+		}
+
 		public override void Initialize() {
 		}
 

@@ -220,8 +220,13 @@ namespace Europlan.Common {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
 					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
-						graphicalMode = true;
-						this.product.Product.GraphicalMode = true;
+						if (hp.PlannedRegisterArea > 0) {
+							graphicalMode = false;
+							this.product.Product.GraphicalMode = false;
+						} else {
+							graphicalMode = true;
+							this.product.Product.GraphicalMode = true;
+						}
 					} else {
 						graphicalMode = false;
 						this.product.Product.GraphicalMode = false;
@@ -1080,6 +1085,15 @@ namespace Europlan.Common {
 							if (result == DialogResult.No) {
 								this.UpdateControl(FieldEnum.NONE);
 								return;
+							} else {
+								HithermProduct hp = this.product.Product as HithermProduct;
+								hp.Connections = null;
+								foreach (HithermCircuit c in hp.PlannedCircuits) {
+									c.Links = null;
+									foreach (HithermRegister register in c.Registers) {
+										register.ClearGraphicalRepresentation();
+									}
+								}
 							}
 						}
 						// change from table based to graphical  

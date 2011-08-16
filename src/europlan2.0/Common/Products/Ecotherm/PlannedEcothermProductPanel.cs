@@ -337,8 +337,19 @@ namespace Europlan.Common {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
 					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
-						graphicalMode = true;
-						this.product.Product.GraphicalMode = true;
+						if (evProduct.PlannedAreaGraphical.Count > 0 &&
+							evProduct.PlannedFloorArea == evProduct.AssociatedRoom.Area &&
+							evProduct.PlannedAreaReduced == 0 &&
+							evProduct.PlannedAreaUnheated == 0 &&
+							evProduct.PlannedRimLength == 0 &&
+							evProduct.PlannedRimCorners == 0 &&
+							evProduct.PlannedCorrections == false) {
+							graphicalMode = true;
+							this.product.Product.GraphicalMode = true;
+						} else {
+							graphicalMode = false;
+							this.product.Product.GraphicalMode = false;
+						}
 					} else {
 						graphicalMode = false;
 						this.product.Product.GraphicalMode = false;
@@ -1502,6 +1513,10 @@ namespace Europlan.Common {
 							if (result == DialogResult.No) {
 								this.UpdateControl(FieldEnum.NONE);
 								return;
+							} else {
+								EcothermProduct evProduct = this.product.Product as EcothermProduct;
+								evProduct.Connections = null;
+								evProduct.ClearGraphicalRepresentation();
 							}
 						}
 						// change from table based to graphical  

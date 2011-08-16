@@ -379,6 +379,12 @@ namespace Europlan.Common {
 			this.registerCount = registerCount;
 		}
 
+		public void ClearGraphicalRepresentation() {
+			graphWallId = null;
+			graphPosX = 0;
+			graphPosY = 0;
+		}
+
 		public HithermCompactRegisterTypeEnum RegisterType {
 			get { return this.registerType; }
 			set {
