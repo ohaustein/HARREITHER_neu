@@ -901,10 +901,20 @@ namespace Europlan.Common {
 				if ((!register.Register.GraphVorlaufRight && newStartPoint5.X > secondPoint.X) ||
 					(register.Register.GraphVorlaufRight && newStartPoint5.X < secondPoint.X)) {
 					double tmpY;
-					if (upside) {
-						tmpY = secondPoint.Y + 10;
+					if (register is GraphicalHithermRegisterWrapper) {
+						if (upside) {
+							tmpY = secondPoint.Y + 10;
+						} else {
+							tmpY = secondPoint.Y - register.Height - 10;
+						}
+					} else if (register is GraphicalHithermCompactRegisterWrapper) {
+						if (upside) {
+							tmpY = secondPoint.Y + register.Height + 10;
+						} else {
+							tmpY = secondPoint.Y - 10;
+						}
 					} else {
-						tmpY = secondPoint.Y - register.Height - 10;
+						throw new Exception("Invalid Register Type");
 					}
 					this.vertices.RemoveAt(1);
 					this.vertices.Insert(1, new Point2D(secondPoint.X, tmpY));
@@ -1028,6 +1038,7 @@ namespace Europlan.Common {
 				vertexAdded = true;
 			}
 			Nullable<Vector2D> offset = register.AssociatedRoom.GetWallOffset(owningWall) * 100;
+
 			if (!offset.HasValue) {
 				return;
 			}

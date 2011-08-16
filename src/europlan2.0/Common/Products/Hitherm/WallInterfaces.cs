@@ -19,7 +19,14 @@ namespace Europlan.Common {
 
 		bool GraphVorlaufRight {
 			get;
-			set;
+		}
+
+		bool GraphVorlaufHorizontal {
+			get;
+		}
+
+		bool GraphRuecklaufHorizontal {
+			get;
 		}
 	}
 

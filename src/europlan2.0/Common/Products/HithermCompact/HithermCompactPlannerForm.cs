@@ -490,7 +490,7 @@ namespace Europlan.Common {
 				} else if (hithermRegister.Register.IsDachschraege) {
 					text += "Dachschrägenelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Ds";
 				} else {
-					text += "Wandschrägenelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Std";
+					text += "Wandelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Std";
 				}
 				lblRegisterSelectedRegister.Text = text;
 				numRegisterLeft.Value = (decimal)hithermRegister.Register.GraphPosX;

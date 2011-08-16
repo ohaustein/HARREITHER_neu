@@ -510,6 +510,7 @@ namespace Europlan.Common {
 					double y = this.dragStart.Value.Y < this.dragEnd.Y ? this.dragStart.Value.Y : this.dragStart.Value.Y - this.newRegister.Height;
 					this.newRegister.Register.GraphPosX = x - this.newRegisterWallXOffset;
 					this.newRegister.Register.GraphPosY = y - this.newRegisterWallYOffset;
+					this.newRegister.Register.RegisterCount = this.newRegisterParapet ? 1 : (int)Math.Floor(width / (HithermCompactRegister.GetRegisterBreite(registerType.Value) / 10.0)); ;
 					this.newRegister.Register.GraphWallId = this.newRegisterWall.Id;
 					if (this.newRegister.Register != null) {
 						if (this.SnapEnabled) {

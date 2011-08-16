@@ -364,6 +364,7 @@ namespace Europlan.Common {
 		private String graphWallId = null;
 		private double graphPosX = 0;
 		private double graphPosY = 0;
+		private bool graphRuecklaufHorizontal = true;
 
 		/*private Nullable<Point> origin = null;*/
 
@@ -727,9 +728,19 @@ namespace Europlan.Common {
 			set { this.graphPosY = value; }
 		}
 
+		[XmlIgnore]
 		public bool GraphVorlaufRight {
 			get { return true; }
-			set { /* nothing to do as hitherm compact modules cannot be inverted */ }
+		}
+
+		public bool GraphRuecklaufHorizontal {
+			get { return this.graphRuecklaufHorizontal; }
+			set { this.graphRuecklaufHorizontal = value; }
+		}
+
+		[XmlIgnore]
+		public bool GraphVorlaufHorizontal {
+			get { return !this.IsParapet; }
 		}
 	}
 }

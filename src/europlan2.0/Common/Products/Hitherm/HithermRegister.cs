@@ -1049,6 +1049,16 @@ namespace Europlan.Common {
 			set { this.graphVorlaufRight = value; }
 		}
 
+		[XmlIgnore]
+		public bool GraphVorlaufHorizontal {
+			get { return this.orientation == RegisterOrientationEnum.ORIENTATION_HORIZONTAL; }
+		}
+
+		[XmlIgnore]
+		public bool GraphRuecklaufHorizontal {
+			get { return this.GraphVorlaufHorizontal; }
+		}
+
 		private bool onlyCompleteRegisters = false;
 		[XmlIgnore]
 		public bool OnlyCompleteRegisters {

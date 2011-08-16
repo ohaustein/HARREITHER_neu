@@ -49,8 +49,8 @@ namespace Europlan.Common {
 				} else {
 					// TODO: check if dachschraegen register are different!
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.Height + 6.5 + 1));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY + this.Height + 6.5 + 1));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.Height));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY + this.Height));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY));
 				}
 				return borders;
@@ -60,11 +60,11 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, false/*, this == selectedObject*/);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, false);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false/*, false*/);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false);
 		}
 
 		private const float parapet_distLeft = 3.5f;
@@ -75,7 +75,14 @@ namespace Europlan.Common {
 		private const float parapet_distBottomLeftRegisterPipe = 2.5f;
 		private const float parapet_distTopPipe = 2.5f;
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool error/*, bool drawAnchors*/) {
+		private const float standard_distLeft = 3.5f;
+		private const float standard_distRight = 3.5f;
+		private const float standard_pipeWidth = 2.0f;
+		private const float standard_distPipeToRegister = 14.0f - standard_distLeft - standard_pipeWidth;
+		private const float standard_platteBottom = 6.5f;
+		private const float standard_totalWidth = 62.5f;
+
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool error) {
 			if (register == null) {
 				return;
 			}
@@ -95,9 +102,10 @@ namespace Europlan.Common {
 				bOutput = new SolidBrush(Color.FromArgb(63, Color.Blue));
 			}
 			if (register.IsParapet) {
-				float x1 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth + parapet_distPipeToRegister);
-				float x2 = (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_registerPipeWidth);
-				float y = (float)(yOffset + register.GraphPosY);
+				float x, x1, x2, y, y1, y2;
+				x1 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth + parapet_distPipeToRegister);
+				x2 = (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_registerPipeWidth);
+				y = (float)(yOffset + register.GraphPosY);
 				float hoehe = 55;
 				g.DrawRectangle(registerPen, x1, y + parapet_distBottomLeftRegisterPipe, parapet_registerPipeWidth, hoehe - parapet_distBottomLeftRegisterPipe);
 				g.DrawRectangle(registerPen, x2, y, parapet_registerPipeWidth, hoehe);
@@ -107,18 +115,30 @@ namespace Europlan.Common {
 					y = (float)(yOffset + register.GraphPosY + pos);
 					g.DrawLine(registerPen, x1, y, x2, y);
 				}
-				connectionPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+				connectionPen.EndCap = LineCap.Round;
 				connectionPen.StartCap = LineCap.Flat;
-				float x = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0);
-				float y1 = (float)(yOffset + register.GraphPosY + parapet_pipeWidth);
-				float y2 = (float)(yOffset + register.GraphPosY + this.Height - parapet_distTopPipe - parapet_pipeWidth / 2.0);
-				g.DrawLine(connectionPen, x, y1, x, y2);
-				connectionPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+				if (this.register.GraphRuecklaufHorizontal) {
+					x1 = (float)(xOffset + register.GraphPosX + parapet_pipeWidth);
+					x2 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0);
+					y = (float)(yOffset + register.GraphPosY + parapet_pipeWidth / 2.0);
+					g.DrawLine(connectionPen, x1, y, x2, y);
+					connectionPen.StartCap = LineCap.Round;
+					x = x2;
+					y1 = y;
+					y2 = (float)(yOffset + register.GraphPosY + this.Height - parapet_distTopPipe - parapet_pipeWidth / 2.0);
+					g.DrawLine(connectionPen, x, y1, x, y2);
+				} else {
+					x = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0);
+					y1 = (float)(yOffset + register.GraphPosY + parapet_pipeWidth);
+					y2 = (float)(yOffset + register.GraphPosY + this.Height - parapet_distTopPipe - parapet_pipeWidth / 2.0);
+					g.DrawLine(connectionPen, x, y1, x, y2);
+					connectionPen.StartCap = LineCap.Round;
+				}
 				x1 = x;
 				x2 = x + parapet_distPipeToRegister + parapet_pipeWidth;
 				y = y2;
 				g.DrawLine(connectionPen, x1, y, x2, y);
-				connectionPen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+				connectionPen.EndCap = LineCap.Flat;
 				x = x2;
 				y1 = y;
 				y2 = (float)(yOffset + register.GraphPosY + 55);
@@ -126,163 +146,92 @@ namespace Europlan.Common {
 				g.DrawRectangle(plattePen, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY), (float)this.Width, (float)this.Height);
 				g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
 				g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
-				g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
-				g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				if (this.register.GraphRuecklaufHorizontal) {
+					g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+					g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				} else {
+					g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+					g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
+				}
 			} else {
-				throw new Exception("TODO");
-			}
-#if BLUB
-			if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
-				float x = (float)(xOffset + register.GraphPosX);
-				float y1 = (float)(yOffset + register.GraphPosY);
-				float y2 = (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2);
-				float breite = (float)register.RegisterBreiteForDrawing;
-				g.DrawRectangle(registerPen, x, y1, breite, 2);
-				g.DrawRectangle(registerPen, x, y2, breite, 2);
-				double pos = 5;
-				for (int i = 0; i < register.Rohre; i++) {
-					if (register.Gaps.ContainsKey(i)) {
-						pos += register.Gaps[i];
+				for (int i = 0; i < register.RegisterCount; i++) {
+					float x, x1, x2, y, y1, y2;
+					x1 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth + standard_distPipeToRegister);
+					y1 = (float)(yOffset + register.GraphPosY);
+					float width = (float)(standard_totalWidth - standard_distLeft - standard_pipeWidth - standard_distPipeToRegister - standard_pipeWidth);
+					x2 = (float)(x1 - standard_distRight + standard_pipeWidth);
+					y2 = (float)(yOffset + register.GraphPosY + this.Height - standard_platteBottom);
+					g.DrawRectangle(registerPen, x1, y1, width, standard_pipeWidth);
+					g.DrawRectangle(registerPen, x2, y2, width, standard_pipeWidth);
+					y1 = y1 + standard_pipeWidth / 2.0f;
+					y2 = y2 + standard_pipeWidth / 2.0f;
+					float maxX = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_totalWidth - standard_distRight);
+					for (x = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth + standard_distPipeToRegister + 2.5); x <= maxX; x += 5.0f) {
+						g.DrawLine(registerPen, x, y1, x, y2);
 					}
-					x = (float)(xOffset + register.GraphPosX + pos);
-					y1 = (float)(yOffset + register.GraphPosY + 1);
-					y2 = (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 1);
-					g.DrawLine(registerPen, x, y1, x, y2);
-					if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
-						if (HithermProduct.ConfigUsePlus) {
-							if (i % 14 == 13) {
-								pos += 10;
-							} else {
-								pos += 5;
-							}
+					connectionPen.EndCap = LineCap.Round;
+					connectionPen.StartCap = LineCap.Flat;
+					if (i == 0) {
+						if (this.register.GraphRuecklaufHorizontal) {
+							x1 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_pipeWidth);
+							x2 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth / 2.0);
+							y = (float)(yOffset + register.GraphPosY + standard_pipeWidth / 2.0);
+							g.DrawLine(connectionPen, x1, y, x2, y);
+							connectionPen.StartCap = LineCap.Round;
+							x = x2;
+							y1 = y;
+							y2 = (float)(y1 + this.Height - standard_platteBottom);
+							g.DrawLine(connectionPen, x, y1, x, y2);
 						} else {
-							if (i % 9 == 8) {
-								pos += 10;
-							} else {
-								pos += 5;
-							}
+							x = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth / 2.0);
+							y1 = (float)(yOffset + register.GraphPosY + standard_pipeWidth);
+							y2 = (float)(y1 + this.Height - standard_platteBottom);
+							g.DrawLine(connectionPen, x, y1, x, y2);
+							connectionPen.StartCap = LineCap.Round;
 						}
 					} else {
-						pos += 10;
+						x1 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth - standard_pipeWidth);
+						x2 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth / 2.0);
+						y = (float)(yOffset + register.GraphPosY + standard_pipeWidth / 2.0);
+						g.DrawLine(connectionPen, x1, y, x2, y);
+						connectionPen.StartCap = LineCap.Round;
+						x = x2;
+						y1 = y;
+						y2 = (float)(y1 + this.Height - standard_platteBottom);
+						g.DrawLine(connectionPen, x, y1, x, y2);
 					}
-				}
-				if (highlightConnections) {
-					if (register.GraphVorlaufRight) {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
-					} else {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 3.5), 5, 5);
+					connectionPen.EndCap = LineCap.Flat;
+					x1 = x;
+					x2 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth - standard_distRight + standard_distLeft + standard_pipeWidth + standard_distPipeToRegister + standard_pipeWidth);
+					y = y2;
+					g.DrawLine(connectionPen, x1, y, x2, y);
+					if (i > 0) {
+						g.DrawLine(plattePen, (float)(xOffset + register.GraphPosX + i * standard_totalWidth), (float)(yOffset + register.GraphPosY + standard_platteBottom), (float)(xOffset + register.GraphPosX + i * standard_totalWidth), (float)(yOffset + register.GraphPosY + this.Height));
 					}
-				} else {
-					if (register.GraphVorlaufRight) {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
-					} else {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterBreiteForDrawing - 2), (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2), 2, 2);
+					if (i == register.RegisterCount - 1) {
+						x = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_totalWidth - standard_pipeWidth);
+						y = (float)(yOffset + register.GraphPosY);
+						g.FillRectangle(bInput, x, y, standard_pipeWidth, standard_pipeWidth);
+						g.DrawRectangle(pInput, x, y, standard_pipeWidth, standard_pipeWidth);
 					}
-				}
-			} else {
-				float x1 = (float)(xOffset + register.GraphPosX);
-				float x2 = (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2);
-				float y = (float)(yOffset + register.GraphPosY);
-				float breite = (float)register.RegisterBreiteForDrawing;
-				g.DrawRectangle(registerPen, x1, y, 2, breite);
-				g.DrawRectangle(registerPen, x2, y, 2, breite);
-				double pos = 5;
-				for (int i = 0; i < register.Rohre; i++) {
-					x1 = (float)(xOffset + register.GraphPosX + 1);
-					x2 = (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 1);
-					y = (float)(yOffset + register.GraphPosY + pos);
+					if (i == 0) {
+						if (this.register.GraphRuecklaufHorizontal) {
+							x = (float)(xOffset + register.GraphPosX);
+							y = (float)(yOffset + register.GraphPosY);
+							g.FillRectangle(bOutput, x, y, standard_pipeWidth, standard_pipeWidth);
+							g.DrawRectangle(pOutput, x, y, standard_pipeWidth, standard_pipeWidth);
+						} else {
+							x = (float)(xOffset + register.GraphPosX + standard_distLeft);
+							y = (float)(yOffset + register.GraphPosY);
+							g.FillRectangle(bOutput, x, y, standard_pipeWidth, standard_pipeWidth);
+							g.DrawRectangle(pOutput, x, y, standard_pipeWidth, standard_pipeWidth);
+						}
 
-					g.DrawLine(registerPen, x1, y, x2, y);
-					if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
-						if (HithermProduct.ConfigUsePlus) {
-							if (i % 14 == 13) {
-								pos += 10;
-							} else {
-								pos += 5;
-							}
-						} else {
-							if (i % 9 == 8) {
-								pos += 10;
-							} else {
-								pos += 5;
-							}
-						}
-					} else {
-						pos += 10;
 					}
 				}
-				if (highlightConnections) {
-					if (register.GraphVorlaufRight) {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
-					} else {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 1.5), (float)(yOffset + register.GraphPosY - 1.5), 5, 5);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 3.5), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 3.5), 5, 5);
-					}
-				} else {
-					if (register.GraphVorlaufRight) {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
-					} else {
-						g.FillRectangle(bInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.DrawRectangle(pInput, (float)(xOffset + register.GraphPosX - 0), (float)(yOffset + register.GraphPosY - 0), 2, 2);
-						g.FillRectangle(bOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
-						g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2), (float)(yOffset + register.GraphPosY + register.RegisterBreiteForDrawing - 2), 2, 2);
-					}
-				}
+				g.DrawRectangle(plattePen, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY + standard_platteBottom), (float)(this.Width), (float)(this.Height - standard_platteBottom));
 			}
-			/*if (drawAnchors) {
-				Region oldClip = g.Clip;
-				g.ResetClip();
-				foreach (Anchor a in this.GetAnchors(scale)) {
-					a.PaintAnchor(g, xOffset, yOffset, scale);
-				}
-				g.Clip = oldClip;
-			}*/
-#endif
 		}
-
-		/*public double GetRohrOffset(int rohrNr) {
-			double offset = 5;
-			for (int i = 1; i < rohrNr; i++) {
-				if (register.Rohrabstand == HithermRegister.RohrabstandEnum.RC_HOCHLEISTUNG) {
-					if (HithermProduct.ConfigUsePlus) {
-						if (i % 14 == 13) {
-							offset += 10;
-						} else {
-							offset += 5;
-						}
-					} else {
-						if (i % 9 == 8) {
-							offset += 10;
-						} else {
-							offset += 5;
-						}
-					}
-				} else {
-					offset += 10;
-				}
-			}
-			return offset;
-		}*/
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
 			if (HitTest(planPoint, xOffset, yOffset)) {
@@ -292,26 +241,15 @@ namespace Europlan.Common {
 		}
 
 		public Point2D GetOutputConnectionPoint(double xOffset, double yOffset, double dist) {
-			if (this.register.IsParapet) {
-				return new Point2D(xOffset + this.register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
+			if (this.register.GraphRuecklaufHorizontal) {
+				return new Point2D(xOffset + this.register.GraphPosX - dist, yOffset + this.register.GraphPosY + standard_pipeWidth / 2.0);
 			} else {
-				throw new Exception("TODO");
-			}
-#if BLUB
-			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
-				if (this.register.GraphVorlaufRight) {
-					return new Point2D(xOffset + this.register.GraphPosX - dist, yOffset + this.register.GraphPosY + this.Height - 1);
+				if (this.register.IsParapet) {
+					return new Point2D(xOffset + this.register.GraphPosX + parapet_distLeft + parapet_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
 				} else {
-					return new Point2D(xOffset + this.register.GraphPosX + this.Width + dist, yOffset + this.register.GraphPosY + this.Height - 1);
-				}
-			} else {
-				if (this.register.GraphVorlaufRight) {
-					return new Point2D(xOffset + this.register.GraphPosX + 1, yOffset + this.register.GraphPosY + this.Height + dist);
-				} else {
-					return new Point2D(xOffset + this.register.GraphPosX + this.Width - 1, yOffset + this.register.GraphPosY + this.Height + dist);
+					return new Point2D(xOffset + this.register.GraphPosX + standard_distLeft + standard_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
 				}
 			}
-#endif
 		}
 
 		private double connectionSize = 7;
@@ -319,6 +257,7 @@ namespace Europlan.Common {
 		public Polygon2D GetOutputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
 			Point2D connectionPoint = this.GetOutputConnectionPoint(xOffset, yOffset, 0);
+			connectionPoint = connectionPoint + (this.register.GraphRuecklaufHorizontal ? new Vector2D(parapet_pipeWidth / 2.0, 0) : new Vector2D(0, parapet_pipeWidth / 2.0));
 			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
 			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
 			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
@@ -330,28 +269,14 @@ namespace Europlan.Common {
 			if (this.register.IsParapet) {
 				return new Point2D(xOffset + this.register.GraphPosX + this.Width - parapet_distRight - parapet_pipeWidth / 2.0, yOffset + this.register.GraphPosY - dist);
 			} else {
-				throw new Exception("TODO");
+				return new Point2D(xOffset + this.register.GraphPosX + this.Width + dist, yOffset + this.register.GraphPosY + standard_pipeWidth / 2.0);
 			}
-#if BLUB
-			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
-				if (this.register.GraphVorlaufRight) {
-					return new Point2D(xOffset + this.register.GraphPosX + this.Width + dist, yOffset + this.register.GraphPosY + 1);
-				} else {
-					return new Point2D(xOffset + this.register.GraphPosX - dist, yOffset + this.register.GraphPosY + 1);
-				}
-			} else {
-				if (this.register.GraphVorlaufRight) {
-					return new Point2D(xOffset + this.register.GraphPosX + this.Width - 1, yOffset + this.register.GraphPosY - dist);
-				} else {
-					return new Point2D(xOffset + this.register.GraphPosX + 1, yOffset + this.register.GraphPosY - dist);
-				}
-			}
-#endif
 		}
 
 		public Polygon2D GetInputConnectionArea(double xOffset, double yOffset) {
 			Polygon2D area = new Polygon2D();
 			Point2D connectionPoint = this.GetInputConnectionPoint(xOffset, yOffset, 0);
+			connectionPoint = connectionPoint + (this.register.IsParapet ? new Vector2D(0, parapet_pipeWidth / 2.0) : new Vector2D(-parapet_pipeWidth / 2.0, 0));
 			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y - connectionSize / 2.0));
 			area.Add(new Point2D(connectionPoint.X - connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
 			area.Add(new Point2D(connectionPoint.X + connectionSize / 2.0, connectionPoint.Y + connectionSize / 2.0));
@@ -360,11 +285,11 @@ namespace Europlan.Common {
 		}
 
 		public PossibleHithermCompactRegisterConnection GetOutputConnection(double xOffset, double yOffset, HithermCompactProduct product, HithermCompactCircuit circuit) {
-			return new PossibleHithermCompactRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset, 0), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register, false, true, new Vector2D(0, -5));
+			return new PossibleHithermCompactRegisterConnection(this.GetOutputConnectionPoint(xOffset, yOffset, 0), GetOutputConnectionArea(xOffset, yOffset), false, true, product, circuit, this.register, false, true, this.register.GraphRuecklaufHorizontal ? new Vector2D(-5, 0) : new Vector2D(0, -5));
 		}
 
 		public PossibleHithermCompactRegisterConnection GetInputConnection(double xOffset, double yOffset, HithermCompactProduct product, HithermCompactCircuit circuit) {
-			return new PossibleHithermCompactRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, false, true, new Vector2D(0, -5));
+			return new PossibleHithermCompactRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, false, true, this.register.IsParapet ? new Vector2D(0, -5) : new Vector2D(5, 0));
 		}
 
 		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
@@ -390,31 +315,20 @@ namespace Europlan.Common {
 		public override List<Anchor> GetAnchors(double scale) {
 			List<Anchor> anchors = new List<Anchor>();
 			double px5 = 4.0 / scale;
-			anchors.Add(new Anchor(this.X - px5,              this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT,  this));
-			anchors.Add(new Anchor(this.X - px5,              this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT,         this));
-			anchors.Add(new Anchor(this.X - px5,              this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT,     this));
-			anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP,          this));
-			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT,    this));
-			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT,        this));
-			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
-			anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM,       this));
+			anchors.Add(    new Anchor(this.X - px5,              this.Y - px5,               this.register.IsParapet ? AnchorTypeEnum.ANCHOR_SCALE_LEFT : AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT,   this));
+			anchors.Add(    new Anchor(this.X - px5,              this.Y + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT,                                                                       this));
+			anchors.Add(    new Anchor(this.X - px5,              this.Y + this.Height + px5, this.register.IsParapet ? AnchorTypeEnum.ANCHOR_SCALE_LEFT : AnchorTypeEnum.ANCHOR_SCALE_TOP_LEFT,      this));
+			if (!this.register.IsParapet) {
+				anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y + this.Height + px5, AnchorTypeEnum.ANCHOR_SCALE_TOP,                                                                        this));
+			}
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height + px5,     this.register.IsParapet ? AnchorTypeEnum.ANCHOR_SCALE_RIGHT : AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT,    this));
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y + this.Height / 2.0,     AnchorTypeEnum.ANCHOR_SCALE_RIGHT,        this));
+			anchors.Add(new Anchor(this.X + this.Width + px5, this.Y - px5,                   this.register.IsParapet ? AnchorTypeEnum.ANCHOR_SCALE_RIGHT : AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
+			if (!this.register.IsParapet) {
+				anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5,               AnchorTypeEnum.ANCHOR_SCALE_BOTTOM,                                                                     this));
+			}
 			return anchors;
 		}
-
-		/*private int GetBestRohrCount(double width) {
-			int bestRohre = 3;
-			double bestDelta = double.MaxValue;
-			foreach (KeyValuePair<int, double> kvp in this.register.PossibleWidths) {
-				if (Math.Abs(kvp.Value - width + register.GapsSum) < bestDelta) {
-					bestDelta = Math.Abs(kvp.Value - width + register.GapsSum);
-					bestRohre = kvp.Key;
-				}
-			}
-			if (bestRohre < register.LastGap + 1) {
-				bestRohre = register.LastGap + 1;
-			}
-			return bestRohre;
-		}*/
 
 		public GraphicalHithermCompactVerbindung GetInputLink() {
 			HithermCompactCircuit c = this.product.GetCircuitForRegister(this.register);
@@ -473,65 +387,55 @@ namespace Europlan.Common {
 			if (this.startOutputConnection != null) {
 				this.startOutputConnection.Vertices = new List<Point2D>(this.startOutputConnectionVertices);
 			}
-#if BLUB
-			if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+			if (this.register.IsParapet) {
 				if (anchor == null) {
 					// move
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, checkLinks, useSnap);
-				} else if (anchor is RegisterGapAnchor) {
-					RegisterGapAnchor rga = anchor as RegisterGapAnchor;
-					if (rga.Left) {
-						double newGap = this.startGaps[rga.GapNr] - planPoint.X + startDrag.Value.X;
-						if (newGap < 0) {
-							newGap = 0;
-						}
-						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
-						//this.register.Gaps[rga.GapNr] = newGap;
-						//this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
-					} else {
-						double newGap = this.startGaps[rga.GapNr] + planPoint.X - startDrag.Value.X;
-						if (newGap < 0) {
-							newGap = 0;
-						}
-						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX, startDragRegisterY, true, useSnap);
-						//this.register.Gaps[rga.GapNr] = newGap;
-						//this.UpdatePosition(owningWall, startDragRegisterX, startDragRegisterY, true, useSnap);
-					}
-					// TODO
-				} else if (anchor is Anchor) {
+				} else {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
-						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X), false, checkLinks, useSnap);
+						Nullable<HithermCompactRegister.HithermCompactRegisterTypeEnum> newType = HithermCompactRegister.GetRegisterTypeForSize(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X + 25, this.startDragRegisterHeight, true, false);
+						if (newType.HasValue) {
+							this.UpdateType(owningWall, newType.Value, false, checkLinks, useSnap);
+						}
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
-						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth + planPoint.X - startDrag.Value.X), true, checkLinks, useSnap);
-					}
-
-					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
-						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.Y - this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister, false).Value, true, checkLinks, useSnap);
-					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
-						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.Y + this.startDrag.Value.Y + 25), this.register.IsHochleistungsRegister, false).Value, false, checkLinks, useSnap);
+						Nullable<HithermCompactRegister.HithermCompactRegisterTypeEnum> newType = HithermCompactRegister.GetRegisterTypeForSize(this.startDragRegisterWidth + planPoint.X - startDrag.Value.X + 25, this.startDragRegisterHeight, true, false);
+						if (newType.HasValue) {
+							this.UpdateType(owningWall, newType.Value, true, checkLinks, useSnap);
+						}
 					}
 				}
 			} else {
 				if (anchor == null) {
 					// move
-					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, true, useSnap);
-				} else if (anchor is RegisterGapAnchor) {
-					// TODO
-				} else if (anchor is Anchor) {
+					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, checkLinks, useSnap);
+				} else {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
-						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.X + this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, false, checkLinks, useSnap);
+						int registerCount = (int)Math.Round((this.startDragRegisterWidth - planPoint.X + startDrag.Value.X) / standard_totalWidth);
+						if (registerCount < 1) {
+							registerCount = 1;
+						}
+						this.UpdateRegisterCount(owningWall, registerCount, false, checkLinks, useSnap);
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_RIGHT) == AnchorTypeEnum.ANCHOR_SCALE_RIGHT) {
-						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight + planPoint.X - this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, true, checkLinks, useSnap);
+						int registerCount = (int)Math.Round((this.startDragRegisterWidth + planPoint.X - startDrag.Value.X) / standard_totalWidth);
+						if (registerCount < 1) {
+							registerCount = 1;
+						}
+						this.UpdateRegisterCount(owningWall, registerCount, true, checkLinks, useSnap);
 					}
 
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_TOP) == AnchorTypeEnum.ANCHOR_SCALE_TOP) {
-						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth + planPoint.Y - startDrag.Value.Y), true, checkLinks, useSnap);
+						Nullable<HithermCompactRegister.HithermCompactRegisterTypeEnum> newType = HithermCompactRegister.GetRegisterTypeForSize(this.startDragRegisterWidth, this.startDragRegisterHeight + planPoint.Y - this.startDrag.Value.Y + 25, false, this.register.IsDachschraege);
+						if (newType.HasValue) {
+							this.UpdateType(owningWall, newType.Value, true, checkLinks, useSnap);
+						}
 					} else if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) == AnchorTypeEnum.ANCHOR_SCALE_BOTTOM) {
-						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.Y + startDrag.Value.Y), false, checkLinks, useSnap);
+						Nullable<HithermCompactRegister.HithermCompactRegisterTypeEnum> newType = HithermCompactRegister.GetRegisterTypeForSize(this.startDragRegisterWidth, this.startDragRegisterHeight - planPoint.Y + this.startDrag.Value.Y + 25, false, this.register.IsDachschraege);
+						if (newType.HasValue) {
+							this.UpdateType(owningWall, newType.Value, false, checkLinks, useSnap);
+						}
 					}
 				}
 			}
-#endif
 			return true;
 		}
 
@@ -574,8 +478,8 @@ namespace Europlan.Common {
 			return this.UpdatePositionAndSize(owningWall, newPosX, newPosY, null, null, null, null, updateLinks, snapEnabled);
 		}
 
-		public bool UpdateRohre(GraphicalWall owningWall, int newRohre, bool anchorStart, bool updateLinks, bool snapEnabled) {
-			return this.UpdatePositionAndSize(owningWall, null, null, newRohre, anchorStart, null, null, updateLinks, snapEnabled);
+		public bool UpdateRegisterCount(GraphicalWall owningWall, int newRegisterCount, bool anchorStart, bool updateLinks, bool snapEnabled) {
+			return this.UpdatePositionAndSize(owningWall, null, null, newRegisterCount, anchorStart, null, null, updateLinks, snapEnabled);
 		}
 
 		public bool UpdateType(GraphicalWall owningWall, HithermCompactRegister.HithermCompactRegisterTypeEnum newType, bool anchorStart, bool updateLinks, bool snapEnabled) {
@@ -643,7 +547,7 @@ namespace Europlan.Common {
 						if (this.register.IsParapet) {
 							this.register.GraphPosX = this.register.GraphPosX + (oldBreite - this.Width);
 						} else {
-							this.register.GraphPosY = this.register.GraphPosY + (oldHoehe - this.Width);
+							this.register.GraphPosY = this.register.GraphPosY + (oldHoehe - this.Height);
 						}
 					}
 				}
@@ -687,7 +591,7 @@ namespace Europlan.Common {
 		}
 
 		public double Width {
-			get { return this.register.RegisterBreite / 10.0; }
+			get { return this.register.RegisterBreite * this.register.RegisterCount / 10.0; }
 		}
 
 		private double bakX, bakY;
