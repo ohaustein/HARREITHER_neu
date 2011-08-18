@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
 	[XmlInclude(typeof(GraphicalHithermVerbindung))]
+	[XmlInclude(typeof(GraphicalHithermCompactVerbindung))]
 	public abstract class GraphicalWallVerbindung : IGraphicalWallObject {
 
 		public abstract List<Point2D> Vertices {
@@ -77,9 +78,9 @@ namespace Europlan.Common {
 
 		public abstract IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
 
-		public abstract Polygon2D GetObjectBorders(double xOffset, double yOffset);
+		public abstract List<Polygon2D> GetObjectBorders(double xOffset, double yOffset);
 
-		public abstract bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders);
+		public abstract bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders);
 
 		public abstract List<Anchor> GetAnchors(double scale);
 
@@ -91,279 +92,6 @@ namespace Europlan.Common {
 
 		public abstract bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
 		#endregion
-
-/*		public abstract void UpdateStartPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall, bool checkValidity);
-
-		public void UpdateStartPoint(GraphicalHithermCompactRegisterWrapper register, GraphicalWall owningWall, bool checkValidity) {
-#if BLUB
-			if (this.vertices == null || this.vertices.Count < 2) {
-				return;
-			}
-			bool vertexAdded = false;
-			if (this.vertices.Count == 2) {
-				this.vertices.Insert(0, new Point2D(this.vertices[0]));
-				vertexAdded = true;
-			}
-			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall) * 100;
-			if (!offset.HasValue) {
-				return;
-			}
-			Point2D newStartPoint = register.GetOutputConnectionPoint(offset.Value.X, offset.Value.Y, 0);
-			Point2D newStartPoint5 = register.GetOutputConnectionPoint(offset.Value.X, offset.Value.Y, 5);
-			Point2D firstPoint = this.vertices[0];
-			Point2D secondPoint = this.vertices[1];
-			Vector2D delta = new Segment2D(secondPoint, firstPoint).GetDelta();
-			bool moved = false;
-			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
-				//this.vertices.Insert(0, new Point2D(this.vertices[0]));
-				firstPoint = this.vertices[0];
-				secondPoint = this.vertices[1];
-				Point2D thirdPoint = this.vertices[2];
-				bool left = secondPoint.X < thirdPoint.X;
-				this.MoveVerticalSegment(0, -firstPoint.X + newStartPoint.X);
-				firstPoint = this.vertices[0];
-				secondPoint = this.vertices[1];
-				thirdPoint = this.vertices[2];
-				if ((register.Register.GraphVorlaufRight && newStartPoint5.Y > secondPoint.Y) ||
-					(!register.Register.GraphVorlaufRight && newStartPoint5.Y > secondPoint.Y)) {
-					double tmpX;
-					if (left && register.Register.GraphVorlaufRight) {
-						tmpX = secondPoint.X + register.Width + 10;
-					} else if (!left && register.Register.GraphVorlaufRight) {
-						tmpX = secondPoint.X - 10;
-					} else if (left && !register.Register.GraphVorlaufRight) {
-						tmpX = secondPoint.X + 10;
-					} else {
-						tmpX = secondPoint.X - register.Width - 10;
-					}
-					this.vertices.RemoveAt(1);
-					this.vertices.Insert(1, new Point2D(tmpX, secondPoint.Y));
-					this.vertices.Insert(1, new Point2D(tmpX, newStartPoint5.Y));
-					this.vertices.Insert(1, new Point2D(newStartPoint5.X, newStartPoint5.Y));
-					this.vertices[0] = newStartPoint;
-				} else {
-					this.vertices[0] = newStartPoint;
-				}
-				moved = true;
-			}
-			if (Math.Abs(delta.Y) <= 0.00001) {
-				firstPoint = this.vertices[0];
-				secondPoint = this.vertices[1];
-				Point2D thirdPoint = this.vertices[2];
-				bool upside = secondPoint.Y < thirdPoint.Y;
-				this.MoveHorizontalSegment(0, -firstPoint.Y + newStartPoint.Y);
-				firstPoint = this.vertices[0];
-				secondPoint = this.vertices[1];
-				thirdPoint = this.vertices[2];
-				if ((!register.Register.GraphVorlaufRight && newStartPoint5.X > secondPoint.X) ||
-					(register.Register.GraphVorlaufRight && newStartPoint5.X < secondPoint.X)) {
-					double tmpY;
-					if (upside) {
-						tmpY = secondPoint.Y + 10;
-					} else {
-						tmpY = secondPoint.Y - register.Height - 10;
-					}
-					this.vertices.RemoveAt(1);
-					this.vertices.Insert(1, new Point2D(secondPoint.X, tmpY));
-					this.vertices.Insert(1, new Point2D(newStartPoint5.X, tmpY));
-					this.vertices.Insert(1, new Point2D(newStartPoint5.X, newStartPoint5.Y));
-					this.vertices[0] = newStartPoint;
-				} else {
-					this.vertices[0] = newStartPoint;
-				}
-				moved = true;
-			}
-			if (!moved) {
-				this.vertices[0] = newStartPoint;
-			}
-			this.Simplify();
-			if (checkValidity) {
-				if (!this.CheckValidity(owningWall, 0, 0)) {
-					this.vertices.Clear();
-				}
-			}
-#endif
-		}
-
-		public void UpdateEndPoint(GraphicalHithermRegisterWrapper register, GraphicalWall owningWall, bool checkValidity) {
-			if (this.vertices == null || this.vertices.Count < 2) {
-				return;
-			}
-			bool vertexAdded = false;
-			if (this.vertices.Count == 2) {
-				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
-				vertexAdded = true;
-			}
-			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall) * 100;
-			if (!offset.HasValue) {
-				return;
-			}
-			Point2D newEndPoint = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 0);
-			Point2D newEndPoint5 = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 5);
-			Point2D lastPoint = this.vertices[this.vertices.Count - 1];
-			Point2D prevLastPoint = this.vertices[this.vertices.Count - 2];
-			Vector2D delta = new Segment2D(prevLastPoint, lastPoint).GetDelta();
-			bool moved = false;
-			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
-				//this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				bool left = prevLastPoint.X < prevPrevLastPoint.X;
-				this.MoveVerticalSegment(this.vertices.Count - 2, -lastPoint.X + newEndPoint.X);
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				if ((!register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y) ||
-					(register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y)) {
-					double tmpX;
-					if (left && register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X + 10;
-					} else if (!left && register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X - register.Width - 10;
-					} else if (left && !register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X + register.Width + 10;
-					} else {
-						tmpX = prevLastPoint.X - 10;
-					}
-					this.vertices.RemoveAt(this.vertices.Count - 2);
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, prevLastPoint.Y));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, newEndPoint5.Y));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X, newEndPoint5.Y));
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				} else {
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				}
-				moved = true;
-			}
-			if (Math.Abs(delta.Y) <= 0.00001) {
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				bool upside = prevLastPoint.Y < prevPrevLastPoint.Y;
-				this.MoveHorizontalSegment(this.vertices.Count - 2, -lastPoint.Y + newEndPoint.Y);
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				if ((register.Register.GraphVorlaufRight && newEndPoint5.X > prevLastPoint.X) ||
-					(!register.Register.GraphVorlaufRight && newEndPoint5.X < prevLastPoint.X)) {
-					double tmpY;
-					if (upside) {
-						tmpY = prevLastPoint.Y + register.Height + 10;
-					} else {
-						tmpY = prevLastPoint.Y - 10;
-					}
-					this.vertices.RemoveAt(this.vertices.Count - 2);
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, tmpY));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, lastPoint.Y));
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				} else {
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				}
-				moved = true;
-			}
-			if (!moved) {
-				this.vertices[this.vertices.Count - 1] = newEndPoint;
-			}
-			this.Simplify();
-			if (checkValidity) {
-				if (!this.CheckValidity(owningWall, 0, 0)) {
-					this.vertices.Clear();
-				}
-			}
-		}
-
-		public void UpdateEndPoint(GraphicalHithermCompactRegisterWrapper register, GraphicalWall owningWall, bool checkValidity) {
-#if BLUB
-			if (this.vertices == null || this.vertices.Count < 2) {
-				return;
-			}
-			bool vertexAdded = false;
-			if (this.vertices.Count == 2) {
-				this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
-				vertexAdded = true;
-			}
-			Nullable<Vector2D> offset = register.Product.AssociatedRoom.GetWallOffset(owningWall) * 100;
-			if (!offset.HasValue) {
-				return;
-			}
-			Point2D newEndPoint = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 0);
-			Point2D newEndPoint5 = register.GetInputConnectionPoint(offset.Value.X, offset.Value.Y, 5);
-			Point2D lastPoint = this.vertices[this.vertices.Count - 1];
-			Point2D prevLastPoint = this.vertices[this.vertices.Count - 2];
-			Vector2D delta = new Segment2D(prevLastPoint, lastPoint).GetDelta();
-			bool moved = false;
-			if (Math.Abs(delta.X) < 0.00001 && Math.Abs(delta.Y) >= 0.00001 && !vertexAdded) {
-				//this.vertices.Insert(this.vertices.Count - 1, new Point2D(this.vertices[this.vertices.Count - 1]));
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				bool left = prevLastPoint.X < prevPrevLastPoint.X;
-				this.MoveVerticalSegment(this.vertices.Count - 2, -lastPoint.X + newEndPoint.X);
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				if ((!register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y) ||
-					(register.Register.GraphVorlaufRight && newEndPoint5.Y < prevLastPoint.Y)) {
-					double tmpX;
-					if (left && register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X + 10;
-					} else if (!left && register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X - register.Width - 10;
-					} else if (left && !register.Register.GraphVorlaufRight) {
-						tmpX = prevLastPoint.X + register.Width + 10;
-					} else {
-						tmpX = prevLastPoint.X - 10;
-					}
-					this.vertices.RemoveAt(this.vertices.Count - 2);
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, prevLastPoint.Y));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(tmpX, newEndPoint5.Y));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(lastPoint.X, newEndPoint5.Y));
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				} else {
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				}
-				moved = true;
-			}
-			if (Math.Abs(delta.Y) <= 0.00001) {
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				Point2D prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				bool upside = prevLastPoint.Y < prevPrevLastPoint.Y;
-				this.MoveHorizontalSegment(this.vertices.Count - 2, -lastPoint.Y + newEndPoint.Y);
-				lastPoint = this.vertices[this.vertices.Count - 1];
-				prevLastPoint = this.vertices[this.vertices.Count - 2];
-				prevPrevLastPoint = this.vertices[this.vertices.Count - 3];
-				if ((register.Register.GraphVorlaufRight && newEndPoint5.X > prevLastPoint.X) ||
-					(!register.Register.GraphVorlaufRight && newEndPoint5.X < prevLastPoint.X)) {
-					double tmpY;
-					if (upside) {
-						tmpY = prevLastPoint.Y + register.Height + 10;
-					} else {
-						tmpY = prevLastPoint.Y - 10;
-					}
-					this.vertices.RemoveAt(this.vertices.Count - 2);
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(prevLastPoint.X, tmpY));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, tmpY));
-					this.vertices.Insert(this.vertices.Count - 1, new Point2D(newEndPoint5.X, lastPoint.Y));
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				} else {
-					this.vertices[this.vertices.Count - 1] = newEndPoint;
-				}
-				moved = true;
-			}
-			if (!moved) {
-				this.vertices[this.vertices.Count - 1] = newEndPoint;
-			}
-			this.Simplify();
-			if (checkValidity) {
-				if (!this.CheckValidity(owningWall, 0, 0)) {
-					this.vertices.Clear();
-				}
-			}
-#endif
-		}*/
 
 		public abstract void MoveVerticalSegment(int segmentIndex, double delta);
 
@@ -415,6 +143,7 @@ namespace Europlan.Common {
 		protected string productGuid = null;
 		protected bool finished = true;
 		protected bool error = false;
+		protected bool isPartOfCompound = false;
 
 		internal GenericGraphicalWallVerbindungImplementation() {
 			this.vertices = new List<Point2D>();
@@ -433,19 +162,18 @@ namespace Europlan.Common {
 			this.product = product;
 		}
 
-		public void FinalizeLoading() {
+		public virtual void FinalizeLoading() {
 			PlannedProduct tmpProduct = this.Product;
 			CircuitType tmpCircuit = this.Circuit;
 			RegisterType tmpRegister = this.End;
 			tmpRegister = this.Start;
 		}
 
-		private static double WIDTH = 2.0;
-
+		protected const double WIDTH = 2.0;
 
 		public override List<Point2D> Vertices {
-		  get { return vertices; }
-		  set { vertices = value; }
+		  get { return this.vertices; }
+		  set { this.vertices = value; }
 		}
 
 		public override void InitializeVertices(IEnumerable<Point2D> vertices) {
@@ -486,8 +214,8 @@ namespace Europlan.Common {
 			get { return false; }
 		}
 
-		private static double arrowWidth = 5.0;
-		private static double arrowHeight = arrowWidth * 1.118;
+		protected const double arrowWidth = 5.0;
+		protected const double arrowHeight = arrowWidth * 1.118;
 
 		public override void PaintObject(Graphics g, Color c, bool error, double scale, bool export) {
 			PointF oldVertex = PointF.Empty;
@@ -499,7 +227,7 @@ namespace Europlan.Common {
 				p = new Pen(new HatchBrush(HatchStyle.DarkDownwardDiagonal, c, Color.Transparent));
 			}
 			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-			foreach (Point2D vertex in vertices) {
+			foreach (Point2D vertex in this.Vertices) {
 				newVertex = new PointF((float)vertex.X, (float)vertex.Y);
 				if (first) {
 					first = false;
@@ -510,12 +238,12 @@ namespace Europlan.Common {
 				}
 				oldVertex = newVertex;
 			}
-			if (finished && this.vertices != null && this.vertices.Count > 0) {
-				if (!this.HasStart && this.vertices[0].Y == 0) {
+			if (!isPartOfCompound && finished && this.Vertices != null && this.Vertices.Count > 0) {
+				if (!this.HasStart && this.Vertices[0].Y == 0) {
 					PointF[] arrow = new PointF[3];
-					arrow[0] = new PointF((float)(this.vertices[0].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
-					arrow[1] = new PointF((float)(this.vertices[0].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
-					arrow[2] = new PointF((float)(this.vertices[0].X), (float)(-arrowHeight / 2.0));
+					arrow[0] = new PointF((float)(this.Vertices[0].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[1] = new PointF((float)(this.Vertices[0].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[2] = new PointF((float)(this.Vertices[0].X), (float)(-arrowHeight / 2.0));
 					g.FillPolygon(Brushes.Red, arrow);
 					g.DrawPolygon(new Pen(Color.DarkRed, (float)(1 / scale)), arrow);
 
@@ -525,7 +253,7 @@ namespace Europlan.Common {
 						SizeF size = g.MeasureString(label, font);
 						Matrix oldTransform = g.Transform;
 						Matrix textTransform = oldTransform.Clone();
-						float x = (float)(this.vertices[0].X - size.Width / 2.0);
+						float x = (float)(this.Vertices[0].X - size.Width / 2.0);
 						float y = (float)(-arrowHeight * 0.75);
 						textTransform.Translate(0, -y);
 						textTransform.Scale(1, -1);
@@ -534,11 +262,11 @@ namespace Europlan.Common {
 						g.DrawString(label, font, Brushes.DarkRed, x, -y);
 						g.Transform = oldTransform;
 					}
-				} else if (!this.HasEnd && this.vertices[this.vertices.Count - 1].Y == 0) {
+				} else if (!this.HasEnd && this.Vertices[this.Vertices.Count - 1].Y == 0) {
 					PointF[] arrow = new PointF[3];
-					arrow[0] = new PointF((float)(this.vertices[this.vertices.Count - 1].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
-					arrow[1] = new PointF((float)(this.vertices[this.vertices.Count - 1].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
-					arrow[2] = new PointF((float)(this.vertices[this.vertices.Count - 1].X), (float)(-arrowHeight / 2.0));
+					arrow[0] = new PointF((float)(this.Vertices[this.Vertices.Count - 1].X - arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[1] = new PointF((float)(this.Vertices[this.Vertices.Count - 1].X + arrowWidth / 2.0), (float)(arrowHeight / 2.0));
+					arrow[2] = new PointF((float)(this.Vertices[this.Vertices.Count - 1].X), (float)(-arrowHeight / 2.0));
 					g.FillPolygon(Brushes.Blue, arrow);
 					g.DrawPolygon(new Pen(Color.DarkBlue, (float)(1 / scale)), arrow);
 
@@ -548,7 +276,7 @@ namespace Europlan.Common {
 						SizeF size = g.MeasureString(label, font);
 						Matrix oldTransform = g.Transform;
 						Matrix textTransform = oldTransform.Clone();
-						float x = (float)(this.vertices[this.vertices.Count - 1].X - size.Width / 2.0);
+						float x = (float)(this.Vertices[this.Vertices.Count - 1].X - size.Width / 2.0);
 						float y = (float)(-arrowHeight * 0.75);
 						textTransform.Translate(0, -y);
 						textTransform.Scale(1, -1);
@@ -570,7 +298,7 @@ namespace Europlan.Common {
 			Point2D oldVertex = new Point2D();
 			bool first = false;
 			double bestDist = double.MaxValue;
-			foreach (Point2D newVertex in this.vertices) {
+			foreach (Point2D newVertex in this.Vertices) {
 				if (first) {
 					first = false;
 				} else {
@@ -620,9 +348,9 @@ namespace Europlan.Common {
 
 		public override double GetLength() {
 			double length = 0;
-			if (this.vertices.Count > 1) {
-				for (int i = 1; i < this.vertices.Count; i++) {
-					length += (this.vertices[i - 1] - this.vertices[i]).GetLength();
+			if (this.Vertices.Count > 1) {
+				for (int i = 1; i < this.Vertices.Count; i++) {
+					length += (this.Vertices[i - 1] - this.Vertices[i]).GetLength();
 				}
 			}
 			if (length < 0) {
@@ -647,7 +375,7 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public override Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+		public override List<Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			Nullable<Point2D> prevVertex = null;
 			Nullable<Line2D> prevBorderLeft = null;
 			Nullable<Line2D> prevBorderRight = null;
@@ -659,7 +387,7 @@ namespace Europlan.Common {
 			List<Point2D> leftPoints = new List<Point2D>();
 			List<Point2D> rightPoints = new List<Point2D>();
 			Nullable<Point2D> leftPoint, rightPoint;
-			foreach (Point2D vertex in this.vertices) {
+			foreach (Point2D vertex in this.Vertices) {
 				if (prevVertex.HasValue && vertex != prevVertex) {
 					vector = (vertex - prevVertex.Value);
 					vector.Normalize();
@@ -697,12 +425,15 @@ namespace Europlan.Common {
 			leftPoints.Reverse();
 			Polygon2D border = new Polygon2D(leftPoints);
 			border.AddRange(rightPoints);
-			return border;
+			if (border.IsClockwise()) {
+				border.Reverse();
+			}
+			return new List<Polygon2D>(new Polygon2D[] { border });
 		}
 
-		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D linkBorders = this.GetObjectBorders(0, 0);
-			if (linkBorders.IsClockwise()) {
+		public override bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
+			List<Polygon2D> linkBorders = this.GetObjectBorders(0, 0);
+			/*if (linkBorders.IsClockwise()) {
 				linkBorders.Reverse();
 			}
 			if (polygon.IsClockwise()) {
@@ -711,9 +442,9 @@ namespace Europlan.Common {
 			List<Polygon2D> list1 = new List<Polygon2D>();
 			list1.Add(polygon);
 			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(linkBorders);
+			list2.Add(linkBorders);*/
 			try {
-				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+				return Polygon2D.GetIntersection(polygon, linkBorders).Count > 0;
 			} catch {
 				return false;
 			}
@@ -739,7 +470,7 @@ namespace Europlan.Common {
 					} else {
 						// TODO
 					}
-					if (type != AnchorTypeEnum.ANCHOR_NONE && i > 0 && i < this.vertices.Count - 2) {
+					if (type != AnchorTypeEnum.ANCHOR_NONE && (i > 0 || this.Start == null) && (i < this.vertices.Count - 2 || this.End == null)) {
 						anchors.Add(new InvisibleSegmentAnchor(prev.Value, vertex, i, 4.0, type, this));
 					}
 					i++;
@@ -751,7 +482,7 @@ namespace Europlan.Common {
 
 		public override bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
 			Room room = this.Product.Product.AssociatedRoom;
-			Polygon2D linkBorders = this.GetObjectBorders(offsetX, offsetY);
+			List<Polygon2D> linkBorders = this.GetObjectBorders(offsetX, offsetY);
 			if (room.CollisionTest(linkBorders)) {
 				return false;
 			}
@@ -778,7 +509,7 @@ namespace Europlan.Common {
 			if (this.Product.Product is HithermProduct) {
 				foreach (HithermCircuit hc in this.Product.Product.PlannedCircuits) {
 					foreach (GraphicalHithermVerbindung link in hc.Links) {
-						if (!link.Error && !link.Equals(this) && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
+						if (!link.Error && !link.EqualsOrIsPart(this) && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
 							return false;
 						}
 					}
@@ -786,7 +517,7 @@ namespace Europlan.Common {
 			} else if (this.Product.Product is HithermCompactProduct) {
 				foreach (HithermCompactCircuit hc in this.Product.Product.PlannedCircuits) {
 					foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
-						if (!link.Error && !link.Equals(this) && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
+						if (!link.Error && !link.EqualsOrIsPart(this) && link.CollisionTest(linkBorders, offsetX, offsetY, true)) {
 							return false;
 						}
 					}
@@ -795,6 +526,10 @@ namespace Europlan.Common {
 				throw new Exception("Dieses Produkt wird noch nicht unterstützt");
 			}
 			return true;
+		}
+
+		public virtual bool EqualsOrIsPart(object obj) {
+			return this.Equals(obj);
 		}
 
 		private Nullable<Point2D> startDrag = null;
@@ -838,7 +573,7 @@ namespace Europlan.Common {
 		}
 		#endregion
 
-		public void UpdateStartPoint(WrapperType register, GraphicalWall owningWall, bool checkValidity) {
+		public virtual void UpdateStartPoint(WrapperType register, GraphicalWall owningWall, bool checkValidity) {
 			if (this.vertices == null || this.vertices.Count < 2) {
 				return;
 			}
@@ -1028,7 +763,7 @@ namespace Europlan.Common {
 #endif
 		}*/
 
-		public void UpdateEndPoint(WrapperType register, GraphicalWall owningWall, bool checkValidity) {
+		public virtual void UpdateEndPoint(WrapperType register, GraphicalWall owningWall, bool checkValidity) {
 			if (this.vertices == null || this.vertices.Count < 2) {
 				return;
 			}
@@ -1276,6 +1011,12 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
+		public bool IsPartOfCompound {
+			get { return this.isPartOfCompound; }
+			set { this.isPartOfCompound = value; }
+		}
+
+		[XmlIgnore]
 		public override bool Error {
 			get { return this.error; }
 			set { this.error = value; }
@@ -1306,7 +1047,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public RegisterType Start {
+		public virtual RegisterType Start {
 			get {
 				if (this.startIndex >= 0) {
 					if (this.Circuit is CircuitType) {
@@ -1320,7 +1061,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public RegisterType End {
+		public virtual RegisterType End {
 			get {
 				if (this.endIndex >= 0) {
 					if (this.Circuit is CircuitType) {
@@ -1378,7 +1119,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public CircuitType Circuit {
+		public virtual CircuitType Circuit {
 			get {
 				if (this.circuitIndex >= 0) {
 					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex] as CircuitType;

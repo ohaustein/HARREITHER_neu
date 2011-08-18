@@ -79,7 +79,7 @@ namespace Europlan.Common {
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export);
 		public abstract void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool error, bool export);
 		public abstract IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset);
-		public abstract WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset);
+		public abstract List<WW.Math.Geometry.Polygon2D> GetObjectBorders(double xOffset, double yOffset);
 		public abstract bool StartDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
 		public abstract bool MoveDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
 		public abstract bool EndDrag(Anchor anchor, WW.Math.Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
@@ -316,7 +316,7 @@ namespace Europlan.Common {
 
 
 		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
-			Polygon2D borders = this.GetObjectBorders(offsetX, offsetY);
+			List<Polygon2D> borders = this.GetObjectBorders(offsetX, offsetY);
 			if (this.Width < 10 || this.Height < 10) {
 				return false;
 			}
@@ -326,15 +326,15 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D door;
+		public bool CollisionTest(IList<WW.Math.Geometry.Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
+			List<Polygon2D> door;
 			if (!ignoreBorders) {
 				door = GetOutsideBorder(xOffset, yOffset);
 			} else {
 				door = GetObjectBorders(xOffset, yOffset);
 			}
 
-			if (polygon.IsClockwise()) {
+			/*if (polygon.IsClockwise()) {
 				polygon.Reverse();
 			}
 			if (door.IsClockwise()) {
@@ -343,10 +343,10 @@ namespace Europlan.Common {
 			List<Polygon2D> list1 = new List<Polygon2D>();
 			list1.Add(polygon);
 			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(door);
+			list2.Add(door);*/
 
 			try {
-				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+				return Polygon2D.GetIntersection(polygon, door).Count > 0;
 #if DEBUG
 			} catch (Exception e) {
 				Console.WriteLine(e);
@@ -359,7 +359,7 @@ namespace Europlan.Common {
 #endif
 		}
 
-		public abstract Polygon2D GetOutsideBorder(double xOffset, double yOffset);
+		public abstract List<Polygon2D> GetOutsideBorder(double xOffset, double yOffset);
 
 		protected Polygon2D GetOutsideBorder(Polygon2D border) {
 			Polygon2D usableArea = new Polygon2D(border);

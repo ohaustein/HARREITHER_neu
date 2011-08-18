@@ -72,4 +72,18 @@ namespace Europlan.Common {
 			get;
 		}
 	}
+
+	public interface IWallVerbindungCompound<VerbindungType>
+			where VerbindungType : Europlan.Common.GraphicalWallVerbindung {
+
+		VerbindungType StartLink {
+			get;
+			set;
+		}
+
+		VerbindungType EndLink {
+			get;
+			set;
+		}
+	}
 }

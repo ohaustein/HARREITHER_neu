@@ -177,7 +177,7 @@ namespace Europlan.Common {
 		public double YPos {
 			get { return this.yPos; }
 			set {
-				double maxY = -this.Height / this.Scale + 10 + 10 / this.Scale;
+				double maxY = -this.Height / this.Scale + 10 + 10 / this.Scale + 5;
 				double minY = -TotalHeight * 100 - 10;
 				if (maxY < minY) {
 					// center
@@ -233,7 +233,7 @@ namespace Europlan.Common {
 			if (this.newObstacle != null && this.newObstacleWall != null) {
 				Vector2D offset = this.room.GetWallOffset(this.newObstacleWall).Value * 100;
 				List<PointF> borderPoints = new List<PointF>();
-				foreach (Point2D vertex in this.newObstacleWall.GetObjectBorders(offset.X, offset.Y)) {
+				foreach (Point2D vertex in this.newObstacleWall.GetObjectBorders(offset.X, offset.Y)[0]) {
 					borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 				}
 
@@ -255,7 +255,7 @@ namespace Europlan.Common {
 				if (this.selectedWall != null) {
 					Vector2D offset = this.room.GetWallOffset(this.selectedWall).Value * 100;
 					List<PointF> borderPoints = new List<PointF>();
-					foreach (Point2D vertex in this.selectedWall.GetObjectBorders(offset.X, offset.Y)) {
+					foreach (Point2D vertex in this.selectedWall.GetObjectBorders(offset.X, offset.Y)[0]) {
 						borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
 					}
 

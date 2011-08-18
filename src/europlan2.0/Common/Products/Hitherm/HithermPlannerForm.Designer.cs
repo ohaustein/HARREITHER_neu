@@ -55,6 +55,7 @@ namespace Europlan.Common {
 			this.btnRegisterHorizontal = new System.Windows.Forms.ToolStripButton();
 			this.btnConnectionManual = new System.Windows.Forms.ToolStripButton();
 			this.btnConnectionAuto = new System.Windows.Forms.ToolStripButton();
+			this.btnConnectionInFloor = new System.Windows.Forms.ToolStripButton();
 			this.seperatorConnections = new System.Windows.Forms.ToolStripSeparator();
 			this.btnConnectionAlign = new System.Windows.Forms.ToolStripButton();
 			this.btnConnectionDirect = new System.Windows.Forms.ToolStripButton();
@@ -432,6 +433,7 @@ namespace Europlan.Common {
             this.btnRegisterHorizontal,
             this.btnConnectionManual,
             this.btnConnectionAuto,
+            this.btnConnectionInFloor,
             this.seperatorConnections,
             this.btnConnectionAlign,
             this.btnConnectionDirect,
@@ -548,6 +550,17 @@ namespace Europlan.Common {
 			this.btnConnectionAuto.Text = "Automatisch verbinden";
 			this.btnConnectionAuto.Visible = false;
 			this.btnConnectionAuto.Click += new System.EventHandler(this.btnConnectionAuto_Click);
+			// 
+			// btnConnectionInFloor
+			// 
+			this.btnConnectionInFloor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnConnectionInFloor.Image = ((System.Drawing.Image)(resources.GetObject("btnConnectionInFloor.Image")));
+			this.btnConnectionInFloor.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnConnectionInFloor.Name = "btnConnectionInFloor";
+			this.btnConnectionInFloor.Size = new System.Drawing.Size(23, 20);
+			this.btnConnectionInFloor.Text = "Heizkreise verbinden";
+			this.btnConnectionInFloor.Visible = false;
+			this.btnConnectionInFloor.Click += new System.EventHandler(this.btnConnectionInFloor_Click);
 			// 
 			// seperatorConnections
 			// 
@@ -2672,5 +2685,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSchraegeLeft;
 		private System.Windows.Forms.ToolStripButton btnSchraegeRight;
+		private System.Windows.Forms.ToolStripButton btnConnectionInFloor;
 	}
 }

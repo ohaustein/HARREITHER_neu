@@ -185,11 +185,11 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+		public List<WW.Math.Geometry.Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
+		public bool CollisionTest(IList<WW.Math.Geometry.Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			// nothing to do as the collision testing is handled by the wall
 			return false;
 		}

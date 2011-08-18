@@ -1146,6 +1146,18 @@ namespace Europlan.Common {
 					}
 					foreach (GraphicalHithermVerbindung link in linksToDelete) {
 						hc.Links.Remove(link);
+						if (link is GraphicalHithermUnderfloorVerbindung) {
+							if (link.Start != register) {
+								GraphicalHithermVerbindung subLink = (link as GraphicalHithermUnderfloorVerbindung).StartLink;
+								subLink.IsPartOfCompound = false;
+								hc.Links.Add(subLink);
+							}
+							if (link.End != register) {
+								GraphicalHithermVerbindung subLink = (link as GraphicalHithermUnderfloorVerbindung).EndLink;
+								subLink.IsPartOfCompound = false;
+								hc.Links.Add(subLink);
+							}
+						}
 					}
 				}
 				this.registerCircuits.Remove(register);

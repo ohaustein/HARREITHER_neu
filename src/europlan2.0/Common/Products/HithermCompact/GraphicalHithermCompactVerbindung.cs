@@ -19,7 +19,7 @@ namespace Europlan.Common {
 		}
 
 		public GraphicalHithermCompactVerbindung(HithermCompactRegister start, HithermCompactRegister end, IEnumerable<Point2D> vertices, HithermCompactCircuit circuit, PlannedProduct product)
-			: base (start, end, vertices, circuit, product) {
+			: base(start, end, vertices, circuit, product) {
 		}
 
 		/*private HithermCompactRegister start;

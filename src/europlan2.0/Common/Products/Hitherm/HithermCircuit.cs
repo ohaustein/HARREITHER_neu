@@ -474,13 +474,13 @@ namespace Europlan.Common {
 			bool vorlaufConnected = false;
 			bool ruecklaufConnected = false;
 			foreach (GraphicalHithermVerbindung link in this.Links) {
-				if (link.Start == null) {
+				if (!link.HasStart) {
 					ruecklaufConnected = true;
 					if (vorlaufConnected) {
 						break;
 					}
 				}
-				if (link.End == null) {
+				if (!link.HasEnd) {
 					vorlaufConnected = true;
 					if (ruecklaufConnected) {
 						break;

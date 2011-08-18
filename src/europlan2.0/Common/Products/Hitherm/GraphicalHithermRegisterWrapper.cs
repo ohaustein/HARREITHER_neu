@@ -96,26 +96,26 @@ namespace Europlan.Common {
 		}
 
 		public override bool HitTest(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
-			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
+			return this.GetObjectBorders(xOffset, yOffset)[0].IsInside(planPoint);
 		}
 
-		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+		public override List<WW.Math.Geometry.Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			try {
 				Polygon2D borders = new Polygon2D();
 				if (this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterBreiteForDrawing, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterHoehe));
 				} else {
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
-					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterHoehe, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterHoehe, yOffset + this.register.GraphPosY));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.register.RegisterHoehe, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
+					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.register.RegisterBreiteForDrawing));
 				}
-				return borders;
+				return new List<Polygon2D>(new Polygon2D[] { borders });
 			} catch (Exception e) {
-				return new Polygon2D();
+				return new List<Polygon2D>();
 			}
 		}
 
@@ -379,9 +379,9 @@ namespace Europlan.Common {
 			return new PossibleHithermRegisterConnection(this.GetInputConnectionPoint(xOffset, yOffset, 0), GetInputConnectionArea(xOffset, yOffset), true, false, product, circuit, this.register, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL, this.register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL ? new Vector2D(this.register.GraphVorlaufRight ? 5 : -5, 0) : new Vector2D(0, -5));
 		}
 
-		public override bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
-			Polygon2D register = GetObjectBorders(xOffset, yOffset);
-			if (polygon.IsClockwise()) {
+		public override bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
+			List<Polygon2D> register = GetObjectBorders(xOffset, yOffset);
+			/*if (polygon.IsClockwise()) {
 				polygon.Reverse();
 			}
 			if (register.IsClockwise()) {
@@ -390,10 +390,10 @@ namespace Europlan.Common {
 			List<Polygon2D> list1 = new List<Polygon2D>();
 			list1.Add(polygon);
 			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(register);
+			list2.Add(register);*/
 
 			try {
-				return Polygon2D.GetIntersection(list1, list2).Count > 0;
+				return Polygon2D.GetIntersection(polygon, register).Count > 0;
 			} catch {
 				return true;
 			}
@@ -585,7 +585,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
-			Polygon2D registerBorders = this.GetObjectBorders(offsetX, offsetY);
+			List<Polygon2D> registerBorders = this.GetObjectBorders(offsetX, offsetY);
 			if (owningWall.CollisionTest(registerBorders, offsetX, offsetY, false)) {
 				return false;
 			} else {

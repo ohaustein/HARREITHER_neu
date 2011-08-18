@@ -70,7 +70,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool HitTest(Point2D planPoint, double xOffset, double yOffset) {
-			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
+			return this.GetObjectBorders(xOffset, yOffset)[0].IsInside(planPoint);
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
@@ -85,8 +85,8 @@ namespace Europlan.Common {
 
 			Region oldClip = g.Clip;
 			Region baseClip = new Region(oldClip.GetRegionData());
-			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset);
-			Polygon2D outsideBorder = GetOutsideBorder(xOffset, yOffset);
+			Polygon2D doorArea = this.GetObjectBorders(xOffset, yOffset)[0];
+			Polygon2D outsideBorder = GetOutsideBorder(xOffset, yOffset)[0];
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> doorPoints = new List<PointF>();
@@ -135,13 +135,13 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public override WW.Math.Geometry.Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+		public override List<WW.Math.Geometry.Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			Polygon2D doorBorder = new Polygon2D();
 			doorBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY)); // left bottom
-			doorBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
-			doorBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
 			doorBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY)); // right bottom
-			return doorBorder;
+			doorBorder.Add(new Point2D(xOffset + graphPosX + width, yOffset + graphPosY + height)); // right top
+			doorBorder.Add(new Point2D(xOffset + graphPosX, yOffset + graphPosY + height)); // left top
+			return new List<Polygon2D>(new Polygon2D[] { doorBorder });
 		}
 
 		private Nullable<Point2D> startDrag = null;
@@ -231,14 +231,14 @@ namespace Europlan.Common {
 			Height = bakHeight;
 		}
 
-		public override Polygon2D GetOutsideBorder(double xOffset, double yOffset) {
+		public override List<Polygon2D> GetOutsideBorder(double xOffset, double yOffset) {
 			Polygon2D doorBorder = new Polygon2D();
 			double dist = this.BorderDistance * 100;
 			doorBorder.Add(new Point2D(xOffset + graphPosX - dist, yOffset + graphPosY)); // left bottom
-			doorBorder.Add(new Point2D(xOffset + graphPosX - dist, yOffset + graphPosY + height + dist)); // left top
-			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY + height + dist)); // right top
 			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY)); // right bottom
-			return doorBorder;
+			doorBorder.Add(new Point2D(xOffset + graphPosX + width + dist, yOffset + graphPosY + height + dist)); // right top
+			doorBorder.Add(new Point2D(xOffset + graphPosX - dist, yOffset + graphPosY + height + dist)); // left top
+			return new List<Polygon2D>(new Polygon2D[] { doorBorder });
 		}
 
 		public override bool SnapToHelplines(List<double> helplines, bool snapTop, bool snapBottom) {

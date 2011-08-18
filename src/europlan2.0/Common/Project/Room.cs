@@ -708,7 +708,7 @@ namespace Europlan.Common {
 				GraphicalWall wall = w;
 				while (wall != null) {
 					Vector2D offset = this.GetWallOffset(wall).Value * 100;
-					WW.Math.Geometry.Polygon2D wallBorder = wall.GetObjectBorders(offset.X, offset.Y);
+					WW.Math.Geometry.Polygon2D wallBorder = wall.GetObjectBorders(offset.X, offset.Y)[0];
 					if (wallBorder.IsClockwise()) {
 						wallBorder.Reverse();
 					}
@@ -725,18 +725,18 @@ namespace Europlan.Common {
 			return result;
 		}
 
-		public bool CollisionTest(WW.Math.Geometry.Polygon2D polygon) {
-			if (polygon == null || polygon.Count < 1) {
+		public bool CollisionTest(IList<WW.Math.Geometry.Polygon2D> polygon) {
+			if (polygon == null || polygon.Count < 1 || polygon[0].Count < 1) {
 				return false;
 			}
 			List<WW.Math.Geometry.Polygon2D> walls = this.GetTotalWallsArea();
 			List<WW.Math.Geometry.Polygon2D> polyList = new List<WW.Math.Geometry.Polygon2D>();
-			if (polygon.IsClockwise()) {
+			/*if (polygon.IsClockwise()) {
 				polygon.Reverse();
 			}
-			polyList.Add(polygon);
+			polyList.Add(polygon);*/
 			try {
-				List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polyList, walls);
+				List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polygon, walls);
 				return result != null && result.Count > 0;
 			} catch (Exception e) {
 				return true;
@@ -837,7 +837,7 @@ namespace Europlan.Common {
 			}
 			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
 			foreach (Wrapper register in owningWall.Registers) {
-				WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
+				List<WW.Math.Geometry.Polygon2D> registerBorders = register.GetObjectBorders(offset.X, offset.Y);
 				register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
 				if (register.Error) {
 					Circuit c = product.GetCircuitForRegister(register.Register);
@@ -869,12 +869,18 @@ namespace Europlan.Common {
 				foreach (Circuit c in product.PlannedCircuits) {
 					foreach (Verbindung link in c.Links) {
 						link.Error = false;
+						if (link is IWallVerbindungCompound<Verbindung>) {
+							Verbindung subLink = (link as IWallVerbindungCompound<Verbindung>).StartLink;
+							subLink.Error = false;
+							subLink = (link as IWallVerbindungCompound<Verbindung>).EndLink;
+							subLink.Error = false;
+						}
 					}
 				}
 			}
 			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-			WW.Math.Geometry.Polygon2D objBorder = obstacle.GetObjectBorders(offset.X, offset.Y);
-			WW.Math.Geometry.Polygon2D unsableBorder = obstacle.GetOutsideBorder(offset.X, offset.Y);
+			List<WW.Math.Geometry.Polygon2D> objBorder = obstacle.GetObjectBorders(offset.X, offset.Y);
+			List<WW.Math.Geometry.Polygon2D> unsableBorder = obstacle.GetOutsideBorder(offset.X, offset.Y);
 			foreach (Wrapper register in owningWall.Registers) {
 				register.Error = register.CollisionTest(unsableBorder, offset.X, offset.Y, false);
 				if (register.Error) {
@@ -882,16 +888,28 @@ namespace Europlan.Common {
 					Verbindung link = c.GetInputLink(register.Register);
 					if (link != null) {
 						link.Error = true;
+						if (link is IWallVerbindungCompound<Verbindung>) {
+							(link as IWallVerbindungCompound<Verbindung>).EndLink.Error = true;
+						}
 					}
 					link = c.GetOutputLink(register.Register);
 					if (link != null) {
 						link.Error = true;
+						if (link is IWallVerbindungCompound<Verbindung>) {
+							(link as IWallVerbindungCompound<Verbindung>).StartLink.Error = true;
+						}
 					}
 				}
 			}
 			foreach (Circuit c in product.PlannedCircuits) {
 				foreach (Verbindung link in c.Links) {
 					link.Error = link.Error || link.CollisionTest(objBorder, 0, 0, true);
+					if (link is IWallVerbindungCompound<Verbindung>) {
+						Verbindung subLink = (link as IWallVerbindungCompound<Verbindung>).StartLink;
+						subLink.Error = subLink.Error || subLink.CollisionTest(objBorder, 0, 0, true);
+						subLink = (link as IWallVerbindungCompound<Verbindung>).EndLink;
+						subLink.Error = subLink.Error || subLink.CollisionTest(objBorder, 0, 0, true);
+					}
 				}
 			}
 		}
@@ -905,7 +923,7 @@ namespace Europlan.Common {
 				where Verbindung : Europlan.Common.GraphicalWallVerbindung {
 
 			Vector2D offset = this.GetWallOffset(owningWall).Value * 100.0;
-			WW.Math.Geometry.Polygon2D poly = register.GetObjectBorders(offset.X, offset.Y);
+			List<WW.Math.Geometry.Polygon2D> poly = register.GetObjectBorders(offset.X, offset.Y);
 			foreach (Circuit c in product.PlannedCircuits) {
 				foreach (Verbindung link in c.Links) {
 					link.Error = link.CollisionTest(poly, 0, 0, false);
@@ -929,7 +947,7 @@ namespace Europlan.Common {
 			}
 			Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
 			foreach (Wrapper register in owningWall.Registers) {
-				WW.Math.Geometry.Polygon2D registerBorders = register.GetObjectBorders(offset.X, offset.Y);
+				List<WW.Math.Geometry.Polygon2D> registerBorders = register.GetObjectBorders(offset.X, offset.Y);
 				register.Error = owningWall.CollisionTest(registerBorders, offset.X, offset.Y, false);
 				if (register.Error) {
 					Circuit c = product.GetCircuitForRegister(register.Register);
@@ -962,7 +980,7 @@ namespace Europlan.Common {
 				}
 				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
 					Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-					WW.Math.Geometry.Polygon2D obstacleBorders = obstacle.GetObjectBorders(offset.X, offset.Y);
+					List<WW.Math.Geometry.Polygon2D> obstacleBorders = obstacle.GetObjectBorders(offset.X, offset.Y);
 					obstacle.Error = owningWall.CollisionTest(obstacleBorders, offset.X, offset.Y, true);
 				}
 				if (owningWall.DachSchraege != null) {
@@ -996,7 +1014,7 @@ namespace Europlan.Common {
 				}
 				foreach (GraphicalWallObstacle obstacle in owningWall.Obstacles) {
 					Vector2D offset = this.GetWallOffset(owningWall).Value * 100;
-					WW.Math.Geometry.Polygon2D obstacleBorders = obstacle.GetObjectBorders(offset.X, offset.Y);
+					List<WW.Math.Geometry.Polygon2D> obstacleBorders = obstacle.GetObjectBorders(offset.X, offset.Y);
 					obstacle.Error = owningWall.CollisionTest(obstacleBorders, offset.X, offset.Y, true);
 				}
 				if (owningWall.DachSchraege != null) {
@@ -1013,6 +1031,12 @@ namespace Europlan.Common {
 					foreach (HithermCircuit hc in hp.PlannedCircuits) {
 						foreach (GraphicalHithermVerbindung link in hc.Links) {
 							link.Error = false;
+							if (link is IWallVerbindungCompound<GraphicalHithermVerbindung>) {
+								GraphicalHithermVerbindung subLink = ((IWallVerbindungCompound<GraphicalHithermVerbindung>)link).StartLink;
+								subLink.Error = false;
+								subLink = ((IWallVerbindungCompound<GraphicalHithermVerbindung>)link).EndLink;
+								subLink.Error = false;
+							}
 						}
 					}
 				} else if (pp.Product is HithermCompactProduct) {
@@ -1020,6 +1044,12 @@ namespace Europlan.Common {
 					foreach (HithermCompactCircuit hc in hp.PlannedCircuits) {
 						foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
 							link.Error = false;
+							if (link is IWallVerbindungCompound<GraphicalHithermCompactVerbindung>) {
+								GraphicalHithermCompactVerbindung subLink = ((IWallVerbindungCompound<GraphicalHithermCompactVerbindung>)link).StartLink;
+								subLink.Error = false;
+								subLink = ((IWallVerbindungCompound<GraphicalHithermCompactVerbindung>)link).EndLink;
+								subLink.Error = false;
+							}
 						}
 					}
 				}
@@ -1097,6 +1127,19 @@ namespace Europlan.Common {
 					foreach (List<GraphicalHithermVerbindung> links in linksToDelete.Values) {
 						foreach (GraphicalHithermVerbindung link in links) {
 							if (link.Start != null && link.End != null) {
+								if (link is IWallVerbindungCompound<GraphicalHithermVerbindung>) {
+									HithermCircuit c = hp.GetCircuitForRegister(link.Start);
+									GraphicalHithermVerbindung subLink = ((IWallVerbindungCompound<GraphicalHithermVerbindung>)link).StartLink;
+									if (!subLink.Error) {
+										subLink.IsPartOfCompound = false;
+										c.Links.Add(subLink);
+									}
+									subLink = ((IWallVerbindungCompound<GraphicalHithermVerbindung>)link).EndLink;
+									if (!subLink.Error) {
+										subLink.IsPartOfCompound = false;
+										c.Links.Add(subLink);
+									}
+								}
 								hp.MoveRegisterToCircuit(link.End, hp.GetNewHkId());
 								hp.CorrectCircuitIds();
 							}
@@ -1125,6 +1168,19 @@ namespace Europlan.Common {
 					foreach (List<GraphicalHithermCompactVerbindung> links in linksToDelete.Values) {
 						foreach (GraphicalHithermCompactVerbindung link in links) {
 							if (link.Start != null && link.End != null) {
+								if (link is IWallVerbindungCompound<GraphicalHithermCompactVerbindung>) {
+									HithermCompactCircuit c = hp.GetCircuitForRegister(link.Start);
+									GraphicalHithermCompactVerbindung subLink = ((IWallVerbindungCompound<GraphicalHithermCompactVerbindung>)link).StartLink;
+									if (!subLink.Error) {
+										subLink.IsPartOfCompound = false;
+										c.Links.Add(subLink);
+									}
+									subLink = ((IWallVerbindungCompound<GraphicalHithermCompactVerbindung>)link).EndLink;
+									if (!subLink.Error) {
+										subLink.IsPartOfCompound = false;
+										c.Links.Add(subLink);
+									}
+								}
 								hp.MoveRegisterToCircuit(link.End, hp.GetNewHkId());
 								hp.CorrectCircuitIds();
 							}

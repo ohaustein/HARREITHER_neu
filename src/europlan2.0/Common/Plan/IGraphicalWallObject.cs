@@ -11,8 +11,8 @@ namespace Europlan.Common {
 		bool HitTest(Point2D planPoint, double xOffset, double yOffset);
 		void PaintObject(Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export);
 		IGraphicalWallObject GetPickedObject(Point2D planPoint, double xOffset, double yOffset);
-		Polygon2D GetObjectBorders(double xOffset, double yOffset);
-		bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders);
+		List<Polygon2D> GetObjectBorders(double xOffset, double yOffset);
+		bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders);
 		bool StartDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
 		bool MoveDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);
 		bool EndDrag(Anchor anchor, Point2D planPoint, GraphicalWall owningWall, Room owningRoom, Product owningProduct, bool useSnap);

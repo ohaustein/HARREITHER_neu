@@ -193,7 +193,7 @@ namespace Europlan.Common {
 
 		#region IGraphicalWallObject Members
 		public bool HitTest(Point2D planPoint, double xOffset, double yOffset) {
-			return this.GetObjectBorders(xOffset, yOffset).IsInside(planPoint);
+			return this.GetObjectBorders(xOffset, yOffset)[0].IsInside(planPoint);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
@@ -207,7 +207,7 @@ namespace Europlan.Common {
 			Brush unusableBrush = new HatchBrush(HatchStyle.BackwardDiagonal, (this == selectedObject || this == selectedWall) ? Color.FromArgb(128, 64, 64) : Color.Gray, Color.White);
 
 			Region oldClip = g.Clip;
-			Polygon2D wallBorder = this.GetObjectBorders(xOffset, yOffset);
+			Polygon2D wallBorder = this.GetObjectBorders(xOffset, yOffset)[0];
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			List<PointF> borderPoints = new List<PointF>();
@@ -407,7 +407,7 @@ namespace Europlan.Common {
 		/*public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
 		}*/
 
-		public Polygon2D GetObjectBorders(double xOffset, double yOffset) {
+		public List<Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			Polygon2D wallBorder = new Polygon2D();
 			Point2D lastPoint = new Point2D(xOffset, yOffset);
 			wallBorder.Add(lastPoint);
@@ -427,7 +427,7 @@ namespace Europlan.Common {
 			if (curPoint != lastPoint) {
 				wallBorder.Add(curPoint);
 			}
-			return wallBorder;
+			return new List<Polygon2D>(new Polygon2D[] { wallBorder });
 		}
 
 		public List<Anchor> GetAnchors(double scale) {
@@ -639,26 +639,30 @@ namespace Europlan.Common {
 			return null;
 		}
 
-		public bool CollisionTest(Polygon2D polygon, double xOffset, double yOffset, bool ignoreBorders) {
+		public bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			Polygon2D wall;
 			if (ignoreBorders) {
-				wall = GetObjectBorders(xOffset, yOffset);
+				wall = GetObjectBorders(xOffset, yOffset)[0];
 			} else {
-				wall = GetUsableBorder(this.GetObjectBorders(xOffset, yOffset));
+				wall = GetUsableBorder(this.GetObjectBorders(xOffset, yOffset)[0]);
 			}
 			bool outside = false;
-			foreach (Point2D point in polygon) {
-				if (!Polygon2D.IsInside(point, wall)) {
-					IList<Segment2D> segments = new List<Segment2D>();
-					Polygon2D.GetSegments(wall, segments);
-					outside = true;
-					foreach (Segment2D segment in segments) {
-						if (segment.GetDistance(point) < 0.01) {
-							outside = false;
+			foreach (Polygon2D p in polygon) {
+				if (!p.IsClockwise()) {
+					foreach (Point2D point in p) {
+						if (!Polygon2D.IsInside(point, wall)) {
+							IList<Segment2D> segments = new List<Segment2D>();
+							Polygon2D.GetSegments(wall, segments);
+							outside = true;
+							foreach (Segment2D segment in segments) {
+								if (segment.GetDistance(point) < 0.01) {
+									outside = false;
+								}
+							}
+							if (outside) {
+								break;
+							}
 						}
-					}
-					if (outside) {
-						break;
 					}
 				}
 			}

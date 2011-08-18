@@ -101,6 +101,7 @@ namespace Europlan.Common {
 			if (buttonToCheck != null) {
 				this.btnConnectionManual.Checked = this.btnConnectionManual == buttonToCheck;
 				this.btnConnectionAuto.Checked = this.btnConnectionAuto == buttonToCheck;
+				this.btnConnectionInFloor.Checked = this.btnConnectionInFloor == buttonToCheck;
 			} else {
 				this.btnConnectionDirect.Checked = !this.hithermPlanner.NewConnectionsAlign;
 				this.btnConnectionAlign.Checked = this.hithermPlanner.NewConnectionsAlign;
@@ -300,6 +301,7 @@ namespace Europlan.Common {
 				this.btnConnectionManual.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_MANUAL;
 				this.btnConnectionAuto.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
 				this.btnConnectionDirect.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_DIRECT;
+				this.btnConnectionInFloor.Checked = this.hithermPlanner.NewConnectionMode == HithermPlanner.NewConnectionModeEnum.NCM_CONNECT_HKS;
 				UpdateModifyConnectionPanel(null);
 				this.panelModifyConnection.BringToFront();
 				ApplyButtonCheckedState(this.btnConnection);
@@ -368,6 +370,11 @@ namespace Europlan.Common {
 		private void btnConnectionAuto_Click(object sender, EventArgs e) {
 			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_AUTO;
 			ApplyConnectionButtonCheckedState(this.btnConnectionAuto);
+		}
+
+		private void btnConnectionInFloor_Click(object sender, EventArgs e) {
+			this.hithermPlanner.NewConnectionMode = HithermPlanner.NewConnectionModeEnum.NCM_CONNECT_HKS;
+			ApplyConnectionButtonCheckedState(this.btnConnectionInFloor);
 		}
 
 		private void btnConnectionDirect_Click(object sender, EventArgs e) {
@@ -474,6 +481,7 @@ namespace Europlan.Common {
 
 			this.btnConnectionManual.Visible = this.btnConnection.Checked;
 			this.btnConnectionAuto.Visible = this.btnConnection.Checked;
+			this.btnConnectionInFloor.Visible = this.btnConnection.Checked;
 			this.seperatorConnections.Visible = false; //this.btnConnection.Checked;
 			this.btnConnectionDirect.Visible = false; //this.btnConnection.Checked;
 			this.btnConnectionAlign.Visible = false; //this.btnConnection.Checked;
@@ -1271,13 +1279,34 @@ namespace Europlan.Common {
 		private void DeleteVerbindung(GraphicalHithermVerbindung verbindung) {
 			if (verbindung != null) {
 				foreach (HithermCircuit c in this.hithermPlanner.HithermProduct.PlannedCircuits) {
-					if (c.Links.Contains(verbindung)) {
-						c.Links.Remove(verbindung);
+					GraphicalHithermVerbindung foundLink = null;
+					foreach (GraphicalHithermVerbindung curLink in c.Links) {
+						if (curLink.EqualsOrIsPart(verbindung)) {
+							foundLink = curLink;
+							break;
+						}
+					}
+
+					if (foundLink != null) {
+					//if (c.Links.Contains(verbindung)) {
+						bool moveCircuit = foundLink.HasStart && foundLink.HasEnd;
+						c.Links.Remove(foundLink);
+						if (foundLink is GraphicalHithermUnderfloorVerbindung) {
+							if (verbindung != (foundLink as GraphicalHithermUnderfloorVerbindung).StartLink) {
+								(foundLink as GraphicalHithermUnderfloorVerbindung).StartLink.IsPartOfCompound = false;
+								c.Links.Add((foundLink as GraphicalHithermUnderfloorVerbindung).StartLink);
+							}
+							if (verbindung != (foundLink as GraphicalHithermUnderfloorVerbindung).EndLink) {
+								(foundLink as GraphicalHithermUnderfloorVerbindung).EndLink.IsPartOfCompound = false;
+								c.Links.Add((foundLink as GraphicalHithermUnderfloorVerbindung).EndLink);
+							}
+						}
 						if (verbindung == this.graphicalWallPanel.SelectedObject) {
 							this.graphicalWallPanel.SelectedObject = null;
 						}
-						if (verbindung.Start != null && verbindung.End != null) {
-							this.hithermPlanner.HithermProduct.MoveRegisterToCircuit(verbindung.End, this.hithermPlanner.HithermProduct.GetNewHkId());
+						if (moveCircuit) {
+							HithermRegister registerToMove = foundLink.End;
+							this.hithermPlanner.HithermProduct.MoveRegisterToCircuit(registerToMove, this.hithermPlanner.HithermProduct.GetNewHkId());
 							this.hithermPlanner.HithermProduct.CorrectCircuitIds();
 						}
 						this.graphicalWallPanel.InvalidateGraphics();
