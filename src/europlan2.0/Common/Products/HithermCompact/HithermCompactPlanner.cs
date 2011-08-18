@@ -21,7 +21,8 @@ namespace Europlan.Common {
 		public enum NewConnectionModeEnum {
 			NCM_MANUAL,
 			NCM_AUTO,
-			NCM_DIRECT
+			NCM_DIRECT,
+			NCM_CONNECT_HKS
 		}
 
 		private GraphicalWallPanel connectedWallPanel;
@@ -51,6 +52,7 @@ namespace Europlan.Common {
 		private GraphicalHithermCompactRegisterWrapper newConnectionAutoStart = null;
 		private PossibleHithermCompactRegisterConnection newConnectionEnd = null;
 		private Vector2D newConnectionAutoStartWallOffset = new Vector2D();
+		private GraphicalHithermCompactVerbindung newConnectionStartConnection = null;
 
 		//private GraphicalHithermRegisterWrapper connectRegistersFirst = null;
 		//
@@ -323,6 +325,49 @@ namespace Europlan.Common {
 							this.newConnectionAutoStart = null;
 						}
 					}
+				} else if (this.newConnectionMode == NewConnectionModeEnum.NCM_CONNECT_HKS) {
+					if (this.newConnectionStartConnection == null) {
+						this.newConnectionStartConnection = this.GetConnectionForPoint(planPoint);
+						if (this.newConnectionStartConnection != null && (this.newConnectionStartConnection.Start == null) == (this.newConnectionStartConnection.End == null)) {
+							this.newConnectionStartConnection = null;
+						}
+						if (this.newConnectionStartConnection != null && this.connectedWallPanel != null) {
+							this.connectedWallPanel.SelectedObject = this.newConnectionStartConnection;
+						}
+					} else {
+						GraphicalHithermCompactVerbindung endConnection = this.GetConnectionForPoint(planPoint);
+						if (newConnectionStartConnection.Circuit == endConnection.Circuit) {
+							endConnection = null;
+						}
+						if (((this.newConnectionStartConnection.Start == null) != (endConnection.Start == null)) && ((this.newConnectionStartConnection.End == null) != (endConnection.End == null))) {
+							GraphicalHithermCompactVerbindung startConnection = (this.newConnectionStartConnection.End == null) ? this.newConnectionStartConnection : endConnection;
+							endConnection = (this.newConnectionStartConnection.Start == null) ? this.newConnectionStartConnection : endConnection;
+							HithermCompactCircuit startCircuit = this.product.GetCircuitForRegister(startConnection.Start);
+							HithermCompactCircuit endCircuit = this.product.GetCircuitForRegister(endConnection.End);
+							HithermCompactCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
+							HithermCompactCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
+							int combinedCircuitNr = combinedCircuit.HkLabelNr;
+							while (deleteCircuit.Registers.Count > 0) {
+								this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+							}
+							HithermCompactRegister startRegister = startConnection.Start;
+							HithermCompactRegister endRegister = endConnection.End;
+
+							combinedCircuit.Links.Remove(startConnection);
+							combinedCircuit.Links.Remove(endConnection);
+							GraphicalHithermCompactVerbindung newLink = new GraphicalHithermCompactUnderfloorVerbindung(startConnection, endConnection);
+							combinedCircuit.Links.Add(newLink);
+
+							this.newConnectionStartConnection = null;
+
+							if (this.connectedWallPanel != null) {
+								this.connectedWallPanel.SelectedObject = newLink;
+								this.connectedWallPanel.InvalidateGraphics();
+							}
+
+
+						}
+					}
 				}
 				if (this.restoreMode != null) {
 					this.restoreMode(this, EventArgs.Empty);
@@ -339,6 +384,17 @@ namespace Europlan.Common {
 				foreach (GraphicalHithermCompactRegisterWrapper register in wall.Registers) {
 					if (register.HitTest(planPoint, offsetX, offsetY)) {
 						return register;
+					}
+				}
+			}
+			return null;
+		}
+
+		private GraphicalHithermCompactVerbindung GetConnectionForPoint(Point2D planPoint) {
+			foreach (HithermCompactCircuit hc in this.product.PlannedCircuits) {
+				foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+					if (link.HitTest(planPoint, 2)) {
+						return link;
 					}
 				}
 			}
@@ -854,10 +910,12 @@ namespace Europlan.Common {
 			if (this.product == null) {
 				return null;
 			}
+			IGraphicalWallObject pickedObject = null;
 			foreach (HithermCompactCircuit hc in this.product.PlannedCircuits) {
 				foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
-					if (link.HitTest(mousePosInPlan, 2)) {
-						return link;
+					pickedObject = link.GetPickedObject(mousePosInPlan, 0, 0);
+					if (pickedObject != null) {
+						return pickedObject;
 					}
 				}
 			}

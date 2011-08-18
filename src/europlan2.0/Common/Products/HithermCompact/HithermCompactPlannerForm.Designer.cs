@@ -24,7 +24,7 @@ namespace Europlan.Common {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HithermPlannerForm));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HithermCompactPlannerForm));
 			this.toolStripMain = new System.Windows.Forms.ToolStrip();
 			this.btnZoomIn = new System.Windows.Forms.ToolStripButton();
 			this.btnZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -193,6 +193,7 @@ namespace Europlan.Common {
 			this.hithermCompactPlanner = new Europlan.Common.HithermCompactPlanner();
 			this.planPanel = new Europlan.Common.PlanPanel();
 			this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
+			this.btnConnectionInFloor = new System.Windows.Forms.ToolStripButton();
 			this.toolStripMain.SuspendLayout();
 			this.toolStripSubmenu.SuspendLayout();
 			this.panelTop.SuspendLayout();
@@ -423,6 +424,7 @@ namespace Europlan.Common {
             this.btnRegisterHorizontal,
             this.btnConnectionManual,
             this.btnConnectionAuto,
+            this.btnConnectionInFloor,
             this.seperatorConnections,
             this.btnConnectionAlign,
             this.btnConnectionDirect,
@@ -2334,7 +2336,18 @@ namespace Europlan.Common {
 			this.connectionPlanner.PlanFloor = true;
 			this.connectionPlanner.Product = null;
 			// 
-			// HithermPlannerForm
+			// btnConnectionInFloor
+			// 
+			this.btnConnectionInFloor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btnConnectionInFloor.Image = ((System.Drawing.Image)(resources.GetObject("btnConnectionInFloor.Image")));
+			this.btnConnectionInFloor.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnConnectionInFloor.Name = "btnConnectionInFloor";
+			this.btnConnectionInFloor.Size = new System.Drawing.Size(23, 20);
+			this.btnConnectionInFloor.Text = "Heizkreise verbinden";
+			this.btnConnectionInFloor.Visible = false;
+			this.btnConnectionInFloor.Click += new System.EventHandler(this.btnConnectionInFloor_Click);
+			// 
+			// HithermCompactPlannerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -2346,7 +2359,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.toolStripMain);
 			this.Controls.Add(this.planPanel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "HithermPlannerForm";
+			this.Name = "HithermCompactPlannerForm";
 			this.Text = "Hitherm - grafische Auslegung";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
@@ -2562,5 +2575,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripSeparator sepAnbindeleitungen;
 		private System.Windows.Forms.ToolStripButton btnSchraegeLeft;
 		private System.Windows.Forms.ToolStripButton btnSchraegeRight;
+		private System.Windows.Forms.ToolStripButton btnConnectionInFloor;
 	}
 }
