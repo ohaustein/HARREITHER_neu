@@ -527,7 +527,9 @@ namespace Europlan.Common {
 				if (value is ImagePlan) {
 					this.plan = value as ImagePlan;
 					if (this.plan.AbsoluteFileName != "") {
-						image = Image.FromFile(this.plan.AbsoluteFileName);
+						using (Image temp = Image.FromFile(this.plan.AbsoluteFileName)) {
+							image = new Bitmap(temp);
+						}
 					}
 					this.angle = plan.Angle;
 					this.xPos = plan.XPos;

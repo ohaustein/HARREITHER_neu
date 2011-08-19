@@ -10,14 +10,67 @@ using System.IO;
 namespace Europlan.Common {
 	public partial class ImportedPlansPanel : UserControl, IEditorUserControl, ISaveRequest {
 
+		private class ConverterArguments {
+			private ProgressForm progressForm;
+			private NewPlanForm newPlanForm;
+			private string fileName;
+			List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
+			private string dir;
+			private string subDir;
+			private string extension;
+
+			public ConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, List<SolidFramework.Pdf.Plumbing.PdfPage> Pages, string dir, string subDir, string extension) {
+				this.progressForm = progressForm;
+				this.newPlanForm = newPlanform;
+				this.fileName = fileName;
+				this.pages = Pages;
+				this.dir = dir;
+				this.subDir = subDir;
+				this.extension = extension;
+			}
+
+			public ProgressForm ProgressForm {
+				get { return this.progressForm; }
+			}
+
+			public NewPlanForm NewPlanForm {
+				get { return this.newPlanForm; }
+			}
+
+			public string FileName {
+				get { return this.fileName; }
+			}
+
+			public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
+				get { return this.pages; }
+			}
+
+			public string Dir {
+				get { return this.dir; }
+			}
+
+			public string SubDir {
+				get { return this.subDir; }
+			}
+
+			public string Extension {
+				get { return this.extension; }
+			}
+
+		}
+
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 		public event ProjectSaveRequestHandler ProjectSaveRequest;
 
+		private System.ComponentModel.BackgroundWorker backgroundSaver;
+
 		public ImportedPlansPanel() {
 			InitializeComponent();
-
+			this.backgroundSaver = new BackgroundWorker();
+			this.backgroundSaver.DoWork += new DoWorkEventHandler(backgroundSaver_DoWork);
+			this.backgroundSaver.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundSaver_RunWorkerCompleted);
 			this.SetLanguage();
 		}
 
@@ -71,8 +124,11 @@ namespace Europlan.Common {
 					
 					NewPlanForm newPlanForm = null;
 
+#if !DEBUG
 					// Solid Framework license
+					SolidFramework.LicenseCollection.Instance.Clear();
 					SolidFramework.License.Import("neudorfer", "christian.neudorfer@bluesource.at", "", "818f1-eab90-d327b-34e1b");
+#endif
 
 					List<SolidFramework.Pdf.Plumbing.PdfPage> Pages = null;
 					SolidFramework.Pdf.Catalog catalog = null;
@@ -105,23 +161,12 @@ namespace Europlan.Common {
 						}
 						
 						if (isPdf(extension)) {
-							plan = new ImagePlan();
+							ProgressForm progressForm = new ProgressForm();
+							ConverterArguments args = new ConverterArguments(progressForm, newPlanForm, dialog.FileName, Pages, dir, subDir, extension);
+							this.backgroundSaver.RunWorkerAsync(args);
+							progressForm.ShowDialog();
 
-							// Create a bitmap from the page with set dpi.
-							Bitmap bm = Pages[newPlanForm.PageNumber - 1].DrawBitmap(96);
-
-							// Setup the filename.
-							string newFileName = Path.Combine(dir, Path.GetFileNameWithoutExtension(dialog.FileName) + ".png");
-
-							// If the file exits already, delete it. I.E. Overwrite it.
-							if (File.Exists(newFileName))
-								File.Delete(newFileName);
-
-							// Save the file.
-							bm.Save(newFileName, System.Drawing.Imaging.ImageFormat.Png);
-
-							// Cleanup.
-							bm.Dispose();
+							dialog.Dispose();
 						} else {
 							if (isImage(extension)) {
 								plan = new ImagePlan();
@@ -134,21 +179,60 @@ namespace Europlan.Common {
 							if (!dialog.FileName.Equals(newFileName)) {
 								File.Copy(dialog.FileName, newFileName, true);
 							}
-						}						
 
-						plan.Name = newPlanForm.PlanName;
-						plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
-						plans.Add(plan);
-						if (ProjectChanged != null) {
-							ProjectChanged(this);
-						}
-						UpdateControl(false);
-						openPlanOptions(plan);
+							plan.Name = newPlanForm.PlanName;
+							plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
+							plans.Add(plan);
+							if (ProjectChanged != null) {
+								ProjectChanged(this);
+							}
+							UpdateControl(false);
+
+							newPlanForm.Dispose();
+							dialog.Dispose();
+							openPlanOptions(plan);
+						}						
 					}
-					newPlanForm.Dispose();
 				}
-				dialog.Dispose();
 			}
+		}
+
+		void backgroundSaver_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
+			ConverterArguments args = e.Result as ConverterArguments;
+			args.ProgressForm.Close();
+			Plan plan = new ImagePlan();
+			plan.Name = args.NewPlanForm.PlanName;
+			plan.RelativeFileName = Path.Combine(args.SubDir, isPdf(args.Extension) ? Path.GetFileNameWithoutExtension(args.FileName) + ".png" : Path.GetFileName(args.FileName));
+			Project.Instance.ImportedPlans.Add(plan);
+			if (ProjectChanged != null) {
+				ProjectChanged(this);
+			}
+			UpdateControl(false);
+
+			args.NewPlanForm.Dispose();
+			openPlanOptions(plan);
+		}
+
+		private void backgroundSaver_DoWork(object sender, DoWorkEventArgs e) {
+			ConverterArguments args = e.Argument as ConverterArguments;		
+
+			// Create a bitmap from the page with set dpi.
+			Bitmap bm = args.Pages[args.NewPlanForm.PageNumber - 1].DrawBitmap(96);
+
+			// Setup the filename.
+			string newFileName = Path.Combine(args.Dir, Path.GetFileNameWithoutExtension(args.FileName) + ".png");
+
+			// If the file exits already, delete it. I.E. Overwrite it.
+			if (File.Exists(newFileName))
+				File.Delete(newFileName);
+
+			// Save the file.
+			bm.Save(newFileName, System.Drawing.Imaging.ImageFormat.Png);
+
+			// Cleanup.
+			bm.Dispose();
+
+			e.Result = args;
 		}
 
 		private bool isImage(string extension) {

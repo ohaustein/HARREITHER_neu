@@ -52,6 +52,11 @@ namespace Europlan.Common {
 				this.numPage.MaxValue = this.numOfPages;
 				this.lblNumOfPages.Visible = this.numOfPages > 1;
 				this.lblNumOfPages.Text = "Seiten: 1 - " + this.numOfPages;
+			} else {
+				this.lblPage.Enabled = false;
+				this.numPage.Enabled = false;
+				this.numPage.MinValue = 1;
+				this.lblNumOfPages.Visible = false;
 			}
 		}
 
