@@ -809,52 +809,52 @@ Vorlauf
     <value>Automatisch</value>
   </data>
   <data name="EcothermProduct_EV10" xml:space="preserve">
-    <value>EV10</value>
+    <value>RA10</value>
   </data>
   <data name="EcothermProduct_EV10_110" xml:space="preserve">
-    <value>EV10/110</value>
+    <value>RA10/110</value>
   </data>
   <data name="EcothermProduct_EV10_165" xml:space="preserve">
-    <value>EV10/165</value>
+    <value>RA10/165</value>
   </data>
   <data name="EcothermProduct_EV10_55" xml:space="preserve">
-    <value>EV10/55</value>
+    <value>RA10/55</value>
   </data>
   <data name="EcothermProduct_EV15" xml:space="preserve">
-    <value>EV15</value>
+    <value>RA15</value>
   </data>
   <data name="EcothermProduct_EV15_120" xml:space="preserve">
-    <value>EV15/120</value>
+    <value>RA15/120</value>
   </data>
   <data name="EcothermProduct_EV15_180" xml:space="preserve">
-    <value>EV15/180</value>
+    <value>RA15/180</value>
   </data>
   <data name="EcothermProduct_EV15_60" xml:space="preserve">
-    <value>EV15/60</value>
+    <value>RA15/60</value>
   </data>
   <data name="EcothermProduct_EV20" xml:space="preserve">
-    <value>EV20</value>
+    <value>RA20</value>
   </data>
   <data name="EcothermProduct_EV25" xml:space="preserve">
-    <value>EV25</value>
+    <value>RA25</value>
   </data>
   <data name="EcothermProduct_EV30" xml:space="preserve">
-    <value>EV30</value>
+    <value>RA30</value>
   </data>
   <data name="EcothermProduct_EV35" xml:space="preserve">
-    <value>EV35</value>
+    <value>RA35</value>
   </data>
   <data name="EcothermProduct_EV5" xml:space="preserve">
-    <value>EV5</value>
+    <value>RA5</value>
   </data>
   <data name="EcothermProduct_EV5_120" xml:space="preserve">
-    <value>EV5/120</value>
+    <value>RA5/120</value>
   </data>
   <data name="EcothermProduct_EV5_40" xml:space="preserve">
-    <value>EV5/40</value>
+    <value>RA5/40</value>
   </data>
   <data name="EcothermProduct_EV5_80" xml:space="preserve">
-    <value>EV5/80</value>
+    <value>RA5/80</value>
   </data>
   <data name="EcothermProduct_NotificationParameter" xml:space="preserve">
     <value>Ecotherm-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>

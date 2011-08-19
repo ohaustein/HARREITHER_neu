@@ -1903,7 +1903,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV10.
+        ///   Looks up a localized string similar to RA10.
         /// </summary>
         internal static string EcothermProduct_EV10 {
             get {
@@ -1912,7 +1912,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV10/110.
+        ///   Looks up a localized string similar to RA10/110.
         /// </summary>
         internal static string EcothermProduct_EV10_110 {
             get {
@@ -1921,7 +1921,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV10/165.
+        ///   Looks up a localized string similar to RA10/165.
         /// </summary>
         internal static string EcothermProduct_EV10_165 {
             get {
@@ -1930,7 +1930,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV10/55.
+        ///   Looks up a localized string similar to RA10/55.
         /// </summary>
         internal static string EcothermProduct_EV10_55 {
             get {
@@ -1939,7 +1939,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV15.
+        ///   Looks up a localized string similar to RA15.
         /// </summary>
         internal static string EcothermProduct_EV15 {
             get {
@@ -1948,7 +1948,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV15/120.
+        ///   Looks up a localized string similar to RA15/120.
         /// </summary>
         internal static string EcothermProduct_EV15_120 {
             get {
@@ -1957,7 +1957,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV15/180.
+        ///   Looks up a localized string similar to RA15/180.
         /// </summary>
         internal static string EcothermProduct_EV15_180 {
             get {
@@ -1966,7 +1966,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV15/60.
+        ///   Looks up a localized string similar to RA15/60.
         /// </summary>
         internal static string EcothermProduct_EV15_60 {
             get {
@@ -1975,7 +1975,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV20.
+        ///   Looks up a localized string similar to RA20.
         /// </summary>
         internal static string EcothermProduct_EV20 {
             get {
@@ -1984,7 +1984,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV25.
+        ///   Looks up a localized string similar to RA25.
         /// </summary>
         internal static string EcothermProduct_EV25 {
             get {
@@ -1993,7 +1993,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV30.
+        ///   Looks up a localized string similar to RA30.
         /// </summary>
         internal static string EcothermProduct_EV30 {
             get {
@@ -2002,7 +2002,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV35.
+        ///   Looks up a localized string similar to RA35.
         /// </summary>
         internal static string EcothermProduct_EV35 {
             get {
@@ -2011,7 +2011,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV5.
+        ///   Looks up a localized string similar to RA5.
         /// </summary>
         internal static string EcothermProduct_EV5 {
             get {
@@ -2020,7 +2020,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV5/120.
+        ///   Looks up a localized string similar to RA5/120.
         /// </summary>
         internal static string EcothermProduct_EV5_120 {
             get {
@@ -2029,7 +2029,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV5/40.
+        ///   Looks up a localized string similar to RA5/40.
         /// </summary>
         internal static string EcothermProduct_EV5_40 {
             get {
@@ -2038,7 +2038,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV5/80.
+        ///   Looks up a localized string similar to RA5/80.
         /// </summary>
         internal static string EcothermProduct_EV5_80 {
             get {
