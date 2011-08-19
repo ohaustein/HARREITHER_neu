@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SolidFramework</name>
+    </assembly>
+    <members>
+        <member name="T:SolidFramework.Pdf.Creators.GenericPrintProvider">
+            <summary>
+            Represents common print provider functionality
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Pdf.Creators.GenericPrintProvider.ValidationMode">
+            <summary>
+            Gets or sets validation mode.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Converter">
+            <summary>
+            Base class for all converters.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.Converter.AddSourceFile(SolidFramework.Plumbing.Document)">
+            <summary>
+            Add a PDF file to be converted to the source collection from a laoded <c>Document</c> object.
+            </summary>
+            <param name="document">Document object loaded with a PDF file.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <c>Document</c> object is null.</exception>
+        </member>
+        <member name="M:SolidFramework.Converters.Converter.AddSourceFile(System.String)">
+            <summary>
+            Add a PDF file to be converted to the source collection.
+            </summary>
+            <param name="path">String of the full path to the PDF file.</param>
+            <exception cref="!:System.FileNotFoundException">Thrown when path is invalid.</exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SolidFramework.Converters.Converter.AddSourceFiles(System.Collections.ObjectModel.ReadOnlyCollection{System.String})" -->
+        <member name="M:SolidFramework.Converters.Converter.ClearSourceFiles">
+            <summary>
+            Clear the current source files collection.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.Converter.OverwriteMode">
+            <summary>
+            Get or set whether to overwrite an existing output file.
+            </summary>
+            <remarks>
+            Set the desired action when the output file already exists.
+            Default is <c>FailIfExists.</c>
+            </remarks>
+        </member>
+        <member name="P:SolidFramework.Pdf.Creators.Plumbing.PdfCreator.ProcessName">
+            <summary><c>ProcessName</c> is used to find the PDF printer driver process name as seen in Task Manager.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToPdfAConverter">
+            <summary>
+            Converts PDF to PDF/A-compliant document.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToPdfAConverter.ValidationMode">
+            <summary>
+            Gets or sets validation mode.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToPdfAConverter.ExportLogPath">
+            <summary>
+            Gets or sets the path to validation log.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.SolidConverterPdf.Cancel">
+            <summary>
+            Cancel the current running conversion.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.ImageDocumentType">
+            <summary>
+            Sets converted images format
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Default">
+            <summary>
+            Use optimal - the most appropriate format for each image
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Bmp">
+            <summary>
+            BMP images
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Jpeg">
+            <summary>
+            Jpeg images
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Png">
+            <summary>
+            Png images
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Tiff">
+            <summary>
+            Tiff images
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageDocumentType.Gif">
+            <summary>
+            Gif images
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Plumbing.GZip.#ctor">
+            <summary>
+            Some compilers automatically create a public default constructor if the type does not define any constructors.
+            If this is the case with your type, add a private default constructor to eliminate the violation.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Plumbing.GZip.Compress(System.String,System.String,System.String)">
+            <summary>
+            Compress
+            </summary>
+            <param name="lpSourceFolder">The location of the files to include in the zip file, all files including files in subfolders will be included.</param>
+            <param name="lpDestFolder">Folder to write the zip file into</param>
+            <param name="zipFileName">Name of the zip file to write</param>
+        </member>
+        <member name="M:SolidFramework.Plumbing.GZip.Compress(System.String,System.String,System.IO.SearchOption,System.String,System.String,System.Boolean)">
+            <summary>
+            Compress
+            </summary>
+            <param name="lpSourceFolder">The location of the files to include in the zip file</param>
+            <param name="searchPattern">Search pattern (ie "*.*" or "*.txt" or "*.gif") to idendify what files in lpSourceFolder to include in the zip file</param>
+            <param name="searchOption">Only files in lpSourceFolder or include files in subfolders also</param>
+            <param name="lpDestFolder">Folder to write the zip file into</param>
+            <param name="zipFileName">Name of the zip file to write</param>
+            <param name="deleteTempFile">Boolean, true deleted the intermediate temp file, false leaves the temp file in lpDestFolder (for debugging)</param>
+        </member>
+        <member name="M:SolidFramework.Plumbing.GZip.Compress(System.IO.FileInfo[],System.String,System.String,System.String)">
+            <summary>
+            Compress
+            </summary>
+            <param name="files">Array of FileInfo objects to be included in the zip file</param>
+            <param name="lpBaseFolder">Base folder to use when creating relative paths for the files 
+            stored in the zip file. For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file 
+            'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for sample.txt 
+            will be 'folder1/sample.txt'</param>
+            <param name="lpDestFolder">Folder to write the zip file into</param>
+            <param name="zipFileName">Name of the zip file to write</param>
+        </member>
+        <member name="M:SolidFramework.Plumbing.GZip.Compress(System.IO.FileInfo[],System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Compress
+            </summary>
+            <param name="files">Array of FileInfo objects to be included in the zip file</param>
+            <param name="lpBaseFolder">Base folder to use when creating relative paths for the files 
+            stored in the zip file. For example, if lpBaseFolder is 'C:\zipTest\Files\', and there is a file 
+            'C:\zipTest\Files\folder1\sample.txt' in the 'files' array, the relative path for sample.txt 
+            will be 'folder1/sample.txt'</param>
+            <param name="lpDestFolder">Folder to write the zip file into</param>
+            <param name="zipFileName">Name of the zip file to write</param>
+            <param name="deleteTempFile">Boolean, true deleted the intermediate temp file, false leaves the temp file in lpDestFolder (for debugging)</param>
+        </member>
+        <member name="T:SolidFramework.Plumbing.OverwriteMode">
+            <summary>
+            Defines whether to overwrite or fail the conversion if the output file exists.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Plumbing.OverwriteMode.FailIfExists">
+            <summary>
+            If output file exists, fail conversion.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Plumbing.OverwriteMode.ForceOverwrite">
+            <summary>
+            If output file exists, overwrite file.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.ConversionStatus">
+            <summary>
+            ConversionStatus return codes.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ConversionStatus.Success">
+            <summary>
+            Successful conversion
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ConversionStatus.IOFileLocked">
+            <summary>
+            Output file exists and is locked or readonly.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ConversionStatus.FileHasCopyProtection">
+            <summary>
+            PDF file is password protected.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToPowerPointConverter">
+            <summary>
+            Converts PDF to PowerPoint document.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SolidFramework.Converters.PdfToOfficeDocumentConverter" -->
+        <member name="P:SolidFramework.Converters.PdfToOfficeDocumentConverter.AutoRotate">
+            <summary>
+            Gets or sets wither to automatically rotate pages based on the orientation of the text on the pages.
+            </summary>
+            <remarks>If a page in the PDF file is set to lanscape, and all text is following up and down, automatically rotate the page to portrait.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToPowerPointConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToPowerPointConverter class.
+            </summary>
+            <remarks>Defaults to <c>LineTerminator.Platform</c> and <c>Encoding = UTF-8</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToPowerPointConverter.Convert">
+            <summary>
+            Starts the convertion of a PDF file to a PowerPoint document.
+            </summary>
+            <remarks>Source and target files must be set before calling <c>Convert()</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToPowerPointConverter.Convert(System.String,System.String)">
+            <summary>
+            Convert the specified source file into the specified PowerPoint file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination PowerPoint file.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToPowerPointConverter.Convert(System.String,System.String,System.Boolean)">
+            <summary>
+            Convert the specified source file into the specified PowerPoint file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination PowerPoint file.</param>
+            <param name="overwrite">If the destination files exists, overwrite it or not.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.WordDocumentType">
+            <summary>
+            Word output document types.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.WordDocumentType.WordML">
+            <summary>
+            Sets format to Microsoft Office XML.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.WordDocumentType.Rtf">
+            <summary>
+            Sets format to RTF.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.WordDocumentType.Txt">
+            <summary>
+            Sets format to TXT.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.WordDocumentType.Doc" -->
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.WordDocumentType.DocX" -->
+        <member name="T:SolidFramework.Converters.Plumbing.ExcelDocumentType">
+            <summary>
+            Excel output document types.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.ExcelDocumentType.Xls" -->
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.ExcelDocumentType.XlsX" -->
+        <member name="T:SolidFramework.Converters.Plumbing.DataDocumentType">
+            <summary>
+            Data output document types.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.DelimiterOptions">
+            <summary>
+            The delimiter used in data files.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.DelimiterOptions.Comma">
+            <summary>
+            Sets delimiter to comma
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.DelimiterOptions.Semicolon">
+            <summary>
+            Sets delimiter to semicolon
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.DelimiterOptions.Tab">
+            <summary>
+            Sets delimiter to tab
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.LineTerminator">
+            <summary>
+            The line terminator used in text based files.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.LineTerminator.Platform">
+            <summary>
+            Set the terminator based on current platform. Allows .Net to determine and set the terminator based on the platform detected. 
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.LineTerminator.Windows">
+            <summary>
+            Set the terminator to 0x0D 0x0A (Windows default).
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.LineTerminator.OSX">
+            <summary>
+            Set the terminator to 0x0A (OSX default).
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Plumbing.ValidationMode">
+            <summary>
+            Variant of PDFa formats
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToDataConverter">
+            <summary>
+            Convert PDF to CSV data document.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToDataConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToDataConverter class.
+            </summary>
+            <remarks>Defaults to <c>LineTerminator.Platform</c> and <c>Encoding = UTF-8</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToDataConverter.Convert">
+            <summary>
+            Starts the convertion of a PDF file to a text document.
+            </summary>
+            <remarks>Source and target files must be set before calling <c>Convert()</c>.</remarks>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToDataConverter.LineTerminator">
+            <summary>
+            Gets or sets the line terminator character.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToDataConverter.OutputType">
+            <summary>
+            Gets or sets the data document format.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToDataConverter.Encoding">
+            <summary>
+            Gets or sets the data document encoding.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToDataConverter.DelimiterOption">
+            <summary>
+            Gets or sets the file delimiter character.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Pdf.Info.info">
+            <summary>
+            TODO: GSG 7/24/2009 - If there is a Metadata dictionary, move all the info fields into that and remove the Info dictionary.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.ImageAnchoringMode">
+            <summary>
+            Sets images anchoring mode in the output Word file
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageAnchoringMode.Automatic">
+            <summary>
+            Use automatic anchoring
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageAnchoringMode.Paragraph">
+            <summary>
+            Anchor images to paragraph
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageAnchoringMode.Page">
+            <summary>
+            Anchor images to page
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ImageAnchoringMode.RemoveImages">
+            <summary>
+            Remove images from the output file
+            </summary>
+        </member>
+        <member name="M:SolidFramework.PageRange.ToArray">
+            <summary>
+            Return the complete array of integer page numbers after Parse is called.
+            
+            NOTE: This is a stop gap to allow multiple page ranges like 1-3,4,6-10 used by a couple sample apps like PDFtoImage.
+            </summary>
+            <returns>int[] of page numbers.</returns>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.HtmlImages">
+            <summary>
+            Sets images handling mode when converting to HTML format
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.HtmlImages.Link">
+            <summary>
+            Include linked images into output HTML file
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.HtmlImages.Ignore" -->
+        <!-- Badly formed XML comment ignored for member "F:SolidFramework.Converters.Plumbing.HtmlImages.Embed" -->
+        <member name="T:SolidFramework.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ArgumentNull">
+            <summary>
+              Looks up a localized string similar to cannot be null or empty string.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.BadConversionResults">
+            <summary>
+              Looks up a localized string similar to The converter results are no good. Check Results.Count and Results[].Status.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.BadDLLPath">
+            <summary>
+              Looks up a localized string similar to SolidFramework&apos;s dependent DLLs need to either be in the same folder as your exe or in the same folder that you loaded SolidFramework.dll from..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.BadNumCopies">
+            <summary>
+              Looks up a localized string similar to NumberOfCopies should be between 1 and 5 (PDF Reference says values higher than 5 are ignored).
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.BadStream">
+            <summary>
+              Looks up a localized string similar to Stream needs to be defined and accessible.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.BadThreadingModel">
+            <summary>
+              Looks up a localized string similar to Framework requires single threaded apartment thread state. Use [STAThread] attribute on Main or call Framework using new thread with SetApartmentState(ApartmentState.STA)..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ConflictingRecontstructionModeAndWorddocumentType">
+            <summary>
+              Looks up a localized string similar to ReconstructionMode and WordDocumentType properties are incompatible. ReconstructionMode.PlainText should only be used with WordDocumentType.Txt.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ConvertNeedsContinuous">
+            <summary>
+              Looks up a localized string similar to This conversion is limited to continuous page ranges like All or n..m.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.CurrentIsExclusive">
+            <summary>
+              Looks up a localized string similar to PageRanges.Current should not be used with other PageRanges flags..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.CurrentPageNotDone">
+            <summary>
+              Looks up a localized string similar to CurrentPage is not yet implemented for Word.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.CurrentPageNotSet">
+            <summary>
+              Looks up a localized string similar to CurrentPage is not set..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.CurrentPageRange">
+            <summary>
+              Looks up a localized string similar to CurrentPage should be between 1 and the total number of pages in the document..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DateTimeKindMustBeUnspecified">
+            <summary>
+              Looks up a localized string similar to DateTime.Kind must not be DateTimeKind.Utc. Use PdfDate(DateTime) constuctor or UtcOffset to specify time zone offset..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DefaultPrinterNotChanged">
+            <summary>
+              Looks up a localized string similar to Couldn&apos;t set &quot;{0}&quot; as default printer..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DifferentThreadSolidConverter">
+            <summary>
+              Looks up a localized string similar to SolidFramework.Converter classes are designed to be used within a single thread.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DifferentThreadWordApp">
+            <summary>
+              Looks up a localized string similar to SolidFramework.Word classes are designed to be used within a single thread.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DocumentAlreadyOpen">
+            <summary>
+              Looks up a localized string similar to Document is already Open.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DocumentMustBeOpen">
+            <summary>
+              Looks up a localized string similar to Document is not Open.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DocumentNotModified">
+            <summary>
+              Looks up a localized string similar to Document was not modified since Open. Save is meaningless..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DontUseNativeDocumentAfterClose">
+            <summary>
+              Looks up a localized string similar to NativeDocument is not valid after Dispose.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DPIValueInvalid">
+            <summary>
+              Looks up a localized string similar to DPI cannot be set for ConversionType of ExtractImages..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.DuplicatePage">
+            <summary>
+              Looks up a localized string similar to Duplicate page numbers not allowed in range..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ErrorParsingDateTime">
+            <summary>
+              Looks up a localized string similar to There was an error parsing the ISO/IEC8824 date string..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ErrorParsingPageRange">
+            <summary>
+              Looks up a localized string similar to There was an error parsing the PageRange string..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ErrorUtcDeltaNotDefined">
+            <summary>
+              Looks up a localized string similar to Confirm that PdfDate has time zone defined using UtcDeltaDefined before reading UtcDelta..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.FileAlreadyExists">
+            <summary>
+              Looks up a localized string similar to Failed to overwrite existing file. Set OverwriteMode property..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.FileHasCopyProtection">
+            <summary>
+              Looks up a localized string similar to This PDF file is password protected. Please specify the correct UserPassword or OwnerPassword..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.FrameworkError">
+            <summary>
+              Looks up a localized string similar to Failed in Framework.dll.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.InstallationIssue">
+            <summary>
+              Looks up a localized string similar to The PDF creation product does not appear to be installed correctly. Please reinstall or repair..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.InvalidImageType">
+            <summary>
+              Looks up a localized string similar to Attempted to use unsupported image type with Html converter..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.InvalidMachineID">
+            <summary>
+              Looks up a localized string similar to Failed to establish unique machine id from MAC.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.InvalidOperationException">
+            <summary>
+              Looks up a localized string similar to An identical License is already exists in LicenseCollection.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.InvalidVersion">
+            <summary>
+              Looks up a localized string similar to Please reinstall Solid Framework.  Invalid version of DLL:.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.KeywordsNotFree">
+            <summary>
+              Looks up a localized string similar to PdfDocument.Info.Keywords is a read only property for Free and Developer licenses of Solid Framework..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.LicenseViolation">
+            <summary>
+              Looks up a localized string similar to Operation not possible without correct license (use License.Import(..)).
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.MediaBoxMissing">
+            <summary>
+              Looks up a localized string similar to Cannot find required MediaBox for Page.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.MSWordNotInstalled">
+            <summary>
+              Looks up a localized string similar to Couldn&apos;t create WordDocument because MS Word is not installed.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NeedsPublisher">
+            <summary>
+              Looks up a localized string similar to PublisherPrintProvider requires Microsoft Publisher to be installed.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NeedsWord">
+            <summary>
+              Looks up a localized string similar to WordPrintProvider requires Microsoft Word to be installed.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NeedsWord2007">
+            <summary>
+              Looks up a localized string similar to WordPrintProvider requires Microsoft Word 2007 or better to be installed for .docx support.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NegativePage">
+            <summary>
+              Looks up a localized string similar to Pages numbers must be greater than zero..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NotAPage">
+            <summary>
+              Looks up a localized string similar to This is a Pages node and not a Page leaf object..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NotAPageNode">
+            <summary>
+              Looks up a localized string similar to This is a Page leaf object and not a Pages node object..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NotImplemented">
+            <summary>
+              Looks up a localized string similar to The SolidFramework method or operation is not implemented..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NotIndirectObject">
+            <summary>
+              Looks up a localized string similar to ObjectID and GenerationID are only valid for Indirect Objects. Use Indirect property to test..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.NoUserAndNoOwner">
+            <summary>
+              Looks up a localized string similar to To use Encryption either a UserPassword or an OwnerPassword is required..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PageRangeMultipleFiles">
+            <summary>
+              Looks up a localized string similar to PageRange can only be set for single file conversions..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PageRangeNotSet">
+            <summary>
+              Looks up a localized string similar to PageRange needs to be set or created before it can be used..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PathMustBeSet">
+            <summary>
+              Looks up a localized string similar to Path must be set before calling Open.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PathMustExist">
+            <summary>
+              Looks up a localized string similar to Path must refer to an existing file for Open.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PdfCreatorFailed">
+            <summary>
+              Looks up a localized string similar to Pdf Creator failed. The .pdf file was not found where expected. Could be because the UI appeared and the user chose save location. If so, unlock the product so it can behave silently..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PdfCreatorIsAbstract">
+            <summary>
+              Looks up a localized string similar to PdfCreator is an abstract class. Use one of the concrete derived classes for each of the Solid Documents PDF creation printer drivers..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PDFCreatorRequiresLicense">
+            <summary>
+              Looks up a localized string similar to PdfCreator requires a SolidFramework license. Use License.Import and a Tools license or better..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PortraitLandscapeNotDone">
+            <summary>
+              Looks up a localized string similar to PageRanges.Portrait and PageRanges.Landscape are not yet implemented..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PrinterError">
+            <summary>
+              Looks up a localized string similar to Failed to set PdfCreator as printer in Word. Is the PdfCreator installed?.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PrintInitializedAlready">
+            <summary>
+              Looks up a localized string similar to PrintProvider cannot be initialized more than once..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.PrintNeedsCreator">
+            <summary>
+              Looks up a localized string similar to PrintProvider needs PdfCreator property to be set to an appropriate PDF creation printer driver product like SolidPDFCreator..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ProducerNotFree">
+            <summary>
+              Looks up a localized string similar to PdfDocument.Info.Producer is a read only property for Free and Developer licenses of Solid Framework..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.RangeNotContinuous">
+            <summary>
+              Looks up a localized string similar to First and Last only make sense for continuous ranges..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ReadonlyObject">
+            <summary>
+              Looks up a localized string similar to This object is readonly..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ResultsFilesMustBeOne">
+            <summary>
+              Looks up a localized string similar to ConvertTo can only be used for conversion that result in single result file.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SaveEmfNotImplemented">
+            <summary>
+              Looks up a localized string similar to SolidFramework does not save EMF or SPL documents.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SelectedNotDone">
+            <summary>
+              Looks up a localized string similar to PageRanges.Selected is not yet implemented..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SolidConverterPDFRequiresLicense">
+            <summary>
+              Looks up a localized string similar to SolidConverterPDF  requires a SolidFramework license. Use License.Import and a Tools license or better..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SourceFileNotFound">
+            <summary>
+              Looks up a localized string similar to The source file does not exist..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SourceFilesMustBeOne">
+            <summary>
+              Looks up a localized string similar to ConvertTo requires only one source file to be set.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.SourceFilesNotDefined">
+            <summary>
+              Looks up a localized string similar to Source files or directory need to be set..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.UnknownFrameworkError">
+            <summary>
+              Looks up a localized string similar to Unknown error in Framework.dll.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.UnsupportedFileType">
+            <summary>
+              Looks up a localized string similar to Attempted to use an unsupported file type with print provider.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.UserButNoOwner">
+            <summary>
+              Looks up a localized string similar to When specifying a UserPassword, an OwnerPassword is also required..
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Properties.Resources.ValidTime">
+            <summary>
+              Looks up a localized string similar to Confirm that the PdfDate is valid using IsValid before trying to read it..
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.MarkupAnnotConversionType">
+            <summary>
+            Sets annotations recovering mode when converting to Word format.
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.MarkupAnnotConversionType.Never">
+            <summary>
+            Do not recover annotations
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.MarkupAnnotConversionType.Textbox">
+            <summary>
+            Recover annotations to textboxes
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.MarkupAnnotConversionType.Comment">
+            <summary>
+            Recover annotations to Word comments
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SolidFramework.Converters.PdfToWordConverter" -->
+        <member name="M:SolidFramework.Converters.PdfToWordConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToWordConverter class.
+            </summary>
+            <remarks>Defaults to <c>keepCharacterSpacing = true</c>, <c>averageCharacterScaling = true</c>,
+            <c>detectTables = true</c>, <c>MarkupAnnotConversionType.Never</c>, <c>encoding = 65001</c> 
+            and <c>LineTerminator.Platform</c>.</remarks>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.MarkupAnnotConversionType">
+            <summary>
+            Get or set whether to recognize and convert annotations.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.KeepCharacterSpacing">
+            <summary>
+            Get or set whether to turn on average font property.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.AverageCharacterScaling">
+            <summary>
+            Get or set whether to turn on average font property.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.DetectTables">
+            <summary>
+            Get or set whether to detect tables.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.ReconstructionMode">
+            <summary>
+            Get or set file reconstruction mode.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.ImageAnchoringMode">
+            <summary>
+            Get or set images anchoring mode.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.HeaderAndFooterMode">
+            <summary>
+            Get or set footer and headers handling mode.
+            </summary>        
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToWordConverter.OutputType">
+            <summary>
+            Get or set output Word format.
+            </summary> 
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToTextConverter">
+            <summary>
+            Converts a PDF file to Text file.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToTextConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToTextConverter class.
+            </summary>
+            <remarks>Defaults to <c>LineTerminator.Platform</c> and <c>Encoding = UTF-8</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToTextConverter.Convert">
+            <summary>
+            Starts the conversion of PDF file(s) to a text files(s).
+            </summary>
+            <remarks>Source files must be set using <c>AddSourceFile</c>(s) before calling <c>Convert()</c>. Converted file(s) will be saved in the <c>OutputDirectory</c> specified. If no OutputDirectory is specified the default save location will be the same as the source file(s).</remarks>
+            <exception cref="T:System.InvalidOperationException">Thrown when an option fails.</exception>
+            <seealso cref="!:AddSourceFile"/>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToTextConverter.DoConversion(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source">String of the full path to the PDF file.</param>
+            <returns><c>IConversionResult</c> of the resulting conversion.</returns>
+            <remarks>Path to the converted file will be included in the <c>IConversionResult</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToTextConverter.Convert(System.String,System.String)">
+            <summary>
+            Convert the specified source file into the specified text file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination text file.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+            <remarks>If the file already exists, the <c>ConversionStatus</c> will return FileAlreadyExists and fail.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToTextConverter.Convert(System.String,System.String,System.Boolean)">
+            <summary>
+            Convert the specified source file into the specified text file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination text file.</param>
+            <param name="overwrite">If the destination file(s) exist, specify whether or not to overwrite the file(s).</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+            <example><code>
+             using System;
+             using System.Collections.Generic;
+             using SolidFramework;
+             using System.IO;
+            	namespace SolidPoc
+            	{
+            		class Program
+            		{
+            			static void Main(string[] args)
+            			{
+            				License.Import(new StreamReader(@"lincense.xml"));
+            				using (PdfToTextConverter converter as new PdfToTextConverter)
+            				{
+            					ConversionStatus returnStatus = converter.Convert(@"c:\temp\MyFile.pdf", @"c:\output\MyFile.txt", true);
+            				}
+            			}
+            		}
+            	}
+             </code></example>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToTextConverter.LineLength">
+            <summary>
+             Get or set the maximum number of characters to display in each line of your text document.  Example:  <c>textConverter.LineLength = 80;</c>.
+            </summary>
+            <remarks>
+            Specify the maximum number of characters to display in each line of your text output document.
+            Default value is 100 if not specified.
+            </remarks>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToTextConverter.LineTerminator">
+            <summary>
+            Get or set the line terminator.
+            </summary>
+            <remarks>
+            What will be used as a line terminator in the output text file.
+            Default is <c>SolidFramework.Converters.Plumbing.LineTerminator.Platform</c>.
+            </remarks>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToTextConverter.Encoding">
+            <summary>
+            Get or set the character set encoding used for the output text document.
+            </summary>
+            <remarks>
+            Integer representing Windows Code Page. i.e. 65001 for UTF-8 Unicode, or 1252 for Latin, etc.
+            Default is 65001 for UTF-8 Unicode.
+            </remarks>
+        </member>
+        <member name="M:SolidFramework.Plumbing.VerifyVersions.#ctor">
+            <summary>
+            Static methods only, compilers will automatically add a public default constructor if 
+            no constructor is specified. To prevent this, adding an empty private constructor.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.Plumbing.HeaderAndFooterMode">
+            <summary>
+            Sets Headers and Footers handling mode when converting PDFs
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.HeaderAndFooterMode.Detect">
+            <summary>
+            Recover Headers and Footers in the output document 
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.HeaderAndFooterMode.Ignore">
+            <summary>
+            Recognize Headers and Footers but place them in the body of the output document 
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.HeaderAndFooterMode.Remove">
+            <summary>
+            Remove Headers and Footers from the output document 
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToImageConverter">
+            <summary>
+            Extract images from PDF to files.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToImageConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToImageConverter class.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:SolidFramework.Converters.PdfToImageConverter.OutputType" -->
+        <member name="T:SolidFramework.Converters.Plumbing.ReconstructionMode">
+            <summary>
+            Reconstruction mode when converting to Word format
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ReconstructionMode.Flowing">
+            <summary>
+            Use Flowing mode
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ReconstructionMode.Exact">
+            <summary>
+            Use Exact mode
+            </summary>
+        </member>
+        <member name="F:SolidFramework.Converters.Plumbing.ReconstructionMode.Continuous">
+            <summary>
+            Use Continuous mode
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToHtmlConverter">
+            <summary>
+            Convert PDF to HTML document.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToHtmlConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToHtmlConverter class.
+            </summary>
+            <remarks>Defaults to <c>HtmlImages.Default</c>, <c>ImageDocumentType.Default</c>, <c>GraphicsAsImages = true</c> and <c>widthLimit = 0</c>.</remarks>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToHtmlConverter.Convert">
+            <summary>
+            Starts the convertion of a PDF file to HTML document.
+            </summary>
+            <remarks>Source and target files must be set before calling <c>Convert()</c>.</remarks>
+            <exception cref="T:System.InvalidOperationException">Thrown when an option fails.</exception>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToHtmlConverter.Convert(System.String,System.String)">
+            <summary>
+            Convert the specified source file into the specified HTML file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination text file.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToHtmlConverter.Convert(System.String,System.String,System.Boolean)">
+            <summary>
+            Convert the specified source file into the specified HTML file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination text file.</param>
+            <param name="overwrite">If the destination files exists, overwrite it or not.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToHtmlConverter.ImageType">
+            <summary>
+            Gets or sets the HTML file images type.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToHtmlConverter.WidthLimit">
+            <summary>
+            Gets or sets maximum width for HTML file images.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToHtmlConverter.Images">
+            <summary>
+            Gets or sets the HTML file images linking type.
+            </summary>
+        </member>
+        <member name="T:SolidFramework.Converters.PdfToExcelConverter">
+            <summary>
+            Extract tables from PDF to Excel document.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToExcelConverter.#ctor">
+            <summary>
+            Initializes a new instance of the PdfToExcelConverter class.
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToExcelConverter.Convert">
+            <summary>
+            Starts extracting tables from PDF file to Excel document.
+            <remarks>Source and target files must be set before calling <c>Convert()</c>.</remarks>
+            </summary>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToExcelConverter.Convert(System.String,System.String)">
+            <summary>
+            Convert the specified source file into the specified Excel file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination Excel file.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="M:SolidFramework.Converters.PdfToExcelConverter.Convert(System.String,System.String,System.Boolean)">
+            <summary>
+            Convert the specified source file into the specified text file.
+            </summary>
+            <param name="sourceFileName">String of the full path to the PDF file.</param>
+            <param name="destFileName">String of the full path to the destination text file.</param>
+            <param name="overwrite">If the destination files exists, overwrite it or not.</param>
+            <returns><c>ConversionStatus</c> of the resulting conversion.</returns>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToExcelConverter.TablesFromContent">
+            <summary>
+            Get or sets whether to include non-table content into output Excel file.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToExcelConverter.SingleTable">
+            <summary>
+            Get or sets whether to join the output tables into a single sheet.
+            </summary>
+        </member>
+        <member name="P:SolidFramework.Converters.PdfToExcelConverter.OutputType">
+            <summary>
+            Get or sets the output Excel file type.
+            </summary>
+        </member>
+    </members>
+</doc>
