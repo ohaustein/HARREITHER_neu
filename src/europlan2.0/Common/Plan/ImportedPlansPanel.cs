@@ -52,42 +52,92 @@ namespace Europlan.Common {
 				dialog.CheckFileExists = true;
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "dxf";
-				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
+				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp";
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
+				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_PdfFilter + "|*.pdf";
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
 				dialog.Multiselect = false;
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
 					List<Plan> plans = Project.Instance.ImportedPlans;
+					string extension = Path.GetExtension(dialog.FileName);
+					string file = isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName);
 					foreach (Plan plan in plans) {
-						if (Path.GetFileName(plan.RelativeFileName).Equals(Path.GetFileName(dialog.FileName))) {
+						if (Path.GetFileName(plan.RelativeFileName).Equals(file)) {
 							result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden);
 							return;
 						}
 					}
-					NewPlanForm newPlanForm = new NewPlanForm();
+					
+					NewPlanForm newPlanForm = null;
+
+					// Solid Framework license
+					SolidFramework.License.Import("neudorfer", "christian.neudorfer@bluesource.at", "", "818f1-eab90-d327b-34e1b");
+
+					List<SolidFramework.Pdf.Plumbing.PdfPage> Pages = null;
+					SolidFramework.Pdf.Catalog catalog = null;
+					SolidFramework.Pdf.Plumbing.PdfPages pages = null;
+					SolidFramework.Pdf.PdfDocument doc = null;	
+			
+					if (isPdf(extension)) {
+						// Load up the document
+						doc = new SolidFramework.Pdf.PdfDocument(dialog.FileName);
+						doc.Open();
+						// Get our pages.
+						Pages = new List<SolidFramework.Pdf.Plumbing.PdfPage>(doc.Catalog.Pages.PageCount);
+						catalog = (SolidFramework.Pdf.Catalog)SolidFramework.Pdf.Catalog.Create(doc);
+						pages = (SolidFramework.Pdf.Plumbing.PdfPages)catalog.Pages;
+						ProcessPages(ref pages, ref Pages);
+						
+						newPlanForm = new NewPlanForm(true);
+						newPlanForm.NumOfPages = Pages.Count;
+					} else {
+						newPlanForm = new NewPlanForm(false);
+					}
 					result = newPlanForm.ShowDialog();
 					if (result == DialogResult.OK) {
+						Plan plan = null;
 						string dir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
 						string subDir = Path.GetFileNameWithoutExtension(Project.Instance.ProjectFileName) + "_plans";
 						dir = Path.Combine(dir, subDir);
 						if (!Directory.Exists(dir)) {
 							Directory.CreateDirectory(dir);
 						}
-						string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
-						if (!dialog.FileName.Equals(newFileName)) {
-							File.Copy(dialog.FileName, newFileName, true);
-						}
-						string extension = Path.GetExtension(dialog.FileName);
-						Plan plan = null;
-						if (isImage(extension)) {
+						
+						if (isPdf(extension)) {
 							plan = new ImagePlan();
-						} else if (isCad(extension)) {
-							plan = new CadPlan();
-						}
-						// TODO assure that plan is not null
+
+							// Create a bitmap from the page with set dpi.
+							Bitmap bm = Pages[newPlanForm.PageNumber - 1].DrawBitmap(96);
+
+							// Setup the filename.
+							string newFileName = Path.Combine(dir, Path.GetFileNameWithoutExtension(dialog.FileName) + ".png");
+
+							// If the file exits already, delete it. I.E. Overwrite it.
+							if (File.Exists(newFileName))
+								File.Delete(newFileName);
+
+							// Save the file.
+							bm.Save(newFileName, System.Drawing.Imaging.ImageFormat.Png);
+
+							// Cleanup.
+							bm.Dispose();
+						} else {
+							if (isImage(extension)) {
+								plan = new ImagePlan();
+							} else if (isCad(extension)) {
+								plan = new CadPlan();
+							}
+
+							
+							string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
+							if (!dialog.FileName.Equals(newFileName)) {
+								File.Copy(dialog.FileName, newFileName, true);
+							}
+						}						
+
 						plan.Name = newPlanForm.PlanName;
-						plan.RelativeFileName = Path.Combine(subDir, Path.GetFileName(dialog.FileName));
+						plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
 						plans.Add(plan);
 						if (ProjectChanged != null) {
 							ProjectChanged(this);
@@ -102,7 +152,6 @@ namespace Europlan.Common {
 		}
 
 		private bool isImage(string extension) {
-
 			return string.Compare(".jpg", extension, true) == 0 ||
 				string.Compare(".bmp", extension, true) == 0 ||
 				string.Compare(".png", extension, true) == 0;
@@ -111,6 +160,10 @@ namespace Europlan.Common {
 		private bool isCad(string extension) {
 			return string.Compare(".dxf", extension, true) == 0 ||
 				string.Compare(".dwg", extension, true) == 0;
+		}
+
+		private bool isPdf(string extension) {
+			return string.Compare(".pdf", extension, true) == 0;
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
@@ -200,6 +253,27 @@ namespace Europlan.Common {
 					ProjectChanged(this);
 				}
 				UpdateControl(false);
+			}
+		}
+
+		private static void ProcessPages(ref SolidFramework.Pdf.Plumbing.PdfPages pages,
+			ref List<SolidFramework.Pdf.Plumbing.PdfPage> listPages) {
+			// Walk the Pages catalog and get all the page objects.  This will follow 
+			// the references and get the actual object that we can work 
+			// with recursively.
+			foreach (SolidFramework.Pdf.Plumbing.PdfItem pdfItem in pages.Kids) {
+				SolidFramework.Pdf.Plumbing.PdfDictionary dictionary =
+					(SolidFramework.Pdf.Plumbing.PdfDictionary)
+					SolidFramework.Pdf.Plumbing.PdfItem.GetIndirectionItem(pdfItem);
+				if (dictionary.Type == "Pages") {
+					SolidFramework.Pdf.Plumbing.PdfPages nodePages =
+						(SolidFramework.Pdf.Plumbing.PdfPages)dictionary;
+					ProcessPages(ref nodePages, ref listPages);
+				} else if (dictionary.Type == "Page") {
+					SolidFramework.Pdf.Plumbing.PdfPage page =
+						(SolidFramework.Pdf.Plumbing.PdfPage)dictionary;
+					listPages.Add(page);
+				}
 			}
 		}
 

@@ -10,18 +10,21 @@ using Star.SettingsXpress;
 namespace Europlan.Common {
 	public partial class NewPlanForm : Form {
 
-		public NewPlanForm() {
+		private bool showPageSelection = false;
+		private int numOfPages = 0;
+
+		public NewPlanForm(bool showPageSelection) {
 			InitializeComponent();
 
 			this.SetLanguage();
-
+			this.showPageSelection = showPageSelection;
 		}
 
 		private void SetLanguage() {
 			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
 			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
 
-			this.label3.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
+			this.lblCaption.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
 			this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
 		}
 
@@ -42,10 +45,26 @@ namespace Europlan.Common {
 			SettingsKey settings = SettingsFile.Settings["NewPlanForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.Size = settings.GetSize("Size", this.Size);
+			if (this.showPageSelection) {
+				this.lblPage.Enabled = this.numOfPages > 1;
+				this.numPage.Enabled = this.numOfPages > 1;
+				this.numPage.MinValue = 1;
+				this.numPage.MaxValue = this.numOfPages;
+				this.lblNumOfPages.Visible = this.numOfPages > 1;
+				this.lblNumOfPages.Text = "Seiten: 1 - " + this.numOfPages;
+			}
 		}
 
 		public string PlanName {
 			get { return this.txtName.Text; }
+		}
+
+		public int NumOfPages {
+			set { this.numOfPages = value; }
+		}
+
+		public int PageNumber {
+			get { return (int)numPage.Value; }
 		}
 	}
 }

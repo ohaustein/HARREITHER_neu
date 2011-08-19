@@ -1632,6 +1632,9 @@ R
   <data name="ImportedPlansPanel_Optionen" xml:space="preserve">
     <value>Optionen</value>
   </data>
+  <data name="ImportedPlansPanel_PdfFilter" xml:space="preserve">
+    <value>PDF (*.pdf)</value>
+  </data>
   <data name="ImportedPlansPanel_PlanEntfernen" xml:space="preserve">
     <value>Plan entfernen</value>
   </data>
