@@ -1682,9 +1682,6 @@ Do you still want to continue?</value>
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>Valid until:</value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>The validity of the license has expired. Please contact contact name at office@harreither.com or +43-7353-6660 to request a new license.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>Hardware ID:</value>
   </data>
@@ -1694,20 +1691,8 @@ Do you still want to continue?</value>
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>Installed licences:</value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>No license was found. If you already have a license, please import it with the button 'Import license'. If you have no license yet, contact contact name at lizenz@dummy.at or +43-7353-6660 to request a license. You have to specify the hardware ID stated here to request a license.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Licensed for:</value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>The license is invalid because it was modified by unauthorised parties. Please use your original license or contact contact name at lizenz@dummy.at or +43-7353-6660 to request a new license.</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>The license is not valid. If you already have a valid license, use the button 'Import license' to import it. If you have no valid license yet, contact contact name at office@harreither.com or +43-7353-6660 to request a license. You have to specify the hardware stated her to request a license.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>The license is not valid for the computer that is currently used. Please contact contact name at office@harreither.com or +43-7353-6660 to request a license for this computer. You have to specify the hardware ID stated here to request a license.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Page header:</value>

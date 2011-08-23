@@ -1665,9 +1665,6 @@ R
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>validità fino:</value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>La validità della licenza è scaduta. Per favore, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere una nuova licenza.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>ID hardware:</value>
   </data>
@@ -1677,20 +1674,8 @@ R
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>licenze installate:</value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Non è stata trovata alcuna licenza. Se siete già in possesso di una licenza, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza, mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-7353-6660, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Licenziato per:</value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>la licenza è invalida poiché non è stata modificata da un soggetto autorizzato. Per favore, utilizzate la vostra licenza originale oppure mettetevi in contatto all'indirizzo e-mail lizenz@dummy.at oppure al telefono +43-7353-6660, per richiedere una nuova licenza.</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>La licenza non è valida. Se siete già in possesso di una licenza valida, importatela mediante il pulsante "Importa licenza". Se non possedete ancora alcuna licenza valida, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere la licenza. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>La licenza non vale sul computer attuale. Per favore, mettetevi in contatto all'indirizzo e-mail office@harreither.com oppure al telefono +43-7353-6660, per richiedere la licenza per questo computer. Per richiedere la licenza si deve comunicare il codice ID del hardware qui indicato.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Testata:</value>

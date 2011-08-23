@@ -597,5 +597,28 @@ namespace Europlan.Common {
 			}
 			return -1;
 		}
+
+		public bool IsVorlaufConnected(KlimaFlaechenList row) {
+
+			if (this.Links != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
+					if (link.EndRows.Contains(row)) {
+					return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		public bool IsRuecklaufConnected(KlimaFlaechenList row) {
+			if (this.Links != null) {
+				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
+					if (link.StartRows.Contains(row)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	}
 }

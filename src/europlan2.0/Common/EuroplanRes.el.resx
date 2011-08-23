@@ -1688,9 +1688,6 @@ R
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>Ισχύει έως:</value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>Η ισχύς της αδείας χρήσης έχει λήξει. Επικοινωνήστε με το όνομα επαφής στη διεύθυνση office@harreither.com ή στο +43-7353-6660 για να ζητήσετε νέα άδεια χρήσης.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>Αναγνωριστικό υλισμικού:</value>
   </data>
@@ -1700,20 +1697,8 @@ R
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>Εγκαταστημένες άδειες:</value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Δεν βρέθηκε καμία άδεια χρήσης. Εάν διαθέτετε άδεια χρήσης, εισάγετέ την με το πλήκτρο οθόνης 'Εισαγωγή αδείας χρήσης'. Εάν δεν διαθέτετε άδεια χρήσης, επικοινωνήστε με το όνομα επαφής στη διεύθυνση lizenz@dummy.at ή στο +43-7353-6660 για να ζητήσετε μια άδεια χρήσης. Για να ζητήσετε την άδεια χρήσης πρέπει να γνωστοποιήσετε το αναγνωριστικό λογισμικού που αναφέρεται εδώ.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Άδεια για:</value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>Η άδεια χρήσης δεν είναι έγκυρη, επειδή έχει τροποποιηθεί από μη εξουσιοδοτημένο φορέα. Χρησιμοποιήστε τη γνήσια άδεια χρήσης ή επικοινωνήστε με το όνομα επαφής στη διεύθυνση lizenz@dummy.at ή στο +43-7353-6660 για να ζητήσετε μια νέα άδεια.</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>Η άδεια χρήσης δεν είναι έγκυρη. Εάν διαθέτετε μια έγκυρη άδεια χρήσης, εισάγετέ την με το πλήκτρο οθόνης 'Εισαγωγή αδείας χρήσης'. Εάν δεν διεθέτετε έγκυρη άδεια χρήσης, επικοινωνήστε με το όνομα επαφής στη διεύθυνση office@harreither.com ή στο +43-7353-6660 για να ζητήσετε μια άδεια χρήσης. Για να ζητήσετε την άδεια χρήσης πρέπει να γνωστοποιήσετε το αναγνωριστικό υλισμικού που αναφέρεται εδώ.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>Η άδεια χρήσης δεν είναι έγκυρη στον συγκεκριμένο υπολογιστή. Επικοινωνήστε με το όνομα επαφής στη διεύθυνση office@harreither.com ή στο +43-7353-6660 για να ζητήσετε μια άδεια χρήσης για τον συγκεκριμένο υπολογιστή. Για να ζητήσετε την άδεια χρήσης πρέπει να γνωστοποιήσετε το αναγνωριστικό υλισμικού που αναφέρεται εδώ.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Κεφαλίδα σελίδας:</value>

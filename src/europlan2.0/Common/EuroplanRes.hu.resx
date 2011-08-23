@@ -1675,9 +1675,6 @@ R
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>Érvényességi határidő: </value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>A licensz érvényessége lejárt. Kerjük, vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>Hardverazonosító</value>
   </data>
@@ -1687,20 +1684,8 @@ R
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>Telepített licenszek: </value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Nem találtam licenszet. Ha már rendelkezik licensszel, kérem, importálja azt a 'Licensz importálása' kapcsolómezővel. Ha még nem rendelkezik licensszel, vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-7353-6660 kapcsolatnévvel, hogy licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adnia.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Licensz kiadva a következő névre: </value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>A licensz érvénytelen, mivel nem engedélyezett hely módosította azt. Kérjük, használja az eredeti licenszet vagy vegye fel a kapcsolatot a lizenz@dummy.at vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>A licensz érvénytelen. Ha már rendelkezik érvényes licensszel, kérjük,  importálja azt a 'Licensz importálása" kapcsolófelülettel. Ha még nem rendelkezik érvényes licensszel,  vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>A licensz az aktuális számítógépen nem érvényes. Kérjük, vegye fel a kapcsolatot a office@harreither.com vagy +43-7353-6660 kapcsolatnévvel, hogy új licenszet kérjen. Licensz kéréséhez az itt megadott hardverazonosítót meg kell adni.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Oldalfejléc:</value>

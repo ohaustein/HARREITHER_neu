@@ -1686,9 +1686,6 @@ R
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>Važi do:</value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>Rok licence je istekao. Kontaktirajte  kontakt osobu pod  office@harreither.com ili +43-7353-6660 kako biste zatražili novu licencu.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>ID hardvera:</value>
   </data>
@@ -1698,20 +1695,8 @@ R
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>Instalirane licence</value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Licenca nije nađena. Ako već posjedujete licencu importirajte je preko izborne površine "licencu importirati". Ako još ne posjedujete licencu, kontaktirajte kontakt osobu pod lizenz@dummy.at ili +43-7353-6660 kako biste zatražili licencu. Pri traženju licence morate navesti navedeni ID broj hardvera.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Licencirano za:</value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>Licenca nije važeća jer je modificirana od neovlaštene osobe.. Koristite svoju originalnu licencu ili kontaktirajte  kontakt osobu pod  lizenz@dummy.at ili +43-7353-6660 kako biste zatražili novu licencu,</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>Licenca nije važeća. Ako već posjedujete važeću licencu importirajte je preko izborne površine "licencu importirati". Ako još ne posjedujete važeću licencu, kontaktirajte kontakt osobu pod office@harreither.com ili +43-7353-6660 kako biste zatražili licencu. Pri traženju licence morate navesti navedeni ID broj.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>Licenca nije važeća na aktualnom računalu. Kontaktirajte kontakt osobu pod office@harreither.com ili +43-7353-6660 kako biste dobili licencu za ovo računalo. Pri traženju licence morate navesti navedeni ID broj hardvera.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Zaglavlje stranice:</value>

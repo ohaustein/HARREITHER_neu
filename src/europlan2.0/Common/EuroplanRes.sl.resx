@@ -1663,9 +1663,6 @@ R
   <data name="LicenseForm_GueltigBis" xml:space="preserve">
     <value>Veljavno do:</value>
   </data>
-  <data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
-    <value>Veljavnost licence se je iztekla. Prosimo, da to sporočite na naslov office@harreither.com ali pa pokličete na +43-7353-6660 ter zaprosite za novo licenco.</value>
-  </data>
   <data name="LicenseForm_HardwareId" xml:space="preserve">
     <value>ID strojne opreme:</value>
   </data>
@@ -1675,20 +1672,8 @@ R
   <data name="LicenseForm_InsallierteLizenzen" xml:space="preserve">
     <value>Nameščene licence:</value>
   </data>
-  <data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
-    <value>Nisem našel licence. Če licenco že imate, jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov lizenz@dummy.at ali pokličite na +43-7353-6660 in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
-  </data>
   <data name="LicenseForm_LizensiertFuer" xml:space="preserve">
     <value>Licencirano za:</value>
-  </data>
-  <data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
-    <value>Licenca je neveljavna, ker jo je spremenila nepooblaščena oseba. Prosimo, da uporabite originalno licenco ali to sporočite na naslov lizenz@dummy.at ali pa pokličete na +43-7353-6660 ter zaprosite za novo licenco.</value>
-  </data>
-  <data name="LicenseForm_NichtGueltig" xml:space="preserve">
-    <value>Licenca ni veljavna. Če licenco že imate, prosimo, da jo uvozite z gumbom "Uvozi licenco". Če licence še nimate, vas prosimo, da to sporočite na naslov office@harreither.com ali pokličete na +43-7353-6660 in zaprositea licenco. V ta namen je treba navesti ID strojne opreme.</value>
-  </data>
-  <data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
-    <value>Licenca v tem računalniku ni veljavna. Prosimo, da to sporočite na naslov office@harreither.com ali pokličite na +43-7353-6660 in zaprosite za licenco. V ta namen je treba navesti ID strojne opreme.</value>
   </data>
   <data name="LicenseForm_Seitenkopf" xml:space="preserve">
     <value>Glava strani:</value>

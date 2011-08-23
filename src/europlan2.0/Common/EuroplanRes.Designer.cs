@@ -4768,6 +4768,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diesen Hinweis nicht mehr anzeigen.
+        /// </summary>
+        internal static string License_NichtMehrZeigen {
+            get {
+                return ResourceManager.GetString("License_NichtMehrZeigen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Die ausgewählte Lizenzdatei konnte nicht importiert werden, da sie auf dem aktuellen Rechner nicht gültig ist..
         /// </summary>
         internal static string License_RechnerNichtGueltigText {
@@ -4822,6 +4831,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ihre Europlan Linzenz ist nur mehr %DAYS% Tage gültig. Bitte fordern Sie eine neue Lizenz unter office@harreither.com oder +43-7353-6660 an..
+        /// </summary>
+        internal static string License_WarnungGueltigkeit {
+            get {
+                return ResourceManager.GetString("License_WarnungGueltigkeit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte erneuern Sie Ihre Lizenz.
+        /// </summary>
+        internal static string License_WarnungGueltigkeitCaption {
+            get {
+                return ResourceManager.GetString("License_WarnungGueltigkeitCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gültig bis:.
         /// </summary>
         internal static string LicenseForm_GueltigBis {
@@ -4831,7 +4858,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine neue Lizenz anzufordern..
+        ///   Looks up a localized string similar to Die Gültigkeit der Lizenz ist abgelaufen. Bitte fordern Sie unter office@harreither.com oder +43-7353-6660 eine neue Lizenz an..
         /// </summary>
         internal static string LicenseForm_GueltigkeitAbgelaufen {
             get {
@@ -4867,7 +4894,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine Lizenz besitzen, fordern Sie bitte unter office@harreither.com oder +43-7353-6660 eine Lizenz an. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_KeineLizenzGefunden {
             get {
@@ -4885,7 +4912,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-7353-6660 um eine neue Lizenz anzufordern..
+        ///   Looks up a localized string similar to Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder fordern Sie unter office@harreither.com oder +43-7353-6660 um eine neue Lizenz an..
         /// </summary>
         internal static string LicenseForm_LizenzModifiziert {
             get {
@@ -4894,7 +4921,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine gültige Lizenz besitzen kontaktieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche &apos;Lizenz importieren&apos;. Falls Sie noch keine gültige Lizenz besitzen fordern Sie bitte eine Lizenz unter office@harreither.com oder +43-7353-6660 an. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_NichtGueltig {
             get {
@@ -4903,7 +4930,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter office@harreither.com oder +43-7353-6660 um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben..
+        ///   Looks up a localized string similar to Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte fordern Sie eine Lizenz für diesen Rechner unter office@harreither.com oder +43-7353-6660 an. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben..
         /// </summary>
         internal static string LicenseForm_RechnerNichtGueltig {
             get {

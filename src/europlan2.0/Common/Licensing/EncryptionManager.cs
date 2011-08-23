@@ -52,6 +52,7 @@ namespace Europlan.Licensing {
 			byte[] textContent = this.byteConverter.GetBytes(text);
 			byte[] signature = this.provider.SignData(textContent, this.hashAlgorithm);
 			string base64Signature = Convert.ToBase64String(signature);
+
 			return base64Signature;
 		}
 

@@ -243,6 +243,25 @@ namespace Europlan.Application {
 					System.Windows.Forms.Application.Restart();
 				}
 				license.Dispose();
+			} else {
+				TimeSpan timeLeft = LicenseManager.Instance.License.ValidUntil.Subtract(DateTime.Now);
+				if (timeLeft.Days < 30) {
+					String text = EuroplanRes.License_WarnungGueltigkeit;
+					text = text.Replace("%DAYS%", timeLeft.Days.ToString());
+					ToolStripLabel warning = new ToolStripLabel(text);
+					statusStrip.Items.Add(warning);
+					//settings.
+					string hideWarning = settings.GetSetting("HideValidityWarning", "");
+					if (hideWarning != LicenseManager.Instance.License.Signature) {
+						ValidityWarningForm form = new ValidityWarningForm(timeLeft.Days);
+						form.ShowDialog();
+						if (form.DontShowAgain) {
+							settings.StoreSetting("HideValidityWarning", LicenseManager.Instance.License.Signature);
+							SettingsFile.Update();
+						}
+						form.Dispose();
+					}
+				}
 			}
 			if (!restart) {
 				this.updateController.CheckForUpdateAsync();
