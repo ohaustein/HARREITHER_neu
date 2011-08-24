@@ -1003,7 +1003,25 @@ namespace Europlan.Common {
 					this.nextConnectionPoints.Clear();
 					if (endModul != null) {
 						if (rowConnection) {
-							throw new Exception("TODO");
+							int tmp;
+							ModulDeckeCircuit startCircuit = this.product.GetCircuitForModul(this.newConnectionStart, out tmp);
+							ModulDeckeSubArea startSubArea = startCircuit.GetSubareaForModul(this.newConnectionStart, out tmp);
+							KlimaFlaechenList startRow = startSubArea.GetRowForModul(this.newConnectionStart, out tmp);
+							ModulDeckeCircuit endCircuit = this.product.GetCircuitForModul(endModul, out tmp);
+							ModulDeckeSubArea endSubArea = startCircuit.GetSubareaForModul(endModul, out tmp);
+							KlimaFlaechenList endRow = startSubArea.GetRowForModul(endModul, out tmp);
+							if (startCircuit == endCircuit && startSubArea == endSubArea && startRow != endRow) {
+								if (startCircuit.Links == null) {
+									startCircuit.Links = new List<KlimaFlaechenSubAreaVerbindung>();
+								}
+								if (this.newConnectionStartAtOutput) {
+									startCircuit.Links.Add(new KlimaFlaechenSubAreaVerbindung(new KlimaFlaechenModul[] { this.newConnectionStart, endModul }, new KlimaFlaechenModul[] { }, new List<Point2D>[] { this.newConnectionVertices }, startCircuit, Project.Instance.GetPlannedProduct(this.product)));
+								} else {
+									startCircuit.Links.Add(new KlimaFlaechenSubAreaVerbindung(new KlimaFlaechenModul[] { }, new KlimaFlaechenModul[] { this.newConnectionStart, endModul }, new List<Point2D>[] { this.newConnectionVertices }, startCircuit, Project.Instance.GetPlannedProduct(this.product)));
+								}
+								this.newConnectionVertices = null;
+								this.newConnectionStart = null;
+							}
 						} else {
 							int tmp;
 							ModulDeckeCircuit startCircuit = this.product.GetCircuitForModul(this.newConnectionStart, out tmp);
@@ -2628,7 +2646,7 @@ namespace Europlan.Common {
 			}
 			//ModulDeckeCircuit circuit = this.product.GetCircuitForModul(this.newConnectionStart, out tmp);
 			ModulDeckeCircuit circuit = this.newConnectionCircuit;
-			if (circuit.GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
+			if (!rowConnection && circuit.GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
 				endModule = null;
 			}
 			if (endModule != null) {
@@ -2668,9 +2686,31 @@ namespace Europlan.Common {
 						point = saLink.GetClosestPoint(mousePoint, out dist);
 						dist = dist / measure;
 						if (dist <= 0.05 && dist < bestDist) {
-							bestDist = dist;
-							saLinkPoint = point;
-							endVerbindung = saLink;
+							// check if this connection is allowed
+							bool ok = false;
+							if (this.newConnectionStartAtOutput) {
+								List<ModulDeckeSubArea> subAreas = saLink.StartSubAreas;
+								//int tmp;
+								ModulDeckeSubArea startSubArea = this.newConnectionCircuit.GetSubareaForModul(this.newConnectionStart, out tmp);
+								KlimaFlaechenList startRow = startSubArea.GetRowForModul(this.newConnectionStart, out tmp);
+								if (subAreas != null && subAreas.Count > 0 && subAreas[0] == startSubArea && !saLink.StartRows.Contains(startRow)) {
+									ok = true;
+								}
+								//if (saLink.EndRows != null && saLink.EndRows.Count > 0 && saLink.EndRows[0].
+							} else {
+								List<ModulDeckeSubArea> subAreas = saLink.EndSubAreas;
+								//int tmp;
+								ModulDeckeSubArea startSubArea = this.newConnectionCircuit.GetSubareaForModul(this.newConnectionStart, out tmp);
+								KlimaFlaechenList startRow = startSubArea.GetRowForModul(this.newConnectionStart, out tmp);
+								if (subAreas != null && subAreas.Count > 0 && subAreas[0] == startSubArea && !saLink.StartRows.Contains(startRow)) {
+									ok = true;
+								}
+							}
+							if (ok) {
+								bestDist = dist;
+								saLinkPoint = point;
+								endVerbindung = saLink;
+							}
 						}
 					}
 				}

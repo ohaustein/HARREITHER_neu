@@ -603,7 +603,7 @@ namespace Europlan.Common {
 			if (this.Links != null) {
 				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
 					if (link.EndRows.Contains(row)) {
-					return true;
+						return true;
 					}
 				}
 			}
