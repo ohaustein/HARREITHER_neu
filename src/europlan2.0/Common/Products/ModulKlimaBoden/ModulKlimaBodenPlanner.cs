@@ -2048,8 +2048,10 @@ namespace Europlan.Common {
 				}
 
 				foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-					foreach (KlimaFlaechenModulVerbindung link in c.Links) {
-						link.DrawDxf(model, modulLayer, c.CircuitColor);
+					if (c.Links != null) {
+						foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+							link.DrawDxf(model, modulLayer, c.CircuitColor);
+						}
 					}
 				}
 

@@ -12,7 +12,7 @@ namespace Europlan.Common {
 		private List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
-		private List<KlimaFlaechenSubAreaVerbindung> verbindungen = null;
+		private List<KlimaFlaechenSubAreaVerbindung> verbindungen = new List<KlimaFlaechenSubAreaVerbindung>();
 
 		public ModulDeckeCircuit() {
 			// A circuit needs to have at least one subarea so add this subarea by default,

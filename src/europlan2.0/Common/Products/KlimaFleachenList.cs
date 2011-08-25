@@ -8,7 +8,7 @@ namespace Europlan.Common {
 
 		private double lengthVerbindeleitungen;
 		private List<KlimaFlaechenModul> list = new List<KlimaFlaechenModul>();
-		private List<KlimaFlaechenModulVerbindung> verbindungen = null;
+		private List<KlimaFlaechenModulVerbindung> verbindungen = new List<KlimaFlaechenModulVerbindung>();
 
 		public KlimaFlaechenList() {
 		}

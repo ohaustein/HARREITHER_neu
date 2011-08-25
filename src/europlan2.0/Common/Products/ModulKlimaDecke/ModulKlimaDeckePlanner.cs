@@ -2253,13 +2253,17 @@ namespace Europlan.Common {
 				}
 
 				foreach (ModulDeckeCircuit c in this.product.PlannedCircuits) {
-					foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
-						link.DrawDxf(model, modulLayer, c.CircuitColor);
+					if (c.Links != null) {
+						foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
+							link.DrawDxf(model, modulLayer, c.CircuitColor);
+						}
 					}
 					foreach (ModulDeckeSubArea sa in c.SubAreas) {
 						foreach (KlimaFlaechenList row in sa.Rows) {
-							foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-								link.DrawDxf(model, modulLayer, c.CircuitColor);
+							if (row.Links != null) {
+								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+									link.DrawDxf(model, modulLayer, c.CircuitColor);
+								}
 							}
 						}
 					}

@@ -16,7 +16,7 @@ namespace Europlan.Common {
 		private double reducedArea = 0;
 		private Color circuitColor = Color.FromArgb(0, 128, 0);
 
-		private List<KlimaFlaechenModulVerbindung> verbindungen = null;
+		private List<KlimaFlaechenModulVerbindung> verbindungen = new List<KlimaFlaechenModulVerbindung>();
 
 		public ModulBodenCircuit() {
 
