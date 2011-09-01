@@ -234,6 +234,11 @@ namespace Europlan.Common {
 		private void connectedPlanPanel_KeyDown(object sender, KeyEventArgs e) {
 			if (this.mode == ConnectionMode.KDM_ADD_CONNECTION) {
 				if (e.KeyCode == Keys.Escape) {
+					if (this.newConnectionStart != null && this.newConnectionStart.ProductConnection != null) {
+						this.newConnectionStart.ProductConnection.ConnectedProduct = null;
+						this.newConnectionStart.ProductConnection.ResetCachedVerticesForDrawing();
+						this.product.Connections = new List<GraphicalProductConnection>();
+					}
 					this.newConnectionStart = null;
 					this.newConnectionVertices = null;
 					this.selectedCircuit = null;
@@ -245,6 +250,11 @@ namespace Europlan.Common {
 					}
 				} else if (e.KeyCode == Keys.Back) {
 					if (this.newConnectionVertices == null || this.newConnectionVertices.Count < 2) {
+						if (this.newConnectionStart != null && this.newConnectionStart.ProductConnection != null) {
+							this.newConnectionStart.ProductConnection.ConnectedProduct = null;
+							this.newConnectionStart.ProductConnection.ResetCachedVerticesForDrawing();
+							this.product.Connections = new List<GraphicalProductConnection>();
+						}
 						this.newConnectionStart = null;
 						this.newConnectionVertices = null;
 						this.selectedCircuit = null;
@@ -376,6 +386,10 @@ namespace Europlan.Common {
 								PointF[] poly = connectionPoly.ToArray();
 								g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.Blue)), poly);
 								g.DrawPolygon(new Pen(Color.Blue), poly);
+							} else if (this.possibleProductConnection.ProductConnection != null && this.possibleProductConnection.PossibleInput && this.possibleProductConnection.PossibleOutput) {
+								PointF[] poly = connectionPoly.ToArray();
+								g.FillPolygon(new SolidBrush(Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White)), poly);
+								g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White), poly);
 							}
 						//}
 					}
@@ -454,73 +468,94 @@ namespace Europlan.Common {
 			bool redraw = false;
 			if (this.mode == ConnectionMode.KDM_ADD_CONNECTION && button != MouseButtons.Middle) {
 				if (this.newConnectionStart == null && this.possibleProductConnection != null) {
-					PossibleProductConnection connection = null;
-					/*foreach (PossibleConnection pc in this.possibleConnections) {
-						if (pc.ConnectionArea.IsInside(planPoint)) {
-							connection = pc;
-							break;
+					if (this.possibleProductConnection.ProductConnection != null && this.product != null) {
+						NewGraphicalProductToProductConnection form = new NewGraphicalProductToProductConnection();
+						if (form.ShowDialog() == DialogResult.OK) {
+							this.possibleProductConnection.ProductConnection.ConnectedProduct = Project.Instance.GetPlannedProduct(this.product);
+							this.possibleProductConnection.ProductConnection.ProductConnectedAtSegment = this.possibleProductConnection.SegmentId;
+							this.possibleProductConnection.ProductConnection.ProductConnectedPoint = this.possibleProductConnection.DistFromSegmentStart;
+							this.possibleProductConnection.ProductConnection.ProductConnectedVorlaufseitig = form.Vorlaufseitig;
+							this.product.PlannedConnection = new ProductConnection(this.possibleProductConnection.ProductConnection.Product, Circuit.CircuitConnectionTypeEnum.VORLAUF);
+							this.product.Connections = new List<GraphicalProductConnection>();
+							this.product.Connections.Add(new GraphicalProductToProductConnection(Project.Instance.GetPlannedProduct(this.product), this.possibleProductConnection.ProductConnection.Product));
+							this.possibleProductConnection.ProductConnection.ResetCachedVerticesForDrawing();
+							this.newConnectionStart = this.possibleProductConnection;
+							this.possibleProductConnection = null;
 						}
-					}*/
-					if (this.possibleProductConnection.ConnectionArea.IsInside(planPoint)) {
-						connection = this.possibleProductConnection;
-					}
-					if (connection != null) {
-						if (connection.PossibleInput && connection.PossibleOutput) {
-							//this.newConnectionStart = connection;
-							//this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
-							this.AddConnection(connection, true);
-						} else if (connection.PossibleInput) {
-							this.AddConnection(connection, true);
-						} else if (connection.PossibleOutput) {
-							this.AddConnection(connection, false);
+						form.Dispose();
+					} else {
+						PossibleProductConnection connection = null;
+						/*foreach (PossibleConnection pc in this.possibleConnections) {
+							if (pc.ConnectionArea.IsInside(planPoint)) {
+								connection = pc;
+								break;
+							}
+						}*/
+						if (this.possibleProductConnection.ConnectionArea.IsInside(planPoint)) {
+							connection = this.possibleProductConnection;
 						}
-						this.newConnectionEndsAtDistributor = false;
-						this.selectedProduct = connection.Product;
+						if (connection != null) {
+							if (connection.PossibleInput && connection.PossibleOutput) {
+								//this.newConnectionStart = connection;
+								//this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
+								this.AddConnection(connection, true);
+							} else if (connection.PossibleInput) {
+								this.AddConnection(connection, true);
+							} else if (connection.PossibleOutput) {
+								this.AddConnection(connection, false);
+							}
+							this.newConnectionEndsAtDistributor = false;
+							this.selectedProduct = connection.Product;
+						}
 					}
 				} else if (this.newConnectionStart != null) {
-					PossibleProductConnection endConnection;
-					this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
-					this.nextConnectionPoints.Clear();
-					if (endConnection != null) {
-						int index;
-						// TODO check if connection is valid!
-						PossibleProductConnection productConnection;
-						PossibleProductConnection distributorConnection;
-						bool ok = false;
-						bool vorlauf = true;
-						if (this.newConnectionStart.Product != null && endConnection.Distributor != null) {
-							productConnection = this.newConnectionStart;
-							distributorConnection = endConnection;
-							//vorlauf = !this.newConnectionStartAtOutput;
-							ok = true;
-						} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
-							distributorConnection = this.newConnectionStart;
-							productConnection = endConnection;
-							this.newConnectionVertices.Reverse();
-							//vorlauf = this.newConnectionStartAtOutput;
-							ok = true;
-						} else {
-							productConnection = new PossibleProductConnection();
-							distributorConnection = new PossibleProductConnection();
-						}
-						int count = productConnection.Product.PlannedCircuits.Count;
-						List<int> openInputs = distributorConnection.Distributor.GetOpenInputs();
-						List<int> openOutputs = distributorConnection.Distributor.GetOpenOutputs();
-						List<int> distributorIndices = new List<int>();
-						if (ok) {
-							if (productConnection.Product.PlannedConnection == null || distributorConnection.Distributor != productConnection.Product.PlannedConnection.Distributor) {
-								productConnection.Product.PlannedConnection = new ProductConnection(distributorConnection.Distributor);
+					if (this.newConnectionStart.ProductConnection != null) {
+						this.newConnectionStart = null;
+					} else {
+						PossibleProductConnection endConnection;
+						this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
+						this.nextConnectionPoints.Clear();
+						if (endConnection != null) {
+							int index;
+							// TODO check if connection is valid!
+							PossibleProductConnection productConnection;
+							PossibleProductConnection distributorConnection;
+							bool ok = false;
+							bool vorlauf = true;
+							if (this.newConnectionStart.Product != null && endConnection.Distributor != null) {
+								productConnection = this.newConnectionStart;
+								distributorConnection = endConnection;
+								//vorlauf = !this.newConnectionStartAtOutput;
+								ok = true;
+							} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
+								distributorConnection = this.newConnectionStart;
+								productConnection = endConnection;
+								this.newConnectionVertices.Reverse();
+								//vorlauf = this.newConnectionStartAtOutput;
+								ok = true;
+							} else {
+								productConnection = new PossibleProductConnection();
+								distributorConnection = new PossibleProductConnection();
 							}
-							//productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuits, distributorConnection.DistributorStartPosition, distributorConnection.DistributorCircuitCount, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
-							productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.ProductFirstCircuit, productConnection.ProductOtherCircuits, distributorConnection.DistributorStartPosition, productConnection.PossibleInput, productConnection.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
-							this.newConnectionVertices = null;
-							this.newConnectionStart = null;
-							this.selectedCircuit = null;
-							this.selectedProduct = null;
-							this.selectedDistributor = null;
-							this.selectedDistributorNr = null;
-							if (this.AnbindeleitungAdded != null) {
-								this.AnbindeleitungAdded(this, EventArgs.Empty);
+							int count = productConnection.Product.PlannedCircuits.Count;
+							List<int> openInputs = distributorConnection.Distributor.GetOpenInputs();
+							List<int> openOutputs = distributorConnection.Distributor.GetOpenOutputs();
+							List<int> distributorIndices = new List<int>();
+							if (ok) {
+								if (productConnection.Product.PlannedConnection == null || distributorConnection.Distributor != productConnection.Product.PlannedConnection.Distributor) {
+									productConnection.Product.PlannedConnection = new ProductConnection(distributorConnection.Distributor);
+								}
+								//productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuits, distributorConnection.DistributorStartPosition, distributorConnection.DistributorCircuitCount, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
+								productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.ProductFirstCircuit, productConnection.ProductOtherCircuits, distributorConnection.DistributorStartPosition, productConnection.PossibleInput, productConnection.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
+								this.newConnectionVertices = null;
+								this.newConnectionStart = null;
+								this.selectedCircuit = null;
+								this.selectedProduct = null;
+								this.selectedDistributor = null;
+								this.selectedDistributorNr = null;
+								if (this.AnbindeleitungAdded != null) {
+									this.AnbindeleitungAdded(this, EventArgs.Empty);
+								}
 							}
 						}
 					}
@@ -668,94 +703,110 @@ namespace Europlan.Common {
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
 			if (this.Mode == ConnectionMode.KDM_ADD_CONNECTION) {
-				// TODO
-				//List<PossibleConnection> oldPossibleConnections = possibleConnections;
-				PossibleProductConnection oldPossibleProductConnection = possibleProductConnection;
-				//possibleConnections = new List<PossibleConnection>();
-				possibleProductConnection = null;
-				Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
-				if (/*this.newConnectionStart != null && this.selectedProduct != null*/ productToUse != null && selectedDistributor == null) {
-					foreach (Distributor d in this.GetAllDistributors()) {
-						//possibleConnections.AddRange(d.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedProduct, selectedCircuit, this.floor));
-						//possibleProductConnection = d.GetPossibleProductConnection();
-						if (productToUse.Connections != null) {
-							bool ok = true;
+				if (this.newConnectionStart != null && this.newConnectionStart.ProductConnection != null) {
+					Point2D v1 = this.newConnectionStart.ProductConnection.Vertices[this.newConnectionStart.ProductConnection.ProductConnectedAtSegment];
+					Point2D v2 = this.newConnectionStart.ProductConnection.Vertices[this.newConnectionStart.ProductConnection.ProductConnectedAtSegment + 1];
+					Line2D l = new Line2D(v1, v1 - v2);
+					Point2D closestPoint = l.GetClosestPoint(planPoint);
+					Vector2D v = closestPoint - planPoint;
+					if (v.X > 0) {
+						this.newConnectionStart.ProductConnection.ProductConnectionRight = true;
+					} else if (v.X == 0) {
+						if (v.Y > 0) {
+							this.newConnectionStart.ProductConnection.ProductConnectionRight = true;
+						} else {
+							this.newConnectionStart.ProductConnection.ProductConnectionRight = false;
+						}
+					} else {
+						this.newConnectionStart.ProductConnection.ProductConnectionRight = false;
+					}
+					this.newConnectionStart.ProductConnection.ResetCachedVerticesForDrawing();
+					redraw = true;
+				} else {
+					PossibleProductConnection oldPossibleProductConnection = possibleProductConnection;
+					possibleProductConnection = null;
+					Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
+					if (productToUse != null && selectedDistributor == null) {
+						foreach (Distributor d in this.GetAllDistributors()) {
+							if (productToUse.Connections != null) {
+								bool ok = true;
+								foreach (GraphicalProductConnection conn in productToUse.Connections) {
+									if (conn.Distributor != null && conn.Distributor != d) {
+										ok = false;
+										break;
+									}
+								}
+								if (!ok) {
+									continue;
+								}
+							}
+							bool addFirst = this.addFirstCircuit;
+							bool addOthers = this.addOtherCircuits;
 							foreach (GraphicalProductConnection conn in productToUse.Connections) {
-								if (conn.Distributor != null && conn.Distributor != d) {
-									ok = false;
+								if (conn.FirstCircuit) {
+									addFirst = false;
+								}
+								if (conn.OtherCircuits) {
+									addOthers = false;
+								}
+							}
+							int circuitCount = 0;
+							if (addFirst) {
+								circuitCount++;
+							}
+							if (addOthers) {
+								circuitCount += productToUse.PlannedCircuitCount - 1;
+							}
+							if (circuitCount > 0) {
+								possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount, false, 0.0);
+								if (possibleProductConnection != null) {
+									break;
+								}
+								if (possibleProductConnection == null && productToUse != null && productToUse.GraphicalArea != null && productToUse.GraphicalArea.Count > 2 && productToUse.GraphicalArea.IsInside(planPoint)) {
+									foreach (PlannedProduct p in d.PlannedConnectedProducts) {
+										if (productToUse != p.Product) {
+											foreach (GraphicalProductConnection gpc in p.Product.Connections) {
+												if ((gpc.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (gpc.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
+													possibleProductConnection = gpc.GetPossibleProductConnection(this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount);
+													if (possibleProductConnection != null) {
+														break;
+													}
+												}
+											}
+											if (possibleProductConnection != null) {
+												break;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					if (possibleProductConnection == null && selectedProduct == null) {
+						if (this.product == null) {
+							foreach (Product p in this.GetAllProducts()) {
+								possibleProductConnection = p.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
+								if (possibleProductConnection != null) {
 									break;
 								}
 							}
-							if (!ok) {
-								continue;
-							}
-						}
-						bool addFirst = this.addFirstCircuit;
-						bool addOthers = this.addOtherCircuits;
-						foreach (GraphicalProductConnection conn in productToUse.Connections) {
-							if (conn.FirstCircuit) {
-								addFirst = false;
-							}
-							if (conn.OtherCircuits) {
-								addOthers = false;
-							}
-						}
-						int circuitCount = 0;
-						if (addFirst) {
-							circuitCount++;
-						}
-						if (addOthers) {
-							circuitCount += productToUse.PlannedCircuitCount - 1;
-						}
-						if (circuitCount > 0) {
-							possibleProductConnection = d.GetPossibleProductConnections(addInput, addOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, productToUse, this.floor, circuitCount, false, 0.0);
-							if (possibleProductConnection != null) {
-								break;
-							}
+						} else {
+							possibleProductConnection = this.product.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
 						}
 					}
-				}
-				if (possibleProductConnection == null && selectedProduct == null) {
-					if (this.product == null) {
-						foreach (Product p in this.GetAllProducts()) {
-							//possibleConnections.AddRange(p.GetPossibleConnections(this.newConnectionStart == null || this.newConnectionStartAtOutput, this.newConnectionStart == null || !this.newConnectionStartAtOutput, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint, selectedDistributor, selectedDistributorNr));
-							possibleProductConnection = p.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
-							if (possibleProductConnection != null) {
-								break;
-							}
-						}
-					} else {
-						possibleProductConnection = this.product.GetPossibleProductConnection(addInput, addOutput, addFirstCircuit, addOtherCircuits, this.Plan.Measure.Value, this.Plan.InvertYAxis, planPoint);
-					}
-				}
-				//redraw = true;
 
-				/*if (oldPossibleConnections == null) {
-					if (possibleConnections.Count == 0) {
-						redraw = redraw || this.newConnectionStart != null;
+					if (oldPossibleProductConnection == null) {
+						redraw = redraw || possibleProductConnection != null || this.newConnectionStart != null;
 					} else {
-						redraw = true;
+						redraw = redraw || possibleProductConnection == null || this.newConnectionStart != null;
 					}
-				} else {
-					foreach (PossibleConnection pc in oldPossibleConnections) {
-						if (!possibleConnections.Contains(pc)) {
-							redraw = true;
-							break;
-						}
-						possibleConnections.Remove(pc);
+					if (this.newConnectionStart != null) {
+						PossibleProductConnection endConnection;
+						this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
+						this.newConnectionEndsAtDistributor = endConnection != null && endConnection.Distributor != null;
+					} else {
+						this.nextConnectionPoints = new List<Point2D>();
 					}
-				}*/
-				if (oldPossibleProductConnection == null) {
-					redraw = redraw || possibleProductConnection != null || this.newConnectionStart != null;
-				} else {
-					redraw = redraw || possibleProductConnection == null || this.newConnectionStart != null;
-				}
-				if (this.newConnectionStart != null) {
-					PossibleProductConnection endConnection;
-					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection);
-					this.newConnectionEndsAtDistributor = endConnection != null && endConnection.Distributor != null;
-				} else {
-					this.nextConnectionPoints = new List<Point2D>();
 				}
 				redraw = redraw || possibleProductConnection != null || this.newConnectionStart != null;
 			} else if (this.mode == ConnectionMode.KDM_SELECT_CONNECTION) {
@@ -781,31 +832,6 @@ namespace Europlan.Common {
 				if (!found) {
 					(this.ConnectedPlanPanel as Control).Cursor = Cursors.Cross;
 				}
-				/*foreach (Room room in this.floor.Rooms) {
-					foreach (PlannedProduct pp in room.PlannedProducts) {
-						foreach (GraphicalProductConnection conn in pp.Product.Connections) {
-							foreach (GraphicalConnectionAnchor a in conn.GetAnchors(this.Plan.Measure.Value)) {
-								if (a.HitTest(planPoint, scale)) {
-									(this.ConnectedPlanPanel as Control).Cursor = a.Cursor;
-									found = true;
-									break;
-								}
-							}
-							if (found) {
-								break;
-							}
-						}
-						if (found) {
-							break;
-						}
-					}
-					if (found) {
-						break;
-					}
-				}
-				if (!found) {
-					(this.ConnectedPlanPanel as Control).Cursor = Cursors.Cross;
-				}*/
 			}
 			return redraw;
 		}
@@ -868,6 +894,9 @@ namespace Europlan.Common {
 			bool redraw = false;
 			if (this.Mode == ConnectionMode.KDM_SELECT_CONNECTION && this.selectedConnection != null) {
 				if (key == Keys.Delete) {
+					if (this.selectedConnection.ConnectedProduct != null) {
+						this.selectedConnection.ConnectedProduct.Product.Connections = new List<GraphicalProductConnection>();
+					}
 					foreach (Product product in this.productsInFloor.Keys) {
 						if (product.Connections.Contains(this.selectedConnection)) {
 							product.DeleteConnection(this.selectedConnection);

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Xml.Serialization;
 using System.Threading;
 using WW.Math;
+using WW.Math.Geometry;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
@@ -538,6 +539,60 @@ namespace Europlan.Common {
 			set { this.graphModulierendY = value; }
 		}
 
+		private Polygon2D GetConnectionArea(double measure, bool invertYAxis, ModulKlimaDeckeProduct product, bool topConnection) {
+			ModulKlimaDeckeProduct mkd = product as ModulKlimaDeckeProduct;
+			if (mkd == null) {
+				// this method is not (yet) needed for klimaboden
+				return null;
+			}
+			Matrix3D laneRotation = Transformation3D.Rotate(-mkd.GraphConstruction.Rotation * Math.PI / 180.0);
+			Matrix3D moduleRotation = Transformation3D.Rotate(mkd.GraphConstruction.Rotation * Math.PI / 180.0);
+
+			double x = laneRotation.Transform(mkd.GraphConstruction.PossibleLanes[this.GraphLane].BorderLeft.Origin).X;
+			double y = this.GraphPositionInLan;
+			Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
+			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+			if (/*this.product.AssociatedRoom.AssociatedPlan.InvertYAxis == modul.GraphBottomUp*/ topConnection) {
+				if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+					Point2D input12D = transformation.Transform(new Point2D(width, height));
+					Point2D input22D = transformation.Transform(new Point2D(width, height - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input32D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input42D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height));
+					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
+				} else if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+					Point2D input12D = transformation.Transform(new Point2D(0, height));
+					Point2D input22D = transformation.Transform(new Point2D(0, height - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input32D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input42D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height));
+					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
+				}
+			} else {
+				if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+					Point2D input12D = transformation.Transform(new Point2D(0, 0));
+					Point2D input22D = transformation.Transform(new Point2D(0, 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input32D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input42D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
+				} else if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+					Point2D input12D = transformation.Transform(new Point2D(width, 0));
+					Point2D input22D = transformation.Transform(new Point2D(width, 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input32D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
+					Point2D input42D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
+					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
+				}
+			}
+			return null;
+		}
+
+		public Polygon2D GetOutputConnectionArea(double measure, bool invertYAxis, ModulKlimaDeckeProduct product) {
+			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis != this.GraphBottomUp/*this.Orientation != KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT*/);
+		}
+
+		public Polygon2D GetInputConnectionArea(double measure, bool invertYAxis, ModulKlimaDeckeProduct product) {
+			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis == this.GraphBottomUp/*this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT*/);
+		}
+
 		public Point2D GetOutputConnection(double measure, bool invertYAxis, Product product) {
 			if (invertYAxis) {
 				return GetInputConnection(measure, false, product);
@@ -768,6 +823,14 @@ namespace Europlan.Common {
 				}
 			}
 			return link;
+		}
+
+		public bool IsOutputOpen(Circuit circuit, bool invertYAxis) {
+			return this.GetOutputLink(circuit, invertYAxis) == null && this.GetSubareaOutputLink(circuit, invertYAxis) == null;
+		}
+
+		public bool IsInputOpen(Circuit circuit, bool invertYAxis) {
+			return this.GetInputLink(circuit, invertYAxis) == null && this.GetSubareaInputLink(circuit, invertYAxis) == null;
 		}
 		#endregion
 	}

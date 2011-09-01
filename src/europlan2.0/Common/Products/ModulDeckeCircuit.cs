@@ -602,7 +602,7 @@ namespace Europlan.Common {
 
 			if (this.Links != null) {
 				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
-					if (link.EndRows.Contains(row)) {
+					if (link.GetEndRows().Contains(row)) {
 						return true;
 					}
 				}
@@ -613,7 +613,7 @@ namespace Europlan.Common {
 		public bool IsRuecklaufConnected(KlimaFlaechenList row) {
 			if (this.Links != null) {
 				foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
-					if (link.StartRows.Contains(row)) {
+					if (link.GetStartRows().Contains(row)) {
 						return true;
 					}
 				}

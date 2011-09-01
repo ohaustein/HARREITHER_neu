@@ -212,6 +212,10 @@ namespace Europlan.Common {
 		protected bool firstCircuit;
 		protected bool otherCircuits;
 
+		protected GraphicalProductConnection productConnection;
+		protected int segmentId = -1;
+		protected double distFromSegmentStart = -1;
+
 		public PossibleProductConnection() {
 		}
 
@@ -243,6 +247,20 @@ namespace Europlan.Common {
 			this.distributorCircuitCount = distributorCircuitCount;
 		}
 
+		public PossibleProductConnection(Point2D connectionPoint, Polygon2D connectionArea, bool possibleInput, bool possibleOutput, double rotation, GraphicalProductConnection productConnection, int segmentId, double distFromSegmentStart) {
+			this.connectionPoint = connectionPoint;
+			this.connectionArea = connectionArea;
+			this.possibleInput = possibleInput;
+			this.possibleOutput = possibleOutput;
+			this.product = null;
+			this.rotation = rotation;
+			this.firstCircuit = false;
+			this.otherCircuits = false;
+			this.productConnection = productConnection;
+			this.segmentId = segmentId;
+			this.distFromSegmentStart = distFromSegmentStart;
+		}
+
 		public Point2D ConnectionPoint {
 			get { return connectionPoint; }
 			set { connectionPoint = value; }
@@ -266,6 +284,11 @@ namespace Europlan.Common {
 		public Product Product {
 			get { return this.product; }
 			set { this.product = value; }
+		}
+
+		public GraphicalProductConnection ProductConnection {
+			get { return this.productConnection; }
+			set { this.productConnection = value; }
 		}
 
 		/*public List<Circuit> Circuits {
@@ -336,6 +359,15 @@ namespace Europlan.Common {
 			set { this.distributorCircuitCount = value; }
 		}
 
+		public int SegmentId {
+			get { return this.segmentId; }
+			set { this.segmentId = value; }
+		}
+
+		public double DistFromSegmentStart {
+			get { return this.distFromSegmentStart; }
+			set { this.distFromSegmentStart = value; }
+		}
 		/*public List<int> DistributorIndices {
 			// TODO
 			get { return new List<int>(); }

@@ -374,66 +374,60 @@ namespace Europlan.Common {
 			set { this.rowEndIndices = value; }
 		}
 
-		[XmlIgnore]
-		public List<KlimaFlaechenList> StartRows {
-			get {
-				List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
-				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
-				} else if (this.Circuit is ModulDeckeCircuit) {
-					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (KlimaFlaechenModul m in this.Start) {
-						bool found = false;
-						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-							foreach (KlimaFlaechenList row in sa.Rows) {
-								if (row.List.Contains(m)) {
-									rows.Add(row);
-									found = true;
-									break;
-								}
-							}
-							if (found) {
+		public List<KlimaFlaechenList> GetStartRows() {
+			List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
+			if (this.Circuit is ModulBodenCircuit) {
+				throw new Exception("todo");
+			} else if (this.Circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenModul m in this.Start) {
+					bool found = false;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(m)) {
+								rows.Add(row);
+								found = true;
 								break;
 							}
 						}
-						if (!found) {
-							rows.Add(null);
+						if (found) {
+							break;
 						}
 					}
+					if (!found) {
+						rows.Add(null);
+					}
 				}
-				return rows;
 			}
+			return rows;
 		}
 
-		[XmlIgnore]
-		public List<KlimaFlaechenList> EndRows {
-			get {
-				List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
-				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
-				} else if (this.Circuit is ModulDeckeCircuit) {
-					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (KlimaFlaechenModul m in this.End) {
-						bool found = false;
-						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-							foreach (KlimaFlaechenList row in sa.Rows) {
-								if (row.List.Contains(m)) {
-									rows.Add(row);
-									found = true;
-									break;
-								}
-							}
-							if (found) {
+		public List<KlimaFlaechenList> GetEndRows() {
+			List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
+			if (this.Circuit is ModulBodenCircuit) {
+				throw new Exception("todo");
+			} else if (this.Circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenModul m in this.End) {
+					bool found = false;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(m)) {
+								rows.Add(row);
+								found = true;
 								break;
 							}
 						}
-						if (!found) {
-							rows.Add(null);
+						if (found) {
+							break;
 						}
 					}
+					if (!found) {
+						rows.Add(null);
+					}
 				}
-				return rows;
 			}
+			return rows;
 		}
 
 		public List<int> SubAreaStartIndices {
@@ -518,68 +512,64 @@ namespace Europlan.Common {
 			set { this.subAreaEndIndices = value; }
 		}
 
-		public List<ModulDeckeSubArea> StartSubAreas {
-			get {
-				List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
-				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
-				} else if (this.Circuit is ModulDeckeCircuit) {
-					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (KlimaFlaechenModul m in this.Start) {
-						bool found = false;
-						int i = 0;
-						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-							foreach (KlimaFlaechenList row in sa.Rows) {
-								if (row.List.Contains(m)) {
-									subAreas.Add(sa);
-									found = true;
-									break;
-								}
-							}
-							if (found) {
+		public List<ModulDeckeSubArea> GetStartSubAreas() {
+			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
+			if (this.Circuit is ModulBodenCircuit) {
+				throw new Exception("todo");
+			} else if (this.Circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenModul m in this.Start) {
+					bool found = false;
+					int i = 0;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(m)) {
+								subAreas.Add(sa);
+								found = true;
 								break;
 							}
-							i++;
 						}
-						if (!found) {
-							subAreas.Add(null);
+						if (found) {
+							break;
 						}
+						i++;
+					}
+					if (!found) {
+						subAreas.Add(null);
 					}
 				}
-				return subAreas;
 			}
+			return subAreas;
 		}
 
-		public List<ModulDeckeSubArea> EndSubAreas {
-			get {
-				List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
-				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
-				} else if (this.Circuit is ModulDeckeCircuit) {
-					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (KlimaFlaechenModul m in this.End) {
-						bool found = false;
-						int i = 0;
-						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-							foreach (KlimaFlaechenList row in sa.Rows) {
-								if (row.List.Contains(m)) {
-									subAreas.Add(sa);
-									found = true;
-									break;
-								}
-							}
-							if (found) {
+		public List<ModulDeckeSubArea> GetEndSubAreas() {
+			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
+			if (this.Circuit is ModulBodenCircuit) {
+				throw new Exception("todo");
+			} else if (this.Circuit is ModulDeckeCircuit) {
+				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
+				foreach (KlimaFlaechenModul m in this.End) {
+					bool found = false;
+					int i = 0;
+					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+						foreach (KlimaFlaechenList row in sa.Rows) {
+							if (row.List.Contains(m)) {
+								subAreas.Add(sa);
+								found = true;
 								break;
 							}
-							i++;
 						}
-						if (!found) {
-							subAreas.Add(null);
+						if (found) {
+							break;
 						}
+						i++;
+					}
+					if (!found) {
+						subAreas.Add(null);
 					}
 				}
-				return subAreas;
 			}
+			return subAreas;
 		}
 
 		[XmlIgnore]
@@ -705,13 +695,15 @@ namespace Europlan.Common {
 
 		public bool StartConnectedToAnbindung {
 			get {
-				return (this.Start == null || this.Start.Count == 0);
+				return (this.End != null && this.End.Count > 0 && this.distributorIndex >= 0);
+				//return (this.Start == null || this.Start.Count == 0);
 			}
 		}
 
 		public bool EndConnectedToAnbindung {
 			get {
-				return (this.End == null || this.End.Count == 0);
+				return (this.Start != null && this.Start.Count > 0 && this.distributorIndex >= 0);
+				//return (this.End == null || this.End.Count == 0);
 			}
 		}
 	}

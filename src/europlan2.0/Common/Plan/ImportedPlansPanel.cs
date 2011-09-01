@@ -10,6 +10,7 @@ using System.IO;
 namespace Europlan.Common {
 	public partial class ImportedPlansPanel : UserControl, IEditorUserControl, ISaveRequest {
 
+#if PDF
 		private class ConverterArguments {
 			private ProgressForm progressForm;
 			private NewPlanForm newPlanForm;
@@ -58,19 +59,24 @@ namespace Europlan.Common {
 			}
 
 		}
+#endif
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
 		public event TreeSelectionRequestedHandler TreeSelectionRequested;
 		public event ProjectSaveRequestHandler ProjectSaveRequest;
 
+#if PDF
 		private System.ComponentModel.BackgroundWorker backgroundSaver;
+#endif
 
 		public ImportedPlansPanel() {
 			InitializeComponent();
+#if PDF
 			this.backgroundSaver = new BackgroundWorker();
 			this.backgroundSaver.DoWork += new DoWorkEventHandler(backgroundSaver_DoWork);
 			this.backgroundSaver.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundSaver_RunWorkerCompleted);
+#endif
 			this.SetLanguage();
 		}
 
@@ -105,9 +111,15 @@ namespace Europlan.Common {
 				dialog.CheckFileExists = true;
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "dxf";
+#if PDF
 				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp";
+#else
+				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
+#endif
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
+#if PDF
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_PdfFilter + "|*.pdf";
+#endif
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
 				dialog.Multiselect = false;
 				DialogResult result = dialog.ShowDialog();
@@ -124,6 +136,7 @@ namespace Europlan.Common {
 					
 					NewPlanForm newPlanForm = null;
 
+#if PDF
 #if !DEBUG
 					// Solid Framework license
 					SolidFramework.LicenseCollection.Instance.Clear();
@@ -134,8 +147,10 @@ namespace Europlan.Common {
 					SolidFramework.Pdf.Catalog catalog = null;
 					SolidFramework.Pdf.Plumbing.PdfPages pages = null;
 					SolidFramework.Pdf.PdfDocument doc = null;	
+#endif
 			
 					if (isPdf(extension)) {
+#if PDF
 						// Load up the document
 						doc = new SolidFramework.Pdf.PdfDocument(dialog.FileName);
 						doc.Open();
@@ -147,6 +162,7 @@ namespace Europlan.Common {
 						
 						newPlanForm = new NewPlanForm(true);
 						newPlanForm.NumOfPages = Pages.Count;
+#endif
 					} else {
 						newPlanForm = new NewPlanForm(false);
 					}
@@ -161,12 +177,14 @@ namespace Europlan.Common {
 						}
 						
 						if (isPdf(extension)) {
+#if PDF
 							ProgressForm progressForm = new ProgressForm();
 							ConverterArguments args = new ConverterArguments(progressForm, newPlanForm, dialog.FileName, Pages, dir, subDir, extension);
 							this.backgroundSaver.RunWorkerAsync(args);
 							progressForm.ShowDialog();
 
 							dialog.Dispose();
+#endif
 						} else {
 							if (isImage(extension)) {
 								plan = new ImagePlan();
@@ -197,6 +215,7 @@ namespace Europlan.Common {
 			}
 		}
 
+#if PDF
 		void backgroundSaver_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
 			ConverterArguments args = e.Result as ConverterArguments;
 			args.ProgressForm.Close();
@@ -234,6 +253,7 @@ namespace Europlan.Common {
 
 			e.Result = args;
 		}
+#endif
 
 		private bool isImage(string extension) {
 			return string.Compare(".jpg", extension, true) == 0 ||
@@ -340,6 +360,7 @@ namespace Europlan.Common {
 			}
 		}
 
+#if PDF
 		private static void ProcessPages(ref SolidFramework.Pdf.Plumbing.PdfPages pages,
 			ref List<SolidFramework.Pdf.Plumbing.PdfPage> listPages) {
 			// Walk the Pages catalog and get all the page objects.  This will follow 
@@ -360,6 +381,7 @@ namespace Europlan.Common {
 				}
 			}
 		}
+#endif
 
 	}
 }

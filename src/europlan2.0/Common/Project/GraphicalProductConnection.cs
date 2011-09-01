@@ -11,6 +11,7 @@ using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
+	[XmlInclude(typeof(GraphicalProductToProductConnection))]
 	public class GraphicalProductConnection {
 
 
@@ -34,13 +35,21 @@ namespace Europlan.Common {
 		private List<List<Point2D>> vorlaufVerticesForDrawing = null;
 		private List<List<Point2D>> ruecklaufVerticesForDrawing = null;
 
-		public List<Point2D> Vertices {
-		  get { return vertices; }
-		  set { vertices = value; }
+		private PlannedProduct connectedProduct;
+		private string connectedProductGuid = null;
+		private int productConnectedAtSegment = -1;
+		private double productConnectedPoint = -1;
+		private bool productConnectedVorlaufseitig = true;
+		private bool productConnectionRight = true;
+		//private List<Point2D> connectedProductVertices = null;
+
+		public virtual List<Point2D> Vertices {
+			get { return vertices; }
+			set { vertices = value; }
 		}
 
 		[XmlIgnore]
-		public bool FinishedConnection {
+		public virtual bool FinishedConnection {
 			get { return this.finishedConnection; }
 			set { this.finishedConnection = value; }
 		}
@@ -183,11 +192,11 @@ namespace Europlan.Common {
 			this.connectionType = connectionType;
 		}
 
-		public double ConnectionWidth {
+		public virtual double ConnectionWidth {
 			get { return this.NrOfCircuits * 0.05 * 2 - 0.029; }
 		}
 
-		public double ConnectionDistributorWidth {
+		public virtual double ConnectionDistributorWidth {
 			get { return this.NrOfCircuits * 0.055 - 0.005; }
 		}
 
@@ -201,40 +210,141 @@ namespace Europlan.Common {
 				double distVlFirst = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - i * 2) : distVl;
 				double distRl = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - i * 2 - 1);
 				double distRlFirst = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - i * 2 - 1) : distRl;
-				Line2D curLineVl, curLineRl;
+				Line2D curLineVl = new Line2D(), curLineRl = new Line2D();
 				Nullable<Line2D> lastLineVl = null, lastLineRl = null;
 				Point2D startPoint, endPoint;
-				Vector2D curVector;
+				Vector2D curVector = new Vector2D();
 				Vector2D moveVector = new Vector2D();
-				for (int j = 0; j < this.vertices.Count - 1; j++) {
-					startPoint = this.vertices[j];
-					endPoint = this.vertices[j + 1];
-					curVector = endPoint - startPoint;
-					curVector.Normalize();
-					moveVector = new Vector2D(curVector.Y, -curVector.X);
-					curLineVl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distVl : distVlFirst) * measure * factor), curVector);
-					curLineRl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distRl : distRlFirst) * measure * factor), curVector);
+				for (int j = 0; j < this.vertices.Count /*- 1*/; j++) {
+					if (j < this.vertices.Count - 1) {
+						startPoint = this.vertices[j];
+						endPoint = this.vertices[j + 1];
+						curVector = endPoint - startPoint;
+						curVector.Normalize();
+						moveVector = new Vector2D(curVector.Y, -curVector.X);
+						curLineVl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distVl : distVlFirst) * measure * factor), curVector);
+						curLineRl = new Line2D(startPoint + moveVector * ((j < this.vertices.Count - 2 ? distRl : distRlFirst) * measure * factor), curVector);
+					}
 					if (lastLineVl == null) {
 						vl.Add(curLineVl.Origin);
 					} else {
-						Nullable<Point2D> curPoint = Line2D.GetIntersection(curLineVl, lastLineVl.Value);
+						Nullable<Point2D> curPoint;
+						if (j < this.vertices.Count - 1) {
+							curPoint = Line2D.GetIntersection(curLineVl, lastLineVl.Value);
+						} else {
+							curPoint = this.vertices[j] + moveVector * (distVlFirst * measure * factor);
+						}
 						if (curPoint.HasValue) {
+							if (this.ConnectedProduct != null && j == this.ProductConnectedAtSegment + 1) {
+								if (this.ProductConnectedVorlaufseitig && i < this.ConnectedProduct.Product.PlannedCircuitCount) {
+									Vector2D lastVector = lastLineVl.Value.Direction;
+									Vector2D lastMoveVector = new Vector2D(lastVector.Y, -lastVector.X);
+									int rightFactor = -1;
+									if (this.productConnectionRight) {
+										if (lastVector.X > 0) {
+											rightFactor = 1;
+										} else if (lastVector.X == 0 && lastVector.Y >= 0) {
+											rightFactor = 1;
+										}
+									} else {
+										if (lastVector.X < 0) {
+											rightFactor = 1;
+										} else if (lastVector.X == 0 && lastVector.Y <= 0) {
+											rightFactor = 1;
+										}
+									}
+									Point2D tmp = this.vertices[j - 1];
+									List<Point2D> tmpRl = new List<Point2D>();
+
+									double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
+									double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 1 : distVlTmp;
+
+									/*double distRlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2 - 1) - 0.1;
+									double distRlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2 - 1) : distRl - 0.05;*/
+
+									
+									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVl : distVlFirst) * measure * factor /** rightFactor*/)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
+									Point2D connPoint0 = connPoint1 - lastVector * (0.015 * measure);
+									tmpRl.Add(connPoint0);
+									tmpRl.Add(connPoint1);
+									vl.Add(connPoint1);
+									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
+									//Point2D connPoint2 = connPoint1 + (lastMoveVector * (0.05 * measure * rightFactor));
+									tmpRl.Add(connPoint2);
+									this.ruecklaufVerticesForDrawing.Add(tmpRl);
+									this.vorlaufVerticesForDrawing.Add(vl);
+									vl = new List<Point2D>();
+									Point2D connPoint3 = connPoint2 + (lastVector * (0.05 * measure));
+									vl.Add(connPoint3);
+									Point2D connPoint4 = connPoint1 + (lastVector * (0.05 * measure));
+									vl.Add(connPoint4);
+								}
+							}
 							vl.Add(curPoint.Value);
 						}
 					}
 					if (lastLineRl == null) {
 						rl.Add(curLineRl.Origin);
 					} else {
-						Nullable<Point2D> curPoint = Line2D.GetIntersection(curLineRl, lastLineRl.Value);
+						Nullable<Point2D> curPoint;
+						if (j < this.vertices.Count - 1) {
+							curPoint = Line2D.GetIntersection(curLineRl, lastLineRl.Value);
+						} else {
+							curPoint = this.vertices[j] + moveVector * (distRlFirst * measure * factor);
+						}
 						if (curPoint.HasValue) {
+							if (this.ConnectedProduct != null && j == this.ProductConnectedAtSegment + 1) {
+								if (!this.ProductConnectedVorlaufseitig && i < this.ConnectedProduct.Product.PlannedCircuitCount) {
+									Vector2D lastVector = lastLineRl.Value.Direction;
+									Vector2D lastMoveVector = new Vector2D(lastVector.Y, -lastVector.X);
+									int rightFactor = -1;
+									if (this.productConnectionRight) {
+										if (lastVector.X > 0) {
+											rightFactor = 1;
+										} else if (lastVector.X == 0 && lastVector.Y >= 0) {
+											rightFactor = 1;
+										}
+									} else {
+										if (lastVector.X < 0) {
+											rightFactor = 1;
+										} else if (lastVector.X == 0 && lastVector.Y <= 0) {
+											rightFactor = 1;
+										}
+									}
+									Point2D tmp = this.vertices[j - 1];
+									List<Point2D> tmpVl = new List<Point2D>();
+
+									/*double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.05;
+									double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distVl - 0.05;*/
+									double distRlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
+									double distRlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distRlTmp;
+
+
+									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRl : distRlFirst) * measure * factor /** rightFactor*/)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
+									Point2D connPoint0 = connPoint1 - lastVector * (0.015 * measure);
+									tmpVl.Add(connPoint0);
+									tmpVl.Add(connPoint1);
+									rl.Add(connPoint1);
+									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRlTmp : distRlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
+									//Point2D connPoint2 = connPoint1 + (lastMoveVector * (0.05 * measure * rightFactor));
+									tmpVl.Add(connPoint2);
+									this.vorlaufVerticesForDrawing.Add(tmpVl);
+									this.ruecklaufVerticesForDrawing.Add(rl);
+									rl = new List<Point2D>();
+									Point2D connPoint3 = connPoint2 + (lastVector * (0.05 * measure));
+									rl.Add(connPoint3);
+									Point2D connPoint4 = connPoint1 + (lastVector * (0.05 * measure));
+									rl.Add(connPoint4);
+								}
+							}
 							rl.Add(curPoint.Value);
 						}
 					}
 					lastLineVl = curLineVl;
 					lastLineRl = curLineRl;
 				}
-				vl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distVlFirst * measure * factor));
-				rl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distRlFirst * measure * factor));
+				//vl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distVlFirst * measure * factor));
+				//rl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distRlFirst * measure * factor));
 				this.vorlaufVerticesForDrawing.Add(vl);
 				this.ruecklaufVerticesForDrawing.Add(rl);
 			}
@@ -267,12 +377,12 @@ namespace Europlan.Common {
 			return factor;
 		}
 
-		public void ResetCachedVerticesForDrawing() {
+		public virtual void ResetCachedVerticesForDrawing() {
 			this.vorlaufVerticesForDrawing = null;
 			this.ruecklaufVerticesForDrawing = null;
 		}
 
-		public void Draw(Graphics g, Matrix4D additionalTransformation, double measure, bool selected, bool gray) {
+		public virtual void Draw(Graphics g, Matrix4D additionalTransformation, double measure, bool selected, bool gray) {
 			if (this.vertices.Count < 2) {
 				return;
 			}
@@ -290,7 +400,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
+		public virtual void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
 			if (this.vertices.Count < 2) {
 				return;
 			}
@@ -315,14 +425,16 @@ namespace Europlan.Common {
 			PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
 			PointF newVertex;
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
-			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+			if (singleConnection.Count > 2) {
+				p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+			}
 			for (int i = 1; i < singleConnection.Count; i++) {
 				newVertex2D = additionalTransformation.TransformTo2D(singleConnection[i]);
 				newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
 				if (i == 2) {
 					p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 				}
-				if (i == this.vertices.Count - 1) {
+				if (i == singleConnection.Count - 1) {
 					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
 				}
 				try {
@@ -352,12 +464,12 @@ namespace Europlan.Common {
 			}
 		}
 
-		public bool HitTest(Point2D planPoint, double measure) {
+		public virtual bool HitTest(Point2D planPoint, double measure) {
 			return this.GetDistance(planPoint) <= measure * (this.NrOfCircuits * 0.05 - 0.01);
 		}
 
-		public double GetDistance(Point2D planPoint) {
-			Point2D oldVertex = new Point2D();
+		public virtual double GetDistance(Point2D planPoint) {
+			/*Point2D oldVertex = new Point2D();
 			bool first = false;
 			double bestDist = double.MaxValue;
 			foreach (Point2D newVertex in this.vertices) {
@@ -372,11 +484,39 @@ namespace Europlan.Common {
 				}
 				oldVertex = newVertex;
 			}
+			return bestDist;*/
+			int tmp;
+			Point2D tmp2;
+			return GetDistance(planPoint, out tmp, out tmp2);
+		}
+
+		private double GetDistance(Point2D planPoint, out int segmentId, out Point2D closestPoint) {
+			Point2D oldVertex = new Point2D();
+			bool first = true;
+			double bestDist = double.MaxValue;
+			segmentId = -1;
+			closestPoint = new Point2D();
+			int i = 0;
+			foreach (Point2D newVertex in this.vertices) {
+				if (first) {
+					first = false;
+				} else {
+					Segment2D segment = new Segment2D(oldVertex, newVertex);
+					double dist = segment.GetDistance(planPoint);
+					if (dist <= bestDist) {
+						segmentId = i;
+						bestDist = dist;
+						closestPoint = segment.GetClosestPoint(planPoint);
+					}
+					i++;
+				}
+				oldVertex = newVertex;
+			}
 			return bestDist;
 		}
 
 		[XmlIgnore]
-		public PlannedProduct Product {
+		public virtual PlannedProduct Product {
 			get {
 				if (this.productGuid != null) {
 					this.product = null;
@@ -403,13 +543,50 @@ namespace Europlan.Common {
 			}
 		}
 
-		public string ProductGuid {
+		public virtual string ProductGuid {
 			set { this.productGuid = value; }
 			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
 		}
 
 		[XmlIgnore]
-		public Distributor Distributor {
+		public virtual PlannedProduct ConnectedProduct {
+			get {
+				if (this.connectedProductGuid != null) {
+					this.connectedProduct = null;
+					foreach (Floor f in Project.Instance.Floors) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct pp in r.PlannedProducts) {
+								if (pp.Id == this.connectedProductGuid) {
+									this.connectedProduct = pp;
+									this.connectedProductGuid = null;
+									break;
+								}
+							}
+							if (this.connectedProductGuid == null) {
+								break;
+							}
+						}
+						if (this.connectedProductGuid == null) {
+							break;
+						}
+					}
+					this.connectedProductGuid = null;
+				}
+				return this.connectedProduct;
+			}
+			set {
+				this.connectedProduct = value;
+				this.connectedProductGuid = null;
+			}
+		}
+
+		public virtual string ConnectedProductGuid {
+			set { this.connectedProductGuid = value; }
+			get { return (this.connectedProductGuid != null || this.connectedProduct == null) ? this.connectedProductGuid : this.connectedProduct.Id; }
+		}
+
+		[XmlIgnore]
+		public virtual Distributor Distributor {
 			get {
 				if (this.distributorId != null) {
 					foreach (Floor f in Project.Instance.Floors) {
@@ -429,17 +606,17 @@ namespace Europlan.Common {
 			}
 		}
 
-		public string DistributorId {
+		public virtual string DistributorId {
 			get { return (this.distributorId != null && this.distributor == null) ? this.distributorId : this.distributor.Id; }
 			set { this.distributorId = value; }
 		}
 
-		public int DistributorStartIndex {
+		public virtual int DistributorStartIndex {
 			get { return this.distributorStartIndex; }
 			set { this.distributorStartIndex = value; }
 		}
 
-		public bool Automatic {
+		public virtual bool Automatic {
 			get { return this.automatic; }
 			set { this.automatic = true; }
 		}
@@ -489,27 +666,27 @@ namespace Europlan.Common {
 			set { this.productCircuitIndices = value; }
 		}*/
 
-		public bool Vorlauf {
+		public virtual bool Vorlauf {
 			get { return this.vorlauf; }
 			set { this.vorlauf = value; }
 		}
 
-		public bool Ruecklauf {
+		public virtual bool Ruecklauf {
 			get { return this.ruecklauf; }
 			set { this.ruecklauf = value; }
 		}
 
-		public bool FirstCircuit {
+		public virtual bool FirstCircuit {
 			get { return this.firstCircuit; }
 			set { this.firstCircuit = value; }
 		}
 
-		public bool OtherCircuits {
+		public virtual bool OtherCircuits {
 			get { return this.otherCircuits; }
 			set { this.otherCircuits = value; }
 		}
 
-		public int NrOfCircuits {
+		public virtual int NrOfCircuits {
 			get {
 				int nrOfCircuits = 0;
 				if (this.firstCircuit) {
@@ -522,7 +699,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public Product.ProductType ConnectionType {
+		public virtual Product.ProductType ConnectionType {
 			get { return this.connectionType; }
 			set { this.connectionType = value; }
 		}
@@ -573,7 +750,7 @@ namespace Europlan.Common {
 			return result;
 		}
 
-		public double GetPartInsidePolygon(Polygon2D polygon) {
+		public virtual double GetPartInsidePolygon(Polygon2D polygon) {
 			if (this.vertices == null || this.vertices.Count < 2 || polygon == null || polygon.Count < 3) {
 				return 0;
 			}
@@ -593,7 +770,7 @@ namespace Europlan.Common {
 			return length;
 		}
 
-		public double GetLength(double measure) {
+		public virtual double GetLength(double measure) {
 			if (measure == 0) {
 				return 0;
 			}
@@ -611,7 +788,7 @@ namespace Europlan.Common {
 			return length;
 		}
 
-		public List<GraphicalConnectionAnchor> GetAnchors(double scale) {
+		public virtual List<GraphicalConnectionAnchor> GetAnchors(double scale) {
 			List<GraphicalConnectionAnchor> anchors = new List<GraphicalConnectionAnchor>();
 			if (this.vertices == null || this.vertices.Count < 2) {
 				return anchors;
@@ -621,7 +798,7 @@ namespace Europlan.Common {
 			int i = 0;
 			foreach (Point2D vertex in this.vertices) {
 				if (prev.HasValue) {
-					if (i > 0 && i < this.vertices.Count - 2) {
+					if (i > 0 && i < this.vertices.Count - 2 && i != this.productConnectedAtSegment && i != this.productConnectedAtSegment - 1) {
 						anchors.Add(new GraphicalConnectionAnchor(new Segment2D(prev.Value, vertex), this, i));
 					}
 					i++;
@@ -634,18 +811,18 @@ namespace Europlan.Common {
 		private Point2D startDrag;
 		private List<Point2D> startVertices;
 
-		public bool StartDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+		public virtual bool StartDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
 			this.startDrag = planPoint;
 			this.startVertices = new List<Point2D>(this.vertices);
 			return false;
 		}
 
-		public bool MoveDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+		public virtual bool MoveDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
 			this.MoveSegment(anchor.SegmentId, planPoint - startDrag);
 			return true;
 		}
 
-		public bool EndDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+		public virtual bool EndDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
 			this.Simplify();
 			this.startDrag = new Point2D();
 			this.startVertices = null;
@@ -662,15 +839,26 @@ namespace Europlan.Common {
 			realMoveDirection.Normalize();
 
 			Vector2D realMove = Vector2D.DotProduct(realMoveDirection, vector) * realMoveDirection;
-
+			
 			Line2D movedLine = new Line2D(this.startVertices[segmentId] + realMove, this.startVertices[segmentId] - this.startVertices[segmentId + 1]);
 
 			Nullable<Point2D> newSegmentStart = Line2D.GetIntersection(prevLine, movedLine);
 			Nullable<Point2D> newSegmentEnd = Line2D.GetIntersection(nextLine, movedLine);
 
+			Point2D oldVertex1 = this.vertices[segmentId];
+			Point2D oldVertex2 = this.vertices[segmentId + 1];
+
 			if (newSegmentStart.HasValue && newSegmentEnd.HasValue) {
 				this.vertices[segmentId] = newSegmentStart.Value;
 				this.vertices[segmentId + 1] = newSegmentEnd.Value;
+			}
+
+			if (this.ConnectedProduct != null) {
+				double segmentLength = new Segment2D(this.vertices[this.productConnectedAtSegment], this.vertices[this.productConnectedAtSegment + 1]).GetLength();
+				if (segmentLength < this.productConnectedPoint) {
+					this.vertices[segmentId] = oldVertex1;
+					this.vertices[segmentId + 1] = oldVertex2;
+				}
 			}
 		}
 
@@ -679,7 +867,51 @@ namespace Europlan.Common {
 			//throw new Exception("The method or operation is not implemented.");
 		}
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
+		public virtual List<GraphicalConnectionAnbindungsPunkt> GetConnectedProductAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
+			if (this.ConnectedProduct == null || this.Vertices == null || this.Vertices.Count < 2) {
+				return new List<GraphicalConnectionAnbindungsPunkt>();
+			}
+
+			List<GraphicalConnectionAnbindungsPunkt> result = new List<GraphicalConnectionAnbindungsPunkt>();
+			double factor = CalculateFactor();
+			for (int i = 0; i < this.ConnectedProduct.Product.PlannedCircuitCount; i++) {
+				int j = this.ProductConnectedAtSegment + 1;
+				Vector2D lastVector = this.vertices[j] - this.vertices[j - 1];
+				lastVector.Normalize();
+				Vector2D lastMoveVector = new Vector2D(lastVector.Y, -lastVector.X);
+				int rightFactor = -1;
+				if (this.productConnectionRight) {
+					if (lastVector.X > 0) {
+						rightFactor = 1;
+					} else if (lastVector.X == 0 && lastVector.Y >= 0) {
+						rightFactor = 1;
+					}
+				} else {
+					if (lastVector.X < 0) {
+						rightFactor = 1;
+					} else if (lastVector.X == 0 && lastVector.Y <= 0) {
+						rightFactor = 1;
+					}
+				}
+				Point2D tmp = this.vertices[j - 1];
+
+				double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
+				double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distVlTmp - 0.1;
+
+				Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
+				Point2D connPoint2 = connPoint1 + (lastVector * (0.05 * measure));
+
+				if (this.ProductConnectedVorlaufseitig == !input) {
+					result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint1, new Polygon2D(new Point2D[] { connPoint1 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint1 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
+				} else {
+					result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint2, new Polygon2D(new Point2D[] { connPoint2 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint2 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
+				}
+			}
+
+			return result;
+		}
+
+		public virtual List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
 			if (this.Vertices == null || this.Vertices.Count < 2) {
 				return new List<GraphicalConnectionAnbindungsPunkt>();
 			}
@@ -726,6 +958,286 @@ namespace Europlan.Common {
 			}
 			return anbindungsPunkte;
 		}
+
+		public virtual int ProductConnectedAtSegment {
+			get { return this.productConnectedAtSegment; }
+			set { this.productConnectedAtSegment = value; }
+		}
+
+		public virtual double ProductConnectedPoint {
+			get { return this.productConnectedPoint; }
+			set { this.productConnectedPoint = value; }
+		}
+
+		public virtual bool ProductConnectedVorlaufseitig {
+			get { return this.productConnectedVorlaufseitig; }
+			set { this.productConnectedVorlaufseitig = value; }
+		}
+
+		public virtual bool ProductConnectionRight {
+			get { return this.productConnectionRight; }
+			set { this.productConnectionRight = value; }
+		}
+
+		public virtual PossibleProductConnection GetPossibleProductConnection(float measure, bool invertYAxis, Point2D planPoint, Product productToUse, Floor floor, int circuitCount) {
+			if (this.ConnectedProduct != null) {
+				return null;
+			}
+			int segmentId;
+			Point2D closestPoint;
+			double dist = this.GetDistance(planPoint, out segmentId, out closestPoint);
+
+			PossibleProductConnection possibleConnection = null;
+			if (dist < 0.025 * measure) {
+				double size = 0.05 * measure;
+				Point2D leftBottom = new Point2D(closestPoint.X - size, closestPoint.Y - size);
+				Point2D leftTop = new Point2D(closestPoint.X - size, closestPoint.Y + size);
+				Point2D rightTop = new Point2D(closestPoint.X + size, closestPoint.Y + size);
+				Point2D rightBottom = new Point2D(closestPoint.X + size, closestPoint.Y - size);
+				possibleConnection = new PossibleProductConnection(closestPoint, new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, true, 0 /* TODO*/, this, segmentId, new Segment2D(closestPoint, this.vertices[segmentId]).GetLength());
+			}
+			return possibleConnection;
+		}
+	}
+
+	public class GraphicalProductToProductConnection : GraphicalProductConnection {
+		private PlannedProduct product;
+		private string productGuid = null;
+
+		private PlannedProduct connectedToProduct;
+		private string connectedToProductGuid = null;
+
+		public override List<Point2D> Vertices {
+			get { return null; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool FinishedConnection {
+			get { return true; }
+			set { }
+		}
+
+		internal GraphicalProductToProductConnection() {
+		}
+
+		public GraphicalProductToProductConnection(PlannedProduct product, PlannedProduct connectedToProduct) {
+			this.product = product;
+			this.connectedToProduct = connectedToProduct;
+		}
+
+		public override double ConnectionDistributorWidth {
+			get { return this.NrOfCircuits * 0.05 * 2 - 0.029; }
+		}
+
+		public override void ResetCachedVerticesForDrawing() {
+		}
+
+		public override void Draw(Graphics g, Matrix4D additionalTransformation, double measure, bool selected, bool gray) {
+		}
+
+		public override void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
+		}
+
+		public override bool HitTest(Point2D planPoint, double measure) {
+			return false;
+		}
+
+		public override double GetDistance(Point2D planPoint) {
+			return double.MaxValue;
+		}
+
+		[XmlIgnore]
+		public override PlannedProduct Product {
+			get {
+				if (this.productGuid != null) {
+					this.product = null;
+					foreach (Floor f in Project.Instance.Floors) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct pp in r.PlannedProducts) {
+								if (pp.Id == this.productGuid) {
+									this.product = pp;
+									this.productGuid = null;
+									break;
+								}
+							}
+							if (this.productGuid == null) {
+								break;
+							}
+						}
+						if (this.productGuid == null) {
+							break;
+						}
+					}
+					this.productGuid = null;
+				}
+				return this.product;
+			}
+		}
+
+		public override string ProductGuid {
+			set { this.productGuid = value; }
+			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
+		}
+
+		[XmlIgnore]
+		public PlannedProduct ConnectedToProduct {
+			get {
+				if (this.connectedToProductGuid != null) {
+					this.connectedToProduct = null;
+					foreach (Floor f in Project.Instance.Floors) {
+						foreach (Room r in f.Rooms) {
+							foreach (PlannedProduct pp in r.PlannedProducts) {
+								if (pp.Id == this.connectedToProductGuid) {
+									this.connectedToProduct = pp;
+									this.connectedToProductGuid = null;
+									break;
+								}
+							}
+							if (this.connectedToProductGuid == null) {
+								break;
+							}
+						}
+						if (this.connectedToProductGuid == null) {
+							break;
+						}
+					}
+					this.connectedToProductGuid = null;
+				}
+				return this.connectedToProduct;
+			}
+			set {
+				this.connectedToProduct = value;
+				this.connectedToProductGuid = null;
+			}
+		}
+
+		public string ConnectedToProductGuid {
+			set { this.connectedToProductGuid = value; }
+			get { return (this.connectedToProductGuid != null || this.connectedToProduct == null) ? this.connectedToProductGuid : this.connectedToProduct.Id; }
+		}
+
+		[XmlIgnore]
+		public override Distributor Distributor {
+			get { return null; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override string DistributorId {
+			get { return null; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override int DistributorStartIndex {
+			get { return -1; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool Automatic {
+			get { return true; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool Vorlauf {
+			get { return true; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool Ruecklauf {
+			get { return true; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool FirstCircuit {
+			get { return true; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool OtherCircuits {
+			get { return true; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override int NrOfCircuits {
+			get { return this.Product.Product.PlannedCircuitCount; }
+		}
+
+		[XmlIgnore]
+		public override Product.ProductType ConnectionType {
+			get {
+				if (this.ConnectedToProduct != null && this.ConnectedToProduct.Product.Connections != null && this.ConnectedToProduct.Product.Connections.Count > 0) {
+					return this.ConnectedToProduct.Product.Connections[0].ConnectionType;
+				}
+				return Europlan.Common.Product.ProductType.FBH;
+			}
+			set { }
+		}
+
+		public override double GetPartInsidePolygon(Polygon2D polygon) {
+			return 0;
+		}
+
+		public override double GetLength(double measure) {
+			return 0;
+		}
+
+		public override List<GraphicalConnectionAnchor> GetAnchors(double scale) {
+			return new List<GraphicalConnectionAnchor>();
+		}
+
+		public override bool StartDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+			return false;
+		}
+
+		public override bool MoveDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+			return false;
+		}
+
+		public override bool EndDrag(GraphicalConnectionAnchor anchor, Point2D planPoint) {
+			return false;
+		}
+
+		public override List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
+			if (this.ConnectedToProduct.Product.Connections != null && this.ConnectedToProduct.Product.Connections.Count > 0) {
+				return this.ConnectedToProduct.Product.Connections[0].GetConnectedProductAnbindungsPunkte(measure, input, distributorIndex, ignoreDistributorIndices, newProductConnection);
+			}
+			return new List<GraphicalConnectionAnbindungsPunkt>();
+		}
+
+		public override List<GraphicalConnectionAnbindungsPunkt> GetConnectedProductAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
+			return new List<GraphicalConnectionAnbindungsPunkt>();
+		}
+
+		[XmlIgnore]
+		public override int ProductConnectedAtSegment {
+			get { return -1; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override double ProductConnectedPoint {
+			get { return -1; }
+			set { }
+		}
+
+		[XmlIgnore]
+		public override bool ProductConnectedVorlaufseitig {
+			get { return true; }
+			set { }
+		}
+
+		public override PossibleProductConnection GetPossibleProductConnection(float measure, bool invertYAxis, Point2D planPoint, Product productToUse, Floor floor, int circuitCount) {
+			return null;
+		}
+
 	}
 
 	public class GraphicalConnectionAnbindungsPunkt {

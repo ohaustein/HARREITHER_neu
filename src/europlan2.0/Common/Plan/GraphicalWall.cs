@@ -856,7 +856,6 @@ namespace Europlan.Common {
 
 		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
 			// TODO
-			//throw new Exception("TODO");
 			return true;
 		}
 

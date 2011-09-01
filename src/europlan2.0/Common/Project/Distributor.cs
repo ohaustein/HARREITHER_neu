@@ -725,7 +725,6 @@ namespace Europlan.Common {
 		}
 
 		public PossibleProductConnection GetPossibleProductConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint1, Product product, Floor floor, int nrOfCircuits, bool useFirstConnection, double moveMousePoint) {
-			// TODO
 			double width = this.Width * measure;
 			double height = this.Height * measure;
 			double connectionWidth = 0.055 * measure;

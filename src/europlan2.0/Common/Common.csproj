@@ -42,10 +42,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="SolidFramework, Version=7.1.1606.0, Culture=neutral, PublicKeyToken=d16bc61c9431f4ad, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\SolidFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -398,6 +394,12 @@
     </Compile>
     <Compile Include="Project\ConnectionDrawer.Designer.cs">
       <DependentUpon>ConnectionDrawer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\NewGraphicalProductToProductConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\NewGraphicalProductToProductConnection.Designer.cs">
+      <DependentUpon>NewGraphicalProductToProductConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\PossibleConnection.cs" />
     <Compile Include="Products\Circuit.cs" />
@@ -1180,6 +1182,10 @@
     <EmbeddedResource Include="Project\ConnectionDrawer.resx">
       <DependentUpon>ConnectionDrawer.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\NewGraphicalProductToProductConnection.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewGraphicalProductToProductConnection.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="Icons\default.png" />
     <Content Include="Reporting\Harreither.png">
