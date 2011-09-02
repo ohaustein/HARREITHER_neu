@@ -55,9 +55,9 @@ namespace Europlan.Common {
 			set { }
 		}
 
-		public override void InitializeVertices(IEnumerable<Point2D> vertices) {
-			throw new Exception("TODO");
-		}
+		/*public override void InitializeVertices(IEnumerable<Point2D> vertices) {
+			// TODO
+		}*/
 
 		public override bool IsMoveable {
 			get { return false; }

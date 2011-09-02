@@ -1252,6 +1252,12 @@ namespace Europlan.Common {
 									pipe.PipeType = previousRestPipeRl.PipeType;
 									pipe.Insulation = previousRestPipeRl.Insulation;
 									pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+								} else {
+									pipe.PipeType = pp.Product.DefaultPipeType;
+									if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+										pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+										pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+									}
 								}
 								pipe.IsGenerated = true;
 								pipe.Room = roomThrough;
@@ -1285,6 +1291,12 @@ namespace Europlan.Common {
 									pipe.PipeType = previousRestPipeVl.PipeType;
 									pipe.Insulation = previousRestPipeVl.Insulation;
 									pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+								} else {
+									pipe.PipeType = pp.Product.DefaultPipeType;
+									if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+										pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+										pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+									}
 								}
 								pipe.IsGenerated = true;
 								pipe.Room = roomThrough;
@@ -1311,6 +1323,12 @@ namespace Europlan.Common {
 								pipe.PipeType = previousRestPipeRl.PipeType;
 								pipe.Insulation = previousRestPipeRl.Insulation;
 								pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+							} else {
+								pipe.PipeType = pp.Product.DefaultPipeType;
+								if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+									pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+									pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+								}
 							}
 							pipe.IsGenerated = true;
 							pipe.Room = roomThrough;
@@ -1336,6 +1354,12 @@ namespace Europlan.Common {
 								pipe.PipeType = previousRestPipeVl.PipeType;
 								pipe.Insulation = previousRestPipeVl.Insulation;
 								pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+							} else {
+								pipe.PipeType = pp.Product.DefaultPipeType;
+								if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+									pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+									pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+								}
 							}
 							pipe.IsGenerated = true;
 							pipe.Room = roomThrough;
@@ -1354,6 +1378,12 @@ namespace Europlan.Common {
 							pipe.PipeType = previousRestPipeRl.PipeType;
 							pipe.Insulation = previousRestPipeRl.Insulation;
 							pipe.Verlegeart = previousRestPipeRl.Verlegeart;
+						} else {
+							pipe.PipeType = pp.Product.DefaultPipeType;
+							if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+								pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+								pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+							}
 						}
 						pipe.IsGenerated = true;
 						pipe.Vorlauf = vlRest;
@@ -1369,6 +1399,12 @@ namespace Europlan.Common {
 							pipe.PipeType = previousRestPipeVl.PipeType;
 							pipe.Insulation = previousRestPipeVl.Insulation;
 							pipe.Verlegeart = previousRestPipeVl.Verlegeart;
+						} else {
+							pipe.PipeType = pp.Product.DefaultPipeType;
+							if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
+								pipe.Insulation = ConnectionPipe.InsulationEnum.IN_VL_RL;
+								pipe.Verlegeart = ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH;
+							}
 						}
 						pipe.IsGenerated = true;
 						pipe.Ruecklauf = rlRest;

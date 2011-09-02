@@ -1120,15 +1120,7 @@ namespace Europlan.Common {
 								return;
 							} else {
 								ModulKlimaBodenProduct mbProduct = this.product.Product as ModulKlimaBodenProduct;
-								mbProduct.GraphConstruction = null;
-								mbProduct.Connections = null;
-								foreach (ModulBodenCircuit c in mbProduct.PlannedCircuits) {
-									c.Links = null;
-									c.Row.Links = null;
-									foreach (KlimaFlaechenModul modul in c.Row.List) {
-										modul.ClearGraphicalRepresentation();
-									}
-								}
+								mbProduct.ClearGraphicalRepresentation();
 							}
 						}
 						// change from table based to graphical  

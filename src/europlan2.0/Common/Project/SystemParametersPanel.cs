@@ -1232,6 +1232,15 @@ namespace Europlan.Common {
 			if (rbHithermDefault.Checked != rbHithermPlusDefault.Checked) {
 				Configuration.UserTemplate.AddProductParameter<HithermProduct>("ConfigUsePlus", this.rbHithermPlusDefault.Checked);
 				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+
+				if (HithermProduct.ConfigUsePlus != rbHithermPlusDefault.Checked) {
+					if (MessageBox.Show("Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?", "Für aktuelles Projekt verwenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+						HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+						if (ProjectChanged != null) {
+							ProjectChanged(null);
+						}
+					}
+				}
 			}
 		}
 
@@ -1239,6 +1248,15 @@ namespace Europlan.Common {
 			if (rbHithermCompactDefault.Checked != rbHithermCompactPlusDefault.Checked) {
 				Configuration.UserTemplate.AddProductParameter<HithermCompactProduct>("ConfigUsePlus", this.rbHithermCompactPlusDefault.Checked);
 				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+
+				if (HithermCompactProduct.ConfigUsePlus != rbHithermCompactPlusDefault.Checked) {
+					if (MessageBox.Show("Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?", "Für aktuelles Projekt verwenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+						HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlusDefault.Checked;
+						if (ProjectChanged != null) {
+							ProjectChanged(null);
+						}
+					}
+				}
 			}
 		}
 

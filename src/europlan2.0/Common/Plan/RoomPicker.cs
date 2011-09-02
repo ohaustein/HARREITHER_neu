@@ -84,7 +84,7 @@ namespace Europlan.Common {
 			set {
 				if (value == RoomPickerMode.RPM_PICK_ROOM) {
 					if (this.room != null && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0) {
-						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren? Die grafische Auslegung aller Systeme die bereits in diesem Raum verplant wurden wird dadurch gelöscht.", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
 						if (result == DialogResult.No) {
 							return;
 						}
@@ -97,6 +97,17 @@ namespace Europlan.Common {
 					this.unusedCoordinates.Clear();
 					if (this.ConnectedPlanPanel != null) {
 						this.ConnectedPlanPanel.InvalidateGraphics();
+					}
+					bool resetFloorProducts = !this.isCeiling;
+					bool resetCeilingProducts = this.isCeiling || this.room.CeilingCoordinates == null;
+					bool resetWallProducts = false;
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						if ((resetFloorProducts && pp.Product.Type == Product.ProductType.FBH) ||
+							(resetCeilingProducts && pp.Product.Type == Product.ProductType.DH) ||
+							(resetWallProducts && pp.Product.Type == Product.ProductType.WH)) {
+							pp.Product.GraphicalMode = false;
+							pp.Product.ClearGraphicalRepresentation();
+						}
 					}
 				}
 				this.mode = value;

@@ -924,6 +924,7 @@ namespace Europlan.Common.Products {
 		private void UpdateSelectedModules() {
 			this.ignoreModuleOrientationChange++;
 			this.ignoreModuleTypeChange++;
+			this.ignoreModuleFlexibleChange++;
 
 			if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_PICK_MODULE) {
 				if (this.modulKlimaDeckePlanner.HighlightCircuit == null && this.modulKlimaDeckePlanner.HighlightSubArea == null && this.modulKlimaDeckePlanner.HighlightRow == null) {
@@ -991,6 +992,63 @@ namespace Europlan.Common.Products {
 					this.cmbSelectedModuleType.Enabled = false;
 					this.cmbSelectedModuleOrientation.Enabled = false;
 				}
+
+				{ // update flexible checkboxes
+					bool vlFlexible = false;
+					bool vlNonFlexible = false;
+					bool rlFlexible = false;
+					bool rlNonFlexible = false;
+					KlimaFlaechenModulVerbindung link;
+					int tmp;
+					bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+					ModulDeckeCircuit c;
+					foreach (KlimaFlaechenModul modul in module) {
+						c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(modul, out tmp);
+						link = modul.GetInputLink(c, invertYAxis);
+						if (link != null) {
+							if (link.IsFlexible) {
+								vlFlexible = true;
+							} else {
+								vlNonFlexible = true;
+							}
+						}
+						link = modul.GetOutputLink(c, invertYAxis);
+						if (link != null) {
+							if (link.IsFlexible) {
+								rlFlexible = true;
+							} else {
+								rlNonFlexible = true;
+							}
+						}
+					}
+					if (!vlFlexible && !vlNonFlexible) {
+						this.cbVlFlexible.Enabled = false;
+						this.cbVlFlexible.CheckState = CheckState.Indeterminate;
+					} else {
+						this.cbVlFlexible.Enabled = true;
+						if (vlFlexible && vlNonFlexible) {
+							this.cbVlFlexible.CheckState = CheckState.Indeterminate;
+						} else if (vlFlexible) {
+							this.cbVlFlexible.CheckState = CheckState.Checked;
+						} else {
+							this.cbVlFlexible.CheckState = CheckState.Unchecked;
+						}
+					}
+					if (!rlFlexible && !rlNonFlexible) {
+						this.cbRlFlexible.Enabled = false;
+						this.cbRlFlexible.CheckState = CheckState.Indeterminate;
+					} else {
+						this.cbRlFlexible.Enabled = true;
+						if (rlFlexible && rlNonFlexible) {
+							this.cbRlFlexible.CheckState = CheckState.Indeterminate;
+						} else if (rlFlexible) {
+							this.cbRlFlexible.CheckState = CheckState.Checked;
+						} else {
+							this.cbRlFlexible.CheckState = CheckState.Unchecked;
+						}
+					}
+				}
+
 			} else {
 				this.lblTypError.Text = "Kein Modul ausgewählt";
 				this.cmbSelectedModuleType.SelectedIndex = -1;
@@ -1000,6 +1058,7 @@ namespace Europlan.Common.Products {
 			}
 			this.ignoreModuleOrientationChange--;
 			this.ignoreModuleTypeChange--;
+			this.ignoreModuleFlexibleChange--;
 
 			//List<KlimaFlaechenModul> module = this.modulKlimaBodenPlanner.GetAllSelectedModules();
 			if (module.Count == 0) {
@@ -1098,6 +1157,7 @@ namespace Europlan.Common.Products {
 
 		private int ignoreModuleTypeChange = 0;
 		private int ignoreModuleOrientationChange = 0;
+		private int ignoreModuleFlexibleChange = 0;
 
 		private void cmbSelectedModuleType_SelectedIndexChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
@@ -1373,7 +1433,19 @@ namespace Europlan.Common.Products {
 			lblQAnbCool.Text = Math.Round(this.plannedProduct.Product.PlannedCoolLoadAnbindung, 0).ToString();
 			lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 			lblQCoolRest.Text = Math.Round(this.plannedProduct.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
+			
+			double diff = 0;
+			if (showHeat) {
+				if (showCool) {
+					diff = Math.Min(qDiffHeat, qDiffCool);
+				} else {
+					diff = qDiffHeat;
+				}
+			} else if (showCool) {
+				diff = qDiffCool;
 
+			}
+			lblQDiff.Text = Math.Round(diff, 0).ToString("+0;-0");
 		}
 
 		private void button1_Click(object sender, EventArgs e) {
@@ -1621,6 +1693,40 @@ namespace Europlan.Common.Products {
 				this.planPanel.InvalidateGraphics();
 			}
 			form.Dispose();*/
+		}
+
+		private void cbVlFlexible_CheckedChanged(object sender, EventArgs e) {
+			if (this.ignoreModuleFlexibleChange == 0 && this.cbVlFlexible.CheckState != CheckState.Indeterminate) {
+				KlimaFlaechenModulVerbindung link;
+				int tmp;
+				bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+				ModulDeckeCircuit c;
+				foreach (KlimaFlaechenModul modul in this.modulKlimaDeckePlanner.HighlightModules) {
+					c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(modul, out tmp);
+					link = modul.GetInputLink(c, invertYAxis);
+					if (link != null) {
+						link.IsFlexible = (this.cbVlFlexible.CheckState == CheckState.Checked);
+					}
+				}
+				this.planPanel.InvalidateGraphics();
+			}
+		}
+
+		private void cbRlFlexible_CheckedChanged(object sender, EventArgs e) {
+			if (this.ignoreModuleFlexibleChange == 0 && this.cbRlFlexible.CheckState != CheckState.Indeterminate) {
+				KlimaFlaechenModulVerbindung link;
+				int tmp;
+				bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+				ModulDeckeCircuit c;
+				foreach (KlimaFlaechenModul modul in this.modulKlimaDeckePlanner.HighlightModules) {
+					c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(modul, out tmp);
+					link = modul.GetOutputLink(c, invertYAxis);
+					if (link != null) {
+						link.IsFlexible = (this.cbRlFlexible.CheckState == CheckState.Checked);
+					}
+				}
+				this.planPanel.InvalidateGraphics();
+			}
 		}
 	}
 }

@@ -369,9 +369,6 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				if (this.restoreMode != null) {
-					this.restoreMode(this, EventArgs.Empty);
-				}
 			}
 
 			return false;
@@ -632,6 +629,7 @@ namespace Europlan.Common {
 
 			if (this.mode == HithermCompactPlannerMode.HPM_ADD_CONNECTION) {
 				if (key == System.Windows.Forms.Keys.Escape) {
+					this.newConnectionStartConnection = null;
 					this.newConnectionStart = null;
 					this.newConnection.Vertices.Clear();
 					this.newConnectionEnd = null;
@@ -649,6 +647,7 @@ namespace Europlan.Common {
 							this.connectedWallPanel.InvalidateGraphics();
 						}
 					} else {
+						this.newConnectionStartConnection = null;
 						this.newConnectionStart = null;
 						this.newConnection.Vertices.Clear();
 						this.newConnectionEnd = null;

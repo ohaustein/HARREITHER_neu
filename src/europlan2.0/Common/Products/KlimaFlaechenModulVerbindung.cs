@@ -70,6 +70,7 @@ namespace Europlan.Common {
 		private PlannedProduct product;
 		private string productGuid = null;
 		private int distributorIndex = -1;
+		private bool flexible = false;
 
 		public List<Point2D> Vertices {
 		  get { return vertices; }
@@ -131,12 +132,21 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
+			if (this.StartConnectedToAnbindung) {
+				c = Color.Red;
+			} else if (this.EndConnectedToAnbindung) {
+				c = Color.Blue;
+			}
 			Point2D newVertex2D;
 			Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.vertices[0]);
 			PointF newVertex;
 			PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
 			//bool first = true;
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
+			if (this.flexible) {
+				p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+				//p.DashPattern = new float[] { 3, 1 };
+			}
 			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 			Point2D vertex;
 			for (int i = 1; i < this.vertices.Count; i++) {
@@ -162,6 +172,11 @@ namespace Europlan.Common {
 		}
 
 		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, Color c) {
+			if (this.StartConnectedToAnbindung) {
+				c = Color.Red;
+			} else if (this.EndConnectedToAnbindung) {
+				c = Color.Blue;
+			}
 			if (this.vertices.Count < 2) {
 				return;
 			}
@@ -602,6 +617,11 @@ namespace Europlan.Common {
 			get {
 				return (this.End == null);
 			}
+		}
+
+		public bool IsFlexible {
+			get { return this.flexible; }
+			set { this.flexible = value; }
 		}
 	}
 }

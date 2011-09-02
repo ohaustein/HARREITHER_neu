@@ -1493,5 +1493,17 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		public override void ClearGraphicalRepresentation() {
+			base.ClearGraphicalRepresentation();
+			this.GraphConstruction = null;
+			foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+				c.Links = null;
+				c.Row.Links = null;
+				foreach (KlimaFlaechenModul modul in c.Row.List) {
+					modul.ClearGraphicalRepresentation();
+				}
+			}
+		}
 	}
 }

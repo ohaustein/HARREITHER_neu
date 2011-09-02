@@ -1515,7 +1515,6 @@ namespace Europlan.Common {
 								return;
 							} else {
 								EcothermProduct evProduct = this.product.Product as EcothermProduct;
-								evProduct.Connections = null;
 								evProduct.ClearGraphicalRepresentation();
 							}
 						}

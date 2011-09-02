@@ -618,7 +618,7 @@ namespace Europlan.Common {
 
 		public virtual bool Automatic {
 			get { return this.automatic; }
-			set { this.automatic = true; }
+			set { this.automatic = value; }
 		}
 
 		/*public int DistributorIndicesCount {
@@ -901,10 +901,13 @@ namespace Europlan.Common {
 				Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
 				Point2D connPoint2 = connPoint1 + (lastVector * (0.05 * measure));
 
-				if (this.ProductConnectedVorlaufseitig == !input) {
-					result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint1, new Polygon2D(new Point2D[] { connPoint1 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint1 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
-				} else {
-					result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint2, new Polygon2D(new Point2D[] { connPoint2 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint2 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
+				if ((distributorIndex < 0 || this.distributorStartIndex + i == distributorIndex) &&
+					(ignoreDistributorIndices == null || !ignoreDistributorIndices.Contains(this.distributorStartIndex + i))) {
+					if (this.ProductConnectedVorlaufseitig == !input) {
+						result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint1, new Polygon2D(new Point2D[] { connPoint1 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint1 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint1 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
+					} else {
+						result.Add(new GraphicalConnectionAnbindungsPunkt(connPoint2, new Polygon2D(new Point2D[] { connPoint2 - lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) - lastMoveVector * (0.05 * measure), connPoint2 + lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure), connPoint2 - lastVector * (0.025 * measure) + lastMoveVector * (0.05 * measure) }), this.distributorStartIndex + i));
+					}
 				}
 			}
 
@@ -1137,7 +1140,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override bool Automatic {
-			get { return true; }
+			get { return false; }
 			set { }
 		}
 

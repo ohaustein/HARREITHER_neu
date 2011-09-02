@@ -534,7 +534,34 @@ namespace Europlan.Common {
 					} else if (pp.Product is HithermCompactProduct) {
 						HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
 						if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-							throw new Exception("TODO");
+							HithermCompactProduct hp = pp.Product as HithermCompactProduct;
+							if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
+								foreach (HithermCompactCircuit hc in hp.PlannedCircuits) {
+									foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+										link.RevertState();
+										for (int i = 0; i < link.Vertices.Count; i++) {
+											vertex = link.Vertices[i];
+											if (vertex.X > xBorder) {
+												vertex.X += linkXDelta;
+												link.Vertices[i] = vertex;
+											} else if (vertex.X > newXBorder) {
+												vertex.X = newXBorder;
+												link.Vertices[i] = vertex;
+											}
+											if (vertex.X >= leftBorder && vertex.X <= rightBorder) {
+												if (vertex.Y > yBorder) {
+													vertex.Y += linkYDelta;
+													link.Vertices[i] = vertex;
+												} else if (vertex.Y > newYBorder) {
+													vertex.Y = newYBorder;
+													link.Vertices[i] = vertex;
+												}
+											}
+										}
+										link.Simplify();
+									}
+								}
+							}
 						}
 					}
 				}
@@ -551,46 +578,6 @@ namespace Europlan.Common {
 					ceilingContour[i] = new Point2D(p.X, y);
 				}
 				this.AdjustLinks();
-				/*if (this.DachSchraege != null) {
-					Point2D vertex;
-					Nullable<Vector2D> offset = this.AssiociatedRoom.GetWallOffset(this);
-					if (offset.HasValue) {
-						double backupedHeihgt= this.GetBackupWallHeight();
-						double yBorder = (offset.Value.Y + backupedHeight) * 100.0;
-						double newYBorder = (offset.Value.Y + height) * 100.0;
-						double leftBorder = offset.Value.X * 100.0;
-						double rightBorder = (offset.Value.X + this.GetWallWidth()) * 100.0;
-						double linkDelta = (height - backupedHeight) * 100.0;
-						foreach (PlannedProduct pp in this.AssiociatedRoom.PlannedProducts) {
-							if (pp.Product is HithermProduct) {
-								HithermProduct hp = pp.Product as HithermProduct;
-								if (hp.GraphicalMode.HasValue && hp.GraphicalMode.Value == true) {
-									foreach (HithermCircuit hc in hp.PlannedCircuits) {
-										foreach (GraphicalHithermVerbindung link in hc.Links) {
-											link.RevertState();
-											for (int i = 0; i < link.Vertices.Count; i++) {
-												vertex = link.Vertices[i];
-												if (vertex.X > xBorder) {
-													vertex.X += linkDelta;
-													link.Vertices[i] = vertex;
-												} else if (vertex.X > newXBorder) {
-													vertex.X = newXBorder;
-													link.Vertices[i] = vertex;
-												}
-											}
-											link.Simplify();
-										}
-									}
-								}
-							} else if (pp.Product is HithermCompactProduct) {
-								HithermCompactProduct hcp = pp.Product as HithermCompactProduct;
-								if (hcp.GraphicalMode.HasValue && hcp.GraphicalMode.Value == true) {
-									throw new Exception("TODO");
-								}
-							}
-						}
-					}
-				}*/
 			}
 		}
 

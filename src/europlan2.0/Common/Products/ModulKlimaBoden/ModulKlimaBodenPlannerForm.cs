@@ -727,6 +727,18 @@ namespace Europlan.Common.Products {
 			lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 			lblQCoolRest.Text = Math.Round(this.plannedProduct.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
 
+			double diff = 0;
+			if (showHeat) {
+				if (showCool) {
+					diff = Math.Min(qDiffHeat, qDiffCool);
+				} else {
+					diff = qDiffHeat;
+				}
+			} else if (showCool) {
+				diff = qDiffCool;
+
+			}
+			lblQDiff.Text = Math.Round(diff, 0).ToString("+0;-0");
 		}
 
 		private void button1_Click(object sender, EventArgs e) {

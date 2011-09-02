@@ -1597,6 +1597,16 @@ namespace Europlan.Common {
 			}
 			return possibleConnection;
 		}
+
+		public override void ClearGraphicalRepresentation() {
+			base.ClearGraphicalRepresentation();
+			foreach (HithermCircuit c in this.PlannedCircuits) {
+				c.Links = null;
+				foreach (HithermRegister register in c.Registers) {
+					register.ClearGraphicalRepresentation();
+				}
+			}
+		}
 	}
 	
 }

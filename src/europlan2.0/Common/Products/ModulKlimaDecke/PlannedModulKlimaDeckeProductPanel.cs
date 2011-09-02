@@ -1177,19 +1177,7 @@ namespace Europlan.Common {
 								return;
 							} else {
 								ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
-								mdProduct.GraphConstruction = null;
-								mdProduct.Connections = null;
-								foreach (ModulDeckeCircuit c in mdProduct.PlannedCircuits) {
-									c.Links = null;
-									foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-										foreach (KlimaFlaechenList list in subArea.Rows) {
-											list.Links = null;
-											foreach (KlimaFlaechenModul modul in list.List) {
-												modul.ClearGraphicalRepresentation();
-											}
-										}
-									}
-								}
+								mdProduct.ClearGraphicalRepresentation();
 							}
 						}
 					// change from table based to graphical  

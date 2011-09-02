@@ -621,6 +621,11 @@ namespace Europlan.Common {
 				this.incompleteCalculation = true;
 				return false;
 			}
+			if (this.PlannedCircuits.Count > 12) {
+				this.lastErrorMsg = "Es sind zuviele Heizkreise in diesem Produkt vorhanden"; // TODO
+				this.incompleteCalculation = true;
+				return false;
+			}
 
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 				// TODO connect all circuits
@@ -1036,6 +1041,31 @@ namespace Europlan.Common {
 		}
 
 		internal void MoveRegisterToCircuit(HithermCompactRegister register, int circuitId) {
+			HithermCompactCircuit oldCircuit = this.GetCircuitForRegister(register);
+			if (oldCircuit != null) {
+				List<HithermCompactRegister> registersToMove = oldCircuit.GetAllConnectedRegisters(register);
+				HithermCompactCircuit circuit = null;
+				foreach (HithermCompactRegister registerToMove in registersToMove) {
+					circuit = this.MoveSingleRegisterToCircuit(registerToMove, circuitId);
+				}
+				if (circuit != null) {
+					List<GraphicalHithermCompactVerbindung> linksToMove = new List<GraphicalHithermCompactVerbindung>();
+					foreach (GraphicalHithermCompactVerbindung link in oldCircuit.Links) {
+						if ((link.Start != null && circuit.Registers.Contains(link.Start)) ||
+							(link.End != null && circuit.Registers.Contains(link.End))) {
+							linksToMove.Add(link);
+						}
+					}
+					foreach (GraphicalHithermCompactVerbindung link in linksToMove) {
+						oldCircuit.Links.Remove(link);
+						link.Circuit = circuit;
+						circuit.Links.Add(link);
+					}
+				}
+			}
+		}
+
+		private HithermCompactCircuit MoveSingleRegisterToCircuit(HithermCompactRegister register, int circuitId) {
 			if (this.registerCircuits.ContainsKey(register)) {
 				HithermCompactCircuit hc = this.circuitIds[this.registerCircuits[register]];
 				hc.Registers.Remove(register);
@@ -1046,11 +1076,14 @@ namespace Europlan.Common {
 				this.registerCircuits[register] = circuitId;
 				if (!this.circuitIds.ContainsKey(circuitId)) {
 					hc = new HithermCompactCircuit();
+					hc.HithermCompactProduct = this;
 					this.circuits.Add(hc);
 					this.circuitIds[circuitId] = hc;
 				}
 				this.circuitIds[circuitId].Registers.Add(register);
+				return this.circuitIds[circuitId];
 			}
+			return null;
 		}
 
 		internal void RemoveRegisterFromCircuit(HithermCompactRegister register) {
@@ -1281,6 +1314,16 @@ namespace Europlan.Common {
 					hr.PlannedProduct = pp;
 				}
 				nr++;
+			}
+		}
+
+		public override void ClearGraphicalRepresentation() {
+			base.ClearGraphicalRepresentation();
+			foreach (HithermCompactCircuit c in this.PlannedCircuits) {
+				c.Links = null;
+				foreach (HithermCompactRegister register in c.Registers) {
+					register.ClearGraphicalRepresentation();
+				}
 			}
 		}
 	}

@@ -1649,5 +1649,9 @@ namespace Europlan.Common {
 		public virtual void DeleteConnection(GraphicalProductConnection connection) {
 			this.connections.Remove(connection);
 		}
+
+		public virtual void ClearGraphicalRepresentation() {
+			this.connections = new List<GraphicalProductConnection>();
+		}
 	}
 }

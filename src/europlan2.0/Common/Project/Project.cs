@@ -120,7 +120,7 @@ namespace Europlan.Common {
 			calculateCoolLoad = false;
 			outsideTemperatureForCooling = 30;
 			relativeHumidity = 50;
-			insideTemperatureForCooling = 25;
+			insideTemperatureForCooling = 26;
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();

@@ -137,9 +137,11 @@ namespace Europlan.Common {
 				}
 				g.Clip = newClip;
 				foreach (Product product in this.productsInFloor) {
-					foreach (GraphicalProductConnection connection in product.Connections) {
-						if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
-							connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != null && this.product != product);
+					if (product.Connections != null) {
+						foreach (GraphicalProductConnection connection in product.Connections) {
+							if ((connection.ConnectionType == Product.ProductType.FBH && this.PlanFloor) || (connection.ConnectionType == Product.ProductType.DH && this.PlanCeiling)) {
+								connection.Draw(g, additionalTransformation, this.Plan.Measure.Value, false, this.product != null && this.product != product);
+							}
 						}
 					}
 				}

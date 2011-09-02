@@ -1514,7 +1514,6 @@ namespace Europlan.Common {
 								return;
 							} else {
 								EurovalProduct evProduct = this.product.Product as EurovalProduct;
-								evProduct.Connections = null;
 								evProduct.ClearGraphicalRepresentation();
 							}
 						}

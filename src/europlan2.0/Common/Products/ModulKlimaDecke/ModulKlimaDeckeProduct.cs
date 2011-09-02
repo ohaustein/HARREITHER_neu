@@ -1754,6 +1754,22 @@ namespace Europlan.Common {
 			}
 			target.SubAreas.Add(subArea);
 		}
+
+		public override void ClearGraphicalRepresentation() {
+			base.ClearGraphicalRepresentation();
+			this.GraphConstruction = null;
+			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+				c.Links = new List<KlimaFlaechenSubAreaVerbindung>();
+				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+					foreach (KlimaFlaechenList list in subArea.Rows) {
+						list.Links = new List<KlimaFlaechenModulVerbindung>();
+						foreach (KlimaFlaechenModul modul in list.List) {
+							modul.ClearGraphicalRepresentation();
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public struct KlimaFlaechenModulWithRowAndCircuit {

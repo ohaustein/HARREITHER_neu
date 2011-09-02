@@ -1087,13 +1087,7 @@ namespace Europlan.Common {
 								return;
 							} else {
 								HithermProduct hp = this.product.Product as HithermProduct;
-								hp.Connections = null;
-								foreach (HithermCircuit c in hp.PlannedCircuits) {
-									c.Links = null;
-									foreach (HithermRegister register in c.Registers) {
-										register.ClearGraphicalRepresentation();
-									}
-								}
+								hp.ClearGraphicalRepresentation();
 							}
 						}
 						// change from table based to graphical  

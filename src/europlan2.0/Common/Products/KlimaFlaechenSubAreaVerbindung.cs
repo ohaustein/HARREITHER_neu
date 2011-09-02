@@ -99,6 +99,11 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
+			if (this.StartConnectedToAnbindung) {
+				c = Color.Red;
+			} else if (this.EndConnectedToAnbindung) {
+				c = Color.Blue;
+			}
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
 			foreach (List<Point2D> v in vertices) {
 				Point2D newVertex2D;
@@ -126,6 +131,11 @@ namespace Europlan.Common {
 		}
 
 		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, Color c) {
+			if (this.StartConnectedToAnbindung) {
+				c = Color.Red;
+			} else if (this.EndConnectedToAnbindung) {
+				c = Color.Blue;
+			}
 			foreach (List<Point2D> v in vertices) {
 				Point2D oldVertex = v[0];
 				Point2D newVertex;
@@ -172,7 +182,7 @@ namespace Europlan.Common {
 			get {
 				if (this.moduleStartIndices != null) {
 					if (this.Circuit is ModulBodenCircuit) {
-						throw new Exception("todo");
+						throw new Exception("modul boden does not support teilflächen");
 					} else if (this.Circuit is ModulDeckeCircuit) {
 						ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 						this.start = new List<KlimaFlaechenModul>();
@@ -194,7 +204,7 @@ namespace Europlan.Common {
 			get {
 				if (this.moduleEndIndices != null) {
 					if (this.Circuit is ModulBodenCircuit) {
-						throw new Exception("todo");
+						throw new Exception("modul boden does not support teilflächen");
 					} else if (this.Circuit is ModulDeckeCircuit) {
 						ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 						this.end = new List<KlimaFlaechenModul>();
@@ -217,7 +227,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.Start) {
@@ -258,7 +268,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.End) {
@@ -299,7 +309,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.Start) {
@@ -340,7 +350,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.End) {
@@ -377,7 +387,7 @@ namespace Europlan.Common {
 		public List<KlimaFlaechenList> GetStartRows() {
 			List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
 			if (this.Circuit is ModulBodenCircuit) {
-				throw new Exception("todo");
+				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
 				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 				foreach (KlimaFlaechenModul m in this.Start) {
@@ -405,7 +415,7 @@ namespace Europlan.Common {
 		public List<KlimaFlaechenList> GetEndRows() {
 			List<KlimaFlaechenList> rows = new List<KlimaFlaechenList>();
 			if (this.Circuit is ModulBodenCircuit) {
-				throw new Exception("todo");
+				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
 				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 				foreach (KlimaFlaechenModul m in this.End) {
@@ -437,7 +447,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.Start) {
@@ -478,7 +488,7 @@ namespace Europlan.Common {
 				}
 				List<int> indices = new List<int>();
 				if (this.Circuit is ModulBodenCircuit) {
-					throw new Exception("todo");
+					throw new Exception("modul boden does not support teilflächen");
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					foreach (KlimaFlaechenModul m in this.End) {
@@ -515,7 +525,7 @@ namespace Europlan.Common {
 		public List<ModulDeckeSubArea> GetStartSubAreas() {
 			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 			if (this.Circuit is ModulBodenCircuit) {
-				throw new Exception("todo");
+				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
 				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 				foreach (KlimaFlaechenModul m in this.Start) {
@@ -545,7 +555,7 @@ namespace Europlan.Common {
 		public List<ModulDeckeSubArea> GetEndSubAreas() {
 			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
 			if (this.Circuit is ModulBodenCircuit) {
-				throw new Exception("todo");
+				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
 				ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 				foreach (KlimaFlaechenModul m in this.End) {
