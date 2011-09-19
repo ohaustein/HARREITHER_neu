@@ -82,7 +82,7 @@ namespace Europlan.Common {
 			this.btnZoomOut.Name = "btnZoomOut";
 			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
 			this.btnZoomOut.Text = "Herauszoomen";
-			this.btnZoomOut.ToolTipText = "Heranzoomen";
+			this.btnZoomOut.ToolTipText = "Herauszoomen";
 			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1

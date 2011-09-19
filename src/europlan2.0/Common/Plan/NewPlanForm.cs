@@ -26,6 +26,7 @@ namespace Europlan.Common {
 
 			this.lblCaption.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
 			this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
+			this.lblPage.Text = EuroplanRes.NewPlanForm_Seite;
 		}
 
 		private void NewPlanForm_FormClosing(object sender, FormClosingEventArgs e) {

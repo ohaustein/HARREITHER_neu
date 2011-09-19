@@ -18,8 +18,17 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
+			this.Text = EuroplanRes.NewObstacleForm_Titel;
 			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
 			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+
+			this.label1.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblHeightOffset.Text = EuroplanRes.NewObstacleForm_Parapethoehe;
+			this.label3.Text = EuroplanRes.Unit_Zentimeter;
+			this.label2.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblHeight.Text = EuroplanRes.NewObstacleForm_Hoehe;
+			this.lblWidth.Text = EuroplanRes.NewObstacleForm_Breite;
+			this.lblConstruction.Text = EuroplanRes.NewObstacleForm_Typ;
 
 		}
 

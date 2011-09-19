@@ -71,8 +71,26 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
+			this.btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			this.btnRaster.ToolTipText = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
+			this.btnRotateLeft.Text = EuroplanRes.ImagePlanOptions_RotateCCWLarge;
+			this.btnRotateLeft.ToolTipText = EuroplanRes.ImagePlanOptions_RotateCCWLarge;
+			this.btnRotateLeftSmall.Text = EuroplanRes.ImagePlanOptions_RotateCCWSmall;
+			this.btnRotateLeftSmall.ToolTipText = EuroplanRes.ImagePlanOptions_RotateCCWSmall;
+			this.btnRotateRightSmall.Text = EuroplanRes.ImagePlanOptions_RotateCWSmall;
+			this.btnRotateRightSmall.ToolTipText = EuroplanRes.ImagePlanOptions_RotateCWSmall;
+			this.btnRotateRight.Text = EuroplanRes.ImagePlanOptions_RotateCWLarge;
+			this.btnRotateRight.ToolTipText = EuroplanRes.ImagePlanOptions_RotateCWLarge;
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomIn.ToolTipText = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomOut.ToolTipText = EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnMove.ToolTipText = EuroplanRes.Plan_Verschieben;
+			this.btnDistance.Text = EuroplanRes.Plan_Massstab;
+			this.btnDistance.ToolTipText = EuroplanRes.Plan_Massstab;
+			this.btnOk.Text = EuroplanRes.General_Uebernehmen;
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {

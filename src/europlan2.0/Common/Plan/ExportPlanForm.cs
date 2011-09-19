@@ -97,6 +97,7 @@ namespace Europlan.Common {
 			this.btnExport.Text = EuroplanRes.ExportPlanForm_Exportieren; //"Exportieren";
 			this.lblExportOption.Text = EuroplanRes.ExportPlanForm_Exportumfang; //"Exportumfang";
 			this.lblFileName.Text = EuroplanRes.ExportPlanForm_Dateipfad; //"Dateipfad";
+			this.chkExportWallNumbers.Text = EuroplanRes.ExportPlanForm_Wandnummerierung;
 		}
 
 		private void ExportPlanForm_Load(object sender, EventArgs e) {

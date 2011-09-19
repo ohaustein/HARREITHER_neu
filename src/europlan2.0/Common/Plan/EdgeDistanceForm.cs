@@ -18,11 +18,11 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
+			this.Text = EuroplanRes.EdgeDistanceForm_Titel;
 			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
 			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
-
-			//this.label3.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
-			//this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
+			this.label3.Text = EuroplanRes.EdgeDistanceForm_Randabstand;
+			this.label1.Text = EuroplanRes.Unit_Zentimeter;
 		}
 
 		private void EdgeDistanceForm_FormClosing(object sender, FormClosingEventArgs e) {

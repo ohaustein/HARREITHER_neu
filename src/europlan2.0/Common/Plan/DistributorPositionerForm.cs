@@ -56,7 +56,13 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
+			this.Text = EuroplanRes.DistributorPositionerForm_Titel;
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnPosition.Text = EuroplanRes.DistributorPositionerForm_Positionieren;
+			this.lblRotation.Text = EuroplanRes.DistributorPositionerForm_Ausrichtung;
+			this.btnOk.Text = EuroplanRes.General_Uebernehmen;
 		}
 
 		private void DistributionPositionerForm_FormClosing(object sender, FormClosingEventArgs e) {

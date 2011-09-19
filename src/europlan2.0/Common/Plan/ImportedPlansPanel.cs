@@ -85,9 +85,10 @@ namespace Europlan.Common {
 			this.btnImport.Text = EuroplanRes.ImportedPlansPanel_PlanImportieren; //"Plan importieren"
 			this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen"
 			this.btnExport.Text = EuroplanRes.ImportedPlansPanel_PlanExportieren; //"Plan exportieren"
-			this.nameDataGridViewTextBoxColumn.Name = EuroplanRes.ImportedPlansPanel_PlanName; //"Name"
-			this.RelativeFileName.Name = EuroplanRes.ImportedPlansPanel_DateiPfad; //"Pfad"
-			this.colOptions.Name = EuroplanRes.ImportedPlansPanel_Optionen; //"Optionen"
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ImportedPlansPanel_PlanName; //"Name"
+			this.RelativeFileName.HeaderText = EuroplanRes.ImportedPlansPanel_DateiPfad; //"Pfad"
+			this.dataGridViewTextBoxColumn1.HeaderText = EuroplanRes.ImportedPlansPanel_DateiPfad;
+			this.colOptions.HeaderText = EuroplanRes.ImportedPlansPanel_Optionen; //"Optionen"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

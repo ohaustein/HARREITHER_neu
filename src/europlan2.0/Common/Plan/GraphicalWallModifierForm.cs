@@ -38,7 +38,22 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			//this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
+			this.Text = EuroplanRes.GraphicalWallModifierForm_Titel;
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnPickWall.Text = EuroplanRes.GraphicalWallModifierForm_WandWaehlen;
+			this.btnObstacle.Text = EuroplanRes.GraphicalWallModifierForm_FensterTueren;
+			this.btnOk.Text = EuroplanRes.General_Ok;
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen;
+			this.groupBox2.Text = EuroplanRes.GraphicalWallModifierForm_Groesse;
+			this.label3.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblWallVertical.Text = EuroplanRes.GraphicalWallModifierForm_Senkrecht;
+			this.label2.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblWallHorizontal.Text = EuroplanRes.GraphicalWallModifierForm_Waagrecht;
+			this.groupBox1.Text = EuroplanRes.GraphicalWallModifierForm_Konstruktion;
+			this.chkStartWall.Text = EuroplanRes.GraphicalWallModifierForm_ErsteWand;
+			this.chkEnable.Text = EuroplanRes.GraphicalWallModifierForm_Erzeugen;
 		}
 
 		private void GraphicalWallModifierForm_FormClosing(object sender, FormClosingEventArgs e) {

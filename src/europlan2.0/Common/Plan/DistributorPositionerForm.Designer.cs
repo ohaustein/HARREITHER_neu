@@ -108,7 +108,7 @@ namespace Europlan.Common {
 			this.btnPosition.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnPosition.Name = "btnPosition";
 			this.btnPosition.Size = new System.Drawing.Size(23, 22);
-			this.btnPosition.Text = "Raumgeometrie definieren";
+			this.btnPosition.Text = "Verteiler positionieren";
 			this.btnPosition.Click += new System.EventHandler(this.btnPosition_Click);
 			// 
 			// panel1

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -5772,5 +5772,212 @@ fläche
   </data>
   <data name="WarningsAndErrorsForm_Warnung" xml:space="preserve">
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %WARNUNG%</value>
+  </data>
+  <data name="Plan_Heranzoomen" xml:space="preserve">
+    <value>Heranzoomen</value>
+  </data>
+  <data name="Plan_Herauszoomen" xml:space="preserve">
+    <value>Herauszoomen</value>
+  </data>
+  <data name="Plan_Verschieben" xml:space="preserve">
+    <value>Plan verschieben</value>
+  </data>
+  <data name="Plan_Massstab" xml:space="preserve">
+    <value>Maßstab</value>
+  </data>
+  <data name="General_Uebernehmen" xml:space="preserve">
+    <value>Übernehmen</value>
+  </data>
+  <data name="CadPlanOptionsForm_Raumtypen" xml:space="preserve">
+    <value>Raumtypen</value>
+  </data>
+  <data name="DistributorPositionerForm_Titel" xml:space="preserve">
+    <value>Verteiler positionieren</value>
+  </data>
+  <data name="DistributorPositionerForm_Positionieren" xml:space="preserve">
+    <value>Verteiler positionieren</value>
+  </data>
+  <data name="DistributorPositionerForm_Ausrichtung" xml:space="preserve">
+    <value>Ausrichtung:</value>
+  </data>
+  <data name="EdgeDistanceForm_Titel" xml:space="preserve">
+    <value>Sicherheitsabstand</value>
+  </data>
+  <data name="EdgeDistanceForm_Randabstand" xml:space="preserve">
+    <value>Bitte geben Sie den Randabstand des Objekts ein:</value>
+  </data>
+  <data name="Unit_Zentimeter" xml:space="preserve">
+    <value>cm</value>
+  </data>
+  <data name="ExportPlanForm_Wandnummerierung" xml:space="preserve">
+    <value>Numerierung der Wände exportieren</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Titel" xml:space="preserve">
+    <value>Wände definieren</value>
+  </data>
+  <data name="GraphicalWallModifierForm_WandWaehlen" xml:space="preserve">
+    <value>Wand wählen</value>
+  </data>
+  <data name="GraphicalWallModifierForm_FensterTueren" xml:space="preserve">
+    <value>Fenster und Türen</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Groesse" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Senkrecht" xml:space="preserve">
+    <value>Senkrecht:</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Waagrecht" xml:space="preserve">
+    <value>Waagrecht:</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Konstruktion" xml:space="preserve">
+    <value>Konstruktion</value>
+  </data>
+  <data name="GraphicalWallModifierForm_ErsteWand" xml:space="preserve">
+    <value>Als erste Wand verwenden</value>
+  </data>
+  <data name="GraphicalWallModifierForm_Erzeugen" xml:space="preserve">
+    <value>Wand erzeugen?</value>
+  </data>
+  <data name="ImagePlanOptions_RotateCCWLarge" xml:space="preserve">
+    <value>5° gegen den Uhrzeigersinn drehen</value>
+  </data>
+  <data name="ImagePlanOptions_RotateCCWSmall" xml:space="preserve">
+    <value>0.1° gegen den Uhrzeigersinn drehen</value>
+  </data>
+  <data name="ImagePlanOptions_RotateCWSmall" xml:space="preserve">
+    <value>0.1° im Uhrzeigersinn drehen</value>
+  </data>
+  <data name="ImagePlanOptions_RotateCWLarge" xml:space="preserve">
+    <value>5° im Uhrzeigersinn drehen</value>
+  </data>
+  <data name="NewObstacleForm_Titel" xml:space="preserve">
+    <value>Fenster/Tür hinzufügen</value>
+  </data>
+  <data name="NewObstacleForm_Parapethoehe" xml:space="preserve">
+    <value>Parapethöhe:</value>
+  </data>
+  <data name="NewObstacleForm_Hoehe" xml:space="preserve">
+    <value>Höhe:</value>
+  </data>
+  <data name="NewObstacleForm_Breite" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="NewObstacleForm_Typ" xml:space="preserve">
+    <value>Typ:</value>
+  </data>
+  <data name="NewPlanForm_Seite" xml:space="preserve">
+    <value>Seite aus PDF:</value>
+  </data>
+  <data name="NewWallForm_Titel" xml:space="preserve">
+    <value>Wand hinzufügen</value>
+  </data>
+  <data name="NewWallForm_Konstruktion" xml:space="preserve">
+    <value>Konstruktion:</value>
+  </data>
+  <data name="NewWallForm_Breite" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="NewWallForm_Hoehe" xml:space="preserve">
+    <value>Höhe:</value>
+  </data>
+  <data name="NewWallForm_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="NewWallForm_Schraege" xml:space="preserve">
+    <value>Als Schräge für aktuelle Wand</value>
+  </data>
+  <data name="NewWallForm_NachWandNr" xml:space="preserve">
+    <value>Nach Wand Nr.</value>
+  </data>
+  <data name="NewWallForm_NachWand" xml:space="preserve">
+    <value>Nach aktueller Wand</value>
+  </data>
+  <data name="NewWallForm_VorWand" xml:space="preserve">
+    <value>Vor aktueller Wand</value>
+  </data>
+  <data name="PlanSetMeasureForm_MassstabSetzen" xml:space="preserve">
+    <value>Maßstab setzen</value>
+  </data>
+  <data name="RoomPickerForm_Titel" xml:space="preserve">
+    <value>Raumgemetrie</value>
+  </data>
+  <data name="RoomPickerForm_Definieren" xml:space="preserve">
+    <value>Raumgeometrie definieren</value>
+  </data>
+  <data name="RoomPickerForm_UnbeheizteDefinieren" xml:space="preserve">
+    <value>Unbeheizte Flächen definieren</value>
+  </data>
+  <data name="RoomPickerForm_UnbeheizteLoeschen" xml:space="preserve">
+    <value>Unbeheizte Flächen löschen</value>
+  </data>
+  <data name="RoomPickerForm_DehnfugeHinzufuegen" xml:space="preserve">
+    <value>Dehnfuge hinzufügen</value>
+  </data>
+  <data name="RoomPickerForm_DehnfugeLoeschen" xml:space="preserve">
+    <value>Dehnfuge löschen</value>
+  </data>
+  <data name="RoomPickerForm_FlaecheEingeben" xml:space="preserve">
+    <value>Fläche eingeben</value>
+  </data>
+  <data name="RoomPickerForm_FlaecheHinzufuegen" xml:space="preserve">
+    <value>Fläche hinzufügen</value>
+  </data>
+  <data name="RoomPickerForm_Groesse" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="RoomPickerForm_Hoehe" xml:space="preserve">
+    <value>Höhe:</value>
+  </data>
+  <data name="RoomPickerForm_Breite" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="RoomPickerForm_Abstand" xml:space="preserve">
+    <value>Abstand vom Referenzpunkt</value>
+  </data>
+  <data name="RoomPickerForm_AbstandVertikal" xml:space="preserve">
+    <value>Vertikaler Abstand:</value>
+  </data>
+  <data name="RoomPickerForm_AbstandHorizontal" xml:space="preserve">
+    <value>Horizontaler Abstand:</value>
+  </data>
+  <data name="RoomPickerForm_Referenzpunkt" xml:space="preserve">
+    <value>Referenzpunkt festlegen</value>
+  </data>
+  <data name="RoomPickerForm_GroesseEingeben" xml:space="preserve">
+    <value>Größe eingeben</value>
+  </data>
+  <data name="RoomPickerForm_GrafischFestlegen" xml:space="preserve">
+    <value>grafisch festlegen</value>
+  </data>
+  <data name="RoomPickerForm_NeueUnbeheizteFlaeche" xml:space="preserve">
+    <value>Neue Unbeheizte Fläche</value>
+  </data>
+  <data name="WallHelpLinesForm_Titel" xml:space="preserve">
+    <value>Hilfslinien</value>
+  </data>
+  <data name="WallHelpLinesForm_Modus" xml:space="preserve">
+    <value>Bearbeitungsmodus</value>
+  </data>
+  <data name="WallHelpLinesForm_Individuelle" xml:space="preserve">
+    <value>Individuelle Hilfslinien für die aktuelle Wand bearbeiten</value>
+  </data>
+  <data name="WallHelpLinesForm_Globale" xml:space="preserve">
+    <value>Globale Hilfslinien für den gesamten Raum bearbeiten</value>
+  </data>
+  <data name="WallHelpLinesForm_Eigenschaften" xml:space="preserve">
+    <value>Eigenschaften der Wand</value>
+  </data>
+  <data name="WallHelpLinesForm_GlobaleAktivieren" xml:space="preserve">
+    <value>Globale Hilfslinien aktivieren</value>
+  </data>
+  <data name="WallHelpLinesForm_Positionen" xml:space="preserve">
+    <value>Position der Hilfslinien</value>
+  </data>
+  <data name="WallHelpLinesForm_Loeschen" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="WallHelpLinesForm_Hinzufuegen" xml:space="preserve">
+    <value>Hinzufügen</value>
   </data>
 </root>

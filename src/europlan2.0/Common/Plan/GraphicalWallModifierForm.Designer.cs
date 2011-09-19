@@ -81,7 +81,7 @@ namespace Europlan.Common {
 			this.btnZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnZoomIn.Name = "btnZoomIn";
 			this.btnZoomIn.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomIn.Text = "zoomIn";
+			this.btnZoomIn.Text = "Heranzoomen";
 			this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
 			// 
 			// btnZoomOut
@@ -92,7 +92,7 @@ namespace Europlan.Common {
 			this.btnZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnZoomOut.Name = "btnZoomOut";
 			this.btnZoomOut.Size = new System.Drawing.Size(23, 22);
-			this.btnZoomOut.Text = "zoomOut";
+			this.btnZoomOut.Text = "Herauszoomen";
 			this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
 			// 
 			// toolStripSeparator1
@@ -110,7 +110,7 @@ namespace Europlan.Common {
 			this.btnMove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnMove.Name = "btnMove";
 			this.btnMove.Size = new System.Drawing.Size(23, 22);
-			this.btnMove.Text = "toolStripButton1";
+			this.btnMove.Text = "Plan verschieben";
 			this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
 			// 
 			// btnPickWall

@@ -84,7 +84,32 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
+			this.Text = EuroplanRes.RoomPickerForm_Titel;
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnPickRoom.Text = EuroplanRes.RoomPickerForm_Definieren;
+			this.btnPickUnused.Text = EuroplanRes.RoomPickerForm_UnbeheizteDefinieren;
+			this.btnDelUnused.Text = EuroplanRes.RoomPickerForm_UnbeheizteLoeschen;
+			this.btnAddExpansionGap.Text = EuroplanRes.RoomPickerForm_DehnfugeHinzufuegen;
+			this.btnRemoveExpansionGap.Text = EuroplanRes.RoomPickerForm_DehnfugeLoeschen;
+			this.cbEnterArea.Text = EuroplanRes.RoomPickerForm_FlaecheEingeben;
+			this.btnAddUnheatedArea.Text = EuroplanRes.RoomPickerForm_FlaecheHinzufuegen;
+			this.grpSize.Text = EuroplanRes.RoomPickerForm_Groesse;
+			this.lblSizeYUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblSizeY.Text = EuroplanRes.RoomPickerForm_Hoehe;
+			this.lblSizeXUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblSizeX.Text = EuroplanRes.RoomPickerForm_Breite;
+			this.grpDistance.Text = EuroplanRes.RoomPickerForm_Abstand;
+			this.lblDistanceYUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblDistanceY.Text = EuroplanRes.RoomPickerForm_AbstandVertikal;
+			this.lblDistanceXUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblDistanceX.Text = EuroplanRes.RoomPickerForm_AbstandHorizontal;
+			this.cbReferencePoint.Text = EuroplanRes.RoomPickerForm_Referenzpunkt;
+			this.cbUnheatedTextual.Text = EuroplanRes.RoomPickerForm_GroesseEingeben;
+			this.cbUnheatedGraphical.Text = EuroplanRes.RoomPickerForm_GrafischFestlegen;
+			this.lblAddUnheatedArea.Text = EuroplanRes.RoomPickerForm_NeueUnbeheizteFlaeche;
+			this.btnOk.Text = EuroplanRes.General_Uebernehmen;
 		}
 
 		private void RoomPickerForm_FormClosing(object sender, FormClosingEventArgs e) {

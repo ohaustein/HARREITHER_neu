@@ -40,7 +40,17 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-
+			this.Text = EuroplanRes.WallHelpLinesForm_Titel;
+			this.btnClose.Text = EuroplanRes.General_Schliessen;
+			this.groupBox1.Text = EuroplanRes.WallHelpLinesForm_Modus;
+			this.rbWall.Text = EuroplanRes.WallHelpLinesForm_Individuelle;
+			this.rbGlobal.Text = EuroplanRes.WallHelpLinesForm_Globale;
+			this.groupBox2.Text = EuroplanRes.WallHelpLinesForm_Eigenschaften;
+			this.chkUseGlobal.Text = EuroplanRes.WallHelpLinesForm_GlobaleAktivieren;
+			this.groupBox3.Text = EuroplanRes.WallHelpLinesForm_Positionen;
+			this.btnDelete.Text = EuroplanRes.WallHelpLinesForm_Loeschen;
+			this.btnAdd.Text = EuroplanRes.WallHelpLinesForm_Hinzufuegen;
+			this.label1.Text = EuroplanRes.Unit_Zentimeter;
 		}
 
 		private void WallHelpLinesForm_FormClosing(object sender, FormClosingEventArgs e) {

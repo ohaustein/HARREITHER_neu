@@ -62,11 +62,19 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
+			this.Text = EuroplanRes.NewWallForm_Titel;
 			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
 			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
-
-			//this.label3.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
-			//this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
+			this.lblConstruction.Text = EuroplanRes.NewWallForm_Konstruktion;
+			this.lblWidth.Text = EuroplanRes.NewWallForm_Breite;
+			this.lblHeight.Text = EuroplanRes.NewWallForm_Hoehe;
+			this.label2.Text = EuroplanRes.Unit_Zentimeter;
+			this.label3.Text = EuroplanRes.Unit_Zentimeter;
+			this.groupBox1.Text = EuroplanRes.NewWallForm_Position;
+			this.rbSchraege.Text = EuroplanRes.NewWallForm_Schraege;
+			this.rbAfter.Text = EuroplanRes.NewWallForm_NachWandNr;
+			this.rbNext.Text = EuroplanRes.NewWallForm_NachWand;
+			this.rbPrev.Text = EuroplanRes.NewWallForm_VorWand;
 		}
 
 		private void NewWallForm_FormClosing(object sender, FormClosingEventArgs e) {

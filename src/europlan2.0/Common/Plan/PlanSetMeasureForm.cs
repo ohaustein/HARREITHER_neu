@@ -56,6 +56,11 @@ namespace Europlan.Common {
 				this.lblText.Text = EuroplanRes.PlanSetMeasureForm_KeinMassstab;
 				this.txtLength.Value = (decimal)(1 * Product.ConfigPlanMeasureMultiplier);
 			}
+
+			this.btnOk.Text = EuroplanRes.General_Ok;
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen;
+			this.Text = EuroplanRes.PlanSetMeasureForm_MassstabSetzen;
+
 		}
 
 		public double Length {

@@ -242,6 +242,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raumtypen.
+        /// </summary>
+        internal static string CadPlanOptionsForm_Raumtypen {
+            get {
+                return ResourceManager.GetString("CadPlanOptionsForm_Raumtypen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Optionen.
         /// </summary>
         internal static string CadPlanOptionsForm_Titel {
@@ -1885,6 +1894,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ausrichtung:.
+        /// </summary>
+        internal static string DistributorPositionerForm_Ausrichtung {
+            get {
+                return ResourceManager.GetString("DistributorPositionerForm_Ausrichtung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler positionieren.
+        /// </summary>
+        internal static string DistributorPositionerForm_Positionieren {
+            get {
+                return ResourceManager.GetString("DistributorPositionerForm_Positionieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler positionieren.
+        /// </summary>
+        internal static string DistributorPositionerForm_Titel {
+            get {
+                return ResourceManager.GetString("DistributorPositionerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A5.
         /// </summary>
         internal static string EcothermProduct_A5 {
@@ -2052,6 +2088,24 @@ namespace Europlan.Common {
         internal static string EcothermProduct_NotificationParameter {
             get {
                 return ResourceManager.GetString("EcothermProduct_NotificationParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte geben Sie den Randabstand des Objekts ein:.
+        /// </summary>
+        internal static string EdgeDistanceForm_Randabstand {
+            get {
+                return ResourceManager.GetString("EdgeDistanceForm_Randabstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sicherheitsabstand.
+        /// </summary>
+        internal static string EdgeDistanceForm_Titel {
+            get {
+                return ResourceManager.GetString("EdgeDistanceForm_Titel", resourceCulture);
             }
         }
         
@@ -2529,6 +2583,15 @@ namespace Europlan.Common {
         internal static string ExportPlanForm_Titel {
             get {
                 return ResourceManager.GetString("ExportPlanForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numerierung der Wände exportieren.
+        /// </summary>
+        internal static string ExportPlanForm_Wandnummerierung {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_Wandnummerierung", resourceCulture);
             }
         }
         
@@ -3567,6 +3630,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Übernehmen.
+        /// </summary>
+        internal static string General_Uebernehmen {
+            get {
+                return ResourceManager.GetString("General_Uebernehmen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weiter.
         /// </summary>
         internal static string General_Weiter {
@@ -3581,6 +3653,87 @@ namespace Europlan.Common {
         internal static string General_WieGehtsWeiter {
             get {
                 return ResourceManager.GetString("General_WieGehtsWeiter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Als erste Wand verwenden.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_ErsteWand {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_ErsteWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand erzeugen?.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Erzeugen {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Erzeugen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fenster und Türen.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_FensterTueren {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_FensterTueren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Größe.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Groesse {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Groesse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Konstruktion {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Konstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Senkrecht:.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Senkrecht {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Senkrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wände definieren.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Titel {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waagrecht:.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_Waagrecht {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_Waagrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand wählen.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_WandWaehlen {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_WandWaehlen", resourceCulture);
             }
         }
         
@@ -4214,6 +4367,42 @@ namespace Europlan.Common {
         internal static string HithermWallGrid_ZusaetzlicheDaemmung {
             get {
                 return ResourceManager.GetString("HithermWallGrid_ZusaetzlicheDaemmung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5° gegen den Uhrzeigersinn drehen.
+        /// </summary>
+        internal static string ImagePlanOptions_RotateCCWLarge {
+            get {
+                return ResourceManager.GetString("ImagePlanOptions_RotateCCWLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.1° gegen den Uhrzeigersinn drehen.
+        /// </summary>
+        internal static string ImagePlanOptions_RotateCCWSmall {
+            get {
+                return ResourceManager.GetString("ImagePlanOptions_RotateCCWSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5° im Uhrzeigersinn drehen.
+        /// </summary>
+        internal static string ImagePlanOptions_RotateCWLarge {
+            get {
+                return ResourceManager.GetString("ImagePlanOptions_RotateCWLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.1° im Uhrzeigersinn drehen.
+        /// </summary>
+        internal static string ImagePlanOptions_RotateCWSmall {
+            get {
+                return ResourceManager.GetString("ImagePlanOptions_RotateCWSmall", resourceCulture);
             }
         }
         
@@ -11134,6 +11323,51 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breite:.
+        /// </summary>
+        internal static string NewObstacleForm_Breite {
+            get {
+                return ResourceManager.GetString("NewObstacleForm_Breite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Höhe:.
+        /// </summary>
+        internal static string NewObstacleForm_Hoehe {
+            get {
+                return ResourceManager.GetString("NewObstacleForm_Hoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parapethöhe:.
+        /// </summary>
+        internal static string NewObstacleForm_Parapethoehe {
+            get {
+                return ResourceManager.GetString("NewObstacleForm_Parapethoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fenster/Tür hinzufügen.
+        /// </summary>
+        internal static string NewObstacleForm_Titel {
+            get {
+                return ResourceManager.GetString("NewObstacleForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ:.
+        /// </summary>
+        internal static string NewObstacleForm_Typ {
+            get {
+                return ResourceManager.GetString("NewObstacleForm_Typ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bezeichnung.
         /// </summary>
         internal static string NewPlanForm_Bezeichnung {
@@ -11170,11 +11404,101 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seite aus PDF:.
+        /// </summary>
+        internal static string NewPlanForm_Seite {
+            get {
+                return ResourceManager.GetString("NewPlanForm_Seite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raumtypen.
         /// </summary>
         internal static string NewRoomTypeForm_Titel {
             get {
                 return ResourceManager.GetString("NewRoomTypeForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breite:.
+        /// </summary>
+        internal static string NewWallForm_Breite {
+            get {
+                return ResourceManager.GetString("NewWallForm_Breite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Höhe:.
+        /// </summary>
+        internal static string NewWallForm_Hoehe {
+            get {
+                return ResourceManager.GetString("NewWallForm_Hoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion:.
+        /// </summary>
+        internal static string NewWallForm_Konstruktion {
+            get {
+                return ResourceManager.GetString("NewWallForm_Konstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nach aktueller Wand.
+        /// </summary>
+        internal static string NewWallForm_NachWand {
+            get {
+                return ResourceManager.GetString("NewWallForm_NachWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nach Wand Nr..
+        /// </summary>
+        internal static string NewWallForm_NachWandNr {
+            get {
+                return ResourceManager.GetString("NewWallForm_NachWandNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        internal static string NewWallForm_Position {
+            get {
+                return ResourceManager.GetString("NewWallForm_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Als Schräge für aktuelle Wand.
+        /// </summary>
+        internal static string NewWallForm_Schraege {
+            get {
+                return ResourceManager.GetString("NewWallForm_Schraege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand hinzufügen.
+        /// </summary>
+        internal static string NewWallForm_Titel {
+            get {
+                return ResourceManager.GetString("NewWallForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vor aktueller Wand.
+        /// </summary>
+        internal static string NewWallForm_VorWand {
+            get {
+                return ResourceManager.GetString("NewWallForm_VorWand", resourceCulture);
             }
         }
         
@@ -11418,6 +11742,42 @@ namespace Europlan.Common {
         internal static string PicturePanel_DeleteUnusedText {
             get {
                 return ResourceManager.GetString("PicturePanel_DeleteUnusedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heranzoomen.
+        /// </summary>
+        internal static string Plan_Heranzoomen {
+            get {
+                return ResourceManager.GetString("Plan_Heranzoomen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Herauszoomen.
+        /// </summary>
+        internal static string Plan_Herauszoomen {
+            get {
+                return ResourceManager.GetString("Plan_Herauszoomen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maßstab.
+        /// </summary>
+        internal static string Plan_Massstab {
+            get {
+                return ResourceManager.GetString("Plan_Massstab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan verschieben.
+        /// </summary>
+        internal static string Plan_Verschieben {
+            get {
+                return ResourceManager.GetString("Plan_Verschieben", resourceCulture);
             }
         }
         
@@ -12719,6 +13079,15 @@ namespace Europlan.Common {
         internal static string PlanSetMeasureForm_Massstab {
             get {
                 return ResourceManager.GetString("PlanSetMeasureForm_Massstab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maßstab setzen.
+        /// </summary>
+        internal static string PlanSetMeasureForm_MassstabSetzen {
+            get {
+                return ResourceManager.GetString("PlanSetMeasureForm_MassstabSetzen", resourceCulture);
             }
         }
         
@@ -14892,6 +15261,168 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abstand vom Referenzpunkt.
+        /// </summary>
+        internal static string RoomPickerForm_Abstand {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Abstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontaler Abstand:.
+        /// </summary>
+        internal static string RoomPickerForm_AbstandHorizontal {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_AbstandHorizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertikaler Abstand:.
+        /// </summary>
+        internal static string RoomPickerForm_AbstandVertikal {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_AbstandVertikal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breite:.
+        /// </summary>
+        internal static string RoomPickerForm_Breite {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Breite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumgeometrie definieren.
+        /// </summary>
+        internal static string RoomPickerForm_Definieren {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Definieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dehnfuge hinzufügen.
+        /// </summary>
+        internal static string RoomPickerForm_DehnfugeHinzufuegen {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_DehnfugeHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dehnfuge löschen.
+        /// </summary>
+        internal static string RoomPickerForm_DehnfugeLoeschen {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_DehnfugeLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche eingeben.
+        /// </summary>
+        internal static string RoomPickerForm_FlaecheEingeben {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_FlaecheEingeben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche hinzufügen.
+        /// </summary>
+        internal static string RoomPickerForm_FlaecheHinzufuegen {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_FlaecheHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to grafisch festlegen.
+        /// </summary>
+        internal static string RoomPickerForm_GrafischFestlegen {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_GrafischFestlegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Größe.
+        /// </summary>
+        internal static string RoomPickerForm_Groesse {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Groesse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Größe eingeben.
+        /// </summary>
+        internal static string RoomPickerForm_GroesseEingeben {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_GroesseEingeben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Höhe:.
+        /// </summary>
+        internal static string RoomPickerForm_Hoehe {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Hoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neue Unbeheizte Fläche.
+        /// </summary>
+        internal static string RoomPickerForm_NeueUnbeheizteFlaeche {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_NeueUnbeheizteFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Referenzpunkt festlegen.
+        /// </summary>
+        internal static string RoomPickerForm_Referenzpunkt {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Referenzpunkt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumgemetrie.
+        /// </summary>
+        internal static string RoomPickerForm_Titel {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unbeheizte Flächen definieren.
+        /// </summary>
+        internal static string RoomPickerForm_UnbeheizteDefinieren {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_UnbeheizteDefinieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unbeheizte Flächen löschen.
+        /// </summary>
+        internal static string RoomPickerForm_UnbeheizteLoeschen {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_UnbeheizteLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bemerkung.
         /// </summary>
         internal static string RoomSummaryPanel_Bemerkung {
@@ -16192,6 +16723,96 @@ namespace Europlan.Common {
         internal static string Unit_WattProQmKelvin {
             get {
                 return ResourceManager.GetString("Unit_WattProQmKelvin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cm.
+        /// </summary>
+        internal static string Unit_Zentimeter {
+            get {
+                return ResourceManager.GetString("Unit_Zentimeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eigenschaften der Wand.
+        /// </summary>
+        internal static string WallHelpLinesForm_Eigenschaften {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Eigenschaften", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Globale Hilfslinien für den gesamten Raum bearbeiten.
+        /// </summary>
+        internal static string WallHelpLinesForm_Globale {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Globale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Globale Hilfslinien aktivieren.
+        /// </summary>
+        internal static string WallHelpLinesForm_GlobaleAktivieren {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_GlobaleAktivieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hinzufügen.
+        /// </summary>
+        internal static string WallHelpLinesForm_Hinzufuegen {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Hinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Individuelle Hilfslinien für die aktuelle Wand bearbeiten.
+        /// </summary>
+        internal static string WallHelpLinesForm_Individuelle {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Individuelle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Löschen.
+        /// </summary>
+        internal static string WallHelpLinesForm_Loeschen {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Loeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bearbeitungsmodus.
+        /// </summary>
+        internal static string WallHelpLinesForm_Modus {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Modus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position der Hilfslinien.
+        /// </summary>
+        internal static string WallHelpLinesForm_Positionen {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Positionen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hilfslinien.
+        /// </summary>
+        internal static string WallHelpLinesForm_Titel {
+            get {
+                return ResourceManager.GetString("WallHelpLinesForm_Titel", resourceCulture);
             }
         }
         

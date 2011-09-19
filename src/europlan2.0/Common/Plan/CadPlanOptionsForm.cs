@@ -51,6 +51,15 @@ namespace Europlan.Common {
 		private void SetLanguage() {
 			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
 			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomIn.ToolTipText = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomOut.ToolTipText = EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnMove.ToolTipText = EuroplanRes.Plan_Verschieben;
+			this.btnDistance.Text = EuroplanRes.Plan_Massstab;
+			this.btnDistance.ToolTipText = EuroplanRes.Plan_Massstab;
+			this.btnOk.Text = EuroplanRes.General_Uebernehmen;
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
