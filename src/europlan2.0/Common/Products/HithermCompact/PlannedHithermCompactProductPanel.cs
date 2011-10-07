@@ -101,6 +101,12 @@ namespace Europlan.Common {
 			this.label5.Text = EuroplanRes.PlannedHithermProductPanel_DurchnittlicheWaermestromdichte; //"Durchschn. Wärmestromdichte:";
 
 			this.registerCountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.PlannedHithermCompactProductPanel_AnzahlRegister;
+
+			this.rbLayoutTable.Text = EuroplanRes.PlannedProductPanel_Tabellarisch;
+			this.rbLayoutGraphical.Text = EuroplanRes.PlannedProductPanel_Grafisch;
+			this.lblLayoutType.Text = EuroplanRes.PlannedProductPanel_Auslegungsart;
+			this.btnGraphicalAnbindleitungen.Text = EuroplanRes.PlannedProductPanel_GrafischeAnbindeleitungen;
+			this.btnGrafischeAuslegung.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
 		}
 
 		private void UpdateRegisterItems(bool ceiling) {
@@ -720,7 +726,7 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			if (this.product.Product.Connections != null && this.product.Product.Connections.Count > 0) {
-				if (MessageBox.Show("Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht", "Grafische Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+				if (MessageBox.Show(EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText, EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
 					return;
 				}
 				this.product.Product.Connections.Clear();

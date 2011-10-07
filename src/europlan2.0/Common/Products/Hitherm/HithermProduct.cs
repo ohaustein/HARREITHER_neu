@@ -754,7 +754,7 @@ namespace Europlan.Common {
 				return false;
 			}
 			if (this.PlannedCircuits.Count > 12) {
-				this.lastErrorMsg = "Es sind zuviele Heizkreise in diesem Produkt vorhanden"; // TODO
+				this.lastErrorMsg = EuroplanRes.HithermProduct_ZuvieleHeizkreise; // TODO
 				this.incompleteCalculation = true;
 				return false;
 			}

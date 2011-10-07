@@ -440,6 +440,16 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BKA
+        ///(m²).
+        /// </summary>
+        internal static string ConcreteActivationProduct_Schnellauslegung {
+            get {
+                return ResourceManager.GetString("ConcreteActivationProduct_Schnellauslegung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ecotherm FBH.
         /// </summary>
         internal static string ConnectionPipe_Ecotherm {
@@ -756,6 +766,96 @@ namespace Europlan.Common {
         internal static string ConnectionPipesForm_Nettoflaeche {
             get {
                 return ResourceManager.GetString("ConnectionPipesForm_Nettoflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rücklauf.
+        /// </summary>
+        internal static string ConnectionPlanner_Ruecklauf {
+            get {
+                return ResourceManager.GetString("ConnectionPlanner_Ruecklauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorlauf.
+        /// </summary>
+        internal static string ConnectionPlanner_Vorlauf {
+            get {
+                return ResourceManager.GetString("ConnectionPlanner_Vorlauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen ändern.
+        /// </summary>
+        internal static string ConnectionPlannerForm_AnbindeleitungenAendern {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_AnbindeleitungenAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung hinzufügen.
+        /// </summary>
+        internal static string ConnectionPlannerForm_AnbindeleitungHinzufuegen {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_AnbindeleitungHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung löschen.
+        /// </summary>
+        internal static string ConnectionPlannerForm_AnbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_AnbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boden.
+        /// </summary>
+        internal static string ConnectionPlannerForm_Boden {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_Boden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decke.
+        /// </summary>
+        internal static string ConnectionPlannerForm_Decke {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_Decke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to erster Heizkreis.
+        /// </summary>
+        internal static string ConnectionPlannerForm_ErsterHeizkreis {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_ErsterHeizkreis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to restliche Heizkreise.
+        /// </summary>
+        internal static string ConnectionPlannerForm_RestlicheHeizkreise {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_RestlicheHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen - grafische Auslegung.
+        /// </summary>
+        internal static string ConnectionPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("ConnectionPlannerForm_Titel", resourceCulture);
             }
         }
         
@@ -1894,6 +1994,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An diesen Verteiler sind bereits grafische Anbindeleitunge angeschlossen. Wenn sie die Position des Verteilers ändern wollen, werden diese Anbindeleitungen gelöscht!.
+        /// </summary>
+        internal static string DistributorPositionerForm_AnbindungenLoeschenText {
+            get {
+                return ResourceManager.GetString("DistributorPositionerForm_AnbindungenLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen löschen.
+        /// </summary>
+        internal static string DistributorPositionerForm_AnbindungenLoeschenTitel {
+            get {
+                return ResourceManager.GetString("DistributorPositionerForm_AnbindungenLoeschenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ausrichtung:.
         /// </summary>
         internal static string DistributorPositionerForm_Ausrichtung {
@@ -1917,6 +2035,417 @@ namespace Europlan.Common {
         internal static string DistributorPositionerForm_Titel {
             get {
                 return ResourceManager.GetString("DistributorPositionerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Anzahl der Heizkreise von Systemen die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen des Systems löschen?.
+        /// </summary>
+        internal static string EcothermPlanerForm_AnbindeleitungLoeschenText {
+            get {
+                return ResourceManager.GetString("EcothermPlanerForm_AnbindeleitungLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen löschen.
+        /// </summary>
+        internal static string EcothermPlanerForm_AnbindeleitungLoeschenTitel {
+            get {
+                return ResourceManager.GetString("EcothermPlanerForm_AnbindeleitungLoeschenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AAnb
+        ///m².
+        /// </summary>
+        internal static string EcothermPlannerForm_AAnb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AAnb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen ändern.
+        /// </summary>
+        internal static string EcothermPlannerForm_AnbindeleitungenAendern {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AnbindeleitungenAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen hinzufügen.
+        /// </summary>
+        internal static string EcothermPlannerForm_AnbindeleitungenHinzufuegen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AnbindeleitungenHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl der Ecken:.
+        /// </summary>
+        internal static string EcothermPlannerForm_AnzahlEcken {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AnzahlEcken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl Heizkreise:.
+        /// </summary>
+        internal static string EcothermPlannerForm_AnzahlHeizkreise {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AnzahlHeizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anzahl
+        ///HK.
+        /// </summary>
+        internal static string EcothermPlannerForm_AnzahlHK {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AnzahlHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung.
+        /// </summary>
+        internal static string EcothermPlannerForm_Auslegung {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Auslegung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aufenthaltszone.
+        /// </summary>
+        internal static string EcothermPlannerForm_AZ {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_AZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse.
+        /// </summary>
+        internal static string EcothermPlannerForm_Berechnungsergebnisse {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Berechnungsergebnisse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B
+        ///cm.
+        /// </summary>
+        internal static string EcothermPlannerForm_Breite {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Breite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DeltaP
+        ///mbar.
+        /// </summary>
+        internal static string EcothermPlannerForm_DeltaP {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_DeltaP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (positive Ecken vergößern, negative verringern die Randzonenfläche).
+        /// </summary>
+        internal static string EcothermPlannerForm_EckenErklaerung {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_EckenErklaerung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A
+        ///m².
+        /// </summary>
+        internal static string EcothermPlannerForm_Flaeche {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Flaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche definieren.
+        /// </summary>
+        internal static string EcothermPlannerForm_FlaecheDefinieren {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_FlaecheDefinieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizen:.
+        /// </summary>
+        internal static string EcothermPlannerForm_Heizen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Heizen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühlen:.
+        /// </summary>
+        internal static string EcothermPlannerForm_Kuehlen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Kuehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge der Randzone:.
+        /// </summary>
+        internal static string EcothermPlannerForm_LaengeRandzone {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_LaengeRandzone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh
+        ///kg/h.
+        /// </summary>
+        internal static string EcothermPlannerForm_Mh {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Mh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nach Heizbetrieb.
+        /// </summary>
+        internal static string EcothermPlannerForm_NachHeizbetrieb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_NachHeizbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nach Heiz- und Kühlbetrieb.
+        /// </summary>
+        internal static string EcothermPlannerForm_NachHeizUndKuehlbetrieb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_NachHeizUndKuehlbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nach Kühlbetrieb.
+        /// </summary>
+        internal static string EcothermPlannerForm_NachKuehlbetrieb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_NachKuehlbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Q
+        ///W.
+        /// </summary>
+        internal static string EcothermPlannerForm_Q {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Q", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QAnb
+        ///W.
+        /// </summary>
+        internal static string EcothermPlannerForm_QAnb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_QAnb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QFBH
+        ///W.
+        /// </summary>
+        internal static string EcothermPlannerForm_QFBH {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_QFBH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QRest
+        ///W.
+        /// </summary>
+        internal static string EcothermPlannerForm_QRest {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_QRest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QSoll
+        ///W.
+        /// </summary>
+        internal static string EcothermPlannerForm_QSoll {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_QSoll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to qSoll
+        ///W/m².
+        /// </summary>
+        internal static string EcothermPlannerForm_QSollProQuadratmeter {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_QSollProQuadratmeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone hinzufügen.
+        /// </summary>
+        internal static string EcothermPlannerForm_RandzoneHinzufuegen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_RandzoneHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone löschen.
+        /// </summary>
+        internal static string EcothermPlannerForm_RandzoneLoeschen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_RandzoneLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche mit red. Heiz-/Kühlleistung hinzufügen.
+        /// </summary>
+        internal static string EcothermPlannerForm_RedFlaecheHinzufuegen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_RedFlaecheHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche mit red. Heiz-/Kühlleistung löschen.
+        /// </summary>
+        internal static string EcothermPlannerForm_RedFlaecheLoeschen {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_RedFlaecheLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohrl.
+        ///m.
+        /// </summary>
+        internal static string EcothermPlannerForm_Rohrlaenge {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Rohrlaenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone.
+        /// </summary>
+        internal static string EcothermPlannerForm_RZ {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_RZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spreizung
+        ///K.
+        /// </summary>
+        internal static string EcothermPlannerForm_Spreizung {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Spreizung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Textbox positionieren.
+        /// </summary>
+        internal static string EcothermPlannerForm_TextboxPositionieren {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_TextboxPositionieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Textbox vergrößern.
+        /// </summary>
+        internal static string EcothermPlannerForm_TextboxVergroessern {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_TextboxVergroessern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Textbox verkleinern.
+        /// </summary>
+        internal static string EcothermPlannerForm_TextboxVerkleinern {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_TextboxVerkleinern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tfb
+        ///°C.
+        /// </summary>
+        internal static string EcothermPlannerForm_Tfb {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Tfb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ecotherm® - grafische Auslegung.
+        /// </summary>
+        internal static string EcothermPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VA.
+        /// </summary>
+        internal static string EcothermPlannerForm_VA {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_VA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegeart Aufenthaltszone:.
+        /// </summary>
+        internal static string EcothermPlannerForm_VerlegeartAZ {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_VerlegeartAZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegeart Randzone:.
+        /// </summary>
+        internal static string EcothermPlannerForm_VerlegeartRZ {
+            get {
+                return ResourceManager.GetString("EcothermPlannerForm_VerlegeartRZ", resourceCulture);
             }
         }
         
@@ -2344,6 +2873,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Euroval® - grafische Auslegung.
+        /// </summary>
+        internal static string EurovalPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("EurovalPlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A5.
         /// </summary>
         internal static string EurovalProduct_A5 {
@@ -2574,6 +3112,60 @@ namespace Europlan.Common {
         internal static string ExportPlanForm_Exportumfang {
             get {
                 return ResourceManager.GetString("ExportPlanForm_Exportumfang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es sind keine Produkte ausgelegt, die exportiert werden können..
+        /// </summary>
+        internal static string ExportPlanForm_KeineProdukteText {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_KeineProdukteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen.
+        /// </summary>
+        internal static string ExportPlanForm_LayerAnbindeleitungen {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_LayerAnbindeleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beplankung.
+        /// </summary>
+        internal static string ExportPlanForm_LayerBeplankung {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_LayerBeplankung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dehnfugen.
+        /// </summary>
+        internal static string ExportPlanForm_LayerDehnfugen {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_LayerDehnfugen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string ExportPlanForm_LayerVerteiler {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_LayerVerteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wandnumerierungen.
+        /// </summary>
+        internal static string ExportPlanForm_LayerWandnumerierungen {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_LayerWandnumerierungen", resourceCulture);
             }
         }
         
@@ -3201,6 +3793,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raumhöhe für dieses Geschoß:.
+        /// </summary>
+        internal static string FloorSummaryPanel_Raumhoehe {
+            get {
+                return ResourceManager.GetString("FloorSummaryPanel_Raumhoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ti
         ///(°C).
         /// </summary>
@@ -3666,6 +4267,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Um eine andere Wand als &apos;erste Wand&apos; zu definieren, wählen Sie bitte dazu die gewünschte Wand und setzen sie dort die Option..
+        /// </summary>
+        internal static string GraphicalWallModifierForm_ErsteWandText {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_ErsteWandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wand erzeugen?.
         /// </summary>
         internal static string GraphicalWallModifierForm_Erzeugen {
@@ -3729,6 +4339,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die definierten Wände übernehmen?.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_WaendeUebernehmenText {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_WaendeUebernehmenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wände übernehmen?.
+        /// </summary>
+        internal static string GraphicalWallModifierForm_WaendeUebernehmenTitel {
+            get {
+                return ResourceManager.GetString("GraphicalWallModifierForm_WaendeUebernehmenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wand wählen.
         /// </summary>
         internal static string GraphicalWallModifierForm_WandWaehlen {
@@ -3779,6 +4407,101 @@ namespace Europlan.Common {
         internal static string GraphicalWallObstacle_WindowTriangleRight {
             get {
                 return ResourceManager.GetString("GraphicalWallObstacle_WindowTriangleRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm®
+        ///Compact
+        ///Dachschr.
+        ///(m²).
+        /// </summary>
+        internal static string HithermCompactDachschraege_Flaechenaufstellung {
+            get {
+                return ResourceManager.GetString("HithermCompactDachschraege_Flaechenaufstellung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dachschrägenelement(e).
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Dachschraegenelemente {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Dachschraegenelemente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ds.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Ds {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Ds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Par.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Par {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Par", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parapetelement.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Parapetelement {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Parapetelement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm Klimawand   %ANZAHL% Stück Hitherm-Compact %TYP% %HOEHE% %TYPABK.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_RegisterText {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_RegisterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Std.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Std {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Std", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm Compact - grafische Auslegung.
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wandelement(e).
+        /// </summary>
+        internal static string HithermCompactPlannerForm_Wandelemente {
+            get {
+                return ResourceManager.GetString("HithermCompactPlannerForm_Wandelemente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm®
+        ///Compact
+        ///(m²).
+        /// </summary>
+        internal static string HithermCompactProduct_Flaechenaufstellung {
+            get {
+                return ResourceManager.GetString("HithermCompactProduct_Flaechenaufstellung", resourceCulture);
             }
         }
         
@@ -4026,11 +4749,875 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diese beiden Register können nicht verbunden werden.
+        /// </summary>
+        internal static string HithermPlanner_VerbindenFehlerText {
+            get {
+                return ResourceManager.GetString("HithermPlanner_VerbindenFehlerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler.
+        /// </summary>
+        internal static string HithermPlanner_VerbindenFehlerTitel {
+            get {
+                return ResourceManager.GetString("HithermPlanner_VerbindenFehlerTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abstand hor..
+        /// </summary>
+        internal static string HithermPlannerForm_AbstandHor {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AbstandHor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Änderungen speichern.
+        /// </summary>
+        internal static string HithermPlannerForm_AenderungenSpeichern {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AenderungenSpeichern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Änderungen verwerfen.
+        /// </summary>
+        internal static string HithermPlannerForm_AenderungenVerwerfen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AenderungenVerwerfen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen.
+        /// </summary>
+        internal static string HithermPlannerForm_Anbindeleitungen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Anbindeleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen ändern.
+        /// </summary>
+        internal static string HithermPlannerForm_AnbindeleitungenAendern {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AnbindeleitungenAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen hinzufügen.
+        /// </summary>
+        internal static string HithermPlannerForm_AnbindeleitungenHinzufuegen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AnbindeleitungenHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitung löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_AnbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AnbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An Hilfslinien ausrichten.
+        /// </summary>
+        internal static string HithermPlannerForm_AnHilfslinienAusrichten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AnHilfslinienAusrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An Hilfslinine ausrichten.
+        /// </summary>
+        internal static string HithermPlannerForm_AnHilfslinineAusrichten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AnHilfslinineAusrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatisch verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_AutomatischVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_AutomatischVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Belegte Fläche:.
+        /// </summary>
+        internal static string HithermPlannerForm_BelegteFlaeche {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_BelegteFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to benötigte Fläche:.
+        /// </summary>
+        internal static string HithermPlannerForm_BenoetigteFlaeche {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_BenoetigteFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to benötigte Wärmestromd.:.
+        /// </summary>
+        internal static string HithermPlannerForm_BenoetigteWaermestromdichte {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_BenoetigteWaermestromdichte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse:.
+        /// </summary>
+        internal static string HithermPlannerForm_Berechnungsergebnisse {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Berechnungsergebnisse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Differenz zur erwarteten Leistung:.
+        /// </summary>
+        internal static string HithermPlannerForm_DifferenzZurErwartetenLeistung {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_DifferenzZurErwartetenLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direkt verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_DirektVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_DirektVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dreieckfenster Links.
+        /// </summary>
+        internal static string HithermPlannerForm_DreieckfensterLinks {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_DreieckfensterLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dreiecksfenster Rechts.
+        /// </summary>
+        internal static string HithermPlannerForm_DreiecksfensterRechts {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_DreiecksfensterRechts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erreichte Leistung:.
+        /// </summary>
+        internal static string HithermPlannerForm_ErreichteLeistung {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ErreichteLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung exportieren.
+        /// </summary>
+        internal static string HithermPlannerForm_Exportieren {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Exportieren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fenster.
+        /// </summary>
+        internal static string HithermPlannerForm_Fenster {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Fenster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fenster und Türen.
+        /// </summary>
+        internal static string HithermPlannerForm_FensterTueren {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_FensterTueren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bild.
+        /// </summary>
+        internal static string HithermPlannerForm_FilterBild {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_FilterBild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Größe.
+        /// </summary>
+        internal static string HithermPlannerForm_Groesse {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Groesse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizbetrieb.
+        /// </summary>
+        internal static string HithermPlannerForm_Heizbetrieb {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Heizbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreise verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_HeizkreiseVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_HeizkreiseVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hilfslinien einrichten.
+        /// </summary>
+        internal static string HithermPlannerForm_HilfslinienEinrichten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_HilfslinienEinrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hochleistungsregister.
+        /// </summary>
+        internal static string HithermPlannerForm_Hochleistungsregister {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Hochleistungsregister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal:.
+        /// </summary>
+        internal static string HithermPlannerForm_Horizontal {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Horizontal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keine Schräge ausgewählt.
+        /// </summary>
+        internal static string HithermPlannerForm_KeineSchraege {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_KeineSchraege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es sind keine Wände zum exportieren vorhanden..
+        /// </summary>
+        internal static string HithermPlannerForm_KeineWaendeText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_KeineWaendeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keine Wand ausgewählt.
+        /// </summary>
+        internal static string HithermPlannerForm_KeineWand {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_KeineWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Objekt ausgewählt.
+        /// </summary>
+        internal static string HithermPlannerForm_KeinObjekt {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_KeinObjekt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Register ausgewählt.
+        /// </summary>
+        internal static string HithermPlannerForm_KeinRegister {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_KeinRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion.
+        /// </summary>
+        internal static string HithermPlannerForm_Konstruktion {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Konstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühlbetrieb.
+        /// </summary>
+        internal static string HithermPlannerForm_Kuehlbetrieb {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Kuehlbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Links.
+        /// </summary>
+        internal static string HithermPlannerForm_Links {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Links", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to links.
+        /// </summary>
+        internal static string HithermPlannerForm_Links2 {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Links2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Links:.
+        /// </summary>
+        internal static string HithermPlannerForm_Links3 {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Links3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manuell verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_ManuellVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ManuellVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mittelmaß hor..
+        /// </summary>
+        internal static string HithermPlannerForm_MittelmassHor {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_MittelmassHor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neue Wand anlegen.
+        /// </summary>
+        internal static string HithermPlannerForm_NeueWand {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_NeueWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nur ganze Register.
+        /// </summary>
+        internal static string HithermPlannerForm_NurGanzeRegister {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_NurGanzeRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objekte bearbeiten.
+        /// </summary>
+        internal static string HithermPlannerForm_ObjekteBearbeiten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ObjekteBearbeiten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objekt löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_ObjektLoeschen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ObjektLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ: %OBJEKT% %BREITE%cm x %HOEHE%cm.
+        /// </summary>
+        internal static string HithermPlannerForm_ObjektText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ObjektText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        internal static string HithermPlannerForm_Position {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position hor..
+        /// </summary>
+        internal static string HithermPlannerForm_PositionHor {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_PositionHor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position vert..
+        /// </summary>
+        internal static string HithermPlannerForm_PositionVert {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_PositionVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randabstand ändern.
+        /// </summary>
+        internal static string HithermPlannerForm_RandabstandAendern {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RandabstandAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechts.
+        /// </summary>
+        internal static string HithermPlannerForm_Rechts {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Rechts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rechts.
+        /// </summary>
+        internal static string HithermPlannerForm_Rechts2 {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Rechts2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechtwinkelig verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_RechtwinkeligVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RechtwinkeligVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_RegisterLoeschen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RegisterLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm Klimawand   %ANZAHL% Stück Hitherm %TYP% %HOEHE%cm (%ROHRE%).
+        /// </summary>
+        internal static string HithermPlannerForm_RegisterText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RegisterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register verbinden.
+        /// </summary>
+        internal static string HithermPlannerForm_RegisterVerbinden {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RegisterVerbinden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohrabstand.
+        /// </summary>
+        internal static string HithermPlannerForm_Rohrabstand {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Rohrabstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 cm (Hochleistungsreg.).
+        /// </summary>
+        internal static string HithermPlannerForm_RohrabstandHochleistung {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RohrabstandHochleistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 cm (Standardreg.).
+        /// </summary>
+        internal static string HithermPlannerForm_RohrabstandStandard {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_RohrabstandStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schräge links.
+        /// </summary>
+        internal static string HithermPlannerForm_SchraegeLinks {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_SchraegeLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schräge löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_SchraegeLoeschen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_SchraegeLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schrägen.
+        /// </summary>
+        internal static string HithermPlannerForm_Schraegen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Schraegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schräge rechts.
+        /// </summary>
+        internal static string HithermPlannerForm_SchraegeRechts {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_SchraegeRechts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schräge %AUSRICHTUNG%: %BREITE%cm x %HOEHE%cm.
+        /// </summary>
+        internal static string HithermPlannerForm_SchraegeText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_SchraegeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Senkrecht:.
+        /// </summary>
+        internal static string HithermPlannerForm_Senkrecht {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Senkrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonstiges.
+        /// </summary>
+        internal static string HithermPlannerForm_Sonstiges {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Sonstiges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standardregister.
+        /// </summary>
+        internal static string HithermPlannerForm_Standardregister {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Standardregister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitherm - grafische Auslegung.
+        /// </summary>
+        internal static string HithermPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tür.
+        /// </summary>
+        internal static string HithermPlannerForm_Tuer {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Tuer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Übrige Fläche:.
+        /// </summary>
+        internal static string HithermPlannerForm_UebrigeFlaeche {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_UebrigeFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verfügbare Fläche:.
+        /// </summary>
+        internal static string HithermPlannerForm_VerfuegbareFlaeche {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_VerfuegbareFlaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausschnitt verschieben.
+        /// </summary>
+        internal static string HithermPlannerForm_Verschieben {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Verschieben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertikal:.
+        /// </summary>
+        internal static string HithermPlannerForm_Vertikal {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Vertikal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorlauf.
+        /// </summary>
+        internal static string HithermPlannerForm_Vorlauf {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Vorlauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Links unten.
+        /// </summary>
+        internal static string HithermPlannerForm_VorlaufLinksUnten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_VorlaufLinksUnten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechts unten (Std.).
+        /// </summary>
+        internal static string HithermPlannerForm_VorlaufRechtsUnten {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_VorlaufRechtsUnten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waagrecht:.
+        /// </summary>
+        internal static string HithermPlannerForm_Waagrecht {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Waagrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wände.
+        /// </summary>
+        internal static string HithermPlannerForm_Waende {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Waende", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wände aus Raumgeometrie erzeugen.
+        /// </summary>
+        internal static string HithermPlannerForm_WaendeErzeugen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WaendeErzeugen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es sind bereits Wände vorhanden. Wollen Sie wirklich alle bestehenden Wände löschen und automatisch erzeugen?.
+        /// </summary>
+        internal static string HithermPlannerForm_WaendeVorhandenText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WaendeVorhandenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wände vorhanden.
+        /// </summary>
+        internal static string HithermPlannerForm_WaendeVorhandenTitel {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WaendeVorhandenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wärmeregister.
+        /// </summary>
+        internal static string HithermPlannerForm_Waermeregister {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_Waermeregister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wärmeregister senkrecht.
+        /// </summary>
+        internal static string HithermPlannerForm_WaermeregisterSenkrecht {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WaermeregisterSenkrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wärmeregister waagrecht.
+        /// </summary>
+        internal static string HithermPlannerForm_WaermeregisterWaagrecht {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WaermeregisterWaagrecht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_WandLoeschen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die aktuelle Wand wirklich löschen?.
+        /// </summary>
+        internal static string HithermPlannerForm_WandLoeschenText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand löschen.
+        /// </summary>
+        internal static string HithermPlannerForm_WandLoeschenTitel {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandLoeschenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Wanddefinitionen wurden automatisch erzeugt. Falls Sie Änderungen vornehmen wollen, können Anbindeleitungen nicht mehr grafisch verplant werden. Wollen Sie wirklich fortfahren?.
+        /// </summary>
+        internal static string HithermPlannerForm_WandManuellText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandManuellText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wanddefinition manuell anpassen?.
+        /// </summary>
+        internal static string HithermPlannerForm_WandManuellTitel {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandManuellTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand nach links verschieben.
+        /// </summary>
+        internal static string HithermPlannerForm_WandNachLinksVerschieben {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandNachLinksVerschieben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand nach rechts verschieben.
+        /// </summary>
+        internal static string HithermPlannerForm_WandNachRechtsVerschieben {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandNachRechtsVerschieben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand Nr: %WAND%.
+        /// </summary>
+        internal static string HithermPlannerForm_WandText {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_WandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zus. Informationen:.
+        /// </summary>
+        internal static string HithermPlannerForm_ZusInformationen {
+            get {
+                return ResourceManager.GetString("HithermPlannerForm_ZusInformationen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
         /// </summary>
         internal static string HithermProduct_NotificationParameter {
             get {
                 return ResourceManager.GetString("HithermProduct_NotificationParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es sind zuviele Heizkreise in diesem Produkt vorhanden.
+        /// </summary>
+        internal static string HithermProduct_ZuvieleHeizkreise {
+            get {
+                return ResourceManager.GetString("HithermProduct_ZuvieleHeizkreise", resourceCulture);
             }
         }
         
@@ -4407,6 +5994,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Länge in cm:.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_LaengeCm {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_LaengeCm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in m:.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_LaengeM {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_LaengeM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in mm:.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_LaengeMm {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_LaengeMm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raster aus.
         /// </summary>
         internal static string ImagePlanOptionsForm_RasterAus {
@@ -4439,6 +6053,33 @@ namespace Europlan.Common {
         internal static string ImagePlanRoomPickerForm_Titel {
             get {
                 return ResourceManager.GetString("ImagePlanRoomPickerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to alle Pläne.
+        /// </summary>
+        internal static string ImportedPlansPanel_AlleFilter {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_AlleFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beim Einlesen des Plans ist leider ein Fehler aufgetreten. Bitte versuchen Sie, falls möglich, den Plan mit einem CAD-Programm erneut abzuspeichern und nochmals zu importieren..
+        /// </summary>
+        internal static string ImportedPlansPanel_CadFehlerText {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_CadFehlerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler beim Einlesen.
+        /// </summary>
+        internal static string ImportedPlansPanel_CadFehlerTitel {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_CadFehlerTitel", resourceCulture);
             }
         }
         
@@ -11179,6 +12820,915 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?.
+        /// </summary>
+        internal static string ModulKlimaBodenPlanner_AnbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlanner_AnbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?.
+        /// </summary>
+        internal static string ModulKlimaBodenPlanner_HeizkreisLoeschenText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlanner_HeizkreisLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreis löschen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlanner_HeizkreisLoeschenTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlanner_HeizkreisLoeschenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neuer Heizkreis.
+        /// </summary>
+        internal static string ModulKlimaBodenPlanner_NeuerHeizkreisTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlanner_NeuerHeizkreisTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achsabstand:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Achsabstand {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Achsabstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle umdrehen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_AlleUmdrehen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_AlleUmdrehen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen ändern.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_AnbindeleitungenAendern {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_AnbindeleitungenAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_AnbindeleitungenHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_AnbindeleitungenHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ausgewählte Module.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_AusgewaehlteModule {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_AusgewaehlteModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausgewähltes Modul.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_AusgewaehltesModul {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_AusgewaehltesModul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausrichtung:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Ausrichtung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Ausrichtung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Berechnungsergebnisse {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Berechnungsergebnisse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Berechnungsergebnisse2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Berechnungsergebnisse2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breitseite.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Breitseite {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Breitseite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breitseite:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Breitseite2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Breitseite2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dicht.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Dicht {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Dicht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Differenz zur erwarteten Leistung:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drehung:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Drehung2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Drehung2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Durchströmungsrichtung umdrehen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_DurchstroemungsrichtungUmdrehen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_DurchstroemungsrichtungUmdrehen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erreichte Leistung:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ErreichteLeistung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ErreichteLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farbe des Heizkreises:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_FarbeHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_FarbeHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frei.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Frei {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Frei", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizbetrieb.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Heizbetrieb {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Heizbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreis:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Heizkreis2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Heizkreis2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreise.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Heizkreise {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Heizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Hinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Hinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Holzstaffeln.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Holzstaffeln {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Holzstaffeln", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to keiner.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_KeinHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_KeinHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Modul ausgewählt.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_KeinModul {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_KeinModul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_KonstruktionAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_KonstruktionAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_KonstruktionAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_KonstruktionAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion einrichten.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_KonstruktionEinrichten {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_KonstruktionEinrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktionsart.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Konstruktionsart {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Konstruktionsart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktionsparameter.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Konstruktionsparameter {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Konstruktionsparameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühlbetrieb.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Kuehlbetrieb {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Kuehlbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Längsseite.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Laengsseite {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Laengsseite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Längsseite:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Laengsseite2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Laengsseite2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leistung Anbindeleitungen:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_LeistungAnbindeleitungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_LeistungAnbindeleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module auslegen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModuleAuslegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModuleAuslegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module auswählen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModuleAuswaehlen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModuleAuswaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModuleHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModuleHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die neu hinzugefügten Module übernehmen?.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModuleUebernehmenText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModuleUebernehmenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module übernehmen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to modulierend.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Modulierend {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Modulierend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to modulierend - doppelter Abstand.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ModulierendDoppelt {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ModulierendDoppelt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neue Module.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_NeueModule {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_NeueModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neue Module:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_NeueModule2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_NeueModule2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neuer HK.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_NeuerHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_NeuerHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Orientierung von Modulen an die bereits eine Verbindeleitung angeschlossen ist kann nicht mehr geändert werden. Wollen Sie die Verbindeleitungen der betreffenden Module löschen?.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_OrientierungAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_OrientierungAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitungen löschen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_OrientierungAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_OrientierungAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Pro Winkel zusätzlich 1m Verbindungsleitung).
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ProWinkel1mVerbindungsleitung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ProWinkel1mVerbindungsleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Referenzmodul für Ausrichtung wählen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_ReferenzmodulFuerAusrichtung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_ReferenzmodulFuerAusrichtung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_RichtungAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_RichtungAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen löschen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_RichtungAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_RichtungAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staffelbreite:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Staffelbreite {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Staffelbreite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul Klima-Boden - grafische Auslegung.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unterkonstruktion ausrichten.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitung hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_VerbindeleitungHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_VerbindeleitungHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitung löschen.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_VerbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_VerbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindungen:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_Verbindungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_Verbindungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summe Verbindungsleitungen in Heizkreis:.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_VerbindungsleitungenInHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_VerbindungsleitungenInHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verschiedene Ausrichtungen ausgewählt.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_VerschiedeneAusrichtungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_VerschiedeneAusrichtungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to verschiende.
+        /// </summary>
+        internal static string ModulKlimaBodenPlannerForm_VerschiendeHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBodenPlannerForm_VerschiendeHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neue Module.
+        /// </summary>
+        internal static string ModulKlimaDeckeForm_NeueModule {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckeForm_NeueModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Akustikdecke mit Randfries.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_AkustikdeckeRandfries {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_AkustikdeckeRandfries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to wenn möglich automatisch ausrichten.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_AutomatischAusrichten {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_AutomatischAusrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatische Anpassungen.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_AutomatischeAnpassungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_AutomatischeAnpassungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beplankung.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Beplankung {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Beplankung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beplankung bekannt.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_BeplankungBekannt {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_BeplankungBekannt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breite:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Breite {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Breite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deckenkonstruktion.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Deckenkonstruktion {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Deckenkonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen löschen.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glatt.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Glatt {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Glatt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to keine.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_KeineReihe {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_KeineReihe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to keine.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_KeineTeilflaeche {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_KeineTeilflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klimamodul Serie.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_KlimamodulSerie {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_KlimamodulSerie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Laenge {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Laenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neue Reihen.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NeueReihen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NeueReihen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neue Teilfläche.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NeueTeilflaeche {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NeueTeilflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es konnten nicht alle Module geändert werden, da nicht genug Platz zur Verfügugn steht.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NichtGenugPlatz2Text {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NichtGenugPlatz2Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NichtGenugPlatz2Titel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NichtGenugPlatz2Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es konnte kein Modul geändert werden, da nicht genug Platz zur Verfügugn steht.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NichtGenugPlatzText {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NichtGenugPlatzText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_NichtGenugPlatzTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_NichtGenugPlatzTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parallele Reihen in der Teilfläche.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_ParalleleReihen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_ParalleleReihen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randfries:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Randfries {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Randfries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rastermaß.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Rastermass {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Rastermass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reihe:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Reihe {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Reihe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rücklauf flexibel.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_RuecklaufFlexibel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_RuecklaufFlexibel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klimamodul Serie 30.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Serie30 {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Serie30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klimamodul Serie 40.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Serie40 {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Serie40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summe Verbindungsleitungen in Reihe:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_SummeVerbindungsleitungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_SummeVerbindungsleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teilfläche:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Teilflaeche {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Teilflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teilflächen.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Teilflaechen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Teilflaechen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul Klima-Decke - grafische Auslegung.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Titel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ:.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Typ {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Typ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unterkonstuktion.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Unterkonstuktion {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Unterkonstuktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to verschieben.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_Verschieben {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_Verschieben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verschiedene Modulgrößen ausgewählt.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_VerschiedeneModulgroessen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_VerschiedeneModulgroessen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to wenn möglich zu vorhandenen Reihen hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_VorhandeneReihenNutzen {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_VorhandeneReihenNutzen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vorlauf flexibel.
+        /// </summary>
+        internal static string ModulKlimaDeckePlannerForm_VorlaufFlexibel {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckePlannerForm_VorlaufFlexibel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C-Profil.
         /// </summary>
         internal static string ModulKlimaDeckeProduct_CProfil {
@@ -11292,6 +13842,42 @@ namespace Europlan.Common {
         internal static string NewDistributorForm_VerteilerAnlegen {
             get {
                 return ResourceManager.GetString("NewDistributorForm_VerteilerAnlegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rücklaufseitig.
+        /// </summary>
+        internal static string NewGraphicalProductToProductConnection_Ruecklaufseitig {
+            get {
+                return ResourceManager.GetString("NewGraphicalProductToProductConnection_Ruecklaufseitig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System anschließen.
+        /// </summary>
+        internal static string NewGraphicalProductToProductConnection_Titel {
+            get {
+                return ResourceManager.GetString("NewGraphicalProductToProductConnection_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vorlaufseitig.
+        /// </summary>
+        internal static string NewGraphicalProductToProductConnection_Vorlaufseitig {
+            get {
+                return ResourceManager.GetString("NewGraphicalProductToProductConnection_Vorlaufseitig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie das System vorlauf oder rücklaufseitig anschließen?.
+        /// </summary>
+        internal static string NewGraphicalProductToProductConnection_WieAnschliessen {
+            get {
+                return ResourceManager.GetString("NewGraphicalProductToProductConnection_WieAnschliessen", resourceCulture);
             }
         }
         
@@ -11413,6 +13999,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seiten:.
+        /// </summary>
+        internal static string NewPlanForm_Seiten {
+            get {
+                return ResourceManager.GetString("NewPlanForm_Seiten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raumtypen.
         /// </summary>
         internal static string NewRoomTypeForm_Titel {
@@ -11499,6 +14094,24 @@ namespace Europlan.Common {
         internal static string NewWallForm_VorWand {
             get {
                 return ResourceManager.GetString("NewWallForm_VorWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte geben Sie für die Breite einen gültigen Wert ein (min. 10cm)..
+        /// </summary>
+        internal static string NewWallForm_WandZuSchmalText {
+            get {
+                return ResourceManager.GetString("NewWallForm_WandZuSchmalText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand zu schmal.
+        /// </summary>
+        internal static string NewWallForm_WandZuSchmalTextTitel {
+            get {
+                return ResourceManager.GetString("NewWallForm_WandZuSchmalTextTitel", resourceCulture);
             }
         }
         
@@ -11746,6 +14359,114 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie das Definieren der Fläche abbrechen?.
+        /// </summary>
+        internal static string PipeProductPlaner_FlaecheAbbrechenText {
+            get {
+                return ResourceManager.GetString("PipeProductPlaner_FlaecheAbbrechenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abbrechen?.
+        /// </summary>
+        internal static string PipeProductPlaner_FlaecheAbbrechenTitel {
+            get {
+                return ResourceManager.GetString("PipeProductPlaner_FlaecheAbbrechenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AZ: .
+        /// </summary>
+        internal static string PipeProductPlanner_AZ {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_AZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die definierte Fläche beträgt %FLAECHE%m². Wollen Sie diese Fläche übernehmen?.
+        /// </summary>
+        internal static string PipeProductPlanner_FlaecheUebernehmenText {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_FlaecheUebernehmenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche übernehmen?.
+        /// </summary>
+        internal static string PipeProductPlanner_FlaecheUebernehmenTitel {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_FlaecheUebernehmenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK: .
+        /// </summary>
+        internal static string PipeProductPlanner_HK {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_HK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name: .
+        /// </summary>
+        internal static string PipeProductPlanner_Name {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?.
+        /// </summary>
+        internal static string PipeProductPlanner_Neu1Text {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_Neu1Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die bereits definierte Fläche und die bestehenden Anbindeleitungen verwerfen und neu definieren?.
+        /// </summary>
+        internal static string PipeProductPlanner_Neu2Text {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_Neu2Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verwerfen und neu definieren?.
+        /// </summary>
+        internal static string PipeProductPlanner_NeuTitel {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_NeuTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rohrl.: .
+        /// </summary>
+        internal static string PipeProductPlanner_Rohrlaenge {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_Rohrlaenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RZ: .
+        /// </summary>
+        internal static string PipeProductPlanner_RZ {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_RZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heranzoomen.
         /// </summary>
         internal static string Plan_Heranzoomen {
@@ -11778,6 +14499,24 @@ namespace Europlan.Common {
         internal static string Plan_Verschieben {
             get {
                 return ResourceManager.GetString("Plan_Verschieben", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht.
+        /// </summary>
+        internal static string PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText {
+            get {
+                return ResourceManager.GetString("PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grafische Anbindeleitungen löschen.
+        /// </summary>
+        internal static string PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel {
+            get {
+                return ResourceManager.GetString("PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel", resourceCulture);
             }
         }
         
@@ -12840,6 +15579,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auslegungsart:.
+        /// </summary>
+        internal static string PlannedProductPanel_Auslegungsart {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Auslegungsart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auslegung.
         /// </summary>
         internal static string PlannedProductPanel_AuslegungSeite {
@@ -12912,6 +15660,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to grafisch.
+        /// </summary>
+        internal static string PlannedProductPanel_Grafisch {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Grafisch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to grafische Anbindeleitungen.
+        /// </summary>
+        internal static string PlannedProductPanel_GrafischeAnbindeleitungen {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_GrafischeAnbindeleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grafische Auslegung öffnen.
+        /// </summary>
+        internal static string PlannedProductPanel_GrafischeAuslegung {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_GrafischeAuslegung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heizen.
         /// </summary>
         internal static string PlannedProductPanel_Heizen {
@@ -12971,6 +15746,15 @@ namespace Europlan.Common {
         internal static string PlannedProductPanel_Stellantriebe {
             get {
                 return ResourceManager.GetString("PlannedProductPanel_Stellantriebe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tabellarisch.
+        /// </summary>
+        internal static string PlannedProductPanel_Tabellarisch {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Tabellarisch", resourceCulture);
             }
         }
         
@@ -13070,6 +15854,33 @@ namespace Europlan.Common {
         internal static string PlanSetMeasureForm_KeinMassstab {
             get {
                 return ResourceManager.GetString("PlanSetMeasureForm_KeinMassstab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in cm:.
+        /// </summary>
+        internal static string PlanSetMeasureForm_LaengeCm {
+            get {
+                return ResourceManager.GetString("PlanSetMeasureForm_LaengeCm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in m:.
+        /// </summary>
+        internal static string PlanSetMeasureForm_LaengeM {
+            get {
+                return ResourceManager.GetString("PlanSetMeasureForm_LaengeM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge in mm:.
+        /// </summary>
+        internal static string PlanSetMeasureForm_LaengeMm {
+            get {
+                return ResourceManager.GetString("PlanSetMeasureForm_LaengeMm", resourceCulture);
             }
         }
         
@@ -13406,6 +16217,87 @@ namespace Europlan.Common {
         internal static string ProductOverviewForm_VerlegeabstandRz {
             get {
                 return ResourceManager.GetString("ProductOverviewForm_VerlegeabstandRz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boden.
+        /// </summary>
+        internal static string ProductType_Boden {
+            get {
+                return ResourceManager.GetString("ProductType_Boden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dachschräge.
+        /// </summary>
+        internal static string ProductType_Dachschraege {
+            get {
+                return ResourceManager.GetString("ProductType_Dachschraege", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decke.
+        /// </summary>
+        internal static string ProductType_Decke {
+            get {
+                return ResourceManager.GetString("ProductType_Decke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest.
+        /// </summary>
+        internal static string ProductType_Rest {
+            get {
+                return ResourceManager.GetString("ProductType_Rest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand.
+        /// </summary>
+        internal static string ProductType_Wand {
+            get {
+                return ResourceManager.GetString("ProductType_Wand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das Projekt konnte leider nicht gespeichert werden, da beim Speichern ein Fehler aufgetreten ist!.
+        /// </summary>
+        internal static string Project_FehlerBeimSpeichernText {
+            get {
+                return ResourceManager.GetString("Project_FehlerBeimSpeichernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler beim Speichern.
+        /// </summary>
+        internal static string Project_FehlerBeimSpeichernTitel {
+            get {
+                return ResourceManager.GetString("Project_FehlerBeimSpeichernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beim Laden konnte der folgende Plan nicht gefunden werden: &apos;%PLANNAME%&apos; (%FILENAME%) Falls der Plan versehentlich aus dem Verzeichnis gelöscht oder verschoben wurde, können Sie ihn erneut importieren. Falls Sie den Plan erneut importieren möchten, klicken Sie auf JA, wenn Sie NEIN auswählen, gehen bereits grafisch ausgelegte Produkte verloren. Erneut importieren?.
+        /// </summary>
+        internal static string Project_PlanFehltText {
+            get {
+                return ResourceManager.GetString("Project_PlanFehltText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem beim Laden.
+        /// </summary>
+        internal static string Project_PlanFehltTitel {
+            get {
+                return ResourceManager.GetString("Project_PlanFehltTitel", resourceCulture);
             }
         }
         
@@ -15261,6 +18153,78 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie das Definieren der Fläche abbrechen?.
+        /// </summary>
+        internal static string RoomPicker_FlaecheAbbrechenText {
+            get {
+                return ResourceManager.GetString("RoomPicker_FlaecheAbbrechenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abbrechen?.
+        /// </summary>
+        internal static string RoomPicker_FlaecheAbbrechenTitel {
+            get {
+                return ResourceManager.GetString("RoomPicker_FlaecheAbbrechenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren? Die grafische Auslegung aller Systeme die bereits in diesem Raum verplant wurden wird dadurch gelöscht..
+        /// </summary>
+        internal static string RoomPicker_NeueRaumgeometrieText {
+            get {
+                return ResourceManager.GetString("RoomPicker_NeueRaumgeometrieText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verwerfen und neu definieren?.
+        /// </summary>
+        internal static string RoomPicker_NeueRaumgeometrieTitel {
+            get {
+                return ResourceManager.GetString("RoomPicker_NeueRaumgeometrieTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie das Definieren der Raumgeometrie abbrechen?.
+        /// </summary>
+        internal static string RoomPicker_RaumgeometrieAbbrechenText {
+            get {
+                return ResourceManager.GetString("RoomPicker_RaumgeometrieAbbrechenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abbrechen?.
+        /// </summary>
+        internal static string RoomPicker_RaumgeometrieAbbrechenTitel {
+            get {
+                return ResourceManager.GetString("RoomPicker_RaumgeometrieAbbrechenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die definierte Fläche beträgt %AREA%m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?.
+        /// </summary>
+        internal static string RoomPicker_RaumgroesseText {
+            get {
+                return ResourceManager.GetString("RoomPicker_RaumgroesseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raumgeometrie übernehmen?.
+        /// </summary>
+        internal static string RoomPicker_RaumgroesseTitel {
+            get {
+                return ResourceManager.GetString("RoomPicker_RaumgroesseTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abstand vom Referenzpunkt.
         /// </summary>
         internal static string RoomPickerForm_Abstand {
@@ -15374,6 +18338,24 @@ namespace Europlan.Common {
         internal static string RoomPickerForm_Hoehe {
             get {
                 return ResourceManager.GetString("RoomPickerForm_Hoehe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es muss ein Referenzpunk gewählt werden um unbeheizte Flächen definieren zu können.
+        /// </summary>
+        internal static string RoomPickerForm_KeinReferenzpunktText {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_KeinReferenzpunktText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Referenzpunkt gewählt.
+        /// </summary>
+        internal static string RoomPickerForm_KeinReferenzpunktTitel {
+            get {
+                return ResourceManager.GetString("RoomPickerForm_KeinReferenzpunktTitel", resourceCulture);
             }
         }
         
@@ -16016,6 +18998,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitte wählen Sie einen Heizkreis, in die die ausgewählte Teilfläche verschoben werden soll.
+        /// </summary>
+        internal static string SelectMoveTargetForm_HeizkreisWaehlen {
+            get {
+                return ResourceManager.GetString("SelectMoveTargetForm_HeizkreisWaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte wählen Sie eine Teilfläche, in die die ausgewählte Reihe verschoben werden soll.
+        /// </summary>
+        internal static string SelectMoveTargetForm_TeilflaecheWaehlen {
+            get {
+                return ResourceManager.GetString("SelectMoveTargetForm_TeilflaecheWaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitte wählen Sie ein Teilsystem aus..
         /// </summary>
         internal static string SelectPlannedProductForm_KeinSystemText {
@@ -16030,6 +19030,15 @@ namespace Europlan.Common {
         internal static string SelectPlannedProductForm_KeinSystemTitel {
             get {
                 return ResourceManager.GetString("SelectPlannedProductForm_KeinSystemTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string SelectPlannedProductForm_Name {
+            get {
+                return ResourceManager.GetString("SelectPlannedProductForm_Name", resourceCulture);
             }
         }
         
@@ -16057,6 +19066,15 @@ namespace Europlan.Common {
         internal static string SelectRoomForm_KeinRaumTitel {
             get {
                 return ResourceManager.GetString("SelectRoomForm_KeinRaumTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string SelectRoomForm_Name {
+            get {
+                return ResourceManager.GetString("SelectRoomForm_Name", resourceCulture);
             }
         }
         
@@ -16187,6 +19205,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?.
+        /// </summary>
+        internal static string SystemParametersPanel_FuerProjektVerwendenText {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_FuerProjektVerwendenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Für aktuelles Projekt verwenden.
+        /// </summary>
+        internal static string SystemParametersPanel_FuerProjektVerwendenTitel {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_FuerProjektVerwendenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Geometriefaktor:.
         /// </summary>
         internal static string SystemParametersPanel_Geometriefaktor {
@@ -16237,6 +19273,15 @@ namespace Europlan.Common {
         internal static string SystemParametersPanel_HithermCompact {
             get {
                 return ResourceManager.GetString("SystemParametersPanel_HithermCompact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importierte Pläne.
+        /// </summary>
+        internal static string SystemParametersPanel_ImportiertePlaene {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ImportiertePlaene", resourceCulture);
             }
         }
         
@@ -16664,6 +19709,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mm.
+        /// </summary>
+        internal static string Unit_Millimeter {
+            get {
+                return ResourceManager.GetString("Unit_Millimeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to %.
         /// </summary>
         internal static string Unit_Prozent {
@@ -16813,6 +19867,15 @@ namespace Europlan.Common {
         internal static string WallHelpLinesForm_Titel {
             get {
                 return ResourceManager.GetString("WallHelpLinesForm_Titel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand nach links verschienben.
+        /// </summary>
+        internal static string WandNachLinksVerschienben {
+            get {
+                return ResourceManager.GetString("WandNachLinksVerschienben", resourceCulture);
             }
         }
         

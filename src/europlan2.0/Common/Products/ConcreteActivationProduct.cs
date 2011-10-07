@@ -84,7 +84,7 @@ namespace Europlan.Common {
 		}
 
 		public static string QuickDimensioningNameStatic {
-			get { return "BKA\n(m²)"; }
+			get { return EuroplanRes.ConcreteActivationProduct_Schnellauslegung; }
 		}
 
 		public override ProductType Type {

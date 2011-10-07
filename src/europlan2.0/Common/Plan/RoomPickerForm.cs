@@ -42,10 +42,10 @@ namespace Europlan.Common {
 			this.panel.Mode = PlanMode.PM_MOVE;
 			switch (Product.ConfigPlanMeasureEnum) {
 				case Product.PlanMeasureEnum.PM_CENTIMETER:
-					this.lblDistanceXUnit.Text = "cm";
-					this.lblDistanceYUnit.Text = "cm";
-					this.lblSizeXUnit.Text = "cm";
-					this.lblSizeYUnit.Text = "cm";
+					this.lblDistanceXUnit.Text = EuroplanRes.Unit_Zentimeter;
+					this.lblDistanceYUnit.Text = EuroplanRes.Unit_Zentimeter;
+					this.lblSizeXUnit.Text = EuroplanRes.Unit_Zentimeter;
+					this.lblSizeYUnit.Text = EuroplanRes.Unit_Zentimeter;
 					this.numDistanceX.EditType = NumericBox.NumericEditType.DIST_CM;
 					this.numDistanceY.EditType = NumericBox.NumericEditType.DIST_CM;
 					this.numSizeX.EditType = NumericBox.NumericEditType.LENGTH_CM;
@@ -53,10 +53,10 @@ namespace Europlan.Common {
 					break;
 
 				case Product.PlanMeasureEnum.PM_MILLIMETER:
-					this.lblDistanceXUnit.Text = "mm";
-					this.lblDistanceYUnit.Text = "mm";
-					this.lblSizeXUnit.Text = "mm";
-					this.lblSizeYUnit.Text = "mm";
+					this.lblDistanceXUnit.Text = EuroplanRes.Unit_Millimeter;
+					this.lblDistanceYUnit.Text = EuroplanRes.Unit_Millimeter;
+					this.lblSizeXUnit.Text = EuroplanRes.Unit_Millimeter;
+					this.lblSizeYUnit.Text = EuroplanRes.Unit_Millimeter;
 					this.numDistanceX.EditType = NumericBox.NumericEditType.DIST_MM;
 					this.numDistanceY.EditType = NumericBox.NumericEditType.DIST_MM;
 					this.numSizeX.EditType = NumericBox.NumericEditType.LENGTH_MM;
@@ -65,10 +65,10 @@ namespace Europlan.Common {
 
 				case Product.PlanMeasureEnum.PM_METER:
 				default:
-					this.lblDistanceXUnit.Text = "m";
-					this.lblDistanceYUnit.Text = "m";
-					this.lblSizeXUnit.Text = "m";
-					this.lblSizeYUnit.Text = "m";
+					this.lblDistanceXUnit.Text = EuroplanRes.Unit_Meter;
+					this.lblDistanceYUnit.Text = EuroplanRes.Unit_Meter;
+					this.lblSizeXUnit.Text = EuroplanRes.Unit_Meter;
+					this.lblSizeYUnit.Text = EuroplanRes.Unit_Meter;
 					this.numDistanceX.EditType = NumericBox.NumericEditType.DIST_M;
 					this.numDistanceY.EditType = NumericBox.NumericEditType.DIST_M;
 					this.numSizeX.EditType = NumericBox.NumericEditType.LENGTH;
@@ -280,7 +280,7 @@ namespace Europlan.Common {
 					ignoreReferencePoint++;
 					cbReferencePoint.Checked = true;
 					ignoreReferencePoint--;
-					MessageBox.Show("Es muss ein Referenzpunk gewählt werden um unbeheizte Flächen definieren zu können", "Kein Referenzpunkt gewählt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					MessageBox.Show(EuroplanRes.RoomPickerForm_KeinReferenzpunktText, EuroplanRes.RoomPickerForm_KeinReferenzpunktTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				} else {
 					this.grpDistance.Enabled = !this.cbReferencePoint.Checked;
 					this.grpSize.Enabled = !this.cbReferencePoint.Checked;

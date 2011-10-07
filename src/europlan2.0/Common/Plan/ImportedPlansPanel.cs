@@ -113,9 +113,9 @@ namespace Europlan.Common {
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "dxf";
 #if PDF
-				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp";
+				dialog.Filter = EuroplanRes.ImportedPlansPanel_AlleFilter + "|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp";
 #else
-				dialog.Filter = "alle Pläne|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
+				dialog.Filter = EuroplanRes.ImportedPlansPanel_AlleFilter + "|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
 #endif
 				dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
 #if PDF
@@ -333,7 +333,7 @@ namespace Europlan.Common {
 							}
 						}
 					} catch (Exception) {
-						MessageBox.Show("Beim Einlesen des Plans ist leider ein Fehler aufgetreten. Bitte versuchen Sie, falls möglich, den Plan mit einem CAD-Programm erneut abzuspeichern und nochmals zu importieren.", "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						MessageBox.Show(EuroplanRes.ImportedPlansPanel_CadFehlerText, EuroplanRes.ImportedPlansPanel_CadFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						deletePlan(plan);
 					} finally {
 						if (cpoForm != null) {

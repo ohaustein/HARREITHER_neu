@@ -883,7 +883,7 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			if (this.product.Product.Connections != null && this.product.Product.Connections.Count > 0) {
-				if (MessageBox.Show("Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht", "Grafische Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+				if (MessageBox.Show(EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText, EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
 					return;
 				}
 				this.product.Product.Connections.Clear();

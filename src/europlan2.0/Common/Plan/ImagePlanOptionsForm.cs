@@ -18,16 +18,16 @@ namespace Europlan.Common {
 			InitializeComponent();
 			switch (Product.ConfigPlanMeasureEnum) {
 				case Product.PlanMeasureEnum.PM_CENTIMETER:
-					this.lblLength.Text = "Länge in cm:";
+					this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LaengeCm;
 					break;
 
 				case Product.PlanMeasureEnum.PM_MILLIMETER:
-					this.lblLength.Text = "Länge in mm:";
+					this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LaengeMm;
 					break;
 
 				case Product.PlanMeasureEnum.PM_METER:
 				default:
-					this.lblLength.Text = "Länge in m:";
+					this.lblLength.Text = EuroplanRes.ImagePlanOptionsForm_LaengeM;
 					break;
 			}
 			this.SetLanguage();
@@ -39,11 +39,11 @@ namespace Europlan.Common {
 			if (this.picturePanel.Plan.Measure.HasValue) {
 				switch (Product.ConfigPlanMeasureEnum) {
 					case Product.PlanMeasureEnum.PM_CENTIMETER:
-						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "cm";
+						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + EuroplanRes.Unit_Zentimeter;
 						break;
 
 					case Product.PlanMeasureEnum.PM_MILLIMETER:
-						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "mm";
+						txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + EuroplanRes.Unit_Millimeter;
 						break;
 
 					case Product.PlanMeasureEnum.PM_METER:
@@ -217,11 +217,11 @@ namespace Europlan.Common {
 					//this.txtLength.Text = (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
 					switch (Product.ConfigPlanMeasureEnum) {
 						case Product.PlanMeasureEnum.PM_CENTIMETER:
-							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "cm";
+							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + EuroplanRes.Unit_Zentimeter;
 							break;
 
 						case Product.PlanMeasureEnum.PM_MILLIMETER:
-							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + "mm";
+							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + EuroplanRes.Unit_Millimeter;
 							break;
 
 						case Product.PlanMeasureEnum.PM_METER:

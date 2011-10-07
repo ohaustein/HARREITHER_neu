@@ -201,6 +201,39 @@ namespace Europlan.Common {
 			this.lblGeneralAlphaDeckeCool.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:";
 			this.btnGeneralStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
 			this.lblGeneralAlphaWandCool.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:";
+
+			this.lblHithermCompactRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+
+			this.label1.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl;
+			this.label2.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz;
+			this.label3.Text = EuroplanRes.SystemParametersPanel_Heizflaeche;
+			this.label4.Text = EuroplanRes.Unit_Quadratmeter;
+			this.radioButton1.Text = EuroplanRes.SystemParametersPanel_SystemHithermPlus;
+			this.radioButton2.Text = EuroplanRes.SystemParametersPanel_SystemHitherm;
+			this.button1.Text = EuroplanRes.SystemParametersPanel_Standardwerte;
+			this.label6.Text = EuroplanRes.SystemParametersPanel_System;
+			this.label7.Text = EuroplanRes.Unit_Mbar;
+			this.label8.Text = EuroplanRes.SystemParametersPanel_Druckverlust;
+			this.label9.Text = EuroplanRes.SystemParametersPanel_Durchfluss;
+			this.label10.Text = EuroplanRes.Unit_LiterProStunde;
+			this.label11.Text = EuroplanRes.General_Pascal;
+			this.label12.Text = EuroplanRes.SystemParametersPanel_AlphaWand;
+			this.label13.Text = EuroplanRes.SystemParametersPanel_AlphaDecke;
+			this.label14.Text = EuroplanRes.SystemParametersPanel_AlphaBoden;
+			this.label15.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label16.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label17.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label18.Text = EuroplanRes.SystemParametersPanel_Heizen;
+			this.label19.Text = EuroplanRes.SystemParametersPanel_Kuehlen;
+			this.label20.Text = EuroplanRes.SystemParametersPanel_AlphaBoden;
+			this.label21.Text = EuroplanRes.SystemParametersPanel_AlphaDecke;
+			this.button2.Text = EuroplanRes.SystemParametersPanel_Standardwerte;
+			this.label22.Text = EuroplanRes.SystemParametersPanel_AlphaWand;
+			this.label23.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label24.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label25.Text = EuroplanRes.Unit_WattProQmKelvin;
+			this.label26.Text = EuroplanRes.SystemParametersPanel_ImportiertePlaene;
+			this.label27.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
 		}
 
 		public Configuration.ConfigurationType ConfigurationType {
@@ -1234,7 +1267,7 @@ namespace Europlan.Common {
 				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 
 				if (HithermProduct.ConfigUsePlus != rbHithermPlusDefault.Checked) {
-					if (MessageBox.Show("Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?", "Für aktuelles Projekt verwenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 						HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 						if (ProjectChanged != null) {
 							ProjectChanged(null);
@@ -1250,7 +1283,7 @@ namespace Europlan.Common {
 				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 
 				if (HithermCompactProduct.ConfigUsePlus != rbHithermCompactPlusDefault.Checked) {
-					if (MessageBox.Show("Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?", "Für aktuelles Projekt verwenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 						HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlusDefault.Checked;
 						if (ProjectChanged != null) {
 							ProjectChanged(null);

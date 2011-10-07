@@ -26,6 +26,8 @@ namespace Europlan.Common {
 			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
 			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
 
+			this.colName.Text = EuroplanRes.SelectPlannedProductForm_Name;
+
 			this.Text = EuroplanRes.SelectPlannedProductForm_Titel; //"Bitte wählen Sie das gewünschte Teilsystem";
 		}
 

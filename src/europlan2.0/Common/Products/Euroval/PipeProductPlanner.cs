@@ -164,7 +164,7 @@ namespace Europlan.Common {
 			    }
 			} else if (this.mode == PipeProductMode.EVM_ADD_AREA || this.mode == PipeProductMode.EVM_ADD_RED) {
 				if (e.KeyCode == Keys.Escape) {
-					if (MessageBox.Show("Wollen Sie das Definieren der Fläche abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					if (MessageBox.Show(EuroplanRes.PipeProductPlaner_FlaecheAbbrechenText, EuroplanRes.PipeProductPlaner_FlaecheAbbrechenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 						this.inDesign = false;
 						this.coordsPickedSoFar.Clear();
 						this.Mode = PipeProductMode.EVM_NONE;
@@ -450,15 +450,15 @@ namespace Europlan.Common {
 					}
 
 					maxWidth = Math.Max(maxWidth, g.MeasureString(this.productTypeName + ": ", font).Width);
-					maxWidth = Math.Max(maxWidth, g.MeasureString("AZ: ", font).Width);
-					maxWidth = Math.Max(maxWidth, g.MeasureString("RZ: ", font).Width);
-					maxWidth = Math.Max(maxWidth, g.MeasureString("HK: ", font).Width);
-					maxWidth = Math.Max(maxWidth, g.MeasureString("Rohrl.: ", font).Width);
-					maxHeight = Math.Max(maxHeight, g.MeasureString("Name: ", font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString("AZ: ", font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString("RZ: ", font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString("HK: ", font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString("Rohrl.: ", font).Height);
+					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_AZ, font).Width);
+					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_RZ, font).Width);
+					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_HK, font).Width);
+					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_Rohrlaenge, font).Width);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Name, font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_AZ, font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_RZ, font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_HK, font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Rohrlaenge, font).Height);
 
 					maxWidth = Math.Max(maxWidth, g.MeasureString(productName, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(az, font).Width);
@@ -490,10 +490,10 @@ namespace Europlan.Common {
 					}
 
 					PaintTextBox(this.productTypeName + ": ", font, pos, maxWidth, 0, maxHeight, 0, border, p, g, additionalTransformation);
-					PaintTextBox("AZ: ", font, pos, maxWidth, 0, maxHeight, 1, border, p, g, additionalTransformation);
-					PaintTextBox("RZ: ", font, pos, maxWidth, 0, maxHeight, 2, border, p, g, additionalTransformation);
-					PaintTextBox("HK: ", font, pos, maxWidth, 0, maxHeight, 3, border, p, g, additionalTransformation);
-					PaintTextBox("Rohrl.: ", font, pos, maxWidth, 0, maxHeight, 4, border, p, g, additionalTransformation);
+					PaintTextBox(EuroplanRes.PipeProductPlanner_AZ, font, pos, maxWidth, 0, maxHeight, 1, border, p, g, additionalTransformation);
+					PaintTextBox(EuroplanRes.PipeProductPlanner_RZ, font, pos, maxWidth, 0, maxHeight, 2, border, p, g, additionalTransformation);
+					PaintTextBox(EuroplanRes.PipeProductPlanner_HK, font, pos, maxWidth, 0, maxHeight, 3, border, p, g, additionalTransformation);
+					PaintTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, font, pos, maxWidth, 0, maxHeight, 4, border, p, g, additionalTransformation);
 
 					PaintTextBox(productName, font, pos, maxWidth, 1, maxHeight, 0, border, p, g, additionalTransformation);
 					PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 1, border, p, g, additionalTransformation);
@@ -677,7 +677,9 @@ namespace Europlan.Common {
 					if (coordsPickedSoFar.Count > 2) {
 						if (this.Mode == PipeProductMode.EVM_ADD_AREA) {
 							double area = Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
-							DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + area + "m². Wollen Sie diese Fläche übernehmen?", "Fläche übernehmen?", MessageBoxButtons.YesNo);
+							string message = EuroplanRes.PipeProductPlanner_FlaecheUebernehmenText;
+							message = message.Replace("%FLAECHE%", area.ToString());
+							DialogResult result = MessageBox.Show(message, EuroplanRes.PipeProductPlanner_FlaecheUebernehmenTitel, MessageBoxButtons.YesNo);
 							if (result.Equals(DialogResult.Yes)) {
 								Polygon2D room = new Polygon2D(this.product.AssociatedRoom.RoomCoordinates);
 								if (room.IsClockwise()) {
@@ -895,9 +897,9 @@ namespace Europlan.Common {
 			if (this.Mode == PipeProductMode.EVM_ADD_AREA) {
 				DialogResult result;
 				if (this.product.Connections != null && this.product.Connections.Count > 0) {
-					result = MessageBox.Show("Wollen Sie die bereits definierte Fläche und die bestehenden Anbindeleitungen verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+					result = MessageBox.Show(EuroplanRes.PipeProductPlanner_Neu2Text, EuroplanRes.PipeProductPlanner_NeuTitel, MessageBoxButtons.YesNo);
 				} else {
-					result = MessageBox.Show("Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+					result = MessageBox.Show(EuroplanRes.PipeProductPlanner_Neu1Text, EuroplanRes.PipeProductPlanner_NeuTitel, MessageBoxButtons.YesNo);
 				}
 				if (result == DialogResult.No) {
 					return false;
@@ -1451,16 +1453,16 @@ namespace Europlan.Common {
 					text.Style = model.TextStyles["HarreitherStyle"];
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					text.Text = "AZ: ";
+					text.Text = EuroplanRes.PipeProductPlanner_AZ;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight); 
-					text.Text = "RZ: ";
+					text.Text = EuroplanRes.PipeProductPlanner_RZ;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					text.Text = "HK: ";
+					text.Text = EuroplanRes.PipeProductPlanner_HK;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					text.Text = "Rohrl.: ";
+					text.Text = EuroplanRes.PipeProductPlanner_Rohrlaenge;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);					
 
@@ -1490,10 +1492,10 @@ namespace Europlan.Common {
 					float border = 0.02f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 
 					PaintDxfTextBox(this.productTypeName + ": ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, 0, border, color, model, layer);
-					PaintDxfTextBox("AZ: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -1, border, color, model, layer);
-					PaintDxfTextBox("RZ: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
-					PaintDxfTextBox("HK: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
-					PaintDxfTextBox("Rohrl.: ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_AZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -1, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_RZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_HK, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
 
 					PaintDxfTextBox(productName, "HarreitherStyle", pos, maxWidth, 1, maxHeight, 0, border, color, model, layer);
 					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);

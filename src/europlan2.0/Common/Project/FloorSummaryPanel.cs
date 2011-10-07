@@ -58,6 +58,10 @@ namespace Europlan.Common {
 			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n";
 			this.IsNassraum.HeaderText = EuroplanRes.FloorSummaryPanel_Nassraum;
 			this.chkAssignPlan.Text = EuroplanRes.FloorSummaryPanel_PlanVorhanden;
+
+			this.btnDefineConnections.Text = EuroplanRes.PlannedProductPanel_GrafischeAnbindeleitungen;
+			this.label2.Text = EuroplanRes.FloorSummaryPanel_Raumhoehe;
+			this.label3.Text = EuroplanRes.Unit_Meter;
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

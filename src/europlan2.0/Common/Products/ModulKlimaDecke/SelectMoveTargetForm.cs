@@ -15,9 +15,9 @@ namespace Europlan.Common {
 			InitializeComponent();
 			this.product = product;
 			if (moveRow) {
-				this.label1.Text = "Bitte wählen Sie eine Teilfläche, in die die ausgewählte Reihe verschoben werden soll";
+				this.label1.Text = EuroplanRes.SelectMoveTargetForm_TeilflaecheWaehlen;
 			} else {
-				this.label1.Text = "Bitte wählen Sie einen Heizkreis, in die die ausgewählte Teilfläche verschoben werden soll";
+				this.label1.Text = EuroplanRes.SelectMoveTargetForm_HeizkreisWaehlen;
 				this.lstSubarea.Enabled = false;
 			}
 			this.UpdateLists(true, true);
@@ -30,7 +30,7 @@ namespace Europlan.Common {
 				for (int i = 1; i <= this.product.PlannedCircuitCount; i++) {
 					lstCircuits.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_HeizkreisAbkuerzung + i.ToString());
 				}
-				this.lstCircuits.Items.Add("neuer HK");
+				this.lstCircuits.Items.Add(EuroplanRes.ModulKlimaBodenPlannerForm_NeuerHK);
 				this.lstCircuits.SelectedIndex = lstCircuits.Items.Count - 1;
 				this.lstCircuits.EndUpdate();
 			}
@@ -39,10 +39,10 @@ namespace Europlan.Common {
 				this.lstSubarea.Items.Clear();
 				if (this.SelectedCircuit != null) {
 					for (int i = 1; i <= this.SelectedCircuit.SubAreas.Count; i++) {
-						lstSubarea.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaeche + i.ToString());
+						lstSubarea.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaeche + " " + i.ToString());
 					}
 				}
-				lstSubarea.Items.Add("neue Teilfläche");
+				lstSubarea.Items.Add(EuroplanRes.ModulKlimaDeckePlannerForm_NeueTeilflaeche);
 				lstSubarea.SelectedIndex = this.lstSubarea.Enabled ? lstSubarea.Items.Count - 1 : -1;
 				this.lstSubarea.EndUpdate();
 			}

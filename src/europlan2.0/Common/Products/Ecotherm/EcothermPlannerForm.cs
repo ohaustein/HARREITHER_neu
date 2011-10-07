@@ -98,6 +98,63 @@ namespace Europlan.Common.Products {
 			for (int i = 1; i <= 12; i++) {
 				this.cmbCircuits.Items.Add(i.ToString());
 			}
+
+			this.Text = Europlan.Common.EuroplanRes.EurovalPlannerForm_Titel;
+			this.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Titel;
+			this.btnZoomIn.Text = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomIn.ToolTipText = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = Europlan.Common.EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomOut.ToolTipText = Europlan.Common.EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = Europlan.Common.EuroplanRes.Plan_Verschieben;
+			this.btnMove.ToolTipText = Europlan.Common.EuroplanRes.Plan_Verschieben;
+			this.btnDefineArea.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_FlaecheDefinieren;
+			this.btnAddRz.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_RandzoneHinzufuegen;
+			this.btnDelRz.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_RandzoneLoeschen;
+			this.btnDelRz.ToolTipText = Europlan.Common.EuroplanRes.EcothermPlannerForm_RandzoneLoeschen;
+			this.btnAddReduced.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_RedFlaecheHinzufuegen;
+			this.btnDelReduced.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_RedFlaecheLoeschen;
+			this.btnSetText.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxPositionieren;
+			this.btnFontPlus.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxVergroessern;
+			this.btnFontMinus.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxVerkleinern;
+			this.btnAddAnbindeleitungen.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnbindeleitungenHinzufuegen;
+			this.btnSelectAnbindeleitungen.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnbindeleitungenAendern;
+			this.pageAuslegung.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Auslegung;
+			this.label12.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_EckenErklaerung;
+			this.label11.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnzahlEcken;
+			this.label9.Text = Europlan.Common.EuroplanRes.Unit_Meter;
+			this.label10.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_LaengeRandzone;
+			this.label29.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnzahlHeizkreise;
+			this.rbCalculateBoth.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_NachHeizUndKuehlbetrieb;
+			this.rbCalculateCool.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_NachKuehlbetrieb;
+			this.rbCalculateHeat.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_NachHeizbetrieb;
+			this.label14.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_VerlegeartRZ;
+			this.label13.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_VerlegeartAZ;
+			this.pageCalculations.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Berechnungsergebnisse;
+			this.label41.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Spreizung;
+			this.label33.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Kuehlen;
+			this.label34.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_DeltaP;
+			this.label35.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Mh;
+			this.label36.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Rohrlaenge;
+			this.label37.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnzahlHK;
+			this.label38.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Heizen;
+			this.label26.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AZ;
+			this.label25.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_RZ;
+			this.label19.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Q;
+			this.label20.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Tfb;
+			this.label21.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Flaeche;
+			this.label22.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_VA;
+			this.label23.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QAnb;
+			this.label24.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AAnb;
+			this.label15.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Q;
+			this.label16.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Tfb;
+			this.label17.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Breite;
+			this.label18.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_VA;
+			this.label6.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Kuehlen;
+			this.label5.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QRest;
+			this.label4.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QFBH;
+			this.label3.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QSollProQuadratmeter;
+			this.label2.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QSoll;
+			this.label1.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Heizen;
 		}
 
 		private void UpdateControls() {
@@ -438,7 +495,7 @@ namespace Europlan.Common.Products {
 			if (this.cmbCircuitsContainsAutomatic != newCmbCircuitsContainsAutomatic) {
 				this.cmbCircuitsContainsAutomatic = newCmbCircuitsContainsAutomatic;
 				if (this.cmbCircuitsContainsAutomatic) {
-					this.cmbCircuits.Items.Insert(0, "Automatisch");
+					this.cmbCircuits.Items.Insert(0, Europlan.Common.EuroplanRes.EcothermProduct_Automatisch);
 				} else {
 					this.cmbCircuits.Items.RemoveAt(0);
 				}
@@ -682,7 +739,7 @@ namespace Europlan.Common.Products {
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1) != this.eurovalPlanner.Product.RequestedCircuits || ((this.cmbCircuitsContainsAutomatic && this.cmbCircuits.SelectedIndex == 0) != (this.eurovalPlanner.Product.RequestedCircuits == null))) {
 				if (this.eurovalPlanner.Product.Connections != null && this.eurovalPlanner.Product.Connections.Count > 0) {
-					if (MessageBox.Show("Die Anzahl der Heizkreise von Systemen die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen des Systems löschen?", "Anbindeleitungen löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+					if (MessageBox.Show(Europlan.Common.EuroplanRes.EcothermPlanerForm_AnbindeleitungLoeschenText, Europlan.Common.EuroplanRes.EcothermPlanerForm_AnbindeleitungLoeschenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 						this.cmbCircuits.SelectedIndex = this.eurovalPlanner.Product.RequestedCircuits.Value + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
 						return;
 					}

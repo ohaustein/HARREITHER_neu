@@ -200,7 +200,7 @@ namespace Europlan.Common {
 						}
 					}
 					if (ask) {
-						if (MessageBox.Show("Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Heizkreis löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						if (MessageBox.Show(EuroplanRes.ModulKlimaBodenPlanner_HeizkreisLoeschenText, EuroplanRes.ModulKlimaBodenPlanner_HeizkreisLoeschenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 							return true;
 						}
 						this.product.Connections.Clear();
@@ -781,6 +781,13 @@ namespace Europlan.Common {
 		}
 
 		private bool TryAddModule(Matrix4D additionalTransformation, ref double y, double start, double end, double step, ref bool left, bool bottomUp, Matrix3D invRotation, PossibleModulLane lane, Point2D borderLeftOrigin, Dictionary<PossibleModulLane, KlimaFlaechenList> laneToRowMapping, ModulDeckeSubArea subArea, KlimaFlaechenList row, List<KlimaFlaechenModul> modulesAdded, bool tryToFindRow, bool onlyAddToExistingHks, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, ModulDeckeCircuit circuitToAdd) {
+			bool invertDirection = false;
+			if (this.connectedPlanPanel != null && this.connectedPlanPanel.Plan != null) {
+				if (!this.connectedPlanPanel.Plan.InvertYAxis) {
+					invertDirection = true;
+					//bottomUp = !bottomUp;
+				}
+			}
 			addedModul = lastAddedModul;
 			rowOfAddedModul = rowOfLastAddedModul;
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
@@ -796,7 +803,7 @@ namespace Europlan.Common {
 								KlimaFlaechenModul modul = new KlimaFlaechenModul(moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
 								modul.GraphLane = lane.Nr;
 								modul.GraphPositionInLan = bestStart.Value;
-								modul.GraphBottomUp = bottomUp;
+								modul.GraphBottomUp = invertDirection ? !bottomUp : bottomUp;
 								KlimaFlaechenList usedRow = null;
 								if (tryToFindRow) {
 									List<KlimaFlaechenModulWithRowAndCircuit> modulesInLane = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
@@ -832,7 +839,9 @@ namespace Europlan.Common {
 									modulesAdded.Add(modul);
 									addedModul = modul;
 									rowOfAddedModul = usedRow;
-									left = !left;
+									if (moduleTypeToAdd != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 && moduleTypeToAdd != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+										left = !left;
+									}
 									if (addedModul != lastAddedModul && rowOfAddedModul == rowOfLastAddedModul) {
 										int tmp;
 										Point2D output1 = lastAddedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
@@ -866,7 +875,7 @@ namespace Europlan.Common {
 						KlimaFlaechenModul modul = new KlimaFlaechenModul(moduleTypeToAdd, left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
 						modul.GraphLane = lane.Nr;
 						modul.GraphPositionInLan = y;
-						modul.GraphBottomUp = bottomUp;
+						modul.GraphBottomUp = invertDirection ? !bottomUp : bottomUp;
 						KlimaFlaechenList usedRow;
 						if (row != null) {
 							usedRow = row;
@@ -881,7 +890,9 @@ namespace Europlan.Common {
 						addedModul = modul;
 						rowOfAddedModul = usedRow;
 
-						left = !left;
+						if (moduleTypeToAdd != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 && moduleTypeToAdd != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+							left = !left;
+						}
 						if (addedModul != lastAddedModul && rowOfAddedModul == rowOfLastAddedModul) {
 							int tmp;
 							ModulDeckeCircuit circuit = this.product.GetCircuitForModul(addedModul, out tmp);
@@ -2830,7 +2841,7 @@ namespace Europlan.Common {
 					bool onlyAddToExisting = false;
 					if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null) {
 						if (this.product.Connections != null && this.product.Connections.Count > 0) {
-							if (MessageBox.Show("Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Neuer Heizkreis", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+							if (MessageBox.Show(EuroplanRes.ModulKlimaBodenPlanner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBodenPlanner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 								//this.layoutAddArea = null;
 								//return true;
 								onlyAddToExisting = true;
@@ -2877,11 +2888,18 @@ namespace Europlan.Common {
 								KlimaFlaechenList lastRow = null;
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
+										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										left = !left;
+										if (moduleWithRow.modul.DiagonalDurchstroemt) {
+											left = !left;
+										}
 									} else {
 										lastRow = moduleWithRow.row;
-										left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										//if (moduleWithRow.modul.DiagonalDurchstroemt) {
+											left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										//} else {
+											//left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+										//}
 									}
 								}
 								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(true));
@@ -2889,11 +2907,18 @@ namespace Europlan.Common {
 								lastRow = null;
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
+										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										left = !left;
+										if (moduleWithRow.modul.DiagonalDurchstroemt) {
+											left = !left;
+										}
 									} else {
 										lastRow = moduleWithRow.row;
-										left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										//if (moduleWithRow.modul.DiagonalDurchstroemt) {
+											left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										//} else {
+											//left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+										//}
 									}
 								}
 							}
@@ -3270,6 +3295,9 @@ namespace Europlan.Common {
 				p.Width = 1.5f;
 			}
 			Brush b = new SolidBrush(Color.FromArgb(c.A / 2, c));
+			if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && bottomUp) {
+				orientation = (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+			}
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
@@ -3289,6 +3317,9 @@ namespace Europlan.Common {
 				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });
 			}
 
+			if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && bottomUp) {
+				orientation = (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+			}
 			if (orientation != null) {
 				if (highlight) {
 					g.FillPolygon(b, new PointF[] { directionTop1, directionTop2, directionTop3 });

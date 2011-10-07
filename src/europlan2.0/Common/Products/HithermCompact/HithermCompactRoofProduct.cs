@@ -83,7 +83,7 @@ namespace Europlan.Common {
 		}
 
 		public static string QuickDimensioningNameStatic {
-			get { return "Hitherm®\nCompact\nDachschr.\n(m²)"; }
+			get { return EuroplanRes.HithermCompactDachschraege_Flaechenaufstellung; }
 		}
 
 		public override ProductType Type {

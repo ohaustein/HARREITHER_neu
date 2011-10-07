@@ -19,6 +19,8 @@ namespace Europlan.Common {
 		public ConnectionPlannerForm(Floor floor) {
 			InitializeComponent();
 
+			this.SetLanguage();
+
 			this.connectionPlanner.Floor = floor;
 
 			/*foreach (Distributor distributor in floor.GetAllAvailableDistributors()) {
@@ -30,6 +32,21 @@ namespace Europlan.Common {
 			}*/
 
 			this.UpdateToolbar(null);
+		}
+
+		private void SetLanguage() {
+			this.btnBoden.Text = EuroplanRes.ConnectionPlannerForm_Boden;
+			this.btnDecke.Text = EuroplanRes.ConnectionPlannerForm_Decke;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnFirstCircuit.Text = EuroplanRes.ConnectionPlannerForm_ErsterHeizkreis;
+			this.btnOtherCircuits.Text = EuroplanRes.ConnectionPlannerForm_RestlicheHeizkreise;
+			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
+			this.btnMove.ToolTipText = EuroplanRes.Plan_Verschieben;
+			this.btnConnections.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungHinzufuegen;
+			this.btnDeleteConnection.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungLoeschen;
+			this.btnPickConnection.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungenAendern;
+			this.Text = EuroplanRes.ConnectionPlannerForm_Titel;
 		}
 
 		public ConnectionPlannerForm(Product product, bool ceiling) {

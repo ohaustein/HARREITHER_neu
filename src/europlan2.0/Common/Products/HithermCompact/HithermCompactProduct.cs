@@ -570,7 +570,7 @@ namespace Europlan.Common {
 		}
 
 		public static string QuickDimensioningNameStatic {
-			get { return "Hitherm®\nCompact\n(m²)"; }
+			get { return EuroplanRes.HithermCompactProduct_Flaechenaufstellung; }
 		}
 
 		public override ProductType Type {
@@ -622,7 +622,7 @@ namespace Europlan.Common {
 				return false;
 			}
 			if (this.PlannedCircuits.Count > 12) {
-				this.lastErrorMsg = "Es sind zuviele Heizkreise in diesem Produkt vorhanden"; // TODO
+				this.lastErrorMsg = EuroplanRes.HithermProduct_ZuvieleHeizkreise; // TODO
 				this.incompleteCalculation = true;
 				return false;
 			}

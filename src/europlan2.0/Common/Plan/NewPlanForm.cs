@@ -52,7 +52,7 @@ namespace Europlan.Common {
 				this.numPage.MinValue = 1;
 				this.numPage.MaxValue = this.numOfPages;
 				this.lblNumOfPages.Visible = this.numOfPages > 1;
-				this.lblNumOfPages.Text = "Seiten: 1 - " + this.numOfPages;
+				this.lblNumOfPages.Text = EuroplanRes.NewPlanForm_Seiten + " 1 - " + this.numOfPages;
 			} else {
 				this.lblPage.Enabled = false;
 				this.numPage.Enabled = false;

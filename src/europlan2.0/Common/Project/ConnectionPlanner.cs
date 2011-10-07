@@ -25,8 +25,12 @@ namespace Europlan.Common {
 
 		public ConnectionPlanner() {
 			InitializeComponent();
-			this.contextMenu.Items[0].Text = "Vorlauf";
-			this.contextMenu.Items[1].Text = "Rücklauf";
+			this.SetLanguage();
+		}
+
+		private void SetLanguage() {
+			this.cmVorlauf.Text = EuroplanRes.ConnectionPlanner_Vorlauf;
+			this.cmRuecklauf.Text = EuroplanRes.ConnectionPlanner_Ruecklauf;
 		}
 
 		public ConnectionPlanner(IContainer container) {

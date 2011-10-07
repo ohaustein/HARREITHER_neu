@@ -21,34 +21,34 @@ namespace Europlan.Common {
 		private void SetLanguage() {
 			switch (Product.ConfigPlanMeasureEnum) {
 				case Product.PlanMeasureEnum.PM_CENTIMETER:
-					this.lblLength.Text = "Länge in cm:";
+					this.lblLength.Text = EuroplanRes.PlanSetMeasureForm_LaengeCm;
 					this.txtLength.EditType = NumericBox.NumericEditType.LENGTH_CM;
 					break;
 
 				case Product.PlanMeasureEnum.PM_MILLIMETER:
-					this.lblLength.Text = "Länge in mm:";
+					this.lblLength.Text = EuroplanRes.PlanSetMeasureForm_LaengeMm;
 					this.txtLength.EditType = NumericBox.NumericEditType.LENGTH_MM;
 					break;
 
 				case Product.PlanMeasureEnum.PM_METER:
 				default:
-					this.lblLength.Text = "Länge in m:";
+					this.lblLength.Text = EuroplanRes.PlanSetMeasureForm_LaengeM;
 					this.txtLength.EditType = NumericBox.NumericEditType.LENGTH;
 					break;
 			}
 			if (this.length.HasValue) {
 				switch (Product.ConfigPlanMeasureEnum) {
 					case Product.PlanMeasureEnum.PM_CENTIMETER:
-						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", "cm");
+						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", EuroplanRes.Unit_Zentimeter);
 						break;
 
 					case Product.PlanMeasureEnum.PM_MILLIMETER:
-						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", "mm");
+						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", EuroplanRes.Unit_Millimeter);
 						break;
 
 					case Product.PlanMeasureEnum.PM_METER:
 					default:
-						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", "m");
+						this.lblText.Text = EuroplanRes.PlanSetMeasureForm_Massstab.Replace("%LAENGE%", length.Value.ToString("0.00")).Replace("%EINHEIT%", EuroplanRes.Unit_Meter);
 						break;
 				}
 				this.txtLength.Value = (decimal)(length.Value * Product.ConfigPlanMeasureMultiplier);

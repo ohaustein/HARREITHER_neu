@@ -2360,7 +2360,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.planPanel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "HithermCompactPlannerForm";
-			this.Text = "Hitherm - grafische Auslegung";
+			this.Text = "Hitherm Compact - grafische Auslegung";
 			this.Load += new System.EventHandler(this.HithermPlannerForm_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HithermPlannerForm_FormClosing);
 			this.toolStripMain.ResumeLayout(false);

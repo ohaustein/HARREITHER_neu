@@ -73,6 +73,7 @@ namespace Europlan.Common {
 			this.Area.HeaderText = EuroplanRes.ConnectionPipePanel_FlaecheCol; //"Fläche";
 			this.HeatLoad.HeaderText = EuroplanRes.ConnectionPipePanel_HeizleistungCol; //"Heiz-\nleistung";
 			this.CoolLoad.HeaderText = EuroplanRes.ConnectionPipePanel_KuehlleistungCol; //"Kühl-\nleistung";
+			this.ConnectionOf.HeaderText = EuroplanRes.ConnectionPipePanel_TeilsystemCol;
 		}
 
 		private void ConfigureColumnVisibility() {

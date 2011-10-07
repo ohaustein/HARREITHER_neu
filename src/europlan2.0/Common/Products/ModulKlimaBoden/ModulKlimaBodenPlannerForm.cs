@@ -25,6 +25,7 @@ namespace Europlan.Common.Products {
 
 		public ModulKlimaBodenPlannerForm(PlannedProduct plannedProduct) {
 			InitializeComponent();
+			this.SetLanguage();
 			this.plannedProduct = plannedProduct;
 
 			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
@@ -36,18 +37,18 @@ namespace Europlan.Common.Products {
 			this.cmbSelectedModuleOrientation.SelectedIndex = -1;
 			this.cmbSelectedModuleOrientation.Enabled = false;
 
-			this.cmbHorizontal.Items.Add("dicht");
-			this.cmbHorizontal.Items.Add("modulierend");
-			this.cmbHorizontal.Items.Add("modulierend - doppelter Abstand");
+			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Dicht);
+			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Modulierend);
+			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModulierendDoppelt);
 			this.cmbHorizontal.SelectedIndex = 0;
 
-			this.cmbVertical.Items.Add("dicht");
-			this.cmbVertical.Items.Add("modulierend");
-			this.cmbVertical.Items.Add("modulierend - doppelter Abstand");
+			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Dicht);
+			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Modulierend);
+			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModulierendDoppelt);
 			this.cmbVertical.SelectedIndex = 1;
 
-			this.cmbConnections.Items.Add("Längsseite");
-			this.cmbConnections.Items.Add("Breitseite");
+			this.cmbConnections.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Laengsseite);
+			this.cmbConnections.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Breitseite);
 			this.cmbConnections.SelectedIndex = 1;
 
 			ModulKlimaBodenProduct product = plannedProduct.Product as ModulKlimaBodenProduct;
@@ -84,8 +85,73 @@ namespace Europlan.Common.Products {
 			}
 			this.UpdateToolbar(this.tabs.SelectedTab);
 			this.CalculateAndUpdate();
-
 			this.connectionPlanner.Product = product;
+		}
+
+		private void SetLanguage() {
+			this.btnZoomIn.Text = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomIn.ToolTipText = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = Europlan.Common.EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomOut.ToolTipText = Europlan.Common.EuroplanRes.Plan_Herauszoomen;
+			this.btnMove.Text = Europlan.Common.EuroplanRes.Plan_Verschieben;
+			this.btnMove.ToolTipText = Europlan.Common.EuroplanRes.Plan_Verschieben;
+			this.btnConstruction.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten;
+			this.btnConstruction.ToolTipText = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten;
+			this.btnAddModules.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleHinzufuegen;
+			this.btnAddModules.ToolTipText = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleHinzufuegen;
+			this.btnSelectModule.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleAuswaehlen;
+			this.btnSelectModule.ToolTipText = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleAuswaehlen;
+			this.btnConnections.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_VerbindeleitungHinzufuegen;
+			this.btnDeleteConnection.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_VerbindeleitungLoeschen;
+			this.btnAddAnbindeleitungen.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_AnbindeleitungenHinzufuegen;
+			this.btnSelectAnbindeleitungen.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_AnbindeleitungenAendern;
+			this.pageConstruction.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KonstruktionEinrichten;
+			this.grpConstructionType.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Konstruktionsart;
+			this.rbHolzstaffeln.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Holzstaffeln;
+			this.rbFrei.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Frei;
+			this.grpConstructionParameter.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Konstruktionsparameter;
+			this.label5.Text = Europlan.Common.EuroplanRes.Unit_Millimeter;
+			this.lblAchsabstand.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Achsabstand;
+			this.label1.Text = Europlan.Common.EuroplanRes.Unit_Millimeter;
+			this.lblStaffelBreite.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Staffelbreite;
+			this.lblRotation.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Ausrichtung;
+			this.pageLayout.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleAuslegen;
+			this.lblColor.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_FarbeHK;
+			this.label14.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ProWinkel1mVerbindungsleitung;
+			this.label8.Text = Europlan.Common.EuroplanRes.Unit_Meter;
+			this.label7.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_VerbindungsleitungenInHK;
+			this.label12.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Heizkreise;
+			this.grpNewModules.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_NeueModule;
+			this.lblNewModules.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_NeueModule2;
+			this.chkSelectReferenceModule.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ReferenzmodulFuerAusrichtung;
+			this.lblConnections.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Verbindungen;
+			this.btnAdd.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Hinzufuegen;
+			this.lblVertical.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Breitseite2;
+			this.lblHorizontal.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Laengsseite2;
+			this.lblNewRotation.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Drehung2;
+			this.label3.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Ausrichtung;
+			this.grpSelection.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_AusgewaehltesModul;
+			this.lblHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Heizkreis2;
+			this.grpSelectedModules.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_AusgewaehlteModule;
+			this.btnInvertDirection.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_DurchstroemungsrichtungUmdrehen;
+			this.label4.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Ausrichtung;
+			this.pageCalculations.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Berechnungsergebnisse;
+			this.lblQAnbCoolUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.label45.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_LeistungAnbindeleitungen;
+			this.lblQCoolRestUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.lblQCoolDiffUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.lblQCoolUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.lblQHeatRestUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.lblQHeatDiffUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.lblQHeatUnit.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.label16.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung;
+			this.label17.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ErreichteLeistung;
+			this.label11.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Kuehlbetrieb;
+			this.label10.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Heizbetrieb;
+			this.label6.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Berechnungsergebnisse2;
+			this.label9.Text = Europlan.Common.EuroplanRes.Unit_Watt;
+			this.label18.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung;
+			this.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Titel;
 		}
 
 		private void UpdateControls() {
@@ -103,7 +169,7 @@ namespace Europlan.Common.Products {
 		private void btnMove_Click(object sender, EventArgs e) {
 			if (!btnMove.Checked) {
 				if (this.modulKlimaBodenPlanner.ContainsNotConfirmedModules) {
-					DialogResult result = MessageBox.Show("Wollen Sie die neu hinzugefügten Module übernehmen?", "Module übernehmen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+					DialogResult result = MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleUebernehmenText, Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 					if (result == DialogResult.Cancel) {
 						return;
 					} else if (result == DialogResult.Yes) {
@@ -152,7 +218,7 @@ namespace Europlan.Common.Products {
 			if (!btnSelectModule.Checked) {
 				this.SetProductPlanner();
 				if (this.modulKlimaBodenPlanner.ContainsNotConfirmedModules) {
-					DialogResult result = MessageBox.Show("Wollen Sie die neu hinzugefügten Module übernehmen?", "Module übernehmen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+					DialogResult result = MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleUebernehmenText, Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 					if (result == DialogResult.Cancel) {
 						return;
 					} else if (result == DialogResult.Yes) {
@@ -258,7 +324,7 @@ namespace Europlan.Common.Products {
 				if (!this.newVisible) {
 					this.newVisible = true;
 					this.ignoreListChange++;
-					lstCircuits.Items.Add("neuer HK");
+					lstCircuits.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_NeuerHK);
 					this.ignoreListChange--;
 				}
 			} else {
@@ -312,7 +378,7 @@ namespace Europlan.Common.Products {
 		private void tabs_Selecting(object sender, TabControlCancelEventArgs e) {
 			if ((previousTab == this.pageLayout || previousTab == this.pageCalculations) && e.TabPage == this.pageConstruction) {
 				if (this.modulKlimaBodenPlanner.Product.ContainsModules || this.modulKlimaBodenPlanner.ContainsNotConfirmedModules) {
-					if (MessageBox.Show("Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!", "Bestätigen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
+					if (MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KonstruktionAendernText, Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KonstruktionAendernTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
 						e.Cancel = true;
 					} else {
 						this.modulKlimaBodenPlanner.HighlightCircuit = null;
@@ -384,7 +450,7 @@ namespace Europlan.Common.Products {
 					lstCircuits.Items.Add(EuroplanRes.PlannedModulKlimaDeckeProductPanel_HeizkreisAbkuerzung + i.ToString());
 				}
 				if (this.newVisible) {
-					lstCircuits.Items.Add("neuer HK");
+					lstCircuits.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_NeuerHK);
 				}
 				if (selectLastCircuit) {
 					ignoreListChange--;
@@ -506,18 +572,18 @@ namespace Europlan.Common.Products {
 							this.cmbSelectedModuleOrientation.Items.RemoveAt(2);
 						}
 					} else {
-						this.lblOrientationError.Text = "Verschiedene Ausrichtungen ausgewählt";
+						this.lblOrientationError.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_VerschiedeneAusrichtungen;
 						if (this.cmbSelectedModuleOrientation.Items.Count == 2) {
-							this.cmbSelectedModuleOrientation.Items.Add("Alle umdrehen");
+							this.cmbSelectedModuleOrientation.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_AlleUmdrehen);
 						}
 					}
 					this.cmbSelectedModuleOrientation.Enabled = true;
 				} else {
-					this.lblTypError.Text = "Kein Modul ausgewählt";
+					this.lblTypError.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KeinModul;
 					this.cmbSelectedModuleOrientation.Enabled = false;
 				}
 			} else {
-				this.lblTypError.Text = "Kein Modul ausgewählt";
+				this.lblTypError.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KeinModul;
 				this.cmbSelectedModuleOrientation.SelectedIndex = -1;
 				this.cmbSelectedModuleOrientation.Enabled = false;
 			}
@@ -525,7 +591,7 @@ namespace Europlan.Common.Products {
 			if (module.Count == 0) {
 				this.llHk.Enabled = false;
 				this.llHk.Tag = null;
-				this.llHk.Text = "keiner";
+				this.llHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_KeinHK;
 			} else {
 				ModulBodenCircuit circuit = null;
 				bool circuitOk = true;
@@ -544,12 +610,12 @@ namespace Europlan.Common.Products {
 				if (circuitOk) {
 					this.llHk.Tag = circuitIndex;
 					circuitIndex++;
-					this.llHk.Text = "HK" + circuitIndex.ToString();
+					this.llHk.Text = Europlan.Common.EuroplanRes.PlannedModulKlimaDeckeProductPanel_HeizkreisAbkuerzung + circuitIndex.ToString();
 					this.llHk.Enabled = true;
 				} else {
 					this.llHk.Tag = null;
 					this.llHk.Enabled = false;
-					this.llHk.Text = "verschiende";
+					this.llHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_VerschiendeHK;
 				}
 			}
 			this.ignoreModuleOrientationChange--;
@@ -586,7 +652,7 @@ namespace Europlan.Common.Products {
 					}
 				}
 				if (cancel) {
-					if (MessageBox.Show("Die Orientierung von Modulen an die bereits eine Verbindeleitung angeschlossen ist kann nicht mehr geändert werden. Wollen Sie die Verbindeleitungen der betreffenden Module löschen?", "Verbindeleitungen löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+					if (MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_OrientierungAendernText, Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_OrientierungAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 						return;
 					}
 				}
@@ -865,7 +931,7 @@ namespace Europlan.Common.Products {
 			}
 
 			if (anbindungen.Count > 0) {
-				if (MessageBox.Show("Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?", "Anbindeleitungen löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+				if (MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_RichtungAendernText, Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_RichtungAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 					return;
 				}
 				foreach (KeyValuePair<KlimaFlaechenModulVerbindung, ModulBodenCircuit> kvp in anbindungen) {
@@ -1129,7 +1195,7 @@ namespace Europlan.Common.Products {
 			if (e.count == 0) {
 				this.lblNewModules.Visible = false;
 			} else {
-				this.lblNewModules.Text = e.count.ToString() + " neue Module";
+				this.lblNewModules.Text = e.count.ToString() + " " + Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_NeueModule;
 				this.lblNewModules.Visible = true;
 			}
 		}

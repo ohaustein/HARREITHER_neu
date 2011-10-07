@@ -29,7 +29,7 @@ namespace Europlan.Common {
 			connOf = connOf.Replace("%SYSTEM%", pipe.ConnectionOf.ToString());
 			connOf = connOf.Replace("%RAUM%", pipe.ConnectionOf.Product.AssociatedRoom.ToString());
 			connOf = connOf.Replace("%ANZHK%", pipe.PlannedCircuits.ToString());
-			this.lblDescription.Text = "Anbindeleitung von %SYSTEM% in %RAUM%, %ANZHK% Heizkreis(e)";
+			this.lblDescription.Text = EuroplanRes.LengthAssistent_AnbindeleitungVon;
 			this.cmbLayDistance.SelectedItem = pipe.Verlegeart;
 			this.numVorlauf.Value = (decimal)pipe.Vorlauf;
 			this.numVorlaufArea.Value = (decimal)GetAreaForPipeLength((double)this.numVorlauf.Value);

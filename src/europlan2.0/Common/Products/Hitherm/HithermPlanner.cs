@@ -461,7 +461,7 @@ namespace Europlan.Common {
 							}
 						}
 						if (!ok) {
-							MessageBox.Show("Diese beiden Register können nicht verbunden werden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							MessageBox.Show(EuroplanRes.HithermPlanner_VerbindenFehlerText, EuroplanRes.HithermPlanner_VerbindenFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
 				}

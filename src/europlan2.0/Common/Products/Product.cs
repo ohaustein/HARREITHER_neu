@@ -139,11 +139,11 @@ namespace Europlan.Common {
 		#endregion Product Parameters
 
 		public class ProductTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string dh = "Decke";
-			private static readonly string fbh = "Boden";
-			private static readonly string rest = "Rest";
-			private static readonly string wh = "Wand";
-			private static readonly string dsh = "Dachschräge";
+			private static readonly string dh = EuroplanRes.ProductType_Decke;
+			private static readonly string fbh = EuroplanRes.ProductType_Boden;
+			private static readonly string rest = EuroplanRes.ProductType_Rest;
+			private static readonly string wh = EuroplanRes.ProductType_Wand;
+			private static readonly string dsh = EuroplanRes.ProductType_Dachschraege;
 
 			private Dictionary<string, ProductType> mappingFromString = new Dictionary<string, ProductType>();
 			private Dictionary<ProductType, string> mappingToString = new Dictionary<ProductType, string>();

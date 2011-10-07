@@ -260,6 +260,11 @@ namespace Europlan.Common {
 			set { this.modulType = value; }
 		}
 
+		[XmlIgnore]
+		public bool DiagonalDurchstroemt {
+			get { return this.modulType != ModulTypeEnum.MODUL_60_60 && this.modulType != ModulTypeEnum.MODUL_60_60B; }
+		}
+
 		public ModulOrientationEnum Orientation {
 			get { return this.orientation; }
 			set { this.orientation = value; }
@@ -629,16 +634,32 @@ namespace Europlan.Common {
 				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
 
 				if (this.graphBottomUp) {
-					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					if (!this.DiagonalDurchstroemt) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+						}
 					} else {
-						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						}
 					}
 				} else {
-					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					if (!this.DiagonalDurchstroemt) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						}
 					} else {
-						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						}
 					}
 				}
 			} else {
@@ -682,16 +703,32 @@ namespace Europlan.Common {
 				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
 
 				if (this.graphBottomUp) {
-					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-						return transformation.Transform(new Point2D(connectionDist, connectionDist));
+					if (!this.DiagonalDurchstroemt) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						}
 					} else {
-						return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+						}
 					}
 				} else {
-					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
-						return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+					if (!this.DiagonalDurchstroemt) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+						}
 					} else {
-						return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+							return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+						} else {
+							return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+						}
 					}
 				}
 			} else {

@@ -154,7 +154,7 @@ namespace Europlan.Common {
 				list.Add(ExportOptionType.DH);
 			}
 			if (list.Count == 0) {
-				MessageBox.Show("Es sind keine Produkte ausgelegt, die exportiert werden können.");
+				MessageBox.Show(EuroplanRes.ExportPlanForm_KeineProdukteText);
 				this.Close();
 			}
 
@@ -311,11 +311,11 @@ namespace Europlan.Common {
 				DxfLayer ceilingConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Decke);
 				DxfLayer floorConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Fussboden);
 				// TODO: übersetzen
-				DxfLayer beplankungLayer = new DxfLayer("Beplankung");
-				DxfLayer dehnfugenLayer = new DxfLayer("Dehnfugen");
-				DxfLayer wandLayer = new DxfLayer("Wandnumerierungen");
-				DxfLayer distributorLayer = new DxfLayer("Verteiler");
-				DxfLayer anbindeLayer = new DxfLayer("Anbindeleitungen");
+				DxfLayer beplankungLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerBeplankung);
+				DxfLayer dehnfugenLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerDehnfugen);
+				DxfLayer wandLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerWandnumerierungen);
+				DxfLayer distributorLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerVerteiler);
+				DxfLayer anbindeLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerAnbindeleitungen);
 
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {

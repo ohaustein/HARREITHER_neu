@@ -191,7 +191,7 @@ namespace Europlan.Common {
 						}
 					}
 					if (ask) {
-						if (MessageBox.Show("Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Heizkreis löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+						if (MessageBox.Show(EuroplanRes.ModulKlimaBodenPlanner_HeizkreisLoeschenText, EuroplanRes.ModulKlimaBodenPlanner_HeizkreisLoeschenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 							return true;
 						}
 						this.product.Connections.Clear();
@@ -2079,7 +2079,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (productConnected) {
-					if (MessageBox.Show("Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?", "Neuer Heizkreis", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
+					if (MessageBox.Show(EuroplanRes.ModulKlimaBodenPlanner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBodenPlanner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
 						this.layoutAddArea = null;
 						this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
 						if (this.connectedPlanPanel != null) {

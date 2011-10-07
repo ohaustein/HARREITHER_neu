@@ -60,7 +60,7 @@ namespace Europlan.Common {
 			bool create = false;
 			if (this.DialogResult == DialogResult.Cancel) {
 				if (e.CloseReason == CloseReason.UserClosing) {
-					DialogResult result = MessageBox.Show("Wollen Sie die definierten Wände übernehmen?", "Wände übernehmen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					DialogResult result = MessageBox.Show(EuroplanRes.GraphicalWallModifierForm_WaendeUebernehmenText, EuroplanRes.GraphicalWallModifierForm_WaendeUebernehmenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 					if (result == DialogResult.Yes) {
 						create = true;
 					} 
@@ -216,7 +216,7 @@ namespace Europlan.Common {
 					chkStartWall.Checked = true;
 					panel.InvalidateGraphics();
 				} else {
-					MessageBox.Show("Um eine andere Wand als 'erste Wand' zu definieren, wählen Sie bitte dazu die gewünschte Wand und setzen sie dort die Option.");
+					MessageBox.Show(EuroplanRes.GraphicalWallModifierForm_ErsteWandText);
 				}
 			}
 		}

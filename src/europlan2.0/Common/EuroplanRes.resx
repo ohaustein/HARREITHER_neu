@@ -5980,4 +5980,1039 @@ fläche
   <data name="WallHelpLinesForm_Hinzufuegen" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
+  <data name="DistributorPositionerForm_AnbindungenLoeschenText" xml:space="preserve">
+    <value>An diesen Verteiler sind bereits grafische Anbindeleitunge angeschlossen. Wenn sie die Position des Verteilers ändern wollen, werden diese Anbindeleitungen gelöscht!</value>
+  </data>
+  <data name="DistributorPositionerForm_AnbindungenLoeschenTitel" xml:space="preserve">
+    <value>Anbindeleitungen löschen</value>
+  </data>
+  <data name="ExportPlanForm_LayerBeplankung" xml:space="preserve">
+    <value>Beplankung</value>
+  </data>
+  <data name="ExportPlanForm_LayerDehnfugen" xml:space="preserve">
+    <value>Dehnfugen</value>
+  </data>
+  <data name="ExportPlanForm_LayerWandnumerierungen" xml:space="preserve">
+    <value>Wandnumerierungen</value>
+  </data>
+  <data name="ExportPlanForm_LayerVerteiler" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="ExportPlanForm_LayerAnbindeleitungen" xml:space="preserve">
+    <value>Anbindeleitungen</value>
+  </data>
+  <data name="ExportPlanForm_KeineProdukteText" xml:space="preserve">
+    <value>Es sind keine Produkte ausgelegt, die exportiert werden können.</value>
+  </data>
+  <data name="GraphicalWallModifierForm_WaendeUebernehmenText" xml:space="preserve">
+    <value>Wollen Sie die definierten Wände übernehmen?</value>
+  </data>
+  <data name="GraphicalWallModifierForm_WaendeUebernehmenTitel" xml:space="preserve">
+    <value>Wände übernehmen?</value>
+  </data>
+  <data name="GraphicalWallModifierForm_ErsteWandText" xml:space="preserve">
+    <value>Um eine andere Wand als 'erste Wand' zu definieren, wählen Sie bitte dazu die gewünschte Wand und setzen sie dort die Option.</value>
+  </data>
+  <data name="Unit_Millimeter" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="ImagePlanOptionsForm_LaengeCm" xml:space="preserve">
+    <value>Länge in cm:</value>
+  </data>
+  <data name="ImagePlanOptionsForm_LaengeMm" xml:space="preserve">
+    <value>Länge in mm:</value>
+  </data>
+  <data name="ImagePlanOptionsForm_LaengeM" xml:space="preserve">
+    <value>Länge in m:</value>
+  </data>
+  <data name="ImportedPlansPanel_AlleFilter" xml:space="preserve">
+    <value>alle Pläne</value>
+  </data>
+  <data name="ImportedPlansPanel_CadFehlerText" xml:space="preserve">
+    <value>Beim Einlesen des Plans ist leider ein Fehler aufgetreten. Bitte versuchen Sie, falls möglich, den Plan mit einem CAD-Programm erneut abzuspeichern und nochmals zu importieren.</value>
+  </data>
+  <data name="ImportedPlansPanel_CadFehlerTitel" xml:space="preserve">
+    <value>Fehler beim Einlesen</value>
+  </data>
+  <data name="NewPlanForm_Seiten" xml:space="preserve">
+    <value>Seiten:</value>
+  </data>
+  <data name="NewWallForm_WandZuSchmalText" xml:space="preserve">
+    <value>Bitte geben Sie für die Breite einen gültigen Wert ein (min. 10cm).</value>
+  </data>
+  <data name="NewWallForm_WandZuSchmalTextTitel" xml:space="preserve">
+    <value>Wand zu schmal</value>
+  </data>
+  <data name="PlanSetMeasureForm_LaengeCm" xml:space="preserve">
+    <value>Länge in cm:</value>
+  </data>
+  <data name="PlanSetMeasureForm_LaengeMm" xml:space="preserve">
+    <value>Länge in mm:</value>
+  </data>
+  <data name="PlanSetMeasureForm_LaengeM" xml:space="preserve">
+    <value>Länge in m:</value>
+  </data>
+  <data name="RoomPicker_NeueRaumgeometrieText" xml:space="preserve">
+    <value>Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren? Die grafische Auslegung aller Systeme die bereits in diesem Raum verplant wurden wird dadurch gelöscht.</value>
+  </data>
+  <data name="RoomPicker_NeueRaumgeometrieTitel" xml:space="preserve">
+    <value>Verwerfen und neu definieren?</value>
+  </data>
+  <data name="RoomPicker_RaumgeometrieAbbrechenText" xml:space="preserve">
+    <value>Wollen Sie das Definieren der Raumgeometrie abbrechen?</value>
+  </data>
+  <data name="RoomPicker_RaumgeometrieAbbrechenTitel" xml:space="preserve">
+    <value>Abbrechen?</value>
+  </data>
+  <data name="RoomPicker_FlaecheAbbrechenText" xml:space="preserve">
+    <value>Wollen Sie das Definieren der Fläche abbrechen?</value>
+  </data>
+  <data name="RoomPicker_FlaecheAbbrechenTitel" xml:space="preserve">
+    <value>Abbrechen?</value>
+  </data>
+  <data name="RoomPickerForm_KeinReferenzpunktText" xml:space="preserve">
+    <value>Es muss ein Referenzpunk gewählt werden um unbeheizte Flächen definieren zu können</value>
+  </data>
+  <data name="RoomPickerForm_KeinReferenzpunktTitel" xml:space="preserve">
+    <value>Kein Referenzpunkt gewählt</value>
+  </data>
+  <data name="EcothermPlanerForm_AnbindeleitungLoeschenText" xml:space="preserve">
+    <value>Die Anzahl der Heizkreise von Systemen die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen des Systems löschen?</value>
+  </data>
+  <data name="EcothermPlanerForm_AnbindeleitungLoeschenTitel" xml:space="preserve">
+    <value>Anbindeleitungen löschen</value>
+  </data>
+  <data name="PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText" xml:space="preserve">
+    <value>Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht</value>
+  </data>
+  <data name="PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel" xml:space="preserve">
+    <value>Grafische Anbindeleitungen löschen</value>
+  </data>
+  <data name="PipeProductPlaner_FlaecheAbbrechenText" xml:space="preserve">
+    <value>Wollen Sie das Definieren der Fläche abbrechen?</value>
+  </data>
+  <data name="PipeProductPlaner_FlaecheAbbrechenTitel" xml:space="preserve">
+    <value>Abbrechen?</value>
+  </data>
+  <data name="PipeProductPlanner_AZ" xml:space="preserve">
+    <value>AZ: </value>
+  </data>
+  <data name="PipeProductPlanner_RZ" xml:space="preserve">
+    <value>RZ: </value>
+  </data>
+  <data name="PipeProductPlanner_HK" xml:space="preserve">
+    <value>HK: </value>
+  </data>
+  <data name="PipeProductPlanner_Rohrlaenge" xml:space="preserve">
+    <value>Rohrl.: </value>
+  </data>
+  <data name="PipeProductPlanner_Name" xml:space="preserve">
+    <value>Name: </value>
+  </data>
+  <data name="PipeProductPlanner_FlaecheUebernehmenText" xml:space="preserve">
+    <value>Die definierte Fläche beträgt %FLAECHE%m². Wollen Sie diese Fläche übernehmen?</value>
+  </data>
+  <data name="PipeProductPlanner_FlaecheUebernehmenTitel" xml:space="preserve">
+    <value>Fläche übernehmen?</value>
+  </data>
+  <data name="PipeProductPlanner_Neu2Text" xml:space="preserve">
+    <value>Wollen Sie die bereits definierte Fläche und die bestehenden Anbindeleitungen verwerfen und neu definieren?</value>
+  </data>
+  <data name="PipeProductPlanner_Neu1Text" xml:space="preserve">
+    <value>Wollen Sie die bereits definierte Fläche verwerfen und neu definieren?</value>
+  </data>
+  <data name="PipeProductPlanner_NeuTitel" xml:space="preserve">
+    <value>Verwerfen und neu definieren?</value>
+  </data>
+  <data name="EcothermPlannerForm_Titel" xml:space="preserve">
+    <value>Ecotherm® - grafische Auslegung</value>
+  </data>
+  <data name="EcothermPlannerForm_FlaecheDefinieren" xml:space="preserve">
+    <value>Fläche definieren</value>
+  </data>
+  <data name="EcothermPlannerForm_RandzoneHinzufuegen" xml:space="preserve">
+    <value>Randzone hinzufügen</value>
+  </data>
+  <data name="EcothermPlannerForm_RandzoneLoeschen" xml:space="preserve">
+    <value>Randzone löschen</value>
+  </data>
+  <data name="EcothermPlannerForm_RedFlaecheHinzufuegen" xml:space="preserve">
+    <value>Fläche mit red. Heiz-/Kühlleistung hinzufügen</value>
+  </data>
+  <data name="EcothermPlannerForm_RedFlaecheLoeschen" xml:space="preserve">
+    <value>Fläche mit red. Heiz-/Kühlleistung löschen</value>
+  </data>
+  <data name="EcothermPlannerForm_TextboxPositionieren" xml:space="preserve">
+    <value>Textbox positionieren</value>
+  </data>
+  <data name="EcothermPlannerForm_TextboxVergroessern" xml:space="preserve">
+    <value>Textbox vergrößern</value>
+  </data>
+  <data name="EcothermPlannerForm_TextboxVerkleinern" xml:space="preserve">
+    <value>Textbox verkleinern</value>
+  </data>
+  <data name="EcothermPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+    <value>Anbindeleitungen hinzufügen</value>
+  </data>
+  <data name="EcothermPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+    <value>Anbindeleitungen ändern</value>
+  </data>
+  <data name="EcothermPlannerForm_Auslegung" xml:space="preserve">
+    <value>Auslegung</value>
+  </data>
+  <data name="EcothermPlannerForm_EckenErklaerung" xml:space="preserve">
+    <value>(positive Ecken vergößern, negative verringern die Randzonenfläche)</value>
+  </data>
+  <data name="EcothermPlannerForm_AnzahlEcken" xml:space="preserve">
+    <value>Anzahl der Ecken:</value>
+  </data>
+  <data name="EcothermPlannerForm_LaengeRandzone" xml:space="preserve">
+    <value>Länge der Randzone:</value>
+  </data>
+  <data name="EcothermPlannerForm_AnzahlHeizkreise" xml:space="preserve">
+    <value>Anzahl Heizkreise:</value>
+  </data>
+  <data name="EcothermPlannerForm_NachHeizUndKuehlbetrieb" xml:space="preserve">
+    <value>nach Heiz- und Kühlbetrieb</value>
+  </data>
+  <data name="EcothermPlannerForm_NachKuehlbetrieb" xml:space="preserve">
+    <value>nach Kühlbetrieb</value>
+  </data>
+  <data name="EcothermPlannerForm_NachHeizbetrieb" xml:space="preserve">
+    <value>nach Heizbetrieb</value>
+  </data>
+  <data name="EcothermPlannerForm_VerlegeartRZ" xml:space="preserve">
+    <value>Verlegeart Randzone:</value>
+  </data>
+  <data name="EcothermPlannerForm_VerlegeartAZ" xml:space="preserve">
+    <value>Verlegeart Aufenthaltszone:</value>
+  </data>
+  <data name="EcothermPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+    <value>Berechnungsergebnisse</value>
+  </data>
+  <data name="EcothermPlannerForm_Spreizung" xml:space="preserve">
+    <value>Spreizung
+K</value>
+  </data>
+  <data name="EcothermPlannerForm_Kuehlen" xml:space="preserve">
+    <value>Kühlen:</value>
+  </data>
+  <data name="EcothermPlannerForm_DeltaP" xml:space="preserve">
+    <value>DeltaP
+mbar</value>
+  </data>
+  <data name="EcothermPlannerForm_Mh" xml:space="preserve">
+    <value>mh
+kg/h</value>
+  </data>
+  <data name="EcothermPlannerForm_Rohrlaenge" xml:space="preserve">
+    <value>Rohrl.
+m</value>
+  </data>
+  <data name="EcothermPlannerForm_AnzahlHK" xml:space="preserve">
+    <value>Anzahl
+HK</value>
+  </data>
+  <data name="EcothermPlannerForm_Heizen" xml:space="preserve">
+    <value>Heizen:</value>
+  </data>
+  <data name="EcothermPlannerForm_AZ" xml:space="preserve">
+    <value>Aufenthaltszone</value>
+  </data>
+  <data name="EcothermPlannerForm_RZ" xml:space="preserve">
+    <value>Randzone</value>
+  </data>
+  <data name="EcothermPlannerForm_Q" xml:space="preserve">
+    <value>Q
+W</value>
+  </data>
+  <data name="EcothermPlannerForm_Tfb" xml:space="preserve">
+    <value>tfb
+°C</value>
+  </data>
+  <data name="EcothermPlannerForm_Flaeche" xml:space="preserve">
+    <value>A
+m²</value>
+  </data>
+  <data name="EcothermPlannerForm_VA" xml:space="preserve">
+    <value>VA</value>
+  </data>
+  <data name="EcothermPlannerForm_QAnb" xml:space="preserve">
+    <value>QAnb
+W</value>
+  </data>
+  <data name="EcothermPlannerForm_AAnb" xml:space="preserve">
+    <value>AAnb
+m²</value>
+  </data>
+  <data name="EcothermPlannerForm_Breite" xml:space="preserve">
+    <value>B
+cm</value>
+  </data>
+  <data name="EcothermPlannerForm_QRest" xml:space="preserve">
+    <value>QRest
+W</value>
+  </data>
+  <data name="EcothermPlannerForm_QFBH" xml:space="preserve">
+    <value>QFBH
+W</value>
+  </data>
+  <data name="EcothermPlannerForm_QSollProQuadratmeter" xml:space="preserve">
+    <value>qSoll
+W/m²</value>
+  </data>
+  <data name="EcothermPlannerForm_QSoll" xml:space="preserve">
+    <value>QSoll
+W</value>
+  </data>
+  <data name="EurovalPlannerForm_Titel" xml:space="preserve">
+    <value>Euroval® - grafische Auslegung</value>
+  </data>
+  <data name="PlannedProductPanel_Tabellarisch" xml:space="preserve">
+    <value>tabellarisch</value>
+  </data>
+  <data name="PlannedProductPanel_Grafisch" xml:space="preserve">
+    <value>grafisch</value>
+  </data>
+  <data name="PlannedProductPanel_Auslegungsart" xml:space="preserve">
+    <value>Auslegungsart:</value>
+  </data>
+  <data name="PlannedProductPanel_GrafischeAnbindeleitungen" xml:space="preserve">
+    <value>grafische Anbindeleitungen</value>
+  </data>
+  <data name="PlannedProductPanel_GrafischeAuslegung" xml:space="preserve">
+    <value>Grafische Auslegung öffnen</value>
+  </data>
+  <data name="HithermPlannerForm_Titel" xml:space="preserve">
+    <value>Hitherm - grafische Auslegung</value>
+  </data>
+  <data name="HithermPlannerForm_Exportieren" xml:space="preserve">
+    <value>Auslegung exportieren</value>
+  </data>
+  <data name="HithermPlannerForm_Verschieben" xml:space="preserve">
+    <value>Ausschnitt verschieben</value>
+  </data>
+  <data name="HithermPlannerForm_ObjekteBearbeiten" xml:space="preserve">
+    <value>Objekte bearbeiten</value>
+  </data>
+  <data name="HithermPlannerForm_Waende" xml:space="preserve">
+    <value>Wände</value>
+  </data>
+  <data name="HithermPlannerForm_FensterTueren" xml:space="preserve">
+    <value>Fenster und Türen</value>
+  </data>
+  <data name="HithermPlannerForm_Schraegen" xml:space="preserve">
+    <value>Schrägen</value>
+  </data>
+  <data name="HithermPlannerForm_Waermeregister" xml:space="preserve">
+    <value>Wärmeregister</value>
+  </data>
+  <data name="HithermPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+    <value>Anbindeleitungen hinzufügen</value>
+  </data>
+  <data name="HithermPlannerForm_AnHilfslinineAusrichten" xml:space="preserve">
+    <value>An Hilfslinine ausrichten</value>
+  </data>
+  <data name="HithermPlannerForm_Anbindeleitungen" xml:space="preserve">
+    <value>Anbindeleitungen</value>
+  </data>
+  <data name="HithermPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+    <value>Anbindeleitungen ändern</value>
+  </data>
+  <data name="HithermPlannerForm_Tuer" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="HithermPlannerForm_Fenster" xml:space="preserve">
+    <value>Fenster</value>
+  </data>
+  <data name="HithermPlannerForm_DreieckfensterLinks" xml:space="preserve">
+    <value>Dreieckfenster Links</value>
+  </data>
+  <data name="HithermPlannerForm_DreiecksfensterRechts" xml:space="preserve">
+    <value>Dreiecksfenster Rechts</value>
+  </data>
+  <data name="HithermPlannerForm_Sonstiges" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="HithermPlannerForm_WaermeregisterSenkrecht" xml:space="preserve">
+    <value>Wärmeregister senkrecht</value>
+  </data>
+  <data name="HithermPlannerForm_WaermeregisterWaagrecht" xml:space="preserve">
+    <value>Wärmeregister waagrecht</value>
+  </data>
+  <data name="HithermPlannerForm_ManuellVerbinden" xml:space="preserve">
+    <value>Manuell verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_AutomatischVerbinden" xml:space="preserve">
+    <value>Automatisch verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_HeizkreiseVerbinden" xml:space="preserve">
+    <value>Heizkreise verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_RechtwinkeligVerbinden" xml:space="preserve">
+    <value>Rechtwinkelig verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_DirektVerbinden" xml:space="preserve">
+    <value>Direkt verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_SchraegeLinks" xml:space="preserve">
+    <value>Schräge links</value>
+  </data>
+  <data name="HithermPlannerForm_SchraegeRechts" xml:space="preserve">
+    <value>Schräge rechts</value>
+  </data>
+  <data name="HithermPlannerForm_KeineSchraege" xml:space="preserve">
+    <value>Keine Schräge ausgewählt</value>
+  </data>
+  <data name="HithermPlannerForm_SchraegeLoeschen" xml:space="preserve">
+    <value>Schräge löschen</value>
+  </data>
+  <data name="HithermPlannerForm_AenderungenVerwerfen" xml:space="preserve">
+    <value>Änderungen verwerfen</value>
+  </data>
+  <data name="HithermPlannerForm_AenderungenSpeichern" xml:space="preserve">
+    <value>Änderungen speichern</value>
+  </data>
+  <data name="HithermPlannerForm_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="HithermPlannerForm_Links" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="HithermPlannerForm_Rechts" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="HithermPlannerForm_Groesse" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="HithermPlannerForm_Vertikal" xml:space="preserve">
+    <value>Vertikal:</value>
+  </data>
+  <data name="HithermPlannerForm_Horizontal" xml:space="preserve">
+    <value>Horizontal:</value>
+  </data>
+  <data name="HithermPlannerForm_AnbindeleitungLoeschen" xml:space="preserve">
+    <value>Anbindeleitung löschen</value>
+  </data>
+  <data name="HithermPlannerForm_MittelmassHor" xml:space="preserve">
+    <value>Mittelmaß hor.</value>
+  </data>
+  <data name="HithermPlannerForm_AbstandHor" xml:space="preserve">
+    <value>Abstand hor.</value>
+  </data>
+  <data name="HithermPlannerForm_PositionHor" xml:space="preserve">
+    <value>Position hor.</value>
+  </data>
+  <data name="HithermPlannerForm_KeinObjekt" xml:space="preserve">
+    <value>Kein Objekt ausgewählt</value>
+  </data>
+  <data name="HithermPlannerForm_PositionVert" xml:space="preserve">
+    <value>Position vert.</value>
+  </data>
+  <data name="HithermPlannerForm_RandabstandAendern" xml:space="preserve">
+    <value>Randabstand ändern</value>
+  </data>
+  <data name="HithermPlannerForm_ObjektLoeschen" xml:space="preserve">
+    <value>Objekt löschen</value>
+  </data>
+  <data name="HithermPlannerForm_HilfslinienEinrichten" xml:space="preserve">
+    <value>Hilfslinien einrichten</value>
+  </data>
+  <data name="HithermPlannerForm_WandNachLinksVerschieben" xml:space="preserve">
+    <value>Wand nach links verschieben</value>
+  </data>
+  <data name="HithermPlannerForm_WandNachRechtsVerschieben" xml:space="preserve">
+    <value>Wand nach rechts verschieben</value>
+  </data>
+  <data name="HithermPlannerForm_Konstruktion" xml:space="preserve">
+    <value>Konstruktion</value>
+  </data>
+  <data name="HithermPlannerForm_KeineWand" xml:space="preserve">
+    <value>Keine Wand ausgewählt</value>
+  </data>
+  <data name="HithermPlannerForm_WaendeErzeugen" xml:space="preserve">
+    <value>Wände aus Raumgeometrie erzeugen</value>
+  </data>
+  <data name="HithermPlannerForm_Senkrecht" xml:space="preserve">
+    <value>Senkrecht:</value>
+  </data>
+  <data name="HithermPlannerForm_Waagrecht" xml:space="preserve">
+    <value>Waagrecht:</value>
+  </data>
+  <data name="HithermPlannerForm_NeueWand" xml:space="preserve">
+    <value>Neue Wand anlegen</value>
+  </data>
+  <data name="HithermPlannerForm_WandLoeschen" xml:space="preserve">
+    <value>Wand löschen</value>
+  </data>
+  <data name="HithermPlannerForm_NurGanzeRegister" xml:space="preserve">
+    <value>Nur ganze Register</value>
+  </data>
+  <data name="HithermPlannerForm_AnHilfslinienAusrichten" xml:space="preserve">
+    <value>An Hilfslinien ausrichten</value>
+  </data>
+  <data name="HithermPlannerForm_RegisterVerbinden" xml:space="preserve">
+    <value>Register verbinden</value>
+  </data>
+  <data name="HithermPlannerForm_RegisterLoeschen" xml:space="preserve">
+    <value>Register löschen</value>
+  </data>
+  <data name="HithermPlannerForm_Rohrabstand" xml:space="preserve">
+    <value>Rohrabstand</value>
+  </data>
+  <data name="HithermPlannerForm_RohrabstandStandard" xml:space="preserve">
+    <value>10 cm (Standardreg.)</value>
+  </data>
+  <data name="HithermPlannerForm_RohrabstandHochleistung" xml:space="preserve">
+    <value>5 cm (Hochleistungsreg.)</value>
+  </data>
+  <data name="HithermPlannerForm_Vorlauf" xml:space="preserve">
+    <value>Vorlauf</value>
+  </data>
+  <data name="HithermPlannerForm_VorlaufRechtsUnten" xml:space="preserve">
+    <value>Rechts unten (Std.)</value>
+  </data>
+  <data name="HithermPlannerForm_VorlaufLinksUnten" xml:space="preserve">
+    <value>Links unten</value>
+  </data>
+  <data name="HithermPlannerForm_KeinRegister" xml:space="preserve">
+    <value>Kein Register ausgewählt</value>
+  </data>
+  <data name="HithermPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+    <value>Berechnungsergebnisse:</value>
+  </data>
+  <data name="HithermPlannerForm_Heizbetrieb" xml:space="preserve">
+    <value>Heizbetrieb</value>
+  </data>
+  <data name="HithermPlannerForm_Kuehlbetrieb" xml:space="preserve">
+    <value>Kühlbetrieb</value>
+  </data>
+  <data name="HithermPlannerForm_ErreichteLeistung" xml:space="preserve">
+    <value>Erreichte Leistung:</value>
+  </data>
+  <data name="HithermPlannerForm_DifferenzZurErwartetenLeistung" xml:space="preserve">
+    <value>Differenz zur erwarteten Leistung:</value>
+  </data>
+  <data name="HithermPlannerForm_ZusInformationen" xml:space="preserve">
+    <value>Zus. Informationen:</value>
+  </data>
+  <data name="HithermPlannerForm_BelegteFlaeche" xml:space="preserve">
+    <value>Belegte Fläche:</value>
+  </data>
+  <data name="HithermPlannerForm_BenoetigteWaermestromdichte" xml:space="preserve">
+    <value>benötigte Wärmestromd.:</value>
+  </data>
+  <data name="HithermPlannerForm_BenoetigteFlaeche" xml:space="preserve">
+    <value>benötigte Fläche:</value>
+  </data>
+  <data name="HithermPlannerForm_VerfuegbareFlaeche" xml:space="preserve">
+    <value>Verfügbare Fläche:</value>
+  </data>
+  <data name="HithermPlannerForm_UebrigeFlaeche" xml:space="preserve">
+    <value>Übrige Fläche:</value>
+  </data>
+  <data name="HithermPlanner_VerbindenFehlerText" xml:space="preserve">
+    <value>Diese beiden Register können nicht verbunden werden</value>
+  </data>
+  <data name="HithermPlanner_VerbindenFehlerTitel" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="HithermPlannerForm_WaendeVorhandenText" xml:space="preserve">
+    <value>Es sind bereits Wände vorhanden. Wollen Sie wirklich alle bestehenden Wände löschen und automatisch erzeugen?</value>
+  </data>
+  <data name="HithermPlannerForm_WaendeVorhandenTitel" xml:space="preserve">
+    <value>Wände vorhanden</value>
+  </data>
+  <data name="HithermPlannerForm_RegisterText" xml:space="preserve">
+    <value>Hitherm Klimawand   %ANZAHL% Stück Hitherm %TYP% %HOEHE%cm (%ROHRE%)</value>
+  </data>
+  <data name="HithermPlannerForm_Hochleistungsregister" xml:space="preserve">
+    <value>Hochleistungsregister</value>
+  </data>
+  <data name="HithermPlannerForm_Standardregister" xml:space="preserve">
+    <value>Standardregister</value>
+  </data>
+  <data name="HithermPlannerForm_WandText" xml:space="preserve">
+    <value>Wand Nr: %WAND%</value>
+  </data>
+  <data name="HithermPlannerForm_ObjektText" xml:space="preserve">
+    <value>Typ: %OBJEKT% %BREITE%cm x %HOEHE%cm</value>
+  </data>
+  <data name="HithermPlannerForm_SchraegeText" xml:space="preserve">
+    <value>Schräge %AUSRICHTUNG%: %BREITE%cm x %HOEHE%cm</value>
+  </data>
+  <data name="HithermPlannerForm_Links2" xml:space="preserve">
+    <value>links</value>
+  </data>
+  <data name="HithermPlannerForm_Rechts2" xml:space="preserve">
+    <value>rechts</value>
+  </data>
+  <data name="HithermPlannerForm_WandManuellText" xml:space="preserve">
+    <value>Die Wanddefinitionen wurden automatisch erzeugt. Falls Sie Änderungen vornehmen wollen, können Anbindeleitungen nicht mehr grafisch verplant werden. Wollen Sie wirklich fortfahren?</value>
+  </data>
+  <data name="HithermPlannerForm_WandManuellTitel" xml:space="preserve">
+    <value>Wanddefinition manuell anpassen?</value>
+  </data>
+  <data name="HithermPlannerForm_WandLoeschenText" xml:space="preserve">
+    <value>Wollen Sie die aktuelle Wand wirklich löschen?</value>
+  </data>
+  <data name="HithermPlannerForm_WandLoeschenTitel" xml:space="preserve">
+    <value>Wand löschen</value>
+  </data>
+  <data name="HithermPlannerForm_FilterBild" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="HithermPlannerForm_KeineWaendeText" xml:space="preserve">
+    <value>Es sind keine Wände zum exportieren vorhanden.</value>
+  </data>
+  <data name="HithermProduct_ZuvieleHeizkreise" xml:space="preserve">
+    <value>Es sind zuviele Heizkreise in diesem Produkt vorhanden</value>
+  </data>
+  <data name="HithermCompactPlannerForm_RegisterText" xml:space="preserve">
+    <value>Hitherm Klimawand   %ANZAHL% Stück Hitherm-Compact %TYP% %HOEHE% %TYPABK</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Parapetelement" xml:space="preserve">
+    <value>Parapetelement</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Par" xml:space="preserve">
+    <value>Par</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Dachschraegenelemente" xml:space="preserve">
+    <value>Dachschrägenelement(e)</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Ds" xml:space="preserve">
+    <value>Ds</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Wandelemente" xml:space="preserve">
+    <value>Wandelement(e)</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Std" xml:space="preserve">
+    <value>Std</value>
+  </data>
+  <data name="HithermCompactDachschraege_Flaechenaufstellung" xml:space="preserve">
+    <value>Hitherm®
+Compact
+Dachschr.
+(m²)</value>
+  </data>
+  <data name="HithermCompactProduct_Flaechenaufstellung" xml:space="preserve">
+    <value>Hitherm®
+Compact
+(m²)</value>
+  </data>
+  <data name="ModulKlimaBodenPlanner_AnbindeleitungLoeschen" xml:space="preserve">
+    <value>Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?</value>
+  </data>
+  <data name="ModulKlimaBodenPlanner_NeuerHeizkreisTitel" xml:space="preserve">
+    <value>Neuer Heizkreis</value>
+  </data>
+  <data name="ModulKlimaBodenPlanner_HeizkreisLoeschenText" xml:space="preserve">
+    <value>Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?</value>
+  </data>
+  <data name="ModulKlimaBodenPlanner_HeizkreisLoeschenTitel" xml:space="preserve">
+    <value>Heizkreis löschen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Dicht" xml:space="preserve">
+    <value>dicht</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Modulierend" xml:space="preserve">
+    <value>modulierend</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModulierendDoppelt" xml:space="preserve">
+    <value>modulierend - doppelter Abstand</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Laengsseite" xml:space="preserve">
+    <value>Längsseite</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Breitseite" xml:space="preserve">
+    <value>Breitseite</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModuleUebernehmenText" xml:space="preserve">
+    <value>Wollen Sie die neu hinzugefügten Module übernehmen?</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel" xml:space="preserve">
+    <value>Module übernehmen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_NeuerHK" xml:space="preserve">
+    <value>neuer HK</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_KonstruktionAendernText" xml:space="preserve">
+    <value>Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_KonstruktionAendernTitel" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_VerschiedeneAusrichtungen" xml:space="preserve">
+    <value>Verschiedene Ausrichtungen ausgewählt</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_AlleUmdrehen" xml:space="preserve">
+    <value>Alle umdrehen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_KeinModul" xml:space="preserve">
+    <value>Kein Modul ausgewählt</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_KeinHK" xml:space="preserve">
+    <value>keiner</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_VerschiendeHK" xml:space="preserve">
+    <value>verschiende</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_OrientierungAendernText" xml:space="preserve">
+    <value>Die Orientierung von Modulen an die bereits eine Verbindeleitung angeschlossen ist kann nicht mehr geändert werden. Wollen Sie die Verbindeleitungen der betreffenden Module löschen?</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_OrientierungAendernTitel" xml:space="preserve">
+    <value>Verbindeleitungen löschen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_RichtungAendernText" xml:space="preserve">
+    <value>Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_RichtungAendernTitel" xml:space="preserve">
+    <value>Anbindeleitungen löschen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_NeueModule" xml:space="preserve">
+    <value>neue Module</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NeueTeilflaeche" xml:space="preserve">
+    <value>neue Teilfläche</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NeueReihen" xml:space="preserve">
+    <value>neue Reihen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_VerschiedeneModulgroessen" xml:space="preserve">
+    <value>Verschiedene Modulgrößen ausgewählt</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_KeineTeilflaeche" xml:space="preserve">
+    <value>keine</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_KeineReihe" xml:space="preserve">
+    <value>keine</value>
+  </data>
+  <data name="SelectMoveTargetForm_TeilflaecheWaehlen" xml:space="preserve">
+    <value>Bitte wählen Sie eine Teilfläche, in die die ausgewählte Reihe verschoben werden soll</value>
+  </data>
+  <data name="SelectMoveTargetForm_HeizkreisWaehlen" xml:space="preserve">
+    <value>Bitte wählen Sie einen Heizkreis, in die die ausgewählte Teilfläche verschoben werden soll</value>
+  </data>
+  <data name="ConcreteActivationProduct_Schnellauslegung" xml:space="preserve">
+    <value>BKA
+(m²)</value>
+  </data>
+  <data name="ProductType_Decke" xml:space="preserve">
+    <value>Decke</value>
+  </data>
+  <data name="ProductType_Boden" xml:space="preserve">
+    <value>Boden</value>
+  </data>
+  <data name="ProductType_Rest" xml:space="preserve">
+    <value>Rest</value>
+  </data>
+  <data name="ProductType_Wand" xml:space="preserve">
+    <value>Wand</value>
+  </data>
+  <data name="ProductType_Dachschraege" xml:space="preserve">
+    <value>Dachschräge</value>
+  </data>
+  <data name="WandNachLinksVerschienben" xml:space="preserve">
+    <value>Wand nach links verschienben</value>
+  </data>
+  <data name="HithermPlannerForm_Links3" xml:space="preserve">
+    <value>Links:</value>
+  </data>
+  <data name="HithermCompactPlannerForm_Titel" xml:space="preserve">
+    <value>Hitherm Compact - grafische Auslegung</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten" xml:space="preserve">
+    <value>Unterkonstruktion ausrichten</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModuleHinzufuegen" xml:space="preserve">
+    <value>Module hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModuleAuswaehlen" xml:space="preserve">
+    <value>Module auswählen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_VerbindeleitungHinzufuegen" xml:space="preserve">
+    <value>Verbindeleitung hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_VerbindeleitungLoeschen" xml:space="preserve">
+    <value>Verbindeleitung löschen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+    <value>Anbindeleitungen hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+    <value>Anbindeleitungen ändern</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_KonstruktionEinrichten" xml:space="preserve">
+    <value>Konstruktion einrichten</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Konstruktionsart" xml:space="preserve">
+    <value>Konstruktionsart</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Holzstaffeln" xml:space="preserve">
+    <value>Holzstaffeln</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Frei" xml:space="preserve">
+    <value>Frei</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Konstruktionsparameter" xml:space="preserve">
+    <value>Konstruktionsparameter</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Achsabstand" xml:space="preserve">
+    <value>Achsabstand:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Staffelbreite" xml:space="preserve">
+    <value>Staffelbreite:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Ausrichtung" xml:space="preserve">
+    <value>Ausrichtung:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ModuleAuslegen" xml:space="preserve">
+    <value>Module auslegen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_FarbeHK" xml:space="preserve">
+    <value>Farbe des Heizkreises:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ProWinkel1mVerbindungsleitung" xml:space="preserve">
+    <value>(Pro Winkel zusätzlich 1m Verbindungsleitung)</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_VerbindungsleitungenInHK" xml:space="preserve">
+    <value>Summe Verbindungsleitungen in Heizkreis:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Heizkreise" xml:space="preserve">
+    <value>Heizkreise</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_NeueModule2" xml:space="preserve">
+    <value>Neue Module:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ReferenzmodulFuerAusrichtung" xml:space="preserve">
+    <value>Referenzmodul für Ausrichtung wählen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Verbindungen" xml:space="preserve">
+    <value>Verbindungen:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Hinzufuegen" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Breitseite2" xml:space="preserve">
+    <value>Breitseite:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Laengsseite2" xml:space="preserve">
+    <value>Längsseite:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Drehung2" xml:space="preserve">
+    <value>Drehung:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_AusgewaehltesModul" xml:space="preserve">
+    <value>Ausgewähltes Modul</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Heizkreis2" xml:space="preserve">
+    <value>Heizkreis:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_AusgewaehlteModule" xml:space="preserve">
+    <value>ausgewählte Module</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_DurchstroemungsrichtungUmdrehen" xml:space="preserve">
+    <value>Durchströmungsrichtung umdrehen</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+    <value>Berechnungsergebnisse</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_LeistungAnbindeleitungen" xml:space="preserve">
+    <value>Leistung Anbindeleitungen:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung" xml:space="preserve">
+    <value>Differenz zur erwarteten Leistung:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_ErreichteLeistung" xml:space="preserve">
+    <value>Erreichte Leistung:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Kuehlbetrieb" xml:space="preserve">
+    <value>Kühlbetrieb</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Heizbetrieb" xml:space="preserve">
+    <value>Heizbetrieb</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Berechnungsergebnisse2" xml:space="preserve">
+    <value>Berechnungsergebnisse:</value>
+  </data>
+  <data name="ModulKlimaBodenPlannerForm_Titel" xml:space="preserve">
+    <value>Modul Klima-Boden - grafische Auslegung</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Beplankung" xml:space="preserve">
+    <value>Beplankung</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Unterkonstuktion" xml:space="preserve">
+    <value>Unterkonstuktion</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Breite" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Laenge" xml:space="preserve">
+    <value>Länge:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_BeplankungBekannt" xml:space="preserve">
+    <value>Beplankung bekannt</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Deckenkonstruktion" xml:space="preserve">
+    <value>Deckenkonstruktion</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_AkustikdeckeRandfries" xml:space="preserve">
+    <value>Akustikdecke mit Randfries</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Glatt" xml:space="preserve">
+    <value>Glatt</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Randfries" xml:space="preserve">
+    <value>Randfries:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_KlimamodulSerie" xml:space="preserve">
+    <value>Klimamodul Serie</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Serie40" xml:space="preserve">
+    <value>Klimamodul Serie 40</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Serie30" xml:space="preserve">
+    <value>Klimamodul Serie 30</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Rastermass" xml:space="preserve">
+    <value>Rastermaß</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_SummeVerbindungsleitungen" xml:space="preserve">
+    <value>Summe Verbindungsleitungen in Reihe:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Teilflaechen" xml:space="preserve">
+    <value>Teilflächen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_ParalleleReihen" xml:space="preserve">
+    <value>Parallele Reihen in der Teilfläche</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Typ" xml:space="preserve">
+    <value>Typ:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Verschieben" xml:space="preserve">
+    <value>verschieben</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Reihe" xml:space="preserve">
+    <value>Reihe:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Teilflaeche" xml:space="preserve">
+    <value>Teilfläche:</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_AutomatischeAnpassungen" xml:space="preserve">
+    <value>Automatische Anpassungen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_VorhandeneReihenNutzen" xml:space="preserve">
+    <value>wenn möglich zu vorhandenen Reihen hinzufügen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_AutomatischAusrichten" xml:space="preserve">
+    <value>wenn möglich automatisch ausrichten</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_VorlaufFlexibel" xml:space="preserve">
+    <value>Vorlauf flexibel</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_RuecklaufFlexibel" xml:space="preserve">
+    <value>Rücklauf flexibel</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_Titel" xml:space="preserve">
+    <value>Modul Klima-Decke - grafische Auslegung</value>
+  </data>
+  <data name="ConnectionPlanner_Vorlauf" xml:space="preserve">
+    <value>Vorlauf</value>
+  </data>
+  <data name="ConnectionPlanner_Ruecklauf" xml:space="preserve">
+    <value>Rücklauf</value>
+  </data>
+  <data name="Project_PlanFehltText" xml:space="preserve">
+    <value>Beim Laden konnte der folgende Plan nicht gefunden werden: '%PLANNAME%' (%FILENAME%) Falls der Plan versehentlich aus dem Verzeichnis gelöscht oder verschoben wurde, können Sie ihn erneut importieren. Falls Sie den Plan erneut importieren möchten, klicken Sie auf JA, wenn Sie NEIN auswählen, gehen bereits grafisch ausgelegte Produkte verloren. Erneut importieren?</value>
+  </data>
+  <data name="Project_PlanFehltTitel" xml:space="preserve">
+    <value>Problem beim Laden</value>
+  </data>
+  <data name="Project_FehlerBeimSpeichernText" xml:space="preserve">
+    <value>Das Projekt konnte leider nicht gespeichert werden, da beim Speichern ein Fehler aufgetreten ist!</value>
+  </data>
+  <data name="Project_FehlerBeimSpeichernTitel" xml:space="preserve">
+    <value>Fehler beim Speichern</value>
+  </data>
+  <data name="SystemParametersPanel_FuerProjektVerwendenText" xml:space="preserve">
+    <value>Wollen Sie diese Einstellung auch für das aktuelle Projekt verwenden?</value>
+  </data>
+  <data name="SystemParametersPanel_FuerProjektVerwendenTitel" xml:space="preserve">
+    <value>Für aktuelles Projekt verwenden</value>
+  </data>
+  <data name="RoomPicker_RaumgroesseText" xml:space="preserve">
+    <value>Die definierte Fläche beträgt %AREA%m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?</value>
+  </data>
+  <data name="RoomPicker_RaumgroesseTitel" xml:space="preserve">
+    <value>Raumgeometrie übernehmen?</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NichtGenugPlatzText" xml:space="preserve">
+    <value>Es konnte kein Modul geändert werden, da nicht genug Platz zur Verfügugn steht</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NichtGenugPlatzTitel" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NichtGenugPlatz2Text" xml:space="preserve">
+    <value>Es konnten nicht alle Module geändert werden, da nicht genug Platz zur Verfügugn steht</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_NichtGenugPlatz2Titel" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernText" xml:space="preserve">
+    <value>Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernTitel" xml:space="preserve">
+    <value>Anbindeleitungen löschen</value>
+  </data>
+  <data name="ModulKlimaDeckeForm_NeueModule" xml:space="preserve">
+    <value>neue Module</value>
+  </data>
+  <data name="ConnectionPlannerForm_Boden" xml:space="preserve">
+    <value>Boden</value>
+  </data>
+  <data name="ConnectionPlannerForm_Decke" xml:space="preserve">
+    <value>Decke</value>
+  </data>
+  <data name="ConnectionPlannerForm_ErsterHeizkreis" xml:space="preserve">
+    <value>erster Heizkreis</value>
+  </data>
+  <data name="ConnectionPlannerForm_RestlicheHeizkreise" xml:space="preserve">
+    <value>restliche Heizkreise</value>
+  </data>
+  <data name="ConnectionPlannerForm_AnbindeleitungHinzufuegen" xml:space="preserve">
+    <value>Anbindeleitung hinzufügen</value>
+  </data>
+  <data name="ConnectionPlannerForm_AnbindeleitungLoeschen" xml:space="preserve">
+    <value>Anbindeleitung löschen</value>
+  </data>
+  <data name="ConnectionPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+    <value>Anbindeleitungen ändern</value>
+  </data>
+  <data name="ConnectionPlannerForm_Titel" xml:space="preserve">
+    <value>Anbindeleitungen - grafische Auslegung</value>
+  </data>
+  <data name="FloorSummaryPanel_Raumhoehe" xml:space="preserve">
+    <value>Raumhöhe für dieses Geschoß:</value>
+  </data>
+  <data name="NewGraphicalProductToProductConnection_WieAnschliessen" xml:space="preserve">
+    <value>Wollen Sie das System vorlauf oder rücklaufseitig anschließen?</value>
+  </data>
+  <data name="NewGraphicalProductToProductConnection_Vorlaufseitig" xml:space="preserve">
+    <value>vorlaufseitig</value>
+  </data>
+  <data name="NewGraphicalProductToProductConnection_Ruecklaufseitig" xml:space="preserve">
+    <value>rücklaufseitig</value>
+  </data>
+  <data name="NewGraphicalProductToProductConnection_Titel" xml:space="preserve">
+    <value>System anschließen</value>
+  </data>
+  <data name="SelectPlannedProductForm_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SelectRoomForm_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SystemParametersPanel_ImportiertePlaene" xml:space="preserve">
+    <value>Importierte Pläne</value>
+  </data>
 </root>

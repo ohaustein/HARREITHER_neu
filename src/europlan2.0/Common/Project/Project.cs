@@ -356,7 +356,10 @@ namespace Europlan.Common {
 					List<Plan> toDelete = new List<Plan>();
 					foreach (Plan plan in instance.ImportedPlans) {
 						if (!File.Exists(plan.AbsoluteFileName)) {
-							DialogResult result = MessageBox.Show("Beim Laden konnte der folgende Plan nicht gefunden werden: '" + plan.Name + "' (" + plan.AbsoluteFileName + ") Falls der Plan versehentlich aus dem Verzeichnis gelöscht oder verschoben wurde, können Sie ihn erneut importieren. Falls Sie den Plan erneut importieren möchten, klicken Sie auf JA, wenn Sie NEIN auswählen, gehen bereits grafisch ausgelegte Produkte verloren. Erneut importieren?", "Problem beim Laden", MessageBoxButtons.YesNoCancel);
+							string text = EuroplanRes.Project_PlanFehltText;
+							text = text.Replace("%PLANNAME%", plan.Name);
+							text = text.Replace("%FILENAME%", plan.AbsoluteFileName);
+							DialogResult result = MessageBox.Show(text, EuroplanRes.Project_PlanFehltTitel, MessageBoxButtons.YesNoCancel);
 							if (result == DialogResult.Yes) {
 								OpenFileDialog dialog = new OpenFileDialog();
 								dialog.CheckFileExists = true;
@@ -534,7 +537,7 @@ namespace Europlan.Common {
 						Project.ProjectSaved(Instance);
 					}
 				} catch (Exception e) {
-					MessageBox.Show("Das Projekt konnte leider nicht gespeichert werden, da beim Speichern ein Fehler aufgetreten ist!", "Fehler beim Speichern", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(EuroplanRes.Project_FehlerBeimSpeichernText, EuroplanRes.Project_FehlerBeimSpeichernTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}

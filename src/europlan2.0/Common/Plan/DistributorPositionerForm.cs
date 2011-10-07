@@ -101,7 +101,7 @@ namespace Europlan.Common {
 		private void btnPosition_Click(object sender, EventArgs e) {
 			if (!btnPosition.Checked) {
 				if (this.distributorPositioner.Distributor.AreProductsConnected) {
-					if (MessageBox.Show("An diesen Verteiler sind bereits grafische Anbindeleitunge angeschlossen. Wenn sie die Position des Verteilers ändern wollen, werden diese Anbindeleitungen gelöscht!", "Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
+					if (MessageBox.Show(EuroplanRes.DistributorPositionerForm_AnbindungenLoeschenText, EuroplanRes.DistributorPositionerForm_AnbindungenLoeschenTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
 						return;
 					}
 					foreach (Floor f in Project.Instance.Floors) {

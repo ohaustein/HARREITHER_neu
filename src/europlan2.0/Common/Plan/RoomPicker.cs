@@ -84,7 +84,7 @@ namespace Europlan.Common {
 			set {
 				if (value == RoomPickerMode.RPM_PICK_ROOM) {
 					if (this.room != null && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0) {
-						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren? Die grafische Auslegung aller Systeme die bereits in diesem Raum verplant wurden wird dadurch gelöscht.", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
+						DialogResult result = MessageBox.Show(EuroplanRes.RoomPicker_NeueRaumgeometrieText, EuroplanRes.RoomPicker_NeueRaumgeometrieTitel, MessageBoxButtons.YesNo);
 						if (result == DialogResult.No) {
 							return;
 						}
@@ -342,7 +342,9 @@ namespace Europlan.Common {
 					this.SimplifyPolygon(coordsPickedSoFar, true);
 					if (coordsPickedSoFar.Count > 2) {
 						if (this.Mode == RoomPickerMode.RPM_PICK_ROOM) {
-							DialogResult result = MessageBox.Show("Die definierte Fläche beträgt " + Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2) + "m². Kleine Ungenauigkeiten in der Flächenberechnung können nachträglich manuell geändert werden. Wollen Sie diese Raumgeometrie übernehmen?", "Raumgeometrie übernehmen?", MessageBoxButtons.YesNo);
+							string text = EuroplanRes.RoomPicker_RaumgroesseText;
+							text = text.Replace("%AREA%", Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2).ToString());
+							DialogResult result = MessageBox.Show(text, EuroplanRes.RoomPicker_RaumgroesseTitel, MessageBoxButtons.YesNo);
 							if (result.Equals(DialogResult.Yes)) {
 								roomCoordinates.AddRange(coordsPickedSoFar);
 								unsavedChanges = true;
@@ -780,7 +782,7 @@ namespace Europlan.Common {
 		public bool PlannerKeyPress(Keys key) {
 			if (this.inDesign && coordsPickedSoFar.Count > 0 && key == Keys.Escape) {
 				if (this.Mode == RoomPickerMode.RPM_PICK_ROOM) {
-					if (MessageBox.Show("Wollen Sie das Definieren der Raumgeometrie abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					if (MessageBox.Show(EuroplanRes.RoomPicker_RaumgeometrieAbbrechenText, EuroplanRes.RoomPicker_RaumgeometrieAbbrechenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 						this.inDesign = false;
 						this.coordsPickedSoFar.Clear();
 						this.roomCoordinates.AddRange(this.oldRoomCoordinates);
@@ -793,7 +795,7 @@ namespace Europlan.Common {
 						return true;
 					}
 				} else {
-					if (MessageBox.Show("Wollen Sie das Definieren der Fläche abbrechen?", "Abbrechen?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					if (MessageBox.Show(EuroplanRes.RoomPicker_FlaecheAbbrechenText, EuroplanRes.RoomPicker_FlaecheAbbrechenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 						this.inDesign = false;
 						this.coordsPickedSoFar.Clear();
 						return true;

@@ -31,7 +31,126 @@ namespace Europlan.Common {
 						
 			UpdateDefineWallsPanelButtons(null);
 			ApplyButtonCheckedState(this.btnPick);
+			this.SetLanguage();
 			this.connectionPlanner.Product = product;
+		}
+
+		private void SetLanguage() {
+			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomIn.ToolTipText = EuroplanRes.Plan_Heranzoomen;
+			this.btnZoomOut.Text = EuroplanRes.Plan_Herauszoomen;
+			this.btnZoomOut.ToolTipText = EuroplanRes.Plan_Herauszoomen;
+			this.btnExport.Text = EuroplanRes.HithermPlannerForm_Exportieren;
+			this.btnMove.Text = EuroplanRes.HithermPlannerForm_Verschieben;
+			this.btnPick.Text = EuroplanRes.HithermPlannerForm_ObjekteBearbeiten;
+			this.btnWall.Text = EuroplanRes.HithermPlannerForm_Waende;
+			this.btnObstacle.Text = EuroplanRes.HithermPlannerForm_FensterTueren;
+			this.btnSchraege.Text = EuroplanRes.HithermPlannerForm_Schraegen;
+			this.btnRegister.Text = EuroplanRes.HithermPlannerForm_Waermeregister;
+			this.btnConnection.Text = EuroplanRes.HithermPlannerForm_AnbindeleitungenHinzufuegen;
+			this.btnUseHelplines.Text = EuroplanRes.HithermPlannerForm_AnHilfslinineAusrichten;
+			this.btnAddAnbindeleitungen.Text = EuroplanRes.HithermPlannerForm_Anbindeleitungen;
+			this.btnSelectAnbindeleitungen.Text = EuroplanRes.HithermPlannerForm_AnbindeleitungenAendern;
+			this.btnObstacleDoor.Text = EuroplanRes.HithermPlannerForm_Tuer;
+			this.btnObstacleWindow.Text = EuroplanRes.HithermPlannerForm_Fenster;
+			this.btnObstacleTriangleWindowLeft.Text = EuroplanRes.HithermPlannerForm_DreieckfensterLinks;
+			this.btnObstacleTriangleWindowRight.Text = EuroplanRes.HithermPlannerForm_DreiecksfensterRechts;
+			this.btnObstacleOther.Text = EuroplanRes.HithermPlannerForm_Sonstiges;
+			this.btnRegisterVertical.Text = EuroplanRes.HithermPlannerForm_WaermeregisterSenkrecht;
+			this.btnRegisterHorizontal.Text = EuroplanRes.HithermPlannerForm_WaermeregisterWaagrecht;
+			this.btnConnectionManual.Text = EuroplanRes.HithermPlannerForm_ManuellVerbinden;
+			this.btnConnectionAuto.Text = EuroplanRes.HithermPlannerForm_AutomatischVerbinden;
+			this.btnConnectionAlign.Text = EuroplanRes.HithermPlannerForm_RechtwinkeligVerbinden;
+			this.btnConnectionDirect.Text = EuroplanRes.HithermPlannerForm_DirektVerbinden;
+			this.btnSchraegeLeft.Text = EuroplanRes.HithermPlannerForm_SchraegeLinks;
+			this.btnSchraegeRight.Text = EuroplanRes.HithermPlannerForm_SchraegeRechts;
+			this.lblSchraege.Text = EuroplanRes.HithermPlannerForm_KeineSchraege;
+			this.toolTip.SetToolTip(this.btnSchraegeDelete, EuroplanRes.HithermPlannerForm_SchraegeLoeschen);
+			this.toolTip.SetToolTip(this.btnSchraegeRevert, EuroplanRes.HithermPlannerForm_AenderungenVerwerfen);
+			this.toolTip.SetToolTip(this.btnSchraegeApply, EuroplanRes.HithermPlannerForm_AenderungenSpeichern);
+			this.groupBox17.Text = EuroplanRes.HithermPlannerForm_Position;
+			this.rbSchraegeLeft.Text = EuroplanRes.HithermPlannerForm_Links;
+			this.rbSchraegeRight.Text = EuroplanRes.HithermPlannerForm_Rechts;
+			this.groupBox18.Text = EuroplanRes.HithermPlannerForm_Groesse;
+			this.label19.Text = EuroplanRes.Unit_Zentimeter;
+			this.label20.Text = EuroplanRes.HithermPlannerForm_Vertikal;
+			this.label21.Text = EuroplanRes.Unit_Zentimeter;
+			this.label22.Text = EuroplanRes.HithermPlannerForm_Horizontal;
+			this.toolTip.SetToolTip(this.btnConnectionRevert, EuroplanRes.HithermPlannerForm_AenderungenVerwerfen);
+			this.toolTip.SetToolTip(this.btnConnectionApply, EuroplanRes.HithermPlannerForm_AenderungenSpeichern);
+			this.label23.Text = EuroplanRes.HithermPlannerForm_Anbindeleitungen;
+			this.toolTip.SetToolTip(this.btnConnectionDelete, EuroplanRes.HithermPlannerForm_AnbindeleitungLoeschen);
+			this.groupBox16.Text = EuroplanRes.HithermPlannerForm_MittelmassHor;
+			this.label15.Text = EuroplanRes.Unit_Zentimeter;
+			this.label18.Text = EuroplanRes.Unit_Zentimeter;
+			this.groupBox15.Text = EuroplanRes.HithermPlannerForm_AbstandHor;
+			this.label13.Text = EuroplanRes.Unit_Zentimeter;
+			this.label14.Text = EuroplanRes.Unit_Zentimeter;
+			this.groupBox14.Text = EuroplanRes.HithermPlannerForm_PositionHor;
+			this.label9.Text = EuroplanRes.Unit_Zentimeter;
+			this.label12.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblObstacle.Text = EuroplanRes.HithermPlannerForm_KeinObjekt;
+			this.toolTip.SetToolTip(this.btnObstacleRevert, EuroplanRes.HithermPlannerForm_AenderungenVerwerfen);
+			this.toolTip.SetToolTip(this.btnObstacleApply, EuroplanRes.HithermPlannerForm_AenderungenSpeichern);
+			this.groupBox13.Text = EuroplanRes.HithermPlannerForm_PositionVert;
+			this.label11.Text = EuroplanRes.Unit_Zentimeter;
+			this.groupBox12.Text = EuroplanRes.HithermPlannerForm_Groesse;
+			this.label8.Text = EuroplanRes.Unit_Zentimeter;
+			this.label10.Text = EuroplanRes.Unit_Zentimeter;
+			this.toolTip.SetToolTip(this.btnObstacleBorder, EuroplanRes.HithermPlannerForm_RandabstandAendern);
+			this.toolTip.SetToolTip(this.btnObstacleRemove, EuroplanRes.HithermPlannerForm_ObjektLoeschen);
+			this.toolTip.SetToolTip(this.btnWallHelpLine, EuroplanRes.HithermPlannerForm_HilfslinienEinrichten);
+			this.toolTip.SetToolTip(this.btnWallEdgeDistance, EuroplanRes.HithermPlannerForm_RandabstandAendern);
+			this.groupBox3.Text = EuroplanRes.HithermPlannerForm_Position;
+			this.toolTip.SetToolTip(this.btnWallLeft, EuroplanRes.WandNachLinksVerschienben);
+			this.toolTip.SetToolTip(this.btnWallRight, EuroplanRes.HithermPlannerForm_WandNachRechtsVerschieben);
+			this.groupBox1.Text = EuroplanRes.HithermPlannerForm_Konstruktion;
+			this.lblSelectedWall.Text = EuroplanRes.HithermPlannerForm_KeineWand;
+			this.btnCreateWalls.Text = EuroplanRes.HithermPlannerForm_WaendeErzeugen;
+			this.groupBox2.Text = EuroplanRes.HithermPlannerForm_Groesse;
+			this.label3.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblWallVertical.Text = EuroplanRes.HithermPlannerForm_Senkrecht;
+			this.label2.Text = EuroplanRes.Unit_Zentimeter;
+			this.lblWallHorizontal.Text = EuroplanRes.HithermPlannerForm_Waagrecht;
+			this.toolTip.SetToolTip(this.btnWallNewWall, EuroplanRes.HithermPlannerForm_NeueWand);
+			this.toolTip.SetToolTip(this.btnWallDelete, EuroplanRes.HithermPlannerForm_WandLoeschenTitel);
+			this.toolTip.SetToolTip(this.btnWallRevert, EuroplanRes.HithermPlannerForm_AenderungenVerwerfen);
+			this.toolTip.SetToolTip(this.btnWallApply, EuroplanRes.HithermPlannerForm_AenderungenSpeichern);
+			this.chkRegisterHelpLines.Text = EuroplanRes.HithermPlannerForm_AnHilfslinienAusrichten;
+			this.toolTip.SetToolTip(this.btnRegisterConnect, EuroplanRes.HithermPlannerForm_RegisterVerbinden);
+			this.toolTip.SetToolTip(this.btnRegisterDelete, EuroplanRes.HithermPlannerForm_RegisterLoeschen);
+			this.toolTip.SetToolTip(this.btnRegisterRevert, EuroplanRes.HithermPlannerForm_AenderungenVerwerfen);
+			this.toolTip.SetToolTip(this.btnRegisterAccept, EuroplanRes.HithermPlannerForm_AenderungenSpeichern);
+			this.groupBox4.Text = EuroplanRes.HithermPlannerForm_Position;
+			this.label1.Text = EuroplanRes.Unit_Zentimeter;
+			this.label4.Text = EuroplanRes.HithermPlannerForm_Vertikal;
+			this.label5.Text = EuroplanRes.Unit_Zentimeter;
+			this.label6.Text = EuroplanRes.HithermPlannerForm_Links3;
+			this.lblRegisterSelectedRegister.Text = EuroplanRes.HithermPlannerForm_KeineWand;
+			this.label7.Text = EuroplanRes.PlannedModulProductPanel_Berechnungsergebnisse;
+			this.lblHeat.Text = EuroplanRes.HithermPlannerForm_Heizbetrieb;
+			this.lblCool.Text = EuroplanRes.HithermPlannerForm_Kuehlbetrieb;
+			this.label17.Text = EuroplanRes.HithermPlannerForm_ErreichteLeistung;
+			this.label16.Text = EuroplanRes.HithermPlannerForm_DifferenzZurErwartetenLeistung;
+			this.lblQHeatUnit.Text = EuroplanRes.Unit_Watt;
+			this.lblQHeatDiffUnit.Text = EuroplanRes.Unit_Watt;
+			this.lblQHeatRestUnit.Text = EuroplanRes.Unit_Watt;
+			this.lblQCoolUnit.Text = EuroplanRes.Unit_Watt;
+			this.lblQCoolDiffUnit.Text = EuroplanRes.Unit_Watt;
+			this.lblQCoolRestUnit.Text = EuroplanRes.Unit_Watt;
+			this.label32.Text = EuroplanRes.HithermPlannerForm_ZusInformationen;
+			this.lblCoveredAreaTitle.Text = EuroplanRes.HithermPlannerForm_BelegteFlaeche;
+			this.lblCoveredAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+			this.lblNecessaryWaermestromdichteTitle.Text = EuroplanRes.HithermPlannerForm_BenoetigteWaermestromdichte;
+			this.lblNecessaryWaermestromdichteUnit.Text = EuroplanRes.Unit_WattProQm;
+			this.lblNecessaryAreaTitle.Text = EuroplanRes.HithermPlannerForm_BenoetigteFlaeche;
+			this.lblNecessaryAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+			this.lblAvailableAreaTitle.Text = EuroplanRes.HithermPlannerForm_VerfuegbareFlaeche;
+			this.lblAvailableAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+			this.lblRestAreaTitle.Text = EuroplanRes.HithermPlannerForm_UebrigeFlaeche;
+			this.lblRestAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+			this.btnConnectionInFloor.Text = EuroplanRes.HithermPlannerForm_HeizkreiseVerbinden;
+			this.Text = EuroplanRes.HithermCompactPlannerForm_Titel;
 		}
 
 		private void HithermPlannerForm_Load(object sender, EventArgs e) {
@@ -150,7 +269,7 @@ namespace Europlan.Common {
 		private void btnCreateWalls_Click(object sender, EventArgs e) {
 			bool ok = true;
 			if (this.graphicalWallPanel.Room.Walls.Count > 0) {
-				DialogResult result = MessageBox.Show("Es sind bereits Wände vorhanden. Wollen Sie wirklich alle bestehenden Wände löschen und automatisch erzeugen?", "Wände vorhanden", MessageBoxButtons.YesNo);
+				DialogResult result = MessageBox.Show(EuroplanRes.HithermPlannerForm_WaendeVorhandenText, EuroplanRes.HithermPlannerForm_WaendeVorhandenTitel, MessageBoxButtons.YesNo);
 				if (result == DialogResult.No) {
 					ok = false;
 				}
@@ -492,20 +611,31 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			this.panelModifyHitherm.BringToFront();
 			if (hithermRegister != null) {
-				string text = "Hitherm Klimawand   " + hithermRegister.Register.RegisterCount + " Stück Hitherm-Compact ";
+				//string text = "Hitherm Klimawand   " + hithermRegister.Register.RegisterCount + " Stück Hitherm-Compact ";
+				string text = EuroplanRes.HithermCompactPlannerForm_RegisterText;
+				text = text.Replace("%ANZAHL%", hithermRegister.Register.RegisterCount.ToString());
 				if (hithermRegister.Register.IsParapet) {
-					text += "Parapetelement " + hithermRegister.Register.RegisterBreite.ToString() + " Par";
+					//text += "Parapetelement " + hithermRegister.Register.RegisterBreite.ToString() + " Par";
+					text = text.Replace("%TYP%", EuroplanRes.HithermCompactPlannerForm_Parapetelement);
+					text = text.Replace("%HOEHE%", hithermRegister.Register.RegisterBreite.ToString());
+					text = text.Replace("%TYPABK%", EuroplanRes.HithermCompactPlannerForm_Par);
 				} else if (hithermRegister.Register.IsDachschraege) {
-					text += "Dachschrägenelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Ds";
+					//text += "Dachschrägenelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Ds";
+					text = text.Replace("%TYP%", EuroplanRes.HithermCompactPlannerForm_Dachschraegenelemente);
+					text = text.Replace("%HOEHE%", hithermRegister.Register.RegisterBreite.ToString());
+					text = text.Replace("%TYPABK%", EuroplanRes.HithermCompactPlannerForm_Ds);
 				} else {
-					text += "Wandelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Std";
+					//text += "Wandelement(e) " + hithermRegister.Register.RegisterHoehe.ToString() + " Std";
+					text = text.Replace("%TYP%", EuroplanRes.HithermCompactPlannerForm_Wandelemente);
+					text = text.Replace("%HOEHE%", hithermRegister.Register.RegisterBreite.ToString());
+					text = text.Replace("%TYPABK%", EuroplanRes.HithermCompactPlannerForm_Std);
 				}
 				lblRegisterSelectedRegister.Text = text;
 				numRegisterLeft.Value = (decimal)hithermRegister.Register.GraphPosX;
 				numRegisterVertical.Value = (decimal)hithermRegister.Register.GraphPosY;
 				chkRegisterHelpLines.Checked = this.hithermCompactPlanner.NewRegisterUseHelpline;
 			} else {
-				lblRegisterSelectedRegister.Text = "Kein Register ausgewählt";
+				lblRegisterSelectedRegister.Text = EuroplanRes.HithermPlannerForm_KeinRegister;
 				numRegisterLeft.Value = 0;
 				numRegisterVertical.Value = 0;
 				chkRegisterHelpLines.Checked = this.hithermCompactPlanner.NewRegisterUseHelpline;
@@ -529,13 +659,15 @@ namespace Europlan.Common {
 				} else {
 					index = this.graphicalWallPanel.Room.Walls.IndexOf(wall);
 				}
-				this.lblSelectedWall.Text = "Wand Nr: " + (index + 1);
+				string text = EuroplanRes.HithermPlannerForm_WandText;
+				text = text.Replace("%WAND%", (index + 1).ToString());
+				this.lblSelectedWall.Text = text;
 				this.txtWallConstruction.Text = wall.WallId;
 				this.numWallHorizontal.Value = (decimal)wall.GetWallWidth() * 100;
 				this.numWallVertical.Value = (decimal)wall.GetWallHeight() * 100;
 				this.btnWallNewWall.Enabled = !wall.IsDachSchraege;
 			} else {
-				this.lblSelectedWall.Text = "Keine Wand ausgewählt";
+				this.lblSelectedWall.Text = EuroplanRes.HithermPlannerForm_KeineWand;
 				this.txtWallConstruction.Text = "";
 				this.numWallHorizontal.Text = "";
 				this.numWallVertical.Text = "";
@@ -580,7 +712,12 @@ namespace Europlan.Common {
 						this.numObstacleMiddleDistanceRight.Text = "";
 					}
 
-					this.lblObstacle.Text = "Typ: " + new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType) + " " + this.numObstacleWidth.Value + "cm x " + this.numObstacleHeight.Value + "cm";
+					string text = EuroplanRes.HithermPlannerForm_ObjektText;
+					text = text.Replace("%OBJEKT%", new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType));
+					text = text.Replace("%BREITE%", this.numObstacleWidth.Value.ToString());
+					text = text.Replace("%HOEHE%", this.numObstacleHeight.Value.ToString());
+					this.lblObstacle.Text = text;
+					//this.lblObstacle.Text = "Typ: " + new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType) + " " + this.numObstacleWidth.Value + "cm x " + this.numObstacleHeight.Value + EuroplanRes.Unit_Zentimeter;
 				}
 			} else {
 				this.numObstacleHeight.Text = "";
@@ -592,7 +729,7 @@ namespace Europlan.Common {
 				this.numObstacleDistanceRight.Text = "";
 				this.numObstacleMiddleDistanceLeft.Text = "";
 				this.numObstacleMiddleDistanceRight.Text = "";
-				this.lblObstacle.Text = "Kein Objekt ausgewählt";
+				this.lblObstacle.Text = EuroplanRes.HithermPlannerForm_KeinObjekt;
 			}
 			UpdateModifyObstaclesPanelButtons(obstacle);
 			updateOngoing = false;
@@ -604,11 +741,16 @@ namespace Europlan.Common {
 			if (schraege != null) {
 				this.numSchraegeHorizontal.Value = (decimal)schraege.Width;
 				this.numSchraegeVertical.Value = (decimal)schraege.Height;
-				this.lblSchraege.Text = "Schräge " + (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? "links" : "rechts") + ": " + Math.Round(schraege.Width, 0).ToString() + "cm x " + Math.Round(schraege.Height, 0).ToString() + "cm";
+				string text = EuroplanRes.HithermPlannerForm_SchraegeText;
+				text = text.Replace("%AUSRICHTUNG%", (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? EuroplanRes.HithermPlannerForm_Links2 : EuroplanRes.HithermPlannerForm_Rechts2));
+				text = text.Replace("%BREITE%", Math.Round(schraege.Width, 0).ToString());
+				text = text.Replace("%HOEHE%", Math.Round(schraege.Height, 0).ToString());
+				this.lblSchraege.Text = text;
+				//this.lblSchraege.Text = "Schräge " + (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? "links" : "rechts") + ": " + Math.Round(schraege.Width, 0).ToString() + "cm x " + Math.Round(schraege.Height, 0).ToString() + EuroplanRes.Unit_Zentimeter;
 			} else {
 				this.numSchraegeHorizontal.Text = "";
 				this.numSchraegeVertical.Text = "";
-				this.lblSchraege.Text = "Keine Schräge ausgewählt";
+				this.lblSchraege.Text = EuroplanRes.HithermPlannerForm_KeineSchraege;
 			}
 			UpdateModifySchraegePanelButtons(schraege);
 			updateOngoing = false;
@@ -813,7 +955,7 @@ namespace Europlan.Common {
 				foreach (GraphicalWall wall in this.graphicalWallPanel.Room.Walls) {
 					if (wall.PlanStartPoint.HasValue || wall.PlanEndPoint.HasValue) {
 						if (!removePlanPointsAllowed) {
-							DialogResult result = MessageBox.Show("Die Wanddefinitionen wurden automatisch erzeugt. Falls Sie Änderungen vornehmen wollen, können Anbindeleitungen nicht mehr grafisch verplant werden. Wollen Sie wirklich fortfahren?", "Wanddefinition manuell anpassen?", MessageBoxButtons.YesNoCancel);
+							DialogResult result = MessageBox.Show(EuroplanRes.HithermPlannerForm_WandManuellText, EuroplanRes.HithermPlannerForm_WandManuellTitel, MessageBoxButtons.YesNoCancel);
 							if (result != DialogResult.Yes) {
 								return false;
 							} else {
@@ -837,7 +979,7 @@ namespace Europlan.Common {
 		}
 
 		private void DeleteWall() {
-			if (MessageBox.Show("Wollen Sie die aktuelle Wand wirklich löschen?", "Wand löschen", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+			if (MessageBox.Show(EuroplanRes.HithermPlannerForm_WandLoeschenText, EuroplanRes.HithermPlannerForm_WandLoeschenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				GraphicalWall wall = SelectedObject as GraphicalWall;
 				graphicalWallPanel.Room.Walls.Remove(wall);
 				wall.RemoveAllRegisters(this.hithermCompactPlanner.HithermCompactProduct);
@@ -1457,7 +1599,7 @@ namespace Europlan.Common {
 				}
 				dialog.FileName = room.AssociatedFloor.Name + "_" + room.Name + "_" + productName;
 				dialog.DefaultExt = ".jpg";
-				dialog.Filter = "Bild|*.jpg;*.png;*.bmp";
+				dialog.Filter = EuroplanRes.HithermPlannerForm_FilterBild + "|*.jpg;*.png;*.bmp";
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
 					
@@ -1510,7 +1652,7 @@ namespace Europlan.Common {
 					g.Dispose();
 				}
 			} else {
-				MessageBox.Show("Es sind keine Wände zum exportieren vorhanden.");
+				MessageBox.Show(EuroplanRes.HithermPlannerForm_KeineWaendeText);
 			}
 		}
 

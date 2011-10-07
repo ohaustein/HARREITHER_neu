@@ -133,7 +133,7 @@ namespace Europlan.Common {
 			e.DrawBackground();
 			if (e.Index >= 0) {
 				SizeF stringSize = new SizeF();
-				string text = lstOffsets.Items[e.Index].ToString() + " cm";
+				string text = lstOffsets.Items[e.Index].ToString() + " " + EuroplanRes.Unit_Zentimeter;
 				stringSize = e.Graphics.MeasureString(text, e.Font);
 				// Draw the current item text based on the current Font and the custom brush settings.
 				e.Graphics.DrawString(text, e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.Right - stringSize.Width, e.Bounds.Y));

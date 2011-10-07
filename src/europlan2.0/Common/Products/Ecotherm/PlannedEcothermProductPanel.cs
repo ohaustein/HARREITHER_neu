@@ -177,18 +177,12 @@ namespace Europlan.Common {
 			for (int i = 1; i <= 12; i++) {
 				this.cmbCircuits.Items.Add(i.ToString());
 			}
-			/*this.cmbCircuits.Items.Add("1");
-			this.cmbCircuits.Items.Add("2");
-			this.cmbCircuits.Items.Add("3");
-			this.cmbCircuits.Items.Add("4");
-			this.cmbCircuits.Items.Add("5");
-			this.cmbCircuits.Items.Add("6");
-			this.cmbCircuits.Items.Add("7");
-			this.cmbCircuits.Items.Add("8");
-			this.cmbCircuits.Items.Add("9");
-			this.cmbCircuits.Items.Add("10");
-			this.cmbCircuits.Items.Add("11");
-			this.cmbCircuits.Items.Add("12");*/
+
+			this.rbLayoutTable.Text = EuroplanRes.PlannedProductPanel_Tabellarisch;
+			this.rbLayoutGraphical.Text = EuroplanRes.PlannedProductPanel_Grafisch;
+			this.lblLayoutType.Text = EuroplanRes.PlannedProductPanel_Auslegungsart;
+			this.btnGraphicalAnbindleitungen.Text = EuroplanRes.PlannedProductPanel_GrafischeAnbindeleitungen;
+			this.btnGraphical.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
 		}
 
 		#region IEditorUserControl Members
@@ -445,7 +439,7 @@ namespace Europlan.Common {
 				if (this.cmbCircuitsContainsAutomatic != newCmbCircuitsContainsAutomatic) {
 					this.cmbCircuitsContainsAutomatic = newCmbCircuitsContainsAutomatic;
 					if (this.cmbCircuitsContainsAutomatic) {
-						this.cmbCircuits.Items.Insert(0, "Automatisch");
+						this.cmbCircuits.Items.Insert(0, EuroplanRes.EcothermProduct_Automatisch);
 					} else {
 						this.cmbCircuits.Items.RemoveAt(0);
 					}
@@ -1257,7 +1251,7 @@ namespace Europlan.Common {
 
 		private void btnDistributor_Click(object sender, EventArgs e) {
 			if (this.product.Product.Connections != null && this.product.Product.Connections.Count > 0) {
-				if (MessageBox.Show("Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht", "Grafische Anbindeleitungen löschen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+				if (MessageBox.Show(EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText, EuroplanRes.PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
 					return;
 				}
 				this.product.Product.Connections.Clear();
