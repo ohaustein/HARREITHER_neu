@@ -141,7 +141,7 @@ namespace Europlan.Common {
 #if !DEBUG
 					// Solid Framework license
 					SolidFramework.LicenseCollection.Instance.Clear();
-					SolidFramework.License.Import("neudorfer", "christian.neudorfer@bluesource.at", "", "818f1-eab90-d327b-34e1b");
+					SolidFramework.License.Import("Christian Neudorfer", "christian.neudorfer@bluesource.at", "bluesource - mobile solutions gmbh", "CXZC");
 #endif
 
 					List<SolidFramework.Pdf.Plumbing.PdfPage> Pages = null;
