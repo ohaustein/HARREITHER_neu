@@ -558,14 +558,20 @@ namespace Europlan.Common {
 			Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
 			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
 			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+			bool left = this.Orientation == ModulOrientationEnum.ORIENTATION_LEFT;
+			if (!this.DiagonalDurchstroemt) {
+				if (this.GraphBottomUp != topConnection) {
+					left = !left;
+				}
+			}
 			if (/*this.product.AssociatedRoom.AssociatedPlan.InvertYAxis == modul.GraphBottomUp*/ topConnection) {
-				if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+				if (left) {
 					Point2D input12D = transformation.Transform(new Point2D(width, height));
 					Point2D input22D = transformation.Transform(new Point2D(width, height - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input32D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input42D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height));
 					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
-				} else if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+				} else /*if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT || !this.DiagonalDurchstroemt)*/ {
 					Point2D input12D = transformation.Transform(new Point2D(0, height));
 					Point2D input22D = transformation.Transform(new Point2D(0, height - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input32D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
@@ -573,13 +579,13 @@ namespace Europlan.Common {
 					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
 				}
 			} else {
-				if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+				if (left) {
 					Point2D input12D = transformation.Transform(new Point2D(0, 0));
 					Point2D input22D = transformation.Transform(new Point2D(0, 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input32D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input42D = transformation.Transform(new Point2D(0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
 					return new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D });
-				} else if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+				} else /*if (this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) && this.DiagonalDurchstroemt*/ {
 					Point2D input12D = transformation.Transform(new Point2D(width, 0));
 					Point2D input22D = transformation.Transform(new Point2D(width, 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value));
 					Point2D input32D = transformation.Transform(new Point2D(width - 0.1 * mkd.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * product.AssociatedRoom.AssociatedPlan.Measure.Value));
@@ -635,7 +641,7 @@ namespace Europlan.Common {
 
 				if (this.graphBottomUp) {
 					if (!this.DiagonalDurchstroemt) {
-						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
 							return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
 						} else {
 							return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
@@ -704,7 +710,7 @@ namespace Europlan.Common {
 
 				if (this.graphBottomUp) {
 					if (!this.DiagonalDurchstroemt) {
-						if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
+						if (this.orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
 							return transformation.Transform(new Point2D(connectionDist, connectionDist));
 						} else {
 							return transformation.Transform(new Point2D(width - connectionDist, connectionDist));

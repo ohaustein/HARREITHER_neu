@@ -1716,6 +1716,9 @@ namespace Europlan.Common.Products {
 
 			foreach (KlimaFlaechenModul modul in modulesToInvert) {
 				modul.GraphBottomUp = !modul.GraphBottomUp;
+				if (!modul.DiagonalDurchstroemt) {
+					modul.Orientation = (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+				}
 			}
 			foreach (IKlimaFlaechenVerbindung link in linksToInvert) {
 				link.InvertDirection();

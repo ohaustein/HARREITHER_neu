@@ -2908,21 +2908,35 @@ namespace Europlan.Common {
 								List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
 								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(false));
 								Nullable<bool> left = null;
+								bool lastDiagonal = true;
 								KlimaFlaechenList lastRow = null;
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										bool trueLeft = left.Value;
+										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
+											trueLeft = !trueLeft;
+										}
+										if (!moduleWithRow.modul.DiagonalDurchstroemt && moduleWithRow.modul.GraphBottomUp) {
+											trueLeft = !trueLeft;
+										}
+										moduleWithRow.modul.Orientation = trueLeft ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										if (moduleWithRow.modul.DiagonalDurchstroemt) {
 											left = !left;
 										}
+										lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
 									} else {
 										lastRow = moduleWithRow.row;
-										//if (moduleWithRow.modul.DiagonalDurchstroemt) {
+										lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+										if (moduleWithRow.modul.DiagonalDurchstroemt) {
 											left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										//} else {
-											//left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
-										//}
+										} else {
+											if (!moduleWithRow.modul.GraphBottomUp) {
+												left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+											} else {
+												left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+											}
+										}
 									}
 								}
 								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(true));
@@ -2931,17 +2945,30 @@ namespace Europlan.Common {
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										moduleWithRow.modul.Orientation = left.Value ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+										bool trueLeft = left.Value;
+										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
+											trueLeft = !trueLeft;
+										}
+										if (!moduleWithRow.modul.DiagonalDurchstroemt && !moduleWithRow.modul.GraphBottomUp) {
+											trueLeft = !trueLeft;
+										}
+										moduleWithRow.modul.Orientation = trueLeft ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										if (moduleWithRow.modul.DiagonalDurchstroemt) {
 											left = !left;
 										}
+										lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
 									} else {
 										lastRow = moduleWithRow.row;
-										//if (moduleWithRow.modul.DiagonalDurchstroemt) {
+										lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+										if (moduleWithRow.modul.DiagonalDurchstroemt) {
 											left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-										//} else {
-											//left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
-										//}
+										} else {
+											if (moduleWithRow.modul.GraphBottomUp) {
+												left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+											} else {
+												left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+											}
+										}
 									}
 								}
 							}
