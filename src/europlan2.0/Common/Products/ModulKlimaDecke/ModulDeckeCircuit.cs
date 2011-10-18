@@ -620,5 +620,28 @@ namespace Europlan.Common {
 			}
 			return false;
 		}
+
+		#region Graphical Materials
+		public int GetRequiredWinkel(double measure) {
+			int result = 0;
+			foreach (ModulDeckeSubArea sa in this.SubAreas) {
+				result += sa.GetRequiredWinkel();
+			}
+			foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
+				result += link.GetRequiredWinkel(measure);
+			}
+			return result;
+		}
+
+		public int GetRequiredTStuecke() {
+			int result = 0;
+			int linkResult;
+			foreach (KlimaFlaechenSubAreaVerbindung link in this.Links) {
+				linkResult = link.GetRequiredTStuecke();
+				result += linkResult;
+			}
+			return result;
+		}
+		#endregion Graphical Materials
 	}
 }

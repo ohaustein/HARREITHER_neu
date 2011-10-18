@@ -33,5 +33,7 @@ namespace Europlan.Common {
 		Product Product {
 			get;
 		}
+
+		void OnRecalculationNecessary();
 	}
 }

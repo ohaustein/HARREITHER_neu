@@ -196,6 +196,15 @@ namespace Europlan.Common {
 			this.lstError = new System.Windows.Forms.ListView();
 			this.defaultColumn = new System.Windows.Forms.ColumnHeader();
 			this.panelBottom = new System.Windows.Forms.Panel();
+			this.groupBox8 = new System.Windows.Forms.GroupBox();
+			this.cmbHk = new System.Windows.Forms.ComboBox();
+			this.lblHk = new System.Windows.Forms.Label();
+			this.lblRlUnit = new System.Windows.Forms.Label();
+			this.numRl = new Europlan.Common.NumericBox();
+			this.lblRl = new System.Windows.Forms.Label();
+			this.lblVlUnit = new System.Windows.Forms.Label();
+			this.numVl = new Europlan.Common.NumericBox();
+			this.lblVl = new System.Windows.Forms.Label();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.graphicalWallPanel = new Europlan.Common.GraphicalWallPanel();
 			this.hithermPlanner = new Europlan.Common.HithermPlanner();
@@ -223,6 +232,7 @@ namespace Europlan.Common {
 			this.groupBox5.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.panelBottom.SuspendLayout();
+			this.groupBox8.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStripMain
@@ -250,7 +260,7 @@ namespace Europlan.Common {
 			this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
 			this.toolStripMain.Name = "toolStripMain";
-			this.toolStripMain.Size = new System.Drawing.Size(886, 25);
+			this.toolStripMain.Size = new System.Drawing.Size(984, 25);
 			this.toolStripMain.TabIndex = 67;
 			this.toolStripMain.Text = "toolStrip1";
 			// 
@@ -626,7 +636,7 @@ namespace Europlan.Common {
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(25, 25);
 			this.panelTop.Name = "panelTop";
-			this.panelTop.Size = new System.Drawing.Size(861, 91);
+			this.panelTop.Size = new System.Drawing.Size(959, 91);
 			this.panelTop.TabIndex = 2;
 			// 
 			// panelModifySchraege
@@ -640,7 +650,7 @@ namespace Europlan.Common {
 			this.panelModifySchraege.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifySchraege.Location = new System.Drawing.Point(0, 0);
 			this.panelModifySchraege.Name = "panelModifySchraege";
-			this.panelModifySchraege.Size = new System.Drawing.Size(861, 91);
+			this.panelModifySchraege.Size = new System.Drawing.Size(959, 91);
 			this.panelModifySchraege.TabIndex = 52;
 			// 
 			// lblSchraege
@@ -849,7 +859,7 @@ namespace Europlan.Common {
 			this.panelModifyConnection.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyConnection.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyConnection.Name = "panelModifyConnection";
-			this.panelModifyConnection.Size = new System.Drawing.Size(861, 91);
+			this.panelModifyConnection.Size = new System.Drawing.Size(959, 91);
 			this.panelModifyConnection.TabIndex = 62;
 			// 
 			// btnConnectionRevert
@@ -915,7 +925,7 @@ namespace Europlan.Common {
 			this.panelModifyObstacle.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyObstacle.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyObstacle.Name = "panelModifyObstacle";
-			this.panelModifyObstacle.Size = new System.Drawing.Size(861, 91);
+			this.panelModifyObstacle.Size = new System.Drawing.Size(959, 91);
 			this.panelModifyObstacle.TabIndex = 16;
 			// 
 			// groupBox16
@@ -1419,7 +1429,7 @@ namespace Europlan.Common {
 			this.panelDefineWalls.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelDefineWalls.Location = new System.Drawing.Point(0, 0);
 			this.panelDefineWalls.Name = "panelDefineWalls";
-			this.panelDefineWalls.Size = new System.Drawing.Size(861, 91);
+			this.panelDefineWalls.Size = new System.Drawing.Size(959, 91);
 			this.panelDefineWalls.TabIndex = 35;
 			// 
 			// btnWallHelpLine
@@ -1531,7 +1541,7 @@ namespace Europlan.Common {
 			// btnCreateWalls
 			// 
 			this.btnCreateWalls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCreateWalls.Location = new System.Drawing.Point(606, 3);
+			this.btnCreateWalls.Location = new System.Drawing.Point(704, 3);
 			this.btnCreateWalls.Name = "btnCreateWalls";
 			this.btnCreateWalls.Size = new System.Drawing.Size(252, 23);
 			this.btnCreateWalls.TabIndex = 51;
@@ -1717,7 +1727,7 @@ namespace Europlan.Common {
 			this.panelModifyHitherm.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelModifyHitherm.Location = new System.Drawing.Point(0, 0);
 			this.panelModifyHitherm.Name = "panelModifyHitherm";
-			this.panelModifyHitherm.Size = new System.Drawing.Size(861, 91);
+			this.panelModifyHitherm.Size = new System.Drawing.Size(959, 91);
 			this.panelModifyHitherm.TabIndex = 0;
 			// 
 			// chkRegisterWholeRegister
@@ -2334,7 +2344,7 @@ namespace Europlan.Common {
 			this.lstError.Location = new System.Drawing.Point(4, 173);
 			this.lstError.Name = "lstError";
 			this.lstError.ShowGroups = false;
-			this.lstError.Size = new System.Drawing.Size(854, 30);
+			this.lstError.Size = new System.Drawing.Size(952, 30);
 			this.lstError.TabIndex = 225;
 			this.lstError.UseCompatibleStateImageBehavior = false;
 			this.lstError.View = System.Windows.Forms.View.Details;
@@ -2342,6 +2352,7 @@ namespace Europlan.Common {
 			// 
 			// panelBottom
 			// 
+			this.panelBottom.Controls.Add(this.groupBox8);
 			this.panelBottom.Controls.Add(this.lstError);
 			this.panelBottom.Controls.Add(this.lblRestAreaUnit);
 			this.panelBottom.Controls.Add(this.lblRestAreaTitle);
@@ -2385,8 +2396,132 @@ namespace Europlan.Common {
 			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelBottom.Location = new System.Drawing.Point(25, 326);
 			this.panelBottom.Name = "panelBottom";
-			this.panelBottom.Size = new System.Drawing.Size(861, 206);
+			this.panelBottom.Size = new System.Drawing.Size(959, 206);
 			this.panelBottom.TabIndex = 66;
+			// 
+			// groupBox8
+			// 
+			this.groupBox8.Controls.Add(this.cmbHk);
+			this.groupBox8.Controls.Add(this.lblHk);
+			this.groupBox8.Controls.Add(this.lblRlUnit);
+			this.groupBox8.Controls.Add(this.numRl);
+			this.groupBox8.Controls.Add(this.lblRl);
+			this.groupBox8.Controls.Add(this.lblVlUnit);
+			this.groupBox8.Controls.Add(this.numVl);
+			this.groupBox8.Controls.Add(this.lblVl);
+			this.groupBox8.Location = new System.Drawing.Point(730, 23);
+			this.groupBox8.Name = "groupBox8";
+			this.groupBox8.Size = new System.Drawing.Size(194, 111);
+			this.groupBox8.TabIndex = 226;
+			this.groupBox8.TabStop = false;
+			this.groupBox8.Text = "Anbindeleitung im Boden im Raum";
+			// 
+			// cmbHk
+			// 
+			this.cmbHk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbHk.FormattingEnabled = true;
+			this.cmbHk.Location = new System.Drawing.Point(51, 27);
+			this.cmbHk.Name = "cmbHk";
+			this.cmbHk.Size = new System.Drawing.Size(92, 21);
+			this.cmbHk.TabIndex = 7;
+			this.cmbHk.SelectedValueChanged += new System.EventHandler(this.cmbHk_SelectedValueChanged);
+			// 
+			// lblHk
+			// 
+			this.lblHk.AutoSize = true;
+			this.lblHk.Location = new System.Drawing.Point(6, 30);
+			this.lblHk.Name = "lblHk";
+			this.lblHk.Size = new System.Drawing.Size(25, 13);
+			this.lblHk.TabIndex = 6;
+			this.lblHk.Text = "HK:";
+			// 
+			// lblRlUnit
+			// 
+			this.lblRlUnit.Location = new System.Drawing.Point(149, 80);
+			this.lblRlUnit.Name = "lblRlUnit";
+			this.lblRlUnit.Size = new System.Drawing.Size(39, 20);
+			this.lblRlUnit.TabIndex = 5;
+			this.lblRlUnit.Text = "m";
+			this.lblRlUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// numRl
+			// 
+			this.numRl.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+			this.numRl.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRl.Location = new System.Drawing.Point(51, 80);
+			this.numRl.MaxValue = null;
+			this.numRl.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRl.Name = "numRl";
+			this.numRl.Size = new System.Drawing.Size(92, 20);
+			this.numRl.TabIndex = 4;
+			this.numRl.Text = "0";
+			this.numRl.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numRl.ValueChanged += new System.EventHandler(this.numRl_ValueChanged);
+			// 
+			// lblRl
+			// 
+			this.lblRl.Location = new System.Drawing.Point(6, 80);
+			this.lblRl.Name = "lblRl";
+			this.lblRl.Size = new System.Drawing.Size(39, 20);
+			this.lblRl.TabIndex = 3;
+			this.lblRl.Text = "RL:";
+			this.lblRl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblVlUnit
+			// 
+			this.lblVlUnit.Location = new System.Drawing.Point(149, 54);
+			this.lblVlUnit.Name = "lblVlUnit";
+			this.lblVlUnit.Size = new System.Drawing.Size(39, 20);
+			this.lblVlUnit.TabIndex = 2;
+			this.lblVlUnit.Text = "m";
+			this.lblVlUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// numVl
+			// 
+			this.numVl.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH_HITHERM;
+			this.numVl.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numVl.Location = new System.Drawing.Point(51, 54);
+			this.numVl.MaxValue = null;
+			this.numVl.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numVl.Name = "numVl";
+			this.numVl.Size = new System.Drawing.Size(92, 20);
+			this.numVl.TabIndex = 1;
+			this.numVl.Text = "0";
+			this.numVl.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.numVl.ValueChanged += new System.EventHandler(this.numVl_ValueChanged);
+			// 
+			// lblVl
+			// 
+			this.lblVl.Location = new System.Drawing.Point(6, 54);
+			this.lblVl.Name = "lblVl";
+			this.lblVl.Size = new System.Drawing.Size(39, 20);
+			this.lblVl.TabIndex = 0;
+			this.lblVl.Text = "VL:";
+			this.lblVl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// graphicalWallPanel
 			// 
@@ -2402,9 +2537,9 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Scale = 1;
 			this.graphicalWallPanel.SelectedObject = null;
 			this.graphicalWallPanel.SelectedWall = null;
-			this.graphicalWallPanel.Size = new System.Drawing.Size(861, 210);
+			this.graphicalWallPanel.Size = new System.Drawing.Size(959, 210);
 			this.graphicalWallPanel.TabIndex = 4;
-			this.graphicalWallPanel.XPos = 420.5;
+			this.graphicalWallPanel.XPos = 469.5;
 			this.graphicalWallPanel.YPos = -105;
 			this.graphicalWallPanel.SelectedObjectModified += new System.EventHandler(this.graphicalWallPanel_SelectedObjectModified);
 			this.graphicalWallPanel.ObjectSelected += new System.EventHandler<Europlan.Common.GraphicalWallPanel.SelectedObjectArgs>(this.graphicalWallPanel_ObjectSelected);
@@ -2431,7 +2566,7 @@ namespace Europlan.Common {
 			this.planPanel.Location = new System.Drawing.Point(0, 0);
 			this.planPanel.Name = "planPanel";
 			this.planPanel.ProductPlanner = this.connectionPlanner;
-			this.planPanel.Size = new System.Drawing.Size(886, 532);
+			this.planPanel.Size = new System.Drawing.Size(984, 532);
 			this.planPanel.TabIndex = 5;
 			this.planPanel.Visible = false;
 			// 
@@ -2450,7 +2585,7 @@ namespace Europlan.Common {
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(886, 532);
+			this.ClientSize = new System.Drawing.Size(984, 532);
 			this.Controls.Add(this.graphicalWallPanel);
 			this.Controls.Add(this.panelBottom);
 			this.Controls.Add(this.panelTop);
@@ -2503,6 +2638,8 @@ namespace Europlan.Common {
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			this.panelBottom.ResumeLayout(false);
+			this.groupBox8.ResumeLayout(false);
+			this.groupBox8.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -2686,5 +2823,14 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ToolStripButton btnSchraegeLeft;
 		private System.Windows.Forms.ToolStripButton btnSchraegeRight;
 		private System.Windows.Forms.ToolStripButton btnConnectionInFloor;
+		private System.Windows.Forms.GroupBox groupBox8;
+		private System.Windows.Forms.Label lblRlUnit;
+		private NumericBox numRl;
+		private System.Windows.Forms.Label lblRl;
+		private System.Windows.Forms.Label lblVlUnit;
+		private NumericBox numVl;
+		private System.Windows.Forms.Label lblVl;
+		private System.Windows.Forms.ComboBox cmbHk;
+		private System.Windows.Forms.Label lblHk;
 	}
 }

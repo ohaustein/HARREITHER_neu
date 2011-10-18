@@ -30,6 +30,7 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.label1.Text = EuroplanRes.RequiredMaterialGrid_Hinweis; //"Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden selbst anhand der Planungsvorlage ermittelt werden!";
+			this.label2.Text = EuroplanRes.RequiredMaterialGrid_Hinweis2;
 			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bezeichnung; //"Bezeichnung";
 			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bestellnummer; //"Bestellnummer";
 			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Menge; //"Menge";

@@ -272,6 +272,17 @@ namespace Europlan.Common {
 			set { area = value; }
 		}
 
+		public double PickedArea {
+			get {
+				if (this.RoomCoordinates == null || this.RoomCoordinates.Count < 3 || this.AssociatedPlan == null || this.AssociatedPlan.Measure == null) {
+					return this.area;
+				} else {
+					double area = WW.Math.Geometry.Polygon2D.GetArea(this.RoomCoordinates) / this.AssociatedPlan.Measure.Value / this.AssociatedPlan.Measure.Value;
+					return area;
+				}
+			}
+		}
+
 		public int HeatLoad {
 			get { return heatLoad; }
 			set {

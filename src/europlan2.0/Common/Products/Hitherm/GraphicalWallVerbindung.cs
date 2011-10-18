@@ -1182,6 +1182,80 @@ namespace Europlan.Common {
 				return -1;
 			}
 		}
+
+		public virtual int CalculateRequiredWandwinkel() {
+			int result = 0;
+			if (this.vertices != null && this.vertices.Count > 2) {
+				Vector2D lastVector = this.vertices[1] - this.vertices[0];
+				Vector2D curVector;
+				double angle;
+				for (int i = 1; i < this.vertices.Count - 1; i++) {
+					curVector = this.vertices[i + 1] - this.vertices[i];
+					angle = (Math.Atan2(curVector.Y, curVector.X) - Math.Atan2(lastVector.Y, lastVector.X)) * 180.0 / Math.PI;
+					if (angle < 0) {
+						angle += 360.0;
+					}
+					if (angle > 180.0) {
+						angle = 360.0 - angle;
+					}
+					/*if (angle <= 112.5) {
+						result[0]++;
+					} else*/
+					if (angle <= 157.5) {
+						//result[1]++;
+						result++;
+					}
+					lastVector = curVector;
+				}
+			}
+			return result;
+		}
+
+		public virtual int CalculateRequiredEckwinkel(List<double> wallBorders) {
+			int result = 0;
+			if (this.vertices != null && this.vertices.Count > 2) {
+				Point2D lastPoint = this.vertices[0];
+				Point2D curPoint;
+				for (int i = 1; i < this.vertices.Count; i++) {
+					curPoint = this.vertices[i];
+					if (curPoint.X != lastPoint.X) {
+						foreach (double border in wallBorders) {
+							if (curPoint.X > lastPoint.X) {
+								if (curPoint.X >= border) {
+									if (lastPoint.X < border) {
+										result++;
+									}
+									break;
+								}
+							} else {
+								if (lastPoint.X >= border) {
+									if (curPoint.X < border) {
+										result++;
+									}
+									break;
+								}
+							}
+						}
+					}
+					lastPoint = curPoint;
+				}
+			}
+			return result;
+		}
+
+		public virtual double CalculateLength() {
+			double length = 0;
+			if (this.vertices != null && this.vertices.Count > 1) {
+				Point2D lastPoint = this.vertices[0];
+				Point2D curPoint;
+				for (int i = 1; i < this.vertices.Count; i++) {
+					curPoint = this.vertices[i];
+					length += (curPoint - lastPoint).GetLength();
+					lastPoint = curPoint;
+				}
+			}
+			return length / 100.0;
+		}
 	}
 
 

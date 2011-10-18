@@ -64,6 +64,11 @@ namespace Europlan.Common {
 
 		private bool hoverAnbindungen = false;
 
+		private List<KlimaFlaechenModulVerbindung> updateStartOnMove = new List<KlimaFlaechenModulVerbindung>();
+		private List<KlimaFlaechenModulVerbindung> updateEndOnMove = new List<KlimaFlaechenModulVerbindung>();
+		private List<KlimaFlaechenModulVerbindung> deleteOnMove = new List<KlimaFlaechenModulVerbindung>();
+		private List<KlimaFlaechenSubAreaVerbindung> deleteSaOnMove = new List<KlimaFlaechenSubAreaVerbindung>();
+
 		private Color[] circuitColors = new Color[] {
 			Color.FromArgb(192, 0, 0),
 			Color.FromArgb(0, 128, 0),
@@ -2722,6 +2727,7 @@ namespace Europlan.Common {
 						}
 						modulesPerLane[modul.GraphLane].Add(modul);
 					}
+					//Dictionary<KlimaFlaechenModul, double> move = new Dictionary<KlimaFlaechenModul, double>();
 					foreach (KeyValuePair<int, List<KlimaFlaechenModul>> kvp in modulesPerLane) {
 						if (kvp.Value.Count > 0) {
 							KlimaFlaechenModul firstModul = kvp.Value[0];
@@ -2732,10 +2738,27 @@ namespace Europlan.Common {
 								Nullable<double> bestMove = lane.BestMovePossible(modul, this.oldModulPositions[modul] + delta, measure, this.product, bottomUp);
 								if (bestMove.HasValue) {
 									modul.GraphPositionInLan = bestMove.Value;
+									//move.Add(modul, bestMove.Value - this.oldModulPositions[modul]);
 								}
 							}
 						}
 					}
+
+					foreach (KlimaFlaechenModulVerbindung link in this.updateStartOnMove) {
+						link.Vertices[0] = link.Start.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+					}
+					foreach (KlimaFlaechenModulVerbindung link in this.updateEndOnMove) {
+						link.Vertices[1] = link.End.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+					}
+					foreach (KlimaFlaechenModulVerbindung link in this.deleteOnMove) {
+						(link.Circuit as ModulDeckeCircuit).SubAreas[link.EndSubarea].Rows[link.EndRow].Links.Remove(link);
+					}
+					this.deleteOnMove.Clear();
+					foreach (KlimaFlaechenSubAreaVerbindung link in this.deleteSaOnMove) {
+						(link.Circuit as ModulDeckeCircuit).Links.Remove(link);
+					}
+					this.deleteSaOnMove.Clear();
+					
 					if (this.ProjectChanged != null) {
 						this.ProjectChanged(this);
 					}
@@ -2991,6 +3014,47 @@ namespace Europlan.Common {
 						}
 					} else {
 						this.HighlightModules = modules;
+					}
+
+					this.updateStartOnMove.Clear();
+					this.updateEndOnMove.Clear();
+					this.deleteOnMove.Clear();
+					this.deleteSaOnMove.Clear();
+					foreach (ModulDeckeCircuit c in this.product.PlannedCircuits) {
+						foreach (ModulDeckeSubArea sa in c.SubAreas) {
+							foreach (KlimaFlaechenList row in sa.Rows) {
+								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+									if (link.Vertices.Count == 2) {
+										if (this.HighlightModules.Contains(link.Start)) {
+											this.updateStartOnMove.Add(link);
+										}
+										if (this.HighlightModules.Contains(link.End)) {
+											this.updateEndOnMove.Add(link);
+										}
+									} else {
+										this.deleteOnMove.Add(link);
+									}
+								}
+							}
+						}
+						foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
+							bool deleted = false;
+							foreach (KlimaFlaechenModul m in link.Start) {
+								if (this.HighlightModules.Contains(m)) {
+									this.deleteSaOnMove.Add(link);
+									deleted = true;
+									break;
+								}
+							}
+							if (!deleted) {
+								foreach (KlimaFlaechenModul m in link.End) {
+									if (this.HighlightModules.Contains(m)) {
+										this.deleteSaOnMove.Add(link);
+										break;
+									}
+								}
+							}
+						}
 					}
 
 					this.dragStartedInPlan = null;

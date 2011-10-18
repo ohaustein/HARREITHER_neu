@@ -39,6 +39,48 @@ namespace Europlan.Common {
 			}
 		}
 
+		private static int ComparePoint(Point2D p1, Point2D p2) {
+			if (p1.X.Equals(p2.X)) {
+				return p1.Y.CompareTo(p2.Y);
+			} else {
+				return p1.X.CompareTo(p2.X);
+			}
+		}
+
+		public double GetStaffelnLength(double measure) {
+			if (this.schienen == null) {
+				this.RecalculateSchienen();
+			}
+			List<Point2D> ceilingCoordinates = this.CeilingCoordinates;
+			Point2D start, end;
+			Line2D staffel;
+			Segment2D seg;
+			Nullable<Point2D> intersection;
+			List<Point2D> intersections = new List<Point2D>();
+			double length = 0;
+			foreach (Polygon2D schiene in this.schienen) {
+				start = schiene[0] + (schiene[1] - schiene[0]) / 2.0;
+				end = schiene[2] + (schiene[3] - schiene[2]) / 2.0;
+				staffel = new Line2D(start, end - start);
+				//schiene.GetI
+				Point2D lastPoint = ceilingCoordinates[ceilingCoordinates.Count - 1];
+				intersections.Clear();
+				foreach (Point2D curPoint in ceilingCoordinates) {
+					seg = new Segment2D(lastPoint, curPoint);
+					intersection = Line2D.GetIntersection(staffel, seg);
+					if (intersection.HasValue) {
+						intersections.Add(intersection.Value);
+					}
+					lastPoint = curPoint;
+				}
+				intersections.Sort(ComparePoint);
+				for (int i = 0; i < intersections.Count - 1; i += 2) {
+					length += (intersections[i] - intersections[i + 1]).GetLength();
+				}
+			}
+			return length / measure;
+		}
+
 		public override void RecalculateSchienen() {
 			if (/*this.Planner == null ||*/ this.Product == null ||
 				this.Product.AssociatedRoom == null ||

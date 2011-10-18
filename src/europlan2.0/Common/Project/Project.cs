@@ -698,6 +698,8 @@ namespace Europlan.Common {
 
 		public void CalculateRequiredMaterial() {
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
+			bool klimaBodenPlanned = false;
+			bool hithermCompactPlanned = false;
 			foreach (Floor floor in this.floors) {
 				// distributors
 				foreach (Distributor distributor in floor.Distributors) {
@@ -707,20 +709,42 @@ namespace Europlan.Common {
 					// products
 					foreach (PlannedProduct product in room.PlannedProducts) {
 						product.Product.CalculateRequiredMaterial(requiredMaterialCalculated);
+						if (product.Product is ModulKlimaBodenProduct) {
+							klimaBodenPlanned = true;
+						}
+						if (product.Product is HithermCompactProduct) {
+							hithermCompactPlanned = true;
+						}
 					}
 				}
 			}
 
-			ModulKlimaBodenProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
-			HithermCompactProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
+			if (klimaBodenPlanned) {
+				ModulKlimaBodenProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
+			}
+			if (hithermCompactPlanned) {
+				HithermCompactProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
+			}
 		}
 
 		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string materialId, double amount) {
 			if (amount != 0) {
 				Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
-				if (material != null) {
+				if (material != null || materialId.StartsWith("PLACEHOLDER_")) {
 					if (requiredMaterial.ContainsKey(material.Id)) {
-						requiredMaterial[material.Id] += amount;
+						double oldAmount = requiredMaterial[material.Id];
+						double newAmount;
+						if (double.IsNegativeInfinity(oldAmount)) {
+							newAmount = Math.Abs(amount);
+						} else if (double.IsNegativeInfinity(amount)) {
+							newAmount = Math.Abs(oldAmount);
+						} else {
+							newAmount = Math.Abs(oldAmount) + Math.Abs(amount);
+						}
+						if (double.IsNegativeInfinity(oldAmount) || double.IsNegativeInfinity(amount) || oldAmount < 0 || amount < 0) {
+							newAmount = -newAmount;
+						}
+						requiredMaterial[material.Id] = newAmount;
 					} else {
 						requiredMaterial.Add(material.Id, amount);
 					}

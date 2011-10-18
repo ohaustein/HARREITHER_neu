@@ -1134,20 +1134,25 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 			double additional21mm = 0;
 			int nrOfElements = 0;
 			int nrOfOtherElements = 0;
 			int rows = 0;
 			int subAreas = 0;
 			double modulArea = 0;
+			int flexibleRows = 0;
+			bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
+			int tStuecke = 0;
 			foreach (ModulDeckeCircuit c in this.circuits) {
 				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
 					subAreas++;
+					tStuecke += (subArea.Rows.Count - 1) * 2;
 					foreach (KlimaFlaechenList row in subArea.Rows) {
 						rows++;
 						additional21mm += row.LengthVerbindeleitungen;
 						additional21mm += 1.4;
+						bool flexible = false;
 						foreach (KlimaFlaechenModul modul in row.List) {
 							// Modul
 							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
@@ -1156,47 +1161,129 @@ namespace Europlan.Common {
 							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
 								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
 								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
-								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D || 
-								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
+								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D) {
 								nrOfOtherElements++;
 							}
+							KlimaFlaechenModulVerbindung link = modul.GetInputLink(c, invertYAxis);
+							if (link != null && link.IsFlexible) {
+								flexible = true;
+							}
+							link = modul.GetOutputLink(c, invertYAxis);
+							if (link != null && link.IsFlexible) {
+								flexible = true;
+							}
+						}
+						if (flexible) {
+							flexibleRows++;
 						}
 					}
 				}
 			}
 
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm);
 
-			// Muffe
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+			if (this.GraphicalMode.HasValue && this.GraphicalMode.Value) {
+				double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
 
-			// T-Stück
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - 1) * 2);
+				bool serie40 = false;
+				if (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) != 0.3) {
+					serie40 = true;
+				}
+				if (this.GraphConstruction is ModulKlimaDeckeConstructionKassette && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450) {
+					serie40 = true;
+				}
+				int langeFittinge = 0;
+				int kurzeFittinge = 0;
+				if (serie40) {
+					foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+						foreach (ModulDeckeSubArea sa in c.SubAreas) {
+							foreach (KlimaFlaechenList row in sa.Rows) {
+								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+									if  (link.IsLangerFitting(measure)) {
+										langeFittinge++;
+									}
+									if (link.IsKurzerFitting(measure)) {
+										kurzeFittinge++;
+									}
+								}
+							}
+						}
+					}
+				}
 
-			if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL) {
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, false);
+
+				// Muffe
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+
+				// T-Stück
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", tStuecke);
+
 				// Winkel 90°
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
+				int winkel = 0;
+				foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+					winkel = c.GetRequiredWinkel(measure);
+				}
+				winkel += (rows - flexibleRows) * 2;
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", winkel);
 
-				// Holzstaffel
-				if (modulArea > 0) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
+				// Anbindung von flexiblen Reihen
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", flexibleRows * 2);
+
+				if (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && this.GraphConstruction.CeilingConstruction == ModulCeilingConstructionEnum.HOLZSTAFFEL) {
+					ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
+				} else {
+					// Einhängebügel
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+					if (nrOfOtherElements > 0) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
+					}
+				}
+
+				if (serie40) {
+					// Winkel 45° bei Serie 40
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", (nrOfElements /*- kurzeFittinge - langeFittinge*/) * 2);
+
+					/*// Kurze Fittinge bei Serie 40
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", 0);
+
+					// Lange Fittinge bei Serie 40
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", 0);*/
 				}
 			} else {
-				// Winkel 90°
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + 1) * 2);
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
 
-				// Einhängebügel
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
-				if (nrOfOtherElements > 0) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
+				// Muffe
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+
+				// T-Stück
+				//Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - 1) * 2);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", tStuecke);
+
+				if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL) {
+					// Winkel 90°
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
+
+					// Holzstaffel
+					if (modulArea > 0) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
+					}
+				} else {
+					// Winkel 90°
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + 1) * 2);
+
+					// Einhängebügel
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+					if (nrOfOtherElements > 0) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
+					}
+				}
+
+				// Winkel 45° in Wand
+				if (this.Type == ProductType.WH) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
 				}
 			}
-
-			// Winkel 45° in Wand
-			if (this.Type == ProductType.WH) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
-			}
-			
 		}
 
 		public override double Dichte {

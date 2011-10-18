@@ -343,5 +343,41 @@ namespace Europlan.Common {
 		public override bool EqualsOrIsPart(object obj) {
 			return base.EqualsOrIsPart(obj) || this.startLink.EqualsOrIsPart(obj) || this.endLink.EqualsOrIsPart(obj);
 		}
+
+		public override int CalculateRequiredWandwinkel() {
+			int result = 2;
+			if (this.startLink != null) {
+				result += this.startLink.CalculateRequiredWandwinkel();
+			}
+			if (this.endLink != null) {
+				result += this.endLink.CalculateRequiredWandwinkel();
+			}
+			return result;
+		}
+
+		public override int CalculateRequiredEckwinkel(List<double> wallBorders) {
+			int result = 0;
+			if (this.startLink != null) {
+				result += this.startLink.CalculateRequiredEckwinkel(wallBorders);
+			}
+			if (this.endLink != null) {
+				result += this.endLink.CalculateRequiredEckwinkel(wallBorders);
+			}
+			return result;
+		}
+
+		public override double CalculateLength() {
+			double length = 0;
+			if (this.startLink != null) {
+				length += this.startLink.CalculateLength();
+			}
+			if (this.endLink != null) {
+				length += this.endLink.CalculateLength();
+			}
+			if (this.endLink != null && this.endLink.Vertices != null && this.endLink.Vertices.Count > 0 && this.startLink != null && this.startLink.Vertices != null && this.startLink.Vertices.Count > 0) {
+				length += (Math.Abs(this.endLink.Vertices[0].X - this.startLink.Vertices[this.startLink.Vertices.Count - 1].X) + 20.0) / 100.0;
+			}
+			return length;
+		}
 	}
 }

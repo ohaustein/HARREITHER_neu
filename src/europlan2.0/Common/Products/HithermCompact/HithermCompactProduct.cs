@@ -143,6 +143,9 @@ namespace Europlan.Common {
 		private float plannedRoofArea = 0;
 		private float plannedFloorCeilingRoofArea = 0;
 
+		private double graphicalAdditionalVl = 0;
+		private double graphicalAdditionalRl = 0;
+
 		public HithermCompactProduct() {
 			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
 				throw new ProductNotLicensedException(this.GetType());
@@ -944,11 +947,21 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
-			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, 0);
-
 			double verbindeLength = 0;
+			double verbindeLengthBoden = 0;
 			int teilflaechen = 0;
 			double registerCount = 0;
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
+
+			List<double> wallBorders = new List<double>();
+			if (graphical && this.AssociatedRoom != null && this.AssociatedRoom.Walls != null) {
+				double pos = 0;
+				foreach (GraphicalWall wall in this.AssociatedRoom.Walls) {
+					pos += wall.GetWallWidth();
+					wallBorders.Add(pos * 100.0);
+				}
+			}
+
 			foreach (HithermCompactCircuit c in this.circuits) {
 				foreach (HithermCompactRegister register in c.Registers) {
 					teilflaechen++;
@@ -963,26 +976,50 @@ namespace Europlan.Common {
 						MessageBox.Show("Hitherm Compact Product not found.");
 					}
 #endif
-					//Wandwinkel
-					if (ConfigUsePlus) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", 1);
-					} else {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", 1);
-					}
 
-					// Bodenwinkel
+					if (!graphical) {
+						//Wandwinkel
+						if (ConfigUsePlus) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", 1);
+						} else {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", 1);
+						}
+
+						// Bodenwinkel
+						if (ConfigUsePlus) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", 2);
+						} else {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
+						}
+
+						verbindeLength += register.PipeHorizontal + register.PipeVertical;
+					}
+				}
+				if (graphical) {
+					verbindeLengthBoden += c.GraphicalAdditionalVl + c.GraphicalAdditionalRl;
+
+					// Verbindeleitungen, Wandwinkel, Eckwinkel, Bodenwinkel
+					int wandwinkel = 0;
+					int eckwinkel = 0;
+					foreach (GraphicalHithermCompactVerbindung link in c.Links) {
+						wandwinkel += link.CalculateRequiredWandwinkel();
+						verbindeLength += link.CalculateLength();
+						eckwinkel += link.CalculateRequiredEckwinkel(wallBorders);
+					}
 					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", wandwinkel);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR67", eckwinkel);
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", 2);
 					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", wandwinkel);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", eckwinkel);
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
 					}
-
-					verbindeLength += register.PipeHorizontal + register.PipeVertical;
-
 				}
-
 			}
-			
+
+			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true);
+
 			// Ovalmuffen
 			double amount = teilflaechen;
 			if (verbindeLength > 0) {
@@ -1325,6 +1362,19 @@ namespace Europlan.Common {
 					register.ClearGraphicalRepresentation();
 				}
 			}
+			this.associatedRoom.Walls.Clear();
+			this.graphicalAdditionalRl = 0;
+			this.graphicalAdditionalVl = 0;
+		}
+
+		public double GraphicalAdditionalVl {
+			get { return this.graphicalAdditionalVl; }
+			set { this.graphicalAdditionalVl = value; }
+		}
+
+		public double GraphicalAdditionalRl {
+			get { return this.graphicalAdditionalRl; }
+			set { this.graphicalAdditionalRl = value; }
 		}
 	}
 }

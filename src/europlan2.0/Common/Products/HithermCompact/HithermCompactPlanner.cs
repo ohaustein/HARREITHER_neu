@@ -110,7 +110,7 @@ namespace Europlan.Common {
 			remove { this.restoreMode -= value; }
 		}
 
-		protected virtual void OnRecalculationNecessary() {
+		public virtual void OnRecalculationNecessary() {
 			if (this.recalculationNecessary != null) {
 				this.recalculationNecessary(this, EventArgs.Empty);
 			}
@@ -336,36 +336,44 @@ namespace Europlan.Common {
 						}
 					} else {
 						GraphicalHithermCompactVerbindung endConnection = this.GetConnectionForPoint(planPoint);
-						if (newConnectionStartConnection.Circuit == endConnection.Circuit) {
-							endConnection = null;
-						}
-						if (((this.newConnectionStartConnection.Start == null) != (endConnection.Start == null)) && ((this.newConnectionStartConnection.End == null) != (endConnection.End == null))) {
-							GraphicalHithermCompactVerbindung startConnection = (this.newConnectionStartConnection.End == null) ? this.newConnectionStartConnection : endConnection;
-							endConnection = (this.newConnectionStartConnection.Start == null) ? this.newConnectionStartConnection : endConnection;
-							HithermCompactCircuit startCircuit = this.product.GetCircuitForRegister(startConnection.Start);
-							HithermCompactCircuit endCircuit = this.product.GetCircuitForRegister(endConnection.End);
-							HithermCompactCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
-							HithermCompactCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
-							int combinedCircuitNr = combinedCircuit.HkLabelNr;
-							while (deleteCircuit.Registers.Count > 0) {
-								this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+						if (endConnection != null) {
+							if (newConnectionStartConnection.Circuit == endConnection.Circuit) {
+								endConnection = null;
 							}
-							HithermCompactRegister startRegister = startConnection.Start;
-							HithermCompactRegister endRegister = endConnection.End;
+							if (endConnection != null && ((this.newConnectionStartConnection.Start == null) != (endConnection.Start == null)) && ((this.newConnectionStartConnection.End == null) != (endConnection.End == null))) {
+								GraphicalHithermCompactVerbindung startConnection = (this.newConnectionStartConnection.End == null) ? this.newConnectionStartConnection : endConnection;
+								endConnection = (this.newConnectionStartConnection.Start == null) ? this.newConnectionStartConnection : endConnection;
+								HithermCompactCircuit startCircuit = this.product.GetCircuitForRegister(startConnection.Start);
+								HithermCompactCircuit endCircuit = this.product.GetCircuitForRegister(endConnection.End);
+								HithermCompactCircuit combinedCircuit = (startCircuit.HkLabelNr < endCircuit.HkLabelNr ? startCircuit : endCircuit);
+								HithermCompactCircuit deleteCircuit = combinedCircuit == startCircuit ? endCircuit : startCircuit;
+								int combinedCircuitNr = combinedCircuit.HkLabelNr;
+								while (deleteCircuit.Registers.Count > 0) {
+									this.product.MoveRegisterToCircuit(deleteCircuit.Registers[0], combinedCircuitNr);
+								}
+								HithermCompactRegister startRegister = startConnection.Start;
+								HithermCompactRegister endRegister = endConnection.End;
 
-							combinedCircuit.Links.Remove(startConnection);
-							combinedCircuit.Links.Remove(endConnection);
-							GraphicalHithermCompactVerbindung newLink = new GraphicalHithermCompactUnderfloorVerbindung(startConnection, endConnection);
-							combinedCircuit.Links.Add(newLink);
+								combinedCircuit.Links.Remove(startConnection);
+								combinedCircuit.Links.Remove(endConnection);
+								GraphicalHithermCompactVerbindung newLink = new GraphicalHithermCompactUnderfloorVerbindung(startConnection, endConnection);
+								combinedCircuit.Links.Add(newLink);
 
-							this.newConnectionStartConnection = null;
+								this.newConnectionStartConnection = null;
 
-							if (this.connectedWallPanel != null) {
-								this.connectedWallPanel.SelectedObject = newLink;
-								this.connectedWallPanel.InvalidateGraphics();
+								if (this.connectedWallPanel != null) {
+									this.connectedWallPanel.SelectedObject = newLink;
+									this.connectedWallPanel.InvalidateGraphics();
+								}
+							} else {
+								if (MessageBox.Show(EuroplanRes.HithermPlanner_VerbindungNichtMoeglichText, EuroplanRes.HithermPlanner_VerbindungNichtMoeglichTitel, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Cancel) {
+									this.newConnectionStartConnection = null;
+									if (this.connectedWallPanel != null) {
+										this.connectedWallPanel.SelectedObject = null;
+										this.connectedWallPanel.InvalidateGraphics();
+									}
+								}
 							}
-
-
 						}
 					}
 				}

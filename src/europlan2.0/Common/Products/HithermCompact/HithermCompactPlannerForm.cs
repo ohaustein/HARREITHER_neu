@@ -20,6 +20,7 @@ namespace Europlan.Common {
 
 		public HithermCompactPlannerForm(HithermCompactProduct product) {
 			InitializeComponent();
+			this.SetLanguage();
 
 			this.hithermCompactPlanner.HithermCompactProduct = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
@@ -31,7 +32,10 @@ namespace Europlan.Common {
 						
 			UpdateDefineWallsPanelButtons(null);
 			ApplyButtonCheckedState(this.btnPick);
-			this.SetLanguage();
+
+			this.UpdateAdditionalVlRlForCircuit();
+			this.CalculateAndUpdate();
+
 			this.connectionPlanner.Product = product;
 		}
 
@@ -233,7 +237,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallNewWall_Click(object sender, EventArgs e) {
-			NewWallForm form = new NewWallForm(false, false, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count, (graphicalWallPanel.SelectedWall != null && !graphicalWallPanel.SelectedWall.IsDachSchraege), graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
+			NewWallForm form = new NewWallForm(false, true, SelectedObject != null ? (SelectedObject as GraphicalWall).GetWallWidth() * 100 : 0, graphicalWallPanel.Room.Walls.Count, (graphicalWallPanel.SelectedWall != null && !graphicalWallPanel.SelectedWall.IsDachSchraege), graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
 			DialogResult result = form.ShowDialog();
 			if (result == DialogResult.OK) {
 				double height = form.Height / 100.0;
@@ -278,7 +282,7 @@ namespace Europlan.Common {
 				this.graphicalWallPanel.Room.Walls.Clear();
 				//this.hithermCompactPlanner.HithermCompactProduct.PlannedCircuits.Clear();
 				this.hithermCompactPlanner.HithermCompactProduct.ResetProduct();
-				NewWallForm form = new NewWallForm(true, false, 0, 0, false, graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
+				NewWallForm form = new NewWallForm(true, true, 0, 0, false, graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
 				DialogResult result = form.ShowDialog();
 				if (result == DialogResult.OK) {
 					double height = form.Height / 100.0;
@@ -886,7 +890,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnWallSelectConstruction_Click(object sender, EventArgs e) {
-			SelectHithermWallForm form = new SelectHithermWallForm(false);
+			SelectHithermWallForm form = new SelectHithermWallForm(true);
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (SelectedObject is GraphicalWall) {
 					this.txtWallConstruction.Text = form.SelectedWall.Id;
@@ -1109,7 +1113,46 @@ namespace Europlan.Common {
 			CalculateAndUpdate();
 		}
 
+		private class HithermCompactCircuitItem {
+			private HithermCompactCircuit circuit = null;
+
+			public HithermCompactCircuitItem(HithermCompactCircuit circuit) {
+				this.circuit = circuit;
+			}
+
+			public HithermCompactCircuit Circuit {
+				get { return this.circuit; }
+			}
+
+			public override string ToString() {
+				return (this.circuit != null) ? this.circuit.HkLabelNr.ToString() : "";
+			}
+
+			public override bool Equals(object obj) {
+				return (obj == null || !(obj is HithermCompactCircuitItem)) ? false : this.circuit == (obj as HithermCompactCircuitItem).circuit;
+			}
+
+			public override int GetHashCode() {
+				return (circuit == null) ? 0 : circuit.GetHashCode();
+			}
+		}
+
 		private void CalculateAndUpdate() {
+			HithermCompactCircuitItem selectedItem = this.cmbHk.SelectedItem as HithermCompactCircuitItem;
+			this.cmbHk.Items.Clear();
+			foreach (HithermCompactCircuit c in this.hithermCompactPlanner.HithermCompactProduct.PlannedCircuits) {
+				this.cmbHk.Items.Add(new HithermCompactCircuitItem(c));
+			}
+			if (selectedItem != null && cmbHk.Items.Contains(selectedItem)) {
+				this.cmbHk.SelectedItem = selectedItem;
+			} else {
+				if (cmbHk.Items.Count > 0) {
+					this.cmbHk.SelectedItem = this.cmbHk.Items[0];
+				} else {
+					this.cmbHk.SelectedItem = null;
+				}
+			}
+
 			HithermCompactProduct product = this.hithermCompactPlanner.HithermCompactProduct;
 			PlannedProduct pp = Project.Instance.GetPlannedProduct(product);
 			product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
@@ -1700,6 +1743,44 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Visible = false;
 			this.panelTop.Visible = false;
 			this.planPanel.Visible = true;
+		}
+
+		private int ignoreVlRlChange = 0;
+
+		private void numVl_ValueChanged(object sender, EventArgs e) {
+			if (ignoreVlRlChange == 0) {
+				if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCompactCircuitItem) {
+					(this.cmbHk.SelectedItem as HithermCompactCircuitItem).Circuit.GraphicalAdditionalVl = (double)this.numVl.Value;
+				}
+			}
+		}
+
+		private void numRl_ValueChanged(object sender, EventArgs e) {
+			if (ignoreVlRlChange == 0) {
+				if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCompactCircuitItem) {
+					(this.cmbHk.SelectedItem as HithermCompactCircuitItem).Circuit.GraphicalAdditionalRl = (double)this.numRl.Value;
+				}
+			}
+		}
+
+		private void cmbHk_SelectedValueChanged(object sender, EventArgs e) {
+			this.UpdateAdditionalVlRlForCircuit();
+		}
+
+		private void UpdateAdditionalVlRlForCircuit() {
+			ignoreVlRlChange++;
+			if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCompactCircuitItem) {
+				this.numVl.Enabled = true;
+				this.numRl.Enabled = true;
+				this.numVl.Value = (decimal)(this.cmbHk.SelectedItem as HithermCompactCircuitItem).Circuit.GraphicalAdditionalVl;
+				this.numRl.Value = (decimal)(this.cmbHk.SelectedItem as HithermCompactCircuitItem).Circuit.GraphicalAdditionalRl;
+			} else {
+				this.numVl.Enabled = false;
+				this.numRl.Enabled = false;
+				this.numVl.Text = "";
+				this.numRl.Text = "";
+			}
+			ignoreVlRlChange--;
 		}
 	}
 }

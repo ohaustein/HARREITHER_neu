@@ -99,5 +99,15 @@ namespace Europlan.Common {
 			index = -1;
 			return null;
 		}
+
+		#region Graphical Materials
+		public int GetRequiredWinkel() {
+			int result = 0;
+			foreach (KlimaFlaechenList row in this.Rows) {
+				result += row.GetRequiredWinkel();
+			}
+			return result;
+		}
+		#endregion Graphical Materials
 	}
 }

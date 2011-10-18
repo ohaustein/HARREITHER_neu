@@ -552,6 +552,10 @@ namespace Europlan.Common {
 			return this.vertices.Count == 2 && this.Start != null && this.End != null && Math.Abs((this.vertices[0] - this.vertices[1]).GetLength() / measure - (0.1 + 2 * KlimaFlaechenModul.CONNECTION_DISTANCE)) < 0.0001;
 		}
 
+		public bool IsKurzerFitting(double measure) {
+			return this.vertices.Count == 2 && this.Start != null && this.End != null && Math.Abs((this.vertices[0] - this.vertices[1]).GetLength() / measure - (2 * KlimaFlaechenModul.CONNECTION_DISTANCE)) < 0.0001;
+		}
+
 		public int DistributorIndex {
 			get { return this.distributorIndex; }
 			set { this.distributorIndex = value; }
@@ -623,5 +627,34 @@ namespace Europlan.Common {
 			get { return this.flexible; }
 			set { this.flexible = value; }
 		}
+
+		#region Graphical Materials
+		public int GetRequiredWinkel() {
+			int result = 0;
+			if (this.vertices != null && this.vertices.Count > 2) {
+				Vector2D lastVector = this.vertices[1] - this.vertices[0];
+				Vector2D curVector;
+				double angle;
+				for (int i = 1; i < this.vertices.Count - 1; i++) {
+					curVector = this.vertices[i + 1] - this.vertices[i];
+					angle = (Math.Atan2(curVector.Y, curVector.X) - Math.Atan2(lastVector.Y, lastVector.X)) * 180.0 / Math.PI;
+					if (angle < 0) {
+						angle += 360.0;
+					}
+					if (angle > 180.0) {
+						angle = 360.0 - angle;
+					}
+					/*if (angle <= 112.5) {
+						result[0]++;
+					} else*/ if (angle <= 157.5) {
+						//result[1]++;
+								 result++;
+					}
+					lastVector = curVector;
+				}
+			}
+			return result;
+		}
+		#endregion Graphical Materials
 	}
 }

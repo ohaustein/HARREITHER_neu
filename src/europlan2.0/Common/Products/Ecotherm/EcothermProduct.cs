@@ -2094,7 +2094,7 @@ namespace Europlan.Common {
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
 			// Anbindeleitungen
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true);
 
 			// Ecotherm Rohr
 			double length = 0;

@@ -185,6 +185,9 @@ namespace Europlan.Common {
 		private float plannedCeilingArea = 0;
 		private float plannedFloorOrCeilingArea = 0;
 
+		//private double graphicalAdditionalVl = 0;
+		//private double graphicalAdditionalRl = 0;
+
 		public HithermProduct() {
 			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
 				throw new ProductNotLicensedException(this.GetType());
@@ -1268,16 +1271,25 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
-			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, 0);
-
 			double verbindeLength = 0;
+			double verbindeLengthBoden = 0;
 			int teilflaechen = 0;
 			double registerCount = 0;
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
+
+			List<double> wallBorders = new List<double>();
+			if (graphical && this.AssociatedRoom != null && this.AssociatedRoom.Walls != null) {
+				double pos = 0;
+				foreach (GraphicalWall wall in this.AssociatedRoom.Walls) {
+					pos += wall.GetWallWidth();
+					wallBorders.Add(pos * 100.0);
+				}
+			}
+
 			foreach (HithermCircuit c in this.circuits) {
 				foreach (HithermRegister register in c.Registers) {
 					teilflaechen++;
 					registerCount += register.RegisterCount;
-
 					// Register
 					if (register.PartNumber != "") {
 						Project.Instance.AddRequiredMaterial(requiredMaterial, register.PartNumber, register.RegisterCount);
@@ -1300,20 +1312,27 @@ namespace Europlan.Common {
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI65", 2);
 					}
 
-					//Wandwinkel
-					int amount = 2;
-					if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL) {
-						amount = 4;
-					}
-					if (ConfigUsePlus) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", amount);
-					} else {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
+					if (!graphical) {
+						//Wandwinkel
+						int amount = 2;
+						if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL) {
+							amount = 4;
+						}
+						if (ConfigUsePlus) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", amount);
+						} else {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", amount);
+						}
 					}
 
-					verbindeLength += register.PipeHorizontal + register.PipeVertical;
+					if (!graphical) {
+						verbindeLength += register.PipeHorizontal + register.PipeVertical;
+					} else {
+						verbindeLength += register.CalculatePipeLengthForGaps();
+					}
 
 				}
+
 				// Bodenwinkel
 				if (ConfigUsePlus) {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", 2);
@@ -1321,7 +1340,28 @@ namespace Europlan.Common {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI68", 2);
 				}
 
+				if (graphical) {
+					verbindeLengthBoden += c.GraphicalAdditionalVl + c.GraphicalAdditionalRl;
+
+					// Verbindeleitungen, Wandwinkel, Eckwinkel
+					int wandwinkel = 0;
+					int eckwinkel = 0;
+					foreach (GraphicalHithermVerbindung link in c.Links) {
+						wandwinkel += link.CalculateRequiredWandwinkel();
+						verbindeLength += link.CalculateLength();
+						eckwinkel += link.CalculateRequiredEckwinkel(wallBorders);
+					}
+					if (ConfigUsePlus) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", wandwinkel);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HR67", eckwinkel);
+					} else {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI66", wandwinkel);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI67", eckwinkel);
+					}
+				}
 			}
+
+			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true);
 
 			// Ovalmuffen
 			if (verbindeLength > 0) {
@@ -1602,11 +1642,15 @@ namespace Europlan.Common {
 			base.ClearGraphicalRepresentation();
 			foreach (HithermCircuit c in this.PlannedCircuits) {
 				c.Links = null;
+				c.GraphicalAdditionalRl = 0;
+				c.GraphicalAdditionalVl = 0;
 				foreach (HithermRegister register in c.Registers) {
 					register.ClearGraphicalRepresentation();
 				}
 			}
+			this.associatedRoom.Walls.Clear();
+			//this.graphicalAdditionalRl = 0;
+			//this.graphicalAdditionalVl = 0;
 		}
 	}
-	
 }

@@ -423,6 +423,7 @@ namespace Europlan.Common {
 					if (calculateRoomArea) {
 						// TODO - unbeheizte flächen...
 						room.Area = (float)Math.Round(Plan.PolygonArea(form.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
+						//room.PickedArea = room.Area;
 					}
 					if (this.ProjectChanged != null) {
 						this.ProjectChanged(this);

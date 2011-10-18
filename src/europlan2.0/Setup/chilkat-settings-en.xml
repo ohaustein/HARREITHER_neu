@@ -19,7 +19,7 @@
         <MainCaption />
         <FinTitle />
         <FinCaption />
-        <ProgressTitle>Europlan 2.0 Setup</ProgressTitle>
+        <ProgressTitle>Europlan 3.0 Setup</ProgressTitle>
         <ProgressCaption>Extracting setup ...</ProgressCaption>
         <PwTitle />
         <PwCaption />

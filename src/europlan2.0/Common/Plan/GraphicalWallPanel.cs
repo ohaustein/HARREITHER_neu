@@ -508,6 +508,7 @@ namespace Europlan.Common {
 					invalidate = invalidate || this.draggingObject.EndDrag(this.draggingAnchor, mousePosInPlan, this.selectedWall, this.room, this.productPlanner == null ? null : this.productPlanner.Product, snapEnabled);
 					this.draggingObject = null;
 					this.draggingAnchor = null;
+					this.productPlanner.OnRecalculationNecessary();
 					// TODO set cursor correctly;
 				}
 			}

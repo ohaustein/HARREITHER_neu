@@ -676,7 +676,7 @@ namespace Europlan.Common {
 					this.SimplifyPolygon(coordsPickedSoFar, true);
 					if (coordsPickedSoFar.Count > 2) {
 						if (this.Mode == PipeProductMode.EVM_ADD_AREA) {
-							double area = Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
+							double area = Math.Round(Math.Abs(new Polygon2D(coordsPickedSoFar).GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0) * this.product.AssociatedRoom.Area / this.product.AssociatedRoom.PickedArea, 2);
 							string message = EuroplanRes.PipeProductPlanner_FlaecheUebernehmenText;
 							message = message.Replace("%FLAECHE%", area.ToString());
 							DialogResult result = MessageBox.Show(message, EuroplanRes.PipeProductPlanner_FlaecheUebernehmenTitel, MessageBoxButtons.YesNo);

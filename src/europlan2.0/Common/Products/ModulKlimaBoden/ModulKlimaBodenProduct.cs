@@ -1115,22 +1115,73 @@ namespace Europlan.Common {
 			}
 		}
 
+		public const string PLACEHOLDER_MK01_02 = "PLACEHOLDER_MK01/02";
+
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
 			// Anbindeleitungen
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, this.RequestedSonstigeVerbindeLeitung);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, graphical ? 0 : this.RequestedSonstigeVerbindeLeitung, !graphical);
 
-			// Modul
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK01", this.RequestedModulesTotal);
+			double graphVerbindung = 0;
+			int graphWinkel = 0;
+			int graphWinkel45 = 0;
+			int graphBoegenKurz = 0;
+			int graphBoegenLang = 0;
 
+			if (!graphical) {
+				// Modul
+				Project.Instance.AddRequiredMaterial(requiredMaterial, ModulKlimaBodenProduct.PLACEHOLDER_MK01_02, this.RequestedModulesTotal);
+			}else {
+				double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+				foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+					foreach (KlimaFlaechenModul modul in c.Row.List) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+					}
+					foreach (KlimaFlaechenModulVerbindung link in c.Links) {
+						if (link.IsKurzerFitting(measure)) {
+							graphBoegenKurz++;
+						} else if (link.IsLangerFitting(measure)) {
+							graphBoegenLang++;
+						} else {
+							graphVerbindung += link.GetLength(measure);
+							if (link.Start != null && link.End != null) {
+								graphWinkel45 += 2;
+							} else {
+								graphWinkel45++;
+							}
+						}
+						graphWinkel += link.GetRequiredWinkel();
+					}
+				}
+			}
+
+			if (graphical) {
+				// 90° Winkel
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", graphWinkel);
+				// Verbindeleitungen
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", graphVerbindung);
+			}
+
+			// 45° Winkel
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", this.PlannedCircuitCount * 2);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", this.RequestedModulesSonstige * 2);
+			if (graphical) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", graphWinkel45);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", this.RequestedModulesSonstige * 2);
+			}
 
 			// Modulbögen
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", this.RequestedModulesDicht - 1);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", this.RequestedModulesModulierend - 1);
+			if (graphical) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", graphBoegenKurz);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", graphBoegenLang);
+			} else {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", this.RequestedModulesDicht - 1);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", this.RequestedModulesModulierend - 1);
+			}
 
 			// Modulstreifen
+			// TODO for graphical!!!
 			double streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", streifen);
 
@@ -1145,8 +1196,12 @@ namespace Europlan.Common {
 			}
 
 			// Rohrführungsplatte
-			if (this.RequestedSonstigeVerbindeLeitung > 0) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(this.RequestedSonstigeVerbindeLeitung / 8));
+			if (graphical) {
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(graphVerbindung / 8));
+			} else {
+				if (this.RequestedSonstigeVerbindeLeitung > 0) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(this.RequestedSonstigeVerbindeLeitung / 8));
+				}
 			}
 
 			// Modulniveauplatten
@@ -1157,9 +1212,9 @@ namespace Europlan.Common {
 		public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
 			// same amount left and right
-			if (requiredMaterial.ContainsKey("MK01")) {
-				int amount = (int)requiredMaterial["MK01"];
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK01", -1 * amount);
+			if (requiredMaterial.ContainsKey(ModulKlimaBodenProduct.PLACEHOLDER_MK01_02)) {
+				int amount = (int)requiredMaterial[ModulKlimaBodenProduct.PLACEHOLDER_MK01_02];
+				Project.Instance.AddRequiredMaterial(requiredMaterial, ModulKlimaBodenProduct.PLACEHOLDER_MK01_02, -1 * amount);
 				if (amount % 2 != 0) {
 					amount++;
 				}

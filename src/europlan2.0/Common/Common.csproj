@@ -489,7 +489,7 @@
     <Compile Include="Products\Hitherm\HithermWallGrid.Designer.cs">
       <DependentUpon>HithermWallGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\ModulDeckeSubArea.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulDeckeSubArea.cs" />
     <Compile Include="Products\Hitherm\PlannedHithermProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -502,7 +502,7 @@
     <Compile Include="Products\ModulKlimaBoden\PlannedModulKlimaBodenProductPanel.Designer.cs">
       <DependentUpon>PlannedModulKlimaBodenProductPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Products\ModulBodenCircuit.cs" />
+    <Compile Include="Products\ModulKlimaBoden\ModulBodenCircuit.cs" />
     <Compile Include="Products\Hitherm\HithermRegister.cs" />
     <Compile Include="Products\Hitherm\HithermCircuit.cs" />
     <Compile Include="Products\KlimaFlaechenModulGrid.cs">
@@ -512,7 +512,7 @@
       <DependentUpon>KlimaFlaechenModulGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Products\KlimaFleachenList.cs" />
-    <Compile Include="Products\ModulDeckeCircuit.cs" />
+    <Compile Include="Products\ModulKlimaDecke\ModulDeckeCircuit.cs" />
     <Compile Include="Products\ModulKlimaDecke\PlannedModulKlimaDeckeProductPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

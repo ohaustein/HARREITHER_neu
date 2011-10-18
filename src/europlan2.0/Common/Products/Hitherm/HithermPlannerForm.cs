@@ -20,6 +20,7 @@ namespace Europlan.Common {
 
 		public HithermPlannerForm(HithermProduct product) {
 			InitializeComponent();
+			this.SetLanguage();
 
 			this.hithermPlanner.HithermProduct = product;
 			this.btnCreateWalls.Enabled = this.graphicalWallPanel.Room != null && this.graphicalWallPanel.Room.RoomCoordinates != null && this.graphicalWallPanel.Room.RoomCoordinates.Count > 2 && this.graphicalWallPanel.Room.AssociatedPlan != null && this.graphicalWallPanel.Room.AssociatedPlan.Measure.HasValue;
@@ -31,7 +32,10 @@ namespace Europlan.Common {
 						
 			UpdateDefineWallsPanelButtons(null);
 			ApplyButtonCheckedState(this.btnPick);
-			this.SetLanguage();
+
+			this.UpdateAdditionalVlRlForCircuit();
+			this.CalculateAndUpdate();
+
 			this.connectionPlanner.Product = product;
 		}
 
@@ -158,6 +162,13 @@ namespace Europlan.Common {
 			this.lblAvailableAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
 			this.lblRestAreaTitle.Text = EuroplanRes.HithermPlannerForm_UebrigeFlaeche;
 			this.lblRestAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
+
+			this.groupBox8.Text = EuroplanRes.HithermPlannerForm_AnbindeleitungImBodenImRaum;
+			this.lblVlUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblRlUnit.Text = EuroplanRes.Unit_Meter;
+			this.lblVl.Text = EuroplanRes.HithermPlannerForm_VL;
+			this.lblRl.Text = EuroplanRes.HithermPlannerForm_RL;
+			this.lblHk.Text = EuroplanRes.HithermPlannerForm_HK;
 		}
 
 		private void HithermPlannerForm_Load(object sender, EventArgs e) {
@@ -1146,6 +1157,7 @@ namespace Europlan.Common {
 				}
 				this.graphicalWallPanel.SelectedObject = null;
 				this.graphicalWallPanel.InvalidateGraphics();
+				this.hithermPlanner.OnRecalculationNecessary();
 			}
 		}
 
@@ -1183,7 +1195,46 @@ namespace Europlan.Common {
 			CalculateAndUpdate();
 		}
 
+		private class HithermCircuitItem {
+			private HithermCircuit circuit = null;
+
+			public HithermCircuitItem(HithermCircuit circuit) {
+				this.circuit = circuit;
+			}
+
+			public HithermCircuit Circuit {
+				get { return this.circuit; }
+			}
+
+			public override string ToString() {
+				return (this.circuit != null) ? this.circuit.HkLabelNr.ToString() : "";
+			}
+
+			public override bool Equals(object obj) {
+				return (obj == null || !(obj is HithermCircuitItem)) ? false : this.circuit == (obj as HithermCircuitItem).circuit;
+			}
+
+			public override int GetHashCode() {
+				return (circuit == null) ? 0 : circuit.GetHashCode();
+			}
+		}
+
 		private void CalculateAndUpdate() {
+			HithermCircuitItem selectedItem = this.cmbHk.SelectedItem as HithermCircuitItem;
+			this.cmbHk.Items.Clear();
+			foreach (HithermCircuit c in this.hithermPlanner.HithermProduct.PlannedCircuits) {
+				this.cmbHk.Items.Add(new HithermCircuitItem(c));
+			}
+			if (selectedItem != null && cmbHk.Items.Contains(selectedItem)) {
+				this.cmbHk.SelectedItem = selectedItem;
+			} else {
+				if (cmbHk.Items.Count > 0) {
+					this.cmbHk.SelectedItem = this.cmbHk.Items[0];
+				} else {
+					this.cmbHk.SelectedItem = null;
+				}
+			}
+
 			HithermProduct product = this.hithermPlanner.HithermProduct;
 			PlannedProduct pp = Project.Instance.GetPlannedProduct(product);
 			product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, false);
@@ -1774,6 +1825,44 @@ namespace Europlan.Common {
 			this.graphicalWallPanel.Visible = false;
 			this.panelTop.Visible = false;
 			this.planPanel.Visible = true;
+		}
+
+		private int ignoreVlRlChange = 0;
+
+		private void numVl_ValueChanged(object sender, EventArgs e) {
+			if (ignoreVlRlChange == 0) {
+				if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCircuitItem) {
+					(this.cmbHk.SelectedItem as HithermCircuitItem).Circuit.GraphicalAdditionalVl = (double)this.numVl.Value;
+				}
+			}
+		}
+
+		private void numRl_ValueChanged(object sender, EventArgs e) {
+			if (ignoreVlRlChange == 0) {
+				if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCircuitItem) {
+					(this.cmbHk.SelectedItem as HithermCircuitItem).Circuit.GraphicalAdditionalRl = (double)this.numRl.Value;
+				}
+			}
+		}
+
+		private void cmbHk_SelectedValueChanged(object sender, EventArgs e) {
+			this.UpdateAdditionalVlRlForCircuit();
+		}
+
+		private void UpdateAdditionalVlRlForCircuit() {
+			ignoreVlRlChange++;
+			if (this.cmbHk.SelectedItem != null && this.cmbHk.SelectedItem is HithermCircuitItem) {
+				this.numVl.Enabled = true;
+				this.numRl.Enabled = true;
+				this.numVl.Value = (decimal)(this.cmbHk.SelectedItem as HithermCircuitItem).Circuit.GraphicalAdditionalVl;
+				this.numRl.Value = (decimal)(this.cmbHk.SelectedItem as HithermCircuitItem).Circuit.GraphicalAdditionalRl;
+			} else {
+				this.numVl.Enabled = false;
+				this.numRl.Enabled = false;
+				this.numVl.Text = "";
+				this.numRl.Text = "";
+			}
+			ignoreVlRlChange--;
 		}
 	}
 }

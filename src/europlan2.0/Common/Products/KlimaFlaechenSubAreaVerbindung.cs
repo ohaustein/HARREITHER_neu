@@ -716,5 +716,56 @@ namespace Europlan.Common {
 				//return (this.End == null || this.End.Count == 0);
 			}
 		}
+
+		#region Graphical Materials
+		public int GetRequiredWinkel(double measure) {
+			int result = 0;
+			if (this.vertices != null) {
+				foreach (List<Point2D> vs in this.vertices) {
+					if (vs.Count > 2) {
+						Vector2D lastVector = vs[1] - vs[0];
+						Vector2D curVector;
+						double angle;
+						for (int i = 1; i < vs.Count - 1; i++) {
+							Point2D center = vs[i];
+							bool addWinkel = true;
+							foreach (List<Point2D> vs2 in this.vertices) {
+								if (vs2 != vs && vs2.Count > 0) {
+									double startDist = (vs2[0] - center).GetLength() / measure;
+									double endDist = (vs2[vs2.Count - 1] - center).GetLength() / measure;
+									if (startDist < 0.01 || endDist < 0.01) {
+										addWinkel = false;
+										break;
+									}
+								}
+							}
+							curVector = vs[i + 1] - vs[i];
+							if (addWinkel) {
+								angle = (Math.Atan2(curVector.Y, curVector.X) - Math.Atan2(-lastVector.Y, -lastVector.X)) * 180.0 / Math.PI;
+								if (angle < 0) {
+									angle += 360.0;
+								}
+								if (angle > 180.0) {
+									angle = 360.0 - angle;
+								}
+								/*if (angle <= 112.5) {
+									result[0]++;
+								} else*/
+								if (angle <= 157.5) {
+									result++;
+								}
+							}
+							lastVector = curVector;
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		public int GetRequiredTStuecke() {
+			return this.vertices.Count - 1;
+		}
+		#endregion Graphical Materials
 	}
 }

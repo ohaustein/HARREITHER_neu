@@ -1099,5 +1099,13 @@ namespace Europlan.Common {
 				return lastGap;
 			}
 		}
+
+		public double CalculatePipeLengthForGaps() {
+			double length = 0;
+			foreach (double gap in this.gaps.Values) {
+				length += gap;
+			}
+			return length * 2;
+		}
 	}
 }

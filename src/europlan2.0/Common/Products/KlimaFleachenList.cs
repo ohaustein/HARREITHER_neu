@@ -80,5 +80,15 @@ namespace Europlan.Common {
 		public int CountModules() {
 			return this.list.Count;
 		}
+
+		#region Graphical Materials
+		public int GetRequiredWinkel() {
+			int result = 0;
+			foreach (KlimaFlaechenModulVerbindung link in this.Links) {
+				result += link.GetRequiredWinkel();
+			}
+			return result;
+		}
+		#endregion Graphical Materials
 	}
 }

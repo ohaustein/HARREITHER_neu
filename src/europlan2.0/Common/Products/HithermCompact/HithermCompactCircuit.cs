@@ -10,8 +10,21 @@ namespace Europlan.Common {
 		private List<HithermCompactRegister> registers = new List<HithermCompactRegister>();
 		private List<GraphicalHithermCompactVerbindung> links = new List<GraphicalHithermCompactVerbindung>();
 
+		private double graphicalAdditionalVl = 0;
+		private double graphicalAdditionalRl = 0;
+
 		public HithermCompactCircuit() {
 
+		}
+
+		public double GraphicalAdditionalVl {
+			get { return this.graphicalAdditionalVl; }
+			set { this.graphicalAdditionalVl = value; }
+		}
+
+		public double GraphicalAdditionalRl {
+			get { return this.graphicalAdditionalRl; }
+			set { this.graphicalAdditionalRl = value; }
 		}
 
 		public List<HithermCompactRegister> Registers {

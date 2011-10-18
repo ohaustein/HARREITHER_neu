@@ -1478,7 +1478,7 @@ namespace Europlan.Common {
 				return rtn;
 			}
 		}
-		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm) {
+		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm, bool addWinkelForAdditional21mm) {
 			// Euroval Anbindung
 			// 21mm Anbindung
 			/*double pipeEurovalLength = 0;*/
@@ -1575,10 +1575,14 @@ namespace Europlan.Common {
 			}
 
 			// Winkel 90°
+			double winkelPipe = pipe21mm;
+			if (!addWinkelForAdditional21mm) {
+				winkelPipe -= additional21mm;
+			}
 			if (usePlus) {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR56", pipe21mm * 0.8);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR56", winkelPipe * 0.8);
 			} else {
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", pipe21mm * 0.8);
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", winkelPipe * 0.8);
 			}
 
 			// Winkel 45°

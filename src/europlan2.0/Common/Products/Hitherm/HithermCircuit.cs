@@ -10,8 +10,21 @@ namespace Europlan.Common {
 		private List<HithermRegister> registers = new List<HithermRegister>();
 		private List<GraphicalHithermVerbindung> links = new List<GraphicalHithermVerbindung>();
 
+		private double graphicalAdditionalVl = 0;
+		private double graphicalAdditionalRl = 0;
+
 		public HithermCircuit() {
 
+		}
+
+		public double GraphicalAdditionalVl {
+			get { return this.graphicalAdditionalVl; }
+			set { this.graphicalAdditionalVl = value; }
+		}
+
+		public double GraphicalAdditionalRl {
+			get { return this.graphicalAdditionalRl; }
+			set { this.graphicalAdditionalRl = value; }
 		}
 
 		public List<HithermRegister> Registers {
@@ -164,7 +177,7 @@ namespace Europlan.Common {
 				foreach (HithermRegister reg in this.registers) {
 					length += reg.PipeVertical + reg.PipeHorizontal;
 				}
-				return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal + length;
+				return this.PipeLengthWithoutConnections + this.vorlaufTotal + this.ruecklaufTotal + length + this.graphicalAdditionalVl + this.graphicalAdditionalRl;
 			}
 		}
 
