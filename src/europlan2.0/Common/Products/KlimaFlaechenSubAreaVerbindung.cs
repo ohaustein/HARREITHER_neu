@@ -20,6 +20,7 @@ namespace Europlan.Common {
 		private List<int> rowEndIndices = null;
 		private List<int> moduleStartIndices = null;
 		private List<int> moduleEndIndices = null;
+		private List<int> flexibleConnections = null;
 		private Circuit circuit;
 		private int circuitIndex = -1;
 		private PlannedProduct product;
@@ -718,6 +719,26 @@ namespace Europlan.Common {
 		}
 
 		#region Graphical Materials
+		public double GetLength(double measure) {
+			if (measure == 0 || this.vertices == null) {
+				return 0;
+			}
+			
+			double length = 0;
+			foreach (List<Point2D> vs in this.vertices) {
+				for (int i = 1; i < vs.Count; i++) {
+					length += (vs[i - 1] - vs[i]).GetLength();
+				}
+			}
+
+			length = length / measure;
+			length -= (this.vertices.Count + 1) * KlimaFlaechenModul.CONNECTION_DISTANCE;
+			if (length < 0) {
+				length = 0;
+			}
+			return length;
+		}
+
 		public int GetRequiredWinkel(double measure) {
 			int result = 0;
 			if (this.vertices != null) {

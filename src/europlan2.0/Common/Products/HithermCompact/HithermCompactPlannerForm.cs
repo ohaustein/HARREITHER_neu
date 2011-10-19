@@ -1629,7 +1629,7 @@ namespace Europlan.Common {
 			if (room != null && room.Walls.Count > 0) {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.CheckPathExists = true;
-				dialog.CreatePrompt = true;
+				dialog.CreatePrompt = false;
 				dialog.OverwritePrompt = true;
 				dialog.InitialDirectory = Path.GetDirectoryName(Project.Instance.ProjectFileName);
 				string productName = "";

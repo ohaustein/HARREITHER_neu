@@ -682,7 +682,12 @@ namespace Europlan.Common {
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
 				double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
 
-				heatLoadRoom += vorlaufHeatLoad + ruecklaufHeatLoad;
+				if (!double.IsNaN(vorlaufHeatLoad)) {
+					heatLoadRoom += vorlaufHeatLoad;
+				}
+				if (!double.IsNaN(ruecklaufHeatLoad)) {
+					heatLoadRoom += ruecklaufHeatLoad;
+				}
 				qH2o += vorlaufHeatLoad + vorlaufQU + ruecklaufHeatLoad + ruecklaufQU;
 			}
 			if (heatLoadRoom.Equals(double.NaN)) {

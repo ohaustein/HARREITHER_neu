@@ -1285,16 +1285,97 @@ namespace Europlan.Common.Products {
 		private void cmbSelectedModuleOrientation_SelectedIndexChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
 				if (ignoreModuleOrientationChange == 0) {
+					List<KlimaFlaechenModulVerbindung> linksToUpdate = new List<KlimaFlaechenModulVerbindung>();
+					Dictionary<KlimaFlaechenModulVerbindung, KlimaFlaechenList> linksToDelete = new Dictionary<KlimaFlaechenModulVerbindung, KlimaFlaechenList>();
+					Dictionary<KlimaFlaechenSubAreaVerbindung, ModulDeckeCircuit> saLinksToDelete = new Dictionary<KlimaFlaechenSubAreaVerbindung, ModulDeckeCircuit>();
 					this.changed = true;
+					int tmp;
 					List<KlimaFlaechenModul> modules = this.modulKlimaDeckePlanner.GetAllSelectedModules();
+					ModulDeckeCircuit c;
+					bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+					double measure = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					KlimaFlaechenModul next, prev;
+					KlimaFlaechenModulVerbindung link;
+					KlimaFlaechenSubAreaVerbindung saLink;
+					ModulDeckeSubArea sa;
+					KlimaFlaechenList row;
 					if (cmbSelectedModuleOrientation.SelectedIndex == 2) {
 						foreach (KlimaFlaechenModul modul in modules) {
 							modul.Orientation = (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+							c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(modul, out tmp);
+							link = modul.GetOutputLink(c, invertYAxis);
+							next = (link == null ? null : link.End);
+							if (next != null) {
+								if (modules.Contains(next) && link.Vertices.Count == 2) {
+									if (!linksToUpdate.Contains(link)) {
+										linksToUpdate.Add(link);
+									}
+								} else if (!linksToDelete.ContainsKey(link)) {
+									sa = c.GetSubareaForModul(modul, out tmp);
+									row = sa.GetRowForModul(modul, out tmp);
+									linksToDelete.Add(link, row);
+								}
+							}
+							link = modul.GetInputLink(c, invertYAxis);
+							prev = (link == null ? null : link.Start);
+							if (prev != null) {
+								if (modules.Contains(prev) && link.Vertices.Count == 2) {
+									if (!linksToUpdate.Contains(link)) {
+										linksToUpdate.Add(link);
+									}
+								} else if (!linksToDelete.ContainsKey(link)) {
+									sa = c.GetSubareaForModul(modul, out tmp);
+									row = sa.GetRowForModul(modul, out tmp);
+									linksToDelete.Add(link, row);
+								}
+							}
+							saLink = modul.GetSubareaOutputLink(c, invertYAxis);
+							if (saLink != null && !saLinksToDelete.ContainsKey(saLink)) {
+								saLinksToDelete.Add(saLink, c);
+							}
+							saLink = modul.GetSubareaInputLink(c, invertYAxis);
+							if (saLink != null && !saLinksToDelete.ContainsKey(saLink)) {
+								saLinksToDelete.Add(saLink, c);
+							}
 						}
 					} else if (this.cmbSelectedModuleOrientation.SelectedItem is KlimaFlaechenModul.ModulOrientationEnum) {
 						foreach (KlimaFlaechenModul modul in modules) {
+							bool orientationChanged = (modul.Orientation != (KlimaFlaechenModul.ModulOrientationEnum)this.cmbSelectedModuleOrientation.SelectedItem);
 							modul.Orientation = (KlimaFlaechenModul.ModulOrientationEnum)this.cmbSelectedModuleOrientation.SelectedItem;
+							if (orientationChanged) {
+								c = this.modulKlimaDeckePlanner.Product.GetCircuitForModul(modul, out tmp);
+								link = modul.GetOutputLink(c, invertYAxis);
+								if (link != null && !linksToDelete.ContainsKey(link)) {
+									sa = c.GetSubareaForModul(modul, out tmp);
+									row = sa.GetRowForModul(modul, out tmp);
+									linksToDelete.Add(link, row);
+								}
+								link = modul.GetInputLink(c, invertYAxis);
+								if (link != null && !linksToDelete.ContainsKey(link)) {
+									sa = c.GetSubareaForModul(modul, out tmp);
+									row = sa.GetRowForModul(modul, out tmp);
+									linksToDelete.Add(link, row);
+								}
+								saLink = modul.GetSubareaOutputLink(c, invertYAxis);
+								if (saLink != null && !saLinksToDelete.ContainsKey(saLink)) {
+									saLinksToDelete.Add(saLink, c);
+								}
+								saLink = modul.GetSubareaInputLink(c, invertYAxis);
+								if (saLink != null && !saLinksToDelete.ContainsKey(saLink)) {
+									saLinksToDelete.Add(saLink, c);
+								}
+							}
 						}
+					}
+					foreach (KeyValuePair<KlimaFlaechenModulVerbindung, KlimaFlaechenList> linkToDelete in linksToDelete) {
+						linkToDelete.Value.Links.Remove(linkToDelete.Key);
+					}
+					foreach (KlimaFlaechenModulVerbindung linkToUpdate in linksToUpdate) {
+						linkToUpdate.Vertices[0] = linkToUpdate.Start.GetOutputConnection(measure, invertYAxis, this.modulKlimaDeckePlanner.Product);
+						linkToUpdate.Vertices[1] = linkToUpdate.End.GetInputConnection(measure, invertYAxis, this.modulKlimaDeckePlanner.Product);
+					}
+					foreach (KeyValuePair<KlimaFlaechenSubAreaVerbindung, ModulDeckeCircuit> saLinkToDelete in saLinksToDelete) {
+						saLinkToDelete.Value.Links.Remove(saLinkToDelete.Key);
 					}
 					this.UpdateSelectedModules();
 					this.planPanel.InvalidateGraphics();

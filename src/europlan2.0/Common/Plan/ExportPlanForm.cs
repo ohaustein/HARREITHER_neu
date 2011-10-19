@@ -173,7 +173,7 @@ namespace Europlan.Common {
 		private void btnSaveAs_Click(object sender, EventArgs e) {
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.CheckPathExists = true;
-			dialog.CreatePrompt = true;
+			dialog.CreatePrompt = false;
 			dialog.OverwritePrompt = true;
 			dialog.InitialDirectory = Path.GetDirectoryName(Project.Instance.ProjectFileName);
 			if (this.plan is CadPlan) {

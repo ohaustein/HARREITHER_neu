@@ -1135,7 +1135,231 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
-			double additional21mm = 0;
+
+			if (!graphical) {
+				double additional21mm = 0;
+				int nrOfElements = 0;
+				int nrOfOtherElements = 0;
+				int rows = 0;
+				int subAreas = 0;
+				double modulArea = 0;
+				foreach (ModulDeckeCircuit c in this.circuits) {
+					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+						subAreas++;
+						foreach (KlimaFlaechenList row in subArea.Rows) {
+							rows++;
+							additional21mm += row.LengthVerbindeleitungen;
+							additional21mm += 1.4;
+							foreach (KlimaFlaechenModul modul in row.List) {
+								// Modul
+								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+								nrOfElements++;
+								modulArea += modul.GetHeatArea(false);
+								if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
+									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
+									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
+									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D ||
+									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
+									nrOfOtherElements++;
+								}
+							}
+						}
+					}
+				}
+
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
+
+				// Muffe
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+
+				// T-Stück
+				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+				if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL) {
+					// Winkel 90°
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
+
+					// Holzstaffel
+					if (modulArea > 0) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
+					}
+				} else {
+					// Winkel 90°
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + subAreas) * 2);
+
+					// Einhängebügel
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+					if (nrOfOtherElements > 0) {
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
+					}
+				}
+
+				// Winkel 45° in Wand
+				if (this.Type == ProductType.WH) {
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
+				}
+			} else {
+				bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
+				bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
+				bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
+				bool serie30 = ((constrCProfil || constrHolzstaffeln) && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) == 0.3);
+				bool serie40 = ((constrCProfil || constrHolzstaffeln) && !serie30);
+				bool raster105_45 = (constrKassetten && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450);
+				bool raster60 = (constrKassetten && !raster105_45);
+
+				bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
+				double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+
+				int subAreas = 0;
+				int rows = 0;
+				int modules = 0;
+				int dichteVerbindung = 0;
+				int nichtDichteVerbindung = 0;
+				double verbindeLength = 0;
+				int winkel90 = 0;
+
+				foreach (ModulDeckeCircuit c in this.circuits) {
+					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
+						subAreas++;
+						foreach (KlimaFlaechenList row in subArea.Rows) {
+							rows++;
+							foreach (KlimaFlaechenModul modul in row.List) {
+								// Modul
+								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+								modules++;
+							}
+							foreach (KlimaFlaechenModulVerbindung link in row.Links) {
+								verbindeLength += link.GetLength(measure);
+								winkel90 += link.GetRequiredWinkel();
+								if (link.IsKurzerFitting(measure)) {
+									dichteVerbindung++;
+								} else {
+									nichtDichteVerbindung++;
+								}
+							}
+						}
+					}
+					foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
+						verbindeLength += link.GetLength(measure);
+						winkel90 += link.GetRequiredWinkel(measure);
+					}
+				}
+
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, true);
+
+				if (constrCProfil) {
+					if (serie30) {
+						// Einhängebügel
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+
+						// Winkel 90°
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Muffe
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
+					} else if (serie40) {
+						// Einhängebügel
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+
+						// Winkel 90°
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Winkel 45° + Verbindungstück Rohr
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
+					}
+				} else if (constrHolzstaffeln) {
+					if (serie30) {
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Muffe
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
+
+						// Holzstaffeln
+						ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
+					} else if (serie40) {
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Winkel 45° + Verbindungstück Rohr
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
+
+						// Holzstaffeln
+						ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
+					}
+				} else if (constrKassetten) {
+					int lanes = (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).PossibleLanes.Count;
+					List<KlimaFlaechenModul> modulesInLane;
+					int sharedBuegel = 0;
+					for (int i = 0; i < lanes; i++) {
+						modulesInLane = this.GetModulesInLane(i);
+						foreach (KlimaFlaechenModul m in modulesInLane) {
+							if (this.GetModuleAtPos(i + 1, m.GraphPositionInLan, measure, 0.05) != null) {
+								sharedBuegel += 2;
+							}
+						}
+					}
+
+					if (raster105_45) {
+						// TODO flexible verbindungen berücksichtigen!!!
+
+						// TODO Einhängebügel berücksichtigen
+
+						// Winkel 90°
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Verbindung der Module: 2 * Winkel 45° + 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
+					} else if (raster60) {
+						// TODO flexible verbindungen berücksichtigen!!!
+
+						// Einhängebügel
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", modules * 4 - sharedBuegel);
+
+						// Winkel 90°
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+
+						// T-Stück
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+						// Verbindung der Module: (2 * Winkel 45° + ???) 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
+						//Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
+					}
+				}
+			}
+			
+
+
+
+
+
+
+
+
+
+
+
+
+			/*double additional21mm = 0;
 			int nrOfElements = 0;
 			int nrOfOtherElements = 0;
 			int rows = 0;
@@ -1144,6 +1368,16 @@ namespace Europlan.Common {
 			int flexibleRows = 0;
 			bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
 			int tStuecke = 0;
+
+			bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
+			bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
+			bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
+			bool serie30 = ((constrCProfil || constrHolzstaffeln) && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) == 0.3);
+			bool serie40 = ((constrCProfil || constrHolzstaffeln) && !serie30);
+			bool raster105_45 = (constrKassetten && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450);
+			bool raster60 = (constrKassetten && !raster105_45);
+
+
 			foreach (ModulDeckeCircuit c in this.circuits) {
 				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
 					subAreas++;
@@ -1242,13 +1476,8 @@ namespace Europlan.Common {
 
 				if (serie40) {
 					// Winkel 45° bei Serie 40
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", (nrOfElements /*- kurzeFittinge - langeFittinge*/) * 2);
+					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
 
-					/*// Kurze Fittinge bei Serie 40
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK10", 0);
-
-					// Lange Fittinge bei Serie 40
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK11", 0);*/
 				}
 			} else {
 				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
@@ -1283,7 +1512,7 @@ namespace Europlan.Common {
 				if (this.Type == ProductType.WH) {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
 				}
-			}
+			}*/
 		}
 
 		public override double Dichte {
@@ -1856,6 +2085,23 @@ namespace Europlan.Common {
 					}
 				}
 			}
+		}
+
+		public KlimaFlaechenModul GetModuleAtPos(int lane, double posInLane, double measure, double tolerance) {
+			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
+				foreach (ModulDeckeSubArea sa in c.SubAreas) {
+					foreach (KlimaFlaechenList row in sa.Rows) {
+						foreach (KlimaFlaechenModul m in row.List) {
+							if (m.GraphLane == lane) {
+								if (Math.Abs(posInLane - m.GraphPositionInLan) / measure < tolerance) {
+									return m;
+								}
+							}
+						}
+					}
+				}
+			}
+			return null;
 		}
 	}
 
