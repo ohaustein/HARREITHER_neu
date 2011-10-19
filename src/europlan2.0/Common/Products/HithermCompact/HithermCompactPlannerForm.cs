@@ -1674,6 +1674,7 @@ namespace Europlan.Common {
 					font = new Font("Arial", 10);
 					SizeF size = g.MeasureString("1m", font);
 					g.DrawString("1m", font, Brushes.Black, new PointF(100 + border + 5, (float)height - 15 - (float)(size.Height / 2.0)));
+					g.DrawString(EuroplanRes.PlanExport_Hinweis, font, Brushes.Black, new PointF(100 + border + 5 + size.Width + 5, (float)height - 15 - (float)(size.Height / 2.0)));
 
 					Matrix matrix = new Matrix();
 					matrix.Scale(1.0f, -1.0f);

@@ -14557,6 +14557,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hinweis: Prinzipskizze, kein Ausführungsplan.
+        /// </summary>
+        internal static string PlanExport_Hinweis {
+            get {
+                return ResourceManager.GetString("PlanExport_Hinweis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Für dieses Produkt wurden bereits grafische Anbindeleitungen verplant, wenn Sie den Verteileranschluss ändern werden die grafischen Anbindeleitungen gelöscht.
         /// </summary>
         internal static string PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText {

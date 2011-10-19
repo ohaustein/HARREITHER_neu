@@ -7042,4 +7042,7 @@ Compact
   <data name="HithermPlanner_VerbindungNichtMoeglichTitel" xml:space="preserve">
     <value>Verbindung nicht möglich</value>
   </data>
+  <data name="PlanExport_Hinweis" xml:space="preserve">
+    <value>Hinweis: Prinzipskizze, kein Ausführungsplan</value>
+  </data>
 </root>
