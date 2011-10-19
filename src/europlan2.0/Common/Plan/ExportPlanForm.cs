@@ -293,6 +293,10 @@ namespace Europlan.Common {
 						connectionDrawer.Paint(g, Matrix4D.Identity);
 					}
 				}
+				Font warningFont = new Font("Arial", 10);
+				SizeF warningSize = g.MeasureString(EuroplanRes.PlanExport_Hinweis, warningFont);
+				g.DrawString(EuroplanRes.PlanExport_Hinweis, warningFont, Brushes.Black, new PointF(5, image.Height - 5 - warningSize.Height));
+				
 				ImageFormat format = null;
 				string extension = Path.GetExtension(txtPath.Text);
 				if (extension.ToLower() == ".jpg") {
