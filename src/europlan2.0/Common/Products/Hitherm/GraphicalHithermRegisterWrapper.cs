@@ -120,14 +120,14 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false/*, this == selectedObject*/);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false, export/*, this == selectedObject*/);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false, false/*, false*/);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false, false, false/*, false*/);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error/*, bool drawAnchors*/) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error, bool export/*, bool drawAnchors*/) {
 			highlightConnections = false;
 			if (register == null) {
 				return;
@@ -144,7 +144,13 @@ namespace Europlan.Common {
 				bInput = new SolidBrush(Color.FromArgb(63, Color.Red));
 				bOutput = new SolidBrush(Color.FromArgb(63, Color.Blue));
 			}
+
+			float width = 0.0f;
+			float height = 0.0f;
+
 			if (register.Orientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
+				width = (float)register.RegisterBreiteForDrawing;
+				height = register.RegisterHoehe;
 				float x = (float)(xOffset + register.GraphPosX);
 				float y1 = (float)(yOffset + register.GraphPosY);
 				float y2 = (float)(yOffset + register.GraphPosY + register.RegisterHoehe - 2);
@@ -204,6 +210,8 @@ namespace Europlan.Common {
 					}
 				}
 			} else {
+				height = (float)register.RegisterBreiteForDrawing;
+				width = register.RegisterHoehe;
 				float x1 = (float)(xOffset + register.GraphPosX);
 				float x2 = (float)(xOffset + register.GraphPosX + register.RegisterHoehe - 2);
 				float y = (float)(yOffset + register.GraphPosY);
@@ -261,6 +269,26 @@ namespace Europlan.Common {
 					}
 				}
 			}
+
+			if (export) {
+				Font font = new Font("Arial", 8);
+				string type = new HithermRegister.RegisterOrientationEnumConverter().ConvertToString(register.RegisterType);
+				SizeF size = g.MeasureString(type, font);
+				float x, y;
+				x = (float)(xOffset + register.GraphPosX + (width / 2) - (size.Width / 2));
+				y = (float)(yOffset + register.GraphPosY + (height / 2) + (size.Height / 2));
+				
+				Matrix oldTransform = g.Transform;
+				Matrix textTransform = oldTransform.Clone();
+				textTransform.Translate(0, -y);
+				textTransform.Scale(1, -1);
+				textTransform.Translate(0, -y);
+				g.Transform = textTransform;
+				g.FillRectangle(Brushes.White, x - 1, -(y + 1), size.Width + 1, size.Height + 1);
+				g.DrawString(type, font, Brushes.Black, x, -y);
+				g.Transform = oldTransform;
+			}
+
 			/*if (drawAnchors) {
 				Region oldClip = g.Clip;
 				g.ResetClip();

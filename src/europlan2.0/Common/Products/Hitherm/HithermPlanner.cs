@@ -150,11 +150,11 @@ namespace Europlan.Common {
 			get { return null; }
 		}
 
-		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale) {
-			this.PaintAfterPlanPannel(e.Graphics, mousePositionInPlan, mousePositionInControl, scale);
+		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale, bool export) {
+			this.PaintAfterPlanPannel(e.Graphics, mousePositionInPlan, mousePositionInControl, scale, export);
 		}
 
-		public void PaintAfterPlanPannel(System.Drawing.Graphics g, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale) {
+		public void PaintAfterPlanPannel(System.Drawing.Graphics g, WW.Math.Point2D mousePositionInPlan, System.Drawing.Point mousePositionInControl, double scale, bool export) {
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && dragStart != null) {
 				float x = (float)(this.dragStart.Value.X < mousePositionInPlan.X ? this.dragStart.Value.X : this.dragEnd.X);
 				float width = (float)Math.Abs(this.dragStart.Value.X - this.dragEnd.X);
@@ -164,7 +164,7 @@ namespace Europlan.Common {
 				Pen pen = new Pen(brush, (float)(1.0 / scale));
 				g.DrawRectangle(pen, x, y, width, height);
 				if (this.newRegister != null) {
-					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale, true, !this.newRegisterOk/*, false*/);
+					this.newRegister.PaintObject(g, newRegisterWallXOffset, newRegisterWallYOffset, Color.Green, scale, true, !this.newRegisterOk, export/*, false*/);
 				}
 			}
 			foreach (HithermCircuit c in this.product.PlannedCircuits) {

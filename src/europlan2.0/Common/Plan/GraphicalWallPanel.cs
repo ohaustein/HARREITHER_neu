@@ -227,7 +227,7 @@ namespace Europlan.Common {
 				e.Graphics.Transform = paintMatrix;
 				Point pointInCtrl = this.PointToClient(MousePosition);
 				Point2D pointInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(pointInCtrl.X, pointInCtrl.Y));
-				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl, this.Scale);
+				this.productPlanner.PaintAfterPlanPannel(e, pointInPlan, pointInCtrl, this.Scale, false);
 			}
 
 			if (this.newObstacle != null && this.newObstacleWall != null) {

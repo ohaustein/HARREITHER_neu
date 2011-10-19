@@ -60,11 +60,11 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, false);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, false, export);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false);
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, bool export) {
+			this.PaintObject(g, xOffset, yOffset, color, 1, false, export);
 		}
 
 		private const float parapet_distLeft = 3.5f;
@@ -82,7 +82,7 @@ namespace Europlan.Common {
 		private const float standard_platteBottom = 6.5f;
 		private const float standard_totalWidth = 62.5f;
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool error) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool error, bool export) {
 			if (register == null) {
 				return;
 			}
@@ -101,7 +101,14 @@ namespace Europlan.Common {
 				bInput = new SolidBrush(Color.FromArgb(63, Color.Red));
 				bOutput = new SolidBrush(Color.FromArgb(63, Color.Blue));
 			}
+
+			float w = 0.0f;
+			float h = 0.0f;
+
 			if (register.IsParapet) {
+				w = (float)Width;
+				h = (float)Height;
+
 				float x, x1, x2, y, y1, y2;
 				x1 = (float)(xOffset + register.GraphPosX + parapet_distLeft + parapet_pipeWidth + parapet_distPipeToRegister);
 				x2 = (float)(xOffset + register.GraphPosX + this.Width - parapet_distRight - parapet_registerPipeWidth);
@@ -154,6 +161,8 @@ namespace Europlan.Common {
 					g.DrawRectangle(pOutput, (float)(xOffset + register.GraphPosX + parapet_distLeft), (float)(yOffset + register.GraphPosY), parapet_pipeWidth, parapet_pipeWidth);
 				}
 			} else {
+				h = (float)Height;
+				w = (float)Width;
 				for (int i = 0; i < register.RegisterCount; i++) {
 					float x, x1, x2, y, y1, y2;
 					x1 = (float)(xOffset + register.GraphPosX + i * standard_totalWidth + standard_distLeft + standard_pipeWidth + standard_distPipeToRegister);
@@ -230,6 +239,24 @@ namespace Europlan.Common {
 					}
 				}
 				g.DrawRectangle(plattePen, (float)(xOffset + register.GraphPosX), (float)(yOffset + register.GraphPosY + standard_platteBottom), (float)(this.Width), (float)(this.Height - standard_platteBottom));
+			}
+			if (export) {
+				Font font = new Font("Arial", 8);
+				string type = new HithermRegister.RegisterOrientationEnumConverter().ConvertToString(register.RegisterType);
+				SizeF size = g.MeasureString(type, font);
+				float x, y;
+				x = (float)(xOffset + register.GraphPosX + (w / 2) - (size.Width / 2));
+				y = (float)(yOffset + register.GraphPosY + (h / 2) + (size.Height / 2));
+
+				Matrix oldTransform = g.Transform;
+				Matrix textTransform = oldTransform.Clone();
+				textTransform.Translate(0, -y);
+				textTransform.Scale(1, -1);
+				textTransform.Translate(0, -y);
+				g.Transform = textTransform;
+				g.FillRectangle(Brushes.White, x - 1, -(y + 1), size.Width + 1, size.Height + 1);
+				g.DrawString(type, font, Brushes.Black, x, -y);
+				g.Transform = oldTransform;
 			}
 		}
 

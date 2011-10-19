@@ -31,6 +31,7 @@ namespace Europlan.Common {
 		private bool showGlobalHelpLines = true;
 		private Room assiociatedRoom = null;
 		private List<GraphicalWallSchraege> schraegen = null;
+		private int index = 0;
 
 		public GraphicalWall() {
 			//GraphicalDoor door = new GraphicalDoor();
@@ -125,6 +126,12 @@ namespace Europlan.Common {
 		public string WallId {
 			get { return wallId; }
 			set { wallId = value; }
+		}
+
+		[XmlIgnore]
+		public int Index {
+			get { return index; }
+			set { index = value; }
 		}
 
 		public List<double> HelpLines {
@@ -287,6 +294,18 @@ namespace Europlan.Common {
 			if (this.DachSchraege != null) {
 				this.DachSchraege.PaintObject(g, xOffset + this.GetDachschraegeXOffset(), yOffset + this.GetWallHeight() * 100, selectedObject, selectedWall, scale, export);
 			}
+
+			if (export) {
+				Font font = new Font("Arial", 10);
+				SizeF size = g.MeasureString(index.ToString(), font);
+				Matrix oldTransform = g.Transform;
+				Matrix textTransform = oldTransform.Clone();
+				textTransform.Scale(1, -1);
+				g.Transform = textTransform;
+				g.DrawString(index.ToString(), font, Brushes.Black, new PointF(2.0f + (float)xOffset, -1.0f * (2.0f + size.Height + (float)yOffset + ((float)this.GetWallHeight() * 100))));
+				g.Transform = oldTransform;				
+			}
+
 		}
 
 		private double GetDachschraegeXOffset() {

@@ -1723,8 +1723,8 @@ namespace Europlan.Common {
 					}
 				}
 				dialog.FileName = room.AssociatedFloor.Name + "_" + room.Name + "_" + productName;
-				dialog.DefaultExt = ".jpg";
-				dialog.Filter = EuroplanRes.HithermPlannerForm_FilterBild + "|*.jpg;*.png;*.bmp";
+				dialog.DefaultExt = ".png";
+				dialog.Filter = EuroplanRes.HithermPlannerForm_FilterBild + "|*.png;*.jpg;*.bmp";
 				DialogResult result = dialog.ShowDialog();
 				if (result == DialogResult.OK) {
 					
@@ -1740,21 +1740,34 @@ namespace Europlan.Common {
 						}
 					}
 					width += border * 2;
-					height += border * 2;
+					height += border * 4;
 					b = new Bitmap((int)width, (int)height);
 					g = Graphics.FromImage(b);
 					//g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
 					g.ResetClip();
 					g.FillRectangle(Brushes.White, 0, 0, (float)width, (float)height);
+										
+					Font font = new Font("Arial", 12);
+					g.DrawString(room.AssociatedFloor.Name + " - " + room.Id + ": " + room.Name, font, Brushes.Black, new PointF(2, 2));
+					g.DrawLine(Pens.Black, border, (float)height - 15, 100 + border, (float)height - 15);
+					g.DrawLine(Pens.Black, border, (float)height - 20, border, (float)height - 10);
+					g.DrawLine(Pens.Black, 100 + border, (float)height - 20, 100 + border, (float)height - 10);
+					font = new Font("Arial", 10);
+					SizeF size = g.MeasureString("1m", font);
+					g.DrawString("1m", font, Brushes.Black, new PointF(100 + border + 5, (float)height - 15 - (float)(size.Height / 2.0)));
+
 					Matrix matrix = new Matrix();
 					matrix.Scale(1.0f, -1.0f);
-					matrix.Translate(border, -(float)(height - border));
+					matrix.Translate(border, -(float)(height - (border * 2.0)));
 					g.Transform = matrix;
 
+					int index = 0;
 					foreach (GraphicalWall wall in room.Walls) {
+						index++;
 						double xOffset = room.GetWallOffset(wall).Value.X * 100.0;
 						double yOffset = 0;
+						wall.Index = index;
 						wall.PaintObject(g, xOffset, yOffset, null, null, 1.0, true);
 					}
 

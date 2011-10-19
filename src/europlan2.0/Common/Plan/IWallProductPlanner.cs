@@ -16,8 +16,8 @@ namespace Europlan.Common {
 			get;
 		}
 
-		void PaintAfterPlanPannel(PaintEventArgs e, Point2D mousePositionInPlan, Point mousePositionInControl, double scale);
-		void PaintAfterPlanPannel(Graphics g, Point2D mousePositionInPlan, Point mousePositionInControl, double scale);
+		void PaintAfterPlanPannel(PaintEventArgs e, Point2D mousePositionInPlan, Point mousePositionInControl, double scale, bool export);
+		void PaintAfterPlanPannel(Graphics g, Point2D mousePositionInPlan, Point mousePositionInControl, double scale, bool export);
 
 		bool PlannerClick(Point2D planPoint, Point pointInControl, MouseButtons button);
 		bool PlannerMouseMove(Point2D planPoint, Point pointInControl, MouseButtons button);
