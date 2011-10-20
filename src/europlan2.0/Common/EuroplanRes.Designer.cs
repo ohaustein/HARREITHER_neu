@@ -7519,7 +7519,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!.
+        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen einen Richtwert dar und müssen vom Planenden auf Korrektheit überprüft werden!.
         /// </summary>
         internal static string LL_Report_BestellvorschlagWarnung {
             get {
@@ -8738,7 +8738,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!.
+        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen einen Richtwert dar und müssen vom Planenden auf Korrektheit überprüft werden!.
         /// </summary>
         internal static string LL_Report_MaterialbedarfWarnung {
             get {
