@@ -415,6 +415,8 @@ namespace Europlan.Common.Products {
 				ignoreRotation--;
 			} else {
 			}
+			this.cbRlFlexible.Visible = this.rbKassettendecke.Checked;
+			this.cbVlFlexible.Visible = this.rbKassettendecke.Checked;
 			updateOngoing = false;
 		}
 
@@ -543,7 +545,7 @@ namespace Europlan.Common.Products {
 				this.btnDeleteConnection.Checked = false;
 				this.btnAddAnbindeleitungen.Checked = false;
 				this.btnSelectAnbindeleitungen.Checked = false;
-			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_ADD_CONNECTION) {
+			} else if (this.planPanel.ProductPlanner == this.modulKlimaDeckePlanner && (this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_DEL_CONNECTION) {
 				this.btnMove.Checked = false;
 				this.btnConstruction.Checked = false;
 				this.btnAddModules.Checked = false;
@@ -1088,6 +1090,7 @@ namespace Europlan.Common.Products {
 					bool rlFlexible = false;
 					bool rlNonFlexible = false;
 					KlimaFlaechenModulVerbindung link;
+					KlimaFlaechenSubAreaVerbindung saLink;
 					int tmp;
 					bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
 					ModulDeckeCircuit c;
@@ -1100,6 +1103,15 @@ namespace Europlan.Common.Products {
 							} else {
 								vlNonFlexible = true;
 							}
+						} else {
+							saLink = modul.GetSubareaInputLink(c, invertYAxis);
+							if (saLink != null) {
+								if (saLink.isEndFlexible(modul)) {
+									vlFlexible = true;
+								} else {
+									vlNonFlexible = true;
+								}
+							}
 						}
 						link = modul.GetOutputLink(c, invertYAxis);
 						if (link != null) {
@@ -1107,6 +1119,15 @@ namespace Europlan.Common.Products {
 								rlFlexible = true;
 							} else {
 								rlNonFlexible = true;
+							}
+						} else {
+							saLink = modul.GetSubareaOutputLink(c, invertYAxis);
+							if (saLink != null) {
+								if (saLink.isStartFlexible(modul)) {
+									rlFlexible = true;
+								} else {
+									rlNonFlexible = true;
+								}
 							}
 						}
 					}
@@ -1144,6 +1165,10 @@ namespace Europlan.Common.Products {
 				this.cmbSelectedModuleOrientation.SelectedIndex = -1;
 				this.cmbSelectedModuleType.Enabled = false;
 				this.cmbSelectedModuleOrientation.Enabled = false;
+				this.cbVlFlexible.Enabled = false;
+				this.cbRlFlexible.Enabled = false;
+				this.cbVlFlexible.CheckState = CheckState.Indeterminate;
+				this.cbRlFlexible.CheckState = CheckState.Indeterminate;
 			}
 			this.ignoreModuleOrientationChange--;
 			this.ignoreModuleTypeChange--;
@@ -1871,6 +1896,7 @@ namespace Europlan.Common.Products {
 		private void cbVlFlexible_CheckedChanged(object sender, EventArgs e) {
 			if (this.ignoreModuleFlexibleChange == 0 && this.cbVlFlexible.CheckState != CheckState.Indeterminate) {
 				KlimaFlaechenModulVerbindung link;
+				KlimaFlaechenSubAreaVerbindung saLink;
 				int tmp;
 				bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
 				ModulDeckeCircuit c;
@@ -1879,6 +1905,11 @@ namespace Europlan.Common.Products {
 					link = modul.GetInputLink(c, invertYAxis);
 					if (link != null) {
 						link.IsFlexible = (this.cbVlFlexible.CheckState == CheckState.Checked);
+					} else {
+						saLink = modul.GetSubareaInputLink(c, invertYAxis);
+						if (saLink != null) {
+							saLink.SetEndFlexible(modul, (this.cbVlFlexible.CheckState == CheckState.Checked));
+						}
 					}
 				}
 				this.planPanel.InvalidateGraphics();
@@ -1888,6 +1919,7 @@ namespace Europlan.Common.Products {
 		private void cbRlFlexible_CheckedChanged(object sender, EventArgs e) {
 			if (this.ignoreModuleFlexibleChange == 0 && this.cbRlFlexible.CheckState != CheckState.Indeterminate) {
 				KlimaFlaechenModulVerbindung link;
+				KlimaFlaechenSubAreaVerbindung saLink;
 				int tmp;
 				bool invertYAxis = this.modulKlimaDeckePlanner.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
 				ModulDeckeCircuit c;
@@ -1896,6 +1928,11 @@ namespace Europlan.Common.Products {
 					link = modul.GetOutputLink(c, invertYAxis);
 					if (link != null) {
 						link.IsFlexible = (this.cbRlFlexible.CheckState == CheckState.Checked);
+					} else {
+						saLink = modul.GetSubareaOutputLink(c, invertYAxis);
+						if (saLink != null) {
+							saLink.SetStartFlexible(modul, (this.cbRlFlexible.CheckState == CheckState.Checked));
+						}
 					}
 				}
 				this.planPanel.InvalidateGraphics();

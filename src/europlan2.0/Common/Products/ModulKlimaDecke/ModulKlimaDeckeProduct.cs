@@ -1217,6 +1217,9 @@ namespace Europlan.Common {
 				int nichtDichteVerbindung = 0;
 				double verbindeLength = 0;
 				int winkel90 = 0;
+				int flexibleAnschluesseRandTStueck = 0;
+				int flexibleAnschluesseRandWinkel = 0;
+				int flexibleAnschluesseInnerhalb = 0;
 
 				foreach (ModulDeckeCircuit c in this.circuits) {
 					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
@@ -1236,12 +1239,45 @@ namespace Europlan.Common {
 								} else {
 									nichtDichteVerbindung++;
 								}
+								if (link.IsFlexible) {
+									flexibleAnschluesseInnerhalb++;
+								}
 							}
 						}
 					}
 					foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
 						verbindeLength += link.GetLength(measure);
 						winkel90 += link.GetRequiredWinkel(measure);
+						int flexibleRow = 0;
+						int nonFlexibleRow = 0;
+						for (int i = 0; i < link.FlexibleEndConnections.Length; i++) {
+							if (link.FlexibleEndConnections[i]) {
+								flexibleRow++;
+							} else {
+								nonFlexibleRow++;
+							}
+						}
+						if (nonFlexibleRow == 0) {
+							flexibleAnschluesseRandTStueck += flexibleRow - 1;
+							flexibleAnschluesseRandWinkel++;
+						} else {
+							flexibleAnschluesseRandTStueck += flexibleRow;
+						}
+						flexibleRow = 0;
+						nonFlexibleRow = 0;
+						for (int i = 0; i < link.FlexibleStartConnections.Length; i++) {
+							if (link.FlexibleStartConnections[i]) {
+								flexibleRow++;
+							} else {
+								nonFlexibleRow++;
+							}
+						}
+						if (nonFlexibleRow == 0) {
+							flexibleAnschluesseRandTStueck += flexibleRow - 1;
+							flexibleAnschluesseRandWinkel++;
+						} else {
+							flexibleAnschluesseRandTStueck += flexibleRow;
+						}
 					}
 				}
 
@@ -1313,23 +1349,37 @@ namespace Europlan.Common {
 					}
 
 					if (raster105_45) {
-						// TODO flexible verbindungen berücksichtigen!!!
-
-						// TODO Einhängebügel berücksichtigen
+						// Einhängebügel
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", -modules * 4);
 
 						// Winkel 90°
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2);
 
 						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2 - flexibleAnschluesseRandTStueck);
 
 						// Verbindung der Module: 2 * Winkel 45° + 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", -modules * 2);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows - flexibleAnschluesseInnerhalb) * 4);
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
-					} else if (raster60) {
-						// TODO flexible verbindungen berücksichtigen!!!
 
+						// Flexible Anschlüsse innerhalb der Reihen
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
+
+						// Flexible Anschlüsse an Rand
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
+
+						if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
+						}
+						if (flexibleAnschluesseRandTStueck > 0) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
+						}
+					} else if (raster60) {
 						// Einhängebügel
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", modules * 4 - sharedBuegel);
 
@@ -1339,10 +1389,26 @@ namespace Europlan.Common {
 						// T-Stück
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
 
-						// Verbindung der Module: (2 * Winkel 45° + ???) 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
-						//Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4);
+						// Verbindung der Module: 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4 - flexibleAnschluesseInnerhalb * 2);
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
+
+						// Flexible Anschlüsse innerhalb der Reihen
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
+
+						// Flexible Anschlüsse an Rand
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
+						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
+
+						if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
+						}
+						if (flexibleAnschluesseRandTStueck > 0) {
+							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
+						}
 					}
 				}
 			}

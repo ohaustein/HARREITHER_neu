@@ -5765,7 +5765,7 @@ fläche
     <value>%SYSTEM% in %RAUMID% (%RAUMNAME%): %HINWEIS%</value>
   </data>
   <data name="WarningsAndErrorsForm_Titel" xml:space="preserve">
-    <value>s</value>
+    <value>Warnungen und Fehler</value>
   </data>
   <data name="WarningsAndErrorsForm_VerteilerWarnung" xml:space="preserve">
     <value>%VERTEILERID% (%VERTEILERNAME%) in %GESCHOSS%: %WARNUNG%</value>
@@ -7022,7 +7022,7 @@ Compact
     <value>Differenz zur grafisch ermittelten Fläche zu groß</value>
   </data>
   <data name="RequiredMaterialGrid_Hinweis2" xml:space="preserve">
-    <value>Der Materialbedarf wurde rechnerisch ermittelt und muss vom Planenden überprüft bzw. an die tatsächlichen Anforderungen angepasst werden</value>
+    <value>Hinweis: Die aus dem Programm ermittelten Mengen stellen einen Richtwert dar und müssen vom Planenden auf Korrektheit überprüft werden!</value>
   </data>
   <data name="HithermPlannerForm_VL" xml:space="preserve">
     <value>VL:</value>

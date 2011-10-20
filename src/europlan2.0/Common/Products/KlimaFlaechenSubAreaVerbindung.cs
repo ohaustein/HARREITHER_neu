@@ -20,7 +20,8 @@ namespace Europlan.Common {
 		private List<int> rowEndIndices = null;
 		private List<int> moduleStartIndices = null;
 		private List<int> moduleEndIndices = null;
-		private List<int> flexibleConnections = null;
+		private bool[] flexibleStartConnections = null;
+		private bool[] flexibleEndConnections = null;
 		private Circuit circuit;
 		private int circuitIndex = -1;
 		private PlannedProduct product;
@@ -715,6 +716,80 @@ namespace Europlan.Common {
 			get {
 				return (this.Start != null && this.Start.Count > 0 && this.distributorIndex >= 0);
 				//return (this.End == null || this.End.Count == 0);
+			}
+		}
+
+		public bool[] FlexibleStartConnections {
+			get {
+				if (this.flexibleStartConnections == null) {
+					this.flexibleStartConnections = new bool[this.Start.Count];
+					for (int i = 0; i < this.flexibleStartConnections.Length; i++) {
+						this.flexibleStartConnections[i] = false;
+					}
+				} else if (this.flexibleStartConnections.Length != this.Start.Count) {
+					bool[] oldFlexibleStart = this.flexibleStartConnections;
+					this.flexibleStartConnections = new bool[this.Start.Count];
+					for (int i = 0; i < oldFlexibleStart.Length; i++) {
+						this.flexibleStartConnections[i] = oldFlexibleStart[i];
+					}
+					for (int i = oldFlexibleStart.Length; i < this.flexibleStartConnections.Length; i++) {
+						this.flexibleStartConnections[i] = false;
+					}
+				}
+				return this.flexibleStartConnections;
+			}
+			set { this.flexibleStartConnections = value; }
+		}
+
+		public bool isStartFlexible(KlimaFlaechenModul modul) {
+			int i = this.Start.IndexOf(modul);
+			if (i < 0) {
+				return false;
+			}
+			return this.FlexibleStartConnections[i];
+		}
+
+		public void SetStartFlexible(KlimaFlaechenModul modul, bool flexible) {
+			int i = this.Start.IndexOf(modul);
+			if (i >= 0) {
+				this.FlexibleStartConnections[i] = flexible;
+			}
+		}
+
+		public bool[] FlexibleEndConnections {
+			get {
+				if (this.flexibleEndConnections == null) {
+					this.flexibleEndConnections = new bool[this.End.Count];
+					for (int i = 0; i < this.flexibleEndConnections.Length; i++) {
+						this.flexibleEndConnections[i] = false;
+					}
+				} else if (this.flexibleEndConnections.Length != this.End.Count) {
+					bool[] oldFlexibleEnd = this.flexibleEndConnections;
+					this.flexibleEndConnections = new bool[this.End.Count];
+					for (int i = 0; i < oldFlexibleEnd.Length; i++) {
+						this.flexibleEndConnections[i] = oldFlexibleEnd[i];
+					}
+					for (int i = oldFlexibleEnd.Length; i < this.flexibleEndConnections.Length; i++) {
+						this.flexibleEndConnections[i] = false;
+					}
+				}
+				return this.flexibleEndConnections;
+			}
+			set { this.flexibleEndConnections = value; }
+		}
+
+		public bool isEndFlexible(KlimaFlaechenModul modul) {
+			int i = this.End.IndexOf(modul);
+			if (i < 0) {
+				return false;
+			}
+			return this.FlexibleEndConnections[i];
+		}
+
+		public void SetEndFlexible(KlimaFlaechenModul modul, bool flexible) {
+			int i = this.End.IndexOf(modul);
+			if (i >= 0) {
+				this.FlexibleEndConnections[i] = flexible;
 			}
 		}
 

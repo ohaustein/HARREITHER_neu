@@ -319,6 +319,18 @@ namespace Europlan.Common {
 
 		private void dataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			if (this.deletedProduct != null) {
+				if (this.deletedProduct.Product is HithermProduct || this.deletedProduct.Product is HithermCompactProduct) {
+					bool hithermFound = false;
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						if (pp != this.deletedProduct && (pp.Product is HithermProduct || pp.Product is HithermCompactProduct)) {
+							hithermFound = true;
+							break;
+						}
+					}
+					if (!hithermFound) {
+						this.room.Walls.Clear();
+					}
+				}
 				List<PlannedProduct> connectedProducts = this.room.GetFloor().FindConnectedProduct(this.deletedProduct);
 				foreach (PlannedProduct connectedProduct in connectedProducts) {
 					SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
