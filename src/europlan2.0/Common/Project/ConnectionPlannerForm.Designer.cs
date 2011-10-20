@@ -226,6 +226,7 @@ namespace Europlan.Common {
 			this.ClientSize = new System.Drawing.Size(892, 465);
 			this.Controls.Add(this.planPanel);
 			this.Controls.Add(this.toolStrip);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "ConnectionPlannerForm";
 			this.Text = "Modul Klima-Boden - grafische Auslegung";
 			this.Load += new System.EventHandler(this.ModulKlimaBodenPlannerForm_Load);

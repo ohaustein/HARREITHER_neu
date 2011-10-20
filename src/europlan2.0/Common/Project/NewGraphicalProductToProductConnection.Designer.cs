@@ -36,7 +36,7 @@ namespace Europlan.Common {
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(339, 23);
 			this.label1.TabIndex = 0;
-			this.label1.Tag = "";
+			this.label1.Tag = global::Europlan.Common.EuroplanRes.Material_a834583d_750c_4695_ba45_7e346108551f;
 			this.label1.Text = "Wollen Sie das System vorlauf oder rücklaufseitig anschließen?";
 			// 
 			// rbVorlauf
@@ -93,6 +93,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.rbRuecklauf);
 			this.Controls.Add(this.rbVorlauf);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "NewGraphicalProductToProductConnection";

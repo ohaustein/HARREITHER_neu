@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuslegeAssistentForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.treeProducts = new System.Windows.Forms.TreeView();
@@ -127,6 +128,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.label1);
 			this.helpProvider.SetHelpKeyword(this, "html\\euro99fd.htm");
 			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AuslegeAssistentForm";

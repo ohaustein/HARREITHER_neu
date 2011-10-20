@@ -265,6 +265,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.picturePanel);
 			this.DoubleBuffered = true;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimizeBox = false;
 			this.Name = "ImagePlanOptionsForm";
 			this.Text = "Raumtypen";

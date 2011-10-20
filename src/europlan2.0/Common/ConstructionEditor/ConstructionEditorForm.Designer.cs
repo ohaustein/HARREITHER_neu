@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConstructionEditorForm));
 			this.panelBottom = new System.Windows.Forms.Panel();
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.lblType = new System.Windows.Forms.Label();
@@ -77,6 +78,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.constructionEditor);
 			this.Controls.Add(this.panelTop);
 			this.Controls.Add(this.panelBottom);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "ConstructionEditorForm";
 			this.Text = "Konstruktion";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConstructionEditorForm_FormClosing_1);

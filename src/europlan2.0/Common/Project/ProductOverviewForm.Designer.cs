@@ -41,6 +41,7 @@ namespace Europlan.Common {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductOverviewForm));
 			this.dgvProductOverview = new System.Windows.Forms.DataGridView();
 			this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.roomNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -353,6 +354,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.dgvProductOverview);
 			this.helpProvider.SetHelpKeyword(this, "html\\euro3q9d.htm");
 			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ProductOverviewForm";

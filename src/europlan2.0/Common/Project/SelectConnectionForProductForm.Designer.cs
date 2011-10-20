@@ -26,6 +26,7 @@ namespace Europlan.Common {
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectConnectionForProductForm));
 			this.tvDistributors = new System.Windows.Forms.TreeView();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
@@ -237,6 +238,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.tvDistributors);
 			this.helpProvider.SetHelpKeyword(this, "html\\euro9qk7.htm");
 			this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "SelectConnectionForProductForm";
 			this.helpProvider.SetShowHelp(this, true);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

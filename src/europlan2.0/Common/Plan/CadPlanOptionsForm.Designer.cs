@@ -206,6 +206,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.toolStrip);
 			this.DoubleBuffered = true;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimizeBox = false;
 			this.Name = "CadPlanOptionsForm";
 			this.Text = "Raumtypen";

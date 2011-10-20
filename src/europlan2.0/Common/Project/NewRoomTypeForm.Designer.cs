@@ -23,6 +23,7 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewRoomTypeForm));
 			this.gridRoomTypes = new Europlan.Common.RoomTypeGrid();
 			this.SuspendLayout();
 			// 
@@ -40,6 +41,7 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(567, 313);
 			this.Controls.Add(this.gridRoomTypes);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimizeBox = false;
 			this.Name = "NewRoomTypeForm";
 			this.Text = "Raumtypen";

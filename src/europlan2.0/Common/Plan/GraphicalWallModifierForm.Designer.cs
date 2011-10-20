@@ -373,6 +373,7 @@ namespace Europlan.Common {
 			this.Controls.Add(this.panel);
 			this.Controls.Add(this.toolStrip);
 			this.DoubleBuffered = true;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(500, 500);
 			this.Name = "GraphicalWallModifierForm";
