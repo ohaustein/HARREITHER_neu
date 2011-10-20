@@ -100,7 +100,7 @@ namespace Europlan.Common.Products {
 				this.cmbCircuits.Items.Add(i.ToString());
 			}
 
-			this.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Titel;
+			this.Text = Europlan.Common.EuroplanRes.EurovalPlannerForm_Titel;
 			this.btnZoomIn.Text = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
 			this.btnZoomIn.ToolTipText = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
 			this.btnZoomOut.Text = Europlan.Common.EuroplanRes.Plan_Herauszoomen;
