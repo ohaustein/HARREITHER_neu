@@ -7519,6 +7519,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!.
+        /// </summary>
+        internal static string LL_Report_BestellvorschlagWarnung {
+            get {
+                return ResourceManager.GetString("LL_Report_BestellvorschlagWarnung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bezeichnung.
         /// </summary>
         internal static string LL_Report_Bezeichnung {
@@ -8725,6 +8734,15 @@ namespace Europlan.Common {
         internal static string LL_Report_MaterialbedarfMenge {
             get {
                 return ResourceManager.GetString("LL_Report_MaterialbedarfMenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!.
+        /// </summary>
+        internal static string LL_Report_MaterialbedarfWarnung {
+            get {
+                return ResourceManager.GetString("LL_Report_MaterialbedarfWarnung", resourceCulture);
             }
         }
         

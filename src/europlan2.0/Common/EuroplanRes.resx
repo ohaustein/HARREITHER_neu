@@ -7045,4 +7045,10 @@ Compact
   <data name="PlanExport_Hinweis" xml:space="preserve">
     <value>Hinweis: Prinzipskizze, kein Ausführungsplan</value>
   </data>
+  <data name="LL_Report_BestellvorschlagWarnung" xml:space="preserve">
+    <value>Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!</value>
+  </data>
+  <data name="LL_Report_MaterialbedarfWarnung" xml:space="preserve">
+    <value>Hinweis: Die aus dem Programm ermittelten Mengen stellen eine Näherung dar und müssen vom Planenden auf Korrektheit überprüft werden!</value>
+  </data>
 </root>
