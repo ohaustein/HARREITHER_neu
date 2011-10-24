@@ -133,7 +133,7 @@ namespace Europlan.Common {
 		private List<PossibleModulLaneArea> GetPossibleModuleAreasInLane(Polygon2D lane) {
 			Line2D rightBorder = new Line2D(lane[0], lane[0] - lane[1]);
 			Line2D leftBorder = new Line2D(lane[3], lane[3] - lane[2]);
-			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.Product.AssociatedRoom.CeilingCoordinatesToUse, false, 0.15);
+			List<LineSegment> unusableSegments = GetUnusableSegments(leftBorder, rightBorder, this.Product.AssociatedRoom.CeilingCoordinatesToUse, false, 0);
 			if (this.Product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
 				List<LineSegment> tmp;
 				foreach (List<Point2D> unusedArea in this.Product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
