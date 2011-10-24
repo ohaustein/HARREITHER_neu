@@ -198,7 +198,16 @@ namespace Europlan.Common {
 				Graphics g;
 				if (plan.Measure.Value < 200) {
 					float factor = 200.0f / plan.Measure.Value;
-					b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
+					if (image.Width * factor * image.Height * factor > 10000 * 5000) {
+						//factor = (float)Math.Sqrt(10000.0f * 5000.0f / image.Width / image.Height);
+					}
+					try {
+						b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
+					} catch {
+						MessageBox.Show(EuroplanRes.ExportPlanForm_BildFehlerText, EuroplanRes.ExportPlanForm_BildFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						this.Close();
+						return;
+					}
 					g = Graphics.FromImage(b);
 					g.InterpolationMode = InterpolationMode.Bicubic;
 					g.DrawImage(image, 0, 0, image.Width * factor, image.Height * factor);
