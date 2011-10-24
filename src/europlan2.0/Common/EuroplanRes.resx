@@ -7051,4 +7051,10 @@ Compact
   <data name="LL_Report_MaterialbedarfWarnung" xml:space="preserve">
     <value>Hinweis: Die aus dem Programm ermittelten Mengen stellen einen Richtwert dar und müssen vom Planenden auf Korrektheit überprüft werden!</value>
   </data>
+  <data name="ExportPlanForm_BildFehlerText" xml:space="preserve">
+    <value>Der Plan konnte nicht exportiert werden, da nicht genügend Arbeitsspeicher zur Verfügung steht</value>
+  </data>
+  <data name="ExportPlanForm_BildFehlerTitel" xml:space="preserve">
+    <value>Fehler beim Exportieren</value>
+  </data>
 </root>

@@ -3089,6 +3089,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Der Plan konnte nicht exportiert werden, da nicht genügend Arbeitsspeicher zur Verfügung steht.
+        /// </summary>
+        internal static string ExportPlanForm_BildFehlerText {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_BildFehlerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler beim Exportieren.
+        /// </summary>
+        internal static string ExportPlanForm_BildFehlerTitel {
+            get {
+                return ResourceManager.GetString("ExportPlanForm_BildFehlerTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dateipfad.
         /// </summary>
         internal static string ExportPlanForm_Dateipfad {
@@ -18153,7 +18171,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Der Materialbedarf wurde rechnerisch ermittelt und muss vom Planenden überprüft bzw. an die tatsächlichen Anforderungen angepasst werden.
+        ///   Looks up a localized string similar to Hinweis: Die aus dem Programm ermittelten Mengen stellen einen Richtwert dar und müssen vom Planenden auf Korrektheit überprüft werden!.
         /// </summary>
         internal static string RequiredMaterialGrid_Hinweis2 {
             get {
@@ -20015,7 +20033,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to s.
+        ///   Looks up a localized string similar to Warnungen und Fehler.
         /// </summary>
         internal static string WarningsAndErrorsForm_Titel {
             get {
