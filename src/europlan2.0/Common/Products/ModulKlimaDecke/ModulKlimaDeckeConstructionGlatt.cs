@@ -146,12 +146,14 @@ namespace Europlan.Common {
 			}
 			//curPos = curPos - increment;
 			List<int> ignoreLanes = new List<int>();
+			double schieneStartY = minY - measure * 0.1;
+			double schieneEndY = maxY + measure * 0.1;
 			while (curPos < maxX) {
 				Polygon2D schiene = new Polygon2D();
-				schiene.Add(matrix.Transform(new Point2D(curPos, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, minY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, maxY)));
-				schiene.Add(matrix.Transform(new Point2D(curPos, maxY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos, schieneStartY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, schieneStartY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos + SchienenBreite * measure, schieneEndY)));
+				schiene.Add(matrix.Transform(new Point2D(curPos, schieneEndY)));
 				this.schienen.Add(schiene);
 				curBeplankungsPos += (SchienenBreite + schienenAbstand);
 				curPos += increment;
@@ -596,9 +598,9 @@ namespace Europlan.Common {
 			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
 			g.Clip = new Region(roomPath);
 
-			Color c = Color.Gray;
+			System.Drawing.Color c = System.Drawing.Color.Gray;
 			Pen p = new Pen(c);
-			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, System.Drawing.Color.FromArgb(0, c));
 
 			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
@@ -627,9 +629,9 @@ namespace Europlan.Common {
 			}
 
 			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
-				c = Color.FromArgb(128, 0, 240, 0);
+				c = System.Drawing.Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
-				b = new SolidBrush(Color.FromArgb(64, c));
+				b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));
 				Region r = new Region();
 				r.MakeInfinite();
 				g.Clip = r;
@@ -665,7 +667,7 @@ namespace Europlan.Common {
 				clipRegion.Reverse();
 			}
 
-			Color c = Color.Gray;
+			EntityColor c = EntityColor.CreateFromRgb(System.Drawing.Color.Gray.ToArgb());
 
 			DxfHatch hatch = new DxfHatch();
 			hatch.Color = c;
@@ -683,20 +685,24 @@ namespace Europlan.Common {
 				list1.Add(clipRegion);
 				List<Polygon2D> list2 = new List<Polygon2D>();
 				list2.Add(clipped);
+				try {
+					IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+					foreach (Polygon2D polygon in clippedPolygons) {
+						DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
+						polyLine.Closed = true;
+						polyLine.Layer = constructionLayer;
+						model.Entities.Add(polyLine);
 
-				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
-				foreach (Polygon2D polygon in clippedPolygons) {
-					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
-					polyLine.Closed = true;
-					polyLine.Layer = constructionLayer;
-					model.Entities.Add(polyLine);
-
-					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
-					boundaryPath.Type = BoundaryPathType.Polyline;
-					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
-					boundaryPath.PolylineData.Closed = true;
-					hatch.BoundaryPaths.Add(boundaryPath);
-				}								
+						DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
+						boundaryPath.Type = BoundaryPathType.Polyline;
+						boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(polygon.ToArray());
+						boundaryPath.PolylineData.Closed = true;
+						hatch.BoundaryPaths.Add(boundaryPath);
+					}
+				} catch (Exception e) {
+					// TODO log warning
+					Console.WriteLine("adf");
+				}
 			}
 
 			hatch.Pattern = new DxfPattern();

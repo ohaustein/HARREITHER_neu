@@ -9,7 +9,6 @@ using System.Drawing;
 using WW.Math;
 using WW.Math.Geometry;
 using WW.Cad.Model.Tables;
-using WW.Cad.Model;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
@@ -3540,7 +3539,7 @@ namespace Europlan.Common {
 		}
 
 
-		internal void DrawDxf(DxfModel model, DxfLayer modulLayer, DxfLayer constructionLayer, DxfLayer beplankungLayer) {
+		internal void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer modulLayer, DxfLayer constructionLayer, DxfLayer beplankungLayer) {
 			Matrix4D additionalTransformation = Matrix4D.Identity;
 						
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.CeilingCoordinatesToUse != null) {
@@ -3582,7 +3581,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.AssociatedRoom.CeilingUnusedAreaCoordinates != null) {
-					Color gray = Color.Gray;
+					EntityColor gray = EntityColor.CreateFromRgb(Color.Gray.ToArgb());
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.CeilingUnusedAreaCoordinates) {
 						Polygon2D polygon = new Polygon2D(unusedArea);
 						DxfPolyline2D polyLine = new DxfPolyline2D(gray, polygon.ToArray());
@@ -3594,7 +3593,7 @@ namespace Europlan.Common {
 			}		
 		}
 
-		private void DrawDxfModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, DxfModel model, DxfLayer layer, bool bottomUp, Color circuitColor) {
+		private void DrawDxfModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, WW.Cad.Model.DxfModel model, DxfLayer layer, bool bottomUp, Color circuitColor) {
 			if (this.product == null || this.product.GraphConstruction == null ||
 						this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
 						this.product.AssociatedRoom.AssociatedPlan.Measure == null) {
@@ -3639,10 +3638,8 @@ namespace Europlan.Common {
 				directionBottom32D = additionalTransformation.TransformTo2D(new Point2D(width / 2, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 			}
 
-			Color c = Color.FromArgb(128, circuitColor);
+			EntityColor c = EntityColor.CreateFromRgb(circuitColor.ToArgb());
 			
-			Pen p = new Pen(c);
-
 			Point2D[] polygon = null;
 			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };

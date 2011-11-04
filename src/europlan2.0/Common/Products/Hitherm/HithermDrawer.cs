@@ -98,12 +98,12 @@ namespace Europlan.Common {
 				Region clipDisabled = new Region();
 				clipDisabled.MakeInfinite();
 				clipDisabled.Exclude(path);
-				Color c = Color.Black;
+				System.Drawing.Color c = System.Drawing.Color.Black;
 				if (this.ConnectedPlanPanel != null && this.ConnectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
-					c = Color.White;
+					c = System.Drawing.Color.White;
 				}
 				Brush b = new SolidBrush(c);
-				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, Color.FromArgb(128, c), Color.FromArgb(112, c));
+				b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal, System.Drawing.Color.FromArgb(128, c), System.Drawing.Color.FromArgb(112, c));
 
 				if (highlightRoomCoordinates) {
 					// gray out all except the room
@@ -122,7 +122,7 @@ namespace Europlan.Common {
 					}
 					fillPath.AddPolygon(array);
 					fillPath.CloseFigure();
-					c = Color.FromArgb(64, Color.Blue);
+					c = System.Drawing.Color.FromArgb(64, System.Drawing.Color.Blue);
 					b = new SolidBrush(c);
 					//g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b), fillPath);
