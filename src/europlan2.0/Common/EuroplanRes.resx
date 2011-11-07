@@ -7057,4 +7057,13 @@ Compact
   <data name="ExportPlanForm_BildFehlerTitel" xml:space="preserve">
     <value>Fehler beim Exportieren</value>
   </data>
+  <data name="ImagePlanOptionsForm_WarnungGroesseText" xml:space="preserve">
+    <value>Aufgrund der Größe des Bildes sind von Europlan eingefügte Texte beim Exportieren des Plans möglicherweise nicht mehr klar lesbar. Falls möglich importieren Sie diesen Plan bitte in mehreren kleinen Stücken</value>
+  </data>
+  <data name="ImagePlanOptionsForm_WarnungGroesseTitel" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="PdfRegionPickerForm_BereichAuswaehlen" xml:space="preserve">
+    <value>Bereich auswählen</value>
+  </data>
 </root>

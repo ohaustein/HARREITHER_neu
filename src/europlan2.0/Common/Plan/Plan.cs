@@ -30,7 +30,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public string AbsoluteFileName {
+		public virtual string AbsoluteFileName {
 			get {
 				string projectDir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
 				return Path.Combine(projectDir, RelativeFileName);

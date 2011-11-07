@@ -196,10 +196,30 @@ namespace Europlan.Common {
 				Image image = Image.FromFile(plan.AbsoluteFileName);
 				Bitmap b;
 				Graphics g;
-				if (plan.Measure.Value < 200) {
+				double factor = (plan as ImagePlan).GetPlanExportMeasureFactor();
+				if (factor != 1.0) {
+					try {
+						b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
+					} catch {
+						MessageBox.Show(EuroplanRes.ExportPlanForm_BildFehlerText, EuroplanRes.ExportPlanForm_BildFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						this.Close();
+						return;
+					}
+					g = Graphics.FromImage(b);
+					g.InterpolationMode = InterpolationMode.Bicubic;
+					g.DrawImage(image, 0, 0, (float)(image.Width * factor), (float)(image.Height * factor));
+					Matrix m = new Matrix();
+					m.Scale((float)factor, (float)factor);
+					g.Transform = m;
+				} else {
+					b = new Bitmap(image);
+					g = Graphics.FromImage(b);
+					g.InterpolationMode = InterpolationMode.Bicubic;
+				}
+/*				if (plan.Measure.Value < 200) {
 					float factor = 200.0f / plan.Measure.Value;
 					if (image.Width * factor * image.Height * factor > 10000 * 5000) {
-						//factor = (float)Math.Sqrt(10000.0f * 5000.0f / image.Width / image.Height);
+						factor = (float)Math.Sqrt(10000.0f * 5000.0f / image.Width / image.Height);
 					}
 					try {
 						b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
@@ -219,7 +239,7 @@ namespace Europlan.Common {
 					b = new Bitmap(image);
 					g = Graphics.FromImage(b);
 					g.InterpolationMode = InterpolationMode.Bicubic;
-				}
+				}*/
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {

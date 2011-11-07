@@ -43,6 +43,24 @@ namespace Europlan.Common {
 		public override bool InvertYAxis {
 			get { return false; }
 		}
+
+		public double GetPlanExportMeasureFactor() {
+			if (this.Measure.Value < 200) {
+				Image image = Image.FromFile(this.AbsoluteFileName);
+				float factor = 200.0f / this.Measure.Value;
+				if (image.Width * factor * image.Height * factor > 10000 * 5000) {
+					factor = (float)Math.Sqrt(10000.0f * 5000.0f / image.Width / image.Height);
+				}
+				image.Dispose();
+				return factor;
+			} else {
+				return 1.0;
+			}
+		}
+
+		public bool IsExportMeasureOk() {
+			return this.Measure.Value * this.GetPlanExportMeasureFactor() >= 199;
+		}
 	}
 
 }

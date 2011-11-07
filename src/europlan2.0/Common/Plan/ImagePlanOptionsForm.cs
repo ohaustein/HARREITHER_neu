@@ -229,6 +229,9 @@ namespace Europlan.Common {
 							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0.00") + EuroplanRes.Unit_Meter;
 							break;
 					}
+					if (!(this.picturePanel.Plan as ImagePlan).IsExportMeasureOk()) {
+						MessageBox.Show(EuroplanRes.ImagePlanOptionsForm_WarnungGroesseText, EuroplanRes.ImagePlanOptionsForm_WarnungGroesseTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					}
 				}
 			}
 		}

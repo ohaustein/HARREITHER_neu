@@ -6120,6 +6120,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aufgrund der Größe des Bildes sind von Europlan eingefügte Texte beim Exportieren des Plans möglicherweise nicht mehr klar lesbar. Falls möglich importieren Sie diesen Plan bitte in mehreren kleinen Stücken.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_WarnungGroesseText {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_WarnungGroesseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warnung.
+        /// </summary>
+        internal static string ImagePlanOptionsForm_WarnungGroesseTitel {
+            get {
+                return ResourceManager.GetString("ImagePlanOptionsForm_WarnungGroesseTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raum definieren.
         /// </summary>
         internal static string ImagePlanRoomPickerForm_Titel {
@@ -14427,6 +14445,15 @@ namespace Europlan.Common {
         internal static string OptionsForm_Wand {
             get {
                 return ResourceManager.GetString("OptionsForm_Wand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bereich auswählen.
+        /// </summary>
+        internal static string PdfRegionPickerForm_BereichAuswaehlen {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_BereichAuswaehlen", resourceCulture);
             }
         }
         

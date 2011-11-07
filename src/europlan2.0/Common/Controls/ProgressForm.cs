@@ -5,11 +5,16 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Europlan.Common {
 	public partial class ProgressForm : Form {
-		public ProgressForm() {
+
+		private Semaphore semaphore;
+
+		public ProgressForm(Semaphore semaphore) {
 			InitializeComponent();
+			this.semaphore = semaphore;
 		}
 
 		public string Title {
@@ -22,6 +27,11 @@ namespace Europlan.Common {
 			set {
 				this.label1.Text = value;
 			}
+		}
+
+		protected override void OnLoad(EventArgs e) {
+			base.OnLoad(e);
+			this.semaphore.Release();
 		}
 	}
 }
