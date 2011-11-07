@@ -379,21 +379,21 @@ namespace Europlan.Common {
 							if (this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Distributor != null) {
 								if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
 									PointF[] poly = connectionPoly.ToArray();
-									g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White)), poly);
-									g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White), poly);
+									g.FillPolygon(new SolidBrush(Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White)), poly);
+									g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White), poly);
 								} else {
 									PointF[] poly = connectionPoly.ToArray();
-									g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Red)), poly);
-									g.DrawPolygon(new Pen(System.Drawing.Color.Red), poly);
+									g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.Red)), poly);
+									g.DrawPolygon(new Pen(Color.Red), poly);
 								}
 							} else if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
 								PointF[] poly = connectionPoly.ToArray();
-								g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Blue)), poly);
-								g.DrawPolygon(new Pen(System.Drawing.Color.Blue), poly);
+								g.FillPolygon(new SolidBrush(Color.FromArgb(128, Color.Blue)), poly);
+								g.DrawPolygon(new Pen(Color.Blue), poly);
 							} else if (this.possibleProductConnection.ProductConnection != null && this.possibleProductConnection.PossibleInput && this.possibleProductConnection.PossibleOutput) {
 								PointF[] poly = connectionPoly.ToArray();
-								g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White)), poly);
-								g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White), poly);
+								g.FillPolygon(new SolidBrush(Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White)), poly);
+								g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? Color.Black : Color.White), poly);
 							}
 						//}
 					}
@@ -453,7 +453,7 @@ namespace Europlan.Common {
 					}
 					fillPath.AddPolygon(array);
 					fillPath.CloseFigure();
-					System.Drawing.Color c = System.Drawing.Color.FromArgb(128, System.Drawing.Color.Green);
+					Color c = Color.FromArgb(128, Color.Green);
 					Brush b = new SolidBrush(c);
 					//g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b, (float)(0.05 * this.Plan.Measure.Value * additionalTransformation.M00)), fillPath);

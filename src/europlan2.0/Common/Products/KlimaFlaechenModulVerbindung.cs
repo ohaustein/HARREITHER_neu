@@ -5,6 +5,7 @@ using WW.Math;
 using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
+using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
@@ -170,7 +171,7 @@ namespace Europlan.Common {
 			// TODO
 		}
 
-		public void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, Color c) {
+		public void DrawDxf(DxfModel model, DxfLayer connectionLayer, Color c) {
 			if (this.StartConnectedToAnbindung) {
 				c = Color.Red;
 			} else if (this.EndConnectedToAnbindung) {
@@ -182,12 +183,10 @@ namespace Europlan.Common {
 			Point2D oldVertex = this.vertices[0];
 			Point2D newVertex;
 
-			EntityColor ec = EntityColor.CreateFromRgb(c.ToArgb());
-
 			for (int i = 1; i < this.vertices.Count; i++) {
 				newVertex = this.vertices[i];
 
-				DxfLine line = new DxfLine(ec, oldVertex, newVertex);
+				DxfLine line = new DxfLine(c, oldVertex, newVertex);
 				line.Layer = connectionLayer;
 				model.Entities.Add(line);
 

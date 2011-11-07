@@ -9,6 +9,7 @@ using System.Drawing;
 using WW.Math;
 using WW.Math.Geometry;
 using System.Xml.Serialization;
+using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
@@ -1231,15 +1232,14 @@ namespace Europlan.Common {
 
 		public event ProjectChangedHandler ProjectChanged;
 
-		internal void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer layer) {
+		internal void DrawDxf(DxfModel model, DxfLayer layer) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
-				EntityColor c = EntityColor.CreateFromRgb(Color.Red.ToArgb());
+				Color c = Color.Red;
 				double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				List<Polygon2D> clip = new List<Polygon2D>();
 
 				if (this.product.PlannedReducedAreas.Count > 0) {
-					//Color.Gray
-					EntityColor gray = EntityColor.CreateFromRgb(Color.Gray.ToArgb());
+					Color gray = Color.Gray;
 					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
 						Polygon2D polygon = new Polygon2D(reducedArea);
 						clip.Add(polygon);
@@ -1268,7 +1268,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
-					EntityColor gray = EntityColor.CreateFromRgb(Color.Red.ToArgb());
+					Color gray = Color.Red;
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
 						Polygon2D polygon = new Polygon2D(unusedArea);
 						clip.Add(polygon);
@@ -1525,8 +1525,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void PaintDxfTextBox(string dxfText, string fontStyle, Point2D start, double width, int xFactor, double height, int yFactor, float border, Color c, WW.Cad.Model.DxfModel model, DxfLayer layer) {
-			EntityColor ec = EntityColor.CreateFromRgb(c.ToArgb());
+		private void PaintDxfTextBox(string dxfText, string fontStyle, Point2D start, double width, int xFactor, double height, int yFactor, float border, Color c, DxfModel model, DxfLayer layer) {
 			Point2D topleft2D = start;
 
 			Point2D topleft = new Point2D(topleft2D.X + (xFactor * (width + (2 * border))), topleft2D.Y + (yFactor * (height + (2 * border))));
@@ -1535,23 +1534,23 @@ namespace Europlan.Common {
 			Point2D bottomLeft = new Point2D(topleft.X, topleft.Y + height + (2 * border));
 			Point2D stringPos = new Point2D(topleft.X + border, topleft.Y + border);
 
-			DxfLine line = new DxfLine(ec, topleft, topRight);
+			DxfLine line = new DxfLine(c, topleft, topRight);
 			line.Layer = layer;
 			model.Entities.Add(line);
-			line = new DxfLine(ec, topRight, bottomRight);
+			line = new DxfLine(c, topRight, bottomRight);
 			line.Layer = layer;
 			model.Entities.Add(line);
-			line = new DxfLine(ec, bottomRight, bottomLeft);
+			line = new DxfLine(c, bottomRight, bottomLeft);
 			line.Layer = layer;
 			model.Entities.Add(line);
-			line = new DxfLine(ec, bottomLeft, topleft);
+			line = new DxfLine(c, bottomLeft, topleft);
 			line.Layer = layer;
 			model.Entities.Add(line);
 
 			DxfText text = new DxfText(dxfText, (Point3D)stringPos, 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 			text.Style = model.TextStyles[fontStyle];
 			text.Layer = layer;
-			text.Color = ec;
+			text.Color = c;
 			model.Entities.Add(text);
 		}
 

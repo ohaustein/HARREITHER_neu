@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Xml.Serialization;
 using WW.Math.Geometry;
 using System.Windows.Forms;
+using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
@@ -399,7 +400,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public virtual void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, double measure) {
+		public virtual void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
 			if (this.vertices.Count < 2) {
 				return;
 			}
@@ -445,19 +446,17 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void DrawDxfSingleConnection(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, List<Point2D> singleConnection, Color c) {
+		private void DrawDxfSingleConnection(DxfModel model, DxfLayer connectionLayer, List<Point2D> singleConnection, Color c) {
 			if (singleConnection.Count < 2) {
 				return;
 			}
 			Point2D oldVertex = singleConnection[0];
 			Point2D newVertex;
 
-			EntityColor ec = EntityColor.CreateFromRgb(c.ToArgb());
-
 			for (int i = 1; i < singleConnection.Count; i++) {
 				newVertex = singleConnection[i];
 
-				DxfLine line = new DxfLine(ec, oldVertex, newVertex);
+				DxfLine line = new DxfLine(c, oldVertex, newVertex);
 				line.Layer = connectionLayer;
 				model.Entities.Add(line);
 
@@ -1040,7 +1039,7 @@ namespace Europlan.Common {
 		public override void Draw(Graphics g, Matrix4D additionalTransformation, double measure, bool selected, bool gray) {
 		}
 
-		public override void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, double measure) {
+		public override void DrawDxf(DxfModel model, DxfLayer connectionLayer, double measure) {
 		}
 
 		public override bool HitTest(Point2D planPoint, double measure) {

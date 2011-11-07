@@ -1043,8 +1043,6 @@ namespace Europlan.Common {
 			Point2D rightTop = Point2D.Zero;
 			Point2D rightBottom = Point2D.Zero;
 
-			EntityColor red = EntityColor.CreateFromRgb(System.Drawing.Color.Red.ToArgb());
-
 			foreach (Distributor.GraphicalRepresentation gp in this.GraphicalRepresentations) {
 				if (gp.floorId == floor.Id) {
 				
@@ -1058,21 +1056,21 @@ namespace Europlan.Common {
 					rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
 					
 
-					DxfLine line = new DxfLine(red, leftBottom, rightBottom);
+					DxfLine line = new DxfLine(Color.Red, leftBottom, rightBottom);
 					line.Layer = distributorLayer;
 					model.Entities.Add(line);
-					line = new DxfLine(red, rightBottom, rightTop);
+					line = new DxfLine(Color.Red, rightBottom, rightTop);
 					line.Layer = distributorLayer;
 					model.Entities.Add(line);
-					line = new DxfLine(red, rightTop, leftTop);
+					line = new DxfLine(Color.Red, rightTop, leftTop);
 					line.Layer = distributorLayer;
 					model.Entities.Add(line);
-					line = new DxfLine(red, leftTop, leftBottom);
+					line = new DxfLine(Color.Red, leftTop, leftBottom);
 					line.Layer = distributorLayer;
 					model.Entities.Add(line);
 
 					DxfHatch hatch = new DxfHatch();
-					hatch.Color = red;
+					hatch.Color = Color.Red;
 					DxfHatch.BoundaryPath boundaryPath = new DxfHatch.BoundaryPath();
 					boundaryPath.Type = BoundaryPathType.Polyline;
 					boundaryPath.PolylineData = new DxfHatch.BoundaryPath.Polyline(new Point2D[] { leftBottom, rightBottom, rightTop});
