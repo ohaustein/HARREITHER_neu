@@ -62,7 +62,16 @@ namespace Europlan.Common {
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public IPlanPanel ConnectedPlanPanel {
 			get { return this.connectedPlanPanel; }
-			set { this.connectedPlanPanel = value; }
+			set {
+				this.connectedPlanPanel = value;
+				if (this.connectedPlanPanel != null && this.connectedPlanPanel.Plan != null && this.connectedPlanPanel.Plan is TempImagePlan) {
+					this.startPoint = new Point2D(0, 0);
+					this.endPoint = (this.connectedPlanPanel.Plan as TempImagePlan).GetImageSize();
+				} else {
+					this.startPoint = null;
+					this.endPoint = null;
+				}
+			}
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {

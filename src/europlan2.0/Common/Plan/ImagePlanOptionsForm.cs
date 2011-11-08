@@ -112,6 +112,10 @@ namespace Europlan.Common {
 					this.DialogResult = DialogResult.Cancel;
 					return;
 				}
+			} else {
+				if (!(this.picturePanel.Plan as ImagePlan).IsExportMeasureOk()) {
+					MessageBox.Show(EuroplanRes.ImagePlanOptionsForm_WarnungGroesseText, EuroplanRes.ImagePlanOptionsForm_WarnungGroesseTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
 			}
 			this.DialogResult = DialogResult.OK;
 		}
@@ -228,9 +232,6 @@ namespace Europlan.Common {
 						default:
 							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0.00") + EuroplanRes.Unit_Meter;
 							break;
-					}
-					if (!(this.picturePanel.Plan as ImagePlan).IsExportMeasureOk()) {
-						MessageBox.Show(EuroplanRes.ImagePlanOptionsForm_WarnungGroesseText, EuroplanRes.ImagePlanOptionsForm_WarnungGroesseTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					}
 				}
 			}

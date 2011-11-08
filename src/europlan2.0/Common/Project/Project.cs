@@ -728,27 +728,31 @@ namespace Europlan.Common {
 		}
 
 		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string materialId, double amount) {
-			if (amount != 0) {
-				Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
-				if (material != null || materialId.StartsWith("PLACEHOLDER_")) {
-					if (requiredMaterial.ContainsKey(material.Id)) {
-						double oldAmount = requiredMaterial[material.Id];
-						double newAmount;
-						if (double.IsNegativeInfinity(oldAmount)) {
-							newAmount = Math.Abs(amount);
-						} else if (double.IsNegativeInfinity(amount)) {
-							newAmount = Math.Abs(oldAmount);
+			try {
+				if (amount != 0) {
+					Material material = this.Config.Materials.Find(delegate(Material m) { return m.Id == materialId; });
+					if (material != null || materialId.StartsWith("PLACEHOLDER_")) {
+						if (requiredMaterial.ContainsKey(materialId)) {
+							double oldAmount = requiredMaterial[materialId];
+							double newAmount;
+							if (double.IsNegativeInfinity(oldAmount)) {
+								newAmount = Math.Abs(amount);
+							} else if (double.IsNegativeInfinity(amount)) {
+								newAmount = Math.Abs(oldAmount);
+							} else {
+								newAmount = Math.Abs(oldAmount) + Math.Abs(amount);
+							}
+							if (double.IsNegativeInfinity(oldAmount) || double.IsNegativeInfinity(amount) || oldAmount < 0 || amount < 0) {
+								newAmount = -newAmount;
+							}
+							requiredMaterial[materialId] = newAmount;
 						} else {
-							newAmount = Math.Abs(oldAmount) + Math.Abs(amount);
+							requiredMaterial.Add(materialId, amount);
 						}
-						if (double.IsNegativeInfinity(oldAmount) || double.IsNegativeInfinity(amount) || oldAmount < 0 || amount < 0) {
-							newAmount = -newAmount;
-						}
-						requiredMaterial[material.Id] = newAmount;
-					} else {
-						requiredMaterial.Add(material.Id, amount);
 					}
 				}
+			} catch (Exception e) {
+				Console.WriteLine(e);
 			}
 		}
 

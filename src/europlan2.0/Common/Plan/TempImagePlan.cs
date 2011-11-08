@@ -18,6 +18,22 @@ namespace Europlan.Common {
 		public void SetAbsoluteFilename(string filename) {
 			this.absoluteFileName = filename;
 		}
+
+		public WW.Math.Point2D GetImageSize() {
+			if (!string.IsNullOrEmpty(this.AbsoluteFileName)) {
+				try {
+					Image image = Image.FromFile(this.AbsoluteFileName);
+					int width = image.Width;
+					int height = image.Height;
+					image.Dispose();
+					return new WW.Math.Point2D(width, height);
+				} catch {
+					return new WW.Math.Point2D(0, 0);
+				}
+			} else {
+				return new WW.Math.Point2D(0, 0);
+			}
+		}
 	}
 
 }
