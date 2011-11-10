@@ -209,7 +209,7 @@ namespace Europlan.Common {
 		}
 
 		public double qFBHSqm {
-		    get { return Q_FBH / (RzArea + AzArea + ConnectionArea + UnusedArea); }
+		    get { return Q_FBH / (RzArea + AzArea + ConnectionArea); }
 		    //set { q_FBH = value; }
 		}
 
