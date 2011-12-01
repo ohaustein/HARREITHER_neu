@@ -12,9 +12,15 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(GraphicalHithermCompactVerbindung))]
 	public abstract class GraphicalWallVerbindung : IGraphicalWallObject {
 
+		[XmlIgnore]
 		public abstract List<Point2D> Vertices {
-		  get;
-		  set;
+			get;
+			set;
+		}
+
+		public virtual List<Point2D> VerticesSerialize {
+			get { return this.Vertices; }
+			set { this.Vertices = value; }
 		}
 
 		public abstract void InitializeVertices(IEnumerable<Point2D> vertices);
@@ -44,19 +50,49 @@ namespace Europlan.Common {
 
 		public abstract double GetDistance(Point2D planPoint);
 
+		[XmlIgnore]
 		public abstract int StartIndex {
 			get;
 			set;
 		}
 
+		public virtual Nullable<int> StartIndexSerialize {
+			get { return this.StartIndex; }
+			set {
+				if (value.HasValue) {
+					this.StartIndex = value.Value;
+				}
+			}
+		}
+
+		[XmlIgnore]
 		public abstract int EndIndex {
 			get;
 			set;
 		}
 
+		public virtual Nullable<int> EndIndexSerialize {
+			get { return this.EndIndex; }
+			set {
+				if (value.HasValue) {
+					this.EndIndex = value.Value;
+				}
+			}
+		}
+
+		[XmlIgnore]
 		public abstract int CircuitIndex {
 			get;
 			set;
+		}
+
+		public virtual Nullable<int> CircuitIndexSerialize {
+			get { return this.CircuitIndex; }
+			set {
+				if (value.HasValue) {
+					this.CircuitIndex = value.Value;
+				}
+			}
 		}
 
 		[XmlIgnore]
@@ -64,9 +100,15 @@ namespace Europlan.Common {
 			get;
 		}
 
+		[XmlIgnore]
 		public abstract string ProductGuid {
 			set;
 			get;
+		}
+
+		public virtual string ProductGuidSerialize {
+			get { return this.ProductGuid; }
+			set { this.ProductGuid = value; }
 		}
 
 		public abstract double GetLength();
@@ -171,6 +213,7 @@ namespace Europlan.Common {
 
 		protected const double WIDTH = 2.0;
 
+		[XmlIgnore]
 		public override List<Point2D> Vertices {
 		  get { return this.vertices; }
 		  set { this.vertices = value; }
@@ -341,6 +384,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public override string ProductGuid {
 			set { this.productGuid = value; }
 			get { return (this.productGuid != null || this.product == null) ? this.productGuid : this.product.Id; }
@@ -1074,6 +1118,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public override int StartIndex {
 			get {
 				if (this.startIndex >= 0) {
@@ -1096,6 +1141,7 @@ namespace Europlan.Common {
 			set { this.startIndex = value; }
 		}
 
+		[XmlIgnore]
 		public override int EndIndex {
 			get {
 				if (this.endIndex >= 0) {
@@ -1133,6 +1179,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public override int CircuitIndex {
 			get {
 				if (this.circuitIndex >= 0) {

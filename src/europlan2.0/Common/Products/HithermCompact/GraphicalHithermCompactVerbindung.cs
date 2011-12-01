@@ -8,7 +8,8 @@ using WW.Math.Geometry;
 using System.Drawing.Drawing2D;
 
 namespace Europlan.Common {
-	public class GraphicalHithermCompactVerbindung : GenericGraphicalWallVerbindungImplementation<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister,  GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung> {
+	[XmlInclude(typeof(GraphicalHithermCompactUnderfloorVerbindung))]
+	public class GraphicalHithermCompactVerbindung : GenericGraphicalWallVerbindungImplementation<HithermCompactProduct, HithermCompactCircuit, HithermCompactRegister, GraphicalHithermCompactRegisterWrapper, GraphicalHithermCompactVerbindung> {
 
 		internal GraphicalHithermCompactVerbindung()
 			: base() {
@@ -43,9 +44,13 @@ namespace Europlan.Common {
 			this.endLink.FinalizeLoading();
 		}
 
+		[XmlIgnore]
 		public override List<Point2D> Vertices {
 			get {
 				List<Point2D> vertices = new List<Point2D>();
+				if (this.startLink == null || this.startLink.Vertices == null || this.endLink == null || this.endLink.Vertices == null) {
+					return vertices;
+				}
 				vertices.AddRange(this.startLink.Vertices);
 				vertices[vertices.Count - 1] = new Point2D(vertices[vertices.Count - 1].X, -10);
 				vertices.AddRange(this.endLink.Vertices);
@@ -53,6 +58,11 @@ namespace Europlan.Common {
 				return vertices;
 			}
 			set { }
+		}
+
+		public override List<Point2D> VerticesSerialize {
+			get { return new List<Point2D>(); }
+			set { /* intentionally left blank */ }
 		}
 
 		/*public override void InitializeVertices(IEnumerable<Point2D> vertices) {
@@ -117,6 +127,7 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public override string ProductGuid {
 			set {
 				this.startLink.ProductGuid = value;
@@ -125,6 +136,10 @@ namespace Europlan.Common {
 			get {
 				return this.startLink.ProductGuid;
 			}
+		}
+		public override string ProductGuidSerialize {
+			get { return null; }
+			set { /* intentionally left blank */ }
 		}
 
 		public override double GetLength() {
@@ -288,14 +303,24 @@ namespace Europlan.Common {
 			get { return this.endLink.End; }
 		}
 
+		[XmlIgnore]
 		public override int StartIndex {
 			get { return this.startLink.StartIndex; }
 			set { this.startLink.StartIndex = value; }
 		}
+		public override Nullable<int> StartIndexSerialize {
+			get { return null; }
+			set { /* intentionally left blank */ }
+		}
 
+		[XmlIgnore]
 		public override int EndIndex {
 			get { return this.endLink.EndIndex; }
 			set { this.endLink.EndIndex = value; }
+		}
+		public override Nullable<int> EndIndexSerialize {
+			get { return null; }
+			set { /* intentionally left blank */ }
 		}
 
 		[XmlIgnore]
@@ -307,12 +332,17 @@ namespace Europlan.Common {
 			}
 		}
 
+		[XmlIgnore]
 		public override int CircuitIndex {
 			get { return this.startLink.CircuitIndex; }
 			set {
 				this.startLink.CircuitIndex = value;
 				this.endLink.CircuitIndex = value;
 			}
+		}
+		public override Nullable<int> CircuitIndexSerialize {
+			get { return null; }
+			set { /* intentionally left blank */ }
 		}
 
 		[XmlIgnore]
@@ -332,16 +362,62 @@ namespace Europlan.Common {
 
 		public GraphicalHithermCompactVerbindung StartLink {
 			get { return this.startLink; }
-			set { this.startLink = value; }
+			set {
+				this.startLink = value;
+				if (this.startLink != null) {
+					this.startLink.IsPartOfCompound = true;
+				}
+			}
 		}
 
 		public GraphicalHithermCompactVerbindung EndLink {
 			get { return this.endLink; }
-			set { this.endLink = value; }
+			set {
+				this.endLink = value;
+				if (this.endLink != null) {
+					this.endLink.IsPartOfCompound = true;
+				}
+			}
 		}
 
 		public override bool EqualsOrIsPart(object obj) {
 			return base.EqualsOrIsPart(obj) || this.startLink.EqualsOrIsPart(obj) || this.endLink.EqualsOrIsPart(obj);
+		}
+
+		public override int CalculateRequiredWandwinkel() {
+			int result = 2;
+			if (this.startLink != null) {
+				result += this.startLink.CalculateRequiredWandwinkel();
+			}
+			if (this.endLink != null) {
+				result += this.endLink.CalculateRequiredWandwinkel();
+			}
+			return result;
+		}
+
+		public override int CalculateRequiredEckwinkel(List<double> wallBorders) {
+			int result = 0;
+			if (this.startLink != null) {
+				result += this.startLink.CalculateRequiredEckwinkel(wallBorders);
+			}
+			if (this.endLink != null) {
+				result += this.endLink.CalculateRequiredEckwinkel(wallBorders);
+			}
+			return result;
+		}
+
+		public override double CalculateLength() {
+			double length = 0;
+			if (this.startLink != null) {
+				length += this.startLink.CalculateLength();
+			}
+			if (this.endLink != null) {
+				length += this.endLink.CalculateLength();
+			}
+			if (this.endLink != null && this.endLink.Vertices != null && this.endLink.Vertices.Count > 0 && this.startLink != null && this.startLink.Vertices != null && this.startLink.Vertices.Count > 0) {
+				length += (Math.Abs(this.endLink.Vertices[0].X - this.startLink.Vertices[this.startLink.Vertices.Count - 1].X) + 20.0) / 100.0;
+			}
+			return length;
 		}
 	}
 }

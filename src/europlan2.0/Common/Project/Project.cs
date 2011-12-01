@@ -537,6 +537,7 @@ namespace Europlan.Common {
 						Project.ProjectSaved(Instance);
 					}
 				} catch (Exception e) {
+					log.Error(e);
 					MessageBox.Show(EuroplanRes.Project_FehlerBeimSpeichernText, EuroplanRes.Project_FehlerBeimSpeichernTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
