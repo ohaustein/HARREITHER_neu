@@ -83,10 +83,25 @@ namespace Europlan.Common {
 			get { return this.mode; }
 			set {
 				if (value == RoomPickerMode.RPM_PICK_ROOM) {
+					bool resetFloorProducts = !this.isCeiling;
+					bool resetCeilingProducts = this.isCeiling || this.room.CeilingCoordinates == null || this.room.CeilingCoordinates.Count == 0;
+					bool resetWallProducts = false;
 					if (this.room != null && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0) {
-						DialogResult result = MessageBox.Show(EuroplanRes.RoomPicker_NeueRaumgeometrieText, EuroplanRes.RoomPicker_NeueRaumgeometrieTitel, MessageBoxButtons.YesNo);
-						if (result == DialogResult.No) {
-							return;
+						bool ask = false;
+						foreach (PlannedProduct pp in this.room.PlannedProducts) {
+							if (((resetFloorProducts && pp.Product.Type == Product.ProductType.FBH) ||
+								(resetCeilingProducts && pp.Product.Type == Product.ProductType.DH) ||
+								(resetWallProducts && pp.Product.Type == Product.ProductType.WH)) &&
+								pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+								ask = true;
+								break;
+							}
+						}
+						if (ask) {
+							DialogResult result = MessageBox.Show(EuroplanRes.RoomPicker_NeueRaumgeometrieText, EuroplanRes.RoomPicker_NeueRaumgeometrieTitel, MessageBoxButtons.YesNo);
+							if (result == DialogResult.No) {
+								return;
+							}
 						}
 					}
 					this.oldRoomCoordinates.Clear();
@@ -98,9 +113,6 @@ namespace Europlan.Common {
 					if (this.ConnectedPlanPanel != null) {
 						this.ConnectedPlanPanel.InvalidateGraphics();
 					}
-					bool resetFloorProducts = !this.isCeiling;
-					bool resetCeilingProducts = this.isCeiling || this.room.CeilingCoordinates == null || this.room.CeilingCoordinates.Count == 0;
-					bool resetWallProducts = false;
 					foreach (PlannedProduct pp in this.room.PlannedProducts) {
 						if ((resetFloorProducts && pp.Product.Type == Product.ProductType.FBH) ||
 							(resetCeilingProducts && pp.Product.Type == Product.ProductType.DH) ||
