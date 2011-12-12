@@ -447,9 +447,47 @@ namespace Europlan.Common {
 			}
 		}
 
+		private bool compareGeometries(List<Point2D> geometry1, List<Point2D> geometry2) {
+			if (geometry1 == geometry2) {
+				return true;
+			}
+			if (geometry1.Count != geometry2.Count) {
+				return false;
+			}
+			for (int i = 0; i < geometry1.Count; i++) {
+				if (!geometry1[i].Equals(geometry2[i])) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 		private void chkCeilingGeometry_CheckedChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
 				if (!this.chkCeilingGeometry.Checked) {
+					bool ask = false;
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						if (pp.Product.Type == Product.ProductType.DH && pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+							ask = true;
+							break;
+						}
+					}
+					if (this.room.CeilingCoordinates == null || this.room.CeilingCoordinates.Count == 0 || compareGeometries(this.room.CeilingCoordinates, this.room.RoomCoordinates)) {
+						ask = false;
+					}
+					if (ask) {
+						DialogResult result = MessageBox.Show(EuroplanRes.RoomSummaryPanel_DeckengemeometrieVerwerfenText, EuroplanRes.RoomSummaryPanel_DeckengemeometrieVerwerfenTitel, MessageBoxButtons.YesNo);
+						if (result == DialogResult.No) {
+							UpdateControl(false);
+							return;
+						}
+					}
+					foreach (PlannedProduct pp in this.room.PlannedProducts) {
+						if (pp.Product.Type == Product.ProductType.DH) {
+							pp.Product.GraphicalMode = false;
+							pp.Product.ClearGraphicalRepresentation();
+						}
+					}
 					this.room.CeilingCoordinates.Clear();
 					this.room.CeilingUnusedAreaCoordinates.Clear();
 				} else {
