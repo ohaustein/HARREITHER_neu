@@ -248,7 +248,7 @@ namespace Europlan.Common {
 						foreach (Room room in floor.Rooms) {
 							if (chkExportWallNumbers.Enabled && chkExportWallNumbers.Checked) {
 								float size = (float)(plan.Measure * 0.1 );
-								Pen p = new Pen(Color.Black, size);
+								Pen p = new Pen(System.Drawing.Color.Black, size);
 								float fontSize = 8.0f / g.DpiX * plan.Measure.Value;
 								Font font = new Font("Arial", fontSize);
 								StringFormat stringFormat = new StringFormat();
@@ -350,10 +350,13 @@ namespace Europlan.Common {
 				DxfLayer distributorLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerVerteiler);
 				DxfLayer anbindeLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerAnbindeleitungen);
 
+				EntityColor blue = EntityColor.CreateFromRgb(System.Drawing.Color.Blue.ToArgb());
+				EntityColor white = EntityColor.CreateFromRgb(System.Drawing.Color.White.ToArgb());
+
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
-							DxfLine line = new DxfLine(Color.Blue, expansionGap.Start, expansionGap.End);
+							DxfLine line = new DxfLine(blue, expansionGap.Start, expansionGap.End);
 							line.Layer = dehnfugenLayer;
 							model.Entities.Add(line);
 						}
@@ -383,7 +386,7 @@ namespace Europlan.Common {
 									text.HorizontalAlignment = TextHorizontalAlignment.Center;
 									text.VerticalAlignment = TextVerticalAlignment.Middle;
 									text.Layer = wandLayer;
-									text.Color = Color.White;
+									text.Color = white;
 									model.Entities.Add(text);
 								}
 							}

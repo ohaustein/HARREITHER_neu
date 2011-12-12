@@ -222,14 +222,20 @@ namespace Europlan.Common {
 			double bestSqDistance = double.PositiveInfinity;
 			Nullable<Point2D> bestPoint = null;
 
-			IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
+			IList<RenderedEntityInfo> closeRenderedEntityInfos = EntitySelector.GetEntitiesCloseToPoint(
 				model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
 				gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
+			//IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
+			//	model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
+			//	gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
 
 			List<Polygon2D> closePolygons = new List<Polygon2D>();
-			foreach (List<DxfEntity> entityChain in closeEntityChains) {
-				closePolygons.AddRange(GetEntityAsPolygons(entityChain));
+			foreach (RenderedEntityInfo entityInfo in closeRenderedEntityInfos) {
+				closePolygons.AddRange(GetEntityAsPolygons(entityInfo));
 			}
+			//foreach (List<DxfEntity> entityChain in closeEntityChains) {
+			//	closePolygons.AddRange(GetEntityAsPolygons(entityChain));
+			//}
 
 			double curSqDistance = double.PositiveInfinity;
 			Nullable<Point2D> curPoint = null;
@@ -406,84 +412,86 @@ namespace Europlan.Common {
 			}
 		}
 
-		private Point3D CorrectPoint(Point3D point, List<DxfEntity> entityChain, int pos) {
-			if (pos >= entityChain.Count) {
-				return point;
-			} else {
-				// todo correct point
-				DxfEntity correctionEntity = entityChain[pos];
-				if (correctionEntity is DxfInsert) {
+		//private Point3D CorrectPoint(Point3D point, List<DxfEntity> entityChain, int pos) {
+		private Point3D CorrectPoint(Point3D point, RenderedEntityInfo entityInfo) {
+			return entityInfo.Transform.Transform(point);
+			//if (pos >= entityChain.Count) {
+			//    return point;
+			//} else {
+			//    // todo correct point
+			//    DxfEntity correctionEntity = entityChain[pos];
+			//    if (correctionEntity is DxfInsert) {
 					
-					DxfInsert insert = correctionEntity as DxfInsert;
+			//        DxfInsert insert = correctionEntity as DxfInsert;
 
-					Matrix4D matrix = Matrix4D.Identity;
-					//insert.
-					//point = point * ((Vector4D)insert.ScaleFactor);
+			//        Matrix4D matrix = Matrix4D.Identity;
+			//        //insert.
+			//        //point = point * ((Vector4D)insert.ScaleFactor);
 					
-					double cosPhi = Math.Cos(insert.Rotation);
-					double sinPhi = Math.Sin(insert.Rotation);
-					Vector3D u = insert.ZAxis;
-					Matrix4D rotation =
-						new Matrix4D(
-							new Vector4D(
-								1.0 + (1.0 - cosPhi) * (u.X * u.X - 1),
-								(1.0 - cosPhi) * u.X * u.Y + u.Z * sinPhi,
-								(1.0 - cosPhi) * u.X * u.Z - u.Y + sinPhi,
-								0),
-							new Vector4D(
-								(1.0 - cosPhi) * u.X * u.Y - u.Z * sinPhi,
-								1.0 + (1.0 - cosPhi) * (u.Y * u.Y - 1),
-								(1.0 - cosPhi) * u.Y * u.Z + u.X * sinPhi,
-								0),
-							new Vector4D(
-								(1.0 - cosPhi) * u.X * u.Z + u.Y * sinPhi,
-								(1.0 - cosPhi) * u.Y * u.Z - u.X * sinPhi,
-								1.0 + (1.0 - cosPhi) * (u.Z * u.Z - 1),
-								0),
-							new Vector4D(
-								0,
-								0,
-								0,
-								1));
+			//        double cosPhi = Math.Cos(insert.Rotation);
+			//        double sinPhi = Math.Sin(insert.Rotation);
+			//        Vector3D u = insert.ZAxis;
+			//        Matrix4D rotation =
+			//            new Matrix4D(
+			//                new Vector4D(
+			//                    1.0 + (1.0 - cosPhi) * (u.X * u.X - 1),
+			//                    (1.0 - cosPhi) * u.X * u.Y + u.Z * sinPhi,
+			//                    (1.0 - cosPhi) * u.X * u.Z - u.Y + sinPhi,
+			//                    0),
+			//                new Vector4D(
+			//                    (1.0 - cosPhi) * u.X * u.Y - u.Z * sinPhi,
+			//                    1.0 + (1.0 - cosPhi) * (u.Y * u.Y - 1),
+			//                    (1.0 - cosPhi) * u.Y * u.Z + u.X * sinPhi,
+			//                    0),
+			//                new Vector4D(
+			//                    (1.0 - cosPhi) * u.X * u.Z + u.Y * sinPhi,
+			//                    (1.0 - cosPhi) * u.Y * u.Z - u.X * sinPhi,
+			//                    1.0 + (1.0 - cosPhi) * (u.Z * u.Z - 1),
+			//                    0),
+			//                new Vector4D(
+			//                    0,
+			//                    0,
+			//                    0,
+			//                    1));
 
-					Matrix4D scale = new Matrix4D(
-						insert.ScaleFactor.X, 0, 0, 0,
-						0, insert.ScaleFactor.Y, 0, 0,
-						0, 0, insert.ScaleFactor.Z, 0,
-						0, 0, 0, 1);
+			//        Matrix4D scale = new Matrix4D(
+			//            insert.ScaleFactor.X, 0, 0, 0,
+			//            0, insert.ScaleFactor.Y, 0, 0,
+			//            0, 0, insert.ScaleFactor.Z, 0,
+			//            0, 0, 0, 1);
 
-					Matrix4D translation = new Matrix4D(
-						1, 0, 0, insert.InsertionPoint.X,
-						0, 1, 0, insert.InsertionPoint.Y,
-						0, 0, 1, insert.InsertionPoint.Z,
-						0, 0, 0, 1);
+			//        Matrix4D translation = new Matrix4D(
+			//            1, 0, 0, insert.InsertionPoint.X,
+			//            0, 1, 0, insert.InsertionPoint.Y,
+			//            0, 0, 1, insert.InsertionPoint.Z,
+			//            0, 0, 0, 1);
 
-					Matrix4D totalMatrix = translation * rotation * scale;
+			//        Matrix4D totalMatrix = translation * rotation * scale;
 
-					point = totalMatrix.Transform(point);
+			//        point = totalMatrix.Transform(point);
 								
 													
 
-					/*point.X = point.X * insert.ScaleFactor.X + insert.InsertionPoint.X;
-					point.Y = point.Y * insert.ScaleFactor.Y + insert.InsertionPoint.Y;
-					point.Z = point.Z * insert.ScaleFactor.Z + insert.InsertionPoint.Z;*/
-					// todo
-				} else if (correctionEntity is DxfDimension) {
-					DxfDimension dimension = correctionEntity as DxfDimension;
+			//        /*point.X = point.X * insert.ScaleFactor.X + insert.InsertionPoint.X;
+			//        point.Y = point.Y * insert.ScaleFactor.Y + insert.InsertionPoint.Y;
+			//        point.Z = point.Z * insert.ScaleFactor.Z + insert.InsertionPoint.Z;*/
+			//        // todo
+			//    } else if (correctionEntity is DxfDimension) {
+			//        DxfDimension dimension = correctionEntity as DxfDimension;
 
-					point = point + (dimension.InsertionPoint - new Point3D(0, 0, 0));
-					/*point.X = point.X + dimension.InsertionPoint.X;
-					point.Y = point.Y + dimension.InsertionPoint.X;
-					point.Z = point.Z + dimension.InsertionPoint.X;*/
-					// todo
-				}
+			//        point = point + (dimension.InsertionPoint - new Point3D(0, 0, 0));
+			//        /*point.X = point.X + dimension.InsertionPoint.X;
+			//        point.Y = point.Y + dimension.InsertionPoint.X;
+			//        point.Z = point.Z + dimension.InsertionPoint.X;*/
+			//        // todo
+			//    }
 
-				if (pos == entityChain.Count - 1) {
-					return point;
-				} else {
-					return CorrectPoint(point, entityChain, pos + 1);
-				}
-			}
+			//    if (pos == entityChain.Count - 1) {
+			//        return point;
+			//    } else {
+			//        return CorrectPoint(point, entityChain, pos + 1);
+			//    }
+			//}
 		}
 
 		private struct Polygon3D {
@@ -518,8 +526,9 @@ namespace Europlan.Common {
 			public bool isClosed;
 		}
 
-		private List<Polygon2D> GetEntityAsPolygons(List<DxfEntity> entityChain) {
-			DxfEntity entity = entityChain[0];
+		//private List<Polygon2D> GetEntityAsPolygons(List<DxfEntity> entityChain) {
+		private List<Polygon2D> GetEntityAsPolygons(RenderedEntityInfo entityInfo) {
+			DxfEntity entity = entityInfo.Entity;
 			List<Polygon3D> polygons3d = new List<Polygon3D>();
 
 			if (entity is DxfLine) {
@@ -551,7 +560,8 @@ namespace Europlan.Common {
 			foreach (Polygon3D polygon3d in polygons3d) {
 				Polygon2D polygon2d = new Polygon2D(polygon3d.isClosed);
 				foreach (Point3D vertex3d in polygon3d.vertices) {
-					polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityChain, 1)));
+					//polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityChain, 1)));
+					polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityInfo)));
 				}
 				polygons2d.Add(polygon2d);
 			}

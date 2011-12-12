@@ -99,7 +99,7 @@ namespace Europlan.Common {
 						this.ConnectedPlanPanel.InvalidateGraphics();
 					}
 					bool resetFloorProducts = !this.isCeiling;
-					bool resetCeilingProducts = this.isCeiling || this.room.CeilingCoordinates == null;
+					bool resetCeilingProducts = this.isCeiling || this.room.CeilingCoordinates == null || this.room.CeilingCoordinates.Count == 0;
 					bool resetWallProducts = false;
 					foreach (PlannedProduct pp in this.room.PlannedProducts) {
 						if ((resetFloorProducts && pp.Product.Type == Product.ProductType.FBH) ||

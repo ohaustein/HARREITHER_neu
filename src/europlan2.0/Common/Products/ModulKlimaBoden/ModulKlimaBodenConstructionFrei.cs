@@ -112,16 +112,16 @@ namespace Europlan.Common {
 			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
 			//g.Clip = new Region(roomPath);
 
-			Color c = Color.Gray;
+			System.Drawing.Color c = System.Drawing.Color.Gray;
 			Pen p = new Pen(c);
-			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, Color.FromArgb(0, c));
+			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, System.Drawing.Color.FromArgb(0, c));
 
 			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
 			if (mode == ModulKlimaBodenPlanner.KlimaBodenMode.KDM_CONSTRUCTION) {
-				c = Color.FromArgb(128, 0, 240, 0);
+				c = System.Drawing.Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
-				b = new SolidBrush(Color.FromArgb(64, c));
+				b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));
 				Region r = new Region();
 				r.MakeInfinite();
 				g.Clip = r;

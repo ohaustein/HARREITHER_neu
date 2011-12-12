@@ -1632,7 +1632,7 @@ namespace Europlan.Common {
 					this.plannedFloorArea = 0;
 					break;
 			}
-			if (this.graphConstruction != null) {
+			if (this.graphConstruction != null && this.GraphicalMode.HasValue && this.GraphicalMode.Value) {
 				this.graphConstruction.Product = this;
 				this.graphConstruction.RecalculateSchienen();
 			}
