@@ -1298,7 +1298,6 @@ prostorija</value>
   </data>
 	<data name="General_NeustartErforderlichText" xml:space="preserve">
     <value>Zbog izmjene postavki potreban je restart. 
-
 Kliknite na "OK" za restart programa</value>
   </data>
 	<data name="General_NeustartErforderlichTitel" xml:space="preserve">
