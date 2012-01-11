@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using log4net;
 
 namespace Europlan.Common {
 	public partial class ImportedPlansPanel : UserControl, IEditorUserControl, ISaveRequest {
@@ -16,17 +17,17 @@ namespace Europlan.Common {
 			private ProgressForm progressForm;
 			private NewPlanForm newPlanForm;
 			private string fileName;
-			List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
+			//List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
 			private string dir;
 			private string subDir;
 			private string extension;
 			private string tmpFileName;
 
-			public PreviewConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, List<SolidFramework.Pdf.Plumbing.PdfPage> Pages, string dir, string subDir, string extension) {
+			public PreviewConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, /*List<SolidFramework.Pdf.Plumbing.PdfPage> Pages,*/ string dir, string subDir, string extension) {
 				this.progressForm = progressForm;
 				this.newPlanForm = newPlanform;
 				this.fileName = fileName;
-				this.pages = Pages;
+				//this.pages = Pages;
 				this.dir = dir;
 				this.subDir = subDir;
 				this.extension = extension;
@@ -44,9 +45,9 @@ namespace Europlan.Common {
 				get { return this.fileName; }
 			}
 
-			public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
+			/*public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
 				get { return this.pages; }
-			}
+			}*/
 
 			public string Dir {
 				get { return this.dir; }
@@ -70,17 +71,18 @@ namespace Europlan.Common {
 			private ProgressForm progressForm;
 			private NewPlanForm newPlanForm;
 			private string fileName;
-			List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
+			//List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
 			private string dir;
 			private string subDir;
 			private string extension;
 			private double top, left, bottom, right;
+			private int dpi;
 
-			public FinalConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, List<SolidFramework.Pdf.Plumbing.PdfPage> Pages, string dir, string subDir, string extension, double top, double left, double bottom, double right) {
+			public FinalConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, string dir, string subDir, string extension, double top, double left, double bottom, double right, int dpi) {
 				this.progressForm = progressForm;
 				this.newPlanForm = newPlanform;
 				this.fileName = fileName;
-				this.pages = Pages;
+				//this.pages = Pages;
 				this.dir = dir;
 				this.subDir = subDir;
 				this.extension = extension;
@@ -88,6 +90,7 @@ namespace Europlan.Common {
 				this.left = left;
 				this.bottom = bottom;
 				this.right = right;
+				this.dpi = dpi;
 			}
 
 			public ProgressForm ProgressForm {
@@ -102,9 +105,9 @@ namespace Europlan.Common {
 				get { return this.fileName; }
 			}
 
-			public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
+			/*public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
 				get { return this.pages; }
-			}
+			}*/
 
 			public string Dir {
 				get { return this.dir; }
@@ -133,8 +136,14 @@ namespace Europlan.Common {
 			public double Right {
 				get { return this.right; }
 			}
+
+			public int Dpi {
+				get { return this.dpi; }
+			}
 		}
 #endif
+
+		private static readonly ILog log = LogManager.GetLogger(typeof(ImportedPlansPanel));
 
 		public event ProjectStructureChangedHandler ProjectStructureChanged;
 		public event ProjectChangedHandler ProjectChanged;
@@ -181,6 +190,23 @@ namespace Europlan.Common {
 			return true;
 		}
 
+		private List<SolidFramework.Pdf.Plumbing.PdfPage> GetPdfPages(string filename) {
+			List<SolidFramework.Pdf.Plumbing.PdfPage> pageList = null;
+			SolidFramework.Pdf.Catalog catalog = null;
+			SolidFramework.Pdf.Plumbing.PdfPages pages = null;
+			SolidFramework.Pdf.PdfDocument doc = null;
+			
+			doc = new SolidFramework.Pdf.PdfDocument(filename);
+			doc.Open();
+			// Get our pages.
+			pageList = new List<SolidFramework.Pdf.Plumbing.PdfPage>(doc.Catalog.Pages.PageCount);
+			catalog = (SolidFramework.Pdf.Catalog)SolidFramework.Pdf.Catalog.Create(doc);
+			pages = (SolidFramework.Pdf.Plumbing.PdfPages)catalog.Pages;
+			ProcessPages(ref pages, ref pageList);
+
+			return pageList;
+		}
+
 		private void btnImport_Click(object sender, EventArgs e) {
 			bool saved = true;
 			if (ProjectSaveRequest != null) {
@@ -223,15 +249,15 @@ namespace Europlan.Common {
 					SolidFramework.License.Import("Christian Neudorfer", "christian.neudorfer@bluesource.at", "bluesource - mobile solutions gmbh", "CXZC");
 #endif
 
-					List<SolidFramework.Pdf.Plumbing.PdfPage> Pages = null;
-					SolidFramework.Pdf.Catalog catalog = null;
+					List<SolidFramework.Pdf.Plumbing.PdfPage> pages = null;
+					/*SolidFramework.Pdf.Catalog catalog = null;
 					SolidFramework.Pdf.Plumbing.PdfPages pages = null;
-					SolidFramework.Pdf.PdfDocument doc = null;	
+					SolidFramework.Pdf.PdfDocument doc = null;	*/
 #endif
 			
 					if (isPdf(extension)) {
 #if PDF
-						// Load up the document
+						/*// Load up the document
 						doc = new SolidFramework.Pdf.PdfDocument(dialog.FileName);
 						doc.Open();
 						// Get our pages.
@@ -239,9 +265,10 @@ namespace Europlan.Common {
 						catalog = (SolidFramework.Pdf.Catalog)SolidFramework.Pdf.Catalog.Create(doc);
 						pages = (SolidFramework.Pdf.Plumbing.PdfPages)catalog.Pages;
 						ProcessPages(ref pages, ref Pages);
-						
+						*/
+						pages = this.GetPdfPages(dialog.FileName);
 						newPlanForm = new NewPlanForm(true);
-						newPlanForm.NumOfPages = Pages.Count;
+						newPlanForm.NumOfPages = pages.Count;
 #endif
 					} else {
 						newPlanForm = new NewPlanForm(false);
@@ -260,7 +287,7 @@ namespace Europlan.Common {
 #if PDF
 							previewSemaphore = new Semaphore(0, 1);
 							ProgressForm progressForm = new ProgressForm(previewSemaphore);
-							PreviewConverterArguments args = new PreviewConverterArguments(progressForm, newPlanForm, dialog.FileName, Pages, dir, subDir, extension);
+							PreviewConverterArguments args = new PreviewConverterArguments(progressForm, newPlanForm, dialog.FileName, /*pages,*/ dir, subDir, extension);
 							this.backgroundSaver.RunWorkerAsync(args);
 
 							progressForm.ShowDialog();
@@ -281,23 +308,31 @@ namespace Europlan.Common {
 
 							plan.Name = newPlanForm.PlanName;
 							plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
-							plans.Add(plan);
-							if (ProjectChanged != null) {
-								ProjectChanged(this);
+							bool import = true;
+							if (plan.IsLargePlan) {
+								import = MessageBox.Show("Wenn Sie groﬂe Pl‰ne importieren, kann sich unter Umst‰nden die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie diesen Plan trotzdem importieren?", "Best‰tigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
 							}
-							UpdateControl(false);
+							if (import) {
+								plans.Add(plan);
+								if (ProjectChanged != null) {
+									ProjectChanged(this);
+								}
+								UpdateControl(false);
+							}
 
 							newPlanForm.Dispose();
 							dialog.Dispose();
-							openPlanOptions(plan);
+							if (import) {
+								openPlanOptions(plan);
+							}
 						}						
 					}
 				}
 			}
 		}
 
-		private static int PDF_PREVIEW_DPI = 72;
-		private static int PDF_PT_PER_INCH = 72;
+		private static readonly int PDF_PREVIEW_DPI = 72;
+		public static readonly int PDF_PT_PER_INCH = 72;
 
 		private static Semaphore previewSemaphore;
 		private static Semaphore finalSemaphore;
@@ -306,8 +341,10 @@ namespace Europlan.Common {
 		private void backgroundSaver_DoWork(object sender, DoWorkEventArgs e) {
 			PreviewConverterArguments args = e.Argument as PreviewConverterArguments;
 
+			List<SolidFramework.Pdf.Plumbing.PdfPage> pages = this.GetPdfPages(args.FileName);
+
 			// Create a bitmap from the page with set dpi.
-			Bitmap bm = args.Pages[args.NewPlanForm.PageNumber - 1].DrawBitmap(PDF_PREVIEW_DPI);
+			Bitmap bm = pages[args.NewPlanForm.PageNumber - 1].DrawBitmap(PDF_PREVIEW_DPI);
 
 			// Setup the filename.
 			args.TmpFileName = Path.GetTempFileName();
@@ -335,21 +372,41 @@ namespace Europlan.Common {
 			plan.SetAbsoluteFilename(args.TmpFileName);
 
 			PdfRegionPickerForm regionPickerForm = new PdfRegionPickerForm(plan);
-			regionPickerForm.ShowDialog();
+			DialogResult dr = regionPickerForm.ShowDialog();
+			if (dr == DialogResult.Cancel) {
+				return;
+			}
+			int dpi = regionPickerForm.Dpi;
 
-			SolidFramework.Pdf.Plumbing.PdfPage page = args.Pages[args.NewPlanForm.PageNumber - 1];
+			List<SolidFramework.Pdf.Plumbing.PdfPage> pages = this.GetPdfPages(args.FileName);
+			SolidFramework.Pdf.Plumbing.PdfPage page = pages[args.NewPlanForm.PageNumber - 1];
 
-			double top = 0, left = 0, bottom = page.TrimBox.Bottom - page.TrimBox.Top, right = page.TrimBox.Right - page.TrimBox.Left;
+			log.Error("before accessing trimbox");
+
+			//double top = 0, left = 0, bottom = page.TrimBox.Bottom - page.TrimBox.Top, right = page.TrimBox.Right - page.TrimBox.Left;
+			double top = 0, left = 0, bottom = 0, right = 0;
+			
+			log.Error("after accessing trimbox");
+
 			if (regionPickerForm.TopLeft.HasValue && regionPickerForm.BottomRight.HasValue) {
+				log.Error("getting top");
 				top = regionPickerForm.TopLeft.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
 				left = regionPickerForm.TopLeft.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
+				log.Error("getting left");
 				bottom = regionPickerForm.BottomRight.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
+				log.Error("getting bottom");
 				right = regionPickerForm.BottomRight.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
+				log.Error("getting right");
+			} else {
+				log.Error("else");
+				bottom = page.TrimBox.Bottom - page.TrimBox.Top;
+				right = page.TrimBox.Right - page.TrimBox.Left;
 			}
+			log.Error("seems ok");
 
 			finalSemaphore = new Semaphore(0, 1);
 			ProgressForm progressForm = new ProgressForm(finalSemaphore);
-			FinalConverterArguments fArgs = new FinalConverterArguments(progressForm, args.NewPlanForm, args.FileName, args.Pages, args.Dir, args.SubDir, args.Extension, top, left, bottom, right);
+			FinalConverterArguments fArgs = new FinalConverterArguments(progressForm, args.NewPlanForm, args.FileName, args.Dir, args.SubDir, args.Extension, top, left, bottom, right, dpi);
 			this.backgroundSaver2.RunWorkerAsync(fArgs);
 			progressForm.ShowDialog();
 		}
@@ -357,7 +414,7 @@ namespace Europlan.Common {
 		private void backgroundSaver2_DoWork(object sender, DoWorkEventArgs e) {
 			FinalConverterArguments args = e.Argument as FinalConverterArguments;
 
-			double dpi = 96;
+			double dpi = args.Dpi;
 
 			double width = args.Right - args.Left;
 			double height = args.Bottom - args.Top;
@@ -368,7 +425,8 @@ namespace Europlan.Common {
 			m.Translate((float)(-args.Left * dpi / PDF_PT_PER_INCH), (float)(-args.Top * dpi / PDF_PT_PER_INCH));
 			m.Scale((float)(dpi / PDF_PT_PER_INCH), (float)(dpi / PDF_PT_PER_INCH));
 			g.Transform = m;
-			args.Pages[args.NewPlanForm.PageNumber - 1].DrawToHDC(ref g);
+			List<SolidFramework.Pdf.Plumbing.PdfPage> pages = this.GetPdfPages(args.FileName);
+			pages[args.NewPlanForm.PageNumber - 1].DrawToHDC(ref g);
 
 			// Setup the filename.
 			string newFileName = Path.Combine(args.Dir, Path.GetFileNameWithoutExtension(args.FileName) + ".png");

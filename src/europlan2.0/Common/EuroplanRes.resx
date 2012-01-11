@@ -1929,7 +1929,7 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
     <value>Raumtyp</value>
   </data>
   <data name="LL_QuickDimensioning_RaumtypHeizlastKuehllast" xml:space="preserve">
-    <value>Raumtyp: Heizlast - Kühhlast</value>
+    <value>Raumtyp: Heizlast - Kühllast</value>
   </data>
   <data name="LL_QuickDimensioning_RcFunk" xml:space="preserve">
     <value>RC-Funk</value>
@@ -7071,5 +7071,20 @@ Compact
   </data>
   <data name="RoomSummaryPanel_DeckengemeometrieVerwerfenTitel" xml:space="preserve">
     <value>Deckengeometrie verwerfen?</value>
+  </data>
+  <data name="PdfRegionPickerForm_Auswaehlen" xml:space="preserve">
+    <value>Bereich auswählen</value>
+  </data>
+  <data name="PdfRegionPickerForm_Bildgroesse" xml:space="preserve">
+    <value>Bildgröße:</value>
+  </data>
+  <data name="PdfRegionPickerForm_Klein" xml:space="preserve">
+    <value>klein</value>
+  </data>
+  <data name="PdfRegionPickerForm_Normal" xml:space="preserve">
+    <value>normal</value>
+  </data>
+  <data name="PdfRegionPickerForm_Gross" xml:space="preserve">
+    <value>groß</value>
   </data>
 </root>

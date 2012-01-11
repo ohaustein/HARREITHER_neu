@@ -500,7 +500,7 @@ namespace Europlan.Common {
 			get { return this.offsetY; }
 			set {
 				if (!this.beplankung.HasValue) {
-					this.OffsetY = 0;
+					this.offsetY = 0;
 					return;
 				}
 				this.offsetY = value;

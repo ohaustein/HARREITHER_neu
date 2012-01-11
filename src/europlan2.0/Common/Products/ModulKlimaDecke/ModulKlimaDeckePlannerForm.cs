@@ -653,6 +653,7 @@ namespace Europlan.Common.Products {
 			if (!updateOngoing) {
 				if (this.rbKassettendecke.Checked && this.modulKlimaDeckePlanner.Product.GraphConstruction.CeilingConstruction != ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE) {
 					this.modulKlimaDeckePlanner.Product.GraphConstruction = this.kassette;
+					this.UpdateModuleTypesInCombobox(this.kassette.Raster);
 					this.changed = true;
 					this.UpdateControls();
 					this.planPanel.InvalidateGraphics();
@@ -671,6 +672,7 @@ namespace Europlan.Common.Products {
 						this.modulKlimaDeckePlanner.Product.GraphConstruction = this.glatt;
 					}
 					this.modulKlimaDeckePlanner.Product.GraphConstruction.RecalculateSchienen();
+					this.UpdateModuleTypesInCombobox(this.glatt.SchienenAbstand);
 					this.changed = true;
 					this.UpdateControls();
 					this.planPanel.InvalidateGraphics();
@@ -689,6 +691,7 @@ namespace Europlan.Common.Products {
 						this.modulKlimaDeckePlanner.Product.GraphConstruction = this.glatt;
 					}
 					this.modulKlimaDeckePlanner.Product.GraphConstruction.RecalculateSchienen();
+					this.UpdateModuleTypesInCombobox(this.glatt.SchienenAbstand);
 					this.changed = true;
 					this.UpdateControls();
 					this.planPanel.InvalidateGraphics();
@@ -1434,25 +1437,11 @@ namespace Europlan.Common.Products {
 					if (sender == this.rbSerie30) {
 						this.glatt.SchienenAbstand = 0.3;
 						this.akustik.SchienenAbstand = 0.3;
-
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
-						this.cmbModulType.SelectedIndex = 2;
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
-						this.cmbSelectedModuleType.SelectedIndex = -1;
-
 					} else if (sender == this.rbSerie40) {
 						this.glatt.SchienenAbstand = 0.4;
 						this.akustik.SchienenAbstand = 0.4;
-
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
-						this.cmbModulType.SelectedIndex = 0;
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
-						this.cmbSelectedModuleType.SelectedIndex = -1;
 					}
+					UpdateModuleTypesInCombobox(this.glatt.SchienenAbstand);
 				}
 				this.planPanel.InvalidateGraphics();
 			}
@@ -1467,37 +1456,73 @@ namespace Europlan.Common.Products {
 
 					if (sender == this.rb1050) {
 						this.kassette.Raster = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450;
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
-						this.cmbModulType.SelectedIndex = 0;
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
-						this.cmbSelectedModuleType.SelectedIndex = -1;
 					} else if (sender == this.rb625) {
 						this.kassette.Raster = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_625;
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
-						this.cmbModulType.SelectedIndex = 0;
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
-						this.cmbSelectedModuleType.SelectedIndex = -1;
 					} else if (sender == this.rb600) {
 						this.kassette.Raster = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_600;
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
-						this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
-						this.cmbModulType.SelectedIndex = 0;
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
-						this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
-						this.cmbSelectedModuleType.SelectedIndex = -1;
 					}
+					UpdateModuleTypesInCombobox(this.kassette.Raster);
 				}
 				this.planPanel.InvalidateGraphics();
+			}
+		}
+
+		private void UpdateModuleTypesInCombobox(double schienenAbstand) {
+			this.cmbModulType.Items.Clear();
+			this.cmbSelectedModuleType.Items.Clear();
+			if (Math.Round(schienenAbstand, 2) == 0.3) {
+				this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
+				this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
+				this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
+				this.cmbModulType.SelectedIndex = 2;
+				this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30);
+				this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30);
+				this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30);
+				this.cmbSelectedModuleType.SelectedIndex = -1;
+			} else {
+				this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+				this.cmbModulType.SelectedIndex = 0;
+				this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+				this.cmbSelectedModuleType.SelectedIndex = -1;
+			}
+		}
+
+		private void UpdateModuleTypesInCombobox(ModulKlimaDeckeConstructionKassette.RasterMass rasterMass) {
+			this.cmbModulType.Items.Clear();
+			this.cmbSelectedModuleType.Items.Clear();
+			switch (rasterMass) {
+				case ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450:
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+					this.cmbModulType.SelectedIndex = 0;
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
+					this.cmbSelectedModuleType.SelectedIndex = -1;
+					break;
+
+				case ModulKlimaDeckeConstructionKassette.RasterMass.Raster_625:
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
+					this.cmbModulType.SelectedIndex = 0;
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
+					this.cmbSelectedModuleType.SelectedIndex = -1;
+					break;
+
+				case ModulKlimaDeckeConstructionKassette.RasterMass.Raster_600:
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
+					this.cmbModulType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
+					this.cmbModulType.SelectedIndex = 0;
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C);
+					this.cmbSelectedModuleType.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
+					this.cmbSelectedModuleType.SelectedIndex = -1;
+					break;
 			}
 		}
 

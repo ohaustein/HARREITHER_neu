@@ -646,11 +646,16 @@ namespace Europlan.Common {
 					}
 				}
 
-				pipeAfterVorlauf += this.ruecklauf;
-				pipeBeforeRuecklauf += this.vorlauf;
-				totalPipeLength = pipeBeforeVorlauf + pipeAfterVorlauf + this.vorlauf;
-				//totalPipeLength += this.vorlauf;
-				//totalPipeLength += this.ruecklauf;
+				if (this.Insulation != InsulationEnum.IN_VL_RL) {
+					pipeAfterVorlauf += this.ruecklauf;
+				}
+				if (this.Insulation == InsulationEnum.IN_NONE) {
+					pipeBeforeRuecklauf += this.vorlauf;
+				}
+				totalPipeLength = pipeBeforeVorlauf + pipeAfterVorlauf;
+				if (this.Insulation == InsulationEnum.IN_NONE) {
+					totalPipeLength += this.vorlauf;
+				}
 
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
@@ -684,11 +689,18 @@ namespace Europlan.Common {
 
 				if (!double.IsNaN(vorlaufHeatLoad)) {
 					heatLoadRoom += vorlaufHeatLoad;
+					qH2o += vorlaufHeatLoad;
+					if (!double.IsNaN(vorlaufQU)) {
+						qH2o += vorlaufQU;
+					}
 				}
 				if (!double.IsNaN(ruecklaufHeatLoad)) {
 					heatLoadRoom += ruecklaufHeatLoad;
+					qH2o += ruecklaufHeatLoad;
+					if (!double.IsNaN(vorlaufQU)) {
+						qH2o += ruecklaufQU;
+					}
 				}
-				qH2o += vorlaufHeatLoad + vorlaufQU + ruecklaufHeatLoad + ruecklaufQU;
 			}
 			if (heatLoadRoom.Equals(double.NaN)) {
 				heatLoadRoom = 0;
@@ -811,9 +823,21 @@ namespace Europlan.Common {
 					}
 				}
 
-				totalPipeLength += pipeBeforeVorlauf + pipeAfterVorlauf;
+				/*totalPipeLength += pipeBeforeVorlauf + pipeAfterVorlauf;
 				totalPipeLength += this.vorlauf;
-				totalPipeLength += this.ruecklauf;
+				totalPipeLength += this.ruecklauf;*/
+
+				
+				if (this.Insulation != InsulationEnum.IN_VL_RL) {
+					pipeAfterVorlauf += this.ruecklauf;
+				}
+				if (this.Insulation == InsulationEnum.IN_NONE) {
+					pipeBeforeRuecklauf += this.vorlauf;
+				}
+				totalPipeLength = pipeBeforeVorlauf + pipeAfterVorlauf;
+				if (this.Insulation == InsulationEnum.IN_NONE) {
+					totalPipeLength += this.vorlauf;
+				}
 
 				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
 				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
@@ -844,8 +868,21 @@ namespace Europlan.Common {
 				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
 				double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomCoolTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowCool) * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
 
-				coolLoadRoom += vorlaufHeatLoad + ruecklaufHeatLoad;
-				qH2o += vorlaufHeatLoad + vorlaufQU + ruecklaufHeatLoad + ruecklaufQU;
+				if (!double.IsNaN(vorlaufHeatLoad)) {
+					coolLoadRoom += vorlaufHeatLoad;
+					qH2o += vorlaufHeatLoad;
+					if (!double.IsNaN(vorlaufQU)) {
+						qH2o += vorlaufQU;
+					}
+				}
+				if (!double.IsNaN(ruecklaufHeatLoad)) {
+					coolLoadRoom += ruecklaufHeatLoad;
+					qH2o += ruecklaufHeatLoad;
+					if (!double.IsNaN(vorlaufQU)) {
+						qH2o += ruecklaufQU;
+					}
+				}
+
 			}
 			if (coolLoadRoom.Equals(double.NaN)) {
 				coolLoadRoom = 0;

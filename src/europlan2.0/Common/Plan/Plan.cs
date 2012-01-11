@@ -86,6 +86,11 @@ namespace Europlan.Common {
 		public abstract bool InvertYAxis {
 			get;
 		}
+
+		[XmlIgnore]
+		public virtual bool IsLargePlan {
+			get { return false; }
+		}
 	}
 
 }

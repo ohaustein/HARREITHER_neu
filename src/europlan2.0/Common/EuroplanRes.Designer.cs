@@ -233,7 +233,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Tv
-        ///
         ///°C.
         /// </summary>
         internal static string AuslegeAssistentForm_Tv {
@@ -442,7 +441,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to BKA
-        ///
         ///(m²).
         /// </summary>
         internal static string ConcreteActivationProduct_Schnellauslegung {
@@ -525,9 +523,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to durch
-        ///
         ///Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string ConnectionPipePanel_DurchRaumCol {
@@ -547,7 +543,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///leistung.
         /// </summary>
         internal static string ConnectionPipePanel_HeizleistungCol {
@@ -567,7 +562,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Kühl-
-        ///
         ///leistung.
         /// </summary>
         internal static string ConnectionPipePanel_KuehlleistungCol {
@@ -578,9 +572,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to nur
-        ///
         ///erster
-        ///
         ///HK.
         /// </summary>
         internal static string ConnectionPipePanel_NurErsterHkCol {
@@ -600,7 +592,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohr-
-        ///
         ///system.
         /// </summary>
         internal static string ConnectionPipePanel_RohrsystemCol {
@@ -611,9 +602,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Länge
-        ///
         ///Rücklauf
-        ///
         ///(m).
         /// </summary>
         internal static string ConnectionPipePanel_RuecklaufCol {
@@ -669,7 +658,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verlege-
-        ///
         ///art.
         /// </summary>
         internal static string ConnectionPipePanel_VerlegeartCol {
@@ -680,9 +668,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verlege-
-        ///
         ///daten
-        ///
         ///drucken.
         /// </summary>
         internal static string ConnectionPipePanel_VerlegedatenDruckenCol {
@@ -693,9 +679,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Länge
-        ///
         ///Vorlauf
-        ///
         ///(m).
         /// </summary>
         internal static string ConnectionPipePanel_VorlaufCol {
@@ -2074,7 +2058,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to AAnb
-        ///
         ///m².
         /// </summary>
         internal static string EcothermPlannerForm_AAnb {
@@ -2121,7 +2104,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///HK.
         /// </summary>
         internal static string EcothermPlannerForm_AnzahlHK {
@@ -2159,7 +2141,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to B
-        ///
         ///cm.
         /// </summary>
         internal static string EcothermPlannerForm_Breite {
@@ -2170,7 +2151,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to DeltaP
-        ///
         ///mbar.
         /// </summary>
         internal static string EcothermPlannerForm_DeltaP {
@@ -2190,7 +2170,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to A
-        ///
         ///m².
         /// </summary>
         internal static string EcothermPlannerForm_Flaeche {
@@ -2237,7 +2216,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to mh
-        ///
         ///kg/h.
         /// </summary>
         internal static string EcothermPlannerForm_Mh {
@@ -2275,7 +2253,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Q
-        ///
         ///W.
         /// </summary>
         internal static string EcothermPlannerForm_Q {
@@ -2286,7 +2263,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QAnb
-        ///
         ///W.
         /// </summary>
         internal static string EcothermPlannerForm_QAnb {
@@ -2297,7 +2273,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFBH
-        ///
         ///W.
         /// </summary>
         internal static string EcothermPlannerForm_QFBH {
@@ -2308,7 +2283,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QRest
-        ///
         ///W.
         /// </summary>
         internal static string EcothermPlannerForm_QRest {
@@ -2319,7 +2293,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///W.
         /// </summary>
         internal static string EcothermPlannerForm_QSoll {
@@ -2330,7 +2303,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qSoll
-        ///
         ///W/m².
         /// </summary>
         internal static string EcothermPlannerForm_QSollProQuadratmeter {
@@ -2377,7 +2349,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohrl.
-        ///
         ///m.
         /// </summary>
         internal static string EcothermPlannerForm_Rohrlaenge {
@@ -2397,7 +2368,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Spreizung
-        ///
         ///K.
         /// </summary>
         internal static string EcothermPlannerForm_Spreizung {
@@ -2435,7 +2405,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tfb
-        ///
         ///°C.
         /// </summary>
         internal static string EcothermPlannerForm_Tfb {
@@ -3256,7 +3225,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Vor-
-        ///
         ///gabe.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_AnbindungAktivieren {
@@ -3267,7 +3235,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Fläche
-        ///
         ///%.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_AnbindungProzent {
@@ -3341,7 +3308,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Vor-
-        ///
         ///gabe.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_FlaecheAktivieren {
@@ -3352,7 +3318,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to %
-        ///
         ///.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_FlaecheProzent {
@@ -3363,7 +3328,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to m²
-        ///
         ///.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_FlaecheWert {
@@ -3374,9 +3338,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis
-        ///
         ///Nr..
         /// </summary>
         internal static string ExtendedCorrectionsGrid_HeizkreisCol {
@@ -3396,7 +3358,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Vor-
-        ///
         ///gabe.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_RandzoneAktivieren {
@@ -3407,7 +3368,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///Ecken.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_RandzoneEcken {
@@ -3418,7 +3378,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to %
-        ///
         ///.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_RandzoneProzent {
@@ -3429,7 +3388,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to m
-        ///
         ///.
         /// </summary>
         internal static string ExtendedCorrectionsGrid_RandzoneWert {
@@ -3611,7 +3569,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Bearbeiten
-        ///
         ///.
         /// </summary>
         internal static string FloorSummaryPanel_Bearbeiten {
@@ -3622,7 +3579,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Bezeichnung
-        ///
         ///.
         /// </summary>
         internal static string FloorSummaryPanel_Bezeichnung {
@@ -3660,7 +3616,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to A
-        ///
         ///(m²).
         /// </summary>
         internal static string FloorSummaryPanel_Flaeche {
@@ -3680,7 +3635,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFr
-        ///
         ///(W).
         /// </summary>
         internal static string FloorSummaryPanel_Fremdwaermeleistung {
@@ -3700,7 +3654,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFB
-        ///
         ///(W).
         /// </summary>
         internal static string FloorSummaryPanel_Fussbodentransmissionen {
@@ -3765,7 +3718,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QKühl
-        ///
         ///(W).
         /// </summary>
         internal static string FloorSummaryPanel_Kuehlleistung {
@@ -3785,7 +3737,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RF
-        ///
         ///(%).
         /// </summary>
         internal static string FloorSummaryPanel_Luftfeuchtigkeit {
@@ -3805,7 +3756,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Nass-
-        ///
         ///raum.
         /// </summary>
         internal static string FloorSummaryPanel_Nassraum {
@@ -3816,7 +3766,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Nr.
-        ///
         ///.
         /// </summary>
         internal static string FloorSummaryPanel_Nummer {
@@ -3872,7 +3821,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Ti
-        ///
         ///(°C).
         /// </summary>
         internal static string FloorSummaryPanel_RaumtemperaturHeiz {
@@ -3892,7 +3840,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Ti
-        ///
         ///(°C).
         /// </summary>
         internal static string FloorSummaryPanel_RaumtemperaturKuehl {
@@ -3966,7 +3913,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QN
-        ///
         ///(W).
         /// </summary>
         internal static string FloorSummaryPanel_Waermebedarf {
@@ -3986,9 +3932,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klicken Sie auf einen der Buttons in der Spalte
-        ///
         ///&apos;Bearbeiten&apos; um den entsprechenden Raum zu öffnen, oder
-        ///
         ///klicken Sie in der Projekthierarchie auf den gewünschten Raum..
         /// </summary>
         internal static string FloorSummaryPanel_WieGehtsWeiterText {
@@ -4170,7 +4114,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Durch die Änderungen an den Einstellungen ist ein Neustart erforderlich.
-        ///
         ///Drücken Sie OK, um die Anwendung jetzt neu zu starten..
         /// </summary>
         internal static string General_NeustartErforderlichText {
@@ -4487,11 +4430,8 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///Compact
-        ///
         ///Dachschr.
-        ///
         ///(m²).
         /// </summary>
         internal static string HithermCompactDachschraege_Flaechenaufstellung {
@@ -4574,9 +4514,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///Compact
-        ///
         ///(m²).
         /// </summary>
         internal static string HithermCompactProduct_Flaechenaufstellung {
@@ -6009,7 +5947,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Basis-
-        ///
         ///Konstr..
         /// </summary>
         internal static string HithermWallGrid_Basiskonstruktion {
@@ -6020,9 +5957,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Decksch.
-        ///
         ///R
-        ///
         ///(m²K/W).
         /// </summary>
         internal static string HithermWallGrid_Deckschicht {
@@ -6042,9 +5977,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Temp.
-        ///
         ///Heiz
-        ///
         ///(°C).
         /// </summary>
         internal static string HithermWallGrid_TemperaturHeiz {
@@ -6055,9 +5988,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Temp.
-        ///
         ///Kühl
-        ///
         ///(°C).
         /// </summary>
         internal static string HithermWallGrid_TemperaturKuehl {
@@ -6068,7 +5999,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to U-Wert
-        ///
         ///(W/m²K).
         /// </summary>
         internal static string HithermWallGrid_UWert {
@@ -6079,9 +6009,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wärme
-        ///
         ///Bedarf
-        ///
         ///berein..
         /// </summary>
         internal static string HithermWallGrid_WaermebedarfBereinigen {
@@ -6092,9 +6020,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to zus. Dämmg
-        ///
         ///R
-        ///
         ///(m²K/W).
         /// </summary>
         internal static string HithermWallGrid_ZusaetzlicheDaemmung {
@@ -6645,7 +6571,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Die gewählte Anbindefläche ist größer als die verfügbare Fläche.
-        ///
         ///Wollen Sie trotzdem fortfahren?.
         /// </summary>
         internal static string LengthAssistentForm_FlaecheZuGrossText {
@@ -7043,7 +6968,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
-        ///
         ///Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben..
         /// </summary>
         internal static string LL_QuickDimensioning_HinweisText {
@@ -7179,7 +7103,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Raumtyp: Heizlast - Kühhlast.
+        ///   Looks up a localized string similar to Raumtyp: Heizlast - Kühllast.
         /// </summary>
         internal static string LL_QuickDimensioning_RaumtypHeizlastKuehllast {
             get {
@@ -7558,7 +7482,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Ber.
-        ///
         ///Bedarf.
         /// </summary>
         internal static string LL_Report_BereingterBedarfHeiz {
@@ -7569,7 +7492,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Ber.
-        ///
         ///Bedarf.
         /// </summary>
         internal static string LL_Report_BereingterBedarfKuehl {
@@ -7805,7 +7727,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to B
-        ///
         ///cm.
         /// </summary>
         internal static string LL_Report_FussbodenBreite {
@@ -7825,7 +7746,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohr
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_FussbodenDruckverlustRohr {
@@ -7836,7 +7756,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verteiler
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_FussbodenDruckverlustVerteiler {
@@ -7847,7 +7766,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to FB-Konstr.
-        ///
         ///RL,B.
         /// </summary>
         internal static string LL_Report_FussbodenFbKonstruktion {
@@ -7858,7 +7776,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to A
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_FussbodenFlaeche {
@@ -7878,7 +7795,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreise.
         /// </summary>
         internal static string LL_Report_FussbodenHeizkreise {
@@ -7889,7 +7805,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string LL_Report_FussbodenHeizkreise2 {
@@ -7918,7 +7833,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFBH
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_FussbodenLeistung {
@@ -7929,7 +7843,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qFBH
-        ///
         ///W/m².
         /// </summary>
         internal static string LL_Report_FussbodenLeistungProQm {
@@ -7940,7 +7853,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tFB,AZ
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenOberflaechenTempAz {
@@ -7951,7 +7863,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tFB,RZ
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenOberflaechenTempRz {
@@ -7980,7 +7891,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_FussbodenRaumNr {
@@ -7991,7 +7901,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to ti
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenRaumtemperatur {
@@ -8011,7 +7920,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anbinde-
-        ///
         ///ltg. m.
         /// </summary>
         internal static string LL_Report_FussbodenRohrlaengeAnbindung {
@@ -8022,7 +7930,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heizkr.
-        ///
         ///(FBH) m.
         /// </summary>
         internal static string LL_Report_FussbodenRohrlaengeHeizkreis {
@@ -8033,7 +7940,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heizkr.
-        ///
         ///(ges) m.
         /// </summary>
         internal static string LL_Report_FussbodenRohrlaengeHeizkreisGesamt {
@@ -8044,7 +7950,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RZ + AZ
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_FussbodenRohrlaengeRzAz {
@@ -8055,7 +7960,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tr
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenRücklauftemperaur {
@@ -8066,7 +7970,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///(ber) W.
         /// </summary>
         internal static string LL_Report_FussbodenSollLeistung {
@@ -8077,7 +7980,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string LL_Report_FussbodenTeilsystem {
@@ -8097,7 +7999,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Tv
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_FussbodenVorlauftemperaur {
@@ -8108,7 +8009,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wasser-
-        ///
         ///menge.
         /// </summary>
         internal static string LL_Report_FussbodenWassermenge {
@@ -8119,7 +8019,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to WD-Konstr.
-        ///
         ///Ru.
         /// </summary>
         internal static string LL_Report_FussbodenWdKonstruktion {
@@ -8148,7 +8047,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QBer
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_GeschossuebersichtBereinigterBedarf {
@@ -8168,7 +8066,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to 
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_GeschossuebersichtFlaecheEinheit {
@@ -8179,7 +8076,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QHeiz
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_GeschossuebersichtHeizleistung {
@@ -8190,7 +8086,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QKühl
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_GeschossuebersichtKuehlleistung {
@@ -8219,7 +8114,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to ti
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_GeschossuebersichtRaumtemperatur {
@@ -8230,7 +8124,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QRest
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_GeschossuebersichtRestleistung {
@@ -8250,7 +8143,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///leistung.
         /// </summary>
         internal static string LL_Report_Heizleistung {
@@ -8270,7 +8162,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anbindeltg.
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_KlimabodenAnbindeleitung {
@@ -8281,7 +8172,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///Module.
         /// </summary>
         internal static string LL_Report_KlimabodenAnzahlModule {
@@ -8301,7 +8191,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_KlimabodenDruckverlustHeizkreis {
@@ -8312,7 +8201,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verteiler
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_KlimabodenDruckverlustVerteiler {
@@ -8323,9 +8211,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to FB-Konstr.
-        ///
         ///RL,B
-        ///
         ///m²K/W.
         /// </summary>
         internal static string LL_Report_KlimabodenFbKonstruktion {
@@ -8336,7 +8222,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anb.
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimabodenFlaecheAnbindung {
@@ -8347,7 +8232,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Dicht
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimabodenFlaecheDicht {
@@ -8358,7 +8242,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Modulierend
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimabodenFlaecheModulierend {
@@ -8369,7 +8252,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Sonstige
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimabodenFlaecheSonstige {
@@ -8389,7 +8271,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreise.
         /// </summary>
         internal static string LL_Report_KlimabodenHeizkreise {
@@ -8400,7 +8281,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string LL_Report_KlimabodenHeizkreise2 {
@@ -8429,7 +8309,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFBH
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_KlimabodenLeistung {
@@ -8440,7 +8319,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qFBH
-        ///
         ///W/m².
         /// </summary>
         internal static string LL_Report_KlimabodenLeistungProQm {
@@ -8451,7 +8329,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tFB
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimabodenOberflaechenTemp {
@@ -8471,7 +8348,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_KlimabodenRaumNr {
@@ -8482,7 +8358,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to ti
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimabodenRaumtemperatur {
@@ -8493,7 +8368,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tr
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimabodenRuecklauftemperaur {
@@ -8504,7 +8378,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///(ber) W.
         /// </summary>
         internal static string LL_Report_KlimabodenSollLeistung {
@@ -8524,7 +8397,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string LL_Report_KlimabodenTeilsystem {
@@ -8535,7 +8407,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Tv
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimabodenVorlauftemperaur {
@@ -8546,7 +8417,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wasser-
-        ///
         ///menge.
         /// </summary>
         internal static string LL_Report_KlimabodenWassermenge {
@@ -8557,9 +8427,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to WD-Konstr.
-        ///
         ///Ru
-        ///
         ///m²K/W.
         /// </summary>
         internal static string LL_Report_KlimabodenWdKonstruktion {
@@ -8570,7 +8438,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anbindeltg.
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_KlimadeckeAnbindeleitung {
@@ -8590,9 +8457,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Decken-Konstr.
-        ///
         ///RL,B
-        ///
         ///m²K/W.
         /// </summary>
         internal static string LL_Report_KlimadeckeDeckenKonstruktion {
@@ -8612,7 +8477,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_KlimadeckeDruckverlustHeizkreis {
@@ -8623,7 +8487,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verteiler
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_KlimadeckeDruckverlustVerteiler {
@@ -8634,7 +8497,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anb.
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimadeckeFlaecheAnbindung {
@@ -8645,7 +8507,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Modulfläche
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_KlimadeckeFlaecheModule {
@@ -8665,7 +8526,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreise.
         /// </summary>
         internal static string LL_Report_KlimadeckeHeizkreise {
@@ -8676,7 +8536,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string LL_Report_KlimadeckeHeizkreise2 {
@@ -8696,7 +8555,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QDH
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_KlimadeckeLeistung {
@@ -8707,7 +8565,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qDH
-        ///
         ///W/m².
         /// </summary>
         internal static string LL_Report_KlimadeckeLeistungProQm {
@@ -8727,7 +8584,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_KlimadeckeRaumNr {
@@ -8738,7 +8594,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to ti
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimadeckeRaumtemperatur {
@@ -8749,7 +8604,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tr
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimadeckeRuecklauftemperaur {
@@ -8760,7 +8614,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///(ber) W.
         /// </summary>
         internal static string LL_Report_KlimadeckeSollLeistung {
@@ -8780,7 +8633,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string LL_Report_KlimadeckeTeilsystem {
@@ -8791,7 +8643,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Tv
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_KlimadeckeVorlauftemperaur {
@@ -8802,7 +8653,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wasser-
-        ///
         ///menge.
         /// </summary>
         internal static string LL_Report_KlimadeckeWassermenge {
@@ -8813,9 +8663,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to WD-Konstr.
-        ///
         ///Ru
-        ///
         ///m²K/W.
         /// </summary>
         internal static string LL_Report_KlimadeckeWdKonstruktion {
@@ -8844,7 +8692,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Kühl-
-        ///
         ///last.
         /// </summary>
         internal static string LL_Report_Kuehllast {
@@ -8855,7 +8702,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Kühl-
-        ///
         ///leistung.
         /// </summary>
         internal static string LL_Report_Kuehlleistung {
@@ -9064,7 +8910,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_RaumNr {
@@ -9309,7 +9154,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///l/h.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermDurchflussProHkZeile2 {
@@ -9320,7 +9164,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Fläche/
-        ///
         ///HK.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermFlaecheProHk {
@@ -9367,7 +9210,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Länge/
-        ///
         ///HK.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermLaengeProHk {
@@ -9423,7 +9265,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2 {
@@ -9506,7 +9347,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///l/h.
         /// </summary>
         internal static string LL_Report_VerlegedatenEurovalDurchflussProHkZeile2 {
@@ -9517,7 +9357,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Fläche/
-        ///
         ///HK.
         /// </summary>
         internal static string LL_Report_VerlegedatenEurovalFlaecheProHk {
@@ -9564,7 +9403,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Länge/
-        ///
         ///HK.
         /// </summary>
         internal static string LL_Report_VerlegedatenEurovalLaengeProHk {
@@ -9629,7 +9467,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2 {
@@ -9748,7 +9585,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to fläche
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2 {
@@ -9777,7 +9613,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RL
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactLaengeRuecklauf {
@@ -9788,7 +9623,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to VL
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactLaengeVorlauf {
@@ -9799,7 +9633,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wand
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactLaengeWand {
@@ -9837,7 +9670,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///Reg..
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactRegisterAnzahl {
@@ -9902,7 +9734,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RA10
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermFlaecheRa10 {
@@ -9913,7 +9744,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RA 5
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermFlaecheRa5 {
@@ -9951,7 +9781,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to RL
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermLaengeRuecklauf {
@@ -9962,7 +9791,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to VL
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermLaengeVorlauf {
@@ -9973,7 +9801,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wand
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermLaengeWand {
@@ -10011,7 +9838,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Breite
-        ///
         ///cm.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermRegisterBreite {
@@ -10121,7 +9947,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///
         ///l/h.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2 {
@@ -10249,7 +10074,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verb.-
-        ///
         ///ltg. m.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2 {
@@ -10296,7 +10120,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Decken-
-        ///
         ///Konstr..
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion {
@@ -10307,7 +10130,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to mh/HK
-        ///
         ///l/h.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeDurchflussProHk {
@@ -10318,7 +10140,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to AUnb.
-        ///
         ///m².
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt {
@@ -10329,7 +10150,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeHeizkreise {
@@ -10367,7 +10187,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Modul-
-        ///
         ///fläche m².
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeModulflaeche {
@@ -10387,7 +10206,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeRaumNr {
@@ -10407,7 +10225,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeTeilsystem {
@@ -10418,7 +10235,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Sonstige Verb.-
-        ///
         ///ltg. m.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeVerbindeleitung {
@@ -10555,7 +10371,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wärme-
-        ///
         ///bedarf.
         /// </summary>
         internal static string LL_Report_Waermebedarf {
@@ -10575,7 +10390,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to senkr.
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_WandAnbindeleitungSenkrecht {
@@ -10586,7 +10400,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to waagr.
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_WandAnbindeleitungWaagrecht {
@@ -10606,7 +10419,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QDelta
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_WandBereinigungLeistung {
@@ -10626,7 +10438,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohr
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_WandDruckverlustRohr {
@@ -10637,7 +10448,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verteiler
-        ///
         ///mbar.
         /// </summary>
         internal static string LL_Report_WandDruckverlustVerteiler {
@@ -10675,7 +10485,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string LL_Report_WandHeizkreise {
@@ -10713,7 +10522,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QWH
-        ///
         ///W.
         /// </summary>
         internal static string LL_Report_WandLeistung {
@@ -10724,7 +10532,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qWH
-        ///
         ///W/m².
         /// </summary>
         internal static string LL_Report_WandLeistungProQm {
@@ -10744,7 +10551,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum
-        ///
         ///Nr..
         /// </summary>
         internal static string LL_Report_WandRaumNr {
@@ -10773,7 +10579,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to ti
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_WandRaumtemperatur {
@@ -10793,7 +10598,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anbinde-
-        ///
         ///ltg. m.
         /// </summary>
         internal static string LL_Report_WandRohrlaengeAnbindung {
@@ -10804,7 +10608,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heizkr.
-        ///
         ///(ges) m.
         /// </summary>
         internal static string LL_Report_WandRohrlaengeHeizkreisGesamt {
@@ -10815,7 +10618,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to In Wand
-        ///
         ///m.
         /// </summary>
         internal static string LL_Report_WandRohrlaengeInWand {
@@ -10826,7 +10628,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tr
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_WandRuecklauftemperaur {
@@ -10837,7 +10638,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///(ber) W.
         /// </summary>
         internal static string LL_Report_WandSollLeistung {
@@ -10848,7 +10648,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string LL_Report_WandTeilsystem {
@@ -10877,7 +10676,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Tv
-        ///
         ///°C.
         /// </summary>
         internal static string LL_Report_WandVorlauftemperaur {
@@ -10888,7 +10686,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Wasser-
-        ///
         ///menge.
         /// </summary>
         internal static string LL_Report_WandWassermenge {
@@ -13122,7 +12919,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verpackungs-
-        ///
         ///einheit.
         /// </summary>
         internal static string MaterialEditorGrid_VerpackungseinheitCol {
@@ -14655,9 +14451,54 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to Bereich auswählen.
         /// </summary>
+        internal static string PdfRegionPickerForm_Auswaehlen {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_Auswaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bereich auswählen.
+        /// </summary>
         internal static string PdfRegionPickerForm_BereichAuswaehlen {
             get {
                 return ResourceManager.GetString("PdfRegionPickerForm_BereichAuswaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bildgröße:.
+        /// </summary>
+        internal static string PdfRegionPickerForm_Bildgroesse {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_Bildgroesse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to groß.
+        /// </summary>
+        internal static string PdfRegionPickerForm_Gross {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_Gross", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to klein.
+        /// </summary>
+        internal static string PdfRegionPickerForm_Klein {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_Klein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to normal.
+        /// </summary>
+        internal static string PdfRegionPickerForm_Normal {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_Normal", resourceCulture);
             }
         }
         
@@ -14852,7 +14693,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to A
-        ///
         ///m².
         /// </summary>
         internal static string PlannedEurovalProductPanel_A {
@@ -14863,7 +14703,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to AAnb
-        ///
         ///m².
         /// </summary>
         internal static string PlannedEurovalProductPanel_AAnb {
@@ -14901,7 +14740,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///HK.
         /// </summary>
         internal static string PlannedEurovalProductPanel_AnzahlHK {
@@ -14948,7 +14786,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to B
-        ///
         ///cm.
         /// </summary>
         internal static string PlannedEurovalProductPanel_B {
@@ -14977,7 +14814,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to DeltaP
-        ///
         ///mbar.
         /// </summary>
         internal static string PlannedEurovalProductPanel_DeltaP {
@@ -15069,7 +14905,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to mh
-        ///
         ///kg/h.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Mg {
@@ -15107,7 +14942,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Q
-        ///
         ///W.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Q {
@@ -15118,7 +14952,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QAnb
-        ///
         ///W.
         /// </summary>
         internal static string PlannedEurovalProductPanel_QAnb {
@@ -15129,7 +14962,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QFBH
-        ///
         ///W.
         /// </summary>
         internal static string PlannedEurovalProductPanel_QFbh {
@@ -15140,7 +14972,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QRest
-        ///
         ///W.
         /// </summary>
         internal static string PlannedEurovalProductPanel_QRest {
@@ -15151,7 +14982,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to QSoll
-        ///
         ///W.
         /// </summary>
         internal static string PlannedEurovalProductPanel_QSoll {
@@ -15162,7 +14992,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to qSoll
-        ///
         ///W/m².
         /// </summary>
         internal static string PlannedEurovalProductPanel_QSollProQuadratmeter {
@@ -15191,7 +15020,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohrl.
-        ///
         ///m.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Rohrlaenge {
@@ -15202,7 +15030,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Spreizung
-        ///
         ///K.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Spreizung {
@@ -15222,7 +15049,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to tfb
-        ///
         ///°C.
         /// </summary>
         internal static string PlannedEurovalProductPanel_Tfb {
@@ -15269,7 +15095,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Anzahl
-        ///
         ///Reg..
         /// </summary>
         internal static string PlannedHithermCompactProductPanel_AnzahlRegister {
@@ -15343,7 +15168,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Breite
-        ///
         ///(cm).
         /// </summary>
         internal static string PlannedHithermProductPanel_Breite {
@@ -15444,9 +15268,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Leitung
-        ///
         ///senkr.
-        ///
         ///(m).
         /// </summary>
         internal static string PlannedHithermProductPanel_LeitungSenkrecht {
@@ -15457,9 +15279,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Leitung
-        ///
         ///waagr.
-        ///
         ///(m).
         /// </summary>
         internal static string PlannedHithermProductPanel_LeitungWaagrecht {
@@ -15470,7 +15290,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Register-
-        ///
         ///typ.
         /// </summary>
         internal static string PlannedHithermProductPanel_RegisterTyp {
@@ -15517,7 +15336,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to waag-
-        ///
         ///recht.
         /// </summary>
         internal static string PlannedHithermProductPanel_Waagrecht {
@@ -16410,7 +16228,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Druckverlust
-        ///
         ///mbar.
         /// </summary>
         internal static string ProductOverviewForm_DruckverlustHeiz {
@@ -16421,7 +16238,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Druckverlust
-        ///
         ///mbar.
         /// </summary>
         internal static string ProductOverviewForm_DruckverlustKuehl {
@@ -16432,7 +16248,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Fläche
-        ///
         ///m².
         /// </summary>
         internal static string ProductOverviewForm_Flaeche {
@@ -16443,7 +16258,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///kreis(e).
         /// </summary>
         internal static string ProductOverviewForm_Heizkreise {
@@ -16454,7 +16268,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Kühllast
-        ///
         ///W.
         /// </summary>
         internal static string ProductOverviewForm_Kuehllast {
@@ -16465,7 +16278,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Normwärme
-        ///
         ///W.
         /// </summary>
         internal static string ProductOverviewForm_Normwaerme {
@@ -16503,7 +16315,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rest
-        ///
         ///W.
         /// </summary>
         internal static string ProductOverviewForm_Restkuellast {
@@ -16514,7 +16325,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Restwärme
-        ///
         ///W.
         /// </summary>
         internal static string ProductOverviewForm_Restwaerme {
@@ -16525,7 +16335,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Rohrlänge
-        ///
         ///m.
         /// </summary>
         internal static string ProductOverviewForm_Rohrlaenge {
@@ -16545,7 +16354,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Teil-
-        ///
         ///system.
         /// </summary>
         internal static string ProductOverviewForm_Teilsystem {
@@ -16565,7 +16373,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verlegeabstand
-        ///
         ///AZ.
         /// </summary>
         internal static string ProductOverviewForm_VerlegeabstandAz {
@@ -16576,7 +16383,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Verlegeabstand
-        ///
         ///RZ.
         /// </summary>
         internal static string ProductOverviewForm_VerlegeabstandRz {
@@ -17370,9 +17176,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to BKA
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_BkaAngeschlossen {
@@ -17383,9 +17187,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to BKA
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_BkaOffen {
@@ -17396,9 +17198,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Euroval®
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_EurovalAngeschlossen {
@@ -17409,9 +17209,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Euroval®
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_EurovalOffen {
@@ -17431,9 +17229,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermAngschlossen {
@@ -17444,9 +17240,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen {
@@ -17457,9 +17251,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///Dach angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen {
@@ -17470,9 +17262,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///Dach offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermCompactDachOffen {
@@ -17483,9 +17273,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermCompactOffen {
@@ -17496,9 +17284,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_HithermOffen {
@@ -17509,9 +17295,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Boden
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen {
@@ -17522,9 +17306,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Boden
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_KlimaBodenOffen {
@@ -17535,9 +17317,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Decke
-        ///
         ///angeschl.
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen {
@@ -17548,9 +17328,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Decke
-        ///
         ///offene
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_KlimaDeckeOffen {
@@ -17570,7 +17348,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum-
-        ///
         ///nr..
         /// </summary>
         internal static string QuickDimensioningDistributorsGrid_RaumNr {
@@ -17635,7 +17412,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to BKA
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_BkaFlaeche {
@@ -17646,7 +17422,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to BKA
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_BkaHeizkreise {
@@ -17657,7 +17432,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Euroval®
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_EurovalFlaeche {
@@ -17668,7 +17442,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Euroval®
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_EurovalHeizkreise {
@@ -17679,7 +17452,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heizlast
-        ///
         ///(W).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_Heizlast {
@@ -17708,7 +17480,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///Dach (m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermCompactDachFlaeche {
@@ -17719,7 +17490,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///Dach Hkr..
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermCompactDachHeizkreise {
@@ -17730,7 +17500,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermCompactFlaeche {
@@ -17741,7 +17510,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm® Co
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermCompactHeizkreise {
@@ -17752,7 +17520,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermFlaeche {
@@ -17763,7 +17530,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Hitherm®
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_HithermHeizkreise {
@@ -17774,7 +17540,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Boden
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_KlimaBodenFlaeche {
@@ -17785,7 +17550,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Boden
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_KlimaBodenHeizkreise {
@@ -17796,7 +17560,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Decke
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_KlimaDeckeFlaeche {
@@ -17807,7 +17570,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klima-Decke
-        ///
         ///Heizkreise.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_KlimaDeckeHeizkreise {
@@ -17818,7 +17580,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Kühllast
-        ///
         ///(W).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_Kuehllast {
@@ -17856,7 +17617,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raum-
-        ///
         ///controller.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_RaumController {
@@ -17867,7 +17627,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Raumfl.
-        ///
         ///(m²).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_Raumflaeche {
@@ -17932,7 +17691,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Stell-
-        ///
         ///motore.
         /// </summary>
         internal static string QuickDimensioningFloorGrid_Stellmotore {
@@ -17943,7 +17701,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Temp.
-        ///
         ///(°C).
         /// </summary>
         internal static string QuickDimensioningFloorGrid_Temperatur {
@@ -18287,7 +18044,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Vorlauftemperatur
-        ///
         ///(Heizen).
         /// </summary>
         internal static string QuickDimensioningPanel_VorlauftemperaturHeizen {
@@ -18298,7 +18054,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Vorlauftemperatur
-        ///
         ///(Kühlen).
         /// </summary>
         internal static string QuickDimensioningPanel_VorlauftemperaturKuehlen {
@@ -18921,9 +18676,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to FBH-
-        ///
         ///Fläche
-        ///
         ///(m²).
         /// </summary>
         internal static string RoomSummaryPanel_FbhFlaeche {
@@ -18943,9 +18696,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Heiz-
-        ///
         ///fläche
-        ///
         ///(m²).
         /// </summary>
         internal static string RoomSummaryPanel_Heizflaeche {
@@ -18974,7 +18725,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to PHeiz
-        ///
         ///(W).
         /// </summary>
         internal static string RoomSummaryPanel_Heizleistung {
@@ -19021,7 +18771,6 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to PKühl
-        ///
         ///(W).
         /// </summary>
         internal static string RoomSummaryPanel_Kuehlleistung {
@@ -19131,9 +18880,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to Klicken Sie auf einen der Buttons in der Spalte
-        ///
         ///&apos;Bearbeiten&apos; um das entsprechende Heizsystem zu öffnen, oder
-        ///
         /// klicken Sie in der Projekthierarchie auf das gewünschte Heizsystem..
         /// </summary>
         internal static string RoomSummaryPanel_WieGehtsWeiterText {

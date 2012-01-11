@@ -30,6 +30,8 @@ namespace Europlan.Common {
 		private PdfRegionPickerMode mode = PdfRegionPickerMode.DPM_NONE;
 		private bool unsavedChanges = false;
 
+		private Nullable<Point2D> oldStartPoint = null;
+		private Nullable<Point2D> oldEndPoint = null;
 		private Nullable<Point2D> startPoint = null;
 		private Nullable<Point2D> curPoint = null;
 		private Nullable<Point2D> endPoint = null;
@@ -105,153 +107,44 @@ namespace Europlan.Common {
 					g.DrawRectangle(pen, x, y, width, height);
 				}
 			}
-
-			/*double width = distributor.Width * this.floor.AssociatedPlan.Measure.Value;
-			double height = distributor.Height * this.floor.AssociatedPlan.Measure.Value;
-
-			Point2D leftBottom = Point2D.Zero;
-			Point2D leftTop = Point2D.Zero;
-			Point2D rightTop = Point2D.Zero;
-			Point2D rightBottom = Point2D.Zero;
-
-			if (DrawOtherDistributorsInPlan) {
-				Matrix4D transformation = additionalTransformation;
-				foreach (Distributor d in floor.Distributors) {
-					if (d.Id != this.distributor.Id) {
-						foreach (Distributor.GraphicalRepresentation gp in d.GraphicalRepresentations) {
-							if (gp.floorId == this.floor.Id) {
-								if (this.ConnectedPlanPanel.Plan is CadPlan) {
-									transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-									transformation = transformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
-									transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-									leftBottom = transformation.TransformTo2D(gp.position);
-									leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
-									rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
-									rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-								} else {
-									transformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-									transformation = transformation * Transformation4D.RotateZ(gp.rotation * Math.PI / 180.0);
-									transformation = transformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-									leftBottom = transformation.TransformTo2D(gp.position);
-									leftTop = transformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y - height));
-									rightTop = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y - height));
-									rightBottom = transformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-								}
-								g.DrawLine(otherPen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
-								g.DrawLine(otherPen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
-								g.DrawLine(otherPen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
-								g.DrawLine(otherPen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
-								g.FillPolygon(otherBrush, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
-								break;
-							}
-						}
-					}
-				}
-			}
-
-			if (this.Mode == PdfRegionPickerMode.DPM_PICK_REGION) {
-				if (this.ConnectedPlanPanel.Plan is CadPlan) {
-					additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-this.RotationInclPlan * Math.PI / 180.0);
-					additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
-
-					leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
-					leftTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y + height));
-					rightTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y + height));
-					rightBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y));
-				} else {
-					additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-					additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.RotationInclPlan * Math.PI / 180.0);
-					additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
-
-					leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
-					leftTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y - height));
-					rightTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y - height));
-					rightBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y));
-				}
-				g.DrawLine(pen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
-				g.DrawLine(pen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
-				g.DrawLine(pen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
-				g.DrawLine(pen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
-				g.FillPolygon(Brushes.Red, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
-			} else {
-				foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {
-					if (gp.floorId == this.floor.Id) {
-						if (this.ConnectedPlanPanel.Plan is CadPlan) {
-							additionalTransformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-							additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
-							additionalTransformation = additionalTransformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-							leftBottom = additionalTransformation.TransformTo2D(gp.position);
-							leftTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
-							rightTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
-							rightBottom = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-						} else {
-							additionalTransformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-							additionalTransformation = additionalTransformation * Transformation4D.RotateZ(gp.rotation * Math.PI / 180.0);
-							additionalTransformation = additionalTransformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-							leftBottom = additionalTransformation.TransformTo2D(gp.position);
-							leftTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y - height));
-							rightTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y - height));
-							rightBottom = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-						}
-						g.DrawLine(pen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
-						g.DrawLine(pen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
-						g.DrawLine(pen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
-						g.DrawLine(pen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
-						g.FillPolygon(Brushes.Red, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
-						break;
-					}
-				}
-			}*/
 		}
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			/*if (this.Mode == PdfRegionPickerMode.DPM_PICK_REGION && button == MouseButtons.Left) {
-				Distributor.GraphicalRepresentation gp = new Distributor.GraphicalRepresentation();
-				gp.position = planPoint;
-				gp.rotation = this.RotationInclPlan;
-				gp.isOnThisFloor = distributor.AssociatedFloor == this.Floor;
-				gp.floorId = this.Floor.Id;
-				distributor.GraphicalRepresentations.Add(gp);
-				this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
-				this.Mode = PdfRegionPickerMode.DPM_NONE;
-				if (ModeChanged != null) {
-					this.ModeChanged(this, EventArgs.Empty);
-				}
-				return true;
-			}*/
 			return false;
 		}
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			/*if (this.Mode == PdfRegionPickerMode.DPM_PICK_REGION) {
-				return true;
-			}*/
 			return false;
 		}
 
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
+			this.oldStartPoint = this.startPoint;
+			this.oldEndPoint = this.endPoint;
 			this.startPoint = planPoint;
+			this.curPoint = this.startPoint;
 			this.endPoint = null;
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
-			this.curPoint = planPoint;
-			return !this.endPoint.HasValue;
+			if (curPoint != planPoint) {
+				this.curPoint = planPoint;
+				return !this.endPoint.HasValue;
+			}
+			return false;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
-			this.endPoint = planPoint;
+			bool redraw = false;
+			if (planPoint.X != this.startPoint.Value.X && planPoint.Y != this.startPoint.Value.Y) {
+				this.endPoint = planPoint;
+			} else {
+				this.startPoint = this.oldStartPoint;
+				this.endPoint = this.oldEndPoint;
+				redraw = true;
+			}
 			this.curPoint = null;
-			return false;
+			return redraw;
 		}
 		#endregion
 

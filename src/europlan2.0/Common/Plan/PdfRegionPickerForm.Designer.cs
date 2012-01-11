@@ -33,9 +33,15 @@ namespace Europlan.Common {
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.btnMove = new System.Windows.Forms.ToolStripButton();
 			this.btnOk = new System.Windows.Forms.Button();
+			this.sliderSize = new System.Windows.Forms.TrackBar();
+			this.lblSize = new System.Windows.Forms.Label();
+			this.lblSmall = new System.Windows.Forms.Label();
+			this.lblMedium = new System.Windows.Forms.Label();
+			this.lblLarge = new System.Windows.Forms.Label();
 			this.picturePanel = new Europlan.Common.ImagePanel();
 			this.pdfRegionPicker = new Europlan.Common.PdfRegionPicker(this.components);
 			this.toolStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.sliderSize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -90,7 +96,6 @@ namespace Europlan.Common {
 			this.btnSelectRegion.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnSelectRegion.Name = "btnSelectRegion";
 			this.btnSelectRegion.Size = new System.Drawing.Size(23, 22);
-			this.btnSelectRegion.Text = "toolStripButton1";
 			this.btnSelectRegion.Click += new System.EventHandler(this.btnSelectRegion_Click);
 			// 
 			// toolStripSeparator3
@@ -123,6 +128,60 @@ namespace Europlan.Common {
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
+			// sliderSize
+			// 
+			this.sliderSize.LargeChange = 2;
+			this.sliderSize.Location = new System.Drawing.Point(73, 415);
+			this.sliderSize.Maximum = 4;
+			this.sliderSize.Name = "sliderSize";
+			this.sliderSize.Size = new System.Drawing.Size(197, 45);
+			this.sliderSize.TabIndex = 3;
+			this.sliderSize.Value = 2;
+			this.sliderSize.Visible = false;
+			// 
+			// lblSize
+			// 
+			this.lblSize.AutoSize = true;
+			this.lblSize.Location = new System.Drawing.Point(12, 418);
+			this.lblSize.Name = "lblSize";
+			this.lblSize.Size = new System.Drawing.Size(54, 13);
+			this.lblSize.TabIndex = 4;
+			this.lblSize.Text = "Bildgröße:";
+			this.lblSize.Visible = false;
+			// 
+			// lblSmall
+			// 
+			this.lblSmall.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblSmall.Location = new System.Drawing.Point(52, 440);
+			this.lblSmall.Name = "lblSmall";
+			this.lblSmall.Size = new System.Drawing.Size(70, 13);
+			this.lblSmall.TabIndex = 5;
+			this.lblSmall.Text = "klein";
+			this.lblSmall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.lblSmall.Visible = false;
+			// 
+			// lblMedium
+			// 
+			this.lblMedium.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMedium.Location = new System.Drawing.Point(137, 440);
+			this.lblMedium.Name = "lblMedium";
+			this.lblMedium.Size = new System.Drawing.Size(70, 13);
+			this.lblMedium.TabIndex = 6;
+			this.lblMedium.Text = "normal";
+			this.lblMedium.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.lblMedium.Visible = false;
+			// 
+			// lblLarge
+			// 
+			this.lblLarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblLarge.Location = new System.Drawing.Point(222, 440);
+			this.lblLarge.Name = "lblLarge";
+			this.lblLarge.Size = new System.Drawing.Size(70, 13);
+			this.lblLarge.TabIndex = 7;
+			this.lblLarge.Text = "groß";
+			this.lblLarge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.lblLarge.Visible = false;
+			// 
 			// picturePanel
 			// 
 			this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -139,7 +198,7 @@ namespace Europlan.Common {
 			this.picturePanel.Name = "picturePanel";
 			this.picturePanel.Scale = null;
 			this.picturePanel.ShowRaster = false;
-			this.picturePanel.Size = new System.Drawing.Size(668, 400);
+			this.picturePanel.Size = new System.Drawing.Size(668, 390);
 			this.picturePanel.StartPoint = null;
 			this.picturePanel.TabIndex = 0;
 			this.picturePanel.XPos = 0F;
@@ -154,6 +213,11 @@ namespace Europlan.Common {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(668, 455);
+			this.Controls.Add(this.lblLarge);
+			this.Controls.Add(this.lblMedium);
+			this.Controls.Add(this.lblSmall);
+			this.Controls.Add(this.lblSize);
+			this.Controls.Add(this.sliderSize);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.picturePanel);
@@ -166,6 +230,7 @@ namespace Europlan.Common {
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImagePlanOptionsForm_FormClosing);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.sliderSize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -183,6 +248,11 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.ToolStripButton btnSelectRegion;
 		private PdfRegionPicker pdfRegionPicker;
+		private System.Windows.Forms.TrackBar sliderSize;
+		private System.Windows.Forms.Label lblSize;
+		private System.Windows.Forms.Label lblSmall;
+		private System.Windows.Forms.Label lblMedium;
+		private System.Windows.Forms.Label lblLarge;
 
 
 	}

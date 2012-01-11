@@ -28,18 +28,36 @@ namespace Europlan.Common {
 			this.btnZoomOut.ToolTipText = EuroplanRes.Plan_Herauszoomen;
 			this.btnMove.Text = EuroplanRes.Plan_Verschieben;
 			this.btnMove.ToolTipText = EuroplanRes.Plan_Verschieben;
-			// TODO this.btnSelectRegion
+			this.btnSelectRegion.Text = EuroplanRes.PdfRegionPickerForm_Auswaehlen;
+			this.btnSelectRegion.ToolTipText = EuroplanRes.PdfRegionPickerForm_Auswaehlen;
+			this.lblSize.Text = EuroplanRes.PdfRegionPickerForm_Bildgroesse;
+			this.lblSmall.Text = EuroplanRes.PdfRegionPickerForm_Klein;
+			this.lblMedium.Text = EuroplanRes.PdfRegionPickerForm_Normal;
+			this.lblLarge.Text = EuroplanRes.PdfRegionPickerForm_Gross;
 			this.btnOk.Text = EuroplanRes.General_Uebernehmen;
 		}
 
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
+			bool import = true;
+			if (this.PixelHeight * this.PixelWidth > ImagePlan.largePlanSize) {
+				DialogResult dr = MessageBox.Show("Wenn Sie groﬂe Pl‰ne importieren, kann sich unter Umst‰nden die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie den gew‰hlten Bereich dieses Plans trotzdem importieren?", "Best‰tigen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+				e.Cancel = (dr == DialogResult.Cancel);
+				if (e.Cancel) {
+					return;
+				} else {
+					import = (dr == DialogResult.Yes);
+				}
+			}
+
 			SettingsKey settings = SettingsFile.Settings["ImagePlanOptionsForm"];
 			settings.StorePoint("Location", this.Location);
 			settings.StoreSize("Size", this.Size);
-			this.picturePanel.ApplyChangesToPlan();
+			if (import) {
+				this.picturePanel.ApplyChangesToPlan();
+			}
 			SettingsFile.Update();
 
-			this.DialogResult = DialogResult.OK;
+			this.DialogResult = import ? DialogResult.OK : DialogResult.Cancel;
 		}
 
 		private void ImagePlanOptionsForm_Load(object sender, EventArgs e) {
@@ -87,6 +105,45 @@ namespace Europlan.Common {
 
 		public Nullable<Point2D> BottomRight {
 			get { return this.pdfRegionPicker.BottomRight; }
+		}
+
+		public int PixelWidth {
+			get {
+				if (!this.pdfRegionPicker.TopLeft.HasValue || !this.pdfRegionPicker.BottomRight.HasValue) {
+					return 0;
+				}
+				double width = this.pdfRegionPicker.BottomRight.Value.X - this.pdfRegionPicker.TopLeft.Value.X;
+				return (int)(width * this.Dpi / ImportedPlansPanel.PDF_PT_PER_INCH);
+			}
+		}
+
+		public int PixelHeight {
+			get {
+				if (!this.pdfRegionPicker.TopLeft.HasValue || !this.pdfRegionPicker.BottomRight.HasValue) {
+					return 0;
+				}
+				double height = this.pdfRegionPicker.BottomRight.Value.Y - this.pdfRegionPicker.TopLeft.Value.Y;
+				return (int)(height * this.Dpi / ImportedPlansPanel.PDF_PT_PER_INCH);
+			}
+		}
+
+		public int Dpi {
+			get {
+				switch (this.sliderSize.Value) {
+					case 0:
+						return 96;
+					case 1:
+						return 96;
+					case 2:
+						return 96;
+					case 3:
+						return 96;
+					case 4:
+						return 96;
+					default:
+						return 96;
+				}
+			}
 		}
 	}
 }

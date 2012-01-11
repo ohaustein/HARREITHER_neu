@@ -9,6 +9,8 @@ namespace Europlan.Common {
 	[Serializable()]
 	public class ImagePlan : Plan {
 
+		public static readonly int largePlanSize = 3000 * 4000;
+
 		private float angle = 0;
 		private float xPos = 0;
 		private float yPos = 0;
@@ -60,6 +62,20 @@ namespace Europlan.Common {
 
 		public bool IsExportMeasureOk() {
 			return this.Measure.Value * this.GetPlanExportMeasureFactor() >= 199;
+		}
+
+		public override bool IsLargePlan {
+			get {
+				bool largePlan = false;
+				if (this.AbsoluteFileName != null) {
+					try {
+						Image image = Image.FromFile(this.AbsoluteFileName);
+						largePlan = (image.Width * image.Height > largePlanSize);
+						image.Dispose();
+					} catch { }
+				}
+				return largePlan;
+			}
 		}
 	}
 
