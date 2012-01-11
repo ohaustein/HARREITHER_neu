@@ -381,28 +381,18 @@ namespace Europlan.Common {
 			List<SolidFramework.Pdf.Plumbing.PdfPage> pages = this.GetPdfPages(args.FileName);
 			SolidFramework.Pdf.Plumbing.PdfPage page = pages[args.NewPlanForm.PageNumber - 1];
 
-			log.Error("before accessing trimbox");
-
 			//double top = 0, left = 0, bottom = page.TrimBox.Bottom - page.TrimBox.Top, right = page.TrimBox.Right - page.TrimBox.Left;
 			double top = 0, left = 0, bottom = 0, right = 0;
 			
-			log.Error("after accessing trimbox");
-
 			if (regionPickerForm.TopLeft.HasValue && regionPickerForm.BottomRight.HasValue) {
-				log.Error("getting top");
 				top = regionPickerForm.TopLeft.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
 				left = regionPickerForm.TopLeft.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-				log.Error("getting left");
 				bottom = regionPickerForm.BottomRight.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-				log.Error("getting bottom");
 				right = regionPickerForm.BottomRight.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-				log.Error("getting right");
 			} else {
-				log.Error("else");
 				bottom = page.TrimBox.Bottom - page.TrimBox.Top;
 				right = page.TrimBox.Right - page.TrimBox.Left;
 			}
-			log.Error("seems ok");
 
 			finalSemaphore = new Semaphore(0, 1);
 			ProgressForm progressForm = new ProgressForm(finalSemaphore);

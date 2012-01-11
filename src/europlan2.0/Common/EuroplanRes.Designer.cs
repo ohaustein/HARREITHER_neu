@@ -6192,6 +6192,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie große Pläne importieren, kann sich unter Umständen die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie diesen Plan trotzdem importieren?.
+        /// </summary>
+        internal static string ImportedPlansPanel_GrosserPlanText {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_GrosserPlanText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string ImportedPlansPanel_GrosserPlanTitel {
+            get {
+                return ResourceManager.GetString("ImportedPlansPanel_GrosserPlanTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eingescannter Plan (*.jpg, *.png, *.bmp).
         /// </summary>
         internal static string ImportedPlansPanel_ImageFilter {
@@ -14481,6 +14499,24 @@ namespace Europlan.Common {
         internal static string PdfRegionPickerForm_Gross {
             get {
                 return ResourceManager.GetString("PdfRegionPickerForm_Gross", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie große Pläne importieren, kann sich unter Umständen die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie den gewählten Bereich dieses Plans trotzdem importieren?.
+        /// </summary>
+        internal static string PdfRegionPickerForm_GrosserPlanText {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_GrosserPlanText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string PdfRegionPickerForm_GrosserPlanTitel {
+            get {
+                return ResourceManager.GetString("PdfRegionPickerForm_GrosserPlanTitel", resourceCulture);
             }
         }
         

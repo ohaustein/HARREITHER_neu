@@ -7087,4 +7087,16 @@ Compact
   <data name="PdfRegionPickerForm_Gross" xml:space="preserve">
     <value>groß</value>
   </data>
+  <data name="ImportedPlansPanel_GrosserPlanText" xml:space="preserve">
+    <value>Wenn Sie große Pläne importieren, kann sich unter Umständen die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie diesen Plan trotzdem importieren?</value>
+  </data>
+  <data name="ImportedPlansPanel_GrosserPlanTitel" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="PdfRegionPickerForm_GrosserPlanText" xml:space="preserve">
+    <value>Wenn Sie große Pläne importieren, kann sich unter Umständen die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie den gewählten Bereich dieses Plans trotzdem importieren?</value>
+  </data>
+  <data name="PdfRegionPickerForm_GrosserPlanTitel" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
 </root>
