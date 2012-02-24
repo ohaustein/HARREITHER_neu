@@ -53,10 +53,10 @@ namespace Europlan.Common {
 		private string partnerLogo;
 
 		public enum ConfigurationType {
-			InitializedConfiguration,
-			AdminConfiguration,
-			UserConfiguration,
-			ProjectConfiguration
+			InitializedConfiguration = 0,
+			AdminConfiguration = 1,
+			UserConfiguration = 2,
+			ProjectConfiguration = 3
 		}
 
 		public Configuration() {
@@ -231,115 +231,117 @@ namespace Europlan.Common {
 			if (config1.type == config2.type) {
 				throw new Exception("Cannot add configurations of the same type");
 			}
-			Configuration first, second;
-			if (config1.type < config2.type) {
-				first = config1;
-				second = config2;
+			Configuration hiPrioConfig, lowPrioConfig;
+			if (config1.type > config2.type) {
+				hiPrioConfig = config1;
+				lowPrioConfig = config2;
 			} else {
-				first = config2;
-				second = config1;
+				hiPrioConfig = config2;
+				lowPrioConfig = config1;
 			}
 
-			if (first.partnerLogo != "") {
-				config.partnerLogo = first.partnerLogo;
+			if (lowPrioConfig.partnerLogo != "") {
+				config.partnerLogo = lowPrioConfig.partnerLogo;
 			}
-			if (second.partnerLogo != "") {
-				config.partnerLogo = second.partnerLogo;
+			if (hiPrioConfig.partnerLogo != "") {
+				config.partnerLogo = hiPrioConfig.partnerLogo;
 			}
-			foreach (Material material in first.Materials) {
+
+			// merge materials
+			foreach (Material material in hiPrioConfig.Materials) {
 				if (!config.Materials.Contains(material)) {
 					config.Materials.Add(material);
 				}
 			}
-			foreach (Material material in second.Materials) {
+			foreach (Material material in lowPrioConfig.Materials) {
 				if (!config.Materials.Contains(material)) {
 					config.Materials.Add(material);
 				}
 			}
 
-			foreach (Construction construction in first.Constructions) {
+			// merge constructions
+			foreach (Construction construction in hiPrioConfig.Constructions) {
+				if (!config.Constructions.Contains(construction)) {
+					config.Constructions.Add(construction);
+				}
+			}
+			foreach (Construction construction in lowPrioConfig.Constructions) {
 				if (!config.Constructions.Contains(construction)) {
 					config.Constructions.Add(construction);
 				}
 			}
 
-			foreach (Construction construction in second.Constructions) {
-				if (!config.Constructions.Contains(construction)) {
-					config.Constructions.Add(construction);
+			// merge categories
+			foreach (Category category in hiPrioConfig.Categories) {
+				if (!config.Categories.Contains(category)) {
+					config.Categories.Add(category);
 				}
 			}
-
-			foreach (Category category in first.Categories) {
+			foreach (Category category in lowPrioConfig.Categories) {
 				if (!config.Categories.Contains(category)) {
 					config.Categories.Add(category);
 				}
 			}
 
-			foreach (Category category in second.Categories) {
-				if (!config.Categories.Contains(category)) {
-					config.Categories.Add(category);
-				}
-			}
-
-			foreach (string materialId in first.materialToCategoryMapping.Keys) {
+			// merge mappings
+			foreach (string materialId in hiPrioConfig.materialToCategoryMapping.Keys) {
 				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
-					config.materialToCategoryMapping.Add(materialId, first.materialToCategoryMapping[materialId]);
+					config.materialToCategoryMapping.Add(materialId, hiPrioConfig.materialToCategoryMapping[materialId]);
 				}
 			}
-
-			foreach (string materialId in second.materialToCategoryMapping.Keys) {
+			foreach (string materialId in lowPrioConfig.materialToCategoryMapping.Keys) {
 				if (!config.materialToCategoryMapping.ContainsKey(materialId)) {
-					config.materialToCategoryMapping.Add(materialId, second.materialToCategoryMapping[materialId]);
+					config.materialToCategoryMapping.Add(materialId, lowPrioConfig.materialToCategoryMapping[materialId]);
 				}
 			}
 
-			foreach (RoomType roomType in first.RoomTypes) {
+			// merge room types
+			foreach (RoomType roomType in hiPrioConfig.RoomTypes) {
+				if (!config.RoomTypes.Contains(roomType)) {
+					config.RoomTypes.Add(roomType);
+				}
+			}
+			foreach (RoomType roomType in lowPrioConfig.RoomTypes) {
 				if (!config.RoomTypes.Contains(roomType)) {
 					config.RoomTypes.Add(roomType);
 				}
 			}
 
-			foreach (RoomType roomType in second.RoomTypes) {
-				if (!config.RoomTypes.Contains(roomType)) {
-					config.RoomTypes.Add(roomType);
-				}
-			}
-
-			foreach (String typeName in first.productConfiguration.Keys) {
+			// merge product configurations
+			foreach (String typeName in hiPrioConfig.productConfiguration.Keys) {
 				if (!config.productConfiguration.ContainsKey(typeName)) {
 					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
 				}
-				foreach (string parameterName in first.productConfiguration[typeName].Keys) {
+				foreach (string parameterName in hiPrioConfig.productConfiguration[typeName].Keys) {
 					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
-						config.productConfiguration[typeName][parameterName] = first.productConfiguration[typeName][parameterName];
+						config.productConfiguration[typeName][parameterName] = hiPrioConfig.productConfiguration[typeName][parameterName];
+					}
+				}
+			}
+			foreach (String typeName in lowPrioConfig.productConfiguration.Keys) {
+				if (!config.productConfiguration.ContainsKey(typeName)) {
+					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
+				}
+				foreach (string parameterName in lowPrioConfig.productConfiguration[typeName].Keys) {
+					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
+						config.productConfiguration[typeName][parameterName] = lowPrioConfig.productConfiguration[typeName][parameterName];
 					}
 				}
 			}
 
-			foreach (String typeName in second.productConfiguration.Keys) {
-				if (!config.productConfiguration.ContainsKey(typeName)) {
-					config.productConfiguration[typeName] = new SerializableDictionary<string, string>();
-				}
-				foreach (string parameterName in second.productConfiguration[typeName].Keys) {
-					if (!config.productConfiguration[typeName].ContainsKey(parameterName)) {
-						config.productConfiguration[typeName][parameterName] = second.productConfiguration[typeName][parameterName];
-					}
+			// merge materials with price per package
+			foreach (String materialId in hiPrioConfig.materialIdsWithPricePerPackage) {
+				if (!config.materialIdsWithPricePerPackage.Contains(materialId)) {
+					config.materialIdsWithPricePerPackage.Add(materialId);
 				}
 			}
-
-			foreach (String materialId in first.materialIdsWithPricePerPackage) {
+			foreach (String materialId in lowPrioConfig.materialIdsWithPricePerPackage) {
 				if (!config.materialIdsWithPricePerPackage.Contains(materialId)) {
 					config.materialIdsWithPricePerPackage.Add(materialId);
 				}
 			}
 
-			foreach (String materialId in second.materialIdsWithPricePerPackage) {
-				if (!config.materialIdsWithPricePerPackage.Contains(materialId)) {
-					config.materialIdsWithPricePerPackage.Add(materialId);
-				}
-			}
-
-			config.type = second.type;			 
+			config.type = hiPrioConfig.type;			 
 
 			return config;
 		}
@@ -391,7 +393,9 @@ namespace Europlan.Common {
 							if (userTemplate == null) {
 								XmlSerializer s = new XmlSerializer(typeof(Configuration));
 								Stream r = new FileStream(Path.Combine(PathUtil.DataPath, "custom.conf"), FileMode.Open);
-								userTemplate = AdminTemplate + (Configuration)s.Deserialize(r);
+								Configuration userConfig = (Configuration)s.Deserialize(r);
+								userConfig.Type = ConfigurationType.UserConfiguration;
+								userTemplate = AdminTemplate + userConfig;
 								r.Close();
 							}
 						} catch (Exception ex) {

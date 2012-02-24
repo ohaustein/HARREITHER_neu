@@ -40,7 +40,7 @@ namespace Europlan.Common {
 		private void ImagePlanOptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
 			bool import = true;
 			if (this.PixelHeight * this.PixelWidth > ImagePlan.largePlanSize) {
-				DialogResult dr = MessageBox.Show("Wenn Sie groﬂe Pl‰ne importieren, kann sich unter Umst‰nden die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie den gew‰hlten Bereich dieses Plans trotzdem importieren?", "Best‰tigen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+				DialogResult dr = MessageBox.Show(EuroplanRes.PdfRegionPickerForm_GrosserPlanText, EuroplanRes.PdfRegionPickerForm_GrosserPlanTitel, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 				e.Cancel = (dr == DialogResult.Cancel);
 				if (e.Cancel) {
 					return;

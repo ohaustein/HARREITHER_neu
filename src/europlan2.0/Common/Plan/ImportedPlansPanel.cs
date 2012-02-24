@@ -310,7 +310,7 @@ namespace Europlan.Common {
 							plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
 							bool import = true;
 							if (plan.IsLargePlan) {
-								import = MessageBox.Show("Wenn Sie groﬂe Pl‰ne importieren, kann sich unter Umst‰nden die Bedienung der grafischen Auslegung verlangsamen! Wollen Sie diesen Plan trotzdem importieren?", "Best‰tigen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+								import = MessageBox.Show(EuroplanRes.ImportedPlansPanel_GrosserPlanText, EuroplanRes.ImportedPlansPanel_GrosserPlanTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
 							}
 							if (import) {
 								plans.Add(plan);
