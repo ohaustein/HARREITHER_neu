@@ -50,7 +50,13 @@ namespace Europlan.Common {
 		private static double alphaBodenCool = 6.5;
 		private static double alphaWandCool = 8.0;
 
+        private static bool fillBoxBackground = false;
+        private static double boxFontSize = 5.0;
+
 		private static PlanMeasureEnum planMeasure = PlanMeasureEnum.PM_METER;
+        private static bool orthoRasterung = true;
+        private static bool showPlanInBackground = true;
+        private static bool autoSave = false;
 
 		private static double maxCoolLoadPerSqm = 70.0;
 
@@ -136,6 +142,36 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+        [BoolProductParameter(true, saveForUser = true, saveInProject = false)]
+        public static bool ConfigActivateOrthoRasterung {
+            get { return orthoRasterung; }
+            set { orthoRasterung = value; }
+        }
+
+        [BoolProductParameter(false, saveForUser = true, saveInProject = false)]
+        public static bool ConfigAutoSave {
+            get { return autoSave; }
+            set { autoSave = value; }
+        }
+
+        // not (yet) a productparameter
+        public static bool ShowPlanInBackground {
+            get { return showPlanInBackground; }
+            set { showPlanInBackground = value; }
+        }
+
+        [BoolProductParameter(false, saveForUser = true)]
+        public static bool ConfigFillBoxBackground {
+            get { return fillBoxBackground; }
+            set { fillBoxBackground = value; }
+        }
+
+        [DoubleProductParameter(5.0, saveForUser = true)]
+        public static double ConfigBoxFontSize {
+            get { return boxFontSize; }
+            set { boxFontSize = value; }
+        }
 		#endregion Product Parameters
 
 		public class ProductTypeEnumConverter : System.ComponentModel.TypeConverter {

@@ -26,6 +26,10 @@ namespace Europlan.Common {
 		bool PlannerDragEnd(Point2D planPoint, Point pointInControl, MouseButtons button);
 
 		bool PlannerKeyPress(Keys key);
+
+        bool ShowPlanBackground {
+            get;
+        }
 	}
 
 	public interface IProductPlanner : IPlanner {

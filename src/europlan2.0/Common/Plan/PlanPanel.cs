@@ -334,5 +334,9 @@ namespace Europlan.Common {
 		private void imagePanel_KeyUp(object sender, KeyEventArgs e) {
 			this.OnKeyUp(e);
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return this.ProductPlanner == null ? true : this.ProductPlanner.ShowPlanBackground; }
+        }
+    }
 }

@@ -2340,8 +2340,8 @@ namespace Europlan.Common {
 			// planPanel
 			// 
 			this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.planPanel.Location = new System.Drawing.Point(0, 0);
-			this.planPanel.Name = "planPanel";
+            this.graphicalWallPanel.Location = new System.Drawing.Point(0, 0);
+            this.planPanel.Name = "planPanel";
 			this.planPanel.ProductPlanner = this.connectionPlanner;
 			this.planPanel.Size = new System.Drawing.Size(966, 532);
 			this.planPanel.TabIndex = 5;
@@ -2488,11 +2488,11 @@ namespace Europlan.Common {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(966, 532);
 			this.Controls.Add(this.graphicalWallPanel);
-			this.Controls.Add(this.panelBottom);
+            this.Controls.Add(this.planPanel);
+            this.Controls.Add(this.panelBottom);
 			this.Controls.Add(this.panelTop);
 			this.Controls.Add(this.toolStripSubmenu);
 			this.Controls.Add(this.toolStripMain);
-			this.Controls.Add(this.planPanel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "HithermCompactPlannerForm";
 			this.Text = "Hitherm Compact - grafische Auslegung";

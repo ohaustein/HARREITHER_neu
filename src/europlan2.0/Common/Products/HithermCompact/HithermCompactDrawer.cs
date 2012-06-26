@@ -14,24 +14,24 @@ using WW.Cad.Model.Tables;
 using WW.Cad.Model.Entities;
 
 namespace Europlan.Common {
-	public partial class HithermDrawer : Component, IProductPlanner {
+	public partial class HithermCompactDrawer : Component, IProductPlanner {
 
-		public HithermDrawer() {
+		public HithermCompactDrawer() {
 			InitializeComponent();
 		}
 
-		public HithermDrawer(IContainer container) {
+        public HithermCompactDrawer(IContainer container) {
 			container.Add(this);
 			InitializeComponent();
 		}
 
-		private HithermProduct product;
+		private HithermCompactProduct product;
 		private bool highlightRoomCoordinates = true;
 		private bool drawExpansionGaps = true;
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public HithermProduct Product {
+		public HithermCompactProduct Product {
 			get { return this.product; }
 			set {
 				this.product = value;

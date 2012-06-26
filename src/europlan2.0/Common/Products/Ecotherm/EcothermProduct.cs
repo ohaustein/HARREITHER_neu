@@ -83,7 +83,8 @@ namespace Europlan.Common {
 		private List<Point2D> plannedAreaGraphical = new List<Point2D>();
 		private List<List<Point2D>> plannedReducedAreas = new List<List<Point2D>>();
 		private Point2D textBoxPosition = Point2D.Zero;
-		private float textBoxFontSize = 5.0f;
+		private Nullable<float> textBoxFontSize = null;
+        private float textBoxRotation = 0;
 
 		/*public override int GetIndexOfCircuit(Circuit c) {
 			int i = 0;
@@ -2246,11 +2247,21 @@ namespace Europlan.Common {
 		}
 
 
-		public float TextBoxFontSize {
+		public Nullable<float> TextBoxFontSize {
 			get { return textBoxFontSize; }
 			set { textBoxFontSize = value; }
 		}
-		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
+
+        public float TextBoxFontSizeForUse {
+            get { return this.TextBoxFontSize.HasValue ? this.TextBoxFontSize.Value : (float)Product.ConfigBoxFontSize; }
+        }
+
+        public float TextBoxRotation {
+            get { return this.textBoxRotation; }
+            set { this.textBoxRotation = value; }
+        }
+
+        public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
 			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
 				return null;
 			}

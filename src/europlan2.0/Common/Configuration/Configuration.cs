@@ -875,8 +875,12 @@ namespace Europlan.Common {
 							object[] attributes = info.GetCustomAttributes(typeof(ProductParameterAttribute), false);
 							if (attributes.Length > 0) {
 								ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
-								if (this.Type == ConfigurationType.UserConfiguration && ppa.saveForUser ||
-									this.Type == ConfigurationType.ProjectConfiguration && ppa.saveInProject ||
+                                if (this.Type == ConfigurationType.UserConfiguration && ppa.saveForUser) {
+                                    string valueStr = Configuration.UserTemplate.GetProductParameter(t, info.Name);
+                                    if (valueStr != null) {
+                                        this.AddProductParameter(t, info.Name, valueStr, result);
+                                    }
+                                } else if (this.Type == ConfigurationType.ProjectConfiguration && ppa.saveInProject ||
 									this.Type == ConfigurationType.AdminConfiguration ||
 									this.Type == ConfigurationType.InitializedConfiguration) {
 									object value = info.GetValue(null, null);

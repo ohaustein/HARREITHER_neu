@@ -201,6 +201,17 @@ namespace Europlan.Common {
 			this.lblGeneralAlphaDeckeCool.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:";
 			this.btnGeneralStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
 			this.lblGeneralAlphaWandCool.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:";
+            this.lblGeneralTextbox.Text = EuroplanRes.SystemParametersPanel_Textbox;
+            this.lblGeneralFillTextbox.Text = EuroplanRes.SystemParametersPanel_DeckenderHintergrund;
+            this.lblGeneralTextboxFontSize.Text = EuroplanRes.SystemParametersPanel_DefaultFontSize;
+            this.lblGeneralTextboxFontSizeUnit.Text = EuroplanRes.Unit_Zentimeter;
+
+            this.tabGeneralDefault.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein";
+            this.lblGeneralTextboxDefault.Text = EuroplanRes.SystemParametersPanel_Textbox;
+            this.lblGeneralFillTextboxDefault.Text = EuroplanRes.SystemParametersPanel_DeckenderHintergrund;
+            this.btnGeneralStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
+            this.lblGeneralTextboxFontSizeDefault.Text = EuroplanRes.SystemParametersPanel_DefaultFontSize;
+            this.lblGeneralTextboxFontSizeDefaultUnit.Text = EuroplanRes.Unit_Zentimeter;
 
 			this.lblHithermCompactRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter;
 
@@ -509,23 +520,64 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeGeneralPanel() {
+            /*this.tabSystemParameters.TabPages.Remove(this.tabGeneralDefault);
+            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
+                if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
+                    this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
+                }
+            } else {
+                Licensing.License license = Licensing.LicenseManager.Instance.License;
+                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
+                    if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
+                        this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
+                    }
+                } else {
+                    if (!this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
+                        this.tabSystemParameters.TabPages.Add(this.tabGeneral);
+                    }
+                }
+            }*/
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
-				if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-					this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
-				}
-			} else {
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
-				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-					if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-						this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
-					}
-				} else {
-					if (!this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-						this.tabSystemParameters.TabPages.Add(this.tabGeneral);
-					}
-				}
+                if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
+                    this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
+                }
+                if (!this.tabSystemParameters.TabPages.Contains(this.tabGeneralDefault)) {
+                    this.tabSystemParameters.TabPages.Add(this.tabGeneralDefault);
+                }
+            } else {
+                if (this.tabSystemParameters.TabPages.Contains(this.tabGeneralDefault)) {
+                    this.tabSystemParameters.TabPages.Remove(this.tabGeneralDefault);
+                }
+                if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
+                    this.layoutGeneral.Controls.Remove(this.lblHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaBodenHeat);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaBodenHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaBodenUnitHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaDeckeHeat);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaDeckeHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaDeckeUnitHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaWandHeat);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaWandHeat);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaWandUnitHeat);
+
+                    this.layoutGeneral.Controls.Remove(this.lblCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaBodenCool);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaBodenCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaBodenUnitCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaDeckeCool);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaDeckeCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaDeckeUnitCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaWandCool);
+                    this.layoutGeneral.Controls.Remove(this.numGeneralAlphaWandCool);
+                    this.layoutGeneral.Controls.Remove(this.lblGeneralAlphaWandUnitCool);
+
+                    this.layoutGeneral.SetRow(this.btnGeneralStandard, this.layoutGeneral.RowCount - 8);
+                }
+                if (!this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
+                    this.tabSystemParameters.TabPages.Add(this.tabGeneral);
+                }
 			}
-		}
+        }
 
 		private void InitializeEurovalValues() {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
@@ -647,14 +699,17 @@ namespace Europlan.Common {
 
 		private void InitializeGeneralValues() {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
-				// nothing to do yet
-			} else {
+                cbGeneralFillTextboxDefault.Checked = Configuration.UserTemplate.GetProductParameterAsBool<Product>("ConfigFillBoxBackground");
+                numGeneralTextboxFontSizeDefault.Value = (decimal)Configuration.UserTemplate.GetProductParameterAsDouble<Product>("ConfigBoxFontSize");
+            } else {
 				numGeneralAlphaBodenHeat.Value = (decimal)Product.ConfigAlphaBodenHeat;
 				numGeneralAlphaDeckeHeat.Value = (decimal)Product.ConfigAlphaDeckeHeat;
 				numGeneralAlphaWandHeat.Value = (decimal)Product.ConfigAlphaWandHeat;
 				numGeneralAlphaBodenCool.Value = (decimal)Product.ConfigAlphaBodenCool;
 				numGeneralAlphaDeckeCool.Value = (decimal)Product.ConfigAlphaDeckeCool;
 				numGeneralAlphaWandCool.Value = (decimal)Product.ConfigAlphaWandCool;
+                cbGeneralFillTextbox.Checked = Product.ConfigFillBoxBackground;
+                numGeneralTextboxFontSize.Value = (decimal)Product.ConfigBoxFontSize;
 			}
 		}
 
@@ -1261,37 +1316,86 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void rbHithermDefault_CheckedChanged(object sender, EventArgs e) {
-			if (rbHithermDefault.Checked != rbHithermPlusDefault.Checked) {
-				Configuration.UserTemplate.AddProductParameter<HithermProduct>("ConfigUsePlus", this.rbHithermPlusDefault.Checked);
-				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+        private void cbGeneralFillTextbox_CheckedChanged(object sender, EventArgs e) {
+            Product.ConfigFillBoxBackground = cbGeneralFillTextbox.Checked;
+            if (ProjectChanged != null) {
+                ProjectChanged(null);
+            }
+        }
 
-				if (HithermProduct.ConfigUsePlus != rbHithermPlusDefault.Checked) {
-					if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-						HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
-						if (ProjectChanged != null) {
-							ProjectChanged(null);
-						}
-					}
-				}
-			}
+        private void numGeneralTextboxFontSize_ValueChanged(object sender, EventArgs e) {
+            Product.ConfigBoxFontSize = (double)numGeneralTextboxFontSize.Value;
+            if (ProjectChanged != null) {
+                ProjectChanged(null);
+            }
+        }
+
+
+        private void rbHithermDefault_CheckedChanged(object sender, EventArgs e) {
+            if (!updateOngoing) {
+                if (rbHithermDefault.Checked != rbHithermPlusDefault.Checked) {
+                    Configuration.UserTemplate.AddProductParameter<HithermProduct>("ConfigUsePlus", this.rbHithermPlusDefault.Checked);
+                    //HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+
+                    if (HithermProduct.ConfigUsePlus != rbHithermPlusDefault.Checked) {
+                        if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                            HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+                            if (ProjectChanged != null) {
+                                ProjectChanged(null);
+                            }
+                        }
+                    }
+                }
+            }
 		}
 
 		private void rbHithermCompactDefault_CheckedChanged(object sender, EventArgs e) {
-			if (rbHithermCompactDefault.Checked != rbHithermCompactPlusDefault.Checked) {
-				Configuration.UserTemplate.AddProductParameter<HithermCompactProduct>("ConfigUsePlus", this.rbHithermCompactPlusDefault.Checked);
-				//HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
+            if (!updateOngoing) {
+                if (rbHithermCompactDefault.Checked != rbHithermCompactPlusDefault.Checked) {
+                    Configuration.UserTemplate.AddProductParameter<HithermCompactProduct>("ConfigUsePlus", this.rbHithermCompactPlusDefault.Checked);
+                    //HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 
-				if (HithermCompactProduct.ConfigUsePlus != rbHithermCompactPlusDefault.Checked) {
-					if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-						HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlusDefault.Checked;
-						if (ProjectChanged != null) {
-							ProjectChanged(null);
-						}
-					}
-				}
-			}
+                    if (HithermCompactProduct.ConfigUsePlus != rbHithermCompactPlusDefault.Checked) {
+                        if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                            HithermCompactProduct.ConfigUsePlus = this.rbHithermCompactPlusDefault.Checked;
+                            if (ProjectChanged != null) {
+                                ProjectChanged(null);
+                            }
+                        }
+                    }
+                }
+            }
 		}
+
+        private void cbGeneralFillTextboxDefault_CheckedChanged(object sender, EventArgs e) {
+            if (!updateOngoing) {
+                Configuration.UserTemplate.AddProductParameter<Product>("ConfigFillBoxBackground", this.cbGeneralFillTextboxDefault.Checked);
+
+                if (Product.ConfigFillBoxBackground != this.cbGeneralFillTextboxDefault.Checked) {
+                    if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        Product.ConfigFillBoxBackground = this.cbGeneralFillTextboxDefault.Checked;
+                        if (ProjectChanged != null) {
+                            ProjectChanged(null);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void numGeneralTextboxFontSizeDefault_ValueChanged(object sender, EventArgs e) {
+            if (!updateOngoing) {
+                Configuration.UserTemplate.AddProductParameter<Product>("ConfigBoxFontSize", (double)this.numGeneralTextboxFontSizeDefault.Value);
+
+                if (Product.ConfigBoxFontSize != (double)this.numGeneralTextboxFontSizeDefault.Value) {
+                    if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        Product.ConfigBoxFontSize = (double)this.numGeneralTextboxFontSizeDefault.Value;
+                        if (ProjectChanged != null) {
+                            ProjectChanged(null);
+                        }
+                    }
+                }
+            }
+        }
 
 		private void btnHithermStandardDefault_Click(object sender, EventArgs e) {
 			bool usePlus = Configuration.AdminTemplate.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus");
@@ -1305,5 +1409,10 @@ namespace Europlan.Common {
 			this.InitializeHithermCompactValues();
 		}
 
+        private void btnGeneralStandardDefault_Click(object sender, EventArgs e) {
+            bool fillTextbox = Configuration.AdminTemplate.GetProductParameterAsBool<Product>("ConfigFillBoxBackground");
+            Configuration.UserTemplate.AddProductParameter<Product>("ConfigFillBoxBackground", fillTextbox);
+            this.InitializeGeneralValues();
+        }
 	}
 }

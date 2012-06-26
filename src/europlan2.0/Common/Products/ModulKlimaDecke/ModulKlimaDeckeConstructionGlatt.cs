@@ -14,20 +14,34 @@ using Europlan.Common.Products.ModulKlimaDecke;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		//private double schienenBreite = 0.045; // meter
+		private Nullable<double> schienenBreite = 0.045; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
 		private double offsetY = 0; // meter (only used for beplankung)
+        private int beplankungXShift = 0;
 		//private Nullable<Size2D> beplankung = null; // meter
 		private Nullable<Size2D> beplankung = new Size2D(2.0, 1.25);
 
 		private Nullable<Size2D> beplankungStart = null;
 		private Nullable<Size2D> beplankungEnd = null;
 
+        private ConstructionModifyMode mode = ConstructionModifyMode.MOVE_SCHIENEN;
+
 		private ModulKlimaDeckeProduct.ModulCeilingConstructionEnum constructionType = (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE ? ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL : (ModulKlimaDeckeProduct.ModulCeilingConstructionEnum)ModulKlimaDeckeProduct.ConfigModulCeilingConstruction;
+
+        public enum ConstructionModifyMode {
+            MOVE_SCHIENEN,
+            MOVE_BEPLANKUNG
+        }
 
 		public ModulKlimaDeckeConstructionGlatt() {
 		}
+
+        [XmlIgnore]
+        public ConstructionModifyMode Mode {
+            get { return this.mode; }
+            set { this.mode = value; }
+        }
 
 		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
@@ -80,6 +94,21 @@ namespace Europlan.Common {
 			}
 			return length / measure;
 		}
+
+        public int BeplankungXShift {
+            get {
+                if (!this.Beplankung.HasValue) {
+                    return 0;
+                }
+                return this.beplankungXShift % (int)Math.Ceiling(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand));
+            }
+            set {
+                this.beplankungXShift = value;
+                while (this.beplankungXShift < 0) {
+                    this.beplankungXShift += (int)Math.Ceiling(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand));
+                }
+            }
+        }
 
 		public override void RecalculateSchienen() {
 			if (/*this.Planner == null ||*/ this.Product == null ||
@@ -135,7 +164,7 @@ namespace Europlan.Common {
 				while (curYPos > minY) {
 					curYPos -= beplankungsYIncrement;
 				}
-				this.beplankungStart = new Size2D(curPos + SchienenBreite / 2.0 * measure, curYPos);
+                this.beplankungStart = new Size2D(curPos + SchienenBreite / 2.0 * measure + this.BeplankungXShift * (SchienenAbstand + SchienenBreite) * measure - this.beplankung.Value.X * measure, curYPos);
 				this.beplankungEnd = new Size2D(maxX, maxY);
 				while (curPos + increment < minX) {
 					curPos += increment;
@@ -453,12 +482,25 @@ namespace Europlan.Common {
 
 		public ModulKlimaDeckeProduct.ModulCeilingConstructionEnum ContructionType {
 			get { return this.constructionType; }
-			set { this.constructionType = value; }
+			set {
+                if (this.constructionType != value) {
+                    this.schienenBreite = null;
+                    this.constructionType = value;
+                }
+            }
 		}
 
-		[XmlIgnore]
+        /*public Nullable<double> SchienenBreiteSerialize {
+            get { return this.schienenBreite; }
+            set { this.schienenBreite = value; }
+        }
+
+		[XmlIgnore]*/
 		public double SchienenBreite {
 			get {
+                if (this.schienenBreite.HasValue) {
+                    return this.schienenBreite.Value;
+                }
 				switch (this.ContructionType) {
 					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL:
 						return 0.065;
@@ -471,6 +513,12 @@ namespace Europlan.Common {
 						break;
 				}
 			}
+            set {
+                if (this.schienenBreite != value) {
+                    this.schienenBreite = value;
+                    this.RecalculateSchienen();
+                }
+            }
 		}
 
 		public double SchienenAbstand {
@@ -511,7 +559,8 @@ namespace Europlan.Common {
 				while (this.offset < 0) {
 					this.offset += increment;
 				}
-			}
+                this.RecalculateSchienen();
+            }
 		}
 
 		public Nullable<Size2D> Beplankung {
@@ -632,7 +681,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION) {
+			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION && this.mode == ConstructionModifyMode.MOVE_SCHIENEN) {
 				c = System.Drawing.Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
 				b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));
@@ -790,10 +839,25 @@ namespace Europlan.Common {
 		}
 
 		public override void MoveDrag(Point2D planPoint, Point pointInControl) {
-			Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
-			this.Offset = startOffset + (move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
-			this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
-
+            if (this.mode == ConstructionModifyMode.MOVE_SCHIENEN) {
+                Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
+                this.Offset = startOffset + (move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+                //this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+            } else {
+			    if (/*this.Planner == null ||*/
+				    this.Product == null ||
+				    this.Product.AssociatedRoom == null ||
+				    this.CeilingCoordinates == null ||
+				    this.CeilingCoordinates.Count < 3 ||
+				    this.Product.AssociatedRoom.AssociatedPlan == null ||
+				    this.Product.AssociatedRoom.AssociatedPlan.Measure == null) {
+				    return;
+			    }
+			    double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
+                Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
+                this.BeplankungXShift = (int)Math.Round((move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value) / (this.SchienenAbstand + this.SchienenBreite));
+                this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
+            }
 			if (this.PlanPanel != null) {
 				this.PlanPanel.InvalidateGraphics();
 			}

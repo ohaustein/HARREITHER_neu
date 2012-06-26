@@ -254,7 +254,7 @@ namespace Europlan.Common {
 					SolidFramework.Pdf.Plumbing.PdfPages pages = null;
 					SolidFramework.Pdf.PdfDocument doc = null;	*/
 #endif
-			
+
 					if (isPdf(extension)) {
 #if PDF
 						/*// Load up the document
@@ -309,6 +309,9 @@ namespace Europlan.Common {
 							plan.Name = newPlanForm.PlanName;
 							plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
 							bool import = true;
+                            if (isDwg(extension)) {
+                                MessageBox.Show(EuroplanRes.ImportedPlansPanel_DwgWarnung, EuroplanRes.ImportedPlansPanel_DwgWarnungTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
 							if (plan.IsLargePlan) {
 								import = MessageBox.Show(EuroplanRes.ImportedPlansPanel_GrosserPlanText, EuroplanRes.ImportedPlansPanel_GrosserPlanTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
 							}
@@ -471,6 +474,10 @@ namespace Europlan.Common {
 		private bool isPdf(string extension) {
 			return string.Compare(".pdf", extension, true) == 0;
 		}
+
+        private bool isDwg(string extension) {
+            return string.Compare(".dwg", extension, true) == 0;
+        }
 
 		private void btnDelete_Click(object sender, EventArgs e) {
 			// TODO - check if plan is alerady used

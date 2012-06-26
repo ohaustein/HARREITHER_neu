@@ -292,11 +292,14 @@ namespace Europlan.Application {
 
 		private void LoadProject() {
 			this.splitContainer.Panel2.Controls.Clear();
+            StopAutoSaveTimer();
 			try {
 				if (projectFileName != null) {
+                    Project.Instance.CleanupAutoSave();
 					Project.Load(projectFileName);
 					currentProject = Project.Instance;
 					AddRecentProject(projectFileName);
+                    StartAutoSaveTimer();
 				}
 			} catch (Exception ex) {
 				if (ex is ProductNotLicensedException || ex.InnerException is ProductNotLicensedException) {
@@ -334,14 +337,27 @@ namespace Europlan.Application {
 				return;
 			}
 			try {
+                StopAutoSaveTimer();
 				if (currentProject != null && projectFileName != null) {
 					Project.Save(projectFileName);
 					AddRecentProject(projectFileName);
 				}
-			} catch (Exception ex) {
+			} catch (Exception ex) { 
 				log.Error("Problem saving project:", ex);
 			}
+            StartAutoSaveTimer();
 		}
+
+        private void AutoSaveProject() {
+            try {
+                if (currentProject != null && projectFileName != null) {
+                    Project.AutoSave(projectFileName);
+                    AddRecentProject(projectFileName);
+                }
+            } catch (Exception ex) {
+                log.Error("Problem saving project:", ex);
+            }
+        }
 
 		private void NewProject(bool checkChanges) {
 			if (!checkChanges || CheckForUnsavedChanges()) {
@@ -397,7 +413,8 @@ namespace Europlan.Application {
 				}
 
 				SettingsFile.Update();
-			} else {
+                Project.Instance.CleanupAutoSave();
+            } else {
 				e.Cancel = true;
 			}
 		}
@@ -940,5 +957,20 @@ namespace Europlan.Application {
 			Help.ShowHelp(this, "tutorial.chm");
 		}
 
+        private void autoSaveTimer_Tick(object sender, EventArgs e) {
+            this.AutoSaveProject();
+        }
+
+        private void StopAutoSaveTimer() {
+            if (autoSaveTimer.Enabled) {
+                autoSaveTimer.Stop();
+            }
+        }
+
+        private void StartAutoSaveTimer() {
+            if (Product.ConfigAutoSave) {
+                autoSaveTimer.Start();
+            }
+        }
 	}
 }

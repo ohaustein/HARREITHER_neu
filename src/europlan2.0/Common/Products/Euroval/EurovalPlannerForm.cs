@@ -24,6 +24,7 @@ namespace Europlan.Common.Products {
 		public EurovalPlannerForm(PlannedProduct plannedProduct) {
 			InitializeComponent();
 			this.plannedProduct = plannedProduct;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
 
 			EurovalProduct product = plannedProduct.Product as EurovalProduct;
 			if (product.PlannedAreaGraphical.Count == 0) {
@@ -116,7 +117,8 @@ namespace Europlan.Common.Products {
 			this.btnSetText.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxPositionieren;
 			this.btnFontPlus.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxVergroessern;
 			this.btnFontMinus.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxVerkleinern;
-			this.btnAddAnbindeleitungen.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnbindeleitungenHinzufuegen;
+            this.btnFontRevert.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_TextboxZuruecksetzen;
+            this.btnAddAnbindeleitungen.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnbindeleitungenHinzufuegen;
 			this.btnSelectAnbindeleitungen.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_AnbindeleitungenAendern;
 			this.pageAuslegung.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Auslegung;
 			this.label12.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_EckenErklaerung;
@@ -155,7 +157,9 @@ namespace Europlan.Common.Products {
 			this.label3.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QSollProQuadratmeter;
 			this.label2.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_QSoll;
 			this.label1.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Heizen;
-		}
+            this.btnShowPlanBg.Text = Europlan.Common.EuroplanRes.ProductPlannerForm_PlanImHintergrundAnzeigen;
+            this.btnRotateTextbox.Text = Europlan.Common.EuroplanRes.PipeProductPlannerForm_TextboxDrehen;
+        }
 
 		private void UpdateControls() {
 		}
@@ -231,16 +235,21 @@ namespace Europlan.Common.Products {
 		}
 
 		private void btnFontPlus_Click(object sender, EventArgs e) {
-			this.eurovalPlanner.Product.TextBoxFontSize = this.eurovalPlanner.Product.TextBoxFontSize + 1;
+            this.eurovalPlanner.Product.TextBoxFontSize = this.eurovalPlanner.Product.TextBoxFontSizeForUse * 1.25f;
 			this.planPanel.InvalidateGraphics();
 		}
 
 		private void btnFontMinus_Click(object sender, EventArgs e) {
-			this.eurovalPlanner.Product.TextBoxFontSize = Math.Max(this.eurovalPlanner.Product.TextBoxFontSize - 1, 3.0f);
+            this.eurovalPlanner.Product.TextBoxFontSize = this.eurovalPlanner.Product.TextBoxFontSizeForUse * 0.8f;
 			this.planPanel.InvalidateGraphics();
-		}
+        }
 
-		private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
+        private void btnFontRevert_Click(object sender, EventArgs e) {
+            this.eurovalPlanner.Product.TextBoxFontSize = null;
+            this.planPanel.InvalidateGraphics();
+        }
+
+        private void btnAddAnbindeleitungen_Click(object sender, EventArgs e) {
 			if (!this.btnAddAnbindeleitungen.Checked) {
 				this.SetConnectionPlanner();
 				this.planPanel.Mode = PlanMode.PM_PLANNER_CLICK;
@@ -861,6 +870,30 @@ namespace Europlan.Common.Products {
 			this.CalculateAndUpdate();
 		}
 
+        private void btnShowPlanBg_Click(object sender, EventArgs e) {
+            Product.ShowPlanInBackground = !Product.ShowPlanInBackground;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
+            this.planPanel.InvalidateGraphics();
+        }
 
-	}
+        private void btn0Degree_Click(object sender, EventArgs e) {
+            this.eurovalPlanner.Product.TextBoxRotation = 0;
+            this.planPanel.InvalidateGraphics();
+        }
+
+        private void btn90Degree_Click(object sender, EventArgs e) {
+            this.eurovalPlanner.Product.TextBoxRotation = 90;
+            this.planPanel.InvalidateGraphics();
+        }
+
+        private void btn180Degree_Click(object sender, EventArgs e) {
+            this.eurovalPlanner.Product.TextBoxRotation = 180;
+            this.planPanel.InvalidateGraphics();
+        }
+
+        private void btn270Degree_Click(object sender, EventArgs e) {
+            this.eurovalPlanner.Product.TextBoxRotation = 270;
+            this.planPanel.InvalidateGraphics();
+        }
+    }
 }

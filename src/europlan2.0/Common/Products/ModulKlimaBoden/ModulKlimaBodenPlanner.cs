@@ -2224,6 +2224,10 @@ namespace Europlan.Common {
 		public bool DrawExpansionGaps {
 			get { return this.drawExpansionGaps; }
 			set { this.drawExpansionGaps = value; }
-	}
+	    }
+
+        public bool ShowPlanBackground {
+            get { return Europlan.Common.Product.ShowPlanInBackground; }
+        }
 	}
 }

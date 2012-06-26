@@ -652,10 +652,19 @@ namespace Europlan.Common {
 		}
 
 
-		float TextBoxFontSize {
+		Nullable<float> TextBoxFontSize {
 			get;
 			set;
 		}
+
+        float TextBoxFontSizeForUse {
+            get;
+        }
+
+        float TextBoxRotation {
+            get;
+            set;
+        }
 	#endregion
 	}
 }

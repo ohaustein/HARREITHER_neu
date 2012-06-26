@@ -195,5 +195,9 @@ namespace Europlan.Common {
 				}
 			}
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return true; }
+        }
+    }
 }

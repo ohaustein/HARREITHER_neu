@@ -20,6 +20,8 @@ namespace Europlan.Common {
 		private static readonly object padlock = new object();
 		private static readonly ILog log = LogManager.GetLogger(typeof(Project));
 
+        private static string autosaveExtension = ".as";
+
 		private string projectNumber;
 		private string[] projectName;
 		private string[] projectContact;
@@ -327,6 +329,10 @@ namespace Europlan.Common {
 			return true;
 		}
 
+        public static string AutoSaveFilename(string filename) {
+            return filename + Project.autosaveExtension;
+        }
+
 		public static void Load(string filename) {
 			lock (padlock) {
 				Project old = instance;
@@ -342,6 +348,36 @@ namespace Europlan.Common {
 						throw new ProjectVersionNotCompatibleException();
 					}
 				}
+                if (File.Exists(AutoSaveFilename(filename))) {
+                    s = new XmlSerializer(typeof(Project));
+                    r = new FileStream(AutoSaveFilename(filename), FileMode.Open);
+                    Project asProject = null;
+                    try {
+                        asProject = (Project)s.Deserialize(r);
+                    } catch (Exception) {
+                        // nothing todo
+                    } finally {
+                        r.Close();
+                    }
+                    if (asProject != null) {
+                        if (!asProject.ProjectVersionCompatible()) {
+                            File.Delete(AutoSaveFilename(filename));
+                        } else {
+                            string message = "Das Projekt wurde zuletzt am %CHANGEDATE% gespeichert, es wurde aber eine automatisch gespeicherte Sicherung vom %AUTOSAVEDATE% gefunden. Wollen Sie diese Sicherung wiederherstellen?";
+                            message = message.Replace("%CHANGEDATE%", instance.ProjectLastChanged.ToShortDateString() + " " + instance.ProjectLastChanged.ToShortTimeString());
+                            message = message.Replace("%AUTOSAVEDATE%", asProject.ProjectLastChanged.ToShortDateString() + " " + asProject.ProjectLastChanged.ToShortTimeString());
+                            if (MessageBox.Show(message, "Automatische Sicherung gefunden", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                                File.Delete(filename);
+                                File.Move(AutoSaveFilename(filename), filename);
+                                instance = asProject;
+                            } else {
+                                File.Delete(AutoSaveFilename(filename));
+                            }
+                        }
+                    } else {
+                        File.Delete(AutoSaveFilename(filename));
+                    }
+                }
 				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration = Configuration.UserTemplate + instance.configuration;
@@ -533,6 +569,7 @@ namespace Europlan.Common {
 					w.Close();
 					fs.Close();
 					FileUtils.SetAccessForEveryone(filename);
+                    Project.Instance.CleanupAutoSave();
 					if (ProjectSaved != null) {
 						Project.ProjectSaved(Instance);
 					}
@@ -542,6 +579,44 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+        public static void AutoSave(string filename) {
+            lock (padlock) {
+                try {
+                    Instance.ProjectLastChanged = DateTime.Now;
+
+                    XmlSerializer s = new XmlSerializer(typeof(Project));
+                    MemoryStream w = new MemoryStream();
+                    Instance.ProjectFileName = filename;
+                    s.Serialize(w, Instance);
+                    Stream fs = new FileStream(AutoSaveFilename(filename), FileMode.Create);
+                    w.WriteTo(fs);
+                    w.Close();
+                    fs.Close();
+                    FileUtils.SetAccessForEveryone(filename);
+                    /*if (ProjectSaved != null) {
+                        Project.ProjectSaved(Instance);
+                    }*/
+                } catch (Exception e) {
+                    log.Error(e);
+                    //MessageBox.Show(EuroplanRes.Project_FehlerBeimSpeichernText, EuroplanRes.Project_FehlerBeimSpeichernTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public void CleanupAutoSave() {
+            lock (padlock) {
+                try {
+                    if (!string.IsNullOrEmpty(this.ProjectFileName)) {
+                        if (File.Exists(AutoSaveFilename(this.ProjectFileName))) {
+                            File.Delete(AutoSaveFilename(this.ProjectFileName));
+                        }
+                    }
+                } catch (Exception ex) {
+                    log.Error("Problem deleting autosave file", ex);
+                }
+            }
+        }
 
 		public static Project New() {
 			lock (padlock) {
@@ -974,5 +1049,5 @@ namespace Europlan.Common {
 				CopyDirectory(diSrcDirectory, new DirectoryInfo(Path.Combine(diDestDir.FullName, diSrcDirectory.Name)));
 			}
 		}
-	}
+    }
 }

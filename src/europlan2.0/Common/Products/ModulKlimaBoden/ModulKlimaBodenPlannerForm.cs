@@ -27,6 +27,7 @@ namespace Europlan.Common.Products {
 			InitializeComponent();
 			this.SetLanguage();
 			this.plannedProduct = plannedProduct;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
 
 			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
 			this.cmbOrientation.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
@@ -152,6 +153,7 @@ namespace Europlan.Common.Products {
 			this.label9.Text = Europlan.Common.EuroplanRes.Unit_Watt;
 			this.label18.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung;
 			this.Text = Europlan.Common.EuroplanRes.ModulKlimaBodenPlannerForm_Titel;
+            this.btnShowPlanBg.Text = Europlan.Common.EuroplanRes.ProductPlannerForm_PlanImHintergrundAnzeigen;
 		}
 
 		private void UpdateControls() {
@@ -1199,5 +1201,11 @@ namespace Europlan.Common.Products {
 				this.lblNewModules.Visible = true;
 			}
 		}
+
+        private void btnShowPlanBg_Click(object sender, EventArgs e) {
+            Product.ShowPlanInBackground = !Product.ShowPlanInBackground;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
+            this.planPanel.InvalidateGraphics();
+        }
 	}
 }

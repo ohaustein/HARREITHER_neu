@@ -157,14 +157,14 @@ namespace Europlan.Common {
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_5);
 			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_5);
-			//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_5);
+			this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_300_5);
 			if (!HithermProduct.ConfigUsePlus) {
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_50_10);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_100_10);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_150_10);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_200_10);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_250_10);
-				//this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.RegisterTypeEnum.HIT_300_10);
+                this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermRegister.HithermRegisterTypeEnum.HIT_300_10);
 			}
 
 			this.product = this.Tag as PlannedProduct;

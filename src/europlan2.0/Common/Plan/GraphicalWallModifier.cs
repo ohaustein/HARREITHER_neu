@@ -531,5 +531,9 @@ namespace Europlan.Common {
 
 			return list;
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return true; }
+        }
+    }
 }

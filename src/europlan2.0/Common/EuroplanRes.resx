@@ -7099,4 +7099,52 @@ Compact
   <data name="PdfRegionPickerForm_GrosserPlanTitel" xml:space="preserve">
     <value>Bestätigen</value>
   </data>
+  <data name="PipeProductPlanner_Raum" xml:space="preserve">
+    <value>Raum:</value>
+  </data>
+  <data name="SystemParametersPanel_DeckenderHintergrund" xml:space="preserve">
+    <value>Deckender Hintergrund:</value>
+  </data>
+  <data name="SystemParametersPanel_Textbox" xml:space="preserve">
+    <value>Textbox bei Euroval / Ecotherm</value>
+  </data>
+  <data name="SystemParametersPanel_DefaultFontSize" xml:space="preserve">
+    <value>Standardschriftgröße:</value>
+  </data>
+  <data name="EcothermPlannerForm_TextboxZuruecksetzen" xml:space="preserve">
+    <value>Größe der Textbox zurücksetzen</value>
+  </data>
+  <data name="OptionsForm_OrthoRasterung" xml:space="preserve">
+    <value>Rasterung bei eingescannten Plänen aktivieren</value>
+  </data>
+  <data name="OptionsForm_AutomatischSichern" xml:space="preserve">
+    <value>Projekt Alle 10 Minuten sichern</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_BeplankungAnzeigen" xml:space="preserve">
+    <value>Beplankung anzeigen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_BeplankungVerschieben" xml:space="preserve">
+    <value>Beplankung verschieben</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_PlanAnzeigen" xml:space="preserve">
+    <value>Plan im Hintergrund anzeigen</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_StaffelnCProfil" xml:space="preserve">
+    <value>Staffeln / C-Profil</value>
+  </data>
+  <data name="ModulKlimaDeckePlannerForm_StaffelBreite" xml:space="preserve">
+    <value>Breite</value>
+  </data>
+  <data name="ProductPlannerForm_PlanImHintergrundAnzeigen" xml:space="preserve">
+    <value>Plan im Hintergrund anzeigen</value>
+  </data>
+  <data name="PipeProductPlannerForm_TextboxDrehen" xml:space="preserve">
+    <value>Textbox drehen</value>
+  </data>
+  <data name="ImportedPlansPanel_DwgWarnung" xml:space="preserve">
+    <value>Beim Exportieren von dwg-Dateien kann möglicherweise eine Datei erzeugt werden, die von Ihrem CAD-Programm nicht mehr geöffnet werden kann. Bitte exportieren Sie diesen Plan einmal, bevor Sie mit der Planung beginnen und versuchen Sie diesen mit Ihrem CAD-Programm zu öffnen. Wenn hierbei Probleme auftreten, wandeln Sie bitte die dwg-Datei mit einem externen Programm (z.B. Ihrem CAD-Programm) in eine dxf-Datei um, um sicherzustellen, dass Sie am Ende der Planung die exportierte Datei öffnen können!</value>
+  </data>
+  <data name="ImportedPlansPanel_DwgWarnungTitel" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
 </root>

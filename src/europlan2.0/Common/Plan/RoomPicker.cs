@@ -201,7 +201,7 @@ namespace Europlan.Common {
 				List<Point2D> points = new List<Point2D>(coordsPickedSoFar);
 				//PointF pos = mousePosInPlan;
 				Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
-				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+				if (Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 					if (points.Count == 1) {
 						pos = GetNormalizedPoint(points[0], null, pos);
 					} else if (points.Count == 2) {
@@ -247,7 +247,7 @@ namespace Europlan.Common {
 
 			if (expansionGapStart != Point2D.Zero) {
 				Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
-				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+                if (Product.ConfigActivateOrthoRasterung ==  ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 					pos = GetNormalizedPoint(expansionGapStart, null, pos);
 				}
 				Point2D start = additionalTransformation.TransformTo2D(expansionGapStart);
@@ -313,7 +313,7 @@ namespace Europlan.Common {
 				bool pick = (button == MouseButtons.Left) || (button == MouseButtons.Right);
 				bool finishPick = button == MouseButtons.Right;
 				bool addFinishinigPick = true;
-				if (coordsPickedSoFar.Count > 0 && (this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+                if (coordsPickedSoFar.Count > 0 && Product.ConfigActivateOrthoRasterung ==  ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 					if (coordsPickedSoFar.Count == 1) {
 						normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, normalizedPoint);
 					} else if (coordsPickedSoFar.Count == 2) {
@@ -406,7 +406,7 @@ namespace Europlan.Common {
 					expansionGapStart = planPoint;
 				} else {
 					Point2D normalizedPoint = planPoint;
-					if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+                    if (Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 						normalizedPoint = GetNormalizedPoint(expansionGapStart, null, normalizedPoint);
 					}
 					this.room.AssociatedFloor.ExpansionGaps.Add(new Segment2D(expansionGapStart.X, expansionGapStart.Y, normalizedPoint.X, normalizedPoint.Y));
@@ -545,7 +545,7 @@ namespace Europlan.Common {
 			if (this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
 				Point2D normalizedPoint = planPoint;
 				bool isStart = false;
-				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT && coordsPickedSoFar.Count > 0) {
+                if (Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) && coordsPickedSoFar.Count > 0) {
 					if (coordsPickedSoFar.Count == 1) {
 						normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, planPoint);
 					} else if (coordsPickedSoFar.Count == 2) {
@@ -578,7 +578,7 @@ namespace Europlan.Common {
 			} else if (this.Mode == RoomPickerMode.RPM_PICK_ROOM) {
 				Point2D normalizedPoint = planPoint;
 				bool isStart = false;
-				if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT && coordsPickedSoFar.Count > 0) {
+				if (Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) && coordsPickedSoFar.Count > 0) {
 					if (coordsPickedSoFar.Count > 2) {
 						normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[coordsPickedSoFar.Count - 1], coordsPickedSoFar[0], planPoint, coordsPickedSoFar[0], out isStart);
 					}
@@ -932,5 +932,9 @@ namespace Europlan.Common {
 			this.newUnheatedAreaSize = new Size2D();
 			this.newUnheatedArea = null;
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return true; }
+        }
+    }
 }

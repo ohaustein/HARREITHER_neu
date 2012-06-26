@@ -660,16 +660,17 @@ namespace Europlan.Common {
 
 			this.lastErrorMsg = "";
 			string newMsg;
-			//foreach (ModulBodenCircuit c in this.circuits) {
-			//    int moduleCount = 0;
-			//    foreach (KlimaFlaechenList row in c.Rows) {
-			//        moduleCount += row.List.Count;
-			//    }
-			//    if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
-			//        //errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
-			//        errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
-			//    }
-			//}
+			foreach (ModulBodenCircuit c in this.circuits) {
+			    int moduleCount = 0;
+                moduleCount += c.ModuleTotal;
+			    if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
+                    newMsg = EuroplanRes.ErrorMessage_ModulAnzahl;
+                    newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                    newMsg = newMsg.Replace("%VALUE%", moduleCount.ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+			}
 
 			if (this.CoveredFloorArea > this.PlannedNetArea) {
 				newMsg = EuroplanRes.ErrorMessage_Modulflaeche;
@@ -1117,6 +1118,20 @@ namespace Europlan.Common {
 
 		public const string PLACEHOLDER_MK01_02 = "PLACEHOLDER_MK01/02";
 
+        private struct ModulePosForCalc {
+            public ModulePosForCalc(double x, double y, double height, double width) {
+                this.x = x;
+                this.y = y;
+                this.height = height;
+                this.width = width;
+            }
+
+            public double x;
+            public double y;
+            public double height;
+            public double width;
+        }
+
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
@@ -1181,9 +1196,73 @@ namespace Europlan.Common {
 			}
 
 			// Modulstreifen
-			// TODO for graphical!!!
-			double streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", streifen);
+            double streifen = 0;
+            if (graphical && this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+                // TODO for graphical!!!
+                double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+                Dictionary<double, List<KlimaFlaechenModul>> moduleByRotation = new Dictionary<double,List<KlimaFlaechenModul>>();
+                foreach (ModulBodenCircuit c in this.PlannedCircuits) {
+                    foreach (KlimaFlaechenModul modul in c.Row.List) {
+                        double roundedRotation = Math.Round(modul.GraphRotation, 1);
+                        if (!moduleByRotation.ContainsKey(roundedRotation)) {
+                            moduleByRotation.Add(roundedRotation, new List<KlimaFlaechenModul>());
+                        }
+                        moduleByRotation[roundedRotation].Add(modul);
+                    }
+                }
+                double modulStreifenLength = 0;
+                foreach (KeyValuePair<double, List<KlimaFlaechenModul>> kvp in moduleByRotation) {
+                    List<ModulePosForCalc> modulePos = new List<ModulePosForCalc>();
+                    Matrix3D rotate = Transformation3D.Rotate(-kvp.Key * Math.PI / 180.0);
+                    foreach (KlimaFlaechenModul m in kvp.Value) {
+                        Point2D rotatedPos = rotate.Transform(new Point2D(m.GraphPosX, m.GraphPosY));
+                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeight(m.ModulType), KlimaFlaechenModul.GetModuleWidth(m.ModulType)));
+                    }
+                    for (int i = 0; i < modulePos.Count - 1; i++) {
+                        for (int j = i + 1; j < modulePos.Count; j++) {
+                            // check distance of these 2 modules in x and in y direction
+                            if (modulePos[i].x < modulePos[j].x) {
+                                double distX = modulePos[j].x - modulePos[i].x - modulePos[i].width;
+                                // possible modulstreifen found
+                                int streifenWidth = 0;
+                                if (Math.Abs(distX - 0.1) < 0.005) {
+                                    streifenWidth = 1;
+                                } else if (Math.Abs(distX - 0.2) < 0.005) {
+                                    streifenWidth = 2;
+                                }
+                                if (streifenWidth > 0) {
+                                    double overlap = Math.Min(modulePos[i].y + modulePos[i].height, modulePos[j].y + modulePos[j].height) - Math.Max(modulePos[i].y, modulePos[j].y);
+                                    if (overlap > 0) {
+                                        modulStreifenLength += overlap * streifenWidth;
+                                    }
+                                }
+                            } else {
+                                double distX = modulePos[i].x - modulePos[j].x - modulePos[j].width;
+                                int streifenWidth = 0;
+                                if (Math.Abs(distX - 0.1) < 0.005) {
+                                    streifenWidth = 1;
+                                } else if (Math.Abs(distX - 0.2) < 0.005) {
+                                    streifenWidth = 2;
+                                }
+                                if (streifenWidth > 0) {
+                                    // possible modulstreifen found
+                                    double overlap = Math.Min(modulePos[j].y + modulePos[j].height, modulePos[i].y + modulePos[i].height) - Math.Max(modulePos[j].y, modulePos[i].y);
+                                    if (overlap > 0) {
+                                        modulStreifenLength += overlap * streifenWidth;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                streifen = Math.Ceiling(modulStreifenLength);
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", -streifen);
+#warning TODO for graphical
+            } else {
+                streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", -streifen);
+            }
 
 			// nur bei Estrichkonstruktion
 			if (this.HasInsideConstruction) {
@@ -1206,7 +1285,7 @@ namespace Europlan.Common {
 
 			// Modulniveauplatten
 			double area = this.PlannedFloorArea - this.PlannedModulArea - (streifen * (0.945 * 0.096));
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK03", Math.Ceiling(area * 2));
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "MK03", -Math.Ceiling(area * 2));
 		}
 
 		public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {

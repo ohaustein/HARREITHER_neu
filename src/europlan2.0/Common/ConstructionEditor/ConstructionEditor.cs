@@ -71,8 +71,10 @@ namespace Europlan.Common {
 			this.colMaterial.Items.Clear();
 			//this.colMaterial.Items.Add(Material.EmptyMaterial);
 			this.colMaterial.Items.Add(new MaterialItem("", null));
-			foreach (Material m in insulations) {
-				this.colMaterial.Items.Add(new MaterialItem(m.LocalizedName, m));
+			//foreach (Material m in insulations) {
+            for (int i = 0; i < insulations.Count; i++) {
+                Material m = insulations[i];
+                this.colMaterial.Items.Add(new MaterialItem(m.LocalizedName, m));
 			}
 			switch (this.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:

@@ -131,15 +131,15 @@ namespace Europlan.Common {
 			get {
 				switch (this.sliderSize.Value) {
 					case 0:
-						return 96;
+						return 54;
 					case 1:
-						return 96;
+						return 72;
 					case 2:
-						return 96;
+                        return 96; // default
 					case 3:
-						return 96;
+						return 120;
 					case 4:
-						return 96;
+						return 150;
 					default:
 						return 96;
 				}

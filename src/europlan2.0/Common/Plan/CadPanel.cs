@@ -95,7 +95,9 @@ namespace Europlan.Common {
 
 		protected override void OnPaint(PaintEventArgs e) {
 			if (gdiGraphics3D != null) {
-				gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
+                if (this.productPlanner == null || this.productPlanner.ShowPlanBackground) {
+                    gdiGraphics3D.Draw(e.Graphics, this.ClientRectangle);
+                }
 				if (selectedStartPointCad.HasValue) {
 					Point3D start = gdiGraphics3D.To2DTransform.Transform(selectedStartPointCad.Value);
 					if (selectedEndPointCad.HasValue) {

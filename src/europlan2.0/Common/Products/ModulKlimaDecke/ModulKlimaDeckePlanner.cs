@@ -20,7 +20,8 @@ namespace Europlan.Common {
 			KDM_LAYOUT_ADD_AREA,
 			KDM_PICK_MODULE,
 			KDM_ADD_CONNECTION,
-			KDM_DEL_CONNECTION
+			KDM_DEL_CONNECTION,
+            KDM_BEPLANKUNG
 		}
 
 		public ModulKlimaDeckePlanner() {
@@ -4136,5 +4137,9 @@ namespace Europlan.Common {
 			form.Dispose();
 			return move;
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return Europlan.Common.Product.ShowPlanInBackground; }
+        }
+    }
 }

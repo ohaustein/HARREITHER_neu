@@ -194,7 +194,9 @@ namespace Europlan.Common {
 				paintMatrix.Translate(this.XPos, this.YPos);
 				g.Transform = paintMatrix;
 
-				g.DrawImage(image, 0, 0, image.Width, image.Height);
+                if (this.productPlanner == null || this.productPlanner.ShowPlanBackground) {
+                    g.DrawImage(image, 0, 0, image.Width, image.Height);
+                }
 
 				Matrix ctrlToPlan = paintMatrix.Clone();
 				/*transformPointsMatrix.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);

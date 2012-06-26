@@ -183,8 +183,9 @@ namespace Europlan.Common {
 						productsInFloor.Add(p, pp);
 					} else if (p is HithermProduct) {
 						productsInFloor.Add(p, null);
-					} else
-					if (p is ModulKlimaDeckeProduct) {
+                    } else if (p is HithermCompactProduct) {
+                        productsInFloor.Add(p, null);
+					} else if (p is ModulKlimaDeckeProduct) {
 						ModulKlimaDeckePlanner pp = new ModulKlimaDeckePlanner();
 						pp.Product = p as ModulKlimaDeckeProduct;
 						pp.ConnectedPlanPanel = this.connectedPlanPanel;
@@ -1417,5 +1418,9 @@ namespace Europlan.Common {
 				}
 			}
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return Europlan.Common.Product.ShowPlanInBackground; }
+        }
+    }
 }

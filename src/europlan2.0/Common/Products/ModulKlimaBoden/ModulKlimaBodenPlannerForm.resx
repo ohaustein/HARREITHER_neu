@@ -201,6 +201,13 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnShowPlanBg.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA/SURBVDhPY2CgBUhLS/tPLMZqP0gzMWDz5s3/qWMANufO
+        nDnzPyEMdwEhJ4MMwgZGDfj/fzQMqB0GxOY+dHUAEU7haITIo48AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnVertical.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

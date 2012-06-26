@@ -22,6 +22,7 @@ namespace Europlan.Common {
 			this.SetLanguage();
 
 			this.connectionPlanner.Floor = floor;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
 
 			/*foreach (Distributor distributor in floor.GetAllAvailableDistributors()) {
 				foreach (Distributor.GraphicalRepresentation rep in distributor.GraphicalRepresentations) {
@@ -51,6 +52,8 @@ namespace Europlan.Common {
 
 		public ConnectionPlannerForm(Product product, bool ceiling) {
 			InitializeComponent();
+
+            this.SetLanguage();
 
 			this.connectionPlanner.Product = product;
 			this.connectionPlanner.PlanCeiling = ceiling;
@@ -326,5 +329,10 @@ namespace Europlan.Common {
 			this.connectionPlanner.AddOtherCircuits = this.btnOtherCircuits.Checked;
 		}
 
+        private void btnShowPlanBg_Click(object sender, EventArgs e) {
+            Product.ShowPlanInBackground = !Product.ShowPlanInBackground;
+            this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
+            this.planPanel.InvalidateGraphics();
+        }
 	}
 }

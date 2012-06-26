@@ -26,8 +26,8 @@ namespace Europlan.Application {
 			this.megWall.Filter = CategoryType.Wall;
 
 			this.SetLanguague();
-			this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
-		}
+            this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
+        }
 
 		public OptionsForm(bool standardWerte) {
 			InitializeComponent();
@@ -65,6 +65,8 @@ namespace Europlan.Application {
 			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung";
 			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand";
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
+            cbOrthoRasterung.Text = EuroplanRes.OptionsForm_OrthoRasterung;
+            cbAutoSave.Text = Properties.Resources.OptionsForm_AutomatischSichern;
 
 			this.lblPlanUnit.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
 			this.cmbPlanUnit.Items.Clear();
@@ -109,6 +111,8 @@ namespace Europlan.Application {
 			}
 			cmbLanguage.SelectedItem = CultureInfo.GetCultureInfo((string)settings.GetSetting("Language", "de"));
 			cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
+            cbOrthoRasterung.Checked = Product.ConfigActivateOrthoRasterung;
+            cbAutoSave.Checked = Product.ConfigAutoSave;
 		}
 
 		private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -129,6 +133,8 @@ namespace Europlan.Application {
 
 		private void btnOk_Click(object sender, EventArgs e) {
 			Product.ConfigPlanMeasure = cmbPlanUnit.SelectedIndex;
+            Product.ConfigActivateOrthoRasterung = cbOrthoRasterung.Checked;
+            Product.ConfigAutoSave = cbAutoSave.Checked;
 			Configuration.UserTemplate.Save();
 		}
 

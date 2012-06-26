@@ -380,6 +380,12 @@
     <Compile Include="Products\HithermCompact\HithermCompactPlannerForm.Designer.cs">
       <DependentUpon>HithermCompactPlannerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\HithermCompact\HithermCompactDrawer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Products\HithermCompact\HithermCompactDrawer.Designer.cs">
+      <DependentUpon>HithermCompactDrawer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Hitherm\GraphicalWallVerbindung.cs" />
     <Compile Include="Products\Hitherm\HithermDrawer.cs">
       <SubType>Component</SubType>
@@ -1182,6 +1188,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\HithermCompact\HithermCompactPlannerForm.resx">
       <DependentUpon>HithermCompactPlannerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\HithermCompact\HithermCompactDrawer.resx">
+      <DependentUpon>HithermCompactDrawer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\Hitherm\HithermDrawer.resx">

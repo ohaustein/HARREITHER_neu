@@ -280,5 +280,8 @@ namespace Europlan.Common {
 			set { drawOtherDistributorsInPlan = value; }
 		}
 
-	}
+        public bool ShowPlanBackground {
+            get { return true; }
+        }
+    }
 }

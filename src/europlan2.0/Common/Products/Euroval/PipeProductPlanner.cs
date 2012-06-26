@@ -281,7 +281,7 @@ namespace Europlan.Common {
 							}
 						}
 					} else {
-						if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+						if (Europlan.Common.Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 							if (points.Count == 1) {
 								pos = GetNormalizedPoint(points[0], null, pos);
 							} else if (points.Count == 2) {
@@ -419,12 +419,26 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.TextBoxPosition != Point2D.Zero) {
+                    Point2D pos = Point2D.Zero;
+                    if (this.Mode == PipeProductMode.EVM_SET_TEXT) {
+                        pos = mousePositionInPlan;
+                    } else {
+                        pos = product.TextBoxPosition;
+                    }
+
+                    Matrix oldTransform = g.Transform;
+                    Matrix newTransform = g.Transform.Clone();
+                    newTransform.RotateAt(this.product.TextBoxRotation, additionalTransformation.TransformTo2D((PointF)pos));
+                    g.Transform = newTransform;
 					// paint textbox
-					Font font = new Font("Arial", this.product.TextBoxFontSize / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+                    double fontsize = this.product.TextBoxFontSizeForUse / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					Font font = new Font("Arial", (float)fontsize);
+                    double lineWidth = fontsize / 10.0;
 					float maxWidth = 0;
 					float maxHeight = 0;
 
 					string productName = Project.Instance.GetPlannedProduct(product).InternalName;
+                    string roomId = this.product.AssociatedRoom.Id;
 
 					string az = "--";
 					if (this.product.PlannedCalculationComplete && product.PlannedLayDistance.HasValue) {
@@ -448,24 +462,28 @@ namespace Europlan.Common {
 						}
 					}
 
+                    maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_Raum, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(this.productTypeName + ": ", font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_AZ, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_RZ, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_HK, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(EuroplanRes.PipeProductPlanner_Rohrlaenge, font).Width);
-					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Name, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Raum, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Name, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_AZ, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_RZ, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_HK, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Rohrlaenge, font).Height);
 
-					maxWidth = Math.Max(maxWidth, g.MeasureString(productName, font).Width);
+                    maxWidth = Math.Max(maxWidth, g.MeasureString(roomId, font).Width);
+                    maxWidth = Math.Max(maxWidth, g.MeasureString(productName, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(az, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(rz, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Width);
 					double pipeLength = Math.Round(product.PlannedPipeLengthPerCircuit, 2);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(pipeLength.ToString(), font).Width);
-					maxHeight = Math.Max(maxHeight, g.MeasureString(productName, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(roomId, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(productName, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(az, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(rz, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Height);
@@ -473,39 +491,42 @@ namespace Europlan.Common {
 
 					Pen p;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
-						p = new Pen(Color.White);
+						p = new Pen(Color.White, (float)lineWidth);
 					} else {
-						p = new Pen(Color.Black);
+						p = new Pen(Color.Black, (float)lineWidth);
 					}
 					p.StartCap = LineCap.Round;
 					p.EndCap = LineCap.Round;
-					float border = 2.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					//float border = 2.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+                    //float border = 2.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * this.product.TextBoxFontSize / 5.0f ;
+                    double border = 2.0f / 5.0f * fontsize;
 
-					Point2D pos = Point2D.Zero;
-					if (this.Mode == PipeProductMode.EVM_SET_TEXT) {
-						pos = mousePositionInPlan;
-					} else {
-						pos = product.TextBoxPosition;
-					}
+                    Brush background = null;
+                    if (Europlan.Common.Product.ConfigFillBoxBackground) {
+                        background = new SolidBrush((this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) ? Color.Black : Color.White);
+                    }
 
-					PaintTextBox(this.productTypeName + ": ", font, pos, maxWidth, 0, maxHeight, 0, border, p, g, additionalTransformation);
-					PaintTextBox(EuroplanRes.PipeProductPlanner_AZ, font, pos, maxWidth, 0, maxHeight, 1, border, p, g, additionalTransformation);
-					PaintTextBox(EuroplanRes.PipeProductPlanner_RZ, font, pos, maxWidth, 0, maxHeight, 2, border, p, g, additionalTransformation);
-					PaintTextBox(EuroplanRes.PipeProductPlanner_HK, font, pos, maxWidth, 0, maxHeight, 3, border, p, g, additionalTransformation);
-					PaintTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, font, pos, maxWidth, 0, maxHeight, 4, border, p, g, additionalTransformation);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_Raum, font, pos, maxWidth, 0, maxHeight, 0, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(this.productTypeName + ": ", font, pos, maxWidth, 0, maxHeight, 1, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_AZ, font, pos, maxWidth, 0, maxHeight, 2, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_RZ, font, pos, maxWidth, 0, maxHeight, 3, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_HK, font, pos, maxWidth, 0, maxHeight, 4, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, font, pos, maxWidth, 0, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
 
-					PaintTextBox(productName, font, pos, maxWidth, 1, maxHeight, 0, border, p, g, additionalTransformation);
-					PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 1, border, p, g, additionalTransformation);
-					PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 2, border, p, g, additionalTransformation);
-					PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 3, border, p, g, additionalTransformation);
-					PaintTextBox(pipeLength.ToString(), font, pos, maxWidth, 1, maxHeight, 4, border, p, g, additionalTransformation);
+                    PaintTextBox(roomId, font, pos, maxWidth, 1, maxHeight, 0, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(productName, font, pos, maxWidth, 1, maxHeight, 1, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 2, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 3, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 4, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(pipeLength.ToString(), font, pos, maxWidth, 1, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
+                    g.Transform = oldTransform;
 				}
 
 				path.Dispose();
 			}
 		}
 
-		private void PaintTextBox(string text, Font font, Point2D start, float width, int xFactor, float height, int yFactor, float border, Pen pen, Graphics g, Matrix4D additionalTransformation) {
+		private void PaintTextBox(string text, Font font, Point2D start, float width, int xFactor, float height, int yFactor, float border, Pen pen, Graphics g, Matrix4D additionalTransformation, Brush background) {
 			Point2D topleft2D = additionalTransformation.TransformTo2D(start);
 
 			PointF topleft = new PointF((float)topleft2D.X + (xFactor * (width + (2 * border))), (float)topleft2D.Y + (yFactor * (height + (2 * border))));
@@ -514,6 +535,9 @@ namespace Europlan.Common {
 			PointF bottomLeft = new PointF((float)topleft.X, (float)topleft.Y + height + (2 * border));
 			PointF stringPos = new PointF((float)topleft.X + border, (float)topleft.Y + border);
 
+            if (background != null) {
+                g.FillPolygon(background, new PointF[] { topleft, topRight, bottomRight, bottomLeft });
+            }
 			g.DrawLine(pen, topleft, topRight);
 			g.DrawLine(pen, topRight, bottomRight);
 			g.DrawLine(pen, bottomRight, bottomLeft);
@@ -602,7 +626,7 @@ namespace Europlan.Common {
 				bool finishPick = button == MouseButtons.Right;
 				bool addFinishinigPick = true;
 				bool snapFound = false;
-				if (coordsPickedSoFar.Count > 0 && (this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+                if (coordsPickedSoFar.Count > 0 && Europlan.Common.Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 					if (coordsPickedSoFar.Count == 1) {
 						if (GetSnapPoint(border, normalizedPoint) != Point2D.Zero) {
 							normalizedPoint = GetSnapPoint(border, normalizedPoint);
@@ -972,7 +996,7 @@ namespace Europlan.Common {
 					}
 					isStart = coordsPickedSoFar.Count > 0 && normalizedPoint == coordsPickedSoFar[0];
 				} else {
-					if ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT) {
+                    if (Europlan.Common.Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 						if (coordsPickedSoFar.Count == 1) {
 							normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, planPoint);
 						} else if (coordsPickedSoFar.Count == 2) {
@@ -1420,6 +1444,7 @@ namespace Europlan.Common {
 					double maxHeight = 0;
 
 					string productName = Project.Instance.GetPlannedProduct(product).InternalName;
+                    string roomId = this.product.AssociatedRoom.Id;
 
 					string az = "--";
 					if (this.product.PlannedCalculationComplete && product.PlannedLayDistance.HasValue) {
@@ -1449,8 +1474,11 @@ namespace Europlan.Common {
 					}
 					Point2D pos = product.TextBoxPosition;
 
-					DxfText text = new DxfText(this.productTypeName + ": ", (Point3D)pos, (this.product.TextBoxFontSize / 100.0f) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+                    DxfText text = new DxfText(EuroplanRes.PipeProductPlanner_Raum, (Point3D)pos, (this.product.TextBoxFontSizeForUse / 100.0f) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 					text.Style = model.TextStyles["HarreitherStyle"];
+                    maxWidth = Math.Max(maxWidth, text.BoxWidth);
+                    maxHeight = Math.Max(maxHeight, text.BoxHeight);
+                    text.Text = this.productTypeName + ": ";
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 					text.Text = EuroplanRes.PipeProductPlanner_AZ;
@@ -1464,9 +1492,12 @@ namespace Europlan.Common {
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 					text.Text = EuroplanRes.PipeProductPlanner_Rohrlaenge;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
-					maxHeight = Math.Max(maxHeight, text.BoxHeight);					
+					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
-					text.Text = productName;
+                    text.Text = roomId;
+                    maxWidth = Math.Max(maxWidth, text.BoxWidth);
+                    maxHeight = Math.Max(maxHeight, text.BoxHeight);
+                    text.Text = productName;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 					text.Text = az;
@@ -1489,19 +1520,21 @@ namespace Europlan.Common {
 					} else {
 						color = Color.Black;
 					}
-					float border = 0.02f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+                    float border = 0.75f * (this.product.TextBoxFontSizeForUse / 100.0f) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 
-					PaintDxfTextBox(this.productTypeName + ": ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, 0, border, color, model, layer);
-					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_AZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -1, border, color, model, layer);
-					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_RZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
-					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_HK, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
-					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Raum, "HarreitherStyle", pos, maxWidth, 0, maxHeight, 0, border, color, model, layer);
+					PaintDxfTextBox(this.productTypeName + ": ", "HarreitherStyle", pos, maxWidth, 0, maxHeight, -1, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_AZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_RZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_HK, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
+					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -5, border, color, model, layer);
 
-					PaintDxfTextBox(productName, "HarreitherStyle", pos, maxWidth, 1, maxHeight, 0, border, color, model, layer);
-					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);
-					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -2, border, color, model, layer);
-					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
-					PaintDxfTextBox(pipeLength.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
+                    PaintDxfTextBox(roomId, "HarreitherStyle", pos, maxWidth, 1, maxHeight, 0, border, color, model, layer);
+                    PaintDxfTextBox(productName, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);
+					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -2, border, color, model, layer);
+					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
+					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
+					PaintDxfTextBox(pipeLength.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -5, border, color, model, layer);
 				}
 
 
@@ -1529,11 +1562,38 @@ namespace Europlan.Common {
 			EntityColor ec = EntityColor.CreateFromRgb(c.ToArgb());
 			Point2D topleft2D = start;
 
-			Point2D topleft = new Point2D(topleft2D.X + (xFactor * (width + (2 * border))), topleft2D.Y + (yFactor * (height + (2 * border))));
-			Point2D topRight = new Point2D(topleft.X + width + (2 * border), topleft.Y);
-			Point2D bottomRight = new Point2D(topleft.X + width + (2 * border), topleft.Y + height + (2 * border));
-			Point2D bottomLeft = new Point2D(topleft.X, topleft.Y + height + (2 * border));
-			Point2D stringPos = new Point2D(topleft.X + border, topleft.Y + border);
+            yFactor--; // shift the yFactor by 1 to make it work with dxf
+
+            double xMoveTl = (xFactor * (width + (2 * border)));
+            double yMoveTl = (yFactor * (height + (2 * border)));
+
+            double xMoveTr = width + (2 * border);
+            double yMoveTr = 0;
+
+            double xMoveBr = width + (2 * border);
+            double yMoveBr = height + (2 * border);
+
+            double xMoveBl = 0;
+            double yMoveBl = height + (2 * border);
+
+            double xMoveString = border;
+            double yMoveString = border;
+
+			Point2D topleft = new Point2D(topleft2D.X + xMoveTl, topleft2D.Y + yMoveTl);
+			Point2D topRight = new Point2D(topleft.X + xMoveTr, topleft.Y + yMoveTr);
+			Point2D bottomRight = new Point2D(topleft.X + xMoveBr, topleft.Y + yMoveBr);
+			Point2D bottomLeft = new Point2D(topleft.X + xMoveBl, topleft.Y + yMoveBl);
+            Point2D stringPos = new Point2D(topleft.X + xMoveString, topleft.Y + yMoveString);
+
+            Matrix3D m = Transformation3D.Translation(start.X, start.Y);
+            m = m * Transformation3D.Rotate(-this.product.TextBoxRotation * Math.PI / 180.0);
+            m = m * Transformation3D.Translation(-start.X, -start.Y);
+
+            topleft = m.Transform(topleft);
+            topRight = m.Transform(topRight);
+            bottomRight = m.Transform(bottomRight);
+            bottomLeft = m.Transform(bottomLeft);
+            stringPos = m.Transform(stringPos);
 
 			DxfLine line = new DxfLine(ec, topleft, topRight);
 			line.Layer = layer;
@@ -1548,10 +1608,11 @@ namespace Europlan.Common {
 			line.Layer = layer;
 			model.Entities.Add(line);
 
-			DxfText text = new DxfText(dxfText, (Point3D)stringPos, 0.05f * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
+            DxfText text = new DxfText(dxfText, (Point3D)stringPos, (this.product.TextBoxFontSizeForUse / 100.0f) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value);
 			text.Style = model.TextStyles[fontStyle];
 			text.Layer = layer;
 			text.Color = ec;
+            text.Rotation = -this.Product.TextBoxRotation * Math.PI / 180.0;
 			model.Entities.Add(text);
 		}
 
@@ -1566,5 +1627,9 @@ namespace Europlan.Common {
 			get { return this.drawExpansionGaps; }
 			set { this.drawExpansionGaps = value; }
 		}
-	}
+
+        public bool ShowPlanBackground {
+            get { return Europlan.Common.Product.ShowPlanInBackground; }
+        }
+    }
 }
