@@ -25,7 +25,7 @@ namespace Europlan.Common {
 		Nullable<PointF> startPoint = null;
 		Nullable<PointF> endPoint = null;
 		private double length = 0;
-		private float mouseDownX, mouseUpX, mouseDownY, mouseUpY;
+		private float mouseDownXPlan, mouseUpXPlan, mouseDownYPlan, mouseUpYPlan, mouseDownX, mouseUpX, mouseDownY, mouseUpY;
 		private bool inDesign = false;
 		private bool inMove = false;
 		private bool shiftPressed = false;
@@ -264,11 +264,17 @@ namespace Europlan.Common {
 			return result;
 		}
 
+        private float xPosDown = 0;
+        private float yPosDown = 0;
+
 		protected override void OnMouseDown(MouseEventArgs e) {
 			base.OnMouseDown(e);
 			if (image == null) {
 				return;
 			}
+
+            this.xPosDown = this.XPos;
+            this.yPosDown = this.YPos;
 
 			mouseDown = true;
 			if (mode == PlanMode.PM_PLANNER_DRAG && this.productPlanner != null && e.Button != MouseButtons.Middle) {
@@ -303,8 +309,12 @@ namespace Europlan.Common {
 				ctrlToPlan.Invert();
 				ctrlToPlan.TransformPoints(arr);
 
-				mouseDownX = arr[0].X;
-				mouseDownY = arr[0].Y;
+				mouseDownXPlan = arr[0].X;
+				mouseDownYPlan = arr[0].Y;
+                mouseDownX = mousePosInCtrl.X;
+                mouseDownY = mousePosInCtrl.Y;
+                xPosDown = this.XPos;
+                yPosDown = this.YPos;
 			}
 			if (e.Button == MouseButtons.Middle) {
 				inMove = true;
@@ -412,12 +422,17 @@ namespace Europlan.Common {
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle))) {
 				unsavedChanges = true;
 
-				mouseUpX = arr[0].X;
-				mouseUpY = arr[0].Y;
+				/*mouseUpXPlan = arr[0].X;
+				mouseUpYPlan = arr[0].Y;
 
-				this.XPos += mouseUpX - mouseDownX;
-				this.YPos += mouseUpY - mouseDownY;
-				invalidate = true;
+                this.XPos += mouseUpXPlan - mouseDownXPlan;
+                this.YPos += mouseUpYPlan - mouseDownYPlan;*/
+                float scale = this.Scale.HasValue ? this.Scale.Value : 1;
+                mouseUpX = mousePosInCtrl.X;
+                mouseUpY = mousePosInCtrl.Y;
+                this.XPos = this.xPosDown + (mouseUpX - mouseDownX) / scale;
+                this.YPos = this.yPosDown + (mouseUpY - mouseDownY) / scale;
+                invalidate = true;
 			} else if (mode == PlanMode.PM_PICK_MEASURE && startPoint.HasValue && !endPoint.HasValue) {
 				this.Invalidate();
 			}
@@ -627,6 +642,7 @@ namespace Europlan.Common {
 				return;
 			}
 			double scale = this.Scale.HasValue ? this.Scale.Value : 1.0;
+
 			tmp = tmp * Transformation4D.Translation(((float)image.Width / 2.0 + this.XPos) * scale, ((float)image.Height / 2.0 + this.YPos) * scale, 0);
 			tmp = tmp * Transformation4D.RotateZ(this.Angle);
 			tmp = tmp * Transformation4D.Translation(-((float)image.Width / 2.0 + this.XPos) * scale, -((float)image.Height / 2.0 + this.YPos) * scale, 0);
@@ -635,6 +651,9 @@ namespace Europlan.Common {
 
 			planToControl = tmp;
 			controlToPlan = planToControl.GetInverse();
+
+            /*controlToPlan = Transformation4D.Translation(-((float)image.Width / 2.0 + this.XPos), -((float)image.Height / 2.0 + this.YPos), 0) * ((Transformation4D.Translation(((float)image.Width / 2.0) * scale, ((float)image.Height / 2.0) * scale, 0) * Transformation4D.RotateZ(-this.Angle)) * Transformation4D.Scaling(1 / scale));
+            planToControl = controlToPlan.GetInverse();*/
 		}
 
 		[Browsable(false)]

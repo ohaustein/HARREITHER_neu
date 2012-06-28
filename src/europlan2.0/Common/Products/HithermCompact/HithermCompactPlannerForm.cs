@@ -1623,7 +1623,11 @@ namespace Europlan.Common {
 			this.btnUseHelplines.Checked = this.graphicalWallPanel.SnapEnabled;
 		}
 
-		private void btnExport_Click(object sender, EventArgs e) {
+        private string EscapeFilename(string originalFilename) {
+            return originalFilename.Replace('/', '_').Replace('\\', '_').Replace(':', '_').Replace('*', '_').Replace('?', '_').Replace('"', '_').Replace('<', '_').Replace('>', '_').Replace('|', '_');
+        }
+
+        private void btnExport_Click(object sender, EventArgs e) {
 			float border = 20.0f;
 			Room room = graphicalWallPanel.Room;
 			if (room != null && room.Walls.Count > 0) {
@@ -1640,7 +1644,7 @@ namespace Europlan.Common {
 						break;
 					}
 				}
-				dialog.FileName = room.AssociatedFloor.Name + "_" + room.Name + "_" + productName;
+				dialog.FileName = EscapeFilename(room.AssociatedFloor.Name + "_" + room.Name + "_" + productName);
 				dialog.DefaultExt = ".png";
 				dialog.Filter = EuroplanRes.HithermPlannerForm_FilterBild + "|*.png;*.jpg;*.bmp";
 				DialogResult result = dialog.ShowDialog();

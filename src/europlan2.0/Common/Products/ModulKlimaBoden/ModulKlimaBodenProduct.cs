@@ -1220,47 +1220,83 @@ namespace Europlan.Common {
                     }
                     for (int i = 0; i < modulePos.Count - 1; i++) {
                         for (int j = i + 1; j < modulePos.Count; j++) {
-                            // check distance of these 2 modules in x and in y direction
+                            int xStreifenWidth = 0;
+                            double xOverlap = 0;
+                            int yStreifenWidth = 0;
+                            double yOverlap = 0;
+
+                            // check distance of these 2 modules in x
                             if (modulePos[i].x < modulePos[j].x) {
                                 double distX = modulePos[j].x - modulePos[i].x - modulePos[i].width;
                                 // possible modulstreifen found
-                                int streifenWidth = 0;
                                 if (Math.Abs(distX - 0.1) < 0.005) {
-                                    streifenWidth = 1;
+                                    xStreifenWidth = 1;
                                 } else if (Math.Abs(distX - 0.2) < 0.005) {
-                                    streifenWidth = 2;
+                                    xStreifenWidth = 2;
                                 }
-                                if (streifenWidth > 0) {
-                                    double overlap = Math.Min(modulePos[i].y + modulePos[i].height, modulePos[j].y + modulePos[j].height) - Math.Max(modulePos[i].y, modulePos[j].y);
-                                    if (overlap > 0) {
-                                        modulStreifenLength += overlap * streifenWidth;
-                                    }
+                                if (xStreifenWidth > 0) {
+                                    xOverlap = Math.Min(modulePos[i].y + modulePos[i].height, modulePos[j].y + modulePos[j].height) - Math.Max(modulePos[i].y, modulePos[j].y);
                                 }
                             } else {
                                 double distX = modulePos[i].x - modulePos[j].x - modulePos[j].width;
-                                int streifenWidth = 0;
                                 if (Math.Abs(distX - 0.1) < 0.005) {
-                                    streifenWidth = 1;
+                                    xStreifenWidth = 1;
                                 } else if (Math.Abs(distX - 0.2) < 0.005) {
-                                    streifenWidth = 2;
+                                    xStreifenWidth = 2;
                                 }
-                                if (streifenWidth > 0) {
+                                if (xStreifenWidth > 0) {
                                     // possible modulstreifen found
-                                    double overlap = Math.Min(modulePos[j].y + modulePos[j].height, modulePos[i].y + modulePos[i].height) - Math.Max(modulePos[j].y, modulePos[i].y);
-                                    if (overlap > 0) {
-                                        modulStreifenLength += overlap * streifenWidth;
-                                    }
+                                    xOverlap = Math.Min(modulePos[j].y + modulePos[j].height, modulePos[i].y + modulePos[i].height) - Math.Max(modulePos[j].y, modulePos[i].y);
                                 }
+                            }
+
+                            // check distance of these 2 modules in y
+                            if (modulePos[i].y < modulePos[j].y) {
+                                double distY = modulePos[j].y - modulePos[i].y - modulePos[i].height;
+                                // possible modulstreifen found
+                                if (Math.Abs(distY - 0.1) < 0.005) {
+                                    yStreifenWidth = 1;
+                                } else if (Math.Abs(distY - 0.2) < 0.005) {
+                                    yStreifenWidth = 2;
+                                }
+                                if (yStreifenWidth > 0) {
+                                    yOverlap = Math.Min(modulePos[i].x + modulePos[i].width, modulePos[j].x + modulePos[j].width) - Math.Max(modulePos[i].x, modulePos[j].x);
+                                }
+                            } else {
+                                double distY = modulePos[i].y - modulePos[j].y - modulePos[j].height;
+                                if (Math.Abs(distY - 0.1) < 0.005) {
+                                    yStreifenWidth = 1;
+                                } else if (Math.Abs(distY - 0.2) < 0.005) {
+                                    yStreifenWidth = 2;
+                                }
+                                if (yStreifenWidth > 0) {
+                                    // possible modulstreifen found
+                                    yOverlap = Math.Min(modulePos[j].x + modulePos[j].width, modulePos[i].x + modulePos[i].width) - Math.Max(modulePos[j].x, modulePos[i].x);
+                                }
+                            }
+
+                            if (xOverlap > 0 && xStreifenWidth > 0) {
+                                modulStreifenLength += xOverlap * xStreifenWidth;
+                            }
+                            if (yOverlap > 0 && yStreifenWidth > 0) {
+                                modulStreifenLength += yOverlap * yStreifenWidth;
+                            }
+                            if (xOverlap > 0 && xStreifenWidth > 0 && yOverlap > 0 && yStreifenWidth > 0) {
+                                modulStreifenLength += xStreifenWidth / 10 * yStreifenWidth;
                             }
                         }
                     }
                 }
 
                 streifen = Math.Ceiling(modulStreifenLength);
-                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", -streifen);
 #warning TODO for graphical
             } else {
                 streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
+            }
+
+            if (streifen == 0) {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", double.NegativeInfinity);
+            } else {
                 Project.Instance.AddRequiredMaterial(requiredMaterial, "MK04", -streifen);
             }
 

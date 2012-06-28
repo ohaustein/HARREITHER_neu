@@ -338,7 +338,7 @@ namespace Europlan.Common.Products {
             // 
             this.btn0Degree.Image = ((System.Drawing.Image)(resources.GetObject("btn0Degree.Image")));
             this.btn0Degree.Name = "btn0Degree";
-            this.btn0Degree.Size = new System.Drawing.Size(152, 22);
+            this.btn0Degree.Size = new System.Drawing.Size(97, 22);
             this.btn0Degree.Text = "0°";
             this.btn0Degree.Click += new System.EventHandler(this.btn0Degree_Click);
             // 
@@ -346,7 +346,7 @@ namespace Europlan.Common.Products {
             // 
             this.btn90Degree.Image = ((System.Drawing.Image)(resources.GetObject("btn90Degree.Image")));
             this.btn90Degree.Name = "btn90Degree";
-            this.btn90Degree.Size = new System.Drawing.Size(152, 22);
+            this.btn90Degree.Size = new System.Drawing.Size(97, 22);
             this.btn90Degree.Text = "90°";
             this.btn90Degree.Click += new System.EventHandler(this.btn90Degree_Click);
             // 
@@ -354,7 +354,7 @@ namespace Europlan.Common.Products {
             // 
             this.btn180Degree.Image = ((System.Drawing.Image)(resources.GetObject("btn180Degree.Image")));
             this.btn180Degree.Name = "btn180Degree";
-            this.btn180Degree.Size = new System.Drawing.Size(152, 22);
+            this.btn180Degree.Size = new System.Drawing.Size(97, 22);
             this.btn180Degree.Text = "180°";
             this.btn180Degree.Click += new System.EventHandler(this.btn180Degree_Click);
             // 
@@ -362,7 +362,7 @@ namespace Europlan.Common.Products {
             // 
             this.btn270Degree.Image = ((System.Drawing.Image)(resources.GetObject("btn270Degree.Image")));
             this.btn270Degree.Name = "btn270Degree";
-            this.btn270Degree.Size = new System.Drawing.Size(152, 22);
+            this.btn270Degree.Size = new System.Drawing.Size(97, 22);
             this.btn270Degree.Text = "270°";
             this.btn270Degree.Click += new System.EventHandler(this.btn270Degree_Click);
             // 

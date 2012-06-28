@@ -106,9 +106,23 @@ namespace Europlan.Common {
 			}
 		}
 
+        private Cursor cursorBeforePickReference = Cursors.Cross;
+
 		public KlimaBodenMode Mode {
 			get { return this.mode; }
 			set {
+                if (this.mode != KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE && value == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
+                    this.cursorBeforePickReference = this.customCursor;
+                    this.customCursor = Cursors.Arrow;
+                    if (this.ConnectedPlanPanel != null) {
+                        this.ConnectedPlanPanel.PlanCursor = this.customCursor;
+                    }
+                } else if (this.mode == KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE && value != KlimaBodenMode.KDM_LAYOUT_ADD_AREA_PICK_REFERENCE) {
+                    this.customCursor = this.cursorBeforePickReference;
+                    if (this.ConnectedPlanPanel != null) {
+                        this.ConnectedPlanPanel.PlanCursor = this.customCursor;
+                    }
+                }
 				this.mode = value;
 				if (this.mode != KlimaBodenMode.KDM_PICK_MODULE && this.HighlightModules != null) {
 					this.HighlightModules = null;
@@ -433,7 +447,7 @@ namespace Europlan.Common {
 					Matrix3D rotation = Transformation3D.Rotate(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 					Matrix3D invRotation = rotation.GetInverse();
 
-					double top = double.MaxValue;
+                    double top = double.MaxValue;
 					double bottom = double.MinValue;
 					double left = double.MaxValue;
 					double right = double.MinValue;
@@ -454,6 +468,14 @@ namespace Europlan.Common {
 					}
 					Point2D referencePoint = invRotation.Transform(new Point2D(pickedModul.GraphPosX, pickedModul.GraphPosY));
 
+                    Point2D rotatedTopLeft = invRotation.Transform(this.layoutAddArea[0]);
+                    Point2D rotatedBottomLeft = invRotation.Transform(this.layoutAddArea[1]);
+                    Point2D rotatedBottomRight = invRotation.Transform(this.layoutAddArea[2]);
+                    Point2D rotatedTopRight = invRotation.Transform(this.layoutAddArea[3]);
+
+                    bool rightToLeft = rotatedTopLeft.X > rotatedTopRight.X;
+                    bool bottomUp = rotatedTopLeft.Y > rotatedBottomLeft.Y;
+
 					double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 					double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 
@@ -469,6 +491,7 @@ namespace Europlan.Common {
 					while (refLeft < left) {
 						refLeft += stepX;
 					}
+
 					double refTop = referencePoint.Y;
 					while (refTop - stepY > top) {
 						refTop -= stepY;
@@ -476,8 +499,9 @@ namespace Europlan.Common {
 					while (refTop < top) {
 						refTop += stepY;
 					}
-					this.NewModulesOffsetX = refLeft - left;
-					this.NewModulesOffsetY = refTop - top;
+
+                    this.NewModulesOffsetX = refLeft - (rightToLeft ? right + modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht : left);
+                    this.NewModulesOffsetY = refTop - (bottomUp ? bottom + modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesYDicht : top);
 
 					this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA_FINISH;
 					if (this.connectedPlanPanel != null) {
@@ -1308,9 +1332,23 @@ namespace Europlan.Common {
 			Matrix4D xyRotation = Transformation4D.RotateZ(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 			bool orientationLeft = this.newModulesStartingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
 
+            /*double startY = top + newModulesOffsetY;
+            if (bottomUp) {
+                while (startY < bottom) {
+                    startY += stepY;
+                }
+                startY -= stepY;
+            }*/
 			double startY = bottomUp ? bottom - (newModulesOffsetY > 0 ? stepY - newModulesOffsetY : 0) : top + newModulesOffsetY;
 			double endY = bottomUp ? top : bottom;
 			double incY = bottomUp ? -stepY : stepY;
+            /*double startX = left + newModulesOffsetX;
+            if (rightToLeft) {
+                while (startX < right) {
+                    startX += stepX;
+                }
+                startX -= stepX;
+            }*/
 			double startX = rightToLeft ? right - (newModulesOffsetX > 0 ? stepX - newModulesOffsetX : 0) : left + newModulesOffsetX;
 			double endX = rightToLeft ? left : right;
 			double incX = rightToLeft ? -stepX : stepX;
@@ -1357,7 +1395,12 @@ namespace Europlan.Common {
 						// check if module intersects unused area or another module
 						bool intersectionFound = false;
 						foreach (List<Polygon2D> unused in unusedList) {
-							List<Polygon2D> intersection = Polygon2D.GetIntersection(newModuleList, unused);
+                            List<Polygon2D> intersection = null;
+                            try {
+                                intersection = Polygon2D.GetIntersection(newModuleList, unused);
+                            } catch {
+                                // nothing to do
+                            }
 							if (intersection != null && intersection.Count > 0) {
 								intersectionFound = true;
 								break;
@@ -1442,7 +1485,12 @@ namespace Europlan.Common {
 						// check if module intersects unused area or another module
 						bool intersectionFound = false;
 						foreach (List<Polygon2D> unused in unusedList) {
-							List<Polygon2D> intersection = Polygon2D.GetIntersection(newModuleList, unused);
+                            List<Polygon2D> intersection = null;
+                            try {
+                                intersection = Polygon2D.GetIntersection(newModuleList, unused);
+                            } catch {
+                                // nothing to do
+                            }
 							if (intersection != null && intersection.Count > 0) {
 								intersectionFound = true;
 								break;

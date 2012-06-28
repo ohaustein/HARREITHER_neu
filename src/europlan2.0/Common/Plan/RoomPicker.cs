@@ -897,7 +897,11 @@ namespace Europlan.Common {
 				list1.Add(tmp);
 				List<Polygon2D> list2 = new List<Polygon2D>();
 				list2.Add(room);
-				newUnheatedArea = Polygon2D.GetIntersection(list1, list2);
+                try {
+                    newUnheatedArea = Polygon2D.GetIntersection(list1, list2);
+                } catch {
+                    newUnheatedArea = new List<Polygon2D>();
+                }
 
 				foreach (List<Point2D> unused in this.unusedCoordinates) {
 					list2.Clear();

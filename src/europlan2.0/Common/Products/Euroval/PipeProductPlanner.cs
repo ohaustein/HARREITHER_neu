@@ -480,14 +480,13 @@ namespace Europlan.Common {
 					maxWidth = Math.Max(maxWidth, g.MeasureString(az, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(rz, font).Width);
 					maxWidth = Math.Max(maxWidth, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Width);
-					double pipeLength = Math.Round(product.PlannedPipeLengthPerCircuit, 2);
-					maxWidth = Math.Max(maxWidth, g.MeasureString(pipeLength.ToString(), font).Width);
+                    maxWidth = Math.Max(maxWidth, g.MeasureString(product.PipeLengthText, font).Width);
                     maxHeight = Math.Max(maxHeight, g.MeasureString(roomId, font).Height);
                     maxHeight = Math.Max(maxHeight, g.MeasureString(productName, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(az, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(rz, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Height);
-					maxHeight = Math.Max(maxHeight, g.MeasureString(pipeLength.ToString(), font).Height);
+					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PipeLengthText, font).Height);
 
 					Pen p;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
@@ -518,7 +517,7 @@ namespace Europlan.Common {
                     PaintTextBox(az, font, pos, maxWidth, 1, maxHeight, 2, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 3, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 4, (float)border, p, g, additionalTransformation, background);
-                    PaintTextBox(pipeLength.ToString(), font, pos, maxWidth, 1, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(product.PipeLengthText, font, pos, maxWidth, 1, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
                     g.Transform = oldTransform;
 				}
 
@@ -717,7 +716,12 @@ namespace Europlan.Common {
 								List<Polygon2D> list2 = new List<Polygon2D>();
 								list2.Add(prod);
 
-								IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                IList<Polygon2D> clippedPolygons = null;
+                                try {
+                                    clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                } catch {
+                                    clippedPolygons = new List<Polygon2D>();
+                                }
 								if (clippedPolygons.Count > 0) {
 									this.product.PlannedAreaGraphical.AddRange(clippedPolygons[0]);
 									this.product.PlannedFloorArea = (float)Math.Round(Math.Abs(clippedPolygons[0].GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
@@ -732,7 +736,11 @@ namespace Europlan.Common {
 											}
 											list2.Add(unusedAreaPolygon);
 										}
-										clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                        try {
+                                            clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                        } catch {
+                                            clippedPolygons = new List<Polygon2D>();
+                                        }
 										area = 0;
 										foreach (Polygon2D clippedPolygon in clippedPolygons) {
 											area += Math.Round(Math.Abs(clippedPolygon.GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
@@ -762,7 +770,12 @@ namespace Europlan.Common {
 							list2.Add(reduced);
 
 							try {
-								IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                IList<Polygon2D> clippedPolygons = null;
+                                try {
+                                    clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                                } catch {
+                                    clippedPolygons = new List<Polygon2D>();
+                                }
 								if (clippedPolygons.Count > 0) {
 									list1.Clear();
 									if (clippedPolygons[0].IsClockwise()) {
@@ -1381,7 +1394,12 @@ namespace Europlan.Common {
 						}
 						list2.Add(rim);
 
-						IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                        IList<Polygon2D> clippedPolygons = null;
+                        try {
+                            clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                        } catch {
+                            clippedPolygons = new List<Polygon2D>();
+                        }
 						foreach (Polygon2D polygon in clippedPolygons) {
 							//DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 							//polyLine.Closed = true;
@@ -1408,7 +1426,12 @@ namespace Europlan.Common {
 								list1.Add(polygon);
 								list2 = new List<Polygon2D>();
 								list2.Add(poly);
-								IList<Polygon2D> clipped = Polygon2D.GetIntersection(list1, list2);
+                                IList<Polygon2D> clipped = null;
+                                try {
+                                    clipped = Polygon2D.GetIntersection(list1, list2);
+                                } catch {
+                                    clipped = new List<Polygon2D>();
+                                }
 								if (clipped.Count > 0) {
 									foreach (Polygon2D p in clipped) {
 										boundaryPath = new DxfHatch.BoundaryPath();
@@ -1509,8 +1532,7 @@ namespace Europlan.Common {
 					text.Text = product.PlannedCircuitCount.ToString();
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					double pipeLength = Math.Round(product.PlannedPipeLengthPerCircuit, 2);
-					text.Text = pipeLength.ToString();
+					text.Text = product.PipeLengthText;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
@@ -1534,7 +1556,7 @@ namespace Europlan.Common {
 					PaintDxfTextBox(az, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -2, border, color, model, layer);
 					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
 					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
-					PaintDxfTextBox(pipeLength.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -5, border, color, model, layer);
+                    PaintDxfTextBox(product.PipeLengthText, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -5, border, color, model, layer);
 				}
 
 

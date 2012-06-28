@@ -39,11 +39,11 @@ namespace Europlan.Common {
             this.btnConnections = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteConnection = new System.Windows.Forms.ToolStripButton();
             this.btnPickConnection = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnShowPlanBg = new System.Windows.Forms.ToolStripButton();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.planPanel = new Europlan.Common.PlanPanel();
             this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnShowPlanBg = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,21 +75,21 @@ namespace Europlan.Common {
             // 
             this.btnBoden.Checked = true;
             this.btnBoden.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.btnBoden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnBoden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnBoden.Image = ((System.Drawing.Image)(resources.GetObject("btnBoden.Image")));
             this.btnBoden.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnBoden.Name = "btnBoden";
-            this.btnBoden.Size = new System.Drawing.Size(45, 22);
+            this.btnBoden.Size = new System.Drawing.Size(23, 22);
             this.btnBoden.Text = "Boden";
             this.btnBoden.Click += new System.EventHandler(this.btnBoden_Click);
             // 
             // btnDecke
             // 
-            this.btnDecke.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnDecke.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnDecke.Image = ((System.Drawing.Image)(resources.GetObject("btnDecke.Image")));
             this.btnDecke.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDecke.Name = "btnDecke";
-            this.btnDecke.Size = new System.Drawing.Size(43, 22);
+            this.btnDecke.Size = new System.Drawing.Size(23, 22);
             this.btnDecke.Text = "Decke";
             this.btnDecke.Click += new System.EventHandler(this.btnDecke_Click);
             // 
@@ -203,6 +203,20 @@ namespace Europlan.Common {
             this.btnPickConnection.Text = "Anbindeleitungen ändern";
             this.btnPickConnection.Click += new System.EventHandler(this.btnPickConnection_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnShowPlanBg
+            // 
+            this.btnShowPlanBg.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowPlanBg.Image = ((System.Drawing.Image)(resources.GetObject("btnShowPlanBg.Image")));
+            this.btnShowPlanBg.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowPlanBg.Name = "btnShowPlanBg";
+            this.btnShowPlanBg.Size = new System.Drawing.Size(23, 22);
+            this.btnShowPlanBg.Click += new System.EventHandler(this.btnShowPlanBg_Click);
+            // 
             // planPanel
             // 
             this.planPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -222,20 +236,6 @@ namespace Europlan.Common {
             this.connectionPlanner.PlanCeiling = false;
             this.connectionPlanner.PlanFloor = true;
             this.connectionPlanner.Product = null;
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnShowPlanBg
-            // 
-            this.btnShowPlanBg.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnShowPlanBg.Image = ((System.Drawing.Image)(resources.GetObject("btnShowPlanBg.Image")));
-            this.btnShowPlanBg.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShowPlanBg.Name = "btnShowPlanBg";
-            this.btnShowPlanBg.Size = new System.Drawing.Size(23, 22);
-            this.btnShowPlanBg.Click += new System.EventHandler(this.btnShowPlanBg_Click);
             // 
             // ConnectionPlannerForm
             // 

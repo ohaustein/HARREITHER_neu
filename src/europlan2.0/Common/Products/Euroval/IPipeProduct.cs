@@ -665,6 +665,18 @@ namespace Europlan.Common {
             get;
             set;
         }
+
+        string PipeLengthText {
+            get;
+        }
+
+        double LongestVlPerCircuit {
+            get;
+        }
+
+        double LongestRlPerCircuit {
+            get;
+        }
 	#endregion
 	}
 }

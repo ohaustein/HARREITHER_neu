@@ -307,7 +307,12 @@ namespace Europlan.Common {
 				List<Polygon2D> list2 = new List<Polygon2D>();
 				list2.Add(clipped);
 
-				IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                IList<Polygon2D> clippedPolygons = null;
+                try {
+                    clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                } catch {
+                    clippedPolygons = new List<Polygon2D>();
+                }
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
 					polyLine.Closed = true;

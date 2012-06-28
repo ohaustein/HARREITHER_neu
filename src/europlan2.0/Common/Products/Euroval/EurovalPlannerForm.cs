@@ -47,7 +47,12 @@ namespace Europlan.Common.Products {
 						}
 						list2.Add(unusedAreaPolygon);
 					}
-					IList<Polygon2D> clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    IList<Polygon2D> clippedPolygons = null;
+                    try {
+                        clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    } catch {
+                        clippedPolygons = new List<Polygon2D>();
+                    }
 					double area = 0;
 					foreach (Polygon2D clippedPolygon in clippedPolygons) {
 						area += Math.Round(Math.Abs(clippedPolygon.GetArea()) / Math.Pow(product.AssociatedRoom.AssociatedPlan.Measure.Value, 2.0), 2);

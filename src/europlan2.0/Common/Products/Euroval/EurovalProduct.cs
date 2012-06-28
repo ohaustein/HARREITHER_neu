@@ -1445,6 +1445,38 @@ namespace Europlan.Common {
 			}
 		}
 
+        [XmlIgnore]
+        public double LongestVlPerCircuit {
+            get {
+                if (this.incompleteCalculation) {
+                    return 0;
+                }
+                double value = 0;
+                foreach (EurovalCircuit ec in this.circuits) {
+                    if (ec.PipeLengthVorlaufTotal > value) {
+                        value = ec.PipeLengthVorlaufTotal;
+                    }
+                }
+                return value;
+            }
+        }
+
+        [XmlIgnore]
+        public double LongestRlPerCircuit {
+            get {
+                if (this.incompleteCalculation) {
+                    return 0;
+                }
+                double value = 0;
+                foreach (EurovalCircuit ec in this.circuits) {
+                    if (ec.PipeLengthRuecklaufTotal > value) {
+                        value = ec.PipeLengthRuecklaufTotal;
+                    }
+                }
+                return value;
+            }
+        }
+
 		[XmlIgnore]
 		public double LongestPipeLengthPerCircuitWithAllConnections {
 			get {
@@ -2541,5 +2573,17 @@ namespace Europlan.Common {
 			}
 			return possibleConnection;
 		}
+
+        public string PipeLengthText {
+            get {
+                double vl = this.LongestVlPerCircuit;
+                double rl = this.LongestRlPerCircuit;
+                if (vl > 0 || rl > 0) {
+                    return Math.Round(this.PlannedPipeLengthPerCircuit + vl + rl, 1).ToString() + " (" + Math.Ceiling(vl) + "+" + Math.Ceiling(rl) + ")";
+                } else {
+                    return Math.Round(this.PlannedPipeLengthPerCircuit, 1).ToString();
+                }
+            }
+        }
 	}
 }

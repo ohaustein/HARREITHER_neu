@@ -47,6 +47,7 @@ namespace Europlan.Common {
 			this.btnConnections.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungHinzufuegen;
 			this.btnDeleteConnection.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungLoeschen;
 			this.btnPickConnection.Text = EuroplanRes.ConnectionPlannerForm_AnbindeleitungenAendern;
+            this.btnShowPlanBg.Text = EuroplanRes.ProductPlannerForm_PlanImHintergrundAnzeigen;
 			this.Text = EuroplanRes.ConnectionPlannerForm_Titel;
 		}
 

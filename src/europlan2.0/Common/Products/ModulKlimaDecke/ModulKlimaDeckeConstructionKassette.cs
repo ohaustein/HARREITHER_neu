@@ -817,7 +817,11 @@ namespace Europlan.Common {
 					if (list2[0].IsClockwise()) {
 						list2[0].Reverse();
 					}
-					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    try {
+                        clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    } catch {
+                        clippedPolygons = new List<Polygon2D>();
+                    }
 				}
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
@@ -858,7 +862,11 @@ namespace Europlan.Common {
 					if (list2[0].IsClockwise()) {
 						list2[0].Reverse();
 					}
-					clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    try {
+                        clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                    } catch {
+                        clippedPolygons = new List<Polygon2D>();
+                    }
 				}
 				foreach (Polygon2D polygon in clippedPolygons) {
 					DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
