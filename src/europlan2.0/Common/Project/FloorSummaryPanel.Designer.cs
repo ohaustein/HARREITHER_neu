@@ -471,7 +471,6 @@ namespace Europlan.Common {
 		private NumericColumn RoomRelativeHumidity;
 		private NumericColumn CoolLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn associatedPanelTypeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewImageColumn associatedIconDataGridViewImageColumn;
 		private System.Windows.Forms.DataGridViewButtonColumn colView;
         private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.CheckBox chkAssignPlan;

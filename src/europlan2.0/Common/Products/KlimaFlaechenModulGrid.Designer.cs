@@ -164,6 +164,5 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblCount;
 		private System.Windows.Forms.DataGridViewComboBoxColumn modulTypeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewComboBoxColumn orientationDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
 	}
 }

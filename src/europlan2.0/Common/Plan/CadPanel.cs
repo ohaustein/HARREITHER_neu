@@ -75,7 +75,6 @@ namespace Europlan.Common {
 
 		private PlanMode mode = PlanMode.PM_MOVE;
 		private bool shiftPressed = false;
-		private bool inDesign = false;
 
 		public CadPanel() {
 			this.InitializeComponent();

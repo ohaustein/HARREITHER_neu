@@ -1823,23 +1823,11 @@ namespace Europlan.Common.Products {
 		}
 
 		private void btnInvertDirection_Click(object sender, EventArgs e) {
-			/*this.changed = true;
-			List<KlimaFlaechenModul> modules = this.modulKlimaDeckePlanner.GetAllSelectedModules();
-			foreach (KlimaFlaechenModul modul in modules) {
-				modul.GraphBottomUp = !modul.GraphBottomUp;
-			}
-			this.UpdateSelectedModules();
-			this.planPanel.InvalidateGraphics();*/
-
 			this.changed = true;
 			List<KlimaFlaechenModul> selectedModules = this.modulKlimaDeckePlanner.GetAllSelectedModules();
 			List<KlimaFlaechenModul> modulesToInvert = new List<KlimaFlaechenModul>();
 			List<IKlimaFlaechenVerbindung> linksToInvert = new List<IKlimaFlaechenVerbindung>();
 
-			bool invertUnselected = false;
-			//bool connectedToAnbindung = false;
-			//List<KlimaFlaechenModul> ruecklaufConnected = new List<KlimaFlaechenModul>();
-			//List<KlimaFlaechenModul> vorlaufConnected = new List<KlimaFlaechenModul>();
 			Dictionary<IKlimaFlaechenVerbindung, ModulDeckeCircuit> anbindungen = new Dictionary<IKlimaFlaechenVerbindung, ModulDeckeCircuit>();
 
 			foreach (KlimaFlaechenModul m1 in selectedModules) {
@@ -1883,9 +1871,6 @@ namespace Europlan.Common.Products {
 						}
 					}
 					if (!modulesToInvert.Contains(m2)) {
-						if (!selectedModules.Contains(m2)) {
-							invertUnselected = true;
-						}
 						modulesToInvert.Add(m2);
 					}
 				}

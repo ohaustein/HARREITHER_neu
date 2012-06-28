@@ -54,7 +54,7 @@ namespace Europlan.Common {
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.Height));
 				}
 				return new List<Polygon2D>(new Polygon2D[] { borders });
-			} catch (Exception e) {
+			} catch (Exception) {
 				return new List<Polygon2D>();
 			}
 		}

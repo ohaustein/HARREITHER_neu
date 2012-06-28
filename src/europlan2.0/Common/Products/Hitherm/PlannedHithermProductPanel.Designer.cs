@@ -1709,10 +1709,6 @@ namespace Europlan.Common {
 
 		#endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn constructionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrOfRegistersDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource hithermRegisterBindingSource;
         private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.TabPage pageAuslegung;

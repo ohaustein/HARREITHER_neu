@@ -25,8 +25,7 @@ namespace Europlan.Common {
 		Nullable<PointF> startPoint = null;
 		Nullable<PointF> endPoint = null;
 		private double length = 0;
-		private float mouseDownXPlan, mouseUpXPlan, mouseDownYPlan, mouseUpYPlan, mouseDownX, mouseUpX, mouseDownY, mouseUpY;
-		private bool inDesign = false;
+		private float mouseDownXPlan, mouseDownYPlan, mouseDownX, mouseUpX, mouseDownY, mouseUpY;
 		private bool inMove = false;
 		private bool shiftPressed = false;
 		private Cursor tempCursor = Cursors.Default;
@@ -100,7 +99,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public Nullable<float> Scale {
+		public new Nullable<float> Scale {
 			get { return scale; }
 			set { 
 				scale = value;

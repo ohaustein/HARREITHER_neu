@@ -12,10 +12,22 @@ namespace Europlan.Common {
 
 	public partial class RequiredMaterialGrid : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
-		public event RequiredMaterialGridContentChangedHandler GridContentChanged;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
+        public event RequiredMaterialGridContentChangedHandler GridContentChanged;
 
 		private CategoryType type;
 		private DataGridViewGrouper grouper = null;

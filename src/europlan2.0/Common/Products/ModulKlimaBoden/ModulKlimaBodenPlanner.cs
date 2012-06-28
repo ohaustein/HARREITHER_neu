@@ -232,8 +232,8 @@ namespace Europlan.Common {
 				foreach (Circuit emptyCircuit in emptyCircuits) {
 					this.product.PlannedCircuits.Remove(emptyCircuit);
 				}
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				if (this.ModuleSelected != null) {
 					this.ModuleSelected(this, EventArgs.Empty);
@@ -242,8 +242,8 @@ namespace Europlan.Common {
 				if (this.ListsNeedUpdate != null) {
 					this.ListsNeedUpdate(this, EventArgs.Empty);
 				}
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				return true;
 			}
@@ -908,8 +908,8 @@ namespace Europlan.Common {
 			if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
 				if (button == MouseButtons.Left && this.product.GraphConstruction != null) {
 					this.product.GraphConstruction.MoveDrag(planPoint, pointInControl);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 					return true;
 				}
@@ -943,47 +943,9 @@ namespace Europlan.Common {
 					this.ConnectedPlanPanel.InvalidateGraphics();
 				}
 			} else if (this.Mode == KlimaBodenMode.KDM_PICK_MODULE && button == MouseButtons.Left) {
-				//int deltaY = this.dragStartedInControl.Y - pointInControl.Y;
-				//Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-
-				/*if (deltaX * deltaX + deltaY * deltaY > 25) {
-					dragIsPick = false;
-				}*/
-				//if (/*!dragIsPick && */moveModules) {
-				/*	Point2D rotatedStartPoint = rotation.Transform(this.dragStartedInPlan.Value);
-					Point2D rotatedCurPoint = rotation.Transform(planPoint);
-					double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
-					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					Dictionary<int, List<KlimaFlaechenModul>> modulesPerLane = new Dictionary<int, List<KlimaFlaechenModul>>();
-					foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
-						if (!modulesPerLane.ContainsKey(modul.GraphLane)) {
-							modulesPerLane.Add(modul.GraphLane, new List<KlimaFlaechenModul>());
-						}
-						modulesPerLane[modul.GraphLane].Add(modul);
-					}
-					foreach (KeyValuePair<int, List<KlimaFlaechenModul>> kvp in modulesPerLane) {
-						if (kvp.Value.Count > 0) {
-							KlimaFlaechenModul firstModul = kvp.Value[0];
-							bool bottomUp = firstModul.GraphPositionInLan < this.oldModulPositions[firstModul] + delta;
-							kvp.Value.Sort(new KlimaFlaechenModuleComparer(!bottomUp));
-							PossibleModulLane lane = this.product.GraphConstruction.PossibleLanes[kvp.Key];
-							foreach (KlimaFlaechenModul modul in kvp.Value) {
-								Nullable<double> bestMove = lane.BestMovePossible(modul, this.oldModulPositions[modul] + delta, measure, this.product, bottomUp);
-								if (bestMove.HasValue) {
-									modul.GraphPositionInLan = bestMove.Value;
-								}
-							}
-						}
-					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
-					}
-					this.connectedPlanPanel.InvalidateGraphics();
-				} else {*/
-					this.dragEndedInControl = pointInControl;
-					this.dragEndedInPlan = planPoint;
-					this.connectedPlanPanel.InvalidateGraphics();
-				//}
+				this.dragEndedInControl = pointInControl;
+				this.dragEndedInPlan = planPoint;
+				this.connectedPlanPanel.InvalidateGraphics();
 			}
 			return false;
 		}
@@ -1074,8 +1036,12 @@ namespace Europlan.Common {
 
 		#endregion
 
-		public event ProjectChangedHandler ProjectChanged;
-		public event EventHandler ModuleSelected;
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        public event EventHandler ModuleSelected;
 
 		[XmlIgnore]
 		public double NewModulesRotation {
@@ -2185,8 +2151,8 @@ namespace Europlan.Common {
 			}
 
 			this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 			return newModules > 0 && newCircuit ? c : null;
 		}

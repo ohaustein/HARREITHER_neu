@@ -9,9 +9,21 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class RegulatorCircuitsSummaryPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 		
 		public RegulatorCircuitsSummaryPanel() {
 			InitializeComponent();
@@ -55,21 +67,21 @@ namespace Europlan.Common {
 		private void regulatoryCircuitsGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRegulatoryCircuits.Columns.Count &&
 					e.RowIndex >= 0 && e.RowIndex < this.gridRegulatoryCircuits.Rows.Count) {
-				if (ProjectChanged != null) {
-					ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 			}
 		}
 
 		private void regulatoryCircuitsGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
-			if (ProjectChanged != null) {
-				ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
 		private void btnNext_Click(object sender, EventArgs e) {
-			if (TreeSelectionRequested != null) {
-				TreeSelectionRequested(this, typeof(FloorListSummaryPanel));
+            if (this.treeSelectionRequested != null) {
+                this.treeSelectionRequested(this, typeof(FloorListSummaryPanel));
 			}
 		}
 

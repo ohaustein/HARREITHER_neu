@@ -10,7 +10,11 @@ using System.Threading;
 namespace Europlan.Common {
 	public partial class QuickDimensioningDistributorsSummary : UserControl {
 
-		public event ProjectChangedHandler ProjectChanged;
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
 
 		public QuickDimensioningDistributorsSummary() {
 			InitializeComponent();
@@ -91,8 +95,8 @@ namespace Europlan.Common {
 		}
 
 		private void OnProjectChanged() {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 

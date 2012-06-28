@@ -182,7 +182,6 @@ namespace Europlan.Common {
 				}
 				return this;
 			}
-			return null;
 		}
 
 		public List<WW.Math.Geometry.Polygon2D> GetObjectBorders(double xOffset, double yOffset) {

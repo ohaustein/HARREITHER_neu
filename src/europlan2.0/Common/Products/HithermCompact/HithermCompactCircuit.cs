@@ -123,34 +123,27 @@ namespace Europlan.Common {
 
 		#endregion Area
 
-		//private double c_area;
-		//private double c_pipeLength;
-
 		private double c_qHeatPerSqm;
 		private double c_qCoolPerSqm;
 
 		[XmlIgnore]
 		public double C_QHeatPerSqm {
 			get { return c_qHeatPerSqm; }
-			//set { c_qHeatPerSqm = value; }
 		}
 
 		[XmlIgnore]
 		public double C_QCoolPerSqm {
 			get { return c_qCoolPerSqm; }
-			//set { c_qCoolPerSqm = value; }
 		}
 
-		private double c_floorTempHeat;
 		[XmlIgnore]
 		public double C_FloorTempHeat {
-			get { return this.c_floorTempHeat; }
+			get { return 0; }
 		}
 
-		private double c_floorTempCool;
 		[XmlIgnore]
 		public double C_FloorTempCool {
-			get { return this.c_floorTempCool; }
+			get { return 0; }
 		}
 
 		private double c_thetaVHeat;

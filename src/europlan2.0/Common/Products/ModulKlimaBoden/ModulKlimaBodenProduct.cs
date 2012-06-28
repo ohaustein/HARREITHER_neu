@@ -44,7 +44,6 @@ namespace Europlan.Common {
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
 		private float plannedArea = 0;
-		private float plannedFloorArea = 0;
 		private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
@@ -575,7 +574,6 @@ namespace Europlan.Common {
 						double verbindeleitung = 0;
 						if (c.Links != null) {
 							foreach (KlimaFlaechenModulVerbindung link in c.Links) {
-								Segment2D test;
 								if (link.IsLangerFitting(measure)) {
 									langeFittinge++;
 								} else {
@@ -1289,7 +1287,6 @@ namespace Europlan.Common {
                 }
 
                 streifen = Math.Ceiling(modulStreifenLength);
-#warning TODO for graphical
             } else {
                 streifen = Math.Ceiling(this.RequestedModulesModulierend * 1.5);
             }

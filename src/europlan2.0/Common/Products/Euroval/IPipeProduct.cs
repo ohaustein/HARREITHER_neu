@@ -389,8 +389,6 @@ namespace Europlan.Common {
 			set;
 		}
 
-		void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial);
-
 		string LastErrorMessage {
 			get;
 		}

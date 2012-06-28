@@ -9,9 +9,21 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class ProjectSummaryPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		public ProjectSummaryPanel() {
 			InitializeComponent();
@@ -51,42 +63,42 @@ namespace Europlan.Common {
 
 		private void txtProjectName_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectName = txtProjectName.Lines;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void txtEditor_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectEditor = txtEditor.Text;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void txtNotes_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectNotes = txtNotes.Lines;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void txtContact_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectContact = txtContact.Lines;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void txtNumber_TextChanged(object sender, EventArgs e) {
 			Project.Instance.ProjectNumber = txtNumber.Text;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void btnNext_Click(object sender, EventArgs e) {
-			if (TreeSelectionRequested != null) {
-				TreeSelectionRequested(this, typeof(FacilityDetailsSummaryPanel));
+            if (this.treeSelectionRequested != null) {
+                this.treeSelectionRequested(this, typeof(FacilityDetailsSummaryPanel));
 			}
 		}
 

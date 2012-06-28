@@ -126,12 +126,24 @@ namespace Europlan.Common {
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds);
 				this.registerTypeDataGridViewTextBoxColumn.Items.Add(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds);
 			//}
-			}
+		}
 
 		#region IEditorUserControl Members
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		private enum FieldEnum {
 			NONE = 0,
@@ -638,8 +650,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.HEAT_LOAD_PERCENTAGE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				ignoreHeatLoad--;
 			}
@@ -653,8 +665,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.COOL_LOAD_PERCENTAGE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				ignoreCoolLoad--;
 			}
@@ -668,8 +680,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.HEAT_LOAD);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				ignoreHeatLoadPercentage--;
 			}
@@ -683,8 +695,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.COOL_LOAD);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				ignoreCoolLoadPercentage--;
 			}
@@ -702,8 +714,8 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -719,8 +731,8 @@ namespace Europlan.Common {
 				}
 			}
 			form.Dispose();
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -748,16 +760,16 @@ namespace Europlan.Common {
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.COOL_LOAD);
-			if (form.DialogResult == DialogResult.OK && this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (form.DialogResult == DialogResult.OK && this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 			form.Dispose();
 		}
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {
 			gridContentChanged = true;
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -768,8 +780,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.NONE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 			}
 			form.Dispose();
@@ -778,7 +790,6 @@ namespace Europlan.Common {
 		DataGridViewRow newRow = null;
 		private void dgvRegisters_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e) {
 			this.newRow = e.Row;
-			//e.Row.Cells[registerAreaDataGridViewTextBoxColumn.Index].Value = HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std;
 			if (registerTypeDataGridViewTextBoxColumn.Items.Count > 0) {
 				e.Row.Cells[registerTypeDataGridViewTextBoxColumn.Index].Value = registerTypeDataGridViewTextBoxColumn.Items[0];
 			}
@@ -803,8 +814,8 @@ namespace Europlan.Common {
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.REGISTER);
-			if (ProjectChanged != null) {
-				ProjectChanged(this);
+            if (this.projectChanged != null) {
+                this.projectChanged(this);
 			}
 		}
 
@@ -816,8 +827,8 @@ namespace Europlan.Common {
 				(this.product.Product as HithermCompactProduct).AddRegisterToCircuit(newRow.DataBoundItem as HithermCompactRegister, (int)newRow.Cells[this.heizkreisDataGridViewTextBoxColumn.Index].Value);
 				newRow = null;
 			}
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -826,8 +837,8 @@ namespace Europlan.Common {
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.REGISTER);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 			}
 		}
@@ -840,8 +851,8 @@ namespace Europlan.Common {
 
 		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
 			this.product.Product.StellMotore = this.chkStellAntriebe.Checked;
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -886,8 +897,8 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.AREA);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				} else if (this.product.Product.Type == Product.ProductType.DH) {
 					(this.product.Product as HithermCompactProduct).PlannedCeilingArea = (float)this.numArea.Value;
@@ -895,8 +906,8 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.AREA);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 				ignoreAreaPercentage--;
@@ -912,8 +923,8 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				} else if (this.product.Product.Type == Product.ProductType.DH) {
 					(this.product.Product as HithermCompactProduct).PlannedCeilingAreaPercentage = (float)this.numAreaPercentage.Value;
@@ -921,8 +932,8 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 				ignoreArea--;
@@ -959,16 +970,16 @@ namespace Europlan.Common {
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.errorMsg = this.product.Product.LastErrorMessage;
 					this.UpdateControl(FieldEnum.TYPE);
-					if (this.ProjectStructureChanged != null) {
-						this.ProjectStructureChanged(this);
+                    if (this.projectStructureChanged != null) {
+                        this.projectStructureChanged(this);
 					}
 				}
 			}
 		}
 
 		private void hithermWallGrid1_WallChanged(object sender, HithermWallGrid.WallEventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -996,8 +1007,8 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 			}
@@ -1009,8 +1020,8 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.COOL;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 			}
@@ -1022,8 +1033,8 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT_AND_COOL;
 					this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.UpdateControl(FieldEnum.NONE);
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 			}
@@ -1033,8 +1044,8 @@ namespace Europlan.Common {
 			this.product.RestwaermeUebernehmen();
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.UpdateControl(FieldEnum.NONE);
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -1042,8 +1053,8 @@ namespace Europlan.Common {
 			this.product.RestkaelteUebernehmen();
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.UpdateControl(FieldEnum.NONE);
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -1053,8 +1064,8 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.LAYOUT_TYPE);
 			form.Dispose();
 			// TODO
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -1088,8 +1099,8 @@ namespace Europlan.Common {
 				}
 				this.product.Product.GraphicalMode = rbLayoutGraphical.Checked;
 				this.UpdateControl(FieldEnum.LAYOUT_TYPE);
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 			}
 		}

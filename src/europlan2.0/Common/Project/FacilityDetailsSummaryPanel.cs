@@ -9,9 +9,21 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class FacilityDetailsSummaryPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		public FacilityDetailsSummaryPanel() {
 			InitializeComponent();
@@ -77,15 +89,15 @@ namespace Europlan.Common {
 
 		private void numNormOutsideTemperature_ValueChanged(object sender, EventArgs e) {
 			Project.Instance.NormOutsideTemperature = (int)numNormOutsideTemperature.Value;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
 		private void chkSpreizung_CheckedChanged(object sender, EventArgs e) {
 			Project.Instance.VariableSpreizung = chkSpreizung.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
@@ -99,15 +111,15 @@ namespace Europlan.Common {
 			} else {
 				numDewPoint.Text = "";
 			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
 		private void numOutsideTemperature_ValueChanged(object sender, EventArgs e) {
 			Project.Instance.OutsideTemperatureForCooling = (int)numOutsideTemperature.Value;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
@@ -118,8 +130,8 @@ namespace Europlan.Common {
 			} else {
 				numDewPoint.Text = "";
 			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
@@ -130,14 +142,14 @@ namespace Europlan.Common {
 			} else {
 				numDewPoint.Text = "";
 			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
 		private void btnNext_Click(object sender, EventArgs e) {
-			if (TreeSelectionRequested != null) {
-				TreeSelectionRequested(this, typeof(RegulatorCircuitsSummaryPanel));
+            if (this.treeSelectionRequested != null) {
+                this.treeSelectionRequested(this, typeof(RegulatorCircuitsSummaryPanel));
 			}
 		}
 

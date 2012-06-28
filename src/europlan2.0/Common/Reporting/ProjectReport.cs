@@ -336,7 +336,7 @@ namespace Europlan.Common {
 			try {
 				listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, PathUtil.DataPath);
 				GC.Collect();
-			} catch (Exception ex) {
+            } catch (Exception) {
 				DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if (result == DialogResult.OK) {
 					try {
@@ -3936,8 +3936,6 @@ namespace Europlan.Common {
 			VerlegedatenCircuitWrapper wrapper = null;
 			Dictionary<string, int> circuitCount = new Dictionary<string, int>();
 
-			int count = 1;
-
 			foreach (Floor floor in project.Floors) {
 				foreach (Distributor d in floor.Distributors) {
 					foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
@@ -4089,7 +4087,6 @@ namespace Europlan.Common {
 			List<ModulDeckeVerlegeDatenWrapper> wrapperList = new List<ModulDeckeVerlegeDatenWrapper>();
 
 			ModulKlimaDeckeProduct p = null;
-			bool isProductPlanned = false;
 			int prevCircuit;
 			int prevTeilFlaeche;
 			ModulDeckeVerlegeDatenWrapper wrapper;

@@ -258,7 +258,7 @@ namespace Europlan.Common {
 		protected EurovalProduct(EurovalProduct product) : base(product) {
 		}
 
-		public void ClearGraphicalRepresentation() {
+		public override void ClearGraphicalRepresentation() {
 			base.ClearGraphicalRepresentation();
 			plannedRimSegments = new List<Segment2D>();
 			plannedAreaGraphical = new List<Point2D>();
@@ -1574,36 +1574,25 @@ namespace Europlan.Common {
 			if (oldOk != newOk) {
 				return newOk;
 			}
-			//if (oldOk) {
-				bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
-				bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
-				if (oldCovers != newCovers) {
-					return newCovers;
+			bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
+			bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
+			if (oldCovers != newCovers) {
+				return newCovers;
+			}
+			bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
+			bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
+			if (oldRimWidthOk != newRimWidthOk) {
+				return newRimWidthOk;
+			}
+			if (oldCovers) {
+#warning TODO implement better decisison which parameters should be used
+				if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
+					return newAreaRim < oldAreaRim;
 				}
-				bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
-				bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
-				if (oldRimWidthOk != newRimWidthOk) {
-					return newRimWidthOk;
-				}
-				if (oldCovers) {
-					// TODO implement better decisison which parameters should be used
-					/*if (checkCool) {
-						return newFloorTempCoolRes >= oldFloorTempCoolRes;
-					}*/
-					if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
-						return newAreaRim < oldAreaRim;
-					}
-					return newFloorTempHeatRes <= oldFloorTempHeatRes;
-				} else {
-					/*if (checkCool) {
-						return newCoolLoad > oldCoolLoad;
-					}*/
-					return newHeatLoad > oldHeatLoad;
-				}
-			/*} else {
-
-			}*/
-			return true;
+				return newFloorTempHeatRes <= oldFloorTempHeatRes;
+			} else {
+				return newHeatLoad > oldHeatLoad;
+			}
 		}
 
 		public override ProductConnection PlannedConnection {

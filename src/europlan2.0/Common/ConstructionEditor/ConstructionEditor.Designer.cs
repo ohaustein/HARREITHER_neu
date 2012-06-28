@@ -330,7 +330,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.CheckBox cbPeFoil;
 		private Europlan.Common.NumericBox numThickness;
 		private System.Windows.Forms.BindingSource constructionLayerBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Label lblFactor;
 		private NumericBox numFactor;
 		private System.Windows.Forms.CheckBox chkHitherm;

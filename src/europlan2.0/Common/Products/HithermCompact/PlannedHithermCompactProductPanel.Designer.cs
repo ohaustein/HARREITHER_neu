@@ -1794,12 +1794,9 @@ namespace Europlan.Common {
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Label label32;
 		private System.Windows.Forms.DataGridView dgvRegisters;
-		private System.Windows.Forms.DataGridViewTextBoxColumn registerBreiteDataGridViewTextBoxColumn;
 		private System.Windows.Forms.TabPage pageConstructions;
-		private System.Windows.Forms.DataGridViewTextBoxColumn constructionDataGridViewTextBoxColumn;
 		private System.Windows.Forms.CheckBox chkStellAntriebe;
 		private HithermWallGrid hithermWallGrid1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nrOfRegistersDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Button btnSelectWall;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.ComboBox cmbType;
@@ -1838,7 +1835,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewTextBoxColumn defaultPipeVerticalDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn equivalentPipeLengthDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn equivalentPipeLengthUnisolatedDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn registerAreaDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn heatAreaDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn plannedProductDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn wallIdDataGridViewTextBoxColumn;

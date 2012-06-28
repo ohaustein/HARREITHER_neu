@@ -15,9 +15,21 @@ using System.Collections;
 namespace Europlan.Common {
 	public partial class QuickDimensioningPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		private combit.ListLabel15.ListLabel listLabel1;
 		private combit.ListLabel15.ListLabelPreviewControl listLabelPreviewControl1;
@@ -1039,7 +1051,7 @@ namespace Europlan.Common {
 				try {
 					listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, PathUtil.DataPath);
 					GC.Collect();
-				} catch (Exception ex) {
+				} catch (Exception) {
 					DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 					if (result == DialogResult.OK) {
 						try {
@@ -1263,8 +1275,8 @@ namespace Europlan.Common {
 		}
 
 		private void OnProjectChanged() {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 

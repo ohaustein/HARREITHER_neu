@@ -1515,36 +1515,25 @@ namespace Europlan.Common {
 			if (oldOk != newOk) {
 				return newOk;
 			}
-			//if (oldOk) {
-				bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
-				bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
-				if (oldCovers != newCovers) {
-					return newCovers;
+			bool oldCovers = CoversLoads(oldHeatLoad, oldCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
+			bool newCovers = CoversLoads(newHeatLoad, newCoolLoad, checkHeat ? requestedHeatLoad : 0, checkCool ? requestedCoolLoad : 0);
+			if (oldCovers != newCovers) {
+				return newCovers;
+			}
+			bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
+			bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
+			if (oldRimWidthOk != newRimWidthOk) {
+				return newRimWidthOk;
+			}
+			if (oldCovers) {
+#warning TODO implement better decisison which parameters should be used
+				if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
+					return newAreaRim < oldAreaRim;
 				}
-				bool oldRimWidthOk = oldAreaRim * 2 <= oldAreaResidence;
-				bool newRimWidthOk = newAreaRim * 2 <= newAreaResidence;
-				if (oldRimWidthOk != newRimWidthOk) {
-					return newRimWidthOk;
-				}
-				if (oldCovers) {
-					// TODO implement better decisison which parameters should be used
-					/*if (checkCool) {
-						return newFloorTempCoolRes >= oldFloorTempCoolRes;
-					}*/
-					if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
-						return newAreaRim < oldAreaRim;
-					}
-					return newFloorTempHeatRes <= oldFloorTempHeatRes;
-				} else {
-					/*if (checkCool) {
-						return newCoolLoad > oldCoolLoad;
-					}*/
-					return newHeatLoad > oldHeatLoad;
-				}
-			/*} else {
-
-			}*/
-			return true;
+				return newFloorTempHeatRes <= oldFloorTempHeatRes;
+			} else {
+				return newHeatLoad > oldHeatLoad;
+			}
 		}
 
 		public override ProductConnection PlannedConnection {
@@ -1553,7 +1542,6 @@ namespace Europlan.Common {
 				if (value != null && value.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 					this.requestedCircuits = this.PlannedCircuitCount > 0 ? this.PlannedCircuitCount : 1;
 					this.requestedLayDistance = this.plannedLayDistance.HasValue ? this.plannedLayDistance.Value : EcothermLayDistance.EV35;
-					//this.requestedRimType = this.plannedRimType.HasValue ? this.plannedRimType.Value : EcothermRimType.EV15_60;
 					this.requestedRimType = this.plannedRimType;
 				}
 				this.plannedConnection = value;

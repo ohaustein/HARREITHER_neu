@@ -9,9 +9,21 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class FloorListSummaryPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		public FloorListSummaryPanel() {
 			InitializeComponent();
@@ -26,18 +38,6 @@ namespace Europlan.Common {
 			this.colView.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
 			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
 		}
-
-		//private void btnImport_Click(object sender, EventArgs e) {
-		//    BuildingDataImportManager.Instance.ImportBuildingData();
-		//    if (ProjectStructureChanged != null) {
-		//        ProjectStructureChanged(null);
-		//    }
-		//    if (ProjectChanged != null) {
-		//        ProjectChanged(null);
-		//    }
-		//    projectFloorsSource.DataSource = Project.Instance.Floors;
-		//    projectFloorsSource.ResetBindings(false);
-		//}
 
 		public void UpdateControl(bool resetUserInterface) {
 			List<DataGridViewColumn> selectedCols = null;
@@ -86,8 +86,8 @@ namespace Europlan.Common {
 			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
 				Floor f = this.gridFloors.Rows[e.RowIndex].DataBoundItem as Floor;
 				if (f != null) {
-					if (TreeSelectionRequested != null) {
-						TreeSelectionRequested(this, f);
+                    if (this.treeSelectionRequested != null) {
+                        this.treeSelectionRequested(this, f);
 					}
 				}
 			}
@@ -106,16 +106,16 @@ namespace Europlan.Common {
 			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridFloors.Columns.Count &&
 			  (this.gridFloors.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn) &&
 			  e.RowIndex >= 0 && e.RowIndex < this.gridFloors.Rows.Count) {
-				if (ProjectStructureChanged != null) {
-					ProjectStructureChanged(this);
+				if (this.projectStructureChanged != null) {
+					this.projectStructureChanged(this);
 				}
 			}
 		}
 
 		private void gridFloors_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			gridFloors.AllowUserToAddRows = true;
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
+			if (this.projectStructureChanged != null) {
+				this.projectStructureChanged(this);
 			}
 		}
 

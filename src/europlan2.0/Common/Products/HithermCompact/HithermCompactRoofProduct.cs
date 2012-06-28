@@ -82,7 +82,7 @@ namespace Europlan.Common {
 			get { return QuickDimensioningNameStatic; }
 		}
 
-		public static string QuickDimensioningNameStatic {
+		public new static string QuickDimensioningNameStatic {
 			get { return EuroplanRes.HithermCompactDachschraege_Flaechenaufstellung; }
 		}
 

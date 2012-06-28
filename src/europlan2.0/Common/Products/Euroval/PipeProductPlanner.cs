@@ -865,8 +865,8 @@ namespace Europlan.Common {
 
 								rzStart = Point2D.Zero;
 
-								if (this.ProjectChanged != null) {
-									this.ProjectChanged(this);
+								if (this.projectChanged != null) {
+									this.projectChanged(this);
 								}
 								return true;
 							}
@@ -891,8 +891,8 @@ namespace Europlan.Common {
 					sum += (float)segment.GetLength() / this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				}
 				this.product.PlannedRimLength = sum;
-				if (this.ProjectChanged != null) {
-					this.ProjectChanged(this);
+				if (this.projectChanged != null) {
+					this.projectChanged(this);
 				}
 				return true;
 			} else if (this.Mode == PipeProductMode.EVM_DEL_RED) {
@@ -985,16 +985,13 @@ namespace Europlan.Common {
 				Point2D normalizedPoint = planPoint;
 				bool isStart = false;
 				if (coordsPickedSoFar.Count == 0) {
-					bool snapFound = false;
 					if (GetSnapPoint(border, planPoint) != Point2D.Zero) {
 						normalizedPoint = GetSnapPoint(border, planPoint);
-						snapFound = true;
 					}
 					foreach (Point2D point in border) {
 						Segment2D line = new Segment2D(point, normalizedPoint);
 						if (line.GetLength() < (this.product.AssociatedRoom.AssociatedPlan.Measure * 0.1)) {
 							normalizedPoint = point;
-							snapFound = true;
 							break;
 						}
 					}
@@ -1266,7 +1263,11 @@ namespace Europlan.Common {
 
 		#endregion
 
-		public event ProjectChangedHandler ProjectChanged;
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
 
 		internal void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer layer) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
@@ -1652,6 +1653,10 @@ namespace Europlan.Common {
 
         public bool ShowPlanBackground {
             get { return Europlan.Common.Product.ShowPlanInBackground; }
+        }
+
+        public bool UnsavedChanged {
+            get { return this.unsavedChanges || true; }
         }
     }
 }

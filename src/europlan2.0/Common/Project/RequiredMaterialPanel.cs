@@ -8,11 +8,21 @@ using System.Windows.Forms;
 
 namespace Europlan.Common {
 	public partial class RequiredMaterialPanel : UserControl, IEditorUserControl {
-
-
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		
 		public RequiredMaterialPanel() {
@@ -56,8 +66,8 @@ namespace Europlan.Common {
 		}
 
 		private void requiredMaterialGrid_GridContentChanged(object sender) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 

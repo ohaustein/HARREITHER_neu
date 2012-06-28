@@ -424,7 +424,6 @@ namespace Europlan.Common {
 			Nullable<Line2D> prevBorderLeft = null;
 			Nullable<Line2D> prevBorderRight = null;
 			Line2D borderLeft, borderRight;
-			Segment2D segment;
 			Vector2D vector = new Vector2D(0, 0);
 			Vector2D vLeft = new Vector2D();
 			Vector2D vRight = new Vector2D();

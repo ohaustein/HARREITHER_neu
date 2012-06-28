@@ -25,7 +25,6 @@ namespace Europlan.Common {
 
 		private void FillListView() {
 			lstErrors.Items.Clear();
-			string text = "";
 			foreach (Floor floor in Project.Instance.Floors) {
 				foreach (Room room in floor.Rooms) {
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {

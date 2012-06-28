@@ -53,7 +53,6 @@ namespace Europlan.Common {
 		#endregion
 
 		private CadPlan plan = null;
-		private bool ignoreCheck = true;
 
 		public Plan Plan {
 			get { return this.plan; }

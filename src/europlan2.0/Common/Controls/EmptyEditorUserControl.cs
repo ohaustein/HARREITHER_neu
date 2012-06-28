@@ -14,11 +14,23 @@ namespace Europlan.Common {
 
 		#region IEditorUserControl Members
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
 
-		public event ProjectChangedHandler ProjectChanged;
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
 
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		public void UpdateControl(bool resetUserInterface) {
 		}

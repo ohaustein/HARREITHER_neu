@@ -1057,15 +1057,6 @@ namespace Europlan.Common {
 			} else {
 				return null;
 			}
-
-			/*if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return null;
-			}
-			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return null;
-			}
-			return this.productConfiguration[typeof(ProductType).FullName][parameterName];*/
-			return this.GetProductParameter(typeof(ProductType), parameterName);
 		}
 
 		public int GetProductParameterAsInt<ProductType>(string parameterName) where ProductType : Product {

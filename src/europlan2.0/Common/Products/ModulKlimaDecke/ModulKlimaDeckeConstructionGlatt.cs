@@ -504,14 +504,14 @@ namespace Europlan.Common {
 				switch (this.ContructionType) {
 					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL:
 						return 0.065;
-						break;
-					case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL:
+
+                    case ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL:
 						return 0.045;
-						break;
-					default:
+
+                    default:
 						return 0.045;
-						break;
-				}
+
+                }
 			}
             set {
                 if (this.schienenBreite != value) {
@@ -757,7 +757,7 @@ namespace Europlan.Common {
 						boundaryPath.PolylineData.Closed = true;
 						hatch.BoundaryPaths.Add(boundaryPath);
 					}
-				} catch (Exception e) {
+				} catch (Exception) {
 					// TODO log warning
 					Console.WriteLine("adf");
 				}

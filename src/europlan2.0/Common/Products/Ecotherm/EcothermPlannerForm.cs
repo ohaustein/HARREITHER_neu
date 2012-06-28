@@ -14,8 +14,6 @@ namespace Europlan.Common.Products {
 
 		private PlannedProduct plannedProduct;
 
-		private bool changed = false;
-
 		private bool cmbLayDistanceContainsAutomatic = true;
 		private bool cmbRimTypeContainsAutomatic = true;
 		private bool cmbRimTypeContainsNone = false;
@@ -719,14 +717,12 @@ namespace Europlan.Common.Products {
 
 		private void europlanPlanner_ProjectChanged(object sender) {
 			this.CalculateAndUpdate();
-			this.changed = true;
 		}
 
 		public bool Changed {
 			get {
-				// TODO remove this when the cahnged flag is properly implemented
 				return true;
-				return this.changed; 
+#warning TODO properly implement changed flag
 			}
 		}
 

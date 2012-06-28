@@ -1069,13 +1069,12 @@ namespace Europlan.Common {
 				case HithermRegister.HithermRegisterTypeEnum.HIT_300_5:
 					x2 = new double[] { 25, 50, 75, 100, 125, 150 };
 					return 0;
-					break;
 
 				case HithermRegister.HithermRegisterTypeEnum.HIT_300_10:
 					x2 = new double[] { 50, 100, 150, 200, 250, 300 };
 					return 0;
-					break;
-				default:
+
+                default:
 					return 0;
 			}
 

@@ -10,7 +10,11 @@ using log4net;
 namespace Europlan.Common {
 	public partial class QuickDimensioningFloorGrid : UserControl {
 
-		public event ProjectChangedHandler ProjectChanged;
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
 
 		private Floor floor = null;
 		private RoomType newRoomType;
@@ -622,8 +626,8 @@ namespace Europlan.Common {
 		}
 
 		private void OnProjectChanged() {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 

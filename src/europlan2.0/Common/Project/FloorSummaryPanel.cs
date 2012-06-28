@@ -9,10 +9,22 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 
 	public partial class FloorSummaryPanel : UserControl, IEditorUserControl {
-		
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		private Floor floor;
 		private bool updateControlOngoing = false;
@@ -144,8 +156,8 @@ namespace Europlan.Common {
 					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
 				Room r = this.gridRooms.Rows[e.RowIndex].DataBoundItem as Room;
 				if (r != null) {
-					if (TreeSelectionRequested != null) {
-						TreeSelectionRequested(this, r);
+					if (treeSelectionRequested != null) {
+						treeSelectionRequested(this, r);
 					}
 				}
 			}
@@ -211,19 +223,19 @@ namespace Europlan.Common {
 						oldArea = null;
 					}
 				}
-				if (this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && ProjectStructureChanged != null) {
-					ProjectStructureChanged(this);
+				if (this.gridRooms.Columns[e.ColumnIndex] == this.nameDataGridViewTextBoxColumn && projectStructureChanged != null) {
+					projectStructureChanged(this);
 				}
-				if (ProjectChanged != null) {
-					ProjectChanged(this);
+				if (projectChanged != null) {
+					projectChanged(this);
 				}
 			}
 		}
 
 		private void gridRooms_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
 			gridRooms.AllowUserToAddRows = true;
-			if (ProjectStructureChanged != null) {
-				ProjectStructureChanged(this);
+			if (projectStructureChanged != null) {
+				projectStructureChanged(this);
 			}
 		}
 
@@ -238,8 +250,8 @@ namespace Europlan.Common {
 				if (result == DialogResult.OK) {
 					if (form.Distributor != null) {
 						this.floor.Distributors.Add(form.Distributor);
-						if (ProjectStructureChanged != null) {
-							ProjectStructureChanged(this);
+						if (projectStructureChanged != null) {
+							projectStructureChanged(this);
 						}
 					}
 				}
@@ -277,8 +289,8 @@ namespace Europlan.Common {
 									}
 								}
 								floor.Distributors.Remove(toDelete);
-								if (ProjectStructureChanged != null) {
-									ProjectStructureChanged(this);
+								if (projectStructureChanged != null) {
+									projectStructureChanged(this);
 								}
 							}
 						} else {
@@ -290,8 +302,8 @@ namespace Europlan.Common {
 								pp.ConfigureProduct(false);
 							}
 							floor.Distributors.Remove(toDelete);
-							if (ProjectStructureChanged != null) {
-								ProjectStructureChanged(this);
+							if (projectStructureChanged != null) {
+								projectStructureChanged(this);
 							}
 						}
 					}
@@ -447,8 +459,8 @@ namespace Europlan.Common {
 					floor.AssociatedPlanId = null;
 					cmbPlans.Enabled = false;
 				}
-				if (ProjectChanged != null) {
-					ProjectChanged(this);
+				if (projectChanged != null) {
+					projectChanged(this);
 				}
 			}
 		}
@@ -505,8 +517,8 @@ namespace Europlan.Common {
 						}
 					}
 					floor.AssociatedPlanId = (cmbPlans.SelectedItem as Plan).Id;
-					if (ProjectChanged != null) {
-						ProjectChanged(this);
+					if (projectChanged != null) {
+						projectChanged(this);
 					}
 				}
 			}

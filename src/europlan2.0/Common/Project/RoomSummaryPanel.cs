@@ -9,10 +9,22 @@ using WW.Math;
 
 namespace Europlan.Common {
 	public partial class RoomSummaryPanel : UserControl, IEditorUserControl {
-		
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		private Room room;
 		private bool updateOngoing = false;
@@ -103,16 +115,16 @@ namespace Europlan.Common {
 
 		private void txtName_TextChanged(object sender, EventArgs e) {
 			this.room.Name = this.txtName.Text;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
 			}
 		}
 
 		private void txtArea_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.Area = (float)this.txtArea.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -123,8 +135,8 @@ namespace Europlan.Common {
 		private void txtTemperature_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.RoomHeatTemperature = (int)this.txtTemperature.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -135,8 +147,8 @@ namespace Europlan.Common {
 		private void txtHeat_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.HeatLoad = (int)this.txtHeat.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -147,8 +159,8 @@ namespace Europlan.Common {
 		private void txtNormHeat_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.NormalizedHeatLoad = (int)this.txtNormHeat.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -159,8 +171,8 @@ namespace Europlan.Common {
 		private void txtCool_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.CoolLoad = (int)this.txtCool.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -171,8 +183,8 @@ namespace Europlan.Common {
 		private void txtNormCool_TextChanged(object sender, EventArgs e) {
 			try {
 				this.room.NormalizedCoolLoad = (int)this.txtNormCool.Value;
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+                if (this.projectChanged != null) {
+                    this.projectChanged(null);
 				}
 			} catch (Exception) {
 				MessageBox.Show(EuroplanRes.RoomSummaryPanel_EingabefehlerText, EuroplanRes.RoomSummaryPanel_EingabefehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -249,8 +261,8 @@ namespace Europlan.Common {
 					pp.ConfigureProduct(false);
 					this.room.PlannedProducts.Add(pp);
 					this.UpdateControl(true);
-					if (this.ProjectStructureChanged != null) {
-						this.ProjectStructureChanged(this);
+                    if (this.projectStructureChanged != null) {
+                        this.projectStructureChanged(this);
 					}
 				}
 			}
@@ -279,8 +291,8 @@ namespace Europlan.Common {
 						}
 						SelectConnectionForProductForm.UnconnectProduct(product);
 						this.room.PlannedProducts.Remove(product);
-						if (this.ProjectStructureChanged != null) {
-							this.ProjectStructureChanged(this);
+                        if (this.projectStructureChanged != null) {
+                            this.projectStructureChanged(this);
 						}
 
 						List<PlannedProduct> products = this.room.PlannedProducts;
@@ -339,8 +351,8 @@ namespace Europlan.Common {
 				}
 				SelectConnectionForProductForm.UnconnectProduct(this.deletedProduct);
 				this.room.PlannedProducts.Remove(this.deletedProduct);
-				if (this.ProjectStructureChanged != null) {
-					this.ProjectStructureChanged(this);
+                if (this.projectStructureChanged != null) {
+                    this.projectStructureChanged(this);
 				}
 			}
 			this.deletedProduct = null;
@@ -363,8 +375,8 @@ namespace Europlan.Common {
 			  e.RowIndex >= 0 && e.RowIndex < this.dgvProducts.Rows.Count) {
 				PlannedProduct pp = this.dgvProducts.Rows[e.RowIndex].DataBoundItem as PlannedProduct;
 				if (pp != null) {
-					if (TreeSelectionRequested != null) {
-						TreeSelectionRequested(this, pp);
+					if (this.treeSelectionRequested != null) {
+                        this.treeSelectionRequested(this, pp);
 					}
 				}
 			}
@@ -381,8 +393,8 @@ namespace Europlan.Common {
 		}
 
 		private void dgvProducts_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (this.ProjectChanged != null) {
-				this.ProjectChanged(this);
+			if (this.projectChanged != null) {
+				this.projectChanged(this);
 			}
 		}
 
@@ -437,8 +449,8 @@ namespace Europlan.Common {
 						room.Area = (float)Math.Round(Plan.PolygonArea(form.RoomCoordinates.ToArray()) / Math.Pow(plan.Measure.Value, 2.0), 2);
 						//room.PickedArea = room.Area;
 					}
-					if (this.ProjectChanged != null) {
-						this.ProjectChanged(this);
+					if (this.projectChanged != null) {
+						this.projectChanged(this);
 					}
 				}
 				form.Dispose();

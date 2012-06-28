@@ -162,17 +162,13 @@ namespace Europlan.Common {
 			}
 		}
 
-		public event EventHandler ModeChanged;
+        private event EventHandler modeChanged;
+        public event EventHandler ModeChanged {
+            add { this.modeChanged += value; }
+            remove { this.modeChanged -= value; }
+        }
 
 		public bool PlannerKeyPress(Keys key) {
-			/*if (key == Keys.Escape && this.Mode == PdfRegionPickerMode.DPM_PICK_REGION) {
-				this.Mode = PdfRegionPickerMode.DPM_NONE;
-				this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
-				if (this.ModeChanged != null) {
-					this.ModeChanged(this, EventArgs.Empty);
-				}
-				return true;
-			}*/
 			return false;
 		}
 

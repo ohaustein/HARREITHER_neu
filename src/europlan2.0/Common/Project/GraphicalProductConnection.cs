@@ -351,8 +351,9 @@ namespace Europlan.Common {
 
 		private double CalculateFactor() {
 			return 1;
-			// TODO
-			double factor = 1;
+
+#warning TODO implement CalculateFactor
+			/*double factor = 1;
 			if (this.Distributor != null && this.vertices != null && this.vertices.Count > 1 && this.Product != null) {
 				Nullable<Distributor.GraphicalRepresentation> distRep = null;
 				foreach (Distributor.GraphicalRepresentation gr in this.Distributor.GraphicalRepresentations) {
@@ -373,7 +374,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			return factor;
+			return factor;*/
 		}
 
 		public virtual void ResetCachedVerticesForDrawing() {

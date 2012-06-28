@@ -20,7 +20,6 @@ namespace Europlan.Common {
 		private double yPos;
 
 		private bool mouseDown = false;
-		private bool inMove = false;
 		private PlanMode mode = PlanMode.PM_MOVE;
 
 		private double mouseDownXInPlan;
@@ -106,7 +105,7 @@ namespace Europlan.Common {
 			e.Graphics.Clear(Color.LightGray);
 		}
 
-		public double Scale {
+		public new double Scale {
 			get { return this.scale; }
 			set { this.scale = value; }
 		}
@@ -432,7 +431,6 @@ namespace Europlan.Common {
 				}
 			}
 			if (e.Button == MouseButtons.Middle) {
-				inMove = true;
 				this.tempCursor = this.Cursor;
 			}
 			if ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle)) {
@@ -517,7 +515,6 @@ namespace Europlan.Common {
 			}
 			if (e.Button == MouseButtons.Middle) {
 				this.Cursor = this.tempCursor;
-				inMove = false;
 			} else if (this.productPlanner != null) {
 				if (this.productPlanner.CustomCursor != null) {
 					if (this.oldCursor == null) {

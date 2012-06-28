@@ -340,7 +340,11 @@ namespace Europlan.Common {
 			get { throw new NotSupportedException("The method or operation is not implemented."); }
 		}
 
-		public event ListChangedEventHandler ListChanged;
+        private event ListChangedEventHandler listChanged;
+        public event ListChangedEventHandler ListChanged {
+            add { this.listChanged += value; }
+            remove { this.listChanged -= value; }
+        }
 
 		public void RemoveIndex(PropertyDescriptor property) {
 		}

@@ -71,6 +71,12 @@ namespace AP
             }
             return result;
         }
+        public override bool Equals(object obj) {
+            return (obj is Complex) && ((Complex)obj).x == this.x && ((Complex)obj).y == this.y;
+        }
+        public override int GetHashCode() {
+            return (x.ToString() + ";" + y.ToString()).GetHashCode();
+        }
     }    
     
 	/********************************************************************

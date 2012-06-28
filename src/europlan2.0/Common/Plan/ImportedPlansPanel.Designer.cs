@@ -162,7 +162,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnImport;
 		private System.Windows.Forms.Button btnDelete;
 		private System.Windows.Forms.DataGridView dgvPlans;
-		private System.Windows.Forms.DataGridViewTextBoxColumn fileNameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource planSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn RelativeFileName;

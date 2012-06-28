@@ -179,7 +179,6 @@ namespace Europlan.Common {
 
 		private System.Windows.Forms.DataGridView gridFloors;
 		private System.Windows.Forms.BindingSource projectFloorsSource;
-		private System.Windows.Forms.DataGridViewImageColumn associatedIconDataGridViewImageColumn;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnWhatIsNext;
 		private System.Windows.Forms.HelpProvider helpProvider;

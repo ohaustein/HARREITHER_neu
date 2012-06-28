@@ -145,10 +145,22 @@ namespace Europlan.Common {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(ImportedPlansPanel));
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
-		public event ProjectSaveRequestHandler ProjectSaveRequest;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
+        public event ProjectSaveRequestHandler ProjectSaveRequest;
 
 #if PDF
 		private System.ComponentModel.BackgroundWorker backgroundSaver;
@@ -317,8 +329,8 @@ namespace Europlan.Common {
 							}
 							if (import) {
 								plans.Add(plan);
-								if (ProjectChanged != null) {
-									ProjectChanged(this);
+								if (projectChanged != null) {
+									projectChanged(this);
 								}
 								UpdateControl(false);
 							}
@@ -449,8 +461,8 @@ namespace Europlan.Common {
 			plan.RelativeFileName = Path.Combine(args.SubDir, isPdf(args.Extension) ? Path.GetFileNameWithoutExtension(args.FileName) + ".png" : Path.GetFileName(args.FileName));
 
 			Project.Instance.ImportedPlans.Add(plan);
-			if (ProjectChanged != null) {
-				ProjectChanged(this);
+            if (this.projectChanged != null) {
+                this.projectChanged(this);
 			}
 			UpdateControl(false);
 
@@ -501,8 +513,8 @@ namespace Europlan.Common {
 		}
 
 		private void dgvPlans_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-			if (ProjectChanged != null) {
-				ProjectChanged(this);
+			if (projectChanged != null) {
+				projectChanged(this);
 			}
 		}
 
@@ -525,8 +537,8 @@ namespace Europlan.Common {
 					ImagePlanOptionsForm ipoForm = new ImagePlanOptionsForm(plan as ImagePlan);
 					result = ipoForm.ShowDialog();
 					if (ipoForm.UnsavedChanges) {
-						if (ProjectChanged != null) {
-							ProjectChanged(this);
+                        if (this.projectChanged != null) {
+                            this.projectChanged(this);
 						}
 					}
 					ipoForm.Dispose();
@@ -536,8 +548,8 @@ namespace Europlan.Common {
 						cpoForm = new CadPlanOptionsForm(plan as CadPlan);
 						result = cpoForm.ShowDialog();
 						if (cpoForm.UnsavedChanges) {
-							if (ProjectChanged != null) {
-								ProjectChanged(this);
+                            if (this.projectChanged != null) {
+                                this.projectChanged(this);
 							}
 						}
 					} catch (Exception) {
@@ -562,8 +574,8 @@ namespace Europlan.Common {
 					File.Delete(fileName);
 				}
 				Project.Instance.ImportedPlans.Remove(plan);
-				if (ProjectChanged != null) {
-					ProjectChanged(this);
+                if (this.projectChanged != null) {
+                    this.projectChanged(this);
 				}
 				UpdateControl(false);
 			}

@@ -749,7 +749,7 @@ namespace Europlan.Common {
 			try {
 				List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polygon, walls);
 				return result != null && result.Count > 0;
-			} catch (Exception e) {
+			} catch (Exception) {
 				return true;
 			}
 			/*bool outside = false;

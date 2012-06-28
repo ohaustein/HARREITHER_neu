@@ -221,20 +221,16 @@ namespace Europlan.Common {
 				switch (anschlussHollaender) {
 					case AnschlussHollaenderEnum.Kein:
 						return 0.349 + ((maxCircuits - 2) * 0.055);
-						break;
 					case AnschlussHollaenderEnum.hollaender32:
 						return 0.349 + ((maxCircuits - 2) * 0.055);
-						break;
 					case AnschlussHollaenderEnum.hollaenderIG:
 						if (flanschKugelHaehne) {
 							return 0.372 + ((maxCircuits - 2) * 0.055);
 						} else {
 							return 0.326 + ((maxCircuits - 2) * 0.055);
 						}
-						break;
 					default:
 						return 0;
-						break;
 				}
 			}
 		}

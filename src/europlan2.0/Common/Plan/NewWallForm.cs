@@ -103,11 +103,11 @@ namespace Europlan.Common {
 			this.Size = settings.GetSize("Size", this.Size);
 		}
 
-		public double Width {
+		public new double Width {
 			get { return (double)this.numWidth.Value; }
 		}
 
-		public double Height {
+		public new double Height {
 			get { return (double)this.numHeight.Value; }
 		}
 

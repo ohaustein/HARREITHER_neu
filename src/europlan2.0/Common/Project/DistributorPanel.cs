@@ -9,9 +9,21 @@ using System.Windows.Forms;
 namespace Europlan.Common {
 	public partial class DistributorPanel : UserControl, IEditorUserControl {
 
-		public event ProjectStructureChangedHandler ProjectStructureChanged;
-		public event ProjectChangedHandler ProjectChanged;
-		public event TreeSelectionRequestedHandler TreeSelectionRequested;
+        private event ProjectStructureChangedHandler projectStructureChanged;
+        public event ProjectStructureChangedHandler ProjectStructureChanged {
+            add { this.projectStructureChanged += value; }
+            remove { this.projectStructureChanged -= value; }
+        }
+        private event ProjectChangedHandler projectChanged;
+        public event ProjectChangedHandler ProjectChanged {
+            add { this.projectChanged += value; }
+            remove { this.projectChanged -= value; }
+        }
+        private event TreeSelectionRequestedHandler treeSelectionRequested;
+        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+            add { this.treeSelectionRequested += value; }
+            remove { this.treeSelectionRequested -= value; }
+        }
 
 		private Distributor distributor;
 
@@ -115,15 +127,15 @@ namespace Europlan.Common {
 
 		private void txtName_TextChanged(object sender, EventArgs e) {
 			distributor.Name = this.txtName.Text;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void cmbCircuit_SelectedIndexChanged(object sender, EventArgs e) {
 			distributor.RegulatorCircuit = this.cmbCircuit.SelectedItem as RegulatorCircuit;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
@@ -132,8 +144,8 @@ namespace Europlan.Common {
 			numAdditionalCircuits.Maximum = distributor.MaxCircuits;
 			UpdateCircuitsLabel();
 			this.UpdateErrorMessages();
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
@@ -144,15 +156,15 @@ namespace Europlan.Common {
 			UpdateCircuitsLabel();
 			this.UpdateErrorMessages();
 			this.UpdateCircuitsLabel();
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void numZusStellantriebe_ValueChanged(object sender, EventArgs e) {
 			distributor.ZusaetzlicheStellantriebe = (int)this.numZusStellantriebe.Value;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
@@ -172,8 +184,8 @@ namespace Europlan.Common {
 						DistributorPositionerForm form = new DistributorPositionerForm(this.distributor, floor);
 						form.ShowDialog();
 						if (form.UnsavedChanges) {
-							if (ProjectChanged != null) {
-								ProjectChanged(null);
+							if (this.projectChanged != null) {
+								this.projectChanged(null);
 							}
 						}
 						form.Dispose();
@@ -206,43 +218,36 @@ namespace Europlan.Common {
 					this.distributor.AdditionalFloorIds.Remove(floor.Id);
 				}
 			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void chkEinbauschrank_CheckedChanged(object sender, EventArgs e) {
 			distributor.EinbauSchrank = this.chkEinbauschrank.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
-		//private void cmbDistributorType_SelectedIndexChanged(object sender, EventArgs e) {
-		//    distributor.DistributorType = (Distributor.DistributorTypeEnum)this.cmbDistributorType.SelectedItem;
-		//    if (ProjectChanged != null) {
-		//        ProjectChanged(null);
-		//    }
-		//}
-
 		private void cmbAnschlussHollaender_SelectedIndexChanged(object sender, EventArgs e) {
 			distributor.AnschlussHollaender = (Distributor.AnschlussHollaenderEnum)this.cmbAnschlussHollaender.SelectedItem;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void chkFlansch_CheckedChanged(object sender, EventArgs e) {
 			distributor.FlanschKugelHaehne = this.chkFlansch.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
 		private void chkAnschluss_CheckedChanged(object sender, EventArgs e) {
 			distributor.LangeAnschlussboegen = this.chkAnschluss.Checked;
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
@@ -259,8 +264,8 @@ namespace Europlan.Common {
 					distributor.UseForCeiling = e.NewValue == CheckState.Checked;
 					break;
 			}
-			if (ProjectChanged != null) {
-				ProjectChanged(null);
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
 			}
 		}
 
@@ -269,8 +274,8 @@ namespace Europlan.Common {
 			form.DrawOtherDistributorsInPlan = true;
 			form.ShowDialog();
 			if (form.UnsavedChanges) {
-				if (ProjectChanged != null) {
-					ProjectChanged(null);
+				if (this.projectChanged != null) {
+					this.projectChanged(null);
 				}
 			}
 			form.Dispose();

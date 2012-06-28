@@ -137,10 +137,6 @@ class spline3
         double[] b = new double[0];
         double[] d = new double[0];
         int i = 0;
-        int tblsize = 0;
-        double delta = 0;
-        double delta2 = 0;
-        double delta3 = 0;
 
         x = (double[])x.Clone();
         y = (double[])y.Clone();
@@ -669,9 +665,6 @@ class spline3
     {
         int i = 0;
         int n = 0;
-        double v = 0;
-        double dv = 0;
-        double d2v = 0;
         double[] x = new double[0];
         double[] y = new double[0];
         double[] d = new double[0];
@@ -772,7 +765,6 @@ class spline3
         ref double[,] ctbl)
     {
         bool c = new bool();
-        int e = 0;
         int g = 0;
         double tmp = 0;
         int nxm1 = 0;
@@ -784,7 +776,6 @@ class spline3
         double dxjp1 = 0;
         double dyjp1 = 0;
         double dxp = 0;
-        double dyp = 0;
         double yppa = 0;
         double yppb = 0;
         double pj = 0;

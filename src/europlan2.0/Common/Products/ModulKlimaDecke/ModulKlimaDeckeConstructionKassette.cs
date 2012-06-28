@@ -520,16 +520,13 @@ namespace Europlan.Common {
 				switch (this.Raster) {
 					case RasterMass.Raster_625:
 						return 0.025; // meter
-						break;
 
 					case RasterMass.Raster_600:
 						return 0; // meter
-						break;
 
 					case RasterMass.Raster_1050_450:
 					default:
 						return 0.05; // meter
-						break;
 				}
 			}
 		}
@@ -541,12 +538,10 @@ namespace Europlan.Common {
 					case RasterMass.Raster_625:
 					case RasterMass.Raster_600:
 						return 0.6; // meter
-						break;
 
 					case RasterMass.Raster_1050_450:
 					default:
 						return 0.4; // meter
-						break;
 				}
 			}
 		}
@@ -557,16 +552,13 @@ namespace Europlan.Common {
 				switch (this.Raster) {
 					case RasterMass.Raster_625:
 						return 0.025; // meter
-						break;
 
 					case RasterMass.Raster_600:
 						return 0;
-						break;
 
 					case RasterMass.Raster_1050_450:
 					default:
 						return 0.05; // meter
-						break;
 				}
 			}
 		}
@@ -577,16 +569,13 @@ namespace Europlan.Common {
 				switch (this.Raster) {
 					case RasterMass.Raster_625:
 						return 0.6; // meter
-						break;
 
 					case RasterMass.Raster_600:
 						return 0.6; // meter
-						break;
 
 					case RasterMass.Raster_1050_450:
 					default:
 						return 1.0; // meter
-						break;
 				}
 			}
 		}

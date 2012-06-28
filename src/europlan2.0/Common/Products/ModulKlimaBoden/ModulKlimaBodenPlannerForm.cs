@@ -827,9 +827,8 @@ namespace Europlan.Common.Products {
 
 		public bool Changed {
 			get {
-				// TODO remove this when the cahnged flag is properly implemented
-				return true;
-				return this.changed; 
+				return this.changed || true;
+#warning TODO properly implement changed flag
 			}
 		}
 
@@ -877,10 +876,6 @@ namespace Europlan.Common.Products {
 			List<KlimaFlaechenModul> modulesToInvert = new List<KlimaFlaechenModul>();
 			List<KlimaFlaechenModulVerbindung> linksToInvert = new List<KlimaFlaechenModulVerbindung>();
 
-			bool invertUnselected = false;
-			//bool connectedToAnbindung = false;
-			//List<KlimaFlaechenModul> ruecklaufConnected = new List<KlimaFlaechenModul>();
-			//List<KlimaFlaechenModul> vorlaufConnected = new List<KlimaFlaechenModul>();
 			Dictionary<KlimaFlaechenModulVerbindung, ModulBodenCircuit> anbindungen = new Dictionary<KlimaFlaechenModulVerbindung, ModulBodenCircuit>();
 
 			foreach (KlimaFlaechenModul m1 in selectedModules) {
@@ -924,9 +919,6 @@ namespace Europlan.Common.Products {
 						}
 					}
 					if (!modulesToInvert.Contains(m2)) {
-						if (!selectedModules.Contains(m2)) {
-							invertUnselected = true;
-						}
 						modulesToInvert.Add(m2);
 					}
 				}
