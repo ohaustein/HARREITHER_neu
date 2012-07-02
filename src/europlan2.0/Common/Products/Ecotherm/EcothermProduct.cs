@@ -1605,7 +1605,39 @@ namespace Europlan.Common {
 				return true;
 			}
 
-			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+            // calculate unheated area for graphical mode
+            if (this.GraphicalMode.HasValue && this.GraphicalMode.Value) {
+                double unheatedSum = 0;
+                if (this.GraphicalArea != null && this.GraphicalArea.Count > 0 && this.AssociatedRoom != null && this.AssociatedRoom.RoomUnusedAreaCoordinates != null && this.AssociatedRoom.RoomUnusedAreaCoordinates.Count > 0 && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
+                    List<Polygon2D> product = new List<Polygon2D>();
+                    Polygon2D tmp = new Polygon2D(this.GraphicalArea);
+                    if (tmp.IsClockwise()) {
+                        tmp.Reverse();
+                    }
+                    product.Add(tmp);
+                    foreach (List<Point2D> p in this.AssociatedRoom.RoomUnusedAreaCoordinates) {
+                        Polygon2D unheated = new Polygon2D(p);
+                        if (unheated.IsClockwise()) {
+                            unheated.Reverse();
+                        }
+                        List<Polygon2D> unheatedList = new List<Polygon2D>();
+                        unheatedList.Add(unheated);
+                        IList<Polygon2D> unheatedInProduct = null;
+                        try {
+                            unheatedInProduct = Polygon2D.GetIntersection(unheatedList, product);
+                            foreach (Polygon2D tmp2 in unheatedInProduct) {
+                                unheatedSum += Math.Abs(tmp2.GetArea());
+                            }
+                        } catch {
+                            // nothing to do
+                        }
+                    }
+                    unheatedSum = Math.Round(unheatedSum / this.AssociatedRoom.AssociatedPlan.Measure.Value / this.AssociatedRoom.AssociatedPlan.Measure.Value, 2);
+                }
+                this.PlannedAreaUnheated = (float)unheatedSum;
+            }
+
+            if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 				// TODO connect all circuits
 
 				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;

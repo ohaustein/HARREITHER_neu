@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
+	<Properties ApplicationID="04e4c63a-a752-4fb3-a8ca-b7be57aed70b" ApplicationName="Europlan 2.0 mit grafischer Auslegung" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0BOqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;9/YrkoKXdOKs5jTOGEINH0KF1g85Obkd2hFGpAKLLZyNW+UUbhtTNR95zTYx2t7lOzAVVAuwXG9R6xg0HUzG6w==&lt;/P&gt;&lt;Q&gt;72A8TLACkRiYFAEzV76J3F/HlPIP0lTKs3QQhyQizlVJoFl9rnJROs/kgiGBN+mhJyyik5/IdslGuxxxoYNShQ==&lt;/Q&gt;&lt;DP&gt;y4zqsefAOzSFKKk6chFuwjWStmli2a7MAaJi8eogpH26UTCZd9W4lYhULZCKlpiZZuAO8iJyUT8U6T/CMDdBpw==&lt;/DP&gt;&lt;DQ&gt;O1e5Oy27RSs6sGLnzo3e8XIRMVydDYCVy80vN8F+m3ZLTWRCIxgWCSV2ucgCl9DkcajAGSbYdJJLZaGUjfzXXQ==&lt;/DQ&gt;&lt;InverseQ&gt;QmXlNg91w0h5dZ7ZihReS4gvZx7Mo1C0iN53VK5JSmhpfadeltCZbUk0ruVFgOFxIC/XOj+/p8BV3E/hH4PbaQ==&lt;/InverseQ&gt;&lt;D&gt;1M/QzKYGph6CrG3HgszFxxpFjI4pS2AW0s5r3RRZZRreyv6RiM26y2JGfXzz9owI/NpZZBYCoJcVOq56xrTY+d2n5z5pF+RHXmIuSMnXhrRTX5jDaZrn2ZnQWC7EPaOxW7hMkzxlB+E5PQlX2HFxUG836XuAQJgVXNy6xGoMl2k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\beta\de" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/de" BuildLocation="updates-ga-beta-de Updates" PublishVersion="3.0.15.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\Share\Software\europlan\versions_ga\v3.0.15.0\europlan30-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>Aktualisierung der Preisliste auf den Stand Februar 2011</CurrentSummary>
+	<CurrentCustomData />
+	<NoUpdateDisplayText />
+	<AssemblyReferences />
+	<CurrentTargets>
+		<Target number="0.0.0.0" includeAllGreater="false" />
+	</CurrentTargets>
+	<Director>
+		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
+			<Application AppId="04e4c63a-a752-4fb3-a8ca-b7be57aed70b" NoUpdateDisplayText="">
+				<Versions>
+					<Version number="3.0.15.0" postdate="2012-01-11T16:17:59.1318894Z" signature="nJ5fmwe9bz0UDwU0Xpc0j3yXpVhPR8LRLe2tnYxYzfMYnBKYxbk7+UzN8ekhNFWNVKnqoX6LYAWze3g7pfAJwzzLBi7cu6EXXCe9hwGUxMCETbSEo/COZP3Y46o90aRi3N9APA6CxA6Flok1Qq21XZ8I1OG11Sq7zGwUjemN0+4=" fileSize="48669231">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Aktualisierung der Preisliste auf den Stand Februar 2011</Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.14.1" postdate="2011-12-12T23:26:39.3170186Z" signature="5JNae8bLjQx8WYDLZB69QPbQkZK+AjSEzLvODeZgLWQxykMwy+H9yJ57B9qnmT2BtGOKNGuzYrmCNAn7bgOCtXgLWL5rPrjRT558ANCUk0sHO+YqoubFN1uEa2XhCtmjPA9VwhnB6tFZ/QmgrWmhlctahdWK9pUNDfwAJqzOGvw=" fileSize="48661848">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.14.0" postdate="2011-12-12T14:37:34.8909306Z" signature="KUOCXPRaPDOABAjg+cqZNh6VOtkWht69Q+GADAQKntQuSRP1lQz1pGFRN/4Jz4ZLhZGu/6AorxbnT9XSS7M+r7lru6GwxxjidsZ0PV46blicrOHBXtx8QVL/O9Ka0+GtZShx8yuLi3dhEakJw2OnCE2WtoqjJMJN6wpfEY3PSr4=" fileSize="48662086">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.13.0" postdate="2011-10-21T11:51:00.3108875Z" signature="p2GNXz3HxupqJyYMk0SYUDjoP+UctZaQTkeWWsQNLpvtgJCPJLJMwTBBGdakOPvz8Tla5z4KJYrVgrf7SY/kLu4YcSsMaXbTnIQLmPh+6+gueZGJAd2NM6+IhwYYCZH9qwvzc2vU7Wes6e18Zu+JP4Ulut8TW45ruxjBmZVEjMQ=" fileSize="48107577">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.12.0" postdate="2011-09-02T18:01:50.2863457Z" signature="nnTbLzO/aDlG3NQRozzcHot7OJdjyq8ogtKDl7tnxd/M5WWdITIIIM8NREHr70JL2FbNPM9X3eErtHOtuYLZFGSr8L8UKRWRLYX1TsJdCZA5jEqaQaZLtSV0BMDWax4XgM+Wwsy/7K8Au8+RcQfvlffnuRNelp8u+iQUinKLLLU=" fileSize="19578790">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.11.1" postdate="2011-07-28T18:42:59.3775498Z" signature="y27RdzsQ66XzBz3iABi5TJQr751ePKu7KXd7gVzaSC2czsMn4tYTNxh9vq4e7mQD46cEyTShKun+ZLXEP1yFCB8eRz2hZX2V955M+smPeFLzRVIAA7WbPM8IuSASa/lKokLSVF8oriO5YHDJOIr1Wt8IM0oJDn6oiPaIViYe/tY=" fileSize="19498980">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.10.2" postdate="2011-07-20T19:27:48.654658Z" signature="apSk0A3VqrwNzhiM3kRPt33bFSDkUeW3ajXDJ4r6qzBwS0tdSXP/04D2T0aL7csYAnJkKu1KL5IjgSd3sEXu/S9otG38u5yYB3DaPPh28aZt3eMQWsFpVUr3JjbpOA0UezLAHwrj0w4Q7KFhfwAK3ROkYt+pti5u/SKo7MaVGNk=" fileSize="19454209">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.9.1" postdate="2011-06-08T15:02:17.2506398Z" signature="SI1mZePL6fb1cRVRxC/JVZfsZDcp+VVzX8uwtFgpckGu3cmHbN9xsEzXYdUv9ORSADzXCo14CgoG2Kf6bf0HIZjz71GvoqLYONQNN4Y297uldo2U1pZ0XzN7OSiIxx3llfFK1dRf0X+4EW1vcUGwbyFAUZklc7LTv+bXAdwGfZc=" fileSize="19427684">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.8.6" postdate="2011-05-19T18:41:04.3718516Z" signature="z2emWB/uYHJYmfVywQYBxFMv+kV0ZHh/CV+JXN5kHaOVW6OTC4T7/u9OdPI9OsCHovB+u3D05zlqF0tQqSPXiR0M5IRi6J9bch4wx8NiekrT7lQ7mguANAK1z3X8FKbQoCkv0YPFf31T1bCN0D0xiv+gk5lfJQbg3P8KQxwmRx0=" fileSize="19413088">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.8.5" postdate="2011-05-19T18:33:43.4438516Z" signature="1oDc32NxriET8iZBnQ3Vvveo/UWeGJGpTXX1dzPi30hijyzhLj888ryOfF35yPr6w8I60jJnJkpRwC61tyxF3Ut5/B1rQxtbpogNxjPisj1TkixcaWxoQ5cyThpaY7+NMYJ/l3rZ3NHS90URN+c+UIwA0lWKqSJXacKaJ3oeFYs=" fileSize="19412797">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.8.4" postdate="2011-05-19T17:56:34.1356647Z" signature="nkU6Ss6woALabUA/Vd+7TqqwwOU/pZjvs4+mtbdUEwlQIinKuYYg0Z5dhERf3wBJQTr6jfw/DHVvtB9BgoMIi3j7GXiVBAZhaeLHE6w+/cVnChFHP56bEcYFJrxnFwkolRsK+4zjpxivBcWWGh6p385cseFisVtvMUGTUtVfhiU=" fileSize="19413402">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.7.0" postdate="2011-05-06T18:21:03.8224253Z" signature="B6LwsDNMSMNdUD9IUijG6YBcZKj+vohIfO6gKfksFyTYYB4HQBxNPybcK1oNMrWNwexJU1C0hXMZonp2ASNVe9mHXJPfIrafqHy37hJuN4ptjLTV7V3gNiUYv2ZXn9SgxH90FonqdQd8A5W+Q/Em5FeyXDk3rRlqQDURqeQyYMI=" fileSize="19363902">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.6.0" postdate="2011-04-04T18:02:47.488209Z" signature="E87tz0UyTBH2TZVppOSGz/n88sHorXWvdrisi4jXZoLK9KB4hR8FQ1pCIexqUIi4lAWYMnu9oPqMMS9COqbAnWJk05ZHoYdShRR5vHxKRl4qzXSXgP8nlfxYWXHbYol5D6Wib66rbRHRGA7E7A38RnL9RsooV/sLiHrLNmGhJLc=" fileSize="19290501">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.5.0" postdate="2011-02-18T18:38:26.1372152Z" signature="54TPxN8U5MazuX04Fab5/CEJOIIaTWNU0oLEV8UMefEN3QZdpe4dC4po28EX5eoZO04rKABhkT+V6HNPROP/GV6DV44VzOzGKfoykODltkvz1NDlxOYF7Faz7AshPbkWhk/j+tclb3fSnn6AWOKwz4rPKShSr0D3yfIZqb/16MI=" fileSize="19239267">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.4.0" postdate="2011-01-12T20:40:14.8227469Z" signature="vuxJ1W/3NfxHurmUj0gW5ZcUpQEkc1WLYbiz47vOCQCmPws0y90CjIXwuf2EVsqhGO8l51P70suk1CEalm0mvAltZwGz64kDW5GbWFfUMdjEozC/bQBBLWNf9dFqP/HnlGCmnwUE4XRnVx1iC3OCPOuQsLHbf2HxkEST2LWV72k=" fileSize="19165591">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.3.0" postdate="2010-11-19T16:56:06.5632337Z" signature="vZf4O9lfbWVi7MSDGvyMqsfHStIkLNK7seWL8pWwz2OByKTAwcM7axa2N7HkMIQiW+xkH6fYzr/UOw2hP9m5unij5+oG9o6E2doJqpqOnCsUfTMuEzcW9G5P+iJY1T+3755FJrdPvp1fBtBUPOW//KNtSH3vclOx/CtFsNX+KSc=" fileSize="19146999">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="3.0.2.0" postdate="2010-11-12T16:36:25.9554464Z" signature="DSG5FuUrnNLpHoV9dKCszorOilEl2W1qIn1sdqcLIWT71JttKkMaIM4PDV0qGs5uXDtUDfstPXptr2sX3K8EWt62hngGTDEgtf/TcQq6KdeM5sUDTwjb9cBu7RqG0LAwre3tPozVcGbIuQJ33SVYITW52zbysYZUNzuN+dXM5Ww=" fileSize="19131158">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+					<Version number="2.0.30.0" postdate="2010-07-06T12:23:45.6988679Z" signature="uL1J7OJqPYXx216qSrVpdWwK6l+8HDk4nufC4l8TtnKUIbU9KmY2t7vREuN8UO/jIuA2z0RDHDHNvhPD0MdkME5gLHFmNUDA7FirJ3A/kATYakB+DDrm+dqPLsIf8NmXLwmfUx9C9MaZuZvG6dByUM+gAX76DS4JR/ZRnUkjisw=" fileSize="17243177">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary></Summary>
+						<CustomData></CustomData>
+					</Version>
+				</Versions>
+			</Application>
+		</AppLifeUpdate>
+	</Director>
+	<Actions />
+	<ExtraFiles />
+	<ExtraLanguages useSingleLanguage="true">
+		<Culture name="de" />
+	</ExtraLanguages>
+	<TranslatedSummaryTexts />
+	<TranslatedUpdateTitleTexts />
+	<TranslatedNoUpdateDisplayTexts />
+	<SkippedBuilderIndexes />
+</UpdateProject>

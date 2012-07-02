@@ -18,7 +18,8 @@ namespace Europlan.Common {
 			this.SetLanguage();
 			this.picturePanel.Plan = plan;
 			this.picturePanel.ProductPlanner = this.pdfRegionPicker;
-		}
+            this.lblActualSize.Text = this.PixelWidth + " x " + this.PixelHeight + " px";
+        }
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.PdfRegionPickerForm_BereichAuswaehlen;
@@ -145,5 +146,13 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+        private void pdfRegionPicker_RegionPicked(object sender, EventArgs e) {
+            this.lblActualSize.Text = this.PixelWidth + " x " + this.PixelHeight + " px";
+        }
+
+        private void sliderSize_Scroll(object sender, EventArgs e) {
+            this.lblActualSize.Text = this.PixelWidth + " x " + this.PixelHeight + " px";
+        }
 	}
 }

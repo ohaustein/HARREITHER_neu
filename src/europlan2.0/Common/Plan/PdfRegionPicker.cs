@@ -27,6 +27,13 @@ namespace Europlan.Common {
 			InitializeComponent();
 		}
 
+        private event EventHandler regionPicked;
+
+        public event EventHandler RegionPicked {
+            add { regionPicked += value; }
+            remove { regionPicked -= value; }
+        }
+
 		private PdfRegionPickerMode mode = PdfRegionPickerMode.DPM_NONE;
 		private bool unsavedChanges = false;
 
@@ -143,10 +150,17 @@ namespace Europlan.Common {
 				this.endPoint = this.oldEndPoint;
 				redraw = true;
 			}
+            this.OnRegionPicked();
 			this.curPoint = null;
 			return redraw;
 		}
 		#endregion
+
+        private void OnRegionPicked() {
+            if (this.regionPicked != null) {
+                this.regionPicked(this, EventArgs.Empty);
+            }
+        }
 
 		public bool UnsavedChanges {
 			get { return this.unsavedChanges; }

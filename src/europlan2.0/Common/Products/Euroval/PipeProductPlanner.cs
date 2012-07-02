@@ -722,32 +722,6 @@ namespace Europlan.Common {
                                 } catch {
                                     clippedPolygons = new List<Polygon2D>();
                                 }
-								if (clippedPolygons.Count > 0) {
-									this.product.PlannedAreaGraphical.AddRange(clippedPolygons[0]);
-									this.product.PlannedFloorArea = (float)Math.Round(Math.Abs(clippedPolygons[0].GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
-									list1.Clear();
-									list1.Add(clippedPolygons[0]);
-									list2.Clear();
-									if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
-										foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
-											Polygon2D unusedAreaPolygon = new Polygon2D(unusedArea);
-											if (unusedAreaPolygon.IsClockwise()) {
-												unusedAreaPolygon.Reverse();
-											}
-											list2.Add(unusedAreaPolygon);
-										}
-                                        try {
-                                            clippedPolygons = Polygon2D.GetIntersection(list1, list2);
-                                        } catch {
-                                            clippedPolygons = new List<Polygon2D>();
-                                        }
-										area = 0;
-										foreach (Polygon2D clippedPolygon in clippedPolygons) {
-											area += Math.Round(Math.Abs(clippedPolygon.GetArea()) / Math.Pow(this.ConnectedPlanPanel.Plan.Measure.Value, 2.0), 2);
-										}
-										this.product.PlannedAreaUnheated = (float)area;
-									}
-								}								
 								unsavedChanges = true;
 								this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
 								this.Mode = PipeProductMode.EVM_NONE;

@@ -67,6 +67,7 @@ namespace Europlan.Application {
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
             cbOrthoRasterung.Text = EuroplanRes.OptionsForm_OrthoRasterung;
             cbAutoSave.Text = Properties.Resources.OptionsForm_AutomatischSichern;
+            this.cbAutoSave.Text = EuroplanRes.OptionsForm_AutomatischSichern;
 
 			this.lblPlanUnit.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
 			this.cmbPlanUnit.Items.Clear();

@@ -46,7 +46,7 @@ namespace Europlan.Application {
 						defaultLanguage = "en";
 						Program.updateGuid = new System.Guid("77e24619-79f7-43da-bcb3-df6e1bb86c8a");
 						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/en";
-						Program.updateBetaLocation = Program.updateLocation;
+                        Program.updateBetaLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en";
 						Program.updatePublicKey = "<RSAKeyValue><Modulus>vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6" +
 							"diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu" +
 							"+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
@@ -57,7 +57,7 @@ namespace Europlan.Application {
 			if (Program.updateLocation == null) {
 				Program.updateGuid = new System.Guid("04e4c63a-a752-4fb3-a8ca-b7be57aed70b");
 				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/de";
-				Program.updateBetaLocation = Program.updateLocation;
+                Program.updateBetaLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/de";
 				Program.updatePublicKey = "<RSAKeyValue><Modulus>59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0B" +
 					"OqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt" +
 					"2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +

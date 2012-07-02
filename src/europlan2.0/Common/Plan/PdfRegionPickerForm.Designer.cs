@@ -38,6 +38,7 @@ namespace Europlan.Common {
             this.lblSmall = new System.Windows.Forms.Label();
             this.lblMedium = new System.Windows.Forms.Label();
             this.lblLarge = new System.Windows.Forms.Label();
+            this.lblActualSize = new System.Windows.Forms.Label();
             this.picturePanel = new Europlan.Common.ImagePanel();
             this.pdfRegionPicker = new Europlan.Common.PdfRegionPicker(this.components);
             this.toolStrip.SuspendLayout();
@@ -138,6 +139,7 @@ namespace Europlan.Common {
             this.sliderSize.Size = new System.Drawing.Size(197, 45);
             this.sliderSize.TabIndex = 3;
             this.sliderSize.Value = 2;
+            this.sliderSize.Scroll += new System.EventHandler(this.sliderSize_Scroll);
             // 
             // lblSize
             // 
@@ -182,6 +184,15 @@ namespace Europlan.Common {
             this.lblLarge.Text = "groﬂ";
             this.lblLarge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblActualSize
+            // 
+            this.lblActualSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblActualSize.AutoSize = true;
+            this.lblActualSize.Location = new System.Drawing.Point(276, 418);
+            this.lblActualSize.Name = "lblActualSize";
+            this.lblActualSize.Size = new System.Drawing.Size(0, 13);
+            this.lblActualSize.TabIndex = 8;
+            // 
             // picturePanel
             // 
             this.picturePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -207,12 +218,14 @@ namespace Europlan.Common {
             // pdfRegionPicker
             // 
             this.pdfRegionPicker.Mode = Europlan.Common.PdfRegionPicker.PdfRegionPickerMode.DPM_NONE;
+            this.pdfRegionPicker.RegionPicked += new System.EventHandler(this.pdfRegionPicker_RegionPicked);
             // 
             // PdfRegionPickerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 455);
+            this.Controls.Add(this.lblActualSize);
             this.Controls.Add(this.lblLarge);
             this.Controls.Add(this.lblMedium);
             this.Controls.Add(this.lblSmall);
@@ -253,6 +266,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label lblSmall;
 		private System.Windows.Forms.Label lblMedium;
 		private System.Windows.Forms.Label lblLarge;
+        private System.Windows.Forms.Label lblActualSize;
 
 
 	}
