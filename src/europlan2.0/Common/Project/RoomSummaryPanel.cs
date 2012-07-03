@@ -91,13 +91,6 @@ namespace Europlan.Common {
 				plannedProducts.Add(new PlannedProduct(this.room));
 				plannedProductWrapperBindingSource.DataSource = plannedProducts;
 				plannedProductWrapperBindingSource.ResetBindings(false);
-				//this.txtName.Text = room.Name
-				//this.txtArea.Value = (decimal)room.Area;
-				//this.txtTemperature.Text = room.RoomTemperature.ToString();
-				//this.txtHeat.Text = room.HeatLoad.ToString();
-				//this.txtNormHeat.Text = room.NormalizedHeatLoad.ToString();
-				//this.txtCool.Text = room.CoolLoad.ToString();
-				//this.txtNormCool.Text = room.NormalizedCoolLoad.ToString();
 
 				this.btnGeometry.Enabled = this.room.AssociatedFloor.AssociatedPlanId != null ? true : false;
 				this.chkCeilingGeometry.Visible = this.btnGeometry.Enabled && this.room.RoomCoordinates != null && this.room.RoomCoordinates.Count > 0;

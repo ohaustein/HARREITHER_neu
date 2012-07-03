@@ -615,10 +615,10 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadAnbindung {
 			get {
-				/*if (this.incompleteCalculation || this.requestedHeatLoad == 0) {
-					return 0;
-				}*/
-				double value = 0;
+                if (this.requestedHeatLoad == 0) {
+                    return 0;
+                }
+                double value = 0;
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
@@ -664,9 +664,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadAnbindung {
 			get {
-				/*if (this.incompleteCalculation || this.requestedCoolLoad == 0) {
-					return 0;
-				}*/
+                if (this.requestedCoolLoad == 0) {
+                    return 0;
+                }
 				double value = 0;
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
