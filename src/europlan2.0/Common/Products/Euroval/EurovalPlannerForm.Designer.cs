@@ -427,8 +427,6 @@ namespace Europlan.Common.Products {
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(846, 212);
             this.tabs.TabIndex = 1;
-            this.tabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Selecting);
-            this.tabs.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabs_Deselected);
             // 
             // pageAuslegung
             // 

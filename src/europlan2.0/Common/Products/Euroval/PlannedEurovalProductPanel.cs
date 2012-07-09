@@ -745,8 +745,8 @@ namespace Europlan.Common {
                             this.lblResidenceVa.Text = "--";
                             break;
 					}
-					this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
-					this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
+					this.lblResidenceAHeat.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
+					this.lblResidenceACool.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
 					this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 					this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
 					this.lblResidenceQHeat.Text = Math.Round(evProduct.PlannedHeatLoadResidence, 0).ToString();
@@ -764,8 +764,8 @@ namespace Europlan.Common {
 				}
 
 				// anbindung
-				this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
-				this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
+				this.lblConnectionAHeat.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
+				this.lblConnectionACool.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
 				this.lblConnectionQHeat.Text = Math.Round(evProduct.PlannedHeatLoadAnbindung, 0).ToString();
 				this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 
@@ -839,23 +839,6 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
 					this.extendedCorrectionsGrid.UpdateControl(true, true);
 				}
-				/*if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
-					if (evProduct.PlannedCorrections) {
-						this.rbExtendedCorrections.Checked = true;
-					} else {
-						this.rbStandardCorrections.Checked = true;
-					}
-				}*/
-
-				/*if ((skipFields & FieldEnum.CORRECTIONS_LIST) == FieldEnum.NONE) {
-					if (evProduct.PlannedCorrections) {
-						this.extendedCorrectionsBindingSource.DataSource = (this.product.Product as EurovalProduct).PlannedCorrectionList;
-					} else {
-						this.extendedCorrectionsBindingSource.DataSource = new List<ExtendedCorrections>();
-					}
-					this.extendedCorrectionsBindingSource.ResetBindings(false);
-					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
-				}*/
 
 				this.tabs.TabPages.Remove(pageCorrections);
 
@@ -878,9 +861,6 @@ namespace Europlan.Common {
 					this.numAreaUnheated.Enabled = true;
 					this.numRim.Enabled = true;
 					this.numCorners.Enabled = true;
-					//this.cmbLayDistance.Enabled = true;
-					//this.cmbRimType.Enabled = true;
-					//this.cmbCircuits.Enabled = true;
 					this.btnGraphical.Enabled = false;
 				}
 

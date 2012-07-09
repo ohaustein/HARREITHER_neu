@@ -1831,7 +1831,7 @@ namespace Europlan.Common {
 							wrapperOverview.RzWidth = ep.PlannedRimWidth;
 							wrapperOverview.RzArea = ep.PlannedAreaRim;
 							wrapperOverview.AzLayDistance = ep.PlannedLayDistance.ToString();
-							wrapperOverview.AzArea = ep.PlannedAreaResidence;
+							wrapperOverview.AzArea = ep.PlannedAreaResidenceHeated;
 							wrapperOverview.ConnectionArea = ep.PlannedRemoveArea;
 
 							double v, r;
@@ -1931,7 +1931,7 @@ namespace Europlan.Common {
 								wrapperHeat.RzWidth = ep.PlannedRimWidth;
 								wrapperHeat.RzArea = ep.PlannedAreaRim;
 								wrapperHeat.AzLayDistance = ep.PlannedLayDistance.ToString();
-								wrapperHeat.AzArea = ep.PlannedAreaResidence;
+								wrapperHeat.AzArea = ep.PlannedAreaResidenceHeated;
 								wrapperHeat.ConnectionArea = ep.PlannedRemoveArea;
 																
 								pp.Product.GetHeatFlow(out v, out r);
@@ -1982,7 +1982,7 @@ namespace Europlan.Common {
 								wrapperCool.RzWidth = ep.PlannedRimWidth;
 								wrapperCool.RzArea = ep.PlannedAreaRim;
 								wrapperCool.AzLayDistance = ep.PlannedLayDistance.ToString();
-								wrapperCool.AzArea = ep.PlannedAreaResidence;
+								wrapperCool.AzArea = ep.PlannedAreaResidenceHeated;
 								wrapperCool.ConnectionArea = ep.PlannedRemoveArea;
 
 								pp.Product.GetCoolFlow(out v, out r);
@@ -2166,7 +2166,7 @@ namespace Europlan.Common {
 							wrapperOverview.RzWidth = ep.PlannedRimWidth;
 							wrapperOverview.RzArea = ep.PlannedAreaRim;
 							wrapperOverview.AzLayDistance = ep.PlannedLayDistance.ToString();
-							wrapperOverview.AzArea = ep.PlannedAreaResidence;
+							wrapperOverview.AzArea = ep.PlannedAreaResidenceHeated;
 							wrapperOverview.ConnectionArea = ep.PlannedRemoveArea;
 
 							double v, r;
@@ -2266,7 +2266,7 @@ namespace Europlan.Common {
 								wrapperHeat.RzWidth = ep.PlannedRimWidth;
 								wrapperHeat.RzArea = ep.PlannedAreaRim;
 								wrapperHeat.AzLayDistance = ep.PlannedLayDistance.ToString();
-								wrapperHeat.AzArea = ep.PlannedAreaResidence;
+								wrapperHeat.AzArea = ep.PlannedAreaResidenceHeated;
 								wrapperHeat.ConnectionArea = ep.PlannedRemoveArea;
 
 								pp.Product.GetHeatFlow(out v, out r);
@@ -2317,7 +2317,7 @@ namespace Europlan.Common {
 								wrapperCool.RzWidth = ep.PlannedRimWidth;
 								wrapperCool.RzArea = ep.PlannedAreaRim;
 								wrapperCool.AzLayDistance = ep.PlannedLayDistance.ToString();
-								wrapperCool.AzArea = ep.PlannedAreaResidence;
+								wrapperCool.AzArea = ep.PlannedAreaResidenceHeated;
 								wrapperCool.ConnectionArea = ep.PlannedRemoveArea;
 
 								pp.Product.GetCoolFlow(out v, out r);
@@ -3607,9 +3607,9 @@ namespace Europlan.Common {
 							p = pp.Product as EurovalProduct;
 							if (p.PlannedLayDistance.HasValue) {
 								if (aZAreaPerLayDistance.ContainsKey(p.PlannedLayDistance.Value)) {
-									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidence;
+									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidenceHeated;
 								} else {
-									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidence);
+									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidenceHeated);
 								}
 							}
 							if (p.PlannedRimLayDistance.HasValue) {
@@ -3666,9 +3666,9 @@ namespace Europlan.Common {
 							p = pp.Product as EcothermProduct;
 							if (p.PlannedLayDistance.HasValue) {
 								if (aZAreaPerLayDistance.ContainsKey(p.PlannedLayDistance.Value)) {
-									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidence;
+									aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidenceHeated;
 								} else {
-									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidence);
+									aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidenceHeated);
 								}
 							}
 							if (p.PlannedRimLayDistance.HasValue) {

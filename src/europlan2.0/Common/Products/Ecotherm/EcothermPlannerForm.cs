@@ -103,7 +103,6 @@ namespace Europlan.Common.Products {
 				this.cmbCircuits.Items.Add(i.ToString());
 			}
 
-			this.Text = Europlan.Common.EuroplanRes.EurovalPlannerForm_Titel;
 			this.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Titel;
 			this.btnZoomIn.Text = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
 			this.btnZoomIn.ToolTipText = Europlan.Common.EuroplanRes.Plan_Heranzoomen;
@@ -558,10 +557,10 @@ namespace Europlan.Common.Products {
 			this.lblQSollCool.Text = Math.Round(this.plannedProduct.RequestedCoolLoad, 2).ToString();
 			this.lblQkSollHeat.Text = Math.Round(this.plannedProduct.RequestedHeatLoadPerSqM, 2).ToString();
 			this.lblQkSollCool.Text = this.plannedProduct.PlannedArea.HasValue ? Math.Round(this.plannedProduct.RequestedCoolLoad / this.plannedProduct.PlannedArea.Value, 2).ToString() : "0";
-			this.lblQfbhHeat.Text = Math.Round(evProduct.PlannedHeatLoad, 2).ToString();
-			this.lblQfbhCool.Text = Math.Round(evProduct.PlannedCoolLoad, 2).ToString();
-			double qRestHeat = evProduct.PlannedHeatLoad - this.plannedProduct.RequestedHeatLoad;
-			double qRestCool = evProduct.PlannedCoolLoad - this.plannedProduct.RequestedCoolLoad;
+			this.lblQfbhHeat.Text = Math.Round(this.plannedProduct.PlannedHeatLoad, 2).ToString();
+			this.lblQfbhCool.Text = Math.Round(this.plannedProduct.PlannedCoolLoad, 2).ToString();
+			double qRestHeat = this.plannedProduct.PlannedHeatLoad - this.plannedProduct.RequestedHeatLoad;
+			double qRestCool = this.plannedProduct.PlannedCoolLoad - this.plannedProduct.RequestedCoolLoad;
 			this.lblQRestHeat.Text = Math.Round(qRestHeat, 2).ToString("+0.00;-0.00");
 			this.lblQRestCool.Text = Math.Round(qRestCool, 2).ToString("+0.00;-0.00");
 
@@ -671,8 +670,8 @@ namespace Europlan.Common.Products {
 						this.lblResidenceVa.Text = "--";
 						break;
 				}
-				this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
-				this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
+				this.lblResidenceAHeat.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
+				this.lblResidenceACool.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
 				this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 				this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
 				this.lblResidenceQHeat.Text = Math.Round(evProduct.PlannedHeatLoadResidence, 0).ToString();
@@ -690,8 +689,8 @@ namespace Europlan.Common.Products {
 			}
 
 			// anbindung
-			this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
-			this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
+			this.lblConnectionAHeat.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
+			this.lblConnectionACool.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
 			this.lblConnectionQHeat.Text = Math.Round(evProduct.PlannedHeatLoadAnbindung, 0).ToString();
 			this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 

@@ -14,6 +14,7 @@ namespace Europlan.Common {
 	[Serializable()]
 	[ProductName("Product_EcothermName", "Product_EcothermFullName")]
 	public class EcothermProduct : Product, ProductWithInsulationConstruction, IPipeProduct<EcothermProduct.EcothermLayDistance, EcothermProduct.EcothermRimType> {
+		private static readonly ILog log = LogManager.GetLogger(typeof(EcothermProduct));
 
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
@@ -1086,6 +1087,16 @@ namespace Europlan.Common {
 			}
 		}
 
+        /// <summary>
+        /// Actual part of the residence area that is heated/cooled.
+        /// </summary>
+        [XmlIgnore]
+        public float PlannedAreaResidenceHeated {
+            get {
+                return this.PlannedAreaResidence - this.PlannedAreaUnheated;
+            }
+        }
+
 		/// <summary>
 		/// The percentage of the total room area that is occupied by the planned area.
 		/// </summary>
@@ -1163,7 +1174,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadPerSqMResidence {
 			get {
-				double area = this.PlannedAreaResidence;
+				double area = this.PlannedAreaResidenceHeated;
 				return area == 0 ? 0 : this.PlannedHeatLoadResidence / area;
 			}
 		}
@@ -1280,7 +1291,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadPerSqMResidence {
 			get {
-				double area = this.PlannedAreaResidence;
+				double area = this.PlannedAreaResidenceHeated;
 				return area == 0 ? 0 : this.PlannedCoolLoadResidence / area;
 			}
 		}
@@ -2159,7 +2170,7 @@ namespace Europlan.Common {
 			// Clipschiene
 			double amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
-			    amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
+			    amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			}
 			if (this.PlannedRimType.HasValue) {
 			    amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
@@ -2169,7 +2180,7 @@ namespace Europlan.Common {
 			// Muffe
 			amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
-				amount += this.PlannedAreaResidence * GetMuffePerSqm(this.PlannedLayDistance.Value);
+				amount += this.PlannedAreaResidenceHeated * GetMuffePerSqm(this.PlannedLayDistance.Value);
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetMuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
@@ -2237,31 +2248,10 @@ namespace Europlan.Common {
 				}
 			}
 		}
-/*		public bool PlannedCorrections {
-			get { return this.plannedCorrections; }
-			set {
-				if (this.plannedCorrections != value) {
-					this.plannedCorrections = value;
-					if (this.plannedCorrections) {
-						if (this.requestedCircuits == null || this.requestedLayDistance == null || (this.requestedRimType == null && this.plannedRimLength > 0)) {
-							this.PlannedCorrections = false;
-						} else {
-							this.plannedCorrectionList = new List<ExtendedCorrections>();
-							for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
-								this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
-							}
-						}
-					} else {
-						this.plannedCorrectionList = null;
-					}
-				}
-			}
-		}*/
 
 		public List<ExtendedCorrections> PlannedCorrectionList {
 			get { return this.plannedCorrectionList; }
 			set {
-				//this.plannedCorrections = (value != null && value.Count > 0);
 				this.plannedCorrectionList = (value == null) ? new List<ExtendedCorrections>() : value;
 			}
 		}
@@ -2283,7 +2273,6 @@ namespace Europlan.Common {
 		public override bool ManualMode {
 			get {
 				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT); // ||
-					//this.PlannedCorrections;
 			}
 		}
 
@@ -2371,7 +2360,6 @@ namespace Europlan.Common {
 						newConnectionPoint = segment.End + v * (width / 2);
 					}
 					double distance = segment.GetDistance(currentMousePoint);
-					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
 					if (distance < bestDistance) {
 						bestDistance = distance;
 						bestSegment = segment;
@@ -2381,26 +2369,20 @@ namespace Europlan.Common {
 				lastPoint = point;
 			}
 			if (bestDistance < 10) {
-				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
-					Polygon2D polygon = new Polygon2D();
-					Vector2D v = bestSegment.End - bestSegment.Start;
-					v.Normalize();
-					Vector2D v2 = new Vector2D(-v.Y, v.X);
-					polygon.Add(bestConnectionPoint + (v * width / 2));
-					polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
-					polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
-					polygon.Add(bestConnectionPoint - (v * width / 2));
+				Polygon2D polygon = new Polygon2D();
+				Vector2D v = bestSegment.End - bestSegment.Start;
+				v.Normalize();
+				Vector2D v2 = new Vector2D(-v.Y, v.X);
+				polygon.Add(bestConnectionPoint + (v * width / 2));
+				polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2));
 
-					double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
-					possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-				//}
+				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
 			}
 			return possibleConnection;
-		}
-
-		public void ResetToTableBasedLayout() {
 		}
 
         public string PipeLengthText {

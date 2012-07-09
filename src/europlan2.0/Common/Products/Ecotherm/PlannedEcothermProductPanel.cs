@@ -9,8 +9,8 @@ using System.Threading;
 
 namespace Europlan.Common {
 	public partial class PlannedEcothermProductPanel : UserControl, IEditorUserControl {
-		private PlannedProduct product = null;
 
+		private PlannedProduct product = null;
 		private bool gridContentChanged = false;
 		private bool updateOngoing = false;
 
@@ -703,7 +703,7 @@ namespace Europlan.Common {
 				}
 
 				// Aufenthaltszone
-				if (evProduct.PlannedLayDistance.HasValue) {
+				if (complete && evProduct.PlannedLayDistance.HasValue) {
 					switch (evProduct.PlannedLayDistance) {
 						case EcothermProduct.EcothermLayDistance.EV5:
 							this.lblResidenceVaHeat.Text = EuroplanRes.EcothermProduct_EV5; //"EV5";
@@ -746,8 +746,8 @@ namespace Europlan.Common {
                             this.lblResidenceVa.Text = "--";
 							break;
 					}
-					this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
-					this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
+					this.lblResidenceAHeat.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
+					this.lblResidenceACool.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
 					this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 					this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
 					this.lblResidenceQHeat.Text = Math.Round(evProduct.PlannedHeatLoadResidence, 0).ToString();
@@ -765,8 +765,8 @@ namespace Europlan.Common {
 				}
 
 				// anbindung
-				this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
-				this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
+				this.lblConnectionAHeat.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
+				this.lblConnectionACool.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
 				this.lblConnectionQHeat.Text = Math.Round(evProduct.PlannedHeatLoadAnbindung, 0).ToString();
 				this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 
@@ -830,7 +830,7 @@ namespace Europlan.Common {
 				}
 				if (lstError.Items.Count > 0) {
 					this.lstError.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-					int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 5;
+					int height = this.lstError.Items[this.lstError.Items.Count - 1].Position.Y + this.lstError.Items[this.lstError.Items.Count - 1].Bounds.Height + 20;
 					this.lstError.Height = height;
 					this.lstError.Visible = true;
 				} else {
@@ -840,23 +840,6 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
 					this.extendedCorrectionsGrid.UpdateControl(true, true);
 				}
-				/*if ((skipFields & FieldEnum.CORRECTIONS) == FieldEnum.NONE) {
-					if (evProduct.PlannedCorrections) {
-						this.rbExtendedCorrections.Checked = true;
-					} else {
-						this.rbStandardCorrections.Checked = true;
-					}
-				}*/
-
-				/*if ((skipFields & FieldEnum.CORRECTIONS_LIST) == FieldEnum.NONE) {
-					if (evProduct.PlannedCorrections) {
-						this.extendedCorrectionsBindingSource.DataSource = (this.product.Product as EcothermProduct).PlannedCorrectionList;
-					} else {
-						this.extendedCorrectionsBindingSource.DataSource = new List<ExtendedCorrections>();
-					}
-					this.extendedCorrectionsBindingSource.ResetBindings(false);
-					this.gridExtendedCorrections.Enabled = evProduct.PlannedCorrections;
-				}*/
 
 				this.tabs.TabPages.Remove(pageCorrections);
 
@@ -879,9 +862,6 @@ namespace Europlan.Common {
 					this.numAreaUnheated.Enabled = true;
 					this.numRim.Enabled = true;
 					this.numCorners.Enabled = true;
-					//this.cmbLayDistance.Enabled = true;
-					//this.cmbRimType.Enabled = true;
-					//this.cmbCircuits.Enabled = true;
 					this.btnGraphical.Enabled = false;
 				}
 

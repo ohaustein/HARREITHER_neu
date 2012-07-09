@@ -1242,6 +1242,7 @@ namespace Europlan.Common {
 			// 
 			this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lstError.BackColor = System.Drawing.SystemColors.Window;
 			this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.lstError.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.defaultColumn});
@@ -1510,7 +1511,7 @@ namespace Europlan.Common {
 			// btnGraphical
 			// 
 			this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGraphical.Location = new System.Drawing.Point(713, 39);
+			this.btnGraphical.Location = new System.Drawing.Point(711, 39);
 			this.btnGraphical.Name = "btnGraphical";
 			this.btnGraphical.Size = new System.Drawing.Size(167, 23);
 			this.btnGraphical.TabIndex = 43;

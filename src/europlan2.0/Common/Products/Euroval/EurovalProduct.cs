@@ -1145,6 +1145,16 @@ namespace Europlan.Common {
 			}
 		}
 
+        /// <summary>
+        /// Actual part of the residence area that is heated/cooled.
+        /// </summary>
+        [XmlIgnore]
+        public float PlannedAreaResidenceHeated {
+            get {
+                return this.PlannedAreaResidence - this.PlannedAreaUnheated;
+            }
+        }
+
 		/// <summary>
 		/// The percentage of the total room area that is occupied by the planned area.
 		/// </summary>
@@ -1222,7 +1232,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedHeatLoadPerSqMResidence {
 			get {
-				double area = this.PlannedAreaResidence;
+				double area = this.PlannedAreaResidenceHeated;
 				return area == 0 ? 0 : this.PlannedHeatLoadResidence / area;
 			}
 		}
@@ -1339,7 +1349,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedCoolLoadPerSqMResidence {
 			get {
-				double area = this.PlannedAreaResidence;
+				double area = this.PlannedAreaResidenceHeated;
 				return area == 0 ? 0 : this.PlannedCoolLoadResidence / area;
 			}
 		}
@@ -1401,7 +1411,7 @@ namespace Europlan.Common {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
-				double value = Double.MaxValue;
+				double value = double.MaxValue;
 				foreach (EurovalCircuit ec in this.circuits) {
 					if (ec.C_FloorTempRzCool < value) {
 						value = ec.C_FloorTempRzCool;
@@ -2066,7 +2076,7 @@ namespace Europlan.Common {
 					newMsg = newMsg.Replace("%MAXIMUM%", EurovalProduct.ConfigMaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
-			} else if (requestedCoolLoad > 0) {
+			} else if (this.requestedCoolLoad > 0) {
 				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
@@ -2220,7 +2230,7 @@ namespace Europlan.Common {
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
 			double amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
-				amount += this.PlannedAreaResidence * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
+				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
@@ -2230,7 +2240,7 @@ namespace Europlan.Common {
 			// Ovalmuffe
 			amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
-				amount += this.PlannedAreaResidence * GetOvalmuffePerSqm(this.PlannedLayDistance.Value);
+				amount += this.PlannedAreaResidenceHeated * GetOvalmuffePerSqm(this.PlannedLayDistance.Value);
 			}
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetOvalmuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
@@ -2304,31 +2314,10 @@ namespace Europlan.Common {
 				}
 			}
 		}
-/*		public bool PlannedCorrections {
-			get { return this.plannedCorrections; }
-			set {
-				if (this.plannedCorrections != value) {
-					this.plannedCorrections = value;
-					if (this.plannedCorrections) {
-						if (this.requestedCircuits == null || this.requestedLayDistance == null || (this.requestedRimType == null && this.plannedRimLength > 0)) {
-							this.PlannedCorrections = false;
-						} else {
-							this.plannedCorrectionList = new List<ExtendedCorrections>();
-							for (int i = 0; i < this.requestedCircuits.Value; i++ ) {
-								this.plannedCorrectionList.Add(new ExtendedCorrections(i + 1, this));
-							}
-						}
-					} else {
-						this.plannedCorrectionList = null;
-					}
-				}
-			}
-		}*/
 
 		public List<ExtendedCorrections> PlannedCorrectionList {
 			get { return this.plannedCorrectionList; }
 			set {
-				//this.plannedCorrections = (value != null && value.Count > 0);
 				this.plannedCorrectionList = (value == null) ? new List<ExtendedCorrections>() : value;
 			}
 		}
@@ -2350,7 +2339,6 @@ namespace Europlan.Common {
 		public override bool ManualMode {
 			get {
 				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT); // ||
-					//this.PlannedCorrections;
 			}
 		}
 
@@ -2379,134 +2367,6 @@ namespace Europlan.Common {
             get { return this.textBoxRotation; }
             set { this.textBoxRotation = value; }
         }
-
-		/*public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
-			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates)) {
-				return new List<PossibleConnection>();
-			}
-			List<PossibleConnection> possibleConnections = new List<PossibleConnection>();
-
-			Segment2D segment;
-			double bestDistance = double.MaxValue;
-			Segment2D bestSegment = new Segment2D();
-			Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
-			if (room.IsClockwise()) {
-				room.Reverse();
-			}
-			Point2D lastPoint = room[room.Count - 1];
-			foreach (Point2D point in room) {
-				segment = new Segment2D(lastPoint, point);
-				double distance = segment.GetDistance(currentMousePoint);
-				if (distance < bestDistance) {
-					bestDistance = distance;
-					bestSegment = segment;
-				}
-				lastPoint = point;
-			}
-			if (bestDistance < 10) {
-				Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				Polygon2D polygon = new Polygon2D();
-				Vector2D v = bestSegment.End - bestSegment.Start;
-				v.Normalize();
-				Vector2D v2 = new Vector2D(-v.Y, v.X);
-				polygon.Add(connectionPoint + (v * 10));
-				polygon.Add(connectionPoint + (v * 10) + (v2 * 10));
-				polygon.Add(connectionPoint - (v * 10) + (v2 * 10));
-				polygon.Add(connectionPoint - (v * 10));
-
-				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
-
-				//polygon.Add(new Point2D(connectionPoint.X - 5, connectionPoint.Y - 5));
-				//polygon.Add(new Point2D(connectionPoint.X + 5, connectionPoint.Y - 5));
-				//polygon.Add(new Point2D(connectionPoint.X + 5, connectionPoint.Y + 5));
-				//polygon.Add(new Point2D(connectionPoint.X - 5, connectionPoint.Y + 5));
-				PossibleConnection connection = new PossibleConnection(connectionPoint, polygon, true, true, this, null, angle, 0);
-				possibleConnections.Add(connection);
-			}
-
-			// TODO wenn distributor bereit gesetzt ist dürfen nicht alle zurückgegeben werden
-			//List<ModulBodenCircuit> openInputs = this.GetOpenInputs();
-			//List<ModulBodenCircuit> openOutputs = this.GetOpenOutputs();
-
-			//foreach (ModulBodenCircuit c in this.PlannedCircuits) {
-			//    foreach (KlimaFlaechenModul modul in c.Row.List) {
-			//        Matrix3D transformation = Matrix3D.Identity;
-			//        transformation = transformation * Transformation3D.Translation(modul.GraphPosX, modul.GraphPosY);
-			//        transformation = transformation * Transformation3D.Rotate(modul.GraphRotation * Math.PI / 180.0);
-
-			//        double height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
-			//        double width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * measure;
-
-			//        if (invertYAxis == modul.GraphBottomUp) {
-			//            if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-			//                if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-			//                    output12D = transformation.Transform(new Point2D(0, 0));
-			//                    output22D = transformation.Transform(new Point2D(0, 0.1 * measure));
-			//                    output32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
-			//                    output42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
-			//                }
-			//                if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-			//                    input12D = transformation.Transform(new Point2D(width, height));
-			//                    input22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
-			//                    input32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
-			//                    input42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
-			//                }
-			//            } else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-			//                if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-			//                    output12D = transformation.Transform(new Point2D(width, 0));
-			//                    output22D = transformation.Transform(new Point2D(width, 0.1 * measure));
-			//                    output32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
-			//                    output42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
-			//                }
-			//                if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-			//                    input12D = transformation.Transform(new Point2D(0, height));
-			//                    input22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
-			//                    input32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
-			//                    input42D = transformation.Transform(new Point2D(0.1 * measure, height));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
-			//                }
-			//            }
-			//        } else {
-			//            if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-			//                if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-			//                    input12D = transformation.Transform(new Point2D(0, 0));
-			//                    input22D = transformation.Transform(new Point2D(0, 0.1 * measure));
-			//                    input32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
-			//                    input42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
-			//                }
-			//                if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-			//                    output12D = transformation.Transform(new Point2D(width, height));
-			//                    output22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
-			//                    output32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
-			//                    output42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
-			//                }
-			//            } else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-			//                if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-			//                    input12D = transformation.Transform(new Point2D(width, 0));
-			//                    input22D = transformation.Transform(new Point2D(width, 0.1 * measure));
-			//                    input32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
-			//                    input42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, modul.GraphRotation, 0));
-			//                }
-			//                if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-			//                    output12D = transformation.Transform(new Point2D(0, height));
-			//                    output22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
-			//                    output32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
-			//                    output42D = transformation.Transform(new Point2D(0.1 * measure, height));
-			//                    possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, modul.GraphRotation, 0));
-			//                }
-			//            }
-			//        }
-			//    }
-			//}
-
-			return possibleConnections;
-		}*/
 
 		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
 			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
@@ -2566,7 +2426,6 @@ namespace Europlan.Common {
 						newConnectionPoint = segment.End + v * (width / 2);
 					}
 					double distance = segment.GetDistance(currentMousePoint);
-					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
 					if (distance < bestDistance) {
 						bestDistance = distance;
 						bestSegment = segment;
@@ -2576,21 +2435,18 @@ namespace Europlan.Common {
 				lastPoint = point;
 			}
 			if (bestDistance < 10) {
-				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
-					Polygon2D polygon = new Polygon2D();
-					Vector2D v = bestSegment.End - bestSegment.Start;
-					v.Normalize();
-					Vector2D v2 = new Vector2D(-v.Y, v.X);
-					polygon.Add(bestConnectionPoint + (v * width / 2));
-					polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
-					polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
-					polygon.Add(bestConnectionPoint - (v * width / 2));
+				Polygon2D polygon = new Polygon2D();
+				Vector2D v = bestSegment.End - bestSegment.Start;
+				v.Normalize();
+				Vector2D v2 = new Vector2D(-v.Y, v.X);
+				polygon.Add(bestConnectionPoint + (v * width / 2));
+				polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.05 * measure));
+				polygon.Add(bestConnectionPoint - (v * width / 2));
 
-					double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
-					possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-				//}
+				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
 			}
 			return possibleConnection;
 		}

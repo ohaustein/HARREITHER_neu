@@ -69,7 +69,6 @@ namespace Europlan.Common.Products {
 
 			this.eurovalPlanner.Product = product;
 			this.SetLanguage();
-			this.UpdateToolbar(this.tabs.SelectedTab);
 			this.CalculateAndUpdate();
 			this.connectionPlanner.Product = product;
 		}
@@ -270,33 +269,6 @@ namespace Europlan.Common.Products {
 			}
 		}
 
-		//private void btnAddModules_Click(object sender, EventArgs e) {
-		//    if (!btnAddModules.Checked) {
-		//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
-		//        this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
-		//        this.UpdateButtons();
-		//    }
-		//}
-
-		//private void btnSelectModule_Click(object sender, EventArgs e) {
-		//    if (!btnSelectModule.Checked) {
-		//        if (this.eurovalPlanner.ContainsNotConfirmedModules) {
-		//            DialogResult result = MessageBox.Show("Wollen Sie die neu hinzugefügten Module übernehmen?", "Module übernehmen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-		//            if (result == DialogResult.Cancel) {
-		//                return;
-		//            } else if (result == DialogResult.Yes) {
-		//                ModulBodenCircuit newCircuit = this.eurovalPlanner.ConfirmNewModules();
-		//                if (newCircuit != null) {
-		//                    this.UpdateLists(true, true);
-		//                }
-		//            }
-		//        }
-		//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_PICK_MODULE;
-		//        this.planPanel.Mode = PlanMode.PM_PLANNER_DRAG;
-		//        this.UpdateButtons();
-		//    }
-		//}
-
 		private void UpdateButtons() {
 			EurovalProduct product = plannedProduct.Product as EurovalProduct;
 			this.btnAddReduced.Enabled = product.PlannedAreaGraphical.Count > 0;
@@ -402,52 +374,6 @@ namespace Europlan.Common.Products {
 				this.btnAddAnbindeleitungen.Checked = false;
 				this.btnSelectAnbindeleitungen.Checked = false;
 			}
-		}
-
-		private TabPage previousTab = null;
-
-		private void tabs_Selecting(object sender, TabControlCancelEventArgs e) {
-			//if ((previousTab == this.pageLayout || previousTab == this.pageCalculations) && e.TabPage == this.pageConstruction) {
-			//    if (this.eurovalPlanner.Product.ContainsModules || this.eurovalPlanner.ContainsNotConfirmedModules) {
-			//        if (MessageBox.Show("Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!", "Bestätigen", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) {
-			//            e.Cancel = true;
-			//        } else {
-			//            this.eurovalPlanner.HighlightCircuit = null;
-			//            this.eurovalPlanner.Product.PlannedCircuits.Clear();
-			//            this.eurovalPlanner.Product.PlannedCircuits.Add(new ModulBodenCircuit());
-			//        }
-			//    }
-			//}
-			//if (!e.Cancel) {
-			//    this.UpdateToolbar(e.TabPage);
-			//    this.planPanel.InvalidateGraphics();
-			//}
-		}
-
-		private void UpdateToolbar(TabPage tabPage) {
-			//if (tabPage == this.pageLayout) {
-			//    this.btnAddModules.Visible = true;
-			//    this.btnSelectModule.Visible = true;
-			//    this.btnConstruction.Visible = false;
-			//    if (!this.btnAddModules.Checked && !this.btnSelectModule.Checked && !this.btnMove.Checked) {
-			//        this.planPanel.Mode = PlanMode.PM_MOVE;
-			//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_NONE;
-			//        this.UpdateButtons();
-			//    }
-			//} else if (tabPage == this.pageConstruction) {
-			//    this.btnAddModules.Visible = false;
-			//    this.btnSelectModule.Visible = false;
-			//    this.btnConstruction.Visible = false;
-			//    if (!this.btnConstruction.Checked && !this.btnMove.Checked) {
-			//        this.planPanel.Mode = PlanMode.PM_MOVE;
-			//        this.eurovalPlanner.Mode = EurovalPlanner.KlimaBodenMode.KDM_NONE;
-			//        this.UpdateButtons();
-			//    }
-			//}
-		}
-
-		private void tabs_Deselected(object sender, TabControlEventArgs e) {
-			this.previousTab = e.TabPage;
 		}
 
 		private void EurovalPlannerForm_Load(object sender, EventArgs e) {
@@ -631,10 +557,10 @@ namespace Europlan.Common.Products {
 			this.lblQSollCool.Text = Math.Round(this.plannedProduct.RequestedCoolLoad, 2).ToString();
 			this.lblQkSollHeat.Text = Math.Round(this.plannedProduct.RequestedHeatLoadPerSqM, 2).ToString();
 			this.lblQkSollCool.Text = this.plannedProduct.PlannedArea.HasValue ? Math.Round(this.plannedProduct.RequestedCoolLoad / this.plannedProduct.PlannedArea.Value, 2).ToString() : "0";
-			this.lblQfbhHeat.Text = Math.Round(evProduct.PlannedHeatLoad, 2).ToString();
-			this.lblQfbhCool.Text = Math.Round(evProduct.PlannedCoolLoad, 2).ToString();
-			double qRestHeat = evProduct.PlannedHeatLoad - this.plannedProduct.RequestedHeatLoad;
-			double qRestCool = evProduct.PlannedCoolLoad - this.plannedProduct.RequestedCoolLoad;
+			this.lblQfbhHeat.Text = Math.Round(this.plannedProduct.PlannedHeatLoad, 2).ToString();
+            this.lblQfbhCool.Text = Math.Round(this.plannedProduct.PlannedCoolLoad, 2).ToString();
+            double qRestHeat = this.plannedProduct.PlannedHeatLoad - this.plannedProduct.RequestedHeatLoad;
+            double qRestCool = this.plannedProduct.PlannedCoolLoad - this.plannedProduct.RequestedCoolLoad;
 			this.lblQRestHeat.Text = Math.Round(qRestHeat, 2).ToString("+0.00;-0.00");
 			this.lblQRestCool.Text = Math.Round(qRestCool, 2).ToString("+0.00;-0.00");
 
@@ -744,8 +670,8 @@ namespace Europlan.Common.Products {
 						this.lblResidenceVa.Text = "--";
 						break;
 				}
-				this.lblResidenceAHeat.Text = evProduct.PlannedAreaResidence.ToString();
-				this.lblResidenceACool.Text = evProduct.PlannedAreaResidence.ToString();
+				this.lblResidenceAHeat.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
+				this.lblResidenceACool.Text = Math.Round(evProduct.PlannedAreaResidenceHeated, 1).ToString();
 				this.lblResidenceTfbHeat.Text = Math.Round(evProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 				this.lblResidenceTfbCool.Text = Math.Round(evProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
 				this.lblResidenceQHeat.Text = Math.Round(evProduct.PlannedHeatLoadResidence, 0).ToString();
@@ -763,8 +689,8 @@ namespace Europlan.Common.Products {
 			}
 
 			// anbindung
-			this.lblConnectionAHeat.Text = evProduct.PlannedRemoveArea.ToString();
-			this.lblConnectionACool.Text = evProduct.PlannedRemoveArea.ToString();
+			this.lblConnectionAHeat.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
+			this.lblConnectionACool.Text = Math.Round(evProduct.PlannedRemoveArea, 1).ToString();
 			this.lblConnectionQHeat.Text = Math.Round(evProduct.PlannedHeatLoadAnbindung, 0).ToString();
 			this.lblConnectionQCool.Text = Math.Round(evProduct.PlannedCoolLoadAnbindung, 0).ToString();
 

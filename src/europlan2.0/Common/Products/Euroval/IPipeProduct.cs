@@ -539,6 +539,10 @@ namespace Europlan.Common {
 			get;
 		}
 
+        float PlannedAreaResidenceHeated {
+            get;
+        }
+
 		float PlannedFloorAreaPercentage {
 			get;
 			set;

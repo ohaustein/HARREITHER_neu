@@ -15,7 +15,7 @@ namespace Europlan.AdminApplication {
 		[STAThread]
 		static void Main() {
 			//DATA_PATH = Path.Combine(Application.StartupPath, "data");
-#if DEBUG
+#if DEBUG 
 			PathUtil.UseCommonAppDataPath = true;
 #else
 			PathUtil.UseCommonAppDataPath = false;
