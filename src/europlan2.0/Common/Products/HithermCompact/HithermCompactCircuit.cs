@@ -272,7 +272,7 @@ namespace Europlan.Common {
 					foreach (HithermCompactRegister reg in this.registers) {
 						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat, alphaInnenHeatDs);
 						heatLoadRegisters += heatLoad;
-						qU += reg.WaermeverlustAussen(heatLoad, this.HithermCompactProduct.AssociatedRoom.RoomCoolTemperature, alphaAussenHeat, alphaInnenHeat, alphaAussenHeatDs, alphaInnenHeatDs);
+						qU += reg.WaermeverlustAussen(heatLoad, this.HithermCompactProduct.AssociatedRoom.RoomHeatTemperature, alphaAussenHeat, alphaInnenHeat, alphaAussenHeatDs, alphaInnenHeatDs);
 					}
 					this.c_qHeatPerSqm = heatLoadRegisters / this.HeatArea;
 					qU = qU / this.HeatArea;

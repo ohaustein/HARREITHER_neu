@@ -2834,7 +2834,7 @@ namespace Europlan.Common {
 								this.product.Connections.Clear();
 							}
 						}
-						newCircuit = new ModulDeckeCircuit();
+						newCircuit = new ModulDeckeCircuit(this.Product);
 						newCircuit.CircuitColor = this.GetNewCircuitColor();
 						newSubArea = newCircuit.SubAreas[0];
 						newSubArea.Rows.Clear();

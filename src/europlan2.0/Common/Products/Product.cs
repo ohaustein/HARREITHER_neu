@@ -1693,5 +1693,57 @@ namespace Europlan.Common {
 		public virtual void ClearGraphicalRepresentation() {
 			this.connections = new List<GraphicalProductConnection>();
 		}
+
+		public virtual void InitializeNewProduct() {
+		}
+
+		public void FixConnectedCircuits() {
+			List<int> keysToRemove = new List<int>();
+			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.ConnectedCircuits) {
+				int i = kvp.Key;
+				Circuit.CircuitConnection conn = kvp.Value;
+
+				if (conn.OtherProduct == null || conn.OtherCircuit == null || conn.OtherCircuitId >= conn.OtherProduct.PlannedCircuits.Count) {
+					keysToRemove.Add(i);
+				}
+			}
+			foreach (int i in keysToRemove) {
+				this.connectedCircuits.Remove(i);
+			}
+		}
+
+		public void FixInverseConnectedCircuits() {
+			if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+				List<int> keysToRemove = new List<int>();
+				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.InverseConnectedCircuits) {
+					int i = kvp.Key;
+					Circuit.CircuitConnection conn = kvp.Value;
+
+					if (conn.OtherProduct == null || conn.OtherCircuit == null || conn.OtherCircuitId >= conn.OtherProduct.PlannedCircuits.Count) {
+						keysToRemove.Add(i);
+					}
+				}
+				foreach (int i in keysToRemove) {
+					this.inverseConnectedCircuits.Remove(i);
+				}
+
+				if (this.PlannedConnection.OtherProduct != null && this.PlannedConnection.OtherProduct.Product != null) {
+					Product otherProduct = this.PlannedConnection.OtherProduct.Product;
+					Circuit.CircuitConnectionTypeEnum type = this.PlannedConnection.CircuitConnectionType;
+					foreach (Circuit c in this.PlannedCircuits) {
+						if (!this.InverseConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
+							int i = 0;
+							while (otherProduct.ConnectedCircuits.ContainsKey(i)) {
+								i++;
+							}
+							if (otherProduct.PlannedCircuits.Count > i) {
+								otherProduct.ConnectedCircuits[i] = new Circuit.CircuitConnection(type, c, false);
+								this.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection(type, otherProduct.PlannedCircuits[i], false);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -1672,5 +1672,12 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+		internal override void FinalizeLoading(PlannedProduct pp) {
+			base.FinalizeLoading(pp);
+			foreach (ModulBodenCircuit c in this.circuits) {
+				c.ModulKlimaBodenProduct = this;
+			}
+		}
 	}
 }

@@ -233,6 +233,16 @@ namespace Europlan.Common {
 		}
 
 		private void gridRooms_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
+			/*
+						List<PlannedProduct> connectedProducts = this.room.GetFloor().FindConnectedProduct(product);
+						foreach (PlannedProduct connectedProduct in connectedProducts) {
+							SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
+							connectedProduct.Product.PlannedConnection = null;
+							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
+						}
+						SelectConnectionForProductForm.UnconnectProduct(product);
+						this.room.PlannedProducts.Remove(product);
+			 */
 			gridRooms.AllowUserToAddRows = true;
 			if (projectStructureChanged != null) {
 				projectStructureChanged(this);
@@ -241,6 +251,20 @@ namespace Europlan.Common {
 
 		private void gridRooms_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
 			gridRooms.AllowUserToAddRows = false;
+
+			Room room = e.Row.DataBoundItem as Room;
+			if (room != null) {
+				foreach (PlannedProduct product in room.PlannedProducts) {
+					List<PlannedProduct> connectedProducts = room.GetFloor().FindConnectedProduct(product);
+					foreach (PlannedProduct connectedProduct in connectedProducts) {
+						SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
+						connectedProduct.Product.PlannedConnection = null;
+						connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
+					}
+					SelectConnectionForProductForm.UnconnectProduct(product);
+				}
+				room.PlannedProducts.Clear();
+			}
 		}
 
 		private void btnAddDistributor_Click(object sender, EventArgs e) {

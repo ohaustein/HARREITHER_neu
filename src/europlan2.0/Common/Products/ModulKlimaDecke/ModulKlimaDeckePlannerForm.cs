@@ -813,7 +813,7 @@ namespace Europlan.Common.Products {
 						e.Cancel = true;
 					} else {
 						this.modulKlimaDeckePlanner.Product.PlannedCircuits.Clear();
-						this.modulKlimaDeckePlanner.Product.PlannedCircuits.Add(new ModulDeckeCircuit());
+						this.modulKlimaDeckePlanner.Product.PlannedCircuits.Add(new ModulDeckeCircuit(this.modulKlimaDeckePlanner.Product));
 					}
 				}
 			}

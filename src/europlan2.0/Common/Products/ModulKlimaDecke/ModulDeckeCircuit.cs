@@ -14,34 +14,47 @@ namespace Europlan.Common {
 
 		private List<KlimaFlaechenSubAreaVerbindung> verbindungen = new List<KlimaFlaechenSubAreaVerbindung>();
 
-		public ModulDeckeCircuit() {
+		private ModulDeckeCircuit() {
+			// A circuit needs to have at least one subarea so add this subarea by default,
+			// if this circuit is deserialized this subarea will be deleted again in FinalizeLoading
+			//this.subAreas.Add(new ModulDeckeSubArea());
+		}
+
+		public ModulDeckeCircuit(ModulKlimaDeckeProduct product) {
+			this.ModulKlimaDeckeProduct = product;
 			// A circuit needs to have at least one subarea so add this subarea by default,
 			// if this circuit is deserialized this subarea will be deleted again in FinalizeLoading
 			this.subAreas.Add(new ModulDeckeSubArea());
 		}
 	
-		//public List<KlimaFlaechenList> Rows {
-		//	get { return rows; }
-		//	set { rows = value; }
-		//}
-
 		public List<ModulDeckeSubArea> SubAreas {
 			get { return this.subAreas; }
 			set { this.subAreas = value; }
 		}
 
+		private ModulKlimaDeckeProduct mdProduct = null;
+
 		[XmlIgnore]
 		public ModulKlimaDeckeProduct ModulKlimaDeckeProduct {
-			get { return this.PlannedProduct.Product as ModulKlimaDeckeProduct; }
+			get {
+				return this.PlannedProduct == null ? null : this.PlannedProduct.Product as ModulKlimaDeckeProduct;
+			}
 			set {
+				bool found = false;
+				this.plannedProduct = null;
+				this.mdProduct = null;
 				foreach (Floor f in Project.Instance.Floors) {
 					foreach (Room r in f.Rooms) {
 						foreach (PlannedProduct pp in r.PlannedProducts) {
 							if (pp.Product == value) {
 								this.plannedProduct = pp;
+								found = true;
 							}
 						}
 					}
+				}
+				if (!found) {
+					this.mdProduct = value;
 				}
 			}
 		}
@@ -51,6 +64,9 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override PlannedProduct PlannedProduct {
 			get {
+				if (this.plannedProduct == null && this.mdProduct != null) {
+					this.ModulKlimaDeckeProduct = this.mdProduct;
+				}
 				return this.plannedProduct;
 			}
 		}
@@ -343,7 +359,7 @@ namespace Europlan.Common {
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
 					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-					double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaDeckeProduct.AssociatedRoom.RoomCoolTemperature, this.ModulKlimaDeckeProduct.PlannedRoomTemperatureBelowCool);
 
 					// hydraulische Berechnung
 					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
@@ -396,9 +412,9 @@ namespace Europlan.Common {
 		internal override void FinalizeLoading() {
 			base.FinalizeLoading();
 			// If this circuit is deserialized remove the subarea that was added by default
-			if (this.SubAreas.Count > 0) {
+			/*if (this.SubAreas.Count > 0) {
 				this.SubAreas.RemoveAt(0);
-			}
+			}*/
 			foreach (ModulDeckeSubArea sa in this.SubAreas) {
 				sa.FinalizeLoading();
 			}

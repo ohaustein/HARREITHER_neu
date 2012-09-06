@@ -542,6 +542,8 @@ namespace Europlan.Common {
 			foreach (Floor floor in this.floors) {
 				floor.FinalizeLoading();
 			}
+
+			this.FixProductToProductConnection();
 		}
 
 		private void RecalculateQuickDimensioningRoomToProjectMapping() {
@@ -557,6 +559,7 @@ namespace Europlan.Common {
 		public static void Save(string filename) {
 			lock (padlock) {
 				try {
+					Instance.FixProductToProductConnection();
 					Instance.ProjectLastChanged = DateTime.Now;
 
 					XmlSerializer s = new XmlSerializer(typeof(Project));
@@ -1049,5 +1052,16 @@ namespace Europlan.Common {
 				CopyDirectory(diSrcDirectory, new DirectoryInfo(Path.Combine(diDestDir.FullName, diSrcDirectory.Name)));
 			}
 		}
-    }
+
+		private void FixProductToProductConnection() {
+			foreach (Floor floor in this.floors) {
+				foreach (Room room in floor.Rooms) {
+					foreach (PlannedProduct pp in room.PlannedProducts) {
+						pp.Product.FixConnectedCircuits();
+						pp.Product.FixInverseConnectedCircuits();
+					}
+				}
+			}
+		}
+	}
 }

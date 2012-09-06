@@ -2324,6 +2324,9 @@ namespace Europlan.Common {
 
 		internal override void FinalizeLoading(PlannedProduct pp) {
 			base.FinalizeLoading(pp);
+			foreach (EurovalCircuit c in this.circuits) {
+				c.EurovalProduct = this;
+			}
 			if (this.PlannedCorrections) {
 				int i = 1;
 				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {

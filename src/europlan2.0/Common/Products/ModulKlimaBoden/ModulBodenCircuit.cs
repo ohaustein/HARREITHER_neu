@@ -19,7 +19,6 @@ namespace Europlan.Common {
 		private List<KlimaFlaechenModulVerbindung> verbindungen = new List<KlimaFlaechenModulVerbindung>();
 
 		public ModulBodenCircuit() {
-
 		}
 	
 		public KlimaFlaechenList Row {
@@ -317,7 +316,7 @@ namespace Europlan.Common {
 					double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
 					this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta);
 
-					double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qCoolPerSqm, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaBodenProduct.PlannedRoomTemperatureBelowHeat);
+					double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qCoolPerSqm, this.ModulKlimaBodenProduct.AssociatedRoom.RoomCoolTemperature, this.ModulKlimaBodenProduct.PlannedRoomTemperatureBelowCool);
 
 					// hydraulische Berechnung
 					this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatAreaForCalculation;            // gesamte aufgenommene Leistung berechnen

@@ -2258,6 +2258,9 @@ namespace Europlan.Common {
 
 		internal override void FinalizeLoading(PlannedProduct pp) {
 			base.FinalizeLoading(pp);
+			foreach (EcothermCircuit c in this.circuits) {
+				c.EcothermProduct = this;
+			}
 			if (this.PlannedCorrections) {
 				int i = 1;
 				foreach (ExtendedCorrections ec in this.PlannedCorrectionList) {

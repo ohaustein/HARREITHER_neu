@@ -1146,6 +1146,9 @@ namespace Europlan.Common {
 
 		internal override void FinalizeLoading(PlannedProduct pp) {
 			base.FinalizeLoading(pp);
+			foreach (HithermCompactCircuit c in this.circuits) {
+				c.HithermCompactProduct = this;
+			}
 			switch (this.hithermCompactType) {
 				case ProductType.FBH:
 					this.plannedFloorArea = this.plannedFloorCeilingRoofArea;

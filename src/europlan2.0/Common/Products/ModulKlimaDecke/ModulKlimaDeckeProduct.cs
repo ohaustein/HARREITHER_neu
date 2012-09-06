@@ -130,6 +130,10 @@ namespace Europlan.Common {
 
 		}
 
+		public override void InitializeNewProduct() {
+			this.PlannedCircuits.Add(new ModulDeckeCircuit(this));
+		}
+
 		public override void Initialize() {
 		}
 
@@ -1611,6 +1615,9 @@ namespace Europlan.Common {
 
 		internal override void FinalizeLoading(PlannedProduct pp) {
 			base.FinalizeLoading(pp);
+			foreach (ModulDeckeCircuit c in this.circuits) {
+				c.ModulKlimaDeckeProduct = this;
+			}
 			switch (this.modulType) {
 				case ProductType.FBH:
 					this.plannedFloorArea = this.plannedFloorOrCeilingArea;
@@ -2067,7 +2074,7 @@ namespace Europlan.Common {
 				}
 			}
 			if (targetCircuit == null) {
-				targetCircuit = new ModulDeckeCircuit();
+				targetCircuit = new ModulDeckeCircuit(this);
 				targetCircuit.CircuitColor = newCircuitColor;
 				targetCircuit.SubAreas.Clear();
 				this.PlannedCircuits.Add(targetCircuit);
@@ -2123,7 +2130,7 @@ namespace Europlan.Common {
 				}
 			}
 			if (target == null) {
-				target = new ModulDeckeCircuit();
+				target = new ModulDeckeCircuit(this);
 				target.SubAreas.Clear();
 				target.CircuitColor = newCircuitColor;
 				this.PlannedCircuits.Add(target);

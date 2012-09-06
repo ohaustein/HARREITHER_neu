@@ -71,41 +71,43 @@ namespace Europlan.Common {
 					} else {
 						int j = 0;
 						foreach (Circuit c in p.Product.PlannedCircuits) {
-							Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
-							j++;
-							string label = "";
-							if (p.Product.PlannedCircuits.Count <= 1) {
-								label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
-								label = label.Replace("%SYSTEM%", p.Node.Text);
-								label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
-							} else {
-								label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
-								label = label.Replace("%SYSTEM%", p.Node.Text);
-								label = label.Replace("%HK%", j.ToString());
-								label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
-							}
-							if (cc != null) {
-								string tmp = "";
-								if (cc.OtherCircuit.PlannedProduct.Product.PlannedCircuits.Count <= 1) {
-									tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
-									tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
-									tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+							if (c.PlannedProduct != null) {
+								Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
+								j++;
+								string label = "";
+								if (p.Product.PlannedCircuits.Count <= 1) {
+									label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+									label = label.Replace("%SYSTEM%", p.Node.Text);
+									label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
 								} else {
-									tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
-									tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
-									tmp = tmp.Replace("%HK%", cc.OtherCircuit.NrOfCircuit.ToString());
-									tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+									label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
+									label = label.Replace("%SYSTEM%", p.Node.Text);
+									label = label.Replace("%HK%", j.ToString());
+									label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
 								}
-								label += ", " + tmp;
-							}
-							TreeNode node = new TreeNode(label);
-							node.Tag = c;
-							distributorNodes[i].Nodes.Add(node);
-							node.Checked = true;
-							if (selectNode == null && this.product.Product.PlannedConnection != null &&
-								this.product.Product.PlannedConnection.OtherProduct == p &&
-								cc != null && cc.OtherProduct == this.product.Product) {
-								selectNode = node;
+								if (cc != null) {
+									string tmp = "";
+									if (cc.OtherCircuit.PlannedProduct.Product.PlannedCircuits.Count <= 1) {
+										tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+										tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
+										tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+									} else {
+										tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
+										tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
+										tmp = tmp.Replace("%HK%", cc.OtherCircuit.NrOfCircuit.ToString());
+										tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+									}
+									label += ", " + tmp;
+								}
+								TreeNode node = new TreeNode(label);
+								node.Tag = c;
+								distributorNodes[i].Nodes.Add(node);
+								node.Checked = true;
+								if (selectNode == null && this.product.Product.PlannedConnection != null &&
+									this.product.Product.PlannedConnection.OtherProduct == p &&
+									cc != null && cc.OtherProduct == this.product.Product) {
+									selectNode = node;
+								}
 							}
 						}
 					}
@@ -304,7 +306,7 @@ namespace Europlan.Common {
 				foreach (PlannedProduct pp in wasConnectedTo) {
 					List<int> delete = new List<int>();
 					foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
-						if (kvp.Value.OtherCircuit.PlannedProduct == product) {
+						if (kvp.Value.OtherCircuit != null && kvp.Value.OtherCircuit.PlannedProduct == product) {
 							delete.Add(kvp.Key);
 						}
 					}
@@ -319,48 +321,11 @@ namespace Europlan.Common {
 			foreach (PlannedProduct pp in wasConnectedTo) {
 				pp.ConfigureProduct(false);
 			}
-			//UnconnectProduct(product.Product);
 		}
-
-		/*public static void UnconnectProduct(Product product) {
-			List<PlannedProduct> wasConnectedTo = new List<PlannedProduct>();
-			if (product.PlannedConnection != null && product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				// find out to which other product(s) this product was connected
-				foreach (Circuit.CircuitConnection cc in product.InverseConnectedCircuits.Values) {
-					if (!wasConnectedTo.Contains(cc.OtherPlannedProduct)) {
-						wasConnectedTo.Add(cc.OtherPlannedProduct);
-					}
-				}
-
-				// remove the connection in the other product(s)
-				foreach (PlannedProduct pp in wasConnectedTo) {
-					List<int> delete = new List<int>();
-					foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in pp.Product.ConnectedCircuits) {
-						if (kvp.Value.OtherCircuit.PlannedProduct.Product == product) {
-							delete.Add(kvp.Key);
-						}
-					}
-					foreach (int i in delete) {
-						pp.Product.ConnectedCircuits.Remove(i);
-					}
-				}
-
-				// remove the connection in this product
-				product.InverseConnectedCircuits.Clear();
-			}
-			foreach (PlannedProduct pp in wasConnectedTo) {
-				pp.ConfigureProductDefault();
-			}
-		}*/
 
 		public static void ConnectProduct(PlannedProduct product, Distributor dist) {
 			product.Product.PlannedConnection = new ProductConnection(dist);
-			//ConnectProduct(product.Product, dist);
 		}
-
-		/*public static void ConnectProduct(Product product, Distributor dist) {
-			product.PlannedConnection = new ProductConnection(dist);
-		}*/
 
 		public static void ConnectProduct(PlannedProduct product, PlannedProduct otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
 			product.Product.PlannedConnection = new ProductConnection(otherProduct, ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF);
@@ -370,35 +335,21 @@ namespace Europlan.Common {
 					product.Product.InverseConnectedCircuits[udc.Hk1 - 1] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), otherProduct, udc.Hk2 - 1, true);
 				}
 				product.Product.PlannedConnection.UserDefined = true;
-				// TODO
-				//foreach (DataGridViewRow row in this.gridUserDefinedConnection.Rows) {
-				//pp.Product.ConnectedCircuits[(int)row.Cells[1]] = new Circuit.CircuitConnection((
-				//}
 			} else {
 				int i = 0;
 				foreach (Circuit c in product.Product.PlannedCircuits) {
 					while (otherProduct.Product.ConnectedCircuits.ContainsKey(i)) {
 						i++;
 					}
-					otherProduct.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), c, false);
-					product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), otherProduct.Product.PlannedCircuits[i], false);
+					if (otherProduct.Product.PlannedCircuits.Count > i) {
+						otherProduct.Product.ConnectedCircuits[i] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), c, false);
+						product.Product.InverseConnectedCircuits[c.NrOfCircuit] = new Circuit.CircuitConnection((ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF), otherProduct.Product.PlannedCircuits[i], false);
+					}
 				}
 			}
 			product.Product.ConfigureProduct(product.RequestedHeatLoad, product.RequestedCoolLoad, product.CalculateHeat, product.CalculateCool, false);
 			otherProduct.Product.ConfigureProduct(otherProduct.RequestedHeatLoad, otherProduct.RequestedCoolLoad, otherProduct.CalculateHeat, otherProduct.CalculateCool, false);
 		}
-
-		/*public static void ConnectProduct(Product product, PlannedProduct otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
-			ConnectProduct(Project.Instance.GetPlannedProduct(product), otherProduct, ruecklauf, list);
-		}
-
-		public static void ConnectProduct(PlannedProduct product, Product otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
-			ConnectProduct(product, Project.Instance.GetPlannedProduct(otherProduct), ruecklauf, list);
-		}
-
-		public static void ConnectProduct(Product product, Product otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
-			ConnectProduct(Project.Instance.GetPlannedProduct(product), Project.Instance.GetPlannedProduct(otherProduct), ruecklauf, list);
-		}*/
 
 		private void cbActivateUserDefinedConnection_CheckedChanged(object sender, EventArgs e) {
 			if (this.cbActivateUserDefinedConnection.Checked) {
