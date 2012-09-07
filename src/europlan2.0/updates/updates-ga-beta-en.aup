@@ -1,22 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\beta\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en" BuildLocation="updates-ga-beta-en Updates" PublishVersion="3.0.16.3" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions_ga\v3.0.16.3\europlan30-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>New features in this version:&#xD;
-- The size of the generated image can be choosen when importing PDFs&#xD;
-- When planning a Modul Klimaboden system graphically a recommentation for the required number of module strips is calculated&#xD;
-- Textboxes that show parameters of Euroval and Ecotherm systems can be rotated in 90° steps and the background of these textboxes can be set to be solid&#xD;
-- The text displayed for the pipe length in these textboxes has been changed to the format "Total Length (Supply Pipe + Return Pipe)"&#xD;
-- Autosaving of the project every 10 minutes can be enabled under "Options"-&gt;"Settings"&#xD;
-- Display of the imported plan can be disabled when layouting systems or connection pipes&#xD;
-- The width of wooden support and c-profiles can be changed when layouting Modul Klimadecken systems&#xD;
-- Covering can be moved independently of wodden support or c-profiles when layouting Modul Klimadecken systems&#xD;
-&#xD;
-The following bugs were fixed:&#xD;
-- Systemparameters have not been saved correctly within projects&#xD;
-- the maximum number of modules has not been respected when planning Modul Klimaboden systems&#xD;
-- A bug that occured when planning 3m-registers in Hitherm systems&#xD;
-- Connection pipes could not be planned for Hitherm Compact systems&#xD;
-- Unheated areas have not been substracted from the lving zone in Euroval and Ecotherm systems</CurrentSummary>
+	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\beta\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en" BuildLocation="updates-ga-beta-en Updates" PublishVersion="3.0.17.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\eos\share\Software\europlan\versions_ga\v3.0.17.0\europlan30-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>Fixed bugs:&#xD;
+- The wrong roomtemperature was used when calulating cooling for Modul Klimadecke.&#xD;
+- Connecting one system to another system instead a distributor, sometimes caused random errors.</CurrentSummary>
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -27,6 +14,15 @@ The following bugs were fixed:&#xD;
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="77e24619-79f7-43da-bcb3-df6e1bb86c8a" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="3.0.17.0" postdate="2012-09-07T12:00:48.7157716Z" signature="aNL0Br4QPyNmDmRYOs0noSCDAejDlos3RXkbZ1lp2MojLBSs456nsRL9rVuv2gsCsZpY9wvI0YTe925SrrAY2mVQGFIxQKy3h2xukEmmM3v5mr1M5BvkV6tHFss7Sq5BEaNbeJvX9f/F+myZPw3TyScKsK2dSLxgrsTqc3RAepY=" fileSize="48709148">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Fixed bugs:&#xD;
+- The wrong roomtemperature was used when calulating cooling for Modul Klimadecke.&#xD;
+- Connecting one system to another system instead a distributor, sometimes caused random errors.</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="3.0.16.3" postdate="2012-07-13T14:16:53.7322301Z" signature="NQh9CcwP3/uf5D1xFM5whqpJwEZiaynwOULIC0SHoejYz3Gi4iu13GeH8BkcVIP4symhI4icgptnRJ6+FBxa6PPp79/a5y8j96Ra2Txk8Idc/7lz2oUXvYj1gpJ03Tk31ObHizvQt19rAUA5NfujC95x/woTuS490Dj9kpHy98o=" fileSize="48705968">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
