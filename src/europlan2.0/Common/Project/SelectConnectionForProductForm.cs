@@ -226,38 +226,10 @@ namespace Europlan.Common {
 			this.btnOk.Enabled = ok;
 		}
 
-		/*public ProductConnection SelectedConnection {
-			get {
-				if (tvDistributors.SelectedNode == null) {
-					return null;
-				}
-				if (tvDistributors.SelectedNode.Tag is Distributor) {
-					return new ProductConnection(tvDistributors.SelectedNode.Tag as Distributor, (Distributor)null);
-				}
-				if (tvDistributors.SelectedNode.Tag is Product) {
-					return new ProductConnection(tvDistributors.SelectedNode.Tag as PlannedProduct, (Distributor)null);
-				}
-				return null;
-			}
-			set {
-				if (value == null) {
-					this.tvDistributors.SelectedNode = null;
-				} else {
-					object sel = value.Connection;
-					if (sel != null && this.nodes.ContainsKey(sel)) {
-						this.tvDistributors.SelectedNode = this.nodes[sel];
-					} else {
-						this.tvDistributors.SelectedNode = null;
-					}
-				}
-			}
-		}*/
-
 		private void SelectConnectionForProductForm_Load(object sender, EventArgs e) {
 			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 
-			// TODO select old
 			if (selectNode != null) {
 				this.tvDistributors.SelectedNode = selectNode;
 			}
@@ -285,7 +257,6 @@ namespace Europlan.Common {
 					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked,
 						this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
 				}
-				// TODO
 			}
 			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
 			settings.StorePoint("Location", this.Location);

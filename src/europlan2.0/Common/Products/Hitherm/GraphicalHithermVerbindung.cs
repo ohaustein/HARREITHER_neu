@@ -65,10 +65,6 @@ namespace Europlan.Common {
 			set { /* intentionally left blank */ }
 		}
 
-		/*public override void InitializeVertices(IEnumerable<Point2D> vertices) {
-			// TODO
-		}*/
-
 		public override bool IsMoveable {
 			get { return false; }
 		}
@@ -76,7 +72,6 @@ namespace Europlan.Common {
 		public override void PaintObject(Graphics g, Color c, bool error, double scale, bool export) {
 			Pen p = new Pen(c, 2);
 			if (error || this.error) {
-				//p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
 				p = new Pen(new HatchBrush(HatchStyle.DarkDownwardDiagonal, c, Color.Transparent));
 			}
 			p.EndCap = LineCap.Round;

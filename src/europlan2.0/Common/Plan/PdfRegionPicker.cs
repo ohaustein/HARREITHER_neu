@@ -45,23 +45,7 @@ namespace Europlan.Common {
 
 		public PdfRegionPickerMode Mode {
 			get { return this.mode; }
-			set {
-				if (value == PdfRegionPickerMode.DPM_PICK_REGION) {
-					/*Nullable<Distributor.GraphicalRepresentation> gpToDelete = null;
-					foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {
-						if (gp.floorId == this.floor.Id) {
-							gpToDelete = gp;
-							break;
-						}
-					}
-					if (gpToDelete.HasValue) {
-						// TODO: check if there are already products graphically connected to this distributor
-						distributor.GraphicalRepresentations.Remove(gpToDelete.Value);
-						this.ConnectedPlanPanel.InvalidateGraphics();
-					}*/
-				}
-				this.mode = value;
-			}
+			set { this.mode = value; }
 		}
 
 		#region IProductPlanner Members

@@ -29,8 +29,6 @@ namespace Europlan.AdminApplication {
 				string newValue = value as string;
 				if (newValue != null) {
 					this.Value = new HardwareId(newValue);
-				/*} else {
-					this.Value = value as HardwareId;*/
 				}
 			}
 		}

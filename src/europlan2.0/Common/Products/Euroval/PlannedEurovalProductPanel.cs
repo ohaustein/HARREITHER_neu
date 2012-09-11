@@ -887,7 +887,6 @@ namespace Europlan.Common {
 				ignoreCalculationMode--;
 			}
 			updateOngoing = false;
-			// TODO
 		}
 
 		public bool AllowLeave() {
@@ -1255,10 +1254,6 @@ namespace Europlan.Common {
 				}
 			}
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
-			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
-			//if (form.ShowDialog() == DialogResult.OK) {
-			//	(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
-			//}
 			form.ShowDialog();
 
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
@@ -1306,16 +1301,9 @@ namespace Europlan.Common {
 					}
 					this.product.ConfigureProduct(false);
 
-					/*foreach (Product prod in this.product.Product.PlannedConnectedProducts) {
-					//while (this.product.Product.PlannedConnectedProducts.Count != 0) {
-						prod.PlannedConnection.Distributor = this.product.Product.PlannedConnection.Distributor;
-						prod.
-					}
-					this.product.Product.PlannedConnectedProducts.Clear();*/
 				}
 
 				if (!this.cbSeparateCircuit.Checked && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-					// TODO confirm that this really works without sideeffects
 					SelectConnectionForProductForm.UnconnectProduct(this.product);
 				}
 

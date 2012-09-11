@@ -352,7 +352,6 @@ namespace Europlan.Common {
 					return pickedObject;
 				}
 			}
-			// TODO check for register here
 			if (HitTest(planPoint, xOffset, yOffset)) {
 				return this;
 			}
@@ -491,7 +490,6 @@ namespace Europlan.Common {
 		public void SetWallWidth(double width) {
 			double currentWidth = GetWallWidth();
 			double delta = width - currentWidth;
-			// TODO: breite der dachschräge prüfen
 			if (Math.Round(delta, 2) != 0) {
 				ceilingContour[2] = new Point2D(ceilingContour[2].X + delta, ceilingContour[2].Y);
 				ceilingContour[3] = new Point2D(ceilingContour[3].X + delta, ceilingContour[3].Y);
@@ -861,7 +859,6 @@ namespace Europlan.Common {
 		}
 
 		public bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
-			// TODO
 			return true;
 		}
 
@@ -880,7 +877,6 @@ namespace Europlan.Common {
 		public void AdjustWidth(double newWidth, bool adjustLeftSide) {
 			double currentWidth = GetWallWidth();
 			double delta = newWidth - currentWidth;
-			// TODO: breite der dachschräge prüfen
 			if (Math.Round(delta, 2) != 0) {
 				ceilingContour[2] = new Point2D(ceilingContour[2].X + delta, ceilingContour[2].Y);
 				ceilingContour[3] = new Point2D(ceilingContour[3].X + delta, ceilingContour[3].Y);

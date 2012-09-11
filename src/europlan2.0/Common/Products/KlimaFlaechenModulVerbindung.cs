@@ -160,14 +160,8 @@ namespace Europlan.Common {
 					p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
 				}
 				g.DrawLine(p, oldVertex, newVertex);
-				/*if (first) {
-					first = false;
-				} else {
-					g.DrawLine(p, oldVertex, newVertex);
-				}*/
 				oldVertex = newVertex;
 			}
-			// TODO
 		}
 
 		public void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, Color c) {

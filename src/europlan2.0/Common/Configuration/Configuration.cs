@@ -169,8 +169,6 @@ namespace Europlan.Common {
 						}
 					}
 				} catch (Exception ex) {
-					// TODO
-					// show messagebox to user
 					log.Error("Error while parsing BruttoPreise.csv file", ex);
 				} finally {
 					if (sr != null) {
@@ -180,24 +178,6 @@ namespace Europlan.Common {
 			}
 
 			this.materials.AddRange(allMaterials);
-			//try {
-			//    sr = new StreamReader(Path.Combine(appDataPath, "DATANORM.RAB"), System.Text.Encoding.GetEncoding(850));
-			//    string line;
-			//    while ((line = sr.ReadLine()) != null) {
-			//        if (line.StartsWith("R")) {
-			//            string[] positions = line.Split(';');
-			//            string discountGroup = positions[2].Trim();
-			//            float discount = Int32.Parse(positions[4]) / 100;
-			//            this.discounts.Add(discountGroup, discount);
-			//        }
-			//    }
-			//} catch (Exception ex) {
-			//    log.Error("Error while parsing DATANORM.RAB file", ex);
-			//} finally {
-			//    if (sr != null) {
-			//        sr.Close();
-			//    }
-			//}
 		}
 
 

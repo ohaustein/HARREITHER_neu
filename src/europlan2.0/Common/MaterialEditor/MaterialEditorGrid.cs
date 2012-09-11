@@ -39,14 +39,9 @@ namespace Europlan.Common {
 		public MaterialEditorGrid() {
 			InitializeComponent();
 			this.SetLanguage();
-			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO anpassen, falls MaterialEditorGrid auch für admin verwendet werden soll!
+			this.wrapper = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			this.materialsWrapperBindingSource.DataSource = this.wrapper;
 			this.materialsWrapperBindingSource.ResetBindings(false);
-			/*this.Category.Items.Clear();
-			this.Category.Items.Add(new MaterialCategoryGridItem(null));
-			foreach (Category category in Configuration.AdminTemplate.Categories) {
-				this.Category.Items.Add(new MaterialCategoryGridItem(category));
-			}*/
 			List<MaterialCategoryGridItem> categories = new List<MaterialCategoryGridItem>();
 			categories.Add(new MaterialCategoryGridItem(null));
 			foreach (Category category in Configuration.AdminTemplate.Categories) {

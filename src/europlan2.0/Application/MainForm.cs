@@ -716,11 +716,6 @@ namespace Europlan.Application {
 #endif
 							Clipboard.SetData(format.Name, selectedItem.Copy());
 						}
-						/*if (grid.Name == "gridFloors") {
-
-						} else if (grid.Name = "gridRooms") {
-
-						}*/
 					}
 				} else {
 					Clipboard.SetText(activeControl.Text);
@@ -847,12 +842,10 @@ namespace Europlan.Application {
 		private void datanormToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (this.CheckForUnsavedChanges()) {
 				OpenFileDialog dialog = new OpenFileDialog();
-				//FolderBrowserDialog dialog = new FolderBrowserDialog();
 				dialog.Filter = EuroplanRes.MainForm_BruttoPreiseFilter + "|BruttoPreise*.csv";
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					string path = Path.GetDirectoryName(dialog.FileName);
 					if (!path.Equals(PathUtil.DataPath)) {
-						// TODO 
 						// check if csv contains materials
 						if (File.Exists(dialog.FileName)) {
 							string filename = Path.Combine(PathUtil.DataPath, "BruttoPreise.csv");

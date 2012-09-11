@@ -240,7 +240,6 @@ namespace Europlan.Common {
 				int layDistance = 5;
 				for (int i = 0; i <= count; i++) {
 					g.DrawLine(Pens.Black, (float)(x0 + leftOffset - 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)), (float)(x0 + leftOffset + gridWidth + 2), (float)(y0Rz + topOffset + (i * rzGridHeight / count)));
-					// TODO Localization
 					g.DrawString(EuroplanRes.AuslegeAssistentForm_Ev + layDistance.ToString(), graphicsPanel.Font, Brushes.Black, x0 + 5, y0Rz + topOffset + (i * rzGridHeight / count) - graphicsPanel.Font.SizeInPoints / 2);
 					layDistance += 5;
 				}

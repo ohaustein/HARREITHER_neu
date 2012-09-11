@@ -504,7 +504,6 @@ namespace Europlan.Common {
 			if (this.startOutputConnection != null) {
 				this.startOutputConnectionVertices = new List<Point2D>(this.startOutputConnection.Vertices);
 			}
-			// TODO
 			return false;
 		}
 
@@ -531,18 +530,13 @@ namespace Europlan.Common {
 							newGap = 0;
 						}
 						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
-						//this.register.Gaps[rga.GapNr] = newGap;
-						//this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY, true, useSnap);
 					} else {
 						double newGap = this.startGaps[rga.GapNr] + planPoint.X - startDrag.Value.X;
 						if (newGap < 0) {
 							newGap = 0;
 						}
 						this.UpdateGap(owningWall, rga.GapNr, newGap, startDragRegisterX, startDragRegisterY, true, useSnap);
-						//this.register.Gaps[rga.GapNr] = newGap;
-						//this.UpdatePosition(owningWall, startDragRegisterX, startDragRegisterY, true, useSnap);
 					}
-					// TODO
 				} else if (anchor is Anchor) {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 						this.UpdateRohre(owningWall, GetBestRohrCount(this.startDragRegisterWidth - planPoint.X + startDrag.Value.X), false, checkLinks, useSnap);
@@ -561,7 +555,7 @@ namespace Europlan.Common {
 					// move
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, true, useSnap);
 				} else if (anchor is RegisterGapAnchor) {
-					// TODO
+#warning TODO implement RegisterGapAnchor
 				} else if (anchor is Anchor) {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.X + this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, false, checkLinks, useSnap);
@@ -749,7 +743,7 @@ namespace Europlan.Common {
 					this.register.RegisterType = oldType;
 					this.register.Gaps = oldGaps;
 				} else {
-					// TODO move Verbindeleitungen
+#warning TODO move Verbindeleitungen
 				}
 			}
 
@@ -757,11 +751,11 @@ namespace Europlan.Common {
 			foreach (GraphicalHithermVerbindung link in circuit.Links) {
 				if (link.Start == this.register) {
 					link.RevertState();
-					link.UpdateStartPoint(this, owningWall, checkLinks); // TODO
+					link.UpdateStartPoint(this, owningWall, checkLinks);
 				}
 				if (link.End == this.register) {
 					link.RevertState();
-					link.UpdateEndPoint(this, owningWall, checkLinks); // TODO
+					link.UpdateEndPoint(this, owningWall, checkLinks);
 				}
 			}
 

@@ -117,7 +117,6 @@ namespace Europlan.Common {
 		}
 
 		private int GetNode(int index) {
-			// TODO
 			int i = 0;
 			int current = 0;
 
@@ -138,14 +137,8 @@ namespace Europlan.Common {
 				current++;
 			}
 
-			/*while (current < this.Materials.Count && (this.categoryFilter != null && (this.Materials[current].Category == null || this.categoryFilter.Value != this.Materials[current].Category.Type))) {
-				current++;
-			}*/
 			while (i < index && current < this.Materials.Count) {
 				current++;
-				/*while (current < this.Materials.Count && (this.categoryFilter != null && (this.Materials[current].Category == null || this.categoryFilter.Value != this.Materials[current].Category.Type))) {
-					current++;
-				}*/
 				while
 					(
 						current < this.Materials.Count && (
@@ -301,9 +294,6 @@ namespace Europlan.Common {
 		}
 
 		public object AddNew() {
-			/*if (this.categoryFilter == null) {
-				throw new NotSupportedException("The method or operation is not implemented");
-			}*/
 			Material m = new Material();
 			if (this.categoryFilter != null) {
 				m.Category = Configuration.UserTemplate.GetUserDefinedCategoryForCategoryType(this.categoryFilter.Value);

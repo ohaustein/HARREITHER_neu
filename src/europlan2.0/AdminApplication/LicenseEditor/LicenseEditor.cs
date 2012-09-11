@@ -12,13 +12,8 @@ namespace Europlan.AdminApplication {
 
 		private LicenseTemplate license = null;
 
-		//public static readonly string[] availableModules = { "Interne Lizenz", "Adminmodus", "Euroval", "Ecotherm", "Hitherm", "Hitherm Compact", "Modul Klimaboden", "Modul Klimadecke" };
-
 		public LicenseEditor() {
 			InitializeComponent();
-			/*foreach (string availableModule in availableModules) {
-				this.lstModules.Items.Add(new ModuleItem(new LicensedModule(availableModule, false)));
-			}*/
 			this.UpdateGui(true);
 		}
 
@@ -72,14 +67,6 @@ namespace Europlan.AdminApplication {
 					lstModules.Items.Add(new ModuleItem(module));
 				}
 			}
-			/*foreach (ModuleItem item in this.lstModules.Items) {
-				if (this.license == null) {
-					item.Checked = false;
-				} else {
-					item.Checked = this.license.IsModuleEnabled(item.Module.Name);
-				}
-				// TODO handle modules that are in license but not in list!!! 
-			}*/
 		}
 
 		private void txtLicensedTo_TextChanged(object sender, EventArgs e) {
@@ -116,28 +103,7 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void RefreshSystemList() {
-			// TODO
 		}
-
-		//private void dataGridView1_KeyDown(object sender, KeyEventArgs e) {
-		//    if (this.dataGridView1.SelectedCells.Count == 1) {
-		//        DataGridViewTextBoxCell cell = this.dataGridView1.SelectedCells[0] as DataGridViewTextBoxCell;
-		//        if (cell != null) {
-		//        }
-		//    }
-
-		//}
-
-		//private bool VirtualKeyPress(char keyChar, int pos, DataGridViewTextBoxCell cell) {
-		//    if (pos % 7 == 6) {
-		//        pos++;
-		//    }
-		//    /*txtHardwareId.Text = txtHardwareId.Text.Substring(0, pos) + keyChar + txtHardwareId.Text.Substring(pos + 1);
-		//    txtHardwareId.SelectionStart = pos + 1;
-		//    txtHardwareId.SelectionLength = 0;*/
-
-		//    return true;
-		//}
 
 		private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
 			if (dataGridView1.Columns[e.ColumnIndex] == this.idDataGridViewTextBoxColumn) {

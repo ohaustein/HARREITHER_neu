@@ -9,7 +9,7 @@ using WW.Math.Geometry;
 
 namespace Europlan.Common {
 	public class KlimaFlaechenModul {
-		public static readonly double CONNECTION_DISTANCE = 0.035;  // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+		public static readonly double CONNECTION_DISTANCE = 0.035;  // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 
 		private static double module_100_40_height = 1.0;
 		private static double module_100_30_height = 1.0;
@@ -633,7 +633,7 @@ namespace Europlan.Common {
 				Matrix3D moduleRotation = Transformation3D.Rotate((product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
 				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
 				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
-				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double connectionDist = 0.035 * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 				double x = laneRotation.Transform((product as ModulKlimaDeckeProduct).GraphConstruction.PossibleLanes[this.GraphLane].BorderLeft.Origin).X;
 				double y = this.GraphPositionInLan;
 				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
@@ -682,7 +682,7 @@ namespace Europlan.Common {
 
 				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
 				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
-				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double connectionDist = 0.035 * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 
 				if (this.graphBottomUp) {
 					if (this.orientation == ModulOrientationEnum.ORIENTATION_LEFT) {
@@ -702,7 +702,7 @@ namespace Europlan.Common {
 				Matrix3D moduleRotation = Transformation3D.Rotate((product as ModulKlimaDeckeProduct).GraphConstruction.Rotation * Math.PI / 180.0);
 				double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
 				double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
-				double connectionDist = 0.035 * measure; // TODO: Geschätzt! Abstand der Anschlüsse zum Rand ca 2.45cm + hälte der breite (2.1cm / 2)
+				double connectionDist = 0.035 * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 				double x = laneRotation.Transform((product as ModulKlimaDeckeProduct).GraphConstruction.PossibleLanes[this.GraphLane].BorderLeft.Origin).X;
 				double y = this.GraphPositionInLan;
 				Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);

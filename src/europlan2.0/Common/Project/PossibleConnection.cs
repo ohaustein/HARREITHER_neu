@@ -368,10 +368,5 @@ namespace Europlan.Common {
 			get { return this.distFromSegmentStart; }
 			set { this.distFromSegmentStart = value; }
 		}
-		/*public List<int> DistributorIndices {
-			// TODO
-			get { return new List<int>(); }
-			//set { }
-		}*/
 	}
 }

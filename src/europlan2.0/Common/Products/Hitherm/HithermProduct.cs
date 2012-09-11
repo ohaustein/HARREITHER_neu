@@ -757,14 +757,12 @@ namespace Europlan.Common {
 				return false;
 			}
 			if (this.PlannedCircuits.Count > 12) {
-				this.lastErrorMsg = EuroplanRes.HithermProduct_ZuvieleHeizkreise; // TODO
+				this.lastErrorMsg = EuroplanRes.HithermProduct_ZuvieleHeizkreise;
 				this.incompleteCalculation = true;
 				return false;
 			}
 
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				// TODO connect all circuits
-
 				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
 				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
 					if (cc.OtherProduct == this) {
@@ -772,11 +770,6 @@ namespace Europlan.Common {
 					}
 				}
 				if (c < this.circuits.Count) {
-					/*if (this.requestedCircuits.HasValue) {
-						// TODO reset circuits
-					} else {*/
-					//this.circuits.Clear();
-					/*}*/
 					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
@@ -1027,17 +1020,13 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*public override int GetIndexOfCircuit(Circuit c) {
-			return -1;
-		}*/
-
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
 		}
 
 		[XmlIgnore]
 		public override float PlannedInsideConstructionRValue {
-			get { return 0; /*TODO*/ }
+			get { return 0; }
 		}
 
 		[XmlIgnore]
@@ -1052,7 +1041,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override float PlannedOutsideConstructionRValue {
-			get { return 0; /*TODO*/ }
+			get { return 0; }
 		}
 
 		[XmlIgnore]
@@ -1456,7 +1445,6 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override WW.Math.Geometry.Polygon2D GraphicalArea {
-			// TODO
 			get { return null; }
 		}
 

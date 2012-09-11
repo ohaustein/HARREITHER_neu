@@ -1185,8 +1185,6 @@ namespace Europlan.Common {
 				} else {
 					listLabel1.Variables.Add("@Allocation", "");
 				}
-				//TODO
-				//string filename = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath), "partner.jpg");
 				string filename = Configuration.UserTemplate.PartnerLogo;
 				if (File.Exists(filename)) {
 					listLabel1.Variables.Add("@PartnerLogo", Image.FromFile(filename));

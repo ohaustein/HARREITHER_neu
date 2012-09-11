@@ -570,13 +570,9 @@ namespace Europlan.Common {
 				List<string> errors = new List<string>();
 				if (this.MaxCircuits - this.AdditionalCircuits < this.PlannedCircuits) {
 					string err = this.AdditionalCircuits > 0 ? EuroplanRes.Distributor_ZuVieleHeizkreiseZus : EuroplanRes.Distributor_ZuVieleHeizkreise;
-					/*err = err.Replace("%VERTEILER%", this.Name);
-					err = err.Replace("%GESCHOSS%", this.AssociatedFloor.Name);*/
 					err = err.Replace("%VALUE%", this.PlannedCircuits.ToString());
 					err = err.Replace("%VALUEZUS%", this.AdditionalCircuits.ToString());
 					err = err.Replace("%MAXIMUM%", MaxCircuits.ToString());
-					//An den Verteiler %VERTEILER% (%GESCHOSS%) sind zu viele Heizkreise angeschlossen (%VALUE% + %VALUEZUS% > %MAXIMUM%)
-					//An den Verteiler %VERTEILER% (%GESCHOSS%) sind zu viele Heizkreise angeschlossen (%VALUE% > %MAXIMUM%)
 					errors.Add(err);
 				}
 				string[] errs = new string[errors.Count];
@@ -586,7 +582,6 @@ namespace Europlan.Common {
 		}
 
 		public List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint, Product product, Circuit circuit, Floor floor) {
-			// TODO
 			double width = this.Width * measure;
 			double height = this.Height * measure;
 			double connectionWidth = 0.055 * measure;

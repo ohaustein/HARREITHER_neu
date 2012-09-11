@@ -355,7 +355,7 @@ namespace Europlan.Common {
                     try {
                         asProject = (Project)s.Deserialize(r);
                     } catch (Exception) {
-                        // nothing todo
+                        // nothing to do
                     } finally {
                         r.Close();
                     }

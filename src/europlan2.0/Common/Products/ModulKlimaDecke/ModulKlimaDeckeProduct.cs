@@ -543,7 +543,6 @@ namespace Europlan.Common {
 			}
 
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				// TODO connect all circuits
 
 				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
 				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
@@ -552,11 +551,6 @@ namespace Europlan.Common {
 					}
 				}
 				if (c < this.circuits.Count) {
-					/*if (this.requestedCircuits.HasValue) {
-						// TODO reset circuits
-					} else {*/
-					//this.circuits.Clear();
-					/*}*/
 					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
@@ -636,13 +630,6 @@ namespace Europlan.Common {
 							row.LengthVerbindeleitungen = verbindeleitung;
 						}
 					}
-					/*TODO add verbindeleitungen of subarea
-					 * if (c.Links != null) {
-						foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
-							double verbindeleitung = link.GetLength(measure);
-							link.En
-						}
-					}*/
 				}
 				mc.Calculate();
 				i++;
@@ -702,26 +689,6 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
-			// TODO
-			/*foreach (ModulDeckeCircuit c in this.circuits) {
-				int moduleCount = 0;
-				foreach (KlimaFlaechenList row in c.Rows) {
-					moduleCount += row.List.Count;
-				}
-				if (moduleCount > ModulKlimaBodenProduct.ConfigModulesInCircuit) {
-					//errorMsg += "Der Heizkreis HK" + c.NrOfCircuit.ToString() + " enthält mehr als 50 Module\n";
-					errorMsg += "Der Heizkreis HK" + (c.NrOfCircuit + 1).ToString() + " enthält zu viele Module (" + moduleCount + " > " + ModulKlimaBodenProduct.ConfigModulesInCircuit.ToString() + ")\n";
-				}
-			}*/
-			//double maxTemp = double.MinValue;
-			//foreach (ModulDeckeCircuit c in this.circuits) {
-			//    if (c.C_FloorTempHeat > maxTemp) {
-			//        maxTemp = c.C_FloorTempHeat;
-			//    }
-			//}
-			//if (Math.Round(maxTemp, 1) > (ModulKlimaBodenProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264)) {
-			//    errorMsg += "Oberflächentemperatur zu groß (" + Math.Round(maxTemp, 1) + "°C > " + Math.Round((EurovalProduct.ConfigUseHarreitherNorm ? ModulKlimaBodenProduct.ConfigMaxFloorTempHarreither : ModulKlimaBodenProduct.ConfigMaxFloorTempEn1264), 1) + "°C)\n";
-			//}
 			foreach (ModulDeckeCircuit c in circuits) {
 				int saNr = 1;
 				int longestRow = 0;
@@ -1752,136 +1719,6 @@ namespace Europlan.Common {
 			index = -1;
 			return null;
 		}
-
-		/*public override List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
-			if (!Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || this.GraphConstruction == null || this.GraphConstruction.PossibleLanes == null) {
-				return new List<PossibleConnection>();
-			}
-			List<PossibleConnection> possibleConnections = new List<PossibleConnection>();
-			Point2D input12D, input22D, input32D, input42D;
-			Point2D output12D, output22D, output32D, output42D;
-			double height, width;
-
-			// TODO wenn distributor bereit gesetzt ist dürfen nicht alle zurückgegeben werden
-			List<ModulDeckeCircuit> openInputs = this.GetOpenInputs();
-			List<ModulDeckeCircuit> openOutputs = this.GetOpenOutputs();
-
-			Matrix3D laneRotation = Transformation3D.Rotate(-this.GraphConstruction.Rotation * Math.PI / 180.0);
-			Matrix3D moduleRotation = Transformation3D.Rotate(this.GraphConstruction.Rotation * Math.PI / 180.0);
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				foreach (ModulDeckeSubArea sa in c.SubAreas) {
-					foreach (KlimaFlaechenList row in sa.Rows) {
-						foreach (KlimaFlaechenModul modul in row.List) {
-							if (this.GraphConstruction.PossibleLanes.Count > modul.GraphLane) {
-								double x = laneRotation.Transform(this.GraphConstruction.PossibleLanes[modul.GraphLane].BorderLeft.Origin).X;
-								double y = modul.GraphPositionInLan;
-								Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
-								height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
-								width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * measure;
-
-								if (invertYAxis == modul.GraphBottomUp) {
-									if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-										if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-											output12D = transformation.Transform(new Point2D(0, 0));
-											output22D = transformation.Transform(new Point2D(0, 0.1 * measure));
-											output32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
-											output42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-											possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, this.graphConstruction.Rotation, 0));
-										}
-										if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-											input12D = transformation.Transform(new Point2D(width, height));
-											input22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
-											input32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
-											input42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-											possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, this.graphConstruction.Rotation, 0));
-										}
-									} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-										if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-											output12D = transformation.Transform(new Point2D(width, 0));
-											output22D = transformation.Transform(new Point2D(width, 0.1 * measure));
-											output32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
-											output42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-											possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, this.graphConstruction.Rotation, 0));
-										}
-										if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-											input12D = transformation.Transform(new Point2D(0, height));
-											input22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
-											input32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
-											input42D = transformation.Transform(new Point2D(0.1 * measure, height));
-											possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, this.graphConstruction.Rotation, 0));
-										}
-									}
-								} else {
-									if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
-										if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-											input12D = transformation.Transform(new Point2D(0, 0));
-											input22D = transformation.Transform(new Point2D(0, 0.1 * measure));
-											input32D = transformation.Transform(new Point2D(0.1 * measure, 0.1 * measure));
-											input42D = transformation.Transform(new Point2D(0.1 * measure, 0));
-											possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, this.graphConstruction.Rotation, 0));
-										}
-										if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-											output12D = transformation.Transform(new Point2D(width, height));
-											output22D = transformation.Transform(new Point2D(width, height - 0.1 * measure));
-											output32D = transformation.Transform(new Point2D(width - 0.1 * measure, height - 0.1 * measure));
-											output42D = transformation.Transform(new Point2D(width - 0.1 * measure, height));
-											possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, this.graphConstruction.Rotation, 0));
-										}
-									} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
-										if (input && modul.GetInputLink(c, invertYAxis) == null && openInputs.Contains(c)) {
-											input12D = transformation.Transform(new Point2D(width, 0));
-											input22D = transformation.Transform(new Point2D(width, 0.1 * measure));
-											input32D = transformation.Transform(new Point2D(width - 0.1 * measure, 0.1 * measure));
-											input42D = transformation.Transform(new Point2D(width - 0.1 * measure, 0));
-											possibleConnections.Add(new PossibleConnection(modul.GetInputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }), true, false, this, c, this.graphConstruction.Rotation, 0));
-										}
-										if (output && modul.GetOutputLink(c, invertYAxis) == null && openOutputs.Contains(c)) {
-											output12D = transformation.Transform(new Point2D(0, height));
-											output22D = transformation.Transform(new Point2D(0, height - 0.1 * measure));
-											output32D = transformation.Transform(new Point2D(0.1 * measure, height - 0.1 * measure));
-											output42D = transformation.Transform(new Point2D(0.1 * measure, height));
-											possibleConnections.Add(new PossibleConnection(modul.GetOutputConnection(measure, invertYAxis, this), new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }), false, true, this, c, this.graphConstruction.Rotation, 0));
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-
-			return possibleConnections;
-		}*/
-
-		/*private List<ModulDeckeCircuit> GetOpenInputs() {
-			List<ModulDeckeCircuit> openInputs = new List<ModulDeckeCircuit>();
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				openInputs.Add(c);
-			}
-			foreach (GraphicalProductConnection conn in this.Connections) {
-				if (conn.Vorlauf) {
-					foreach (ModulDeckeCircuit c in conn.ProductCircuits) {
-						openInputs.Remove(c);
-					}
-				}
-			}
-			return openInputs;
-		}
-
-		private List<ModulDeckeCircuit> GetOpenOutputs() {
-			List<ModulDeckeCircuit> openOutputs = new List<ModulDeckeCircuit>();
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				openOutputs.Add(c);
-			}
-			foreach (GraphicalProductConnection conn in this.Connections) {
-				if (!conn.Vorlauf) {
-					foreach (ModulDeckeCircuit c in conn.ProductCircuits) {
-						openOutputs.Remove(c);
-					}
-				}
-			}
-			return openOutputs;
-		}*/
 
 		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
 			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {

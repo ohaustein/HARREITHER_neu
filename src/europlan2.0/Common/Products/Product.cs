@@ -785,17 +785,6 @@ namespace Europlan.Common {
 		}
 
 		public void GetCoolFlow(out double vorlauf, out double ruecklauf) {
-			/*if (this.PlannedConnection == null) {
-				vorlauf = 0;
-				ruecklauf = 0;
-				return;
-			}
-			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				this.PlannedConnection.OtherProduct.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-				return;
-			}
-			vorlauf = this.PlannedConnection.Distributor.RegulatorCircuit.CoolFlowTemperature;
-			ruecklauf = vorlauf + 3;*/
 			vorlauf = this.plannedVorlaufTempCool;
 			ruecklauf = this.plannedRuecklaufTempCool;
 		}
@@ -810,16 +799,6 @@ namespace Europlan.Common {
 			}
 			set { this.plannedConnection = value; }
 		}
-
-		/*public SerializableDictionary<int, string> PlannedConnectedProductIds {
-			get {
-				return null;
-				// TODO
-			}
-			set {
-				// TODO
-			}
-		}*/
 
 		public List<Circuit> PlannedCircuits {
 			get {
@@ -856,15 +835,6 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedSpreizungHeat {
 			get {
-				/*if (this.PlannedConnection == null) {
-					return 0;
-				}
-				if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
-					return this.PlannedConnection.Distributor.RegulatorCircuit == null ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);
-				} else if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-					return this.PlannedConnection.OtherProduct.Product.PlannedSpreizungHeat;
-				}
-				return (this.PlannedConnection == null || this.PlannedConnection.Distributor == null || this.PlannedConnection.Distributor.RegulatorCircuit == null) ? 0 : EN1264.Instance.DefaultSpreizung(this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature);*/
 				return this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
 			}
 		}
@@ -872,7 +842,6 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double PlannedSpreizungCool {
 			get {
-				//return 3; // TODO
 				return this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
 			}
 		}
@@ -1517,7 +1486,6 @@ namespace Europlan.Common {
 		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm, bool addWinkelForAdditional21mm) {
 			// Euroval Anbindung
 			// 21mm Anbindung
-			/*double pipeEurovalLength = 0;*/
 			double pipe21mm = additional21mm;
 			double circuit21mmFirstLength = 0;
 			double circuit21mmOthersLength = 0;
@@ -1590,17 +1558,8 @@ namespace Europlan.Common {
 						}
 						ovalMuffeEuroval += pipe.AreaTotal * EurovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
 					}
-
-					// TODO
-					/*if (pipe.OnlyFirst) {
-						pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
-					} else {
-						pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-					}*/
 				}
 			}
-			/*Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", pipeEurovalLength);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", pipe21mmLength);*/
 
 			// materials for 21mm pipe
 			// Muffe
@@ -1666,11 +1625,6 @@ namespace Europlan.Common {
 		public virtual bool AllowToSwitchMode {
 			get { return false; }
 		}
-
-		/*public virtual List<PossibleConnection> GetPossibleConnections(bool input, bool output, double measure, bool invertYAxis, Point2D currentMousePoint, Distributor distributor, Nullable<int> nr) {
-			// must be overriden by all products that can be planned graphically
-			return new List<PossibleConnection>();
-		}*/
 
 		public virtual PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
 			return null;

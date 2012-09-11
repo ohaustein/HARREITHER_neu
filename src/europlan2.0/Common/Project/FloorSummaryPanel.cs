@@ -142,6 +142,9 @@ namespace Europlan.Common {
 				chkAssignPlan.Enabled = false;
 				cmbPlans.Enabled = false;
 			}
+
+			btnDefineConnections.Enabled = this.floor.AssociatedPlan != null;
+
 			updateControlOngoing = false;
 		}
 
@@ -483,6 +486,7 @@ namespace Europlan.Common {
 					floor.AssociatedPlanId = null;
 					cmbPlans.Enabled = false;
 				}
+				this.UpdateControl(false);
 				if (projectChanged != null) {
 					projectChanged(this);
 				}

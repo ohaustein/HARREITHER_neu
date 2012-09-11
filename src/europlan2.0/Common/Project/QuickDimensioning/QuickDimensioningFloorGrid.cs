@@ -144,7 +144,7 @@ namespace Europlan.Common {
 		}
 
 		public bool ConcreteActivation {
-			// TODO !!!
+#warning TODO Concrete Activation has not been implemented yet
 			get { return this.colConcreteActivation.Visible; }
 			set { this.SetProductAvailable<ConcreteActivationProduct>(value); }
 		}

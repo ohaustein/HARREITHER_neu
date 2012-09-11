@@ -258,17 +258,12 @@ namespace Europlan.Common {
 									double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
 									double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 1 : distVlTmp;
 
-									/*double distRlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2 - 1) - 0.1;
-									double distRlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2 - 1) : distRl - 0.05;*/
-
-									
-									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVl : distVlFirst) * measure * factor /** rightFactor*/)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
+									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVl : distVlFirst) * measure * factor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
 									Point2D connPoint0 = connPoint1 - lastVector * (0.015 * measure);
 									tmpRl.Add(connPoint0);
 									tmpRl.Add(connPoint1);
 									vl.Add(connPoint1);
-									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
-									//Point2D connPoint2 = connPoint1 + (lastMoveVector * (0.05 * measure * rightFactor));
+									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
 									tmpRl.Add(connPoint2);
 									this.ruecklaufVerticesForDrawing.Add(tmpRl);
 									this.vorlaufVerticesForDrawing.Add(vl);
@@ -313,19 +308,16 @@ namespace Europlan.Common {
 									Point2D tmp = this.vertices[j - 1];
 									List<Point2D> tmpVl = new List<Point2D>();
 
-									/*double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.05;
-									double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distVl - 0.05;*/
 									double distRlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
 									double distRlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distRlTmp;
 
 
-									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRl : distRlFirst) * measure * factor /** rightFactor*/)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
+									Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRl : distRlFirst) * measure * factor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
 									Point2D connPoint0 = connPoint1 - lastVector * (0.015 * measure);
 									tmpVl.Add(connPoint0);
 									tmpVl.Add(connPoint1);
 									rl.Add(connPoint1);
-									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRlTmp : distRlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
-									//Point2D connPoint2 = connPoint1 + (lastMoveVector * (0.05 * measure * rightFactor));
+									Point2D connPoint2 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distRlTmp : distRlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
 									tmpVl.Add(connPoint2);
 									this.vorlaufVerticesForDrawing.Add(tmpVl);
 									this.ruecklaufVerticesForDrawing.Add(rl);
@@ -342,8 +334,6 @@ namespace Europlan.Common {
 					lastLineVl = curLineVl;
 					lastLineRl = curLineRl;
 				}
-				//vl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distVlFirst * measure * factor));
-				//rl.Add(this.vertices[this.vertices.Count - 1] + moveVector * (distRlFirst * measure * factor));
 				this.vorlaufVerticesForDrawing.Add(vl);
 				this.ruecklaufVerticesForDrawing.Add(rl);
 			}

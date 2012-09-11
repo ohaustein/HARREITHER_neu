@@ -13,22 +13,11 @@ namespace StartSetup {
 		static void Main(string[] args) {
 			try {
 
-				/*int found = 0;
-				int i = 0;
-				while (found == 0) {  // ERROR_SUCCESS = 0
-					string foundProduct = new string(' ', 39);
-					found = Msidll.MsiEnumRelatedProducts("{ca795401-2df9-4ed9-8770-f230bd4ab9dc}", 0, i, foundProduct);
-					i++;
-				}*/
-
 				string foundProduct = new string(' ', 39);
 				bool found = (Msidll.MsiEnumRelatedProducts("{F33AAB86-9453-478e-A55B-20CAF7047F33}", 0, 0, foundProduct) == 0);
-				//found = false;
 				Process installProcess = new Process();
-				//MessageBox.Show(Application.StartupPath);
 				installProcess.StartInfo.FileName = "msiexec";
 				installProcess.StartInfo.Arguments = "/i \"" + Path.Combine(Application.StartupPath, "setup.msi") + (found ? " /qb+" : ""); //"\" REINSTALL=ALL REINSTALLMODE=vomus" : "\"");
-				//MessageBox.Show(installProcess.StartInfo.Arguments);
 				installProcess.StartInfo.CreateNoWindow = true;
 
 				installProcess.StartInfo.UseShellExecute = true;

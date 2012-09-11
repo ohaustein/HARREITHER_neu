@@ -250,14 +250,11 @@ namespace Europlan.Common {
 				double bottom  = this.wall.GetWallHeight() * 100.0 - this.Height;
 				List<Anchor> anchors = new List<Anchor>();
 				anchors.Add(new Anchor(left, top, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
-				//anchors.Add(new Anchor(right, top, AnchorTypeEnum.ANCHOR_NONE, this));
 				anchors.Add(new Anchor(right, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 				anchors.Add(new Anchor(left, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_LEFT, this));
 
-				//anchors.Add(new Anchor((left + right) / 2.0, top, AnchorTypeEnum.ANCHOR_NONE, this));
 				anchors.Add(new Anchor((left + right) / 2.0, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 				anchors.Add(new Anchor(left, (top + bottom) / 2.0, AnchorTypeEnum.ANCHOR_SCALE_LEFT, this));
-				//anchors.Add(new Anchor(right, (top + bottom) / 2.0, AnchorTypeEnum.ANCHOR_NONE, this));
 				return anchors;
 			}
 		}
@@ -268,7 +265,6 @@ namespace Europlan.Common {
 
 		public bool Error {
 			get {
-				// TODO
 				return false;
 			}
 			set {

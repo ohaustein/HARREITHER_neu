@@ -137,8 +137,7 @@ namespace Europlan.Common {
 		}
 
 		private void dgvModules_DataError(object sender, DataGridViewDataErrorEventArgs e) {
-			// TODO - check if error caused by graphical planner has to be handled in an other way than
-			// listening for the data error event
+#warning TODO check if error caused by graphical planner has to be handled in an other way than listening for the data error event
 		}
 	}
 }

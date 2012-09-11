@@ -371,10 +371,7 @@ namespace Europlan.Common {
 			double startPointX = double.MaxValue;
 			double endPointX = double.MinValue;
 			int start = -1;
-			//int i = 0;
-			//Vector2D normalizedBorderDirection = matrix.Transform(borderLeft.Direction);
 			Vector2D normalizedBorderDirection = new Vector2D(0, 1);
-			// todo replace by new Vector2D(0, 1)
 			Line2D normalizedBorderLeft = new Line2D(matrix.Transform(borderLeft.Origin), normalizedBorderDirection);
 			Line2D normalizedBorderRight = new Line2D(matrix.Transform(borderRight.Origin), normalizedBorderDirection);
 			List<Line2D> normalizedLines = new List<Line2D>();

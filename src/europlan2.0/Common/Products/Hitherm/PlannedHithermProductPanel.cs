@@ -590,7 +590,6 @@ namespace Europlan.Common {
 				ignoreType--;
 				ignoreCalculationMode--;
 			}
-			// TODO
 			updateOngoing = false;
 		}
 
@@ -1134,7 +1133,6 @@ namespace Europlan.Common {
 			form.ShowDialog();
 			this.UpdateControl(FieldEnum.LAYOUT_TYPE);
 			form.Dispose();
-			// TODO
 			if (this.projectChanged != null) {
 				this.projectChanged(this);
 			}

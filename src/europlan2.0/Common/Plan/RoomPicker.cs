@@ -305,7 +305,6 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			if (this.Mode == RoomPickerMode.RPM_PICK_ROOM || this.Mode == RoomPickerMode.RPM_PICK_UNUSED) {
 				PointF pos = new PointF((float)planPoint.X, (float)planPoint.Y);
 
@@ -333,14 +332,6 @@ namespace Europlan.Common {
 					}
 				}
 				if (pick && !finishPick) {
-					/*if (!inDesign && this.Mode == RoomPickerMode.RPM_PICK_ROOM && roomCoordinates.Count > 0) {
-						// TODO
-						DialogResult result = MessageBox.Show("Wollen Sie die bereits definierte Raumgeometrie verwerfen und neu definieren?", "Verwerfen und neu definieren?", MessageBoxButtons.YesNo);
-						if (result == DialogResult.No) {
-							return false;
-						}
-						roomCoordinates.Clear();
-					}*/
 					if (RoomAreaIsValid(normalizedPoint)) {
 						unsavedChanges = true;
 						coordsPickedSoFar.Add(normalizedPoint);
@@ -615,17 +606,14 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 		#endregion

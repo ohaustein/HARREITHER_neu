@@ -47,7 +47,6 @@ namespace Europlan.Common {
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY + this.Height));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY + this.Height));
 				} else {
-					// TODO: check if dachschraegen register are different!
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX, yOffset + this.register.GraphPosY));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY));
 					borders.Add(new Point2D(xOffset + this.register.GraphPosX + this.Width, yOffset + this.register.GraphPosY + this.Height));
@@ -399,7 +398,6 @@ namespace Europlan.Common {
 			if (this.startOutputConnection != null) {
 				this.startOutputConnectionVertices = new List<Point2D>(this.startOutputConnection.Vertices);
 			}
-			// TODO
 			return false;
 		}
 
@@ -585,8 +583,6 @@ namespace Europlan.Common {
 					this.register.GraphPosY = oldPosY;
 					this.register.RegisterCount = oldRegisterCount;
 					this.register.RegisterType = oldType;
-				} else {
-					// TODO move Verbindeleitungen
 				}
 			}
 
@@ -594,11 +590,11 @@ namespace Europlan.Common {
 			foreach (GraphicalHithermCompactVerbindung link in circuit.Links) {
 				if (link.Start == this.register) {
 					link.RevertState();
-					link.UpdateStartPoint(this, owningWall, checkLinks); // TODO
+					link.UpdateStartPoint(this, owningWall, checkLinks);
 				}
 				if (link.End == this.register) {
 					link.RevertState();
-					link.UpdateEndPoint(this, owningWall, checkLinks); // TODO
+					link.UpdateEndPoint(this, owningWall, checkLinks);
 				}
 			}
 

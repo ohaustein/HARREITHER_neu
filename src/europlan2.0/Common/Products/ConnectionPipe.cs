@@ -389,7 +389,6 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double AreaTotal {
 			get {
-				// TODO calculate separate circuits
 				double area = 0;
 				switch (verlegeart) {
 					case VerlegeartEnum.VA_UNTER_ESTRICH:
@@ -455,7 +454,7 @@ namespace Europlan.Common {
 				case VerlegeartEnum.VA_A5:
 					return EurovalProduct.EurovalLayDistance.A5;
 				default:
-					return EurovalProduct.EurovalLayDistance.EV5; // TODO
+					return EurovalProduct.EurovalLayDistance.EV5;
 			}
 		}
 
@@ -478,7 +477,7 @@ namespace Europlan.Common {
 				case VerlegeartEnum.VA_A5:
 					return EcothermProduct.EcothermLayDistance.A5;
 				default:
-					return EcothermProduct.EcothermLayDistance.EV5; // TODO
+					return EcothermProduct.EcothermLayDistance.EV5;
 			}
 		}
 
@@ -571,7 +570,6 @@ namespace Europlan.Common {
 			}
 
 			if (originalProduct == null || originalProduct.Product == null || originalProduct.Product.PlannedConnection == null || originalProduct.Product.PlannedConnection.Distributor == null || originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit == null) {
-				// TODO
 				return;
 			}
 			double distributorTempOut = 0;
@@ -748,7 +746,6 @@ namespace Europlan.Common {
 			}
 
 			if (originalProduct.Product.PlannedConnection == null || originalProduct.Product.PlannedConnection.Distributor == null || originalProduct.Product.PlannedConnection.Distributor.RegulatorCircuit == null) {
-				// TODO
 				return;
 			}
 			double distributorTempOut = 0;

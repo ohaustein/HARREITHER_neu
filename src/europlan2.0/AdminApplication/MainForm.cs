@@ -23,15 +23,11 @@ namespace Europlan.AdminApplication {
 			LicenseTemplate newLicense = new LicenseTemplate();
 			newLicense.ValidUntil = DateTime.Now.AddYears(1);
 			foreach (string module in AbstractLicensedModule.DefaultModules.Keys) {
-			//foreach (string module in LicenseEditor.availableModules) {
 				newLicense.SetModuleEnabled(module, AbstractLicensedModule.DefaultEnabledModules.Contains(module));
 			}
 			LicenseItem newItem = new LicenseItem(newLicense);
 			this.lstLicenses.Items.Add(newItem);
 			LicenseManager.Instance.Licenses.Add(newLicense);
-			/*foreach (LicenseItem item in this.lstLicenses.Items) {
-				item.Selected = item == newItem;
-			}*/
 			newItem.Selected = true;
 
 		}
@@ -225,51 +221,5 @@ namespace Europlan.AdminApplication {
 				}
 			}
 		}
-
-		/*private void cmsViewItem_Click(object sender, EventArgs e) {
-			int i = 0;
-			string selected = "";
-			if (this.tsmiFloorConstruction.Checked) {
-				selected += ", FB";
-				i++;
-			}
-			if (this.tsmiInsulationConstruction.Checked) {
-				selected += ", WD";
-				i++;
-			}
-			if (i == 0) {
-				selected = "keine";
-				this.constructionEditorPage.Filter = ConstructionScopeEnum.UnknownConstruction;
-			} else if (i == 2) {
-				selected = "alle";
-				this.constructionEditorPage.Filter = ConstructionScopeEnum.All;
-			} else {
-				selected = selected.Substring(2);
-				if (this.tsmiFloorConstruction.Checked) {
-					this.constructionEditorPage.Filter = ConstructionScopeEnum.FloorConstruction;
-				} else {
-					this.constructionEditorPage.Filter = ConstructionScopeEnum.InsulationConstruction;
-				}
-			}
-			this.btnView.Text = "Angezeigte Konstruktionen (" + selected + ")";
-		}
-
-		private void tsmiNewConstruction_Click(object sender, EventArgs e) {
-			Construction c = null;
-			if (sender == this.tsmiNewFloorConstruction) {
-				c = new FloorConstruction();
-				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH);
-			} else if (sender == this.tsmiNewInsulationConstruction) {
-				c = new InsulationConstruction();
-				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_DAEMM);
-			} else if (sender == this.tsmiNewWallConstruction) {
-				// TODO
-			}
-			if (c != null) {
-				ConstructionEditorForm form = new ConstructionEditorForm(c);
-				form.ShowDialog();
-				this.constructionEditorPage.AddConstruction(c);
-			}
-		}*/
 	}
 }

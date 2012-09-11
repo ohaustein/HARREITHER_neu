@@ -158,7 +158,7 @@ namespace Europlan.Common {
 		private void ResetProducts() {
 			this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
-				// TODO add other products
+#warning TODO do not forget to add new products here
 				if (p.GraphicalMode == true) {
 					if (p is ModulKlimaBodenProduct) {
 						ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
@@ -517,7 +517,7 @@ namespace Europlan.Common {
 						this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
 						this.nextConnectionPoints.Clear();
 						if (endConnection != null) {
-							// TODO check if connection is valid!
+#warning TODO check if connection is valid!
 							PossibleProductConnection productConnection;
 							PossibleProductConnection distributorConnection;
 							bool ok = false;

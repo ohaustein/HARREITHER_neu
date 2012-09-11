@@ -451,17 +451,14 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 		#endregion

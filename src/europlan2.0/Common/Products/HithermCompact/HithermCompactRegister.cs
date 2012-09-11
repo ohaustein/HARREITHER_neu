@@ -485,7 +485,6 @@ namespace Europlan.Common {
 		public double EquivalentPipeLengthUnisolated {
 			get {
 				return this.HeatArea * 10;
-				// TODO confirm
 			}
 		}
 
@@ -494,11 +493,6 @@ namespace Europlan.Common {
 			set { this.registerCount = value; }
 		}
 		
-		//public Nullable<Point> Origin {
-		//	get { return this.origin; }
-		//	set { this.origin = value; }
-		//}
-
 		[XmlIgnore]
 		public double CoveredArea {
 			get {
@@ -587,8 +581,6 @@ namespace Europlan.Common {
 			}
 			faktor = faktor * usedAlpha / HithermCompactProduct.ConfigAlphaWandCool * HithermCompactProduct.ConfigLeistungsFaktorKuehlen;
 			return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistungProQm, faktor) * this.HeatArea;
-			// TODO
-			//return EN1264.Instance.KaeltestromDichteRegister(kuehlmittelTemp, roomTemp, HithermCompactProduct.ConfigHlRegKuehlleistung, faktor) * this.registerCount;
 		}
 
 		public double KuehlleistungBereinigung(double roomTemp) {

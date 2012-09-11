@@ -413,8 +413,6 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (this.mode == HithermPlannerMode.HPM_CONNECT_REGISTERS) {
-				//if (this.connectRegistersFirst == null) {
-					//this.connectRegistersFirst = this.GetRegisterForPoint(planPoint);
 				if (this.connectedWallPanel != null && this.connectedWallPanel.SelectedObject is GraphicalHithermRegisterWrapper) {
 					GraphicalHithermRegisterWrapper first = this.connectedWallPanel.SelectedObject as GraphicalHithermRegisterWrapper;
 					GraphicalHithermRegisterWrapper second = this.GetRegisterForPoint(planPoint);
@@ -446,8 +444,6 @@ namespace Europlan.Common {
 									ok  = false;
 								}
 
-								// TODO check if number of rohre is ok
-								// TODO other checks
 								if (ok) {
 									second.Error = true;
 									secondOwningWall.Registers.Remove(second);
@@ -458,16 +454,11 @@ namespace Europlan.Common {
 									int oldRohre = first.Register.Rohre;
 									first.Register.Rohre =first.Register.Rohre + second.Register.Rohre;
 									first.Register.Gaps[oldRohre] = (firstLeft < secondLeft) ? secondLeft - firstRight : firstLeft - secondRight;
-									if (!first.CheckValidity(firstOwningWall, offset.X, offset.Y)) {
-										// TODO revert
-									}
 									if (this.connectedWallPanel != null) {
 										this.connectedWallPanel.InvalidateGraphics();
 									}
 								}
 
-							} else {
-								// TODO
 							}
 						}
 						if (!ok) {
@@ -944,14 +935,11 @@ namespace Europlan.Common {
 						lastVertices.Add(endPoint);
 						todo = todo - endVector;
 					}
-					//if (Math.Abs(startVector.Y) <= 0.0001 && Math.Abs(endVector.X) <= 0.0001 &&
-					//(Math.Abs(startVector.X) > 0.0001 || Math.Abs(endVector.Y) > 0.0001)) {
+
 					if (Math.Abs(startVector.Y) <= 0.0001) {
 						nextVertices.Add(new Point2D(endPoint.X, startPoint.Y));
-						//nextVertices.Add(new Point2D(lastVertices[0].X, nextVertices.Count > 0 ? nextVertices[nextVertices.Count - 1].Y : this.newConnection.Vertices[this.newConnection.Vertices.Count - 1].Y));
 					} else {
 						nextVertices.Add(new Point2D(startPoint.X, endPoint.Y));
-						//nextVertices.Add(new Point2D(nextVertices.Count > 0 ? nextVertices[nextVertices.Count - 1].X : this.newConnection.Vertices[this.newConnection.Vertices.Count - 1].X, lastVertices[0].Y));
 					}
 					lastVertices.Reverse();
 					nextVertices.AddRange(lastVertices);
@@ -971,10 +959,8 @@ namespace Europlan.Common {
 
 		private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out PossibleConnection endConnection) {
 			List<Point2D> nextConnectionPoints = new List<Point2D>();
-			//endRegister = null;
 			endConnection = this.GetHoveredRegisterConnection(mousePoint, this.newConnectionStart.PossibleOutput, this.newConnectionStart.PossibleInput);
-			
-			// TODO check if end connection is valid
+
 			if (endConnection != null) {
 				if (endConnection is PossibleHithermRegisterConnection) {
 					HithermCircuit circuit = this.product.GetCircuitForRegister((endConnection as PossibleHithermRegisterConnection).Register);
@@ -983,10 +969,6 @@ namespace Europlan.Common {
 					}
 				}
 			}
-
-			/*if (this.product.GetCircuitForModul(this.newConnectionStart, out index).GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
-				endModule = null;
-			}*/
 
 			if (endConnection == null) {
 				bool horizontal;

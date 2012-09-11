@@ -665,7 +665,6 @@ namespace Europlan.Common {
 				ignoreLayoutType--;
 			}
 			updateOngoing = false;
-			// TODO
 		}
 
 		public bool AllowLeave() {

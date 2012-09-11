@@ -756,7 +756,6 @@ namespace Europlan.Common {
 		private bool hoverAnbindungen = false;
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			if (this.Mode == KlimaBodenMode.KDM_CONSTRUCTION) {
 				if (this.product.GraphConstruction != null) {
 					if (this.product.GraphConstruction.HitTest(planPoint, pointInControl)) {
@@ -1200,7 +1199,6 @@ namespace Europlan.Common {
 			Matrix3D rotation = Transformation3D.Rotate(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 			Matrix3D invRotation = rotation.GetInverse();
 
-			//Polygon2D rotatedAddArea = new Polygon2D();
 			double top = double.MaxValue;
 			double bottom = double.MinValue;
 			double left = double.MaxValue;
@@ -1238,21 +1236,9 @@ namespace Europlan.Common {
 			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
 			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
 
-			/*double stepX = width;
-			if (this.product.GraphConstruction is ModulKlimaBodenConstructionStaffeln) {
-				stepX = ((this.product.GraphConstruction as ModulKlimaBodenConstructionStaffeln).StaffelnAbstand + (this.product.GraphConstruction as ModulKlimaBodenConstructionStaffeln).StaffelnBreite) * measure;
-			} else {
-				stepX += modulierendDistance * measure * (int)this.newModulesXDicht;
-			}*/
-			/*if (!this.newModulesXDicht) {
-				stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			}*/
 			double stepX = this.NewModulesStepX;
 			double stepY = height;
 			stepY += modulierendDistance * measure * (int)this.newModulesYDicht;
-			/*if (!this.newModulesYDicht) {
-				stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			}*/
 
 			right -= width;
 			bottom -= height;
@@ -1298,23 +1284,9 @@ namespace Europlan.Common {
 			Matrix4D xyRotation = Transformation4D.RotateZ(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 			bool orientationLeft = this.newModulesStartingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
 
-            /*double startY = top + newModulesOffsetY;
-            if (bottomUp) {
-                while (startY < bottom) {
-                    startY += stepY;
-                }
-                startY -= stepY;
-            }*/
 			double startY = bottomUp ? bottom - (newModulesOffsetY > 0 ? stepY - newModulesOffsetY : 0) : top + newModulesOffsetY;
 			double endY = bottomUp ? top : bottom;
 			double incY = bottomUp ? -stepY : stepY;
-            /*double startX = left + newModulesOffsetX;
-            if (rightToLeft) {
-                while (startX < right) {
-                    startX += stepX;
-                }
-                startX -= stepX;
-            }*/
 			double startX = rightToLeft ? right - (newModulesOffsetX > 0 ? stepX - newModulesOffsetX : 0) : left + newModulesOffsetX;
 			double endX = rightToLeft ? left : right;
 			double incX = rightToLeft ? -stepX : stepX;
@@ -1374,7 +1346,6 @@ namespace Europlan.Common {
 						}
 						if (intersectionFound) {
 							fits = false;
-							//continue;
 						}
 
 						if (addIncomplete || fits) {
@@ -1389,8 +1360,6 @@ namespace Europlan.Common {
 							if (addConnections) {
 								// add Verbindeleitung between current and last modul
 								if (lastAddedModul != null && circuitOfModul == lastCircuitOfModul) {
-									//Point2D output = lastAddedModul.GetOutputConnection(measure);
-									//Point2D input = addedModul.GetInputConnection(measure);
 									if (circuitOfModul.Links == null) {
 										circuitOfModul.Links = new List<KlimaFlaechenModulVerbindung>();
 									}
@@ -1464,7 +1433,6 @@ namespace Europlan.Common {
 						}
 						if (intersectionFound) {
 							fits = false;
-							//continue;
 						}
 
 						if (addIncomplete || fits) {
@@ -1479,8 +1447,6 @@ namespace Europlan.Common {
 							if (addConnections) {
 								// add Verbindeleitung between current and last modul
 								if (lastAddedModul != null && circuitOfModul == lastCircuitOfModul) {
-									//Point2D output = lastAddedModul.GetOutputConnection(measure);
-									//Point2D input = addedModul.GetInputConnection(measure);
 									if (circuitOfModul.Links == null) {
 										circuitOfModul.Links = new List<KlimaFlaechenModulVerbindung>();
 									}
@@ -2201,7 +2167,7 @@ namespace Europlan.Common {
 
 		public bool ContainsNotConfirmedModules {
 			get {
-				// TODO check if the area really contains modules
+#warning TODO check if the area really contains modules
 				return this.layoutAddArea != null;
 			}
 		}

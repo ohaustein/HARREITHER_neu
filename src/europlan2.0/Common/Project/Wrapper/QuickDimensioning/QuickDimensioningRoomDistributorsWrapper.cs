@@ -24,57 +24,8 @@ namespace Europlan.Common {
 		}
 
 		public string FloorName {
-			get { return this.floor.Name; } // TODO
+			get { return this.floor.Name; }
 		}
-
-		/*private int GetPlannedCircuitsForRoom() {
-			int circuits = 0;
-
-			// Euroval
-			Product product = this.room.GetProductForQuickDimensioning<EurovalProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-			// ConcreteActivation
-			product = this.room.GetProductForQuickDimensioning<ConcreteActivationProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-			// Hitherm
-			product = this.room.GetProductForQuickDimensioning<HithermProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-			// Hitherm Compact
-			product = this.room.GetProductForQuickDimensioning<HithermCompactProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-			// Modul Klimaboden
-			product = this.room.GetProductForQuickDimensioning<ModulKlimaBodenProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-			// Modul Klimadecke
-			product = this.room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>();
-			if (product != null) {
-				if (product.QuickDimensioningConnectedDistributors.ContainsKey(this.distributor.Id)) {
-					circuits += product.QuickDimensioningConnectedDistributors[this.distributor.Id];
-				}
-			}
-
-			return circuits;
-		}*/
 
 		private int GetOpenCircuitsForProduct<P>() where P : Product {
 			Product product = this.room.GetProductForQuickDimensioning<P>();
@@ -128,8 +79,6 @@ namespace Europlan.Common {
 				} else if (circuits != null) {
 					product.QuickDimensioningConnectedDistributors[this.distributor.Id] = circuits.Value;
 				}
-			} else {
-				// TODO log
 			}
 		}
 

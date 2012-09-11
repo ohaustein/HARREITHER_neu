@@ -79,8 +79,8 @@ namespace Europlan.Common {
 		private void ConfigureColumnVisibility() {
 			this.dgvConnectionPipes.AllowUserToDeleteRows = !showPipesThroughProduct;
 			if (showPipesThroughProduct) {
-				// TODO: this is just a quick workaround - room column could not be made invisible if it
-				//       was the first column
+				// TODO this is just a quick workaround - room column could not be made invisible if it
+				//      was the first column
 				if (!dgvConnectionPipes.Columns.Contains(Room)) {
 					dgvConnectionPipes.Columns.Insert(0, Room);
 				}
@@ -106,8 +106,8 @@ namespace Europlan.Common {
 				roomDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.Control;
 				dgvConnectionPipes.AllowUserToAddRows = false;
 			} else {
-				// TODO: this is just a quick workaround - room column could not be made invisible if it
-				//       was the first column
+				// TODO this is just a quick workaround - room column could not be made invisible if it
+				//      was the first column
 				if (dgvConnectionPipes.Columns.Contains(Room)) {
 					dgvConnectionPipes.Columns.Remove(Room);
 				}

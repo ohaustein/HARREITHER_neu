@@ -415,6 +415,7 @@ namespace Europlan.Common {
 
 		//private Point3D CorrectPoint(Point3D point, List<DxfEntity> entityChain, int pos) {
 		private Point3D CorrectPoint(Point3D point, RenderedEntityInfo entityInfo) {
+#warning TODO fix this method to make snapping work again
 			return entityInfo.Transform.Transform(point);
 			//if (pos >= entityChain.Count) {
 			//    return point;

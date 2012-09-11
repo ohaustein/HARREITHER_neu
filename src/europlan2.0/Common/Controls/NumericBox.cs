@@ -148,16 +148,12 @@ namespace Europlan.Common {
 				}
 				text += correctedVal.ToString();
 				this.Text = text;
-				//this.numValueBox.Value = value;
 			}
 		}
 
 		public override string Text {
 			get { return base.Text; }
-			set {
-				// TODO implement
-				base.Text = value;
-			}
+			set { base.Text = value; }
 		}
 
 		public static int DecimalPlaces(NumericBox.NumericEditType type) {
@@ -172,14 +168,6 @@ namespace Europlan.Common {
 		}
 
 		private string decimalCharacters = "0123456789";
-
-		/*protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e) {
-			if (e.KeyCode == Keys.Escape) {
-				e.IsInputKey = false;
-			} else {
-				base.OnPreviewKeyDown(e);
-			}
-		}*/
 
 		protected override void OnKeyPress(KeyPressEventArgs e) {
 			base.OnKeyPress(e);

@@ -507,7 +507,6 @@ namespace Europlan.Common {
 					this.draggingObject = null;
 					this.draggingAnchor = null;
 					this.productPlanner.OnRecalculationNecessary();
-					// TODO set cursor correctly;
 				}
 			}
 			if (mode == PlanMode.PM_MOVE) {
@@ -592,7 +591,6 @@ namespace Europlan.Common {
 					this.newSchraege.Height = height;
 				}
 				this.room.MarkErrors(this.newSchraege, this.newSchraegeWall);
-				// TODO
 				invalidate = true;
 			}
 			if (mode == PlanMode.PM_SELECT_OBJECT && e.Button != MouseButtons.Middle) {
@@ -819,34 +817,6 @@ namespace Europlan.Common {
 						}
 					}
 					if (selectedObject != oldSelectedObject && oldSelectedObject != null && oldSelectedWall != null) {
-						/*Vector2D offset = this.room.GetWallOffset(oldSelectedWall).Value * 100;
-						if (!oldSelectedObject.CheckValidity(oldSelectedWall, offset.X, offset.Y)) {
-							if (oldSelectedObject is GraphicalWallObstacle) {
-								oldSelectedWall.Obstacles.Remove(oldSelectedObject as GraphicalWallObstacle);
-							} else if (oldSelectedObject is GraphicalRegisterWrapper) {
-								oldSelectedWall.Registers.Remove(oldSelectedObject as GraphicalRegisterWrapper);
-								foreach (PlannedProduct pp in this.room.PlannedProducts) {
-									if (pp.Product is HithermProduct && oldSelectedObject is GraphicalHithermRegisterWrapper) {
-										(pp.Product as HithermProduct).RemoveRegisterFromCircuit((oldSelectedObject as GraphicalHithermRegisterWrapper).Register);
-									} else if (pp.Product is HithermCompactProduct) {
-										// TODO
-									}
-								}
-							} else if (oldSelectedObject is GraphicalHithermVerbindung) {
-								foreach (PlannedProduct pp in this.room.PlannedProducts) {
-									if (pp.Product is HithermProduct) {
-										HithermProduct hp = pp.Product as HithermProduct;
-										foreach (HithermCircuit hc in hp.PlannedCircuits) {
-											if (hc.Links.Contains(oldSelectedObject as GraphicalHithermVerbindung)) {
-												hc.Links.Remove(oldSelectedObject as GraphicalHithermVerbindung);
-											}
-										}
-									}
-								}
-							}
-						} else {
-							this.room.DeleteErroneousObjects();
-						}*/
 						oldSelectedObject.IsNew = false;
 						if (oldSelectedObject.Error) {
 							oldSelectedObject.RevertState();

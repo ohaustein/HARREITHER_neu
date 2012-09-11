@@ -75,7 +75,6 @@ namespace Europlan.Common {
 						}
 					}
 					if (gpToDelete.HasValue) {
-						// TODO: check if there are already products graphically connected to this distributor
 						distributor.GraphicalRepresentations.Remove(gpToDelete.Value);
 						this.ConnectedPlanPanel.InvalidateGraphics();
 					}
@@ -232,17 +231,14 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			return false;
 		}
 		#endregion

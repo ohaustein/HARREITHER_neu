@@ -114,13 +114,6 @@ namespace Europlan.AdminApplication {
 		}
 
 		private bool VirtualKeyPress(char keyChar, int pos) {
-			/*if (keyChar == '-') {
-				if (pos % 7 == 6) {
-					txtHardwareId.SelectionStart++;
-					txtHardwareId.SelectionLength = 0;
-				}
-				return true;
-			}*/
 			if (pos % 7 == 6) {
 				pos++;
 			}

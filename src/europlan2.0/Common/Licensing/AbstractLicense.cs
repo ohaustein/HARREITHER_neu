@@ -37,20 +37,9 @@ namespace Europlan.Licensing {
 		public string DisplayName {
 			get {
 				string result = (string.IsNullOrEmpty(this.licensedTo)) ? EuroplanRes.AbstractLicense_NeueLizenz /*"neue Lizenz"*/ : this.licensedTo;
-				//result += " (" + this.validUntil.ToShortDateString() + ")";
-				return result; // TODO
+				return result;
 			}
 		}
-
-		/*public static AbstractLicense<ModuleType, SystemType> LoadLicense(Stream stream) {
-			XmlSerializer serializer = new XmlSerializer(typeof(License));
-			return (AbstractLicense<ModuleType, SystemType>)serializer.Deserialize(stream);
-		}
-
-		public void SaveLicense(Stream stream) {
-			XmlSerializer serializer = new XmlSerializer(this.GetType());
-			serializer.Serialize(stream, this);
-		}*/
 
 		[XmlAttribute("licensedTo")]
 		public string LicensedTo {

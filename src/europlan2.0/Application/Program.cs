@@ -68,7 +68,7 @@ namespace Europlan.Application {
 			SettingsFile.Create();
 
 			SettingsKey settings = SettingsFile.Settings["OptionsForm"];
-			string language = settings.GetSetting("Language", defaultLanguage/*Thread.CurrentThread.CurrentUICulture.ToString()*/);
+			string language = settings.GetSetting("Language", defaultLanguage);
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
 
 			if (IsApplicationAlreadyRunning()) {

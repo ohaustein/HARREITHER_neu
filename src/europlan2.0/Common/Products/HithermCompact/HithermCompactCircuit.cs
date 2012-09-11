@@ -202,18 +202,6 @@ namespace Europlan.Common {
 		public void Calculate() {
 			EN1264 en1264 = EN1264.Instance;
 
-			//double su0 = 0.045; 
-			//double lambdaU0 = 1;
-			//double atmt = 1.06;
-			//double lambdaU = 60;
-			//double lambdaE = ModulKlimaBodenProduct.ConfigLambdaE;
-			//double rLambdaB = this.ModulKlimaBodenProduct.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedFloorConstruction.RValue;
-			//double rLambdaIns = this.ModulKlimaBodenProduct.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBodenProduct.PlannedInsulationConstruction.RValue;
-			//double B = 6.5;
-
-			//double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
-			//double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
-
 			double alphaInnenHeat = 8;
 			double alphaAussenHeat = 8;
 			double alphaInnenCool = 8;
@@ -258,17 +246,11 @@ namespace Europlan.Common {
 					this.c_qHeatPerSqm = 0;
 					this.c_massenstromHeat = 0;
 					this.c_druckverlustHeat = 0;
-					//this.c_floorTempHeat = 0;
 				} else {
 
-					//        double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVHeat, this.c_thetaRHeat, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
-
-					//        double au = en1264.auFlaeche(ModulKlimaBodenProduct.ConfigAlpha0, ModulKlimaBodenProduct.ConfigAlphaFbh, su0, lambdaU0, ModulKlimaBodenProduct.ConfigSu, lambdaE);
-					//        double ab = en1264.abFlaeche(B, au, atmt, rLambdaB);
-					//        this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(B, ab, atmt, au, dTheta);
 					double heizmittelTemp = (this.c_thetaVHeat + this.c_thetaRHeat) / 2;
 					double heatLoadRegisters = 0;
-					double qU = 0; // TODO
+					double qU = 0;
 					foreach (HithermCompactRegister reg in this.registers) {
 						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermCompactProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat, alphaInnenHeatDs);
 						heatLoadRegisters += heatLoad;
@@ -311,8 +293,6 @@ namespace Europlan.Common {
 							this.c_druckverlustHeat += cp.CalculateDruckverlust(this.c_massenstromHeat);
 						}
 					}
-
-					//this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, Europlan.Common.HithermProduct.ConfigAlphaFbh, this.HithermProduct.AssociatedRoom.RoomHeatTemperature);
 				}
 			}
 			{
@@ -327,14 +307,7 @@ namespace Europlan.Common {
 					this.c_qCoolPerSqm = 0;
 					this.c_massenstromCool = 0;
 					this.c_druckverlustCool = 0;
-					//this.c_floorTempCool = 0;
 				} else {
-
-					//        double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVHeat, this.c_thetaRHeat, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
-
-					//        double au = en1264.auFlaeche(ModulKlimaBodenProduct.ConfigAlpha0, ModulKlimaBodenProduct.ConfigAlphaFbh, su0, lambdaU0, ModulKlimaBodenProduct.ConfigSu, lambdaE);
-					//        double ab = en1264.abFlaeche(B, au, atmt, rLambdaB);
-					//        this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(B, ab, atmt, au, dTheta);
 					double kuehlmittelTemp = (this.c_thetaVCool + this.c_thetaRCool) / 2;
 					double coolLoadRegisters = 0;
 					double qU = 0;
@@ -380,8 +353,6 @@ namespace Europlan.Common {
 							this.c_druckverlustCool += cp.CalculateDruckverlust(this.c_massenstromCool);
 						}
 					}
-
-					//this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, Europlan.Common.HithermProduct.ConfigAlphaFbh, this.HithermProduct.AssociatedRoom.RoomHeatTemperature);
 				}
 			}
 		}

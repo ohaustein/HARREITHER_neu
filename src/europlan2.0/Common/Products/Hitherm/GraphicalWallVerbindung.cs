@@ -330,7 +330,6 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			// TODO
 		}
 
 		public override bool HitTest(Point2D planPoint, double maxDist) {
@@ -510,8 +509,6 @@ namespace Europlan.Common {
 						type = AnchorTypeEnum.ANCHOR_MOVE_LEFT_RIGHT;
 					} else if (Math.Abs(prev.Value.Y - vertex.Y) < 0.00001) {
 						type = AnchorTypeEnum.ANCHOR_MOVE_UP_DOWN;
-					} else {
-						// TODO
 					}
 					if (type != AnchorTypeEnum.ANCHOR_NONE && (i > 0 || this.Start == null) && (i < this.vertices.Count - 2 || this.End == null)) {
 						anchors.Add(new InvisibleSegmentAnchor(prev.Value, vertex, i, 4.0, type, this));

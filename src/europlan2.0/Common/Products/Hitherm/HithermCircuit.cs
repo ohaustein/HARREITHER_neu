@@ -253,17 +253,10 @@ namespace Europlan.Common {
 					this.c_qHeatPerSqm = 0;
 					this.c_massenstromHeat = 0;
 					this.c_druckverlustHeat = 0;
-					//this.c_floorTempHeat = 0;
 				} else {
-
-					//        double dTheta = en1264.Heizmitteluebertemperatur(this.c_thetaVHeat, this.c_thetaRHeat, this.ModulKlimaBodenProduct.AssociatedRoom.RoomHeatTemperature);
-
-					//        double au = en1264.auFlaeche(ModulKlimaBodenProduct.ConfigAlpha0, ModulKlimaBodenProduct.ConfigAlphaFbh, su0, lambdaU0, ModulKlimaBodenProduct.ConfigSu, lambdaE);
-					//        double ab = en1264.abFlaeche(B, au, atmt, rLambdaB);
-					//        this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(B, ab, atmt, au, dTheta);
 					double heizmittelTemp = (this.c_thetaVHeat + this.c_thetaRHeat) / 2;
 					double heatLoadRegisters = 0;
-					double qU = 0; // TODO
+					double qU = 0;
 					foreach (HithermRegister reg in this.registers) {
 						double heatLoad = reg.Heizleistung(heizmittelTemp, this.HithermProduct.AssociatedRoom.RoomHeatTemperature, alphaInnenHeat);
 						heatLoadRegisters += heatLoad;

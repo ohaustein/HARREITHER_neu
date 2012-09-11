@@ -128,7 +128,6 @@ namespace Europlan.Common {
 					oldVertex = newVertex;
 				}
 			}
-			// TODO
 		}
 
 		public void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, Color c) {

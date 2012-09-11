@@ -338,7 +338,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public int NormalizedCoolLoad {
 			get { return coolLoad; }
-			set { /*TODO*/; }
+			set { this.coolLoad = value; }
 		}
 
 		public int AdditionalHeatLoad {

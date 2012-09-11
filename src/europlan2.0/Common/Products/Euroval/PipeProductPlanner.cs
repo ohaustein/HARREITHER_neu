@@ -931,7 +931,6 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			if (this.Mode == PipeProductMode.EVM_ADD_RZ || this.Mode == PipeProductMode.EVM_SET_TEXT) {
 				return true;
 			} else if (this.Mode == PipeProductMode.EVM_DEL_RED) {

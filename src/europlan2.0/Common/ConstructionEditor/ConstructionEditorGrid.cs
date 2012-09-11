@@ -17,7 +17,7 @@ namespace Europlan.Common {
 
 		public ConstructionEditorGrid() {
 			InitializeComponent();
-			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration); // TODO
+			this.wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			this.constructionsWrapperBindingSource.DataSource = this.wrapper;
 			this.constructionsWrapperBindingSource.ResetBindings(false);
 			this.SetLanguage();

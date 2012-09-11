@@ -278,12 +278,8 @@ namespace Europlan.Common {
 										if (p is ModulKlimaDeckeProduct) {
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
-											//(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
-											// TODO
-											// planner.DrawBeplankung = ???
-											// planner.Mode = ???
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										} else if (p is ModulKlimaBodenProduct) {
 											ModulKlimaBodenPlanner planner = new ModulKlimaBodenPlanner();
@@ -292,9 +288,6 @@ namespace Europlan.Common {
 											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateStaffeln();
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
-											// TODO
-											// planner.DrawBeplankung = ???
-											// planner.Mode = ???
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										} else if (p is EurovalProduct) {
 											EurovalPlanner planner = new EurovalPlanner();
@@ -343,7 +336,6 @@ namespace Europlan.Common {
 
 				DxfLayer ceilingConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Decke);
 				DxfLayer floorConstructionLayer = new DxfLayer(EuroplanRes.ConstructionEditorForm_Fussboden);
-				// TODO: übersetzen
 				DxfLayer beplankungLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerBeplankung);
 				DxfLayer dehnfugenLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerDehnfugen);
 				DxfLayer wandLayer = new DxfLayer(EuroplanRes.ExportPlanForm_LayerWandnumerierungen);
@@ -402,12 +394,8 @@ namespace Europlan.Common {
 											DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaDeckeProduct), model);
 											ModulKlimaDeckePlanner planner = new ModulKlimaDeckePlanner();
 											planner.Product = p as ModulKlimaDeckeProduct;
-											//(p as ModulKlimaDeckeProduct).GraphConstruction.Planner = planner;
 											(p as ModulKlimaDeckeProduct).GraphConstruction.RecalculateSchienen();
 											planner.HighlightRoomCoordinates = false;
-											// TODO
-											// planner.DrawBeplankung ???
-											// planner.Mode = ???
 											planner.DrawDxf(model, modulLayer, ceilingConstructionLayer, beplankungLayer);
 										} else if (p is ModulKlimaBodenProduct) {
 											DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaBodenProduct), model);
@@ -417,9 +405,6 @@ namespace Europlan.Common {
 											(p as ModulKlimaBodenProduct).GraphConstruction.RecalculateStaffeln();
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
-											// TODO
-											// planner.DrawBeplankung ???
-											// planner.Mode = ???
 											planner.DrawDxf(model, modulLayer, floorConstructionLayer);
 										} else if (p is EurovalProduct) {
 											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(EurovalProduct), model);

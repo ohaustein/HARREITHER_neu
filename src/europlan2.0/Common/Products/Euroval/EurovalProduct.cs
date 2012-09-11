@@ -1553,7 +1553,6 @@ namespace Europlan.Common {
 			if (checkHeat && (pressureLossHeat > maxPressureLost) && !ignoreCircuitLength) {
 				return false;
 			}
-			// TODO checkCool
 			if (circuitLength > maxCircuitLength && !ignoreCircuitLength) {
 				return false;
 			}
@@ -1708,8 +1707,6 @@ namespace Europlan.Common {
             }
 
 			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				// TODO connect all circuits
-
 				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
 				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
 					if (cc.OtherProduct == this) {
@@ -1718,11 +1715,6 @@ namespace Europlan.Common {
 				}
 				this.CorrectCircuits(this.requestedCircuits.Value, false);
 				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
-					/*if (this.requestedCircuits.HasValue) {
-						// TODO reset circuits
-					} else {*/
-						//this.circuits.Clear();
-					/*}*/
 					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen";
 					this.incompleteCalculation = true;
 					return false;
@@ -1858,11 +1850,6 @@ namespace Europlan.Common {
 					while (tryCalc) {
 						this.lastErrorMsg = this.CorrectCircuits(circuitCount, false);
 						if (this.lastErrorMsg != null) {
-							/*if (this.requestedCircuits.HasValue) {
-								// TODO reset circuits
-							} else {*/
-								//this.circuits.Clear();
-							/*}*/
 							this.incompleteCalculation = true;
 							return false;
 						}
@@ -1935,12 +1922,8 @@ namespace Europlan.Common {
 			}
 
 			if (!bestLaydistance.HasValue) {
-				/*if (this.requestedCircuits.HasValue) {
-					// TODO reset circuits
-				} else {*/
-					this.circuits.Clear();
-				/*}*/
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung möglich";
+				this.circuits.Clear();
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung möglich";
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -2347,7 +2330,6 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public override WW.Math.Geometry.Polygon2D GraphicalArea {
-			// TODO
 			get { return new Polygon2D(this.plannedAreaGraphical); }
 		}
 

@@ -502,9 +502,8 @@ namespace Europlan.Common {
 
 			bool added = false;
 			int count = 0;
-			// TODO enable moduleHeightTolerance to avoid problems with rounding
+			// moduleHeightTolerance avoids problems with rounding
 			double moduleHeightTolerance = 0.0001 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			//double moduleHeightTolerance = 0;
 
 			KlimaFlaechenModul lastAddedModul = null;
 			KlimaFlaechenModul addedModul = null;
@@ -2427,7 +2426,6 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerMouseMove(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			bool redraw = false;
 			if (this.Mode == KlimaDeckeMode.KDM_CONSTRUCTION) {
 				if (this.product.GraphConstruction != null) {
@@ -2445,68 +2443,11 @@ namespace Europlan.Common {
 				this.possibleConnectionPoints = this.GetPossibleConnectionPoints(planPoint);
 
 				if (this.newConnectionStartData != null) {
-					//KlimaFlaechenModul tmpModul;
-					//KlimaFlaechenSubAreaVerbindung tmpVerbindung;
-					//GraphicalConnectionAnbindungsPunkt tmpAnbindung;
-					//bool tmpRowConnection;
 					Nullable<PossibleConnectionPoint> tmpConnectionPoint;
-					//this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmpModul, out tmpVerbindung, out tmpAnbindung, out tmpRowConnection);
 					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmpConnectionPoint);
 				} else {
 					this.nextConnectionPoints = new List<Point2D>();
 				}
-
-				/*if (this.newConnectionStart != null) {
-					if (!this.newConnectionStartAtOutput) {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
-					} else {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
-					}
-				}
-
-				Dictionary<KlimaFlaechenModul, Polygon2D> areas = this.GetModuleAreas();
-				KlimaFlaechenModul modul = null;
-				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> area in areas) {
-					if (area.Value.IsInside(planPoint)) {
-						modul = area.Key;
-						break;
-					}
-				}
-				int tmp;
-				ModulDeckeCircuit currentCircuit = this.product.GetCircuitForModul(modul, out tmp);
-				if (modul != null && (this.newConnectionStart == null || currentCircuit == this.product.GetCircuitForModul(this.newConnectionStart, out tmp))) {
-					List<KlimaFlaechenModul> connectedModules;
-					if (this.newConnectionStart != null) {
-						connectedModules = currentCircuit.GetAllLinkedModules(this.newConnectionStart);
-					} else {
-						connectedModules = new List<KlimaFlaechenModul>();
-					}
-					if (!connectedModules.Contains(modul)) {
-						this.hoveredModul = modul;
-						this.hoverInput = this.AllowInput(modul);
-						this.hoverOutput = this.AllowOutput(modul);
-					} else {
-						this.hoveredModul = null;
-						this.hoverInput = false;
-						this.hoverOutput = false;
-					}
-				} else {
-					this.hoveredModul = null;
-					this.hoverInput = false;
-					this.hoverOutput = false;
-				}
-
-				this.hoverAnbindungen = this.newConnectionStart != null;
-				
-				if (this.newConnectionStart != null) {
-					KlimaFlaechenModul tmpModul;
-					KlimaFlaechenSubAreaVerbindung tmpVerbindung;
-					GraphicalConnectionAnbindungsPunkt tmpAnbindung;
-					bool tmpRowConnection;
-					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmpModul, out tmpVerbindung, out tmpAnbindung, out tmpRowConnection);
-				} else {
-					this.nextConnectionPoints = new List<Point2D>();
-				}*/
 				if (this.ConnectedPlanPanel != null) {
 					this.ConnectedPlanPanel.InvalidateGraphics();
 				}
@@ -2553,7 +2494,6 @@ namespace Europlan.Common {
 		private Nullable<Point2D> dragStartedInPlan;
 		private Nullable<Point> dragEndedInControl;
 		private Nullable<Point2D> dragEndedInPlan;
-		//private bool dragIsPick;
 		private Dictionary<KlimaFlaechenModul, double> oldModulPositions;
 		private bool moveModules = false;
 
@@ -2596,12 +2536,10 @@ namespace Europlan.Common {
 							oldModulPositions.Add(modul, modul.GraphPositionInLan);
 						}
 					}
-					//dragIsPick = true;
 				} else {
 					this.moveModules = false;
 					this.dragStartedInControl = pointInControl;
 					this.dragStartedInPlan = planPoint;
-					//dragIsPick = true;
 				}
 			}
 			return false;
@@ -2626,8 +2564,6 @@ namespace Europlan.Common {
 						Point2D rotatedP2 = new Point2D(rotatedP1.X, rotatedP3.Y);
 						Point2D rotatedP4 = new Point2D(rotatedP3.X, rotatedP1.Y);
 						matrix = matrix.GetInverse();
-						//Point2D p2 = matrix.Transform(rotatedP2);
-						//Point2D p4 = matrix.Transform(rotatedP4);
 						layoutAddArea = new Polygon2D();
 						layoutAddArea.Add(layoutAddAreaStart);
 						layoutAddArea.Add(matrix.Transform(rotatedP2));
@@ -2638,7 +2574,6 @@ namespace Europlan.Common {
 						Matrix3D matrix = Transformation3D.Rotate(this.product.AssociatedRoom.AssociatedPlan.Rotation * Math.PI / 180.0);
 						Point2D rotatedP1 = matrix.Transform(layoutAddAreaStart);
 						Point2D rotatedP3 = matrix.Transform(planPoint);
-						//this.layoutAddAreaBottomUp = this.layoutAddAreaStartScreen.X < pointInControl.X;
 						if (this.product.GraphConstruction.RotationRelativeToPlan <= 45 || this.product.GraphConstruction.RotationRelativeToPlan > 135) {
 							if (this.product.GraphConstruction.RotationRelativeToPlan > 135) {
 								this.layoutAddAreaBottomUp = this.layoutAddAreaStartScreen.Y < pointInControl.Y;
@@ -2651,37 +2586,22 @@ namespace Europlan.Common {
 						Point2D rotatedP2 = new Point2D(rotatedP1.X, rotatedP3.Y);
 						Point2D rotatedP4 = new Point2D(rotatedP3.X, rotatedP1.Y);
 						matrix = matrix.GetInverse();
-						//Point2D p2 = matrix.Transform(rotatedP2);
-						//Point2D p4 = matrix.Transform(rotatedP4);
 						layoutAddArea = new Polygon2D();
 						layoutAddArea.Add(layoutAddAreaStart);
 						layoutAddArea.Add(matrix.Transform(rotatedP2));
 						layoutAddArea.Add(planPoint);
 						layoutAddArea.Add(matrix.Transform(rotatedP4));
 						return true;
-
-						/*layoutAddArea = new Polygon2D();
-						layoutAddArea.Add(layoutAddAreaStart);
-						layoutAddArea.Add(new Point2D(layoutAddAreaStart.X, planPoint.Y));
-						layoutAddArea.Add(planPoint);
-						layoutAddArea.Add(new Point2D(planPoint.X, layoutAddAreaStart.Y));
-						return true;*/
 					}
 				}
 			} else if (this.Mode == KlimaDeckeMode.KDM_PICK_MODULE && button == MouseButtons.Left) {
-				/*int deltaX = this.dragStartedInControl.X - pointInControl.X;
-				int deltaY = this.dragStartedInControl.Y - pointInControl.Y;*/
 				Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
 
-				/*if (deltaX * deltaX + deltaY * deltaY > 25) {
-					dragIsPick = false;
-				}*/
-				if (/*!dragIsPick && */moveModules) {
+				if (moveModules) {
 					Point2D rotatedStartPoint = rotation.Transform(this.dragStartedInPlan.Value);
 					Point2D rotatedCurPoint = rotation.Transform(planPoint);
 					double delta = rotatedCurPoint.Y - rotatedStartPoint.Y;
 					double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					// TODO move modules
 					Dictionary<int, List<KlimaFlaechenModul>> modulesPerLane = new Dictionary<int, List<KlimaFlaechenModul>>();
 					foreach (KlimaFlaechenModul modul in this.GetAllSelectedModules()) {
 						if (!modulesPerLane.ContainsKey(modul.GraphLane)) {
@@ -2689,7 +2609,6 @@ namespace Europlan.Common {
 						}
 						modulesPerLane[modul.GraphLane].Add(modul);
 					}
-					//Dictionary<KlimaFlaechenModul, double> move = new Dictionary<KlimaFlaechenModul, double>();
 					foreach (KeyValuePair<int, List<KlimaFlaechenModul>> kvp in modulesPerLane) {
 						if (kvp.Value.Count > 0) {
 							KlimaFlaechenModul firstModul = kvp.Value[0];
@@ -2700,7 +2619,6 @@ namespace Europlan.Common {
 								Nullable<double> bestMove = lane.BestMovePossible(modul, this.oldModulPositions[modul] + delta, measure, this.product, bottomUp);
 								if (bestMove.HasValue) {
 									modul.GraphPositionInLan = bestMove.Value;
-									//move.Add(modul, bestMove.Value - this.oldModulPositions[modul]);
 								}
 							}
 						}
@@ -2811,11 +2729,9 @@ namespace Europlan.Common {
 				}
 			}
 			return newColor;
-			//return Color.FromArgb(random.Next(255), random.Next(255), random.Next(255));
 		}
 
 		public bool PlannerDragEnd(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
-			// TODO
 			if (this.mode == KlimaDeckeMode.KDM_LAYOUT_ADD_AREA) {
 				if (this.layoutAddArea != null) {
 					ModulDeckeSubArea newSubArea = null;
@@ -2827,8 +2743,6 @@ namespace Europlan.Common {
 					if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null) {
 						if (this.product.Connections != null && this.product.Connections.Count > 0) {
 							if (MessageBox.Show(EuroplanRes.ModulKlimaBodenPlanner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBodenPlanner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
-								//this.layoutAddArea = null;
-								//return true;
 								onlyAddToExisting = true;
 							} else {
 								this.product.Connections.Clear();
@@ -2874,7 +2788,6 @@ namespace Europlan.Common {
 								KlimaFlaechenList lastRow = null;
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
-										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										bool trueLeft = left.Value;
 										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
 											trueLeft = !trueLeft;
@@ -2906,7 +2819,6 @@ namespace Europlan.Common {
 								lastRow = null;
 								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
-										//moduleWithRow.modul.Orientation = (left.Value == moduleWithRow.modul.DiagonalDurchstroemt) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
 										bool trueLeft = left.Value;
 										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
 											trueLeft = !trueLeft;
@@ -2935,20 +2847,6 @@ namespace Europlan.Common {
 								}
 							}
 						}
-						/*foreach (ModulDeckeCircuit circuit in this.product.PlannedCircuits) {
-							foreach (ModulDeckeSubArea subArea in circuit.SubAreas) {
-								foreach (KlimaFlaechenList row in subArea.Rows) {
-									if (row.List.Count > 1) {
-										row.List.Sort(new KlimaFlaechenModuleComparer(true));
-										bool left = (row.List[0].Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
-										foreach (KlimaFlaechenModul modul in row.List) {
-											modul.Orientation = (left ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
-											left = !left;
-										}
-									}
-								}
-							}
-						}*/
 						if (this.projectChanged != null) {
 							this.projectChanged(this);
 						}
@@ -3053,43 +2951,6 @@ namespace Europlan.Common {
 
 					this.ConnectedPlanPanel.InvalidateGraphics();
 					this.ModuleSelected(this, new ModuleSelectedEventArgs(modules));
-
-					/*KlimaFlaechenModul module = GetModuleAtPoint(planPoint);
-					if (module != null) {
-						if (this.ShiftPressed) {
-							if (this.HighlightModules == null) {
-								this.HighlightModules = this.GetAllSelectedModules();
-							}
-							if (this.HighlightModules.Contains(module)) {
-								this.HighlightModules.Remove(module);
-							} else {
-								this.HighlightModules.Add(module);
-							}
-							if (this.ModuleSelected != null) {
-								this.ModuleSelected(this, new ModuleSelectedEventArgs(this.HighlightModules));
-							}
-						} else {
-							if (this.HighlightModules == null) {
-								this.HighlightModules = new List<KlimaFlaechenModul>();
-							} else {
-								this.HighlightModules.Clear();
-							}
-							this.HighlightModules.Add(module);
-							if (this.ModuleSelected != null) {
-								this.ModuleSelected(this, new ModuleSelectedEventArgs(module));
-							}
-						}
-					}
-
-					if (module == null && !this.ShiftPressed) {
-						this.HighlightModules = null;
-						if (this.ModuleSelected != null) {
-							this.ModuleSelected(this, new ModuleSelectedEventArgs());
-						}
-						return true;
-					} else if (module != null) {
-						return true;
-					}*/
 				}
 			}
 			return false;
@@ -3116,15 +2977,10 @@ namespace Europlan.Common {
 
 		private List<KlimaFlaechenModul> GetModuleInPoly(Polygon2D poly) {
 			Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-			//Matrix3D invRotation = rotation.GetInverse();
 			Polygon2D rotatedPoly = new Polygon2D();
 			foreach (Point2D point in poly) {
 				rotatedPoly.Add(rotation.Transform(point));
 			}
-			/*Point2D topLeft = new Point2D(startPoint.X < endPoint.X ? startPoint.X : endPoint.X, startPoint.Y < endPoint.Y ? startPoint.Y : endPoint.Y);
-			Point2D bottomRight = new Point2D(startPoint.X >= endPoint.X ? startPoint.X : endPoint.X, startPoint.Y >= endPoint.Y ? startPoint.Y : endPoint.Y);
-			Point2D rotatedTopLeft = rotation.Transform(topLeft);
-			Point2D rotatedBottomRight = rotation.Transform(bottomRight);*/
 			double height;
 			double width;
 
