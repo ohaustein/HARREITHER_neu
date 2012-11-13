@@ -32,7 +32,7 @@ namespace Europlan.Common {
 				this.colRoomType.Items.Add(new RoomTypeItem(roomType));
 			}
 			this.newRoomType = new RoomType();
-			this.newRoomType.Name = EuroplanRes.QuickDimensioningFloorGrid_NeuBearbeiten; //"<Neu/Bearbeiten>";
+			this.newRoomType.Name = EuroplanRes.QuickDimensioningFloorGrid_NeuBearbeiten; //"<Neu/Bearbeiten>"
 			this.newRoomType.Id = "<NEW>";
 			this.newRoomType.UserDefined = true;
 			this.colRoomType.Items.Add(new RoomTypeItem(this.newRoomType));
@@ -43,36 +43,35 @@ namespace Europlan.Common {
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCF, EuroplanRes.QuickDimensioningFloorGrid_RCF/*"RCF"*/));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RCRadio, EuroplanRes.QuickDimensioningFloorGrid_RCFunk/*"RC-Funk"*/));
 			this.colRoomController.Items.Add(new RoomControllerItem(Room.RoomController.RF, EuroplanRes.QuickDimensioningFloorGrid_RF/*"RF"*/));
-			//this.colRoomType.
 		}
 
 		private void SetLanguage() {
-			this.colId.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Nr; //"Nr.";
-			this.colName.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bezeichnung; //"Bezeichnung";
-			this.colRoomTemperature.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Temperatur; //"Temp.\n(°C)";
-			this.colArea.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumflaeche; //"Raumfl.\n(m²)";
-			this.colRoomType.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumtyp; //"Raumtyp";
-			this.colHeatLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Heizlast; //"Heizlast\n(W)";
-			this.colCoolLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Kuehllast; //"Kühllast\n(W)";
-			this.colEuroval.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalFlaeche; //"Euroval®\n(m²)";
-			this.colEurovalCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalHeizkreise; //"Euroval®\nHeizkreise";
-			this.colConcreteActivation.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaFlaeche; //"BKA\n(m²)";
-			this.colConcreteActivationCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaHeizkreise; //"BKA\nHeizkreise";
-			this.colHitherm.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermFlaeche; //"Hitherm®\n(m²)";
-			this.colHithermCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermHeizkreise; //"Hitherm®\nHeizkreise";
-			this.colHithermCompact.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactFlaeche; //"Hitherm® Co\n(m²)";
-			this.colHithermCompactCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactHeizkreise; //"Hitherm® Co\nHeizkreise";
-			this.colHithermCompactRoof.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachFlaeche; //"Hitherm® Co\nDach (m²)";
-			this.colHithermCompactRoofCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachHeizkreise; //"Hitherm® Co\nDach Hkr.";
-			this.colModulKlimaBoden.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenFlaeche; //"Klima-Boden\n(m²)";
-			this.colModulKlimaBodenCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenHeizkreise; //"Klima-Boden\nHeizkreise";
-			this.colModulKlimaDecke.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeFlaeche; //"Klima-Decke\n(m²)";
-			this.colModulKlimaDeckeCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeHeizkreise; //"Klima-Decke\nHeizkreise";
-			this.colRoomController.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_RaumController; //"Raum-\ncontroller";
-			this.colNrOfServos.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Stellmotore; //"Stell-\nmotore";
-			this.colComments.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bemerkung; //"Bemerkung";
-			this.colRevert.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen";
-			this.colRevert.Text = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen";
+			this.colId.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Nr; //"Nr."
+			this.colName.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bezeichnung; //"Bezeichnung"
+			this.colRoomTemperature.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Temperatur; //"Temp.\n(°C)"
+			this.colArea.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumflaeche; //"Raumfl.\n(m²)"
+			this.colRoomType.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Raumtyp; //"Raumtyp"
+			this.colHeatLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Heizlast; //"Heizlast\n(W)"
+			this.colCoolLoad.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Kuehllast; //"Kühllast\n(W)"
+			this.colEuroval.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalFlaeche; //"Euroval®\n(m²)"
+			this.colEurovalCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_EurovalHeizkreise; //"Euroval®\nHeizkreise"
+			this.colConcreteActivation.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaFlaeche; //"BKA\n(m²)"
+			this.colConcreteActivationCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_BkaHeizkreise; //"BKA\nHeizkreise"
+			this.colHitherm.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermFlaeche; //"Hitherm®\n(m²)"
+			this.colHithermCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermHeizkreise; //"Hitherm®\nHeizkreise"
+			this.colHithermCompact.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactFlaeche; //"Hitherm® Co\n(m²)"
+			this.colHithermCompactCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactHeizkreise; //"Hitherm® Co\nHeizkreise"
+			this.colHithermCompactRoof.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachFlaeche; //"Hitherm® Co\nDach (m²)"
+			this.colHithermCompactRoofCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_HithermCompactDachHeizkreise; //"Hitherm® Co\nDach Hkr."
+			this.colModulKlimaBoden.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenFlaeche; //"Klima-Boden\n(m²)"
+			this.colModulKlimaBodenCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaBodenHeizkreise; //"Klima-Boden\nHeizkreise"
+			this.colModulKlimaDecke.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeFlaeche; //"Klima-Decke\n(m²)"
+			this.colModulKlimaDeckeCircuits.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_KlimaDeckeHeizkreise; //"Klima-Decke\nHeizkreise"
+			this.colRoomController.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_RaumController; //"Raum-\ncontroller"
+			this.colNrOfServos.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Stellmotore; //"Stell-\nmotore"
+			this.colComments.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Bemerkung; //"Bemerkung"
+			this.colRevert.HeaderText = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen"
+			this.colRevert.Text = EuroplanRes.QuickDimensioningFloorGrid_Ruecksetzen; //"Rücksetzen"
 		}
 
 		private class RoomControllerItem {
@@ -120,7 +119,6 @@ namespace Europlan.Common {
 
 		public bool Heating {
 			get { return this.colHeatLoad.Visible; }
-			/*set { this.colHeatLoad.Visible = value; }*/
 		}
 
 		public bool Cooling {
@@ -130,17 +128,7 @@ namespace Europlan.Common {
 
 		public bool Euroval {
 			get { return this.colEuroval.Visible; }
-			set {
-				/*this.colEuroval.Visible = value;
-				this.colEurovalCircuits.Visible = value;
-				if (!value) {
-					foreach (DataGridViewRow row in this.dataGridView1.Rows) {
-						row.Cells[this.colEuroval.Index].Value = null;
-						row.Cells[this.colEurovalCircuits.Index].Value = null;
-					}
-				}*/
-				this.SetProductAvailable<EurovalProduct>(value);
-			}
+			set { this.SetProductAvailable<EurovalProduct>(value); }
 		}
 
 		public bool ConcreteActivation {
@@ -206,48 +194,9 @@ namespace Europlan.Common {
 				Room room = row.DataBoundItem as Room;
 				if (room != null) {
 					if (e.ColumnIndex == this.colEuroval.Index) {
-						/*Product product = room.GetProductForQuickDimensioning<EurovalProduct>();
-						object o = row.Cells[this.colEuroval.Index].Value;
-						if (o == null || (decimal)o == 0) {
-							if (product != null) {
-								room.UsedProductsForQuickDimensioning.Remove(product);
-							}
-							row.Cells[this.colEuroval.Index].Value = null;
-							row.Cells[this.colEurovalCircuits.Index].Value = null;
-						} else {
-							if (product == null) {
-								log.Warn("Product for validated cell is null");
-								product = Project.Instance.Config.EurovalProduct.Clone(room);
-							}
-							decimal area = (decimal)o;
-							bool setCircuits = (product.QuickDimensioningCircuits == product.GetDefaultQuickDimensioningCircuits());
-							product.QuickDimensioningPlannedArea = (float)area;
-							if (setCircuits) {
-								product.QuickDimensioningCircuits = product.GetDefaultQuickDimensioningCircuits();
-								row.Cells[this.colEurovalCircuits.Index].Value = product.QuickDimensioningCircuitsAsString;
-							}
-						}
-
-						// check if heat- and coolload are covered
-						this.CheckLoadsCovered(row);
-
-						// check if planned area exceeds maximum area
-						if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
-							row.Cells[this.colEuroval.Index].ErrorText = null;
-						} else {
-							row.Cells[this.colEuroval.Index].ErrorText = "Die geplante Fläche ist größer als die maximal verfügbare Fläche";
-						}*/
 						// Euroval
 						this.ValidateProductArea<EurovalProduct>(row);
 					} else if (e.ColumnIndex == this.colEurovalCircuits.Index) {
-						/*Product product = room.GetProductForQuickDimensioning<EurovalProduct>();
-						if (product == null) {
-							log.Warn("Product for validated cell is null");
-							product = Project.Instance.Config.EurovalProduct.Clone(room);
-							product.QuickDimensioningPlannedArea = product.GetDefaultQuickDimensioningPlannedArea();
-						}
-						string circuits = row.Cells[this.colEurovalCircuits.Index].Value as string;
-						product.QuickDimensioningCircuitsAsString = circuits;*/
 						// Euroval circuits
 						this.ValidateProductCircuits<EurovalProduct>(row);
 					} else if (e.ColumnIndex == this.colConcreteActivation.Index) {
@@ -347,7 +296,7 @@ namespace Europlan.Common {
 			if (product == null || product.QuickDimensioningPlannedArea <= product.QuickDimensioningMaximumArea) {
 				row.Cells[colProductArea.Index].ErrorText = null;
 			} else {
-				row.Cells[colProductArea.Index].ErrorText = EuroplanRes.QuickDimensioningFloorGridFlaecheFehler; //"Die geplante Fläche ist größer als die maximal verfügbare Fläche";
+				row.Cells[colProductArea.Index].ErrorText = EuroplanRes.QuickDimensioningFloorGridFlaecheFehler; //"Die geplante Fläche ist größer als die maximal verfügbare Fläche"
 			}
 		}
 
@@ -375,11 +324,11 @@ namespace Europlan.Common {
 				row.ErrorText = null;
 			} else {
 				if (!room.QuickDimensioningHeatLoadCovered && (!room.QuickDimensioningCoolLoadCovered && this.Cooling)) {
-					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizUndKuehllastFehler; //"Heiz- und Kühllast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizUndKuehllastFehler; //"Heiz- und Kühllast nicht abgedeckt"
 				} else if (!room.QuickDimensioningCoolLoadCovered && this.Cooling) {
-					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizlastFehler; //"Kühllast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_HeizlastFehler; //"Kühllast nicht abgedeckt"
 				} else {
-					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_KuehllastFehler; //"Heizlast nicht abgedeckt";
+					row.ErrorText = EuroplanRes.QuickDimensioningFloorGrid_KuehllastFehler; //"Heizlast nicht abgedeckt"
 				}
 			}
 		}
@@ -464,7 +413,7 @@ namespace Europlan.Common {
 					// Modul Klimaboden
 					this.AddProduct<ModulKlimaDeckeProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
 				} else if (e.ColumnIndex == this.colNrOfServos.Index) {
-					// TODO
+					// not editable for now
 				}
 			}
 		}
@@ -642,7 +591,7 @@ namespace Europlan.Common {
 				if (room != null) {
 					room.RevertQuickDimensioning();
 
-					// reset product values;
+					// reset product values
 					row.Cells[this.colEuroval.Index].Value = null;
 					row.Cells[this.colEurovalCircuits.Index].Value = null;
 					row.Cells[this.colConcreteActivation.Index].Value = null;

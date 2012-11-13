@@ -7,12 +7,9 @@ using System.ComponentModel;
 namespace Europlan.Common {
 	public class NumericColumn : DataGridViewColumn {
 
-		//private NumericCell cellTemplate;
-
 		private bool readOnly = false;
 
 		public NumericColumn() {
-			//this.cellTemplate = new NumericCell();
 			NumericCell cell = new NumericCell();
 			base.CellTemplate = cell;
 			base.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

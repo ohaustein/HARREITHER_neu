@@ -58,29 +58,28 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Room.HeaderText = EuroplanRes.ConnectionPipePanel_RaumCol; //"Raum";
-			this.vorlaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VorlaufCol; //"Länge\nVorlauf\n(m)";
-			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_RuecklaufCol; //"Länge\nRücklauf\n(m)";
-			this.roomDataGridViewComboBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_DurchRaumCol; //"durch\nRaum\nNr.";
-			this.ConnectionThrough.HeaderText = EuroplanRes.ConnectionPipePanel_TeilsystemCol; //"Teilsystem";
-			this.PlannedCircuits.HeaderText = EuroplanRes.ConnectionPipePanel_HkAnzahlCol; //"Anz.";
-			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_NurErsterHkCol; //"nur\nerster\nHK";
-			this.printDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegedatenDruckenCol; //"Verlege-\ndaten\ndrucken";
-			this.PipeType.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem";
-			this.PipeTypeText.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem";
-			this.Verlegeart.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegeartCol; //"Verlege-\nart";
-			this.Insulation.HeaderText = EuroplanRes.ConnectionPipePanel_DaemmungCol; //"Dämmung";
-			this.Area.HeaderText = EuroplanRes.ConnectionPipePanel_FlaecheCol; //"Fläche";
-			this.HeatLoad.HeaderText = EuroplanRes.ConnectionPipePanel_HeizleistungCol; //"Heiz-\nleistung";
-			this.CoolLoad.HeaderText = EuroplanRes.ConnectionPipePanel_KuehlleistungCol; //"Kühl-\nleistung";
+			this.Room.HeaderText = EuroplanRes.ConnectionPipePanel_RaumCol; //"Raum"
+			this.vorlaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VorlaufCol; //"Länge\nVorlauf\n(m)"
+			this.ruecklaufDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_RuecklaufCol; //"Länge\nRücklauf\n(m)"
+			this.roomDataGridViewComboBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_DurchRaumCol; //"durch\nRaum\nNr."
+			this.ConnectionThrough.HeaderText = EuroplanRes.ConnectionPipePanel_TeilsystemCol; //"Teilsystem"
+			this.PlannedCircuits.HeaderText = EuroplanRes.ConnectionPipePanel_HkAnzahlCol; //"Anz."
+			this.onlyFirstDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_NurErsterHkCol; //"nur\nerster\nHK"
+			this.printDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegedatenDruckenCol; //"Verlege-\ndaten\ndrucken"
+			this.PipeType.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem"
+			this.PipeTypeText.HeaderText = EuroplanRes.ConnectionPipePanel_RohrsystemCol; //"Rohr-\nsystem"
+			this.Verlegeart.HeaderText = EuroplanRes.ConnectionPipePanel_VerlegeartCol; //"Verlege-\nart"
+			this.Insulation.HeaderText = EuroplanRes.ConnectionPipePanel_DaemmungCol; //"Dämmung"
+			this.Area.HeaderText = EuroplanRes.ConnectionPipePanel_FlaecheCol; //"Fläche"
+			this.HeatLoad.HeaderText = EuroplanRes.ConnectionPipePanel_HeizleistungCol; //"Heiz-\nleistung"
+			this.CoolLoad.HeaderText = EuroplanRes.ConnectionPipePanel_KuehlleistungCol; //"Kühl-\nleistung"
 			this.ConnectionOf.HeaderText = EuroplanRes.ConnectionPipePanel_TeilsystemCol;
 		}
 
 		private void ConfigureColumnVisibility() {
 			this.dgvConnectionPipes.AllowUserToDeleteRows = !showPipesThroughProduct;
 			if (showPipesThroughProduct) {
-				// TODO this is just a quick workaround - room column could not be made invisible if it
-				//      was the first column
+				// this is a workaround as room column cannot be made invisible if it is the first column
 				if (!dgvConnectionPipes.Columns.Contains(Room)) {
 					dgvConnectionPipes.Columns.Insert(0, Room);
 				}
@@ -106,8 +105,7 @@ namespace Europlan.Common {
 				roomDataGridViewComboBoxColumn.DefaultCellStyle.BackColor = SystemColors.Control;
 				dgvConnectionPipes.AllowUserToAddRows = false;
 			} else {
-				// TODO this is just a quick workaround - room column could not be made invisible if it
-				//      was the first column
+				// this is a workaround as room column cannot be made invisible if it is the first column
 				if (dgvConnectionPipes.Columns.Contains(Room)) {
 					dgvConnectionPipes.Columns.Remove(Room);
 				}
@@ -152,35 +150,6 @@ namespace Europlan.Common {
 
 		public void Update(PlannedProduct product) {
 			this.product = product;
-			// pipe type items
-			/*this.PipeType.Items.Clear();
-			this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_EUROVAL);
-			if (this.product != null && this.product.Product != null &&
-				this.product.Product.PlannedConnection != null) {
-				PlannedProduct connectedProduct = this.product.Product.PlannedConnection.OtherProduct;
-				if (connectedProduct != null && connectedProduct.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-					this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
-				}
-			}*/
-			//this.PipeType.Items.Add(ConnectionPipe.PipeTypeEnum.PT_21MM);
-
-			// verlegeart items
-			/*this.Verlegeart.Items.Clear();
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV35);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV30);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV25);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV20);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV15);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV10);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_EV5);
-			this.Verlegeart.Items.Add(ConnectionPipe.VerlegeartEnum.VA_A5);*/
-
-			// insulation items
-			/*this.Insulation.Items.Clear();
-			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_NONE);
-			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_VL);
-			this.Insulation.Items.Add(ConnectionPipe.InsulationEnum.IN_VL_RL);*/
 
 			if (this.product != null) {
 				if (showPipesThroughProduct) {
@@ -195,7 +164,6 @@ namespace Europlan.Common {
 		}
 
 		private void dgvConnectionPipes_CellEnter(object sender, DataGridViewCellEventArgs e) {
-			//if (!showPipesThroughProduct) {
 			if (e.RowIndex >= 0) {
 				DataGridViewRow selectedRow = dgvConnectionPipes.Rows[e.RowIndex];
 				bool generatedPipe = selectedRow.DataBoundItem is ConnectionPipe ? (selectedRow.DataBoundItem as ConnectionPipe).IsGenerated : false;
@@ -210,11 +178,6 @@ namespace Europlan.Common {
 					DataGridViewCell pipeTypeCell = dgvConnectionPipes.Rows[e.RowIndex].Cells[PipeType.Index];
 					pipeTypeCombo.Items.Clear();
 					ConnectionPipe.PipeTypeEnumConverter conv = new ConnectionPipe.PipeTypeEnumConverter();
-					//if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_EUROVAL) {
-					//pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
-					//} else if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
-					//pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_ECOTHERM));
-					//}
 
 					PlannedProduct connectionOf = null;
 					if (this.showPipesThroughProduct) {
@@ -236,26 +199,12 @@ namespace Europlan.Common {
 						}
 					}
 
-
-					/*if (this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
-						pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_ECOTHERM));
-					} else  {
-						pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
-					}
-					DataGridViewRow selectedRow = dgvConnectionPipes.Rows[e.RowIndex];
-					if ((this.showPipesThroughProduct && selectedRow.DataBoundItem != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf.Product != null && (selectedRow.DataBoundItem as ConnectionPipe).ConnectionOf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) ||
-						(!this.showPipesThroughProduct && this.product != null && this.product.Product != null && this.product.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)) {
-						//(dgvConnectionPipes.Rows[e.RowIndex].DataBoundItem as ConnectionPipe).ConnectionOf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-						pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_21MM));
-					}*/
 					pipeTypeCombo.SelectedItem = conv.ConvertToString(pipeTypeCell.Value);
 					this.pipeTypeCombo.SelectedValueChanged += new EventHandler(pipeTypeCombo_SelectedValueChanged);
 
 					Rectangle rect = dgvConnectionPipes.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
 					pipeTypeCombo.Location = new Point(rect.X, rect.Y);
 					pipeTypeCombo.Size = new Size(rect.Width, rect.Height);
-					//pipeTypeCombo.Height = dgvConnectionPipes.Rows[e.RowIndex].Height;
-					//pipeTypeCombo.Width = dgvConnectionPipes.CurrentCell.Size.Width;
 					pipeTypeCombo.Show();
 				} else if (e.ColumnIndex == Verlegeart.Index && e.RowIndex >= 0) {
 					this.verlegeartCombo.SelectedValueChanged -= new EventHandler(verlegeartCombo_SelectedValueChanged);
@@ -264,7 +213,6 @@ namespace Europlan.Common {
 					verlegeartCombo.Items.Clear();
 					ConnectionPipe.VerlegeartEnumConverter conv = new ConnectionPipe.VerlegeartEnumConverter();
 					verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH));
-					//DataGridViewRow selectedRow = dgvConnectionPipes.Rows[e.RowIndex];
 					if ((ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value) ||
 						ConnectionPipe.PipeTypeEnum.PT_ECOTHERM.Equals(pipeTypeCell.Value))) {
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV35));
@@ -303,7 +251,6 @@ namespace Europlan.Common {
 					insulationCombo.Show();
 				}
 			}
-			//}
 		}
 
 		private void dgvConnectionPipes_CellLeave(object sender, DataGridViewCellEventArgs e) {
@@ -318,7 +265,6 @@ namespace Europlan.Common {
 
 		private void dgvConnectionPipes_CellParsing(object sender, DataGridViewCellParsingEventArgs e) {
 			if (e.ColumnIndex == roomDataGridViewComboBoxColumn.Index) {
-				//this.product = this.Tag as PlannedProduct;
 				lastRoomOk = false;
 				if (String.IsNullOrEmpty(e.Value as string)) {
 					e.Value = null;
@@ -330,7 +276,6 @@ namespace Europlan.Common {
 				foreach (Floor f in Project.Instance.Floors) {
 					if (f.Rooms.Contains(this.product.Product.AssociatedRoom)) {
 						foreach (Room r in f.Rooms) {
-							//if (r.ToString().Equals(e.Value)) {
 							if (r.Id.Equals(e.Value)) {
 								e.Value = r;
 								e.ParsingApplied = true;
@@ -349,7 +294,6 @@ namespace Europlan.Common {
 					}
 				}
 			} else if (e.ColumnIndex == ConnectionThrough.Index) {
-				//this.product = this.Tag as PlannedProduct;
 				lastProductOk = false;
 				if (String.IsNullOrEmpty(e.Value as string)) {
 					e.Value = null;
@@ -520,7 +464,6 @@ namespace Europlan.Common {
 				e.Cancel = true;
 			} else {
 				if (e.ColumnIndex == roomDataGridViewComboBoxColumn.Index || e.ColumnIndex == ConnectionThrough.Index) {
-					//this.dgvConnectionPipes.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = (this.dgvConnectionPipes.Rows[e.RowIndex].DataBoundItem as ConnectionPipe).Room.Id;
 					roomSelectionButton.Hide();
 				}
 			}

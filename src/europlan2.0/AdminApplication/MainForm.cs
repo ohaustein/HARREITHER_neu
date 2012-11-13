@@ -119,11 +119,9 @@ namespace Europlan.AdminApplication {
 		}
 
 		private void btnNew_Click(object sender, EventArgs e) {
-			//this.cmsNew.Show(this.btnNew, new Point(0, this.btnNew.Height));
 		}
 
 		private void btnView_Click(object sender, EventArgs e) {
-			//this.cmsView.Show(this.btnView, new Point(0, this.btnView.Height));
 		}
 
 		private void artikelUndKostruktionenToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -147,15 +145,13 @@ namespace Europlan.AdminApplication {
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				string path = Path.GetDirectoryName(dialog.FileName);
 				if (!path.Equals(PathUtil.DataPath)) {
-					//if (File.Exists(Path.Combine(path, "BruttoPreise.csv"))) {
-						string filename = Path.Combine(PathUtil.DataPath, "BruttoPreise.csv");
-						File.Copy(dialog.FileName, filename, true);
+					string filename = Path.Combine(PathUtil.DataPath, "BruttoPreise.csv");
+					File.Copy(dialog.FileName, filename, true);
 
-						FileUtils.SetAccessForEveryone(filename);
-						
-						MessageBox.Show("Die Anwendung muss nun neu gestartet werden, damit die neu importierte Artikelliste geladen werden kann.");
-						Application.Restart();
-					//}
+					FileUtils.SetAccessForEveryone(filename);
+					
+					MessageBox.Show("Die Anwendung muss nun neu gestartet werden, damit die neu importierte Artikelliste geladen werden kann.");
+					Application.Restart();
 				}
 			}
 		}
@@ -164,7 +160,6 @@ namespace Europlan.AdminApplication {
 			OpenFileDialog dialog = new OpenFileDialog();
 			dialog.CheckFileExists = true;
 			dialog.CheckPathExists = true;
-			//dialog.DefaultExt = "xml";
 			dialog.Filter = "Lizenzvorlagen|licenses.xml|Endbenutzerlizenz (*.epl)|*.epl";
 			if (dialog.ShowDialog() == DialogResult.OK) {
 				string fileName = dialog.FileName;

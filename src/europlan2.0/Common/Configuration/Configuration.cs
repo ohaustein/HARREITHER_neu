@@ -19,7 +19,6 @@ namespace Europlan.Common {
 		private static Configuration adminTemplate = null;
 		private static Configuration userTemplate = null;
 		private static readonly object padlock = new object();
-		//private static string appDataPath = Path.GetDirectoryName(System.Windows.Forms.Application.CommonAppDataPath);
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Configuration));
 
@@ -39,16 +38,7 @@ namespace Europlan.Common {
 		private List<string> materialIdsWithPricePerPackage;
 		private SerializableDictionary<string, SerializableDictionary<string, string>> productConfiguration = new SerializableDictionary<string, SerializableDictionary<string,string>>();
 
-
 		// if you add a product don't forget to call the Initialize() function in setter of ProductConfiguration
-		/*private EurovalProduct eurovalProduct = new EurovalProduct();
-		private EcothermProduct ecothermProduct = new EcothermProduct();
-		private ConcreteActivationProduct concreteActivationProduct = new ConcreteActivationProduct();
-		private HithermProduct hithermProduct = new HithermProduct();
-		private HithermCompactProduct hithermCompactProduct = new HithermCompactProduct();
-		private HithermCompactRoofProduct hithermCompactRoofProduct = new HithermCompactRoofProduct();
-		private ModulKlimaBodenProduct modulKlimaBodenProduct = new ModulKlimaBodenProduct();
-		private ModulKlimaDeckeProduct modulKlimaDeckeProduct = new ModulKlimaDeckeProduct();*/
 
 		private string partnerLogo;
 
@@ -146,15 +136,11 @@ namespace Europlan.Common {
 							if (positions.Length > 1) {
 								name = positions[1].Trim();
 							}
-							//string name2 = positions[5].Trim();
-							//if (name2 != "") {
-							//    name += " " + name2;
-							//}
 							float price = 0;
 							if (positions.Length > 2) {
 								float.TryParse(positions[2], NumberStyles.Any, CultureInfo.GetCultureInfo("de-AT").NumberFormat, out price);
 							}
-							string discountGroup = "" /*positions[10].Trim()*/;
+							string discountGroup = "";
 							string unit = "";
 							if (positions.Length > 9) {
 								unit = positions[9].Trim();
@@ -462,30 +448,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*[XmlArray("PricePerPackage")]
-		[XmlArrayItem("blub")]
-		public List<string> SerializableMaterialIdsWithPricePerPackage {
-			get {
-				if (this.type == ConfigurationType.AdminConfiguration) {
-					List<string> materialIds = new List<string>();
-					foreach (String materialId in this.materialIdsWithPricePerPackage.Keys) {
-						materialIds.Add(materialId);
-					}
-					return materialIds;
-				} else {
-					return null;
-				}
-			}
-			set {
-				this.materialIdsWithPricePerPackage = new Hashtable();
-				if (value != null) {
-					foreach (string materialId in value) {
-						this.materialIdsWithPricePerPackage.Add(materialId, null);
-					}
-				}
-			}
-		}*/
-
 		[XmlIgnore]
 		public List<Category> Categories {
 			get {
@@ -566,7 +528,6 @@ namespace Europlan.Common {
 			set {
 				if (type == ConfigurationType.InitializedConfiguration) {
 					this.materialToCategoryMapping = value;
-					//RecalculateMaterialToCategoryMapping();
 				}
 			}
 		}
@@ -651,79 +612,23 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*[XmlIgnore]
-		public EurovalProduct EurovalProduct {
-			get { return eurovalProduct; }
-			set { eurovalProduct = value; }
-		}
-
-		[XmlIgnore]
-		public EcothermProduct EcothermProduct {
-			get { return ecothermProduct; }
-			set { ecothermProduct = value; }
-		}
-
-		[XmlIgnore]
-		public ConcreteActivationProduct ConcreteActivationProduct {
-			get { return concreteActivationProduct; }
-			set { concreteActivationProduct = value; }
-		}
-
-		[XmlIgnore]
-		public HithermProduct HithermProduct {
-			get { return hithermProduct; }
-			set { hithermProduct = value; }
-		}
-
-		[XmlIgnore]
-		public HithermCompactProduct HithermCompactProduct {
-			get { return hithermCompactProduct; }
-			set { hithermCompactProduct = value; }
-		}
-
-		[XmlIgnore]
-		public HithermCompactRoofProduct HithermCompactRoofProduct {
-			get { return hithermCompactRoofProduct; }
-			set { hithermCompactRoofProduct = value; }
-		}
-
-		[XmlIgnore]
-		public ModulKlimaBodenProduct ModulKlimaBodenProduct {
-			get { return modulKlimaBodenProduct; }
-			set { modulKlimaBodenProduct = value; }
-		}
-
-		[XmlIgnore]
-		public ModulKlimaDeckeProduct ModulKlimaDeckeProduct {
-			get { return modulKlimaDeckeProduct; }
-			set { modulKlimaDeckeProduct = value; }
-		}*/
-
 		public P GetProduct<P>() where P : Product {
 			if (typeof(P) == typeof(EurovalProduct)) {
 				return new EurovalProduct() as P;
-				//return this.EurovalProduct as P;
 			} else if (typeof(P) == typeof(EcothermProduct)) {
 				return new EcothermProduct() as P;
-				//return this.EcothermProduct as P;
 			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
 				return new ConcreteActivationProduct() as P;
-				//return this.ConcreteActivationProduct as P;
 			} else if (typeof(P) == typeof(HithermProduct)) {
 				return new HithermProduct() as P;
-				//return this.HithermProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactProduct)) {
 				return new HithermCompactProduct() as P;
-				//return this.HithermCompactProduct as P;
 			} else if (typeof(P) == typeof(HithermCompactRoofProduct)) {
 				return new HithermCompactRoofProduct() as P;
-				//return this.HithermCompactRoofProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaBodenProduct)) {
 				return new ModulKlimaBodenProduct() as P;
-				//return this.ModulKlimaBodenProduct as P;
 			} else if (typeof(P) == typeof(ModulKlimaDeckeProduct)) {
 				return new ModulKlimaDeckeProduct() as P;
-				//return this.ModulKlimaDeckeProduct as P;
 			} else {
 				log.Warn("unknown product");
 			}
@@ -815,32 +720,6 @@ namespace Europlan.Common {
 		public SerializableDictionary<string, SerializableDictionary<string, string>> ProductConfiguration {
 			get {
 				Type[] types;
-				/*if (this.type == ConfigurationType.UserConfiguration) {
-					SerializableDictionary<string, SerializableDictionary<string, string>> result;
-					result = new SerializableDictionary<string, SerializableDictionary<string, string>>();
-
-					types = Assembly.GetExecutingAssembly().GetTypes();
-					foreach (Type t in types) {
-						if (typeof(Product).IsAssignableFrom(t)) {
-							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
-								object[] attributes = info.GetCustomAttributes(typeof(ProductParameterAttribute), false);
-								if (attributes.Length > 0) {
-									ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
-									if (ppa.saveForUser) {
-										string valueStr = this.GetProductParameter(t, info.Name);
-
-										if (!result.ContainsKey(t.FullName)) {
-											result[t.FullName] = new SerializableDictionary<string, string>();
-										}
-										result[t.FullName][info.Name] = valueStr;
-									}
-								}
-							}
-						}
-					}
-
-					return result;
-				}*/
 				SerializableDictionary<string, SerializableDictionary<string, string>> result;
 				if (this.Type == ConfigurationType.UserConfiguration) {
 					result = new SerializableDictionary<string,SerializableDictionary<string,string>>();
@@ -879,8 +758,6 @@ namespace Europlan.Common {
 									} else if (value.GetType() == typeof(bool)) {
 										bool b = (bool)value;
 										valueStr = b.ToString(CultureInfo.InvariantCulture.NumberFormat);
-										/*} else if (value.GetType().IsSubclassOf(typeof(Enum))) {
-											valueStr = Enum.GetName(value.GetType(), value);*/
 									} else {
 										log.Warn("Error when trying to get Product Configuration: Unknown type");
 										continue;
@@ -895,68 +772,6 @@ namespace Europlan.Common {
 			}
 			set { 
 				this.productConfiguration = value;
-				/*
-				Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-				SerializableDictionary<string, string> current;
-				foreach (Type t in types) {
-					if (typeof(Product).IsAssignableFrom(t)) {
-						if (this.productConfiguration.ContainsKey(t.FullName)) {
-							current = this.productConfiguration[t.FullName];
-							foreach (System.Reflection.PropertyInfo info in t.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.GetProperty)) {
-								try {
-									if (current.ContainsKey(info.Name) && info.CanWrite) {
-										if (info.PropertyType == typeof(int)) {
-											int val = 0;
-											if (int.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-												info.SetValue(null, val, null);
-											} else {
-												log.Warn("Error when trying to set Product Configuration");
-											}
-										} else if (info.PropertyType == typeof(double)) {
-											double val = 0;
-											if (double.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-												info.SetValue(null, val, BindingFlags.Static | BindingFlags.Public, null, null, null);
-											} else {
-												log.Warn("Error when trying to set Product Configuration");
-											}
-										} else if (info.PropertyType == typeof(float)) {
-											float val = 0;
-											if (float.TryParse(current[info.Name], NumberStyles.Any, CultureInfo.InvariantCulture.NumberFormat, out val)) {
-												info.SetValue(null, val, null);
-											} else {
-												log.Warn("Error when trying to set Product Configuration");
-											}
-										} else if (info.PropertyType == typeof(string)) {
-											info.SetValue(null, current[info.Name], null);
-										} else if (info.PropertyType == typeof(bool)) {
-											bool val = false;
-											if (bool.TryParse(current[info.Name], out val)) {
-												info.SetValue(null, val, null);
-											} else {
-												log.Warn("Error when trying to set Product Configuration");
-											}
-											//} else if (info.PropertyType.IsSubclassOf(typeof(Enum))) {
-											//	if (Enum.IsDefined(info.PropertyType, current[info.Name])) {
-											//		info.SetValue(null, Enum.Parse(info.PropertyType, current[info.Name]), null);
-											//	} else {
-											//		log.Warn("Error when trying to set Product Configuration");
-											//	}
-										} else {
-											log.Warn("Error when trying to set Product Configuration: Unknown type");
-										}
-									} else {
-										if (!info.CanWrite) {
-											log.Debug("Error product config property " + info.Name + " in product " + t.Name + " cannot be set");
-										}
-									}
-								} catch (Exception ex) {
-									throw ex;
-								}
-							}
-						}
-					}
-				}
-				*/
 			}
 		}
 
@@ -988,13 +803,6 @@ namespace Europlan.Common {
 		}
 
 		public string GetProductParameter<ProductType>(string parameterName) where ProductType : Product {
-			/*if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				return null;
-			}
-			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				return null;
-			}
-			return this.productConfiguration[typeof(ProductType).FullName][parameterName];*/
 			return this.GetProductParameter(typeof(ProductType), parameterName);
 		}
 
@@ -1211,45 +1019,6 @@ namespace Europlan.Common {
 			return value;
 		}
 
-		/*public EnumType GetProductParameterAsEnum<ProductType, EnumType>(string parameterName)
-															where ProductType : Product {
-			Nullable<EnumType> defaultValue = null;
-			object[] attributes = typeof(ProductType).GetProperty(parameterName).GetCustomAttributes(typeof(EnumProductParameterAttribute), false);
-			if (attributes.Length > 0) {
-				defaultValue = (attributes[0] as EnumProductParameterAttribute).defaultValue;
-			}
-
-			if (!this.productConfiguration.ContainsKey(typeof(ProductType).FullName)) {
-				if (!defaultValue.HasValue) {
-					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
-					return Enum.GetValues(typeof(EnumType))[0];
-				}
-				return defaultValue.Value;
-			}
-
-			if (!this.productConfiguration[typeof(ProductType).FullName].ContainsKey(parameterName)) {
-				if (!defaultValue.HasValue) {
-					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
-					return Enum.GetValues(typeof(EnumType))[0];
-				}
-				return defaultValue.Value;
-			}
-
-			EnumType value;
-			if (Enum.IsDefined(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName])) {
-				value = (EnumType)Enum.Parse(typeof(EnumType), this.productConfiguration[typeof(ProductType).FullName][parameterName]);
-			} else {
-				if (!defaultValue.HasValue) {
-					log.Warn("default value for parameter " + parameterName + " of " + typeof(ProductType).Name + " not found");
-					value = Enum.GetValues(typeof(EnumType))[0]; ;
-				} else {
-					value = defaultValue.Value;
-				}
-			}
-
-			return value;
-		}*/
-
 		private void AddProductParameter(Type t, string parameterName, string value) {
 			this.AddProductParameter(t, parameterName, value, this.productConfiguration);
 		}
@@ -1267,10 +1036,6 @@ namespace Europlan.Common {
 
 		public void AddProductParameter<T>(string parameterName, string value) where T : Product {
 			this.AddProductParameter(typeof(T), parameterName, value);
-			/*if (!this.productConfiguration.ContainsKey(typeof(T).FullName)) {
-				this.productConfiguration[typeof(T).FullName] = new SerializableDictionary<string, string>();
-			}
-			this.productConfiguration[typeof(T).FullName][parameterName] = value;*/
 		}
 
 		public void AddProductParameter<T>(string parameterName, double value) where T : Product {

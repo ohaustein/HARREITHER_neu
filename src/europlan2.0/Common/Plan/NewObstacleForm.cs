@@ -19,8 +19,8 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.NewObstacleForm_Titel;
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK"
 
 			this.label1.Text = EuroplanRes.Unit_Zentimeter;
 			this.lblHeightOffset.Text = EuroplanRes.NewObstacleForm_Parapethoehe;

@@ -707,14 +707,12 @@ namespace Europlan.Common {
 		public bool StartConnectedToAnbindung {
 			get {
 				return (this.End != null && this.End.Count > 0 && this.distributorIndex >= 0);
-				//return (this.Start == null || this.Start.Count == 0);
 			}
 		}
 
 		public bool EndConnectedToAnbindung {
 			get {
 				return (this.Start != null && this.Start.Count > 0 && this.distributorIndex >= 0);
-				//return (this.End == null || this.End.Count == 0);
 			}
 		}
 
@@ -843,9 +841,6 @@ namespace Europlan.Common {
 								if (angle > 180.0) {
 									angle = 360.0 - angle;
 								}
-								/*if (angle <= 112.5) {
-									result[0]++;
-								} else*/
 								if (angle <= 157.5) {
 									result++;
 								}

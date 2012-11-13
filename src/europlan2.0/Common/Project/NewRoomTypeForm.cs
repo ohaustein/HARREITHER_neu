@@ -21,14 +21,13 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.NewRoomTypeForm_Titel; //"Raumtypen";
+			this.Text = EuroplanRes.NewRoomTypeForm_Titel; //"Raumtypen"
 		}
 
 		public RoomType SelectedRoomType {
 			get { return this.selectedRoomType; }
 			set {
-				// TODO select room type
-				//this.selectedRoomType = value;
+				// programmatical selection of roomtype is not supported for now
 			}
 		}
 

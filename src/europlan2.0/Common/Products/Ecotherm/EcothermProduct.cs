@@ -87,29 +87,18 @@ namespace Europlan.Common {
 		private Nullable<float> textBoxFontSize = null;
         private float textBoxRotation = 0;
 
-		/*public override int GetIndexOfCircuit(Circuit c) {
-			int i = 0;
-			foreach (EurovalCircuit ec in this.circuits) {
-				if (ec == c) {
-					return i;
-				}
-				i++;
-			}
-			return -1;
-		}*/
-
 		private bool clipSchieneKlebeband = false;
 		private bool anhydritEstrich = false;
 
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
-			private static readonly string A5 = EuroplanRes.EcothermProduct_A5; //"A5";
-			private static readonly string EV5 = EuroplanRes.EcothermProduct_EV5; //"EV5";
-			private static readonly string EV10 = EuroplanRes.EcothermProduct_EV10; //"EV10";
-			private static readonly string EV15 = EuroplanRes.EcothermProduct_EV15; //"EV15";
-			private static readonly string EV20 = EuroplanRes.EcothermProduct_EV20; //"EV20";
-			private static readonly string EV25 = EuroplanRes.EcothermProduct_EV25; //"EV25";
-			private static readonly string EV30 = EuroplanRes.EcothermProduct_EV30; //"EV30";
-			private static readonly string EV35 = EuroplanRes.EcothermProduct_EV35; //"EV35";
+			private static readonly string A5 = EuroplanRes.EcothermProduct_A5; //"A5"
+			private static readonly string EV5 = EuroplanRes.EcothermProduct_EV5; //"EV5"
+			private static readonly string EV10 = EuroplanRes.EcothermProduct_EV10; //"EV10"
+			private static readonly string EV15 = EuroplanRes.EcothermProduct_EV15; //"EV15"
+			private static readonly string EV20 = EuroplanRes.EcothermProduct_EV20; //"EV20"
+			private static readonly string EV25 = EuroplanRes.EcothermProduct_EV25; //"EV25"
+			private static readonly string EV30 = EuroplanRes.EcothermProduct_EV30; //"EV30"
+			private static readonly string EV35 = EuroplanRes.EcothermProduct_EV35; //"EV35"
 
 			private Dictionary<string, EcothermLayDistance> mappingFromString = new Dictionary<string, EcothermLayDistance>();
 			private Dictionary<EcothermLayDistance, string> mappingToString = new Dictionary<EcothermLayDistance, string>();
@@ -1080,7 +1069,6 @@ namespace Europlan.Common {
 					if (area < 0) {
 						area = 0;
 					}
-					//value += (ec.AreaTotal - ec.GetAreaRim(this.plannedRimType) - ec.AreaRemovedDueConnection);
 					value += area;
 				}
 				return (float)value;
@@ -1393,7 +1381,6 @@ namespace Europlan.Common {
 					}
 				}
 				return value;
-				//return this.plannedPipeLength / this.PlannedCircuits; 
 			}
 		}
 
@@ -1495,7 +1482,7 @@ namespace Europlan.Common {
 			if (checkHeat && (pressureLossHeat > maxPressureLost) && !ignoreCircuitLength) {
 				return false;
 			}
-			// TODO checkCool
+			// hard parameters are currently only checked for heating, maybe extend this to also check cooling
 			if (circuitLength > maxCircuitLength && !ignoreCircuitLength) {
 				return false;
 			}
@@ -1593,15 +1580,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.PlannedFloorConstruction == null || this.PlannedInsulationConstruction == null || (this.PlannedConnection == null && !this.plannedProductIsConnection)) {
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedFloorConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, "
 				}
 				if (PlannedInsulationConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, "
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, "
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -1657,7 +1644,7 @@ namespace Europlan.Common {
 				}
 				this.CorrectCircuits(this.requestedCircuits.Value, false);
 				if (!this.requestedCircuits.HasValue || c < this.requestedCircuits.Value) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1668,7 +1655,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1696,14 +1683,6 @@ namespace Europlan.Common {
 			// determine laydistance/rimtype combinations to calculate
 			Dictionary<EcothermLayDistance, Nullable<EcothermRimType>[]> teilungen = new Dictionary<EcothermLayDistance, EcothermRimType?[]>();
 			if (this.plannedRimLength > 0) {
-				/*teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
-				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
-				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
-				teilungen.Add(EcothermLayDistance.EV25, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180, EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
-				teilungen.Add(EcothermLayDistance.EV20, new Nullable<EcothermRimType>[] { EcothermRimType.EV10_55, EcothermRimType.EV10_110, EcothermRimType.EV10_165, EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
-				teilungen.Add(EcothermLayDistance.EV15, new Nullable<EcothermRimType>[] { EcothermRimType.EV5_40, EcothermRimType.EV5_80, EcothermRimType.EV5_120 });
-				teilungen.Add(EcothermLayDistance.EV10, new Nullable<EcothermRimType>[] { null });
-				teilungen.Add(EcothermLayDistance.EV5, new Nullable<EcothermRimType>[] { null });*/
 				teilungen.Add(EcothermLayDistance.NONE, new Nullable<EcothermRimType>[] { null });
 				teilungen.Add(EcothermLayDistance.EV35, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180 });
 				teilungen.Add(EcothermLayDistance.EV30, new Nullable<EcothermRimType>[] { EcothermRimType.EV15_60, EcothermRimType.EV15_120, EcothermRimType.EV15_180 });
@@ -1865,7 +1844,7 @@ namespace Europlan.Common {
 
 			if (!bestLaydistance.HasValue) {
 				this.circuits.Clear();
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung mˆglich";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_KeineAutomatischeAuslegung; //"Keine Automatische Auslegung mˆglich"
 				this.incompleteCalculation = true;
 				return false;
 			}
@@ -2080,7 +2059,7 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+						error = EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					} else {
 						j--;
 						this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, ec, false));
@@ -2259,7 +2238,7 @@ namespace Europlan.Common {
 
 		public override bool ManualMode {
 			get {
-				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT); // ||
+				return (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT);
 			}
 		}
 

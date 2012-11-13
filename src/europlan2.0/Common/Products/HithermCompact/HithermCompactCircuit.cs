@@ -94,33 +94,6 @@ namespace Europlan.Common {
 				return area;
 			}
 		}
-
-		//private double areaTotal;
-		//[XmlIgnore]
-		//public double AreaTotal {
-		//    get { return this.areaTotal; }
-		//    set { this.areaTotal = value; }
-		//}
-
-		//private double areaUnheated;
-		//[XmlIgnore]
-		//public double AreaUnheated {
-		//    get { return this.areaUnheated; }
-		//    set { this.areaUnheated = value; }
-		//}
-
-		//private double areaRemovedDueConnection;
-		//[XmlIgnore]
-		//public double AreaRemovedDueConnection {
-		//    get { return this.areaRemovedDueConnection; }
-		//    set { this.areaRemovedDueConnection = value; }
-		//}
-
-		//[XmlIgnore]
-		//public double AreaWithoutConnections {
-		//    get { return this.areaTotal - this.areaRemovedDueConnection; }
-		//}
-
 		#endregion Area
 
 		private double c_qHeatPerSqm;

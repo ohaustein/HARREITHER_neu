@@ -4,15 +4,23 @@ using System.Text;
 using System.Globalization;
 
 namespace Europlan.Common {
+	/// <summary>
+	/// Base class for ProductParameterAttributes. Properties of Products that are marked with this attribute will be treated as product parameters that are stored in the config.
+	/// There are currently implementations for product parameters of the following types:
+	/// - bool   (BoolProductParameterAttribute)
+	/// - int    (IntProductParameterAttribute)
+	/// - float  (FloatProductParameterAttribute)
+	/// - double (DoubleProductParameterAttribute)
+	/// - string (StringProductParameterAttribute)
+	/// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
 	public abstract class ProductParameterAttribute: Attribute {
 		public bool overrideableInPlanning = false;
 		public bool overrideableInQuickDimensioning = false;
 		public bool saveForUser = false;
 		public bool saveInProject = true;
-		//public object defaultValue = null;
 
-		public ProductParameterAttribute(/*object defaultValue*/) {
+		public ProductParameterAttribute() {
 		}
 
 		public abstract object DefaultValue {
@@ -22,12 +30,6 @@ namespace Europlan.Common {
 		public abstract string DefaultValueAsString {
 			get;
 		}
-
-		/*public ProductParameterAttribute(/*object defaultValue, bool overrideableInPlanning, bool overrideableInQuickDimensioning, bool saveForUser) {
-			this.overrideableInPlanning = overrideableInPlanning;
-			this.overrideableInQuickDimensioning = overrideableInQuickDimensioning;
-			this.saveForUser = saveForUser;
-		}*/
 	}
 
 	[AttributeUsage(AttributeTargets.Property)]
@@ -114,17 +116,4 @@ namespace Europlan.Common {
 			get { return this.defaultValue; }
 		}
 	}
-
-	/*[AttributeUsage(AttributeTargets.Property)]
-	public class EnumProductParameterAttribute : ProductParameterAttribute {
-		public Enum defaultValue;
-
-		public EnumProductParameterAttribute(Enum defaultValue) {
-			this.defaultValue = defaultValue;
-		}
-
-		public override object DefaultValue {
-			get { return this.defaultValue; }
-		}
-	}*/
 }

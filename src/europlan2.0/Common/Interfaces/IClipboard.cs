@@ -11,7 +11,6 @@ namespace Europlan.Common {
 		string DataFormat { get;}
 		string SupportedPasteFormat { get; }
 		bool SupportsPaste(string data);
-		//object Cut();
 		object Copy();
 		void Paste(object o);
 	}

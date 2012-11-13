@@ -255,21 +255,6 @@ namespace Europlan.Common {
 				this.Value = Math.Min(this.Maximum, this.Value + this.Increment);
 			} else {
 				System.Globalization.NumberFormatInfo numberFormatInfo = System.Globalization.CultureInfo.CurrentCulture.NumberFormat;
-				/*string decimalSeparatorStr = numberFormatInfo.NumberDecimalSeparator;
-				string groupSeparatorStr = numberFormatInfo.NumberGroupSeparator;
-				string negativeSignStr = numberFormatInfo.NegativeSign;
-				if (!string.IsNullOrEmpty(decimalSeparatorStr) && decimalSeparatorStr.Length == 1)
-				{
-					notifyValueChange = decimalSeparatorStr[0] == e.KeyChar;
-				}
-				if (!notifyValueChange && !string.IsNullOrEmpty(groupSeparatorStr) && groupSeparatorStr.Length == 1)
-				{
-					notifyValueChange = groupSeparatorStr[0] == e.KeyChar;
-				}
-				if (!notifyValueChange && !string.IsNullOrEmpty(negativeSignStr) && negativeSignStr.Length == 1)
-				{
-					notifyValueChange = negativeSignStr[0] == e.KeyChar;
-				}*/
 			}
 
 			if (notifyValueChange) {

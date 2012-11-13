@@ -251,41 +251,6 @@ namespace Europlan.Common {
 					this.Materials[node] = (Material)value;
 				}
 			}
-
-			/*get {
-				int node = this.GetNode(index);
-				if (node < 0) {
-					throw new ArgumentOutOfRangeException();
-				} else {
-					IEnumerator<Material> it = this.GetEnumerator();
-					it.MoveNext();
-					for (int i = 0; i < index; i++ ) {
-						it.MoveNext();
-					}
-					return it.Current;
-					//return this.Materials[node];
-				}
-			}
-			set {
-				if (value is Material) {
-					int node = this.GetNode(index);
-					if (node < 0) {
-						throw new ArgumentOutOfRangeException();
-					} else {
-						IEnumerator<Material> it = this.GetEnumerator();
-						it.MoveNext();
-						for (int i = 0; i < index; i++) {
-							it.MoveNext();
-						}
-						//return it.Current;
-						int t = this.Materials.IndexOf(it.Current);
-						this.Materials[t] = (Material)value;
-						//this.Materials[node] = (Material)value;
-					}
-				} else {
-					throw new ArgumentException("Object to set is not a material");
-				}
-			}*/
 		}
 		#endregion
 
@@ -310,7 +275,6 @@ namespace Europlan.Common {
 		}
 
 		public bool AllowNew {
-			//get { return this.categoryFilter == CategoryType.General || this.categoryFilter == CategoryType.Insulation; }
 			get { return true; }
 		}
 
@@ -380,7 +344,6 @@ namespace Europlan.Common {
 					filter = null;
 				}
 				return filter;
-				//return (this.categoryFilter == null ? null : ((int)this.categoryFilter.Value).ToString());
 			}
 			set {
 				int i;
@@ -419,23 +382,6 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				/*} else if (Int32.TryParse(value, out i)) {
-					if (i == ((int)CategoryType.General)) {
-						this.categoryFilter = CategoryType.General;
-					} else if (i == ((int)CategoryType.Floor)) {
-						this.categoryFilter = CategoryType.Floor;
-					} else if (i == ((int)CategoryType.Wall)) {
-						this.categoryFilter = CategoryType.Wall;
-					} else if (i == ((int)CategoryType.Ceiling)) {
-						this.categoryFilter = CategoryType.Ceiling;
-					} else if (i == ((int)CategoryType.Distributor)) {
-						this.categoryFilter = CategoryType.Distributor;
-					} else if (i == ((int)CategoryType.Insulation)) {
-						this.categoryFilter = CategoryType.Insulation;
-					} else {
-						this.categoryFilter = null;
-					}
-				}*/
 			}
 		}
 
@@ -444,7 +390,7 @@ namespace Europlan.Common {
 		}
 
 		public ListSortDescriptionCollection SortDescriptions {
-			get { return null; /*throw new Exception("The method or operation is not implemented.");*/ }
+			get { return null; }
 		}
 
 		public bool SupportsAdvancedSorting {

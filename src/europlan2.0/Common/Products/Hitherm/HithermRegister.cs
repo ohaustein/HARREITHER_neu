@@ -9,31 +9,31 @@ namespace Europlan.Common {
 	public class HithermRegister : IWallRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string hit_50_10 = EuroplanRes.HithermRegister_Hit50L; //"HIT 50/10";
-			private static readonly string hit_100_10 = EuroplanRes.HithermRegister_Hit100L; //"HIT 100/10";
-			private static readonly string hit_150_10 = EuroplanRes.HithermRegister_Hit150L; //"HIT 150/10";
-			private static readonly string hit_200_10 = EuroplanRes.HithermRegister_Hit200L; //"HIT 200/10";
-			private static readonly string hit_250_10 = EuroplanRes.HithermRegister_Hit250L; //"HIT 250/10";
-			private static readonly string hit_300_10 = EuroplanRes.HithermRegister_Hit300L; //"HIT 300/10";
-			private static readonly string hit_50_5 = EuroplanRes.HithermRegister_Hit50HL; //"HIT 50/5";
-			private static readonly string hit_100_5 = EuroplanRes.HithermRegister_Hit100HL; //"HIT 100/5";
-			private static readonly string hit_150_5 = EuroplanRes.HithermRegister_Hit150HL; //"HIT 150/5";
-			private static readonly string hit_200_5 = EuroplanRes.HithermRegister_Hit200HL; //"HIT 200/5";
-			private static readonly string hit_250_5 = EuroplanRes.HithermRegister_Hit250HL; //"HIT 250/5";
-			private static readonly string hit_300_5 = EuroplanRes.HithermRegister_Hit300HL; //"HIT 300/5";
+			private static readonly string hit_50_10 = EuroplanRes.HithermRegister_Hit50L; //"HIT 50/10"
+			private static readonly string hit_100_10 = EuroplanRes.HithermRegister_Hit100L; //"HIT 100/10"
+			private static readonly string hit_150_10 = EuroplanRes.HithermRegister_Hit150L; //"HIT 150/10"
+			private static readonly string hit_200_10 = EuroplanRes.HithermRegister_Hit200L; //"HIT 200/10"
+			private static readonly string hit_250_10 = EuroplanRes.HithermRegister_Hit250L; //"HIT 250/10"
+			private static readonly string hit_300_10 = EuroplanRes.HithermRegister_Hit300L; //"HIT 300/10"
+			private static readonly string hit_50_5 = EuroplanRes.HithermRegister_Hit50HL; //"HIT 50/5"
+			private static readonly string hit_100_5 = EuroplanRes.HithermRegister_Hit100HL; //"HIT 100/5"
+			private static readonly string hit_150_5 = EuroplanRes.HithermRegister_Hit150HL; //"HIT 150/5"
+			private static readonly string hit_200_5 = EuroplanRes.HithermRegister_Hit200HL; //"HIT 200/5"
+			private static readonly string hit_250_5 = EuroplanRes.HithermRegister_Hit250HL; //"HIT 250/5"
+			private static readonly string hit_300_5 = EuroplanRes.HithermRegister_Hit300HL; //"HIT 300/5"
 
-			private static readonly string hit_50_10_Short = EuroplanRes.HithermRegister_Hit50L_Short; //"50/10";
-			private static readonly string hit_100_10_Short = EuroplanRes.HithermRegister_Hit100L_Short; //"100/10";
-			private static readonly string hit_150_10_Short = EuroplanRes.HithermRegister_Hit150L_Short; //"150/10";
-			private static readonly string hit_200_10_Short = EuroplanRes.HithermRegister_Hit200L_Short; //"200/10";
-			private static readonly string hit_250_10_Short = EuroplanRes.HithermRegister_Hit250L_Short; //"250/10";
-			private static readonly string hit_300_10_Short = EuroplanRes.HithermRegister_Hit300L_Short; //"300/10";
-			private static readonly string hit_50_5_Short = EuroplanRes.HithermRegister_Hit50HL_Short; //"50/5";
-			private static readonly string hit_100_5_Short = EuroplanRes.HithermRegister_Hit100HL_Short; //"100/5";
-			private static readonly string hit_150_5_Short = EuroplanRes.HithermRegister_Hit150HL_Short; //"150/5";
-			private static readonly string hit_200_5_Short = EuroplanRes.HithermRegister_Hit200HL_Short; //"200/5";
-			private static readonly string hit_250_5_Short = EuroplanRes.HithermRegister_Hit250HL_Short; //"250/5";
-			private static readonly string hit_300_5_Short = EuroplanRes.HithermRegister_Hit300HL_Short; //"300/5";
+			private static readonly string hit_50_10_Short = EuroplanRes.HithermRegister_Hit50L_Short; //"50/10"
+			private static readonly string hit_100_10_Short = EuroplanRes.HithermRegister_Hit100L_Short; //"100/10"
+			private static readonly string hit_150_10_Short = EuroplanRes.HithermRegister_Hit150L_Short; //"150/10"
+			private static readonly string hit_200_10_Short = EuroplanRes.HithermRegister_Hit200L_Short; //"200/10"
+			private static readonly string hit_250_10_Short = EuroplanRes.HithermRegister_Hit250L_Short; //"250/10"
+			private static readonly string hit_300_10_Short = EuroplanRes.HithermRegister_Hit300L_Short; //"300/10"
+			private static readonly string hit_50_5_Short = EuroplanRes.HithermRegister_Hit50HL_Short; //"50/5"
+			private static readonly string hit_100_5_Short = EuroplanRes.HithermRegister_Hit100HL_Short; //"100/5"
+			private static readonly string hit_150_5_Short = EuroplanRes.HithermRegister_Hit150HL_Short; //"150/5"
+			private static readonly string hit_200_5_Short = EuroplanRes.HithermRegister_Hit200HL_Short; //"200/5"
+			private static readonly string hit_250_5_Short = EuroplanRes.HithermRegister_Hit250HL_Short; //"250/5"
+			private static readonly string hit_300_5_Short = EuroplanRes.HithermRegister_Hit300HL_Short; //"300/5"
 
 			private Dictionary<string, HithermRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermRegisterTypeEnum>();
 			private Dictionary<HithermRegisterTypeEnum, string> mappingToString = new Dictionary<HithermRegisterTypeEnum, string>();
@@ -165,8 +165,8 @@ namespace Europlan.Common {
 		}
 
 		public class RegisterOrientationEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string horizontal = EuroplanRes.HithermRegister_Horizontal; //"Horizontal";
-			private static readonly string vertikal = EuroplanRes.HithermRegister_Vertikal; //"Vertikal";
+			private static readonly string horizontal = EuroplanRes.HithermRegister_Horizontal; //"Horizontal"
+			private static readonly string vertikal = EuroplanRes.HithermRegister_Vertikal; //"Vertikal"
 
 			private Dictionary<string, RegisterOrientationEnum> mappingFromString = new Dictionary<string, RegisterOrientationEnum>();
 			private Dictionary<RegisterOrientationEnum, string> mappingToString = new Dictionary<RegisterOrientationEnum, string>();
@@ -212,8 +212,8 @@ namespace Europlan.Common {
 		}
 
 		public class RohrabstandEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string horizontal = EuroplanRes.HithermRegister_Leistungsregister; //"10cm (Standardreg.)";
-			private static readonly string vertikal = EuroplanRes.HithermRegister_Hochleistungsregister; //"5cm (Hochleistungsreg.)";
+			private static readonly string horizontal = EuroplanRes.HithermRegister_Leistungsregister; //"10cm (Standardreg.)"
+			private static readonly string vertikal = EuroplanRes.HithermRegister_Hochleistungsregister; //"5cm (Hochleistungsreg.)"
 
 			private Dictionary<string, RohrabstandEnum> mappingFromString = new Dictionary<string, RohrabstandEnum>();
 			private Dictionary<RohrabstandEnum, string> mappingToString = new Dictionary<RohrabstandEnum, string>();
@@ -346,8 +346,6 @@ namespace Europlan.Common {
 		private bool graphVorlaufRight = true;
 
 		private Dictionary<int, double> gaps = new Dictionary<int, double>();
-
-		/*private Nullable<Point> origin = null;*/
 
 		public HithermRegister() {
 			this.registerType = HithermRegisterTypeEnum.HIT_50_5;
@@ -695,10 +693,6 @@ namespace Europlan.Common {
 				if (this.Rohre < this.LastGap + 1) {
 					this.Rohre = this.LastGap + 1;
 				}
-
-				/*while (this.RegisterBreiteForDrawing > value && this.Rohre > 3) {
-					this.Rohre--;
-				}*/
 			}
 		}
 
@@ -771,16 +765,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		//public Nullable<Point> Origin {
-		//	get { return this.origin; }
-		//	set { this.origin = value; }
-		//}
-		
 		[XmlIgnore]
 		public double CoveredArea {
 			get {
 				return this.HeatArea;
-				//return ((double)this.RegisterBreite / 100.0) * ((double)this.RegisterHoehe / 100.0);
 			}
 		}
 
@@ -1080,9 +1068,7 @@ namespace Europlan.Common {
 			get {
 				double gapsSum = 0;
 				foreach (KeyValuePair<int, double> gap in this.gaps) {
-					//if (gap.Key < this.Rohre - 1) {
-						gapsSum += gap.Value;
-					//}
+					gapsSum += gap.Value;
 				}
 				return gapsSum;
 			}

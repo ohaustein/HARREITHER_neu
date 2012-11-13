@@ -227,12 +227,6 @@ namespace Europlan.Common {
 			} else {
 				this.endLink.MoveVerticalSegment(segmentIndex - this.startLink.Vertices.Count, delta);
 			}
-			/*if (this.vertices.Count < segmentIndex + 2) {
-				return;
-			}
-			Vector2D deltaVector = new Vector2D(delta, 0);
-			this.vertices[segmentIndex] += deltaVector;
-			this.vertices[segmentIndex + 1] += deltaVector;*/
 		}
 
 		public override void MoveHorizontalSegment(int segmentIndex, double delta) {
@@ -241,12 +235,6 @@ namespace Europlan.Common {
 			} else {
 				this.endLink.MoveHorizontalSegment(segmentIndex - this.startLink.Vertices.Count, delta);
 			}
-			/*if (this.vertices.Count < segmentIndex + 2) {
-				return;
-			}
-			Vector2D deltaVector = new Vector2D(0, delta);
-			this.vertices[segmentIndex] += deltaVector;
-			this.vertices[segmentIndex + 1] += deltaVector;*/
 		}
 
 		public override void Simplify() {

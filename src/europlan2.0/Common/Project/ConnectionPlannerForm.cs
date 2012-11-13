@@ -11,9 +11,6 @@ using WW.Math.Geometry;
 namespace Europlan.Common {
 	public partial class ConnectionPlannerForm : Form {
 
-		//private Floor floor;
-		//private Dictionary<Distributor, Distributor.GraphicalRepresentation> distributors = new Dictionary<Distributor, Distributor.GraphicalRepresentation>();
-
 		private bool changed = false;
 
 		public ConnectionPlannerForm(Floor floor) {
@@ -50,14 +47,6 @@ namespace Europlan.Common {
 
 			this.connectionPlanner.Product = product;
 			this.connectionPlanner.PlanCeiling = ceiling;
-
-			/*foreach (Distributor distributor in floor.GetAllAvailableDistributors()) {
-				foreach (Distributor.GraphicalRepresentation rep in distributor.GraphicalRepresentations) {
-					if (rep.floorId == floor.Id) {
-						this.distributors.Add(distributor, rep);
-					}
-				}
-			}*/
 
 			this.UpdateToolbar(null);
 		}

@@ -122,13 +122,6 @@ namespace Europlan.Common {
 
 		public double TotalWidth {
 			get {
-				/*double totalWidth = 0;
-				if (this.room != null && this.room.Walls != null) {
-					foreach (GraphicalWall wall in this.room.Walls) {
-						totalWidth += wall.GetWallWidth();
-					}
-				}
-				return totalWidth;*/
 				if (this.room == null || this.room.Walls == null || this.room.Walls.Count == 0) {
 					return 0;
 				} else {
@@ -202,14 +195,9 @@ namespace Europlan.Common {
 			e.Graphics.ResetClip();
 			e.Graphics.Clear(Color.LightGray);
 
-			/*Matrix paintMatrix = new Matrix();
-			paintMatrix.Scale((float)this.Scale, -(float)this.Scale);
-			paintMatrix.Translate((float)this.XPos, (float)(this.YPos));
-			e.Graphics.Transform = paintMatrix;*/
 			Matrix paintMatrix = this.PlanToControlMatrix;
 			e.Graphics.Transform = paintMatrix;
 
-			//double xOffset = 0;
 			Pen wallBorderPen = Pens.Black;
 			Brush wallBrush = new SolidBrush(Color.White);
 			Pen unusableBorderPen = Pens.Gray;
@@ -218,7 +206,6 @@ namespace Europlan.Common {
 				double xOffset = this.room.GetWallOffset(wall).Value.X * 100.0;
 				double yOffset = 0;
 				wall.PaintObject(e.Graphics, xOffset, yOffset, this.SelectedObject, this.SelectedWall, this.Scale, false);
-				//xOffset += wall.CeilingContour[wall.CeilingContour.Count - 1].X * 100.0;
 			}
 
 			e.Graphics.ResetClip();
@@ -350,7 +337,6 @@ namespace Europlan.Common {
 			}
 
 			mouseDown = true;
-			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 			Point mousePosInCtrl = new Point(e.X, e.Y);
 			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 			bool invalidate = false;
@@ -392,18 +378,15 @@ namespace Europlan.Common {
 					} else {
 						this.newObstacleOk = false;
 						this.newObstacle.IsNew = true;
-						//this.SelectedObject = this.newObstacle;
 					}
 				}
 			}
 			if (mode == PlanMode.PM_ADD_SCHRAEGE && this.room != null && e.Button == MouseButtons.Left) {
-				//this.dragStart = mousePosInPlan;
 				this.newSchraegeWall = this.room.GetWallForPoint(mousePosInPlan, out this.newSchraegeWallXOffset, out this.newSchraegeWallYOffset);
 				this.SelectedObject = null;
 				this.selectedWall = this.newSchraegeWall;
 				if (this.newSchraegeWall != null) {
 					this.newSchraege = new GraphicalWallSchraege(this.newSchraegeWall, this.newSchraegeOrientation);
-					//this.newSchraegeOk = false;
 					this.newSchraege.IsNew = true;
 				}
 			}
@@ -467,7 +450,6 @@ namespace Europlan.Common {
 			}
 
 			mouseDown = false;
-			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 			Point mousePosInCtrl = new Point(e.X, e.Y);
 			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 			bool invalidate = false;
@@ -541,7 +523,6 @@ namespace Europlan.Common {
 				return;
 			}
 
-			//Point mousePosInCtrl = this.PointToClient(new Point(MousePosition.X, MousePosition.Y));
 			Point mousePosInCtrl = new Point(e.X, e.Y);
 			Point2D mousePosInPlan = this.ControlToPlanMatrix3D.Transform(new Point2D(mousePosInCtrl.X, mousePosInCtrl.Y)); ;
 
@@ -746,22 +727,6 @@ namespace Europlan.Common {
 		}
 
 		private void RecalculateScrollBar() {
-			/*int value = -(int)(this.XPos + (this.Width / this.Scale));
-			int min = -(10 + (int)(this.Width / this.Scale));
-			int max = -(int)((-TotalWidth * 100) + this.Width / this.Scale - 10);
-			if (value <= max && value >= min) {
-				this.hScrollBar1.Minimum = min;
-				this.hScrollBar1.Maximum = max;
-				this.hScrollBar1.LargeChange = (int)(this.Width / this.Scale);
-				this.hScrollBar1.Value = value;
-				this.hScrollBar1.Visible = true;
-			} else {
-				this.hScrollBar1.Minimum = min;
-				this.hScrollBar1.Maximum = max;
-				this.hScrollBar1.LargeChange = max - min + 1;
-				this.hScrollBar1.Value = min;
-				this.hScrollBar1.Visible = false;
-			}*/
 		}
 
 		public IWallProductPlanner ProductPlanner {

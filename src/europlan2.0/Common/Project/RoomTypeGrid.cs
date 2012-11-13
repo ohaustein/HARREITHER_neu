@@ -19,9 +19,9 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Bezeichnung; //"Name";
-			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Heizlast; //"Heizlast (W/m²)";
-			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Kuehllast; //"Kühllast (W/m²)";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Bezeichnung; //"Name"
+			this.heatLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Heizlast; //"Heizlast (W/m²)"
+			this.coolLoadPerSquareMeterDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RoomTypeGrid_Kuehllast; //"Kühllast (W/m²)"
 
 		}
 

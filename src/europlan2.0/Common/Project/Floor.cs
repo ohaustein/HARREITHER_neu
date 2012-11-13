@@ -144,15 +144,6 @@ namespace Europlan.Common {
 			return list;
 		}
 
-		/*internal void InitializeTree(System.Windows.Forms.TreeNode floors) {
-			floorNode.Tag = this;
-			floors.Nodes.Add(floorNode);
-			floorNode.Nodes.Clear();
-			foreach (Room room in rooms) {
-				room.InitializeTree(floorNode);
-			}
-		}*/
-
 		internal void UpdateTree() {
 			int i = 0;
 			bool expand = this.Node.Nodes.Count == 0;
@@ -279,12 +270,10 @@ namespace Europlan.Common {
 				foreach (PlannedProduct pp in r.PlannedProducts) {
 					if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && pp.Product.PlannedConnection.OtherProduct == origin) {
 						connectedProducts.Add(pp);
-						//return pp;
 					}
 				}
 			}
 			return connectedProducts;
-			//return null;
 		}
 
 		public string LastInsulationConstructionId {

@@ -98,13 +98,8 @@ namespace Europlan.Common {
 
 			GraphicsPath doorPath = new GraphicsPath();
 			doorPath.AddPolygon(doorPointArr);
-			//Region doorClip = new Region(doorPath);
-			//doorClip.Intersect(baseClip);
-			//g.Clip = doorClip;
-
 
 			g.FillPolygon(doorBrush, doorPointArr);
-
 			
 			List<PointF> outsidePoints = new List<PointF>();
 			foreach (Point2D vertex in outsideBorder) {
@@ -213,7 +208,6 @@ namespace Europlan.Common {
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height + px, AnchorTypeEnum.ANCHOR_SCALE_TOP_RIGHT, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY + this.Height / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
 			anchors.Add(new Anchor(this.GraphPosX + this.Width + px, this.GraphPosY - px, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
-			//anchors.Add(new Anchor(this.X + this.Width / 2.0, this.Y - px5, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 			return anchors;
 		}
 

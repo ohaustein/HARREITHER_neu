@@ -97,13 +97,8 @@ namespace Europlan.Common {
 
 			GraphicsPath doorPath = new GraphicsPath();
 			doorPath.AddPolygon(doorPointArr);
-			//Region doorClip = new Region(doorPath);
-			//doorClip.Intersect(baseClip);
-			//g.Clip = doorClip;
-
 
 			g.FillPolygon(windowBrush, doorPointArr);
-
 
 			List<PointF> outsidePoints = new List<PointF>();
 			foreach (Point2D vertex in outsideBorder) {
@@ -125,46 +120,6 @@ namespace Europlan.Common {
 			}
 			g.DrawPolygon(windowBorderPen, doorPointArr);
 			g.Clip = oldClip;
-
-			/*Region oldClip = g.Clip;
-			Polygon2D usableArea = this.GetObjectBorders(xOffset, yOffset);
-			Polygon2D windowBorder = GetOutsideBorder(xOffset, yOffset);
-			g.SmoothingMode = SmoothingMode.AntiAlias;
-
-			List<PointF> borderPoints = new List<PointF>();
-			foreach (Point2D vertex in windowBorder) {
-				borderPoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-			}
-
-			PointF[] pointArr = borderPoints.ToArray();
-
-			GraphicsPath windowPath = new GraphicsPath();
-			windowPath.AddPolygon(pointArr);
-			Region windowClip = new Region(windowPath);
-			g.Clip = windowClip;
-
-
-			g.FillPolygon(windowBrush, pointArr);
-
-			List<PointF> usablePoints = new List<PointF>();
-			foreach (Point2D vertex in usableArea) {
-				usablePoints.Add(new PointF((float)vertex.X, (float)vertex.Y));
-			}
-
-			GraphicsPath path = new GraphicsPath();
-			path.AddPolygon(borderPoints.ToArray());
-			Region clip = new Region(path);
-			GraphicsPath excludePath = new GraphicsPath();
-			excludePath.AddPolygon(usablePoints.ToArray());
-			clip.Exclude(excludePath);
-			g.Clip = clip;
-
-			g.FillPolygon(unusableBrush, borderPoints.ToArray());
-
-			g.Clip = windowClip;
-			g.DrawPolygon(unusableBorderPen, usablePoints.ToArray());
-			g.DrawPolygon(windowBorderPen, pointArr);
-			g.Clip = oldClip;*/
 		}
 
 		public override IGraphicalWallObject GetPickedObject(WW.Math.Point2D planPoint, double xOffset, double yOffset) {
@@ -201,7 +156,6 @@ namespace Europlan.Common {
 				double tmpX = this.GraphPosX;
 				double tmpY = this.GraphPosY;
 				
-				//this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
 				this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
 				bool retryY = false;
 				if (useSnap) {

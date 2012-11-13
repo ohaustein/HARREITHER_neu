@@ -45,27 +45,6 @@ namespace Europlan.Common {
 			this.SetLanguage();
 
 			Licensing.License license = Licensing.LicenseManager.Instance.License;
-			/*this.tableLayoutPanel1.Controls.Remove(this.lblEuroval);
-			this.tableLayoutPanel1.Controls.Remove(this.cbEurovalCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbEurovalHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblHitherm);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompact);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblHithermCompactRoof);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbHithermCompactRoofHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaBoden);
-			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaBodenHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblModulKlimaDecke);
-			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbModulKlimaDeckeHeat);
-			this.tableLayoutPanel1.Controls.Remove(this.lblBka);
-			this.tableLayoutPanel1.Controls.Remove(this.cbBkaCool);
-			this.tableLayoutPanel1.Controls.Remove(this.cbBkaHeat);*/
 			this.tableLayoutPanel1.Controls.Clear();
 
 			this.tableLayoutPanel1.Controls.Add(this.lblHeat, 1, 0);
@@ -129,29 +108,29 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.pageSummary.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Ergebnis Flächenaufstellung";
-			this.pageSettings.Text = EuroplanRes.QuickDimensioningPanel_Einstellungen;//"Einstellungen";
-			this.lblTemp4.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)";
-			this.lblTemp3.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturKuehlen;//"Vorlauftemperatur\r\n(Kühlen)";
-			this.lblTemp2.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)";
-			this.label2.Text = EuroplanRes.QuickDimensioningPanel_ProdukteWaehlen;//"Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen:";
-			this.lblTemp1.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturHeizen;//"Vorlauftemperatur\r\n(Heizen)";
-			this.lblEuroval.Text = EuroplanRes.QuickDimensioningPanel_Euroval;//"Euroval® Fußbodenheizung";
-			this.btnRevert.Text = EuroplanRes.QuickDimensioningPanel_Zuruecksetzen;//"Flächenaufstellung zurücksetzen";
-			this.lblAllocation2.Text = EuroplanRes.Unit_Prozent;//"%";
-			this.lblAllocation.Text = EuroplanRes.QuickDimensioningPanel_Belegefaktor;//"Belegefaktor";
-			this.lblHeat.Text = EuroplanRes.QuickDimensioningPanel_Heizen;//"Heizen";
-			this.lblCool.Text = EuroplanRes.QuickDimensioningPanel_Kuehlen;//"Kühlen";
-			this.lblHithermCompact.Text = EuroplanRes.QuickDimensioningPanel_HithermCompact;//"Hitherm® Compact";
-			this.lblHitherm.Text = EuroplanRes.QuickDimensioningPanel_Hitherm;//"Hitherm® Klimawand";
-			this.lblBka.Text = EuroplanRes.QuickDimensioningPanel_Bka;//"Betonkernaktivierung";
-			this.lblModulKlimaDecke.Text = EuroplanRes.QuickDimensioningPanel_KlimaDecke;//"Modul Klima-Decke";
-			this.lblModulKlimaBoden.Text = EuroplanRes.QuickDimensioningPanel_KlimaBoden;//"Modul Klima-Boden";
-			this.lblHithermCompactRoof.Text = EuroplanRes.QuickDimensioningPanel_HithermCompactDach;//"Hitherm® Compact Dachschräge";
-			this.lblDistance.Text = EuroplanRes.QuickDimensioningPanel_Verlegeabstand;//"Verlegeabstand";
-			this.lblAssumptions.Text = EuroplanRes.QuickDimensioningPanel_Annahmen;//"Annahmen";
-			this.pageDistributors.Text = EuroplanRes.QuickDimensioningPanel_Verteiler;//"Verteiler";
-			this.label3.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Flächenaufstellung";
+			this.pageSummary.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Ergebnis Flächenaufstellung"
+			this.pageSettings.Text = EuroplanRes.QuickDimensioningPanel_Einstellungen;//"Einstellungen"
+			this.lblTemp4.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)"
+			this.lblTemp3.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturKuehlen;//"Vorlauftemperatur\r\n(Kühlen)"
+			this.lblTemp2.Text = EuroplanRes.QuickDimensioningPanel_Tv;//"°C (Tv)"
+			this.label2.Text = EuroplanRes.QuickDimensioningPanel_ProdukteWaehlen;//"Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen:"
+			this.lblTemp1.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturHeizen;//"Vorlauftemperatur\r\n(Heizen)"
+			this.lblEuroval.Text = EuroplanRes.QuickDimensioningPanel_Euroval;//"Euroval® Fußbodenheizung"
+			this.btnRevert.Text = EuroplanRes.QuickDimensioningPanel_Zuruecksetzen;//"Flächenaufstellung zurücksetzen"
+			this.lblAllocation2.Text = EuroplanRes.Unit_Prozent;//"%"
+			this.lblAllocation.Text = EuroplanRes.QuickDimensioningPanel_Belegefaktor;//"Belegefaktor"
+			this.lblHeat.Text = EuroplanRes.QuickDimensioningPanel_Heizen;//"Heizen"
+			this.lblCool.Text = EuroplanRes.QuickDimensioningPanel_Kuehlen;//"Kühlen"
+			this.lblHithermCompact.Text = EuroplanRes.QuickDimensioningPanel_HithermCompact;//"Hitherm® Compact"
+			this.lblHitherm.Text = EuroplanRes.QuickDimensioningPanel_Hitherm;//"Hitherm® Klimawand"
+			this.lblBka.Text = EuroplanRes.QuickDimensioningPanel_Bka;//"Betonkernaktivierung"
+			this.lblModulKlimaDecke.Text = EuroplanRes.QuickDimensioningPanel_KlimaDecke;//"Modul Klima-Decke"
+			this.lblModulKlimaBoden.Text = EuroplanRes.QuickDimensioningPanel_KlimaBoden;//"Modul Klima-Boden"
+			this.lblHithermCompactRoof.Text = EuroplanRes.QuickDimensioningPanel_HithermCompactDach;//"Hitherm® Compact Dachschräge"
+			this.lblDistance.Text = EuroplanRes.QuickDimensioningPanel_Verlegeabstand;//"Verlegeabstand"
+			this.lblAssumptions.Text = EuroplanRes.QuickDimensioningPanel_Annahmen;//"Annahmen"
+			this.pageDistributors.Text = EuroplanRes.QuickDimensioningPanel_Verteiler;//"Verteiler"
+			this.label3.Text = EuroplanRes.QuickDimensioningPanel_Flaechenaufstellung;//"Flächenaufstellung"
 
 			this.cmbDistance.Items.Clear();
 			this.cmbDistance.Items.AddRange(new object[] {
@@ -167,8 +146,6 @@ namespace Europlan.Common {
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
-			//Project.Instance.Config.
-
 			updateControlOngoing = true;
 
 			this.cbEurovalHeat.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
@@ -217,7 +194,6 @@ namespace Europlan.Common {
 			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.LayDistance;
 			this.txtAllocation.Text = Project.Instance.QuickDimensioning.CeilingAllocation.ToString();
 
-			//this.grids.Clear();
 			List<Floor> floorsToRemove = new List<Floor>();
 			foreach (Floor floor in grids.Keys) {
 				floorsToRemove.Add(floor);
@@ -1066,7 +1042,6 @@ namespace Europlan.Common {
 							this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 						}
 					} else {
-						//this.tabQuickDimensioning.SelectedTab = this.pageSettings;
 					}
 				}
 			}
@@ -1081,14 +1056,12 @@ namespace Europlan.Common {
 
 				if (listLabel1 != null) {
 					listLabel1.PreviewControl = null;
-					//listLabel1.Dispose();
 					listLabel1 = null;
 				}
 
 				if (listLabelPreviewControl1 != null) {
 					this.pageSummary.Controls.Remove(this.listLabelPreviewControl1);
 					listLabelPreviewControl1.FileName = null;
-					//listLabelPreviewControl1.Dispose();
 					listLabelPreviewControl1 = null;
 				}
 
@@ -1111,9 +1084,6 @@ namespace Europlan.Common {
 				this.listLabel1.PreviewControl = this.listLabelPreviewControl1;
 				this.listLabel1.Unit = combit.ListLabel15.LlUnits.Millimeter_1_100;
 
-				//this.listLabelPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-				//			| System.Windows.Forms.AnchorStyles.Left)
-				//			| System.Windows.Forms.AnchorStyles.Right)));
 				this.listLabelPreviewControl1.CloseMode = combit.ListLabel15.LlPreviewControlCloseMode.DeleteFile;
 				this.listLabelPreviewControl1.Dock = DockStyle.Fill;
 				this.listLabelPreviewControl1.BackColor = System.Drawing.SystemColors.Control;
@@ -1231,35 +1201,6 @@ namespace Europlan.Common {
 						}
 					}
 				}
-
-				// ---------------------------------------------------------------------------------------------------
-				// RoomControllers are now aggregated in the report itself
-				// ---------------------------------------------------------------------------------------------------
-				//Dictionary<Room.RoomController, int> roomControllers = new Dictionary<Room.RoomController, int>();
-				//foreach (Floor floor in Project.Instance.Floors) {
-				//    foreach (Room room in floor.Rooms) {
-				//        if (room.QuickDimensioningRoomController != Room.RoomController.None) {
-				//            if (!roomControllers.ContainsKey(room.QuickDimensioningRoomController)) {
-				//                roomControllers.Add(room.QuickDimensioningRoomController, 1);
-				//            } else {
-				//                roomControllers[room.QuickDimensioningRoomController] = roomControllers[room.QuickDimensioningRoomController] + 1;
-				//            }
-				//        }
-				//    }
-				//}
-				//string controllersSummary = null;
-				//string localized = "";
-				//foreach (KeyValuePair<Room.RoomController, int> kvp in roomControllers) {
-				//    if (controllersSummary != null) {
-				//        controllersSummary += ", ";
-				//    } else {
-				//        controllersSummary = "";
-				//    }
-				//    localized = resources.GetString(kvp.Key.ToString(), Thread.CurrentThread.CurrentUICulture);
-				//    controllersSummary += kvp.Value.ToString() + " * " + localized;
-				//}
-				//listLabel1.Variables.Add("@RoomControllers", controllersSummary);
-				// ---------------------------------------------------------------------------------------------------
 #if DEBUG
 				if (MessageBox.Show("Designer?", "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 					listLabel1.Design();
@@ -1293,7 +1234,6 @@ namespace Europlan.Common {
 				qd.HithermCompactRoofCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.ModulBodenCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.ModulDeckeCheckState = QuickDimensioning.ProductCheckState.None;
-				// TODO revert parameters
 
 				this.UpdateControl(true);
 			}

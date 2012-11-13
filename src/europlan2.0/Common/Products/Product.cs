@@ -247,7 +247,6 @@ namespace Europlan.Common {
 		protected Room associatedRoom = null;
 		protected SerializableDictionary<string, int> quickDimensioningConnectedDistributors = new SerializableDictionary<string, int>();
 		protected ProductConnection plannedConnection = null;
-		//protected SerializableDictionary<int, PlannedProduct> plannedConnectedProducts = new SerializableDictionary<int, PlannedProduct>();
 		protected List<ConnectionPipe> plannedConnectionPipes = new List<ConnectionPipe>();
 
 		protected float plannedRoomTemperatureBelowHeat = 18;
@@ -264,7 +263,6 @@ namespace Europlan.Common {
 
 		protected string lastErrorMsg = null;
 
-		//protected int plannedCircuits = 1;
 		protected List<Circuit> circuits = new List<Circuit>();
 
 		protected bool stellMotore = false;
@@ -319,12 +317,6 @@ namespace Europlan.Common {
 		}
 
 		public static void StaticInitialize(Configuration config) {
-			/*Product.alphaBodenHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenHeat", 10.8);
-			Product.alphaDeckeHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeHeat", 6.5);
-			Product.alphaWandHeat = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandHeat", 8.0);
-			Product.alphaBodenCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaBodenCool", 6.5);
-			Product.alphaDeckeCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaDeckeCool", 10.8);
-			Product.alphaWandCool = config.GetProductParameterAsDouble<Product>("ConfigAlphaWandCool", 8.0);*/
 			StaticInitialize<Product>(config);
 		}
 
@@ -349,7 +341,6 @@ namespace Europlan.Common {
 		}
 
 		public abstract void Initialize();
-		//public abstract void StaticInitialize();
 		public abstract Product Clone(Room room);
 		public abstract int GetDefaultQuickDimensioningCircuits();
 		public abstract float GetDefaultQuickDimensioningPlannedArea();
@@ -397,16 +388,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		//public int QuickDimensioningHeatPowerPerSquareMeter {
-		//    get { return quickDimensioningHeatPowerPerSquareMeter; }
-		//    set { quickDimensioningHeatPowerPerSquareMeter = value; }
-		//}
-
-		//public int QuickDimensioningCoolPowerPerSquareMeter {
-		//    get { return quickDimensioningCoolPowerPerSquareMeter; }
-		//    set { quickDimensioningCoolPowerPerSquareMeter = value; }
-		//}
-
 		public float QuickDimensioningPlannedArea {
 			get {
 				return quickDimensioningPlannedArea; 
@@ -445,16 +426,6 @@ namespace Europlan.Common {
 				this.CheckPlannedCircuits();
 			}
 		}
-
-		//public bool CanHeat {
-		//    get { return canHeat; }
-		//    set { canHeat = value; }
-		//}
-
-		//public bool CanCool {
-		//    get { return canCool; }
-		//    set { canCool = value; }
-		//}
 
 		public bool UsedForQuickDimensioning {
 			get { return usedForQuickDimensioning; }
@@ -769,17 +740,6 @@ namespace Europlan.Common {
 		}
 
 		public void GetHeatFlow(out double vorlauf, out double ruecklauf) {
-			/*if (this.PlannedConnection == null) {
-				vorlauf = 0;
-				ruecklauf = 0;
-				return;
-			}
-			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				this.PlannedConnection.OtherProduct.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-				return;
-			}
-			vorlauf = this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
-			ruecklauf = vorlauf - EN1264.Instance.DefaultSpreizung(vorlauf);*/
 			vorlauf = this.plannedVorlaufTempHeat;
 			ruecklauf = this.plannedRuecklaufTempHeat;
 		}
@@ -1036,15 +996,6 @@ namespace Europlan.Common {
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
-			/*if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
-				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.inverseConnectedCircuits) {
-					kvp.Value.OtherProductId = this.PlannedConnection.OtherProductId;
-					Circuit.CircuitConnection cc = kvp.Value.OtherProduct.ConnectedCircuits[kvp.Value.OtherCircuitId];
-					if (cc != null) {
-						cc.OtherProductId = pp.Id;
-					}
-				}
-			}*/
 			foreach (Circuit c in this.circuits) {
 				c.FinalizeLoading();
 			}
@@ -1431,7 +1382,6 @@ namespace Europlan.Common {
 
 		public virtual string NotificationMessage {
 			get {
-				//double coolLoad = Math.Round(this.PlannedCoolLoad / this.PlannedNetArea, 1);
 				double coolLoad = this.AssociatedRoom.Area == 0 ? 0.0 : Math.Round(this.AssociatedRoom.CoolLoad / this.AssociatedRoom.Area, 1);
 				if (coolLoad > ConfigMaxCoolLoadPerSqm && this.requestedCoolLoad > 0) {
 					string msg = EuroplanRes.NotificationMessage_Entfeuchtung;

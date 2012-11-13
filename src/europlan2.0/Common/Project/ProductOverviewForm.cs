@@ -44,24 +44,24 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.roomIdDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumnr; //"Raumnr.";
-			this.roomNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumname; //"Raumname";
-			this.teilSystemDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Teilsystem; //"Teil-\nsystem";
-			this.systemNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_System; //"System";
-			this.nrOfCircuitsDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Heizkreise; //"Heiz-\nkreis(e)";
-			this.RimType.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandRz; //"Verlegeabstand\nRZ";
-			this.LayDistance.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandAz; //"Verlegeabstand\nAZ";
-			this.pipeLengthDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Rohrlaenge; //"Rohrlänge\nm";
-			this.totalAreaDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Flaeche; //"Fläche\nm²";
-			this.druckverlustHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustHeiz; //"Druckverlust\nmbar";
-			this.heatNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Normwaerme; //"Normwärme\nW";
-			this.heatRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restwaerme; //"Restwärme\nW";
-			this.druckverlustCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustKuehl; //"Druckverlust\nmbar";
-			this.coolNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Kuehllast; //"Kühllast\nW";
-			this.coolRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restkuellast; //"Rest\nW";
-			this.okDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Ok; //"Ok";
-			this.editColumn.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
-			this.Text = EuroplanRes.ProductOverviewForm_Titel; //"Übersicht";
+			this.roomIdDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumnr; //"Raumnr."
+			this.roomNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Raumname; //"Raumname"
+			this.teilSystemDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Teilsystem; //"Teil-\nsystem"
+			this.systemNameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_System; //"System"
+			this.nrOfCircuitsDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Heizkreise; //"Heiz-\nkreis(e)"
+			this.RimType.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandRz; //"Verlegeabstand\nRZ"
+			this.LayDistance.HeaderText = EuroplanRes.ProductOverviewForm_VerlegeabstandAz; //"Verlegeabstand\nAZ"
+			this.pipeLengthDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Rohrlaenge; //"Rohrlänge\nm"
+			this.totalAreaDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Flaeche; //"Fläche\nm²"
+			this.druckverlustHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustHeiz; //"Druckverlust\nmbar"
+			this.heatNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Normwaerme; //"Normwärme\nW"
+			this.heatRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restwaerme; //"Restwärme\nW"
+			this.druckverlustCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_DruckverlustKuehl; //"Druckverlust\nmbar"
+			this.coolNetLoadDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Kuehllast; //"Kühllast\nW"
+			this.coolRestDataGridViewTextBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Restkuellast; //"Rest\nW"
+			this.okDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.ProductOverviewForm_Ok; //"Ok"
+			this.editColumn.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten"
+			this.Text = EuroplanRes.ProductOverviewForm_Titel; //"Übersicht"
 
 		}
 

@@ -454,81 +454,81 @@ namespace Europlan.Common {
 			}
 
 			BilanzWrapper wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtNormwaermebedarf; //"Gesamt-Normwärmebedarf";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtNormwaermebedarf; //"Gesamt-Normwärmebedarf"
 			wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamterBereinigterWaermebedarf; //"Gesamter bereinigter Wärmebedarf";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamterBereinigterWaermebedarf; //"Gesamter bereinigter Wärmebedarf"
 			wrapper.HeatValue = (normWaermeBedarfBereinigt).ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapper.CoolValue = (normKuehlBedarfBereinigt).ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamteHeizleistung; //"Gesamt-Heizleistung (nach innen)";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamteHeizleistung; //"Gesamt-Heizleistung (nach innen)"
 			wrapper.HeatValue = qHeat.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapper.CoolValue = qCool.ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamteAufgenommeneLeistung; //"Gesamte aufgenommene Leistung";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamteAufgenommeneLeistung; //"Gesamte aufgenommene Leistung"
 			wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtWassermenge; //"Gesamt-Wassermenge";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtWassermenge; //"Gesamt-Wassermenge"
 			wrapper.HeatValue = durchflussHeat.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+			wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			wrapper.CoolValue = durchflussCool.ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+			wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamterMaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamterMaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 			wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+			wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 			wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-			wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+			wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtWasserinhalt; //"Gesamt-Wasserinhalt (ab Verteiler)";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtWasserinhalt; //"Gesamt-Wasserinhalt (ab Verteiler)"
 			wrapper.HeatValue = wasserInhalt.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+			wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtRaumflaeche; //"Gesamt-Raumfläche";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtRaumflaeche; //"Gesamt-Raumfläche"
 			wrapper.HeatValue = roomArea.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtFussbodenheizungsflaeche; //"Gesamt-Fußbodenheizungsfläche";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtFussbodenheizungsflaeche; //"Gesamt-Fußbodenheizungsfläche"
 			wrapper.HeatValue = plannedFloorArea.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtWandheizungsflaeche; //"Gesamt-Wandheizungsfläche";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtWandheizungsflaeche; //"Gesamt-Wandheizungsfläche"
 			wrapper.HeatValue = plannedWallArea.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 			wrapperList.Add(wrapper);
 
 			wrapper = new BilanzWrapper();
-			wrapper.Description = EuroplanRes.ProjectReport_GesamtDeckenkuehlungsflaeche; //"Gesamt-Deckenkühlungsfläche";
+			wrapper.Description = EuroplanRes.ProjectReport_GesamtDeckenkuehlungsflaeche; //"Gesamt-Deckenkühlungsfläche"
 			wrapper.HeatValue = plannedCeilingArea.ToString("0.##");
-			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+			wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 			wrapperList.Add(wrapper);
 
 			return wrapperList;
@@ -610,75 +610,75 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEuroval; //"Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)";
+				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEuroval; //"Gesamte Raumfläche (Räume mit Euroval® Fußbodenheizung)"
 				wrapper.HeatValue = roomArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Estrichflaeche; //"Gesamte Estrichfläche";
+				wrapper.Description = EuroplanRes.ProjectReport_Estrichflaeche; //"Gesamte Estrichfläche"
 				wrapper.HeatValue = estrichArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamte Heizfläche";
+				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamte Heizfläche"
 				wrapper.HeatValue = plannedArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -762,75 +762,75 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEcotherm; //"Gesamte Raumfläche (Räume mit Ecotherm® Fußbodenheizung)";
+				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEcotherm; //"Gesamte Raumfläche (Räume mit Ecotherm® Fußbodenheizung)"
 				wrapper.HeatValue = roomArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Estrichflaeche; //"Gesamte Estrichfläche";
+				wrapper.Description = EuroplanRes.ProjectReport_Estrichflaeche; //"Gesamte Estrichfläche"
 				wrapper.HeatValue = estrichArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamte Heizfläche";
+				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamte Heizfläche"
 				wrapper.HeatValue = plannedArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -905,63 +905,63 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamtheizfläche"; // TODO
+				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamtheizfläche"
 				wrapper.HeatValue = totalArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -1036,63 +1036,63 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamtheizfläche"; // TODO
+				wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamtheizfläche"
 				wrapper.HeatValue = totalArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -1172,75 +1172,75 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheKlimaboden; //"Gesamte Raumfläche (Räume mit Modul Klimaboden)";
+				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheKlimaboden; //"Gesamte Raumfläche (Räume mit Modul Klimaboden)"
 				wrapper.HeatValue = roomArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BelegteFlaeche; //"Gesamte belegte Fläche";
+				wrapper.Description = EuroplanRes.ProjectReport_BelegteFlaeche; //"Gesamte belegte Fläche"
 				wrapper.HeatValue = coveredArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BeheizteFlaeche; //"Gesamte beheizte Fläche";
+				wrapper.Description = EuroplanRes.ProjectReport_BeheizteFlaeche; //"Gesamte beheizte Fläche"
 				wrapper.HeatValue = modulArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -1318,69 +1318,69 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				BilanzWrapper wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
 				wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf";
+				wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
 				wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen";
+				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = qCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung";
+				wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
 				wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W";
+				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge";
+				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapper.CoolValue = durchflussCool.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h";
+				wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
 				wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
-				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar";
+				wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)";
+				wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
 				wrapper.HeatValue = wasserInhalt.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l";
+				wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheKlimadecke; //"Gesamte Raumfläche (Räume mit Modul Klimadecke)";
+				wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheKlimadecke; //"Gesamte Raumfläche (Räume mit Modul Klimadecke)"
 				wrapper.HeatValue = roomArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new BilanzWrapper();
-				wrapper.Description = EuroplanRes.ProjectReport_BelegteFlaeche; //"Gesamte belegte Fläche";
+				wrapper.Description = EuroplanRes.ProjectReport_BelegteFlaeche; //"Gesamte belegte Fläche"
 				wrapper.HeatValue = totalArea.ToString("0.##");
-				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 			}
@@ -1494,7 +1494,7 @@ namespace Europlan.Common {
 				    }
 				}
 				FloorOverviewWrapper wrapper = new FloorOverviewWrapper();
-				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
+				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb"
 				wrapper.FloorName = floor.Name;
 				wrapper.FloorArea = area;
 				wrapper.QH2o = transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat;
@@ -1506,7 +1506,7 @@ namespace Europlan.Common {
 
 				if (project.CalculateCoolLoad) {
 					wrapper = new FloorOverviewWrapper();
-					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb"
 					wrapper.FloorName = floor.Name;
 					wrapper.FloorArea = area;
 					wrapper.QH2o = transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool;
@@ -1642,10 +1642,10 @@ namespace Europlan.Common {
 				}
 
 				wrapper = new RegulatorCircuitWrapper();
-				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
+				wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb"
 				wrapper.Id = rc.Id;
 				wrapper.Name = rc.Name;
-				wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser";
+				wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser"
 				wrapper.VorlaufTemp = rc.HeatFlowTemperature;
 				wrapper.RuecklaufTemp = ruecklaufHeat;
 				wrapper.Durchfluss = durchflussHeat;
@@ -1655,10 +1655,10 @@ namespace Europlan.Common {
 				wrapperHeatList.Add(wrapper);
 				if (project.CalculateCoolLoad) {
 					wrapper = new RegulatorCircuitWrapper();
-					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb"
 					wrapper.Id = rc.Id;
 					wrapper.Name = rc.Name;
-					wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser";
+					wrapper.Medium = EuroplanRes.ProjectReport_Wasser; //"Wasser"
 					wrapper.VorlaufTemp = rc.CoolFlowTemperature;
 					wrapper.RuecklaufTemp = ruecklaufCool;
 					wrapper.Durchfluss = durchflussCool;
@@ -1725,7 +1725,7 @@ namespace Europlan.Common {
 					}
 
 					wrapper = new DistributorWrapper();
-					wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb";
+					wrapper.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizbetrieb"
 					wrapper.Id = distributor.Id;
 					wrapper.Name = distributor.Name;
 					wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
@@ -1739,7 +1739,7 @@ namespace Europlan.Common {
 					wrapperHeatList.Add(wrapper);
 					if (project.CalculateCoolLoad) {
 						wrapper = new DistributorWrapper();
-						wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb";
+						wrapper.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlbetrieb"
 						wrapper.Id = distributor.Id;
 						wrapper.Name = distributor.Name;
 						wrapper.Groups = distributor.PlannedCircuits + distributor.AdditionalCircuits;
@@ -1876,7 +1876,6 @@ namespace Europlan.Common {
 								wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 								wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 								wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-								// TODO
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
@@ -1911,7 +1910,7 @@ namespace Europlan.Common {
 
 							if (wrapperHeat == null && pp.RequestedHeatLoad != 0) {
 								wrapperHeat = new EurovalWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -1962,7 +1961,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0) {
 								wrapperCool = new EurovalWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -2030,7 +2029,6 @@ namespace Europlan.Common {
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-										// TODO
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
@@ -2083,7 +2081,6 @@ namespace Europlan.Common {
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-										// TODO
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
@@ -2211,7 +2208,6 @@ namespace Europlan.Common {
 								wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 								wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 								wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-								// TODO
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
@@ -2246,7 +2242,7 @@ namespace Europlan.Common {
 
 							if (wrapperHeat == null && pp.RequestedHeatLoad != 0) {
 								wrapperHeat = new EcothermWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -2297,7 +2293,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0) {
 								wrapperCool = new EcothermWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -2365,7 +2361,6 @@ namespace Europlan.Common {
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-										// TODO
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
@@ -2418,7 +2413,6 @@ namespace Europlan.Common {
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
 										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
-										// TODO
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
@@ -2539,7 +2533,7 @@ namespace Europlan.Common {
 
 								if (pp.RequestedHeatLoad != 0) {
 									wrapperHeat = new HithermWrapper();
-									wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+									wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 									wrapperHeat.FloorId = floor.Id;
 									wrapperHeat.FloorName = floor.Name;
 									wrapperHeat.RoomId = room.Id;
@@ -2595,7 +2589,7 @@ namespace Europlan.Common {
 								}
 								if (project.CalculateCoolLoad && pp.RequestedCoolLoad != 0) {
 									wrapperCool = new HithermWrapper();
-									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 									wrapperCool.FloorId = floor.Id;
 									wrapperCool.FloorName = floor.Name;
 									wrapperCool.RoomId = room.Id;
@@ -2620,7 +2614,6 @@ namespace Europlan.Common {
 										}
 									}
 
-									//double v, r;
 									pp.Product.GetCoolFlow(out v, out r);
 									wrapperCool.RoomTemp = room.RoomCoolTemperature;
 									wrapperCool.VorlaufTemp = v;
@@ -2736,7 +2729,7 @@ namespace Europlan.Common {
 
 								if (pp.RequestedHeatLoad != 0) {
 									wrapperHeat = new HithermCompactWrapper();
-									wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+									wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 									wrapperHeat.FloorId = floor.Id;
 									wrapperHeat.FloorName = floor.Name;
 									wrapperHeat.RoomId = room.Id;
@@ -2789,7 +2782,7 @@ namespace Europlan.Common {
 								}
 								if (project.CalculateCoolLoad && pp.RequestedCoolLoad != 0) {
 									wrapperCool = new HithermCompactWrapper();
-									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+									wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 									wrapperCool.FloorId = floor.Id;
 									wrapperCool.FloorName = floor.Name;
 									wrapperCool.RoomId = room.Id;
@@ -2811,7 +2804,6 @@ namespace Europlan.Common {
 										wrapperCool.Ra5Area += register.CoveredArea;
 									}
 
-									//double v, r;
 									pp.Product.GetCoolFlow(out v, out r);
 									wrapperCool.RoomTemp = room.RoomCoolTemperature;
 									wrapperCool.VorlaufTemp = v;
@@ -2966,7 +2958,7 @@ namespace Europlan.Common {
 
 							if (wrapperHeat == null && pp.RequestedHeatLoad != 0) {
 								wrapperHeat = new ModulBodenWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -3014,7 +3006,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0) {
 								wrapperCool = new ModulBodenWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -3235,7 +3227,6 @@ namespace Europlan.Common {
 							wrapperOverview.RuecklaufTemp = r;
 							wrapperOverview.QSoll = pp.RequestedHeatLoad;
 							wrapperOverview.QFBH = pp.PlannedHeatLoad;
-							//wrapperHeat.tFB = mp.PlannedFloorTemperatureHeat;
 
 							wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
 							wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
@@ -3319,7 +3310,7 @@ namespace Europlan.Common {
 
 							if (wrapperHeat == null && pp.RequestedHeatLoad != 0) {
 								wrapperHeat = new ModulDeckeWrapper();
-								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen";
+								wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
 								wrapperHeat.FloorId = floor.Id;
 								wrapperHeat.FloorName = floor.Name;
 
@@ -3360,7 +3351,6 @@ namespace Europlan.Common {
 								wrapperHeat.RuecklaufTemp = r;
 								wrapperHeat.QSoll = pp.RequestedHeatLoad;
 								wrapperHeat.QFBH = pp.PlannedHeatLoad;
-								//wrapperHeat.tFB = mp.PlannedFloorTemperatureHeat;
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
 								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
@@ -3381,7 +3371,7 @@ namespace Europlan.Common {
 							}
 							if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0) {
 								wrapperCool = new ModulDeckeWrapper();
-								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen";
+								wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
 								wrapperCool.FloorId = floor.Id;
 								wrapperCool.FloorName = floor.Name;
 
@@ -3422,7 +3412,6 @@ namespace Europlan.Common {
 								wrapperCool.RuecklaufTemp = r;
 								wrapperCool.QSoll = pp.RequestedCoolLoad;
 								wrapperCool.QFBH = pp.PlannedCoolLoad;
-								//wrapperCool.tFB = mp.PlannedFloorTemperatureCool;
 
 								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
 								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoCool;
@@ -3742,27 +3731,27 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				HithermOverviewWrapper wrapper = new HithermOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_FlaecheRa5; //"Fläche mit Rohrabstand RA5";
+				wrapper.Text = EuroplanRes.ProjectReport_FlaecheRa5; //"Fläche mit Rohrabstand RA5"
 				wrapper.Amount = ra5Area;
-				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new HithermOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_FlaecheRa10; //"Fläche mit Rohrabstand RA10";
+				wrapper.Text = EuroplanRes.ProjectReport_FlaecheRa10; //"Fläche mit Rohrabstand RA10"
 				wrapper.Amount = ra10Area;
-				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new HithermOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21";
+				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21"
 				wrapper.Amount = rohr21Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 				wrapper = new HithermOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_HithermKlimawand; //"Hitherm Klimawand 24/17";
+				wrapper.Text = EuroplanRes.ProjectReport_HithermKlimawand; //"Hitherm Klimawand 24/17"
 				wrapper.Amount = rohr2417Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 			}
@@ -3801,21 +3790,21 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				HithermCompactOverviewWrapper wrapper = new HithermCompactOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_HeizflaecheGesamt; //"Heizfläche gesamt";
+				wrapper.Text = EuroplanRes.ProjectReport_HeizflaecheGesamt; //"Heizfläche gesamt"
 				wrapper.Amount = registerArea;
-				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new HithermCompactOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21";
+				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21"
 				wrapper.Amount = rohr21Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 				wrapper = new HithermCompactOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_HithermKlimawand; //"Hitherm Klimawand 24/17";
+				wrapper.Text = EuroplanRes.ProjectReport_HithermKlimawand; //"Hitherm Klimawand 24/17"
 				wrapper.Amount = rohr2417Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 			}
@@ -3853,15 +3842,15 @@ namespace Europlan.Common {
 			if (isProductPlanned) {
 
 				ModulBodenOverviewWrapper wrapper = new ModulBodenOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_FlaecheKlimaboden; //"Fläche mit Modul Klimaboden";
+				wrapper.Text = EuroplanRes.ProjectReport_FlaecheKlimaboden; //"Fläche mit Modul Klimaboden"
 				wrapper.Amount = modulBodenArea;
-				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²";
+				wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²"
 				wrapperList.Add(wrapper);
 
 				wrapper = new ModulBodenOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21";
+				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21"
 				wrapper.Amount = rohr21Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 			}
@@ -3916,14 +3905,14 @@ namespace Europlan.Common {
 					if (modulAreas.ContainsKey(item)) {
 						wrapper.Amount = modulAreas[item];
 					}
-					wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²";
+					wrapper.Unit = EuroplanRes.Unit_Quadratmeter; //"m²"
 					wrapperList.Add(wrapper);
 				}
 
 				wrapper = new ModulDeckeOverviewWrapper();
-				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21";
+				wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21"
 				wrapper.Amount = rohr21Length;
-				wrapper.Unit = EuroplanRes.Unit_Meter; //"m";
+				wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
 				wrapperList.Add(wrapper);
 
 			}
@@ -3939,8 +3928,6 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Distributor d in floor.Distributors) {
 					foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
-				//foreach (Room room in floor.Rooms) {
-				//    foreach (PlannedProduct pp in room.PlannedProducts) {
 						ProductConnection connection = pp.Product.PlannedConnection;
 						foreach (Circuit c in pp.Product.PlannedCircuits) {
 							if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
@@ -3970,7 +3957,7 @@ namespace Europlan.Common {
 											wrapper.Name += connStr;
 										}
 										wrapper.Name += "\n";
-										wrapper.Area += Math.Round(pipe.Vorlauf, 1) + EuroplanRes.Unit_Meter + "\n"; //"m\n";
+										wrapper.Area += Math.Round(pipe.Vorlauf, 1) + EuroplanRes.Unit_Meter + "\n"; //"m\n"
 									}
 								}
 
@@ -4008,7 +3995,7 @@ namespace Europlan.Common {
 									}
 								}
 
-								wrapper.Area += Math.Round(c.CircuitArea, 1) + EuroplanRes.Unit_Quadratmeter; //"m²";
+								wrapper.Area += Math.Round(c.CircuitArea, 1) + EuroplanRes.Unit_Quadratmeter; //"m²"
 								if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
 									circuitCount.Add(connection.Distributor.Id, 1);							
 								} 
@@ -4070,7 +4057,7 @@ namespace Europlan.Common {
 											conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
 											wrapper.Name += conStr;
 										}
-										wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m";
+										wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m"
 									}
 								}
 								wrapperList.Add(wrapper);

@@ -92,11 +92,11 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.ExportPlanForm_Titel; //"Plan exportieren";
-			this.btnCancel.Text = EuroplanRes.ExportPlanForm_Abbrechen; //"Abbrechen";
-			this.btnExport.Text = EuroplanRes.ExportPlanForm_Exportieren; //"Exportieren";
-			this.lblExportOption.Text = EuroplanRes.ExportPlanForm_Exportumfang; //"Exportumfang";
-			this.lblFileName.Text = EuroplanRes.ExportPlanForm_Dateipfad; //"Dateipfad";
+			this.Text = EuroplanRes.ExportPlanForm_Titel; //"Plan exportieren"
+			this.btnCancel.Text = EuroplanRes.ExportPlanForm_Abbrechen; //"Abbrechen"
+			this.btnExport.Text = EuroplanRes.ExportPlanForm_Exportieren; //"Exportieren"
+			this.lblExportOption.Text = EuroplanRes.ExportPlanForm_Exportumfang; //"Exportumfang"
+			this.lblFileName.Text = EuroplanRes.ExportPlanForm_Dateipfad; //"Dateipfad"
 			this.chkExportWallNumbers.Text = EuroplanRes.ExportPlanForm_Wandnummerierung;
 		}
 
@@ -216,30 +216,6 @@ namespace Europlan.Common {
 					g = Graphics.FromImage(b);
 					g.InterpolationMode = InterpolationMode.Bicubic;
 				}
-/*				if (plan.Measure.Value < 200) {
-					float factor = 200.0f / plan.Measure.Value;
-					if (image.Width * factor * image.Height * factor > 10000 * 5000) {
-						factor = (float)Math.Sqrt(10000.0f * 5000.0f / image.Width / image.Height);
-					}
-					try {
-						b = new Bitmap((int)(image.Width * factor), (int)(image.Height * factor));
-					} catch {
-						MessageBox.Show(EuroplanRes.ExportPlanForm_BildFehlerText, EuroplanRes.ExportPlanForm_BildFehlerTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
-						this.Close();
-						return;
-					}
-					g = Graphics.FromImage(b);
-					g.InterpolationMode = InterpolationMode.Bicubic;
-					g.DrawImage(image, 0, 0, image.Width * factor, image.Height * factor);
-					Matrix m = new Matrix();
-					m.Scale(factor, factor);
-					g.Transform = m;
-
-				} else {
-					b = new Bitmap(image);
-					g = Graphics.FromImage(b);
-					g.InterpolationMode = InterpolationMode.Bicubic;
-				}*/
 				foreach (Floor floor in Project.Instance.Floors) {
 					if (floor.AssociatedPlanId != null && floor.AssociatedPlanId.Equals(plan.Id)) {
 						foreach (Segment2D expansionGap in floor.ExpansionGaps) {
@@ -264,7 +240,6 @@ namespace Europlan.Common {
 									Segment2D segment = new Segment2D(wall.PlanStartPoint.Value, wall.PlanEndPoint.Value);
 									Point2D numberStart = segment.GetCenter() + (normVector * (plan.Measure.Value * 0.15));
 									g.FillEllipse(Brushes.White, (float)(numberStart.X - fontSize), (float)(numberStart.Y - fontSize), fontSize * 2.0f, fontSize * 2.0f);
-									//g.DrawEllipse(Pens.Black, (float)(numberStart.X - fontSize), (float)(numberStart.Y - fontSize), fontSize * 2.0f, fontSize * 2.0f);
 									g.DrawString("" + (room.Walls.IndexOf(wall) + 1), font, new SolidBrush(p.Color), (float)numberStart.X, (float)numberStart.Y, stringFormat);
 								}
 							}
@@ -302,7 +277,7 @@ namespace Europlan.Common {
 											planner.DrawExpansionGaps = false;
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
 										}
-										//...
+										// ... if further products are implemented they need to be added here
 									}
 								}
 
@@ -421,7 +396,7 @@ namespace Europlan.Common {
 											planner.DrawExpansionGaps = false;
 											planner.DrawDxf(model, layer);
 										}
-										//.....
+										// ... if further products are implemented they need to be added here
 									}
 								}
 							}

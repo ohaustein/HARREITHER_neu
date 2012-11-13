@@ -427,13 +427,6 @@ namespace Europlan.Common {
 				double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.EcothermProduct.AssociatedRoom.RoomCoolTemperature, this.EcothermProduct.PlannedRoomTemperatureBelowCool);
 
 				// hydraulische Berechnung
-				//this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
-				/*double deltaT = this.c_thetaVRzCool - this.c_thetaRAzCool;                                          // gesamte Spreizung
-				this.c_durchflussCool = en1264.Durchfluss(this.c_Qh2oCool, EurovalProduct.ConfigC, deltaT);
-				this.c_druckverlustCool = en1264.DruckverlustRohr(this.c_durchflussCool, EurovalProduct.ConfigRohrInnenA, EurovalProduct.ConfigRho, EurovalProduct.ConfigRohrInnenD, EurovalProduct.ConfigV, 0.000004, this.PipeLengthWithAllConnections);*/
-				//                                                                           // gesamten Druckverlust berechnen
-
-
 				this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
 				foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes) {
 					if (this.nrOfCircuit == 0 || !cp.OnlyFirst) {

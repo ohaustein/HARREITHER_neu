@@ -47,29 +47,21 @@ namespace Europlan.Common {
 				if (excludeModules == null || !excludeModules.Contains(modul)) {
 					for (int i = 0; i < freeAreas.Count; i++) {
 						FreeModulLaneArea area = freeAreas[i];
-						//foreach (FreeModulLaneArea area in freeAreas) {
-						//if (modul.GraphPositionInLan >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
-							double modulBottom = modul.GraphBottomPositionInLane(measure);
-							//if (modulBottom >= area.Top && modulBottom <= area.Bottom) {
-							if (modulBottom >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
-								//int index = freeAreas.IndexOf(area);
-								int index = i;
-								freeAreas.Remove(area);
-								i--;
-								double modulTop = modul.GraphPositionInLan;
-								//if (area.Bottom != modulBottom) {
-								if (area.Bottom > modulBottom) {
-									freeAreas.Insert(index, new FreeModulLaneArea(modulBottom, area.Bottom));
-									i++;
-								}
-								//if (area.Top != modulTop) {
-								if (area.Top < modulTop) {
-									freeAreas.Insert(index, new FreeModulLaneArea(area.Top, modulTop));
-									i++;
-								}
-								//break;
+						double modulBottom = modul.GraphBottomPositionInLane(measure);
+						if (modulBottom >= area.Top && modul.GraphPositionInLan <= area.Bottom) {
+							int index = i;
+							freeAreas.Remove(area);
+							i--;
+							double modulTop = modul.GraphPositionInLan;
+							if (area.Bottom > modulBottom) {
+								freeAreas.Insert(index, new FreeModulLaneArea(modulBottom, area.Bottom));
+								i++;
 							}
-						//}
+							if (area.Top < modulTop) {
+								freeAreas.Insert(index, new FreeModulLaneArea(area.Top, modulTop));
+								i++;
+							}
+						}
 					}
 				}
 			}

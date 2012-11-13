@@ -9,33 +9,33 @@ namespace Europlan.Common {
 	public class HithermCompactRegister: IWallRegister {
 		#region Enums
 		public class RegisterTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string hitc_620_std = EuroplanRes.HithermCompactRegister_Hit620Std; //"HIT 620 Std";
-			private static readonly string hitc_1000_std = EuroplanRes.HithermCompactRegister_Hit1000Std; //"HIT 1000 Std";
-			private static readonly string hitc_1500_std = EuroplanRes.HithermCompactRegister_Hit1500Std; //"HIT 1500 Std";
-			private static readonly string hitc_2000_std = EuroplanRes.HithermCompactRegister_Hit2000Std; //"HIT 2000 Std";
-			private static readonly string hitc_2500_std = EuroplanRes.HithermCompactRegister_Hit2500Std; //"HIT 2500 Std";
-			private static readonly string hitc_1000_par = EuroplanRes.HithermCompactRegister_Hit1000Par; //"HIT 1000 Par";
-			private static readonly string hitc_1500_par = EuroplanRes.HithermCompactRegister_Hit1500Par; //"HIT 1500 Par";
-			private static readonly string hitc_2000_par = EuroplanRes.HithermCompactRegister_Hit2000Par; //"HIT 2000 Par";
-			private static readonly string hitc_620_ds = EuroplanRes.HithermCompactRegister_Hit620Ds; //"HIT 620 DS";
-			private static readonly string hitc_1000_ds = EuroplanRes.HithermCompactRegister_Hit1000Ds; //"HIT 1000 DS";
-			private static readonly string hitc_1500_ds = EuroplanRes.HithermCompactRegister_Hit1500Ds; //"HIT 1500 DS";
-			private static readonly string hitc_2000_ds = EuroplanRes.HithermCompactRegister_Hit2000Ds; //"HIT 2000 DS";
-			private static readonly string hitc_2500_ds = EuroplanRes.HithermCompactRegister_Hit2500Ds; //"HIT 2500 DS";
+			private static readonly string hitc_620_std = EuroplanRes.HithermCompactRegister_Hit620Std; //"HIT 620 Std"
+			private static readonly string hitc_1000_std = EuroplanRes.HithermCompactRegister_Hit1000Std; //"HIT 1000 Std"
+			private static readonly string hitc_1500_std = EuroplanRes.HithermCompactRegister_Hit1500Std; //"HIT 1500 Std"
+			private static readonly string hitc_2000_std = EuroplanRes.HithermCompactRegister_Hit2000Std; //"HIT 2000 Std"
+			private static readonly string hitc_2500_std = EuroplanRes.HithermCompactRegister_Hit2500Std; //"HIT 2500 Std"
+			private static readonly string hitc_1000_par = EuroplanRes.HithermCompactRegister_Hit1000Par; //"HIT 1000 Par"
+			private static readonly string hitc_1500_par = EuroplanRes.HithermCompactRegister_Hit1500Par; //"HIT 1500 Par"
+			private static readonly string hitc_2000_par = EuroplanRes.HithermCompactRegister_Hit2000Par; //"HIT 2000 Par"
+			private static readonly string hitc_620_ds = EuroplanRes.HithermCompactRegister_Hit620Ds; //"HIT 620 DS"
+			private static readonly string hitc_1000_ds = EuroplanRes.HithermCompactRegister_Hit1000Ds; //"HIT 1000 DS"
+			private static readonly string hitc_1500_ds = EuroplanRes.HithermCompactRegister_Hit1500Ds; //"HIT 1500 DS"
+			private static readonly string hitc_2000_ds = EuroplanRes.HithermCompactRegister_Hit2000Ds; //"HIT 2000 DS"
+			private static readonly string hitc_2500_ds = EuroplanRes.HithermCompactRegister_Hit2500Ds; //"HIT 2500 DS"
 
-			private static readonly string hitc_620_std_Short = EuroplanRes.HithermCompactRegister_Hit620Std_Short; //"620 Std";
-			private static readonly string hitc_1000_std_Short = EuroplanRes.HithermCompactRegister_Hit1000Std_Short; //"1000 Std";
-			private static readonly string hitc_1500_std_Short = EuroplanRes.HithermCompactRegister_Hit1500Std_Short; //"1500 Std";
-			private static readonly string hitc_2000_std_Short = EuroplanRes.HithermCompactRegister_Hit2000Std_Short; //"2000 Std";
-			private static readonly string hitc_2500_std_Short = EuroplanRes.HithermCompactRegister_Hit2500Std_Short; //"2500 Std";
-			private static readonly string hitc_1000_par_Short = EuroplanRes.HithermCompactRegister_Hit1000Par_Short; //"1000 Par";
-			private static readonly string hitc_1500_par_Short = EuroplanRes.HithermCompactRegister_Hit1500Par_Short; //"1500 Par";
-			private static readonly string hitc_2000_par_Short = EuroplanRes.HithermCompactRegister_Hit2000Par_Short; //"2000 Par";
-			private static readonly string hitc_620_ds_Short = EuroplanRes.HithermCompactRegister_Hit620Ds_Short; //"620 DS";
-			private static readonly string hitc_1000_ds_Short = EuroplanRes.HithermCompactRegister_Hit1000Ds_Short; //"1000 DS";
-			private static readonly string hitc_1500_ds_Short = EuroplanRes.HithermCompactRegister_Hit1500Ds_Short; //"1500 DS";
-			private static readonly string hitc_2000_ds_Short = EuroplanRes.HithermCompactRegister_Hit2000Ds_Short; //"2000 DS";
-			private static readonly string hitc_2500_ds_Short = EuroplanRes.HithermCompactRegister_Hit2500Ds_Short; //"2500 DS";
+			private static readonly string hitc_620_std_Short = EuroplanRes.HithermCompactRegister_Hit620Std_Short; //"620 Std"
+			private static readonly string hitc_1000_std_Short = EuroplanRes.HithermCompactRegister_Hit1000Std_Short; //"1000 Std"
+			private static readonly string hitc_1500_std_Short = EuroplanRes.HithermCompactRegister_Hit1500Std_Short; //"1500 Std"
+			private static readonly string hitc_2000_std_Short = EuroplanRes.HithermCompactRegister_Hit2000Std_Short; //"2000 Std"
+			private static readonly string hitc_2500_std_Short = EuroplanRes.HithermCompactRegister_Hit2500Std_Short; //"2500 Std"
+			private static readonly string hitc_1000_par_Short = EuroplanRes.HithermCompactRegister_Hit1000Par_Short; //"1000 Par"
+			private static readonly string hitc_1500_par_Short = EuroplanRes.HithermCompactRegister_Hit1500Par_Short; //"1500 Par"
+			private static readonly string hitc_2000_par_Short = EuroplanRes.HithermCompactRegister_Hit2000Par_Short; //"2000 Par"
+			private static readonly string hitc_620_ds_Short = EuroplanRes.HithermCompactRegister_Hit620Ds_Short; //"620 DS"
+			private static readonly string hitc_1000_ds_Short = EuroplanRes.HithermCompactRegister_Hit1000Ds_Short; //"1000 DS"
+			private static readonly string hitc_1500_ds_Short = EuroplanRes.HithermCompactRegister_Hit1500Ds_Short; //"1500 DS"
+			private static readonly string hitc_2000_ds_Short = EuroplanRes.HithermCompactRegister_Hit2000Ds_Short; //"2000 DS"
+			private static readonly string hitc_2500_ds_Short = EuroplanRes.HithermCompactRegister_Hit2500Ds_Short; //"2500 DS"
 
 			private Dictionary<string, HithermCompactRegisterTypeEnum> mappingFromString = new Dictionary<string, HithermCompactRegisterTypeEnum>();
 			private Dictionary<HithermCompactRegisterTypeEnum, string> mappingToString = new Dictionary<HithermCompactRegisterTypeEnum, string>();
@@ -305,33 +305,6 @@ namespace Europlan.Common {
 			double hoehe = GetHeatAreaHoehe(registerType);
 			double breite = GetHeatAreaBreite(registerType);
 			return breite * hoehe;
-			/*switch (registerType) {
-				case HithermCompactRegisterTypeEnum.HITC_620_Std:
-				case HithermCompactRegisterTypeEnum.HITC_620_Ds:
-					return 0.5 * 0.5;// + 0.5 * 0.1 + 0.5 * 0.1;
-
-				case HithermCompactRegisterTypeEnum.HITC_1000_Std:
-				case HithermCompactRegisterTypeEnum.HITC_1000_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_1000_Par:
-					return 1.0 * 0.5;// + 1.0 * 0.1 + 0.5 * 0.1;
-
-				case HithermCompactRegisterTypeEnum.HITC_1500_Std:
-				case HithermCompactRegisterTypeEnum.HITC_1500_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_1500_Par:
-					return 1.5 * 0.5;// +1.5 * 0.1 + 0.5 * 0.1;
-
-				case HithermCompactRegisterTypeEnum.HITC_2000_Std:
-				case HithermCompactRegisterTypeEnum.HITC_2000_Ds:
-				case HithermCompactRegisterTypeEnum.HITC_2000_Par:
-					return 2.0 * 0.5;// +2.0 * 0.1 + 0.5 * 0.1;
-
-				case HithermCompactRegisterTypeEnum.HITC_2500_Std:
-				case HithermCompactRegisterTypeEnum.HITC_2500_Ds:
-					return 2.5 * 0.5;// +2.5 * 0.1 + 0.5 * 0.1;
-
-				default:
-					throw new Exception("Unknown Register Type");
-			}*/
 		}
 
 		public static Nullable<HithermCompactRegisterTypeEnum> GetRegisterTypeForSize(double width, double height, bool isParapet, bool isDachschraege) {
@@ -365,8 +338,6 @@ namespace Europlan.Common {
 		private double graphPosX = 0;
 		private double graphPosY = 0;
 		private bool graphRuecklaufHorizontal = true;
-
-		/*private Nullable<Point> origin = null;*/
 
 		public HithermCompactRegister() {
 			this.registerType = HithermCompactRegisterTypeEnum.HITC_620_Std;
@@ -436,32 +407,6 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double DefaultPipeVertical {
 			get {
-				/*if (this.orientation == RegisterOrientationEnum.ORIENTATION_VERTIKAL) {
-					switch (this.registerType) {
-						case RegisterTypeEnum.HIT_50_5:
-						case RegisterTypeEnum.HIT_50_10:
-							return 0.5;
-						case RegisterTypeEnum.HIT_100_5:
-						case RegisterTypeEnum.HIT_100_10:
-							return 1;
-						case RegisterTypeEnum.HIT_150_5:
-						case RegisterTypeEnum.HIT_150_10:
-							return 1.5;
-						case RegisterTypeEnum.HIT_200_5:
-						case RegisterTypeEnum.HIT_200_10:
-							return 2.0;
-						case RegisterTypeEnum.HIT_250_5:
-						case RegisterTypeEnum.HIT_250_10:
-							return 2.5;
-						case RegisterTypeEnum.HIT_300_5:
-						case RegisterTypeEnum.HIT_300_10:
-							return 3.0;
-						default:
-							return 0;
-					}
-				} else {
-					return ((double)this.RegisterBreite) / 100.0;
-				}*/
 				return 0;
 			}
 		}
@@ -497,7 +442,6 @@ namespace Europlan.Common {
 		public double CoveredArea {
 			get {
 				return ((double)this.RegisterBreite / 1000.0) * ((double)this.RegisterHoehe / 1000.0) * this.registerCount;
-				//return this.HeatArea;
 			}
 		}
 

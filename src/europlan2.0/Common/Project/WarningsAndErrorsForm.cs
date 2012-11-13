@@ -19,8 +19,8 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnClose.Text = EuroplanRes.General_Schliessen; //"&Schlieﬂen";
-			this.Text = EuroplanRes.WarningsAndErrorsForm_Titel; //"Warnungen und Fehler";
+			this.btnClose.Text = EuroplanRes.General_Schliessen; //"&Schlieﬂen"
+			this.Text = EuroplanRes.WarningsAndErrorsForm_Titel; //"Warnungen und Fehler"
 		}
 
 		private void FillListView() {
@@ -52,7 +52,6 @@ namespace Europlan.Common {
 						message = message.Replace("%GESCHOSS%", floor.Name);
 						message = message.Replace("%WARNUNG%", error);
 						lstErrors.Items.Add(message, "warning.png");
-						//lstErrors.Items.Add(error);
 					}
 				}
 			}

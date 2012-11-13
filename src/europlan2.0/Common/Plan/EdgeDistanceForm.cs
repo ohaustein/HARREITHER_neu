@@ -19,8 +19,8 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.EdgeDistanceForm_Titel;
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK"
 			this.label3.Text = EuroplanRes.EdgeDistanceForm_Randabstand;
 			this.label1.Text = EuroplanRes.Unit_Zentimeter;
 		}
@@ -32,7 +32,6 @@ namespace Europlan.Common {
 			SettingsFile.Update();
 			if (this.DialogResult == DialogResult.OK) {
 				if (numEdgeDistance.Text == "") {
-					//MessageBox.Show(EuroplanRes.NewPlanForm_KeinBezeichnerText, EuroplanRes.NewPlanForm_KeinBezeichnerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					e.Cancel = true;
 				}
 			}

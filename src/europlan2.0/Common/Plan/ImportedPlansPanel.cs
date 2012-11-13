@@ -17,7 +17,6 @@ namespace Europlan.Common {
 			private ProgressForm progressForm;
 			private NewPlanForm newPlanForm;
 			private string fileName;
-			//List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
 			private string dir;
 			private string subDir;
 			private string extension;
@@ -27,7 +26,6 @@ namespace Europlan.Common {
 				this.progressForm = progressForm;
 				this.newPlanForm = newPlanform;
 				this.fileName = fileName;
-				//this.pages = Pages;
 				this.dir = dir;
 				this.subDir = subDir;
 				this.extension = extension;
@@ -44,10 +42,6 @@ namespace Europlan.Common {
 			public string FileName {
 				get { return this.fileName; }
 			}
-
-			/*public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
-				get { return this.pages; }
-			}*/
 
 			public string Dir {
 				get { return this.dir; }
@@ -71,7 +65,6 @@ namespace Europlan.Common {
 			private ProgressForm progressForm;
 			private NewPlanForm newPlanForm;
 			private string fileName;
-			//List<SolidFramework.Pdf.Plumbing.PdfPage> pages;
 			private string dir;
 			private string subDir;
 			private string extension;
@@ -82,7 +75,6 @@ namespace Europlan.Common {
 				this.progressForm = progressForm;
 				this.newPlanForm = newPlanform;
 				this.fileName = fileName;
-				//this.pages = Pages;
 				this.dir = dir;
 				this.subDir = subDir;
 				this.extension = extension;
@@ -104,10 +96,6 @@ namespace Europlan.Common {
 			public string FileName {
 				get { return this.fileName; }
 			}
-
-			/*public List<SolidFramework.Pdf.Plumbing.PdfPage> Pages {
-				get { return this.pages; }
-			}*/
 
 			public string Dir {
 				get { return this.dir; }
@@ -262,22 +250,10 @@ namespace Europlan.Common {
 #endif
 
 					List<SolidFramework.Pdf.Plumbing.PdfPage> pages = null;
-					/*SolidFramework.Pdf.Catalog catalog = null;
-					SolidFramework.Pdf.Plumbing.PdfPages pages = null;
-					SolidFramework.Pdf.PdfDocument doc = null;	*/
 #endif
 
 					if (isPdf(extension)) {
 #if PDF
-						/*// Load up the document
-						doc = new SolidFramework.Pdf.PdfDocument(dialog.FileName);
-						doc.Open();
-						// Get our pages.
-						Pages = new List<SolidFramework.Pdf.Plumbing.PdfPage>(doc.Catalog.Pages.PageCount);
-						catalog = (SolidFramework.Pdf.Catalog)SolidFramework.Pdf.Catalog.Create(doc);
-						pages = (SolidFramework.Pdf.Plumbing.PdfPages)catalog.Pages;
-						ProcessPages(ref pages, ref Pages);
-						*/
 						pages = this.GetPdfPages(dialog.FileName);
 						newPlanForm = new NewPlanForm(true);
 						newPlanForm.NumOfPages = pages.Count;
@@ -383,7 +359,6 @@ namespace Europlan.Common {
 			args.ProgressForm.Close();
 			TempImagePlan plan = new TempImagePlan();
 			plan.Name = args.NewPlanForm.PlanName;
-			//plan.RelativeFileName = Path.Combine(args.SubDir, isPdf(args.Extension) ? Path.GetFileNameWithoutExtension(args.FileName) + ".png" : Path.GetFileName(args.FileName));
 			plan.SetAbsoluteFilename(args.TmpFileName);
 
 			PdfRegionPickerForm regionPickerForm = new PdfRegionPickerForm(plan);
@@ -396,7 +371,6 @@ namespace Europlan.Common {
 			List<SolidFramework.Pdf.Plumbing.PdfPage> pages = this.GetPdfPages(args.FileName);
 			SolidFramework.Pdf.Plumbing.PdfPage page = pages[args.NewPlanForm.PageNumber - 1];
 
-			//double top = 0, left = 0, bottom = page.TrimBox.Bottom - page.TrimBox.Top, right = page.TrimBox.Right - page.TrimBox.Left;
 			double top = 0, left = 0, bottom = 0, right = 0;
 			
 			if (regionPickerForm.TopLeft.HasValue && regionPickerForm.BottomRight.HasValue) {

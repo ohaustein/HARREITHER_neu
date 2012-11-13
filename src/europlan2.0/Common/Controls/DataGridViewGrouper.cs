@@ -122,10 +122,6 @@ namespace Europlan.Common {
 			return !grid.Rows[index].Visible;
 		}
 		void CollapseExpand(int index, bool show) {
-			//grid.SuspendLayout();
-			//foreach (DataGridViewRow row in GetRows(index))
-			//    row.Visible = show;
-			//grid.ResumeLayout();
 		}
 		public void ExpandAll() {
 			CollapseExpandAll(true);
@@ -134,16 +130,6 @@ namespace Europlan.Common {
 			CollapseExpandAll(false);
 		}
 		void CollapseExpandAll(bool show) {
-			//if (grid == null || !GridUsesGroupSource) return;
-			//grid.SuspendLayout();
-			//source.SuspendBinding();
-			//int cnt = source.Count;
-			//for (int i = 0; i < cnt; i++) {
-			//    if (!IsGroupRow(i))
-			//        grid.Rows[i].Visible = show;
-			//}
-			//grid.ResumeLayout();
-			//source.ResumeBinding();
 		}
 		void grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
 			if (IsGroupRow(e.RowIndex)) {
@@ -308,16 +294,6 @@ namespace Europlan.Common {
 			}
 		}
 		void grid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e) {
-			//if (!DrawExpandCollapseLines || e.RowIndex >= source.Count) return;
-			//int next = e.RowIndex + 1;
-			//int r = grid.RowHeadersWidth;
-			//int x = HeaderOffset - lineoffset;
-			//int y = e.RowBounds.Top + e.RowBounds.Height / 2;
-			//e.Graphics.DrawLine(linepen, x, y, r, y);
-			//if (next < source.Count && !IsGroupRow(next))
-			//    y = e.RowBounds.Bottom;
-			//e.Graphics.DrawLine(linepen, x, e.RowBounds.Top, x, y);
-
 		}
 
 		private bool showheader = true;
@@ -376,28 +352,6 @@ namespace Europlan.Common {
 			//line under the group row
 			e.Graphics.DrawLine(Pens.Gray, r.Left, r.Bottom, r.Right, r.Bottom);
 
-			//collapse/expand symbol               
-			//{
-			//    Rectangle cer = GetCollapseBoxBounds(e.RowBounds.Y);
-			//    if (capturedcollapsebox.Y == e.RowIndex)
-			//        e.Graphics.FillEllipse(Brushes.Yellow, cer);
-			//    e.Graphics.DrawEllipse(linepen, cer);
-			//    bool collapsed = IsCollapsed(e.RowIndex);
-			//    int cx;
-			//    if (DrawExpandCollapseLines && !collapsed) {
-			//        cx = HeaderOffset - lineoffset;
-			//        e.Graphics.DrawLine(linepen, cx, cer.Bottom, cx, r.Bottom);
-			//    }
-			//    cer.Inflate(-2, -2);
-			//    int cy = cer.Y + cer.Height / 2;
-			//    e.Graphics.DrawLine(linepen, cer.X, cy, cer.Right, cy);
-			//    if (collapsed) {
-			//        cx = cer.X + cer.Width / 2;
-			//        e.Graphics.DrawLine(linepen, cx, cer.Top, cx, cer.Bottom);
-			//    }
-			//}
-			//group value
-
 			{
 				r.X = HeaderOffset + 1;
 
@@ -411,7 +365,7 @@ namespace Europlan.Common {
 						r.Offset((int)size.Width + 5, 0);
 					}
 					if (info.DisplayValue != null) {
-						using (Font f = new Font(info.Font.FontFamily, info.Font.Size/* + 2*/, FontStyle.Bold)) {
+						using (Font f = new Font(info.Font.FontFamily, info.Font.Size, FontStyle.Bold)) {
 							SizeF size = e.Graphics.MeasureString(info.DisplayValue, f);
 							e.Graphics.DrawString(info.DisplayValue, f, fb, r, sf);
 							r.Offset((int)size.Width + 10, 0);
@@ -671,7 +625,6 @@ namespace Europlan.Common {
 				}
 			}
 			public IList Rows;
-			//public List<GroupRow> Groups = new List<GroupRow>();
 			public IDictionary<object, GroupRow> Groups;
 			void set() {
 				Groups = null;
@@ -698,7 +651,6 @@ namespace Europlan.Common {
 					gr.List.Add(row);
 				}
 
-				//var groups = Owner.Cast<object>().GroupBy<object, object>(o => gr.GetGroupValue(o));
 				int i = 0;
 				Rows = new List<object>(Groups.Count + Owner.BaseCount);
 				foreach (GroupRow g in Groups.Values) {
@@ -897,10 +849,6 @@ namespace Europlan.Common {
 		public override PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors) {
 			if (listAccessors == null) {
 				if (props == null) {
-					/*
-					props = new PropertyDescriptorCollection(
-					base.GetItemProperties(null).Cast<PropertyDescriptor>()
-					.Select(pd => new PropertyWrapper(pd, this)).ToArray());*/
 					props = base.GetItemProperties(null);
 					PropertyDescriptor[] arr = new PropertyDescriptor[props.Count];
 					for (int i = 0; i < props.Count; i++) {

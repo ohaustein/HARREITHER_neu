@@ -57,45 +57,45 @@ namespace Europlan.Application {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.MainForm_Titel; //"Europlan";
-			auslegeAssistentButton.Text = EuroplanRes.MainForm_Auslegungshilfe; //"FBH-Auslegungshilfe";
-			copyToolStripButton.Text = EuroplanRes.General_Kopieren; //"&Kopieren";
-			copyToolStripMenuItem.Text = EuroplanRes.General_Kopieren; //"Kopieren";
-			cutToolStripButton.Text = EuroplanRes.General_Ausschneiden; //"&Ausschneiden";
-			cutToolStripMenuItem.Text = EuroplanRes.General_Ausschneiden; //"Ausschneiden";
-			datanormToolStripMenuItem.Text = EuroplanRes.MainForm_Artikelstamm; //"Artikelstamm";
-			demandedHeatToolStripMenuItem.Text = EuroplanRes.MainForm_WaermeUndKuehlbedarf; //"&Wärme-/Kühlbedarf";
-			editToolStripMenuItem.Text = EuroplanRes.MainForm_Bearbeiten; //"&Bearbeiten";
-			exitToolStripMenuItem.Text = EuroplanRes.MainForm_Beenden; //"B&eenden";
-			fileToolStripMenuItem.Text = EuroplanRes.MainForm_Datei; //"&Datei";
-			helpToolStripButton.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe";
-			helpToolStripMenuItem.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe";
-			importGlobalConfToolStripMenuItem.Text = EuroplanRes.MainForm_ArtikelUndKonstruktionen; //"Artikel und Konstruktionen";
-			importToolStripMenuItem.Text = EuroplanRes.MainForm_Importieren; //"&Importieren";
+			this.Text = EuroplanRes.MainForm_Titel; //"Europlan"
+			auslegeAssistentButton.Text = EuroplanRes.MainForm_Auslegungshilfe; //"FBH-Auslegungshilfe"
+			copyToolStripButton.Text = EuroplanRes.General_Kopieren; //"&Kopieren"
+			copyToolStripMenuItem.Text = EuroplanRes.General_Kopieren; //"Kopieren"
+			cutToolStripButton.Text = EuroplanRes.General_Ausschneiden; //"&Ausschneiden"
+			cutToolStripMenuItem.Text = EuroplanRes.General_Ausschneiden; //"Ausschneiden"
+			datanormToolStripMenuItem.Text = EuroplanRes.MainForm_Artikelstamm; //"Artikelstamm"
+			demandedHeatToolStripMenuItem.Text = EuroplanRes.MainForm_WaermeUndKuehlbedarf; //"&Wärme-/Kühlbedarf"
+			editToolStripMenuItem.Text = EuroplanRes.MainForm_Bearbeiten; //"&Bearbeiten"
+			exitToolStripMenuItem.Text = EuroplanRes.MainForm_Beenden; //"B&eenden"
+			fileToolStripMenuItem.Text = EuroplanRes.MainForm_Datei; //"&Datei"
+			helpToolStripButton.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe"
+			helpToolStripMenuItem.Text = EuroplanRes.MainForm_Hilfe; //"&Hilfe"
+			importGlobalConfToolStripMenuItem.Text = EuroplanRes.MainForm_ArtikelUndKonstruktionen; //"Artikel und Konstruktionen"
+			importToolStripMenuItem.Text = EuroplanRes.MainForm_Importieren; //"&Importieren"
 			inhaltToolStripMenuItem.Text = EuroplanRes.MainForm_HilfeInhalt;
 			tutorialToolStripMenuItem.Text = EuroplanRes.MainForm_HilfeTutorial;
-			infoToolStripMenuItem.Text = EuroplanRes.MainForm_Info; //"Info";
-			licenseToolStripMenuItem.Text = EuroplanRes.MainForm_Lizenz; //"&Lizenz";
-			newToolStripButton.Text = EuroplanRes.MainForm_Neu; //"&Neu";
-			newToolStripMenuItem.Text = EuroplanRes.MainForm_Neu; //"&Neu";
-			openGlobalConfDialog.Filter = EuroplanRes.MainForm_ArtikelUndKonstruktionenFilter + "|global.conf"; //"Artikel und Konstruktionen|global.conf";
-			openToolStripButton.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen";
-			openToolStripMenuItem.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen";
-			optionsToolStripMenuItem.Text = EuroplanRes.MainForm_Optionen; //"&Optionen";
-			pasteToolStripButton.Text = EuroplanRes.MainForm_Einfuegen; //"&Einfügen";
-			pasteToolStripMenuItem.Text = EuroplanRes.MainForm_Einfuegen; //"Einfügen";
-			projectOverviewCoolToolStripButton.Text = EuroplanRes.MainForm_UebersichtKuehlen; //"Übersicht Kühlen";
-			projectOverviewHeatToolStripButton.Text = EuroplanRes.MainForm_UebersichtHeizen; //"Übersicht Heizen";
-			projektToolStripMenuItem.Text = EuroplanRes.MainForm_Projekt; //"Projekt";
-			recentProjectsToolStripMenuItem.Text = EuroplanRes.MainForm_LetzteProjekte; //"Letzte Projekte";
-			saveAsToolStripMenuItem.Text = EuroplanRes.MainForm_SpeichernUnter; //"Speichern &unter...";
-			saveToolStripButton.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern";
-			saveToolStripMenuItem.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern";
-			settingsToolStripMenuItem.Text = EuroplanRes.MainForm_Einstellungen; //"&Einstellungen";
-			updateToolStripMenuItem.Text = EuroplanRes.MainForm_Aktualisieren; //"Auf Aktualisierungen prüfen...";
-			viewReportToolStripMenuItem.Text = EuroplanRes.MainForm_Ansehen; //"Ansehen";
-			warningsAndErrorsToolStripMenuItem.Text = EuroplanRes.MainForm_Warnungen; //"Warnungen und Fehler";
-			printPreviewToolStripButton.Text = EuroplanRes.MainForm_ProjektAnsehen; // "Projekt ansehen";
+			infoToolStripMenuItem.Text = EuroplanRes.MainForm_Info; //"Info"
+			licenseToolStripMenuItem.Text = EuroplanRes.MainForm_Lizenz; //"&Lizenz"
+			newToolStripButton.Text = EuroplanRes.MainForm_Neu; //"&Neu"
+			newToolStripMenuItem.Text = EuroplanRes.MainForm_Neu; //"&Neu"
+			openGlobalConfDialog.Filter = EuroplanRes.MainForm_ArtikelUndKonstruktionenFilter + "|global.conf"; //"Artikel und Konstruktionen|global.conf"
+			openToolStripButton.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen"
+			openToolStripMenuItem.Text = EuroplanRes.MainForm_Oeffnen; //"Ö&ffnen"
+			optionsToolStripMenuItem.Text = EuroplanRes.MainForm_Optionen; //"&Optionen"
+			pasteToolStripButton.Text = EuroplanRes.MainForm_Einfuegen; //"&Einfügen"
+			pasteToolStripMenuItem.Text = EuroplanRes.MainForm_Einfuegen; //"Einfügen"
+			projectOverviewCoolToolStripButton.Text = EuroplanRes.MainForm_UebersichtKuehlen; //"Übersicht Kühlen"
+			projectOverviewHeatToolStripButton.Text = EuroplanRes.MainForm_UebersichtHeizen; //"Übersicht Heizen"
+			projektToolStripMenuItem.Text = EuroplanRes.MainForm_Projekt; //"Projekt"
+			recentProjectsToolStripMenuItem.Text = EuroplanRes.MainForm_LetzteProjekte; //"Letzte Projekte"
+			saveAsToolStripMenuItem.Text = EuroplanRes.MainForm_SpeichernUnter; //"Speichern &unter..."
+			saveToolStripButton.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern"
+			saveToolStripMenuItem.Text = EuroplanRes.MainForm_Speichern; //"Speic&hern"
+			settingsToolStripMenuItem.Text = EuroplanRes.MainForm_Einstellungen; //"&Einstellungen"
+			updateToolStripMenuItem.Text = EuroplanRes.MainForm_Aktualisieren; //"Auf Aktualisierungen prüfen..."
+			viewReportToolStripMenuItem.Text = EuroplanRes.MainForm_Ansehen; //"Ansehen"
+			warningsAndErrorsToolStripMenuItem.Text = EuroplanRes.MainForm_Warnungen; //"Warnungen und Fehler"
+			printPreviewToolStripButton.Text = EuroplanRes.MainForm_ProjektAnsehen; // "Projekt ansehen"
 		}
 
 		private void licenseManager_LicenseChanged(object sender, EventArgs e) {
@@ -250,7 +250,6 @@ namespace Europlan.Application {
 					text = text.Replace("%DAYS%", timeLeft.Days.ToString());
 					ToolStripLabel warning = new ToolStripLabel(text);
 					statusStrip.Items.Add(warning);
-					//settings.
 					string hideWarning = settings.GetSetting("HideValidityWarning", "");
 					if (hideWarning != LicenseManager.Instance.License.Signature) {
 						ValidityWarningForm form = new ValidityWarningForm(timeLeft.Days);
@@ -629,7 +628,6 @@ namespace Europlan.Application {
 							currentEditorUserControl = control as IEditorUserControl;
 						}
 					}
-					//if (oldControl == null || control.Tag != oldControl.Tag) {
 					if (tagChanged) {
 						(control as IEditorUserControl).UpdateControl(true);
 					}

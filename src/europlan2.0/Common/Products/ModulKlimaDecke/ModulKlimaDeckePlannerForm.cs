@@ -60,7 +60,6 @@ namespace Europlan.Common.Products {
 			this.modulKlimaDeckePlanner.Product = product;
 			if (product.GraphConstruction == null) {
 				product.GraphConstruction = (defaultConstrType == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE ? (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionKassette() : (ModulKlimaDeckeConstruction)new ModulKlimaDeckeConstructionGlatt());
-				//product.GraphConstruction.Planner = this.modulKlimaDeckePlanner;
 				product.GraphConstruction.Product = product;
 				product.GraphConstruction.PlanPanel = this.planPanel;
 				product.GraphConstruction.RotationRelativeToPlan = 0;
@@ -71,24 +70,20 @@ namespace Europlan.Common.Products {
 
 			if (this.glatt == null) {
 				this.glatt = new ModulKlimaDeckeConstructionGlatt();
-				//this.glatt.Planner = this.modulKlimaDeckePlanner;
 				this.glatt.Product = product;
 				this.glatt.PlanPanel = this.planPanel;
 				this.glatt.RotationRelativeToPlan = 0;
 			} else {
-				//this.glatt.Planner = this.modulKlimaDeckePlanner;
 				this.glatt.PlanPanel = this.planPanel;
 			}
 			this.glatt.RecalculateSchienen();
 
 			if (this.akustik == null) {
 				this.akustik = new ModulKlimaDeckeConstructionAkustik();
-				//this.akustik.Planner = this.modulKlimaDeckePlanner;
 				this.akustik.Product = product;
 				this.akustik.PlanPanel = this.planPanel;
 				this.akustik.RotationRelativeToPlan = 0;
 			} else {
-				//this.akustik.Planner = this.modulKlimaDeckePlanner;
 				this.akustik.PlanPanel = this.planPanel;
 			}
 			this.numRandfries.Value = (decimal)Math.Round(this.akustik.Randfries * 100.0);
@@ -96,12 +91,10 @@ namespace Europlan.Common.Products {
 
 			if (this.kassette == null) {
 				this.kassette = new ModulKlimaDeckeConstructionKassette();
-				//this.kassette.Planner = this.modulKlimaDeckePlanner;
 				this.kassette.Product = product;
 				this.kassette.PlanPanel = this.planPanel;
 				this.kassette.RotationRelativeToPlan = 0;
 			} else {
-				//this.kassette.Planner = this.modulKlimaDeckePlanner;
 				this.kassette.PlanPanel = this.planPanel;
 			}
 			this.kassette.RecalculateSchienen();
@@ -111,27 +104,18 @@ namespace Europlan.Common.Products {
 				this.rbCProfil.Checked = true;
 				this.rbHolzstaffel.Checked = false;
 				this.rbKassettendecke.Checked = false;
-				//this.rbGlatt.Visible = true;
-				//this.rbAkustik.Visible = true;
-				//this.rbKassetten.Visible = false;
 				this.grpBeplankung.Enabled = true;
 				this.grpCeilingContruction.Visible = true;
 			} else if (product.GraphConstruction.CeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL) {
 				this.rbCProfil.Checked = false;
 				this.rbHolzstaffel.Checked = true;
 				this.rbKassettendecke.Checked = false;
-				//this.rbGlatt.Visible = true;
-				//this.rbAkustik.Visible = true;
-				//this.rbKassetten.Visible = false;
 				this.grpBeplankung.Enabled = true;
 				this.grpCeilingContruction.Visible = true;
 			} else if (product.GraphConstruction.CeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.KASSETTENDECKE) {
 				this.rbCProfil.Checked = false;
 				this.rbHolzstaffel.Checked = false;
 				this.rbKassettendecke.Checked = true;
-				//this.rbGlatt.Visible = false;
-				//this.rbAkustik.Visible = false;
-				//this.rbKassetten.Visible = true;
 				this.grpBeplankung.Enabled = false;
 				this.grpCeilingContruction.Visible = false;
 			}
@@ -163,7 +147,6 @@ namespace Europlan.Common.Products {
 				}
 				ignoreBeplankung--;
 			} else if (product.GraphConstruction is ModulKlimaDeckeConstructionKassette) {
-				//this.rbKassetten.Checked = true;
 			}
 
 			if (this.cbBeplankung.Checked) {
@@ -371,7 +354,6 @@ namespace Europlan.Common.Products {
 			} else if (this.modulKlimaDeckePlanner.Product.GraphConstruction is ModulKlimaDeckeConstructionGlatt) {
 				rbGlatt.Checked = true;
 			} else if (this.modulKlimaDeckePlanner.Product.GraphConstruction is ModulKlimaDeckeConstructionKassette) {
-				//rbKassetten.Checked = true;
 			}
 			if (!this.rbKassettendecke.Checked && this.rbGlatt.Checked) {
 				ignoreRotation++;
@@ -673,17 +655,6 @@ namespace Europlan.Common.Products {
 				}
 			}
 		}
-
-		/*private void rbKassetten_CheckedChanged(object sender, EventArgs e) {
-			if (!updateOngoing) {
-				if (rbKassetten.Checked && this.modulKlimaDeckePlanner.Product.GraphConstruction != this.kassette) {
-					this.modulKlimaDeckePlanner.Product.GraphConstruction = this.kassette;
-					this.changed = true;
-					this.UpdateControls();
-					this.planPanel.InvalidateGraphics();
-				}
-			}
-		}*/
 
 		private void rbKassettendecke_CheckedChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
@@ -990,36 +961,12 @@ namespace Europlan.Common.Products {
 
 				if (this.lstRows.SelectedIndex >= 0 && this.lstRows.SelectedIndex < this.lstRows.Items.Count - dec) {
 					this.modulKlimaDeckePlanner.HighlightRow = (this.lstRows.Items.Count - dec > this.lstRows.SelectedIndex ? (this.modulKlimaDeckePlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas[this.lstSubarea.SelectedIndex].Rows[this.lstRows.SelectedIndex] : null);
-					/*List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
-					if (this.modulKlimaBodenPlanner.HighlightRow != null) {
-						foreach (KlimaFlaechenModul modul in this.modulKlimaBodenPlanner.HighlightRow.List) {
-							modules.Add(modul);
-						}
-					}*/
 					this.UpdateSelectedModules();
 				} else if (this.lstSubarea.SelectedIndex >= 0 && this.lstSubarea.SelectedIndex < this.lstSubarea.Items.Count - dec) {
 					this.modulKlimaDeckePlanner.HighlightSubArea = (this.lstSubarea.Items.Count - dec > this.lstSubarea.SelectedIndex ? (this.modulKlimaDeckePlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit).SubAreas[this.lstSubarea.SelectedIndex] : null);
-					/*List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
-					if (this.modulKlimaBodenPlanner.HighlightSubArea != null) {
-						foreach (KlimaFlaechenList row in this.modulKlimaBodenPlanner.HighlightSubArea.Rows) {
-							foreach (KlimaFlaechenModul modul in row.List) {
-								modules.Add(modul);
-							}
-						}
-					}*/
 					this.UpdateSelectedModules();
 				} else if (this.lstCircuits.SelectedIndex >= 0 && this.lstCircuits.SelectedIndex < this.lstCircuits.Items.Count - dec) {
 					this.modulKlimaDeckePlanner.HighlightCircuit = (this.lstCircuits.Items.Count - dec > this.lstCircuits.SelectedIndex ? (this.modulKlimaDeckePlanner.Product.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit) : null);
-					/*List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
-					if (this.modulKlimaBodenPlanner.HighlightCircuit != null) {
-						foreach (ModulDeckeSubArea subArea in this.modulKlimaBodenPlanner.HighlightCircuit.SubAreas) {
-							foreach (KlimaFlaechenList row in subArea.Rows) {
-								foreach (KlimaFlaechenModul modul in row.List) {
-									modules.Add(modul);
-								}
-							}
-						}
-					}*/
 					this.UpdateSelectedModules();
 				} else {
 					this.modulKlimaDeckePlanner.HighlightCircuit = null;
@@ -1228,7 +1175,6 @@ namespace Europlan.Common.Products {
 			this.ignoreModuleTypeChange--;
 			this.ignoreModuleFlexibleChange--;
 
-			//List<KlimaFlaechenModul> module = this.modulKlimaBodenPlanner.GetAllSelectedModules();
 			if (module.Count == 0) {
 				this.llHk.Enabled = false;
 				this.llHk.Tag = null;
@@ -1635,7 +1581,6 @@ namespace Europlan.Common.Products {
 					if (!string.IsNullOrEmpty(message)) {
 						ListViewItem item = new ListViewItem(message);
 						item.ForeColor = Color.Red;
-						//item.Font = new Font(item.Font, FontStyle.Bold);
 						this.lstError.Items.Add(item);
 					}
 				}
@@ -1895,9 +1840,6 @@ namespace Europlan.Common.Products {
 			}
 			foreach (IKlimaFlaechenVerbindung link in linksToInvert) {
 				link.InvertDirection();
-				//KlimaFlaechenModul tmp = link.Start;
-				//link.Start = link.End;
-				//link.End = tmp;
 			}
 			this.UpdateSelectedModules();
 			this.planPanel.InvalidateGraphics();
@@ -1940,24 +1882,12 @@ namespace Europlan.Common.Products {
 			if (this.modulKlimaDeckePlanner.MoveRow(this.rowToMove)) {
 				this.UpdateLists(true, true, true, true);
 			}
-			/*SelectMoveTargetForm form = new SelectMoveTargetForm(this.modulKlimaDeckePlanner.Product, true);
-			if (form.ShowDialog() == DialogResult.OK) {
-				this.modulKlimaDeckePlanner.Product.MoveRow(this.rowToMove, form.SelectedSubarea);
-				this.planPanel.InvalidateGraphics();
-			}
-			form.Dispose();*/
 		}
 
 		private void btnMoveSubarea_Click(object sender, EventArgs e) {
 			if (this.modulKlimaDeckePlanner.MoveSubarea(this.subAreaToMove)) {
 				this.UpdateLists(true, true, true, true);
 			}
-			/*SelectMoveTargetForm form = new SelectMoveTargetForm(this.modulKlimaDeckePlanner.Product, false);
-			if (form.ShowDialog() == DialogResult.OK) {
-				this.modulKlimaDeckePlanner.Product.MoveSubarea(this.subAreaToMove, form.SelectedCircuit);
-				this.planPanel.InvalidateGraphics();
-			}
-			form.Dispose();*/
 		}
 
 		private void cbVlFlexible_CheckedChanged(object sender, EventArgs e) {

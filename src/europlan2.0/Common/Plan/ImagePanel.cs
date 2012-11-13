@@ -145,11 +145,9 @@ namespace Europlan.Common {
 				if (startPoint.HasValue && !endPoint.HasValue) {
 					endPoint = mousePosInPlan;
 					length = this.GetDistance(startPoint.Value.X, startPoint.Value.Y, endPoint.Value.X, endPoint.Value.Y);
-					//txtLength.Enabled = true;
 					if (LengthChanged != null) {
 						LengthChanged(this);
 					}
-					//startPoint = null;
 				} else {
 					startPoint = mousePosInPlan;
 					endPoint = null;
@@ -198,11 +196,6 @@ namespace Europlan.Common {
                 }
 
 				Matrix ctrlToPlan = paintMatrix.Clone();
-				/*transformPointsMatrix.Translate(((float)image.Width / 2 + this.XPos) * this.Scale.Value, ((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				transformPointsMatrix.Rotate(this.Angle);
-				transformPointsMatrix.Translate(-((float)image.Width / 2 + this.XPos) * this.Scale.Value, -((float)image.Height / 2 + this.YPos) * this.Scale.Value);
-				transformPointsMatrix.Scale(this.Scale.Value, this.Scale.Value);
-				transformPointsMatrix.Translate(this.XPos, this.YPos);*/
 				ctrlToPlan.Invert();
 				PointF[] tmp = new PointF[] { mousePosInCtrl };
 				ctrlToPlan.TransformPoints(tmp);
@@ -222,7 +215,6 @@ namespace Europlan.Common {
 
 				if (showRaster) {
 					Pen pen = Pens.DarkGray.Clone() as Pen;
-					//pen.DashStyle = DashStyle.Dash;
 					for (int i = 0; i < this.Height; i = i + 100) {
 						g.DrawLine(pen, 0, i, this.Width, i);
 					}
@@ -367,7 +359,6 @@ namespace Europlan.Common {
 		private bool IsIntersecting (PointF p1, PointF p2, PointF p3, PointF p4) {
 			float x1, x2, x3, x4, y1, y2, y3, y4;
 			float ua, ub, ud;
-			//float x, y;
 			x1 = p1.X; x2 = p2.X; x3 = p3.X; x4 = p4.X;
 			y1 = p1.Y; y2 = p2.Y; y3 = p3.Y; y4 = p4.Y;
 			ud = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
@@ -376,8 +367,6 @@ namespace Europlan.Common {
 				ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ud;
 				if (IsBetween(ua, 0, 1) && IsBetween(ub, 0, 1)) {
 					return true;
-				//    x = x1 + ua * (x2 - x1);
-				//    y = y1 + ua * (y2 - y1);
 				}
 			}
 			return false;
@@ -421,11 +410,6 @@ namespace Europlan.Common {
 			if (mouseDown && ((mode == PlanMode.PM_MOVE && e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Middle))) {
 				unsavedChanges = true;
 
-				/*mouseUpXPlan = arr[0].X;
-				mouseUpYPlan = arr[0].Y;
-
-                this.XPos += mouseUpXPlan - mouseDownXPlan;
-                this.YPos += mouseUpYPlan - mouseDownYPlan;*/
                 float scale = this.Scale.HasValue ? this.Scale.Value : 1;
                 mouseUpX = mousePosInCtrl.X;
                 mouseUpY = mousePosInCtrl.Y;
@@ -650,9 +634,6 @@ namespace Europlan.Common {
 
 			planToControl = tmp;
 			controlToPlan = planToControl.GetInverse();
-
-            /*controlToPlan = Transformation4D.Translation(-((float)image.Width / 2.0 + this.XPos), -((float)image.Height / 2.0 + this.YPos), 0) * ((Transformation4D.Translation(((float)image.Width / 2.0) * scale, ((float)image.Height / 2.0) * scale, 0) * Transformation4D.RotateZ(-this.Angle)) * Transformation4D.Scaling(1 / scale));
-            planToControl = controlToPlan.GetInverse();*/
 		}
 
 		[Browsable(false)]

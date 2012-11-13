@@ -51,13 +51,13 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_Nummer; // "Nr.";
-			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_BestellnummerCol; //"Bestellnr.";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
-			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_EinheitCol; //"Einheit";
-			this.denominationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_VerpackungseinheitCol; //"Verpackungs-\neinheit";
-			this.priceDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_PreisCol; //"Preis pro Einheit";
-			this.Category.HeaderText = EuroplanRes.MaterialEditorGrid_KategorieCol; //"Kategorie";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_Nummer; // "Nr."
+			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_BestellnummerCol; //"Bestellnr."
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung"
+			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_EinheitCol; //"Einheit"
+			this.denominationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_VerpackungseinheitCol; //"Verpackungs-\neinheit"
+			this.priceDataGridViewTextBoxColumn.HeaderText = EuroplanRes.MaterialEditorGrid_PreisCol; //"Preis pro Einheit"
+			this.Category.HeaderText = EuroplanRes.MaterialEditorGrid_KategorieCol; //"Kategorie"
 		}
 
 		public bool Admin {
@@ -85,12 +85,6 @@ namespace Europlan.Common {
 		public Nullable<CategoryType> Filter {
 			get { return this.wrapper.FilterCategory; }
 			set { this.wrapper.FilterCategory = value; }
-			/*get { return this.filter; }
-			set {
-				this.filter = value;
-				this.materialsWrapperBindingSource.Filter = (filter == null ? null : ((int)filter).ToString());
-				this.materialsWrapperBindingSource.ResetBindings(false);
-			}*/
 		}
 
 		public bool AllowToAdd {

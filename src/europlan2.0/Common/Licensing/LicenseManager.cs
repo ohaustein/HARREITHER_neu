@@ -46,7 +46,6 @@ namespace Europlan.Licensing {
 			}
 			
 			this.dataDirPath = PathUtil.DataPath;
-			//this.dataDirPath = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "data");
 			string licensePath = Path.Combine(this.dataDirPath, licenseFileName);
 			if (File.Exists(licensePath)) {
 				try {

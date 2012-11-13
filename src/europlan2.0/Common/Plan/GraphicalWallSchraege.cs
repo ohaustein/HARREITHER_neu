@@ -16,8 +16,6 @@ namespace Europlan.Common {
 
 		private GraphicalWall wall;
 		private OrientationEnum orientation;
-		//private double width;
-		//private double height;
 
 		public GraphicalWallSchraege(GraphicalWall wall, OrientationEnum orientation) {
 			this.wall = wall;
@@ -26,12 +24,10 @@ namespace Europlan.Common {
 
 		public GraphicalWall Wall {
 			get { return this.wall; }
-			//set { this.wall = value; }
 		}
 
 		public OrientationEnum Orientation {
 			get { return this.orientation; }
-			//set { this.orientation = value; }
 		}
 
 		public double Width {
@@ -233,14 +229,11 @@ namespace Europlan.Common {
 				double bottom = this.wall.GetWallHeight() * 100.0 - this.Height;
 
 				List<Anchor> anchors = new List<Anchor>();
-				//anchors.Add(new Anchor(left, top, AnchorTypeEnum.ANCHOR_NONE, this));
 				anchors.Add(new Anchor(right, top, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
 				anchors.Add(new Anchor(right, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM_RIGHT, this));
 				anchors.Add(new Anchor(left, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
 
-				//anchors.Add(new Anchor((left + right) / 2.0, top, AnchorTypeEnum.ANCHOR_NONE, this));
 				anchors.Add(new Anchor((left + right) / 2.0, bottom, AnchorTypeEnum.ANCHOR_SCALE_BOTTOM, this));
-				//anchors.Add(new Anchor(left, (top + bottom) / 2.0, AnchorTypeEnum.ANCHOR_NONE, this));
 				anchors.Add(new Anchor(right, (top + bottom) / 2.0, AnchorTypeEnum.ANCHOR_SCALE_RIGHT, this));
 				return anchors;
 			} else {

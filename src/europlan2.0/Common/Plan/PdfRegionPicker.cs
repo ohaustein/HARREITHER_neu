@@ -74,7 +74,6 @@ namespace Europlan.Common {
 		internal void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 			Pen pen = Pens.Green;
-			//Pen otherPen = new Pen(Color.FromArgb(128, Color.Red));
 			Brush brush = new SolidBrush(Color.FromArgb(32, Color.Green));
 
 			if (this.startPoint.HasValue) {

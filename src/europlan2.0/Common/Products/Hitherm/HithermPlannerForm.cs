@@ -211,14 +211,6 @@ namespace Europlan.Common {
 			foreach (ToolStripButton button in buttons) {
 				button.Checked = (button == buttonToCheck);
 			}
-			/*this.btnPick.Checked = false;
-			this.btnMove.Checked = false;
-			this.btnWall.Checked = false;
-			this.btnObstacle.Checked = false;
-			this.btnSchraege.Checked = false;
-			this.btnRegister.Checked = false;
-			this.btnConnection.Checked = false;
-			buttonToCheck.Checked = true;*/
 		}
 
 		private void ApplyRegisterButtonCheckedState(ToolStripButton buttonToCheck) {
@@ -294,7 +286,6 @@ namespace Europlan.Common {
 			}
 			if (ok) {
 				this.graphicalWallPanel.Room.Walls.Clear();
-				//this.hithermPlanner.HithermProduct.PlannedCircuits.Clear();
 				this.hithermPlanner.HithermProduct.ResetProduct();
 				NewWallForm form = new NewWallForm(true, false, 0, 0, false, graphicalWallPanel.Room.AssociatedFloor.DefaultRoomHeight);
 				DialogResult result = form.ShowDialog();
@@ -347,7 +338,6 @@ namespace Europlan.Common {
 		}
 
 		private void btnPick_Click(object sender, EventArgs e) {
-			//this.graphicalWallPanel.SelectedObject = null;
 			if (!this.btnPick.Checked) {
 				this.SetProductPlanner();
 				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_SELECT_OBJECT;
@@ -419,7 +409,6 @@ namespace Europlan.Common {
 				this.graphicalWallPanel.SelectedObject = null;
 				this.graphicalWallPanel.Mode = GraphicalWallPanel.PlanMode.PM_PLANNER_DRAG;
 				this.hithermPlanner.Mode = HithermPlanner.HithermPlannerMode.HPM_ADD_REGISTER;
-				//this.hithermPlanner.NewRegisterOrientation = (this.btnRegisterHorizontal.Checked ? HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL : HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL);
 				this.btnRegisterHorizontal.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_HORIZONTAL;
 				this.btnRegisterVertical.Checked = this.hithermPlanner.NewRegisterOrientation == HithermRegister.RegisterOrientationEnum.ORIENTATION_VERTIKAL;
 				UpdateModifyRegisterPanel(null);
@@ -554,36 +543,6 @@ namespace Europlan.Common {
 					UpdateModifySchraegePanel(SelectedObject as GraphicalWallSchraege);
 				}
 			}
-			/*if (e.OldSelectedObject is GraphicalWallObstacle) {
-				GraphicalWallObstacle obstacle = e.OldSelectedObject as GraphicalWallObstacle;
-				if (!obstacle.CheckValidity(e.OldSelectedWall, 0, 0)) {
-					obstacle.RevertState();
-				} else {
-					Vector2D offset = this.graphicalWallPanel.Room.GetWallOffset(e.OldSelectedWall).Value * 100;
-					Polygon2D border = obstacle.GetObjectBorders(offset.X, offset.Y);
-					Polygon2D outsideBorder = obstacle.GetOutsideBorder(offset.X, offset.Y);
-					List<GraphicalRegisterWrapper> toDelete = new List<GraphicalRegisterWrapper>();
-					foreach (GraphicalRegisterWrapper wrapper in e.OldSelectedWall.Registers) {
-						if (wrapper.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
-							toDelete.Add(wrapper);
-						}
-					}
-					foreach (GraphicalRegisterWrapper wrapper in toDelete) {
-						DeleteRegister(wrapper as GraphicalHithermRegisterWrapper);
-					}
-					List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
-					foreach (HithermCircuit c in this.hithermPlanner.HithermProduct.PlannedCircuits) {
-						foreach (GraphicalHithermVerbindung link in c.Links) {
-							if (link.CollisionTest(outsideBorder, offset.X, offset.Y, false)) {
-								linksToDelete.Add(link);
-							}
-						}
-					}
-					foreach (GraphicalHithermVerbindung link in linksToDelete) {
-						DeleteVerbindung(link);
-					}
-				}
-			}*/
 
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
@@ -619,9 +578,9 @@ namespace Europlan.Common {
 			this.btnConnectionManual.Visible = this.btnConnection.Checked;
 			this.btnConnectionAuto.Visible = this.btnConnection.Checked;
 			this.btnConnectionInFloor.Visible = this.btnConnection.Checked;
-			this.seperatorConnections.Visible = false; //this.btnConnection.Checked;
-			this.btnConnectionDirect.Visible = false; //this.btnConnection.Checked;
-			this.btnConnectionAlign.Visible = false; //this.btnConnection.Checked;
+			this.seperatorConnections.Visible = false;
+			this.btnConnectionDirect.Visible = false;
+			this.btnConnectionAlign.Visible = false;
 
 			this.btnSchraegeLeft.Visible = this.btnSchraege.Checked;
 			this.btnSchraegeRight.Visible = this.btnSchraege.Checked;
@@ -631,13 +590,6 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			this.panelModifyHitherm.BringToFront();
 			if (hithermRegister != null) {
-				/*string text = "Hitherm Klimawand   " + hithermRegister.Register.RegisterCount + " Stück Hitherm ";
-				if (hithermRegister.Register.IsHochleistungsRegister) {
-					text += "Hochleistungsregister ";
-				} else {
-					text += "Standardregister ";
-				}
-				text += hithermRegister.Register.RegisterHoehe + "cm (" + hithermRegister.Register.Rohre + " Leistungsrohre)";*/
 				string text = EuroplanRes.HithermPlannerForm_RegisterText;
 				text = text.Replace("%ANZAHL%", hithermRegister.Register.RegisterCount.ToString());
 				if (hithermRegister.Register.IsHochleistungsRegister) {
@@ -768,7 +720,6 @@ namespace Europlan.Common {
 					text = text.Replace("%BREITE%", this.numObstacleWidth.Value.ToString());
 					text = text.Replace("%HOEHE%", this.numObstacleHeight.Value.ToString());
 					this.lblObstacle.Text = text;
-					//this.lblObstacle.Text = "Typ: " + new GraphicalWallObstacle.ObstacleTypeConverter().ConvertToString(obstacle.ObstacleType) + " " + this.numObstacleWidth.Value + "cm x " + this.numObstacleHeight.Value + EuroplanRes.Unit_Zentimeter;
 				}
 			} else {
 				this.numObstacleHeight.Text = "";
@@ -797,7 +748,6 @@ namespace Europlan.Common {
 				text = text.Replace("%BREITE%", Math.Round(schraege.Width, 0).ToString());
 				text = text.Replace("%HOEHE%", Math.Round(schraege.Height, 0).ToString());
 				this.lblSchraege.Text = text;
-				//this.lblSchraege.Text = "Schräge " + (schraege.Orientation == GraphicalWallSchraege.OrientationEnum.LEFT ? "links" : "rechts") + ": " + Math.Round(schraege.Width, 0).ToString() + "cm x " + Math.Round(schraege.Height, 0).ToString() + EuroplanRes.Unit_Zentimeter;
 			} else {
 				this.numSchraegeHorizontal.Text = "";
 				this.numSchraegeVertical.Text = "";
@@ -945,7 +895,6 @@ namespace Europlan.Common {
 					foreach (GraphicalHithermRegisterWrapper register in (SelectedObject as GraphicalWall).Registers) {
 						register.Register.WallId = form.SelectedWall.Id;
 					}
-					//this.graphicalWallPanel.Room.MarkErrors(SelectedObject, this.graphicalWallPanel.SelectedWall);
 					unsavedChanges = true;
 					UpdateDefineWallsPanelButtons(SelectedObject as GraphicalWall);
 					this.graphicalWallPanel.InvalidateGraphics();
@@ -1045,32 +994,12 @@ namespace Europlan.Common {
 			graphicalWallPanel.SelectedObject = null;
 			graphicalWallPanel.SelectedObject = wall;
 			this.graphicalWallPanel.InvalidateGraphics();
-
-			/*GraphicalWall wall = SelectedObject as GraphicalWall;
-			if (Math.Round((decimal)wall.GetWallWidth() * 100, 0) != numWallHorizontal.Value) {
-				if (IsChangeAllowed()) {
-					wall.WallId = txtWallConstruction.Text;
-					wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);
-					wall.SetWallHeight((double)numWallVertical.Value / 100.0);
-				}
-			} else {
-				wall.WallId = txtWallConstruction.Text;
-				wall.SetWallWidth((double)numWallHorizontal.Value / 100.0);
-				wall.SetWallHeight((double)numWallVertical.Value / 100.0);
-			}
-			foreach (GraphicalHithermRegisterWrapper register in wall.Registers) {
-				register.Register.WallId = wall.WallId;
-			}
-			unsavedChanges = false;
-			UpdateDefineWallsPanel(wall);
-			this.graphicalWallPanel.InvalidateGraphics();*/
 		}
 
 		private void btnWallRevert_Click(object sender, EventArgs e) {
 			GraphicalWall wall = SelectedObject as GraphicalWall;
 			wall.RevertState();
 			this.graphicalWallPanel.Room.MarkErrors(wall, this.graphicalWallPanel.SelectedWall);
-			//graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
 			UpdateDefineWallsPanel(wall);
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -1132,9 +1061,6 @@ namespace Europlan.Common {
 		}
 
 		private void btnRegisterAccept_Click(object sender, EventArgs e) {
-			/*GraphicalHithermRegisterWrapper wrapper = SelectedObject as GraphicalHithermRegisterWrapper;
-			wrapper.Register.GraphPosX = (double)numRegisterLeft.Value;
-			wrapper.Register.GraphPosY = (double)numRegisterVertical.Value;*/
 			graphicalWallPanel.SelectedObject = null;
 			UpdateModifyRegisterPanel(null);
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -1247,7 +1173,6 @@ namespace Europlan.Common {
 					if (!string.IsNullOrEmpty(message)) {
 						ListViewItem item = new ListViewItem(message);
 						item.ForeColor = Color.Red;
-						//item.Font = new Font(item.Font, FontStyle.Bold);
 						this.lstError.Items.Add(item);
 					}
 				}
@@ -1285,8 +1210,6 @@ namespace Europlan.Common {
 
 			bool showHeat = pp.RequestedHeatLoad > 0;
 			bool showCool = pp.RequestedCoolLoad > 0;
-			//bool showHeatCircuit = selectedCircuit >= 0 && showHeat;
-			//bool showCoolCircuit = selectedCircuit >= 0 && showCool;
 			bool showRestArea = product.HithermType == Product.ProductType.FBH || product.HithermType == Product.ProductType.DH;
 
 			lblHeat.Visible = showHeat;
@@ -1296,12 +1219,6 @@ namespace Europlan.Common {
 			lblQHeatDiffUnit.Visible = showHeat;
 			lblQHeatRest.Visible = showHeat;
 			lblQHeatRestUnit.Visible = showHeat;
-			//lblAvgqHeat.Visible = showHeatCircuit;
-			//lblAvgqHeatUnit.Visible = showHeatCircuit;
-			//lblDurchflussHeat.Visible = showHeatCircuit;
-			//lblDurchflussHeatUnit.Visible = showHeatCircuit;
-			//lblDruckverlustHeat.Visible = showHeatCircuit;
-			//lblDruckverlustHeatUnit.Visible = showHeatCircuit;
 			lblCool.Visible = showCool;
 			lblQCool.Visible = showCool;
 			lblQCoolUnit.Visible = showCool;
@@ -1309,12 +1226,6 @@ namespace Europlan.Common {
 			lblQCoolDiffUnit.Visible = showCool;
 			lblQCoolRest.Visible = showCool;
 			lblQCoolRestUnit.Visible = showCool;
-			//lblAvgqCool.Visible = showCoolCircuit;
-			//lblAvgqCoolUnit.Visible = showCoolCircuit;
-			//lblDurchflussCool.Visible = showCoolCircuit;
-			//lblDurchflussCoolUnit.Visible = showCoolCircuit;
-			//lblDruckverlustCool.Visible = showCoolCircuit;
-			//lblDruckverlustCoolUnit.Visible = showCoolCircuit;
 
 			int xDiff = this.lblNecessaryArea.Top - this.lblNecessaryWaermestromdichte.Top;
 			if (showRestArea) {
@@ -1353,15 +1264,6 @@ namespace Europlan.Common {
 				this.lineInfo.Height = 100;
 			}
 
-
-			//this.lblAreaTxt.Visible = showArea;
-			//this.numArea.Visible = showArea;
-			//this.lblAreaUnit.Visible = showArea;
-			//this.numAreaPercentage.Visible = showArea;
-			//this.lblAreaPercentage.Visible = showArea;
-
-
-
 			double qDiffHeat = pp.PlannedHeatLoad - pp.RequestedHeatLoad;
 			double qDiffCool = pp.PlannedCoolLoad - pp.RequestedCoolLoad;
 
@@ -1378,8 +1280,6 @@ namespace Europlan.Common {
 			lblRestArea.Text = Math.Round((pp.PlannedArea.HasValue ? pp.PlannedArea.Value : 0) - area, 2).ToString();
 			lblNecessaryWaermestromdichte.Text = (area > 0) ? Math.Round(pp.RequestedHeatLoad / area, 2).ToString() : "--";
 			lblNecessaryArea.Text = (product.PlannedHeatLoad > 0 && area > 0) ? Math.Round(pp.RequestedHeatLoad / (product.PlannedHeatLoad / area), 2).ToString() : "--";
-				
-
 		}
 
 		private void btnObstacleApply_Click(object sender, EventArgs e) {
@@ -1392,7 +1292,6 @@ namespace Europlan.Common {
 			GraphicalWallObstacle obstacle = SelectedObject as GraphicalWallObstacle;
 			obstacle.RevertState();
 			this.graphicalWallPanel.Room.MarkErrors(obstacle, this.graphicalWallPanel.SelectedWall);
-			//graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
 			UpdateModifyObstaclesPanel(obstacle);
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -1434,18 +1333,6 @@ namespace Europlan.Common {
 				schraege.Width = 0;
 				this.UpdateModifySchraegePanel(null);
 				this.graphicalWallPanel.SelectedObject = null;
-				/*foreach (GraphicalWall wall in graphicalWallPanel.Room.Walls) {
-					GraphicalWall schraegeWall = wall.GetWallForObstacle(schraege);
-					if (schraegeWall != null) {
-						obstacleWall.Obstacles.Remove(obstacle);
-						obstacle.Error = true;
-						if (obstacle == this.SelectedObject) {
-							graphicalWallPanel.SelectedObject = null;
-							UpdateModifyObstaclesPanel(null);
-						}
-						this.graphicalWallPanel.InvalidateGraphics();
-					}
-				}*/
 			}
 		}
 
@@ -1486,7 +1373,6 @@ namespace Europlan.Common {
 					}
 
 					if (foundLink != null) {
-					//if (c.Links.Contains(verbindung)) {
 						bool moveCircuit = foundLink.HasStart && foundLink.HasEnd;
 						c.Links.Remove(foundLink);
 						if (foundLink is GraphicalHithermUnderfloorVerbindung) {
@@ -1632,7 +1518,6 @@ namespace Europlan.Common {
 			GraphicalWallSchraege schraege = SelectedObject as GraphicalWallSchraege;
 			schraege.RevertState();
 			this.graphicalWallPanel.Room.MarkErrors(schraege, this.graphicalWallPanel.SelectedWall);
-			//graphicalWallPanel.SelectedObject = null;
 			unsavedChanges = false;
 			UpdateModifySchraegePanel(schraege);
 			this.graphicalWallPanel.InvalidateGraphics();
@@ -1747,7 +1632,6 @@ namespace Europlan.Common {
 					height += border * 4;
 					b = new Bitmap((int)width, (int)height);
 					g = Graphics.FromImage(b);
-					//g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
 					g.ResetClip();
 					g.FillRectangle(Brushes.White, 0, 0, (float)width, (float)height);
@@ -1799,8 +1683,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		//private bool oldSnap = true;
-		//private bool oldDirect = false;
 		private bool snapInverted = false;
 
 		private void InvertSnap() {

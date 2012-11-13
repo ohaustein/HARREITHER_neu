@@ -320,16 +320,6 @@ namespace Europlan.Common {
 
 		public override bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			List<Polygon2D> register = GetObjectBorders(xOffset, yOffset);
-			/*if (polygon.IsClockwise()) {
-				polygon.Reverse();
-			}
-			if (register.IsClockwise()) {
-				register.Reverse();
-			}
-			List<Polygon2D> list1 = new List<Polygon2D>();
-			list1.Add(polygon);
-			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(register);*/
 
 			try {
 				return Polygon2D.GetIntersection(polygon, register).Count > 0;

@@ -44,7 +44,6 @@ namespace Europlan.Common {
 		private bool highlightRoomCoordinates = true;
 		private bool drawExpansionGaps = true;
 		private Dictionary<Product, IProductPlanner> productsInFloor = new Dictionary<Product, IProductPlanner>();
-		//private Dictionary<Distributor, DistributorPositioner> distributorsInFloor = new Dictionary<Distributor, DistributorPositioner>();
 		private List<Distributor> distributorsInFloor = new List<Distributor>();
 		private Floor floor = null;
 		private bool planFloor = true;
@@ -70,14 +69,6 @@ namespace Europlan.Common {
 							this.product = null;
 						}
 						this.Plan = floor.AssociatedPlan;
-						/*DistributorPositioner positioner;
-						foreach (Distributor d in this.GetAllDistributors()) {
-							positioner = new DistributorPositioner();
-							positioner.Floor = floor;
-							positioner.Distributor = d;
-							positioner.ConnectedPlanPanel = this.connectedPlanPanel;
-							this.distributorsInFloor.Add(d, positioner);
-						}*/
 						this.distributorsInFloor.AddRange(this.GetAllDistributors());
 					}
 				}
@@ -230,9 +221,6 @@ namespace Europlan.Common {
 				if (this.Plan != null) {
 					this.ResetProducts();
 				}
-				//foreach (DistributorPositioner distPositioner in this.distributorsInFloor.Values) {
-					//distPositioner.ConnectedPlanPanel = this.connectedPlanPanel;
-				//}
 			}
 		}
 
@@ -320,22 +308,13 @@ namespace Europlan.Common {
 
 		private List<Distributor> GetAllDistributors() {
 			return this.Floor.GetAllAvailableDistributors(true);
-			/*List<Distributor> distributors = new List<Distributor>();
-			if (this.Plan != null) {
-				foreach (Floor floor in Project.Instance.Floors) {
-					distributors.AddRange(floor.GetAllAvailableDistributors(false));
-				}
-			}
-			return distributors;*/
 		}
 
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.Plan != null) {
 				Region clip = g.Clip;
 				if (!export) {
-					//foreach (KeyValuePair<Distributor, DistributorPositioner> kvp in this.distributorsInFloor) {
 					foreach (Distributor dist in this.distributorsInFloor) {
-						//kvp.Value.PaintAfterPlanPannel(g, additionalTransformation, mousePositionInPlan, mousePositionInControl);
 						dist.Draw(g, additionalTransformation, (float)this.Plan.Measure.Value, this.Plan.InvertYAxis, this.Floor);
 					}
 					g.Clip = clip;
@@ -366,36 +345,33 @@ namespace Europlan.Common {
 				}
 				if (this.mode == ConnectionMode.KDM_ADD_CONNECTION) {
 					if (this.possibleProductConnection != null) {
-						//foreach (PossibleConnection pc in this.possibleConnections) {
-							List<PointF> connectionPoly = new List<PointF>();
-							Point2D tmp;
-							foreach (Point2D point in this.possibleProductConnection.ConnectionArea) {
-								tmp = additionalTransformation.TransformTo2D(point);
-								connectionPoly.Add(new PointF((float)tmp.X, (float)tmp.Y));
-							}
-							if (this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Distributor != null) {
-								if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
-									PointF[] poly = connectionPoly.ToArray();
-									g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White)), poly);
-									g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White), poly);
-								} else {
-									PointF[] poly = connectionPoly.ToArray();
-									g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Red)), poly);
-									g.DrawPolygon(new Pen(System.Drawing.Color.Red), poly);
-								}
-							} else if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
-								PointF[] poly = connectionPoly.ToArray();
-								g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Blue)), poly);
-								g.DrawPolygon(new Pen(System.Drawing.Color.Blue), poly);
-							} else if (this.possibleProductConnection.ProductConnection != null && this.possibleProductConnection.PossibleInput && this.possibleProductConnection.PossibleOutput) {
+						List<PointF> connectionPoly = new List<PointF>();
+						Point2D tmp;
+						foreach (Point2D point in this.possibleProductConnection.ConnectionArea) {
+							tmp = additionalTransformation.TransformTo2D(point);
+							connectionPoly.Add(new PointF((float)tmp.X, (float)tmp.Y));
+						}
+						if (this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Distributor != null) {
+							if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
 								PointF[] poly = connectionPoly.ToArray();
 								g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White)), poly);
 								g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White), poly);
+							} else {
+								PointF[] poly = connectionPoly.ToArray();
+								g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Red)), poly);
+								g.DrawPolygon(new Pen(System.Drawing.Color.Red), poly);
 							}
-						//}
+						} else if (this.possibleProductConnection.PossibleOutput && this.possibleProductConnection.Product != null || this.possibleProductConnection.PossibleInput && this.possibleProductConnection.Distributor != null) {
+							PointF[] poly = connectionPoly.ToArray();
+							g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, System.Drawing.Color.Blue)), poly);
+							g.DrawPolygon(new Pen(System.Drawing.Color.Blue), poly);
+						} else if (this.possibleProductConnection.ProductConnection != null && this.possibleProductConnection.PossibleInput && this.possibleProductConnection.PossibleOutput) {
+							PointF[] poly = connectionPoly.ToArray();
+							g.FillPolygon(new SolidBrush(System.Drawing.Color.FromArgb(128, this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White)), poly);
+							g.DrawPolygon(new Pen(this.connectedPlanPanel.ColorMode == ColorMode.CM_WHITE_BG ? System.Drawing.Color.Black : System.Drawing.Color.White), poly);
+						}
 					}
 
-					//Pen p = new Pen(Color.Green, (float)(0.021 * this.Plan.Measure.Value * additionalTransformation.M00));
 					if (this.newConnectionVertices != null && this.newConnectionVertices.Count > 0) {
 						List<Point2D> vertices = new List<Point2D>();
 						vertices.AddRange(this.newConnectionVertices);
@@ -406,37 +382,7 @@ namespace Europlan.Common {
 						Europlan.Common.Product productToUse = this.selectedProduct != null ? this.selectedProduct : this.product;
 						GraphicalProductConnection tmpConnection = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productToUse), this.newConnectionStart.Distributor, vertices, this.addFirstCircuit, this.addOtherCircuits, 0, this.AddVorlauf, this.AddRuecklauf, Product.ProductType.REST);
 						tmpConnection.FinishedConnection = this.newConnectionEndsAtDistributor || this.newConnectionStart.Distributor != null;
-						//tmpConnection.Vertices.AddRange(this.newConnectionVertices);
-						//tmpConnection.Vertices.AddRange(this.nextConnectionPoints);
 						tmpConnection.Draw(g, additionalTransformation, this.Plan.Measure.Value, true, false);
-						/*double width = this.newConnectionStart.ProductCircuitCount * 0.05;
-						Pen p = new Pen(new System.Drawing.Drawing2D.HatchBrush(System.Drawing.Drawing2D.HatchStyle.LargeCheckerBoard, Color.Red, Color.Blue), (float)(width * this.Plan.Measure.Value * additionalTransformation.M00));
-						Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.newConnectionVertices.Vertices[0]);
-						PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
-						Point2D newVertex2D;
-						PointF newVertex;
-						p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-						for (int i = 1; i < this.newConnectionVertices.Count; i++) {
-							newVertex2D = additionalTransformation.TransformTo2D(this.newConnectionVertices.Vertices[i]);
-							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-							if (i == 2) {
-								p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-							}
-							g.DrawLine(p, oldVertex, newVertex);
-							oldVertex = newVertex;
-						}
-						for (int i = 0; i < this.nextConnectionPoints.Count; i++) {
-							newVertex2D = additionalTransformation.TransformTo2D(this.nextConnectionPoints[i]);
-							newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
-							if (i == 2) {
-								p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-							}
-							if (i == this.nextConnectionPoints.Count - 1) {
-								p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-							}
-							g.DrawLine(p, oldVertex, newVertex);
-							oldVertex = newVertex;
-						}*/
 					}
 				}
 				if (!export && this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null && this.product.AssociatedRoom.RoomCoordinates.Count > 2) {
@@ -452,7 +398,6 @@ namespace Europlan.Common {
 					fillPath.CloseFigure();
 					System.Drawing.Color c = System.Drawing.Color.FromArgb(128, System.Drawing.Color.Green);
 					Brush b = new SolidBrush(c);
-					//g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b, (float)(0.05 * this.Plan.Measure.Value * additionalTransformation.M00)), fillPath);
 					fillPath.Dispose();
 				}
@@ -460,10 +405,8 @@ namespace Europlan.Common {
 		}
 
 		private List<Point2D> newConnectionVertices = null;
-		//private GraphicalProductConnection newConnectionVertices = null;
 		private PossibleProductConnection newConnectionStart = null;
 		private bool newConnectionStartAtOutput = true;
-		//private bool newConnectionLastSegmentHorizontal = true;
 
 		public bool PlannerClick(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			bool redraw = false;
@@ -486,19 +429,11 @@ namespace Europlan.Common {
 						form.Dispose();
 					} else {
 						PossibleProductConnection connection = null;
-						/*foreach (PossibleConnection pc in this.possibleConnections) {
-							if (pc.ConnectionArea.IsInside(planPoint)) {
-								connection = pc;
-								break;
-							}
-						}*/
 						if (this.possibleProductConnection.ConnectionArea.IsInside(planPoint)) {
 							connection = this.possibleProductConnection;
 						}
 						if (connection != null) {
 							if (connection.PossibleInput && connection.PossibleOutput) {
-								//this.newConnectionStart = connection;
-								//this.contextMenu.Show(this.connectedPlanPanel as Control, pointInControl);
 								this.AddConnection(connection, true);
 							} else if (connection.PossibleInput) {
 								this.AddConnection(connection, true);
@@ -524,13 +459,11 @@ namespace Europlan.Common {
 							if (this.newConnectionStart.Product != null && endConnection.Distributor != null) {
 								productConnection = this.newConnectionStart;
 								distributorConnection = endConnection;
-								//vorlauf = !this.newConnectionStartAtOutput;
 								ok = true;
 							} else if (endConnection.Product != null && this.newConnectionStart.Distributor != null) {
 								distributorConnection = this.newConnectionStart;
 								productConnection = endConnection;
 								this.newConnectionVertices.Reverse();
-								//vorlauf = this.newConnectionStartAtOutput;
 								ok = true;
 							} else {
 								productConnection = new PossibleProductConnection();
@@ -544,7 +477,6 @@ namespace Europlan.Common {
 								if (productConnection.Product.PlannedConnection == null || distributorConnection.Distributor != productConnection.Product.PlannedConnection.Distributor) {
 									productConnection.Product.PlannedConnection = new ProductConnection(distributorConnection.Distributor);
 								}
-								//productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.Circuits, distributorConnection.DistributorStartPosition, distributorConnection.DistributorCircuitCount, vorlauf, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
 								productConnection.Product.Connections.Add(new GraphicalProductConnection(Project.Instance.GetPlannedProduct(productConnection.Product), distributorConnection.Distributor, this.newConnectionVertices, productConnection.ProductFirstCircuit, productConnection.ProductOtherCircuits, distributorConnection.DistributorStartPosition, productConnection.PossibleInput, productConnection.PossibleOutput, this.planFloor ? Product.ProductType.FBH : Product.ProductType.DH));
 								this.newConnectionVertices = null;
 								this.newConnectionStart = null;
@@ -635,58 +567,9 @@ namespace Europlan.Common {
 			return transformation.GetInverse().Transform(transformedMousePoint);
 		}
 
-		/*private List<Point2D> GetNextConnectionVerticesInclConnectionPoints(Point2D mousePoint, out KlimaFlaechenModul endModule) {
-			List<Point2D> nextConnectionPoints = new List<Point2D>();
-			endModule = null;
-			int index;
-			if (this.newConnectionStartAtOutput) {
-				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> input in this.GetModuleInputs()) {
-					if (input.Value.IsInside(mousePoint)) {
-						if (this.product.GetCircuitForModul(input.Key, out index) == this.product.GetCircuitForModul(this.newConnectionStart, out index)) {
-							endModule = input.Key;
-						}
-						break;
-					}
-				}
-			} else {
-				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> output in this.GetModuleOutputs()) {
-					if (output.Value.IsInside(mousePoint)) {
-						if (this.product.GetCircuitForModul(output.Key, out index) == this.product.GetCircuitForModul(this.newConnectionStart, out index)) {
-							endModule = output.Key;
-						}
-						break;
-					}
-				}
-			}
-			if (this.product.GetCircuitForModul(this.newConnectionStart, out index).GetAllLinkedModules(this.newConnectionStart).Contains(endModule)) {
-				endModule = null;
-			}
-			if (endModule == null) {
-				bool horizontal;
-				nextConnectionPoints.Add(this.GetNextConnectionVertex(mousePoint, this.newConnectionStart.GraphRotation, out horizontal));
-			} else {
-				Point2D connectionPoint = this.newConnectionStartAtOutput ? endModule.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) : endModule.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
-				if (this.newConnectionVertices.Count > 1) {
-					Point2D p1 = this.newConnectionVertices[this.newConnectionVertices.Count - 2];
-					Point2D p2 = this.newConnectionVertices[this.newConnectionVertices.Count - 1];
-					Line2D line1 = new Line2D(p1, p1 - p2);
-					Line2D line2 = new Line2D(connectionPoint, new Vector2D(line1.Direction.Y, -line1.Direction.X));
-					Nullable<Point2D> intersection = Line2D.GetIntersection(line1, line2);
-					if (intersection.HasValue) {
-						nextConnectionPoints.Add(intersection.Value);
-					}
-				}
-				nextConnectionPoints.Add(connectionPoint);
-			}
-			return nextConnectionPoints;
-		}*/
-
 		private List<Point2D> nextConnectionPoints = new List<Point2D>();
-		//private Nullable<Point2D> startPoint = null;
-		//private Nullable<Point2D> endPoint = null;
 		private Distributor selectedDistributor = null;
 		private Product selectedProduct = null;
-		//List<PossibleConnection> possibleConnections = null;
 		private PossibleProductConnection possibleProductConnection = null;
 		private bool newConnectionEndsAtDistributor = false;
 
@@ -843,18 +726,6 @@ namespace Europlan.Common {
 						}
 					}
 				}
-				/*foreach (Product p in this.productsInFloor.Keys) {
-					foreach (GraphicalProductConnection c in p.Connections) {
-						foreach (GraphicalConnectionAnchor a in c.GetAnchors(this.Plan.Measure.Value)) {
-							if (a.HitTest(planPoint, this.Plan.Measure.Value)) {
-								draggingConnection = c;
-								draggingAnchor = a;
-								draggingConnection.StartDrag(draggingAnchor, planPoint);
-								break;
-							}
-						}
-					}
-				}*/
 			}
 			return true;
 		}

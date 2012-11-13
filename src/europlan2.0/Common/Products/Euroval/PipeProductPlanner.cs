@@ -113,7 +113,6 @@ namespace Europlan.Common {
 					this.productTypeName = "";
 				}
 				this.connectionDrawer.Product = this.product;
-				//this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 
@@ -302,7 +301,6 @@ namespace Europlan.Common {
 						array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
 					}
 					if (array.Length > 2) {
-						//path.AddLines(array);
 						path.AddPolygon(array);
 					} else {
 						path.AddLine(array[0], array[1]);
@@ -496,8 +494,6 @@ namespace Europlan.Common {
 					}
 					p.StartCap = LineCap.Round;
 					p.EndCap = LineCap.Round;
-					//float border = 2.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-                    //float border = 2.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * this.product.TextBoxFontSize / 5.0f ;
                     double border = 2.0f / 5.0f * fontsize;
 
                     Brush background = null;
@@ -770,7 +766,7 @@ namespace Europlan.Common {
 											foreach (Polygon2D poly in clippedPolygons2) {
 												this.product.PlannedReducedAreas.Add(new List<Point2D>(poly));
 											}
-										} catch (Exception /*ex*/) {
+										} catch (Exception) {
 											this.product.PlannedReducedAreas.Add(new List<Point2D>(clippedPolygons[0]));
 										}
 									} else {
@@ -785,16 +781,11 @@ namespace Europlan.Common {
 
 									this.product.PlannedAreaReduced = (float)area;
 								}
-							} catch (Exception /*ex*/) {
+							} catch (Exception) {
 								return true;
 							}					
 
 							unsavedChanges = true;
-							//this.ConnectedPlanPanel.Mode = PlanMode.PM_MOVE;
-							//this.Mode = EurovalMode.EVM_NONE;
-							//if (ModeChanged != null) {
-							//    this.ModeChanged(this, EventArgs.Empty);
-							//}
 						}
 					}
 					coordsPickedSoFar.Clear();
@@ -1016,26 +1007,6 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		//private bool Intersects(Polygon2D polygon, Segment2D line) {
-		//    List<Segment2D> segments = new List<Segment2D>();
-		//    Polygon2D.GetSegments(polygon, segments);
-		//    foreach (Segment2D segment in segments) {
-		//        if (Segment2D.Intersects(segment, line)) {
-		//            if (segment.GetDistance(line.Start) == 0 || segment.GetDistance(line.End) == 0) {
-		//                if (!polygon.IsInside(line.GetCenter())) {
-		//                    return true;
-		//                }
-		//            } else {
-		//                return true;
-		//            }
-		//        } else {
-		//            string test = "";
-		//        }
-		//    }
-		//    return false;
-		//}
-
-
 		public bool PlannerDragStart(WW.Math.Point2D planPoint, System.Drawing.Point pointInControl, MouseButtons button) {
 			return false;
 		}
@@ -1068,7 +1039,6 @@ namespace Europlan.Common {
 		}
 
 		public bool PlannerKeyPress(Keys key) {
-			//return KeyDown(key);
 			return false;
 		}
 
@@ -1249,7 +1219,6 @@ namespace Europlan.Common {
 				List<Polygon2D> clip = new List<Polygon2D>();
 
 				if (this.product.PlannedReducedAreas.Count > 0) {
-					//Color.Gray
 					EntityColor gray = EntityColor.CreateFromRgb(Color.Gray.ToArgb());
 					foreach (List<Point2D> reducedArea in this.product.PlannedReducedAreas) {
 						Polygon2D polygon = new Polygon2D(reducedArea);
@@ -1322,10 +1291,6 @@ namespace Europlan.Common {
 					patternLine.Angle = Math.PI / 4d;
 					patternLine.Offset = new Vector2D(0.3d * measure, -0.3d * measure);
 					hatch.Pattern.Lines.Add(patternLine);
-					//patternLine = new DxfPattern.Line();
-					//patternLine.Angle = 3d * Math.PI / 4d;
-					//patternLine.Offset = new Vector2D(0.02 * measure, 0.02d * measure);
-					//hatch.Pattern.Lines.Add(patternLine);
 
 					hatch.Layer = layer;
 					model.Entities.Add(hatch);
@@ -1375,10 +1340,6 @@ namespace Europlan.Common {
                             clippedPolygons = new List<Polygon2D>();
                         }
 						foreach (Polygon2D polygon in clippedPolygons) {
-							//DxfPolyline2D polyLine = new DxfPolyline2D(c, polygon);
-							//polyLine.Closed = true;
-							//polyLine.Layer = layer;
-							//model.Entities.Add(polyLine);
 							if (polygon.IsClockwise()) {
 								polygon.Reverse();
 							}
@@ -1532,25 +1493,6 @@ namespace Europlan.Common {
 					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
                     PaintDxfTextBox(product.PipeLengthText, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -5, border, color, model, layer);
 				}
-
-
-			//    if (this.product.AssociatedRoom.AssociatedPlan != null && this.product.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
-			//        if (this.product.GraphConstruction != null) {
-			//            this.product.GraphConstruction.PaintDxf(model, floorConstructionLayer);
-			//        }
-			//    }
-
-			//    if (this.mode != KlimaBodenMode.KDM_CONSTRUCTION) {
-			//        Matrix3D rotation = Transformation3D.Rotate(-this.product.GraphConstruction.Rotation * Math.PI / 180.0);
-			//        Matrix3D invRotation = rotation.GetInverse();
-
-			//        List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
-			//        foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
-			//            foreach (KlimaFlaechenModul modul in circuit.Row.List) {
-			//                this.DrawDxfModule(modul.ModulType, modul.Orientation, invRotation.Transform(new Point2D(modul.GraphPosX, modul.GraphPosY)), additionalTransformation, model, modulLayer, modul.GraphBottomUp, circuit.CircuitColor);
-			//            }
-			//        }
-			//    }
 			}
 		}
 

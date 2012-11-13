@@ -25,17 +25,10 @@ namespace Europlan.AdminApplication {
 
 		private void txtHardwareId_KeyDown(object sender, KeyEventArgs e) {
 			if (e.KeyCode == Keys.Delete) {
-				//if (this.txtHardwareId.SelectionLength == 0) {
-					int sel = this.txtHardwareId.SelectionStart;
-					if (sel < 20) {
-						this.VirtualKeyPress('0', this.txtHardwareId.SelectionStart);
-					}
-				//} else {
-				//	int end = this.txtHardwareId.SelectionStart + this.txtHardwareId.SelectionLength;
-				//	while (this.txtHardwareId.SelectionStart < end) {
-				//		this.VirtualKeyPress('0', this.txtHardwareId.SelectionStart);
-				//	}
-				//}
+				int sel = this.txtHardwareId.SelectionStart;
+				if (sel < 20) {
+					this.VirtualKeyPress('0', this.txtHardwareId.SelectionStart);
+				}
 				e.Handled = true;
 				e.SuppressKeyPress = true;
 				return;

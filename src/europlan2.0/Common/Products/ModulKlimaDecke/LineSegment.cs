@@ -50,7 +50,6 @@ namespace Europlan.Common.Products.ModulKlimaDecke {
 			segments.Sort();
 			int i = 1;
 			while (i < segments.Count) {
-				//for (int i = 1; i < segments.Count; i++) {
 				if (segments[i - 1].End >= segments[i].Start) {
 					segments[i - 1].End = Math.Max(segments[i - 1].End, segments[i].End);
 					segments.RemoveAt(i);

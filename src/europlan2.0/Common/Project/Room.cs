@@ -90,9 +90,6 @@ namespace Europlan.Common {
 			this.quickDimensioningRoomTypeId = room.quickDimensioningRoomTypeId; // used the member instead of the public property on purpose here!
 			this.usedProductsForQuickDimensioning = new List<Product>();
 			this.plannedProducts = new List<PlannedProduct>();
-			//foreach (Product product in room.UsedProductsForQuickDimensioning) {
-			//    this.usedProductsForQuickDimensioning.Add(product.Clone(this));
-			//}
 			this.roomCoordinates.Clear();
 			this.roomCoordinates.AddRange(room.roomCoordinates);
 			this.ceilingCoordinates.Clear();
@@ -475,11 +472,6 @@ namespace Europlan.Common {
 			return null;
 		}
 		
-		/*internal void InitializeTree(TreeNode floor) {
-			roomNode.Tag = this;
-			floor.Nodes.Add(roomNode);
-		}*/
-
 		public Type AssociatedPanelType {
 			get {
 				return typeof(RoomSummaryPanel);
@@ -742,42 +734,12 @@ namespace Europlan.Common {
 			}
 			List<WW.Math.Geometry.Polygon2D> walls = this.GetTotalWallsArea();
 			List<WW.Math.Geometry.Polygon2D> polyList = new List<WW.Math.Geometry.Polygon2D>();
-			/*if (polygon.IsClockwise()) {
-				polygon.Reverse();
-			}
-			polyList.Add(polygon);*/
 			try {
 				List<WW.Math.Geometry.Polygon2D> result = WW.Math.Geometry.Polygon2D.GetDifference(polygon, walls);
 				return result != null && result.Count > 0;
 			} catch (Exception) {
 				return true;
 			}
-			/*bool outside = false;
-			Point2D firstPoint = polygon[0];
-			WW.Math.Geometry.Polygon2D wall = null;
-			foreach (WW.Math.Geometry.Polygon2D poly in walls) {
-				if (poly.IsInside(firstPoint)) {
-					wall = poly;
-					break;
-				}
-
-			}
-			foreach (Point2D point in polygon) {
-				if (!WW.Math.Geometry.Polygon2D.IsInside(point, wall)) {
-					IList<WW.Math.Geometry.Segment2D> segments = new List<WW.Math.Geometry.Segment2D>();
-					WW.Math.Geometry.Polygon2D.GetSegments(wall, segments);
-					outside = true;
-					foreach (WW.Math.Geometry.Segment2D segment in segments) {
-						if (segment.GetDistance(point) < 0.01) {
-							outside = false;
-						}
-					}
-					if (outside) {
-						break;
-					}
-				}
-			}
-			return outside;*/
 		}
 
 		public GraphicalWall GetWallForPoint(Point2D planPoint, out double xOffset, out double yOffset) {

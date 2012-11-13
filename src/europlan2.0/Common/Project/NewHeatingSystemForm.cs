@@ -42,7 +42,7 @@ namespace Europlan.Common {
 			this.btnOk.Text = EuroplanRes.General_Ok;
 			this.button2.Text = EuroplanRes.General_Abbrechen;
 
-			this.Text = EuroplanRes.NewHeatingSystemForm_Titel; //"Bitte wählen Sie das gewünschte Heizungssystem";
+			this.Text = EuroplanRes.NewHeatingSystemForm_Titel; //"Bitte wählen Sie das gewünschte Heizungssystem"
 		}
 
 		private class HeatingSystemItem : ListViewItem {

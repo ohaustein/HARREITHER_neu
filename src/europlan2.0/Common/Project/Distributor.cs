@@ -25,60 +25,11 @@ namespace Europlan.Common {
 
 #region enums
 
-		//public class DistributorTypeEnumConverter : System.ComponentModel.TypeConverter {
-	
-		//    private static readonly string durchflussmengenregler = "Harreither Systemverteiler mit Durchflußmengenregler";
-		//    private static readonly string ruecklaufventil = "Harreither Systemverteiler mit Rücklaufventil";
-
-		//    private Dictionary<string, DistributorTypeEnum> mappingFromString = new Dictionary<string, DistributorTypeEnum>();
-		//    private Dictionary<DistributorTypeEnum, string> mappingToString = new Dictionary<DistributorTypeEnum, string>();
-
-		//    public DistributorTypeEnumConverter() {
-		//        mappingFromString.Add(durchflussmengenregler, DistributorTypeEnum.Durchflussmengenregler);
-		//        mappingFromString.Add(ruecklaufventil, DistributorTypeEnum.Ruecklaufventil);
-		//        mappingToString.Add(DistributorTypeEnum.Durchflussmengenregler, durchflussmengenregler);
-		//        mappingToString.Add(DistributorTypeEnum.Ruecklaufventil, ruecklaufventil);
-		//    }
-
-		//    public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
-		//        return sourceType == typeof(string);
-		//    }
-
-		//    public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
-		//        return destinationType == typeof(string);
-		//    }
-
-		//    public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-		//        if (value is string) {
-		//            if (mappingFromString.ContainsKey((string)value)) {
-		//                return mappingFromString[(string)value];
-		//            }
-		//        }
-		//        return base.ConvertFrom(context, culture, value);
-		//    }
-
-		//    public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-		//        if (value is DistributorTypeEnum && destinationType == typeof(string)) {
-		//            if (mappingToString.ContainsKey((DistributorTypeEnum)value)) {
-		//                return mappingToString[(DistributorTypeEnum)value];
-		//            }
-		//        }
-		//        return base.ConvertTo(context, culture, value, destinationType);
-		//    }
-		//}
-
-		//[System.ComponentModel.TypeConverter(typeof(DistributorTypeEnumConverter))]
-		//public enum DistributorTypeEnum {
-		//    Durchflussmengenregler,
-		//    Ruecklaufventil
-		//}
-
 		public class AnschlussHollaenderEnumConverter : System.ComponentModel.TypeConverter {
 
 			private static readonly string kein = EuroplanRes.Distributor_KeinHollaender;
 			private static readonly string hollaender32 = EuroplanRes.Distributor_Hollaender32mm;
 			private static readonly string hollaenderIG = EuroplanRes.Distributor_HollaenderIg;
-			//private static readonly string hollaenderAG = "Anschlußholländer mit Anschlußstück 1\" AG";
 
 			private Dictionary<string,  AnschlussHollaenderEnum> mappingFromString = new Dictionary<string,  AnschlussHollaenderEnum>();
 			private Dictionary< AnschlussHollaenderEnum, string> mappingToString = new Dictionary< AnschlussHollaenderEnum, string>();
@@ -87,11 +38,9 @@ namespace Europlan.Common {
 				mappingFromString.Add(kein, AnschlussHollaenderEnum.Kein);
 				mappingFromString.Add(hollaender32, AnschlussHollaenderEnum.hollaender32);
 				mappingFromString.Add(hollaenderIG, AnschlussHollaenderEnum.hollaenderIG);
-				//mappingFromString.Add(hollaenderAG, AnschlussHollaenderEnum.hollaenderAG);
 				mappingToString.Add(AnschlussHollaenderEnum.Kein, kein);
 				mappingToString.Add(AnschlussHollaenderEnum.hollaender32, hollaender32);
 				mappingToString.Add(AnschlussHollaenderEnum.hollaenderIG, hollaenderIG);
-				//mappingToString.Add(AnschlussHollaenderEnum.hollaenderAG, hollaenderAG);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -126,7 +75,6 @@ namespace Europlan.Common {
 			Kein,
 			hollaender32,
 			hollaenderIG
-			//hollaenderAG
 		}
 
 #endregion
@@ -135,7 +83,6 @@ namespace Europlan.Common {
 		private string name;
 		private string regulatorCircuitId = null;
 		private RegulatorCircuit regulatorCircuit = null;
-		//private DistributorTypeEnum distributorType;
 		private AnschlussHollaenderEnum anschlussHollaender;
 		private bool langeAnschlussboegen;
 		private int maxCircuits;
@@ -167,7 +114,6 @@ namespace Europlan.Common {
 			id = "";
 			name = "";
 			regulatorCircuitId = "";
-			//distributorType = DistributorTypeEnum.Durchflussmengenregler;
 			anschlussHollaender = AnschlussHollaenderEnum.Kein;
 			langeAnschlussboegen = false;
 			maxCircuits = 12;
@@ -204,11 +150,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-		//public DistributorTypeEnum DistributorType {
-		//    get { return distributorType; }
-		//    set { distributorType = value; }
-		//}
 
 		public AnschlussHollaenderEnum AnschlussHollaender {
 			get { return anschlussHollaender; }
@@ -903,84 +844,6 @@ namespace Europlan.Common {
 			return distPoly.IsInside(point);
 		}
 
-		/*public List<GraphicalConnectionAnbindungsPunkt> GetPossibleAnbindungsPunkte(Product product, double measure, bool invertYAxis, bool input, int distributorIndex) {
-			double width = this.Width * measure;
-			double height = this.Height * measure;
-			double connectionWidth = 0.055 * measure;
-			double border = (width - this.maxCircuits * connectionWidth) / 2.0;
-
-			Point2D leftBottom = Point2D.Zero;
-			Point2D leftTop = Point2D.Zero;
-			Point2D rightTop = Point2D.Zero;
-			Point2D rightBottom = Point2D.Zero;
-			Matrix3D transformation = Matrix3D.Identity;
-
-			Nullable<GraphicalRepresentation> representation = null;
-			Floor floor = product.AssociatedRoom.AssociatedFloor;
-			foreach (GraphicalRepresentation gr in this.graphicalRepresentations) {
-				if (gr.floorId == floor.Id) {
-					representation = gr;
-					break;
-				}
-			}
-
-			if (representation == null) {
-				return new List<GraphicalConnectionAnbindungsPunkt>();
-			}
-
-			List<int> openInputs = this.GetOpenInputs();
-			List<int> openOutputs = this.GetOpenOutputs();
-
-			if (invertYAxis) {
-				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
-				transformation = transformation * Transformation3D.Rotate(-representation.Value.rotation * Math.PI / 180.0);
-				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
-				//leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
-				//leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y + height));
-				//rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y + height));
-				//rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
-			} else {
-				transformation = transformation * Transformation3D.Translation(representation.Value.position.X, representation.Value.position.Y);
-				transformation = transformation * Transformation3D.Rotate(representation.Value.rotation * Math.PI / 180.0);
-				transformation = transformation * Transformation3D.Translation(-representation.Value.position.X, -representation.Value.position.Y);
-				//leftBottom = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y));
-				//leftTop = transformation.Transform(new Point2D(representation.Value.position.X, representation.Value.position.Y - height));
-				//rightTop = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y - height));
-				//rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + width, representation.Value.position.Y));
-			}
-			//Polygon2D distPoly = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
-			//if (!distPoly.IsInside(currentMousePoint)) {
-			//	return possibleConnection;
-			//}
-
-			Dictionary<int, Point2D> possibleStarts = new Dictionary<int, Point2D>();
-			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
-			for (int i = 0; i < this.maxCircuits; i++) {
-				if ((distributorIndex < 0 || distributorIndex == i) && ((!input && !openOutputs.Contains(i)) || (input && !openInputs.Contains(i)))) {
-					if (invertYAxis) {
-						Point2D connectionPoint = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y + height / 2.0));
-						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
-						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y + height));
-						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y + height));
-						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
-						Polygon2D connectionArea = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
-						GraphicalConnectionAnbindungsPunkt anbindungsPunkt = new GraphicalConnectionAnbindungsPunkt(connectionPoint, connectionArea, i);
-						anbindungsPunkte.Add(anbindungsPunkt);
-					} else {
-						Point2D connectionPoint = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 0.5) * connectionWidth, representation.Value.position.Y - height / 2.0));
-						leftBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y));
-						leftTop = transformation.Transform(new Point2D(representation.Value.position.X + border + i * connectionWidth, representation.Value.position.Y - height));
-						rightTop = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y - height));
-						rightBottom = transformation.Transform(new Point2D(representation.Value.position.X + border + (i + 1) * connectionWidth, representation.Value.position.Y));
-						Polygon2D connectionArea = new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom });
-						GraphicalConnectionAnbindungsPunkt anbindungsPunkt = new GraphicalConnectionAnbindungsPunkt(connectionPoint, connectionArea, i);
-						anbindungsPunkte.Add(anbindungsPunkt);
-					}
-				}
-			}
-			return anbindungsPunkte;
-		}*/
-
 		public void Draw(System.Drawing.Graphics g, Matrix4D additionalTransformation, double measure, bool invertYAxis, Floor floor) {
 			g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 			System.Drawing.Pen pen = System.Drawing.Pens.Red;
@@ -1073,7 +936,6 @@ namespace Europlan.Common {
 					hatch.Layer = distributorLayer;
 					model.Entities.Add(hatch);
 
-					//g.FillPolygon(System.Drawing.Brushes.Red, new System.Drawing.PointF[] { new System.Drawing.PointF((float)leftBottom.X, (float)leftBottom.Y), new System.Drawing.PointF((float)rightBottom.X, (float)rightBottom.Y), new System.Drawing.PointF((float)rightTop.X, (float)rightTop.Y) });
 					break;
 				}
 			}

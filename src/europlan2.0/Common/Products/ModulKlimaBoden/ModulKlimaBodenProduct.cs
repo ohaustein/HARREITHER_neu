@@ -101,18 +101,6 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 50);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 50);
-			canHeat = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigQuickDimensioningCanCool", false);
-			useHarreitherNorm = config.GetProductParameterAsBool<ModulKlimaBodenProduct>("ConfigUseHarreitherNorm", true);
-			maxPressureLost = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigMaxDurchfluss", 240);
-			maxModulesInCircuit = config.GetProductParameterAsInt<ModulKlimaBodenProduct>("ConfigModulesInCircuit", 40);
-			spreizungHeizMin = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaBodenProduct>("ConfigSpreizungKuehlMax", 5);*/
 			Product.StaticInitialize<ModulKlimaBodenProduct>(config);
 		}
 
@@ -434,15 +422,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.PlannedFloorConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedFloorConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fuﬂbodenkonstruktion, "
 				}
 				if (PlannedInsulationConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, "
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, "
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -457,7 +445,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (c < this.circuits.Count) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -468,7 +456,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -765,7 +753,7 @@ namespace Europlan.Common {
 						j++;
 					}
 					if (!found) {
-						return EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+						return EuroplanRes.ErrorMessage_HkAnschluss; // "Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					}
 					j--;
 					this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Add(j, new Circuit.CircuitConnection(this.PlannedConnection.CircuitConnectionType, ec, false));
@@ -1458,7 +1446,6 @@ namespace Europlan.Common {
 						newConnectionPoint = segment.End + v * (width / 2);
 					}
 					double distance = segment.GetDistance(currentMousePoint);
-					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
 					if (distance < bestDistance) {
 						bestDistance = distance;
 						bestSegment = segment;
@@ -1468,8 +1455,6 @@ namespace Europlan.Common {
 				lastPoint = point;
 			}
 			if (bestDistance < 10) {
-				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
 				Polygon2D polygon = new Polygon2D();
 				Vector2D v = bestSegment.End - bestSegment.Start;
 				v.Normalize();
@@ -1482,7 +1467,6 @@ namespace Europlan.Common {
 				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
 				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-				//}
 			}
 			return possibleConnection;
 		}

@@ -17,7 +17,6 @@ namespace Europlan.Common {
 			Schraege
 		}
 
-		//private static double defaultHeight = 250.0;
 		private bool autoGeneration;
 		private bool isCompact;
 		private string wallId;
@@ -63,8 +62,8 @@ namespace Europlan.Common {
 
 		private void SetLanguage() {
 			this.Text = EuroplanRes.NewWallForm_Titel;
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK"
 			this.lblConstruction.Text = EuroplanRes.NewWallForm_Konstruktion;
 			this.lblWidth.Text = EuroplanRes.NewWallForm_Breite;
 			this.lblHeight.Text = EuroplanRes.NewWallForm_Hoehe;
@@ -79,16 +78,11 @@ namespace Europlan.Common {
 
 		private void NewWallForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK) {
-				//if (txtName.Text == "") {
-				//    MessageBox.Show(EuroplanRes.NewPlanForm_KeinBezeichnerText, EuroplanRes.NewPlanForm_KeinBezeichnerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				//    e.Cancel = true;
-				//}
 				if (this.numWidth.Enabled && this.Width < 10) {
 					MessageBox.Show(EuroplanRes.NewWallForm_WandZuSchmalText, EuroplanRes.NewWallForm_WandZuSchmalTextTitel, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					e.Cancel = true;
 					return;
 				}
-				//defaultHeight = (double)this.numHeight.Value;
 			}
 
 			SettingsKey settings = SettingsFile.Settings["NewWallForm"];

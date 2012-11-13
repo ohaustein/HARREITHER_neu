@@ -41,13 +41,13 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label1.Text = EuroplanRes.RequiredMaterialGrid_Hinweis; //"Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden selbst anhand der Planungsvorlage ermittelt werden!";
+			this.label1.Text = EuroplanRes.RequiredMaterialGrid_Hinweis; //"Bitte unbedingt beachten: Rot markierte Materialpositionen müssen vom Planenden selbst anhand der Planungsvorlage ermittelt werden!"
 			this.label2.Text = EuroplanRes.RequiredMaterialGrid_Hinweis2;
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bezeichnung; //"Bezeichnung";
-			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bestellnummer; //"Bestellnummer";
-			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Menge; //"Menge";
-			this.calculatedAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Berechnet; //"(berechnet)";
-			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Einheit; //"Einheit";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bezeichnung; //"Bezeichnung"
+			this.partNumberDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Bestellnummer; //"Bestellnummer"
+			this.requiredAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Menge; //"Menge"
+			this.calculatedAmountDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Berechnet; //"(berechnet)"
+			this.unitDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RequiredMaterialGrid_Einheit; //"Einheit"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -104,7 +104,7 @@ namespace Europlan.Common {
 
 		private void dgvRequiredMaterial_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
 			if (e.KeyCode == Keys.Delete && this.dgvRequiredMaterial.SelectedCells.Count == 1 &&
-				this.dgvRequiredMaterial.SelectedRows.Count == 0/* && this.gridRooms.SelectedCells[0].Value != null */) {
+				this.dgvRequiredMaterial.SelectedRows.Count == 0) {
 				DataGridViewCell cell = this.dgvRequiredMaterial.SelectedCells[0];
 				if (!cell.ReadOnly) {
 					e.IsInputKey = false;

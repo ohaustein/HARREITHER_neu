@@ -45,10 +45,6 @@ namespace Europlan.Common {
 			if (!initialFormattedValue.Equals(String.Empty)) {
 				ctl.Value = Convert.ToDecimal(initialFormattedValue);
 			}
-			/*if (!this.lastKeyEnteredEditMode) {
-				ctl.SelectionStart = ctl.Text.Length;
-				ctl.SelectionLength = 0;
-			}*/
 		}
 
 		public override object DefaultNewRowValue {
@@ -150,7 +146,6 @@ namespace Europlan.Common {
 			Rectangle bounds = base.GetErrorIconBounds(graphics, cellStyle, rowIndex);
 			bounds = new Rectangle(2, bounds.Y, bounds.Width, bounds.Height);
 			return bounds;
-			//return base.GetErrorIconBounds(graphics, cellStyle, rowIndex);
 		}
 
 		protected override Rectangle GetContentBounds(Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex) {

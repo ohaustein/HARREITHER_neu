@@ -23,12 +23,12 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
-			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
+			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen"
 
 			this.colName.Text = EuroplanRes.SelectRoomForm_Name;
 
-			this.Text = EuroplanRes.SelectRoomForm_Titel; //"Bitte wählen Sie den gewünschten Raum";
+			this.Text = EuroplanRes.SelectRoomForm_Titel; //"Bitte wählen Sie den gewünschten Raum"
 		}
 
 		private class RoomItem : ListViewItem {

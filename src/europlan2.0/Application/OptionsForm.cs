@@ -48,22 +48,22 @@ namespace Europlan.Application {
 		}
 
 		private void SetLanguague() {
-			this.Text = EuroplanRes.OptionsForm_Titel; //"Einstellungen";
-			btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			btnOk.Text = EuroplanRes.General_Ok; //"&OK";
-			button1.Text = EuroplanRes.OptionsForm_Aendern; //"Ändern";
-			button2.Text = EuroplanRes.OptionsForm_Loeschen; //"Löschen";
-			label1.Text = EuroplanRes.OptionsForm_Logo; //"Logo für Ausdrucke:";
-			lblLanguage.Text = EuroplanRes.OptionsForm_Sprache; //"Sprache:";
-			tabConstructions.Text = EuroplanRes.OptionsForm_Konstruktionen; //"Konstruktionen";
-			tabGeneral.Text = EuroplanRes.OptionsForm_Allgemein; //"Allgemein";
-			tabMaterials.Text = EuroplanRes.OptionsForm_Artikelstamm; //"Artikelstamm";
-			tabPageCeiling.Text = EuroplanRes.OptionsForm_Decke; //"Decke";
-			tabPageDistributor.Text = EuroplanRes.OptionsForm_Verteiler; //"Verteiler";
-			tabPageFloor.Text = EuroplanRes.OptionsForm_Fussboden; //"Fußboden";
-			tabPageGeneral.Text = EuroplanRes.OptionsForm_Allgmein; //"Allgemein";
-			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung";
-			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand";
+			this.Text = EuroplanRes.OptionsForm_Titel; //"Einstellungen"
+			btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			btnOk.Text = EuroplanRes.General_Ok; //"&OK"
+			button1.Text = EuroplanRes.OptionsForm_Aendern; //"Ändern"
+			button2.Text = EuroplanRes.OptionsForm_Loeschen; //"Löschen"
+			label1.Text = EuroplanRes.OptionsForm_Logo; //"Logo für Ausdrucke:"
+			lblLanguage.Text = EuroplanRes.OptionsForm_Sprache; //"Sprache:"
+			tabConstructions.Text = EuroplanRes.OptionsForm_Konstruktionen; //"Konstruktionen"
+			tabGeneral.Text = EuroplanRes.OptionsForm_Allgemein; //"Allgemein"
+			tabMaterials.Text = EuroplanRes.OptionsForm_Artikelstamm; //"Artikelstamm"
+			tabPageCeiling.Text = EuroplanRes.OptionsForm_Decke; //"Decke"
+			tabPageDistributor.Text = EuroplanRes.OptionsForm_Verteiler; //"Verteiler"
+			tabPageFloor.Text = EuroplanRes.OptionsForm_Fussboden; //"Fußboden"
+			tabPageGeneral.Text = EuroplanRes.OptionsForm_Allgmein; //"Allgemein"
+			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung"
+			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand"
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
             cbOrthoRasterung.Text = EuroplanRes.OptionsForm_OrthoRasterung;
             cbAutoSave.Text = Properties.Resources.OptionsForm_AutomatischSichern;

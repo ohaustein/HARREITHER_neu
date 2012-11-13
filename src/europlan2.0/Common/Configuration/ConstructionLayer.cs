@@ -63,14 +63,7 @@ namespace Europlan.Common {
 
 		public string MaterialId {
 			get { return this.materialId != null ? this.materialId : (this.layerMaterial == null ? null : this.layerMaterial.Id); }
-			set {
-				this.materialId = value;
-				/*foreach (Material material in Configuration.UserTemplate.Materials) {
-					if (material.Id == this.materialId) {
-						this.layerMaterial = material;
-					}
-				}*/
-			}
+			set { this.materialId = value; }
 		}
 
 		[XmlIgnore]

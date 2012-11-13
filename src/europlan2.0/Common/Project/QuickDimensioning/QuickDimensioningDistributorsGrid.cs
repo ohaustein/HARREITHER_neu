@@ -30,23 +30,23 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.colRoomId.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_RaumNr; //"Id";
-			this.colRoomName.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_Raumname; // "Raumname";
-			this.colFloorName.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_Geschoss; //"Geschoß";
-			this.colEurovalOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalOffen; //"Euroval®\noffene\nHeizkreise";
-			this.colEurovalPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalAngeschlossen; //"Euroval®\nangeschl.\nHeizkreise";
-			this.colConcreteActivationOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaOffen; //"BKA\noffene\nHeizkreise";
-			this.colConcreteActivationPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaAngeschlossen; //"BKA\nangeschl.\nHeizkreise";
-			this.colHithermOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermOffen; //"Hitherm®\noffene\nHeizkreise";
-			this.colHithermPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermAngschlossen; //"Hitherm®\nangeschl.\nHeizkreise";
-			this.colHithermCompactOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactOffen; //"Hitherm® Co\noffene\nHeizkreise";
-			this.colHithermCompactPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen; //"Hitherm® Co\nangeschl.\nHeizkreise";
-			this.colHithermCompactRoofOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactDachOffen; //"Hitherm® Co\nDach offene\nHeizkreise";
-			this.colHithermCompactRoofPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen; //"Hitherm® Co\nDach angeschl.\nHeizkreise";
-			this.colModulKlimaBodenOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaBodenOffen; //"Klima-Boden\noffene\nHeizkreise";
-			this.colModulKlimaBodenPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen; //"Klima-Boden\nangeschl.\nHeizkreise";
-			this.colModulKlimaDeckeOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaDeckeOffen; //"Klima-Decke\noffene\nHeizkreise";
-			this.colModulKlimaDeckePlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen; //"Klima-Decke\nangeschl.\nHeizkreise";
+			this.colRoomId.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_RaumNr; //"Id"
+			this.colRoomName.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_Raumname; // "Raumname"
+			this.colFloorName.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_Geschoss; //"Geschoß"
+			this.colEurovalOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalOffen; //"Euroval®\noffene\nHeizkreise"
+			this.colEurovalPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalAngeschlossen; //"Euroval®\nangeschl.\nHeizkreise"
+			this.colConcreteActivationOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaOffen; //"BKA\noffene\nHeizkreise"
+			this.colConcreteActivationPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaAngeschlossen; //"BKA\nangeschl.\nHeizkreise"
+			this.colHithermOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermOffen; //"Hitherm®\noffene\nHeizkreise"
+			this.colHithermPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermAngschlossen; //"Hitherm®\nangeschl.\nHeizkreise"
+			this.colHithermCompactOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactOffen; //"Hitherm® Co\noffene\nHeizkreise"
+			this.colHithermCompactPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen; //"Hitherm® Co\nangeschl.\nHeizkreise"
+			this.colHithermCompactRoofOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactDachOffen; //"Hitherm® Co\nDach offene\nHeizkreise"
+			this.colHithermCompactRoofPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen; //"Hitherm® Co\nDach angeschl.\nHeizkreise"
+			this.colModulKlimaBodenOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaBodenOffen; //"Klima-Boden\noffene\nHeizkreise"
+			this.colModulKlimaBodenPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen; //"Klima-Boden\nangeschl.\nHeizkreise"
+			this.colModulKlimaDeckeOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaDeckeOffen; //"Klima-Decke\noffene\nHeizkreise"
+			this.colModulKlimaDeckePlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen; //"Klima-Decke\nangeschl.\nHeizkreise"
 		}
 
 		private void OnProjectChanged() {

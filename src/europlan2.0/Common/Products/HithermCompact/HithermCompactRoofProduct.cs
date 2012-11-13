@@ -27,10 +27,6 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermCompactRoofProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
-			canHeat = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<HithermCompactRoofProduct>("ConfigQuickDimensioningCanCool", false);*/
 			Product.StaticInitialize<HithermCompactRoofProduct>(config);
 		}
 

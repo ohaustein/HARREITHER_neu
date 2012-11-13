@@ -49,7 +49,7 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen";
+			this.Text = EuroplanRes.CadPlanOptionsForm_Titel; //"Optionen"
 			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
 			this.btnZoomIn.Text = EuroplanRes.Plan_Heranzoomen;
 			this.btnZoomIn.ToolTipText = EuroplanRes.Plan_Heranzoomen;
@@ -136,8 +136,6 @@ namespace Europlan.Common {
 			this.btnDistance.Checked = true;
 			this.cadPanel.Mode = PlanMode.PM_PICK_MEASURE;
 			txtLength.Text = "";
-			/*txtLength.Visible = true;
-			lblLength.Visible = true;*/
 		}
 
 		private void btnMove_Click(object sender, EventArgs e) {
@@ -172,8 +170,6 @@ namespace Europlan.Common {
 		}
 
 		private void cadPanel_StartPointSelected(object sender, CadPanel.StartPointSelectedArgs e) {
-			/*this.txtLength.Enabled = false;
-			this.txtLength.Text = "";*/
 			this.txtLength.Visible = false;
 			this.lblLength.Visible = false;
 			this.btnSetLength.Visible = false;

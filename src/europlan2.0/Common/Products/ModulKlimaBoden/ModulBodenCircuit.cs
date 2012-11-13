@@ -89,37 +89,7 @@ namespace Europlan.Common {
 		public double CoveredArea {
 			get { return row.GetCoveredArea(true) + this.LangeFittinge * 0.15 + 0.055 * this.SonstigeVerbindeleitung; }
 		}
-
-		//private double areaTotal;
-		//[XmlIgnore]
-		//public double AreaTotal {
-		//    get { return this.areaTotal; }
-		//    set { this.areaTotal = value; }
-		//}
-
-		//private double areaUnheated;
-		//[XmlIgnore]
-		//public double AreaUnheated {
-		//    get { return this.areaUnheated; }
-		//    set { this.areaUnheated = value; }
-		//}
-
-		//private double areaRemovedDueConnection;
-		//[XmlIgnore]
-		//public double AreaRemovedDueConnection {
-		//    get { return this.areaRemovedDueConnection; }
-		//    set { this.areaRemovedDueConnection = value; }
-		//}
-
-		//[XmlIgnore]
-		//public double AreaWithoutConnections {
-		//    get { return this.areaTotal - this.areaRemovedDueConnection; }
-		//}
-
 		#endregion Area
-
-		//private double c_area;
-		//private double c_pipeLength;
 
 		private double c_qHeatPerSqm;
 		private double c_qCoolPerSqm;
@@ -127,13 +97,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public double C_QHeatPerSqm {
 			get { return c_qHeatPerSqm; }
-			//set { c_qHeatPerSqm = value; }
 		}
 
 		[XmlIgnore]
 		public double C_QCoolPerSqm {
 			get { return c_qCoolPerSqm; }
-			//set { c_qCoolPerSqm = value; }
 		}
 
 		private double c_floorTempHeat;

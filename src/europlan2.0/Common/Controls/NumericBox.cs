@@ -63,8 +63,6 @@ namespace Europlan.Common {
 
 		private bool internalValueChange = false;
 
-		//private decimal lastValue = 0;
-
 		public NumericBox() {
 			this.InternalValue = 0;
 		}
@@ -101,10 +99,7 @@ namespace Europlan.Common {
 					} else if (text.StartsWith("-" + Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)) {
 						text = "-0" + text.Substring(1);
 					}
-					//try {
 					if (!decimal.TryParse(text, out val)) {
-						//val = Convert.ToDecimal(text);
-					//} catch (Exception) {
 						if (text.StartsWith("-")) {
 							val = (this.MinValue.HasValue ? this.MinValue.Value : decimal.MinValue);
 						} else {
@@ -119,22 +114,8 @@ namespace Europlan.Common {
 					val = this.MinValue.Value;
 				}
 				return val;
-				//return this.numValueBox.Value;
 			}
 			set {
-				/*NumberFormatInfo info = new NumberFormatInfo();
-				String.Format(*/
-				/*string formatString = masks[(int)this.editType];
-				formatString = formatString.Replace('9', '0');
-				formatString = "{0:" + formatString + "}";
-				string formattedString = String.Format(formatString, value);
-				int i = 0;
-				while (i < formattedString.Length && formattedString[i] == '0') {
-					formattedString = formattedString.Substring(0, i) + ' ' + formattedString.Substring(i + 1);
-					i++;
-				}
-				this.maskedTextBox1.Text = formattedString;*/
-				//this.lastValue = value;
 				decimal correctedVal = Math.Round(value, decimalPlaces[(int)this.editType]);
 				if (this.MaxValue.HasValue && correctedVal > this.MaxValue.Value) {
 					correctedVal = Math.Round(this.MaxValue.Value, decimalPlaces[(int)this.editType]);
@@ -217,8 +198,7 @@ namespace Europlan.Common {
 					e.Handled = true;
 				}
 			} else if (e.KeyChar == '\b') {
-			/*} else if (((int)e.KeyChar)  == 27) {
-				this.Value = this.lastValue;*/
+				// nothing to do here
 			} else {
 				e.Handled = true;
 			}

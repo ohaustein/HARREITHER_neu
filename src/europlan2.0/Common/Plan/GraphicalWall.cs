@@ -34,20 +34,6 @@ namespace Europlan.Common {
 		private int index = 0;
 
 		public GraphicalWall() {
-			//GraphicalDoor door = new GraphicalDoor();
-			//door.GraphPosX = 20;
-			//door.Width = 100;
-			//door.Height = 210;
-			//this.obstacles.Add(door);
-			//GraphicalWindow window = new GraphicalWindow();
-			//window.GraphPosX = 20;
-			//window.GraphPosY = 120;
-			//window.Width = 100;
-			//window.Height = 120;
-			//this.obstacles.Add(window);
-			//helpLines.Add(20);
-			//helpLines.Add(200);
-
 		}
 
 		public bool IsMoveable {
@@ -68,14 +54,6 @@ namespace Europlan.Common {
 			get { return nextWallId; }
 			set { nextWallId = value; }
 		}
-
-		//public GraphicalWall NextWall {
-		//    get { return nextWall; }
-		//}
-
-		//public GraphicalWall PrevWall {
-		//    get { return prevWall; }
-		//}
 
 		public Nullable<Point2D> PlanStartPoint {
 			get { return planStartPoint; }
@@ -100,25 +78,20 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public List<GraphicalWallSchraege> Schraegen {
 			get {
-				//if (this.schraegen == null & this.ceilingContour != null && this.ceilingContour.Count > 3) {
-					this.schraegen = new List<GraphicalWallSchraege>();
-					GraphicalWallSchraege newSchraege;
-					if (this.ceilingContour[0].X != this.ceilingContour[1].X) {
-						newSchraege = new GraphicalWallSchraege(this, GraphicalWallSchraege.OrientationEnum.LEFT);
-						newSchraege.Width = (this.ceilingContour[1].X - this.ceilingContour[0].X) * 100.0;
-						newSchraege.Height = (this.ceilingContour[1].Y - this.ceilingContour[0].Y) * 100.0;
-						this.schraegen.Add(newSchraege);
-					}
-					if (this.ceilingContour[this.ceilingContour.Count  - 1].X != this.ceilingContour[this.ceilingContour.Count - 2].X) {
-						newSchraege = new GraphicalWallSchraege(this, GraphicalWallSchraege.OrientationEnum.RIGHT);
-						newSchraege.Width = (this.ceilingContour[this.ceilingContour.Count - 1].X - this.ceilingContour[this.ceilingContour.Count - 2].X) * 100.0;
-						newSchraege.Height = (this.ceilingContour[this.ceilingContour.Count - 2].Y - this.ceilingContour[this.ceilingContour.Count - 1].Y) * 100.0;
-						this.schraegen.Add(newSchraege);
-					}
-				//}
-				//if (this.schraegen == null) {
-					//return new List<GraphicalDachschraege>();
-				//}
+				this.schraegen = new List<GraphicalWallSchraege>();
+				GraphicalWallSchraege newSchraege;
+				if (this.ceilingContour[0].X != this.ceilingContour[1].X) {
+					newSchraege = new GraphicalWallSchraege(this, GraphicalWallSchraege.OrientationEnum.LEFT);
+					newSchraege.Width = (this.ceilingContour[1].X - this.ceilingContour[0].X) * 100.0;
+					newSchraege.Height = (this.ceilingContour[1].Y - this.ceilingContour[0].Y) * 100.0;
+					this.schraegen.Add(newSchraege);
+				}
+				if (this.ceilingContour[this.ceilingContour.Count  - 1].X != this.ceilingContour[this.ceilingContour.Count - 2].X) {
+					newSchraege = new GraphicalWallSchraege(this, GraphicalWallSchraege.OrientationEnum.RIGHT);
+					newSchraege.Width = (this.ceilingContour[this.ceilingContour.Count - 1].X - this.ceilingContour[this.ceilingContour.Count - 2].X) * 100.0;
+					newSchraege.Height = (this.ceilingContour[this.ceilingContour.Count - 2].Y - this.ceilingContour[this.ceilingContour.Count - 1].Y) * 100.0;
+					this.schraegen.Add(newSchraege);
+				}
 				return this.schraegen;
 			}
 		}
@@ -227,7 +200,6 @@ namespace Europlan.Common {
 			GraphicsPath wallPath = new GraphicsPath();
 			wallPath.AddPolygon(pointArr);
 			Region wallClip = new Region(wallPath);
-			//g.Clip = wallClip;
 
 			g.FillPolygon(wallBrush, pointArr);
 
@@ -265,29 +237,18 @@ namespace Europlan.Common {
 				}
 			}
 
-			//bool drawSelected = false;
-
 			foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
 				if (obstacle != selectedObject) {
 					g.Clip = wallClip;
 					obstacle.PaintObject(g, xOffset, yOffset, selectedObject, scale, export);
-				/*} else {
-					drawSelected = true;*/
 				}
 			}
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				if (register != selectedObject) {
 					g.Clip = wallClip;
 					register.PaintObject(g, xOffset, yOffset, selectedObject, scale, export);
-				/*} else {
-					drawSelected = true;*/
 				}
 			}
-
-			//g.Clip = wallClip;
-			/*if (drawSelected) {
-				selectedObject.PaintObject(g, xOffset, yOffset, selectedObject, scale);
-			}*/
 
 			g.Clip = oldClip;
 
@@ -333,12 +294,6 @@ namespace Europlan.Common {
 			if (pickedObject != null) {
 				return pickedObject.GetPickedObject(planPoint, xOffset, yOffset);
 			}
-			/*foreach (GraphicalWallObstacle obstacle in this.Obstacles) {
-				pickedObject = obstacle.GetPickedObject(planPoint, xOffset, yOffset);
-				if (pickedObject != null) {
-					return pickedObject;
-				}
-			}*/
 
 			foreach (GraphicalRegisterWrapper register in this.Registers) {
 				pickedObject = register.GetPickedObject(planPoint, xOffset, yOffset);
@@ -421,9 +376,6 @@ namespace Europlan.Common {
 		public double GetTotalWallHeight() {
 			return this.DachSchraege != null ? this.GetWallHeight() + this.DachSchraege.GetTotalWallHeight() : this.GetWallHeight();
 		}
-
-		/*public Polygon2D GetWallPolygon(double xOffset, double yOffset) {
-		}*/
 
 		public List<Polygon2D> GetObjectBorders(double xOffset, double yOffset) {
 			Polygon2D wallBorder = new Polygon2D();

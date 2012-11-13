@@ -21,14 +21,14 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK"
 
-			this.label1.Text = EuroplanRes.NewDistributorForm_NeuerVerteiler; //"Neuer Verteiler";
-			this.label2.Text = EuroplanRes.NewDistributorForm_Nummer; //"Nummer:";
-			this.label3.Text = EuroplanRes.NewDistributorForm_Bezeichnung; //"Bezeichnung:";
-			this.label4.Text = EuroplanRes.NewDistributorForm_Regelkreis; //"Regelkreis:";
-			this.Text = EuroplanRes.NewDistributorForm_VerteilerAnlegen; //"Verteiler anlegen";
+			this.label1.Text = EuroplanRes.NewDistributorForm_NeuerVerteiler; //"Neuer Verteiler"
+			this.label2.Text = EuroplanRes.NewDistributorForm_Nummer; //"Nummer:"
+			this.label3.Text = EuroplanRes.NewDistributorForm_Bezeichnung; //"Bezeichnung:"
+			this.label4.Text = EuroplanRes.NewDistributorForm_Regelkreis; //"Regelkreis:"
+			this.Text = EuroplanRes.NewDistributorForm_VerteilerAnlegen; //"Verteiler anlegen"
 		}
 
 		private void Inititalize() {

@@ -291,29 +291,6 @@ namespace Europlan.Common {
 			set { this.productConnection = value; }
 		}
 
-		/*public List<Circuit> Circuits {
-			get {
-				List<Circuit> circuits = new List<Circuit>();
-				if (this.firstCircuit) {
-					circuits.Add(this.product.PlannedCircuits[0]);
-				}
-				if (this.otherCircuits) {
-					for (int i = 1; i < this.product.PlannedCircuits.Count; i++) {
-						circuits.Add(this.product.PlannedCircuits[i]);
-					}
-				}
-				foreach (GraphicalProductConnection conn in this.product.Connections) {
-					foreach (Circuit c in conn.ProductCircuits) {
-						if (circuits.Contains(c)) {
-							circuits.Remove(c);
-						}
-					}
-				}
-				return circuits;
-			}
-			//set { this.circuits = value; }
-		}*/
-
 		public int ProductCircuitCount {
 			get {
 				int circuitCount = 0;

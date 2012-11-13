@@ -23,12 +23,12 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
-			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
+			this.button2.Text = EuroplanRes.General_Abbrechen; //"Abbrechen"
 
 			this.colName.Text = EuroplanRes.SelectPlannedProductForm_Name;
 
-			this.Text = EuroplanRes.SelectPlannedProductForm_Titel; //"Bitte wählen Sie das gewünschte Teilsystem";
+			this.Text = EuroplanRes.SelectPlannedProductForm_Titel; //"Bitte wählen Sie das gewünschte Teilsystem"
 		}
 
 		private class PlannedProductItem : ListViewItem {

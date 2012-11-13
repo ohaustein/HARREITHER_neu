@@ -32,17 +32,17 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnNext.Text = EuroplanRes.General_Weiter; //"Weiter";
+			this.btnNext.Text = EuroplanRes.General_Weiter; //"Weiter"
 
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Nummer; //"Nr.";
-			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_NummerLang; //"Eindeutige Regelkreisnummer";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Bezeichnung; //"Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_BezeichnungLang; //"Bezeichnung des Regelkreises";
-			this.heatFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeiz; //"TvHeiz (°C)";
-			this.heatFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeizLang; //"Vorlauftemperatur im Heizbetrieb";
-			this.coolFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehl; //"TvKühl (°C)";
-			this.coolFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehlLang; //"Vorlauftemperatur im Kühlbetrieb";
-			this.label1.Text = EuroplanRes.RegulatoryCircuitSummaryPanel_Regelkreise; //"Regelkreise";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Nummer; //"Nr."
+			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_NummerLang; //"Eindeutige Regelkreisnummer"
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_Bezeichnung; //"Bezeichnung"
+			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_BezeichnungLang; //"Bezeichnung des Regelkreises"
+			this.heatFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeiz; //"TvHeiz (°C)"
+			this.heatFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturHeizLang; //"Vorlauftemperatur im Heizbetrieb"
+			this.coolFlowTemperatureDataGridViewTextBoxColumn.HeaderText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehl; //"TvKühl (°C)"
+			this.coolFlowTemperatureDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.RegulatoryCircuitSummaryPanel_VorlauftemperaturKuehlLang; //"Vorlauftemperatur im Kühlbetrieb"
+			this.label1.Text = EuroplanRes.RegulatoryCircuitSummaryPanel_Regelkreise; //"Regelkreise"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

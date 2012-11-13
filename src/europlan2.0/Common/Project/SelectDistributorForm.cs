@@ -24,12 +24,12 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
 
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Nummer; //"Id";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Bezeichnung; //"Name";
-			this.Text = EuroplanRes.SelectDistributorForm_Titel; //"SelectDistributorForm";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Nummer; //"Id"
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectDistributorForm_Bezeichnung; //"Name"
+			this.Text = EuroplanRes.SelectDistributorForm_Titel; //"SelectDistributorForm"
 
 		}
 

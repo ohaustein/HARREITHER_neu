@@ -124,16 +124,16 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Cancel";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Cancel"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
 
-			this.grpInfo.Text = EuroplanRes.SelectConnectionForProductForm_Information; //"Information";
-			this.grpConnection.Text = EuroplanRes.SelectConnectionForProductForm_Heizkreisanschluss; //"Heizkreisanschluß (nur bei Anschluß an anderen Heizkreis)";
-			this.rbRuecklauf.Text = EuroplanRes.SelectConnectionForProductForm_Ruecklaufseitig; //"rücklaufseitig";
-			this.rbVorlauf.Text = EuroplanRes.SelectConnectionForProductForm_Vorlaufseitig; //"vorlaufseitig";
-			this.grpUserDefinedConnection.Text = EuroplanRes.SelectConnectionForProductForm_Benutzerdefiniert; //"Benuzerdefinierte Zuordnung (nur bei Anschluß an anderen Heizkreis)";
-			this.cbActivateUserDefinedConnection.Text = EuroplanRes.SelectConnectionForProductForm_BenutzerdefiniertAktivieren; //"benutzerdefinierte Heizkreiszuordnung aktivieren";
-			this.Text = EuroplanRes.SelectConnectionForProductForm_Verteileranschluss; //"Verteileranschluß";
+			this.grpInfo.Text = EuroplanRes.SelectConnectionForProductForm_Information; //"Information"
+			this.grpConnection.Text = EuroplanRes.SelectConnectionForProductForm_Heizkreisanschluss; //"Heizkreisanschluß (nur bei Anschluß an anderen Heizkreis)"
+			this.rbRuecklauf.Text = EuroplanRes.SelectConnectionForProductForm_Ruecklaufseitig; //"rücklaufseitig"
+			this.rbVorlauf.Text = EuroplanRes.SelectConnectionForProductForm_Vorlaufseitig; //"vorlaufseitig"
+			this.grpUserDefinedConnection.Text = EuroplanRes.SelectConnectionForProductForm_Benutzerdefiniert; //"Benuzerdefinierte Zuordnung (nur bei Anschluß an anderen Heizkreis)"
+			this.cbActivateUserDefinedConnection.Text = EuroplanRes.SelectConnectionForProductForm_BenutzerdefiniertAktivieren; //"benutzerdefinierte Heizkreiszuordnung aktivieren"
+			this.Text = EuroplanRes.SelectConnectionForProductForm_Verteileranschluss; //"Verteileranschluß"
 		}
 
 		private void tvDistributors_AfterSelect(object sender, TreeViewEventArgs e) {
@@ -149,23 +149,15 @@ namespace Europlan.Common {
 					ok = true;
 				} else if (tvDistributors.SelectedNode.Tag is Circuit) {
 					if (this.product.Product.ConnectedCircuits.Count > 0) {
-						lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNurAnVerteiler; //"Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden.";
+						lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNurAnVerteiler; //"Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden."
 						ok = false;
 					} else {
 						Circuit selectedCircuit = tvDistributors.SelectedNode.Tag as Circuit;
 						Product selectedProduct = selectedCircuit.PlannedProduct.Product;
 						if (selectedProduct == this.product.Product) {
-							lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSichSelbst; //"Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden.";
+							lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSichSelbst; //"Anschluß nicht möglich. Das Heizsystem kann nicht an sich selbst angeschlossen werden."
 							ok = false;
 						} else {
-							/*int free = 0;
-							foreach (Circuit c in selectedProduct.PlannedCircuits) {
-								if (selectedProduct.GetCircuitConnected(c.NrOfCircuit) == null) {
-									free++;
-								}
-							}
-
-							ok = free >= this.product.Product.PlannedCircuits.Count;*/
 							ok = true;
 							if (ok) {
 								string anschluss = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSystem;
@@ -173,7 +165,7 @@ namespace Europlan.Common {
 								anschluss = anschluss.Replace("%RAUM%", selectedCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
 								lblInfo.Text = anschluss;
 							} else {
-								lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSystemNichtMoeglich; //"Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar";
+								lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSystemNichtMoeglich; //"Anschluß nicht möglich. Bei diesem Heizsystem sind nicht genug Heizkreise verfügbar"
 							}
 							string hkIn = EuroplanRes.SelectConnectionForProductForm_HeizkreisIn;
 							hkIn = hkIn.Replace("%SYSTEM%", selectedCircuit.PlannedProduct.InternalName);
@@ -183,7 +175,7 @@ namespace Europlan.Common {
 						}
 					}
 				} else {
-					lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNichtMoeglich; //"Anschluß nicht möglich";
+					lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNichtMoeglich; //"Anschluß nicht möglich"
 					ok = false;
 				}
 			}
@@ -201,9 +193,6 @@ namespace Europlan.Common {
 					for (int i = 0; i < this.product.Product.PlannedCircuits.Count; i++) {
 						list.Add(new UserDefinedConnection(i + 1, this.product.Product.InverseConnectedCircuits[i].OtherCircuitId + 1));
 					}
-					/*foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.product.Product.InverseConnectedCircuits) {
-						list.Add(new UserDefinedConnection(kvp.Key + 1, kvp.Value.OtherCircuitId + 1));
-					}*/
 				} else {
 					List<int> tmp = new List<int>();
 					for (int i = 0; i < 12; i++) {
@@ -329,7 +318,6 @@ namespace Europlan.Common {
 					Product p = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct.Product;
 					Product currentConnection = this.product.Product.PlannedConnection != null ? (this.product.Product.PlannedConnection.OtherProduct != null ? this.product.Product.PlannedConnection.OtherProduct.Product : null) : null;
 					if (p == currentConnection || !p.ConnectedCircuits.ContainsKey(i) || !p.ConnectedCircuits[i].UserDefined) {
-						//if (!(this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct.Product.ConnectedCircuits.ContainsKey(i)) {
 						this.hk2DataGridViewTextBoxColumn.Items.Add(i + 1);
 					}
 				}
@@ -348,13 +336,6 @@ namespace Europlan.Common {
 					} else {
 						circuitsUsed.Add(udc.Hk2);
 					}
-					/*if ((this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct.Product.ConnectedCircuits.ContainsKey(udc.Hk2 - 1)) {
-						ok = false;
-					}*/
-					/*if (udc.Hk2 > (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct.Product.PlannedCircuitCount) {
-						ok = false;
-					}*/
-				
 				}
 				this.btnOk.Enabled = ok;
 			}

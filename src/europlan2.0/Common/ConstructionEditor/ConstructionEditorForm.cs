@@ -18,7 +18,7 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.ConstructionEditorForm_Titel; //"Konstruktion";
+			this.Text = EuroplanRes.ConstructionEditorForm_Titel; //"Konstruktion"
 		}
 
 		private void ConstructionEditorForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -29,15 +29,15 @@ namespace Europlan.Common {
 			this.constructionEditor.Construction = construction;
 			switch (this.constructionEditor.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:
-					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Fussboden; //"Fuﬂbodenkonstruktion";
+					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Fussboden; //"Fuﬂbodenkonstruktion"
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:
-					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion";
+					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion"
 					break;
 
 				case ConstructionScopeEnum.CeilingConstruction:
-					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion";
+					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion"
 					break;
 
 				case ConstructionScopeEnum.WallConstruction:
@@ -45,7 +45,7 @@ namespace Europlan.Common {
 					break;
 
 				default:
-					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Unbekannt; //"Unbekannte Konstruktion";
+					this.lblType.Text = EuroplanRes.ConstructionEditorForm_Unbekannt; //"Unbekannte Konstruktion"
 					break;
 			}
 		}

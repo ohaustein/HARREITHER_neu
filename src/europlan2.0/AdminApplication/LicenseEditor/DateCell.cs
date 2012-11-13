@@ -19,12 +19,10 @@ namespace Europlan.AdminApplication {
 			DateEditingControl ctl = (DateEditingControl)DataGridView.EditingControl;
 
 			ctl.Value = (DateTime)this.Value;
-			//ctl.Value = this.Value as HardwareId;
 		}
 
 		public override object DefaultNewRowValue {
 			get { 
-				//return new HardwareId("000000-000000-000000");
 				return null;
 			}
 		}

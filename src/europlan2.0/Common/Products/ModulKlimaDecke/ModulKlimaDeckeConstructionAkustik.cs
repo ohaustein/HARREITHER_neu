@@ -26,7 +26,6 @@ namespace Europlan.Common {
 			Region region = new Region(this.GetCeilingPath());
 			region.Exclude(this.GetProductAreaPathForAkustik());
 			g.Clip = new Region();
-			//g.FillRegion(new SolidBrush(Color.FromArgb(31, Color.Red)), region);
 			g.FillRegion(new HatchBrush(HatchStyle.BackwardDiagonal, Color.FromArgb(127, Color.Red), Color.FromArgb(10, Color.Red)), region);
 		}
 
@@ -45,8 +44,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public List<Point2D> CeilingCoordinatesAkustik {
 			get {
-				//return base.CeilingCoordinates;
-				if (/*this.Planner == null ||*/ this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+				if (this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
 					return null;
 				}
 				Polygon2D coords = new Polygon2D(this.Product.AssociatedRoom.CeilingCoordinatesToUse);

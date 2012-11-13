@@ -189,8 +189,6 @@ namespace Europlan.Common {
 					c = Color.FromArgb(255, Color.Red);
 					float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
 					Pen p = new Pen(c, size);
-					//p.StartCap = LineCap.Square;
-					//p.EndCap = LineCap.Square;
 					Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 					Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
 					g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
@@ -204,8 +202,6 @@ namespace Europlan.Common {
 					c = Color.FromArgb(255, Color.Red);
 					float size = (float)(room.AssociatedPlan.Measure * 0.1 * Math.Abs(additionalTransformation.M00));
 					Pen p = new Pen(c, size);
-					//p.StartCap = LineCap.Square;
-					//p.EndCap = LineCap.Square;
 					Point2D start = additionalTransformation.TransformTo2D(wall.PlanStartPoint.Value);
 					Point2D end = additionalTransformation.TransformTo2D(wall.PlanEndPoint.Value);
 					g.DrawLine(p, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
@@ -252,78 +248,9 @@ namespace Europlan.Common {
 					Point2D start = additionalTransformation.TransformTo2D(obstacleStart);
 					Point2D end = additionalTransformation.TransformTo2D(tempEnd);
 					g.DrawLine(pen, (float)start.X, (float)start.Y, (float)end.X, (float)end.Y);
-
-					//Point2D start = additionalTransformation.TransformTo2D(obstacleStart);
-					//g.DrawLine(pen, (float)start.X, (float)start.Y, (float)p.X, (float)p.Y);
 				}
 
 			}
-
-			//Pen pen = Pens.Red;
-			//double width = distributor.Width * this.floor.AssociatedPlan.Measure.Value;
-			//double height = distributor.Height * this.floor.AssociatedPlan.Measure.Value;
-
-			//Point2D leftBottom = Point2D.Zero;
-			//Point2D leftTop = Point2D.Zero;
-			//Point2D rightTop = Point2D.Zero;
-			//Point2D rightBottom = Point2D.Zero;
-
-			//if (this.Mode == DistributorPositionerMode.DPM_POSITION) {
-			//    if (this.ConnectedPlanPanel.Plan is CadPlan) {
-			//        additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-			//        additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-this.RotationInclPlan * Math.PI / 180.0);
-			//        additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
-
-			//        leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
-			//        leftTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y + height));
-			//        rightTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y + height));
-			//        rightBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y));
-			//    } else {
-			//        additionalTransformation = additionalTransformation * Transformation4D.Translation(mousePositionInPlan.X, mousePositionInPlan.Y, 0);
-			//        additionalTransformation = additionalTransformation * Transformation4D.RotateZ(this.RotationInclPlan * Math.PI / 180.0);
-			//        additionalTransformation = additionalTransformation * Transformation4D.Translation(-mousePositionInPlan.X, -mousePositionInPlan.Y, 0);
-
-			//        leftBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y));
-			//        leftTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X, mousePositionInPlan.Y - height));
-			//        rightTop = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y - height));
-			//        rightBottom = additionalTransformation.TransformTo2D(new Point2D(mousePositionInPlan.X + width, mousePositionInPlan.Y));
-			//    }
-			//    g.DrawLine(pen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
-			//    g.DrawLine(pen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
-			//    g.DrawLine(pen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
-			//    g.DrawLine(pen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
-			//    g.FillPolygon(Brushes.Red, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
-			//} else {
-			//    foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {
-			//        if (gp.floorId == this.floor.Id) {
-			//            if (this.ConnectedPlanPanel.Plan is CadPlan) {
-			//                additionalTransformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-			//                additionalTransformation = additionalTransformation * Transformation4D.RotateZ(-gp.rotation * Math.PI / 180.0);
-			//                additionalTransformation = additionalTransformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-			//                leftBottom = additionalTransformation.TransformTo2D(gp.position);
-			//                leftTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y + height));
-			//                rightTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y + height));
-			//                rightBottom = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-			//            } else {
-			//                additionalTransformation = additionalTransformation * Transformation4D.Translation(gp.position.X, gp.position.Y, 0);
-			//                additionalTransformation = additionalTransformation * Transformation4D.RotateZ(gp.rotation * Math.PI / 180.0);
-			//                additionalTransformation = additionalTransformation * Transformation4D.Translation(-gp.position.X, -gp.position.Y, 0);
-
-			//                leftBottom = additionalTransformation.TransformTo2D(gp.position);
-			//                leftTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X, gp.position.Y - height));
-			//                rightTop = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y - height));
-			//                rightBottom = additionalTransformation.TransformTo2D(new Point2D(gp.position.X + width, gp.position.Y));
-			//            }
-			//            g.DrawLine(pen, (float)leftBottom.X, (float)leftBottom.Y, (float)rightBottom.X, (float)rightBottom.Y);
-			//            g.DrawLine(pen, (float)rightBottom.X, (float)rightBottom.Y, (float)rightTop.X, (float)rightTop.Y);
-			//            g.DrawLine(pen, (float)rightTop.X, (float)rightTop.Y, (float)leftTop.X, (float)leftTop.Y);
-			//            g.DrawLine(pen, (float)leftTop.X, (float)leftTop.Y, (float)leftBottom.X, (float)leftBottom.Y);
-			//            g.FillPolygon(Brushes.Red, new PointF[] { new PointF((float)leftBottom.X, (float)leftBottom.Y), new PointF((float)rightBottom.X, (float)rightBottom.Y), new PointF((float)rightTop.X, (float)rightTop.Y) });
-			//            break;
-			//        }
-			//    }
-			//}
 			path.Dispose();
 		}
 

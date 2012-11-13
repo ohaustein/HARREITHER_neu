@@ -54,8 +54,6 @@ namespace Europlan.Common {
 		private Vector2D newConnectionAutoStartWallOffset = new Vector2D();
 		private GraphicalHithermCompactVerbindung newConnectionStartConnection = null;
 
-		//private GraphicalHithermRegisterWrapper connectRegistersFirst = null;
-		//
 		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_AUTO;
 
 		public NewConnectionModeEnum NewConnectionMode {
@@ -120,20 +118,13 @@ namespace Europlan.Common {
 		public GraphicalWallPanel ConnectedWallPanel {
 			get { return this.connectedWallPanel; }
 			set {
-				/*if (this.connectedWallPanel != null) {
-					this.connectedWallPanel.KeyDown -= new KeyEventHandler(connectedPlanPanel_KeyDown);
-				}*/
 				this.connectedWallPanel = value;
-				/*if (this.connectedWallPanel != null) {
-					this.connectedWallPanel.KeyDown += new KeyEventHandler(connectedPlanPanel_KeyDown);
-				}*/
 			}
 		}
 
 		private Cursor customCursor = null;
 
 		public Cursor CustomCursor {
-			//get { return customCursor; }
 			get { return null; }
 		}
 
@@ -193,9 +184,6 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.newConnectionStart != null) {
-					//PossibleConnection endConn;
-					//this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
-					//this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
 					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0), scale, false);
 				}
 			}
@@ -424,7 +412,6 @@ namespace Europlan.Common {
 						}
 					}
 					this.highlightedConnections.Clear();
-					//if (this.startConnection == null) {
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
 						while (wall != null) {
@@ -457,7 +444,6 @@ namespace Europlan.Common {
 							wall = wall.DachSchraege;
 						}
 					}
-					//}
 					if (this.newConnectionStart != null) {
 						this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
 						this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConn));
@@ -715,39 +701,6 @@ namespace Europlan.Common {
 		public Product Product {
 			get { return this.HithermCompactProduct; }
 		}
-
-		/*/// <summary>
-		/// Returns x-offset in m
-		/// </summary>
-		/// <param name="wall"></param>
-		/// <returns></returns>
-		private Nullable<double> GetWallXOffset(GraphicalWall wall) {
-			if (this.product == null || this.product.AssociatedRoom == null) {
-				return null;
-			}
-			double xOffset = 0;
-			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
-				if (w.GetWallYOffset(wall, 0).HasValue) { // quick hack to determine if the searched wall is a dachschräge of w
-					return xOffset;
-				}
-				xOffset += w.GetWallWidth();
-			}
-			return null;
-		}
-
-		private Nullable<double> GetWallYOffset(GraphicalWall wall) {
-			if (this.product == null || this.product.AssociatedRoom == null) {
-				return null;
-			}
-			Nullable<double> yOffset = null;
-			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
-				yOffset = w.GetWallYOffset(wall, 0);
-				if (yOffset.HasValue) {
-					return yOffset;
-				}
-			}
-			return null;
-		}*/
 
 		public HithermCompactPlannerMode Mode {
 			get { return this.mode; }

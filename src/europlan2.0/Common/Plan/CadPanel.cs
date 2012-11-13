@@ -110,7 +110,6 @@ namespace Europlan.Common {
 				if (this.productPlanner != null) {
 					Point mousePosInPlan = this.PointToClient(MousePosition);
 
-					//Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
 					Point3D planPoint = from2DTransform.Transform(new Point3D(mousePosInPlan.X, mousePosInPlan.Y, 0));
 					this.productPlanner.PaintAfterPlanPannel(e, this.gdiGraphics3D.To2DTransform, new Point2D(planPoint.X, planPoint.Y), mousePosInPlan);
 				}
@@ -226,17 +225,11 @@ namespace Europlan.Common {
 			IList<RenderedEntityInfo> closeRenderedEntityInfos = EntitySelector.GetEntitiesCloseToPoint(
 				model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
 				gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
-			//IList<IList<DxfEntity>> closeEntityChains = EntitySelector.GetEntitiesCloseToPoint(
-			//	model, GraphicsConfig.BlackBackgroundCorrectForBackColor,
-			//	gdiGraphics3D.To2DTransform, referencePoint, 2 * grabDist);
 
 			List<Polygon2D> closePolygons = new List<Polygon2D>();
 			foreach (RenderedEntityInfo entityInfo in closeRenderedEntityInfos) {
 				closePolygons.AddRange(GetEntityAsPolygons(entityInfo));
 			}
-			//foreach (List<DxfEntity> entityChain in closeEntityChains) {
-			//	closePolygons.AddRange(GetEntityAsPolygons(entityChain));
-			//}
 
 			double curSqDistance = double.PositiveInfinity;
 			Nullable<Point2D> curPoint = null;
@@ -325,16 +318,10 @@ namespace Europlan.Common {
 			base.OnMouseMove(e);
 			bool invalidate = false;
 			if (mouseDown && this.mode == PlanMode.PM_PLANNER_DRAG && e.Button != MouseButtons.Middle && e.Button != MouseButtons.None && this.productPlanner != null) {
-				/*Point2D pickedPoint;
-				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
-				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerDragMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
 			}
 			if ((this.mode == PlanMode.PM_PLANNER_CLICK || this.mode == PlanMode.PM_SET_DISTRIBUTOR || (this.mode == PlanMode.PM_PLANNER_DRAG && e.Button == MouseButtons.None)) && this.productPlanner != null) {
-				/*Point2D pickedPoint;
-				this.SnapPoint(new Point2D(e.X, e.Y), out pickedPoint);
-				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(pickedPoint, 0));*/
 				Point3D planPoint = gdiGraphics3D.To2DTransform.GetInverse().Transform(new Point3D(e.X, e.Y, 0));
 				invalidate = this.productPlanner.PlannerMouseMove(new Point2D(planPoint.X, planPoint.Y), e.Location, e.Button);
 			} 
@@ -346,19 +333,6 @@ namespace Europlan.Common {
 			}
 			lastMouseLocation = e.Location;
 			if (mode == PlanMode.PM_PICK_MEASURE && selectedStartPointCad.HasValue && !selectedEndPointCad.HasValue) {
-				/*int x = (int)selectedStartPoint.Value.X;
-				int y = (int)selectedStartPoint.Value.Y;
-				int width = x - e.Location.X;
-				int height = y - e.Location.Y;
-				if (width < 0) {
-					width = -width;
-					x = e.Location.X;
-				}
-				if (height < 0) {
-					height = -height;
-					y = e.Location.Y;
-				}
-				Invalidate(new Rectangle(x, y, width, height));*/
 				invalidate = true;
 			}
 			if (invalidate) {
@@ -413,9 +387,8 @@ namespace Europlan.Common {
 			}
 		}
 
-		//private Point3D CorrectPoint(Point3D point, List<DxfEntity> entityChain, int pos) {
 		private Point3D CorrectPoint(Point3D point, RenderedEntityInfo entityInfo) {
-#warning TODO fix this method to make snapping work again
+#warning TODO this method has been broken by the new version of cadlib-library. fix this method to make snapping work again!
 			return entityInfo.Transform.Transform(point);
 			//if (pos >= entityChain.Count) {
 			//    return point;
@@ -477,7 +450,6 @@ namespace Europlan.Common {
 			//        /*point.X = point.X * insert.ScaleFactor.X + insert.InsertionPoint.X;
 			//        point.Y = point.Y * insert.ScaleFactor.Y + insert.InsertionPoint.Y;
 			//        point.Z = point.Z * insert.ScaleFactor.Z + insert.InsertionPoint.Z;*/
-			//        // todo
 			//    } else if (correctionEntity is DxfDimension) {
 			//        DxfDimension dimension = correctionEntity as DxfDimension;
 
@@ -485,7 +457,6 @@ namespace Europlan.Common {
 			//        /*point.X = point.X + dimension.InsertionPoint.X;
 			//        point.Y = point.Y + dimension.InsertionPoint.X;
 			//        point.Z = point.Z + dimension.InsertionPoint.X;*/
-			//        // todo
 			//    }
 
 			//    if (pos == entityChain.Count - 1) {
@@ -528,7 +499,6 @@ namespace Europlan.Common {
 			public bool isClosed;
 		}
 
-		//private List<Polygon2D> GetEntityAsPolygons(List<DxfEntity> entityChain) {
 		private List<Polygon2D> GetEntityAsPolygons(RenderedEntityInfo entityInfo) {
 			DxfEntity entity = entityInfo.Entity;
 			List<Polygon3D> polygons3d = new List<Polygon3D>();
@@ -562,7 +532,6 @@ namespace Europlan.Common {
 			foreach (Polygon3D polygon3d in polygons3d) {
 				Polygon2D polygon2d = new Polygon2D(polygon3d.isClosed);
 				foreach (Point3D vertex3d in polygon3d.vertices) {
-					//polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityChain, 1)));
 					polygon2d.vertices.Add(gdiGraphics3D.To2DTransform.TransformTo2D(CorrectPoint(vertex3d, entityInfo)));
 				}
 				polygons2d.Add(polygon2d);
@@ -584,7 +553,7 @@ namespace Europlan.Common {
 			Vector2D w = p0 - q0;
 
 			if (u.X == 0 && u.Y == 0 && v.X == 0 && v.Y == 0) {
-				// they are both points;
+				// they are both points
 				if (p0.X == q0.X) {
 					// they are the same point
 					sqDistance = CalcSqDist(referencePoint, p0);
@@ -633,47 +602,6 @@ namespace Europlan.Common {
 			Point2D i = p0 + si * u;
 			sqDistance = CalcSqDist(referencePoint, i);
 			return i;
-
-
-
-
-
-
-
-			/*
-			double t0, t1;
-			Vector2D w2 = p1 - q0;
-			if (v.X != 0) {
-				t0 = w.X / v.X;
-				t1 = w2.X / v.X;
-			} else {
-				t0 = w.Y / v.Y;
-				t1 = w2.Y / v.Y;
-			}
-
-			// t0 must be smaller than t1 so swap them if this is not the case
-			if (t0 > t1) {
-				double t = t0;
-				t0 = t1;
-				t1 = t;
-			}
-
-			if (t0 > 1 || t1 < 0) {
-				// intersection lies outside of the line
-				sqDistance = double.PositiveInfinity;
-				return null;
-			}
-			t0 = t0 < 0 ? 0 : t0;	// clip to min 0
-			t1 = t1 > 1 ? 1 : t1;	// clip to max 1
-			if (t0 == t1) {
-				// intersection is a point
-				Point2D intersection = q0 + t0 * v;
-				sqDistance = CalcSqDist(referencePoint, intersection);
-				return intersection;
-			}
-
-			sqDistance = double.PositiveInfinity;
-			return null;*/
 		}
 
 		/// <summary>
@@ -727,7 +655,6 @@ namespace Europlan.Common {
 			Point3D referencePoint3 = new Point3D(0, 0, 1);
 			Point3D transformedPoint3 = matrix.Transform(referencePoint3);
 
-			//Matrix4D scale = Transformation4D.GetScaleTransform(referencePoint1, referencePoint2, referencePoint3, transformedPoint1, transformedPoint2, transformedPoint3);
 			this.scale = matrix.M00;
 			this.translation = new Vector3D(matrix.M03, matrix.M13, 0);
 			

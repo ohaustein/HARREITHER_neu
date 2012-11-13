@@ -28,19 +28,19 @@ namespace Europlan.Application {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.LicenseForm_Titel; //"Lizenz";
-			this.btnImport.Text = EuroplanRes.LicenseForm_Importieren; //"&Lizenz importieren";
-			this.btnOk.Text = EuroplanRes.General_Schliessen; //"&Schließen";
-			this.label1.Text = EuroplanRes.LicenseForm_LizensiertFuer; //"Lizenziert für:";
-			this.lblHardwareId.Text = EuroplanRes.LicenseForm_HardwareId; //"Hardware ID:";
-			this.lblHeader.Text = EuroplanRes.LicenseForm_Seitenkopf; //"Seitenkopf:";
-			this.lblLicenseDateInvalid.Text = EuroplanRes.LicenseForm_GueltigkeitAbgelaufen; //"Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.";
-			this.lblLicenseInvalidUnknown.Text = EuroplanRes.LicenseForm_NichtGueltig; //"Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine gültige Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.";
-			this.lblLicenseMissing.Text = EuroplanRes.LicenseForm_KeineLizenzGefunden; //"Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben.";
-			this.lblLicenseSignatureInvalid.Text = EuroplanRes.LicenseForm_LizenzModifiziert; //"Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern.";
-			this.lblLicenseSystemInvalid.Text = EuroplanRes.LicenseForm_RechnerNichtGueltig; //"Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben.";
-			this.lblModules.Text = EuroplanRes.LicenseForm_InsallierteLizenzen; //"Installierte Lizenzen:";
-			this.lblValidUntil.Text = EuroplanRes.LicenseForm_GueltigBis; //"Gültig bis:";
+			this.Text = EuroplanRes.LicenseForm_Titel; //"Lizenz"
+			this.btnImport.Text = EuroplanRes.LicenseForm_Importieren; //"&Lizenz importieren"
+			this.btnOk.Text = EuroplanRes.General_Schliessen; //"&Schließen"
+			this.label1.Text = EuroplanRes.LicenseForm_LizensiertFuer; //"Lizenziert für:"
+			this.lblHardwareId.Text = EuroplanRes.LicenseForm_HardwareId; //"Hardware ID:"
+			this.lblHeader.Text = EuroplanRes.LicenseForm_Seitenkopf; //"Seitenkopf:"
+			this.lblLicenseDateInvalid.Text = EuroplanRes.LicenseForm_GueltigkeitAbgelaufen; //"Die Gültigkeit der Lizenz ist abgelaufen. Bitte kontaktieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern."
+			this.lblLicenseInvalidUnknown.Text = EuroplanRes.LicenseForm_NichtGueltig; //"Die Lizenz ist nicht gültig. Falls Sie bereits eine gültige Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine gültige Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben."
+			this.lblLicenseMissing.Text = EuroplanRes.LicenseForm_KeineLizenzGefunden; //"Es wurde keine Lizenz gefunden. Falls Sie bereits eine Lizenz besitzen importieren Sie diese bitte über die Schaltfläche 'Lizenz importieren'. Falls Sie noch keine Lizenz besitzen kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz anzufordern. Zum Anfordern einer Lizenz müssen Sie die hier angegebene Hardware ID bekannt geben."
+			this.lblLicenseSignatureInvalid.Text = EuroplanRes.LicenseForm_LizenzModifiziert; //"Die Lizenz ist ungültig da sie von nicht authorisierter Stelle modifiziert wurde. Bitte verwenden Sie Ihre original Lizenz oder kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine neue Lizenz anzufordern."
+			this.lblLicenseSystemInvalid.Text = EuroplanRes.LicenseForm_RechnerNichtGueltig; //"Die Lizenz ist auf dem aktuellen Rechner nicht gültig. Bitte kontatkieren sie Kontakt-Name unter lizenz@dummy.at oder +43-0000-LIZENZ um eine Lizenz für diesen Rechner anzufordern. Zum Anfordern einer Lizenz. müssen Sie die hier angegebene Hardware ID bekannt geben."
+			this.lblModules.Text = EuroplanRes.LicenseForm_InsallierteLizenzen; //"Installierte Lizenzen:"
+			this.lblValidUntil.Text = EuroplanRes.LicenseForm_GueltigBis; //"Gültig bis:"
 		}
 
 		public bool RestartRequired {
@@ -118,7 +118,6 @@ namespace Europlan.Application {
 					MessageBox.Show(EuroplanRes.License_ImportiertText, EuroplanRes.License_ImportiertTitel, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					this.restartRequired = true;
 					this.Close();
-					//this.UpdateLicenseInfo();
 				} else if (importResult == ImportLicenseResultEnum.LICENSE_TEMPORARY_IMPORTED) {
 					string message = EuroplanRes.License_TemporaerImportiertText;
 					message = message.Replace("%LICENSEPATH%", LicenseManager.Instance.LincensePath);

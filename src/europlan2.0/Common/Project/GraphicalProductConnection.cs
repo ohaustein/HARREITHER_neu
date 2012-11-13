@@ -21,10 +21,7 @@ namespace Europlan.Common {
 		private List<Point2D> vertices;
 		private bool firstCircuit;
 		private bool otherCircuits;
-		//private List<Circuit> productCircuits;
-		//private List<int> productCircuitIndices;
 		private int distributorStartIndex;
-		//private int distributorIndicesCount;
 		private bool vorlauf = true;
 		private bool ruecklauf = true;
 		private Product.ProductType connectionType;
@@ -40,7 +37,6 @@ namespace Europlan.Common {
 		private double productConnectedPoint = -1;
 		private bool productConnectedVorlaufseitig = true;
 		private bool productConnectionRight = true;
-		//private List<Point2D> connectedProductVertices = null;
 
 		public virtual List<Point2D> Vertices {
 			get { return vertices; }
@@ -56,92 +52,6 @@ namespace Europlan.Common {
 		internal GraphicalProductConnection() {
 			connectionType = Europlan.Common.Product.ProductType.REST;
 		}
-
-		/*public GraphicalProductConnection(PlannedProduct product, Distributor distributor, IEnumerable<Point2D> vertices, Circuit productCircuit, int distributorIndex, bool vorlauf, Product.ProductType connectionType) {
-			this.product = product;
-			this.distributor = distributor;
-			this.vertices = new List<Point2D>(vertices);
-			Point2D oldVertex = new Point2D();
-			Vector2D oldVector = new Vector2D();
-			Vector2D newVector = new Vector2D();
-			bool first = true;
-			bool second = true;
-			List<Point2D> verticesToRemove = new List<Point2D>();
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					newVector = (oldVertex - newVertex);
-					newVector.Normalize();
-					if (newVector.X < 0) {
-						newVector.X = -newVector.X;
-						newVector.Y = -newVector.Y;
-					}
-					if (second) {
-						second = false;
-					} else {
-						if (Math.Abs(newVector.X - oldVector.X) < 0.001 && Math.Abs(newVector.Y - oldVector.Y) < 0.001) {
-							verticesToRemove.Add(oldVertex);
-						}
-					}
-				}
-				oldVertex = newVertex;
-				oldVector = newVector;
-			}
-			foreach (Point2D vertex in verticesToRemove) {
-				this.vertices.Remove(vertex);
-			}
-			this.productCircuits = new List<Circuit>();
-			this.productCircuits.Add(productCircuit);
-			this.distributorStartIndex = distributorIndex;
-			this.distributorIndicesCount = 1;
-			//this.distributorIndices = new List<int>();
-			//this.distributorIndices.Add(distributorIndex);
-			this.vorlauf = vorlauf;
-			this.connectionType = connectionType;
-		}*/
-
-		/*public GraphicalProductConnection(PlannedProduct product, Distributor distributor, IEnumerable<Point2D> vertices, List<Circuit> productCircuits, int distributorStartIndex, int distributorIndicesCount, bool vorlauf, Product.ProductType connectionType) {
-			this.product = product;
-			this.distributor = distributor;
-			this.vertices = new List<Point2D>(vertices);
-			Point2D oldVertex = new Point2D();
-			Vector2D oldVector = new Vector2D();
-			Vector2D newVector = new Vector2D();
-			bool first = true;
-			bool second = true;
-			List<Point2D> verticesToRemove = new List<Point2D>();
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					newVector = (oldVertex - newVertex);
-					newVector.Normalize();
-					if (newVector.X < 0) {
-						newVector.X = -newVector.X;
-						newVector.Y = -newVector.Y;
-					}
-					if (second) {
-						second = false;
-					} else {
-						if (Math.Abs(newVector.X - oldVector.X) < 0.001 && Math.Abs(newVector.Y - oldVector.Y) < 0.001) {
-							verticesToRemove.Add(oldVertex);
-						}
-					}
-				}
-				oldVertex = newVertex;
-				oldVector = newVector;
-			}
-			foreach (Point2D vertex in verticesToRemove) {
-				this.vertices.Remove(vertex);
-			}
-			this.productCircuits = productCircuits;
-			this.distributorStartIndex = distributorStartIndex;
-			this.distributorIndicesCount = distributorIndicesCount;
-			this.vorlauf = vorlauf;
-			this.connectionType = connectionType;
-		}*/
-
 
 		public GraphicalProductConnection(PlannedProduct product, Distributor distributor, IEnumerable<Point2D> vertices, bool firstCircuit, bool otherCircuits, int distributorStartIndex, bool vorlauf, bool ruecklauf, Product.ProductType connectionType) {
 			this.product = product;
@@ -183,9 +93,7 @@ namespace Europlan.Common {
 			}
 			this.firstCircuit = firstCircuit;
 			this.otherCircuits = otherCircuits;
-			//this.productCircuits = productCircuits;
 			this.distributorStartIndex = distributorStartIndex;
-			//this.distributorIndicesCount = distributorIndicesCount;
 			this.vorlauf = vorlauf;
 			this.ruecklauf = ruecklauf;
 			this.connectionType = connectionType;
@@ -214,7 +122,7 @@ namespace Europlan.Common {
 				Point2D startPoint, endPoint;
 				Vector2D curVector = new Vector2D();
 				Vector2D moveVector = new Vector2D();
-				for (int j = 0; j < this.vertices.Count /*- 1*/; j++) {
+				for (int j = 0; j < this.vertices.Count; j++) {
 					if (j < this.vertices.Count - 1) {
 						startPoint = this.vertices[j];
 						endPoint = this.vertices[j + 1];
@@ -343,28 +251,6 @@ namespace Europlan.Common {
 			return 1;
 
 #warning TODO implement CalculateFactor
-			/*double factor = 1;
-			if (this.Distributor != null && this.vertices != null && this.vertices.Count > 1 && this.Product != null) {
-				Nullable<Distributor.GraphicalRepresentation> distRep = null;
-				foreach (Distributor.GraphicalRepresentation gr in this.Distributor.GraphicalRepresentations) {
-					if (gr.floorId == this.Product.Product.AssociatedRoom.AssociatedFloor.Id) {
-						distRep = gr;
-						break;
-					}
-				}
-				if (distRep != null) {
-					Vector2D startVector = this.vertices[this.vertices.Count - 2] - this.vertices[this.vertices.Count - 1];
-					startVector.Normalize();
-					double angle = Math.Atan2(startVector.Y, startVector.X) * 180 / Math.PI;
-					angle = angle - distRep.Value.rotation;
-					if (angle >= 0 && angle < 180) {
-						factor = 1;
-					} else {
-						factor = -1;
-					}
-				}
-			}
-			return factor;*/
 		}
 
 		public virtual void ResetCachedVerticesForDrawing() {
@@ -461,22 +347,6 @@ namespace Europlan.Common {
 		}
 
 		public virtual double GetDistance(Point2D planPoint) {
-			/*Point2D oldVertex = new Point2D();
-			bool first = false;
-			double bestDist = double.MaxValue;
-			foreach (Point2D newVertex in this.vertices) {
-				if (first) {
-					first = false;
-				} else {
-					Segment2D segment = new Segment2D(oldVertex, newVertex);
-					double dist = segment.GetDistance(planPoint);
-					if (dist <= bestDist) {
-						bestDist = dist;
-					}
-				}
-				oldVertex = newVertex;
-			}
-			return bestDist;*/
 			int tmp;
 			Point2D tmp2;
 			return GetDistance(planPoint, out tmp, out tmp2);
@@ -613,51 +483,6 @@ namespace Europlan.Common {
 			set { this.automatic = value; }
 		}
 
-		/*public int DistributorIndicesCount {
-			get { return this.distributorIndicesCount; }
-			set { this.distributorIndicesCount = value; }
-		}
-
-		[XmlIgnore]
-		public List<Circuit> ProductCircuits {
-			get {
-				if (this.productCircuitIndices != null) {
-					this.productCircuits = new List<Circuit>();
-					foreach (int i in this.productCircuitIndices) {
-						this.productCircuits.Add(this.Product.Product.PlannedCircuits[i]);
-					}
-					this.productCircuitIndices = null;
-				}
-				if (this.productCircuits == null) {
-					this.productCircuits = new List<Circuit>();
-				}
-				return this.productCircuits;
-			}
-		}
-
-		public List<int> ProductCircuitIndices {
-			get {
-				if (this.productCircuitIndices != null) {
-					return this.productCircuitIndices;
-				}
-				List<int> indices = new List<int>();
-				foreach (Circuit circuit in this.ProductCircuits) {
-					int i = 0;
-					if (this.Product != null && this.Product.Product != null && this.Product.Product.PlannedCircuits != null) {
-						foreach (Circuit c in this.Product.Product.PlannedCircuits) {
-							if (c == circuit) {
-								indices.Add(i);
-								break;
-							}
-							i++;
-						}
-					}
-				}
-				return indices;
-			}
-			set { this.productCircuitIndices = value; }
-		}*/
-
 		public virtual bool Vorlauf {
 			get { return this.vorlauf; }
 			set { this.vorlauf = value; }
@@ -773,7 +598,6 @@ namespace Europlan.Common {
 				}
 			}
 			length = length / measure;
-			// TODO remove part that is inside product
 			if (length < 0) {
 				length = 0;
 			}
@@ -786,7 +610,6 @@ namespace Europlan.Common {
 				return anchors;
 			}
 			Nullable<Point2D> prev = null;
-			//bool lastHorizontal = this.vertices[0].Y != 0;
 			int i = 0;
 			foreach (Point2D vertex in this.vertices) {
 				if (prev.HasValue) {
@@ -855,8 +678,6 @@ namespace Europlan.Common {
 		}
 
 		private void Simplify() {
-			// TODO
-			//throw new Exception("The method or operation is not implemented.");
 		}
 
 		public virtual List<GraphicalConnectionAnbindungsPunkt> GetConnectedProductAnbindungsPunkte(double measure, bool input, int distributorIndex, List<int> ignoreDistributorIndices, bool newProductConnection) {
@@ -890,7 +711,7 @@ namespace Europlan.Common {
 				double distVlTmp = 0.05 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) - 0.1;
 				double distVlFirstTmp = finishedConnection ? 0.055 / 2 * ((2 * this.NrOfCircuits - 1) / 2.0 - (this.NrOfCircuits - 1) * 2) : distVlTmp - 0.1;
 
-				Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure)) /*+ (lastMoveVector * (0.05 * measure * rightFactor))*/;
+				Point2D connPoint1 = tmp + (lastMoveVector * ((j < this.vertices.Count - 1 ? distVlTmp : distVlFirstTmp) * measure * factor * rightFactor)) + (lastVector * (this.productConnectedPoint + (0.1 * i - 0.025) * measure));
 				Point2D connPoint2 = connPoint1 + (lastVector * (0.05 * measure));
 
 				if ((distributorIndex < 0 || this.distributorStartIndex + i == distributorIndex) &&
@@ -928,7 +749,7 @@ namespace Europlan.Common {
 				double connectionWidth = (this.Vertices.Count > 2 ? 0.05 : 0.055 / 2.0) * measure;
 				double connectionDepth = 0.1 * measure;
 				for (int i = 0; i < this.NrOfCircuits; i++) {
-					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i /*+ 0.5*/) * connectionWidth * 2;
+					pi1 = connectionPoint - v * ((this.NrOfCircuits) / 2.0 - i) * connectionWidth * 2;
 					if (this.automatic) {
 						pi1 -= (startVector * connectionDepth / 2.0);
 					}
@@ -989,7 +810,7 @@ namespace Europlan.Common {
 				Point2D leftTop = new Point2D(closestPoint.X - size, closestPoint.Y + size);
 				Point2D rightTop = new Point2D(closestPoint.X + size, closestPoint.Y + size);
 				Point2D rightBottom = new Point2D(closestPoint.X + size, closestPoint.Y - size);
-				possibleConnection = new PossibleProductConnection(closestPoint, new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, true, 0 /* TODO*/, this, segmentId, new Segment2D(closestPoint, this.vertices[segmentId]).GetLength());
+				possibleConnection = new PossibleProductConnection(closestPoint, new Polygon2D(new Point2D[] { leftBottom, leftTop, rightTop, rightBottom }), true, true, 0, this, segmentId, new Segment2D(closestPoint, this.vertices[segmentId]).GetLength());
 			}
 			return possibleConnection;
 		}
@@ -1272,22 +1093,9 @@ namespace Europlan.Common {
 	}
 
 	public class GraphicalConnectionAnchor {
-		//protected Point2D position = Point2D.Zero;
 		protected Segment2D segment = new Segment2D();
 		protected GraphicalProductConnection connection = null;
 		protected int segmentId = 0;
-
-		/*public GraphicalConnectionAnchor(double x, double y, GraphicalProductConnection connection, int segmentId) {
-			this.position = new Point2D(x, y); ;
-			this.connection = connection;
-			this.segmentId = segmentId;
-		}
-
-		public GraphicalConnectionAnchor(Point2D position, GraphicalProductConnection connection, int segmentId) {
-			this.position = position;
-			this.connection = connection;
-			this.segmentId = segmentId;
-		}*/
 
 		public GraphicalConnectionAnchor(Segment2D segment, GraphicalProductConnection connection, int segmentId) {
 			this.segment = segment;

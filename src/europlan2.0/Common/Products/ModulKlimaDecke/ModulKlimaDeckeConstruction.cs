@@ -33,14 +33,6 @@ namespace Europlan.Common {
 		public abstract void EndDrag(Point2D planPoint, Point pointInControl);
 		#endregion
 
-		//private ModulKlimaDeckePlanner planner;
-
-		/*[XmlIgnore]
-		public ModulKlimaDeckePlanner Planner {
-			get { return this.planner; }
-			set { this.planner = value; }
-		}*/
-
 		private ModulKlimaDeckeProduct product;
 		private PlanPanel planPanel;
 
@@ -103,15 +95,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-		/*protected void RecalculateSchienen() {
-			if ( this.Product == null ||
-				this.Product.AssociatedRoom == null ||
-				this.Product.AssociatedRoom.AssociatedPlan == null) {
-				return;
-			}
-			this.RecalculateSchienen(this.Product);
-		}*/
 
 		public abstract void RecalculateSchienen();
 

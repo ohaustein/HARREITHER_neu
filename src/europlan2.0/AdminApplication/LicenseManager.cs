@@ -58,7 +58,6 @@ namespace Europlan.AdminApplication {
 				XmlSerializer serializer = new XmlSerializer(typeof(License));
 				License additionalLicense = (License)serializer.Deserialize(stream);
 				LicenseTemplate lt = new LicenseTemplate();
-				//lt.Email = additionalLicense.Email; // Email is missing in License
 				lt.Header = additionalLicense.Header;
 				lt.LicensedTo = additionalLicense.LicensedTo;
 				lt.ValidUntil = additionalLicense.ValidUntil;
@@ -73,8 +72,6 @@ namespace Europlan.AdminApplication {
 				}
 				foreach (LicensedSystem ls in additionalLicense.Systems) {
 					LicensedSystemTemplate lst = new LicensedSystemTemplate();
-					//lst.AddedDate = ls.AddedDate; // AddedDate is missing in LicensedSystem
-					//lst.Annotation = ls.Annotation; // Annotation is missing in LicensedSystem
 					lst.Id = ls.Id;
 					lt.Systems.Add(lst);
 				}

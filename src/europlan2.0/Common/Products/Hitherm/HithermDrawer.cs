@@ -50,7 +50,6 @@ namespace Europlan.Common {
 					}
 				}
 				this.connectionDrawer.Product = this.product;
-				//this.connectionDrawer.Floor = (this.product != null && this.product.AssociatedRoom != null) ? this.product.AssociatedRoom.AssociatedFloor : null;
 			}
 		}
 
@@ -124,7 +123,6 @@ namespace Europlan.Common {
 					fillPath.CloseFigure();
 					c = System.Drawing.Color.FromArgb(64, System.Drawing.Color.Blue);
 					b = new SolidBrush(c);
-					//g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b), fillPath);
 					fillPath.Dispose();
 				}

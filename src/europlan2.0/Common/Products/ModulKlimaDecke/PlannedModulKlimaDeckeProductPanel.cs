@@ -26,34 +26,34 @@ namespace Europlan.Common {
 			this.btnRestwaerme.Text = EuroplanRes.PlannedProductPanel_RestwaermeUebernehmen;
 			this.btnRestkaelte.Text = EuroplanRes.PlannedProductPanel_RestkaelteUebernehmen;
 
-			this.lblAreaPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
-			this.lblCoolLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
-			this.lblHeatLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%";
-			this.lblAreaUnheated.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblRestAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblAnbAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblCoveredAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblAvailableAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.label3.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblCoolLoadUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblHeatLoadUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQAnbCoolUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQAnbHeatUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQCoolRestUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQCoolDiffUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQCoolUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQHeatRestUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQHeatDiffUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.lblQHeatUnit.Text = EuroplanRes.Unit_Watt; //"W";
-			this.label27.Text = EuroplanRes.Unit_GradCelsius; //"°C";
-			this.label7.Text = EuroplanRes.Unit_GradCelsius; //"°C";
-			this.lblDruckverlustCoolUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblDruckverlustHeatUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblDurchflussCoolUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblDurchflussHeatUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblAvgqCoolUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²";
-			this.lblAvgqHeatUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²";
+			this.lblAreaPercentage.Text = EuroplanRes.Unit_Prozent; //"%"
+			this.lblCoolLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%"
+			this.lblHeatLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%"
+			this.lblAreaUnheated.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblRestAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblAnbAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblCoveredAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblAvailableAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.label3.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblCoolLoadUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblHeatLoadUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQAnbCoolUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQAnbHeatUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQCoolRestUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQCoolDiffUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQCoolUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQHeatRestUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQHeatDiffUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.lblQHeatUnit.Text = EuroplanRes.Unit_Watt; //"W"
+			this.label27.Text = EuroplanRes.Unit_GradCelsius; //"°C"
+			this.label7.Text = EuroplanRes.Unit_GradCelsius; //"°C"
+			this.lblDruckverlustCoolUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblDruckverlustHeatUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblDurchflussCoolUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblDurchflussHeatUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblAvgqCoolUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²"
+			this.lblAvgqHeatUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²"
 
 			this.lblCoolLoadTotal.Text = "(0 " + EuroplanRes.Unit_Watt + ")";
 			this.lblHeatLoadTotal.Text = "(0 " + EuroplanRes.Unit_Watt + ")";
@@ -67,50 +67,50 @@ namespace Europlan.Common {
 			this.btnRemoveHk.Text = EuroplanRes.General_Minus;
 			this.btnAddHk.Text = EuroplanRes.General_Plus;
 
-			this.chkCoverCoolLoad.Text = EuroplanRes.PlannedProductPanel_KuehllastDecken; //"Kühllast decken";
-			this.lblCoolLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteKuehlleistung; //"gewünschte Kühlleistung:";
-			this.chkCoverHeatLoad.Text = EuroplanRes.PlannedProductPanel_WaermebedarfDecken; //"Wärmebedarf decken";
-			this.lblHeatLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteHeizleistung; //"gewünschte Heizleistung:";
-			this.label28.Text = EuroplanRes.PlannedProductPanel_TemperaturOberhalbKuehl; //"Temperatur oberhalb (Kühlbetrieb):";
-			this.label8.Text = EuroplanRes.PlannedProductPanel_TemperaturOberhalbHeiz; //"Temperatur oberhalb (Heizbetrieb):";
-			this.lblInsulationConstruction.Text = EuroplanRes.PlannedProductPanel_Daemmkonstruktion; //"Wärmedämmkonstruktion:";
-			this.lblCeilingConstruction.Text = EuroplanRes.PlannedProductPanel_Deckenkonstruktion; //"Deckenkonstruktion:";
-			this.pageInput.Text = EuroplanRes.PlannedProductPanel_EingabedatenSeite; //"Eingabedaten";
-			this.pageCircuit.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenSeite; //"Anbindeleitungen";
-			this.groupBox10.Text = EuroplanRes.PlannedProductPanel_AnbindeleitugenGruppe; //"Anbindeleitungen";
-			this.chkStellAntriebe.Text = EuroplanRes.PlannedProductPanel_Stellantriebe; //"Stellantrieb(e) verwenden";
-			this.lblDistributor.Text = EuroplanRes.PlannedProductPanel_Verteileranschluss; //"Verteileranschluß:";
-			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung";
-			this.btnConnectionPipes.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenBearbeiten; //"Anbindeleitungen bearbeiten";
-			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:";
+			this.chkCoverCoolLoad.Text = EuroplanRes.PlannedProductPanel_KuehllastDecken; //"Kühllast decken"
+			this.lblCoolLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteKuehlleistung; //"gewünschte Kühlleistung:"
+			this.chkCoverHeatLoad.Text = EuroplanRes.PlannedProductPanel_WaermebedarfDecken; //"Wärmebedarf decken"
+			this.lblHeatLoadTxt.Text = EuroplanRes.PlannedProductPanel_GewuenschteHeizleistung; //"gewünschte Heizleistung:"
+			this.label28.Text = EuroplanRes.PlannedProductPanel_TemperaturOberhalbKuehl; //"Temperatur oberhalb (Kühlbetrieb):"
+			this.label8.Text = EuroplanRes.PlannedProductPanel_TemperaturOberhalbHeiz; //"Temperatur oberhalb (Heizbetrieb):"
+			this.lblInsulationConstruction.Text = EuroplanRes.PlannedProductPanel_Daemmkonstruktion; //"Wärmedämmkonstruktion:"
+			this.lblCeilingConstruction.Text = EuroplanRes.PlannedProductPanel_Deckenkonstruktion; //"Deckenkonstruktion:"
+			this.pageInput.Text = EuroplanRes.PlannedProductPanel_EingabedatenSeite; //"Eingabedaten"
+			this.pageCircuit.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenSeite; //"Anbindeleitungen"
+			this.groupBox10.Text = EuroplanRes.PlannedProductPanel_AnbindeleitugenGruppe; //"Anbindeleitungen"
+			this.chkStellAntriebe.Text = EuroplanRes.PlannedProductPanel_Stellantriebe; //"Stellantrieb(e) verwenden"
+			this.lblDistributor.Text = EuroplanRes.PlannedProductPanel_Verteileranschluss; //"Verteileranschluß:"
+			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung"
+			this.btnConnectionPipes.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenBearbeiten; //"Anbindeleitungen bearbeiten"
+			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:"
 
-			this.label4.Text = EuroplanRes.PlannedModulProductPanel_Berechnungsergebnisse; //"Berechnungsergebnisse:";
-			this.label9.Text = EuroplanRes.PlannedModulProductPanel_Druckverlust; //"Druckverlust:";
-			this.label6.Text = EuroplanRes.PlannedModulProductPanel_Wassermenge; //"Wassermenge:";
-			this.label5.Text = EuroplanRes.PlannedModulProductPanel_DurchschnittlicheWaermestromdichte; //"Durchschn. Wärmestromdichte:";
-			this.label11.Text = EuroplanRes.PlannedModulProductPanel_Kuehlbetrieb; //"Kühlbetrieb";
-			this.label10.Text = EuroplanRes.PlannedModulProductPanel_Heizbetrieb; //"Heizbetrieb";
-			this.lblRestAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUebrig; //"Übrige Fläche:";
-			this.lblAnbAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheAnbindung; //"Fläche Anbindeleitungen:";
-			this.lblCoveredAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheBelegt; //"Belegte Fläche:";
-			this.lblAvailableAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheVerfuegbar; //"Verfügbare Fläche:";
-			this.lblAdditionalInfo.Text = EuroplanRes.PlannedModulProductPanel_ZusaetzlicheInformationen; //"Zus. Informationen:";
-			this.label16.Text = EuroplanRes.PlannedModulProductPanel_DifferenzLeistung; //"Differenz zur erwarteten Leistung:";
-			this.label17.Text = EuroplanRes.PlannedModulProductPanel_ErreichteLeistung; //"Erreichte Leistung:";
-			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUnbeheizt; //"unbeheizte/ungekühlte Fläche:";
-			this.label45.Text = EuroplanRes.PlannedModulProductPanel_LeistungAnbindung; //"Leistung Anbindeleitungen:";
+			this.label4.Text = EuroplanRes.PlannedModulProductPanel_Berechnungsergebnisse; //"Berechnungsergebnisse:"
+			this.label9.Text = EuroplanRes.PlannedModulProductPanel_Druckverlust; //"Druckverlust:"
+			this.label6.Text = EuroplanRes.PlannedModulProductPanel_Wassermenge; //"Wassermenge:"
+			this.label5.Text = EuroplanRes.PlannedModulProductPanel_DurchschnittlicheWaermestromdichte; //"Durchschn. Wärmestromdichte:"
+			this.label11.Text = EuroplanRes.PlannedModulProductPanel_Kuehlbetrieb; //"Kühlbetrieb"
+			this.label10.Text = EuroplanRes.PlannedModulProductPanel_Heizbetrieb; //"Heizbetrieb"
+			this.lblRestAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUebrig; //"Übrige Fläche:"
+			this.lblAnbAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheAnbindung; //"Fläche Anbindeleitungen:"
+			this.lblCoveredAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheBelegt; //"Belegte Fläche:"
+			this.lblAvailableAreaText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheVerfuegbar; //"Verfügbare Fläche:"
+			this.lblAdditionalInfo.Text = EuroplanRes.PlannedModulProductPanel_ZusaetzlicheInformationen; //"Zus. Informationen:"
+			this.label16.Text = EuroplanRes.PlannedModulProductPanel_DifferenzLeistung; //"Differenz zur erwarteten Leistung:"
+			this.label17.Text = EuroplanRes.PlannedModulProductPanel_ErreichteLeistung; //"Erreichte Leistung:"
+			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUnbeheizt; //"unbeheizte/ungekühlte Fläche:"
+			this.label45.Text = EuroplanRes.PlannedModulProductPanel_LeistungAnbindung; //"Leistung Anbindeleitungen:"
 
 			this.lblCalculateMode.Text = EuroplanRes.PlannedProductPanel_Verwendungszweck;
 			this.rbHeat.Text = EuroplanRes.PlannedProductPanel_Heizen;
 			this.rbCool.Text = EuroplanRes.PlannedProductPanel_Kuehlen;
 			this.rbHeatAndCool.Text = EuroplanRes.PlannedProductPanel_HeizenUndKuehlen;
 
-			this.label2.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_SummeVerbindungsleitungen; //"Summe Verbindungsleitungen:";
-			this.label12.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Heizkreis; //"Heizkreise";
-			this.label15.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Typ; //"Typ:";
-			this.label13.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaechen; //"Teilflächen";
-			this.label14.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen; //"(Pro Winkel zusätzlich 1m Verbindungsleitung)";
-			this.label1.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ParalleleReihen; //"Parallele Reihen im Heizkreis";
+			this.label2.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_SummeVerbindungsleitungen; //"Summe Verbindungsleitungen:"
+			this.label12.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Heizkreis; //"Heizkreise"
+			this.label15.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Typ; //"Typ:"
+			this.label13.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaechen; //"Teilflächen"
+			this.label14.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen; //"(Pro Winkel zusätzlich 1m Verbindungsleitung)"
+			this.label1.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ParalleleReihen; //"Parallele Reihen im Heizkreis"
 		}
 
 		#region IEditorUserControl Members
@@ -222,8 +222,6 @@ namespace Europlan.Common {
 
 				ModulKlimaDeckeProduct mdProduct = this.product.Product as ModulKlimaDeckeProduct;
 
-				//bool showHeat = this.product.Product.AssociatedRoom.HeatLoad > 0;
-				//bool showCool = this.product.Product.AssociatedRoom.CoolLoad > 0;
 				bool showHeat = this.product.RequestedHeatLoad > 0;
 				bool showCool = this.product.RequestedCoolLoad > 0;
 
@@ -241,8 +239,6 @@ namespace Europlan.Common {
 				lblDurchflussHeatUnit.Visible = showHeat;
 				lblDruckverlustHeat.Visible = showHeat;
 				lblDruckverlustHeatUnit.Visible = showHeat;
-				//lblTempHeat.Visible = showHeat;
-				//lblTempHeatUnit.Visible = showHeat;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
 				lblQAnbCool.Visible = showCool;
@@ -257,8 +253,6 @@ namespace Europlan.Common {
 				lblDurchflussCoolUnit.Visible = showCool;
 				lblDruckverlustCool.Visible = showCool;
 				lblDruckverlustCoolUnit.Visible = showCool;
-				//lblTempCool.Visible = showCool;
-				//lblTempCoolUnit.Visible = showCool;
 
 				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
 					this.rbLayoutTable.Enabled = true;
@@ -316,7 +310,6 @@ namespace Europlan.Common {
 					this.numAreaPercentage.MaxValue = 100;
 				}
 
-				//this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 				this.numHeatLoadPercentage.MaxValue = (decimal)(mdProduct.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / mdProduct.AssociatedRoom.NormalizedHeatLoad);
@@ -369,8 +362,6 @@ namespace Europlan.Common {
 						}
 						break;
 					default:
-						//this.numArea.MaxValue = (decimal)0;
-						//this.numAreaPercentage.MaxValue = (decimal)0;
 						break;
 				}
 
@@ -529,7 +520,6 @@ namespace Europlan.Common {
 					if (lstRows.Items.Count > 0) {
 						lstRows.SelectedIndex = 0;
 					}
-					//btnAddRow.Enabled = lstCircuits.SelectedIndex >= 0 && lstRows.Items.Count < ModulKlimaDeckeProduct.ConfigMaxModulesInParallel;
 					if (graphicalMode) {
 						btnAddRow.Enabled = false;
 						btnRemoveRow.Enabled = false;
@@ -569,7 +559,6 @@ namespace Europlan.Common {
 				lblAvgqHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QHeatPerSqm, 2).ToString() : "0";
 				lblDurchflussHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussHeat, 2).ToString() : "0";
 				lblDruckverlustHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustHeat, 2).ToString() : "0";
-				//lblTempHeat.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
@@ -577,7 +566,6 @@ namespace Europlan.Common {
 				lblAvgqCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QCoolPerSqm, 2)).ToString() : "0";
 				lblDurchflussCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussCool, 2).ToString() : "0";
 				lblDruckverlustCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustCool, 2).ToString() : "0";
-				//lblTempCool.Text = Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_FloorTempCool, 2).ToString();
 				if (mdProduct.ModulType == Product.ProductType.DH || mdProduct.ModulType == Product.ProductType.FBH) {
 					double availableArea;
 					if (mdProduct.ModulType == Product.ProductType.DH) {
@@ -607,7 +595,6 @@ namespace Europlan.Common {
 						if (!string.IsNullOrEmpty(message)) {
 							ListViewItem item = new ListViewItem(message);
 							item.ForeColor = Color.Red;
-							//item.Font = new Font(item.Font, FontStyle.Bold);
 							this.lstError.Items.Add(item);
 						}
 					}
@@ -908,10 +895,6 @@ namespace Europlan.Common {
 				}
 			}
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor);
-			//form.SelectedConnection = (this.product.Product as EurovalProduct).PlannedConnection;
-			//if (form.ShowDialog() == DialogResult.OK) {
-			//	(this.product.Product as EurovalProduct).PlannedConnection = form.SelectedConnection;
-			//}
 			form.ShowDialog();
 
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);

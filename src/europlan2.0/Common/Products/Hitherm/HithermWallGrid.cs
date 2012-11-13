@@ -16,18 +16,6 @@ namespace Europlan.Common {
 			InitializeComponent();
 
 			this.SetLanguage();
-			/*List<HithermWall> walls = new List<HithermWall>();
-
-			ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
-			wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-			//int i = 1;
-			foreach (WallConstruction wc in wrapper) {
-				HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-				walls.Add(w);
-			}
-
-
-			this.hithermWallBindingSource.DataSource = walls;*/
 
 			if (Project.Instance != null) {
 				this.tempBehindCoolDataGridViewTextBoxColumn.Visible = Project.Instance.CalculateCoolLoad;
@@ -38,15 +26,15 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_NummerCol; //"Nummer";
-			this.constructionDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_Basiskonstruktion; //"Basis-\nKonstr.";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
-			this.Deckschicht.HeaderText = EuroplanRes.HithermWallGrid_Deckschicht; //"Decksch.\nR\n(m²K/W)";
-			this.kValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_UWert; //"U-Wert\n(W/m²K)";
-			this.bereinigenDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_WaermebedarfBereinigen; //"Wärme\nBedarf\nberein.";
-			this.additionalInsulationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_ZusaetzlicheDaemmung; //"zus. Dämmg\nR\n(m²K/W)";
-			this.tempBehindHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturHeiz; //"Temp.\nHeiz\n(°C)";
-			this.tempBehindCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturKuehl; //"Temp.\nKühl\n(°C)";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_NummerCol; //"Nummer"
+			this.constructionDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_Basiskonstruktion; //"Basis-\nKonstr."
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung"
+			this.Deckschicht.HeaderText = EuroplanRes.HithermWallGrid_Deckschicht; //"Decksch.\nR\n(m²K/W)"
+			this.kValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_UWert; //"U-Wert\n(W/m²K)"
+			this.bereinigenDataGridViewCheckBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_WaermebedarfBereinigen; //"Wärme\nBedarf\nberein."
+			this.additionalInsulationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_ZusaetzlicheDaemmung; //"zus. Dämmg\nR\n(m²K/W)"
+			this.tempBehindHeatDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturHeiz; //"Temp.\nHeiz\n(°C)"
+			this.tempBehindCoolDataGridViewTextBoxColumn.HeaderText = EuroplanRes.HithermWallGrid_TemperaturKuehl; //"Temp.\nKühl\n(°C)"
 		}
 
 		public class WallEventArgs : EventArgs {
@@ -58,14 +46,6 @@ namespace Europlan.Common {
 		public event EventHandler<WallEventArgs> WallChanged;
 		public event EventHandler<WallEventArgs> WallAdded;
 		public event EventHandler<WallEventArgs> WallRemoved;
-
-		/*public List<HithermWall> Walls {
-			get { return this.hithermWallBindingSource.DataSource as List<HithermWall>; }
-			set {
-				this.hithermWallBindingSource.DataSource = value;
-				this.hithermWallBindingSource.ResetBindings(false);
-			}
-		}*/
 
 		public bool ShowCompact {
 			get { return this.showCompact; }
@@ -150,13 +130,11 @@ namespace Europlan.Common {
 			e.Row.Cells[this.Construction.Index].Value = newConstruction;
 			e.Row.Cells[this.Deckschicht.Index].Value = 0.0;
 			e.Row.Cells[this.kValueDataGridViewTextBoxColumn.Index].Value = 0.0;
-			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = EuroplanRes.HithermWallGrid_NeueWandkonstruktion; //"Neue Wandkonstruktion";
+			e.Row.Cells[this.nameDataGridViewTextBoxColumn.Index].Value = EuroplanRes.HithermWallGrid_NeueWandkonstruktion; //"Neue Wandkonstruktion"
 			int maxId = 0;
 			int newId;
 			string prefix = this.showCompact ? "UCW" : "USW";
 			if (Project.Instance != null) {
-			//if (this.hithermWallBindingSource.DataSource is List<HithermWall>) {
-				//foreach (HithermWall hw in this.hithermWallBindingSource.DataSource as List<HithermWall>) {
 				foreach (HithermWall hw in Project.Instance.HithermWalls) {
 					if (hw.Id != null && hw.Id.StartsWith(prefix)) {
 						if (Int32.TryParse(hw.Id.Substring(3), out newId) && newId > maxId) {

@@ -70,12 +70,6 @@ namespace Europlan.Common {
 			cmbDistributors.Items.Clear();
 			if (Project.Instance != null) {
 				List<Distributor> distributors = Project.Instance.QuickDimensioning.Distributors;
-				//if (distributors.Count == 0) {
-				//    QuickDimensioningDistributor distributor = new QuickDimensioningDistributor();
-				//    string localized = EuroplanRes.Distributor1;
-				//    distributor.Name = localized;
-				//    distributors.Add(distributor);
-				//}
 				foreach (Distributor distributor in distributors) {
 					cmbDistributors.Items.Add(distributor);
 				}
@@ -140,14 +134,5 @@ namespace Europlan.Common {
 			this.distributorGrid.Distributor = distributor;
 			UpdateRemainingConnectors();
 		}
-
-		//private void btnNewDistributor_Click(object sender, EventArgs e) {
-		//    NewQuickDimensioningDistributorForm form = new NewQuickDimensioningDistributorForm(Project.Instance);
-		//    form.ShowDialog();
-		//    this.OnProjectChanged();
-		//    UpdateControl();
-		//}
-
-
 	}
 }

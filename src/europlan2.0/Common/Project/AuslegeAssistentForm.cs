@@ -36,10 +36,10 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label1.Text = EuroplanRes.AuslegeAssistentForm_Beschreibung; //"Die beiden Diagramme stellen die notwendigen Verlegearten für eine Variation der Vorlauftemperatur dar.";
-			this.chkEuroval.Text = EuroplanRes.AuslegeAssistentForm_Euroval; //"Euroval";
-			this.chkEcotherm.Text = EuroplanRes.AuslegeAssistentForm_Ecotherm; //"Ecotherm";
-			this.Text = EuroplanRes.AuslegeAssistentForm_Auslegehilfe; //"Auslegehilfe";
+			this.label1.Text = EuroplanRes.AuslegeAssistentForm_Beschreibung; //"Die beiden Diagramme stellen die notwendigen Verlegearten für eine Variation der Vorlauftemperatur dar."
+			this.chkEuroval.Text = EuroplanRes.AuslegeAssistentForm_Euroval; //"Euroval"
+			this.chkEcotherm.Text = EuroplanRes.AuslegeAssistentForm_Ecotherm; //"Ecotherm"
+			this.Text = EuroplanRes.AuslegeAssistentForm_Auslegehilfe; //"Auslegehilfe"
 		}
 
 		private void ConfigureTree() {

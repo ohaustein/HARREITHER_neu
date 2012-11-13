@@ -14,11 +14,11 @@ namespace Europlan.Common {
 	public abstract class GraphicalWallObstacle : IGraphicalWallObject {
 
 		public class ObstacleTypeConverter : System.ComponentModel.TypeConverter {
-			private static readonly string door = EuroplanRes.GraphicalWallObstacle_Door; //"Tür";
-			private static readonly string window = EuroplanRes.GraphicalWallObstacle_Window; //"Fenster";
-			private static readonly string windowTriangleLeft = EuroplanRes.GraphicalWallObstacle_WindowTriangleLeft; //"Dreiecksfenster Links";
-			private static readonly string windowTriangleRight = EuroplanRes.GraphicalWallObstacle_WindowTriangleRight; //"Dreiecksfenster Rechts";
-			private static readonly string other = EuroplanRes.GraphicalWallObstacle_Other; //"Anderes";
+			private static readonly string door = EuroplanRes.GraphicalWallObstacle_Door; //"Tür"
+			private static readonly string window = EuroplanRes.GraphicalWallObstacle_Window; //"Fenster"
+			private static readonly string windowTriangleLeft = EuroplanRes.GraphicalWallObstacle_WindowTriangleLeft; //"Dreiecksfenster Links"
+			private static readonly string windowTriangleRight = EuroplanRes.GraphicalWallObstacle_WindowTriangleRight; //"Dreiecksfenster Rechts"
+			private static readonly string other = EuroplanRes.GraphicalWallObstacle_Other; //"Anderes"
 
 			private Dictionary<string, ObstacleTypeEnum> mappingFromString = new Dictionary<string, ObstacleTypeEnum>();
 			private Dictionary<ObstacleTypeEnum, string> mappingToString = new Dictionary<ObstacleTypeEnum, string>();
@@ -333,17 +333,6 @@ namespace Europlan.Common {
 			} else {
 				door = GetObjectBorders(xOffset, yOffset);
 			}
-
-			/*if (polygon.IsClockwise()) {
-				polygon.Reverse();
-			}
-			if (door.IsClockwise()) {
-				door.Reverse();
-			}
-			List<Polygon2D> list1 = new List<Polygon2D>();
-			list1.Add(polygon);
-			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(door);*/
 
 			try {
 				return Polygon2D.GetIntersection(polygon, door).Count > 0;

@@ -34,24 +34,24 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label1.Text = EuroplanRes.DistributorPanel_Verteilerdaten; //"Verteilerdaten";
-			this.label2.Text = EuroplanRes.DistributorPanel_Nummer; //"Nummer:";
-			this.label3.Text = EuroplanRes.DistributorPanel_Bezeichnung; //"Bezeichnung:";
-			this.label4.Text = EuroplanRes.DistributorPanel_Regelkreis; //"Regelkreis:";
-			this.label5.Text = EuroplanRes.DistributorPanel_MaximaleHeizkreise; //"max. Heizkreise:";
-			this.label6.Text = EuroplanRes.DistributorPanel_Geschosse; //"Geschoße, die diesen Verteiler auch nutzen können:";
-			this.chkEinbauschrank.Text = EuroplanRes.DistributorPanel_Einbauschrank; //"Einbauschrank";
-			this.chkFlansch.Text = EuroplanRes.DistributorPanel_Flanschkugelhaehne; //"Flanschkugelhähne";
-			this.label9.Text = EuroplanRes.DistributorPanel_Verteilertyp; //"Verteilertyp:";
-			this.label10.Text = EuroplanRes.DistributorPanel_Anschlusshollaender; //"Anschlußholländer:";
-			this.label11.Text = EuroplanRes.DistributorPanel_Zubehoer; //"Zubehör:";
-			this.chkAnschluss.Text = EuroplanRes.DistributorPanel_LangeAnschlussboegen; //"Lange Anschlussbögen";
-			this.label7.Text = EuroplanRes.DistributorPanel_ZusaetzlicheHeizkreise; //"zus. Heizkreise:";
-			this.label8.Text = EuroplanRes.DistributorPanel_ZusaetzlicheStellantriebe; //"zus. Stellantriebe:";
-			this.label12.Text = EuroplanRes.DistributorPanel_Heizsyteme; //"Heizsysteme, die standard- mäßig an diesen Verteiler angeschlossen werden sollen:";
-			this.label13.Text = EuroplanRes.DistributorPanel_ZugewieseneHeizkreise; //"zugewiesene Heizkreise: ";
-			this.lblCircuits.Text = EuroplanRes.DistributorPanel_Aktiv.Replace("%VALUE%", "7"); //"7 (aktiv)";
-			this.btnGraphicalPosition.Text = EuroplanRes.DistributorPanel_GraphicalPosition; //"Grafische Positionierung";
+			this.label1.Text = EuroplanRes.DistributorPanel_Verteilerdaten; //"Verteilerdaten"
+			this.label2.Text = EuroplanRes.DistributorPanel_Nummer; //"Nummer:"
+			this.label3.Text = EuroplanRes.DistributorPanel_Bezeichnung; //"Bezeichnung:"
+			this.label4.Text = EuroplanRes.DistributorPanel_Regelkreis; //"Regelkreis:"
+			this.label5.Text = EuroplanRes.DistributorPanel_MaximaleHeizkreise; //"max. Heizkreise:"
+			this.label6.Text = EuroplanRes.DistributorPanel_Geschosse; //"Geschoße, die diesen Verteiler auch nutzen können:"
+			this.chkEinbauschrank.Text = EuroplanRes.DistributorPanel_Einbauschrank; //"Einbauschrank"
+			this.chkFlansch.Text = EuroplanRes.DistributorPanel_Flanschkugelhaehne; //"Flanschkugelhähne"
+			this.label9.Text = EuroplanRes.DistributorPanel_Verteilertyp; //"Verteilertyp:"
+			this.label10.Text = EuroplanRes.DistributorPanel_Anschlusshollaender; //"Anschlußholländer:"
+			this.label11.Text = EuroplanRes.DistributorPanel_Zubehoer; //"Zubehör:"
+			this.chkAnschluss.Text = EuroplanRes.DistributorPanel_LangeAnschlussboegen; //"Lange Anschlussbögen"
+			this.label7.Text = EuroplanRes.DistributorPanel_ZusaetzlicheHeizkreise; //"zus. Heizkreise:"
+			this.label8.Text = EuroplanRes.DistributorPanel_ZusaetzlicheStellantriebe; //"zus. Stellantriebe:"
+			this.label12.Text = EuroplanRes.DistributorPanel_Heizsyteme; //"Heizsysteme, die standard- mäßig an diesen Verteiler angeschlossen werden sollen:"
+			this.label13.Text = EuroplanRes.DistributorPanel_ZugewieseneHeizkreise; //"zugewiesene Heizkreise: "
+			this.lblCircuits.Text = EuroplanRes.DistributorPanel_Aktiv.Replace("%VALUE%", "7"); //"7 (aktiv)"
+			this.btnGraphicalPosition.Text = EuroplanRes.DistributorPanel_GraphicalPosition; //"Grafische Positionierung"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -70,10 +70,6 @@ namespace Europlan.Common {
 				foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
 					this.cmbCircuit.Items.Add(circuit);
 				}
-				//this.cmbDistributorType.Items.Clear();
-				//foreach (Distributor.DistributorTypeEnum item in Enum.GetValues(typeof(Distributor.DistributorTypeEnum))) {
-				//    this.cmbDistributorType.Items.Add(item);
-				//}
 				this.cmbAnschlussHollaender.Items.Clear();
 				foreach (Distributor.AnschlussHollaenderEnum item in Enum.GetValues(typeof(Distributor.AnschlussHollaenderEnum))) {
 					this.cmbAnschlussHollaender.Items.Add(item);
@@ -89,7 +85,6 @@ namespace Europlan.Common {
 				this.lstSystems.Items.Add(EuroplanRes.DistributorPanel_Wand, distributor.UseForWall);
 				this.lstSystems.Items.Add(EuroplanRes.DistributorPanel_Decke, distributor.UseForCeiling);
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
-				//this.cmbDistributorType.SelectedItem = distributor.DistributorType;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
 
 				this.btnGraphicalPosition.Enabled = distributor.AssociatedFloor.AssociatedPlanId != null && distributor.AssociatedFloor.AssociatedPlanId != "";
@@ -107,7 +102,6 @@ namespace Europlan.Common {
 				if (!string.IsNullOrEmpty(message)) {
 					ListViewItem item = new ListViewItem(message);
 					item.ForeColor = Color.Red;
-					//item.Font = new Font(item.Font, FontStyle.Bold);
 					this.lstError.Items.Add(item);
 				}
 			}
@@ -204,7 +198,6 @@ namespace Europlan.Common {
 					}
 				}
 			} else {
-				// TODO: check if distributor is also planned in a floor
 				if (this.distributor.AdditionalFloorIds.Contains(floor.Id)) {
 					Distributor.GraphicalRepresentation toDelete = new Distributor.GraphicalRepresentation();
 					foreach (Distributor.GraphicalRepresentation gp in distributor.GraphicalRepresentations) {

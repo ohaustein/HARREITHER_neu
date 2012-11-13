@@ -40,7 +40,7 @@ namespace Europlan.Common {
 		private void SetLanguage() {
 			this.btnCancel.Text = EuroplanRes.General_Abbrechen;
 			this.btnOk.Text = EuroplanRes.General_Ok;
-			this.Text = EuroplanRes.SelectHithermWallForm_KonstruktionWaehlen;//"Bitte wählen Sie die Konstruktion!";
+			this.Text = EuroplanRes.SelectHithermWallForm_KonstruktionWaehlen;//"Bitte wählen Sie die Konstruktion!"
 		}
 
 		public HithermWall SelectedWall {

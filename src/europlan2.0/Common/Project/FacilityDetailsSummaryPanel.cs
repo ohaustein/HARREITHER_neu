@@ -41,17 +41,17 @@ namespace Europlan.Common {
 			this.label7.Text = EuroplanRes.Unit_GradCelsius;
 			this.btnNext.Text = EuroplanRes.General_Weiter;
 
-			this.label1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Anlagedaten; //"Anlagedaten";
-			this.label3.Text = EuroplanRes.FacilityDetailsSummaryPanel_Normaussentemperatur; //"Normaußentemperatur:";
-			this.label2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Spreizung; //"Spreizung:";
-			this.chkSpreizung.Text = EuroplanRes.FacilityDetailsSummaryPanel_VariableSpreizungVerwenden; //"variable Spreizung für endgültige Berechnung verwenden";
-			this.groupBox1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Allgemein; //"Generell";
-			this.groupBox2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Kuehlung; //"Kühlung";
-			this.label12.Text = EuroplanRes.FacilityDetailsSummaryPanel_Taupunkttemperatur; //"Taupunkttemperatur:";
-			this.label10.Text = EuroplanRes.FacilityDetailsSummaryPanel_InnentemperaturKuehlung; //"Innentemperatur für Kühlung:";
-			this.label8.Text = EuroplanRes.FacilityDetailsSummaryPanel_Luftfeuchtigkeit; //"Relative Luftfeuchtigkeit:";
-			this.label6.Text = EuroplanRes.FacilityDetailsSummaryPanel_AussentemperaturKuehlung; //"Außentemperatur für Kühlung:";
-			this.chkCool.Text = EuroplanRes.FacilityDetailsSummaryPanel_KuehlleistungBerechnen; //"Kühlleistung berechnen";
+			this.label1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Anlagedaten; //"Anlagedaten"
+			this.label3.Text = EuroplanRes.FacilityDetailsSummaryPanel_Normaussentemperatur; //"Normaußentemperatur:"
+			this.label2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Spreizung; //"Spreizung:"
+			this.chkSpreizung.Text = EuroplanRes.FacilityDetailsSummaryPanel_VariableSpreizungVerwenden; //"variable Spreizung für endgültige Berechnung verwenden"
+			this.groupBox1.Text = EuroplanRes.FacilityDetailsSummaryPanel_Allgemein; //"Generell"
+			this.groupBox2.Text = EuroplanRes.FacilityDetailsSummaryPanel_Kuehlung; //"Kühlung"
+			this.label12.Text = EuroplanRes.FacilityDetailsSummaryPanel_Taupunkttemperatur; //"Taupunkttemperatur:"
+			this.label10.Text = EuroplanRes.FacilityDetailsSummaryPanel_InnentemperaturKuehlung; //"Innentemperatur für Kühlung:"
+			this.label8.Text = EuroplanRes.FacilityDetailsSummaryPanel_Luftfeuchtigkeit; //"Relative Luftfeuchtigkeit:"
+			this.label6.Text = EuroplanRes.FacilityDetailsSummaryPanel_AussentemperaturKuehlung; //"Außentemperatur für Kühlung:"
+			this.chkCool.Text = EuroplanRes.FacilityDetailsSummaryPanel_KuehlleistungBerechnen; //"Kühlleistung berechnen"
 
 		}
 

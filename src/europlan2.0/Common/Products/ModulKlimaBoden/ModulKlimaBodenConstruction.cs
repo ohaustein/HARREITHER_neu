@@ -16,8 +16,6 @@ namespace Europlan.Common {
 	public abstract class ModulKlimaBodenConstruction : IPickableObject, IDragableObject {
 
 		protected double rotation = 0;
-		//protected List<Polygon2D> schienen = new List<Polygon2D>();
-		//protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
 		public abstract void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode);
 		public abstract void PaintDxf(DxfModel model, DxfLayer layer);
@@ -99,12 +97,6 @@ namespace Europlan.Common {
 		public abstract List<Point2D> RoomCoordinates {
 			get;
 		}
-
-		/*[XmlIgnore]
-		public List<PossibleModulLane> PossibleLanes {
-			get { return this.possibleLanes; }
-		}*/
-
 	}
 
 }

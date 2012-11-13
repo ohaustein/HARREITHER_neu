@@ -37,37 +37,37 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.label1.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.label2.Text = EuroplanRes.Unit_GradCelsius; //"°C";
-			this.label3.Text = EuroplanRes.Unit_Watt; //"W";
-			this.label4.Text = EuroplanRes.Unit_Watt; //"W";
-			this.label5.Text = EuroplanRes.Unit_Watt; //"W";
-			this.label6.Text = EuroplanRes.Unit_Watt; //"W";
+			this.label1.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.label2.Text = EuroplanRes.Unit_GradCelsius; //"°C"
+			this.label3.Text = EuroplanRes.Unit_Watt; //"W"
+			this.label4.Text = EuroplanRes.Unit_Watt; //"W"
+			this.label5.Text = EuroplanRes.Unit_Watt; //"W"
+			this.label6.Text = EuroplanRes.Unit_Watt; //"W"
 
-			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
-			this.colEdit.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
+			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?"
+			this.colEdit.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten"
 
-			this.lblName.Text = EuroplanRes.RoomSummaryPanel_Name; //"Name:";
-			this.lblArea.Text = EuroplanRes.RoomSummaryPanel_Flaeche; //"Fläche:";
-			this.lblTemperature.Text = EuroplanRes.RoomSummaryPanel_Raumtemperatur; //"Norminnentemperatur:";
-			this.lblHeat.Text = EuroplanRes.RoomSummaryPanel_Heizlast; //"Heizlast:";
-			this.lblNormHeat.Text = EuroplanRes.RoomSummaryPanel_HeizlastBereinigt; //"Heizlast (bereinigt):";
-			this.lblCool.Text = EuroplanRes.RoomSummaryPanel_Kuehllast; //"Kühllast:";
-			this.lblNormCool.Text = EuroplanRes.RoomSummaryPanel_KuehllastBereinigt; //"Kühllast (bereinigt):";
-			this.lblRoomData.Text = EuroplanRes.RoomSummaryPanel_Raumdaten; //"Raumdaten:";
-			this.grpBoxSystems.Text = EuroplanRes.RoomSummaryPanel_Heizsysteme; //"Heizsysteme";
-			this.btnDelete.Text = EuroplanRes.RoomSummaryPanel_Loeschen; //"Löschen";
-			this.btnAdd.Text = EuroplanRes.RoomSummaryPanel_Hinzufuegen; //"Hinzufügen";
-			this.colType.HeaderText = EuroplanRes.RoomSummaryPanel_Typ; //"Typ";
-			this.colSystem.HeaderText = EuroplanRes.RoomSummaryPanel_System; //"System";
-			this.colComment.HeaderText = EuroplanRes.RoomSummaryPanel_Bemerkung; //"Bemerkung";
-			this.colFloorArea.HeaderText = EuroplanRes.RoomSummaryPanel_FbhFlaeche; //"FBH-\nFläche\n(m²)";
-			this.colPlannedArea.HeaderText = EuroplanRes.RoomSummaryPanel_Heizflaeche; //"Heiz-\nfläche\n(m²)";
-			this.colPlannedHeatLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Heizleistung; //"PHeiz\n(W)";
-			this.colPlannedCoolLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Kuehlleistung; //"PKühl\n(W)";
-			this.btnGeometry.Text = EuroplanRes.RoomSummaryPanel_Raumgeometrie_Erfassen; //"Raumgeometrie erfassen";
-			this.btnCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Erfassen; //"Deckengeometrie erfassen";
-			this.chkCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen; //"Deckengeometrie gesondert erfassen"
+			this.lblName.Text = EuroplanRes.RoomSummaryPanel_Name; //"Name:"
+			this.lblArea.Text = EuroplanRes.RoomSummaryPanel_Flaeche; //"Fläche:"
+			this.lblTemperature.Text = EuroplanRes.RoomSummaryPanel_Raumtemperatur; //"Norminnentemperatur:"
+			this.lblHeat.Text = EuroplanRes.RoomSummaryPanel_Heizlast; //"Heizlast:"
+			this.lblNormHeat.Text = EuroplanRes.RoomSummaryPanel_HeizlastBereinigt; //"Heizlast (bereinigt):"
+			this.lblCool.Text = EuroplanRes.RoomSummaryPanel_Kuehllast; //"Kühllast:"
+			this.lblNormCool.Text = EuroplanRes.RoomSummaryPanel_KuehllastBereinigt; //"Kühllast (bereinigt):"
+			this.lblRoomData.Text = EuroplanRes.RoomSummaryPanel_Raumdaten; //"Raumdaten:"
+			this.grpBoxSystems.Text = EuroplanRes.RoomSummaryPanel_Heizsysteme; //"Heizsysteme"
+			this.btnDelete.Text = EuroplanRes.RoomSummaryPanel_Loeschen; //"Löschen"
+			this.btnAdd.Text = EuroplanRes.RoomSummaryPanel_Hinzufuegen; //"Hinzufügen"
+			this.colType.HeaderText = EuroplanRes.RoomSummaryPanel_Typ; //"Typ"
+			this.colSystem.HeaderText = EuroplanRes.RoomSummaryPanel_System; //"System"
+			this.colComment.HeaderText = EuroplanRes.RoomSummaryPanel_Bemerkung; //"Bemerkung"
+			this.colFloorArea.HeaderText = EuroplanRes.RoomSummaryPanel_FbhFlaeche; //"FBH-\nFläche\n(m²)"
+			this.colPlannedArea.HeaderText = EuroplanRes.RoomSummaryPanel_Heizflaeche; //"Heiz-\nfläche\n(m²)"
+			this.colPlannedHeatLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Heizleistung; //"PHeiz\n(W)"
+			this.colPlannedCoolLoad.HeaderText = EuroplanRes.RoomSummaryPanel_Kuehlleistung; //"PKühl\n(W)"
+			this.btnGeometry.Text = EuroplanRes.RoomSummaryPanel_Raumgeometrie_Erfassen; //"Raumgeometrie erfassen"
+			this.btnCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Erfassen; //"Deckengeometrie erfassen"
+			this.chkCeilingGeometry.Text = EuroplanRes.RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen; //"Deckengeometrie gesondert erfassen
 		}
 
 
@@ -199,10 +199,8 @@ namespace Europlan.Common {
 					pp.CalculateCool = p.DefaultCalculateMode == Product.CalculateModeEnum.COOL || p.DefaultCalculateMode == Product.CalculateModeEnum.HEAT_AND_COOL;
 					if (p.Type == Product.ProductType.FBH) {
 						double plannedFloorArea = this.room.Area;
-						//double necessaryHeatLoad = this.room.NormalizedHeatLoad;
 						foreach (PlannedProduct plannedP in this.room.PlannedProducts) {
 							plannedFloorArea -= plannedP.Product.PlannedFloorArea;
-							//necessaryHeatLoad -= plannedP.PlannedHeatLoad;
 						}
 						if (plannedFloorArea < 0) {
 							plannedFloorArea = 0;

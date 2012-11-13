@@ -33,8 +33,6 @@ namespace Europlan.Common {
 			get;
 		}
 
-		//double GetLength(double measure);
-
 		void InvertDirection();
 
 		List<KlimaFlaechenModul> GetEnds();
@@ -140,16 +138,13 @@ namespace Europlan.Common {
 			Point2D oldVertex2D = additionalTransformation.TransformTo2D(this.vertices[0]);
 			PointF newVertex;
 			PointF oldVertex = new PointF((float)oldVertex2D.X, (float)oldVertex2D.Y);
-			//bool first = true;
 			Pen p = new Pen(c, (float)(0.021 * measure * additionalTransformation.M00));
 			if (this.flexible) {
 				p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-				//p.DashPattern = new float[] { 3, 1 };
 			}
 			p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 			Point2D vertex;
 			for (int i = 1; i < this.vertices.Count; i++) {
-			//foreach (Point2D vertex in vertices) {
 				vertex = this.vertices[i];
 				newVertex2D = additionalTransformation.TransformTo2D(vertex);
 				newVertex = new PointF((float)newVertex2D.X, (float)newVertex2D.Y);
@@ -639,11 +634,8 @@ namespace Europlan.Common {
 					if (angle > 180.0) {
 						angle = 360.0 - angle;
 					}
-					/*if (angle <= 112.5) {
-						result[0]++;
-					} else*/ if (angle <= 157.5) {
-						//result[1]++;
-								 result++;
+					if (angle <= 157.5) {
+						 result++;
 					}
 					lastVector = curVector;
 				}

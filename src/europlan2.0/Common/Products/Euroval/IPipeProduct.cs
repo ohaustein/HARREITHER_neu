@@ -88,8 +88,6 @@ namespace Europlan.Common {
 			set;
 		}
 
-		//protected void CheckPlannedCircuits();
-
 		string Name {
 			get;
 		}
@@ -308,10 +306,6 @@ namespace Europlan.Common {
 
 		bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
-		//internal void FinalizeLoading(PlannedProduct pp);
-
-		//protected void CalculateVorlaufRuecklauf(out double[] vorlaufTotal, out double[] vorlaufNotIsolated, out double[] ruecklaufTotal, out double[] ruecklaufNotIsolated, out double[] vorlaufWithoutOtherProductTotal, out double[] vorlaufWithoutOtherProductNotIsolated, out double[] ruecklaufWithoutOtherProductTotal, out double[] ruecklaufWithoutOtherProductNotIsolated, out double longestVorlaufTotal, out double longestRuecklaufTotal);
-
 		Circuit GetCircuit(int index);
 
 		bool StellMotore {
@@ -425,8 +419,6 @@ namespace Europlan.Common {
 		string[] NotificationMessageArray {
 			get;
 		}
-
-		//protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm);
 
 		Nullable<bool> GraphicalMode {
 			get;

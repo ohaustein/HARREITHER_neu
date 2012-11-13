@@ -43,185 +43,185 @@ namespace Europlan.Common {
 			this.lblInfoProjectconfig.Text = EuroplanRes.SystemParametersPanel_InfoProjectConf;
 			this.lblInfoUserconfig.Text = EuroplanRes.SystemParametersPanel_InfoCustomConf;
 
-			this.lblEurovalSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEurovalSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEurovalSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEurovalSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEcothermSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEcothermSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEcothermSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEcothermSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulBodenSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulBodenSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulBodenSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulBodenSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulDeckeSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulDeckeSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulDeckeSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblModulDeckeSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K";
-			this.lblEurovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblEurovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblEurovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblEcothermEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblEcothermMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblEcothermCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m";
-			this.lblHithermRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblHithermCompactRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.lblEurovalViskositaetUnit.Text = EuroplanRes.Unit_QmProSek; //"m²/s";
-			this.lblEurovalWaermekapazitaetUnit.Text = EuroplanRes.Unit_KjProKgKelvin; //"kJ/(kg*K)";
-			this.lblEurovalDichteUnit.Text = EuroplanRes.Unit_KgProKubikmeter; //"kg/m³";
-			this.lblEurovalPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblEcothermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblHithermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblHithermCompactPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblModulBodenPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblModulDeckePressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar";
-			this.lblEurovalDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblEcothermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblHithermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblHithermCompactDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblModulBodenDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblModulDeckeDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h";
-			this.lblEurovalPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblEcothermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblHithermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblHithermCompactPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblModulBodenPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblModulDeckePressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa";
-			this.lblGeneralAlphaWandUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
-			this.lblGeneralAlphaDeckeUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
-			this.lblGeneralAlphaBodenUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
-			this.lblGeneralAlphaBodenUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
-			this.lblGeneralAlphaDeckeUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
-			this.lblGeneralAlphaWandUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)";
+			this.lblEurovalSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEurovalSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEurovalSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEurovalSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEcothermSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEcothermSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEcothermSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEcothermSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulBodenSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulBodenSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulBodenSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulBodenSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulDeckeSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulDeckeSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulDeckeSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblModulDeckeSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+			this.lblEurovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblEurovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblEurovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblEcothermEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblEcothermMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblEcothermCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
+			this.lblHithermRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblHithermCompactRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.lblEurovalViskositaetUnit.Text = EuroplanRes.Unit_QmProSek; //"m²/s"
+			this.lblEurovalWaermekapazitaetUnit.Text = EuroplanRes.Unit_KjProKgKelvin; //"kJ/(kg*K)"
+			this.lblEurovalDichteUnit.Text = EuroplanRes.Unit_KgProKubikmeter; //"kg/m³"
+			this.lblEurovalPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblEcothermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblHithermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblHithermCompactPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblModulBodenPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblModulDeckePressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+			this.lblEurovalDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblEcothermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblHithermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblHithermCompactDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblModulBodenDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblModulDeckeDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+			this.lblEurovalPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblEcothermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblHithermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblHithermCompactPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblModulBodenPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblModulDeckePressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+			this.lblGeneralAlphaWandUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
+			this.lblGeneralAlphaDeckeUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
+			this.lblGeneralAlphaBodenUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
+			this.lblGeneralAlphaBodenUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
+			this.lblGeneralAlphaDeckeUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
+			this.lblGeneralAlphaWandUnitCool.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
 
-			this.lblTitle.Text = EuroplanRes.SystemParametersPanel_Titel; //"Systemparameter";
+			this.lblTitle.Text = EuroplanRes.SystemParametersPanel_Titel; //"Systemparameter"
 
-			this.tabEuroval.Text = EuroplanRes.SystemParametersPanel_Euroval; //"Euroval®";
-			this.lblEurovalViskositaet.Text = EuroplanRes.SystemParametersPanel_Viskositaet; //"kinematische Viskosität:";
-			this.lblEurovalWaermekapazitaet.Text = EuroplanRes.SystemParametersPanel_Waermekapazitaet; //"spezifische Wärmekapazität:";
-			this.lblEurovalDichte.Text = EuroplanRes.SystemParametersPanel_Dichte; //"Dichte des Mediums:";
-			this.lblEurovalEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:";
-			this.lblEurovalMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:";
-			this.lblEurovalGeometrie.Text = EuroplanRes.SystemParametersPanel_Geometriefaktor; //"Geometriefaktor:";
-			this.lblEurovalSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblEurovalSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblEurovalSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.lblEurovalSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.lblEurovalNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:";
-			this.lblEurovalCircuitLength.Text = EuroplanRes.SystemParametersPanel_Rohrlaenge; //"Max. Rohrlänge je Heizkreis:";
-			this.lblEurovalPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.lblEurovalDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
-			this.lblEurovalSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:";
-			this.lblEurovalSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:";
-			this.rbEurovalHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)";
-			this.rbEurovalEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)";
-			this.btnEurovalStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.cbEurovalGeometrieAktiviert.Text = EuroplanRes.SystemParametersPanel_GeometriefaktorAktiviert; //"aktiviert";
+			this.tabEuroval.Text = EuroplanRes.SystemParametersPanel_Euroval; //"Euroval®"
+			this.lblEurovalViskositaet.Text = EuroplanRes.SystemParametersPanel_Viskositaet; //"kinematische Viskosität:"
+			this.lblEurovalWaermekapazitaet.Text = EuroplanRes.SystemParametersPanel_Waermekapazitaet; //"spezifische Wärmekapazität:"
+			this.lblEurovalDichte.Text = EuroplanRes.SystemParametersPanel_Dichte; //"Dichte des Mediums:"
+			this.lblEurovalEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:"
+			this.lblEurovalMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:"
+			this.lblEurovalGeometrie.Text = EuroplanRes.SystemParametersPanel_Geometriefaktor; //"Geometriefaktor:"
+			this.lblEurovalSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblEurovalSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblEurovalSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.lblEurovalSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.lblEurovalNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
+			this.lblEurovalCircuitLength.Text = EuroplanRes.SystemParametersPanel_Rohrlaenge; //"Max. Rohrlänge je Heizkreis:"
+			this.lblEurovalPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.lblEurovalDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+			this.lblEurovalSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+			this.lblEurovalSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+			this.rbEurovalHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)"
+			this.rbEurovalEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)"
+			this.btnEurovalStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.cbEurovalGeometrieAktiviert.Text = EuroplanRes.SystemParametersPanel_GeometriefaktorAktiviert; //"aktiviert"
 
-			this.tabEcotherm.Text = EuroplanRes.SystemParametersPanel_Ecotherm; //"Ecotherm®";
-			this.lblEcothermEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:";
-			this.btnEcothermStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.lblEcothermMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:";
-			this.lblEcothermSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblEcothermSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblEcothermNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:";
-			this.lblEcothermCircuitLength.Text = EuroplanRes.SystemParametersPanel_Rohrlaenge; //"Max. Rohrlänge je Heizkreis:";
-			this.lblEcothermSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.lblEcothermPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.rbEcothermEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)";
-			this.lblEcothermDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
-			this.rbEcothermHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)";
-			this.lblEcothermSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:";
-			this.lblEcothermSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:";
-			this.lblEcothermSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
+			this.tabEcotherm.Text = EuroplanRes.SystemParametersPanel_Ecotherm; //"Ecotherm®"
+			this.lblEcothermEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:"
+			this.btnEcothermStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.lblEcothermMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:"
+			this.lblEcothermSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblEcothermSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblEcothermNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
+			this.lblEcothermCircuitLength.Text = EuroplanRes.SystemParametersPanel_Rohrlaenge; //"Max. Rohrlänge je Heizkreis:"
+			this.lblEcothermSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.lblEcothermPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.rbEcothermEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)"
+			this.lblEcothermDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+			this.rbEcothermHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)"
+			this.lblEcothermSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+			this.lblEcothermSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+			this.lblEcothermSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
 
-			this.tabHitherm.Text = EuroplanRes.SystemParametersPanel_Hitherm; //"Hitherm®";
-			this.lblHithermLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:";
-			this.lblHithermLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:";
-			this.lblHithermRegisterArea.Text = EuroplanRes.SystemParametersPanel_Heizflaeche; //"Max. Heizfläche je Heizkreis:";
-			this.rbHithermPlus.Text = EuroplanRes.SystemParametersPanel_SystemHithermPlus; //"Hitherm®+";
-			this.rbHitherm.Text = EuroplanRes.SystemParametersPanel_SystemHitherm; //"Hitherm®";
-			this.btnHithermStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.lblHithermSystem.Text = EuroplanRes.SystemParametersPanel_System; //"System:";
-			this.lblHithermPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.lblHithermDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
+			this.tabHitherm.Text = EuroplanRes.SystemParametersPanel_Hitherm; //"Hitherm®"
+			this.lblHithermLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:"
+			this.lblHithermLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:"
+			this.lblHithermRegisterArea.Text = EuroplanRes.SystemParametersPanel_Heizflaeche; //"Max. Heizfläche je Heizkreis:"
+			this.rbHithermPlus.Text = EuroplanRes.SystemParametersPanel_SystemHithermPlus; //"Hitherm®+"
+			this.rbHitherm.Text = EuroplanRes.SystemParametersPanel_SystemHitherm; //"Hitherm®"
+			this.btnHithermStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.lblHithermSystem.Text = EuroplanRes.SystemParametersPanel_System; //"System:"
+			this.lblHithermPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.lblHithermDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
 
-			this.tabHithermDefault.Text = EuroplanRes.SystemParametersPanel_Hitherm; //"Hitherm®";
-			this.rbHithermPlusDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermPlus; //"Hitherm®+";
-			this.rbHithermDefault.Text = EuroplanRes.SystemParametersPanel_SystemHitherm; //"Hitherm®";
-			this.lblHithermSystemDefault.Text = EuroplanRes.SystemParametersPanel_System; //"System:";
-			this.btnHithermStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
+			this.tabHithermDefault.Text = EuroplanRes.SystemParametersPanel_Hitherm; //"Hitherm®"
+			this.rbHithermPlusDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermPlus; //"Hitherm®+"
+			this.rbHithermDefault.Text = EuroplanRes.SystemParametersPanel_SystemHitherm; //"Hitherm®"
+			this.lblHithermSystemDefault.Text = EuroplanRes.SystemParametersPanel_System; //"System:"
+			this.btnHithermStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
 
 			this.tabHithermCompactDefault.Text = EuroplanRes.SystemParametersPanel_HithermCompact;
-			this.rbHithermCompactPlusDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompactPlus; //"Hitherm®+";
-			this.rbHithermCompactDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompact; //"Hitherm®";
-			this.lblHithermCompactSystemDefault.Text = EuroplanRes.SystemParametersPanel_System; //"System:";
-			this.btnHithermCompactStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
+			this.rbHithermCompactPlusDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompactPlus; //"Hitherm®+"
+			this.rbHithermCompactDefault.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompact; //"Hitherm®"
+			this.lblHithermCompactSystemDefault.Text = EuroplanRes.SystemParametersPanel_System; //"System:"
+			this.btnHithermCompactStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
 
-			this.tabHithermCompact.Text = EuroplanRes.SystemParametersPanel_HithermCompact; //"Hitherm® Compact";
-			this.lblHithermCompactLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:";
-			this.lblHithermCompactLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:";
-			this.lblHithermCompactRegisterArea.Text = EuroplanRes.SystemParametersPanel_Heizflaeche; //"Max. Heizfläche je Heizkreis:";
-			this.rbHithermCompactPlus.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompactPlus; //"Hitherm®+ Compact";
-			this.btnHithermCompactStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.rbHithermCompact.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompact; //"Hitherm® Compact";
-			this.lblHithermCompactSystem.Text = EuroplanRes.SystemParametersPanel_System; //"System:";
-			this.lblHithermCompactPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.lblHithermCompactDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
+			this.tabHithermCompact.Text = EuroplanRes.SystemParametersPanel_HithermCompact; //"Hitherm® Compact"
+			this.lblHithermCompactLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:"
+			this.lblHithermCompactLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:"
+			this.lblHithermCompactRegisterArea.Text = EuroplanRes.SystemParametersPanel_Heizflaeche; //"Max. Heizfläche je Heizkreis:"
+			this.rbHithermCompactPlus.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompactPlus; //"Hitherm®+ Compact"
+			this.btnHithermCompactStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.rbHithermCompact.Text = EuroplanRes.SystemParametersPanel_SystemHithermCompact; //"Hitherm® Compact"
+			this.lblHithermCompactSystem.Text = EuroplanRes.SystemParametersPanel_System; //"System:"
+			this.lblHithermCompactPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.lblHithermCompactDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
 
-			this.tabModulBoden.Text = EuroplanRes.SystemParametersPanel_KlimaBoden; //"Modul Klima-Boden";
-			this.lblModulBodenSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblModulBodenSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblModulBodenNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:";
-			this.lblModulBodenMaxModulesInCircuit.Text = EuroplanRes.SystemParametersPanel_Modulanzahl; //"Max Modulanzahl pro Heizkreis:";
-			this.lblModulBodenSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.btnModulBodenStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.lblModulBodenPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.lblModulBodenDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
-			this.rbModulBodenEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)";
-			this.rbModulBodenHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)";
-			this.lblModulBodenSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:";
-			this.lblModulBodenSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:";
-			this.lblModulBodenSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
+			this.tabModulBoden.Text = EuroplanRes.SystemParametersPanel_KlimaBoden; //"Modul Klima-Boden"
+			this.lblModulBodenSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblModulBodenSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblModulBodenNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
+			this.lblModulBodenMaxModulesInCircuit.Text = EuroplanRes.SystemParametersPanel_Modulanzahl; //"Max Modulanzahl pro Heizkreis:"
+			this.lblModulBodenSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.btnModulBodenStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.lblModulBodenPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.lblModulBodenDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+			this.rbModulBodenEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)"
+			this.rbModulBodenHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)"
+			this.lblModulBodenSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+			this.lblModulBodenSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+			this.lblModulBodenSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
 
-			this.tabModulDecke.Text = EuroplanRes.SystemParametersPanel_KlimaDecke; //"Modul Klima-Decke";
-			this.lblModulDeckeLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:";
-			this.lblModulDeckeConstruction.Text = EuroplanRes.SystemParametersPanel_Unterkonstruktion; //"Unterkonstruktion:";
-			this.lblModulDeckeLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:";
-			this.lblModulDeckeMaxRows.Text = EuroplanRes.SystemParametersPanel_Modulreihen; //"Max Modulreihen parallel:";
-			this.lblModulDeckeSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblModulDeckeSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max.";
-			this.lblModulDeckeMaxModulesInRow.Text = EuroplanRes.SystemParametersPanel_ModuleInSerie; //"Max Modulanzahl in Serie:";
-			this.lblModulDeckeMaxModulesInCircuit.Text = EuroplanRes.SystemParametersPanel_Modulanzahl; //"Max Modulanzahl pro Heizkreis:";
-			this.lblModulDeckeSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.lblModulDeckePressurePa.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:";
-			this.lblModulDeckeDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:";
-			this.btnModulDeckeStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.lblModulDeckeSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:";
-			this.lblModulDeckeSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:";
-			this.lblModulDeckeSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min.";
-			this.lblModulDeckeRasterMass.Text = EuroplanRes.SystemParametersPanel_RasterMass; //"Standardwert Rastermaß:";
+			this.tabModulDecke.Text = EuroplanRes.SystemParametersPanel_KlimaDecke; //"Modul Klima-Decke"
+			this.lblModulDeckeLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:"
+			this.lblModulDeckeConstruction.Text = EuroplanRes.SystemParametersPanel_Unterkonstruktion; //"Unterkonstruktion:"
+			this.lblModulDeckeLeistungsfaktorHeat.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorHeiz; //"Leistungsfaktor Heizen:"
+			this.lblModulDeckeMaxRows.Text = EuroplanRes.SystemParametersPanel_Modulreihen; //"Max Modulreihen parallel:"
+			this.lblModulDeckeSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblModulDeckeSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+			this.lblModulDeckeMaxModulesInRow.Text = EuroplanRes.SystemParametersPanel_ModuleInSerie; //"Max Modulanzahl in Serie:"
+			this.lblModulDeckeMaxModulesInCircuit.Text = EuroplanRes.SystemParametersPanel_Modulanzahl; //"Max Modulanzahl pro Heizkreis:"
+			this.lblModulDeckeSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.lblModulDeckePressurePa.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+			this.lblModulDeckeDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+			this.btnModulDeckeStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.lblModulDeckeSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+			this.lblModulDeckeSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+			this.lblModulDeckeSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+			this.lblModulDeckeRasterMass.Text = EuroplanRes.SystemParametersPanel_RasterMass; //"Standardwert Rastermaß:"
 
-			this.tabGeneral.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein";
-			this.lblGeneralAlphaWandHeat.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:";
-			this.lblGeneralAlphaDeckeHeat.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:";
-			this.lblGeneralAlphaBodenHeat.Text = EuroplanRes.SystemParametersPanel_AlphaBoden; //"Alpha Boden:";
-			this.lblHeat.Text = EuroplanRes.SystemParametersPanel_Heizen; //"Heizen";
-			this.lblCool.Text = EuroplanRes.SystemParametersPanel_Kuehlen; //"Kühlen";
-			this.lblGeneralAlphaBodenCool.Text = EuroplanRes.SystemParametersPanel_AlphaBoden; //"Alpha Boden:";
-			this.lblGeneralAlphaDeckeCool.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:";
-			this.btnGeneralStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
-			this.lblGeneralAlphaWandCool.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:";
+			this.tabGeneral.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein"
+			this.lblGeneralAlphaWandHeat.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:"
+			this.lblGeneralAlphaDeckeHeat.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:"
+			this.lblGeneralAlphaBodenHeat.Text = EuroplanRes.SystemParametersPanel_AlphaBoden; //"Alpha Boden:"
+			this.lblHeat.Text = EuroplanRes.SystemParametersPanel_Heizen; //"Heizen"
+			this.lblCool.Text = EuroplanRes.SystemParametersPanel_Kuehlen; //"Kühlen"
+			this.lblGeneralAlphaBodenCool.Text = EuroplanRes.SystemParametersPanel_AlphaBoden; //"Alpha Boden:"
+			this.lblGeneralAlphaDeckeCool.Text = EuroplanRes.SystemParametersPanel_AlphaDecke; //"Alpha Decke:"
+			this.btnGeneralStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+			this.lblGeneralAlphaWandCool.Text = EuroplanRes.SystemParametersPanel_AlphaWand; //"Alpha Wand:"
             this.lblGeneralTextbox.Text = EuroplanRes.SystemParametersPanel_Textbox;
             this.lblGeneralFillTextbox.Text = EuroplanRes.SystemParametersPanel_DeckenderHintergrund;
             this.lblGeneralTextboxFontSize.Text = EuroplanRes.SystemParametersPanel_DefaultFontSize;
             this.lblGeneralTextboxFontSizeUnit.Text = EuroplanRes.Unit_Zentimeter;
 
-            this.tabGeneralDefault.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein";
+            this.tabGeneralDefault.Text = EuroplanRes.SystemParametersPanel_Allgemein; //"Allgemein"
             this.lblGeneralTextboxDefault.Text = EuroplanRes.SystemParametersPanel_Textbox;
             this.lblGeneralFillTextboxDefault.Text = EuroplanRes.SystemParametersPanel_DeckenderHintergrund;
-            this.btnGeneralStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte";
+            this.btnGeneralStandardDefault.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
             this.lblGeneralTextboxFontSizeDefault.Text = EuroplanRes.SystemParametersPanel_DefaultFontSize;
             this.lblGeneralTextboxFontSizeDefaultUnit.Text = EuroplanRes.Unit_Zentimeter;
 
@@ -532,23 +532,6 @@ namespace Europlan.Common {
 		}
 
 		private void InitializeGeneralPanel() {
-            /*this.tabSystemParameters.TabPages.Remove(this.tabGeneralDefault);
-            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
-                if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-                    this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
-                }
-            } else {
-                Licensing.License license = Licensing.LicenseManager.Instance.License;
-                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-                    if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-                        this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
-                    }
-                } else {
-                    if (!this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
-                        this.tabSystemParameters.TabPages.Add(this.tabGeneral);
-                    }
-                }
-            }*/
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
                 if (this.tabSystemParameters.TabPages.Contains(this.tabGeneral)) {
                     this.tabSystemParameters.TabPages.Remove(this.tabGeneral);
@@ -1145,39 +1128,7 @@ namespace Europlan.Common {
 
 		private void cmbConstruction_SelectedIndexChanged(object sender, EventArgs e) {
 			if (!updateOngoing) {
-				/*bool graphicalPlanned = false;
-				foreach (Floor floor in Project.Instance.Floors) {
-					foreach (Room room in floor.Rooms) {
-						foreach (PlannedProduct pp in room.PlannedProducts) {
-							if (pp.Product is ModulKlimaDeckeProduct) {
-								if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
-									graphicalPlanned = true;
-									break;
-								}
-							}
-						}
-					}
-				}
-				if (graphicalPlanned) {
-					DialogResult result = MessageBox.Show(EuroplanRes.SystemParametersPanel_ChangeConstructionText, EuroplanRes.SystemParametersPanel_ChangeConstructionCaption, MessageBoxButtons.YesNo);
-					if (result == DialogResult.No) {
-						UpdateControl(false);
-						return;
-					}
-				}*/
 				ModulKlimaDeckeProduct.ConfigModulCeilingConstruction = (int)cmbModulDeckeConstruction.SelectedItem;
-				/*foreach (Floor floor in Project.Instance.Floors) {
-					foreach (Room room in floor.Rooms) {
-						foreach (PlannedProduct pp in room.PlannedProducts) {
-							if (pp.Product is ModulKlimaDeckeProduct) {
-								if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
-									pp.Product.GraphicalMode = false;
-									(pp.Product as ModulKlimaDeckeProduct).GraphConstruction = null;
-								}
-							}
-						}
-					}
-				}*/
 				if (this.projectChanged != null) {
 					this.projectChanged(null);
 				}
@@ -1347,7 +1298,6 @@ namespace Europlan.Common {
             if (!updateOngoing) {
                 if (rbHithermDefault.Checked != rbHithermPlusDefault.Checked) {
                     Configuration.UserTemplate.AddProductParameter<HithermProduct>("ConfigUsePlus", this.rbHithermPlusDefault.Checked);
-                    //HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 
                     if (HithermProduct.ConfigUsePlus != rbHithermPlusDefault.Checked) {
                         if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
@@ -1365,7 +1315,6 @@ namespace Europlan.Common {
             if (!updateOngoing) {
                 if (rbHithermCompactDefault.Checked != rbHithermCompactPlusDefault.Checked) {
                     Configuration.UserTemplate.AddProductParameter<HithermCompactProduct>("ConfigUsePlus", this.rbHithermCompactPlusDefault.Checked);
-                    //HithermProduct.ConfigUsePlus = this.rbHithermPlusDefault.Checked;
 
                     if (HithermCompactProduct.ConfigUsePlus != rbHithermCompactPlusDefault.Checked) {
                         if (MessageBox.Show(EuroplanRes.SystemParametersPanel_FuerProjektVerwendenText, EuroplanRes.SystemParametersPanel_FuerProjektVerwendenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {

@@ -64,13 +64,11 @@ namespace Europlan.AdminApplication {
 			if (e.Alt ||
 				e.Control ||
 				(HardwareId.hardwareIdKeyChars.IndexOf(keyChar) < 0 &&
-					//keyChar != '-' &&
 					e.KeyCode != Keys.Back)
 				) {
 				e.Handled = !(
 					e.KeyCode == Keys.Left					// allow LEFT
 					|| e.KeyCode == Keys.Right				// allow RIGHT
-					//|| e.Control && e.KeyCode == Keys.A		// allow 'select all'
 					|| e.Control && e.KeyCode == Keys.C		// allow 'copy'
 					|| e.KeyCode == Keys.End				// allow end
 					|| e.KeyCode == Keys.Home				// allow home

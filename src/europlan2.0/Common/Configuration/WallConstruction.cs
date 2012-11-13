@@ -10,8 +10,6 @@ namespace Europlan.Common {
 		private bool isHithermWall = false;
 		private bool isHithermCompactWall = false;
 		private HithermWall defaultWall = null;
-		//private Dictionary<HithermCompactRegister.HithermCompactRegisterTypeEnum, Material> hithermCompactRegisterMaterials = new Dictionary<HithermCompactRegister.HithermCompactRegisterTypeEnum,Material>();
-		//private SerializableDictionary<HithermCompactRegister.HithermCompactRegisterTypeEnum, string> hithermCompactRegisterPartsNrs = null;
 
 		public WallConstruction() : base() {
 		}
@@ -162,33 +160,35 @@ namespace Europlan.Common {
 					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Ds, true ), "HF81+");
 					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Ds, true ), "HF82+");
 				} else if (this.Id == "SCW04") { // Gipskarton 10mm
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par, false, false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , true , false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, true , false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, true , false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, true , false), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, true , false), "");
+					/*
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par, false, false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , true , false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, true , false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, true , false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, true , false), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, true , false), "");
 
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par, false, true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , true , true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, true , true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, true , true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, true , true ), "");
-					//tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, true , true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Par, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Par, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Par, false, true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , true , true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, true , true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1500_Std, true , true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2000_Std, true , true ), "");
+					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_2500_Std, true , true ), "");
+					*/
 				} else if (this.Id == "SCW05") { // Gipskarton 12.5mm
 					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_620_Std , false), "HG01");
 					tmp.Add(new RegisterTypeKey(HithermCompactRegister.HithermCompactRegisterTypeEnum.HITC_1000_Std, false), "HG02");

@@ -14,7 +14,6 @@ namespace Europlan.AdminApplication {
 			this.license = license;
 			this.Text = license.DisplayName;
 			if (this.license.ValidUntil < DateTime.Today.AddDays(7)) {
-				//this.Font = new System.Drawing.Font(this.Font, System.Drawing.FontStyle.Bold);
 				this.ForeColor = System.Drawing.Color.Red;
 			} else {
 				this.ForeColor = System.Drawing.Color.Black;

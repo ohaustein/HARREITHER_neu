@@ -32,11 +32,11 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorListSummaryPanel_Bezeichnung; //"Bezeichnung";
-			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorListSummaryPanel_BezeichnungLang; //"Bezeichnung des Geschoﬂes";
-			this.label1.Text = EuroplanRes.FloorListSummaryPanel_Geschosse; //"Geschoﬂe";
-			this.colView.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten";
-			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorListSummaryPanel_Bezeichnung; //"Bezeichnung"
+			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorListSummaryPanel_BezeichnungLang; //"Bezeichnung des Geschoﬂes"
+			this.label1.Text = EuroplanRes.FloorListSummaryPanel_Geschosse; //"Geschoﬂe"
+			this.colView.HeaderText = EuroplanRes.General_BearbeitenCol; //"Bearbeiten"
+			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {

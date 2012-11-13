@@ -58,14 +58,6 @@ namespace Europlan.Common {
 			new double[] {  30,   40,   55,   65,   80,   90,  100,  115,  130}  // ti=24∞C
 		};
 
-		/*private static double[][] hlRegKuehlleistung = {
-			//  tHm (∞C) 16.0 18.0 20.0 22.0 25.0
-			new double[] { 13,   0},               // ti=18∞C
-			new double[] { 25,  13,   0},          // ti=20∞C
-			new double[] { 40,  25,  13,   0},     // ti=22∞C
-			new double[] { 60,  45,  33,  20,   0} // ti=25∞C
-		};*/
-
 		//     Diffenz Raumtemp - Kuehlmitteltemp (K):  0   2   3   4   5   6   7   9
 		private static double[] hlRegKuehlleistung  = { 0, 13, 20, 25, 33, 40, 45, 60 };
 		private static double[] stdRegKuehlleistung = { 0,  9, 14, 18, 24, 29, 32, 43 };
@@ -171,12 +163,6 @@ namespace Europlan.Common {
 		private static double leistungsFaktorHeizen = 1.0;
 		private static double graphicalRandabstandDefault = 0.1;
 
-		/*private static double factorSpezialputz = 1.15;
-		private static double factorMaschinenputz = 1.0;
-		private static double factorLehmputz = 0.95;
-		private static double factorGkpHohlraum = 0.69;
-		private static double factorHolzHohlraum = 0.62;*/
-
 		private Dictionary<HithermRegister, int> registerCircuits = new Dictionary<HithermRegister, int>();
 		private Dictionary<int, HithermCircuit> circuitIds = new Dictionary<int, HithermCircuit>();
 
@@ -184,9 +170,6 @@ namespace Europlan.Common {
 		private float plannedFloorArea = 0;
 		private float plannedCeilingArea = 0;
 		private float plannedFloorOrCeilingArea = 0;
-
-		//private double graphicalAdditionalVl = 0;
-		//private double graphicalAdditionalRl = 0;
 
 		public HithermProduct() {
 			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
@@ -214,16 +197,6 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 100);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<HithermProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 100);
-			canHeat = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<HithermProduct>("ConfigQuickDimensioningCanCool", false);
-			usePlus = config.GetProductParameterAsBool<HithermProduct>("ConfigUsePlus", false);
-			maxPressureLost = config.GetProductParameterAsInt<HithermProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = config.GetProductParameterAsInt<HithermProduct>("ConfigMaxDurchfluss", 240);
-			maxRegisterArea = config.GetProductParameterAsDouble<HithermProduct>("ConfigMaxRegisterArea", 10.0);
-			leistungsFaktorHeizen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorHeizen", 1.0);
-			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<HithermProduct>("ConfigLeistungsFaktorKuehlen", 1.0);*/
 			Product.StaticInitialize<HithermProduct>(config);
 		}
 
@@ -748,9 +721,9 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.PlannedConnection == null) {
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, "
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -770,7 +743,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (c < this.circuits.Count) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -781,7 +754,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -1510,37 +1483,7 @@ namespace Europlan.Common {
 				}
 				nr++;
 			}
-
-			/*int newId = this.GetNewHkId();
-			while (newId < this.PlannedCircuits.Count + 1) {
-				HithermCircuit circuitToRename = null;
-				foreach (HithermCircuit c in this.PlannedCircuits) {
-					if (this.GetCircuitId(c) > this.PlannedCircuits.Count) {
-						circuitToRename = c;
-					}
-				}
-				if (circuitToRename == null) {
-					break;
-				}
-				this.ChangeCircuitId(circuitToRename, newId);
-				newId = this.GetNewHkId();
-			}*/
 		}
-
-		/*private int GetCircuitId(HithermCircuit circuit) {
-			foreach (KeyValuePair<int, HithermCircuit> kvp in this.circuitIds) {
-				if (kvp.Value == circuit) {
-					return kvp.Key;
-				}
-			}
-			return -1;
-		}
-
-		public void ChangeCircuitId(HithermCircuit circuit, int newId) {
-			while (circuit.Registers != null && circuit.Registers.Count > 0) {
-				this.MoveRegisterToCircuit(circuit.Registers[0], newId);
-			}
-		}*/
 
 		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
 			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
@@ -1600,7 +1543,6 @@ namespace Europlan.Common {
 						newConnectionPoint = segment.End + v * (width / 2);
 					}
 					double distance = segment.GetDistance(currentMousePoint);
-					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
 					if (distance < bestDistance) {
 						bestDistance = distance;
 						bestSegment = segment;
@@ -1610,8 +1552,6 @@ namespace Europlan.Common {
 				lastPoint = point;
 			}
 			if (bestDistance < 10) {
-				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
 				Polygon2D polygon = new Polygon2D();
 				Vector2D v = bestSegment.End - bestSegment.Start;
 				v.Normalize();
@@ -1624,7 +1564,6 @@ namespace Europlan.Common {
 				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
 				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-				//}
 			}
 			return possibleConnection;
 		}
@@ -1640,8 +1579,6 @@ namespace Europlan.Common {
 				}
 			}
 			this.associatedRoom.Walls.Clear();
-			//this.graphicalAdditionalRl = 0;
-			//this.graphicalAdditionalVl = 0;
 		}
 	}
 }

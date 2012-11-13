@@ -12,12 +12,10 @@ namespace Europlan.Common {
 
 			foreach (PropertyInfo info in typeof(T).GetProperties()) {
 				Type colType = info.PropertyType;
-				if ((info.PropertyType.IsGenericType)/* && ((info.PropertyType) == typeof(Nullable<>))*/) {
+				if ((info.PropertyType.IsGenericType)) {
 					colType = colType.GetGenericArguments()[0];
 				}
 				dt.Columns.Add(new DataColumn(info.Name, colType));
-
-				//dt.Columns.Add(new DataColumn(info.Name, info.PropertyType));
 			}
 			foreach (T t in list) {
 				DataRow row = dt.NewRow();

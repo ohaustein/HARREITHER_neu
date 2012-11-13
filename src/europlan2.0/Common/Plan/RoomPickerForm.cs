@@ -113,16 +113,6 @@ namespace Europlan.Common {
 		}
 
 		private void RoomPickerForm_FormClosing(object sender, FormClosingEventArgs e) {
-			//this.plan.Scale = this.cadPanel.PlanScale;
-			//this.plan.TranslationX = this.cadPanel.PlanTranslation.X;
-			//this.plan.TranslationY = this.cadPanel.PlanTranslation.Y;
-
-			//this.plan.DisabledLayers.Clear();
-			//foreach (DxfLayer layer in this.cadPanel.Model.Layers) {
-			//    if (!layer.Enabled) {
-			//        this.plan.DisabledLayers.Add(layer.Name);
-			//    }
-			//}
 			ConnectionPlanner.ReGenerateConnectionPipes(this.roomPicker.Room.AssociatedFloor);
 
 			SettingsKey settings = SettingsFile.Settings["CadPlanRoomPickerForm"];
@@ -341,9 +331,6 @@ namespace Europlan.Common {
 				this.cbReferencePoint.Checked = this.roomPicker.ReferencePoint == null;
 				this.cbReferencePoint.Enabled = true;
 				this.cbEnterArea.Enabled = true;
-				//this.grpDistance.Enabled = false;
-				//this.grpSize.Enabled = false;
-				//this.btnAddUnheatedArea.Enabled = false;
 				this.roomPicker.Mode = RoomPicker.RoomPickerMode.RPM_SET_REFERENCE;
 				ignoreReferencePoint++;
 				this.cbReferencePoint.Checked = this.roomPicker.ReferencePoint == null;

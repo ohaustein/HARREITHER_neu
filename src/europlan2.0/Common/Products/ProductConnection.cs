@@ -24,34 +24,17 @@ namespace Europlan.Common {
 		}
 
 
-		//private Distributor ruecklaufDistributor = null;
-		//private PlannedProduct product = null;
-		//private string ruecklaufDistributorId = null;
-		//private string productId = null;
-
 		public ProductConnection() {
 		}
 
-		public ProductConnection(Distributor distributor/*, Distributor ruecklaufDistributor*/) {
+		public ProductConnection(Distributor distributor) {
 			this.distributor = distributor;
-			//this.ruecklaufDistributor = ruecklaufDistributor;
 		}
 
-		/*public ProductConnection(Distributor vorlaufDistributor, PlannedProduct ruecklaufOtherProduct) {
-			this.distributor = vorlaufDistributor;
-			this.product = ruecklaufOtherProduct;
-		}*/
-
-		public ProductConnection(PlannedProduct otherProduct, Circuit.CircuitConnectionTypeEnum circuitConnectionType/*, Distributor ruecklaufDistributor*/) {
+		public ProductConnection(PlannedProduct otherProduct, Circuit.CircuitConnectionTypeEnum circuitConnectionType) {
 			this.otherProduct = otherProduct;
 			this.circuitConnectionType = circuitConnectionType;
-			//this.ruecklaufDistributor = ruecklaufDistributor;
 		}
-
-		/*public ProductConnection(PlannedProduct vorlaufOtherProduct, PlannedProduct ruecklaufOtherProduct) {
-			this.otherProduct = vorlaufOtherProduct;
-			this.product = ruecklaufOtherProduct;
-		}*/
 
 		#region Anbindung
 		[XmlIgnore]
@@ -144,36 +127,6 @@ namespace Europlan.Common {
 			get { return this.distributor != null ? (object)this.distributor : (object)this.otherProduct; }
 		}
 		#endregion Anbindung
-
-		#region Produkt
-		/*[XmlIgnore]
-		public PlannedProduct Product {
-			get {
-				if (this.productId != null) {
-					foreach (Floor f in Project.Instance.Floors) {
-						foreach (Room r in f.Rooms) {
-							foreach (PlannedProduct pp in r.PlannedProducts) {
-								if (pp.Id == this.productId) {
-									this.product = pp;
-								}
-							}
-						}
-					}
-					this.productId = null;
-				}
-				return this.product;
-			}
-			set {
-				this.product = value;
-				this.productId = null;
-			}
-		}
-
-		public string ProductId {
-			get { return this.Product == null ? null : this.Product.Id; }
-			set { this.productId = value; }
-		}*/
-		#endregion Produkt
 
 		public override string ToString() {
 			if (this.Distributor != null) {

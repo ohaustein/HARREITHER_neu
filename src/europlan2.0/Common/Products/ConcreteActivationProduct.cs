@@ -28,10 +28,6 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ConcreteActivationProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ConcreteActivationProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
-			canHeat = config.GetProductParameterAsBool<ConcreteActivationProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<ConcreteActivationProduct>("ConfigQuickDimensioningCanCool", true);*/
 			Product.StaticInitialize<ConcreteActivationProduct>(config);
 		}
 

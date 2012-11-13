@@ -21,8 +21,9 @@ namespace Europlan.Licensing {
 		private Encoding byteConverter = new ASCIIEncoding();
 
 		private RSACryptoServiceProvider provider = null;
-		//private = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent><P>9vqsAPi2ljejeDM0Ce0tBG2Y3JsXDskIo9WBLypHiZ8=</P><Q>34DJ/Gk+O82xTY5fEc4ssVNoqSg9azhxAZYna0JuXpM=</Q><DP>lQX78zofMdSwlj6PD85Ec3+N1M7fwtQamoChSkxAjhE=</DP><DQ>Y2Tp7rd69quF8wCipM90rrNyMu/zSHCESPlWtGuJm8M=</DQ><InverseQ>iaTFIP3unJMIlPHKNUf+E1dq2k+77Rs3sZRMkk7ATlg=</InverseQ><D>Tk/8m7EPqcyLTF/GNOfRqSMw5MGZLCMg/ALeyhengug5b/9oYr/9S+RerfCCTM9oyO2dnFEn5QQRLUMD394rWQ==</D></RSAKeyValue>";
-		//public  = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+		// the following private/public key has been used:
+		// private = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent><P>9vqsAPi2ljejeDM0Ce0tBG2Y3JsXDskIo9WBLypHiZ8=</P><Q>34DJ/Gk+O82xTY5fEc4ssVNoqSg9azhxAZYna0JuXpM=</Q><DP>lQX78zofMdSwlj6PD85Ec3+N1M7fwtQamoChSkxAjhE=</DP><DQ>Y2Tp7rd69quF8wCipM90rrNyMu/zSHCESPlWtGuJm8M=</DQ><InverseQ>iaTFIP3unJMIlPHKNUf+E1dq2k+77Rs3sZRMkk7ATlg=</InverseQ><D>Tk/8m7EPqcyLTF/GNOfRqSMw5MGZLCMg/ALeyhengug5b/9oYr/9S+RerfCCTM9oyO2dnFEn5QQRLUMD394rWQ==</D></RSAKeyValue>"
+		// public  = "<RSAKeyValue><Modulus>16CcCS56V1YIkjht12jOg5G2597D2lv+AwKMAKvueYpT2X5iE42yuKm/DFDhEIeyGckKe+Edz/T4OtpIq+5oTQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>"
 
 		private EncryptionManager() {
 		}

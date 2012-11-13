@@ -57,8 +57,6 @@ namespace Europlan.Common {
 
 		private GraphicalHithermVerbindung newConnectionStartConnection = null;
 
-		//private GraphicalHithermRegisterWrapper connectRegistersFirst = null;
-		//
 		private NewConnectionModeEnum newConnectionMode = NewConnectionModeEnum.NCM_AUTO;
 
 		public NewConnectionModeEnum NewConnectionMode {
@@ -133,20 +131,13 @@ namespace Europlan.Common {
 		public GraphicalWallPanel ConnectedWallPanel {
 			get { return this.connectedWallPanel; }
 			set {
-				/*if (this.connectedWallPanel != null) {
-					this.connectedWallPanel.KeyDown -= new KeyEventHandler(connectedPlanPanel_KeyDown);
-				}*/
 				this.connectedWallPanel = value;
-				/*if (this.connectedWallPanel != null) {
-					this.connectedWallPanel.KeyDown += new KeyEventHandler(connectedPlanPanel_KeyDown);
-				}*/
 			}
 		}
 
 		private Cursor customCursor = null;
 
 		public Cursor CustomCursor {
-			//get { return customCursor; }
 			get { return null; }
 		}
 
@@ -206,9 +197,6 @@ namespace Europlan.Common {
 					}
 				}
 				if (this.newConnectionStart != null) {
-					//PossibleConnection endConn;
-					//this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
-					//this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(mousePositionInPlan, out endConn));
 					this.newConnectionDraw.PaintObject(g, Color.Green, !this.newConnectionDraw.CheckValidity(null, 0, 0), scale, false);
 				}
 			}
@@ -378,28 +366,6 @@ namespace Europlan.Common {
 									this.connectedWallPanel.SelectedObject = newLink;
 									this.connectedWallPanel.InvalidateGraphics();
 								}
-
-								/*combinedCircuit.Links.Remove(endConnection);
-								startConnection.Vertices[startConnection.Vertices.Count - 1] = new Point2D(startConnection.Vertices[startConnection.Vertices.Count - 1].X, -10);
-								endConnection.Vertices[0] = new Point2D(endConnection.Vertices[0].X, -10);
-								List<Point2D> vertices = new List<Point2D>(startConnection.Vertices);
-								vertices.AddRange(endConnection.Vertices);
-								combinedCircuit.Links.Remove(startConnection);
-								GraphicalHithermVerbindung newLink = new GraphicalHithermVerbindung(startRegister, endRegister, vertices, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
-								combinedCircuit.Links.Add(newLink);*/
-
-								/*GraphicalHithermVerbindung newLink = new GraphicalHithermVerbindung(startConnection.Start, endConnection.End, combinedCircuit, Project.Instance.GetPlannedProduct(this.product));
-								if (combinedCircuit.UnderfloorLinks == null) {
-									combinedCircuit.UnderfloorLinks = new List<GraphicalHithermVerbindung>();
-								}
-								combinedCircuit.UnderfloorLinks.Add(newLink);
-
-								this.newConnectionStartConnection = null;
-
-								if (this.connectedWallPanel != null) {
-									this.connectedWallPanel.SelectedObject = newLink;
-									this.connectedWallPanel.InvalidateGraphics();
-								}*/
 							} else {
 								if (MessageBox.Show(EuroplanRes.HithermPlanner_VerbindungNichtMoeglichText, EuroplanRes.HithermPlanner_VerbindungNichtMoeglichTitel, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Cancel) {
 									this.newConnectionStartConnection = null;
@@ -516,7 +482,6 @@ namespace Europlan.Common {
 						}
 					}
 					this.highlightedConnections.Clear();
-					//if (this.startConnection == null) {
 					foreach (GraphicalWall baseWall in this.product.AssociatedRoom.Walls) {
 						GraphicalWall wall = baseWall;
 						while (wall != null) {
@@ -549,7 +514,6 @@ namespace Europlan.Common {
 							wall = wall.DachSchraege;
 						}
 					}
-					//}
 					if (this.newConnectionStart != null) {
 						this.newConnectionDraw.Vertices = new List<Point2D>(this.newConnection.Vertices);
 						this.newConnectionDraw.Vertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConn));
@@ -704,17 +668,12 @@ namespace Europlan.Common {
 			if (this.mode == HithermPlannerMode.HPM_ADD_REGISTER && this.dragStart.HasValue && this.newRegister != null) {
 				bool recalc = false;
 				if (this.newRegister.Register != null && this.newRegisterOk) {
-					//HithermCircuit c = new HithermCircuit();
-					//this.product.PlannedCircuits.Add(c);
-
 					this.newRegister.Register.Wall = this.newRegisterWall.Wall;
 					this.newRegister.Register.PlannedProduct = Project.Instance.GetPlannedProduct(this.product);
 					int hkId = this.product.GetNewHkId();
 					this.product.AddRegisterToCircuit(this.newRegister.Register, hkId);
-					//this.newRegister.Register.Heizkreis = hkId;
 
 					this.newRegisterWall.Registers.Add(this.newRegister);
-					//this.newRegister.Register.Heizkreis = this.product.PlannedCircuits.Count - 1;
 					if (this.ConnectedWallPanel != null) {
 						this.ConnectedWallPanel.SelectedObject = this.newRegister;
 					}
@@ -817,39 +776,6 @@ namespace Europlan.Common {
 		public Product Product {
 			get { return this.HithermProduct; }
 		}
-
-		/*/// <summary>
-		/// Returns x-offset in m
-		/// </summary>
-		/// <param name="wall"></param>
-		/// <returns></returns>
-		private Nullable<double> GetWallXOffset(GraphicalWall wall) {
-			if (this.product == null || this.product.AssociatedRoom == null) {
-				return null;
-			}
-			double xOffset = 0;
-			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
-				if (w.GetWallYOffset(wall, 0).HasValue) { // quick hack to determine if the searched wall is a dachschräge of w
-					return xOffset;
-				}
-				xOffset += w.GetWallWidth();
-			}
-			return null;
-		}
-
-		private Nullable<double> GetWallYOffset(GraphicalWall wall) {
-			if (this.product == null || this.product.AssociatedRoom == null) {
-				return null;
-			}
-			Nullable<double> yOffset = null;
-			foreach (GraphicalWall w in this.product.AssociatedRoom.Walls) {
-				yOffset = w.GetWallYOffset(wall, 0);
-				if (yOffset.HasValue) {
-					return yOffset;
-				}
-			}
-			return null;
-		}*/
 
 		public HithermPlannerMode Mode {
 			get { return this.mode; }
@@ -1017,9 +943,6 @@ namespace Europlan.Common {
 					if (pickedObject != null) {
 						return pickedObject;
 					}
-					/*if (link.HitTest(mousePosInPlan, 2)) {
-						return link;
-					}*/
 				}
 			}
 			return null;

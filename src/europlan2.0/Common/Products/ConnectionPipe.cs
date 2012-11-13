@@ -8,9 +8,9 @@ namespace Europlan.Common {
 	public class ConnectionPipe {
 
 		public class PipeTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string euroval = EuroplanRes.ConnectionPipe_Euroval; //"Euroval FBH 24/17";
-			private static readonly string rundrohr = EuroplanRes.ConnectionPipe_Rundrohr; //"21mm Rundrohr";
-			private static readonly string ecotherm = EuroplanRes.ConnectionPipe_Ecotherm; //"Ecotherm FBH";
+			private static readonly string euroval = EuroplanRes.ConnectionPipe_Euroval; //"Euroval FBH 24/17"
+			private static readonly string rundrohr = EuroplanRes.ConnectionPipe_Rundrohr; //"21mm Rundrohr"
+			private static readonly string ecotherm = EuroplanRes.ConnectionPipe_Ecotherm; //"Ecotherm FBH"
 
 			private Dictionary<string, PipeTypeEnum> mappingFromString = new Dictionary<string, PipeTypeEnum>();
 			private Dictionary<PipeTypeEnum, string> mappingToString = new Dictionary<PipeTypeEnum, string>();
@@ -59,15 +59,15 @@ namespace Europlan.Common {
 		}
 
 		public class VerlegeartEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string unterEstrich = EuroplanRes.ConnectionPipe_UnterEstrich; //"unter Estrich";
-			private static readonly string ev35 = EuroplanRes.EurovalProduct_EV35; //"EV35";
-			private static readonly string ev30 = EuroplanRes.EurovalProduct_EV30; //"EV30";
-			private static readonly string ev25 = EuroplanRes.EurovalProduct_EV25; //"EV25";
-			private static readonly string ev20 = EuroplanRes.EurovalProduct_EV20; //"EV20";
-			private static readonly string ev15 = EuroplanRes.EurovalProduct_EV15; //"EV15";
-			private static readonly string ev10 = EuroplanRes.EurovalProduct_EV10; //"EV10";
-			private static readonly string ev5 = EuroplanRes.EurovalProduct_EV5; //"EV5";
-			private static readonly string a5 = EuroplanRes.EurovalProduct_A5; //"A5";
+			private static readonly string unterEstrich = EuroplanRes.ConnectionPipe_UnterEstrich; //"unter Estrich"
+			private static readonly string ev35 = EuroplanRes.EurovalProduct_EV35; //"EV35"
+			private static readonly string ev30 = EuroplanRes.EurovalProduct_EV30; //"EV30"
+			private static readonly string ev25 = EuroplanRes.EurovalProduct_EV25; //"EV25"
+			private static readonly string ev20 = EuroplanRes.EurovalProduct_EV20; //"EV20"
+			private static readonly string ev15 = EuroplanRes.EurovalProduct_EV15; //"EV15"
+			private static readonly string ev10 = EuroplanRes.EurovalProduct_EV10; //"EV10"
+			private static readonly string ev5 = EuroplanRes.EurovalProduct_EV5; //"EV5"
+			private static readonly string a5 = EuroplanRes.EurovalProduct_A5; //"A5"
 
 			private Dictionary<string, VerlegeartEnum> mappingFromString = new Dictionary<string, VerlegeartEnum>();
 			private Dictionary<VerlegeartEnum, string> mappingToString = new Dictionary<VerlegeartEnum, string>();
@@ -134,9 +134,9 @@ namespace Europlan.Common {
 		}
 
 		public class InsulationEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string none = EuroplanRes.ConnectionPipe_KeineDaemmung; //"keine";
-			private static readonly string vl = EuroplanRes.ConnectionPipe_VorlaufGedaemmt; //"VL";
-			private static readonly string vlrl = EuroplanRes.ConnectionPipe_Gedaemmt; //"VL+RL";
+			private static readonly string none = EuroplanRes.ConnectionPipe_KeineDaemmung; //"keine"
+			private static readonly string vl = EuroplanRes.ConnectionPipe_VorlaufGedaemmt; //"VL"
+			private static readonly string vlrl = EuroplanRes.ConnectionPipe_Gedaemmt; //"VL+RL"
 
 			private Dictionary<string, InsulationEnum> mappingFromString = new Dictionary<string, InsulationEnum>();
 			private Dictionary<InsulationEnum, string> mappingToString = new Dictionary<InsulationEnum, string>();
@@ -363,9 +363,6 @@ namespace Europlan.Common {
 
 		public VerlegeartEnum Verlegeart {
 			get {
-				/*if (this.ConnectionThrough != null && !(this.ConnectionThrough.Product is EurovalProduct) && !(this.ConnectionThrough.Product is EcothermProduct) && !(this.ConnectionThrough.Product is ModulKlimaBodenProduct)) {
-					return VerlegeartEnum.VA_UNTER_ESTRICH;
-				}*/
 				return this.verlegeart;
 			}
 			set { this.verlegeart = value; }
@@ -820,11 +817,6 @@ namespace Europlan.Common {
 					}
 				}
 
-				/*totalPipeLength += pipeBeforeVorlauf + pipeAfterVorlauf;
-				totalPipeLength += this.vorlauf;
-				totalPipeLength += this.ruecklauf;*/
-
-				
 				if (this.Insulation != InsulationEnum.IN_VL_RL) {
 					pipeAfterVorlauf += this.ruecklauf;
 				}

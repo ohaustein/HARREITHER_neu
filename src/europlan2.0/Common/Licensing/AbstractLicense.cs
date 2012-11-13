@@ -149,7 +149,6 @@ namespace Europlan.Licensing {
 		public string LicenseStringForSigning {
 			get {
 				string tmp = "";
-				/*tmp += "key: " + this.key.HashedKey;*/
 				tmp += "licensed to: " + this.licensedTo;
 				tmp += "\nheader: " + this.header;
 				tmp += "\nvalid until: " + this.validUntil.ToBinary().ToString();

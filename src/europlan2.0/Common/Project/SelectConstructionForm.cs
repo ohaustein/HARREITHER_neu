@@ -27,14 +27,14 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen";
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Abbrechen"
 
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Nummer; //"Nr.";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Bezeichnung; //"Bezeichnung";
-			this.typeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Typ; //"Typ";
-			this.rValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_RWert; //"R";
-			this.Text = EuroplanRes.SelectConstructionForm_Titel; //"Bitte wählen Sie die gewünschte Konstruktion";
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Nummer; //"Nr."
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Bezeichnung; //"Bezeichnung"
+			this.typeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_Typ; //"Typ"
+			this.rValueDataGridViewTextBoxColumn.HeaderText = EuroplanRes.SelectConstructionForm_RWert; //"R"
+			this.Text = EuroplanRes.SelectConstructionForm_Titel; //"Bitte wählen Sie die gewünschte Konstruktion"
 		}
 
 		public Construction SelectedConstruction {
@@ -59,10 +59,8 @@ namespace Europlan.Common {
 			SettingsKey settings = SettingsFile.Settings["SelectConstructionForm"];
 			this.Location = settings.GetPoint("Location", this.Location);
 			this.loaded = true;
-			//if (this.selectConstructionAfterLoad != null) {
-				this.SelectedConstruction = this.selectConstructionAfterLoad;
-				this.selectConstructionAfterLoad = null;
-			//}
+			this.SelectedConstruction = this.selectConstructionAfterLoad;
+			this.selectConstructionAfterLoad = null;
 		}
 
 		private void SelectConstructionForm_FormClosing(object sender, FormClosingEventArgs e) {

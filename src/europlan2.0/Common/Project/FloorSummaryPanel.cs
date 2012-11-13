@@ -34,7 +34,6 @@ namespace Europlan.Common {
 
 			this.SetLanguage();
 
-			//this.gridRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
 			this.gridRooms.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
 			this.gridRooms.CellPainting += new DataGridViewCellPaintingEventHandler(gridRooms_CellPainting);
 			this.gridRooms.Paint += new PaintEventHandler(gridRooms_Paint);
@@ -42,32 +41,32 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?";
+			this.btnWhatIsNext.Text = EuroplanRes.General_WieGehtsWeiter; //"Wie geht\'s weiter?"
 
-			this.btnAddDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerAnlegen; //"Verteiler anlegen";
-			this.label1.Text = EuroplanRes.FloorSummaryPanel_Geschossdaten; //"Geschoßdaten:";
-			this.btnRemoveDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerLoeschen; //"Verteiler löschen";
-			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Nummer; //"Nr.\n";
-			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_NummerLang; //"eindeutige Raumnummer";
-			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Bezeichnung; //"Bezeichnung\n";
-			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_BezeichnungLang; //"Bezeichnung des Raumes";
-			this.Area.HeaderText = EuroplanRes.FloorSummaryPanel_Flaeche; //"A\n(m²)";
-			this.Area.ToolTipText = EuroplanRes.FloorSummaryPanel_FlaecheLang; //"Raumfläche";
-			this.RoomTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeiz; //"Ti\n(°C)";
-			this.RoomTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeizLang; //"Norminnentemperatur laut Wärmebedarfsberechnung";
-			this.HeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Waermebedarf; //"QN\n(W)";
-			this.HeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_WaermebedarfLang; //"Normwärmebedarf laut Wärmebedarfsrechnung";
-			this.FloorHeatingLoss.HeaderText = EuroplanRes.FloorSummaryPanel_Fussbodentransmissionen; //"QFB\n(W)";
-			this.FloorHeatingLoss.ToolTipText = EuroplanRes.FloorSummaryPanel_FussbodentransmissionenLang; //"Im Wärmebedarf enthaltene Fußbodentransmissionen";
-			this.AdditionalHeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Fremdwaermeleistung; //"QFr\n(W)";
-			this.AdditionalHeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_FremdwaermeleistungLang; //"Zusätzliche Fremdwärmeleistung";
-			this.RoomCoolTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehl; //"Ti\n(°C)";
-			this.RoomCoolTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehlLang; //"Gewünschte Rauminnentemperatur bei Kühlung";
-			this.RoomRelativeHumidity.HeaderText = EuroplanRes.FloorSummaryPanel_Luftfeuchtigkeit; //"RF\n(%)";
-			this.RoomRelativeHumidity.ToolTipText = EuroplanRes.FloorSummaryPanel_LuftfeuchtigkeitLang; //"Relative Luftfeuchtigkeit für Kühlung";
-			this.CoolLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Kuehlleistung; //"QKühl\n(W)";
-			this.CoolLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_KuehlleistungLang; //"Erforderliche Külleistung laut Kühllastberechnung";
-			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n";
+			this.btnAddDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerAnlegen; //"Verteiler anlegen"
+			this.label1.Text = EuroplanRes.FloorSummaryPanel_Geschossdaten; //"Geschoßdaten:"
+			this.btnRemoveDistributor.Text = EuroplanRes.FloorSummaryPanel_VerteilerLoeschen; //"Verteiler löschen"
+			this.idDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Nummer; //"Nr.\n"
+			this.idDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_NummerLang; //"eindeutige Raumnummer"
+			this.nameDataGridViewTextBoxColumn.HeaderText = EuroplanRes.FloorSummaryPanel_Bezeichnung; //"Bezeichnung\n"
+			this.nameDataGridViewTextBoxColumn.ToolTipText = EuroplanRes.FloorSummaryPanel_BezeichnungLang; //"Bezeichnung des Raumes"
+			this.Area.HeaderText = EuroplanRes.FloorSummaryPanel_Flaeche; //"A\n(m²)"
+			this.Area.ToolTipText = EuroplanRes.FloorSummaryPanel_FlaecheLang; //"Raumfläche"
+			this.RoomTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeiz; //"Ti\n(°C)"
+			this.RoomTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturHeizLang; //"Norminnentemperatur laut Wärmebedarfsberechnung"
+			this.HeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Waermebedarf; //"QN\n(W)"
+			this.HeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_WaermebedarfLang; //"Normwärmebedarf laut Wärmebedarfsrechnung"
+			this.FloorHeatingLoss.HeaderText = EuroplanRes.FloorSummaryPanel_Fussbodentransmissionen; //"QFB\n(W)"
+			this.FloorHeatingLoss.ToolTipText = EuroplanRes.FloorSummaryPanel_FussbodentransmissionenLang; //"Im Wärmebedarf enthaltene Fußbodentransmissionen"
+			this.AdditionalHeatLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Fremdwaermeleistung; //"QFr\n(W)"
+			this.AdditionalHeatLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_FremdwaermeleistungLang; //"Zusätzliche Fremdwärmeleistung"
+			this.RoomCoolTemperature.HeaderText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehl; //"Ti\n(°C)"
+			this.RoomCoolTemperature.ToolTipText = EuroplanRes.FloorSummaryPanel_RaumtemperaturKuehlLang; //"Gewünschte Rauminnentemperatur bei Kühlung"
+			this.RoomRelativeHumidity.HeaderText = EuroplanRes.FloorSummaryPanel_Luftfeuchtigkeit; //"RF\n(%)"
+			this.RoomRelativeHumidity.ToolTipText = EuroplanRes.FloorSummaryPanel_LuftfeuchtigkeitLang; //"Relative Luftfeuchtigkeit für Kühlung"
+			this.CoolLoad.HeaderText = EuroplanRes.FloorSummaryPanel_Kuehlleistung; //"QKühl\n(W)"
+			this.CoolLoad.ToolTipText = EuroplanRes.FloorSummaryPanel_KuehlleistungLang; //"Erforderliche Külleistung laut Kühllastberechnung"
+			this.colView.HeaderText = EuroplanRes.FloorSummaryPanel_Bearbeiten; //"Bearbeiten\n"
 			this.IsNassraum.HeaderText = EuroplanRes.FloorSummaryPanel_Nassraum;
 			this.chkAssignPlan.Text = EuroplanRes.FloorSummaryPanel_PlanVorhanden;
 
@@ -153,7 +152,6 @@ namespace Europlan.Common {
 		}
 
 		private void gridRooms_CellClick(object sender, DataGridViewCellEventArgs e) {
-			//this.gridRooms.EditMode = (e.ColumnIndex == -1 ? DataGridViewEditMode.EditOnKeystroke : DataGridViewEditMode.EditOnEnter);
 			if (e.ColumnIndex >= 0 && e.ColumnIndex < this.gridRooms.Columns.Count &&
 					this.gridRooms.Columns[e.ColumnIndex] == this.colView &&
 					e.RowIndex >= 0 && e.RowIndex < this.gridRooms.Rows.Count) {
@@ -236,16 +234,6 @@ namespace Europlan.Common {
 		}
 
 		private void gridRooms_UserDeletedRow(object sender, DataGridViewRowEventArgs e) {
-			/*
-						List<PlannedProduct> connectedProducts = this.room.GetFloor().FindConnectedProduct(product);
-						foreach (PlannedProduct connectedProduct in connectedProducts) {
-							SelectConnectionForProductForm.UnconnectProduct(connectedProduct);
-							connectedProduct.Product.PlannedConnection = null;
-							connectedProduct.Product.ConfigureProduct(connectedProduct.RequestedHeatLoad, connectedProduct.RequestedCoolLoad, connectedProduct.CalculateHeat, connectedProduct.CalculateCool, false);
-						}
-						SelectConnectionForProductForm.UnconnectProduct(product);
-						this.room.PlannedProducts.Remove(product);
-			 */
 			gridRooms.AllowUserToAddRows = true;
 			if (projectStructureChanged != null) {
 				projectStructureChanged(this);
@@ -364,23 +352,17 @@ namespace Europlan.Common {
 			r1.Y += 1;
 			r1.Width = r1.Width + r2.Width + r3.Width + r4.Width - 4;
 			r1.Height = r1.Height / 2 - 2;
-			//e.Graphics.FillRectangle(new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.BackColor), r1);
 			StringFormat format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
 			
 			e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
 			e.Graphics.DrawRectangle(new Pen(SystemColors.ControlDark), new Rectangle(r1.X + 4, r1.Y + 4, r1.Width - 8, r1.Height - 9));
-			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + 2), new Point(r1.X + r1.Width, r1.Y + 2));
-			//e.Graphics.DrawLine(new Pen(SystemColors.ControlDark), new Point(r1.X, r1.Y + r1.Height - 7), new Point(r1.X + r1.Width, r1.Y + r1.Height - 7));
 			e.Graphics.DrawString(EuroplanRes.FloorSummaryPanel_Heizbetrieb,
 				this.gridRooms.ColumnHeadersDefaultCellStyle.Font,
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
 				format);
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
 
 			r1 = this.gridRooms.GetCellDisplayRectangle(8, -1, true); //get the column header cell
 			r2 = this.gridRooms.GetCellDisplayRectangle(9, -1, true); //get the column header cell
@@ -390,7 +372,6 @@ namespace Europlan.Common {
 			r1.Y += 1;
 			r1.Width = r1.Width + r2.Width + r3.Width - 4;
 			r1.Height = r1.Height / 2 - 2;
-			//e.Graphics.FillRectangle(new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.BackColor), r1);
 			format = new StringFormat();
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Center;
@@ -401,10 +382,6 @@ namespace Europlan.Common {
 				new SolidBrush(this.gridRooms.ColumnHeadersDefaultCellStyle.ForeColor),
 				r1,
 				format);
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y + r1.Height - 5), new Point(r1.X + r1.Width, r1.Y + r1.Height - 5));
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X, r1.Y), new Point(r1.X, r1.Y + (r1.Height * 2)));
-			//e.Graphics.DrawLine(Pens.Black, new Point(r1.X + r1.Width, r1.Y), new Point(r1.X + r1.Width, r1.Y + (r1.Height * 2)));
-
 		}
 
 		void gridRooms_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {

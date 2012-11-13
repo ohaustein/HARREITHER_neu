@@ -355,7 +355,7 @@ namespace Europlan.Common {
 		}
 
 		public ListSortDescriptionCollection SortDescriptions {
-			get { return null; /*throw new Exception("The method or operation is not implemented.");*/ }
+			get { return null; }
 		}
 
 		public bool SupportsAdvancedSorting {

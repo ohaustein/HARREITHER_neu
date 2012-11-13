@@ -7,12 +7,12 @@ using System.Threading;
 namespace Europlan.Common {
 
 	public class CategoryTypeEnumConverter : System.ComponentModel.TypeConverter {
-		private static readonly string floor = EuroplanRes.Category_Fussbodenheizung; //"Fußbodenheizung";
-		private static readonly string wall = EuroplanRes.Category_Wandheizung; //"Wandheizung";
-		private static readonly string ceiling = EuroplanRes.Category_Deckenkuehlung; //"Deckenkühlung";
-		private static readonly string distributor = EuroplanRes.Category_Verteiler; //"Verteiler";
-		private static readonly string insulation = EuroplanRes.Category_Daemmung; //"Dämmung";
-		private static readonly string general = EuroplanRes.Category_Allgemein; //"Allgemein";
+		private static readonly string floor = EuroplanRes.Category_Fussbodenheizung; //"Fußbodenheizung"
+		private static readonly string wall = EuroplanRes.Category_Wandheizung; //"Wandheizung"
+		private static readonly string ceiling = EuroplanRes.Category_Deckenkuehlung; //"Deckenkühlung"
+		private static readonly string distributor = EuroplanRes.Category_Verteiler; //"Verteiler"
+		private static readonly string insulation = EuroplanRes.Category_Daemmung; //"Dämmung"
+		private static readonly string general = EuroplanRes.Category_Allgemein; //"Allgemein"
 
 		private Dictionary<string, CategoryType> mappingFromString = new Dictionary<string, CategoryType>();
 		private Dictionary<CategoryType, string> mappingToString = new Dictionary<CategoryType, string>();
@@ -34,12 +34,10 @@ namespace Europlan.Common {
 
 		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
 			return true;
-			//return sourceType == typeof(string);
 		}
 
 		public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
 			return true;
-			//return destinationType == typeof(string);
 		}
 
 		public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {

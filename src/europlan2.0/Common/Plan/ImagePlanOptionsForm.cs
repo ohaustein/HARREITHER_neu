@@ -70,7 +70,7 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen";
+			this.Text = EuroplanRes.ImagePlanOptionsForm_Titel; //"Optionen"
 			this.btnRaster.Text = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			this.btnRaster.ToolTipText = EuroplanRes.ImagePlanOptionsForm_RasterEin;
 			this.lblLength.Text = EuroplanRes.PlanOptionsForm_Leange; //"Länge:"
@@ -167,14 +167,12 @@ namespace Europlan.Common {
 
 		private void btnZoomIn_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			//plan.Scale *= 1.1f;
 			picturePanel.AddScale(1.1, null);
 			picturePanel.Invalidate();
 		}
 
 		private void btnZoomOut_Click(object sender, EventArgs e) {
 			unsavedChanges = true;
-			//plan.Scale *= 0.9f;
 			picturePanel.AddScale(0.9, null);
 			picturePanel.Invalidate();
 		}
@@ -196,10 +194,6 @@ namespace Europlan.Common {
 			picturePanel.Cursor = Cursors.Cross;
 			btnMove.Checked = false;
 			btnDistance.Checked = true;
-			//txtLength.Visible = true;
-			//lblLength.Visible = true;
-		    //txtLength.Enabled = plan.Measure.HasValue;
-			//txtLength.Text = "";
 			picturePanel.Mode = PlanMode.PM_PICK_MEASURE;
 		}
 
@@ -218,7 +212,6 @@ namespace Europlan.Common {
 				if (length != psmf.Length) {
 					this.unsavedChanges = true;
 					this.picturePanel.Plan.Measure = (float)(this.picturePanel.Length / psmf.Length);
-					//this.txtLength.Text = (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value).ToString("0.00") + EuroplanRes.Unit_Meter;
 					switch (Product.ConfigPlanMeasureEnum) {
 						case Product.PlanMeasureEnum.PM_CENTIMETER:
 							txtLength.Text = "" + (this.picturePanel.Length / this.picturePanel.Plan.Measure.Value * Product.ConfigPlanMeasureMultiplier).ToString("0") + EuroplanRes.Unit_Zentimeter;

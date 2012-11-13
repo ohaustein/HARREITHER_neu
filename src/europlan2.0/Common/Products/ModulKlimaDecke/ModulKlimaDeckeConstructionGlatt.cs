@@ -19,7 +19,6 @@ namespace Europlan.Common {
 		private double offset = 0; // meter
 		private double offsetY = 0; // meter (only used for beplankung)
         private int beplankungXShift = 0;
-		//private Nullable<Size2D> beplankung = null; // meter
 		private Nullable<Size2D> beplankung = new Size2D(2.0, 1.25);
 
 		private Nullable<Size2D> beplankungStart = null;
@@ -46,7 +45,7 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public override List<Point2D> CeilingCoordinates {
 			get {
-				if (/*this.Planner == null ||*/ this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
+				if (this.Product == null || this.Product.AssociatedRoom == null || this.Product.AssociatedRoom.CeilingCoordinatesToUse == null) {
 					return null;
 				}
 				return this.Product.AssociatedRoom.CeilingCoordinatesToUse;
@@ -76,7 +75,6 @@ namespace Europlan.Common {
 				start = schiene[0] + (schiene[1] - schiene[0]) / 2.0;
 				end = schiene[2] + (schiene[3] - schiene[2]) / 2.0;
 				staffel = new Line2D(start, end - start);
-				//schiene.GetI
 				Point2D lastPoint = ceilingCoordinates[ceilingCoordinates.Count - 1];
 				intersections.Clear();
 				foreach (Point2D curPoint in ceilingCoordinates) {
@@ -111,7 +109,7 @@ namespace Europlan.Common {
         }
 
 		public override void RecalculateSchienen() {
-			if (/*this.Planner == null ||*/ this.Product == null ||
+			if (this.Product == null ||
 				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.Product.AssociatedRoom.AssociatedPlan == null) {
@@ -149,7 +147,6 @@ namespace Europlan.Common {
 			this.schienen.Clear();
 			this.possibleLanes.Clear();
 
-			//double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			double increment = (SchienenBreite + schienenAbstand) * measure;
 			double curPos = (minX + maxX - SchienenBreite * measure) / 2.0 + (offset * measure);
@@ -177,7 +174,6 @@ namespace Europlan.Common {
 				this.beplankungStart = null;
 				this.beplankungEnd = null;
 			}
-			//curPos = curPos - increment;
 			List<int> ignoreLanes = new List<int>();
 			double schieneStartY = minY - measure * 0.1;
 			double schieneEndY = maxY + measure * 0.1;
@@ -287,10 +283,6 @@ namespace Europlan.Common {
 			}
 			normalizedLines.Add(normalizedBorderRight);
 
-			/*if (startPointX > normalizedBorderRight.Origin.X || endPointX < normalizedBorderLeft.Origin.X) {
-				return new List<LineSegment>();
-			}*/
-
 			List<LineSegment> segmentsUnusable = new List<LineSegment>();
 			for (int i = 0; i < normalizedLines.Count; i++) {
 				Line2D line = normalizedLines[i];
@@ -340,80 +332,6 @@ namespace Europlan.Common {
 			return segmentsUnusable;
 		}
 
-		/*private class LineSegment : IComparable<LineSegment> {
-			private double start;
-			private double end;
-
-			public LineSegment() {
-				this.start = 0;
-				this.end = 0;
-			}
-
-			public LineSegment(double start, double end) {
-				this.start = start;
-				this.end = end;
-			}
-
-			public double Start {
-				get { return this.start; }
-				set { this.start = value; }
-			}
-
-			public double End {
-				get { return this.end; }
-				set { this.end = value; }
-			}
-
-			#region IComparable<LineSegment> Members
-			public int CompareTo(LineSegment other) {
-				int rtn = this.start.CompareTo(other.start);
-				if (rtn == 0) {
-					rtn = this.end.CompareTo(other.end);
-				}
-				return rtn;
-			}
-			#endregion
-		}*/
-
-/*		private List<LineSegment> MergeSegments(List<LineSegment> segments1, List<LineSegment> segments2) {
-			List<LineSegment> mergedSegments = new List<LineSegment>(segments1);
-			mergedSegments.AddRange(segments2);
-			NormalizeSegments(mergedSegments);
-			return mergedSegments;
-		}
-
-		private void NormalizeSegments(List<LineSegment> segments) {
-			segments.Sort();
-			int i = 1;
-			while (i < segments.Count) {
-			//for (int i = 1; i < segments.Count; i++) {
-				if (segments[i - 1].End >= segments[i].Start) {
-					segments[i - 1].End = Math.Max(segments[i - 1].End, segments[i].End);
-					segments.RemoveAt(i);
-				} else {
-					i++;
-				}
-			}
-		}
-
-		private List<LineSegment> InvertSegments(List<LineSegment> segments) {
-			List<LineSegment> invertedSegments = new List<LineSegment>();
-			if (segments.Count == 0) {
-				invertedSegments.Add(new LineSegment(double.MinValue, double.MaxValue));
-			} else {
-				if (segments[0].Start > double.MinValue) {
-					invertedSegments.Add(new LineSegment(double.MinValue, segments[0].Start));
-				}
-				for (int i = 1; i < segments.Count; i++) {
-					invertedSegments.Add(new LineSegment(segments[i - 1].End, segments[i].Start));
-				}
-				if (segments[segments.Count - 1].End < double.MaxValue) {
-					invertedSegments.Add(new LineSegment(segments[segments.Count - 1].End, double.MaxValue));
-				}
-			}
-			return invertedSegments;
-		}*/
-
 		private void CheckLeftBorder(Line2D borderLeft, Segment2D roomBorder, ref bool inside, List<double> bordersTop, List<CompareablePair<double>> removes, ref List<double> possiblePoints, ref bool enteredLeft) {
 			Nullable<Point2D> intersection = Line2D.GetIntersection(borderLeft, roomBorder);
 			if (intersection.HasValue) {
@@ -452,26 +370,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*private double GetMin(List<double> values) {
-			double min = double.MaxValue;
-			foreach (double val in values) {
-				if (val < min) {
-					min = val;
-				}
-			}
-			return min;
-		}
-
-		private double GetMax(List<double> values) {
-			double max = double.MinValue;
-			foreach (double val in values) {
-				if (val > max) {
-					max = val;
-				}
-			}
-			return max;
-		}*/
-
 		[XmlIgnore]
 		public override ModulKlimaDeckeProduct.ModulCeilingConstructionEnum CeilingConstruction {
 			get { return this.constructionType; }
@@ -487,12 +385,6 @@ namespace Europlan.Common {
             }
 		}
 
-        /*public Nullable<double> SchienenBreiteSerialize {
-            get { return this.schienenBreite; }
-            set { this.schienenBreite = value; }
-        }
-
-		[XmlIgnore]*/
 		public double SchienenBreite {
 			get {
                 if (this.schienenBreite.HasValue) {
@@ -632,8 +524,7 @@ namespace Europlan.Common {
 		}
 
 		public override void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung) {
-			if (/*this.Planner == null ||*/
-				this.Product == null ||
+			if (this.Product == null ||
 				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
@@ -644,15 +535,12 @@ namespace Europlan.Common {
 			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
-			/*double minX, maxX, minY, maxY;*/
-			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
+			GraphicsPath roomPath = this.GetProductAreaPath();
 			g.Clip = new Region(roomPath);
 
 			System.Drawing.Color c = System.Drawing.Color.Gray;
 			Pen p = new Pen(c);
 			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, System.Drawing.Color.FromArgb(0, c));
-
-			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
 			foreach (Polygon2D schiene in this.GetSchienen(true)) {
 				PointF[] poly = new PointF[schiene.Count];
@@ -673,7 +561,6 @@ namespace Europlan.Common {
 						Point2D p3 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX + beplankung.Value.X * measure, beplankungY + beplankung.Value.Y * measure, 0)));
 						Point2D p4 = additionalTransformation.TransformTo2D(matrix.Transform(new Point3D(beplankungX, beplankungY + beplankung.Value.Y * measure, 0)));
 						g.DrawPolygon(p, new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
-						//g.DrawRectangle(p, (float)(beplankungX), (float)(beplankungY), (float)(beplankung.Value.X * measure), (float)(beplankung.Value.Y * measure));
 					}
 				}
 			}
@@ -698,8 +585,7 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintDxf(DxfModel model, DxfLayer constructionLayer, DxfLayer beplankungLayer, bool drawBeplankung) {
-			if (/*this.Planner == null ||*/
-				this.Product == null ||
+			if (this.Product == null ||
 				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
@@ -808,8 +694,7 @@ namespace Europlan.Common {
 		}
 
 		public override bool HitTest(Point2D planPoint, Point pointInControl) {
-			if (/*this.Planner == null ||*/
-				this.Product == null ||
+			if (this.Product == null ||
 				this.Product.AssociatedRoom == null ||
 				this.CeilingCoordinates == null ||
 				this.CeilingCoordinates.Count < 3 ||
@@ -848,10 +733,8 @@ namespace Europlan.Common {
             if (this.mode == ConstructionModifyMode.MOVE_SCHIENEN) {
                 Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
                 this.Offset = startOffset + (move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
-                //this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
             } else {
-			    if (/*this.Planner == null ||*/
-				    this.Product == null ||
+			    if (this.Product == null ||
 				    this.Product.AssociatedRoom == null ||
 				    this.CeilingCoordinates == null ||
 				    this.CeilingCoordinates.Count < 3 ||

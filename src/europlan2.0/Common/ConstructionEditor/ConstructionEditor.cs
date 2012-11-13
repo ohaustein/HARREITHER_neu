@@ -21,18 +21,18 @@ namespace Europlan.Common {
 		}
 
 		public void SetLanguage() {
-			this.lblId.Text = EuroplanRes.General_Nummer; //"Nummer:";
-			this.lblName.Text = EuroplanRes.General_Bezeichnung; //"Bezeichnung:";
-			this.lblThickness.Text = EuroplanRes.ConstructionEditor_Estrichdicke; //"Estrichdicke:";
-			this.cbPeFoil.Text = EuroplanRes.ConstructionEditor_PeFolie; //"PE Folie";
-			this.lblFactor.Text = EuroplanRes.ConstructionEditor_Faktor; //"Faktor:";
-			this.chkHitherm.Text = EuroplanRes.ConstructionEditor_Hitherm; //"Hitherm®";
-			this.chkHithermCompact.Text = EuroplanRes.ConstructionEditor_HithermCompact; //"Hitherm® Compact";
-			this.colName.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung";
-			this.colMaterial.HeaderText = EuroplanRes.ConstructionEditor_MaterialCol; //"Material";
-			this.colLambdaValue.HeaderText = EuroplanRes.ConstructionEditor_LambdaCol; //"lambda (W/m K)";
-			this.colThickness.HeaderText = EuroplanRes.ConstructionEditor_DickeCol; //"d (mm)";
-			this.colRValue.HeaderText = EuroplanRes.ConstructionEditor_RWertCol; //"R (m²K/W)";
+			this.lblId.Text = EuroplanRes.General_Nummer; //"Nummer:"
+			this.lblName.Text = EuroplanRes.General_Bezeichnung; //"Bezeichnung:"
+			this.lblThickness.Text = EuroplanRes.ConstructionEditor_Estrichdicke; //"Estrichdicke:"
+			this.cbPeFoil.Text = EuroplanRes.ConstructionEditor_PeFolie; //"PE Folie"
+			this.lblFactor.Text = EuroplanRes.ConstructionEditor_Faktor; //"Faktor:"
+			this.chkHitherm.Text = EuroplanRes.ConstructionEditor_Hitherm; //"Hitherm®"
+			this.chkHithermCompact.Text = EuroplanRes.ConstructionEditor_HithermCompact; //"Hitherm® Compact"
+			this.colName.HeaderText = EuroplanRes.General_BezeichnungCol; //"Bezeichnung"
+			this.colMaterial.HeaderText = EuroplanRes.ConstructionEditor_MaterialCol; //"Material"
+			this.colLambdaValue.HeaderText = EuroplanRes.ConstructionEditor_LambdaCol; //"lambda (W/m K)"
+			this.colThickness.HeaderText = EuroplanRes.ConstructionEditor_DickeCol; //"d (mm)"
+			this.colRValue.HeaderText = EuroplanRes.ConstructionEditor_RWertCol; //"R (m²K/W)"
 		}
 
 		public ConstructionScopeEnum ConstructionScope {
@@ -64,14 +64,10 @@ namespace Europlan.Common {
 		private void UpdateConstructionScopeOfGui() {
 			MaterialListWrapper insulations = new MaterialListWrapper(Configuration.ConfigurationType.UserConfiguration);
 			insulations.FilterCategory = CategoryType.Insulation;
-			//this.colMaterial.DataSource = insulations;
 			this.colMaterial.ValueMember = "Material";
 			this.colMaterial.DisplayMember = "Name";
-			//this.colMaterial.Items.Add(null);
 			this.colMaterial.Items.Clear();
-			//this.colMaterial.Items.Add(Material.EmptyMaterial);
 			this.colMaterial.Items.Add(new MaterialItem("", null));
-			//foreach (Material m in insulations) {
             for (int i = 0; i < insulations.Count; i++) {
                 Material m = insulations[i];
                 this.colMaterial.Items.Add(new MaterialItem(m.LocalizedName, m));
@@ -125,7 +121,7 @@ namespace Europlan.Common {
 			switch (this.ConstructionScope) {
 				case ConstructionScopeEnum.FloorConstruction:
 					FloorConstruction fc = this.construction as FloorConstruction;
-					this.numThickness.Value = (fc != null ? (decimal)fc.FloorThickness : (decimal)0); // = (fc != null ? fc.FloorThickness.ToString() : "");
+					this.numThickness.Value = (fc != null ? (decimal)fc.FloorThickness : (decimal)0);
 					break;
 
 				case ConstructionScopeEnum.InsulationConstruction:
@@ -233,7 +229,6 @@ namespace Europlan.Common {
 				this.cbPeFoil.Enabled = !value;
 				if (value) {
 					this.gridLayers.DefaultCellStyle.ForeColor = SystemColors.GrayText;
-					//this.gridLayers.DefaultCellStyle.BackColor = SystemColors.Control;
 					this.txtId.BackColor = SystemColors.Window;
 					this.txtName.BackColor = SystemColors.Window;
 					this.numThickness.BackColor = SystemColors.Window;
@@ -242,7 +237,6 @@ namespace Europlan.Common {
 					this.numThickness.ForeColor = SystemColors.GrayText;
 				} else {
 					this.gridLayers.DefaultCellStyle.ForeColor = SystemColors.WindowText;
-					//this.gridLayers.DefaultCellStyle.BackColor = SystemColors.Window;
 					this.txtId.BackColor = SystemColors.Window;
 					this.txtName.BackColor = SystemColors.Window;
 					this.numThickness.BackColor = SystemColors.Window;

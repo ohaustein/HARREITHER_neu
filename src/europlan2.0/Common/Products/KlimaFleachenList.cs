@@ -44,33 +44,24 @@ namespace Europlan.Common {
 			set { this.verbindungen = value; }
 		}
 
-		//[XmlIgnore]
 		public double GetHeatArea(bool floor) {
-			//get {
-				double area = 0;
-				foreach (KlimaFlaechenModul modul in this.list) {
-					area += modul.GetHeatArea(floor);
-				}
-				return area;
-			//}
+			double area = 0;
+			foreach (KlimaFlaechenModul modul in this.list) {
+				area += modul.GetHeatArea(floor);
 			}
+			return area;
+		}
 
-		//[XmlIgnore]
 		public double GetCoveredArea(bool floor) {
-			//get {
-				double area = 0;
-				foreach (KlimaFlaechenModul modul in this.list) {
-					area += modul.GetCoveredArea(floor);
-				}
-				return area;
-			//}
+			double area = 0;
+			foreach (KlimaFlaechenModul modul in this.list) {
+				area += modul.GetCoveredArea(floor);
 			}
+			return area;
+		}
 
-		//[XmlIgnore]
 		public double GetEquivalentPipeLength(bool floor) {
-			//get {
-				return GetHeatArea(floor) * 10 + lengthVerbindeleitungen;
-			//}
+			return GetHeatArea(floor) * 10 + lengthVerbindeleitungen;
 		}
 
 		public bool ContainsModul(KlimaFlaechenModul modul) {

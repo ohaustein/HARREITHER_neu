@@ -487,7 +487,6 @@ namespace Europlan.Common.Products {
 			}
 
 			ignoreListChange--;
-			//this.lstCircuits_SelectedIndexChanged(this.lstRows, EventArgs.Empty);
 		}
 
 		private ModulBodenCircuit selectedCircuit = null;
@@ -725,7 +724,6 @@ namespace Europlan.Common.Products {
 					if (!string.IsNullOrEmpty(message)) {
 						ListViewItem item = new ListViewItem(message);
 						item.ForeColor = Color.Red;
-						//item.Font = new Font(item.Font, FontStyle.Bold);
 						this.lstError.Items.Add(item);
 					}
 				}

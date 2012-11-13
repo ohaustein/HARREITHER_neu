@@ -45,7 +45,6 @@ namespace Europlan.Common {
 				get {
 					return OtherPlannedProduct == null ? null : OtherPlannedProduct.Product;
 				}
-				/*set { otherProduct = value; }*/
 			}
 
 			[XmlIgnore]
@@ -123,11 +122,6 @@ namespace Europlan.Common {
 		public abstract double CircuitArea {
 			get;
 		}
-
-		/*public abstract string PlannedProductId {
-			get;
-			set;
-		}*/
 
 		protected bool corrections = false;
 		public bool Corrections {

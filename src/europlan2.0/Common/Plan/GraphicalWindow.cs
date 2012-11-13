@@ -179,7 +179,6 @@ namespace Europlan.Common {
 				double tmpX = this.GraphPosX;
 				double tmpY = this.GraphPosY;
 				
-				//this.GraphPosX = startX + planPoint.X - startDrag.Value.X;
 				this.GraphPosY = startY + planPoint.Y - startDrag.Value.Y;
 				bool retryY = false;
 				if (useSnap) {

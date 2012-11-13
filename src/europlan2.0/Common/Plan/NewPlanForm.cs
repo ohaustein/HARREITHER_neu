@@ -21,11 +21,11 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"&Abbrechen"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"&OK"
 
-			this.lblCaption.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:";
-			this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren";
+			this.lblCaption.Text = EuroplanRes.NewPlanForm_Bezeichnung; //"Bezeichnung:"
+			this.Text = EuroplanRes.NewPlanForm_PlanImportieren; //"Plan importieren"
 			this.lblPage.Text = EuroplanRes.NewPlanForm_Seite;
 		}
 

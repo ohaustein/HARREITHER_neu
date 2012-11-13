@@ -32,11 +32,6 @@ namespace Europlan.Common {
 		private static double module_80_30_heatarea = module_80_30_height * (module_80_30_width + module_additional_width);
 		private static double module_60_60_heatarea = module_60_60_height * module_60_60_width;
 
-		/*private static double module_100_40_area = 1.0 * 0.4;
-		private static double module_100_30_area = 1.0 * 0.3;
-		private static double module_120_30_area = 1.2 * 0.3;
-		private static double module_80_30_area = 0.8 * 0.3;
-		private static double module_60_60_area = 0.6 * 0.6;*/
 		private static double module_100_40_floor_area = module_100_40_floor_heatarea;
 		private static double module_100_40_roof_area = module_100_40_roof_heatarea;
 		private static double module_100_30_area = module_100_30_heatarea;
@@ -45,22 +40,22 @@ namespace Europlan.Common {
 		private static double module_60_60_area = module_60_60_heatarea;
 
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string modul_100_40 = EuroplanRes.KlimaFlaechenModul_100_40; //"Modul 100/40";
-			private static readonly string modul_100_30 = EuroplanRes.KlimaFlaechenModul_100_30; //"Modul 100/30";
-			private static readonly string modul_120_30 = EuroplanRes.KlimaFlaechenModul_120_30; //"Modul 120/30";
-			private static readonly string modul_80_30 = EuroplanRes.KlimaFlaechenModul_80_30; //"Modul 80/30";
-			private static readonly string modul_60_60 = EuroplanRes.KlimaFlaechenModul_60_60; //"Modul 60/60 Typ A";
-			private static readonly string modul_60_60B = EuroplanRes.KlimaFlaechenModul_60_60B; //"Modul 60/60 Typ B";
-			private static readonly string modul_60_60C = EuroplanRes.KlimaFlaechenModul_60_60C; //"Modul 60/60 Typ C";
-			private static readonly string modul_60_60D = EuroplanRes.KlimaFlaechenModul_60_60D; //"Modul 60/60 Typ D";
-			private static readonly string modul_100_40_short = EuroplanRes.KlimaFlaechenModul_100_40_Short; //"100/40";
-			private static readonly string modul_100_30_short = EuroplanRes.KlimaFlaechenModul_100_30_Short; //"100/30";
-			private static readonly string modul_120_30_short = EuroplanRes.KlimaFlaechenModul_120_30_Short; //"120/30";
-			private static readonly string modul_80_30_short = EuroplanRes.KlimaFlaechenModul_80_30_Short; //"80/30";
-			private static readonly string modul_60_60_short = EuroplanRes.KlimaFlaechenModul_60_60_Short; //"60/60 A";
-			private static readonly string modul_60_60B_short = EuroplanRes.KlimaFlaechenModul_60_60B_Short; //"60/60 B";
-			private static readonly string modul_60_60C_short = EuroplanRes.KlimaFlaechenModul_60_60C_Short; //"60/60 C";
-			private static readonly string modul_60_60D_short = EuroplanRes.KlimaFlaechenModul_60_60D_Short; //"60/60 D";
+			private static readonly string modul_100_40 = EuroplanRes.KlimaFlaechenModul_100_40; //"Modul 100/40"
+			private static readonly string modul_100_30 = EuroplanRes.KlimaFlaechenModul_100_30; //"Modul 100/30"
+			private static readonly string modul_120_30 = EuroplanRes.KlimaFlaechenModul_120_30; //"Modul 120/30"
+			private static readonly string modul_80_30 = EuroplanRes.KlimaFlaechenModul_80_30; //"Modul 80/30"
+			private static readonly string modul_60_60 = EuroplanRes.KlimaFlaechenModul_60_60; //"Modul 60/60 Typ A"
+			private static readonly string modul_60_60B = EuroplanRes.KlimaFlaechenModul_60_60B; //"Modul 60/60 Typ B"
+			private static readonly string modul_60_60C = EuroplanRes.KlimaFlaechenModul_60_60C; //"Modul 60/60 Typ C"
+			private static readonly string modul_60_60D = EuroplanRes.KlimaFlaechenModul_60_60D; //"Modul 60/60 Typ D"
+			private static readonly string modul_100_40_short = EuroplanRes.KlimaFlaechenModul_100_40_Short; //"100/40"
+			private static readonly string modul_100_30_short = EuroplanRes.KlimaFlaechenModul_100_30_Short; //"100/30"
+			private static readonly string modul_120_30_short = EuroplanRes.KlimaFlaechenModul_120_30_Short; //"120/30"
+			private static readonly string modul_80_30_short = EuroplanRes.KlimaFlaechenModul_80_30_Short; //"80/30"
+			private static readonly string modul_60_60_short = EuroplanRes.KlimaFlaechenModul_60_60_Short; //"60/60 A"
+			private static readonly string modul_60_60B_short = EuroplanRes.KlimaFlaechenModul_60_60B_Short; //"60/60 B"
+			private static readonly string modul_60_60C_short = EuroplanRes.KlimaFlaechenModul_60_60C_Short; //"60/60 C"
+			private static readonly string modul_60_60D_short = EuroplanRes.KlimaFlaechenModul_60_60D_Short; //"60/60 D"
 
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
@@ -167,8 +162,8 @@ namespace Europlan.Common {
 		}
 
 		public class ModulOrientationEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string left = EuroplanRes.KlimaFlaechenModul_AusrichtungLinks; //"Links";
-			private static readonly string right = EuroplanRes.KlimaFlaechenModul_AusrichtungRechts; //"Rechts";
+			private static readonly string left = EuroplanRes.KlimaFlaechenModul_AusrichtungLinks; //"Links"
+			private static readonly string right = EuroplanRes.KlimaFlaechenModul_AusrichtungRechts; //"Rechts"
 			
 			private Dictionary<string, ModulOrientationEnum> mappingFromString = new Dictionary<string, ModulOrientationEnum>();
 			private Dictionary<ModulOrientationEnum, string> mappingToString = new Dictionary<ModulOrientationEnum, string>();
@@ -361,66 +356,55 @@ namespace Europlan.Common {
 			}
 		}
 
-		/*public Nullable<Point> Origin {
-			get { return this.origin; }
-			set { this.origin = value; }
-		}*/
-
-		//[XmlIgnore]
 		public double GetHeatArea(bool floor) {
-			//get {
-				switch (this.modulType) {
-					case ModulTypeEnum.MODUL_100_40:
-						return floor ? KlimaFlaechenModul.module_100_40_floor_heatarea : KlimaFlaechenModul.module_100_40_roof_heatarea;
+			switch (this.modulType) {
+				case ModulTypeEnum.MODUL_100_40:
+					return floor ? KlimaFlaechenModul.module_100_40_floor_heatarea : KlimaFlaechenModul.module_100_40_roof_heatarea;
 
-					case ModulTypeEnum.MODUL_80_30:
-						return KlimaFlaechenModul.module_80_30_heatarea;
+				case ModulTypeEnum.MODUL_80_30:
+					return KlimaFlaechenModul.module_80_30_heatarea;
 
-					case ModulTypeEnum.MODUL_60_60:
-					case ModulTypeEnum.MODUL_60_60B:
-					case ModulTypeEnum.MODUL_60_60C:
-					case ModulTypeEnum.MODUL_60_60D:
-						return KlimaFlaechenModul.module_60_60_heatarea;
+				case ModulTypeEnum.MODUL_60_60:
+				case ModulTypeEnum.MODUL_60_60B:
+				case ModulTypeEnum.MODUL_60_60C:
+				case ModulTypeEnum.MODUL_60_60D:
+					return KlimaFlaechenModul.module_60_60_heatarea;
 
-					case ModulTypeEnum.MODUL_100_30:
-						return KlimaFlaechenModul.module_100_30_heatarea;
+				case ModulTypeEnum.MODUL_100_30:
+					return KlimaFlaechenModul.module_100_30_heatarea;
 
-					case ModulTypeEnum.MODUL_120_30:
-						return KlimaFlaechenModul.module_120_30_heatarea;
+				case ModulTypeEnum.MODUL_120_30:
+					return KlimaFlaechenModul.module_120_30_heatarea;
 
-					default:
-						return 0;
-				}
-			//}
+				default:
+					return 0;
 			}
+		}
 
-		//[XmlIgnore]
 		public double GetCoveredArea(bool floor) {
-			//get {
-				switch (this.modulType) {
-					case ModulTypeEnum.MODUL_100_40:
-						return floor ? KlimaFlaechenModul.module_100_40_floor_area : KlimaFlaechenModul.module_100_40_roof_area;
+			switch (this.modulType) {
+				case ModulTypeEnum.MODUL_100_40:
+					return floor ? KlimaFlaechenModul.module_100_40_floor_area : KlimaFlaechenModul.module_100_40_roof_area;
 
-					case ModulTypeEnum.MODUL_80_30:
-						return KlimaFlaechenModul.module_80_30_area;
+				case ModulTypeEnum.MODUL_80_30:
+					return KlimaFlaechenModul.module_80_30_area;
 
-					case ModulTypeEnum.MODUL_60_60:
-					case ModulTypeEnum.MODUL_60_60B:
-					case ModulTypeEnum.MODUL_60_60C:
-					case ModulTypeEnum.MODUL_60_60D:
-						return KlimaFlaechenModul.module_60_60_area;
+				case ModulTypeEnum.MODUL_60_60:
+				case ModulTypeEnum.MODUL_60_60B:
+				case ModulTypeEnum.MODUL_60_60C:
+				case ModulTypeEnum.MODUL_60_60D:
+					return KlimaFlaechenModul.module_60_60_area;
 
-					case ModulTypeEnum.MODUL_100_30:
-						return KlimaFlaechenModul.module_100_30_area;
+				case ModulTypeEnum.MODUL_100_30:
+					return KlimaFlaechenModul.module_100_30_area;
 
-					case ModulTypeEnum.MODUL_120_30:
-						return KlimaFlaechenModul.module_120_30_area;
+				case ModulTypeEnum.MODUL_120_30:
+					return KlimaFlaechenModul.module_120_30_area;
 
-					default:
-						return 0;
-				}
-			//}
+				default:
+					return 0;
 			}
+		}
 
 		public double Druckverlust(double massenstrom) {
 			switch (this.modulType) {
@@ -596,11 +580,11 @@ namespace Europlan.Common {
 		}
 
 		public Polygon2D GetOutputConnectionArea(double measure, bool invertYAxis, ModulKlimaDeckeProduct product) {
-			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis != this.GraphBottomUp/*this.Orientation != KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT*/);
+			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis != this.GraphBottomUp);
 		}
 
 		public Polygon2D GetInputConnectionArea(double measure, bool invertYAxis, ModulKlimaDeckeProduct product) {
-			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis == this.GraphBottomUp/*this.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT*/);
+			return this.GetConnectionArea(measure, invertYAxis, product, invertYAxis == this.GraphBottomUp);
 		}
 
 		public Point2D GetOutputConnection(double measure, bool invertYAxis, Product product) {
@@ -742,9 +726,6 @@ namespace Europlan.Common {
 		}
 
 		public KlimaFlaechenModulVerbindung GetInputLink(Circuit circuit, bool invertYAxis) {
-			//if (invertYAxis) {
-			//	return GetOutputLink(circuit, false);
-			//}
 			KlimaFlaechenModulVerbindung link = null;
 			if (circuit is ModulBodenCircuit) {
 				ModulBodenCircuit mbc = circuit as ModulBodenCircuit;
@@ -773,38 +754,7 @@ namespace Europlan.Common {
 			return link;
 		}
 
-		/*public KlimaFlaechenSubAreaVerbindung GetSubAreaInputLink(Circuit circuit) {
-			if (circuit is ModulDeckeCircuit) {
-				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
-				foreach (KlimaFlaechenSubAreaVerbindung verbindung in mdc.Links) {
-					foreach (KlimaFlaechenModul kfm in verbindung.End) {
-						if (kfm == this) {
-							return verbindung;
-						}
-					}
-				}
-			}
-			return null;
-		}
-
-		public KlimaFlaechenSubAreaVerbindung GetSubAreaOutputLink(Circuit circuit) {
-			if (circuit is ModulDeckeCircuit) {
-				ModulDeckeCircuit mdc = circuit as ModulDeckeCircuit;
-				foreach (KlimaFlaechenSubAreaVerbindung verbindung in mdc.Links) {
-					foreach (KlimaFlaechenModul kfm in verbindung.Start) {
-						if (kfm == this) {
-							return verbindung;
-						}
-					}
-				}
-			}
-			return null;
-		}*/
-
 		public KlimaFlaechenModulVerbindung GetOutputLink(Circuit circuit, bool invertYAxis) {
-			//if (invertYAxis) {
-			//	return GetInputLink(circuit, false);
-			//}
 			KlimaFlaechenModulVerbindung link = null;
 			if (circuit is ModulBodenCircuit) {
 				ModulBodenCircuit mbc = circuit as ModulBodenCircuit;

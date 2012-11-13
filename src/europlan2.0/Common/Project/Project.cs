@@ -66,7 +66,6 @@ namespace Europlan.Common {
 		private List<HithermWall> serializableHithermWalls = new List<HithermWall>();
 		private List<HithermWall> hithermCompactWalls = null;
 		private List<HithermWall> serializableHithermCompactWalls = new List<HithermWall>();
-		//private List<HithermWall> defaultHithermWalls = new List<HithermWall>();
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -132,7 +131,6 @@ namespace Europlan.Common {
 			requiredMaterialOverrides = new SerializableDictionary<string, double>();
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
 
-			//configuration = Configuration.AdminTemplate + Configuration.UserTemplate;
 			configuration = new Configuration(Configuration.UserTemplate);
 			configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 
@@ -185,14 +183,6 @@ namespace Europlan.Common {
 			importedPlansNode.Tag = typeof(ImportedPlansPanel);
 			importedPlansNode.ImageKey = "Plaene.png";
 			importedPlansNode.SelectedImageKey = "Plaene.png";
-
-
-			/*ConstructionListWrapper wrapper = new ConstructionListWrapper(Configuration.ConfigurationType.UserConfiguration);
-			wrapper.ConstructionScopeFilter = ConstructionScopeEnum.WallConstruction;
-			foreach (WallConstruction wc in wrapper) {
-				HithermWall w = new HithermWall(wc.Id, wc.Name, wc, null, null, false, null, -16, 30, true);
-				defaultHithermWalls.Add(w);
-			}*/
 		}
 
 		public string[] ProjectName {
@@ -302,11 +292,6 @@ namespace Europlan.Common {
 			set { requiredMaterialCalculated = value; }
 		}
 
-		/*public void SetFloors(List<Floor> floors) {
-			this.floors.Clear();
-			this.floors = new List<Floor>(floors);
-		}*/
-
 		public bool ProjectVersionCompatible() {
 			string[] projVers = instance.ProjectEuroplanVersion.Split('.');
 			if (projVers.Length == 4) {
@@ -378,7 +363,6 @@ namespace Europlan.Common {
                         File.Delete(AutoSaveFilename(filename));
                     }
                 }
-				//instance.configuration = (Configuration.AdminTemplate + Configuration.UserTemplate) + instance.configuration;
 				instance.configuration.Type = Configuration.ConfigurationType.ProjectConfiguration;
 				instance.configuration = Configuration.UserTemplate + instance.configuration;
 				instance.configuration.RecalculateMaterialToCategoryMapping();
@@ -564,7 +548,6 @@ namespace Europlan.Common {
 
 					XmlSerializer s = new XmlSerializer(typeof(Project));
 					MemoryStream w = new MemoryStream();
-					//Stream w = new FileStream(filename, FileMode.Create);
 					Instance.ProjectFileName = filename;
 					s.Serialize(w, Instance);
 					Stream fs = new FileStream(filename, FileMode.Create);
@@ -597,12 +580,8 @@ namespace Europlan.Common {
                     w.Close();
                     fs.Close();
                     FileUtils.SetAccessForEveryone(filename);
-                    /*if (ProjectSaved != null) {
-                        Project.ProjectSaved(Instance);
-                    }*/
                 } catch (Exception e) {
                     log.Error(e);
-                    //MessageBox.Show(EuroplanRes.Project_FehlerBeimSpeichernText, EuroplanRes.Project_FehlerBeimSpeichernTitel, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -645,34 +624,6 @@ namespace Europlan.Common {
 
 
 		public void InitializeTreeView(System.Windows.Forms.TreeView tree) {
-			/*TreeNode selectedNode = null;
-			if (tree.SelectedNode != null) {
-				selectedNode = tree.SelectedNode;
-			}
-			tree.Nodes.Clear();
-			rootNode.Nodes.Clear();
-			floorsNode.Nodes.Clear();
-			regulatorCircuitsNode.Nodes.Clear();
-
-			tree.Nodes.Add(rootNode);
-			rootNode.Tag = this;
-
-			regulatorCircuitsNode.Tag = typeof(RegulatorCircuitsSummaryPanel);
-			rootNode.Nodes.Add(regulatorCircuitsNode);
-
-			floorsNode.Tag = floors;
-			rootNode.Nodes.Add(floorsNode);
-		
-			foreach (Floor floor in floors) {
-				floor.InitializeTree(floorsNode);
-			}
-			
-			tree.ExpandAll();
-			if (selectedNode != null) {
-				tree.SelectedNode = selectedNode;
-			} else {
-				tree.SelectedNode = rootNode;
-			}*/
 			this.UpdateTreeView(tree);
 		}
 

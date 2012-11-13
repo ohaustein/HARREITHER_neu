@@ -34,8 +34,6 @@ namespace Europlan.Common {
 				string newValue = value as string;
 				if (newValue != null) {
 					this.Value = Decimal.Parse(newValue);
-				/*} else {
-					this.Value = value as HardwareId;*/
 				}
 			}
 		}

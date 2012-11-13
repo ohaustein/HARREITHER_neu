@@ -25,12 +25,12 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnAdd.Text = EuroplanRes.General_Plus; //"+";
-			this.btnRemove.Text = EuroplanRes.General_Minus; //"-";
-			this.btnAlign.Text = EuroplanRes.KlimaFlaechenModulGrid_AutomatischeAusrichtung; //"Automatische Ausrichtung";
-			this.label1.Text = EuroplanRes.KlimaFlaechenModulGrid_AnzahlModule; //"Anzahl der Module:";
-			this.modulTypeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Modultype; //"Modultyp";
-			this.orientationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Ausrichtung; //"Ausrichtung";
+			this.btnAdd.Text = EuroplanRes.General_Plus; //"+"
+			this.btnRemove.Text = EuroplanRes.General_Minus; //"-"
+			this.btnAlign.Text = EuroplanRes.KlimaFlaechenModulGrid_AutomatischeAusrichtung; //"Automatische Ausrichtung"
+			this.label1.Text = EuroplanRes.KlimaFlaechenModulGrid_AnzahlModule; //"Anzahl der Module:"
+			this.modulTypeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Modultype; //"Modultyp"
+			this.orientationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Ausrichtung; //"Ausrichtung"
 		}
 
 		public void ResetGrid() {

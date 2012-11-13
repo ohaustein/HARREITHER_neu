@@ -34,7 +34,6 @@ namespace Europlan.Common {
 			}
 
 			public override void PaintAnchor(Graphics g, double xOffset, double yOffset, double scale) {
-				//Brush b = new SolidBrush(Color.DarkBlue);
 				Brush b = new SolidBrush(Color.Gray);
 				g.FillRectangle(b, (float)(this.position.X + xOffset - 3.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(2.0 / scale), (float)(6.0 / scale));
 				g.FillRectangle(b, (float)(this.position.X + xOffset + 1.0 / scale), (float)(this.position.Y + yOffset - 3.0 / scale), (float)(2.0 / scale), (float)(6.0 / scale));
@@ -43,7 +42,6 @@ namespace Europlan.Common {
 
 
 		private HithermRegister register;
-		//private List<HithermRegister> registers = new List<HithermRegister>();
 		private HithermProduct product;
 
 		public GraphicalHithermRegisterWrapper(HithermProduct product) {
@@ -52,14 +50,8 @@ namespace Europlan.Common {
 
 		public GraphicalHithermRegisterWrapper(HithermRegister register, HithermProduct product) {
 			this.register = register;
-			//this.registers.Add(register);
 			this.product = product;
 		}
-
-		/*public List<HithermRegister> Registers {
-			get { return this.registers; }
-			set { this.registers = value; }
-		}*/
 
 		public HithermRegister Register {
 			get { 
@@ -72,20 +64,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-		/*public int RegisterCount {
-			get {
-				int count = 0;
-				foreach (HithermRegister register in hithermRegister.Registers) {
-					count += register.RegisterCount;
-				}
-				return count;
-			}
-		}
-
-		public bool IsHochleistungsRegister {
-			get { return (this.registers != null && this.registers.Count > 0) ? this.registers[0].IsHochleistungsRegister : false; }
-		}*/
 
 		public HithermProduct Product {
 			get { return this.product; }
@@ -120,14 +98,14 @@ namespace Europlan.Common {
 		}
 
 		public override void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, IGraphicalWallObject selectedObject, double scale, bool export) {
-			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false, export/*, this == selectedObject*/);
+			this.PaintObject(g, xOffset, yOffset, (this == selectedObject) ? Color.Red : Color.Black, scale, (this == selectedObject), false, export);
 		}
 
 		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color) {
-			this.PaintObject(g, xOffset, yOffset, color, 1, false, false, false/*, false*/);
+			this.PaintObject(g, xOffset, yOffset, color, 1, false, false, false);
 		}
 
-		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error, bool export/*, bool drawAnchors*/) {
+		public void PaintObject(System.Drawing.Graphics g, double xOffset, double yOffset, Color color, double scale, bool highlightConnections, bool error, bool export) {
 			highlightConnections = false;
 			if (register == null) {
 				return;
@@ -288,15 +266,6 @@ namespace Europlan.Common {
 				g.DrawString(type, font, Brushes.Black, x, -y);
 				g.Transform = oldTransform;
 			}
-
-			/*if (drawAnchors) {
-				Region oldClip = g.Clip;
-				g.ResetClip();
-				foreach (Anchor a in this.GetAnchors(scale)) {
-					a.PaintAnchor(g, xOffset, yOffset, scale);
-				}
-				g.Clip = oldClip;
-			}*/
 		}
 
 		public double GetRohrOffset(int rohrNr) {
@@ -409,16 +378,6 @@ namespace Europlan.Common {
 
 		public override bool CollisionTest(IList<Polygon2D> polygon, double xOffset, double yOffset, bool ignoreBorders) {
 			List<Polygon2D> register = GetObjectBorders(xOffset, yOffset);
-			/*if (polygon.IsClockwise()) {
-				polygon.Reverse();
-			}
-			if (register.IsClockwise()) {
-				register.Reverse();
-			}
-			List<Polygon2D> list1 = new List<Polygon2D>();
-			list1.Add(polygon);
-			List<Polygon2D> list2 = new List<Polygon2D>();
-			list2.Add(register);*/
 
 			try {
 				return Polygon2D.GetIntersection(polygon, register).Count > 0;
@@ -471,10 +430,14 @@ namespace Europlan.Common {
 		}
 
 		public GraphicalHithermVerbindung GetOutputLink() {
-			HithermCircuit c = this.product.GetCircuitForRegister(this.register);
-			foreach (GraphicalHithermVerbindung link in c.Links) {
-				if (link.Start == this.register) {
-					return link;
+			if (this.product != null) {
+				HithermCircuit c = this.product.GetCircuitForRegister(this.register);
+				if (c.Links != null) {
+					foreach (GraphicalHithermVerbindung link in c.Links) {
+						if (link != null && link.Start == this.register) {
+							return link;
+						}
+					}
 				}
 			}
 			return null;
@@ -587,23 +550,6 @@ namespace Europlan.Common {
 
 			this.startDrag = null;
 			return true;
-
-			//this.MoveAnchor(anchor, planPoint, owningWall, owningRoom, true);
-			/*HithermCircuit circuit = product.GetCircuitForRegister(this.register);
-			List<GraphicalHithermVerbindung> linksToDel = new List<GraphicalHithermVerbindung>();
-			foreach (GraphicalHithermVerbindung link in circuit.Links) {
-				if (link.Start == this.register && link.Vertices.Count == 0) {
-					linksToDel.Add(link);
-				} else if (link.End == this.register && link.Vertices.Count == 0) {
-					linksToDel.Add(link);
-				}
-			}
-			foreach (GraphicalHithermVerbindung link in linksToDel) {
-				circuit.Links.Remove(link);
-			}
-
-			this.startDrag = null;
-			return linksToDel.Count > 0;*/
 		}
 
 		public override bool CheckValidity(GraphicalWall owningWall, double offsetX, double offsetY) {
@@ -621,13 +567,6 @@ namespace Europlan.Common {
 						return false;
 					}
 				}
-				/*foreach (HithermCircuit hc in this.product.PlannedCircuits) {
-					foreach (GraphicalHithermVerbindung link in hc.Links) {
-						if (link.Start != this.Register && link.End != this.Register && link.CollisionTest(registerBorders, 0, 0, false)) {
-							return false;
-						}
-					}
-				}*/
 			}
 			return true;
 		}
@@ -709,9 +648,6 @@ namespace Europlan.Common {
 					double oldBreite = this.register.RegisterBreiteForDrawing;
 					this.register.Rohre = newRohre.Value;
 					if (anchorRohreStart.HasValue && !anchorRohreStart.Value) {
-						/*foreach (int i in this.register.Gaps.Keys) {
-							this.register.Gaps[i] += this.register.Rohre - oldRohre;
-						}*/
 						this.register.Gaps = new Dictionary<int, double>();
 						foreach (KeyValuePair<int, double> kvp in oldGaps) {
 							this.register.Gaps.Add(kvp.Key + this.register.Rohre - oldRohre, kvp.Value);

@@ -14,9 +14,9 @@ namespace Europlan.Common {
 	public class ModulKlimaDeckeProduct : Product, ProductWithInsulationConstruction {
 
 		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke";
-			private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil";
-			private static readonly string holzStaffel = EuroplanRes.ModulKlimaDeckeProduct_Holzstaffel; //"Holzstaffel";
+			private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke"
+			private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil"
+			private static readonly string holzStaffel = EuroplanRes.ModulKlimaDeckeProduct_Holzstaffel; //"Holzstaffel"
 
 			private Dictionary<string, ModulCeilingConstructionEnum> mappingFromString = new Dictionary<string, ModulCeilingConstructionEnum>();
 			private Dictionary<ModulCeilingConstructionEnum, string> mappingToString = new Dictionary<ModulCeilingConstructionEnum, string>();
@@ -96,9 +96,6 @@ namespace Europlan.Common {
 		private string plannedInsulationConstructionId = null;
 
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
-		//private static bool useHarreitherNorm = true;
-		//private static double maxFloorTempHarreither = 27;
-		//private static double maxFloorTempEn1264 = 29;
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 		private static int maxModulesInRow = 20;
@@ -150,23 +147,6 @@ namespace Europlan.Common {
 		}
 
 		public new static void StaticInitialize(Configuration config) {
-			/*quickDimensioningHeatPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningHeatPowerPerSquareMeter", 80);
-			quickDimensioningCoolPowerPerSquareMeter = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCoolPowerPerSquareMeter", 80);
-			canHeat = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanHeat", true);
-			canCool = config.GetProductParameterAsBool<ModulKlimaDeckeProduct>("ConfigQuickDimensioningCanCool", true);
-			//useHarreitherNorm = true;
-			maxPressureLost = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxPressureLost", 15000);
-			maxDurchfluss = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxDurchfluss", 240);
-			maxModulesInRow = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInRow", 20);
-			maxModulesInParallel = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigMaxModulesInParallel", 6);
-			maxModulesInCircuit = config.GetProductParameterAsInt<ModulKlimaDeckeProduct>("ConfigModulesInCircuit", 50);
-			spreizungHeizMin = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMin", 4);
-			spreizungHeizMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungHeizMax", 12);
-			spreizungKuehlMin = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMin", 2);
-			spreizungKuehlMax = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigSpreizungKuehlMax", 5);
-			construction = config.GetProductParameterAsEnum<ModulKlimaDeckeProduct, ModulCeilingConstructionEnum>("ConfigModulCeilingConstruction", ModulCeilingConstructionEnum.C_PROFIL);
-			leistungsFaktorHeizen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen", 0.95);
-			leistungsFaktorKuehlen = config.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen", 0.95);*/
 			Product.StaticInitialize<ModulKlimaDeckeProduct>(config);
 		}
 
@@ -264,14 +244,6 @@ namespace Europlan.Common {
 			get { return alpha0; }
 			set { alpha0 = value; }
 		}
-
-		//public static double ConfigAlphaDk {
-		//    get { return Product.ConfigAlphaBoden; }
-		//}
-
-		//public static double ConfigAlphaDh {
-		//    get { return Product.ConfigAlphaDecke; }
-		//}
 
 		[DoubleProductParameter(1)]
 		public static double ConfigLambdaU0 {
@@ -527,15 +499,15 @@ namespace Europlan.Common {
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
 			if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: ";
+				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedCeilingConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fuﬂbodenkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fuﬂbodenkonstruktion, "
 				}
 				if (PlannedInsulationConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"W‰rmed‰mmkonstruktion, "
 				}
 				if (PlannedConnection == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, ";
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluﬂ, "
 				}
 				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
 				this.incompleteCalculation = true;
@@ -551,7 +523,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (c < this.circuits.Count) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -562,7 +534,7 @@ namespace Europlan.Common {
 					}
 				}
 				if (!userDefinedOk) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen";
+					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloﬂen"
 					this.incompleteCalculation = true;
 					return false;
 				}
@@ -797,11 +769,6 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		/*public override float PlannedCeilingArea {
-			get { return this.plannedArea; }
-			set { this.plannedArea = value; }
-		}*/
-
 		[XmlIgnore]
 		public double CoveredArea {
 			get {
@@ -937,16 +904,6 @@ namespace Europlan.Common {
 					area += hc.CoveredArea;
 				}
 				return (float)area;
-				/*switch (this.ModulType) {
-					case ProductType.DH:
-						return this.PlannedCeilingArea - this.PlannedAreaUnheated;
-					case ProductType.WH:
-						return this.PlannedWallArea;
-					case ProductType.FBH:
-						return this.PlannedFloorArea;
-					default:
-						return 0;
-				}*/
 			}
 		}
 
@@ -1381,173 +1338,6 @@ namespace Europlan.Common {
 					}
 				}
 			}
-			
-
-
-
-
-
-
-
-
-
-
-
-
-			/*double additional21mm = 0;
-			int nrOfElements = 0;
-			int nrOfOtherElements = 0;
-			int rows = 0;
-			int subAreas = 0;
-			double modulArea = 0;
-			int flexibleRows = 0;
-			bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
-			int tStuecke = 0;
-
-			bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
-			bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
-			bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
-			bool serie30 = ((constrCProfil || constrHolzstaffeln) && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) == 0.3);
-			bool serie40 = ((constrCProfil || constrHolzstaffeln) && !serie30);
-			bool raster105_45 = (constrKassetten && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450);
-			bool raster60 = (constrKassetten && !raster105_45);
-
-
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-					subAreas++;
-					tStuecke += (subArea.Rows.Count - 1) * 2;
-					foreach (KlimaFlaechenList row in subArea.Rows) {
-						rows++;
-						additional21mm += row.LengthVerbindeleitungen;
-						additional21mm += 1.4;
-						bool flexible = false;
-						foreach (KlimaFlaechenModul modul in row.List) {
-							// Modul
-							Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
-							nrOfElements++;
-							modulArea += modul.GetHeatArea(false);
-							if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
-								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
-								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
-								modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D) {
-								nrOfOtherElements++;
-							}
-							KlimaFlaechenModulVerbindung link = modul.GetInputLink(c, invertYAxis);
-							if (link != null && link.IsFlexible) {
-								flexible = true;
-							}
-							link = modul.GetOutputLink(c, invertYAxis);
-							if (link != null && link.IsFlexible) {
-								flexible = true;
-							}
-						}
-						if (flexible) {
-							flexibleRows++;
-						}
-					}
-				}
-			}
-
-
-			if (this.GraphicalMode.HasValue && this.GraphicalMode.Value) {
-				double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
-
-				bool serie40 = false;
-				if (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) != 0.3) {
-					serie40 = true;
-				}
-				if (this.GraphConstruction is ModulKlimaDeckeConstructionKassette && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450) {
-					serie40 = true;
-				}
-				int langeFittinge = 0;
-				int kurzeFittinge = 0;
-				if (serie40) {
-					foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-						foreach (ModulDeckeSubArea sa in c.SubAreas) {
-							foreach (KlimaFlaechenList row in sa.Rows) {
-								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-									if  (link.IsLangerFitting(measure)) {
-										langeFittinge++;
-									}
-									if (link.IsKurzerFitting(measure)) {
-										kurzeFittinge++;
-									}
-								}
-							}
-						}
-					}
-				}
-
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, false);
-
-				// Muffe
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
-
-				// T-St¸ck
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", tStuecke);
-
-				// Winkel 90∞
-				int winkel = 0;
-				foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-					winkel = c.GetRequiredWinkel(measure);
-				}
-				winkel += (rows - flexibleRows) * 2;
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", winkel);
-
-				// Anbindung von flexiblen Reihen
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", flexibleRows * 2);
-
-				if (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && this.GraphConstruction.CeilingConstruction == ModulCeilingConstructionEnum.HOLZSTAFFEL) {
-					ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
-				} else {
-					// Einh‰ngeb¸gel
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
-					if (nrOfOtherElements > 0) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
-					}
-				}
-
-				if (serie40) {
-					// Winkel 45∞ bei Serie 40
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
-
-				}
-			} else {
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
-
-				// Muffe
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
-
-				// T-St¸ck
-				//Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - 1) * 2);
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", tStuecke);
-
-				if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL) {
-					// Winkel 90∞
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
-
-					// Holzstaffel
-					if (modulArea > 0) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
-					}
-				} else {
-					// Winkel 90∞
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + 1) * 2);
-
-					// Einh‰ngeb¸gel
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
-					if (nrOfOtherElements > 0) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
-					}
-				}
-
-				// Winkel 45∞ in Wand
-				if (this.Type == ProductType.WH) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
-				}
-			}*/
 		}
 
 		public override double Dichte {
@@ -1778,7 +1568,6 @@ namespace Europlan.Common {
 						newConnectionPoint = segment.End + v * (width / 2);
 					}
 					double distance = segment.GetDistance(currentMousePoint);
-					//double distance = (newConnectionPoint - currentMousePoint).GetLength();
 					if (distance < bestDistance) {
 						bestDistance = distance;
 						bestSegment = segment;
@@ -1788,8 +1577,6 @@ namespace Europlan.Common {
 				lastPoint = point;
 			}
 			if (bestDistance < 10) {
-				//Point2D connectionPoint = bestSegment.GetClosestPoint(currentMousePoint);
-				//if ((connectionPoint - bestSegment.Start).GetLength() >= width / 2 && (connectionPoint - bestSegment.End).GetLength() >= width / 2) {
 				Polygon2D polygon = new Polygon2D();
 				Vector2D v = bestSegment.End - bestSegment.Start;
 				v.Normalize();
@@ -1802,7 +1589,6 @@ namespace Europlan.Common {
 				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
 				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-				//}
 			}
 			return possibleConnection;
 		}

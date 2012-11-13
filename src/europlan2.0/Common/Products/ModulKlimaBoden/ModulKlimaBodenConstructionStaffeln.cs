@@ -72,7 +72,6 @@ namespace Europlan.Common {
 			while (curPos > minX) {
 				curPos -= increment;
 			}
-			//curPos = curPos - increment;
 			List<int> ignoreLanes = new List<int>();
 			while (curPos < maxX) {
 				Polygon2D schiene = new Polygon2D();
@@ -196,26 +195,6 @@ namespace Europlan.Common {
 			return staffelnForDrawing;
 		}
 
-		/*private List<Polygon2D> GetPossibleAreas(bool forDrawing) {
-			List<Polygon2D> possibleAreas = new List<Polygon2D>();
-			Matrix4D additionalTransformation = this.AdditionalTransformation;
-			foreach (PossibleModulLane possibleLane in this.possibleLanes) {
-				foreach (PossibleModulLaneArea possibleArea in possibleLane.Areas) {
-					if (forDrawing) {
-						Polygon2D a = new Polygon2D();
-						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[0]));
-						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[1]));
-						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[2]));
-						a.Add(additionalTransformation.TransformTo2D((Point3D)possibleArea.Area[3]));
-						possibleAreas.Add(a);
-					} else {
-						possibleAreas.Add(possibleArea.Area);
-					}
-				}
-			}
-			return possibleAreas;
-		}*/
-
 		public override void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode) {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
@@ -229,15 +208,12 @@ namespace Europlan.Common {
 			double measure = this.Planner.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
 			Matrix4D additionalTransformation = this.AdditionalTransformation;
 
-			/*double minX, maxX, minY, maxY;*/
-			GraphicsPath roomPath = this.GetProductAreaPath(/*out minX, out maxX, out minY, out maxY*/);
+			GraphicsPath roomPath = this.GetProductAreaPath();
 			g.Clip = new Region(roomPath);
 
 			System.Drawing.Color c = System.Drawing.Color.Gray;
 			Pen p = new Pen(c);
 			Brush b = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.DiagonalCross, c, System.Drawing.Color.FromArgb(0, c));
-
-			//g.FillPath(new SolidBrush(Color.FromArgb(128, Color.Yellow)), roomPath);
 
 			foreach (Polygon2D staffel in this.GetStaffeln(true)) {
 				PointF[] poly = new PointF[staffel.Count];
@@ -256,15 +232,6 @@ namespace Europlan.Common {
 				Region r = new Region();
 				r.MakeInfinite();
 				g.Clip = r;
-				/*foreach (Polygon2D area in this.GetPossibleAreas(true)) {
-					PointF[] poly = new PointF[area.Count];
-					int i = 0;
-					foreach (Point2D point in area) {
-						poly[i++] = new PointF((float)point.X, (float)point.Y);
-					}
-					g.DrawPolygon(p, poly);
-					g.FillPolygon(b, poly);
-				}*/
 			}
 		}
 

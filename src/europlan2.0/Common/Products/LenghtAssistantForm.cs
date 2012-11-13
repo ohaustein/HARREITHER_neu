@@ -47,24 +47,24 @@ namespace Europlan.Common {
 		}
 
 		private void SetLanguage() {
-			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Cancel";
-			this.btnOk.Text = EuroplanRes.General_Ok; //"OK";
-			this.label12.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaecheOhneAnb; //"Verfügbare Fläche ohne andere Anbindeleitungen:";
-			this.label11.Text = EuroplanRes.LengthAssistent_FlaecheFbh; //"Fläche der Fußbodenheizung ohne unbeheizte Flächen:";
-			this.btnRestAreaRuecklauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
-			this.btnAvailableAreaRuecklauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
-			this.label7.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.label8.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
-			this.label9.Text = EuroplanRes.Unit_Meter; //"m";
-			this.label10.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
-			this.btnRestAreaVorlauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche";
-			this.btnAvailableAreaVorlauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche";
-			this.label6.Text = EuroplanRes.Unit_Quadratmeter; //"m²";
-			this.label5.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche";
-			this.label4.Text = EuroplanRes.Unit_Meter; //"m";
-			this.label3.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:";
-			this.label2.Text = EuroplanRes.LengthAssistent_Verlegeart; //"Verlegeart:";
-			this.Text = EuroplanRes.LengthAssistent_Laengenassistent; //"Längenassistent";
+			this.btnCancel.Text = EuroplanRes.General_Abbrechen; //"Cancel"
+			this.btnOk.Text = EuroplanRes.General_Ok; //"OK"
+			this.label12.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaecheOhneAnb; //"Verfügbare Fläche ohne andere Anbindeleitungen:"
+			this.label11.Text = EuroplanRes.LengthAssistent_FlaecheFbh; //"Fläche der Fußbodenheizung ohne unbeheizte Flächen:"
+			this.btnRestAreaRuecklauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche"
+			this.btnAvailableAreaRuecklauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche"
+			this.label7.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.label8.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche"
+			this.label9.Text = EuroplanRes.Unit_Meter; //"m"
+			this.label10.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:"
+			this.btnRestAreaVorlauf.Text = EuroplanRes.LengthAssistent_RestlicheFlaeche; //"Restliche Fläche"
+			this.btnAvailableAreaVorlauf.Text = EuroplanRes.LengthAssistent_VerfuegbareFlaeche; //"Verfügbare Fläche"
+			this.label6.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+			this.label5.Text = EuroplanRes.LengthAssistent_Flaeche; //"Fläche"
+			this.label4.Text = EuroplanRes.Unit_Meter; //"m"
+			this.label3.Text = EuroplanRes.LengthAssistent_LaengeVorlauf; //"Rohrlänge Vorlauf:"
+			this.label2.Text = EuroplanRes.LengthAssistent_Verlegeart; //"Verlegeart:"
+			this.Text = EuroplanRes.LengthAssistent_Laengenassistent; //"Längenassistent"
 		}
 
 		private void LengthAssistantForm_Load(object sender, EventArgs e) {

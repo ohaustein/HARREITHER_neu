@@ -199,7 +199,6 @@ namespace Europlan.Common {
 
 			if (coordsPickedSoFar.Count > 0 && inDesign) {
 				List<Point2D> points = new List<Point2D>(coordsPickedSoFar);
-				//PointF pos = mousePosInPlan;
 				Point2D pos = new Point2D((float)mousePositionInPlan.X, (float)mousePositionInPlan.Y);
 				if (Product.ConfigActivateOrthoRasterung == ((this.ConnectedPlanPanel.ModifierKey & ModifierKey.MK_SHIFT) != ModifierKey.MK_SHIFT)) {
 					if (points.Count == 1) {
@@ -211,7 +210,6 @@ namespace Europlan.Common {
 					}
 				}
 				points.Add(pos);
-				//g.DrawPolygon(Pens.Black, points.ToArray());
 
 				GraphicsPath path = new GraphicsPath();
 				path.StartFigure();
@@ -222,7 +220,6 @@ namespace Europlan.Common {
 					array[i++] = new PointF((float)tmp.X, (float)tmp.Y);
 				}
 				if (array.Length > 2) {
-					//path.AddLines(array);
 					path.AddPolygon(array);
 				} else {
 					path.AddLine(array[0], array[1]);
@@ -274,7 +271,6 @@ namespace Europlan.Common {
 				g.FillEllipse(new SolidBrush(Color.FromArgb(127, Color.White)), new RectangleF(refPoint[0].X - 5, refPoint[0].Y - 5, 10, 10));
 				g.DrawLine(p, new PointF(refPoint[0].X - 5, refPoint[0].Y), new PointF(refPoint[0].X + 5, refPoint[0].Y));
 				g.DrawLine(p, new PointF(refPoint[0].X, refPoint[0].Y - 5), new PointF(refPoint[0].X, refPoint[0].Y + 5));
-				//g.DrawEllipse(p, new RectangleF(refPoint[0].X - 10, refPoint[0].Y - 10, 20, 20));
 
 				g.Transform = transform;
 
@@ -370,7 +366,6 @@ namespace Europlan.Common {
 				PointF pos = new PointF((float)planPoint.X, (float)planPoint.Y);
 
 				Point2D normalizedPoint = planPoint;
-				//normalizedPoint = GetNormalizedPoint(coordsPickedSoFar[0], null, normalizedPoint);
 
 				this.referencePoint = normalizedPoint;
 				return true;
@@ -901,12 +896,6 @@ namespace Europlan.Common {
 
 					newUnheatedArea = Polygon2D.GetDifference(newUnheatedArea, list2);
 				}
-
-				/*p1 = additionalTransformation.TransformTo2D(p1);
-				p2 = additionalTransformation.TransformTo2D(p2);
-				p3 = additionalTransformation.TransformTo2D(p3);
-				p4 = additionalTransformation.TransformTo2D(p4);*/
-
 			}
 		}
 

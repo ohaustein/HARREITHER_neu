@@ -29,16 +29,13 @@ namespace Europlan.Common {
 		// to avoid rounding errors two values are treated as equal if their difference is smaller than epsion
 		public Nullable<double> BestStart(double moduleTop, double moduleBottom, bool bottomUp, double epsilon) {
 			if (bottomUp) {
-				//if (moduleBottom <= this.bottom) {
 				if (moduleBottom - this.bottom < epsilon) {
-					//if (moduleTop >= this.top) {
 					if (this.top - moduleTop < epsilon) {
 						return moduleTop;
 					} else {
 						return null;
 					}
 				} else {
-					//if (moduleTop <= this.bottom) {
 					if (moduleTop - this.bottom < epsilon) {
 						return this.BestStart(this.bottom + moduleTop - moduleBottom, this.bottom, bottomUp, epsilon);
 					} else {
@@ -46,16 +43,13 @@ namespace Europlan.Common {
 					}
 				}
 			} else {
-				//if (moduleTop >= this.top) {
 				if (this.top - moduleTop < epsilon) {	
-					//if (moduleBottom <= this.bottom) {
 					if (moduleBottom - this.bottom < epsilon) {
 						return moduleTop;
 					} else {
 						return null;
 					}
 				} else {
-					//if (moduleBottom >= this.top) {
 					if (this.top - moduleBottom < epsilon) {
 						return this.BestStart(this.top, this.top + moduleBottom - moduleTop, bottomUp, epsilon);
 					} else {
