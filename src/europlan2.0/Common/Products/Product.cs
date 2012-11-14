@@ -1433,6 +1433,7 @@ namespace Europlan.Common {
 				return rtn;
 			}
 		}
+
 		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm, bool addWinkelForAdditional21mm) {
 			// Euroval Anbindung
 			// 21mm Anbindung
@@ -1566,6 +1567,9 @@ namespace Europlan.Common {
 			}
 		}
 		
+		/// <summary>
+		/// Was the product planned graphically?
+		/// </summary>
 		public Nullable<bool> GraphicalMode {
 			get { return graphicalMode; }
 			set { graphicalMode = value; }

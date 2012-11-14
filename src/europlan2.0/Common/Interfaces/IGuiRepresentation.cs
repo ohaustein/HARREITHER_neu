@@ -11,6 +11,6 @@ namespace Europlan.Common {
 			get;
 		}
 
-		}
+	}
 
 }
