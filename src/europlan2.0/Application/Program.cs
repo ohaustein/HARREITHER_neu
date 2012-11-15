@@ -96,9 +96,11 @@ namespace Europlan.Application {
 			startingForm.Dispose();
 			try {
 				System.Windows.Forms.Application.Run(mainForm);
-			} catch (Exception ex) {
 #if DEBUG
+			} catch (Exception ex) {
 				MessageBox.Show("Catched unhandled exception: " + ex.StackTrace);
+#else
+			} catch (Exception) {
 #endif
 			}			
 		}

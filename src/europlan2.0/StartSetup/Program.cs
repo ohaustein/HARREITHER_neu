@@ -35,12 +35,12 @@ namespace StartSetup {
 			}
 		}
 
-		private static long MOVEFILE_REPLACE_EXISTING = 0x1;
-		private static long MOVEFILE_COPY_ALLOWED = 0x2;
+		//private static long MOVEFILE_REPLACE_EXISTING = 0x1;
+		//private static long MOVEFILE_COPY_ALLOWED = 0x2;
 		private static long MOVEFILE_DELAY_UNITL_REBOOT = 0x4;
-		private static long MOVEFILE_WRITE_THROUGH = 0x8;
-		private static long MOVEFILE_CREATE_HARDLINK = 0x10;
-		private static long MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x20;
+		//private static long MOVEFILE_WRITE_THROUGH = 0x8;
+		//private static long MOVEFILE_CREATE_HARDLINK = 0x10;
+		//private static long MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x20;
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		private static extern long MoveFileEx(string existingFileName, string newFileName, long flags);

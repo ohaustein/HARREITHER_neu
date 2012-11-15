@@ -117,7 +117,6 @@ namespace Europlan.Common {
 		public bool Changed {
 			get {
 				return this.changed || true;
-#warning TODO properly implement changed flag
 			}
 		}
 

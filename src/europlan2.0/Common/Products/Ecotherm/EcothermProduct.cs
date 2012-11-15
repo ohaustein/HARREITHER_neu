@@ -1524,7 +1524,6 @@ namespace Europlan.Common {
 				return newRimWidthOk;
 			}
 			if (oldCovers) {
-#warning TODO implement better decisison which parameters should be used
 				if (!oldRimWidthOk && newAreaRim != oldAreaRim) {
 					return newAreaRim < oldAreaRim;
 				}

@@ -518,7 +518,7 @@ namespace Europlan.Common {
 					// move
 					this.UpdatePosition(owningWall, startDragRegisterX + planPoint.X - startDrag.Value.X, startDragRegisterY + planPoint.Y - startDrag.Value.Y, true, useSnap);
 				} else if (anchor is RegisterGapAnchor) {
-#warning TODO implement RegisterGapAnchor
+					// implement RegisterGapAnchor
 				} else if (anchor is Anchor) {
 					if ((anchor.AnchorType & AnchorTypeEnum.ANCHOR_SCALE_LEFT) == AnchorTypeEnum.ANCHOR_SCALE_LEFT) {
 						this.UpdateType(owningWall, HithermRegister.GetRegisterTypeForHoehe((int)(this.startDragRegisterHeight - planPoint.X + this.startDrag.Value.X + 25), this.register.IsHochleistungsRegister, false).Value, false, checkLinks, useSnap);
@@ -679,7 +679,6 @@ namespace Europlan.Common {
 					this.register.RegisterType = oldType;
 					this.register.Gaps = oldGaps;
 				} else {
-#warning TODO move Verbindeleitungen
 				}
 			}
 

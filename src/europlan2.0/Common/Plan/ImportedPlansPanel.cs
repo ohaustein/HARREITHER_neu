@@ -466,7 +466,7 @@ namespace Europlan.Common {
         }
 
 		private void btnDelete_Click(object sender, EventArgs e) {
-#warning TODO check if plan is alerady used
+			// check if plan is already used
 			// if (alreadyused) { ....
 			DialogResult result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_WirklichLoeschenMessage, EuroplanRes.ImportedPlansPanel_WirklichLoeschenTitle, MessageBoxButtons.YesNo);
 			if (result.Equals(DialogResult.Yes)) {

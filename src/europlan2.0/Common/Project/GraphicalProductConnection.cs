@@ -249,8 +249,6 @@ namespace Europlan.Common {
 
 		private double CalculateFactor() {
 			return 1;
-
-#warning TODO implement CalculateFactor
 		}
 
 		public virtual void ResetCachedVerticesForDrawing() {

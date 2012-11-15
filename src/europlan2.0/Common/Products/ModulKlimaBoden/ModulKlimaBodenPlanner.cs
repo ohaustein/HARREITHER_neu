@@ -2058,7 +2058,6 @@ namespace Europlan.Common {
 
 		public bool ContainsNotConfirmedModules {
 			get {
-#warning TODO check if the area really contains modules
 				return this.layoutAddArea != null;
 			}
 		}

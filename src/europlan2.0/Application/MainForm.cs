@@ -440,7 +440,6 @@ namespace Europlan.Application {
 					this.updateController.UpdateInteractive();
 				}
 			} catch (Exception) {
-#warning TODO implement proper error handling
 				MessageBox.Show(EuroplanRes.MainForm_AktualisierungWirdGeprueft);
 			}
 		}

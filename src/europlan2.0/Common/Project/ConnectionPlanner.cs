@@ -149,7 +149,7 @@ namespace Europlan.Common {
 		private void ResetProducts() {
 			this.productsInFloor.Clear();
 			foreach (Product p in this.GetAllProducts()) {
-#warning TODO do not forget to add new products here
+				// do not forget to add new products here!
 				if (p.GraphicalMode == true) {
 					if (p is ModulKlimaBodenProduct) {
 						ModulKlimaBodenPlanner pp = new ModulKlimaBodenPlanner();
@@ -452,7 +452,6 @@ namespace Europlan.Common {
 						this.newConnectionVertices.AddRange(this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out endConnection));
 						this.nextConnectionPoints.Clear();
 						if (endConnection != null) {
-#warning TODO check if connection is valid!
 							PossibleProductConnection productConnection;
 							PossibleProductConnection distributorConnection;
 							bool ok = false;
@@ -809,12 +808,10 @@ namespace Europlan.Common {
 			endConnection = null;
 			if (this.newConnectionStartAtOutput) {
 				if (this.possibleProductConnection != null && this.possibleProductConnection.ConnectionArea.IsInside(mousePoint)) {
-#warning TODO check if this connection is valid
 					endConnection = this.possibleProductConnection;
 				}
 			} else {
 				if (this.possibleProductConnection != null && this.possibleProductConnection.ConnectionArea.IsInside(mousePoint)) {
-#warning TODO check if this connection is valid
 					endConnection = this.possibleProductConnection;
 				}
 			}

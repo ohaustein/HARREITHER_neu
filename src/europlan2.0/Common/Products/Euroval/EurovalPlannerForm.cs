@@ -720,7 +720,6 @@ namespace Europlan.Common.Products {
 		public bool Changed {
 			get {
 				return true;
-#warning TODO properly implement changed flag
 			}
 		}
 
