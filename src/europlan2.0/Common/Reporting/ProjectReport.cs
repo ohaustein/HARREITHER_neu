@@ -1005,7 +1005,7 @@ namespace Europlan.Common {
 							isProductPlanned = true;
 							normWaermeBedarf += pp.RequestedHeatLoad;
 							normKuehlBedarf += pp.RequestedCoolLoad;
-							totalArea = pp.Product.PlannedNetArea;
+							totalArea += pp.Product.PlannedNetArea;
 
 							normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
 							normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
