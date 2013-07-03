@@ -613,6 +613,7 @@ namespace Europlan.Common {
 		private void InitializeProductParameters() {
 			Product.StaticInitialize(this.Config);
 			ConcreteActivationProduct.StaticInitialize(this.Config);
+			JumbovalProduct.StaticInitialize(this.Config);
 			EcothermProduct.StaticInitialize(this.Config);
 			EurovalProduct.StaticInitialize(this.Config);
 			HithermCompactProduct.StaticInitialize(this.Config);

@@ -95,6 +95,15 @@ namespace Europlan.Common {
 			set { this.SetPlannedCircuits<EurovalProduct>(value); }
 		}
 
+		// Jumboval
+		public OpenCircuits JumbovalOpenCircuits {
+			get { return this.GetOpenCircuits<JumbovalProduct>(); }
+		}
+		public Nullable<int> JumbovalPlannedCircuits {
+			get { return this.GetPlannedCircuits<JumbovalProduct>(); }
+			set { this.SetPlannedCircuits<JumbovalProduct>(value); }
+		}
+
 		// Concrete Activation
 		public OpenCircuits ConcreteActivationOpenCircuits {
 			get { return this.GetOpenCircuits<ConcreteActivationProduct>(); }

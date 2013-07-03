@@ -598,7 +598,7 @@ namespace Europlan.Common {
 		/// Returns the default number of circuit for the planned area (for quick dimensioning)
 		/// </summary>
 		public override int GetDefaultQuickDimensioningCircuits() {
-			EcothermLayDistance distance = (EcothermProduct.EcothermLayDistance)Project.Instance.QuickDimensioning.LayDistance;
+			EcothermLayDistance distance = (EcothermProduct.EcothermLayDistance)Project.Instance.QuickDimensioning.EurovalLayDistance;
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / (100/GetPipeLengthPerSqm(distance)));
 		}
 

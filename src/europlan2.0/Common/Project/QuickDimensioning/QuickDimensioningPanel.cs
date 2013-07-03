@@ -59,6 +59,14 @@ namespace Europlan.Common {
 				this.tableLayoutPanel1.Controls.Add(this.cmbDistance, 4, i);
 				i++;
 			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdJumboval)) {
+				this.tableLayoutPanel1.Controls.Add(this.lblJumboval, 0, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbJumbovalHeat, 1, i);
+				this.tableLayoutPanel1.Controls.Add(this.cbJumbovalCool, 2, i);
+				this.tableLayoutPanel1.Controls.Add(this.lblJumbovalDistance, 3, i);
+				this.tableLayoutPanel1.Controls.Add(this.cmbJumbovalDistance, 4, i);
+				i++;
+			}
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdConcreteActivation)) {
 				this.tableLayoutPanel1.Controls.Add(this.lblBka, 0, i);
 				this.tableLayoutPanel1.Controls.Add(this.cbBkaHeat, 1, i);
@@ -116,6 +124,7 @@ namespace Europlan.Common {
 			this.label2.Text = EuroplanRes.QuickDimensioningPanel_ProdukteWaehlen;//"Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen:"
 			this.lblTemp1.Text = EuroplanRes.QuickDimensioningPanel_VorlauftemperaturHeizen;//"Vorlauftemperatur\r\n(Heizen)"
 			this.lblEuroval.Text = EuroplanRes.QuickDimensioningPanel_Euroval;//"Euroval® Fußbodenheizung"
+			this.lblJumboval.Text = EuroplanRes.QuickDimensioningPanel_Jumboval;//"Jumboval® Fußbodenheizung"
 			this.btnRevert.Text = EuroplanRes.QuickDimensioningPanel_Zuruecksetzen;//"Flächenaufstellung zurücksetzen"
 			this.lblAllocation2.Text = EuroplanRes.Unit_Prozent;//"%"
 			this.lblAllocation.Text = EuroplanRes.QuickDimensioningPanel_Belegefaktor;//"Belegefaktor"
@@ -143,6 +152,14 @@ namespace Europlan.Common {
             EuroplanRes.EurovalProduct_EV35,//"EV35"
 			});
 
+			this.cmbJumbovalDistance.Items.Clear();
+			this.cmbJumbovalDistance.Items.AddRange(new object[] {
+            EuroplanRes.JumbovalProduct_JV20,//"JV20",
+			EuroplanRes.JumbovalProduct_JV30,//"JV30",
+			EuroplanRes.JumbovalProduct_JV40,//"JV40",
+			EuroplanRes.JumbovalProduct_JV50,//"JV50",
+			});
+
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -150,6 +167,8 @@ namespace Europlan.Common {
 
 			this.cbEurovalHeat.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbEurovalCool.Checked = ((Project.Instance.QuickDimensioning.EurovalCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
+			this.cbJumbovalHeat.Checked = ((Project.Instance.QuickDimensioning.JumbovalCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
+			this.cbJumbovalCool.Checked = ((Project.Instance.QuickDimensioning.JumbovalCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbBkaHeat.Checked = ((Project.Instance.QuickDimensioning.ConcreteActivationCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbBkaCool.Checked = ((Project.Instance.QuickDimensioning.ConcreteActivationCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 			this.cbHithermHeat.Checked = ((Project.Instance.QuickDimensioning.HithermCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
@@ -163,12 +182,14 @@ namespace Europlan.Common {
 			this.cbModulKlimaDeckeHeat.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Heat) == QuickDimensioning.ProductCheckState.Heat);
 			this.cbModulKlimaDeckeCool.Checked = ((Project.Instance.QuickDimensioning.ModulDeckeCheckState & QuickDimensioning.ProductCheckState.Cool) == QuickDimensioning.ProductCheckState.Cool);
 
-			this.lblTemp1.Visible = this.EurovalHeating;
-			this.cmbHeatFlowTemperature.Visible = this.EurovalHeating;
-			this.lblTemp2.Visible = this.EurovalHeating;
+			this.lblTemp1.Visible = this.EurovalHeating || this.JumbovalHeating;
+			this.cmbHeatFlowTemperature.Visible = this.EurovalHeating || this.JumbovalHeating;
+			this.lblTemp2.Visible = this.EurovalHeating || this.JumbovalHeating;
 			this.cmbDistance.Visible = this.EurovalHeating;
 			this.lblDistance.Visible = this.EurovalHeating;
-			this.lblAssumptions.Visible = this.EurovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
+			this.cmbJumbovalDistance.Visible = this.JumbovalHeating;
+			this.lblJumbovalDistance.Visible = this.JumbovalHeating;
+			this.lblAssumptions.Visible = this.EurovalHeating || this.JumbovalHeating || this.ConcreteActivationHeating || this.ConcreteActivationCooling || this.ModulKlimaDeckeHeating || this.ModulKlimaDeckeCooling;
 
 			this.lblTemp3.Visible = this.Cooling;
 			this.lblTemp4.Visible = this.Cooling;
@@ -191,7 +212,8 @@ namespace Europlan.Common {
 
 			this.cmbHeatFlowTemperature.SelectedIndex = index;
 			this.txtCoolTemperature.Text = Project.Instance.QuickDimensioning.CoolFlowTemperature.ToString();
-			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.LayDistance;
+			this.cmbDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.EurovalLayDistance;
+			this.cmbJumbovalDistance.SelectedIndex = (int)Project.Instance.QuickDimensioning.JumbovalLayDistance;
 			this.txtAllocation.Text = Project.Instance.QuickDimensioning.CeilingAllocation.ToString();
 
 			List<Floor> floorsToRemove = new List<Floor>();
@@ -229,6 +251,7 @@ namespace Europlan.Common {
 				page.UseVisualStyleBackColor = true;
 				QuickDimensioningFloorGrid grid = new QuickDimensioningFloorGrid();
 				grid.Euroval = this.EurovalHeating || this.EurovalCooling;
+				grid.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
 				grid.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 				grid.Hitherm = this.HithermHeating || this.HithermCooling;
 				grid.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
@@ -245,6 +268,7 @@ namespace Europlan.Common {
 			}
 
 			this.quickDimensioningDistributorsSummary.Euroval = this.EurovalHeating || this.EurovalCooling;
+			this.quickDimensioningDistributorsSummary.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
 			this.quickDimensioningDistributorsSummary.ConcreteActivation = this.ConcreteActivationHeating || this.ConcreteActivationCooling;
 			this.quickDimensioningDistributorsSummary.Hitherm = this.HithermHeating || this.HithermCooling;
 			this.quickDimensioningDistributorsSummary.HithermCompact = this.HithermCompactHeating || this.HithermCompactCooling;
@@ -269,6 +293,7 @@ namespace Europlan.Common {
 		public bool Heating {
 			get {
 				return this.EurovalHeating ||
+						this.JumbovalHeating ||
 						this.ConcreteActivationHeating ||
 						this.HithermHeating ||
 						this.HithermCompactHeating ||
@@ -281,6 +306,7 @@ namespace Europlan.Common {
 		public bool Cooling {
 			get {
 				return this.EurovalCooling ||
+						this.JumbovalCooling ||
 						this.ConcreteActivationCooling ||
 						this.HithermCooling ||
 						this.HithermCompactCooling ||
@@ -298,6 +324,16 @@ namespace Europlan.Common {
 		public bool EurovalCooling {
 			get { return this.cbEurovalCool.Checked; }
 			set { this.cbEurovalCool.Checked = value; }
+		}
+
+		public bool JumbovalHeating {
+			get { return this.cbJumbovalHeat.Checked; }
+			set { this.cbJumbovalHeat.Checked = value; }
+		}
+
+		public bool JumbovalCooling {
+			get { return this.cbJumbovalCool.Checked; }
+			set { this.cbJumbovalCool.Checked = value; }
 		}
 
 		public bool ConcreteActivationHeating {
@@ -450,6 +486,104 @@ namespace Europlan.Common {
 			this.lblAssumptions.Visible = this.Heating || this.Cooling;
 			if (!updateControlOngoing)
 				Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+		}
+
+		private void cbJumbovalHeat_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.JumbovalHeating && !this.JumbovalCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<JumbovalProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_JumbovalEntfernenText, EuroplanRes.QuickDimensioningPanel_JumbovalEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.JumbovalHeating = !this.JumbovalHeating;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
+					grid.Cooling = this.Cooling;
+				}
+				this.quickDimensioningDistributorsSummary.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							JumbovalProduct product = room.GetProductForQuickDimensioning<JumbovalProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp1.Visible = this.Heating;
+			this.cmbHeatFlowTemperature.Visible = this.Heating;
+			this.lblTemp2.Visible = this.Heating;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.cmbJumbovalDistance.Visible = this.JumbovalHeating || this.JumbovalCooling;
+			this.lblJumbovalDistance.Visible = this.JumbovalHeating || this.JumbovalCooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.JumbovalCheckState = (this.JumbovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.JumbovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+
+		}
+
+		private void cbJumbovalCool_CheckedChanged(object sender, EventArgs e) {
+			DialogResult result = DialogResult.None;
+			if (!this.JumbovalHeating && !this.JumbovalCooling) {
+				bool productFound = false;
+				foreach (Floor floor in Project.Instance.Floors) {
+					foreach (Room room in floor.Rooms) {
+						if (room.GetProductForQuickDimensioning<JumbovalProduct>() != null) {
+							productFound = true;
+						}
+					}
+				}
+				if (productFound) {
+					result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_JumbovalEntfernenText, EuroplanRes.QuickDimensioningPanel_JumbovalEntfernenTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				}
+			}
+			if (result == DialogResult.No) {
+				this.JumbovalCooling = !this.JumbovalCooling;
+			} else {
+				foreach (QuickDimensioningFloorGrid grid in this.grids.Values) {
+					grid.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
+					grid.Cooling = this.Cooling;
+				}
+				this.quickDimensioningDistributorsSummary.Jumboval = this.JumbovalHeating || this.JumbovalCooling;
+				if (result == DialogResult.Yes) {
+					foreach (Floor floor in Project.Instance.Floors) {
+						foreach (Room room in floor.Rooms) {
+							JumbovalProduct product = room.GetProductForQuickDimensioning<JumbovalProduct>();
+							if (product != null) {
+								room.UsedProductsForQuickDimensioning.Remove(product);
+							}
+						}
+					}
+				}
+				this.OnProjectChanged();
+			}
+
+			this.lblTemp3.Visible = this.Cooling;
+			this.lblTemp4.Visible = this.Cooling;
+			this.txtCoolTemperature.Visible = this.Cooling;
+			this.cmbDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.lblDistance.Visible = this.EurovalHeating || this.EurovalCooling || this.ConcreteActivationHeating || this.ConcreteActivationCooling;
+			this.cmbJumbovalDistance.Visible = this.JumbovalHeating || this.JumbovalCooling;
+			this.lblJumbovalDistance.Visible = this.JumbovalHeating || this.JumbovalCooling;
+			this.lblAssumptions.Visible = this.Heating || this.Cooling;
+			if (!updateControlOngoing)
+				Project.Instance.QuickDimensioning.EurovalCheckState = (this.EurovalHeating ? QuickDimensioning.ProductCheckState.Heat : QuickDimensioning.ProductCheckState.None) | (this.EurovalCooling ? QuickDimensioning.ProductCheckState.Cool : QuickDimensioning.ProductCheckState.None);
+
 		}
 
 		private void cbBkaHeat_CheckedChanged(object sender, EventArgs e) {
@@ -995,15 +1129,19 @@ namespace Europlan.Common {
 			switch (cmbHeatFlowTemperature.SelectedIndex) {
 				case 0:
 					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV5;
+					this.cmbJumbovalDistance.SelectedIndex = (int)JumbovalProduct.JumbovalLayDistance.JV20;
 					break;
 				case 1:
 					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV15;
+					this.cmbJumbovalDistance.SelectedIndex = (int)JumbovalProduct.JumbovalLayDistance.JV20;
 					break;
 				case 2:
 					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV20;
+					this.cmbJumbovalDistance.SelectedIndex = (int)JumbovalProduct.JumbovalLayDistance.JV20;
 					break;
 				case 3:
 					this.cmbDistance.SelectedIndex = (int)EurovalProduct.EurovalLayDistance.EV25;
+					this.cmbJumbovalDistance.SelectedIndex = (int)JumbovalProduct.JumbovalLayDistance.JV20;
 					break;
 			}
 			this.OnProjectChanged();
@@ -1016,10 +1154,14 @@ namespace Europlan.Common {
 		}
 
 		private void cmbDistance_SelectedIndexChanged(object sender, EventArgs e) {
-			Project.Instance.QuickDimensioning.LayDistance = (EurovalProduct.EurovalLayDistance)this.cmbDistance.SelectedIndex;
+			Project.Instance.QuickDimensioning.EurovalLayDistance = (EurovalProduct.EurovalLayDistance)this.cmbDistance.SelectedIndex;
 			this.OnProjectChanged();
 		}
 
+		private void cmbJumbovalDistance_SelectedIndexChanged(object sender, EventArgs e) {
+			Project.Instance.QuickDimensioning.JumbovalLayDistance = (JumbovalProduct.JumbovalLayDistance)this.cmbJumbovalDistance.SelectedIndex;
+			this.OnProjectChanged();
+		}
 
 		private void tabQuickDimensioning_Selected(object sender, TabControlEventArgs e) {
 			if (e.TabPage == this.pageSummary) {
@@ -1228,6 +1370,7 @@ namespace Europlan.Common {
 				}
 				QuickDimensioning qd = Project.Instance.QuickDimensioning;
 				qd.EurovalCheckState = QuickDimensioning.ProductCheckState.None;
+				qd.JumbovalCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.ConcreteActivationCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.HithermCheckState = QuickDimensioning.ProductCheckState.None;
 				qd.HithermCompactCheckState = QuickDimensioning.ProductCheckState.None;
@@ -1241,10 +1384,6 @@ namespace Europlan.Common {
 
 		private void quickDimensioningDistributorsSummary_ProjectChanged(object sender) {
 			this.OnProjectChanged();
-		}
-
-		private void lblDistance_Click(object sender, EventArgs e) {
-
 		}
 
 	}

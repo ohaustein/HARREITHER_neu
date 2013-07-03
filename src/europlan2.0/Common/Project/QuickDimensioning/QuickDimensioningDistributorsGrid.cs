@@ -35,6 +35,8 @@ namespace Europlan.Common {
 			this.colFloorName.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_Geschoss; //"Geschoß"
 			this.colEurovalOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalOffen; //"Euroval®\noffene\nHeizkreise"
 			this.colEurovalPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_EurovalAngeschlossen; //"Euroval®\nangeschl.\nHeizkreise"
+			this.colJumbovalOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_JumbovalOffen; //"Jumboval®\noffene\nHeizkreise"
+			this.colJumbovalPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_JumbovalAngeschlossen; //"Jumboval®\nangeschl.\nHeizkreise"
 			this.colConcreteActivationOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaOffen; //"BKA\noffene\nHeizkreise"
 			this.colConcreteActivationPlannedCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_BkaAngeschlossen; //"BKA\nangeschl.\nHeizkreise"
 			this.colHithermOpenCircuits.HeaderText = EuroplanRes.QuickDimensioningDistributorsGrid_HithermOffen; //"Hitherm®\noffene\nHeizkreise"
@@ -84,6 +86,11 @@ namespace Europlan.Common {
 		public bool Euroval {
 			get { return this.IsProductVisible<EurovalProduct>(); }
 			set { this.SetProductVisible<EurovalProduct>(value); }
+		}
+
+		public bool Jumboval {
+			get { return this.IsProductVisible<JumbovalProduct>(); }
+			set { this.SetProductVisible<JumbovalProduct>(value); }
 		}
 
 		public bool ConcreteActivation {
@@ -136,6 +143,7 @@ namespace Europlan.Common {
 			for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++) {
 				DataGridViewRow row = this.gridRooms.Rows[i];
 				this.EnableProductInRoom<EurovalProduct>(row);
+				this.EnableProductInRoom<JumbovalProduct>(row);
 				this.EnableProductInRoom<ConcreteActivationProduct>(row);
 				this.EnableProductInRoom<HithermProduct>(row);
 				this.EnableProductInRoom<HithermCompactProduct>(row);
@@ -150,6 +158,7 @@ namespace Europlan.Common {
 				// fill dictionary
 				this.productOpenColumns = new Dictionary<Type, DataGridViewColumn>();
 				this.productOpenColumns.Add(typeof(EurovalProduct), this.colEurovalOpenCircuits);
+				this.productOpenColumns.Add(typeof(JumbovalProduct), this.colJumbovalOpenCircuits);
 				this.productOpenColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationOpenCircuits);
 				this.productOpenColumns.Add(typeof(HithermProduct), this.colHithermOpenCircuits);
 				this.productOpenColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactOpenCircuits);
@@ -171,6 +180,7 @@ namespace Europlan.Common {
 				// fill dictionary
 				this.productPlannedColumns = new Dictionary<Type, DataGridViewColumn>();
 				this.productPlannedColumns.Add(typeof(EurovalProduct), this.colEurovalPlannedCircuits);
+				this.productPlannedColumns.Add(typeof(JumbovalProduct), this.colJumbovalPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(HithermProduct), this.colHithermPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactPlannedCircuits);

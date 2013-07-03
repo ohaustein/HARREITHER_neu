@@ -55,7 +55,8 @@ namespace Europlan.Common {
 		public enum PipeTypeEnum {
 			PT_EUROVAL,
 			PT_21MM,
-			PT_ECOTHERM
+			PT_ECOTHERM,
+			PT_JUMBOVAL
 		}
 
 		public class VerlegeartEnumConverter : System.ComponentModel.TypeConverter {

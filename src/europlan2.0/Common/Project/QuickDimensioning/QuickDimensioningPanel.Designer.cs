@@ -72,6 +72,11 @@ namespace Europlan.Common {
 			this.quickDimensioningRoomDistributorsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.helpProvider = new System.Windows.Forms.HelpProvider();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.lblJumboval = new System.Windows.Forms.Label();
+			this.cbJumbovalHeat = new System.Windows.Forms.CheckBox();
+			this.cbJumbovalCool = new System.Windows.Forms.CheckBox();
+			this.lblJumbovalDistance = new System.Windows.Forms.Label();
+			this.cmbJumbovalDistance = new System.Windows.Forms.ComboBox();
 			this.tabQuickDimensioning.SuspendLayout();
 			this.pageSettings.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -192,6 +197,12 @@ namespace Europlan.Common {
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Controls.Add(this.cmbJumbovalDistance, 4, 8);
+			this.tableLayoutPanel1.Controls.Add(this.lblJumbovalDistance, 3, 8);
+			this.tableLayoutPanel1.Controls.Add(this.cbJumbovalCool, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.cbJumbovalHeat, 1, 8);
+			this.tableLayoutPanel1.Controls.Add(this.lblJumboval, 0, 8);
 			this.tableLayoutPanel1.Controls.Add(this.lblEuroval, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.btnRevert, 0, 9);
 			this.tableLayoutPanel1.Controls.Add(this.cbEurovalHeat, 1, 1);
@@ -706,6 +717,72 @@ namespace Europlan.Common {
 			this.pictureBox1.TabIndex = 78;
 			this.pictureBox1.TabStop = false;
 			// 
+			// lblJumboval
+			// 
+			this.lblJumboval.BackColor = System.Drawing.Color.Transparent;
+			this.lblJumboval.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblJumboval.Location = new System.Drawing.Point(3, 210);
+			this.lblJumboval.Margin = new System.Windows.Forms.Padding(3);
+			this.lblJumboval.Name = "lblJumboval";
+			this.lblJumboval.Size = new System.Drawing.Size(165, 17);
+			this.lblJumboval.TabIndex = 23;
+			this.lblJumboval.Text = "Jumboval® Fußbodenheizung";
+			this.lblJumboval.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cbJumbovalHeat
+			// 
+			this.cbJumbovalHeat.BackColor = System.Drawing.Color.Transparent;
+			this.cbJumbovalHeat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbJumbovalHeat.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cbJumbovalHeat.Location = new System.Drawing.Point(174, 210);
+			this.cbJumbovalHeat.Name = "cbJumbovalHeat";
+			this.cbJumbovalHeat.Size = new System.Drawing.Size(70, 17);
+			this.cbJumbovalHeat.TabIndex = 24;
+			this.cbJumbovalHeat.UseVisualStyleBackColor = false;
+			this.cbJumbovalHeat.CheckedChanged += new System.EventHandler(this.cbJumbovalHeat_CheckedChanged);
+			// 
+			// cbJumbovalCool
+			// 
+			this.cbJumbovalCool.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.cbJumbovalCool.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cbJumbovalCool.Location = new System.Drawing.Point(250, 210);
+			this.cbJumbovalCool.Name = "cbJumbovalCool";
+			this.cbJumbovalCool.Size = new System.Drawing.Size(70, 17);
+			this.cbJumbovalCool.TabIndex = 25;
+			this.cbJumbovalCool.UseVisualStyleBackColor = false;
+			this.cbJumbovalCool.CheckedChanged += new System.EventHandler(this.cbJumbovalCool_CheckedChanged);
+			// 
+			// lblJumbovalDistance
+			// 
+			this.lblJumbovalDistance.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblJumbovalDistance.Location = new System.Drawing.Point(326, 207);
+			this.lblJumbovalDistance.Name = "lblJumbovalDistance";
+			this.lblJumbovalDistance.Size = new System.Drawing.Size(84, 23);
+			this.lblJumbovalDistance.TabIndex = 26;
+			this.lblJumbovalDistance.Text = "Verlegeabstand";
+			this.lblJumbovalDistance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// cmbJumbovalDistance
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.cmbJumbovalDistance, 2);
+			this.cmbJumbovalDistance.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbJumbovalDistance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbJumbovalDistance.FormattingEnabled = true;
+			this.cmbJumbovalDistance.Items.AddRange(new object[] {
+            "EV 5",
+            "EV10",
+            "EV15",
+            "EV20",
+            "EV25",
+            "EV30",
+            "EV35"});
+			this.cmbJumbovalDistance.Location = new System.Drawing.Point(416, 208);
+			this.cmbJumbovalDistance.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+			this.cmbJumbovalDistance.Name = "cmbJumbovalDistance";
+			this.cmbJumbovalDistance.Size = new System.Drawing.Size(85, 21);
+			this.cmbJumbovalDistance.TabIndex = 27;
+			this.cmbJumbovalDistance.SelectedIndexChanged += new System.EventHandler(this.cmbJumbovalDistance_SelectedIndexChanged);
+			// 
 			// QuickDimensioningPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -780,5 +857,10 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label lblJumbovalDistance;
+		private System.Windows.Forms.CheckBox cbJumbovalCool;
+		private System.Windows.Forms.CheckBox cbJumbovalHeat;
+		private System.Windows.Forms.Label lblJumboval;
+		private System.Windows.Forms.ComboBox cmbJumbovalDistance;
 	}
 }

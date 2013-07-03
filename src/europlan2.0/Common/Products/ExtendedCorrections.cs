@@ -18,6 +18,7 @@ namespace Europlan.Common {
 
 		private EurovalProduct evProduct;
 		private EcothermProduct ecProduct;
+		private JumbovalProduct jvProduct;
 
 		private ExtendedCorrections() {
 			this.circuitNr = 0;
@@ -33,6 +34,11 @@ namespace Europlan.Common {
 			this.ecProduct = product;
 		}
 
+		public ExtendedCorrections(JumbovalProduct product) {
+			this.sum = true;
+			this.jvProduct = product;
+		}
+
 		public ExtendedCorrections(int circuitNr, EurovalProduct product) {
 			this.circuitNr = circuitNr;
 			this.evProduct = product;
@@ -41,6 +47,11 @@ namespace Europlan.Common {
 		public ExtendedCorrections(int circuitNr, EcothermProduct product) {
 			this.circuitNr = circuitNr;
 			this.ecProduct = product;
+		}
+
+		public ExtendedCorrections(int circuitNr, JumbovalProduct product) {
+			this.circuitNr = circuitNr;
+			this.jvProduct = product;
 		}
 
 		public ExtendedCorrections(int ciruitNr, Nullable<double> area, Nullable<double> rimLength, Nullable<int> rimCorners, Nullable<double> connections, EurovalProduct product) {
@@ -79,10 +90,28 @@ namespace Europlan.Common {
 			this.ecProduct = product;
 		}
 
+		public ExtendedCorrections(int ciruitNr, Nullable<double> area, Nullable<double> rimLength, Nullable<int> rimCorners, Nullable<double> connections, JumbovalProduct product) {
+			circuitNr = 0;
+			correctArea = area.HasValue;
+			if (correctArea) {
+				this.areaPercentage = area.Value;
+			}
+			correctRim = rimLength.HasValue;
+			if (correctRim) {
+				this.rimLengthPercentage = rimLength.Value;
+				this.rimCornersValue = rimCorners.HasValue ? rimCorners.Value : 0;
+			}
+			correctConnections = connections.HasValue;
+			if (correctConnections) {
+				this.connectionsPercentage = connections.Value;
+			}
+			this.jvProduct = product;
+		}
+
 		public bool CorrectArea {
 			get { return this.correctArea; }
 			set {
-				if ((this.evProduct != null || this.ecProduct != null) && !this.correctArea && value) {
+				if ((this.evProduct != null || this.ecProduct != null || this.jvProduct != null) && !this.correctArea && value) {
 					this.AreaPercentage = this.AreaPercentage;
 				}
 				this.correctArea = value;
@@ -99,6 +128,10 @@ namespace Europlan.Common {
 						}
 					} else if (this.ecProduct != null) {
 						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.AreaPercentage;
+						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
 							perc += ec.AreaPercentage;
 						}
 					}
@@ -125,6 +158,14 @@ namespace Europlan.Common {
 								circuits++;
 							}
 						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
+							if (ec.CorrectArea) {
+								perc -= ec.AreaPercentage;
+							} else {
+								circuits++;
+							}
+						}
 					}
 					if (circuits < 1) {
 						circuits = 1;
@@ -145,6 +186,8 @@ namespace Europlan.Common {
 					return this.evProduct.PlannedFloorArea * this.AreaPercentage / 100;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedFloorArea * this.AreaPercentage / 100;
+				} else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedFloorArea * this.AreaPercentage / 100;
 				} else {
 					return 0;
 				}
@@ -154,6 +197,8 @@ namespace Europlan.Common {
 					this.areaPercentage = value * 100 / this.evProduct.PlannedFloorArea;
 				} else if (this.ecProduct != null) {
 					this.areaPercentage = value * 100 / this.ecProduct.PlannedFloorArea;
+				} else if (this.jvProduct != null) {
+					this.areaPercentage = value * 100 / this.jvProduct.PlannedFloorArea;
 				}
 			}
 		}
@@ -165,6 +210,8 @@ namespace Europlan.Common {
 					return this.evProduct.PlannedAreaReduced * this.AreaPercentage / 100;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedAreaReduced * this.AreaPercentage / 100;
+				} else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedAreaReduced * this.AreaPercentage / 100;
 				} else {
 					return 0;
 				}
@@ -178,6 +225,8 @@ namespace Europlan.Common {
 					return this.evProduct.PlannedAreaUnheated * this.AreaPercentage / 100;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedAreaUnheated * this.AreaPercentage / 100;
+				} else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedAreaUnheated * this.AreaPercentage / 100;
 				} else {
 					return 0;
 				}
@@ -187,7 +236,7 @@ namespace Europlan.Common {
 		public bool CorrectRim {
 			get { return this.correctRim; }
 			set {
-				if ((this.evProduct != null || this.ecProduct != null) && !this.correctRim && value) {
+				if ((this.evProduct != null || this.ecProduct != null || this.jvProduct != null) && !this.correctRim && value) {
 					this.RimPercentage = this.RimPercentage;
 					this.RimCornersValue = this.RimCornersValue;
 				}
@@ -205,6 +254,10 @@ namespace Europlan.Common {
 						}
 					} else if (this.ecProduct != null) {
 						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.RimPercentage;
+						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
 							perc += ec.RimPercentage;
 						}
 					} 
@@ -231,6 +284,14 @@ namespace Europlan.Common {
 								circuits++;
 							}
 						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								perc -= ec.RimPercentage;
+							} else {
+								circuits++;
+							}
+						}
 					}
 					if (perc < 0) {
 						perc = 0;
@@ -251,6 +312,8 @@ namespace Europlan.Common {
 					return this.evProduct.PlannedRimLength * this.RimPercentage / 100;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedRimLength * this.RimPercentage / 100;
+				}  else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedRimLength * this.RimPercentage / 100;
 				} else {
 					return 0;
 				}
@@ -260,6 +323,8 @@ namespace Europlan.Common {
 					this.rimLengthPercentage = value * 100 / this.evProduct.PlannedRimLength;
 				} else if (this.ecProduct != null) {
 					this.rimLengthPercentage = value * 100 / this.ecProduct.PlannedRimLength;
+				} else if (this.jvProduct != null) {
+					this.rimLengthPercentage = value * 100 / this.jvProduct.PlannedRimLength;
 				}
 			}
 		}
@@ -276,6 +341,10 @@ namespace Europlan.Common {
 						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
 							corners += ec.RimCornersValue;
 						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
+							corners += ec.RimCornersValue;
+						}
 					}
 					return corners;
 				}
@@ -287,6 +356,8 @@ namespace Europlan.Common {
 						corners = this.evProduct.PlannedRimCorners;
 					} else if (this.ecProduct != null) {
 						corners = this.ecProduct.PlannedRimCorners;
+					} else if (this.jvProduct != null) {
+						corners = this.jvProduct.PlannedRimCorners;
 					}
 					int circuits = 0;
 					int circuitsBefore = 0;
@@ -303,6 +374,17 @@ namespace Europlan.Common {
 						}
 					} else if (this.ecProduct != null) {
 						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							if (ec.CorrectRim) {
+								corners -= ec.RimCornersValue;
+							} else {
+								if (ec.CircuitNr < this.circuitNr) {
+									circuitsBefore++;
+								}
+								circuits++;
+							}
+						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
 							if (ec.CorrectRim) {
 								corners -= ec.RimCornersValue;
 							} else {
@@ -335,6 +417,8 @@ namespace Europlan.Common {
 						return RimCornersValue.ToString() + " (" + this.evProduct.PlannedRimCorners.ToString() + ")";
 					} else if (this.ecProduct != null) {
 						return RimCornersValue.ToString() + " (" + this.ecProduct.PlannedRimCorners.ToString() + ")";
+					}  else if (this.jvProduct != null) {
+						return RimCornersValue.ToString() + " (" + this.jvProduct.PlannedRimCorners.ToString() + ")";
 					} else {
 						return RimCornersValue.ToString() + " (0)";
 					}
@@ -353,7 +437,7 @@ namespace Europlan.Common {
 		public bool CorrectConnections {
 			get { return this.correctConnections; }
 			set {
-				if ((this.evProduct != null || this.ecProduct != null) && !this.correctConnections && value) {
+				if ((this.evProduct != null || this.ecProduct != null || this.jvProduct != null) && !this.correctConnections && value) {
 					this.ConnectionsPercentage = this.ConnectionsPercentage;
 				}
 				this.correctConnections = value; 
@@ -370,6 +454,10 @@ namespace Europlan.Common {
 						}
 					} else if (this.ecProduct != null) {
 						foreach (ExtendedCorrections ec in this.ecProduct.PlannedCorrectionList) {
+							perc += ec.ConnectionsPercentage;
+						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
 							perc += ec.ConnectionsPercentage;
 						}
 					}
@@ -396,6 +484,14 @@ namespace Europlan.Common {
 								circuits++;
 							}
 						}
+					} else if (this.jvProduct != null) {
+						foreach (ExtendedCorrections ec in this.jvProduct.PlannedCorrectionList) {
+							if (ec.CorrectConnections) {
+								perc -= ec.ConnectionsPercentage;
+							} else {
+								circuits++;
+							}
+						}
 					}
 					if (perc < 0) {
 						perc = 0;
@@ -416,6 +512,8 @@ namespace Europlan.Common {
 					return this.evProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100;
+				}  else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedRemoveArea * this.ConnectionsPercentage / 100;
 				} else {
 					return 0;
 				}
@@ -425,6 +523,8 @@ namespace Europlan.Common {
 					this.connectionsPercentage = value * 100 / this.evProduct.PlannedRemoveArea;
 				} else if (this.ecProduct != null) {
 					this.connectionsPercentage = value * 100 / this.ecProduct.PlannedRemoveArea;
+				} else if (this.jvProduct != null) {
+					this.connectionsPercentage = value * 100 / this.jvProduct.PlannedRemoveArea;
 				}
 			}
 		}
@@ -443,6 +543,11 @@ namespace Europlan.Common {
 		[XmlIgnore]
 		public EcothermProduct EcothermProduct {
 			set { this.ecProduct = value; }
+		}
+
+		[XmlIgnore]
+		public JumbovalProduct JumbovalProduct {
+			set { this.jvProduct = value; }
 		}
 
 		[XmlIgnore]

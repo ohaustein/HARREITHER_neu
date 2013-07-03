@@ -126,6 +126,9 @@
   <data name="AbstractLicensedModule_BetaUpdates" xml:space="preserve">
     <value>Beta-Updates herunterladen</value>
   </data>
+  <data name="AbstractLicensedModule_Jumboval" xml:space="preserve">
+    <value>Jumboval® Fußbodenheizung</value>
+  </data>
   <data name="AbstractLicensedModule_BKA" xml:space="preserve">
     <value>Betonkernaktivierung</value>
   </data>
@@ -991,8 +994,23 @@ Vorlauf
   <data name="EurovalProduct_EV5_80" xml:space="preserve">
     <value>EV5/80</value>
   </data>
+	<data name="JumbovalProduct_JV20" xml:space="preserve">
+    <value>JV20</value>
+  </data>
+	<data name="JumbovalProduct_JV30" xml:space="preserve">
+    <value>JV30</value>
+  </data>
+	<data name="JumbovalProduct_JV40" xml:space="preserve">
+    <value>JV40</value>
+  </data>
+	<data name="JumbovalProduct_JV50" xml:space="preserve">
+    <value>JV50</value>
+  </data>
   <data name="EurovalProduct_NotificationParameter" xml:space="preserve">
     <value>Euroval-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+  </data>
+  <data name="JumbovalProduct_NotificationParameter" xml:space="preserve">
+    <value>Jumboval-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
   <data name="ExportOption_DH" xml:space="preserve">
     <value>Decke</value>
@@ -4568,6 +4586,12 @@ recht</value>
   <data name="Product_EurovalName" xml:space="preserve">
     <value>Euroval®</value>
   </data>
+  <data name="Product_JumbovalFullName" xml:space="preserve">
+    <value>Jumboval® Fußbodenheizung</value>
+  </data>
+  <data name="Product_JumbovalName" xml:space="preserve">
+    <value>Jumboval®</value>
+  </data>
   <data name="Product_HithermCompactFullName" xml:space="preserve">
     <value>Hitherm® Compact Klimawand</value>
   </data>
@@ -4918,6 +4942,16 @@ Heizkreise</value>
 offene
 Heizkreise</value>
   </data>
+  <data name="QuickDimensioningDistributorsGrid_JumbovalAngeschlossen" xml:space="preserve">
+    <value>Jumboval®
+angeschl.
+Heizkreise</value>
+  </data>
+	<data name="QuickDimensioningDistributorsGrid_JumbovalOffen" xml:space="preserve">
+    <value>Jumboval®
+offene
+Heizkreise</value>
+  </data>	
   <data name="QuickDimensioningDistributorsGrid_Geschoss" xml:space="preserve">
     <value>Geschoß</value>
   </data>
@@ -5148,12 +5182,21 @@ motore</value>
   <data name="QuickDimensioningPanel_Euroval" xml:space="preserve">
     <value>Euroval® Fußbodenheizung</value>
   </data>
+  <data name="QuickDimensioningPanel_Jumboval" xml:space="preserve">
+    <value>Jumboval® Fußbodenheizung</value>
+  </data>	
   <data name="QuickDimensioningPanel_EurovalEntfernenText" xml:space="preserve">
     <value>Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?</value>
   </data>
   <data name="QuickDimensioningPanel_EurovalEntfernenTitel" xml:space="preserve">
     <value>Euroval entfernen</value>
   </data>
+  <data name="QuickDimensioningPanel_JumbovalEntfernenText" xml:space="preserve">
+    <value>Wollen sie das Produkt Jumboval wirklich aus der Flächenaufstellung entfernen?</value>
+  </data>
+	<data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
+    <value>Jumboval entfernen</value>
+  </data>	
   <data name="QuickDimensioningPanel_Flaechenaufstellung" xml:space="preserve">
     <value>Flächenaufstellung</value>
   </data>

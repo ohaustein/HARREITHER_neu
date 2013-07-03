@@ -131,6 +131,11 @@ namespace Europlan.Common {
 			set { this.SetProductAvailable<EurovalProduct>(value); }
 		}
 
+		public bool Jumboval {
+			get { return this.colJumboval.Visible; }
+			set { this.SetProductAvailable<JumbovalProduct>(value); }
+		}
+
 		public bool ConcreteActivation {
 #warning TODO Concrete Activation has not been implemented yet
 			get { return this.colConcreteActivation.Visible; }
@@ -199,6 +204,12 @@ namespace Europlan.Common {
 					} else if (e.ColumnIndex == this.colEurovalCircuits.Index) {
 						// Euroval circuits
 						this.ValidateProductCircuits<EurovalProduct>(row);
+					} else if (e.ColumnIndex == this.colJumboval.Index) {
+						// Jumboval
+						this.ValidateProductArea<JumbovalProduct>(row);
+					} else if (e.ColumnIndex == this.colJumbovalCircuits.Index) {
+						// Jumboval circuits
+						this.ValidateProductCircuits<JumbovalProduct>(row);
 					} else if (e.ColumnIndex == this.colConcreteActivation.Index) {
 						// Concrete Activation
 						this.ValidateProductArea<ConcreteActivationProduct>(row);
@@ -340,6 +351,9 @@ namespace Europlan.Common {
 					// Euroval
 					this.ShowProduct<EurovalProduct>(row);
 
+					// Jumboval
+					this.ShowProduct<JumbovalProduct>(row);
+
 					// Concrete Activation
 					this.ShowProduct<ConcreteActivationProduct>(row);
 
@@ -394,6 +408,9 @@ namespace Europlan.Common {
 				} else if ((e.ColumnIndex == this.colEuroval.Index || e.ColumnIndex == this.colEurovalCircuits.Index) && room.GetProductForQuickDimensioning<EurovalProduct>() == null) {
 					// Euroval
 					this.AddProduct<EurovalProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
+				} else if ((e.ColumnIndex == this.colJumboval.Index || e.ColumnIndex == this.colJumbovalCircuits.Index) && room.GetProductForQuickDimensioning<JumbovalProduct>() == null) {
+					// Jumboval
+					this.AddProduct<JumbovalProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
 				} else if ((e.ColumnIndex == this.colConcreteActivation.Index || e.ColumnIndex == this.colConcreteActivationCircuits.Index) && room.GetProductForQuickDimensioning<ConcreteActivationProduct>() == null) {
 					// Concrete Activation
 					this.AddProduct<ConcreteActivationProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
@@ -442,6 +459,7 @@ namespace Europlan.Common {
 				// fill dictionary
 				this.productAreaColumns = new Dictionary<Type, DataGridViewColumn>();
 				this.productAreaColumns.Add(typeof(EurovalProduct), this.colEuroval);
+				this.productAreaColumns.Add(typeof(JumbovalProduct), this.colJumboval);
 				this.productAreaColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivation);
 				this.productAreaColumns.Add(typeof(HithermProduct), this.colHitherm);
 				this.productAreaColumns.Add(typeof(HithermCompactProduct), this.colHithermCompact);
@@ -463,6 +481,7 @@ namespace Europlan.Common {
 				// fill dictionary
 				this.productCircuitsColumns = new Dictionary<Type, DataGridViewColumn>();
 				this.productCircuitsColumns.Add(typeof(EurovalProduct), this.colEurovalCircuits);
+				this.productCircuitsColumns.Add(typeof(JumbovalProduct), this.colJumbovalCircuits);
 				this.productCircuitsColumns.Add(typeof(ConcreteActivationProduct), this.colConcreteActivationCircuits);
 				this.productCircuitsColumns.Add(typeof(HithermProduct), this.colHithermCircuits);
 				this.productCircuitsColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactCircuits);
@@ -539,6 +558,7 @@ namespace Europlan.Common {
 				if (col == this.colRoomTemperature || col == this.colHeatLoad || col == this.colCoolLoad ||
 						col == this.colRoomController || col == this.colComments || col == this.colNrOfServos ||
 						col == this.colEuroval || col == this.colEurovalCircuits ||
+						col == this.colJumboval || col == this.colJumbovalCircuits ||
 						col == this.colConcreteActivation || col == this.colConcreteActivationCircuits ||
 						col == this.colHitherm || col == this.colHithermCircuits ||
 						col == this.colHithermCompact || col == this.colHithermCompactCircuits ||
@@ -551,6 +571,8 @@ namespace Europlan.Common {
 					this.quickDimensioningGrid.EndEdit();
 					if (col == this.colEuroval) {
 						this.ValidateProductArea<EurovalProduct>(row);
+					} else if (col == this.colJumboval) {
+						this.ValidateProductArea<JumbovalProduct>(row);
 					} else if (col == this.colConcreteActivation) {
 						this.ValidateProductArea<ConcreteActivationProduct>(row);
 					} else if (col == this.colHitherm) {
@@ -594,6 +616,8 @@ namespace Europlan.Common {
 					// reset product values
 					row.Cells[this.colEuroval.Index].Value = null;
 					row.Cells[this.colEurovalCircuits.Index].Value = null;
+					row.Cells[this.colJumboval.Index].Value = null;
+					row.Cells[this.colJumbovalCircuits.Index].Value = null;
 					row.Cells[this.colConcreteActivation.Index].Value = null;
 					row.Cells[this.colConcreteActivationCircuits.Index].Value = null;
 					row.Cells[this.colHitherm.Index].Value = null;
@@ -608,6 +632,7 @@ namespace Europlan.Common {
 					row.Cells[this.colModulKlimaDeckeCircuits.Index].Value = null;
 
 					row.Cells[this.colEuroval.Index].ErrorText = null;
+					row.Cells[this.colJumboval.Index].ErrorText = null;
 					row.Cells[this.colConcreteActivation.Index].ErrorText = null;
 					row.Cells[this.colHitherm.Index].ErrorText = null;
 					row.Cells[this.colHithermCompact.Index].ErrorText = null;

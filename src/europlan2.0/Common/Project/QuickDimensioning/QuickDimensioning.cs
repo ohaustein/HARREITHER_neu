@@ -16,6 +16,7 @@ namespace Europlan.Common {
 		}
 		
 		private ProductCheckState eurovalCheckState = ProductCheckState.None;
+		private ProductCheckState jumbovalCheckState = ProductCheckState.None;
 		private ProductCheckState concreteActivationCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCheckState = ProductCheckState.None;
 		private ProductCheckState hithermCompactCheckState = ProductCheckState.None;
@@ -24,7 +25,8 @@ namespace Europlan.Common {
 		private ProductCheckState modulDeckeCheckState = ProductCheckState.None;
 		private float heatFlowTemperature = 35;
 		private float coolFlowTemperature = 16;
-		private Europlan.Common.EurovalProduct.EurovalLayDistance layDistance = Europlan.Common.EurovalProduct.EurovalLayDistance.EV20;
+		private Europlan.Common.EurovalProduct.EurovalLayDistance eurovalLayDistance = Europlan.Common.EurovalProduct.EurovalLayDistance.EV20;
+		private Europlan.Common.JumbovalProduct.JumbovalLayDistance jumbovalLayDistance = Europlan.Common.JumbovalProduct.JumbovalLayDistance.JV20;
 		private float ceilingAllocation = 80;
 
 		[NonSerialized]
@@ -44,6 +46,11 @@ namespace Europlan.Common {
 		public ProductCheckState EurovalCheckState {
 			get { return eurovalCheckState; }
 			set { eurovalCheckState = value; }
+		}
+
+		public ProductCheckState JumbovalCheckState {
+			get { return jumbovalCheckState; }
+			set { jumbovalCheckState = value; }
 		}
 
 		public ProductCheckState ConcreteActivationCheckState {
@@ -86,9 +93,14 @@ namespace Europlan.Common {
 			set { coolFlowTemperature = value; }
 		}
 
-		public Europlan.Common.EurovalProduct.EurovalLayDistance LayDistance {
-			get { return layDistance; }
-			set { layDistance = value; }
+		public Europlan.Common.EurovalProduct.EurovalLayDistance EurovalLayDistance {
+			get { return eurovalLayDistance; }
+			set { eurovalLayDistance = value; }
+		}
+
+		public Europlan.Common.JumbovalProduct.JumbovalLayDistance JumbovalLayDistance {
+			get { return jumbovalLayDistance; }
+			set { jumbovalLayDistance = value; }
 		}
 
 		public float CeilingAllocation {
@@ -145,6 +157,9 @@ namespace Europlan.Common {
 			List<string> productOrder = new List<string>();
 			if (eurovalCheckState != ProductCheckState.None) {
 				productOrder.Add(EurovalProduct.QuickDimensioningNameStatic);
+			}
+			if (jumbovalCheckState != ProductCheckState.None) {
+				productOrder.Add(JumbovalProduct.QuickDimensioningNameStatic);
 			}
 			if (concreteActivationCheckState != ProductCheckState.None) {
 				productOrder.Add(ConcreteActivationProduct.QuickDimensioningNameStatic);

@@ -76,6 +76,14 @@ namespace Europlan.Common {
 			get { return this.GetProductCircuits<EurovalProduct>(); }
 		}
 
+		public float JumbovalArea {
+			get { return this.GetProductArea<JumbovalProduct>(); }
+		}
+
+		public int JumbovalCircuits {
+			get { return this.GetProductCircuits<JumbovalProduct>(); }
+		}
+
 		public float ConcreteActivationArea {
 			get { return this.GetProductArea<ConcreteActivationProduct>(); }
 		}

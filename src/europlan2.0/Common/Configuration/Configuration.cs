@@ -336,6 +336,7 @@ namespace Europlan.Common {
 
 					EurovalProduct.StaticInitialize(adminTemplate);
 					EcothermProduct.StaticInitialize(adminTemplate);
+					JumbovalProduct.StaticInitialize(adminTemplate);
 					ConcreteActivationProduct.StaticInitialize(adminTemplate);
 					HithermProduct.StaticInitialize(adminTemplate);
 					HithermCompactProduct.StaticInitialize(adminTemplate);
@@ -386,7 +387,7 @@ namespace Europlan.Common {
 
 					EurovalProduct.StaticInitialize(userTemplate);
 					EcothermProduct.StaticInitialize(userTemplate);
-					ConcreteActivationProduct.StaticInitialize(userTemplate);
+					JumbovalProduct.StaticInitialize(userTemplate);
 					HithermProduct.StaticInitialize(userTemplate);
 					HithermCompactProduct.StaticInitialize(userTemplate);
 					HithermCompactRoofProduct.StaticInitialize(userTemplate);
@@ -617,8 +618,8 @@ namespace Europlan.Common {
 				return new EurovalProduct() as P;
 			} else if (typeof(P) == typeof(EcothermProduct)) {
 				return new EcothermProduct() as P;
-			} else if (typeof(P) == typeof(ConcreteActivationProduct)) {
-				return new ConcreteActivationProduct() as P;
+			} else if (typeof(P) == typeof(JumbovalProduct)) {
+				return new JumbovalProduct() as P;
 			} else if (typeof(P) == typeof(HithermProduct)) {
 				return new HithermProduct() as P;
 			} else if (typeof(P) == typeof(HithermCompactProduct)) {

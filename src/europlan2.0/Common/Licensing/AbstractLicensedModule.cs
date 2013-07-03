@@ -20,6 +20,8 @@ namespace Europlan.Licensing {
 		public static readonly string ProdModulKlimaBoden = "ProdModulKlimaBoden";
 		public static readonly string ProdModulKlimaDecke = "ProdModulKlimaDecke";
 		public static readonly string ProdConcreteActivation = "ProdConcreteActivation";
+		public static readonly string ProdJumboval = "ProdJumboval";
+		
 		public static readonly string FeatBetaUpdates = "FeatBetaUpdates";
 		private static Dictionary<string, string> defaultModules = null;
 		private static List<string> defaultEnabledModules = null;
@@ -36,6 +38,7 @@ namespace Europlan.Licensing {
 					defaultModules.Add(ProdHithermCompact, EuroplanRes.AbstractLicensedModule_HithermCompact /*"Hitherm® Compact Klimawand"*/);
 					defaultModules.Add(ProdModulKlimaBoden, EuroplanRes.AbstractLicensedModule_ModulBoden /*"Modul Klima-Boden"*/);
 					defaultModules.Add(ProdModulKlimaDecke, EuroplanRes.AbstractLicensedModule_ModulDecke /*"Modul Klima-Decke"*/);
+					defaultModules.Add(ProdJumboval, EuroplanRes.AbstractLicensedModule_Jumboval /*"Jumboval® Fußbodenheizung"*/);
 					defaultModules.Add(ProdConcreteActivation, EuroplanRes.AbstractLicensedModule_BKA /*"Betonkernaktivierung"*/);
 				}
 				return defaultModules;
@@ -52,6 +55,7 @@ namespace Europlan.Licensing {
 					defaultEnabledModules.Add(ProdHithermCompact);
 					defaultEnabledModules.Add(ProdModulKlimaBoden);
 					defaultEnabledModules.Add(ProdModulKlimaDecke);
+					defaultEnabledModules.Add(ProdJumboval);
 					defaultEnabledModules.Add(ProdConcreteActivation);
 				}
 				return defaultEnabledModules;

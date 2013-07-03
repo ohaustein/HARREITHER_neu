@@ -29,6 +29,7 @@ namespace Europlan.Common {
 
 	[XmlInclude(typeof(EurovalProduct))]
 	[XmlInclude(typeof(EcothermProduct))]
+	[XmlInclude(typeof(JumbovalProduct))]
 	[XmlInclude(typeof(ConcreteActivationProduct))]
 	[XmlInclude(typeof(HithermProduct))]
 	[XmlInclude(typeof(HithermCompactProduct))]

@@ -99,6 +99,11 @@ namespace Europlan.Common {
 			set { this.distributorGrid.Euroval = value; }
 		}
 
+		public bool Jumboval {
+			get { return this.distributorGrid.Jumboval; }
+			set { this.distributorGrid.Jumboval = value; }
+		}
+
 		public bool ConcreteActivation {
 			get { return this.distributorGrid.ConcreteActivation; }
 			set { this.distributorGrid.ConcreteActivation = value; }
