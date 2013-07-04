@@ -12,6 +12,7 @@ namespace Europlan.Common {
 
 		private EurovalProduct evProduct = null;
 		private EcothermProduct ecProduct = null;
+		private JumbovalProduct jvProduct = null;
 
 		private ExtendedCorrections sumRow = null;
 
@@ -49,6 +50,8 @@ namespace Europlan.Common {
 					return this.evProduct;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct;
+				} else if (this.jvProduct != null) {
+					return this.jvProduct;
 				} else {
 					return null;
 				}
@@ -56,10 +59,13 @@ namespace Europlan.Common {
 			set {
 				this.evProduct = value as EurovalProduct;
 				this.ecProduct = value as EcothermProduct;
+				this.jvProduct = value as JumbovalProduct;
 				if (this.evProduct != null) {
 					this.sumRow = new ExtendedCorrections(this.evProduct);
-				} else {
+				} else if (this.ecProduct != null) {
 					this.sumRow = new ExtendedCorrections(this.ecProduct);
+				} else if (this.jvProduct != null) {
+					this.sumRow = new ExtendedCorrections(this.jvProduct);
 				}
 				this.UpdateControl(true, true);
 			}
@@ -71,6 +77,8 @@ namespace Europlan.Common {
 					return evProduct.PlannedCorrections;
 				} else if (this.ecProduct != null) {
 					return this.ecProduct.PlannedCorrections;
+				} else if (this.jvProduct != null) {
+					return this.jvProduct.PlannedCorrections;
 				} else {
 					return false;
 				}
@@ -80,6 +88,8 @@ namespace Europlan.Common {
 					this.evProduct.PlannedCorrections = value;
 				} else if (this.ecProduct != null) {
 					this.ecProduct.PlannedCorrections = value;
+				} else if (this.jvProduct != null) {
+					this.jvProduct.PlannedCorrections = value;
 				}
 			}
 		}
@@ -95,6 +105,12 @@ namespace Europlan.Common {
 				} else if (this.ecProduct != null) {
 					if (this.ecProduct.PlannedCorrections) {
 						List<ExtendedCorrections> list = new List<ExtendedCorrections>(this.ecProduct.PlannedCorrectionList);
+						list.Add(this.sumRow);
+						return list;
+					}
+				} else if (this.jvProduct != null) {
+					if (this.jvProduct.PlannedCorrections) {
+						List<ExtendedCorrections> list = new List<ExtendedCorrections>(this.jvProduct.PlannedCorrectionList);
 						list.Add(this.sumRow);
 						return list;
 					}
@@ -155,6 +171,30 @@ namespace Europlan.Common {
 				this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
 
 				this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.ecProduct.PlannedRemoveArea == 0;
+				this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
+				this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+			} else if (this.jvProduct != null) {
+				this.areaValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.jvProduct.PlannedFloorArea;
+				this.rimLengthValueDataGridViewTextBoxColumn.MaxValue = (decimal)this.jvProduct.PlannedRimLength;
+
+				this.correctAreaDataGridViewCheckBoxColumn.ReadOnly = this.jvProduct.PlannedFloorArea == 0;
+				this.correctAreaDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.areaValueDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+				this.areaValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.areaPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly;
+				this.areaPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctAreaDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+
+				this.correctRimDataGridViewCheckBoxColumn.ReadOnly = this.jvProduct.PlannedRimLength == 0;
+				this.correctRimDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.rimLengthValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+				this.rimLengthValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.rimPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+				this.rimPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+				this.rimCornersValueDataGridViewTextBoxColumn.ReadOnly = this.correctRimDataGridViewCheckBoxColumn.ReadOnly;
+				this.rimCornersValueDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctRimDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
+
+				this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly = this.jvProduct.PlannedRemoveArea == 0;
 				this.correctConnectionsDataGridViewCheckBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
 				this.connectionsPercentageDataGridViewTextBoxColumn.ReadOnly = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly;
 				this.connectionsPercentageDataGridViewTextBoxColumn.DefaultCellStyle.BackColor = this.correctConnectionsDataGridViewCheckBoxColumn.ReadOnly ? SystemColors.Control : this.gridExtendedCorrections.DefaultCellStyle.BackColor;
@@ -428,7 +468,8 @@ namespace Europlan.Common {
 					return false;
 				}
 				if ((this.evProduct != null && this.sumRow.RimCornersValue != this.evProduct.PlannedRimCorners) ||
-					(this.ecProduct != null && this.sumRow.RimCornersValue != this.ecProduct.PlannedRimCorners)) {
+					(this.ecProduct != null && this.sumRow.RimCornersValue != this.ecProduct.PlannedRimCorners) ||
+					(this.jvProduct != null && this.sumRow.RimCornersValue != this.jvProduct.PlannedRimCorners)) {
 					MessageBox.Show(EuroplanRes.ExtendedCorrectionsGrid_FehlerEcken /*"Die Summe der Ecken der Randzone an der Gesamtfläche muss 100% die gesamte Anzahl an vorgegebenen Ecken ergeben"*/,
 						EuroplanRes.ExtendedCorrectionsGrid_Fehler /*"Bitte korrigieren Sie die Eingabe"*/,
 						MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 namespace Europlan.Common {
 	[XmlInclude(typeof(EurovalCircuit))]
+	[XmlInclude(typeof(JumbovalCircuit))]
 	[XmlInclude(typeof(EcothermCircuit))]
 	[XmlInclude(typeof(ModulDeckeCircuit))]
 	[XmlInclude(typeof(ModulBodenCircuit))]
