@@ -51,7 +51,11 @@ namespace Europlan.Common {
 			this.lblEcothermSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblEcothermSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblEcothermSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
-			this.lblModulBodenSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblJumbovalSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblJumbovalSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblJumbovalSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblJumbovalSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblModulBodenSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulBodenSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulBodenSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulBodenSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
@@ -59,32 +63,41 @@ namespace Europlan.Common {
 			this.lblModulDeckeSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulDeckeSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulDeckeSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
-			this.lblEurovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
-			this.lblEurovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
-			this.lblEurovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
-			this.lblEcothermEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblEurovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblEurovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblEurovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblEcothermEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
 			this.lblEcothermMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
 			this.lblEcothermCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
-			this.lblHithermRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
+            this.lblJumbovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblJumbovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblJumbovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
+            this.lblHithermRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
 			this.lblHithermCompactRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
 			this.lblEurovalViskositaetUnit.Text = EuroplanRes.Unit_QmProSek; //"m²/s"
 			this.lblEurovalWaermekapazitaetUnit.Text = EuroplanRes.Unit_KjProKgKelvin; //"kJ/(kg*K)"
 			this.lblEurovalDichteUnit.Text = EuroplanRes.Unit_KgProKubikmeter; //"kg/m³"
 			this.lblEurovalPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblEcothermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
-			this.lblHithermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+            this.lblJumbovalViskositaetUnit.Text = EuroplanRes.Unit_QmProSek; //"m²/s"
+            this.lblJumbovalWaermekapazitaetUnit.Text = EuroplanRes.Unit_KjProKgKelvin; //"kJ/(kg*K)"
+            this.lblJumbovalDichteUnit.Text = EuroplanRes.Unit_KgProKubikmeter; //"kg/m³"
+            this.lblJumbovalPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+            this.lblHithermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblHithermCompactPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblModulBodenPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblModulDeckePressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblEurovalDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblEcothermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
-			this.lblHithermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+            this.lblJumbovalDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+            this.lblHithermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblHithermCompactDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblModulBodenDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblModulDeckeDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblEurovalPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblEcothermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
-			this.lblHithermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+            this.lblJumbovalPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+            this.lblHithermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblHithermCompactPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblModulBodenPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblModulDeckePressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
@@ -135,6 +148,28 @@ namespace Europlan.Common {
 			this.lblEcothermSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
 			this.lblEcothermSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
 			this.lblEcothermSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+
+            this.tabJumboval.Text = EuroplanRes.SystemParametersPanel_Jumboval; //"Euroval®"
+            this.lblJumbovalViskositaet.Text = EuroplanRes.SystemParametersPanel_Viskositaet; //"kinematische Viskosität:"
+            this.lblJumbovalWaermekapazitaet.Text = EuroplanRes.SystemParametersPanel_Waermekapazitaet; //"spezifische Wärmekapazität:"
+            this.lblJumbovalDichte.Text = EuroplanRes.SystemParametersPanel_Dichte; //"Dichte des Mediums:"
+            this.lblJumbovalEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:"
+            this.lblJumbovalMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:"
+            this.lblJumbovalGeometrie.Text = EuroplanRes.SystemParametersPanel_Geometriefaktor; //"Geometriefaktor:"
+            this.lblJumbovalSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+            this.lblJumbovalSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+            this.lblJumbovalSpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+            this.lblJumbovalSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+            this.lblJumbovalNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
+            this.lblJumbovalCircuitLength.Text = EuroplanRes.SystemParametersPanel_Rohrlaenge; //"Max. Rohrlänge je Heizkreis:"
+            this.lblJumbovalPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+            this.lblJumbovalDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+            this.lblJumbovalSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+            this.lblJumbovalSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+            this.rbJumbovalHarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)"
+            this.rbJumbovalEN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)"
+            this.btnJumbovalStandard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+            this.cbJumbovalGeometrieAktiviert.Text = EuroplanRes.SystemParametersPanel_GeometriefaktorAktiviert; //"aktiviert"
 
 			this.tabHitherm.Text = EuroplanRes.SystemParametersPanel_Hitherm; //"Hitherm®"
 			this.lblHithermLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:"
@@ -277,6 +312,7 @@ namespace Europlan.Common {
 		public void InitializeAllPanels() {
 			InitializeEurovalPanel();
 			InitializeEcothermPanel();
+            InitializeJumbovalPanel();
 			InitializeHithermPanel();
 			InitializeHithermCompactPanel();
 			InitializeModulBodenPanel();
@@ -288,6 +324,7 @@ namespace Europlan.Common {
 			updateOngoing = true;
 			InitializeEurovalValues();
 			InitializeEcothermValues();
+            InitializeJumbovalValues();
 			InitializeModulBodenValues();
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
@@ -309,6 +346,12 @@ namespace Europlan.Common {
 			EcothermProduct.StaticInitialize(Configuration.UserTemplate);
 			InitializeEcothermValues();
 		}
+
+        private void btnJumbovalStandard_Click(object sender, EventArgs e)
+        {
+            JumbovalProduct.StaticInitialize(Configuration.UserTemplate);
+            InitializeJumbovalValues();
+        }
 
 		private void btnModulBodenStandard_Click(object sender, EventArgs e) {
 			ModulKlimaBodenProduct.StaticInitialize(Configuration.UserTemplate);
@@ -403,6 +446,56 @@ namespace Europlan.Common {
 			}
 		}
 
+        private void InitializeJumbovalPanel()
+        {
+            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration)
+            {
+                if (this.tabSystemParameters.TabPages.Contains(this.tabJumboval))
+                {
+                    this.tabSystemParameters.TabPages.Remove(this.tabJumboval);
+                }
+            }
+            else
+            {
+                Licensing.License license = Licensing.LicenseManager.Instance.License;
+                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdJumboval))
+                {
+                    if (this.tabSystemParameters.TabPages.Contains(this.tabJumboval))
+                    {
+                        this.tabSystemParameters.TabPages.Remove(this.tabJumboval);
+                    }
+                }
+                else
+                {
+                    if (!this.tabSystemParameters.TabPages.Contains(this.tabJumboval))
+                    {
+                        this.tabSystemParameters.TabPages.Add(this.tabJumboval);
+                    }
+                }
+                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin))
+                {
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalGeometrie);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalGeometrie);
+                    this.layoutJumboval.Controls.Remove(this.cbJumbovalGeometrieAktiviert);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalMindestueberdeckung);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalMindestueberdeckung);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalMindestueberdeckungUnit);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalEstrichueberdeckung);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalEstrichueberdeckung);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalEstrichueberdeckungUnit);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalDichte);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalDichte);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalDichteUnit);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalWaermekapazitaet);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalWaermekapazitaet);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalWaermekapazitaetUnit);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalViskositaet);
+                    this.layoutJumboval.Controls.Remove(this.numJumbovalViskositaet);
+                    this.layoutJumboval.Controls.Remove(this.lblJumbovalViskositaetUnit);
+                    this.layoutJumboval.SetRow(this.btnJumbovalStandard, this.layoutJumboval.GetRow(this.btnJumbovalStandard) - 6);
+                }
+            }
+        }
 		private void InitializeHithermPanel() {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
 				if (this.tabSystemParameters.TabPages.Contains(this.tabHitherm)) {
@@ -616,7 +709,36 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void InitializeModulBodenValues() {
+        private void InitializeJumbovalValues()
+        {
+            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration)
+            {
+                // nothing to do yet
+            }
+            else
+            {
+                rbJumbovalHarreitherNorm.Checked = JumbovalProduct.ConfigUseHarreitherNorm;
+                rbJumbovalEN1264.Checked = !JumbovalProduct.ConfigUseHarreitherNorm;
+                numJumbovalCircuitLength.Value = (decimal)JumbovalProduct.ConfigMaxCircuitLength;
+                numJumbovalPressurePa.Value = JumbovalProduct.ConfigMaxPressureLost;
+                numJumbovalDurchfluss.Value = JumbovalProduct.ConfigMaxDurchfluss;
+                numJumbovalSpreizungHeizMin.Value = (decimal)JumbovalProduct.ConfigSpreizungHeizMin;
+                numJumbovalSpreizungHeizMax.Value = (decimal)JumbovalProduct.ConfigSpreizungHeizMax;
+                numJumbovalSpreizungKuehlMin.Value = (decimal)JumbovalProduct.ConfigSpreizungKuehlMin;
+                numJumbovalSpreizungKuehlMax.Value = (decimal)JumbovalProduct.ConfigSpreizungKuehlMax;
+                numJumbovalGeometrie.Value = (decimal)JumbovalProduct.ConfigAg;
+                cbJumbovalGeometrieAktiviert.Checked = JumbovalProduct.ConfigAgActivated;
+                numJumbovalGeometrie.Enabled = JumbovalProduct.ConfigAgActivated;
+                numJumbovalMindestueberdeckung.Value = (decimal)JumbovalProduct.ConfigSu0;
+                numJumbovalEstrichueberdeckung.Value = (decimal)JumbovalProduct.ConfigSu;
+                numJumbovalDichte.Value = (decimal)JumbovalProduct.ConfigRho;
+                numJumbovalWaermekapazitaet.Value = (decimal)JumbovalProduct.ConfigC;
+                numJumbovalViskositaet.Value = (decimal)JumbovalProduct.ConfigV;
+            }
+        }
+
+        private void InitializeModulBodenValues()
+        {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
 				// nothing to do yet
 			} else {
@@ -825,6 +947,128 @@ namespace Europlan.Common {
 
 		private void numEurovalViskositaet_ValueChanged(object sender, EventArgs e) {
 			EurovalProduct.ConfigV = (double)numEurovalViskositaet.Value;
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
+			}
+		}
+
+        private void rbJumbovalHarreitherNorm_CheckedChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigUseHarreitherNorm = rbJumbovalHarreitherNorm.Checked;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void rbJumbovalEN1264_CheckedChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigUseHarreitherNorm = rbJumbovalHarreitherNorm.Checked;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalCircuitLength_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigMaxCircuitLength = (double)numJumbovalCircuitLength.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalDurchfluss_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigMaxDurchfluss = (int)numJumbovalDurchfluss.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalPressurePa_ValueChanged(object sender, EventArgs e) {
+            numJumbovalPressureMbar.Value = numJumbovalPressurePa.Value / 100;
+            JumbovalProduct.ConfigMaxPressureLost = (int)numJumbovalPressurePa.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalPressureMbar_ValueChanged(object sender, EventArgs e) {
+            numJumbovalPressurePa.Value = numJumbovalPressureMbar.Value * 100;
+            JumbovalProduct.ConfigMaxPressureLost = (int)numJumbovalPressurePa.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalSpreizungHeizMin_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSpreizungHeizMin = (double)numJumbovalSpreizungHeizMin.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalSpreizungHeizMax_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSpreizungHeizMax = (double)numJumbovalSpreizungHeizMax.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalSpreizungKühlMin_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSpreizungKuehlMin = (double)numJumbovalSpreizungKuehlMin.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalSpreizungKühlMax_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSpreizungKuehlMax = (double)numJumbovalSpreizungKuehlMax.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalGeometrie_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigAg = (double)numJumbovalGeometrie.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void cbJumbovalGeometrieAktiviert_CheckedChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigAgActivated = cbJumbovalGeometrieAktiviert.Checked;
+			numJumbovalGeometrie.Enabled = JumbovalProduct.ConfigAgActivated;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalMindestueberdeckung_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSu0 = (double)numJumbovalMindestueberdeckung.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalEstrichueberdeckung_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigSu = (double)numJumbovalEstrichueberdeckung.Value;
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalDichte_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigRho = (double)numJumbovalDichte.Value;
+            if (this.projectChanged != null) {
+				this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalWaermekapazitaet_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigC = (double)numJumbovalWaermekapazitaet.Value;
+			if (this.projectChanged != null) {
+				this.projectChanged(null);
+			}
+		}
+
+        private void numJumbovalViskositaet_ValueChanged(object sender, EventArgs e) {
+            JumbovalProduct.ConfigV = (double)numJumbovalViskositaet.Value;
 			if (this.projectChanged != null) {
 				this.projectChanged(null);
 			}

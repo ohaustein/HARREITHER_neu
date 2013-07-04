@@ -266,7 +266,7 @@
   </data>
   <data name="ConnectionPipe_Jumboval" xml:space="preserve">
     <value>Jumboval FBH</value>
-  </data>	
+  </data>
   <data name="ConnectionPipe_Gedaemmt" xml:space="preserve">
     <value>VL+RL</value>
   </data>
@@ -997,16 +997,16 @@ Vorlauf
   <data name="EurovalProduct_EV5_80" xml:space="preserve">
     <value>EV5/80</value>
   </data>
-	<data name="JumbovalProduct_JV20" xml:space="preserve">
+  <data name="JumbovalProduct_JV20" xml:space="preserve">
     <value>JV20</value>
   </data>
-	<data name="JumbovalProduct_JV30" xml:space="preserve">
+  <data name="JumbovalProduct_JV30" xml:space="preserve">
     <value>JV30</value>
   </data>
-	<data name="JumbovalProduct_JV40" xml:space="preserve">
+  <data name="JumbovalProduct_JV40" xml:space="preserve">
     <value>JV40</value>
   </data>
-	<data name="JumbovalProduct_JV50" xml:space="preserve">
+  <data name="JumbovalProduct_JV50" xml:space="preserve">
     <value>JV50</value>
   </data>
   <data name="EurovalProduct_NotificationParameter" xml:space="preserve">
@@ -4950,11 +4950,11 @@ Heizkreise</value>
 angeschl.
 Heizkreise</value>
   </data>
-	<data name="QuickDimensioningDistributorsGrid_JumbovalOffen" xml:space="preserve">
+  <data name="QuickDimensioningDistributorsGrid_JumbovalOffen" xml:space="preserve">
     <value>Jumboval®
 offene
 Heizkreise</value>
-  </data>	
+  </data>
   <data name="QuickDimensioningDistributorsGrid_Geschoss" xml:space="preserve">
     <value>Geschoß</value>
   </data>
@@ -5187,7 +5187,7 @@ motore</value>
   </data>
   <data name="QuickDimensioningPanel_Jumboval" xml:space="preserve">
     <value>Jumboval® Fußbodenheizung</value>
-  </data>	
+  </data>
   <data name="QuickDimensioningPanel_EurovalEntfernenText" xml:space="preserve">
     <value>Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?</value>
   </data>
@@ -5197,9 +5197,9 @@ motore</value>
   <data name="QuickDimensioningPanel_JumbovalEntfernenText" xml:space="preserve">
     <value>Wollen sie das Produkt Jumboval wirklich aus der Flächenaufstellung entfernen?</value>
   </data>
-	<data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
+  <data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
     <value>Jumboval entfernen</value>
-  </data>	
+  </data>
   <data name="QuickDimensioningPanel_Flaechenaufstellung" xml:space="preserve">
     <value>Flächenaufstellung</value>
   </data>
@@ -7192,5 +7192,8 @@ Compact
   </data>
   <data name="ImportedPlansPanel_DwgWarnungTitel" xml:space="preserve">
     <value>Warnung</value>
+  </data>
+  <data name="SystemParametersPanel_Jumboval" xml:space="preserve">
+    <value>Jumboval®</value>
   </data>
 </root>

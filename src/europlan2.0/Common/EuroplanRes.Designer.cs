@@ -19821,6 +19821,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jumboval®.
+        /// </summary>
+        internal static string SystemParametersPanel_Jumboval {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_Jumboval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul Klima-Boden.
         /// </summary>
         internal static string SystemParametersPanel_KlimaBoden {

@@ -115,6 +115,56 @@ namespace Europlan.Common {
             this.lblEcothermSpreizungHeiz = new System.Windows.Forms.Label();
             this.lblEcothermSpreizungKuehl = new System.Windows.Forms.Label();
             this.lblEcothermSpreizungHeizMin = new System.Windows.Forms.Label();
+            this.tabJumboval = new System.Windows.Forms.TabPage();
+            this.layoutJumboval = new System.Windows.Forms.TableLayoutPanel();
+            this.lblJumbovalViskositaetUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalWaermekapazitaetUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalDichteUnit = new System.Windows.Forms.Label();
+            this.numJumbovalViskositaet = new Europlan.Common.NumericBox();
+            this.numJumbovalWaermekapazitaet = new Europlan.Common.NumericBox();
+            this.numJumbovalDichte = new Europlan.Common.NumericBox();
+            this.lblJumbovalViskositaet = new System.Windows.Forms.Label();
+            this.lblJumbovalWaermekapazitaet = new System.Windows.Forms.Label();
+            this.lblJumbovalDichte = new System.Windows.Forms.Label();
+            this.lblJumbovalEstrichueberdeckungUnit = new System.Windows.Forms.Label();
+            this.numJumbovalEstrichueberdeckung = new Europlan.Common.NumericBox();
+            this.lblJumbovalEstrichueberdeckung = new System.Windows.Forms.Label();
+            this.lblJumbovalMindestueberdeckungUnit = new System.Windows.Forms.Label();
+            this.numJumbovalMindestueberdeckung = new Europlan.Common.NumericBox();
+            this.lblJumbovalMindestueberdeckung = new System.Windows.Forms.Label();
+            this.numJumbovalGeometrie = new Europlan.Common.NumericBox();
+            this.lblJumbovalGeometrie = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungKuehlMax = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungHeizMax = new System.Windows.Forms.Label();
+            this.lblJumbovalPressureEquals = new System.Windows.Forms.Label();
+            this.lblJumbovalNorm = new System.Windows.Forms.Label();
+            this.lblJumbovalCircuitLength = new System.Windows.Forms.Label();
+            this.lblJumbovalPressureMbarUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungHeizMaxUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungKuehlMaxUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungKuehlMin = new System.Windows.Forms.Label();
+            this.numJumbovalSpreizungKuehlMax = new Europlan.Common.NumericBox();
+            this.lblJumbovalPressure = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungKuehlMinUnit = new System.Windows.Forms.Label();
+            this.numJumbovalSpreizungHeizMax = new Europlan.Common.NumericBox();
+            this.lblJumbovalDurchfluss = new System.Windows.Forms.Label();
+            this.lblJumbovalDurchflussUnit = new System.Windows.Forms.Label();
+            this.numJumbovalPressureMbar = new Europlan.Common.NumericBox();
+            this.lblJumbovalSpreizungHeizMinUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalCircuitLengthUnit = new System.Windows.Forms.Label();
+            this.lblJumbovalPressurePaUnit = new System.Windows.Forms.Label();
+            this.numJumbovalSpreizungKuehlMin = new Europlan.Common.NumericBox();
+            this.lblJumbovalSpreizungHeiz = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungKuehl = new System.Windows.Forms.Label();
+            this.lblJumbovalSpreizungHeizMin = new System.Windows.Forms.Label();
+            this.rbJumbovalHarreitherNorm = new System.Windows.Forms.RadioButton();
+            this.rbJumbovalEN1264 = new System.Windows.Forms.RadioButton();
+            this.numJumbovalCircuitLength = new Europlan.Common.NumericBox();
+            this.numJumbovalDurchfluss = new Europlan.Common.NumericBox();
+            this.numJumbovalPressurePa = new Europlan.Common.NumericBox();
+            this.numJumbovalSpreizungHeizMin = new Europlan.Common.NumericBox();
+            this.btnJumbovalStandard = new System.Windows.Forms.Button();
+            this.cbJumbovalGeometrieAktiviert = new System.Windows.Forms.CheckBox();
             this.tabHitherm = new System.Windows.Forms.TabPage();
             this.layoutHitherm = new System.Windows.Forms.TableLayoutPanel();
             this.lblHithermLeistungsfaktorCool = new System.Windows.Forms.Label();
@@ -580,6 +630,8 @@ namespace Europlan.Common {
             this.layoutEuroval.SuspendLayout();
             this.tabEcotherm.SuspendLayout();
             this.layoutEcotherm.SuspendLayout();
+            this.tabJumboval.SuspendLayout();
+            this.layoutJumboval.SuspendLayout();
             this.tabHitherm.SuspendLayout();
             this.layoutHitherm.SuspendLayout();
             this.tabHithermCompact.SuspendLayout();
@@ -636,6 +688,7 @@ namespace Europlan.Common {
             // 
             this.tabSystemParameters.Controls.Add(this.tabEuroval);
             this.tabSystemParameters.Controls.Add(this.tabEcotherm);
+            this.tabSystemParameters.Controls.Add(this.tabJumboval);
             this.tabSystemParameters.Controls.Add(this.tabHitherm);
             this.tabSystemParameters.Controls.Add(this.tabHithermCompact);
             this.tabSystemParameters.Controls.Add(this.tabModulBoden);
@@ -649,7 +702,7 @@ namespace Europlan.Common {
             this.tabSystemParameters.Location = new System.Drawing.Point(0, 38);
             this.tabSystemParameters.Name = "tabSystemParameters";
             this.tabSystemParameters.SelectedIndex = 0;
-            this.tabSystemParameters.Size = new System.Drawing.Size(852, 433);
+            this.tabSystemParameters.Size = new System.Drawing.Size(1199, 583);
             this.tabSystemParameters.TabIndex = 4;
             // 
             // tabEuroval
@@ -662,7 +715,7 @@ namespace Europlan.Common {
             this.tabEuroval.Name = "tabEuroval";
             this.tabEuroval.Padding = new System.Windows.Forms.Padding(3);
             this.helpProvider.SetShowHelp(this.tabEuroval, true);
-            this.tabEuroval.Size = new System.Drawing.Size(844, 406);
+            this.tabEuroval.Size = new System.Drawing.Size(1191, 556);
             this.tabEuroval.TabIndex = 0;
             this.tabEuroval.Text = "Euroval®";
             this.tabEuroval.UseVisualStyleBackColor = true;
@@ -1582,7 +1635,7 @@ namespace Europlan.Common {
             this.tabEcotherm.Location = new System.Drawing.Point(4, 23);
             this.tabEcotherm.Name = "tabEcotherm";
             this.helpProvider.SetShowHelp(this.tabEcotherm, true);
-            this.tabEcotherm.Size = new System.Drawing.Size(844, 406);
+            this.tabEcotherm.Size = new System.Drawing.Size(1191, 556);
             this.tabEcotherm.TabIndex = 4;
             this.tabEcotherm.Text = "Ecotherm®";
             this.tabEcotherm.UseVisualStyleBackColor = true;
@@ -2255,6 +2308,924 @@ namespace Europlan.Common {
             this.lblEcothermSpreizungHeizMin.Text = "min.";
             this.lblEcothermSpreizungHeizMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // tabJumboval
+            // 
+            this.tabJumboval.Controls.Add(this.layoutJumboval);
+            this.tabJumboval.ImageIndex = 0;
+            this.tabJumboval.Location = new System.Drawing.Point(4, 23);
+            this.tabJumboval.Name = "tabJumboval";
+            this.tabJumboval.Padding = new System.Windows.Forms.Padding(3);
+            this.tabJumboval.Size = new System.Drawing.Size(1191, 556);
+            this.tabJumboval.TabIndex = 10;
+            this.tabJumboval.Text = "Jumboval®";
+            this.tabJumboval.UseVisualStyleBackColor = true;
+            // 
+            // layoutJumboval
+            // 
+            this.layoutJumboval.ColumnCount = 7;
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 265F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaetUnit, 3, 12);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaetUnit, 3, 11);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDichteUnit, 3, 10);
+            this.layoutJumboval.Controls.Add(this.numJumbovalViskositaet, 2, 12);
+            this.layoutJumboval.Controls.Add(this.numJumbovalWaermekapazitaet, 2, 11);
+            this.layoutJumboval.Controls.Add(this.numJumbovalDichte, 2, 10);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaet, 0, 12);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaet, 0, 11);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDichte, 0, 10);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalEstrichueberdeckungUnit, 3, 9);
+            this.layoutJumboval.Controls.Add(this.numJumbovalEstrichueberdeckung, 2, 9);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalEstrichueberdeckung, 0, 9);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalMindestueberdeckungUnit, 3, 8);
+            this.layoutJumboval.Controls.Add(this.numJumbovalMindestueberdeckung, 2, 8);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalMindestueberdeckung, 0, 8);
+            this.layoutJumboval.Controls.Add(this.numJumbovalGeometrie, 2, 7);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalGeometrie, 0, 7);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungKuehlMax, 4, 6);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungHeizMax, 4, 5);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalPressureEquals, 4, 3);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalNorm, 0, 0);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalCircuitLength, 0, 2);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalPressureMbarUnit, 6, 3);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungHeizMaxUnit, 6, 5);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungKuehlMaxUnit, 6, 6);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungKuehlMin, 1, 6);
+            this.layoutJumboval.Controls.Add(this.numJumbovalSpreizungKuehlMax, 5, 6);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalPressure, 0, 3);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungKuehlMinUnit, 3, 6);
+            this.layoutJumboval.Controls.Add(this.numJumbovalSpreizungHeizMax, 5, 5);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDurchfluss, 0, 4);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDurchflussUnit, 3, 4);
+            this.layoutJumboval.Controls.Add(this.numJumbovalPressureMbar, 5, 3);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungHeizMinUnit, 3, 5);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalCircuitLengthUnit, 3, 2);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalPressurePaUnit, 3, 3);
+            this.layoutJumboval.Controls.Add(this.numJumbovalSpreizungKuehlMin, 2, 6);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungHeiz, 0, 5);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungKuehl, 0, 6);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalSpreizungHeizMin, 1, 5);
+            this.layoutJumboval.Controls.Add(this.rbJumbovalHarreitherNorm, 2, 0);
+            this.layoutJumboval.Controls.Add(this.rbJumbovalEN1264, 2, 1);
+            this.layoutJumboval.Controls.Add(this.numJumbovalCircuitLength, 2, 2);
+            this.layoutJumboval.Controls.Add(this.numJumbovalDurchfluss, 2, 4);
+            this.layoutJumboval.Controls.Add(this.numJumbovalPressurePa, 2, 3);
+            this.layoutJumboval.Controls.Add(this.numJumbovalSpreizungHeizMin, 2, 5);
+            this.layoutJumboval.Controls.Add(this.btnJumbovalStandard, 5, 14);
+            this.layoutJumboval.Controls.Add(this.cbJumbovalGeometrieAktiviert, 5, 7);
+            this.layoutJumboval.Location = new System.Drawing.Point(3, 5);
+            this.layoutJumboval.Name = "layoutJumboval";
+            this.layoutJumboval.RowCount = 15;
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutJumboval.Size = new System.Drawing.Size(580, 345);
+            this.layoutJumboval.TabIndex = 1;
+            // 
+            // lblJumbovalViskositaetUnit
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalViskositaetUnit, 2);
+            this.lblJumbovalViskositaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalViskositaetUnit.Location = new System.Drawing.Point(393, 276);
+            this.lblJumbovalViskositaetUnit.Name = "lblJumbovalViskositaetUnit";
+            this.lblJumbovalViskositaetUnit.Size = new System.Drawing.Size(64, 23);
+            this.lblJumbovalViskositaetUnit.TabIndex = 55;
+            this.lblJumbovalViskositaetUnit.Text = "m²/s";
+            this.lblJumbovalViskositaetUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalWaermekapazitaetUnit
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalWaermekapazitaetUnit, 2);
+            this.lblJumbovalWaermekapazitaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalWaermekapazitaetUnit.Location = new System.Drawing.Point(393, 253);
+            this.lblJumbovalWaermekapazitaetUnit.Name = "lblJumbovalWaermekapazitaetUnit";
+            this.lblJumbovalWaermekapazitaetUnit.Size = new System.Drawing.Size(64, 23);
+            this.lblJumbovalWaermekapazitaetUnit.TabIndex = 54;
+            this.lblJumbovalWaermekapazitaetUnit.Text = "kJ/(kg*K)";
+            this.lblJumbovalWaermekapazitaetUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalDichteUnit
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalDichteUnit, 2);
+            this.lblJumbovalDichteUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalDichteUnit.Location = new System.Drawing.Point(393, 230);
+            this.lblJumbovalDichteUnit.Name = "lblJumbovalDichteUnit";
+            this.lblJumbovalDichteUnit.Size = new System.Drawing.Size(64, 23);
+            this.lblJumbovalDichteUnit.TabIndex = 53;
+            this.lblJumbovalDichteUnit.Text = "kg/m³";
+            this.lblJumbovalDichteUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalViskositaet
+            // 
+            this.numJumbovalViskositaet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalViskositaet.EditType = Europlan.Common.NumericBox.NumericEditType.VISKOSITAET;
+            this.numJumbovalViskositaet.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            655360});
+            this.numJumbovalViskositaet.Location = new System.Drawing.Point(308, 278);
+            this.numJumbovalViskositaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalViskositaet.MaxValue = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            655360});
+            this.numJumbovalViskositaet.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            655360});
+            this.numJumbovalViskositaet.Name = "numJumbovalViskositaet";
+            this.numJumbovalViskositaet.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalViskositaet.TabIndex = 17;
+            this.numJumbovalViskositaet.Text = "0,0000000001";
+            this.numJumbovalViskositaet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalViskositaet.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            655360});
+            this.numJumbovalViskositaet.ValueChanged += new System.EventHandler(this.numJumbovalViskositaet_ValueChanged);
+            // 
+            // numJumbovalWaermekapazitaet
+            // 
+            this.numJumbovalWaermekapazitaet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalWaermekapazitaet.EditType = Europlan.Common.NumericBox.NumericEditType.WAERMEKAPAZITAET;
+            this.numJumbovalWaermekapazitaet.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalWaermekapazitaet.Location = new System.Drawing.Point(308, 255);
+            this.numJumbovalWaermekapazitaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalWaermekapazitaet.MaxValue = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            131072});
+            this.numJumbovalWaermekapazitaet.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalWaermekapazitaet.Name = "numJumbovalWaermekapazitaet";
+            this.numJumbovalWaermekapazitaet.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalWaermekapazitaet.TabIndex = 16;
+            this.numJumbovalWaermekapazitaet.Text = "0,01";
+            this.numJumbovalWaermekapazitaet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalWaermekapazitaet.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalWaermekapazitaet.ValueChanged += new System.EventHandler(this.numJumbovalWaermekapazitaet_ValueChanged);
+            // 
+            // numJumbovalDichte
+            // 
+            this.numJumbovalDichte.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalDichte.EditType = Europlan.Common.NumericBox.NumericEditType.DICHTE;
+            this.numJumbovalDichte.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalDichte.Location = new System.Drawing.Point(308, 232);
+            this.numJumbovalDichte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalDichte.MaxValue = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            131072});
+            this.numJumbovalDichte.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalDichte.Name = "numJumbovalDichte";
+            this.numJumbovalDichte.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalDichte.TabIndex = 15;
+            this.numJumbovalDichte.Text = "0,01";
+            this.numJumbovalDichte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalDichte.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numJumbovalDichte.ValueChanged += new System.EventHandler(this.numJumbovalDichte_ValueChanged);
+            // 
+            // lblJumbovalViskositaet
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalViskositaet, 2);
+            this.lblJumbovalViskositaet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalViskositaet.Location = new System.Drawing.Point(3, 276);
+            this.lblJumbovalViskositaet.Name = "lblJumbovalViskositaet";
+            this.lblJumbovalViskositaet.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalViskositaet.TabIndex = 49;
+            this.lblJumbovalViskositaet.Text = "kinematische Viskosität:";
+            this.lblJumbovalViskositaet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalWaermekapazitaet
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalWaermekapazitaet, 2);
+            this.lblJumbovalWaermekapazitaet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalWaermekapazitaet.Location = new System.Drawing.Point(3, 253);
+            this.lblJumbovalWaermekapazitaet.Name = "lblJumbovalWaermekapazitaet";
+            this.lblJumbovalWaermekapazitaet.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalWaermekapazitaet.TabIndex = 48;
+            this.lblJumbovalWaermekapazitaet.Text = "spezifische Wärmekapazität:";
+            this.lblJumbovalWaermekapazitaet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalDichte
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalDichte, 2);
+            this.lblJumbovalDichte.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalDichte.Location = new System.Drawing.Point(3, 230);
+            this.lblJumbovalDichte.Name = "lblJumbovalDichte";
+            this.lblJumbovalDichte.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalDichte.TabIndex = 47;
+            this.lblJumbovalDichte.Text = "Dichte des Mediums:";
+            this.lblJumbovalDichte.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalEstrichueberdeckungUnit
+            // 
+            this.lblJumbovalEstrichueberdeckungUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalEstrichueberdeckungUnit.Location = new System.Drawing.Point(393, 207);
+            this.lblJumbovalEstrichueberdeckungUnit.Name = "lblJumbovalEstrichueberdeckungUnit";
+            this.lblJumbovalEstrichueberdeckungUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalEstrichueberdeckungUnit.TabIndex = 46;
+            this.lblJumbovalEstrichueberdeckungUnit.Text = "m";
+            this.lblJumbovalEstrichueberdeckungUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalEstrichueberdeckung
+            // 
+            this.numJumbovalEstrichueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalEstrichueberdeckung.EditType = Europlan.Common.NumericBox.NumericEditType.UEBERDECKUNG;
+            this.numJumbovalEstrichueberdeckung.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalEstrichueberdeckung.Location = new System.Drawing.Point(308, 209);
+            this.numJumbovalEstrichueberdeckung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalEstrichueberdeckung.MaxValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalEstrichueberdeckung.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numJumbovalEstrichueberdeckung.Name = "numJumbovalEstrichueberdeckung";
+            this.numJumbovalEstrichueberdeckung.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalEstrichueberdeckung.TabIndex = 14;
+            this.numJumbovalEstrichueberdeckung.Text = "1";
+            this.numJumbovalEstrichueberdeckung.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalEstrichueberdeckung.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalEstrichueberdeckung.ValueChanged += new System.EventHandler(this.numJumbovalEstrichueberdeckung_ValueChanged);
+            // 
+            // lblJumbovalEstrichueberdeckung
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalEstrichueberdeckung, 2);
+            this.lblJumbovalEstrichueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalEstrichueberdeckung.Location = new System.Drawing.Point(3, 207);
+            this.lblJumbovalEstrichueberdeckung.Name = "lblJumbovalEstrichueberdeckung";
+            this.lblJumbovalEstrichueberdeckung.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalEstrichueberdeckung.TabIndex = 44;
+            this.lblJumbovalEstrichueberdeckung.Text = "Estrichüberdeckung:";
+            this.lblJumbovalEstrichueberdeckung.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalMindestueberdeckungUnit
+            // 
+            this.lblJumbovalMindestueberdeckungUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalMindestueberdeckungUnit.Location = new System.Drawing.Point(393, 184);
+            this.lblJumbovalMindestueberdeckungUnit.Name = "lblJumbovalMindestueberdeckungUnit";
+            this.lblJumbovalMindestueberdeckungUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalMindestueberdeckungUnit.TabIndex = 43;
+            this.lblJumbovalMindestueberdeckungUnit.Text = "m";
+            this.lblJumbovalMindestueberdeckungUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalMindestueberdeckung
+            // 
+            this.numJumbovalMindestueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalMindestueberdeckung.EditType = Europlan.Common.NumericBox.NumericEditType.UEBERDECKUNG;
+            this.numJumbovalMindestueberdeckung.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalMindestueberdeckung.Location = new System.Drawing.Point(308, 186);
+            this.numJumbovalMindestueberdeckung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalMindestueberdeckung.MaxValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalMindestueberdeckung.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numJumbovalMindestueberdeckung.Name = "numJumbovalMindestueberdeckung";
+            this.numJumbovalMindestueberdeckung.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalMindestueberdeckung.TabIndex = 13;
+            this.numJumbovalMindestueberdeckung.Text = "1";
+            this.numJumbovalMindestueberdeckung.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalMindestueberdeckung.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalMindestueberdeckung.ValueChanged += new System.EventHandler(this.numJumbovalMindestueberdeckung_ValueChanged);
+            // 
+            // lblJumbovalMindestueberdeckung
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalMindestueberdeckung, 2);
+            this.lblJumbovalMindestueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalMindestueberdeckung.Location = new System.Drawing.Point(3, 184);
+            this.lblJumbovalMindestueberdeckung.Name = "lblJumbovalMindestueberdeckung";
+            this.lblJumbovalMindestueberdeckung.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalMindestueberdeckung.TabIndex = 41;
+            this.lblJumbovalMindestueberdeckung.Text = "Mindestüberdeckung:";
+            this.lblJumbovalMindestueberdeckung.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalGeometrie
+            // 
+            this.numJumbovalGeometrie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalGeometrie.EditType = Europlan.Common.NumericBox.NumericEditType.GEOMETRIEFAKTOR;
+            this.numJumbovalGeometrie.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalGeometrie.Location = new System.Drawing.Point(308, 163);
+            this.numJumbovalGeometrie.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalGeometrie.MaxValue = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            327680});
+            this.numJumbovalGeometrie.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            327680});
+            this.numJumbovalGeometrie.Name = "numJumbovalGeometrie";
+            this.numJumbovalGeometrie.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalGeometrie.TabIndex = 11;
+            this.numJumbovalGeometrie.Text = "1";
+            this.numJumbovalGeometrie.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalGeometrie.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalGeometrie.ValueChanged += new System.EventHandler(this.numJumbovalGeometrie_ValueChanged);
+            // 
+            // lblJumbovalGeometrie
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalGeometrie, 2);
+            this.lblJumbovalGeometrie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalGeometrie.Location = new System.Drawing.Point(3, 161);
+            this.lblJumbovalGeometrie.Name = "lblJumbovalGeometrie";
+            this.lblJumbovalGeometrie.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalGeometrie.TabIndex = 38;
+            this.lblJumbovalGeometrie.Text = "Geometriefaktor:";
+            this.lblJumbovalGeometrie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungKuehlMax
+            // 
+            this.lblJumbovalSpreizungKuehlMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungKuehlMax.Location = new System.Drawing.Point(423, 138);
+            this.lblJumbovalSpreizungKuehlMax.Name = "lblJumbovalSpreizungKuehlMax";
+            this.lblJumbovalSpreizungKuehlMax.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungKuehlMax.TabIndex = 37;
+            this.lblJumbovalSpreizungKuehlMax.Text = "max.";
+            this.lblJumbovalSpreizungKuehlMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblJumbovalSpreizungHeizMax
+            // 
+            this.lblJumbovalSpreizungHeizMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungHeizMax.Location = new System.Drawing.Point(423, 115);
+            this.lblJumbovalSpreizungHeizMax.Name = "lblJumbovalSpreizungHeizMax";
+            this.lblJumbovalSpreizungHeizMax.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungHeizMax.TabIndex = 36;
+            this.lblJumbovalSpreizungHeizMax.Text = "max.";
+            this.lblJumbovalSpreizungHeizMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblJumbovalPressureEquals
+            // 
+            this.lblJumbovalPressureEquals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalPressureEquals.Location = new System.Drawing.Point(423, 69);
+            this.lblJumbovalPressureEquals.Name = "lblJumbovalPressureEquals";
+            this.lblJumbovalPressureEquals.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalPressureEquals.TabIndex = 29;
+            this.lblJumbovalPressureEquals.Text = "=";
+            this.lblJumbovalPressureEquals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblJumbovalNorm
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalNorm, 2);
+            this.lblJumbovalNorm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalNorm.Location = new System.Drawing.Point(3, 0);
+            this.lblJumbovalNorm.Name = "lblJumbovalNorm";
+            this.lblJumbovalNorm.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalNorm.TabIndex = 1;
+            this.lblJumbovalNorm.Text = "Maximale Oberflächentemperatur:";
+            this.lblJumbovalNorm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalCircuitLength
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalCircuitLength, 2);
+            this.lblJumbovalCircuitLength.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalCircuitLength.Location = new System.Drawing.Point(3, 46);
+            this.lblJumbovalCircuitLength.Name = "lblJumbovalCircuitLength";
+            this.lblJumbovalCircuitLength.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalCircuitLength.TabIndex = 3;
+            this.lblJumbovalCircuitLength.Text = "Max. Rohrlänge je Heizkreis:";
+            this.lblJumbovalCircuitLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalPressureMbarUnit
+            // 
+            this.lblJumbovalPressureMbarUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalPressureMbarUnit.Location = new System.Drawing.Point(543, 69);
+            this.lblJumbovalPressureMbarUnit.Name = "lblJumbovalPressureMbarUnit";
+            this.lblJumbovalPressureMbarUnit.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalPressureMbarUnit.TabIndex = 10;
+            this.lblJumbovalPressureMbarUnit.Text = "mbar";
+            this.lblJumbovalPressureMbarUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungHeizMaxUnit
+            // 
+            this.lblJumbovalSpreizungHeizMaxUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungHeizMaxUnit.Location = new System.Drawing.Point(543, 115);
+            this.lblJumbovalSpreizungHeizMaxUnit.Name = "lblJumbovalSpreizungHeizMaxUnit";
+            this.lblJumbovalSpreizungHeizMaxUnit.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungHeizMaxUnit.TabIndex = 18;
+            this.lblJumbovalSpreizungHeizMaxUnit.Text = "K";
+            this.lblJumbovalSpreizungHeizMaxUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungKuehlMaxUnit
+            // 
+            this.lblJumbovalSpreizungKuehlMaxUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungKuehlMaxUnit.Location = new System.Drawing.Point(543, 138);
+            this.lblJumbovalSpreizungKuehlMaxUnit.Name = "lblJumbovalSpreizungKuehlMaxUnit";
+            this.lblJumbovalSpreizungKuehlMaxUnit.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungKuehlMaxUnit.TabIndex = 24;
+            this.lblJumbovalSpreizungKuehlMaxUnit.Text = "K";
+            this.lblJumbovalSpreizungKuehlMaxUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungKuehlMin
+            // 
+            this.lblJumbovalSpreizungKuehlMin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungKuehlMin.Location = new System.Drawing.Point(268, 138);
+            this.lblJumbovalSpreizungKuehlMin.Name = "lblJumbovalSpreizungKuehlMin";
+            this.lblJumbovalSpreizungKuehlMin.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungKuehlMin.TabIndex = 25;
+            this.lblJumbovalSpreizungKuehlMin.Text = "min.";
+            this.lblJumbovalSpreizungKuehlMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numJumbovalSpreizungKuehlMax
+            // 
+            this.numJumbovalSpreizungKuehlMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalSpreizungKuehlMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalSpreizungKuehlMax.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMax.Location = new System.Drawing.Point(463, 140);
+            this.numJumbovalSpreizungKuehlMax.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalSpreizungKuehlMax.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMax.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMax.Name = "numJumbovalSpreizungKuehlMax";
+            this.numJumbovalSpreizungKuehlMax.Size = new System.Drawing.Size(74, 20);
+            this.numJumbovalSpreizungKuehlMax.TabIndex = 10;
+            this.numJumbovalSpreizungKuehlMax.Text = "1";
+            this.numJumbovalSpreizungKuehlMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalSpreizungKuehlMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMax.ValueChanged += new System.EventHandler(this.numJumbovalSpreizungKühlMax_ValueChanged);
+            // 
+            // lblJumbovalPressure
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalPressure, 2);
+            this.lblJumbovalPressure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalPressure.Location = new System.Drawing.Point(3, 69);
+            this.lblJumbovalPressure.Name = "lblJumbovalPressure";
+            this.lblJumbovalPressure.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalPressure.TabIndex = 6;
+            this.lblJumbovalPressure.Text = "Max. Druckverlust:";
+            this.lblJumbovalPressure.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungKuehlMinUnit
+            // 
+            this.lblJumbovalSpreizungKuehlMinUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungKuehlMinUnit.Location = new System.Drawing.Point(393, 138);
+            this.lblJumbovalSpreizungKuehlMinUnit.Name = "lblJumbovalSpreizungKuehlMinUnit";
+            this.lblJumbovalSpreizungKuehlMinUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalSpreizungKuehlMinUnit.TabIndex = 22;
+            this.lblJumbovalSpreizungKuehlMinUnit.Text = "K";
+            this.lblJumbovalSpreizungKuehlMinUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalSpreizungHeizMax
+            // 
+            this.numJumbovalSpreizungHeizMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalSpreizungHeizMax.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalSpreizungHeizMax.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMax.Location = new System.Drawing.Point(463, 117);
+            this.numJumbovalSpreizungHeizMax.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalSpreizungHeizMax.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMax.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMax.Name = "numJumbovalSpreizungHeizMax";
+            this.numJumbovalSpreizungHeizMax.Size = new System.Drawing.Size(74, 20);
+            this.numJumbovalSpreizungHeizMax.TabIndex = 8;
+            this.numJumbovalSpreizungHeizMax.Text = "1";
+            this.numJumbovalSpreizungHeizMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalSpreizungHeizMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMax.ValueChanged += new System.EventHandler(this.numJumbovalSpreizungHeizMax_ValueChanged);
+            // 
+            // lblJumbovalDurchfluss
+            // 
+            this.layoutJumboval.SetColumnSpan(this.lblJumbovalDurchfluss, 2);
+            this.lblJumbovalDurchfluss.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalDurchfluss.Location = new System.Drawing.Point(3, 92);
+            this.lblJumbovalDurchfluss.Name = "lblJumbovalDurchfluss";
+            this.lblJumbovalDurchfluss.Size = new System.Drawing.Size(299, 23);
+            this.lblJumbovalDurchfluss.TabIndex = 11;
+            this.lblJumbovalDurchfluss.Text = "Max. Durchflußmenge:";
+            this.lblJumbovalDurchfluss.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalDurchflussUnit
+            // 
+            this.lblJumbovalDurchflussUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalDurchflussUnit.Location = new System.Drawing.Point(393, 92);
+            this.lblJumbovalDurchflussUnit.Name = "lblJumbovalDurchflussUnit";
+            this.lblJumbovalDurchflussUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalDurchflussUnit.TabIndex = 13;
+            this.lblJumbovalDurchflussUnit.Text = "l/h";
+            this.lblJumbovalDurchflussUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalPressureMbar
+            // 
+            this.numJumbovalPressureMbar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalPressureMbar.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalPressureMbar.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalPressureMbar.Location = new System.Drawing.Point(463, 71);
+            this.numJumbovalPressureMbar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalPressureMbar.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numJumbovalPressureMbar.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalPressureMbar.Name = "numJumbovalPressureMbar";
+            this.numJumbovalPressureMbar.Size = new System.Drawing.Size(74, 20);
+            this.numJumbovalPressureMbar.TabIndex = 5;
+            this.numJumbovalPressureMbar.Text = "0,1";
+            this.numJumbovalPressureMbar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalPressureMbar.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalPressureMbar.ValueChanged += new System.EventHandler(this.numJumbovalPressureMbar_ValueChanged);
+            // 
+            // lblJumbovalSpreizungHeizMinUnit
+            // 
+            this.lblJumbovalSpreizungHeizMinUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungHeizMinUnit.Location = new System.Drawing.Point(393, 115);
+            this.lblJumbovalSpreizungHeizMinUnit.Name = "lblJumbovalSpreizungHeizMinUnit";
+            this.lblJumbovalSpreizungHeizMinUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalSpreizungHeizMinUnit.TabIndex = 16;
+            this.lblJumbovalSpreizungHeizMinUnit.Text = "K";
+            this.lblJumbovalSpreizungHeizMinUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalCircuitLengthUnit
+            // 
+            this.lblJumbovalCircuitLengthUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalCircuitLengthUnit.Location = new System.Drawing.Point(393, 46);
+            this.lblJumbovalCircuitLengthUnit.Name = "lblJumbovalCircuitLengthUnit";
+            this.lblJumbovalCircuitLengthUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalCircuitLengthUnit.TabIndex = 5;
+            this.lblJumbovalCircuitLengthUnit.Text = "m";
+            this.lblJumbovalCircuitLengthUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalPressurePaUnit
+            // 
+            this.lblJumbovalPressurePaUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalPressurePaUnit.Location = new System.Drawing.Point(393, 69);
+            this.lblJumbovalPressurePaUnit.Name = "lblJumbovalPressurePaUnit";
+            this.lblJumbovalPressurePaUnit.Size = new System.Drawing.Size(24, 23);
+            this.lblJumbovalPressurePaUnit.TabIndex = 8;
+            this.lblJumbovalPressurePaUnit.Text = "Pa";
+            this.lblJumbovalPressurePaUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numJumbovalSpreizungKuehlMin
+            // 
+            this.numJumbovalSpreizungKuehlMin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalSpreizungKuehlMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalSpreizungKuehlMin.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMin.Location = new System.Drawing.Point(308, 140);
+            this.numJumbovalSpreizungKuehlMin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalSpreizungKuehlMin.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMin.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMin.Name = "numJumbovalSpreizungKuehlMin";
+            this.numJumbovalSpreizungKuehlMin.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalSpreizungKuehlMin.TabIndex = 9;
+            this.numJumbovalSpreizungKuehlMin.Text = "1";
+            this.numJumbovalSpreizungKuehlMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalSpreizungKuehlMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungKuehlMin.ValueChanged += new System.EventHandler(this.numJumbovalSpreizungKühlMin_ValueChanged);
+            // 
+            // lblJumbovalSpreizungHeiz
+            // 
+            this.lblJumbovalSpreizungHeiz.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungHeiz.Location = new System.Drawing.Point(3, 115);
+            this.lblJumbovalSpreizungHeiz.Name = "lblJumbovalSpreizungHeiz";
+            this.lblJumbovalSpreizungHeiz.Size = new System.Drawing.Size(259, 23);
+            this.lblJumbovalSpreizungHeiz.TabIndex = 14;
+            this.lblJumbovalSpreizungHeiz.Text = "Spreizung Heizbetrieb:";
+            this.lblJumbovalSpreizungHeiz.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungKuehl
+            // 
+            this.lblJumbovalSpreizungKuehl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungKuehl.Location = new System.Drawing.Point(3, 138);
+            this.lblJumbovalSpreizungKuehl.Name = "lblJumbovalSpreizungKuehl";
+            this.lblJumbovalSpreizungKuehl.Size = new System.Drawing.Size(259, 23);
+            this.lblJumbovalSpreizungKuehl.TabIndex = 20;
+            this.lblJumbovalSpreizungKuehl.Text = "Spreizung Kühlbetrieb:";
+            this.lblJumbovalSpreizungKuehl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJumbovalSpreizungHeizMin
+            // 
+            this.lblJumbovalSpreizungHeizMin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblJumbovalSpreizungHeizMin.Location = new System.Drawing.Point(268, 115);
+            this.lblJumbovalSpreizungHeizMin.Name = "lblJumbovalSpreizungHeizMin";
+            this.lblJumbovalSpreizungHeizMin.Size = new System.Drawing.Size(34, 23);
+            this.lblJumbovalSpreizungHeizMin.TabIndex = 19;
+            this.lblJumbovalSpreizungHeizMin.Text = "min.";
+            this.lblJumbovalSpreizungHeizMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // rbJumbovalHarreitherNorm
+            // 
+            this.rbJumbovalHarreitherNorm.Checked = true;
+            this.layoutJumboval.SetColumnSpan(this.rbJumbovalHarreitherNorm, 5);
+            this.rbJumbovalHarreitherNorm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rbJumbovalHarreitherNorm.Location = new System.Drawing.Point(308, 3);
+            this.rbJumbovalHarreitherNorm.Name = "rbJumbovalHarreitherNorm";
+            this.rbJumbovalHarreitherNorm.Size = new System.Drawing.Size(269, 17);
+            this.rbJumbovalHarreitherNorm.TabIndex = 1;
+            this.rbJumbovalHarreitherNorm.TabStop = true;
+            this.rbJumbovalHarreitherNorm.Text = "27 °C (Harreither Werksempfehlung)";
+            this.rbJumbovalHarreitherNorm.UseVisualStyleBackColor = true;
+            this.rbJumbovalHarreitherNorm.CheckedChanged += new System.EventHandler(this.rbJumbovalHarreitherNorm_CheckedChanged);
+            // 
+            // rbJumbovalEN1264
+            // 
+            this.layoutJumboval.SetColumnSpan(this.rbJumbovalEN1264, 5);
+            this.rbJumbovalEN1264.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rbJumbovalEN1264.Location = new System.Drawing.Point(308, 26);
+            this.rbJumbovalEN1264.Name = "rbJumbovalEN1264";
+            this.rbJumbovalEN1264.Size = new System.Drawing.Size(269, 17);
+            this.rbJumbovalEN1264.TabIndex = 2;
+            this.rbJumbovalEN1264.Text = "29 °C (EN 1264)";
+            this.rbJumbovalEN1264.UseVisualStyleBackColor = true;
+            this.rbJumbovalEN1264.CheckedChanged += new System.EventHandler(this.rbJumbovalEN1264_CheckedChanged);
+            // 
+            // numJumbovalCircuitLength
+            // 
+            this.numJumbovalCircuitLength.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalCircuitLength.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalCircuitLength.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalCircuitLength.Location = new System.Drawing.Point(308, 48);
+            this.numJumbovalCircuitLength.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalCircuitLength.MaxValue = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+            this.numJumbovalCircuitLength.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalCircuitLength.Name = "numJumbovalCircuitLength";
+            this.numJumbovalCircuitLength.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalCircuitLength.TabIndex = 3;
+            this.numJumbovalCircuitLength.Text = "0,1";
+            this.numJumbovalCircuitLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalCircuitLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numJumbovalCircuitLength.ValueChanged += new System.EventHandler(this.numJumbovalCircuitLength_ValueChanged);
+            // 
+            // numJumbovalDurchfluss
+            // 
+            this.numJumbovalDurchfluss.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalDurchfluss.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+            this.numJumbovalDurchfluss.InternalValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numJumbovalDurchfluss.Location = new System.Drawing.Point(308, 94);
+            this.numJumbovalDurchfluss.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalDurchfluss.MaxValue = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numJumbovalDurchfluss.MinValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numJumbovalDurchfluss.Name = "numJumbovalDurchfluss";
+            this.numJumbovalDurchfluss.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalDurchfluss.TabIndex = 6;
+            this.numJumbovalDurchfluss.Text = "100";
+            this.numJumbovalDurchfluss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalDurchfluss.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numJumbovalDurchfluss.ValueChanged += new System.EventHandler(this.numJumbovalDurchfluss_ValueChanged);
+            // 
+            // numJumbovalPressurePa
+            // 
+            this.numJumbovalPressurePa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalPressurePa.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalPressurePa.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numJumbovalPressurePa.Location = new System.Drawing.Point(308, 71);
+            this.numJumbovalPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalPressurePa.MaxValue = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
+            this.numJumbovalPressurePa.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numJumbovalPressurePa.Name = "numJumbovalPressurePa";
+            this.numJumbovalPressurePa.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalPressurePa.TabIndex = 4;
+            this.numJumbovalPressurePa.Text = "0";
+            this.numJumbovalPressurePa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalPressurePa.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numJumbovalPressurePa.ValueChanged += new System.EventHandler(this.numJumbovalPressurePa_ValueChanged);
+            // 
+            // numJumbovalSpreizungHeizMin
+            // 
+            this.numJumbovalSpreizungHeizMin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numJumbovalSpreizungHeizMin.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numJumbovalSpreizungHeizMin.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMin.Location = new System.Drawing.Point(308, 117);
+            this.numJumbovalSpreizungHeizMin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numJumbovalSpreizungHeizMin.MaxValue = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMin.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMin.Name = "numJumbovalSpreizungHeizMin";
+            this.numJumbovalSpreizungHeizMin.Size = new System.Drawing.Size(79, 20);
+            this.numJumbovalSpreizungHeizMin.TabIndex = 7;
+            this.numJumbovalSpreizungHeizMin.Text = "1";
+            this.numJumbovalSpreizungHeizMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numJumbovalSpreizungHeizMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numJumbovalSpreizungHeizMin.ValueChanged += new System.EventHandler(this.numJumbovalSpreizungHeizMin_ValueChanged);
+            // 
+            // btnJumbovalStandard
+            // 
+            this.layoutJumboval.SetColumnSpan(this.btnJumbovalStandard, 2);
+            this.btnJumbovalStandard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnJumbovalStandard.Location = new System.Drawing.Point(460, 322);
+            this.btnJumbovalStandard.Margin = new System.Windows.Forms.Padding(0);
+            this.btnJumbovalStandard.Name = "btnJumbovalStandard";
+            this.btnJumbovalStandard.Size = new System.Drawing.Size(120, 23);
+            this.btnJumbovalStandard.TabIndex = 18;
+            this.btnJumbovalStandard.Text = "Standardwerte";
+            this.btnJumbovalStandard.UseVisualStyleBackColor = true;
+            this.btnJumbovalStandard.Click += new System.EventHandler(this.btnJumbovalStandard_Click);
+            // 
+            // cbJumbovalGeometrieAktiviert
+            // 
+            this.cbJumbovalGeometrieAktiviert.AutoSize = true;
+            this.layoutJumboval.SetColumnSpan(this.cbJumbovalGeometrieAktiviert, 2);
+            this.cbJumbovalGeometrieAktiviert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbJumbovalGeometrieAktiviert.Location = new System.Drawing.Point(463, 164);
+            this.cbJumbovalGeometrieAktiviert.Name = "cbJumbovalGeometrieAktiviert";
+            this.cbJumbovalGeometrieAktiviert.Size = new System.Drawing.Size(114, 17);
+            this.cbJumbovalGeometrieAktiviert.TabIndex = 12;
+            this.cbJumbovalGeometrieAktiviert.Text = "aktiviert";
+            this.cbJumbovalGeometrieAktiviert.UseVisualStyleBackColor = true;
+            this.cbJumbovalGeometrieAktiviert.CheckedChanged += new System.EventHandler(this.cbJumbovalGeometrieAktiviert_CheckedChanged);
+            // 
             // tabHitherm
             // 
             this.tabHitherm.Controls.Add(this.layoutHitherm);
@@ -2264,7 +3235,7 @@ namespace Europlan.Common {
             this.tabHitherm.Location = new System.Drawing.Point(4, 23);
             this.tabHitherm.Name = "tabHitherm";
             this.helpProvider.SetShowHelp(this.tabHitherm, true);
-            this.tabHitherm.Size = new System.Drawing.Size(844, 406);
+            this.tabHitherm.Size = new System.Drawing.Size(1191, 556);
             this.tabHitherm.TabIndex = 1;
             this.tabHitherm.Text = "Hitherm®";
             this.tabHitherm.UseVisualStyleBackColor = true;
@@ -2674,7 +3645,7 @@ namespace Europlan.Common {
             this.tabHithermCompact.Name = "tabHithermCompact";
             this.tabHithermCompact.Padding = new System.Windows.Forms.Padding(3);
             this.helpProvider.SetShowHelp(this.tabHithermCompact, true);
-            this.tabHithermCompact.Size = new System.Drawing.Size(844, 406);
+            this.tabHithermCompact.Size = new System.Drawing.Size(1191, 556);
             this.tabHithermCompact.TabIndex = 5;
             this.tabHithermCompact.Text = "Hitherm® Compact";
             this.tabHithermCompact.UseVisualStyleBackColor = true;
@@ -3081,7 +4052,7 @@ namespace Europlan.Common {
             this.tabModulBoden.ImageKey = "Fußbodenheizung.png";
             this.tabModulBoden.Location = new System.Drawing.Point(4, 23);
             this.tabModulBoden.Name = "tabModulBoden";
-            this.tabModulBoden.Size = new System.Drawing.Size(844, 406);
+            this.tabModulBoden.Size = new System.Drawing.Size(1191, 556);
             this.tabModulBoden.TabIndex = 2;
             this.tabModulBoden.Text = "Modul Klima-Boden";
             this.tabModulBoden.UseVisualStyleBackColor = true;
@@ -3633,7 +4604,7 @@ namespace Europlan.Common {
             this.tabModulDecke.ImageKey = "Klimadecke.png";
             this.tabModulDecke.Location = new System.Drawing.Point(4, 23);
             this.tabModulDecke.Name = "tabModulDecke";
-            this.tabModulDecke.Size = new System.Drawing.Size(844, 406);
+            this.tabModulDecke.Size = new System.Drawing.Size(1191, 556);
             this.tabModulDecke.TabIndex = 3;
             this.tabModulDecke.Text = "Modul Klima-Decke";
             this.tabModulDecke.UseVisualStyleBackColor = true;
@@ -4382,7 +5353,7 @@ namespace Europlan.Common {
             this.tabGeneral.ImageKey = "Systemparameter.png";
             this.tabGeneral.Location = new System.Drawing.Point(4, 23);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Size = new System.Drawing.Size(844, 406);
+            this.tabGeneral.Size = new System.Drawing.Size(1191, 556);
             this.tabGeneral.TabIndex = 6;
             this.tabGeneral.Text = "Allgemein";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -4880,7 +5851,7 @@ namespace Europlan.Common {
             this.tabHithermDefault.Location = new System.Drawing.Point(4, 23);
             this.tabHithermDefault.Name = "tabHithermDefault";
             this.helpProvider.SetShowHelp(this.tabHithermDefault, true);
-            this.tabHithermDefault.Size = new System.Drawing.Size(844, 406);
+            this.tabHithermDefault.Size = new System.Drawing.Size(1191, 556);
             this.tabHithermDefault.TabIndex = 7;
             this.tabHithermDefault.Text = "Hitherm®";
             this.tabHithermDefault.UseVisualStyleBackColor = true;
@@ -4973,7 +5944,7 @@ namespace Europlan.Common {
             this.tabHithermCompactDefault.Name = "tabHithermCompactDefault";
             this.tabHithermCompactDefault.Padding = new System.Windows.Forms.Padding(3);
             this.helpProvider.SetShowHelp(this.tabHithermCompactDefault, true);
-            this.tabHithermCompactDefault.Size = new System.Drawing.Size(844, 406);
+            this.tabHithermCompactDefault.Size = new System.Drawing.Size(1191, 556);
             this.tabHithermCompactDefault.TabIndex = 8;
             this.tabHithermCompactDefault.Text = "Hitherm® Compact";
             this.tabHithermCompactDefault.UseVisualStyleBackColor = true;
@@ -5062,7 +6033,7 @@ namespace Europlan.Common {
             this.tabGeneralDefault.ImageKey = "Systemparameter.png";
             this.tabGeneralDefault.Location = new System.Drawing.Point(4, 23);
             this.tabGeneralDefault.Name = "tabGeneralDefault";
-            this.tabGeneralDefault.Size = new System.Drawing.Size(844, 406);
+            this.tabGeneralDefault.Size = new System.Drawing.Size(1191, 556);
             this.tabGeneralDefault.TabIndex = 9;
             this.tabGeneralDefault.Text = "Allgemein";
             this.tabGeneralDefault.UseVisualStyleBackColor = true;
@@ -8163,16 +9134,16 @@ namespace Europlan.Common {
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(852, 38);
+            this.panelHeader.Size = new System.Drawing.Size(1199, 38);
             this.panelHeader.TabIndex = 79;
             // 
             // panInfoUserConfig
             // 
             this.panInfoUserConfig.Controls.Add(this.lblInfoUserconfig);
             this.panInfoUserConfig.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panInfoUserConfig.Location = new System.Drawing.Point(0, 507);
+            this.panInfoUserConfig.Location = new System.Drawing.Point(0, 657);
             this.panInfoUserConfig.Name = "panInfoUserConfig";
-            this.panInfoUserConfig.Size = new System.Drawing.Size(852, 36);
+            this.panInfoUserConfig.Size = new System.Drawing.Size(1199, 36);
             this.panInfoUserConfig.TabIndex = 80;
             this.panInfoUserConfig.Visible = false;
             // 
@@ -8182,7 +9153,7 @@ namespace Europlan.Common {
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfoUserconfig.Location = new System.Drawing.Point(10, 3);
             this.lblInfoUserconfig.Name = "lblInfoUserconfig";
-            this.lblInfoUserconfig.Size = new System.Drawing.Size(838, 28);
+            this.lblInfoUserconfig.Size = new System.Drawing.Size(1185, 28);
             this.lblInfoUserconfig.TabIndex = 0;
             this.lblInfoUserconfig.Text = "Diese Werte betreffen nicht das aktuelle Projekt, sondern sind Standardwerte, wel" +
                 "che verwendet werden wenn ein neues Projekt angelegt wird!";
@@ -8191,9 +9162,9 @@ namespace Europlan.Common {
             // 
             this.panInfoProjectConfig.Controls.Add(this.lblInfoProjectconfig);
             this.panInfoProjectConfig.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panInfoProjectConfig.Location = new System.Drawing.Point(0, 471);
+            this.panInfoProjectConfig.Location = new System.Drawing.Point(0, 621);
             this.panInfoProjectConfig.Name = "panInfoProjectConfig";
-            this.panInfoProjectConfig.Size = new System.Drawing.Size(852, 36);
+            this.panInfoProjectConfig.Size = new System.Drawing.Size(1199, 36);
             this.panInfoProjectConfig.TabIndex = 81;
             // 
             // lblInfoProjectconfig
@@ -8202,7 +9173,7 @@ namespace Europlan.Common {
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfoProjectconfig.Location = new System.Drawing.Point(10, 3);
             this.lblInfoProjectconfig.Name = "lblInfoProjectconfig";
-            this.lblInfoProjectconfig.Size = new System.Drawing.Size(838, 28);
+            this.lblInfoProjectconfig.Size = new System.Drawing.Size(1185, 28);
             this.lblInfoProjectconfig.TabIndex = 1;
             this.lblInfoProjectconfig.Text = "Diese Werte betreffen nur das aktuelle Projekt, um die Standardwerte zu ändern, d" +
                 "ie verwendet werden, wenn ein neues Projekt angelegt wird klicken Sie auf \"Stand" +
@@ -10347,7 +11318,7 @@ namespace Europlan.Common {
             this.Controls.Add(this.panInfoUserConfig);
             this.Controls.Add(this.panelHeader);
             this.Name = "SystemParametersPanel";
-            this.Size = new System.Drawing.Size(852, 543);
+            this.Size = new System.Drawing.Size(1199, 693);
             this.tabSystemParameters.ResumeLayout(false);
             this.tabEuroval.ResumeLayout(false);
             this.layoutEuroval.ResumeLayout(false);
@@ -10355,6 +11326,9 @@ namespace Europlan.Common {
             this.tabEcotherm.ResumeLayout(false);
             this.layoutEcotherm.ResumeLayout(false);
             this.layoutEcotherm.PerformLayout();
+            this.tabJumboval.ResumeLayout(false);
+            this.layoutJumboval.ResumeLayout(false);
+            this.layoutJumboval.PerformLayout();
             this.tabHitherm.ResumeLayout(false);
             this.layoutHitherm.ResumeLayout(false);
             this.layoutHitherm.PerformLayout();
@@ -10967,5 +11941,55 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblGeneralTextboxFontSizeDefault;
         private NumericBox numGeneralTextboxFontSizeDefault;
         private System.Windows.Forms.Label lblGeneralTextboxFontSizeDefaultUnit;
+        private System.Windows.Forms.TabPage tabJumboval;
+        private System.Windows.Forms.TableLayoutPanel layoutJumboval;
+        private System.Windows.Forms.Label lblJumbovalViskositaetUnit;
+        private System.Windows.Forms.Label lblJumbovalWaermekapazitaetUnit;
+        private System.Windows.Forms.Label lblJumbovalDichteUnit;
+        private NumericBox numJumbovalViskositaet;
+        private NumericBox numJumbovalWaermekapazitaet;
+        private NumericBox numJumbovalDichte;
+        private System.Windows.Forms.Label lblJumbovalViskositaet;
+        private System.Windows.Forms.Label lblJumbovalWaermekapazitaet;
+        private System.Windows.Forms.Label lblJumbovalEstrichueberdeckungUnit;
+        private NumericBox numJumbovalEstrichueberdeckung;
+        private System.Windows.Forms.Label lblJumbovalEstrichueberdeckung;
+        private System.Windows.Forms.Label lblJumbovalMindestueberdeckungUnit;
+        private NumericBox numJumbovalMindestueberdeckung;
+        private System.Windows.Forms.Label lblJumbovalMindestueberdeckung;
+        private NumericBox numJumbovalGeometrie;
+        private System.Windows.Forms.Label lblJumbovalGeometrie;
+        private System.Windows.Forms.Label lblJumbovalSpreizungKuehlMax;
+        private System.Windows.Forms.Label lblJumbovalSpreizungHeizMax;
+        private System.Windows.Forms.Label lblJumbovalPressureEquals;
+        private System.Windows.Forms.Label lblJumbovalNorm;
+        private System.Windows.Forms.Label lblJumbovalCircuitLength;
+        private System.Windows.Forms.Label lblJumbovalPressureMbarUnit;
+        private System.Windows.Forms.Label lblJumbovalSpreizungHeizMaxUnit;
+        private System.Windows.Forms.Label lblJumbovalSpreizungKuehlMaxUnit;
+        private System.Windows.Forms.Label lblJumbovalSpreizungKuehlMin;
+        private NumericBox numJumbovalSpreizungKuehlMax;
+        private System.Windows.Forms.Label lblJumbovalPressure;
+        private System.Windows.Forms.Label lblJumbovalSpreizungKuehlMinUnit;
+        private NumericBox numJumbovalSpreizungHeizMax;
+        private System.Windows.Forms.Label lblJumbovalDurchfluss;
+        private System.Windows.Forms.Label lblJumbovalDurchflussUnit;
+        private NumericBox numJumbovalPressureMbar;
+        private System.Windows.Forms.Label lblJumbovalSpreizungHeizMinUnit;
+        private System.Windows.Forms.Label lblJumbovalCircuitLengthUnit;
+        private System.Windows.Forms.Label lblJumbovalPressurePaUnit;
+        private NumericBox numJumbovalSpreizungKuehlMin;
+        private System.Windows.Forms.Label lblJumbovalSpreizungHeiz;
+        private System.Windows.Forms.Label lblJumbovalSpreizungKuehl;
+        private System.Windows.Forms.Label lblJumbovalSpreizungHeizMin;
+        private System.Windows.Forms.RadioButton rbJumbovalHarreitherNorm;
+        private System.Windows.Forms.RadioButton rbJumbovalEN1264;
+        private NumericBox numJumbovalCircuitLength;
+        private NumericBox numJumbovalDurchfluss;
+        private NumericBox numJumbovalPressurePa;
+        private NumericBox numJumbovalSpreizungHeizMin;
+        private System.Windows.Forms.Button btnJumbovalStandard;
+        private System.Windows.Forms.CheckBox cbJumbovalGeometrieAktiviert;
+        private System.Windows.Forms.Label lblJumbovalDichte;
 	}
 }

@@ -26,42 +26,42 @@ namespace Europlan.Common {
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
-		private static double lambdaR0 = 0.35; /* fix */
+		private static double lambdaR0 = 0.35; /* fix */                                                /* TODO in Formel für B in Excel hardcoded??? */
 		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix */
 		private static double lambdaU0 = 1; /* fix */
 		private static double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
 		private static double su = 0.035; /* Estrichüberdeckung; Annahme ECO30;  fix*/
-		private static double lambdaU = 1.2; /* Wärmeleitfähigkeit der Überdeckung */
-		private static double rohrAussenD = 0.0206505; /* Aussendurchmesser Jumboval Rohr */
-		private static double rohrInnenD = 0.0153; /* Rohrinnendurchmesser */
-		public static double rohrInnenA = 0.000183783; /* Rohrinnenquerschnitt */
+		private static double lambdaU = 2.3; /* Wärmeleitfähigkeit der Überdeckung */                   /* TODO sollte eigentlich kein Produktparameter sein, da abhängig von Konstruktion. Bei Jumboval ist Estrich oder Stahlbeton möglich */
+        private static double rohrAussenD = 0.02817; /* Aussendurchmesser Jumboval Rohr */              /* TODO: Muss von Harreither noch überprüft und bestätigt werden */
+		private static double rohrInnenD = 0.02135; /* Rohrinnendurchmesser (12.5*9mm*pi auf Rundrohrfläche */
+		public static double rohrInnenA = 0.000353429; /* Rohrinnenquerschnitt */                       /* TODO: Bestätigen */
 		private static double ag = 1.2125; /* Ovalrohr Geometriefaktor für Jumboval */
-		private static double sr0 = 0.002; /* fix ??? */
+        private static double sr0 = 0.002; /* fix ??? */                                                /* TODO in Formel für B in Excel hardcoded??? */
 		private static double sr = 0.00238; /* Aus Jumboval Normprüfdaten */
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
-		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
-		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
+        private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
+        private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 		private static bool agActivated = true;
 		private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
-		private static double faktorTrockenkonstruktion = 0.45;
+		private static double faktorTrockenkonstruktion = 0.45;                                         /* TODO */
 
-		private static double maxResidenceTempHarreither = 27;
-		private static double maxRimTempHarreither = 33;
-		private static double maxResidenceTempEn1264 = 29;
-		private static double maxRimTempEn1264 = 35;
-		private static double maxNassraumTemp = 33;
+        private static double maxResidenceTempHarreither = 27;                                          /* TODO sollte gleich bleiben */
+        private static double maxRimTempHarreither = 33;                                                /* TODO sollte gleich bleiben */
+        private static double maxResidenceTempEn1264 = 29;                                              /* TODO sollte gleich bleiben */
+        private static double maxRimTempEn1264 = 35;                                                    /* TODO sollte gleich bleiben */
+        private static double maxNassraumTemp = 33;                                                     /* TODO sollte gleich bleiben */
 
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
 		private static bool useHarreitherNorm = true;
-		private static double maxCircuitLength = 100.0;
-		private static int maxPressureLost = 15000;
-		private static int maxDurchfluss = 240;
-		private static double spreizungHeizMin = 4;
-		private static double spreizungHeizMax = 12;
-		private static double spreizungKuehlMin = 2;
-		private static double spreizungKuehlMax = 5;
+		private static double maxCircuitLength = 120.0;
+		private static int maxPressureLost = 15000;                                                     /* TODO */
+        private static int maxDurchfluss = 240;                                                         /* TODO: muß in Verteiler ausgelagert werden, da maximaler Durchfluss vom Typ abhängig! */
+        private static double spreizungHeizMin = 4;                                                     /* TODO sollte gleich bleiben */
+        private static double spreizungHeizMax = 12;                                                    /* TODO sollte gleich bleiben */
+        private static double spreizungKuehlMin = 2;                                                    /* TODO sollte gleich bleiben */
+        private static double spreizungKuehlMax = 5;                                                    /* TODO sollte gleich bleiben */
 
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
@@ -473,25 +473,25 @@ namespace Europlan.Common {
 			set { su = value; }
 		}
 
-		[DoubleProductParameter(1.2)]
+		[DoubleProductParameter(2.3)]
 		public static double ConfigLambdaU {
 			get { return lambdaU; }
 			set { lambdaU = value; }
 		}
 
-		[DoubleProductParameter(0.0206505)]
+        [DoubleProductParameter(0.02817)]
 		public static double ConfigRohrAussenD {
 			get { return rohrAussenD; }
 			set { rohrAussenD = value; }
 		}
 
-		[DoubleProductParameter(0.0153)]
+        [DoubleProductParameter(0.02135)]
 		public static double ConfigRohrInnenD {
 			get { return rohrInnenD; }
 			set { rohrInnenD = value; }
 		}
 
-		[DoubleProductParameter(0.000183783)]
+        [DoubleProductParameter(0.000353429)]
 		public static double ConfigRohrInnenA {
 			get { return rohrInnenA; }
 			set { rohrInnenA = value; }
@@ -593,7 +593,7 @@ namespace Europlan.Common {
 			set { useHarreitherNorm = value; }
 		}
 
-		[DoubleProductParameter(100)]
+		[DoubleProductParameter(120)]
 		public static double ConfigMaxCircuitLength {
 			get { return maxCircuitLength; }
 			set { maxCircuitLength = value; }
