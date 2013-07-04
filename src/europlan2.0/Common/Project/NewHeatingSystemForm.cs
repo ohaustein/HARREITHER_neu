@@ -18,6 +18,9 @@ namespace Europlan.Common {
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
 			}
+			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdJumboval)) {
+				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(JumbovalProduct)));
+			}
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EcothermProduct)));
 			}

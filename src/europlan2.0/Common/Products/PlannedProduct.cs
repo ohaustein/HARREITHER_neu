@@ -386,6 +386,8 @@ namespace Europlan.Common {
 			get {
 				if (this.plannedProduct is EurovalProduct) {
 					return typeof(PlannedEurovalProductPanel);
+				} else if (this.plannedProduct is JumbovalProduct) {
+					return typeof(PlannedJumbovalProductPanel);
 				} else if (this.plannedProduct is EcothermProduct) {
 					return typeof(PlannedEcothermProductPanel);
 				} else if (this.plannedProduct is ModulKlimaDeckeProduct) {
