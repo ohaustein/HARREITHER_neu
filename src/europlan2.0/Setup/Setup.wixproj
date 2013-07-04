@@ -96,7 +96,9 @@
 	  BootstrapperEN;
       PostBuildEvent
     </CoreBuildDependsOn>
-    <PostBuildEvent>copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)de-DE\instmsi.exe"
+    <PostBuildEvent>if $(ConfigurationName) == Debug exit 0
+
+copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)de-DE\instmsi.exe"
 copy "$(TargetDir)de-DE\europlan30.msi" "$(TargetDir)de-DE\setup.msi"
 cd $(ProjectDir)
 for /F "tokens=1,2,3,4,5 delims=/.: " %%a in (%27utils\datetime%27) do set SUFFIX=%%c-%%b-%%a_%%d%%e
