@@ -72,6 +72,10 @@ namespace Europlan.Common {
 			private static readonly string ev10 = EuroplanRes.EurovalProduct_EV10; //"EV10"
 			private static readonly string ev5 = EuroplanRes.EurovalProduct_EV5; //"EV5"
 			private static readonly string a5 = EuroplanRes.EurovalProduct_A5; //"A5"
+            private static readonly string jv50 = EuroplanRes.JumbovalProduct_JV50;
+            private static readonly string jv40 = EuroplanRes.JumbovalProduct_JV40;
+            private static readonly string jv30 = EuroplanRes.JumbovalProduct_JV30;
+            private static readonly string jv20 = EuroplanRes.JumbovalProduct_JV20;
 
 			private Dictionary<string, VerlegeartEnum> mappingFromString = new Dictionary<string, VerlegeartEnum>();
 			private Dictionary<VerlegeartEnum, string> mappingToString = new Dictionary<VerlegeartEnum, string>();
@@ -86,7 +90,11 @@ namespace Europlan.Common {
 				mappingFromString.Add(ev10, VerlegeartEnum.VA_EV10);
 				mappingFromString.Add(ev5, VerlegeartEnum.VA_EV5);
 				mappingFromString.Add(a5, VerlegeartEnum.VA_A5);
-				mappingToString.Add(VerlegeartEnum.VA_UNTER_ESTRICH, unterEstrich);
+                mappingFromString.Add(jv50, VerlegeartEnum.VA_JV50);
+                mappingFromString.Add(jv40, VerlegeartEnum.VA_JV40);
+                mappingFromString.Add(jv30, VerlegeartEnum.VA_JV30);
+                mappingFromString.Add(jv20, VerlegeartEnum.VA_JV20);
+                mappingToString.Add(VerlegeartEnum.VA_UNTER_ESTRICH, unterEstrich);
 				mappingToString.Add(VerlegeartEnum.VA_EV35, ev35);
 				mappingToString.Add(VerlegeartEnum.VA_EV30, ev30);
 				mappingToString.Add(VerlegeartEnum.VA_EV25, ev25);
@@ -95,7 +103,11 @@ namespace Europlan.Common {
 				mappingToString.Add(VerlegeartEnum.VA_EV10, ev10);
 				mappingToString.Add(VerlegeartEnum.VA_EV5, ev5);
 				mappingToString.Add(VerlegeartEnum.VA_A5, a5);
-			}
+                mappingToString.Add(VerlegeartEnum.VA_JV50, jv50);
+                mappingToString.Add(VerlegeartEnum.VA_JV40, jv40);
+                mappingToString.Add(VerlegeartEnum.VA_JV30, jv30);
+                mappingToString.Add(VerlegeartEnum.VA_JV20, jv20);
+            }
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
 				return sourceType == typeof(string);
@@ -134,7 +146,11 @@ namespace Europlan.Common {
 			VA_EV15,
 			VA_EV10,
 			VA_EV5,
-			VA_A5
+			VA_A5,
+            VA_JV50,
+            VA_JV40,
+            VA_JV30,
+            VA_JV20
 		}
 
 		public class InsulationEnumConverter : System.ComponentModel.TypeConverter {
@@ -428,7 +444,23 @@ namespace Europlan.Common {
 						area = (this.vorlauf + this.ruecklauf) / EurovalProduct.GetPipeLengthPerSqm(EurovalProduct.EurovalLayDistance.A5);
 						break;
 
-					default:
+                    case VerlegeartEnum.VA_JV50:
+                        area = (this.vorlauf + this.ruecklauf) / JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV50);
+                        break;
+
+                    case VerlegeartEnum.VA_JV40:
+                        area = (this.vorlauf + this.ruecklauf) / JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV40);
+                        break;
+
+                    case VerlegeartEnum.VA_JV30:
+                        area = (this.vorlauf + this.ruecklauf) / JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV30);
+                        break;
+
+                    case VerlegeartEnum.VA_JV20:
+                        area = (this.vorlauf + this.ruecklauf) / JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV20);
+                        break;
+
+                    default:
 						area = 0;
 						break;
 				}
@@ -459,28 +491,116 @@ namespace Europlan.Common {
 			}
 		}
 
-		public static EcothermProduct.EcothermLayDistance GetEcothermLayDistance(VerlegeartEnum verlegeart) {
-			switch (verlegeart) {
-				case VerlegeartEnum.VA_EV35:
-					return EcothermProduct.EcothermLayDistance.EV35;
-				case VerlegeartEnum.VA_EV30:
-					return EcothermProduct.EcothermLayDistance.EV30;
-				case VerlegeartEnum.VA_EV25:
-					return EcothermProduct.EcothermLayDistance.EV25;
-				case VerlegeartEnum.VA_EV20:
-					return EcothermProduct.EcothermLayDistance.EV20;
-				case VerlegeartEnum.VA_EV15:
-					return EcothermProduct.EcothermLayDistance.EV15;
-				case VerlegeartEnum.VA_EV10:
-					return EcothermProduct.EcothermLayDistance.EV10;
-				case VerlegeartEnum.VA_EV5:
-					return EcothermProduct.EcothermLayDistance.EV5;
-				case VerlegeartEnum.VA_A5:
-					return EcothermProduct.EcothermLayDistance.A5;
-				default:
-					return EcothermProduct.EcothermLayDistance.EV5;
-			}
-		}
+        public static EcothermProduct.EcothermLayDistance GetEcothermLayDistance(VerlegeartEnum verlegeart) {
+            switch (verlegeart) {
+                case VerlegeartEnum.VA_EV35:
+                    return EcothermProduct.EcothermLayDistance.EV35;
+                case VerlegeartEnum.VA_EV30:
+                    return EcothermProduct.EcothermLayDistance.EV30;
+                case VerlegeartEnum.VA_EV25:
+                    return EcothermProduct.EcothermLayDistance.EV25;
+                case VerlegeartEnum.VA_EV20:
+                    return EcothermProduct.EcothermLayDistance.EV20;
+                case VerlegeartEnum.VA_EV15:
+                    return EcothermProduct.EcothermLayDistance.EV15;
+                case VerlegeartEnum.VA_EV10:
+                    return EcothermProduct.EcothermLayDistance.EV10;
+                case VerlegeartEnum.VA_EV5:
+                    return EcothermProduct.EcothermLayDistance.EV5;
+                case VerlegeartEnum.VA_A5:
+                    return EcothermProduct.EcothermLayDistance.A5;
+                default:
+                    return EcothermProduct.EcothermLayDistance.EV5;
+            }
+        }
+
+        public static JumbovalProduct.JumbovalLayDistance GetJumbovalLayDistance(VerlegeartEnum verlegeart) {
+            switch (verlegeart) {
+                case VerlegeartEnum.VA_JV50:
+                    return JumbovalProduct.JumbovalLayDistance.JV50;
+                case VerlegeartEnum.VA_JV40:
+                    return JumbovalProduct.JumbovalLayDistance.JV40;
+                case VerlegeartEnum.VA_JV30:
+                    return JumbovalProduct.JumbovalLayDistance.JV30;
+                case VerlegeartEnum.VA_JV20:
+                    return JumbovalProduct.JumbovalLayDistance.JV20;
+                default:
+                    return JumbovalProduct.JumbovalLayDistance.JV20;
+            }
+        }
+
+        public static bool IsVerlegeartPossible(VerlegeartEnum verlegeart, PipeTypeEnum pipeType) {
+            switch (pipeType) {
+                case PipeTypeEnum.PT_EUROVAL:
+                case PipeTypeEnum.PT_ECOTHERM:
+                    return (verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH ||
+                        verlegeart == VerlegeartEnum.VA_EV35 ||
+                        verlegeart == VerlegeartEnum.VA_EV30 ||
+                        verlegeart == VerlegeartEnum.VA_EV25 ||
+                        verlegeart == VerlegeartEnum.VA_EV20 ||
+                        verlegeart == VerlegeartEnum.VA_EV15 ||
+                        verlegeart == VerlegeartEnum.VA_EV10 ||
+                        verlegeart == VerlegeartEnum.VA_EV5 ||
+                        verlegeart == VerlegeartEnum.VA_A5
+                    );
+                case PipeTypeEnum.PT_JUMBOVAL:
+                    return (verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH ||
+                        verlegeart == VerlegeartEnum.VA_JV50 ||
+                        verlegeart == VerlegeartEnum.VA_JV40 ||
+                        verlegeart == VerlegeartEnum.VA_JV30 ||
+                        verlegeart == VerlegeartEnum.VA_JV20);
+                case PipeTypeEnum.PT_21MM:
+                default:
+                    return verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH;
+            }
+        }
+
+        public static bool IsInsulationPossible(InsulationEnum insulation, VerlegeartEnum verlegeart) {
+            switch (verlegeart) {
+                case VerlegeartEnum.VA_EV35:
+                case VerlegeartEnum.VA_EV30:
+                case VerlegeartEnum.VA_EV25:
+                case VerlegeartEnum.VA_EV20:
+                case VerlegeartEnum.VA_EV15:
+                case VerlegeartEnum.VA_EV10:
+                case VerlegeartEnum.VA_EV5:
+                case VerlegeartEnum.VA_A5:
+                case VerlegeartEnum.VA_JV50:
+                case VerlegeartEnum.VA_JV40:
+                case VerlegeartEnum.VA_JV30:
+                case VerlegeartEnum.VA_JV20:
+                    return true;
+                case VerlegeartEnum.VA_UNTER_ESTRICH:
+                default:
+                    return insulation == InsulationEnum.IN_VL_RL;
+            }
+        }
+
+        public static VerlegeartEnum GetDefaultVerlegeart(PipeTypeEnum pipeType) {
+            switch (pipeType) {
+                case PipeTypeEnum.PT_EUROVAL:
+                case PipeTypeEnum.PT_ECOTHERM:
+                    return VerlegeartEnum.VA_EV5;
+                case PipeTypeEnum.PT_JUMBOVAL:
+                    return VerlegeartEnum.VA_JV20;
+                case PipeTypeEnum.PT_21MM:
+                default:
+                    return VerlegeartEnum.VA_UNTER_ESTRICH;
+            }
+        }
+
+        public static InsulationEnum GetDefaultInsulation(PipeTypeEnum pipeType) {
+            switch (pipeType) {
+                case PipeTypeEnum.PT_EUROVAL:
+                case PipeTypeEnum.PT_ECOTHERM:
+                    return InsulationEnum.IN_NONE;
+                case PipeTypeEnum.PT_JUMBOVAL:
+                    return InsulationEnum.IN_NONE;
+                case PipeTypeEnum.PT_21MM:
+                default:
+                    return InsulationEnum.IN_VL_RL;
+            }
+        }
 
 		[XmlIgnore]
 		private double RohrAussenD {
@@ -532,6 +652,8 @@ namespace Europlan.Common {
 			get {
 				if (this.pipeType == PipeTypeEnum.PT_EUROVAL && EurovalProduct.ConfigAgActivated) {
 					return EurovalProduct.ConfigAg;
+                } else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL && JumbovalProduct.ConfigAgActivated) {
+                    return JumbovalProduct.ConfigAg;
 				} else {
 					return 1;
 				}
@@ -662,35 +784,104 @@ namespace Europlan.Common {
 					totalPipeLength += this.vorlauf;
 				}
 
-				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
-				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
-				double rLambdaIns = this.ConnectionThrough.Product.PlannedOutsideConstructionRValue;
-				double factor = (this.ConnectionThrough.Product.PlannedInsideConstruction != null && (this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? 0.45 : 1;
-				double lambdaU = 1.2; /* Estrich??? */
-				double rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
+                double su;
+                double lambdaU;
+                double faktorTrockenkonstruktion;
+                double rAlphaDeckeFbh;
+                double teilung;
+                double alpha0;
+                double alphaFbh;
+                double su0;
+                double lambdaU0;
+                double lambdaE;
+                double sr;
+                double sr0;
+                double lambdaR;
+                double lambdaR0;
+                double pipeLengthPerSqm;
+                double rLambdaDecke;
+                double rLambdaPutz;
 
-				double vorlaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeVorlauf / totalPipeLength);
-				double vorlaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterVorlauf / totalPipeLength);
-				double ruecklaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeRuecklauf / totalPipeLength);
-				double ruecklaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterRuecklauf / totalPipeLength);
+                if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
+                    su = JumbovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = JumbovalProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = JumbovalProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbh = 1 / JumbovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
+                    teilung = JumbovalProduct.GetTeilung(ConnectionPipe.GetJumbovalLayDistance(this.verlegeart));
+                    alpha0 = JumbovalProduct.ConfigAlpha0;
+                    alphaFbh = JumbovalProduct.ConfigAlphaFbh;
+                    su0 = JumbovalProduct.ConfigSu0;
+                    lambdaU0 = JumbovalProduct.ConfigLambdaU0;
+                    lambdaE = JumbovalProduct.ConfigLambdaE;
+                    sr = JumbovalProduct.ConfigSr;
+                    sr0 = JumbovalProduct.ConfigSr0;
+                    lambdaR = JumbovalProduct.ConfigLambdaR;
+                    lambdaR0  = JumbovalProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = JumbovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetJumbovalLayDistance(this.verlegeart));
+                    rLambdaDecke = JumbovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = JumbovalProduct.ConfigRLambdaPutz;
+                } else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
+                    su = EcothermProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = EcothermProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = EcothermProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbh = 1 / EcothermProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
+                    teilung = EcothermProduct.GetTeilung(ConnectionPipe.GetEcothermLayDistance(this.verlegeart));
+                    alpha0 = EcothermProduct.ConfigAlpha0;
+                    alphaFbh = EcothermProduct.ConfigAlphaFbh;
+                    su0 = EcothermProduct.ConfigSu0;
+                    lambdaU0 = EcothermProduct.ConfigLambdaU0;
+                    lambdaE = EcothermProduct.ConfigLambdaE;
+                    sr = EcothermProduct.ConfigSr;
+                    sr0 = EcothermProduct.ConfigSr0;
+                    lambdaR = EcothermProduct.ConfigLambdaR;
+                    lambdaR0 = EcothermProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = EcothermProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEcothermLayDistance(this.verlegeart));
+                    rLambdaDecke = EurovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = EurovalProduct.ConfigRLambdaPutz;
+                } else {
+                    su = EurovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = EurovalProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = EurovalProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbh = 1 / EurovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
+                    teilung = EurovalProduct.GetTeilung(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                    alpha0 = EurovalProduct.ConfigAlpha0;
+                    alphaFbh = EurovalProduct.ConfigAlphaFbh;
+                    su0 = EurovalProduct.ConfigSu0;
+                    lambdaU0 = EurovalProduct.ConfigLambdaU0;
+                    lambdaE = EurovalProduct.ConfigLambdaE;
+                    sr = EurovalProduct.ConfigSr;
+                    sr0 = EurovalProduct.ConfigSr0;
+                    lambdaR = EurovalProduct.ConfigLambdaR;
+                    lambdaR0 = EurovalProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                    rLambdaDecke = EurovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = EurovalProduct.ConfigRLambdaPutz;
+                }
 
-				double teilung = EurovalProduct.GetTeilung(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
+                double rLambdaIns = this.ConnectionThrough.Product.PlannedOutsideConstructionRValue;
+                double factor = (this.ConnectionThrough.Product.PlannedInsideConstruction != null && (this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN) || this.ConnectionThrough.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN))) ? faktorTrockenkonstruktion : 1;
 
-				double vorlaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(vorlaufTempIn, vorlaufTempOut, this.room.RoomHeatTemperature);
-				double vorlaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
-				double vorlaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
-				double vorlaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(vorlaufSystemabhaengigerKoeffizient, vorlaufPotenzProdukt);
-				double vorlaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(vorlaufWaermedurchgangsKoeffizient, vorlaufHeizmitteluebertemperatur) * factor;
-				double vorlaufHeatLoad = vorlaufWaermestromDichte * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
-				double vorlaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, vorlaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                double vorlaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeVorlauf / totalPipeLength);
+                double vorlaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterVorlauf / totalPipeLength);
+                double ruecklaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeRuecklauf / totalPipeLength);
+                double ruecklaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterRuecklauf / totalPipeLength);
 
-				double ruecklaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(ruecklaufTempIn, ruecklaufTempOut, this.room.RoomHeatTemperature);
-				double ruecklaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
-				double ruecklaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbh, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
-				double ruecklaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(ruecklaufSystemabhaengigerKoeffizient, ruecklaufPotenzProdukt);
-				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur) * factor;
-				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
-				double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                double vorlaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(vorlaufTempIn, vorlaufTempOut, this.room.RoomHeatTemperature);
+                double vorlaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
+                double vorlaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, sr, sr0, lambdaR, lambdaR0);
+                double vorlaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(vorlaufSystemabhaengigerKoeffizient, vorlaufPotenzProdukt);
+                double vorlaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(vorlaufWaermedurchgangsKoeffizient, vorlaufHeizmitteluebertemperatur) * factor;
+                double vorlaufHeatLoad = vorlaufWaermestromDichte * this.vorlauf / pipeLengthPerSqm;
+                double vorlaufQU = EN1264.Instance.WaermeverlustAussen(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, vorlaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.vorlauf / pipeLengthPerSqm;
+
+                double ruecklaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(ruecklaufTempIn, ruecklaufTempOut, this.room.RoomHeatTemperature);
+                double ruecklaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
+                double ruecklaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, sr, sr0, lambdaR, lambdaR0);
+                double ruecklaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(ruecklaufSystemabhaengigerKoeffizient, ruecklaufPotenzProdukt);
+                double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur) * factor;
+                double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / pipeLengthPerSqm;
+                double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomHeatTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowHeat) * this.ruecklauf / pipeLengthPerSqm;
 
 				if (!double.IsNaN(vorlaufHeatLoad)) {
 					heatLoadRoom += vorlaufHeatLoad;
@@ -838,34 +1029,103 @@ namespace Europlan.Common {
 					totalPipeLength += this.vorlauf;
 				}
 
-				double su = 0.035; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                double su;
+                double lambdaU;
+                double faktorTrockenkonstruktion;
+                double rAlphaDeckeFbk;
+                double teilung;
+                double alpha0;
+                double alphaFbk;
+                double su0;
+                double lambdaU0;
+                double lambdaE;
+                double sr;
+                double sr0;
+                double lambdaR;
+                double lambdaR0;
+                double pipeLengthPerSqm;
+                double rLambdaDecke;
+                double rLambdaPutz;
+
+                if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
+                    su = JumbovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = JumbovalProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = JumbovalProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbk = 1 / JumbovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
+                    teilung = JumbovalProduct.GetTeilung(ConnectionPipe.GetJumbovalLayDistance(this.verlegeart));
+                    alpha0 = JumbovalProduct.ConfigAlpha0;
+                    alphaFbk = JumbovalProduct.ConfigAlphaFbk;
+                    su0 = JumbovalProduct.ConfigSu0;
+                    lambdaU0 = JumbovalProduct.ConfigLambdaU0;
+                    lambdaE = JumbovalProduct.ConfigLambdaE;
+                    sr = JumbovalProduct.ConfigSr;
+                    sr0 = JumbovalProduct.ConfigSr0;
+                    lambdaR = JumbovalProduct.ConfigLambdaR;
+                    lambdaR0 = JumbovalProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = JumbovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetJumbovalLayDistance(this.verlegeart));
+                    rLambdaDecke = JumbovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = JumbovalProduct.ConfigRLambdaPutz;
+                } else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
+                    su = EcothermProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = EcothermProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = EcothermProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbk = 1 / EcothermProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
+                    teilung = EcothermProduct.GetTeilung(ConnectionPipe.GetEcothermLayDistance(this.verlegeart));
+                    alpha0 = EcothermProduct.ConfigAlpha0;
+                    alphaFbk = EcothermProduct.ConfigAlphaFbk;
+                    su0 = EcothermProduct.ConfigSu0;
+                    lambdaU0 = EcothermProduct.ConfigLambdaU0;
+                    lambdaE = EcothermProduct.ConfigLambdaE;
+                    sr = EcothermProduct.ConfigSr;
+                    sr0 = EcothermProduct.ConfigSr0;
+                    lambdaR = EcothermProduct.ConfigLambdaR;
+                    lambdaR0 = EcothermProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = EcothermProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEcothermLayDistance(this.verlegeart));
+                    rLambdaDecke = EurovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = EurovalProduct.ConfigRLambdaPutz;
+                } else {
+                    su = EurovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    lambdaU = EurovalProduct.ConfigLambdaU;  /* Estrich??? */
+                    faktorTrockenkonstruktion = EurovalProduct.ConfigFaktorTrockenkonstruktion;
+                    rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
+                    teilung = EurovalProduct.GetTeilung(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                    alpha0 = EurovalProduct.ConfigAlpha0;
+                    alphaFbk = EurovalProduct.ConfigAlphaFbk;
+                    su0 = EurovalProduct.ConfigSu0;
+                    lambdaU0 = EurovalProduct.ConfigLambdaU0;
+                    lambdaE = EurovalProduct.ConfigLambdaE;
+                    sr = EurovalProduct.ConfigSr;
+                    sr0 = EurovalProduct.ConfigSr0;
+                    lambdaR = EurovalProduct.ConfigLambdaR;
+                    lambdaR0 = EurovalProduct.ConfigLambdaR0;
+                    pipeLengthPerSqm = EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+                    rLambdaDecke = EurovalProduct.ConfigRLambdaDecke;
+                    rLambdaPutz = EurovalProduct.ConfigRLambdaPutz;
+                }
+                
 				double rLambdaB = this.ConnectionThrough.Product.PlannedInsideConstructionRValue;
 				double rLambdaIns = this.ConnectionThrough.Product.PlannedOutsideConstructionRValue;
-				double lambdaU = 1.2; /* Estrich??? */
-				double rAlphaDeckeFbk = 1 / EurovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Kühlung */
 
 				double vorlaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeVorlauf / totalPipeLength);
 				double vorlaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterVorlauf / totalPipeLength);
 				double ruecklaufTempIn = distributorTempOut - (distributorSpreizung * pipeBeforeRuecklauf / totalPipeLength);
 				double ruecklaufTempOut = distributorTempOut - distributorSpreizung + (distributorSpreizung * pipeAfterRuecklauf / totalPipeLength);
 
-				double teilung = EurovalProduct.GetTeilung(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
-
 				double vorlaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(vorlaufTempIn, vorlaufTempOut, this.room.RoomCoolTemperature);
-				double vorlaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
-				double vorlaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+				double vorlaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
+				double vorlaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, sr, sr0, lambdaR, lambdaR0);
 				double vorlaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(vorlaufSystemabhaengigerKoeffizient, vorlaufPotenzProdukt);
 				double vorlaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(vorlaufWaermedurchgangsKoeffizient, vorlaufHeizmitteluebertemperatur);
-				double vorlaufHeatLoad = vorlaufWaermestromDichte * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
-				double vorlaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, vorlaufWaermestromDichte, this.room.RoomCoolTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowCool) * this.vorlauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+				double vorlaufHeatLoad = vorlaufWaermestromDichte * this.vorlauf / pipeLengthPerSqm;
+				double vorlaufQU = EN1264.Instance.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, vorlaufWaermestromDichte, this.room.RoomCoolTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowCool) * this.vorlauf / pipeLengthPerSqm;
 
 				double ruecklaufHeizmitteluebertemperatur = EN1264.Instance.Heizmitteluebertemperatur(ruecklaufTempIn, ruecklaufTempOut, this.room.RoomCoolTemperature);
-				double ruecklaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
-				double ruecklaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, EurovalProduct.ConfigAlpha0, EurovalProduct.ConfigAlphaFbk, EurovalProduct.ConfigSu0, EurovalProduct.ConfigLambdaU0, EurovalProduct.ConfigLambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, EurovalProduct.ConfigSr, EurovalProduct.ConfigSr0, EurovalProduct.ConfigLambdaR, EurovalProduct.ConfigLambdaR0);
+				double ruecklaufPotenzProdukt = EN1264.Instance.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor);
+				double ruecklaufSystemabhaengigerKoeffizient = EN1264.Instance.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, teilung, su, this.RohrAussenD, this.Geometriefaktor, sr, sr0, lambdaR, lambdaR0);
 				double ruecklaufWaermedurchgangsKoeffizient = EN1264.Instance.WaermedurchgangsKoeffizientRohr(ruecklaufSystemabhaengigerKoeffizient, ruecklaufPotenzProdukt);
 				double ruecklaufWaermestromDichte = EN1264.Instance.WaermestromDichteRohr(ruecklaufWaermedurchgangsKoeffizient, ruecklaufHeizmitteluebertemperatur);
-				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
-				double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(EurovalProduct.ConfigAlphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, EurovalProduct.ConfigRLambdaDecke, EurovalProduct.ConfigRLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomCoolTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowCool) * this.ruecklauf / EurovalProduct.GetPipeLengthPerSqm(ConnectionPipe.GetEurovalLayDistance(this.verlegeart));
+				double ruecklaufHeatLoad = ruecklaufWaermestromDichte * this.ruecklauf / pipeLengthPerSqm;
+				double ruecklaufQU = EN1264.Instance.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, ruecklaufWaermestromDichte, this.room.RoomCoolTemperature, this.ConnectionThrough.Product.PlannedRoomTemperatureBelowCool) * this.ruecklauf / pipeLengthPerSqm;
 
 				if (!double.IsNaN(vorlaufHeatLoad)) {
 					coolLoadRoom += vorlaufHeatLoad;
