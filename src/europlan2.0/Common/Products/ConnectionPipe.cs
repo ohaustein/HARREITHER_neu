@@ -11,6 +11,7 @@ namespace Europlan.Common {
 			private static readonly string euroval = EuroplanRes.ConnectionPipe_Euroval; //"Euroval FBH 24/17"
 			private static readonly string rundrohr = EuroplanRes.ConnectionPipe_Rundrohr; //"21mm Rundrohr"
 			private static readonly string ecotherm = EuroplanRes.ConnectionPipe_Ecotherm; //"Ecotherm FBH"
+			private static readonly string jumboval = EuroplanRes.ConnectionPipe_Jumboval; //"Jumboval FBH"
 
 			private Dictionary<string, PipeTypeEnum> mappingFromString = new Dictionary<string, PipeTypeEnum>();
 			private Dictionary<PipeTypeEnum, string> mappingToString = new Dictionary<PipeTypeEnum, string>();
@@ -19,9 +20,11 @@ namespace Europlan.Common {
 				mappingFromString.Add(euroval, PipeTypeEnum.PT_EUROVAL);
 				mappingFromString.Add(rundrohr, PipeTypeEnum.PT_21MM);
 				mappingFromString.Add(ecotherm, PipeTypeEnum.PT_ECOTHERM);
+				mappingFromString.Add(jumboval, PipeTypeEnum.PT_JUMBOVAL);
 				mappingToString.Add(PipeTypeEnum.PT_EUROVAL, euroval);
 				mappingToString.Add(PipeTypeEnum.PT_21MM, rundrohr);
 				mappingToString.Add(PipeTypeEnum.PT_ECOTHERM, ecotherm);
+				mappingToString.Add(PipeTypeEnum.PT_JUMBOVAL, jumboval);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -486,6 +489,8 @@ namespace Europlan.Common {
 					return EurovalProduct.ConfigRohrAussenD;
 				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
 					return EcothermProduct.ConfigRohrAussenD;
+				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
+					return JumbovalProduct.ConfigRohrAussenD;
 				} else {
 					return Product.rundrohr21mmAussenD;
 				}
@@ -499,6 +504,8 @@ namespace Europlan.Common {
 					return EurovalProduct.ConfigRohrInnenD;
 				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
 					return EcothermProduct.ConfigRohrInnenD;
+				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
+					return JumbovalProduct.ConfigRohrInnenD;
 				} else {
 					return Product.rundrohr21mmInnenD;
 				}
@@ -512,6 +519,8 @@ namespace Europlan.Common {
 					return EurovalProduct.ConfigRohrInnenA;
 				} else if (this.pipeType == PipeTypeEnum.PT_ECOTHERM) {
 					return EcothermProduct.ConfigRohrInnenA;
+				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
+					return JumbovalProduct.ConfigRohrInnenA;
 				} else {
 					return Product.rundrohr21mmInnenA;
 				}

@@ -13,7 +13,7 @@ namespace Europlan.Common {
 
 	[Serializable()]
 	[ProductName("Product_JumbovalName", "Product_JumbovalFullName")]
-	public class JumbovalProduct : Product /*, ProductWithInsulationConstruction, IPipeProduct<JumbovalProduct.JumbovalLayDistance, JumbovalProduct.JumbovalRimType>*/ {
+	public class JumbovalProduct : Product , ProductWithInsulationConstruction, IPipeProduct<JumbovalProduct.JumbovalLayDistance, JumbovalProduct.JumbovalRimType> {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(JumbovalProduct));
 

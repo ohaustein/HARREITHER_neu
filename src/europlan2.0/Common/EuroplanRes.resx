@@ -264,6 +264,9 @@
   <data name="ConnectionPipe_Euroval" xml:space="preserve">
     <value>Euroval FBH 24/17</value>
   </data>
+  <data name="ConnectionPipe_Jumboval" xml:space="preserve">
+    <value>Jumboval FBH</value>
+  </data>	
   <data name="ConnectionPipe_Gedaemmt" xml:space="preserve">
     <value>VL+RL</value>
   </data>

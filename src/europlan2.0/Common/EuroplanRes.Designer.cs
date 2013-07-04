@@ -486,6 +486,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jumboval FBH.
+        /// </summary>
+        internal static string ConnectionPipe_Jumboval {
+            get {
+                return ResourceManager.GetString("ConnectionPipe_Jumboval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to keine.
         /// </summary>
         internal static string ConnectionPipe_KeineDaemmung {
