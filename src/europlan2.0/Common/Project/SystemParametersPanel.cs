@@ -149,7 +149,7 @@ namespace Europlan.Common {
 			this.lblEcothermSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
 			this.lblEcothermSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
 
-            this.tabJumboval.Text = EuroplanRes.SystemParametersPanel_Jumboval; //"Euroval®"
+            this.tabJumboval.Text = EuroplanRes.SystemParametersPanel_Jumboval; //"Jumboval®"
             this.lblJumbovalViskositaet.Text = EuroplanRes.SystemParametersPanel_Viskositaet; //"kinematische Viskosität:"
             this.lblJumbovalWaermekapazitaet.Text = EuroplanRes.SystemParametersPanel_Waermekapazitaet; //"spezifische Wärmekapazität:"
             this.lblJumbovalDichte.Text = EuroplanRes.SystemParametersPanel_Dichte; //"Dichte des Mediums:"

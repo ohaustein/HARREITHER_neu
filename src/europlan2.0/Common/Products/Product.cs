@@ -1510,7 +1510,9 @@ namespace Europlan.Common {
 						}
 						ovalMuffeEuroval += pipe.AreaTotal * EurovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
 					}
-				}
+                } else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL) {
+                    #warning TODO Materialbedarf für Jumboval Anbindeleitungen implementieren
+                }
 			}
 
 			// materials for 21mm pipe

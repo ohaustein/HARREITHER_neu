@@ -238,9 +238,6 @@ namespace Europlan.Common {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
 		}
-		public static double ConfigMaxMassenstrom {
-			get { return maxDurchfluss; }
-		}
 
 		[IntProductParameter(40)]
 		public static int ConfigModulesInCircuit {
@@ -308,7 +305,26 @@ namespace Europlan.Common {
 		}
 		#endregion Product Parameters
 
-		public override int GetDefaultQuickDimensioningCircuits() {
+        public double MaxDurchfluss {
+            get {
+                if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE) {
+                    return ModulKlimaBodenProduct.ConfigMaxDurchfluss;
+                }
+                Product p = this;
+                while (p != null && p.PlannedConnection != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && p.PlannedConnection.OtherProduct != null) {
+                    p = p.PlannedConnection.OtherProduct.Product;
+                }
+                if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null) {
+                    return this.PlannedConnection.Distributor.MaxDurchfluss;
+                }
+                return ModulKlimaBodenProduct.ConfigMaxDurchfluss;
+            }
+        }
+        public double MaxMassenstrom {
+            get { return MaxDurchfluss * ModulKlimaBodenProduct.ConfigRho / 1000; }
+        }
+
+        public override int GetDefaultQuickDimensioningCircuits() {
 			return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
 		}
 
@@ -576,10 +592,10 @@ namespace Europlan.Common {
 				if (this.PlannedDeltaRhoCool > ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0) {
 					found = false;
 				}
-				if (this.PlannedMaxMhHeat > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (this.PlannedMaxMhHeat > MaxMassenstrom) {
 					found = false;
 				}
-				if (this.PlannedMaxMhCool > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (this.PlannedMaxMhCool > MaxMassenstrom) {
 					found = false;
 				}
 
@@ -602,7 +618,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempHeat += 0.1;
 				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
+				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaBodenProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < MaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 					this.plannedRuecklaufTempHeat += 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -617,7 +633,7 @@ namespace Europlan.Common {
 				}
 				this.plannedRuecklaufTempCool -= 0.1;
 				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < ModulKlimaBodenProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaBodenProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaBodenProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < MaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 					this.plannedRuecklaufTempCool -= 0.1;
 					foreach (ModulBodenCircuit c in this.circuits) {
 						c.Calculate();
@@ -663,17 +679,17 @@ namespace Europlan.Common {
 				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > MaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else if (this.requestedCoolLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > ModulKlimaBodenProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhCool, 1) > MaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBodenProduct.ConfigMaxMassenstrom.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}

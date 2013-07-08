@@ -623,9 +623,6 @@ namespace Europlan.Common {
 			get { return maxDurchfluss; }
 			set { maxDurchfluss = value; }
 		}
-		public static double ConfigMaxMassenstrom {
-			get { return maxDurchfluss * rho / 1000; }
-		}
 
 		[DoubleProductParameter(4)]
 		public static double ConfigSpreizungHeizMin {
@@ -651,6 +648,25 @@ namespace Europlan.Common {
 			set { spreizungKuehlMax = value; }
 		}
 		#endregion Product Parameters
+
+        public double MaxDurchfluss {
+            get {
+                if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE) {
+                    return EurovalProduct.ConfigMaxDurchfluss;
+                }
+                Product p = this;
+                while (p != null && p.PlannedConnection != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && p.PlannedConnection.OtherProduct != null) {
+                    p = p.PlannedConnection.OtherProduct.Product;
+                }
+                if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null) {
+                    return this.PlannedConnection.Distributor.MaxDurchfluss;
+                }
+                return EurovalProduct.ConfigMaxDurchfluss;
+            }
+        }
+        public double MaxMassenstrom {
+            get { return MaxDurchfluss * EurovalProduct.ConfigRho / 1000; }
+        }
 
 		/// <summary>
 		/// Returns the default number of circuit for the planned area (for quick dimensioning)
@@ -1858,10 +1874,10 @@ namespace Europlan.Common {
 						if (this.PlannedDeltaRhoCool > EurovalProduct.ConfigMaxPressureLost / 100.0) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhHeat > EurovalProduct.ConfigMaxMassenstrom) {
+						if (this.PlannedMaxMhHeat > MaxMassenstrom) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhCool > EurovalProduct.ConfigMaxMassenstrom) {
+						if (this.PlannedMaxMhCool > MaxMassenstrom) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
@@ -1953,7 +1969,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempHeat += 0.1;
 					// Heizleistung erhöhen
-					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < EurovalProduct.ConfigMaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
+					while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > EurovalProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < EurovalProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < MaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
 						this.plannedRuecklaufTempHeat += 0.1;
 						foreach (EurovalCircuit ec in this.circuits) {
 							ec.Calculate(bestLaydistance.Value, bestRimType);
@@ -1969,7 +1985,7 @@ namespace Europlan.Common {
 					}
 					this.plannedRuecklaufTempCool -= 0.1;
 					// Kühlleistung erhöhen
-					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < EurovalProduct.ConfigMaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
+					while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > EurovalProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < EurovalProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < MaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
 						this.plannedRuecklaufTempCool -= 0.1;
 						i = 0;
 						foreach (EurovalCircuit ec in this.circuits) {
@@ -2030,17 +2046,17 @@ namespace Europlan.Common {
 				this.lastErrorMsg += newMsg + "\n";
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > EurovalProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhHeat, 1) > MaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", EurovalProduct.ConfigMaxMassenstrom.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			} else if (this.requestedCoolLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > EurovalProduct.ConfigMaxMassenstrom) {
+				if (Math.Round(this.PlannedMaxMhCool, 1) > MaxMassenstrom) {
 					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
 					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", EurovalProduct.ConfigMaxMassenstrom.ToString());
+					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}

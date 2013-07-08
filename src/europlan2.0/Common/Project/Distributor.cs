@@ -77,6 +77,12 @@ namespace Europlan.Common {
 			hollaenderIG
 		}
 
+        public enum DistributorTypeEnum {
+            DT_140,
+            DT_240,
+            DT_480
+        }
+
 #endregion
 
 		private string id;
@@ -93,6 +99,7 @@ namespace Europlan.Common {
 		private bool useForFloor;
 		private bool useForWall;
 		private bool useForCeiling;
+        private DistributorTypeEnum distributorType;
 
 		private List<string> additionalFloors;
 		private List<GraphicalRepresentation> graphicalRepresentations;
@@ -217,6 +224,39 @@ namespace Europlan.Common {
 				return null;
 			}
 		}
+
+        public DistributorTypeEnum DistributorType {
+            get { return distributorType; }
+            set { distributorType = value; }
+        }
+
+        public int MaxCircuitsForType {
+            get {
+                switch (distributorType) {
+                    case DistributorTypeEnum.DT_480:
+                        return 8;
+                    case DistributorTypeEnum.DT_140:
+                    case DistributorTypeEnum.DT_240:
+                    default:
+                        return 12;
+                }
+            }
+        }
+
+        public double MaxDurchfluss {
+            get {
+                switch (distributorType) {
+                    case DistributorTypeEnum.DT_140:
+                        return 140;
+                    case DistributorTypeEnum.DT_240:
+                        return 240;
+                    case DistributorTypeEnum.DT_480:
+                        return 480;
+                    default:
+                        return 0;
+                }
+            }
+        }
 
 		public int MaxCircuits {
 			get { return maxCircuits; }
