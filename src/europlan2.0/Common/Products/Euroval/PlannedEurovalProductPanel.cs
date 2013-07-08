@@ -804,9 +804,10 @@ namespace Europlan.Common {
 					this.extendedCorrectionsGrid.UpdateControl(true, true);
 				}
 
-				this.tabs.TabPages.Remove(pageCorrections);
-
 				if (graphicalMode) {
+					if (this.tabs.TabPages.Contains(pageCorrections)) {
+						this.tabs.TabPages.Remove(pageCorrections);
+					}
 					this.numArea.Enabled = false;
 					this.numAreaPercentage.Enabled = false;
 					this.numAreaReduced.Enabled = false;
@@ -818,7 +819,9 @@ namespace Europlan.Common {
 					this.cmbCircuits.Enabled = false;
 					this.btnGraphical.Enabled = true;
 				} else {
-					this.tabs.TabPages.Add(pageCorrections);
+					if (!this.tabs.TabPages.Contains(pageCorrections)) {
+						this.tabs.TabPages.Add(pageCorrections);
+					}
 					this.numArea.Enabled = true;
 					this.numAreaPercentage.Enabled = true;
 					this.numAreaReduced.Enabled = true;
