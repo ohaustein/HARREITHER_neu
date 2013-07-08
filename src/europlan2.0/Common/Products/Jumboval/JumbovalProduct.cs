@@ -681,7 +681,11 @@ namespace Europlan.Common {
 		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
 		/// </summary>
 		public static double GetClipschienePerSqm(JumbovalLayDistance distance, bool anhydritEstrich) {
-			if (anhydritEstrich) {
+			return 0;
+
+			// keine clipschiene bei jumboval
+
+			/*if (anhydritEstrich) {
 				return 2;
 			} else {
 				switch (distance) {
@@ -698,7 +702,7 @@ namespace Europlan.Common {
 					default:
 						throw new Exception("Unknown Laydistance");
 				}
-			}
+			}*/
 		}
 
 		public static double GetOvalmuffePerSqm(JumbovalLayDistance layDistance) {
@@ -789,12 +793,12 @@ namespace Europlan.Common {
 
 		public bool UseClipSchieneKlebeband {
 			get { return clipSchieneKlebeband; }
-			set { clipSchieneKlebeband = value; }
+			set { /*clipSchieneKlebeband = value;*/ }
 		}
 
 		public bool UseAnhydritEstrich {
 			get { return anhydritEstrich; }
-			set { anhydritEstrich = value; }
+			set { /*anhydritEstrich = value;*/ }
 		}
 
 		#region QuickDimensioning
@@ -2136,9 +2140,12 @@ namespace Europlan.Common {
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
 
+			double amount = 0;
+
+			/* keine clipschiene bei jumboval
 			// Clipschiene
 			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
-			double amount = 0;
+			
 			if (this.PlannedLayDistance.HasValue) {
 				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			}
@@ -2146,7 +2153,8 @@ namespace Europlan.Common {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
-
+			*/
+			 
 			// Ovalmuffe
 			amount = 0;
 			if (this.PlannedLayDistance.HasValue) {
