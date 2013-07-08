@@ -293,16 +293,20 @@ namespace Europlan.Common {
 
 				JumbovalProduct jvProduct = this.product.Product as JumbovalProduct;
 
-				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
+				// at the moment, no graphical mode is available
+				this.rbLayoutGraphical.Enabled = false;
+				this.rbLayoutTable.Enabled = true;
+
+				/*if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
 					this.rbLayoutTable.Enabled = true;
 					this.rbLayoutGraphical.Enabled = true;
 				} else {
 					this.rbLayoutTable.Enabled = false;
 					this.rbLayoutGraphical.Enabled = false;
-				}
+				}*/
 
 				bool graphicalMode = false;
-				if (this.product.Product.GraphicalMode.HasValue) {
+				/*if (this.product.Product.GraphicalMode.HasValue) {
 					graphicalMode = this.product.Product.GraphicalMode.Value;
 				} else {
 					if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.RoomCoordinates.Count > 0) {
@@ -323,7 +327,7 @@ namespace Europlan.Common {
 						graphicalMode = false;
 						this.product.Product.GraphicalMode = false;
 					}
-				}
+				}*/
 
 				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
 					if (graphicalMode) {
