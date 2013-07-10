@@ -52,6 +52,7 @@ namespace Europlan.Common {
 			this.label13.Text = EuroplanRes.DistributorPanel_ZugewieseneHeizkreise; //"zugewiesene Heizkreise: "
 			this.lblCircuits.Text = EuroplanRes.DistributorPanel_Aktiv.Replace("%VALUE%", "7"); //"7 (aktiv)"
 			this.btnGraphicalPosition.Text = EuroplanRes.DistributorPanel_GraphicalPosition; //"Grafische Positionierung"
+            this.lblMaximaldurchfluss.Text = EuroplanRes.DistributorPanel_Maximaldurchfluss; //"Maximaldurchfluß:"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -70,6 +71,10 @@ namespace Europlan.Common {
 				foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
 					this.cmbCircuit.Items.Add(circuit);
 				}
+                this.cmbMaximaldurchfluss.Items.Clear();
+                foreach (Distributor.DistributorTypeEnum item in Enum.GetValues(typeof(Distributor.DistributorTypeEnum))) {
+                    this.cmbMaximaldurchfluss.Items.Add(item);
+                }
 				this.cmbAnschlussHollaender.Items.Clear();
 				foreach (Distributor.AnschlussHollaenderEnum item in Enum.GetValues(typeof(Distributor.AnschlussHollaenderEnum))) {
 					this.cmbAnschlussHollaender.Items.Add(item);
@@ -85,6 +90,8 @@ namespace Europlan.Common {
 				this.lstSystems.Items.Add(EuroplanRes.DistributorPanel_Wand, distributor.UseForWall);
 				this.lstSystems.Items.Add(EuroplanRes.DistributorPanel_Decke, distributor.UseForCeiling);
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
+                this.cmbMaximaldurchfluss.SelectedItem = distributor.DistributorType;
+                this.numMaxCircuits.Maximum = distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 ? 8 : 12;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
 
 				this.btnGraphicalPosition.Enabled = distributor.AssociatedFloor.AssociatedPlanId != null && distributor.AssociatedFloor.AssociatedPlanId != "";
@@ -223,7 +230,20 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void cmbAnschlussHollaender_SelectedIndexChanged(object sender, EventArgs e) {
+        private void cmbMaximaldurchfluss_SelectedIndexChanged(object sender, EventArgs e) {
+            distributor.DistributorType = (Distributor.DistributorTypeEnum)this.cmbMaximaldurchfluss.SelectedItem;
+            numMaxCircuits.Maximum = distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 ? 8 : 12;
+            if (distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 && distributor.MaxCircuits > 8) {
+                distributor.MaxCircuits = 8;
+                numMaxCircuits.Value = 8;
+            }
+            // TODO: maybe all products that are connected to this distributor should be recalculated???
+            if (this.projectChanged != null) {
+                this.projectChanged(null);
+            }
+        }
+
+        private void cmbAnschlussHollaender_SelectedIndexChanged(object sender, EventArgs e) {
 			distributor.AnschlussHollaender = (Distributor.AnschlussHollaenderEnum)this.cmbAnschlussHollaender.SelectedItem;
 			if (this.projectChanged != null) {
 				this.projectChanged(null);

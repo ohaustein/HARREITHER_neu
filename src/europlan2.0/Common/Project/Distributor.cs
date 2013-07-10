@@ -70,6 +70,51 @@ namespace Europlan.Common {
 			}
 		}
 
+        public class DistributorTypeEnumConverter : System.ComponentModel.TypeConverter {
+
+			private static readonly string volxx_140 = EuroplanRes.Distributor_Type140;
+            private static readonly string voxx_240 = EuroplanRes.Distributor_Type240;
+            private static readonly string vohxx_480 = EuroplanRes.Distributor_Type480;
+
+            private Dictionary<string, DistributorTypeEnum> mappingFromString = new Dictionary<string, DistributorTypeEnum>();
+            private Dictionary<DistributorTypeEnum, string> mappingToString = new Dictionary<DistributorTypeEnum, string>();
+
+            public DistributorTypeEnumConverter() {
+                mappingFromString.Add(volxx_140, DistributorTypeEnum.DT_140);
+                mappingFromString.Add(voxx_240, DistributorTypeEnum.DT_240);
+                mappingFromString.Add(vohxx_480, DistributorTypeEnum.DT_480);
+                mappingToString.Add(DistributorTypeEnum.DT_140, volxx_140);
+                mappingToString.Add(DistributorTypeEnum.DT_240, voxx_240);
+                mappingToString.Add(DistributorTypeEnum.DT_480, vohxx_480);
+			}
+
+			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
+				return sourceType == typeof(string);
+			}
+
+			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
+				return destinationType == typeof(string);
+			}
+
+			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
+				if (value is string) {
+					if (mappingFromString.ContainsKey((string)value)) {
+						return mappingFromString[(string)value];
+					}
+				}
+				return base.ConvertFrom(context, culture, value);
+			}
+
+			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
+                if (value is DistributorTypeEnum && destinationType == typeof(string)) {
+                    if (mappingToString.ContainsKey((DistributorTypeEnum)value)) {
+                        return mappingToString[(DistributorTypeEnum)value];
+					}
+				}
+				return base.ConvertTo(context, culture, value, destinationType);
+			}
+        }
+
 		[System.ComponentModel.TypeConverter(typeof(AnschlussHollaenderEnumConverter))]
 		public enum AnschlussHollaenderEnum {
 			Kein,
@@ -77,6 +122,7 @@ namespace Europlan.Common {
 			hollaenderIG
 		}
 
+        [System.ComponentModel.TypeConverter(typeof(DistributorTypeEnumConverter))]
         public enum DistributorTypeEnum {
             DT_140,
             DT_240,
@@ -121,6 +167,7 @@ namespace Europlan.Common {
 			id = "";
 			name = "";
 			regulatorCircuitId = "";
+            distributorType = DistributorTypeEnum.DT_240;
 			anschlussHollaender = AnschlussHollaenderEnum.Kein;
 			langeAnschlussboegen = false;
 			maxCircuits = 12;
@@ -502,6 +549,8 @@ namespace Europlan.Common {
 		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			int totalCircuits = PlannedCircuits + AdditionalCircuits;
 			int totalStellantriebe = PlannedStellAntriebe + ZusaetzlicheStellantriebe;
+
+#warning TODO Materialbedarf anpassen für VOLxx bzw. VOHxx Verteiler
 
 			string partNr = "VO";
 			int circuits = totalCircuits > 2 ? totalCircuits : 2;

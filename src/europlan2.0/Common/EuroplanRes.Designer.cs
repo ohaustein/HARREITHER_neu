@@ -1787,6 +1787,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 140l/h (Serie VOLxx).
+        /// </summary>
+        internal static string Distributor_Type140 {
+            get {
+                return ResourceManager.GetString("Distributor_Type140", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 240l/h (Serie VOxx).
+        /// </summary>
+        internal static string Distributor_Type240 {
+            get {
+                return ResourceManager.GetString("Distributor_Type240", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 480l/h (Serie VOHxx).
+        /// </summary>
+        internal static string Distributor_Type480 {
+            get {
+                return ResourceManager.GetString("Distributor_Type480", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to unbenannt.
         /// </summary>
         internal static string Distributor_Unbenannt {
@@ -1909,6 +1936,15 @@ namespace Europlan.Common {
         internal static string DistributorPanel_LangeAnschlussboegen {
             get {
                 return ResourceManager.GetString("DistributorPanel_LangeAnschlussboegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximaldurchfluß:.
+        /// </summary>
+        internal static string DistributorPanel_Maximaldurchfluss {
+            get {
+                return ResourceManager.GetString("DistributorPanel_Maximaldurchfluss", resourceCulture);
             }
         }
         

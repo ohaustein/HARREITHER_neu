@@ -1803,7 +1803,7 @@ namespace Europlan.Common {
 			EntityColor c = EntityColor.CreateFromRgb(circuitColor.ToArgb());
 
 			Point2D[] polygon = null;
-			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
 					DxfLine line = new DxfLine(c, bottomLeft2D, middle2D);
@@ -1817,7 +1817,7 @@ namespace Europlan.Common {
 					line.Layer = layer;
 					model.Entities.Add(line);
 				}
-			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
 					DxfLine line = new DxfLine(c, bottomRight2D, middle2D);

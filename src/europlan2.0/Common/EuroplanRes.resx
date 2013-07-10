@@ -7196,4 +7196,16 @@ Compact
   <data name="SystemParametersPanel_Jumboval" xml:space="preserve">
     <value>Jumboval®</value>
   </data>
+  <data name="Distributor_Type140" xml:space="preserve">
+    <value>140l/h (Serie VOLxx)</value>
+  </data>
+  <data name="Distributor_Type240" xml:space="preserve">
+    <value>240l/h (Serie VOxx)</value>
+  </data>
+  <data name="Distributor_Type480" xml:space="preserve">
+    <value>480l/h (Serie VOHxx)</value>
+  </data>
+  <data name="DistributorPanel_Maximaldurchfluss" xml:space="preserve">
+    <value>Maximaldurchfluß:</value>
+  </data>
 </root>

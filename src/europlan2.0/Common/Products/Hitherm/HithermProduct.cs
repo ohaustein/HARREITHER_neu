@@ -668,7 +668,7 @@ namespace Europlan.Common {
                     p = p.PlannedConnection.OtherProduct.Product;
                 }
                 if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null) {
-                    return this.PlannedConnection.Distributor.MaxDurchfluss;
+                    return p.PlannedConnection.Distributor.MaxDurchfluss;
                 }
                 return HithermProduct.ConfigMaxDurchfluss;
             }

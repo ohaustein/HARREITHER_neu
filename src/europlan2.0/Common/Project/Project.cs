@@ -75,15 +75,25 @@ namespace Europlan.Common {
 		private string projectEuroplanVersion = null;
 
 		public string EuroplanVersion {
-			get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+			get { return this.EuroplanVersionObj.ToString(); }
 			set {
 				this.projectEuroplanVersion = value;
 			}
 		}
 
+        [XmlIgnore]
+        public Version EuroplanVersionObj {
+            get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version; }
+        }
+
 		[XmlIgnore]
-		public string ProjectEuroplanVersion {
-			get { return this.projectEuroplanVersion == null ? this.EuroplanVersion : this.projectEuroplanVersion; }
+		public Version ProjectEuroplanVersion {
+			get {
+                if (this.projectEuroplanVersion == null) {
+                    return this.EuroplanVersionObj;
+                }
+                return new Version(this.projectEuroplanVersion);
+            }
 		}
 
 		/// <summary>
@@ -293,25 +303,10 @@ namespace Europlan.Common {
 		}
 
 		public bool ProjectVersionCompatible() {
-			string[] projVers = instance.ProjectEuroplanVersion.Split('.');
-			if (projVers.Length == 4) {
-				string[] curVers = instance.EuroplanVersion.Split('.');
+            Version projVers = instance.ProjectEuroplanVersion;
+            Version curVers = instance.EuroplanVersionObj;
 
-				int[] projIntVers = { int.Parse(projVers[0]), int.Parse(projVers[1]), int.Parse(projVers[2]), int.Parse(projVers[3]) };
-				int[] curIntVers = { int.Parse(curVers[0]), int.Parse(curVers[1]), int.Parse(curVers[2]), int.Parse(curVers[3]) };
-
-				if (projIntVers[0] != curIntVers[0]) {
-					return projIntVers[0] < curIntVers[0];
-				}
-				if (projIntVers[1] != curIntVers[1]) {
-					return projIntVers[1] < curIntVers[1];
-				}
-				if (projIntVers[2] != curIntVers[2]) {
-					return projIntVers[2] < curIntVers[2];
-				}
-				return projIntVers[3] <= curIntVers[3];
-			}
-			return true;
+            return projVers.CompareTo(curVers) <= 0;
 		}
 
         public static string AutoSaveFilename(string filename) {
@@ -513,6 +508,38 @@ namespace Europlan.Common {
 					}
 				}
 			}
+            if (Project.Instance.ProjectEuroplanVersion.CompareTo(new Version(3, 0, 18, 0)) < 0) {
+                // change sides of modules in dxf plans
+                foreach (Floor f in Project.Instance.Floors) {
+                    if (f.AssociatedPlan != null && f.AssociatedPlan is CadPlan) {
+                        foreach (Room r in f.Rooms) {
+                            foreach (PlannedProduct pp in r.PlannedProducts) {
+                                if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
+                                    if (pp.Product is ModulKlimaDeckeProduct) {
+                                        ModulKlimaDeckeProduct mkdp = pp.Product as ModulKlimaDeckeProduct;
+                                        foreach (ModulDeckeCircuit circuit in mkdp.PlannedCircuits) {
+                                            foreach (ModulDeckeSubArea subarea in circuit.SubAreas) {
+                                                foreach (KlimaFlaechenList row in subarea.Rows) {
+                                                    foreach (KlimaFlaechenModul m in row.List) {
+                                                        if (m.ModulType != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 && m.ModulType != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+                                                            if (m.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+                                                                m.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                                            } else {
+                                                                m.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+#warning TODO: überprüfen ob Klimaboden-Module auch gedreht werden müssen
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 		}
 
 		internal void FinalizeLoading() {
