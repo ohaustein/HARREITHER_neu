@@ -516,8 +516,7 @@ namespace Europlan.Common {
                             foreach (PlannedProduct pp in r.PlannedProducts) {
                                 if (pp.Product.GraphicalMode.HasValue && pp.Product.GraphicalMode.Value) {
                                     if (pp.Product is ModulKlimaDeckeProduct) {
-                                        ModulKlimaDeckeProduct mkdp = pp.Product as ModulKlimaDeckeProduct;
-                                        foreach (ModulDeckeCircuit circuit in mkdp.PlannedCircuits) {
+                                        foreach (ModulDeckeCircuit circuit in pp.Product.PlannedCircuits) {
                                             foreach (ModulDeckeSubArea subarea in circuit.SubAreas) {
                                                 foreach (KlimaFlaechenList row in subarea.Rows) {
                                                     foreach (KlimaFlaechenModul m in row.List) {
@@ -529,6 +528,16 @@ namespace Europlan.Common {
                                                             }
                                                         }
                                                     }
+                                                }
+                                            }
+                                        }
+                                    } else if (pp.Product is ModulKlimaBodenProduct) {
+                                        foreach (ModulBodenCircuit circuit in pp.Product.PlannedCircuits) {
+                                            foreach (KlimaFlaechenModul m in circuit.Row.List) {
+                                                if (m.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+                                                    m.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                                } else if (m.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+                                                    m.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
                                                 }
                                             }
                                         }

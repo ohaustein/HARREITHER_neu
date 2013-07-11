@@ -2652,7 +2652,7 @@ namespace Europlan.Common {
 			}
 
             Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientationForDrawing = orientation;
-            if (cadPlan) {
+            if (cadPlan || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
                 if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
                     orientationForDrawing = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
                 } else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
@@ -2778,7 +2778,7 @@ namespace Europlan.Common {
 				p.Width = 1.5f;
 			}
 			Brush b = new SolidBrush(Color.FromArgb(c.A / 2, c));
-			if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && !bottomUp) {
+            if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && !bottomUp && orientationForDrawing != null) {
                 orientationForDrawing = (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
 			}
             if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
@@ -2800,9 +2800,6 @@ namespace Europlan.Common {
 				g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft });
 			}
 
-			if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && !bottomUp) {
-                orientationForDrawing = (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
-			}
             if (orientationForDrawing != null) {
 				if (highlight) {
 					g.FillPolygon(b, new PointF[] { directionTop1, directionTop2, directionTop3 });
