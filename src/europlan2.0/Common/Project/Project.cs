@@ -508,7 +508,7 @@ namespace Europlan.Common {
 					}
 				}
 			}
-            if (Project.Instance.ProjectEuroplanVersion.CompareTo(new Version(3, 0, 18, 0)) < 0) {
+            if (Project.Instance.ProjectEuroplanVersion.CompareTo(new Version(3, 0, 17, 2)) < 0) {
                 // change sides of modules in dxf plans
                 foreach (Floor f in Project.Instance.Floors) {
                     if (f.AssociatedPlan != null && f.AssociatedPlan is CadPlan) {
