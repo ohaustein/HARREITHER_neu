@@ -160,15 +160,8 @@ namespace Europlan.Common {
 			this.cmbLayDistance.Items.Add(new LayDistanceItem(JumbovalProduct.JumbovalLayDistance.JV50, EuroplanRes.JumbovalProduct_JV50/*"JV50"*/));
 
 			this.cmbRimType.Items.Add(new RimTypeItem(null, EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV15_60, EuroplanRes.EurovalProduct_EV15_60/*"EV15/60"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV15_120, EuroplanRes.EurovalProduct_EV15_120/*"EV15/120"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV15_180, EuroplanRes.EurovalProduct_EV15_180/*"EV15/180"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV10_55, EuroplanRes.EurovalProduct_EV10_55/*"EV10/55"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV10_110, EuroplanRes.EurovalProduct_EV10_110/*"EV10/110"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV10_165, EuroplanRes.EurovalProduct_EV10_165/*"EV10/165"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV5_40, EuroplanRes.EurovalProduct_EV5_40/*"EV5/40"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV5_80, EuroplanRes.EurovalProduct_EV5_80/*"EV5/80"*/));
-			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.EV5_120, EuroplanRes.EurovalProduct_EV5_120/*"EV5/120"*/));
+			this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.JV20_80, EuroplanRes.JumbovalProduct_JV20_80/*"JV20/80"*/));
+            this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.JV20_100, EuroplanRes.JumbovalProduct_JV20_100/*"JV20/100"*/));
 
 			this.cmbCircuits.Items.Add(EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/);
 			for (int i = 1; i <= 12; i++) {
@@ -568,7 +561,7 @@ namespace Europlan.Common {
 				}
 				if ((skipFields & FieldEnum.RIM_TYPE) == FieldEnum.NONE) {
 					if (jvProduct.RequestedRimType == null && !this.cmbRimTypeContainsAutomatic && !this.cmbRimTypeContainsNone) {
-						jvProduct.RequestedRimType = JumbovalProduct.JumbovalRimType.EV15_60;
+						jvProduct.RequestedRimType = JumbovalProduct.JumbovalRimType.JV20_80;
 					}
 					this.cmbRimType.SelectedItem = new RimTypeItem(this.cmbRimType.Enabled ? jvProduct.RequestedRimType : null, "");
 				}
@@ -609,24 +602,24 @@ namespace Europlan.Common {
 				if (complete && jvProduct.PlannedRimType.HasValue) {
 					switch (jvProduct.PlannedRimLayDistance) {
 						case JumbovalProduct.JumbovalLayDistance.JV20:
-							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV5; //"EV5"
-                            this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV5; //"EV5"
-                            this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV5 + "/" + jvProduct.PlannedRimWidth.ToString(); //"EV5"
+							this.lblRimVaHeat.Text = EuroplanRes.JumbovalProduct_JV20; //"JV20"
+                            this.lblRimVaCool.Text = EuroplanRes.JumbovalProduct_JV20; //"JV20"
+                            this.lblRimVa.Text = EuroplanRes.JumbovalProduct_JV20 + "/" + jvProduct.PlannedRimWidth.ToString(); //"JV20"
                             break;
 						case JumbovalProduct.JumbovalLayDistance.JV30:
-							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV10; //"EV10"
-                            this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV10; //"EV10"
-							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV10 + "/" + jvProduct.PlannedRimWidth.ToString(); //"EV10"
+                            this.lblRimVaHeat.Text = EuroplanRes.JumbovalProduct_JV30; //"JV30"
+                            this.lblRimVaCool.Text = EuroplanRes.JumbovalProduct_JV30; //"JV30"
+                            this.lblRimVa.Text = EuroplanRes.JumbovalProduct_JV30 + "/" + jvProduct.PlannedRimWidth.ToString(); //"JV30"
                             break;
 						case JumbovalProduct.JumbovalLayDistance.JV40:
-							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV15; //"EV15"
-                            this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV15; //"EV15"
-							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV15 + "/" + jvProduct.PlannedRimWidth.ToString(); //"EV15"
+                            this.lblRimVaHeat.Text = EuroplanRes.JumbovalProduct_JV40; //"JV40"
+                            this.lblRimVaCool.Text = EuroplanRes.JumbovalProduct_JV40; //"JV40"
+                            this.lblRimVa.Text = EuroplanRes.JumbovalProduct_JV40 + "/" + jvProduct.PlannedRimWidth.ToString(); //"JV40"
                             break;
 						case JumbovalProduct.JumbovalLayDistance.JV50:
-							this.lblRimVaHeat.Text = EuroplanRes.EurovalProduct_EV20; //"EV20"
-                            this.lblRimVaCool.Text = EuroplanRes.EurovalProduct_EV20; //"EV20"
-							this.lblRimVa.Text = EuroplanRes.EurovalProduct_EV20 + "/" + jvProduct.PlannedRimWidth.ToString(); //"EV20"
+                            this.lblRimVaHeat.Text = EuroplanRes.JumbovalProduct_JV50; //"JV50"
+                            this.lblRimVaCool.Text = EuroplanRes.JumbovalProduct_JV50; //"JV50"
+                            this.lblRimVa.Text = EuroplanRes.JumbovalProduct_JV50 + "/" + jvProduct.PlannedRimWidth.ToString(); //"JV50"
                             break;
 						default:
 							this.lblRimVaHeat.Text = "--";
@@ -656,24 +649,24 @@ namespace Europlan.Common {
 				if (complete && jvProduct.PlannedLayDistance.HasValue) {
 					switch (jvProduct.PlannedLayDistance) {
 						case JumbovalProduct.JumbovalLayDistance.JV20:
-							this.lblResidenceVaHeat.Text = EuroplanRes.EurovalProduct_EV5; //"EV5"
-							this.lblResidenceVaCool.Text = EuroplanRes.EurovalProduct_EV5; //"EV5"
-                            this.lblResidenceVa.Text = EuroplanRes.EurovalProduct_EV5; //"EV5"
+                            this.lblResidenceVaHeat.Text = EuroplanRes.JumbovalProduct_JV20; //"JV20"
+                            this.lblResidenceVaCool.Text = EuroplanRes.JumbovalProduct_JV20; //"JV20"
+                            this.lblResidenceVa.Text = EuroplanRes.JumbovalProduct_JV20; //"JV20"
 							break;
 						case JumbovalProduct.JumbovalLayDistance.JV30:
-							this.lblResidenceVaHeat.Text = EuroplanRes.EurovalProduct_EV10; //"EV10"
-							this.lblResidenceVaCool.Text = EuroplanRes.EurovalProduct_EV10; //"EV10"
-                            this.lblResidenceVa.Text = EuroplanRes.EurovalProduct_EV10; //"EV10"
+                            this.lblResidenceVaHeat.Text = EuroplanRes.JumbovalProduct_JV30; //"JV30"
+                            this.lblResidenceVaCool.Text = EuroplanRes.JumbovalProduct_JV30; //"JV30"
+                            this.lblResidenceVa.Text = EuroplanRes.JumbovalProduct_JV30; //"JV30"
                             break;
 						case JumbovalProduct.JumbovalLayDistance.JV40:
-							this.lblResidenceVaHeat.Text = EuroplanRes.EurovalProduct_EV15; //"EV15"
-							this.lblResidenceVaCool.Text = EuroplanRes.EurovalProduct_EV15; //"EV15"
-                            this.lblResidenceVa.Text = EuroplanRes.EurovalProduct_EV15; //"EV15"
+                            this.lblResidenceVaHeat.Text = EuroplanRes.JumbovalProduct_JV40; //"JV40"
+                            this.lblResidenceVaCool.Text = EuroplanRes.JumbovalProduct_JV40; //"JV40"
+                            this.lblResidenceVa.Text = EuroplanRes.JumbovalProduct_JV40; //"JV40"
                             break;
 						case JumbovalProduct.JumbovalLayDistance.JV50:
-							this.lblResidenceVaHeat.Text = EuroplanRes.EurovalProduct_EV20; //"EV20"
-							this.lblResidenceVaCool.Text = EuroplanRes.EurovalProduct_EV20; //"EV20"
-                            this.lblResidenceVa.Text = EuroplanRes.EurovalProduct_EV20; //"EV20"
+                            this.lblResidenceVaHeat.Text = EuroplanRes.JumbovalProduct_JV50; //"JV50"
+                            this.lblResidenceVaCool.Text = EuroplanRes.JumbovalProduct_JV50; //"JV50"
+                            this.lblResidenceVa.Text = EuroplanRes.JumbovalProduct_JV50; //"JV50"
                             break;
 						default:
 							this.lblResidenceVaHeat.Text = "--";

@@ -7208,4 +7208,10 @@ Compact
   <data name="DistributorPanel_Maximaldurchfluss" xml:space="preserve">
     <value>Maximaldurchfluß:</value>
   </data>
+  <data name="JumbovalProduct_JV20_100" xml:space="preserve">
+    <value>JV20/100</value>
+  </data>
+  <data name="JumbovalProduct_JV20_80" xml:space="preserve">
+    <value>JV20/80</value>
+  </data>
 </root>

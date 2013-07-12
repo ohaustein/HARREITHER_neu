@@ -33,8 +33,8 @@ namespace Europlan.Common {
 		private static double su = 0.035; /* Estrichüberdeckung; Annahme ECO30;  fix*/
 		private static double lambdaU = 2.3; /* Wärmeleitfähigkeit der Überdeckung */                   /* TODO sollte eigentlich kein Produktparameter sein, da abhängig von Konstruktion. Bei Jumboval ist Estrich oder Stahlbeton möglich */
         private static double rohrAussenD = 0.02817; /* Aussendurchmesser Jumboval Rohr */              /* TODO: Muss von Harreither noch überprüft und bestätigt werden */
-		private static double rohrInnenD = 0.02135; /* Rohrinnendurchmesser (12.5*9mm*pi auf Rundrohrfläche */
-		public static double rohrInnenA = 0.000353429; /* Rohrinnenquerschnitt */                       /* TODO: Bestätigen */
+        private static double rohrInnenD = 0.0208; /* Rohrinnendurchmesser (12.5*9mm*pi auf Rundrohrfläche */
+        public static double rohrInnenA = 0.000339292; /* Rohrinnenquerschnitt */                       /* TODO: Bestätigen */
 		private static double ag = 1.2125; /* Ovalrohr Geometriefaktor für Jumboval */
         private static double sr0 = 0.002; /* fix ??? */                                                /* TODO in Formel für B in Excel hardcoded??? */
 		private static double sr = 0.00238; /* Aus Jumboval Normprüfdaten */
@@ -141,38 +141,17 @@ namespace Europlan.Common {
 		}
 
 		public class RimTypeConverter : System.ComponentModel.TypeConverter {
-			/*private static readonly string EV5_40 = EuroplanRes.JumbovalProduct_EV5_40;
-			private static readonly string EV5_80 = EuroplanRes.JumbovalProduct_EV5_80;
-			private static readonly string EV5_120 = EuroplanRes.JumbovalProduct_EV5_120;
-			private static readonly string EV10_55 = EuroplanRes.JumbovalProduct_EV10_55;
-			private static readonly string EV10_110 = EuroplanRes.JumbovalProduct_EV10_110;
-			private static readonly string EV10_165 = EuroplanRes.JumbovalProduct_EV10_165;
-			private static readonly string EV15_60 = EuroplanRes.JumbovalProduct_EV15_60;
-			private static readonly string EV15_120 = EuroplanRes.JumbovalProduct_EV15_120;
-			private static readonly string EV15_180 = EuroplanRes.JumbovalProduct_EV15_180;
+			private static readonly string JV20_80 = EuroplanRes.JumbovalProduct_JV20_80;
+            private static readonly string JV20_100 = EuroplanRes.JumbovalProduct_JV20_100;
 
 			private Dictionary<string, JumbovalRimType> mappingFromString = new Dictionary<string, JumbovalRimType>();
 			private Dictionary<JumbovalRimType, string> mappingToString = new Dictionary<JumbovalRimType, string>();
 
 			public RimTypeConverter() {
-				mappingFromString.Add(EV5_40, JumbovalRimType.EV5_40);
-				mappingFromString.Add(EV5_80, JumbovalRimType.EV5_80);
-				mappingFromString.Add(EV5_120, JumbovalRimType.EV5_120);
-				mappingFromString.Add(EV10_55, JumbovalRimType.EV10_55);
-				mappingFromString.Add(EV10_110, JumbovalRimType.EV10_110);
-				mappingFromString.Add(EV10_165, JumbovalRimType.EV10_165);
-				mappingFromString.Add(EV15_60, JumbovalRimType.EV15_60);
-				mappingFromString.Add(EV15_120, JumbovalRimType.EV15_120);
-				mappingFromString.Add(EV15_180, JumbovalRimType.EV15_180);
-				mappingToString.Add(JumbovalRimType.EV5_40, EV5_40);
-				mappingToString.Add(JumbovalRimType.EV5_80, EV5_80);
-				mappingToString.Add(JumbovalRimType.EV5_120, EV5_120);
-				mappingToString.Add(JumbovalRimType.EV10_55, EV10_55);
-				mappingToString.Add(JumbovalRimType.EV10_110, EV10_110);
-				mappingToString.Add(JumbovalRimType.EV10_165, EV10_165);
-				mappingToString.Add(JumbovalRimType.EV15_60, EV15_60);
-				mappingToString.Add(JumbovalRimType.EV15_120, EV15_120);
-				mappingToString.Add(JumbovalRimType.EV15_180, EV15_180);
+				mappingFromString.Add(JV20_80, JumbovalRimType.JV20_80);
+				mappingFromString.Add(JV20_100, JumbovalRimType.JV20_100);
+				mappingToString.Add(JumbovalRimType.JV20_80, JV20_80);
+				mappingToString.Add(JumbovalRimType.JV20_100, JV20_100);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -199,7 +178,7 @@ namespace Europlan.Common {
 					}
 				}
 				return base.ConvertTo(context, culture, value, destinationType);
-			}*/
+			}
 		}
 
 		[System.ComponentModel.TypeConverter(typeof(LayDistanceConverter))]
@@ -213,15 +192,8 @@ namespace Europlan.Common {
 
 		[System.ComponentModel.TypeConverter(typeof(RimTypeConverter))]
 		public enum JumbovalRimType {
-			EV15_60,
-			EV15_120,
-			EV15_180,
-			EV10_55,
-			EV10_110,
-			EV10_165,
-			EV5_40,
-			EV5_80,
-			EV5_120
+            JV20_80,
+            JV20_100
 		}
 
 		public JumbovalProduct(){
@@ -485,13 +457,13 @@ namespace Europlan.Common {
 			set { rohrAussenD = value; }
 		}
 
-        [DoubleProductParameter(0.02135)]
+        [DoubleProductParameter(0.0208)]
 		public static double ConfigRohrInnenD {
 			get { return rohrInnenD; }
 			set { rohrInnenD = value; }
 		}
 
-        [DoubleProductParameter(0.000353429)]
+        [DoubleProductParameter(0.000339292)]
 		public static double ConfigRohrInnenA {
 			get { return rohrInnenA; }
 			set { rohrInnenA = value; }
@@ -681,11 +653,11 @@ namespace Europlan.Common {
 				case JumbovalLayDistance.JV20:
 					return 5;
 				case JumbovalLayDistance.JV30:
-					return 4;
-				case JumbovalLayDistance.JV40:
 					return 3.5;
+				case JumbovalLayDistance.JV40:
+					return 2.5;
 				case JumbovalLayDistance.JV50:
-					return 3;
+					return 2;
 				case JumbovalLayDistance.NONE:
 					return 0;
 				default:
@@ -763,17 +735,8 @@ namespace Europlan.Common {
 		/// </summary>
 		public static JumbovalLayDistance GetRimLayDistance(JumbovalRimType rimType) {
 			switch (rimType) {
-				case JumbovalRimType.EV15_60:
-				case JumbovalRimType.EV15_120:
-				case JumbovalRimType.EV15_180:
-					return JumbovalLayDistance.JV20;
-				case JumbovalRimType.EV10_55:
-				case JumbovalRimType.EV10_110:
-				case JumbovalRimType.EV10_165:
-					return JumbovalLayDistance.JV20;
-				case JumbovalRimType.EV5_40:
-				case JumbovalRimType.EV5_80:
-				case JumbovalRimType.EV5_120:
+				case JumbovalRimType.JV20_80:
+				case JumbovalRimType.JV20_100:
 					return JumbovalLayDistance.JV20;
 				default:
 					throw new Exception("Unknwon RimType");
@@ -785,23 +748,10 @@ namespace Europlan.Common {
 		/// </summary>
 		public static int GetRimWidth(JumbovalRimType rimType) {
 			switch (rimType) {
-				case JumbovalRimType.EV5_40:
-					return 40;
-				case JumbovalRimType.EV10_55:
-					return 55;
-				case JumbovalRimType.EV15_60:
-					return 60;
-				case JumbovalRimType.EV5_80:
+				case JumbovalRimType.JV20_80:
 					return 80;
-				case JumbovalRimType.EV10_110:
-					return 110;
-				case JumbovalRimType.EV15_120:
-				case JumbovalRimType.EV5_120:
-					return 120;
-				case JumbovalRimType.EV10_165:
-					return 165;
-				case JumbovalRimType.EV15_180:
-					return 180;
+				case JumbovalRimType.JV20_100:
+					return 100;
 				default:
 					throw new Exception("Unknwon RimType");
 			}
@@ -1715,10 +1665,10 @@ namespace Europlan.Common {
 			Dictionary<JumbovalLayDistance, Nullable<JumbovalRimType>[]> teilungen = new Dictionary<JumbovalLayDistance, JumbovalRimType?[]>();
 			if (this.plannedRimLength > 0) {
 				teilungen.Add(JumbovalLayDistance.NONE, new Nullable<JumbovalRimType>[] { null });
-				teilungen.Add(JumbovalLayDistance.JV50, new Nullable<JumbovalRimType>[] { JumbovalRimType.EV15_60, JumbovalRimType.EV15_120, JumbovalRimType.EV15_180 });
-				teilungen.Add(JumbovalLayDistance.JV40, new Nullable<JumbovalRimType>[] { JumbovalRimType.EV15_60, JumbovalRimType.EV15_120, JumbovalRimType.EV15_180 });
-				teilungen.Add(JumbovalLayDistance.JV30, new Nullable<JumbovalRimType>[] { JumbovalRimType.EV15_60, JumbovalRimType.EV15_120, JumbovalRimType.EV15_180 });
-				teilungen.Add(JumbovalLayDistance.JV20, new Nullable<JumbovalRimType>[] { JumbovalRimType.EV10_55, JumbovalRimType.EV10_110, JumbovalRimType.EV10_165 });
+				teilungen.Add(JumbovalLayDistance.JV50, new Nullable<JumbovalRimType>[] { JumbovalRimType.JV20_80, JumbovalRimType.JV20_100 });
+                teilungen.Add(JumbovalLayDistance.JV40, new Nullable<JumbovalRimType>[] { JumbovalRimType.JV20_80, JumbovalRimType.JV20_100 });
+                teilungen.Add(JumbovalLayDistance.JV30, new Nullable<JumbovalRimType>[] { JumbovalRimType.JV20_80, JumbovalRimType.JV20_100 });
+				teilungen.Add(JumbovalLayDistance.JV20, new Nullable<JumbovalRimType>[] { null });
 				//teilungen.Add(JumbovalLayDistance.EV5, new Nullable<JumbovalRimType>[] { null });
 			} else {
 				teilungen.Add(JumbovalLayDistance.NONE, new Nullable<JumbovalRimType>[] { null });
