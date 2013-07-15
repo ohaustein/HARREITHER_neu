@@ -40,7 +40,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		public SelectConnectionForProductForm(PlannedProduct product, Floor floor) {
+		public SelectConnectionForProductForm(PlannedProduct product, Floor floor, bool allowTichelmann) {
 			InitializeComponent();
 
 			this.SetLanguage();
@@ -48,10 +48,21 @@ namespace Europlan.Common {
 			this.tvDistributors.Nodes.Clear();
 			this.product = product;
 			DistributorList distributors = floor.GetAllAvailableDistributors(true);
-			TreeNode[] distributorNodes = new TreeNode[distributors.Count];
+            int count = distributors.Count;
+            if (allowTichelmann) {
+                foreach (RegulatorCircuit rc in Project.Instance.RegulatorCircuits) {
+                    if (rc.ConnectedDistributors == null || rc.ConnectedDistributors.Count == 0) {
+                        count++;
+                    }
+                }
+            }
+			TreeNode[] distributorNodes = new TreeNode[count];
 			int i = 0;
 			foreach (Distributor d in distributors) {
-				distributorNodes[i] = new TreeNode(d.Id + ": " + d.Name);
+                string label = EuroplanRes.SelectConnectionForProductForm_Verteiler; //"Verteiler %ID%: %NAME%"
+                label = label.Replace("%ID%", d.Id);
+                label = label.Replace("%NAME%", d.Name);
+                distributorNodes[i] = new TreeNode(label);
 				distributorNodes[i].Tag = d;
 				this.nodes.Add(d, distributorNodes[i]);
 				if (selectNode == null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.Distributor == d) {
@@ -59,7 +70,7 @@ namespace Europlan.Common {
 				}
 				foreach (PlannedProduct p in d.PlannedConnectedProducts) {
 					if (p.Product.PlannedCircuits == null) {
-						string label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+						label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
 						label = label.Replace("%SYSTEM%", p.Node.Text);
 						label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
 						TreeNode node = new TreeNode(label);
@@ -74,7 +85,7 @@ namespace Europlan.Common {
 							if (c.PlannedProduct != null) {
 								Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
 								j++;
-								string label = "";
+								label = "";
 								if (p.Product.PlannedCircuits.Count <= 1) {
 									label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
 									label = label.Replace("%SYSTEM%", p.Node.Text);
@@ -114,6 +125,22 @@ namespace Europlan.Common {
 				}
 				i++;
 			}
+            if (allowTichelmann) {
+                foreach (RegulatorCircuit rc in Project.Instance.RegulatorCircuits) {
+                    if (rc.ConnectedDistributors == null || rc.ConnectedDistributors.Count == 0) {
+                        string label = EuroplanRes.SelectConnectionForProductForm_Tichelmannverteiler; //"Tichelmannverteiler an  %ID%: %NAME%"
+                        label = label.Replace("%ID%", rc.Id);
+                        label = label.Replace("%NAME%", rc.Name);
+                        distributorNodes[i] = new TreeNode(label);
+                        distributorNodes[i].Tag = rc;
+                        this.nodes.Add(rc, distributorNodes[i]);
+                        if (selectNode == null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.RegulatorCircuit == rc) {
+                            selectNode = distributorNodes[i];
+                        }
+                        i++;
+                    }
+                }
+            }
 			rootNode = new TreeNode(EuroplanRes.General_Projekt, distributorNodes);
 			this.tvDistributors.Nodes.Add(rootNode);
 			this.tvDistributors.ExpandAll();
@@ -174,7 +201,13 @@ namespace Europlan.Common {
 							enable = ok;
 						}
 					}
-				} else {
+                } else if (tvDistributors.SelectedNode.Tag is RegulatorCircuit) {
+                    string anschluss = EuroplanRes.SelectConnectionForProductForm_AnschlussAnTichelmannverteiler; //"Anschluss über Tichelmannverteiler an %ID%: %NAME%"
+                    anschluss = anschluss.Replace("%ID%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Id);
+                    anschluss = anschluss.Replace("%NAME%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Name);
+                    lblInfo.Text = anschluss;
+                    ok = true;
+                } else {
 					lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNichtMoeglich; //"Anschluß nicht möglich"
 					ok = false;
 				}
@@ -245,7 +278,11 @@ namespace Europlan.Common {
 					PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
 					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked,
 						this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
-				}
+                } else if (this.tvDistributors.SelectedNode.Tag is RegulatorCircuit) {
+#warning TODO Überprüfen ob Heizkreise eines anderen Systems an dieses System angeschlossen waren (eventuell auch in den anderen Fällen prüfen!)
+                    RegulatorCircuit rc = this.tvDistributors.SelectedNode.Tag as RegulatorCircuit;
+                    ConnectProduct(this.product, rc);
+                }
 			}
 			SettingsKey settings = SettingsFile.Settings["SelectConnectionForProductForm"];
 			settings.StorePoint("Location", this.Location);
@@ -286,6 +323,10 @@ namespace Europlan.Common {
 		public static void ConnectProduct(PlannedProduct product, Distributor dist) {
 			product.Product.PlannedConnection = new ProductConnection(dist);
 		}
+
+        public static void ConnectProduct(PlannedProduct product, RegulatorCircuit rc) {
+            product.Product.PlannedConnection = new ProductConnection(rc);
+        }
 
 		public static void ConnectProduct(PlannedProduct product, PlannedProduct otherProduct, bool ruecklauf, List<UserDefinedConnection> list) {
 			product.Product.PlannedConnection = new ProductConnection(otherProduct, ruecklauf ? Circuit.CircuitConnectionTypeEnum.RUECKLAUF : Circuit.CircuitConnectionTypeEnum.VORLAUF);

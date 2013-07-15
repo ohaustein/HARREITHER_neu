@@ -7214,4 +7214,16 @@ Compact
   <data name="JumbovalProduct_JV20_80" xml:space="preserve">
     <value>JV20/80</value>
   </data>
+  <data name="ProductConnection_AnschlussAnTichelmann" xml:space="preserve">
+    <value>%ID%: %NAME% (Tichelmann)</value>
+  </data>
+  <data name="SelectConnectionForProductForm_AnschlussAnTichelmannverteiler" xml:space="preserve">
+    <value>Anschluss über Tichelmannverteiler an %ID%: %NAME%</value>
+  </data>
+  <data name="SelectConnectionForProductForm_Tichelmannverteiler" xml:space="preserve">
+    <value>Tichelmannverteiler an  %ID%: %NAME%</value>
+  </data>
+  <data name="SelectConnectionForProductForm_Verteiler" xml:space="preserve">
+    <value>Verteiler %ID%: %NAME%</value>
+  </data>
 </root>

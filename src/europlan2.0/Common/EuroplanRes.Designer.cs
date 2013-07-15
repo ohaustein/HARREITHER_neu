@@ -16506,6 +16506,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to %ID%: %NAME% (Tichelmann).
+        /// </summary>
+        internal static string ProductConnection_AnschlussAnTichelmann {
+            get {
+                return ResourceManager.GetString("ProductConnection_AnschlussAnTichelmann", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Druckverlust
         ///mbar.
         /// </summary>
@@ -19290,6 +19299,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anschluss über Tichelmannverteiler an %ID%: %NAME%.
+        /// </summary>
+        internal static string SelectConnectionForProductForm_AnschlussAnTichelmannverteiler {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_AnschlussAnTichelmannverteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anschluss an %ID%: %NAME%.
         /// </summary>
         internal static string SelectConnectionForProductForm_AnschlussAnVerteiler {
@@ -19385,6 +19403,24 @@ namespace Europlan.Common {
         internal static string SelectConnectionForProductForm_SystemInRaum2 {
             get {
                 return ResourceManager.GetString("SelectConnectionForProductForm_SystemInRaum2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tichelmannverteiler an  %ID%: %NAME%.
+        /// </summary>
+        internal static string SelectConnectionForProductForm_Tichelmannverteiler {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_Tichelmannverteiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler %ID%: %NAME%.
+        /// </summary>
+        internal static string SelectConnectionForProductForm_Verteiler {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_Verteiler", resourceCulture);
             }
         }
         

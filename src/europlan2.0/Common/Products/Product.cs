@@ -730,7 +730,14 @@ namespace Europlan.Common {
 				spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
 				this.PlannedConnection.OtherProduct.Product.GetCoolFlow(out this.plannedVorlaufTempCool, out this.plannedRuecklaufTempCool);
 				spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
-			} else {
+            } else if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
+                this.plannedVorlaufTempHeat = this.PlannedConnection.RegulatorCircuit.HeatFlowTemperature;
+                spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
+                this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+                this.plannedVorlaufTempCool = this.PlannedConnection.RegulatorCircuit.CoolFlowTemperature;
+                spreizungCool = 3;
+                this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+            } else {
 				this.plannedVorlaufTempHeat = this.PlannedConnection.Distributor.RegulatorCircuit.HeatFlowTemperature;
 				spreizungHeat = EN1264.Instance.DefaultSpreizung(this.plannedVorlaufTempHeat);
 				this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;

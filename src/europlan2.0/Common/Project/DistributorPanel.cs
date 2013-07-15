@@ -237,7 +237,7 @@ namespace Europlan.Common {
                 distributor.MaxCircuits = 8;
                 numMaxCircuits.Value = 8;
             }
-            // TODO: maybe all products that are connected to this distributor should be recalculated???
+#warning TODO: maybe all products that are connected to this distributor should be recalculated???
             if (this.projectChanged != null) {
                 this.projectChanged(null);
             }

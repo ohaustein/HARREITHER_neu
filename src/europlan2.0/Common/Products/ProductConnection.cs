@@ -8,13 +8,16 @@ namespace Europlan.Common {
 		public enum ConnectionTypeEnum {
 			DISTRIBUTOR,
 			OTHER_PRODUCT,
-			NONE
+			NONE,
+            TICHELMANN
 		}
 
 		private Distributor distributor = null;
 		private PlannedProduct otherProduct = null;
+        private RegulatorCircuit regulatorCircuit = null;
 		private string distributorId = null;
 		private string otherProductId = null;
+        private string regulatorCircuitId = null;
 		private Circuit.CircuitConnectionTypeEnum circuitConnectionType = Circuit.CircuitConnectionTypeEnum.VORLAUF;
 		private bool userDefined = false;
 
@@ -36,10 +39,14 @@ namespace Europlan.Common {
 			this.circuitConnectionType = circuitConnectionType;
 		}
 
+        public ProductConnection(RegulatorCircuit regulatorCircuit) {
+            this.regulatorCircuit = regulatorCircuit;
+        }
+
 		#region Anbindung
 		[XmlIgnore]
 		public ConnectionTypeEnum ConnectionType {
-			get { return (this.distributor != null || this.distributorId != null) ? ConnectionTypeEnum.DISTRIBUTOR : (this.otherProduct != null || this.otherProductId != null ? ConnectionTypeEnum.OTHER_PRODUCT : ConnectionTypeEnum.NONE); }
+			get { return (this.distributor != null || this.distributorId != null) ? ConnectionTypeEnum.DISTRIBUTOR : (this.otherProduct != null || this.otherProductId != null ? ConnectionTypeEnum.OTHER_PRODUCT : ( this.regulatorCircuit != null || this.regulatorCircuitId != null ? ConnectionTypeEnum.TICHELMANN : ConnectionTypeEnum.NONE)); }
 		}
 
 		[XmlIgnore]
@@ -62,7 +69,9 @@ namespace Europlan.Common {
 				this.distributorId = null;
 				this.otherProduct = null;
 				this.otherProductId = null;
-			}
+                this.regulatorCircuit = null;
+                this.regulatorCircuitId = null;
+            }
 		}
 
 		[XmlIgnore]
@@ -87,9 +96,33 @@ namespace Europlan.Common {
 				this.otherProductId = null;
 				this.distributor = null;
 				this.distributorId = null;
+                this.regulatorCircuit = null;
+                this.regulatorCircuitId = null;
 			}
 		}
 
+        [XmlIgnore]
+        public RegulatorCircuit RegulatorCircuit {
+            get {
+                if (this.regulatorCircuitId != null) {
+                    foreach (RegulatorCircuit rc in Project.Instance.RegulatorCircuits) {
+                        if (rc.Id == this.regulatorCircuitId) {
+                            this.regulatorCircuit = rc;
+                        }
+                    }
+                    this.regulatorCircuitId = null;
+                }
+                return this.regulatorCircuit;
+            }
+            set {
+                this.regulatorCircuit = value;
+                this.regulatorCircuitId = null;
+                this.distributor = null;
+                this.distributorId = null;
+                this.otherProduct = null;
+                this.otherProductId = null;
+            }
+        }
 
 		public string DistributorId {
 			get { return this.Distributor == null ? null : this.Distributor.Id; }
@@ -97,6 +130,8 @@ namespace Europlan.Common {
 				this.distributorId = value;
 				this.otherProduct = null;
 				this.otherProductId = null;
+                this.regulatorCircuit = null;
+                this.regulatorCircuitId = null;
 			}
 		}
 
@@ -106,10 +141,24 @@ namespace Europlan.Common {
 				this.otherProductId = value;
 				this.distributor = null;
 				this.distributorId = null;
-			}
+                this.regulatorCircuit = null;
+                this.regulatorCircuitId = null;
+            }
 		}
 
-		[XmlIgnore]
+        public string RegulatorCircuitId {
+            get { return this.RegulatorCircuit == null ? null : this.RegulatorCircuit.Id; }
+            set {
+                this.regulatorCircuitId = value;
+                this.regulatorCircuit = null;
+                this.distributor = null;
+                this.distributorId = null;
+                this.otherProduct = null;
+                this.otherProductId = null;
+            }
+        }
+
+        [XmlIgnore]
 		public Distributor DirectOrIndirectDistributor {
 			get {
 				if (this.distributor != null) {
@@ -139,6 +188,12 @@ namespace Europlan.Common {
 				connTo = connTo.Replace("%RAUMNAME%", this.OtherProduct.Product.AssociatedRoom.Name);
 				return connTo;
 			}
+            if (this.RegulatorCircuit != null) {
+                string connTo = EuroplanRes.ProductConnection_AnschlussAnTichelmann; //"%ID%: %NAME% (Tichelmann)"
+                connTo = connTo.Replace("%ID%", this.RegulatorCircuit.Id);
+                connTo = connTo.Replace("%NAME%", this.RegulatorCircuit.Name);
+                return connTo;
+            }
 			return "";
 		}
 
