@@ -1616,6 +1616,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Benutzer Stahlbetonkonstruktion.
+        /// </summary>
+        internal static string ConstructionTypeManager_BenutzerBeton {
+            get {
+                return ResourceManager.GetString("ConstructionTypeManager_BenutzerBeton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Benutzer Wärmedämmkonstruktion.
         /// </summary>
         internal static string ConstructionTypeManager_BenutzerDaemm {
@@ -1675,6 +1684,15 @@ namespace Europlan.Common {
         internal static string ConstructionTypeManager_BenutzerWand {
             get {
                 return ResourceManager.GetString("ConstructionTypeManager_BenutzerWand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Stahlbetonkonstruktion.
+        /// </summary>
+        internal static string ConstructionTypeManager_StandardBeton {
+            get {
+                return ResourceManager.GetString("ConstructionTypeManager_StandardBeton", resourceCulture);
             }
         }
         
@@ -1756,6 +1774,24 @@ namespace Europlan.Common {
         internal static string DataImportManager_SyncMessage {
             get {
                 return ResourceManager.GetString("DataImportManager_SyncMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Der gesamte Durchfluss aller an diesen Verteiler angeschlossenen Kreise ist im Heizbetrieb zu groß (%VALUE% &gt;%MAXIMUM%).
+        /// </summary>
+        internal static string Distributor_DurchflussZuGrossHeiz {
+            get {
+                return ResourceManager.GetString("Distributor_DurchflussZuGrossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Der gesamte Durchfluss aller an diesen Verteiler angeschlossenen Kreise ist im Kühlbetrieb zu groß (%VALUE% &gt;%MAXIMUM%).
+        /// </summary>
+        internal static string Distributor_DurchflussZuGrossKuehl {
+            get {
+                return ResourceManager.GetString("Distributor_DurchflussZuGrossKuehl", resourceCulture);
             }
         }
         
@@ -2761,6 +2797,24 @@ namespace Europlan.Common {
         internal static string ErrorMessage_DurchflussKuehl {
             get {
                 return ResourceManager.GetString("ErrorMessage_DurchflussKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estrichüberdeckung zu groß (%VALUE%cm &gt; %MAXIMUM%cm).
+        /// </summary>
+        internal static string ErrorMessage_EstrichueberdeckungZuGross {
+            get {
+                return ResourceManager.GetString("ErrorMessage_EstrichueberdeckungZuGross", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estrichüberdeckung zu klein (%VALUE%cm &lt; %MINIMUM%cm).
+        /// </summary>
+        internal static string ErrorMessage_EstrichueberdeckungZuKlein {
+            get {
+                return ResourceManager.GetString("ErrorMessage_EstrichueberdeckungZuKlein", resourceCulture);
             }
         }
         
@@ -16052,6 +16106,15 @@ namespace Europlan.Common {
         internal static string PlannedProductPanel_EingabedatenSeite {
             get {
                 return ResourceManager.GetString("PlannedProductPanel_EingabedatenSeite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estrichüberdeckung:.
+        /// </summary>
+        internal static string PlannedProductPanel_Estrichueberdeckung {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Estrichueberdeckung", resourceCulture);
             }
         }
         

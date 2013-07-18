@@ -29,9 +29,12 @@ namespace Europlan.Common {
 		private static double lambdaR0 = 0.35; /* fix */                                                /* TODO in Formel für B in Excel hardcoded??? */
 		private static double lambdaR = 0.22; /* für PP Rohr laut Tabelle A.13 fix */
 		private static double lambdaU0 = 1; /* fix */
-		private static double lambdaE = 1.2; /* Estrichleitfähigkeit, fix */
-		private static double su = 0.035; /* Estrichüberdeckung; Annahme ECO30;  fix*/
-		private static double lambdaU = 2.3; /* Wärmeleitfähigkeit der Überdeckung */                   /* TODO sollte eigentlich kein Produktparameter sein, da abhängig von Konstruktion. Bei Jumboval ist Estrich oder Stahlbeton möglich */
+        private static double lambdaEEstrich = 1.2; /* Estrichleitfähigkeit, fix */
+        private static double lambdaEBeton = 2.33; /* Estrichleitfähigkeit, fix */
+        private static double suDefault = 0.05;
+        private static double minSu = 0.05;
+        private static double maxSu = 0.25;
+        private static double lambdaU = 2.3; /* Wärmeleitfähigkeit der Überdeckung */                   /* TODO sollte eigentlich kein Produktparameter sein, da abhängig von Konstruktion. Bei Jumboval ist Estrich oder Stahlbeton möglich */
         private static double rohrAussenD = 0.02817; /* Aussendurchmesser Jumboval Rohr */              /* TODO: Muss von Harreither noch überprüft und bestätigt werden */
         private static double rohrInnenD = 0.0208; /* Rohrinnendurchmesser (12.5*9mm*pi auf Rundrohrfläche */
         public static double rohrInnenA = 0.000339292; /* Rohrinnenquerschnitt */                       /* TODO: Bestätigen */
@@ -72,6 +75,8 @@ namespace Europlan.Common {
 		private Construction plannedInsulationConstruction = null;
 		private string plannedFloorConstructionId = null;
 		private string plannedInsulationConstructionId = null;
+
+        private double su = JumbovalProduct.ConfigSuDefault;
 
 		private Nullable<JumbovalLayDistance> requestedLayDistance = null;
 		private Nullable<JumbovalRimType> requestedRimType = null;
@@ -291,19 +296,6 @@ namespace Europlan.Common {
 					message += newMsg;
 				}
 
-				double defaultSu = userConfig.GetProductParameterAsDouble<JumbovalProduct>("ConfigSu");
-				if (su != defaultSu) {
-					if (message == null) {
-						message = "";
-					} else {
-						message += "\n";
-					}
-					string newMsg = EuroplanRes.NotificationMessage_Estrichueberdeckung;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(su, 3).ToString());
-					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultSu, 3).ToString());
-					message += newMsg;
-				}
-
 				double defaultC = userConfig.GetProductParameterAsDouble<JumbovalProduct>("ConfigC");
 				if (c != defaultC) {
 					if (message == null) {
@@ -433,19 +425,37 @@ namespace Europlan.Common {
 			set { lambdaU0 = value; }
 		}
 
-		[DoubleProductParameter(1.2)]
-		public static double ConfigLambdaE {
-			get { return lambdaE; }
-			set { lambdaE = value; }
-		}
+        [DoubleProductParameter(1.2)]
+        public static double ConfigLambdaEEstrich {
+            get { return lambdaEEstrich; }
+            set { lambdaEEstrich = value; }
+        }
 
-		[DoubleProductParameter(0.035)]
-		public static double ConfigSu {
-			get { return su; }
-			set { su = value; }
-		}
+        [DoubleProductParameter(2.33)]
+        public static double ConfigLambdaEBeton {
+            get { return lambdaEBeton; }
+            set { lambdaEBeton = value; }
+        }
 
-		[DoubleProductParameter(2.3)]
+        [DoubleProductParameter(0.05)]
+        public static double ConfigSuDefault {
+            get { return suDefault; }
+            set { suDefault = value; }
+        }
+
+        [DoubleProductParameter(0.05)]
+        public static double ConfigMinSu {
+            get { return minSu; }
+            set { minSu = value; }
+        }
+
+        [DoubleProductParameter(0.25)]
+        public static double ConfigMaxSu {
+            get { return maxSu; }
+            set { maxSu = value; }
+        }
+
+        [DoubleProductParameter(2.3)]
 		public static double ConfigLambdaU {
 			get { return lambdaU; }
 			set { lambdaU = value; }
@@ -757,12 +767,14 @@ namespace Europlan.Common {
 			}
 		}
 
+        [XmlIgnore]
 		public bool UseClipSchieneKlebeband {
 			get { return clipSchieneKlebeband; }
 			set { /*clipSchieneKlebeband = value;*/ }
 		}
 
-		public bool UseAnhydritEstrich {
+        [XmlIgnore]
+        public bool UseAnhydritEstrich {
 			get { return anhydritEstrich; }
 			set { /*anhydritEstrich = value;*/ }
 		}
@@ -827,6 +839,11 @@ namespace Europlan.Common {
 		public override float PlannedNetArea {
 			get { return this.PlannedFloorArea - this.PlannedAreaReduced / 2 - this.PlannedAreaUnheated; }
 		}
+
+        public double Su {
+            get { return this.su; }
+            set { this.su = value; }
+        }
 
 		/// <summary>
 		/// The lay distance that the user requested for this product in the planning.
@@ -1979,6 +1996,17 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
+            if (Math.Round(this.Su, 2) < JumbovalProduct.ConfigMinSu) {
+                newMsg = EuroplanRes.ErrorMessage_EstrichueberdeckungZuKlein;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Su * 100, 0).ToString());
+                newMsg = newMsg.Replace("%MINIMUM%", Math.Round(JumbovalProduct.ConfigMinSu * 100.0, 2).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            } else if (Math.Round(this.Su, 2) > JumbovalProduct.ConfigMaxSu) {
+                newMsg = EuroplanRes.ErrorMessage_EstrichueberdeckungZuGross;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Su * 100, 0).ToString());
+                newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(JumbovalProduct.ConfigMaxSu * 100.0, 2).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            }
 			if (this.lastErrorMsg.Length == 0) {
 				this.lastErrorMsg = null;
 			}
@@ -2095,7 +2123,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-
+#warning TODO Materialbedarf für Jumboval implementieren
 			// Anbindeleitungen
 			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true);
 
@@ -2104,7 +2132,7 @@ namespace Europlan.Common {
 			foreach (JumbovalCircuit c in this.circuits) {
 				length += c.PipeLengthWithoutConnections;
 			}
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", length);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "JV01", length);
 
 			double amount = 0;
 

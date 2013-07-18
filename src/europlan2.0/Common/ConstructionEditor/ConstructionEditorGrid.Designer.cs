@@ -23,92 +23,93 @@ namespace Europlan.Common {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.panBottom = new System.Windows.Forms.Panel();
-			this.btnView = new System.Windows.Forms.Button();
-			this.btnNew = new System.Windows.Forms.Button();
-			this.gridConstructions = new System.Windows.Forms.DataGridView();
-			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.thicknessDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
-			this.colRValue = new Europlan.Common.NumericColumn();
-			this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.constructionsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiCeilingConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsNew = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiNewFloorConstructionEstrich = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewFloorConstructionTrocken = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewFloorConstructionStahl = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewFloorConstructionTrockenEstrich = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewCeilingConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsNewAdmin = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsmiNewFloorConstructionScreedAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiNewCeilingConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-			this.panBottom.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
-			this.cmsView.SuspendLayout();
-			this.cmsNew.SuspendLayout();
-			this.cmsNewAdmin.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// panBottom
-			// 
-			this.panBottom.Controls.Add(this.btnView);
-			this.panBottom.Controls.Add(this.btnNew);
-			this.panBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panBottom.Location = new System.Drawing.Point(0, 398);
-			this.panBottom.Name = "panBottom";
-			this.panBottom.Size = new System.Drawing.Size(704, 26);
-			this.panBottom.TabIndex = 2;
-			// 
-			// btnView
-			// 
-			this.btnView.Location = new System.Drawing.Point(120, 3);
-			this.btnView.Name = "btnView";
-			this.btnView.Size = new System.Drawing.Size(231, 23);
-			this.btnView.TabIndex = 2;
-			this.btnView.Text = "Angezeigte Konstruktionen (Alle)";
-			this.btnView.UseVisualStyleBackColor = true;
-			this.btnView.Click += new System.EventHandler(this.btnView_Click);
-			// 
-			// btnNew
-			// 
-			this.btnNew.Location = new System.Drawing.Point(0, 3);
-			this.btnNew.Name = "btnNew";
-			this.btnNew.Size = new System.Drawing.Size(114, 23);
-			this.btnNew.TabIndex = 1;
-			this.btnNew.Text = "Neue Konstruktion";
-			this.btnNew.UseVisualStyleBackColor = true;
-			this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-			// 
-			// gridConstructions
-			// 
-			this.gridConstructions.AllowUserToAddRows = false;
-			this.gridConstructions.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gridConstructions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.gridConstructions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridConstructions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panBottom = new System.Windows.Forms.Panel();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.gridConstructions = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thicknessDataGridViewTextBoxColumn = new Europlan.Common.NumericColumn();
+            this.colRValue = new Europlan.Common.NumericColumn();
+            this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.constructionsWrapperBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmsView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiFloorConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCeilingConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsNew = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewFloorConstructionEstrich = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionTrocken = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionStahl = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionTrockenEstrich = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewCeilingConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsNewAdmin = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewFloorConstructionScreedAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewCeilingConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionBeton = new System.Windows.Forms.ToolStripMenuItem();
+            this.panBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
+            this.cmsView.SuspendLayout();
+            this.cmsNew.SuspendLayout();
+            this.cmsNewAdmin.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panBottom
+            // 
+            this.panBottom.Controls.Add(this.btnView);
+            this.panBottom.Controls.Add(this.btnNew);
+            this.panBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panBottom.Location = new System.Drawing.Point(0, 398);
+            this.panBottom.Name = "panBottom";
+            this.panBottom.Size = new System.Drawing.Size(704, 26);
+            this.panBottom.TabIndex = 2;
+            // 
+            // btnView
+            // 
+            this.btnView.Location = new System.Drawing.Point(120, 3);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(231, 23);
+            this.btnView.TabIndex = 2;
+            this.btnView.Text = "Angezeigte Konstruktionen (Alle)";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(0, 3);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(114, 23);
+            this.btnNew.TabIndex = 1;
+            this.btnNew.Text = "Neue Konstruktion";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // gridConstructions
+            // 
+            this.gridConstructions.AllowUserToAddRows = false;
+            this.gridConstructions.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridConstructions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridConstructions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridConstructions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
             this.colType,
@@ -116,263 +117,271 @@ namespace Europlan.Common {
             this.colRValue,
             this.colEdit,
             this.colScope});
-			this.gridConstructions.DataSource = this.constructionsWrapperBindingSource;
-			this.gridConstructions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridConstructions.Location = new System.Drawing.Point(0, 0);
-			this.gridConstructions.MultiSelect = false;
-			this.gridConstructions.Name = "gridConstructions";
-			this.gridConstructions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridConstructions.Size = new System.Drawing.Size(704, 398);
-			this.gridConstructions.TabIndex = 0;
-			this.gridConstructions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConstructions_UserDeletingRow);
-			this.gridConstructions.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridConstructions_RowsAdded);
-			this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
-			// 
-			// colId
-			// 
-			this.colId.DataPropertyName = "Id";
-			this.colId.FillWeight = 50F;
-			this.colId.HeaderText = "Nr.";
-			this.colId.Name = "colId";
-			this.colId.ReadOnly = true;
-			this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colId.Width = 50;
-			// 
-			// colName
-			// 
-			this.colName.DataPropertyName = "Name";
-			this.colName.FillWeight = 150F;
-			this.colName.HeaderText = "Bezeichnung";
-			this.colName.Name = "colName";
-			this.colName.ReadOnly = true;
-			this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colName.Width = 150;
-			// 
-			// colType
-			// 
-			this.colType.DataPropertyName = "Type";
-			this.colType.FillWeight = 150F;
-			this.colType.HeaderText = "Type";
-			this.colType.Name = "colType";
-			this.colType.ReadOnly = true;
-			this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colType.Width = 150;
-			// 
-			// thicknessDataGridViewTextBoxColumn
-			// 
-			this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle2.Format = "F2";
-			this.thicknessDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
-			this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
-			this.thicknessDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
-			this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
-			this.thicknessDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.thicknessDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// colRValue
-			// 
-			this.colRValue.DataPropertyName = "RValue";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			dataGridViewCellStyle3.Format = "F3";
-			this.colRValue.DefaultCellStyle = dataGridViewCellStyle3;
-			this.colRValue.FillWeight = 50F;
-			this.colRValue.HeaderText = "R (m≤K/W)";
-			this.colRValue.Name = "colRValue";
-			this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
-			this.colRValue.ReadOnly = true;
-			this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.colRValue.Width = 50;
-			// 
-			// colEdit
-			// 
-			this.colEdit.FillWeight = 65F;
-			this.colEdit.HeaderText = "Bearbeiten";
-			this.colEdit.Name = "colEdit";
-			this.colEdit.ReadOnly = true;
-			this.colEdit.Text = "...";
-			this.colEdit.UseColumnTextForButtonValue = true;
-			this.colEdit.Width = 65;
-			// 
-			// colScope
-			// 
-			this.colScope.DataPropertyName = "Scope";
-			this.colScope.HeaderText = "Scope";
-			this.colScope.Name = "colScope";
-			this.colScope.ReadOnly = true;
-			this.colScope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colScope.Visible = false;
-			// 
-			// constructionsWrapperBindingSource
-			// 
-			this.constructionsWrapperBindingSource.DataSource = typeof(Europlan.Common.ConstructionListWrapper);
-			// 
-			// cmsView
-			// 
-			this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gridConstructions.DataSource = this.constructionsWrapperBindingSource;
+            this.gridConstructions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridConstructions.Location = new System.Drawing.Point(0, 0);
+            this.gridConstructions.MultiSelect = false;
+            this.gridConstructions.Name = "gridConstructions";
+            this.gridConstructions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridConstructions.Size = new System.Drawing.Size(704, 398);
+            this.gridConstructions.TabIndex = 0;
+            this.gridConstructions.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridConstructions_UserDeletingRow);
+            this.gridConstructions.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridConstructions_RowsAdded);
+            this.gridConstructions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridConstructions_CellClick);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.FillWeight = 50F;
+            this.colId.HeaderText = "Nr.";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colId.Width = 50;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "Name";
+            this.colName.FillWeight = 150F;
+            this.colName.HeaderText = "Bezeichnung";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colName.Width = 150;
+            // 
+            // colType
+            // 
+            this.colType.DataPropertyName = "Type";
+            this.colType.FillWeight = 150F;
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colType.Width = 150;
+            // 
+            // thicknessDataGridViewTextBoxColumn
+            // 
+            this.thicknessDataGridViewTextBoxColumn.DataPropertyName = "Thickness";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "F2";
+            this.thicknessDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.thicknessDataGridViewTextBoxColumn.HeaderText = "Thickness";
+            this.thicknessDataGridViewTextBoxColumn.Name = "thicknessDataGridViewTextBoxColumn";
+            this.thicknessDataGridViewTextBoxColumn.NumEditType = Europlan.Common.NumericBox.NumericEditType.FLOOR_CONSTRUCTION_THICKNESS;
+            this.thicknessDataGridViewTextBoxColumn.ReadOnly = true;
+            this.thicknessDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.thicknessDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // colRValue
+            // 
+            this.colRValue.DataPropertyName = "RValue";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "F3";
+            this.colRValue.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colRValue.FillWeight = 50F;
+            this.colRValue.HeaderText = "R (m≤K/W)";
+            this.colRValue.Name = "colRValue";
+            this.colRValue.NumEditType = Europlan.Common.NumericBox.NumericEditType.R_VALUE;
+            this.colRValue.ReadOnly = true;
+            this.colRValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colRValue.Width = 50;
+            // 
+            // colEdit
+            // 
+            this.colEdit.FillWeight = 65F;
+            this.colEdit.HeaderText = "Bearbeiten";
+            this.colEdit.Name = "colEdit";
+            this.colEdit.ReadOnly = true;
+            this.colEdit.Text = "...";
+            this.colEdit.UseColumnTextForButtonValue = true;
+            this.colEdit.Width = 65;
+            // 
+            // colScope
+            // 
+            this.colScope.DataPropertyName = "Scope";
+            this.colScope.HeaderText = "Scope";
+            this.colScope.Name = "colScope";
+            this.colScope.ReadOnly = true;
+            this.colScope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colScope.Visible = false;
+            // 
+            // constructionsWrapperBindingSource
+            // 
+            this.constructionsWrapperBindingSource.DataSource = typeof(Europlan.Common.ConstructionListWrapper);
+            // 
+            // cmsView
+            // 
+            this.cmsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFloorConstruction,
             this.tsmiInsulationConstruction,
             this.tsmiCeilingConstruction,
             this.tsmiWallConstruction});
-			this.cmsView.Name = "cmsView";
-			this.cmsView.Size = new System.Drawing.Size(228, 92);
-			// 
-			// tsmiFloorConstruction
-			// 
-			this.tsmiFloorConstruction.Checked = true;
-			this.tsmiFloorConstruction.CheckOnClick = true;
-			this.tsmiFloorConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiFloorConstruction.Name = "tsmiFloorConstruction";
-			this.tsmiFloorConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiFloorConstruction.Text = "Fuﬂbodenkonstruktionen";
-			this.tsmiFloorConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
-			// tsmiInsulationConstruction
-			// 
-			this.tsmiInsulationConstruction.Checked = true;
-			this.tsmiInsulationConstruction.CheckOnClick = true;
-			this.tsmiInsulationConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiInsulationConstruction.Name = "tsmiInsulationConstruction";
-			this.tsmiInsulationConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiInsulationConstruction.Text = "W‰rmed‰mmkonstruktionen";
-			this.tsmiInsulationConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
-			// tsmiCeilingConstruction
-			// 
-			this.tsmiCeilingConstruction.Checked = true;
-			this.tsmiCeilingConstruction.CheckOnClick = true;
-			this.tsmiCeilingConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiCeilingConstruction.Name = "tsmiCeilingConstruction";
-			this.tsmiCeilingConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiCeilingConstruction.Text = "Deckenkonstruktion";
-			this.tsmiCeilingConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
-			// tsmiWallConstruction
-			// 
-			this.tsmiWallConstruction.Checked = true;
-			this.tsmiWallConstruction.CheckOnClick = true;
-			this.tsmiWallConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.tsmiWallConstruction.Name = "tsmiWallConstruction";
-			this.tsmiWallConstruction.Size = new System.Drawing.Size(227, 22);
-			this.tsmiWallConstruction.Text = "Wandkonstruktion";
-			this.tsmiWallConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
-			// 
-			// cmsNew
-			// 
-			this.cmsNew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsView.Name = "cmsView";
+            this.cmsView.Size = new System.Drawing.Size(228, 92);
+            // 
+            // tsmiFloorConstruction
+            // 
+            this.tsmiFloorConstruction.Checked = true;
+            this.tsmiFloorConstruction.CheckOnClick = true;
+            this.tsmiFloorConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiFloorConstruction.Name = "tsmiFloorConstruction";
+            this.tsmiFloorConstruction.Size = new System.Drawing.Size(227, 22);
+            this.tsmiFloorConstruction.Text = "Fuﬂbodenkonstruktionen";
+            this.tsmiFloorConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
+            // 
+            // tsmiInsulationConstruction
+            // 
+            this.tsmiInsulationConstruction.Checked = true;
+            this.tsmiInsulationConstruction.CheckOnClick = true;
+            this.tsmiInsulationConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiInsulationConstruction.Name = "tsmiInsulationConstruction";
+            this.tsmiInsulationConstruction.Size = new System.Drawing.Size(227, 22);
+            this.tsmiInsulationConstruction.Text = "W‰rmed‰mmkonstruktionen";
+            this.tsmiInsulationConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
+            // 
+            // tsmiCeilingConstruction
+            // 
+            this.tsmiCeilingConstruction.Checked = true;
+            this.tsmiCeilingConstruction.CheckOnClick = true;
+            this.tsmiCeilingConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiCeilingConstruction.Name = "tsmiCeilingConstruction";
+            this.tsmiCeilingConstruction.Size = new System.Drawing.Size(227, 22);
+            this.tsmiCeilingConstruction.Text = "Deckenkonstruktion";
+            this.tsmiCeilingConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
+            // 
+            // tsmiWallConstruction
+            // 
+            this.tsmiWallConstruction.Checked = true;
+            this.tsmiWallConstruction.CheckOnClick = true;
+            this.tsmiWallConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiWallConstruction.Name = "tsmiWallConstruction";
+            this.tsmiWallConstruction.Size = new System.Drawing.Size(227, 22);
+            this.tsmiWallConstruction.Text = "Wandkonstruktion";
+            this.tsmiWallConstruction.Click += new System.EventHandler(this.cmsViewItem_Click);
+            // 
+            // cmsNew
+            // 
+            this.cmsNew.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNewFloorConstructionEstrich,
             this.tsmiNewFloorConstructionTrocken,
             this.tsmiNewFloorConstructionStahl,
             this.tsmiNewFloorConstructionTrockenEstrich,
+            this.tsmiNewFloorConstructionBeton,
             this.tsmiNewInsulationConstruction,
             this.tsmiNewCeilingConstruction,
             this.tsmiNewWallConstruction});
-			this.cmsNew.Name = "cmsNew";
-			this.cmsNew.Size = new System.Drawing.Size(285, 158);
-			// 
-			// tsmiNewFloorConstructionEstrich
-			// 
-			this.tsmiNewFloorConstructionEstrich.Name = "tsmiNewFloorConstructionEstrich";
-			this.tsmiNewFloorConstructionEstrich.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewFloorConstructionEstrich.Text = "Fuﬂbodenkonstruktion (Estrich)";
-			this.tsmiNewFloorConstructionEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewFloorConstructionTrocken
-			// 
-			this.tsmiNewFloorConstructionTrocken.Name = "tsmiNewFloorConstructionTrocken";
-			this.tsmiNewFloorConstructionTrocken.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewFloorConstructionTrocken.Text = "Fuﬂbodenkonstruktion (Trocken)";
-			this.tsmiNewFloorConstructionTrocken.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewFloorConstructionStahl
-			// 
-			this.tsmiNewFloorConstructionStahl.Name = "tsmiNewFloorConstructionStahl";
-			this.tsmiNewFloorConstructionStahl.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewFloorConstructionStahl.Text = "Fuﬂbodenkonstruktion (Stahlblech)";
-			this.tsmiNewFloorConstructionStahl.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewFloorConstructionTrockenEstrich
-			// 
-			this.tsmiNewFloorConstructionTrockenEstrich.Name = "tsmiNewFloorConstructionTrockenEstrich";
-			this.tsmiNewFloorConstructionTrockenEstrich.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewFloorConstructionTrockenEstrich.Text = "Fuﬂbodenkonstruktion (Trockenestrich)";
-			this.tsmiNewFloorConstructionTrockenEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewInsulationConstruction
-			// 
-			this.tsmiNewInsulationConstruction.Name = "tsmiNewInsulationConstruction";
-			this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewInsulationConstruction.Text = "W‰rmed‰mmkonstruktion";
-			this.tsmiNewInsulationConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewCeilingConstruction
-			// 
-			this.tsmiNewCeilingConstruction.Name = "tsmiNewCeilingConstruction";
-			this.tsmiNewCeilingConstruction.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewCeilingConstruction.Text = "Deckenkonstruktion";
-			this.tsmiNewCeilingConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// tsmiNewWallConstruction
-			// 
-			this.tsmiNewWallConstruction.Name = "tsmiNewWallConstruction";
-			this.tsmiNewWallConstruction.Size = new System.Drawing.Size(284, 22);
-			this.tsmiNewWallConstruction.Text = "Wandkonstruktion";
-			this.tsmiNewWallConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
-			// 
-			// cmsNewAdmin
-			// 
-			this.cmsNewAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsNew.Name = "cmsNew";
+            this.cmsNew.Size = new System.Drawing.Size(285, 202);
+            // 
+            // tsmiNewFloorConstructionEstrich
+            // 
+            this.tsmiNewFloorConstructionEstrich.Name = "tsmiNewFloorConstructionEstrich";
+            this.tsmiNewFloorConstructionEstrich.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionEstrich.Text = "Fuﬂbodenkonstruktion (Estrich)";
+            this.tsmiNewFloorConstructionEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewFloorConstructionTrocken
+            // 
+            this.tsmiNewFloorConstructionTrocken.Name = "tsmiNewFloorConstructionTrocken";
+            this.tsmiNewFloorConstructionTrocken.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionTrocken.Text = "Fuﬂbodenkonstruktion (Trocken)";
+            this.tsmiNewFloorConstructionTrocken.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewFloorConstructionStahl
+            // 
+            this.tsmiNewFloorConstructionStahl.Name = "tsmiNewFloorConstructionStahl";
+            this.tsmiNewFloorConstructionStahl.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionStahl.Text = "Fuﬂbodenkonstruktion (Stahlblech)";
+            this.tsmiNewFloorConstructionStahl.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewFloorConstructionTrockenEstrich
+            // 
+            this.tsmiNewFloorConstructionTrockenEstrich.Name = "tsmiNewFloorConstructionTrockenEstrich";
+            this.tsmiNewFloorConstructionTrockenEstrich.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionTrockenEstrich.Text = "Fuﬂbodenkonstruktion (Trockenestrich)";
+            this.tsmiNewFloorConstructionTrockenEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewInsulationConstruction
+            // 
+            this.tsmiNewInsulationConstruction.Name = "tsmiNewInsulationConstruction";
+            this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewInsulationConstruction.Text = "W‰rmed‰mmkonstruktion";
+            this.tsmiNewInsulationConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewCeilingConstruction
+            // 
+            this.tsmiNewCeilingConstruction.Name = "tsmiNewCeilingConstruction";
+            this.tsmiNewCeilingConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewCeilingConstruction.Text = "Deckenkonstruktion";
+            this.tsmiNewCeilingConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewWallConstruction
+            // 
+            this.tsmiNewWallConstruction.Name = "tsmiNewWallConstruction";
+            this.tsmiNewWallConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewWallConstruction.Text = "Wandkonstruktion";
+            this.tsmiNewWallConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // cmsNewAdmin
+            // 
+            this.cmsNewAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNewFloorConstructionScreedAdmin,
             this.tsmiNewFloorConstructionDryAdmin,
             this.tsmiNewInsulationConstructionAdmin,
             this.tsmiNewCeilingConstructionAdmin});
-			this.cmsNewAdmin.Name = "cmsNew";
-			this.cmsNewAdmin.Size = new System.Drawing.Size(250, 92);
-			// 
-			// tsmiNewFloorConstructionScreedAdmin
-			// 
-			this.tsmiNewFloorConstructionScreedAdmin.Name = "tsmiNewFloorConstructionScreedAdmin";
-			this.tsmiNewFloorConstructionScreedAdmin.Size = new System.Drawing.Size(249, 22);
-			this.tsmiNewFloorConstructionScreedAdmin.Text = "Fuﬂbodenkonstruktion (Estrich)";
-			this.tsmiNewFloorConstructionScreedAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// tsmiNewFloorConstructionDryAdmin
-			// 
-			this.tsmiNewFloorConstructionDryAdmin.Name = "tsmiNewFloorConstructionDryAdmin";
-			this.tsmiNewFloorConstructionDryAdmin.Size = new System.Drawing.Size(249, 22);
-			this.tsmiNewFloorConstructionDryAdmin.Text = "Fuﬂbodenkonstruktion (Trocken)";
-			this.tsmiNewFloorConstructionDryAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// tsmiNewInsulationConstructionAdmin
-			// 
-			this.tsmiNewInsulationConstructionAdmin.Name = "tsmiNewInsulationConstructionAdmin";
-			this.tsmiNewInsulationConstructionAdmin.Size = new System.Drawing.Size(249, 22);
-			this.tsmiNewInsulationConstructionAdmin.Text = "W‰rmed‰mmkonstruktion";
-			this.tsmiNewInsulationConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// tsmiNewCeilingConstructionAdmin
-			// 
-			this.tsmiNewCeilingConstructionAdmin.Name = "tsmiNewCeilingConstructionAdmin";
-			this.tsmiNewCeilingConstructionAdmin.Size = new System.Drawing.Size(249, 22);
-			this.tsmiNewCeilingConstructionAdmin.Text = "Deckenkonstruktion";
-			this.tsmiNewCeilingConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
-			// 
-			// ConstructionEditorGrid
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.gridConstructions);
-			this.Controls.Add(this.panBottom);
-			this.Name = "ConstructionEditorGrid";
-			this.Size = new System.Drawing.Size(704, 424);
-			this.panBottom.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).EndInit();
-			this.cmsView.ResumeLayout(false);
-			this.cmsNew.ResumeLayout(false);
-			this.cmsNewAdmin.ResumeLayout(false);
-			this.ResumeLayout(false);
+            this.cmsNewAdmin.Name = "cmsNew";
+            this.cmsNewAdmin.Size = new System.Drawing.Size(250, 92);
+            // 
+            // tsmiNewFloorConstructionScreedAdmin
+            // 
+            this.tsmiNewFloorConstructionScreedAdmin.Name = "tsmiNewFloorConstructionScreedAdmin";
+            this.tsmiNewFloorConstructionScreedAdmin.Size = new System.Drawing.Size(249, 22);
+            this.tsmiNewFloorConstructionScreedAdmin.Text = "Fuﬂbodenkonstruktion (Estrich)";
+            this.tsmiNewFloorConstructionScreedAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
+            // 
+            // tsmiNewFloorConstructionDryAdmin
+            // 
+            this.tsmiNewFloorConstructionDryAdmin.Name = "tsmiNewFloorConstructionDryAdmin";
+            this.tsmiNewFloorConstructionDryAdmin.Size = new System.Drawing.Size(249, 22);
+            this.tsmiNewFloorConstructionDryAdmin.Text = "Fuﬂbodenkonstruktion (Trocken)";
+            this.tsmiNewFloorConstructionDryAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
+            // 
+            // tsmiNewInsulationConstructionAdmin
+            // 
+            this.tsmiNewInsulationConstructionAdmin.Name = "tsmiNewInsulationConstructionAdmin";
+            this.tsmiNewInsulationConstructionAdmin.Size = new System.Drawing.Size(249, 22);
+            this.tsmiNewInsulationConstructionAdmin.Text = "W‰rmed‰mmkonstruktion";
+            this.tsmiNewInsulationConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
+            // 
+            // tsmiNewCeilingConstructionAdmin
+            // 
+            this.tsmiNewCeilingConstructionAdmin.Name = "tsmiNewCeilingConstructionAdmin";
+            this.tsmiNewCeilingConstructionAdmin.Size = new System.Drawing.Size(249, 22);
+            this.tsmiNewCeilingConstructionAdmin.Text = "Deckenkonstruktion";
+            this.tsmiNewCeilingConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
+            // 
+            // tsmiNewFloorConstructionBeton
+            // 
+            this.tsmiNewFloorConstructionBeton.Name = "tsmiNewFloorConstructionBeton";
+            this.tsmiNewFloorConstructionBeton.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionBeton.Text = "Fuﬂbodenkonstruktion (Stahlbeton)";
+            this.tsmiNewFloorConstructionBeton.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // ConstructionEditorGrid
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.gridConstructions);
+            this.Controls.Add(this.panBottom);
+            this.Name = "ConstructionEditorGrid";
+            this.Size = new System.Drawing.Size(704, 424);
+            this.panBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).EndInit();
+            this.cmsView.ResumeLayout(false);
+            this.cmsNew.ResumeLayout(false);
+            this.cmsNewAdmin.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 
@@ -407,7 +416,8 @@ namespace Europlan.Common {
 		private NumericColumn thicknessDataGridViewTextBoxColumn;
 		private NumericColumn colRValue;
 		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstructionBeton;
 
 	}
 }

@@ -44,6 +44,8 @@ namespace Europlan.Common {
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
 
+        public static double verteilerMaxDurchfluss = 2500;
+
 		private static double alphaDeckeHeat = 6.5;
 		private static double alphaBodenHeat = 10.8;
 		private static double alphaWandHeat = 8.0;
@@ -101,11 +103,17 @@ namespace Europlan.Common {
 			set { alphaWandCool = value; }
 		}
 
-		[DoubleProductParameter(70.0)]
-		public static double ConfigMaxCoolLoadPerSqm {
-			get { return maxCoolLoadPerSqm ; }
-			set { maxCoolLoadPerSqm = value; }
-		}
+        [DoubleProductParameter(70.0)]
+        public static double ConfigMaxCoolLoadPerSqm {
+            get { return maxCoolLoadPerSqm; }
+            set { maxCoolLoadPerSqm = value; }
+        }
+
+        [DoubleProductParameter(2500.0)]
+        public static double ConfigVerteilerMaxDurchfluss {
+            get { return verteilerMaxDurchfluss; }
+            set { verteilerMaxDurchfluss = value; }
+        }
 
 		public enum PlanMeasureEnum {
 			PM_METER = 0,
@@ -1458,6 +1466,8 @@ namespace Europlan.Common {
 			double clipschieneKlebebandEuroval = 0;
 			double ovalMuffeEuroval = 0;
 
+            double pipeJumboval = 0;
+
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
 					if (pipe.OnlyFirst) {
@@ -1519,6 +1529,11 @@ namespace Europlan.Common {
 					}
                 } else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL) {
                     #warning TODO Materialbedarf für Jumboval Anbindeleitungen implementieren
+                    if (pipe.OnlyFirst) {
+                        pipeJumboval += (pipe.Vorlauf + pipe.Ruecklauf);
+                    } else {
+                        pipeJumboval += (pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount;
+                    }
                 }
 			}
 
@@ -1566,6 +1581,9 @@ namespace Europlan.Common {
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV15", clipschieneEuroval);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV16", clipschieneKlebebandEuroval);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", ovalMuffeEuroval);
+
+            // materials for jumboval pipe
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV01", pipeJumboval);
 		}
 
 		// for 21mm pipes

@@ -7226,4 +7226,25 @@ Compact
   <data name="SelectConnectionForProductForm_Verteiler" xml:space="preserve">
     <value>Verteiler %ID%: %NAME%</value>
   </data>
+  <data name="ConstructionTypeManager_BenutzerBeton" xml:space="preserve">
+    <value>Benutzer Stahlbetonkonstruktion</value>
+  </data>
+  <data name="ConstructionTypeManager_StandardBeton" xml:space="preserve">
+    <value>Standard Stahlbetonkonstruktion</value>
+  </data>
+  <data name="Distributor_DurchflussZuGrossHeiz" xml:space="preserve">
+    <value>Der gesamte Durchfluss aller an diesen Verteiler angeschlossenen Kreise ist im Heizbetrieb zu groß (%VALUE% &gt;%MAXIMUM%)</value>
+  </data>
+  <data name="Distributor_DurchflussZuGrossKuehl" xml:space="preserve">
+    <value>Der gesamte Durchfluss aller an diesen Verteiler angeschlossenen Kreise ist im Kühlbetrieb zu groß (%VALUE% &gt;%MAXIMUM%)</value>
+  </data>
+  <data name="ErrorMessage_EstrichueberdeckungZuGross" xml:space="preserve">
+    <value>Estrichüberdeckung zu groß (%VALUE%cm &gt; %MAXIMUM%cm)</value>
+  </data>
+  <data name="ErrorMessage_EstrichueberdeckungZuKlein" xml:space="preserve">
+    <value>Estrichüberdeckung zu klein (%VALUE%cm &lt; %MINIMUM%cm)</value>
+  </data>
+  <data name="PlannedProductPanel_Estrichueberdeckung" xml:space="preserve">
+    <value>Estrichüberdeckung:</value>
+  </data>
 </root>

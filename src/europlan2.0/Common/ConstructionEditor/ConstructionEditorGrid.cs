@@ -173,7 +173,10 @@ namespace Europlan.Common {
 			} else if (sender == this.tsmiNewWallConstruction) {
 				c = new WallConstruction();
 				c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_WAND : ConstructionTypeManager.CT_USER_WAND);
-			}
+            } else if (sender == this.tsmiNewFloorConstructionBeton) {
+                c = new FloorConstruction();
+                c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_BETON : ConstructionTypeManager.CT_USER_BETON);
+            }
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);
 				form.ShowDialog();
@@ -242,6 +245,6 @@ namespace Europlan.Common {
 					}
 				}
 			}
-		}
+        }
 	}
 }

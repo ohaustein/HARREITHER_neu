@@ -22,6 +22,8 @@ namespace Europlan.Common {
 		public static readonly string CT_USER_DECKE = "UserDecke";
 		public static readonly string CT_STD_WAND = "StdWand";
 		public static readonly string CT_USER_WAND = "UserWand";
+        public static readonly string CT_STD_BETON = "StdBeton";
+        public static readonly string CT_USER_BETON = "UserBeton";
 
 		public static ConstructionTypeManager Instance {
 			get {
@@ -60,11 +62,15 @@ namespace Europlan.Common {
 			this.constructionTypes.Add(type.Id, type);
 			type = new ConstructionType(CT_USER_DECKE, EuroplanRes.ConstructionTypeManager_BenutzerDecke/*"Benutzer Deckenkonstruktion"*/, ConstructionScopeEnum.CeilingConstruction, true);
 			this.constructionTypes.Add(type.Id, type);
-			type = new ConstructionType(CT_STD_WAND, EuroplanRes.ConstructionTypeManager_StandardWand/*"Standard Wandkonstruktion"*/, ConstructionScopeEnum.WallConstruction, false);
-			this.constructionTypes.Add(type.Id, type);
-			type = new ConstructionType(CT_USER_WAND, EuroplanRes.ConstructionTypeManager_BenutzerWand/*"Benutzer Wandkonstruktion"*/, ConstructionScopeEnum.WallConstruction, true);
-			this.constructionTypes.Add(type.Id, type);
-		}
+            type = new ConstructionType(CT_STD_WAND, EuroplanRes.ConstructionTypeManager_StandardWand/*"Standard Wandkonstruktion"*/, ConstructionScopeEnum.WallConstruction, false);
+            this.constructionTypes.Add(type.Id, type);
+            type = new ConstructionType(CT_USER_WAND, EuroplanRes.ConstructionTypeManager_BenutzerWand/*"Benutzer Wandkonstruktion"*/, ConstructionScopeEnum.WallConstruction, true);
+            this.constructionTypes.Add(type.Id, type);
+            type = new ConstructionType(CT_STD_BETON, EuroplanRes.ConstructionTypeManager_StandardBeton/*"Standard Stahlbetonkonstruktion"*/, ConstructionScopeEnum.FloorConstruction, false);
+            this.constructionTypes.Add(type.Id, type);
+            type = new ConstructionType(CT_USER_BETON, EuroplanRes.ConstructionTypeManager_BenutzerBeton/*"Benutzer Stahlbetonkonstruktion"*/, ConstructionScopeEnum.FloorConstruction, true);
+            this.constructionTypes.Add(type.Id, type);
+        }
 
 		public ConstructionType GetConstructionTypeById(string id) {
 			if (this.constructionTypes.ContainsKey(id)) {

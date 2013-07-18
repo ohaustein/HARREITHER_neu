@@ -542,7 +542,6 @@ namespace Europlan.Common {
                                             }
                                         }
                                     }
-#warning TODO: überprüfen ob Klimaboden-Module auch gedreht werden müssen
                                 }
                             }
                         }

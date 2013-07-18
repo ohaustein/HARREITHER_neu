@@ -803,7 +803,7 @@ namespace Europlan.Common {
                 double rLambdaPutz;
 
                 if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
-                    su = JumbovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    su = JumbovalProduct.ConfigSuDefault; // TODO: von tatsächlicher Konstruktion übernehmen
                     lambdaU = JumbovalProduct.ConfigLambdaU;  /* Estrich??? */
                     faktorTrockenkonstruktion = JumbovalProduct.ConfigFaktorTrockenkonstruktion;
                     rAlphaDeckeFbh = 1 / JumbovalProduct.ConfigAlphaFbk; /* Wärmeübergang Decke bei Heizung */
@@ -812,7 +812,7 @@ namespace Europlan.Common {
                     alphaFbh = JumbovalProduct.ConfigAlphaFbh;
                     su0 = JumbovalProduct.ConfigSu0;
                     lambdaU0 = JumbovalProduct.ConfigLambdaU0;
-                    lambdaE = JumbovalProduct.ConfigLambdaE;
+                    lambdaE = JumbovalProduct.ConfigLambdaEEstrich; // TODO: überprüfen ob in Estrich oder Stahlbetonkonstruktion
                     sr = JumbovalProduct.ConfigSr;
                     sr0 = JumbovalProduct.ConfigSr0;
                     lambdaR = JumbovalProduct.ConfigLambdaR;
@@ -1048,7 +1048,7 @@ namespace Europlan.Common {
                 double rLambdaPutz;
 
                 if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
-                    su = JumbovalProduct.ConfigSu; /* Estrichüberdeckung; Annahme ECO30; durch echte Konstruktion ersetzen! */
+                    su = JumbovalProduct.ConfigSuDefault; // TODO: von tatsächlicher Konstruktion übernehmen
                     lambdaU = JumbovalProduct.ConfigLambdaU;  /* Estrich??? */
                     faktorTrockenkonstruktion = JumbovalProduct.ConfigFaktorTrockenkonstruktion;
                     rAlphaDeckeFbk = 1 / JumbovalProduct.ConfigAlphaFbh; /* Wärmeübergang Decke bei Heizung */
@@ -1057,7 +1057,7 @@ namespace Europlan.Common {
                     alphaFbk = JumbovalProduct.ConfigAlphaFbk;
                     su0 = JumbovalProduct.ConfigSu0;
                     lambdaU0 = JumbovalProduct.ConfigLambdaU0;
-                    lambdaE = JumbovalProduct.ConfigLambdaE;
+                    lambdaE = JumbovalProduct.ConfigLambdaEEstrich; // TODO: überprüfen ob in Estrich oder Stahlbetonkonstruktion
                     sr = JumbovalProduct.ConfigSr;
                     sr0 = JumbovalProduct.ConfigSr0;
                     lambdaR = JumbovalProduct.ConfigLambdaR;

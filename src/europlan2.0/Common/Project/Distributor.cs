@@ -305,6 +305,30 @@ namespace Europlan.Common {
             }
         }
 
+        public double GesamtDurchflussHeat {
+            get {
+                double durchfluss = 0;
+                foreach (PlannedProduct pp in this.PlannedConnectedProducts) {
+                    foreach (Circuit c in pp.Product.PlannedCircuits) {
+                        durchfluss += c.C_DurchflussHeat;
+                    }
+                }
+                return durchfluss;
+            }
+        }
+
+        public double GesamtDurchflussCool {
+            get {
+                double durchfluss = 0;
+                foreach (PlannedProduct pp in this.PlannedConnectedProducts) {
+                    foreach (Circuit c in pp.Product.PlannedCircuits) {
+                        durchfluss += c.C_DurchflussCool;
+                    }
+                }
+                return durchfluss;
+            }
+        }
+
 		public int MaxCircuits {
 			get { return maxCircuits; }
 			set { maxCircuits = value; }
@@ -550,10 +574,23 @@ namespace Europlan.Common {
 			int totalCircuits = PlannedCircuits + AdditionalCircuits;
 			int totalStellantriebe = PlannedStellAntriebe + ZusaetzlicheStellantriebe;
 
-#warning TODO Materialbedarf anpassen für VOLxx bzw. VOHxx Verteiler
-
-			string partNr = "VO";
+			string partNr;
+            switch (this.DistributorType) {
+                case DistributorTypeEnum.DT_140:
+                    partNr = "VOL";
+                    break;
+                case DistributorTypeEnum.DT_480:
+                    partNr = "VOH";
+                    break;
+                case DistributorTypeEnum.DT_240:
+                default:
+                    partNr = "VO";
+                    break;
+            }
 			int circuits = totalCircuits > 2 ? totalCircuits : 2;
+            if (circuits > this.MaxCircuits) {
+                circuits = this.MaxCircuits; // TODO mit Chris besprechen ob er das so OK empfindet
+            }
 			partNr += String.Format("{0:00}", circuits);
 			Project.Instance.AddRequiredMaterial(requiredMaterial, partNr, 1);
 
@@ -605,7 +642,22 @@ namespace Europlan.Common {
 					err = err.Replace("%MAXIMUM%", MaxCircuits.ToString());
 					errors.Add(err);
 				}
-				string[] errs = new string[errors.Count];
+                if (this.GesamtDurchflussHeat >= this.GesamtDurchflussCool) {
+                    if (Math.Round(this.GesamtDurchflussHeat) > Math.Round(Product.ConfigVerteilerMaxDurchfluss)) {
+                        string err = EuroplanRes.Distributor_DurchflussZuGrossHeiz;
+                        err = err.Replace("%VALUE%", Math.Round(this.GesamtDurchflussHeat).ToString());
+                        err = err.Replace("%MAXIMUM%", Math.Round(Product.ConfigVerteilerMaxDurchfluss).ToString());
+                        errors.Add(err);
+                    }
+                } else {
+                    if (Math.Round(this.GesamtDurchflussCool) > Math.Round(Product.ConfigVerteilerMaxDurchfluss)) {
+                        string err = EuroplanRes.Distributor_DurchflussZuGrossKuehl;
+                        err = err.Replace("%VALUE%", Math.Round(this.GesamtDurchflussCool).ToString());
+                        err = err.Replace("%MAXIMUM%", Math.Round(Product.ConfigVerteilerMaxDurchfluss).ToString());
+                        errors.Add(err);
+                    }
+                }
+                string[] errs = new string[errors.Count];
 				errors.CopyTo(errs);
 				return errs;
 			}

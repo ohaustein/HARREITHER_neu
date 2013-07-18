@@ -257,12 +257,12 @@ namespace Europlan.Common {
 			double alphaFbh = JumbovalProduct.ConfigAlphaFbh;
 			double alphaFbk = JumbovalProduct.ConfigAlphaFbk;
 			double su0 = JumbovalProduct.ConfigSu0;
-			double su = JumbovalProduct.ConfigSu;
+            double su = this.JumbovalProduct.Su;
 			double lambdaR0 = JumbovalProduct.ConfigLambdaR0;
 			double lambdaR = JumbovalProduct.ConfigLambdaR;
 			double lambdaU0 = JumbovalProduct.ConfigLambdaU0;
 			double lambdaU = JumbovalProduct.ConfigLambdaU;
-			double lambdaE = JumbovalProduct.ConfigLambdaE;
+            double lambdaE = (this.JumbovalProduct.PlannedFloorConstruction != null && (this.JumbovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_BETON) || this.JumbovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_BETON))) ? JumbovalProduct.ConfigLambdaEBeton : JumbovalProduct.ConfigLambdaEEstrich;
 			double rLambdaDecke = JumbovalProduct.ConfigRLambdaDecke;
 			double rLambdaPutz = JumbovalProduct.ConfigRLambdaPutz;
 			double rAlphaDeckeFbh = 1 / Product.ConfigAlphaDeckeHeat; /* Wärmeübergang Decke bei Heizung */
@@ -325,22 +325,22 @@ namespace Europlan.Common {
 					tRz = JumbovalProduct.GetTeilung(JumbovalProduct.GetRimLayDistance(rimType.Value));    // Teilung der Randzone
 					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
 					//                                                                        // Potenzprodukt der Randzone berechnen
-					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr,sr0, lambdaR, lambdaR0);
+                    bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
 					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
 					this.c_qRzHeatPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz) * factor;                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
 				}
 
 				double tAz = JumbovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone
-				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
+                double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
 				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
-				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+                double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbh, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
 				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
 				this.c_qAzHeatPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = this.QFbhTotalHeat / this.AreaWithoutConnections;
-				double qU = en1264.WaermeverlustAussen(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.JumbovalProduct.AssociatedRoom.RoomHeatTemperature, this.JumbovalProduct.PlannedRoomTemperatureBelowHeat);
+                double qU = en1264.WaermeverlustAussen(alphaFbh, rLambdaB, su, lambdaU, rAlphaDeckeFbh, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.JumbovalProduct.AssociatedRoom.RoomHeatTemperature, this.JumbovalProduct.PlannedRoomTemperatureBelowHeat);
 
 				// hydraulische Berechnung
 				this.c_Qh2oHeat = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen
@@ -407,24 +407,24 @@ namespace Europlan.Common {
 				double khRz = 0;
 				if (calculateWithRim) {
 					tRz = JumbovalProduct.GetTeilung(JumbovalProduct.GetRimLayDistance(rimType.Value));    // Teilung der Randzone
-					ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
+                    ppRz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag);
 					//                                                                        // Potenzprodukt der Randzone berechnen
-					bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+                    bgRz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tRz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 					//                                                                        // systemabhängigen Koeffizienten der Randzone berechnen
 					khRz = en1264.WaermedurchgangsKoeffizientRohr(bgRz, ppRz);                // Wärmedurchgangskoeffizient der Randzone berechnen
 					this.c_qRzCoolPerSqm = en1264.WaermestromDichteRohr(khRz, dThetaRz) * factor;                       // in den Raum abgegebene Wärmeleistung der Randzone berechnen
 				}
 
 				double tAz = JumbovalProduct.GetTeilung(layDistance);                             // Teilung der Aufenthaltszone
-				double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
+                double ppAz = en1264.PotenzProduktFussbodenGeometrie(alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag);
 				//                                                                            // Potenzprodukt der Aufenthaltszone berechnen
-				double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
+                double bgAz = en1264.SystemabhaengigerKoeffizientGeometrie(6.7, alpha0, alphaFbk, su0, lambdaU0, lambdaE, rLambdaB, tAz, su, rohrAussenD, ag, sr, sr0, lambdaR, lambdaR0);
 				//                                                                            // systemabhängigen Koeffizienten der Aufenthaltszone berechnen
 				double khAz = en1264.WaermedurchgangsKoeffizientRohr(bgAz, ppAz);             // Wärmedurchgangskoeffizient der Aufenthaltszone berechnen
 				this.c_qAzCoolPerSqm = en1264.WaermestromDichteRohr(khAz, dThetaAz) * factor;                    // in den Raum abgegebene Wärmeleistung der Aufenthaltszone berechnen
 
 				double qAverage = -this.QFbhTotalCool / this.AreaWithoutConnections;
-				double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.JumbovalProduct.AssociatedRoom.RoomCoolTemperature, this.JumbovalProduct.PlannedRoomTemperatureBelowCool);
+                double qU = en1264.WaermeverlustAussen(alphaFbk, rLambdaB, su, lambdaU, rAlphaDeckeFbk, rLambdaIns, rLambdaDecke, rLambdaPutz, qAverage, this.JumbovalProduct.AssociatedRoom.RoomCoolTemperature, this.JumbovalProduct.PlannedRoomTemperatureBelowCool);
 
 				// hydraulische Berechnung
 				this.c_Qh2oCool = (qAverage + qU) * this.AreaWithoutConnections;            // gesamte aufgenommene Leistung berechnen

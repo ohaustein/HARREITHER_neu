@@ -1053,7 +1053,9 @@ namespace Europlan.Common {
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN),
-					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN)}));
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN),
+                    ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_BETON),
+                    ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_BETON)}));
 			form.SelectedConstruction = (this.product.Product as EurovalProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {

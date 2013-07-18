@@ -126,9 +126,6 @@ namespace Europlan.Common {
             this.lblJumbovalViskositaet = new System.Windows.Forms.Label();
             this.lblJumbovalWaermekapazitaet = new System.Windows.Forms.Label();
             this.lblJumbovalDichte = new System.Windows.Forms.Label();
-            this.lblJumbovalEstrichueberdeckungUnit = new System.Windows.Forms.Label();
-            this.numJumbovalEstrichueberdeckung = new Europlan.Common.NumericBox();
-            this.lblJumbovalEstrichueberdeckung = new System.Windows.Forms.Label();
             this.lblJumbovalMindestueberdeckungUnit = new System.Windows.Forms.Label();
             this.numJumbovalMindestueberdeckung = new Europlan.Common.NumericBox();
             this.lblJumbovalMindestueberdeckung = new System.Windows.Forms.Label();
@@ -2330,18 +2327,15 @@ namespace Europlan.Common {
             this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.layoutJumboval.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaetUnit, 3, 12);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaetUnit, 3, 11);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalDichteUnit, 3, 10);
-            this.layoutJumboval.Controls.Add(this.numJumbovalViskositaet, 2, 12);
-            this.layoutJumboval.Controls.Add(this.numJumbovalWaermekapazitaet, 2, 11);
-            this.layoutJumboval.Controls.Add(this.numJumbovalDichte, 2, 10);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaet, 0, 12);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaet, 0, 11);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalDichte, 0, 10);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalEstrichueberdeckungUnit, 3, 9);
-            this.layoutJumboval.Controls.Add(this.numJumbovalEstrichueberdeckung, 2, 9);
-            this.layoutJumboval.Controls.Add(this.lblJumbovalEstrichueberdeckung, 0, 9);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaetUnit, 3, 11);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaetUnit, 3, 10);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDichteUnit, 3, 9);
+            this.layoutJumboval.Controls.Add(this.numJumbovalViskositaet, 2, 11);
+            this.layoutJumboval.Controls.Add(this.numJumbovalWaermekapazitaet, 2, 10);
+            this.layoutJumboval.Controls.Add(this.numJumbovalDichte, 2, 9);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalViskositaet, 0, 11);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalWaermekapazitaet, 0, 10);
+            this.layoutJumboval.Controls.Add(this.lblJumbovalDichte, 0, 9);
             this.layoutJumboval.Controls.Add(this.lblJumbovalMindestueberdeckungUnit, 3, 8);
             this.layoutJumboval.Controls.Add(this.numJumbovalMindestueberdeckung, 2, 8);
             this.layoutJumboval.Controls.Add(this.lblJumbovalMindestueberdeckung, 0, 8);
@@ -2376,11 +2370,11 @@ namespace Europlan.Common {
             this.layoutJumboval.Controls.Add(this.numJumbovalDurchfluss, 2, 4);
             this.layoutJumboval.Controls.Add(this.numJumbovalPressurePa, 2, 3);
             this.layoutJumboval.Controls.Add(this.numJumbovalSpreizungHeizMin, 2, 5);
-            this.layoutJumboval.Controls.Add(this.btnJumbovalStandard, 5, 14);
+            this.layoutJumboval.Controls.Add(this.btnJumbovalStandard, 5, 13);
             this.layoutJumboval.Controls.Add(this.cbJumbovalGeometrieAktiviert, 5, 7);
             this.layoutJumboval.Location = new System.Drawing.Point(3, 5);
             this.layoutJumboval.Name = "layoutJumboval";
-            this.layoutJumboval.RowCount = 15;
+            this.layoutJumboval.RowCount = 14;
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
@@ -2396,14 +2390,14 @@ namespace Europlan.Common {
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutJumboval.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.layoutJumboval.Size = new System.Drawing.Size(580, 345);
+            this.layoutJumboval.Size = new System.Drawing.Size(580, 322);
             this.layoutJumboval.TabIndex = 1;
             // 
             // lblJumbovalViskositaetUnit
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalViskositaetUnit, 2);
             this.lblJumbovalViskositaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalViskositaetUnit.Location = new System.Drawing.Point(393, 276);
+            this.lblJumbovalViskositaetUnit.Location = new System.Drawing.Point(393, 253);
             this.lblJumbovalViskositaetUnit.Name = "lblJumbovalViskositaetUnit";
             this.lblJumbovalViskositaetUnit.Size = new System.Drawing.Size(64, 23);
             this.lblJumbovalViskositaetUnit.TabIndex = 55;
@@ -2414,7 +2408,7 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalWaermekapazitaetUnit, 2);
             this.lblJumbovalWaermekapazitaetUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalWaermekapazitaetUnit.Location = new System.Drawing.Point(393, 253);
+            this.lblJumbovalWaermekapazitaetUnit.Location = new System.Drawing.Point(393, 230);
             this.lblJumbovalWaermekapazitaetUnit.Name = "lblJumbovalWaermekapazitaetUnit";
             this.lblJumbovalWaermekapazitaetUnit.Size = new System.Drawing.Size(64, 23);
             this.lblJumbovalWaermekapazitaetUnit.TabIndex = 54;
@@ -2425,7 +2419,7 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalDichteUnit, 2);
             this.lblJumbovalDichteUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalDichteUnit.Location = new System.Drawing.Point(393, 230);
+            this.lblJumbovalDichteUnit.Location = new System.Drawing.Point(393, 207);
             this.lblJumbovalDichteUnit.Name = "lblJumbovalDichteUnit";
             this.lblJumbovalDichteUnit.Size = new System.Drawing.Size(64, 23);
             this.lblJumbovalDichteUnit.TabIndex = 53;
@@ -2441,7 +2435,7 @@ namespace Europlan.Common {
             0,
             0,
             655360});
-            this.numJumbovalViskositaet.Location = new System.Drawing.Point(308, 278);
+            this.numJumbovalViskositaet.Location = new System.Drawing.Point(308, 255);
             this.numJumbovalViskositaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numJumbovalViskositaet.MaxValue = new decimal(new int[] {
             1410065407,
@@ -2474,7 +2468,7 @@ namespace Europlan.Common {
             0,
             0,
             131072});
-            this.numJumbovalWaermekapazitaet.Location = new System.Drawing.Point(308, 255);
+            this.numJumbovalWaermekapazitaet.Location = new System.Drawing.Point(308, 232);
             this.numJumbovalWaermekapazitaet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numJumbovalWaermekapazitaet.MaxValue = new decimal(new int[] {
             99999,
@@ -2507,7 +2501,7 @@ namespace Europlan.Common {
             0,
             0,
             131072});
-            this.numJumbovalDichte.Location = new System.Drawing.Point(308, 232);
+            this.numJumbovalDichte.Location = new System.Drawing.Point(308, 209);
             this.numJumbovalDichte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numJumbovalDichte.MaxValue = new decimal(new int[] {
             9999999,
@@ -2535,7 +2529,7 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalViskositaet, 2);
             this.lblJumbovalViskositaet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalViskositaet.Location = new System.Drawing.Point(3, 276);
+            this.lblJumbovalViskositaet.Location = new System.Drawing.Point(3, 253);
             this.lblJumbovalViskositaet.Name = "lblJumbovalViskositaet";
             this.lblJumbovalViskositaet.Size = new System.Drawing.Size(299, 23);
             this.lblJumbovalViskositaet.TabIndex = 49;
@@ -2546,7 +2540,7 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalWaermekapazitaet, 2);
             this.lblJumbovalWaermekapazitaet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalWaermekapazitaet.Location = new System.Drawing.Point(3, 253);
+            this.lblJumbovalWaermekapazitaet.Location = new System.Drawing.Point(3, 230);
             this.lblJumbovalWaermekapazitaet.Name = "lblJumbovalWaermekapazitaet";
             this.lblJumbovalWaermekapazitaet.Size = new System.Drawing.Size(299, 23);
             this.lblJumbovalWaermekapazitaet.TabIndex = 48;
@@ -2557,66 +2551,12 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.lblJumbovalDichte, 2);
             this.lblJumbovalDichte.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalDichte.Location = new System.Drawing.Point(3, 230);
+            this.lblJumbovalDichte.Location = new System.Drawing.Point(3, 207);
             this.lblJumbovalDichte.Name = "lblJumbovalDichte";
             this.lblJumbovalDichte.Size = new System.Drawing.Size(299, 23);
             this.lblJumbovalDichte.TabIndex = 47;
             this.lblJumbovalDichte.Text = "Dichte des Mediums:";
             this.lblJumbovalDichte.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblJumbovalEstrichueberdeckungUnit
-            // 
-            this.lblJumbovalEstrichueberdeckungUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalEstrichueberdeckungUnit.Location = new System.Drawing.Point(393, 207);
-            this.lblJumbovalEstrichueberdeckungUnit.Name = "lblJumbovalEstrichueberdeckungUnit";
-            this.lblJumbovalEstrichueberdeckungUnit.Size = new System.Drawing.Size(24, 23);
-            this.lblJumbovalEstrichueberdeckungUnit.TabIndex = 46;
-            this.lblJumbovalEstrichueberdeckungUnit.Text = "m";
-            this.lblJumbovalEstrichueberdeckungUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numJumbovalEstrichueberdeckung
-            // 
-            this.numJumbovalEstrichueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numJumbovalEstrichueberdeckung.EditType = Europlan.Common.NumericBox.NumericEditType.UEBERDECKUNG;
-            this.numJumbovalEstrichueberdeckung.InternalValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numJumbovalEstrichueberdeckung.Location = new System.Drawing.Point(308, 209);
-            this.numJumbovalEstrichueberdeckung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-            this.numJumbovalEstrichueberdeckung.MaxValue = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numJumbovalEstrichueberdeckung.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numJumbovalEstrichueberdeckung.Name = "numJumbovalEstrichueberdeckung";
-            this.numJumbovalEstrichueberdeckung.Size = new System.Drawing.Size(79, 20);
-            this.numJumbovalEstrichueberdeckung.TabIndex = 14;
-            this.numJumbovalEstrichueberdeckung.Text = "1";
-            this.numJumbovalEstrichueberdeckung.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numJumbovalEstrichueberdeckung.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numJumbovalEstrichueberdeckung.ValueChanged += new System.EventHandler(this.numJumbovalEstrichueberdeckung_ValueChanged);
-            // 
-            // lblJumbovalEstrichueberdeckung
-            // 
-            this.layoutJumboval.SetColumnSpan(this.lblJumbovalEstrichueberdeckung, 2);
-            this.lblJumbovalEstrichueberdeckung.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblJumbovalEstrichueberdeckung.Location = new System.Drawing.Point(3, 207);
-            this.lblJumbovalEstrichueberdeckung.Name = "lblJumbovalEstrichueberdeckung";
-            this.lblJumbovalEstrichueberdeckung.Size = new System.Drawing.Size(299, 23);
-            this.lblJumbovalEstrichueberdeckung.TabIndex = 44;
-            this.lblJumbovalEstrichueberdeckung.Text = "Estrichüberdeckung:";
-            this.lblJumbovalEstrichueberdeckung.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblJumbovalMindestueberdeckungUnit
             // 
@@ -3204,7 +3144,7 @@ namespace Europlan.Common {
             // 
             this.layoutJumboval.SetColumnSpan(this.btnJumbovalStandard, 2);
             this.btnJumbovalStandard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnJumbovalStandard.Location = new System.Drawing.Point(460, 322);
+            this.btnJumbovalStandard.Location = new System.Drawing.Point(460, 299);
             this.btnJumbovalStandard.Margin = new System.Windows.Forms.Padding(0);
             this.btnJumbovalStandard.Name = "btnJumbovalStandard";
             this.btnJumbovalStandard.Size = new System.Drawing.Size(120, 23);
@@ -11951,9 +11891,6 @@ namespace Europlan.Common {
         private NumericBox numJumbovalDichte;
         private System.Windows.Forms.Label lblJumbovalViskositaet;
         private System.Windows.Forms.Label lblJumbovalWaermekapazitaet;
-        private System.Windows.Forms.Label lblJumbovalEstrichueberdeckungUnit;
-        private NumericBox numJumbovalEstrichueberdeckung;
-        private System.Windows.Forms.Label lblJumbovalEstrichueberdeckung;
         private System.Windows.Forms.Label lblJumbovalMindestueberdeckungUnit;
         private NumericBox numJumbovalMindestueberdeckung;
         private System.Windows.Forms.Label lblJumbovalMindestueberdeckung;

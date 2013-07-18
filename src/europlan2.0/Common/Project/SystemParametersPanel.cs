@@ -69,7 +69,6 @@ namespace Europlan.Common {
             this.lblEcothermEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
 			this.lblEcothermMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
 			this.lblEcothermCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
-            this.lblJumbovalEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
             this.lblJumbovalMindestueberdeckungUnit.Text = EuroplanRes.Unit_Meter; //"m"
             this.lblJumbovalCircuitLengthUnit.Text = EuroplanRes.Unit_Meter; //"m"
             this.lblHithermRegisterAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
@@ -153,7 +152,6 @@ namespace Europlan.Common {
             this.lblJumbovalViskositaet.Text = EuroplanRes.SystemParametersPanel_Viskositaet; //"kinematische Viskosität:"
             this.lblJumbovalWaermekapazitaet.Text = EuroplanRes.SystemParametersPanel_Waermekapazitaet; //"spezifische Wärmekapazität:"
             this.lblJumbovalDichte.Text = EuroplanRes.SystemParametersPanel_Dichte; //"Dichte des Mediums:"
-            this.lblJumbovalEstrichueberdeckung.Text = EuroplanRes.SystemParametersPanel_Estrichueberdeckung; //"Estrichüberdeckung:"
             this.lblJumbovalMindestueberdeckung.Text = EuroplanRes.SystemParametersPanel_Mindestueberdeckung; //"Mindestüberdeckung:"
             this.lblJumbovalGeometrie.Text = EuroplanRes.SystemParametersPanel_Geometriefaktor; //"Geometriefaktor:"
             this.lblJumbovalSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
@@ -480,9 +478,6 @@ namespace Europlan.Common {
                     this.layoutJumboval.Controls.Remove(this.lblJumbovalMindestueberdeckung);
                     this.layoutJumboval.Controls.Remove(this.numJumbovalMindestueberdeckung);
                     this.layoutJumboval.Controls.Remove(this.lblJumbovalMindestueberdeckungUnit);
-                    this.layoutJumboval.Controls.Remove(this.lblJumbovalEstrichueberdeckung);
-                    this.layoutJumboval.Controls.Remove(this.numJumbovalEstrichueberdeckung);
-                    this.layoutJumboval.Controls.Remove(this.lblJumbovalEstrichueberdeckungUnit);
                     this.layoutJumboval.Controls.Remove(this.lblJumbovalDichte);
                     this.layoutJumboval.Controls.Remove(this.numJumbovalDichte);
                     this.layoutJumboval.Controls.Remove(this.lblJumbovalDichteUnit);
@@ -730,7 +725,6 @@ namespace Europlan.Common {
                 cbJumbovalGeometrieAktiviert.Checked = JumbovalProduct.ConfigAgActivated;
                 numJumbovalGeometrie.Enabled = JumbovalProduct.ConfigAgActivated;
                 numJumbovalMindestueberdeckung.Value = (decimal)JumbovalProduct.ConfigSu0;
-                numJumbovalEstrichueberdeckung.Value = (decimal)JumbovalProduct.ConfigSu;
                 numJumbovalDichte.Value = (decimal)JumbovalProduct.ConfigRho;
                 numJumbovalWaermekapazitaet.Value = (decimal)JumbovalProduct.ConfigC;
                 numJumbovalViskositaet.Value = (decimal)JumbovalProduct.ConfigV;
@@ -1041,13 +1035,6 @@ namespace Europlan.Common {
 
         private void numJumbovalMindestueberdeckung_ValueChanged(object sender, EventArgs e) {
             JumbovalProduct.ConfigSu0 = (double)numJumbovalMindestueberdeckung.Value;
-            if (this.projectChanged != null) {
-                this.projectChanged(null);
-			}
-		}
-
-        private void numJumbovalEstrichueberdeckung_ValueChanged(object sender, EventArgs e) {
-            JumbovalProduct.ConfigSu = (double)numJumbovalEstrichueberdeckung.Value;
             if (this.projectChanged != null) {
                 this.projectChanged(null);
 			}

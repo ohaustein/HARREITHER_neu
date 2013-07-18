@@ -80,6 +80,7 @@ namespace Europlan.Common {
 			this.lblHeatLoadPercentage.Text = EuroplanRes.Unit_Prozent; //"%"
 			this.lblCoolLoadUnit.Text = EuroplanRes.Unit_Watt; //"W"
 			this.lblHeatLoadUnit.Text = EuroplanRes.Unit_Watt; //"W"
+            this.lblEstrichueberdeckungUnit.Text = EuroplanRes.Unit_Zentimeter; //"cm"
 			this.label27.Text = EuroplanRes.Unit_GradCelsius; //"°C"
 			this.label7.Text = EuroplanRes.Unit_GradCelsius; //"°C"
 			this.label9.Text = EuroplanRes.Unit_Meter; //"m"
@@ -96,6 +97,7 @@ namespace Europlan.Common {
 			this.label28.Text = EuroplanRes.PlannedProductPanel_TemperaturUnterhalbKuehl; //"Temperatur unterhalb (Kühlbetrieb):"
 			this.label8.Text = EuroplanRes.PlannedProductPanel_TemperaturUnterhalbHeiz; //"Temperatur unterhalb (Heizbetrieb):"
 			this.lblFloorConstruction.Text = EuroplanRes.PlannedProductPanel_Fussbodenkonstruktion; //"Fußbodenkonstruktion:"
+            this.lblEstrichueberdeckung.Text = EuroplanRes.PlannedProductPanel_Estrichueberdeckung; //"Estrichüberdeckung:"
 			this.lblInsulationConstruction.Text = EuroplanRes.PlannedProductPanel_Daemmkonstruktion; //"Wärmedämmkonstruktion:"
 			this.lblDistributor.Text = EuroplanRes.PlannedProductPanel_Verteileranschluss; //"Verteileranschluß:"
 			this.pageCircuit.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenSeite; //"Anbindeleitungen"
@@ -106,8 +108,6 @@ namespace Europlan.Common {
 
 			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_UnbeheizteFlaeche; //"unbeheizte/ungekühlte Fläche:"
 			this.lblAreaReducedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_ReduzierteFlaeche; //"Fläche mit red. Heiz-/Kühlleistung:"
-			this.chkAnhydritEstrich.Text = EuroplanRes.PlannedEurovalProductPanel_Anhydritestrich; //"Anhydritestrich"
-			this.chkClip.Text = EuroplanRes.PlannedEurovalProductPanel_Clipschiene; //"Clipschiene mit Klebeband"
 			this.cbSeparateCircuit.Text = EuroplanRes.PlannedEurovalProductPanel_EigenerHeizkreis; //"Eigener Heizkreis für dieses Fußbodenheizsystem"
 			this.label12.Text = EuroplanRes.PlannedEurovalProductPanel_EckenErklaerung; //"(positive Ecken vergößern, negative verringern die Randzonenfläche)"
 			this.label11.Text = EuroplanRes.PlannedEurovalProductPanel_AnzahlEcken; //"Anzahl der Ecken:"
@@ -212,7 +212,8 @@ namespace Europlan.Common {
 			CIRCUIT_COUNT = 32768,
 			SEPARATE_CIRCUIT = 65536,
 			CORRECTIONS = 131072,
-			LAYOUT_TYPE = 262144
+			LAYOUT_TYPE = 262144,
+            ESTRICH_UEBERDECKUNG = 524288
 		}
 
 		private string errorMsg = null;
@@ -258,6 +259,7 @@ namespace Europlan.Common {
 		private int ignoreSeparateCircuit = 0;
 		private int ignoreCorrections = 0;
 		private int ignoreCalculationMode = 0;
+        private int ignoreEstrichueberdeckung = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			updateOngoing = true;
@@ -283,6 +285,7 @@ namespace Europlan.Common {
 				ignoreSeparateCircuit++;
 				ignoreCorrections++;
 				ignoreCalculationMode++;
+                ignoreEstrichueberdeckung++;
 
 				JumbovalProduct jvProduct = this.product.Product as JumbovalProduct;
 
@@ -539,6 +542,9 @@ namespace Europlan.Common {
 					this.numAreaUnheated.Value = Math.Round((decimal)jvProduct.PlannedAreaUnheated, 2);
 				}
 				this.txtFloorConstruction.Text = (jvProduct.PlannedFloorConstruction == null ? "" : jvProduct.PlannedFloorConstruction.Id + ": " + jvProduct.PlannedFloorConstruction.LocalizedName);
+                if ((skipFields & FieldEnum.ESTRICH_UEBERDECKUNG) == FieldEnum.NONE) {
+                    this.numEstrichueberdeckung.Value = ((decimal)jvProduct.Su) * 100;
+                }
 				this.txtInsulationConstruction.Text = (jvProduct.PlannedInsulationConstruction == null ? "" : jvProduct.PlannedInsulationConstruction.Id + ": " + jvProduct.PlannedInsulationConstruction.LocalizedName);
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
 					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)jvProduct.PlannedRoomTemperatureBelowHeat, 2);
@@ -582,9 +588,6 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.SEPARATE_CIRCUIT) == FieldEnum.NONE) {
 					this.cbSeparateCircuit.Checked = !jvProduct.PlannedProductIsConnection;
 				}
-
-				this.chkClip.Checked = jvProduct.UseClipSchieneKlebeband;
-				this.chkAnhydritEstrich.Checked = jvProduct.UseAnhydritEstrich;
 
 				// General
 				this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
@@ -816,6 +819,7 @@ namespace Europlan.Common {
 				ignoreSeparateCircuit--;
 				ignoreCorrections--;
 				ignoreCalculationMode--;
+                ignoreEstrichueberdeckung--;
 			}
 			updateOngoing = false;
 		}
@@ -1011,13 +1015,30 @@ namespace Europlan.Common {
 			}
 		}
 
+        private void numEstrichueberdeckung_ValueChanged(object sender, EventArgs e) {
+            if (ignoreEstrichueberdeckung == 0) {
+                ignoreEstrichueberdeckung++;
+                JumbovalProduct jvProduct = this.product.Product as JumbovalProduct;
+                jvProduct.Su = (float)this.numEstrichueberdeckung.Value / 100;
+                this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                this.errorMsg = this.product.Product.LastErrorMessage;
+                this.UpdateControl(FieldEnum.ESTRICH_UEBERDECKUNG);
+                if (this.projectChanged != null) {
+                    this.projectChanged(this);
+                }
+                ignoreEstrichueberdeckung--;
+            }
+        }
+
 		private void btnFloorConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.FloorConstruction,
 				new List<ConstructionType>(new ConstructionType[] {
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TROCKEN),
-					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN)}));
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TROCKEN),
+                    ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_BETON),
+                    ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_BETON)}));
 			form.SelectedConstruction = (this.product.Product as JumbovalProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
@@ -1279,23 +1300,6 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void chkClip_CheckedChanged(object sender, EventArgs e) {
-			(this.product.Product as JumbovalProduct).UseClipSchieneKlebeband = chkClip.Checked;
-			if (this.projectChanged != null) {
-				this.projectChanged(this);
-			}
-		}
-
-		private void chkAnhydritEstrich_CheckedChanged(object sender, EventArgs e) {
-			(this.product.Product as JumbovalProduct).UseAnhydritEstrich = chkAnhydritEstrich.Checked;
-			if (chkAnhydritEstrich.Checked) {
-				chkClip.Checked = true;
-			}
-			if (this.projectChanged != null) {
-				this.projectChanged(this);
-			}
-		}
-
 		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
 			this.product.Product.StellMotore = this.chkStellAntriebe.Checked;
 			if (this.projectChanged != null) {
@@ -1458,5 +1462,6 @@ namespace Europlan.Common {
 			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, false);
 			form.ShowDialog();
 		}
+
 	}
 }
