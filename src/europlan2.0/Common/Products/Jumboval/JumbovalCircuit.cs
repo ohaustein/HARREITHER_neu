@@ -257,7 +257,7 @@ namespace Europlan.Common {
 			double alphaFbh = JumbovalProduct.ConfigAlphaFbh;
 			double alphaFbk = JumbovalProduct.ConfigAlphaFbk;
 			double su0 = JumbovalProduct.ConfigSu0;
-            double su = this.JumbovalProduct.Su;
+            double su = this.JumbovalProduct.Estrichueberdeckung;
 			double lambdaR0 = JumbovalProduct.ConfigLambdaR0;
 			double lambdaR = JumbovalProduct.ConfigLambdaR;
 			double lambdaU0 = JumbovalProduct.ConfigLambdaU0;

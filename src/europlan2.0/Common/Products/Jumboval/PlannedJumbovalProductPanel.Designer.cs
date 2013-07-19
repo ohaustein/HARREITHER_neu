@@ -45,6 +45,8 @@ namespace Europlan.Common {
             this.lblHeatLoadUnit = new System.Windows.Forms.Label();
             this.lblHeatLoadTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblEstrichueberdeckungUnit = new System.Windows.Forms.Label();
+            this.lblEstrichueberdeckung = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -173,8 +175,8 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblEstrichueberdeckungUnit = new System.Windows.Forms.Label();
-            this.lblEstrichueberdeckung = new System.Windows.Forms.Label();
+            this.lblSchienenabstandUnit = new System.Windows.Forms.Label();
+            this.lblSchienenabstand = new System.Windows.Forms.Label();
             this.numAreaUnheated = new Europlan.Common.NumericBox();
             this.numAreaReduced = new Europlan.Common.NumericBox();
             this.numAreaPercentage = new Europlan.Common.NumericBox();
@@ -185,6 +187,7 @@ namespace Europlan.Common {
             this.numHeatLoad = new Europlan.Common.NumericBox();
             this.numCorners = new Europlan.Common.NumericBox();
             this.numRim = new Europlan.Common.NumericBox();
+            this.numSchienenabstand = new Europlan.Common.NumericBox();
             this.numEstrichueberdeckung = new Europlan.Common.NumericBox();
             this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
             this.numRoomTemperatureBelowHeat = new Europlan.Common.NumericBox();
@@ -418,6 +421,9 @@ namespace Europlan.Common {
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.numSchienenabstand);
+            this.groupBox1.Controls.Add(this.lblSchienenabstandUnit);
+            this.groupBox1.Controls.Add(this.lblSchienenabstand);
             this.groupBox1.Controls.Add(this.lblEstrichueberdeckungUnit);
             this.groupBox1.Controls.Add(this.numEstrichueberdeckung);
             this.groupBox1.Controls.Add(this.lblEstrichueberdeckung);
@@ -439,6 +445,22 @@ namespace Europlan.Common {
             this.groupBox1.Size = new System.Drawing.Size(884, 119);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
+            // 
+            // lblEstrichueberdeckungUnit
+            // 
+            this.lblEstrichueberdeckungUnit.Location = new System.Drawing.Point(853, 17);
+            this.lblEstrichueberdeckungUnit.Name = "lblEstrichueberdeckungUnit";
+            this.lblEstrichueberdeckungUnit.Size = new System.Drawing.Size(24, 13);
+            this.lblEstrichueberdeckungUnit.TabIndex = 33;
+            this.lblEstrichueberdeckungUnit.Text = "cm";
+            // 
+            // lblEstrichueberdeckung
+            // 
+            this.lblEstrichueberdeckung.Location = new System.Drawing.Point(601, 16);
+            this.lblEstrichueberdeckung.Name = "lblEstrichueberdeckung";
+            this.lblEstrichueberdeckung.Size = new System.Drawing.Size(168, 13);
+            this.lblEstrichueberdeckung.TabIndex = 31;
+            this.lblEstrichueberdeckung.Text = "Estrichüberdeckung:";
             // 
             // label27
             // 
@@ -1786,21 +1808,21 @@ namespace Europlan.Common {
             this.lblTitle.TabIndex = 81;
             this.lblTitle.Text = "Jumboval®";
             // 
-            // lblEstrichueberdeckungUnit
+            // lblSchienenabstandUnit
             // 
-            this.lblEstrichueberdeckungUnit.Location = new System.Drawing.Point(853, 17);
-            this.lblEstrichueberdeckungUnit.Name = "lblEstrichueberdeckungUnit";
-            this.lblEstrichueberdeckungUnit.Size = new System.Drawing.Size(24, 13);
-            this.lblEstrichueberdeckungUnit.TabIndex = 33;
-            this.lblEstrichueberdeckungUnit.Text = "cm";
+            this.lblSchienenabstandUnit.Location = new System.Drawing.Point(853, 42);
+            this.lblSchienenabstandUnit.Name = "lblSchienenabstandUnit";
+            this.lblSchienenabstandUnit.Size = new System.Drawing.Size(24, 13);
+            this.lblSchienenabstandUnit.TabIndex = 36;
+            this.lblSchienenabstandUnit.Text = "m";
             // 
-            // lblEstrichueberdeckung
+            // lblSchienenabstand
             // 
-            this.lblEstrichueberdeckung.Location = new System.Drawing.Point(601, 16);
-            this.lblEstrichueberdeckung.Name = "lblEstrichueberdeckung";
-            this.lblEstrichueberdeckung.Size = new System.Drawing.Size(168, 13);
-            this.lblEstrichueberdeckung.TabIndex = 31;
-            this.lblEstrichueberdeckung.Text = "Estrichüberdeckung:";
+            this.lblSchienenabstand.Location = new System.Drawing.Point(601, 41);
+            this.lblSchienenabstand.Name = "lblSchienenabstand";
+            this.lblSchienenabstand.Size = new System.Drawing.Size(168, 13);
+            this.lblSchienenabstand.TabIndex = 35;
+            this.lblSchienenabstand.Text = "Schienenabstand:";
             // 
             // numAreaUnheated
             // 
@@ -2095,6 +2117,37 @@ namespace Europlan.Common {
             0,
             0});
             this.numRim.ValueChanged += new System.EventHandler(this.numRim_ValueChanged);
+            // 
+            // numSchienenabstand
+            // 
+            this.numSchienenabstand.EditType = Europlan.Common.NumericBox.NumericEditType.DIST_M;
+            this.numSchienenabstand.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSchienenabstand.Location = new System.Drawing.Point(775, 39);
+            this.numSchienenabstand.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numSchienenabstand.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numSchienenabstand.Name = "numSchienenabstand";
+            this.numSchienenabstand.Size = new System.Drawing.Size(72, 20);
+            this.numSchienenabstand.TabIndex = 37;
+            this.numSchienenabstand.Text = "1";
+            this.numSchienenabstand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numSchienenabstand.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSchienenabstand.ValueChanged += new System.EventHandler(this.numSchienenabstand_ValueChanged);
             // 
             // numEstrichueberdeckung
             // 
@@ -2418,5 +2471,8 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblEstrichueberdeckungUnit;
         private NumericBox numEstrichueberdeckung;
         private System.Windows.Forms.Label lblEstrichueberdeckung;
+        private System.Windows.Forms.Label lblSchienenabstandUnit;
+        private System.Windows.Forms.Label lblSchienenabstand;
+        private NumericBox numSchienenabstand;
 	}
 }

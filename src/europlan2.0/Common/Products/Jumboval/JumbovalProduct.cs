@@ -48,6 +48,8 @@ namespace Europlan.Common {
 		private static double rLambdaDecke = 0.11; /* Fuﬂbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fuﬂbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
+        private static double schienenabstandDefault = 1;
+
 		private static double faktorTrockenkonstruktion = 0.45;                                         /* TODO */
 
         private static double maxResidenceTempHarreither = 27;                                          /* TODO sollte gleich bleiben */
@@ -76,7 +78,8 @@ namespace Europlan.Common {
 		private string plannedFloorConstructionId = null;
 		private string plannedInsulationConstructionId = null;
 
-        private double su = JumbovalProduct.ConfigSuDefault;
+        private double estrichueberdeckung = JumbovalProduct.ConfigSuDefault;
+        private double schienenabstand = JumbovalProduct.ConfigSchienenabstandDefault;
 
 		private Nullable<JumbovalLayDistance> requestedLayDistance = null;
 		private Nullable<JumbovalRimType> requestedRimType = null;
@@ -441,6 +444,12 @@ namespace Europlan.Common {
         public static double ConfigSuDefault {
             get { return suDefault; }
             set { suDefault = value; }
+        }
+
+        [DoubleProductParameter(1)]
+        public static double ConfigSchienenabstandDefault {
+            get { return schienenabstandDefault; }
+            set { schienenabstandDefault = value; }
         }
 
         [DoubleProductParameter(0.05)]
@@ -840,9 +849,14 @@ namespace Europlan.Common {
 			get { return this.PlannedFloorArea - this.PlannedAreaReduced / 2 - this.PlannedAreaUnheated; }
 		}
 
-        public double Su {
-            get { return this.su; }
-            set { this.su = value; }
+        public double Estrichueberdeckung {
+            get { return this.estrichueberdeckung; }
+            set { this.estrichueberdeckung = value; }
+        }
+
+        public double Schienenabstand {
+            get { return this.schienenabstand; }
+            set { this.schienenabstand = value; }
         }
 
 		/// <summary>
@@ -1996,14 +2010,14 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-            if (Math.Round(this.Su, 2) < JumbovalProduct.ConfigMinSu) {
+            if (Math.Round(this.Estrichueberdeckung, 2) < JumbovalProduct.ConfigMinSu) {
                 newMsg = EuroplanRes.ErrorMessage_EstrichueberdeckungZuKlein;
-                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Su * 100, 0).ToString());
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Estrichueberdeckung * 100, 0).ToString());
                 newMsg = newMsg.Replace("%MINIMUM%", Math.Round(JumbovalProduct.ConfigMinSu * 100.0, 2).ToString());
                 this.lastErrorMsg += newMsg + "\n";
-            } else if (Math.Round(this.Su, 2) > JumbovalProduct.ConfigMaxSu) {
+            } else if (Math.Round(this.Estrichueberdeckung, 2) > JumbovalProduct.ConfigMaxSu) {
                 newMsg = EuroplanRes.ErrorMessage_EstrichueberdeckungZuGross;
-                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Su * 100, 0).ToString());
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.Estrichueberdeckung * 100, 0).ToString());
                 newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(JumbovalProduct.ConfigMaxSu * 100.0, 2).ToString());
                 this.lastErrorMsg += newMsg + "\n";
             }

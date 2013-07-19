@@ -16542,6 +16542,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schienenabstand:.
+        /// </summary>
+        internal static string PlannedProductPanel_Schienenabstand {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_Schienenabstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stellantrieb(e) verwenden.
         /// </summary>
         internal static string PlannedProductPanel_Stellantriebe {
