@@ -1467,6 +1467,8 @@ namespace Europlan.Common {
 			double ovalMuffeEuroval = 0;
 
             double pipeJumboval = 0;
+            double clipschieneJumboval = 0;
+            double ovalMuffeJumboval = 0;
 
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
@@ -1493,7 +1495,9 @@ namespace Europlan.Common {
 								anhydritEstrich = (pipe.ConnectionThrough.Product as EcothermProduct).UseAnhydritEstrich;
 							} else if (pipe.ConnectionThrough.Product is EurovalProduct) {
 								anhydritEstrich = (pipe.ConnectionThrough.Product as EurovalProduct).UseAnhydritEstrich;
-							}
+                            } else if (pipe.ConnectionThrough.Product is JumbovalProduct) {
+                                anhydritEstrich = (pipe.ConnectionThrough.Product as JumbovalProduct).UseAnhydritEstrich;
+                            }
 						}
 						clipschieneEcotherm += pipe.AreaTotal * EcothermProduct.GetClipschienePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart), anhydritEstrich);
 						muffeEcotherm += pipe.AreaTotal * EcothermProduct.GetMuffePerSqm(ConnectionPipe.GetEcothermLayDistance(pipe.Verlegeart));
@@ -1512,7 +1516,9 @@ namespace Europlan.Common {
 								anhydritEstrich = (pipe.ConnectionThrough.Product as EcothermProduct).UseAnhydritEstrich;
 							} else if (pipe.ConnectionThrough.Product is EurovalProduct) {
 								anhydritEstrich = (pipe.ConnectionThrough.Product as EurovalProduct).UseAnhydritEstrich;
-							}
+                            } else if (pipe.ConnectionThrough.Product is JumbovalProduct) {
+                                anhydritEstrich = (pipe.ConnectionThrough.Product as JumbovalProduct).UseAnhydritEstrich;
+                            }
 						}
 						bool clipschieneKlebeband = false;
 						if (pipe.ConnectionOf != null) {
@@ -1528,11 +1534,26 @@ namespace Europlan.Common {
 						ovalMuffeEuroval += pipe.AreaTotal * EurovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
 					}
                 } else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL) {
-                    #warning TODO Materialbedarf für Jumboval Anbindeleitungen implementieren
+                    #warning TODO Materialbedarf für Jumboval Anbindeleitungen fertig implementieren und bestätigen lassen
                     if (pipe.OnlyFirst) {
                         pipeJumboval += (pipe.Vorlauf + pipe.Ruecklauf);
                     } else {
                         pipeJumboval += (pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount;
+                    }
+
+                    if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH) {
+                        bool anhydritEstrich = false;
+                        if (pipe.ConnectionThrough != null) {
+                            if (pipe.ConnectionThrough.Product is EcothermProduct) {
+                                anhydritEstrich = (pipe.ConnectionThrough.Product as EcothermProduct).UseAnhydritEstrich;
+                            } else if (pipe.ConnectionThrough.Product is EurovalProduct) {
+                                anhydritEstrich = (pipe.ConnectionThrough.Product as EurovalProduct).UseAnhydritEstrich;
+                            } else if (pipe.ConnectionThrough.Product is JumbovalProduct) {
+                                anhydritEstrich = (pipe.ConnectionThrough.Product as JumbovalProduct).UseAnhydritEstrich;
+                            }
+                        }
+                        clipschieneJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), anhydritEstrich);
+                        ovalMuffeJumboval += pipe.AreaTotal * JumbovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart));
                     }
                 }
 			}
@@ -1584,7 +1605,9 @@ namespace Europlan.Common {
 
             // materials for jumboval pipe
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV01", pipeJumboval);
-		}
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV15", clipschieneJumboval);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV10", ovalMuffeJumboval);
+        }
 
 		// for 21mm pipes
 		private double GetWinkel45(double lfm) {

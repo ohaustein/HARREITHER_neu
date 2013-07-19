@@ -277,6 +277,25 @@ namespace Europlan.Common {
             set { distributorType = value; }
         }
 
+        public string DistributorTypeName {
+            get {
+                return Distributor.DistributorTypeToName(this.distributorType);
+            }
+        }
+
+        public static string DistributorTypeToName(DistributorTypeEnum type) {
+            switch (type) {
+                case DistributorTypeEnum.DT_140:
+                    return EuroplanRes.Distributor_TypeName140;
+                case DistributorTypeEnum.DT_240:
+                    return EuroplanRes.Distributor_TypeName240;
+                case DistributorTypeEnum.DT_480:
+                    return EuroplanRes.Distributor_TypeName480;
+                default:
+                    return "unknown";
+            }
+        }
+
         public int MaxCircuitsForType {
             get {
                 switch (distributorType) {

@@ -1382,7 +1382,18 @@ namespace Europlan.Common {
 						notification = notification + "\n" + newNotification;
 					}
 				}
-				return notification;
+                if (this.PlannedConnection != null && this.PlannedConnection.DirectOrIndirectDistributor != null) {
+                    if (this.PlannedConnection.DirectOrIndirectDistributor.DistributorType != Distributor.DistributorTypeEnum.DT_480) {
+                        string newMessage = EuroplanRes.ModulKlimaDeckeProduct_NotificationVerteiler;
+                        newMessage = newMessage.Replace("%TYPE%", this.PlannedConnection.DirectOrIndirectDistributor.DistributorTypeName);
+                        if (notification == null) {
+                            notification = newMessage;
+                        } else {
+                            notification += ("\n" + newMessage);
+                        }
+                    }
+                }
+                return notification;
 			}
 		}
 
@@ -1813,7 +1824,7 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
-	}
+    }
 
 	public struct KlimaFlaechenModulWithRowAndCircuit {
 		public KlimaFlaechenModul modul;

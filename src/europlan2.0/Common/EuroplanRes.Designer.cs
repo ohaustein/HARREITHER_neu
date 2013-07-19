@@ -880,6 +880,33 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Construction_BET01 {
+            get {
+                return ResourceManager.GetString("Construction_BET01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_BET02 {
+            get {
+                return ResourceManager.GetString("Construction_BET02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_BET03 {
+            get {
+                return ResourceManager.GetString("Construction_BET03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Construction_DK01 {
             get {
                 return ResourceManager.GetString("Construction_DK01", resourceCulture);
@@ -1132,6 +1159,15 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Construction_STD10 {
+            get {
+                return ResourceManager.GetString("Construction_STD10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Construction_STW01 {
             get {
                 return ResourceManager.GetString("Construction_STW01", resourceCulture);
@@ -1355,6 +1391,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Construction_WD08 {
+            get {
+                return ResourceManager.GetString("Construction_WD08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to d (mm).
         /// </summary>
         internal static string ConstructionEditor_DickeCol {
@@ -1504,6 +1549,15 @@ namespace Europlan.Common {
         internal static string ConstructionEditorGrid_AngezeigteKonstruktionen {
             get {
                 return ResourceManager.GetString("ConstructionEditorGrid_AngezeigteKonstruktionen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stahlbeton.
+        /// </summary>
+        internal static string ConstructionEditorGrid_Beton {
+            get {
+                return ResourceManager.GetString("ConstructionEditorGrid_Beton", resourceCulture);
             }
         }
         
@@ -1846,6 +1900,33 @@ namespace Europlan.Common {
         internal static string Distributor_Type480 {
             get {
                 return ResourceManager.GetString("Distributor_Type480", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VOLxx (Maximaldurchfluß: 140 l/h).
+        /// </summary>
+        internal static string Distributor_TypeName140 {
+            get {
+                return ResourceManager.GetString("Distributor_TypeName140", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VOxx (Maximaldurchfluß: 240 l/h).
+        /// </summary>
+        internal static string Distributor_TypeName240 {
+            get {
+                return ResourceManager.GetString("Distributor_TypeName240", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VOHxx (Maximaldurchfluß: 480 l/h).
+        /// </summary>
+        internal static string Distributor_TypeName480 {
+            get {
+                return ResourceManager.GetString("Distributor_TypeName480", resourceCulture);
             }
         }
         
@@ -6503,6 +6584,15 @@ namespace Europlan.Common {
         internal static string JumbovalProduct_NotificationParameter {
             get {
                 return ResourceManager.GetString("JumbovalProduct_NotificationParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden.
+        /// </summary>
+        internal static string JumbovalProduct_NotificationVerteiler {
+            get {
+                return ResourceManager.GetString("JumbovalProduct_NotificationVerteiler", resourceCulture);
             }
         }
         
@@ -12695,6 +12785,51 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_JV01 {
+            get {
+                return ResourceManager.GetString("Material_JV01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV10 {
+            get {
+                return ResourceManager.GetString("Material_JV10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV15 {
+            get {
+                return ResourceManager.GetString("Material_JV15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV20 {
+            get {
+                return ResourceManager.GetString("Material_JV20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV21 {
+            get {
+                return ResourceManager.GetString("Material_JV21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_MK01 {
             get {
                 return ResourceManager.GetString("Material_MK01", resourceCulture);
@@ -13049,6 +13184,168 @@ namespace Europlan.Common {
         internal static string Material_VO62 {
             get {
                 return ResourceManager.GetString("Material_VO62", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH02 {
+            get {
+                return ResourceManager.GetString("Material_VOH02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH03 {
+            get {
+                return ResourceManager.GetString("Material_VOH03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH04 {
+            get {
+                return ResourceManager.GetString("Material_VOH04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH05 {
+            get {
+                return ResourceManager.GetString("Material_VOH05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH06 {
+            get {
+                return ResourceManager.GetString("Material_VOH06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH07 {
+            get {
+                return ResourceManager.GetString("Material_VOH07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOH08 {
+            get {
+                return ResourceManager.GetString("Material_VOH08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL02 {
+            get {
+                return ResourceManager.GetString("Material_VOL02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL03 {
+            get {
+                return ResourceManager.GetString("Material_VOL03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL04 {
+            get {
+                return ResourceManager.GetString("Material_VOL04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL05 {
+            get {
+                return ResourceManager.GetString("Material_VOL05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL06 {
+            get {
+                return ResourceManager.GetString("Material_VOL06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL07 {
+            get {
+                return ResourceManager.GetString("Material_VOL07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL08 {
+            get {
+                return ResourceManager.GetString("Material_VOL08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL09 {
+            get {
+                return ResourceManager.GetString("Material_VOL09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL10 {
+            get {
+                return ResourceManager.GetString("Material_VOL10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL11 {
+            get {
+                return ResourceManager.GetString("Material_VOL11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_VOL12 {
+            get {
+                return ResourceManager.GetString("Material_VOL12", resourceCulture);
             }
         }
         
@@ -14130,6 +14427,15 @@ namespace Europlan.Common {
         internal static string ModulKlimaDeckeProduct_NotificationParameter {
             get {
                 return ResourceManager.GetString("ModulKlimaDeckeProduct_NotificationParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden.
+        /// </summary>
+        internal static string ModulKlimaDeckeProduct_NotificationVerteiler {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckeProduct_NotificationVerteiler", resourceCulture);
             }
         }
         

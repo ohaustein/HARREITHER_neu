@@ -2123,7 +2123,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-#warning TODO Materialbedarf für Jumboval implementieren
+#warning TODO Materialbedarf für Jumboval fertig implementieren und bestätigen lassen
 			// Anbindeleitungen
 			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true);
 
@@ -2136,10 +2136,9 @@ namespace Europlan.Common {
 
 			double amount = 0;
 
-			/* keine clipschiene bei jumboval
 			// Clipschiene
-			string clipschiene = clipSchieneKlebeband ? "EV16" : "EV15";
-			
+#warning TODO Es muss pro ausgelegtem System definierbar sein wie viel Clipschienen verwendet werden sollen (hängt unter anderem von Raumgeometrie ab)
+            string clipschiene = "JV15";
 			if (this.PlannedLayDistance.HasValue) {
 				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
 			}
@@ -2147,7 +2146,6 @@ namespace Europlan.Common {
 				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
-			*/
 			 
 			// Ovalmuffe
 			amount = 0;
@@ -2157,11 +2155,11 @@ namespace Europlan.Common {
 			if (this.PlannedRimType.HasValue) {
 				amount += this.PlannedAreaRim * GetOvalmuffePerSqm(GetRimLayDistance(this.PlannedRimType.Value));
 			}
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", amount);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, "JV10", amount);
 
 			//Verteileranschlußbögen
 			if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null) {
-				string verteilerAnschluß = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "EV21" : "EV20";
+				string verteilerAnschluß = this.PlannedConnection.Distributor.LangeAnschlussboegen ? "JV21" : "JV20";
 
 				Project.Instance.AddRequiredMaterial(requiredMaterial, verteilerAnschluß, this.circuits.Count * 2);
 			}
@@ -2191,8 +2189,8 @@ namespace Europlan.Common {
 			}
 
 			// unknown amount
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", Double.NegativeInfinity);
-			Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
+			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", Double.NegativeInfinity);
+			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV12", Double.NegativeInfinity);
 		}
 
 		public override double Dichte {
@@ -2374,6 +2372,24 @@ namespace Europlan.Common {
                 } else {
                     return Math.Round(this.PlannedPipeLengthPerCircuit, 1).ToString();
                 }
+            }
+        }
+
+        public override string NotificationMessage {
+            get {
+                string message = base.NotificationMessage;
+                if (this.PlannedConnection != null && this.PlannedConnection.DirectOrIndirectDistributor != null) {
+                    if (this.PlannedConnection.DirectOrIndirectDistributor.DistributorType != Distributor.DistributorTypeEnum.DT_480) {
+                        string newMessage = EuroplanRes.JumbovalProduct_NotificationVerteiler;
+                        newMessage = newMessage.Replace("%TYPE%", this.PlannedConnection.DirectOrIndirectDistributor.DistributorTypeName);
+                        if (message == null) {
+                            message = newMessage;
+                        } else {
+                            message += ("\n" + newMessage);
+                        }
+                    }
+                }
+                return message;
             }
         }
 	}

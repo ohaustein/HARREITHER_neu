@@ -34,6 +34,7 @@ namespace Europlan.Common {
 			this.tsmiNewFloorConstructionTrocken.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trocken + ")"; //"Fuﬂbodenkonstruktion (Trocken)"
 			this.tsmiNewFloorConstructionStahl.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Stahlblech + ")"; //"Fuﬂbodenkonstruktion (Stahlblech)"
 			this.tsmiNewFloorConstructionTrockenEstrich.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trockenestrich + ")"; //"Fuﬂbodenkonstruktion (Trockenestrich)"
+            this.tsmiNewFloorConstructionBeton.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Beton + ")"; //"Fuﬂbodenkonstruktion (Stahlbeton)"
 			this.tsmiNewInsulationConstruction.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion"
 			this.tsmiNewCeilingConstruction.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion"
 			this.tsmiNewWallConstruction.Text = EuroplanRes.ConstructionEditorForm_Wand; //"Wandkonstruktion"

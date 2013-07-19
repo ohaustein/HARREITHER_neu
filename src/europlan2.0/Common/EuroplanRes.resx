@@ -7247,4 +7247,111 @@ Compact
   <data name="PlannedProductPanel_Estrichueberdeckung" xml:space="preserve">
     <value>Estrichüberdeckung:</value>
   </data>
+  <data name="JumbovalProduct_NotificationVerteiler" xml:space="preserve">
+    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden</value>
+  </data>
+  <data name="Construction_BET01" xml:space="preserve">
+    <value />
+    <comment>Ohne Oberboden</comment>
+  </data>
+  <data name="Construction_BET02" xml:space="preserve">
+    <value />
+    <comment>Fliesen</comment>
+  </data>
+  <data name="Construction_BET03" xml:space="preserve">
+    <value />
+    <comment>Naturstein</comment>
+  </data>
+  <data name="Construction_STD10" xml:space="preserve">
+    <value />
+    <comment>Ohne Oberboden</comment>
+  </data>
+  <data name="Construction_WD08" xml:space="preserve">
+    <value />
+    <comment>10cm Abhängung</comment>
+  </data>
+  <data name="ConstructionEditorGrid_Beton" xml:space="preserve">
+    <value>Stahlbeton</value>
+  </data>
+  <data name="Distributor_TypeName140" xml:space="preserve">
+    <value>VOLxx (Maximaldurchfluß: 140 l/h)</value>
+  </data>
+  <data name="Distributor_TypeName240" xml:space="preserve">
+    <value>VOxx (Maximaldurchfluß: 240 l/h)</value>
+  </data>
+  <data name="Distributor_TypeName480" xml:space="preserve">
+    <value>VOHxx (Maximaldurchfluß: 480 l/h)</value>
+  </data>
+  <data name="Material_JV01" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV21" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH07" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOH08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL04" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL07" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL09" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_VOL12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ModulKlimaDeckeProduct_NotificationVerteiler" xml:space="preserve">
+    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden</value>
+  </data>
 </root>
