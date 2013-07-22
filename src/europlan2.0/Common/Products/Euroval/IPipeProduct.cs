@@ -671,6 +671,10 @@ namespace Europlan.Common {
         double LongestRlPerCircuit {
             get;
         }
+
+        string PlannedMaxDurchflussText {
+            get;
+        }
 	#endregion
 	}
 }

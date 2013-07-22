@@ -15151,6 +15151,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Durchfl.:.
+        /// </summary>
+        internal static string PipeProductPlanner_Durchfluss {
+            get {
+                return ResourceManager.GetString("PipeProductPlanner_Durchfluss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Die definierte Fläche beträgt %FLAECHE%m². Wollen Sie diese Fläche übernehmen?.
         /// </summary>
         internal static string PipeProductPlanner_FlaecheUebernehmenText {

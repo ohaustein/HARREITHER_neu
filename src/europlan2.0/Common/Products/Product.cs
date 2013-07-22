@@ -1009,6 +1009,16 @@ namespace Europlan.Common {
 			get { return PlannedMaxMhCool * 1000 / Dichte; }
 		}
 
+        public double PlannedMaxMh {
+            get { return Math.Max(this.PlannedMaxMhHeat, this.PlannedMaxMhCool); }
+        }
+        public double PlannedMaxDurchfluss {
+            get { return PlannedMaxMh * 1000 / Dichte; }
+        }
+        public string PlannedMaxDurchflussText {
+            get { return Math.Round(this.PlannedMaxDurchfluss, 1).ToString(); }
+        }
+
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
 		internal virtual void FinalizeLoading(PlannedProduct pp) {
@@ -1552,7 +1562,7 @@ namespace Europlan.Common {
                                 anhydritEstrich = (pipe.ConnectionThrough.Product as JumbovalProduct).UseAnhydritEstrich;
                             }
                         }
-                        clipschieneJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), anhydritEstrich);
+                        clipschieneJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), JumbovalProduct.ConfigSchienenabstandDefault);
                         ovalMuffeJumboval += pipe.AreaTotal * JumbovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart));
                     }
                 }

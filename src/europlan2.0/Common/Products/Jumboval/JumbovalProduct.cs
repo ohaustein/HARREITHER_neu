@@ -687,29 +687,8 @@ namespace Europlan.Common {
 		/// <summary>
 		/// Returns the number of clipschiene in m per m² for the specified laydistance and estrich
 		/// </summary>
-		public static double GetClipschienePerSqm(JumbovalLayDistance distance, bool anhydritEstrich) {
-			return 0;
-
-			// keine clipschiene bei jumboval
-
-			/*if (anhydritEstrich) {
-				return 2;
-			} else {
-				switch (distance) {
-					case JumbovalLayDistance.JV20:
-						return 1.4;
-					case JumbovalLayDistance.JV30:
-						return 1.3;
-					case JumbovalLayDistance.JV40:
-						return 1.2;
-					case JumbovalLayDistance.JV50:
-						return 1.2;
-					case JumbovalLayDistance.NONE:
-						return 0;
-					default:
-						throw new Exception("Unknown Laydistance");
-				}
-			}*/
+		public static double GetClipschienePerSqm(JumbovalLayDistance distance, double schienenAbstand) {
+            return schienenAbstand == 0 ?  0 : 1 / schienenAbstand;
 		}
 
 		public static double GetOvalmuffePerSqm(JumbovalLayDistance layDistance) {
@@ -717,11 +696,11 @@ namespace Europlan.Common {
 				case JumbovalLayDistance.JV20:
 					return 0.04;
 				case JumbovalLayDistance.JV30:
-					return 0.03;
+					return 0.02;
 				case JumbovalLayDistance.JV40:
 					return 0.02;
 				case JumbovalLayDistance.JV50:
-					return 0.02;
+					return 0.01;
 				case JumbovalLayDistance.NONE:
 					return 0;
 				default:
@@ -2151,13 +2130,12 @@ namespace Europlan.Common {
 			double amount = 0;
 
 			// Clipschiene
-#warning TODO Es muss pro ausgelegtem System definierbar sein wie viel Clipschienen verwendet werden sollen (hängt unter anderem von Raumgeometrie ab)
             string clipschiene = "JV15";
 			if (this.PlannedLayDistance.HasValue) {
-				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, anhydritEstrich);
+				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, schienenabstand);
 			}
 			if (this.PlannedRimType.HasValue) {
-				amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), anhydritEstrich);
+                amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), schienenabstand);
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 			 

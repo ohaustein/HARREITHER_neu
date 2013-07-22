@@ -472,6 +472,7 @@ namespace Europlan.Common {
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_RZ, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_HK, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Rohrlaenge, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(EuroplanRes.PipeProductPlanner_Durchfluss, font).Height);
 
                     maxWidth = Math.Max(maxWidth, g.MeasureString(roomId, font).Width);
                     maxWidth = Math.Max(maxWidth, g.MeasureString(productName, font).Width);
@@ -485,6 +486,7 @@ namespace Europlan.Common {
 					maxHeight = Math.Max(maxHeight, g.MeasureString(rz, font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedCircuitCount.ToString(), font).Height);
 					maxHeight = Math.Max(maxHeight, g.MeasureString(product.PipeLengthText, font).Height);
+                    maxHeight = Math.Max(maxHeight, g.MeasureString(product.PlannedMaxDurchflussText, font).Height);
 
 					Pen p;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
@@ -507,6 +509,7 @@ namespace Europlan.Common {
                     PaintTextBox(EuroplanRes.PipeProductPlanner_RZ, font, pos, maxWidth, 0, maxHeight, 3, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(EuroplanRes.PipeProductPlanner_HK, font, pos, maxWidth, 0, maxHeight, 4, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, font, pos, maxWidth, 0, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(EuroplanRes.PipeProductPlanner_Durchfluss, font, pos, maxWidth, 0, maxHeight, 6, (float)border, p, g, additionalTransformation, background);
 
                     PaintTextBox(roomId, font, pos, maxWidth, 1, maxHeight, 0, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(productName, font, pos, maxWidth, 1, maxHeight, 1, (float)border, p, g, additionalTransformation, background);
@@ -514,6 +517,7 @@ namespace Europlan.Common {
                     PaintTextBox(rz, font, pos, maxWidth, 1, maxHeight, 3, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(product.PlannedCircuitCount.ToString(), font, pos, maxWidth, 1, maxHeight, 4, (float)border, p, g, additionalTransformation, background);
                     PaintTextBox(product.PipeLengthText, font, pos, maxWidth, 1, maxHeight, 5, (float)border, p, g, additionalTransformation, background);
+                    PaintTextBox(product.PlannedMaxDurchflussText, font, pos, maxWidth, 1, maxHeight, 6, (float)border, p, g, additionalTransformation, background);
                     g.Transform = oldTransform;
 				}
 
@@ -1451,6 +1455,9 @@ namespace Europlan.Common {
 					text.Text = EuroplanRes.PipeProductPlanner_Rohrlaenge;
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
+                    text.Text = EuroplanRes.PipeProductPlanner_Durchfluss;
+                    maxWidth = Math.Max(maxWidth, text.BoxWidth);
+                    maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
                     text.Text = roomId;
                     maxWidth = Math.Max(maxWidth, text.BoxWidth);
@@ -1467,9 +1474,12 @@ namespace Europlan.Common {
 					text.Text = product.PlannedCircuitCount.ToString();
 					maxWidth = Math.Max(maxWidth, text.BoxWidth);
 					maxHeight = Math.Max(maxHeight, text.BoxHeight);
-					text.Text = product.PipeLengthText;
-					maxWidth = Math.Max(maxWidth, text.BoxWidth);
-					maxHeight = Math.Max(maxHeight, text.BoxHeight);
+                    text.Text = product.PipeLengthText;
+                    maxWidth = Math.Max(maxWidth, text.BoxWidth);
+                    maxHeight = Math.Max(maxHeight, text.BoxHeight);
+                    text.Text = product.PlannedMaxDurchflussText;
+                    maxWidth = Math.Max(maxWidth, text.BoxWidth);
+                    maxHeight = Math.Max(maxHeight, text.BoxHeight);
 
 					Color color;
 					if (this.connectedPlanPanel != null && this.connectedPlanPanel.ColorMode == ColorMode.CM_BLACK_BG) {
@@ -1484,7 +1494,8 @@ namespace Europlan.Common {
 					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_AZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -2, border, color, model, layer);
 					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_RZ, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -3, border, color, model, layer);
 					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_HK, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -4, border, color, model, layer);
-					PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -5, border, color, model, layer);
+                    PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Rohrlaenge, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -5, border, color, model, layer);
+                    PaintDxfTextBox(EuroplanRes.PipeProductPlanner_Durchfluss, "HarreitherStyle", pos, maxWidth, 0, maxHeight, -6, border, color, model, layer);
 
                     PaintDxfTextBox(roomId, "HarreitherStyle", pos, maxWidth, 1, maxHeight, 0, border, color, model, layer);
                     PaintDxfTextBox(productName, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -1, border, color, model, layer);
@@ -1492,7 +1503,8 @@ namespace Europlan.Common {
 					PaintDxfTextBox(rz, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -3, border, color, model, layer);
 					PaintDxfTextBox(product.PlannedCircuitCount.ToString(), "HarreitherStyle", pos, maxWidth, 1, maxHeight, -4, border, color, model, layer);
                     PaintDxfTextBox(product.PipeLengthText, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -5, border, color, model, layer);
-				}
+                    PaintDxfTextBox(product.PlannedMaxDurchflussText, "HarreitherStyle", pos, maxWidth, 1, maxHeight, -6, border, color, model, layer);
+                }
 			}
 		}
 

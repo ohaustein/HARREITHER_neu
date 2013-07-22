@@ -7357,4 +7357,7 @@ Compact
   <data name="PlannedProductPanel_Schienenabstand" xml:space="preserve">
     <value>Schienenabstand:</value>
   </data>
+  <data name="PipeProductPlanner_Durchfluss" xml:space="preserve">
+    <value>Durchfl.:</value>
+  </data>
 </root>
