@@ -48,7 +48,9 @@ namespace Europlan.Common {
 		private static double rLambdaDecke = 0.11; /* Fuﬂbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fuﬂbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
-        private static double schienenabstandDefault = 1;
+        private static double schienenabstandDefault = 0.5;
+        private static double schienenabstandMin = 0.1;
+        private static double schienenabstandMax = 1;
 
 		private static double faktorTrockenkonstruktion = 0.45;                                         /* TODO */
 
@@ -446,10 +448,20 @@ namespace Europlan.Common {
             set { suDefault = value; }
         }
 
-        [DoubleProductParameter(1)]
+        [DoubleProductParameter(0.5)]
         public static double ConfigSchienenabstandDefault {
             get { return schienenabstandDefault; }
             set { schienenabstandDefault = value; }
+        }
+        [DoubleProductParameter(0.1)]
+        public static double ConfigSchienenabstandMin {
+            get { return schienenabstandMin; }
+            set { schienenabstandMin = value; }
+        }
+        [DoubleProductParameter(1)]
+        public static double ConfigSchienenabstandMax {
+            get { return schienenabstandMax; }
+            set { schienenabstandMax = value; }
         }
 
         [DoubleProductParameter(0.05)]
@@ -708,6 +720,23 @@ namespace Europlan.Common {
 			}
 		}
 
+        public static double GetKabelbinderPerSqm(JumbovalLayDistance layDistance) {
+            switch (layDistance) {
+                case JumbovalLayDistance.JV20:
+                    return 5.5;
+                case JumbovalLayDistance.JV30:
+                    return 4;
+                case JumbovalLayDistance.JV40:
+                    return 3;
+                case JumbovalLayDistance.JV50:
+                    return 2.5;
+                case JumbovalLayDistance.NONE:
+                    return 0;
+                default:
+                    throw new Exception("Unknown Laydistance");
+            }
+        }
+
 		/// <summary>
 		/// Returns distance between two pipes in m for specified laydistance 
 		/// </summary>
@@ -836,6 +865,10 @@ namespace Europlan.Common {
         public double Schienenabstand {
             get { return this.schienenabstand; }
             set { this.schienenabstand = value; }
+        }
+        [XmlIgnore]
+        public double CheckedSchienenabstand {
+            get { return Math.Max(Math.Min(this.schienenabstand, JumbovalProduct.ConfigSchienenabstandMax), JumbovalProduct.ConfigSchienenabstandMin); }
         }
 
 		/// <summary>
@@ -2132,10 +2165,10 @@ namespace Europlan.Common {
 			// Clipschiene
             string clipschiene = "JV15";
 			if (this.PlannedLayDistance.HasValue) {
-				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, schienenabstand);
+				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, CheckedSchienenabstand);
 			}
 			if (this.PlannedRimType.HasValue) {
-                amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), schienenabstand);
+                amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), CheckedSchienenabstand);
 			}
 			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
 			 
@@ -2179,6 +2212,22 @@ namespace Europlan.Common {
 					}
 				}
 			}
+
+            // nur bei Stahlbetonkonstruktion
+            if (this.HasInsideConstruction) {
+                if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_BETON) ||
+                    this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_BETON)) {
+                    // Kabelbinder
+                    //   Aufenthaltszone
+                    if (this.PlannedLayDistance.HasValue) {
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "EV38", this.PlannedAreaResidenceHeated * GetKabelbinderPerSqm(this.PlannedLayDistance.Value));
+                    }
+                    //   Randzone
+                    if (this.PlannedRimType.HasValue) {
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "EV38", this.PlannedAreaRim * GetKabelbinderPerSqm(GetRimLayDistance(this.PlannedRimType.Value)));
+                    }
+                }
+            }
 
 			// unknown amount
 			//Project.Instance.AddRequiredMaterial(requiredMaterial, "EV11", Double.NegativeInfinity);

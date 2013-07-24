@@ -7360,4 +7360,34 @@ Compact
   <data name="PipeProductPlanner_Durchfluss" xml:space="preserve">
     <value>Durchfl.:</value>
   </data>
+  <data name="Material_EV38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV02" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV03" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV12" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV14" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV97" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV98" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_JV99" xml:space="preserve">
+    <value />
+  </data>
 </root>

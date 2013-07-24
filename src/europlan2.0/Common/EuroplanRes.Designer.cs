@@ -11552,6 +11552,15 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_EV38 {
+            get {
+                return ResourceManager.GetString("Material_EV38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8 {
             get {
                 return ResourceManager.GetString("Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8", resourceCulture);
@@ -12794,9 +12803,63 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_JV02 {
+            get {
+                return ResourceManager.GetString("Material_JV02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV03 {
+            get {
+                return ResourceManager.GetString("Material_JV03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_JV10 {
             get {
                 return ResourceManager.GetString("Material_JV10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV11 {
+            get {
+                return ResourceManager.GetString("Material_JV11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV12 {
+            get {
+                return ResourceManager.GetString("Material_JV12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV13 {
+            get {
+                return ResourceManager.GetString("Material_JV13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV14 {
+            get {
+                return ResourceManager.GetString("Material_JV14", resourceCulture);
             }
         }
         
@@ -12824,6 +12887,33 @@ namespace Europlan.Common {
         internal static string Material_JV21 {
             get {
                 return ResourceManager.GetString("Material_JV21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV97 {
+            get {
+                return ResourceManager.GetString("Material_JV97", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV98 {
+            get {
+                return ResourceManager.GetString("Material_JV98", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_JV99 {
+            get {
+                return ResourceManager.GetString("Material_JV99", resourceCulture);
             }
         }
         

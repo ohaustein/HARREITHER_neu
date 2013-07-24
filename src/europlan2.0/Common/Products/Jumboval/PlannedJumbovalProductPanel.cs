@@ -552,7 +552,9 @@ namespace Europlan.Common {
                 }
 				this.txtInsulationConstruction.Text = (jvProduct.PlannedInsulationConstruction == null ? "" : jvProduct.PlannedInsulationConstruction.Id + ": " + jvProduct.PlannedInsulationConstruction.LocalizedName);
                 if ((skipFields & FieldEnum.SCHIENENABSTAND) == FieldEnum.NONE) {
-                    this.numSchienenabstand.Value = Math.Round((decimal)jvProduct.Schienenabstand, 2);
+                    this.numSchienenabstand.MinValue = (decimal)JumbovalProduct.ConfigSchienenabstandMin;
+                    this.numSchienenabstand.MaxValue = (decimal)JumbovalProduct.ConfigSchienenabstandMax;
+                    this.numSchienenabstand.Value = Math.Round((decimal)jvProduct.CheckedSchienenabstand, 2);
                 }
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
 					this.numRoomTemperatureBelowHeat.Value = Math.Round((decimal)jvProduct.PlannedRoomTemperatureBelowHeat, 2);
