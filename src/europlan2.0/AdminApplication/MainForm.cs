@@ -54,7 +54,7 @@ namespace Europlan.AdminApplication {
 				SaveFileDialog dialog = new SaveFileDialog();
 				dialog.CheckPathExists = true;
 				dialog.DefaultExt = "epl";
-				dialog.Filter = "Europlan 2.0 Lizenz (*.epl)|*.epl";
+				dialog.Filter = "Europlan 3 Lizenz (*.epl)|*.epl";
 
 				if (dialog.ShowDialog() == DialogResult.OK) {
 					using (Stream s = new FileStream(dialog.FileName, FileMode.Create)) {

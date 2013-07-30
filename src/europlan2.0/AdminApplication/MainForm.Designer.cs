@@ -356,7 +356,7 @@ namespace Europlan.AdminApplication {
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "Europlan 2.0 Wartungbereich";
+            this.Text = "Europlan 3 Wartungbereich";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.mainTabControl.ResumeLayout(false);

@@ -20,7 +20,7 @@ namespace Europlan.AdminApplication {
 #endif
 			if (!Directory.Exists(PathUtil.DataPath)) {
 				string message = "Die benötigten Konfigurationsdateiein wurden nicht gefunden";
-				string caption = "Europlan 2.0 Wartungsbereich kann nicht gestartet werden!";
+				string caption = "Europlan 3 Wartungsbereich kann nicht gestartet werden!";
 				MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
@@ -31,11 +31,11 @@ namespace Europlan.AdminApplication {
 				sr.Close();
 				string message;
 				if (string.IsNullOrEmpty(otherUser)) {
-					message = "Ein anderer Benutzer arbeitet bereits mit dem Europlan 2.0 Wartungsbereich. Bitte warten Sie bis bis dieser Benutzer den Wartungsbereich geschlossen hat!";
+					message = "Ein anderer Benutzer arbeitet bereits mit dem Europlan 3 Wartungsbereich. Bitte warten Sie bis bis dieser Benutzer den Wartungsbereich geschlossen hat!";
 				} else {
-					message = "Ein anderer Benutzer (" + otherUser + ") arbeitet bereits mit dem Europlan 2.0 Wartungsbereich. Bitte warten Sie bis bis dieser Benutzer den Wartungsbereich geschlossen hat!";
+					message = "Ein anderer Benutzer (" + otherUser + ") arbeitet bereits mit dem Europlan 3 Wartungsbereich. Bitte warten Sie bis bis dieser Benutzer den Wartungsbereich geschlossen hat!";
 				}
-				string caption = "Europlan 2.0 Wartungsbereich kann nicht gestartet werden!";
+				string caption = "Europlan 3 Wartungsbereich kann nicht gestartet werden!";
 				MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
