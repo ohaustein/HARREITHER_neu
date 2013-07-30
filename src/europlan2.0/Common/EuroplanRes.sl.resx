@@ -1257,7 +1257,7 @@ predtoka
     <value>Program se ne more zagnati, ker je v tem računalniku odprt Europlan2.0.  </value>
   </data>
 	<data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Europlan 2.0 je v tem računalniku že odprt. </value>
+    <value>Europlan 3 je v tem računalniku že odprt. </value>
   </data>
 	<data name="General_Materialbedarf" xml:space="preserve">
     <value>Potreba po materialu</value>
@@ -1631,7 +1631,7 @@ R
     <value>Napaka pri uvozu</value>
   </data>
 	<data name="License_Datei" xml:space="preserve">
-    <value>Licenca za Europlan 2.0</value>
+    <value>Licenca za Europlan 3</value>
   </data>
 	<data name="License_ImportiertText" xml:space="preserve">
     <value>Izbrana licenca je veljavna in je bila uvožena.</value>
@@ -1649,7 +1649,7 @@ R
     <value>Ne morem uvoziti izbrane licenčne datoteke.</value>
   </data>
 	<data name="License_NichtLesbarText" xml:space="preserve">
-    <value>Ne morem prebrati izbrane licenčne datoteke. Ali niste upravičeni odpreti datoteke ali pa licenčna datoteka Europlan 2.0 ni veljavna. </value>
+    <value>Ne morem prebrati izbrane licenčne datoteke. Ali niste upravičeni odpreti datoteke ali pa licenčna datoteka Europlan 3 ni veljavna. </value>
   </data>
 	<data name="License_RechnerNichtGueltigText" xml:space="preserve">
     <value>Ne morem uvoziti izbrane licenčne datoteke, ker v tem računalniku ni veljavna.</value>
@@ -3023,7 +3023,7 @@ m</value>
     <value>&amp;Natisni</value>
   </data>
 	<data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
 	<data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Dodaj</value>

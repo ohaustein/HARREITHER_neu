@@ -1273,10 +1273,10 @@ prostorija</value>
     <value>Kopija od</value>
   </data>
 	<data name="General_LaeuftBereitsText" xml:space="preserve">
-    <value>Program se ne može pokrenuti na ovom računalu jer već radi druga instanca od Europlan 2.0</value>
+    <value>Program se ne može pokrenuti na ovom računalu jer već radi druga instanca od Europlan 3</value>
   </data>
 	<data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Na ovom računalu već radi Europlan 2.0</value>
+    <value>Na ovom računalu već radi Europlan 3</value>
   </data>
 	<data name="General_Materialbedarf" xml:space="preserve">
     <value>Potreba za materijalom</value>
@@ -1653,7 +1653,7 @@ R
     <value>Greška kod importiranja</value>
   </data>
 	<data name="License_Datei" xml:space="preserve">
-    <value>Europlan 2.0 licenca</value>
+    <value>Europlan 3 licenca</value>
   </data>
 	<data name="License_ImportiertText" xml:space="preserve">
     <value>Odabrana licenca je važeća i importirana </value>
@@ -1671,7 +1671,7 @@ R
     <value>Odabrana licencna datoteka nije mogla biti importirana.</value>
   </data>
 	<data name="License_NichtLesbarText" xml:space="preserve">
-    <value>Odabrana licencna datoteka ne može se čitati. Vi ili ne posjedujete pravo na otvaranje te datoteke ili datoteka nije važeća licencna datoteka Europlan 2.0.</value>
+    <value>Odabrana licencna datoteka ne može se čitati. Vi ili ne posjedujete pravo na otvaranje te datoteke ili datoteka nije važeća licencna datoteka Europlan 3.</value>
   </data>
 	<data name="License_RechnerNichtGueltigText" xml:space="preserve">
     <value>Odabrana licencna datoteka nije mogla biti importirana, jer nije važeća na aktualnom računalu.</value>
@@ -3086,7 +3086,7 @@ m</value>
     <value>&amp;Ispisati</value>
   </data>
 	<data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
 	<data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Umetnuti</value>

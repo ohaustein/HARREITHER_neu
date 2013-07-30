@@ -4266,7 +4266,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Anwendung kann nicht gestartet werden, da eine weiter Instanz von Europlan 2.0 auf diesem Rechner bereits läuft.
+        ///   Looks up a localized string similar to Die Anwendung kann nicht gestartet werden, da eine weiter Instanz von Europlan 3 auf diesem Rechner bereits läuft.
         /// </summary>
         internal static string General_LaeuftBereitsText {
             get {
@@ -4275,7 +4275,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Europlan 2.0 läuft bereits auf diesem Rechner.
+        ///   Looks up a localized string similar to Europlan 3 läuft bereits auf diesem Rechner.
         /// </summary>
         internal static string General_LaeuftBereitsTitel {
             get {
@@ -6913,7 +6913,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Europlan 2.0 Lizenz.
+        ///   Looks up a localized string similar to Europlan 3 Lizenz.
         /// </summary>
         internal static string License_Datei {
             get {
@@ -6976,7 +6976,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 2.0 Lizenzdatei..
+        ///   Looks up a localized string similar to Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 3 Lizenzdatei..
         /// </summary>
         internal static string License_NichtLesbarText {
             get {
@@ -11118,7 +11118,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Europlan 2.0 (*.e2p).
+        ///   Looks up a localized string similar to Europlan 3 (*.e2p).
         /// </summary>
         internal static string MainForm_E2pFilter {
             get {
@@ -14377,7 +14377,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Breite.
+        ///   Looks up a localized string similar to Breite inkl. Luftspalt.
         /// </summary>
         internal static string ModulKlimaDeckePlannerForm_StaffelBreite {
             get {
@@ -17265,7 +17265,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die von Ihnen verwendete Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?.
+        ///   Looks up a localized string similar to Die von Ihnen verwendete Version von Europlan 3 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?.
         /// </summary>
         internal static string ProjectLoad_VersionNichtKompatibelText {
             get {

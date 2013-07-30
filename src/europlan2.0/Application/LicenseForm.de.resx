@@ -121,7 +121,7 @@
     <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden, da die Gültigkeit der Lizenz bereits abgelaufen ist.</value>
   </data>
   <data name="LicenseFileDescription" xml:space="preserve">
-    <value>Europlan 2.0 Lizenz</value>
+    <value>Europlan 3 Lizenz</value>
   </data>
   <data name="LicenseImportedMessage" xml:space="preserve">
     <value>Die ausgewählte Lizenz ist gültig und wurde importiert.</value>
@@ -136,7 +136,7 @@
     <value>Die ausgewählte Lizenzdatei konnte nicht gefunden werden.</value>
   </data>
   <data name="LicenseNotReadableMessage" xml:space="preserve">
-    <value>Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 2.0 Lizenzdatei.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 3 Lizenzdatei.</value>
   </data>
   <data name="LicenseNotValidMessage" xml:space="preserve">
     <value>Die ausgewählte Lizenzdatei konnte nicht importiert werden.</value>

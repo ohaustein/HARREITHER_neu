@@ -1266,10 +1266,10 @@ hossz
     <value>A következő másolata:</value>
   </data>
 	<data name="General_LaeuftBereitsText" xml:space="preserve">
-    <value>Az alkalmazás nem indítható, mivel az Europlan 2.0 egy másik példánya már fut ezen a számítógépen</value>
+    <value>Az alkalmazás nem indítható, mivel az Europlan 3 egy másik példánya már fut ezen a számítógépen</value>
   </data>
 	<data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Europlan 2.0 már fut ezen a számítógépen</value>
+    <value>Europlan 3 már fut ezen a számítógépen</value>
   </data>
 	<data name="General_Materialbedarf" xml:space="preserve">
     <value>Anyagigény</value>
@@ -1643,7 +1643,7 @@ R
     <value>Hiba az importálásnál</value>
   </data>
 	<data name="License_Datei" xml:space="preserve">
-    <value>Europlan 2.0 licensz</value>
+    <value>Europlan 3 licensz</value>
   </data>
 	<data name="License_ImportiertText" xml:space="preserve">
     <value>A kiválasztott licensz érvényes és importálásra került</value>
@@ -1661,7 +1661,7 @@ R
     <value>A kiválasztott licenszfájl nem importálható</value>
   </data>
 	<data name="License_NichtLesbarText" xml:space="preserve">
-    <value>A kiválasztott licenszfájl nem olvasható. Vagy Ön nem rendelkezik a jogosultsággal a fájl megnyitásához, vagy a fájl nem érvényes Europlan 2.0 licenszfájl. </value>
+    <value>A kiválasztott licenszfájl nem olvasható. Vagy Ön nem rendelkezik a jogosultsággal a fájl megnyitásához, vagy a fájl nem érvényes Europlan 3 licenszfájl. </value>
   </data>
 	<data name="License_RechnerNichtGueltigText" xml:space="preserve">
     <value>A kiválasztott licenszfájl nem importálható, mivel az aktuális számítógépen nem érvényes. </value>
@@ -3075,7 +3075,7 @@ m</value>
     <value>&amp;Nyomtatás</value>
   </data>
 	<data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
 	<data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Beszúrás</value>
@@ -4992,7 +4992,7 @@ felület
 		<value>Hiba a betöltésnél.</value>
 	</data>
 	<data name="ProjectLoad_VersionNichtKompatibelText" xml:space="preserve">
-		<value>Az Ön által használt Europlan 2.0 verzió régebbi, mint az a verzió, amivel az utolsó projektet tárolta. Ez problémákhoz vezethet a projekt megjelenítésében vagy feldolgozásában. Ennek ellenére be akarja tölteni? </value>
+		<value>Az Ön által használt Europlan 3 verzió régebbi, mint az a verzió, amivel az utolsó projektet tárolta. Ez problémákhoz vezethet a projekt megjelenítésében vagy feldolgozásában. Ennek ellenére be akarja tölteni? </value>
 	</data>
 	<data name="ProjectLoad_VersionNichtKompatibelTitel" xml:space="preserve">
 		<value>A verzió nem kompatibilis</value>

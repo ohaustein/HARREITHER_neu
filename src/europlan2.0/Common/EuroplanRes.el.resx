@@ -1276,10 +1276,10 @@
     <value>Αντίγραφο από</value>
   </data>
   <data name="General_LaeuftBereitsText" xml:space="preserve">
-    <value>Η εκκίνηση της εφαρμογής δεν ήταν εφικτή επειδή βρίσκεται ήδη σε εξέλιξη μία άλλη περίοδος λειτουργίας του Europlan 2.0 στον συγκεκριμένο υπολογιστή</value>
+    <value>Η εκκίνηση της εφαρμογής δεν ήταν εφικτή επειδή βρίσκεται ήδη σε εξέλιξη μία άλλη περίοδος λειτουργίας του Europlan 3 στον συγκεκριμένο υπολογιστή</value>
   </data>
   <data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Η εφαρμογή Europlan 2.0 είναι ήδη ανοικτή στο συγκεκριμένο υπολογιστή</value>
+    <value>Η εφαρμογή Europlan 3 είναι ήδη ανοικτή στο συγκεκριμένο υπολογιστή</value>
   </data>
   <data name="General_Materialbedarf" xml:space="preserve">
     <value>Απαιτήσεις υλικού</value>
@@ -1656,7 +1656,7 @@ R
     <value>Σφάλμα κατά την εισαγωγή</value>
   </data>
   <data name="License_Datei" xml:space="preserve">
-    <value>Άδεια χρήσης Europlan 2.0</value>
+    <value>Άδεια χρήσης Europlan 3</value>
   </data>
   <data name="License_ImportiertText" xml:space="preserve">
     <value>Η επιλεγμένη άδεια χρήσης είναι έγκυρη και έχει εισαχθεί.</value>
@@ -1674,7 +1674,7 @@ R
     <value>Η εισαγωγή του επιλεγμένου αρχείου αδείας χρήσης δεν ήταν εφικτή.</value>
   </data>
   <data name="License_NichtLesbarText" xml:space="preserve">
-    <value>Η ανάγνωση του επιλεγμένου αρχείου αδείας χρήσης δεν ήταν εφικτή. Είτε δεν διαθέτετε δικαιώματα για το άνοιγμα αυτού του αρχείου είτε το αρχείο δεν είναι έγκυρο αρχείο αδείας χρήσης του προγράμματος Europlan 2.0.</value>
+    <value>Η ανάγνωση του επιλεγμένου αρχείου αδείας χρήσης δεν ήταν εφικτή. Είτε δεν διαθέτετε δικαιώματα για το άνοιγμα αυτού του αρχείου είτε το αρχείο δεν είναι έγκυρο αρχείο αδείας χρήσης του προγράμματος Europlan 3.</value>
   </data>
   <data name="License_RechnerNichtGueltigText" xml:space="preserve">
     <value>Η εισαγωγή του επιλεγμένου αρχείου αδείας χρήσης δεν ήταν εφικτή επειδή αυτό δεν είναι έγκυρο στον συγκεκριμένο υπολογιστή.</value>
@@ -3086,7 +3086,7 @@ m</value>
     <value>&amp;Εκτύπωση</value>
   </data>
   <data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
   <data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Προσθήκη</value>

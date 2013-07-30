@@ -171,7 +171,7 @@
     <value>It was not possible to import the selected license file because the validity of this license has already expired.</value>
   </data>
   <data name="LicenseFileDescription" xml:space="preserve">
-    <value>Europlan 2.0 license</value>
+    <value>Europlan 3 license</value>
   </data>
   <data name="LicenseImportedMessage" xml:space="preserve">
     <value>The selected license is valid and was imported.</value>
@@ -186,7 +186,7 @@
     <value>The selected license file was not found.</value>
   </data>
   <data name="LicenseNotReadableMessage" xml:space="preserve">
-    <value>The selected license file was not readable. Either you don't have the permission to open this file or this file is not a valid Europlan 2.0 license file.</value>
+    <value>The selected license file was not readable. Either you don't have the permission to open this file or this file is not a valid Europlan 3 license file.</value>
   </data>
   <data name="LicenseNotValidMessage" xml:space="preserve">
     <value>It was not possible to import the selected license file.</value>

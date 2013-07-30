@@ -1272,10 +1272,10 @@ click on the desired room in the project hierarchy.</value>
     <value>Copy of</value>
   </data>
 	<data name="General_LaeuftBereitsText" xml:space="preserve">
-    <value>The application cannot be started because another instance of Europlan 2.0 is already running on this computer</value>
+    <value>The application cannot be started because another instance of Europlan 3 is already running on this computer</value>
   </data>
 	<data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Europlan 2.0 is already running on this computer</value>
+    <value>Europlan 3 is already running on this computer</value>
   </data>
 	<data name="General_Materialbedarf" xml:space="preserve">
     <value>Material requirements</value>
@@ -1650,7 +1650,7 @@ Do you still want to continue?</value>
     <value>Import error</value>
   </data>
 	<data name="License_Datei" xml:space="preserve">
-    <value>Europlan 2.0 license</value>
+    <value>Europlan 3 license</value>
   </data>
 	<data name="License_ImportiertText" xml:space="preserve">
     <value>The selected license is valid and has been imported.</value>
@@ -1668,7 +1668,7 @@ Do you still want to continue?</value>
     <value>The selected license file could not be imported.</value>
   </data>
 	<data name="License_NichtLesbarText" xml:space="preserve">
-    <value>The selected license file could not be read. Either you do not have the rights to open this file or the file is no valid Europlan 2.0 license file.</value>
+    <value>The selected license file could not be read. Either you do not have the rights to open this file or the file is no valid Europlan 3 license file.</value>
   </data>
 	<data name="License_RechnerNichtGueltigText" xml:space="preserve">
     <value>The selected license file could not be imported because it is not valid on the computer that is currently used.</value>
@@ -3065,7 +3065,7 @@ m</value>
     <value>&amp;Print</value>
   </data>
 	<data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
 	<data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Paste</value>
@@ -4558,7 +4558,7 @@ desired heating system in the project hierarchy.</value>
     <value>Loading error</value>
   </data>
 	<data name="ProjectLoad_VersionNichtKompatibelText" xml:space="preserve">
-    <value>The used version of Europlan 2.0 ist older than the saved project version. Maybe there will be problems with displaying or editing the project. Do you still want to continue?</value>
+    <value>The used version of Europlan 3 ist older than the saved project version. Maybe there will be problems with displaying or editing the project. Do you still want to continue?</value>
   </data>
 	<data name="ProjectLoad_VersionNichtKompatibelTitel" xml:space="preserve">
     <value>Version incompatible</value>

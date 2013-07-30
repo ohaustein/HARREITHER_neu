@@ -1341,10 +1341,10 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
     <value>Kopie von</value>
   </data>
   <data name="General_LaeuftBereitsText" xml:space="preserve">
-    <value>Die Anwendung kann nicht gestartet werden, da eine weiter Instanz von Europlan 2.0 auf diesem Rechner bereits läuft</value>
+    <value>Die Anwendung kann nicht gestartet werden, da eine weiter Instanz von Europlan 3 auf diesem Rechner bereits läuft</value>
   </data>
   <data name="General_LaeuftBereitsTitel" xml:space="preserve">
-    <value>Europlan 2.0 läuft bereits auf diesem Rechner</value>
+    <value>Europlan 3 läuft bereits auf diesem Rechner</value>
   </data>
   <data name="General_Materialbedarf" xml:space="preserve">
     <value>Materialbedarf</value>
@@ -1784,7 +1784,7 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Fehler beim Importieren</value>
   </data>
   <data name="License_Datei" xml:space="preserve">
-    <value>Europlan 2.0 Lizenz</value>
+    <value>Europlan 3 Lizenz</value>
   </data>
   <data name="License_ImportiertText" xml:space="preserve">
     <value>Die ausgewählte Lizenz ist gültig und wurde importiert.</value>
@@ -1805,7 +1805,7 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Fehler beim Importieren</value>
   </data>
   <data name="License_NichtLesbarText" xml:space="preserve">
-    <value>Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 2.0 Lizenzdatei.</value>
+    <value>Die ausgewählte Lizenzdatei konnte nicht gelesen werden. Sie besitzen entweder keine Rechte diese Datei zu öffnen oder die Datei ist keine gültige Europlan 3 Lizenzdatei.</value>
   </data>
   <data name="License_NichtLesbarTitel" xml:space="preserve">
     <value>Fehler beim Importieren</value>
@@ -3265,7 +3265,7 @@ menge</value>
     <value>&amp;Drucken</value>
   </data>
   <data name="MainForm_E2pFilter" xml:space="preserve">
-    <value>Europlan 2.0 (*.e2p)</value>
+    <value>Europlan 3 (*.e2p)</value>
   </data>
   <data name="MainForm_Einfuegen" xml:space="preserve">
     <value>&amp;Einfügen</value>
@@ -4698,7 +4698,7 @@ RZ</value>
     <value>Fehler beim Laden</value>
   </data>
   <data name="ProjectLoad_VersionNichtKompatibelText" xml:space="preserve">
-    <value>Die von Ihnen verwendete Version von Europlan 2.0 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?</value>
+    <value>Die von Ihnen verwendete Version von Europlan 3 ist älter als die Version mit der das Projekt zuletzt abgespeichert wurde. Dies kann zu Problemen beim Anzeigen bzw. Bearbeiten des Projekts führen. Wollen Sie das Projekt trotzdem laden?</value>
   </data>
   <data name="ProjectLoad_VersionNichtKompatibelTitel" xml:space="preserve">
     <value>Version nicht kompatibel</value>
@@ -7179,7 +7179,7 @@ Compact
     <value>Staffeln / C-Profil</value>
   </data>
   <data name="ModulKlimaDeckePlannerForm_StaffelBreite" xml:space="preserve">
-    <value>Breite</value>
+    <value>Breite inkl. Luftspalt</value>
   </data>
   <data name="ProductPlannerForm_PlanImHintergrundAnzeigen" xml:space="preserve">
     <value>Plan im Hintergrund anzeigen</value>
