@@ -14,7 +14,7 @@ using Europlan.Common.Products.ModulKlimaDecke;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
-		private Nullable<double> schienenBreite = 0.045; // meter
+		private Nullable<double> schienenBreite = null; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
 		private double offsetY = 0; // meter (only used for beplankung)
