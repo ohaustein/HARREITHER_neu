@@ -15340,6 +15340,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Farbe des Systems:.
+        /// </summary>
+        internal static string PipeProductPlannerForm_Farbe {
+            get {
+                return ResourceManager.GetString("PipeProductPlannerForm_Farbe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Textbox drehen.
         /// </summary>
         internal static string PipeProductPlannerForm_TextboxDrehen {

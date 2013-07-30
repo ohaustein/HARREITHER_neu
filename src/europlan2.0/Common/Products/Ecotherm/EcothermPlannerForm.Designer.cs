@@ -53,6 +53,8 @@ namespace Europlan.Common.Products {
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabs = new System.Windows.Forms.TabControl();
             this.pageAuslegung = new System.Windows.Forms.TabPage();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.lblColor = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.numCorners = new Europlan.Common.NumericBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -145,6 +147,7 @@ namespace Europlan.Common.Products {
             this.planPanel = new Europlan.Common.PlanPanel();
             this.eurovalPlanner = new Europlan.Common.EcothermPlanner(this.components);
             this.connectionPlanner = new Europlan.Common.ConnectionPlanner(this.components);
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -430,6 +433,8 @@ namespace Europlan.Common.Products {
             // 
             // pageAuslegung
             // 
+            this.pageAuslegung.Controls.Add(this.btnColor);
+            this.pageAuslegung.Controls.Add(this.lblColor);
             this.pageAuslegung.Controls.Add(this.label12);
             this.pageAuslegung.Controls.Add(this.numCorners);
             this.pageAuslegung.Controls.Add(this.label11);
@@ -456,11 +461,31 @@ namespace Europlan.Common.Products {
             this.pageAuslegung.Text = "Auslegung";
             this.pageAuslegung.UseVisualStyleBackColor = true;
             // 
+            // btnColor
+            // 
+            this.btnColor.BackColor = System.Drawing.Color.DarkRed;
+            this.btnColor.Location = new System.Drawing.Point(245, 88);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(23, 23);
+            this.btnColor.TabIndex = 161;
+            this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // lblColor
+            // 
+            this.lblColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblColor.AutoSize = true;
+            this.lblColor.Location = new System.Drawing.Point(8, 93);
+            this.lblColor.Name = "lblColor";
+            this.lblColor.Size = new System.Drawing.Size(99, 13);
+            this.lblColor.TabIndex = 162;
+            this.lblColor.Text = "Farbe des Systems:";
+            // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.Location = new System.Drawing.Point(360, 129);
+            this.label12.Location = new System.Drawing.Point(360, 146);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(475, 36);
             this.label12.TabIndex = 93;
@@ -475,7 +500,7 @@ namespace Europlan.Common.Products {
             0,
             0,
             0});
-            this.numCorners.Location = new System.Drawing.Point(245, 126);
+            this.numCorners.Location = new System.Drawing.Point(245, 143);
             this.numCorners.MaxValue = null;
             this.numCorners.MinValue = null;
             this.numCorners.Name = "numCorners";
@@ -492,7 +517,7 @@ namespace Europlan.Common.Products {
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(8, 129);
+            this.label11.Location = new System.Drawing.Point(8, 146);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(231, 13);
             this.label11.TabIndex = 91;
@@ -500,7 +525,7 @@ namespace Europlan.Common.Products {
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(442, 103);
+            this.label9.Location = new System.Drawing.Point(442, 120);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(19, 13);
             this.label9.TabIndex = 90;
@@ -515,7 +540,7 @@ namespace Europlan.Common.Products {
             0,
             0,
             0});
-            this.numRim.Location = new System.Drawing.Point(245, 100);
+            this.numRim.Location = new System.Drawing.Point(245, 117);
             this.numRim.MaxValue = null;
             this.numRim.MinValue = new decimal(new int[] {
             0,
@@ -535,7 +560,7 @@ namespace Europlan.Common.Products {
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(8, 103);
+            this.label10.Location = new System.Drawing.Point(8, 120);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(231, 13);
             this.label10.TabIndex = 88;
@@ -1563,5 +1588,8 @@ namespace Europlan.Common.Products {
         private System.Windows.Forms.ToolStripMenuItem btn90Degree;
         private System.Windows.Forms.ToolStripMenuItem btn180Degree;
         private System.Windows.Forms.ToolStripMenuItem btn270Degree;
+        private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.Label lblColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }

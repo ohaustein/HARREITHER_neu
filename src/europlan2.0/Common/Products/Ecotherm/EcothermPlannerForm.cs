@@ -161,6 +161,7 @@ namespace Europlan.Common.Products {
 			this.label1.Text = Europlan.Common.EuroplanRes.EcothermPlannerForm_Heizen;
             this.btnShowPlanBg.Text = Europlan.Common.EuroplanRes.ProductPlannerForm_PlanImHintergrundAnzeigen;
             this.btnRotateTextbox.Text = Europlan.Common.EuroplanRes.PipeProductPlannerForm_TextboxDrehen;
+            this.lblColor.Text = Europlan.Common.EuroplanRes.PipeProductPlannerForm_Farbe;
         }
 
 		private void UpdateControls() {
@@ -819,6 +820,15 @@ namespace Europlan.Common.Products {
         private void btn270Degree_Click(object sender, EventArgs e) {
             this.eurovalPlanner.Product.TextBoxRotation = 270;
             this.planPanel.InvalidateGraphics();
+        }
+
+        private void btnColor_Click(object sender, EventArgs e) {
+            colorDialog.Color = this.eurovalPlanner.Product.ProductColor;
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                this.eurovalPlanner.Product.ProductColor = colorDialog.Color;
+                this.btnColor.BackColor = this.eurovalPlanner.Product.ProductColor;
+                this.planPanel.InvalidateGraphics();
+            }
         }
 	}
 }

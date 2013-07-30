@@ -8,6 +8,7 @@ using System.Threading;
 using Europlan.Licensing;
 using WW.Math.Geometry;
 using WW.Math;
+using System.Drawing;
 
 namespace Europlan.Common {
 
@@ -90,6 +91,8 @@ namespace Europlan.Common {
 
 		private bool clipSchieneKlebeband = false;
 		private bool anhydritEstrich = false;
+
+        private Color productColor = Color.Red;
 
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
 			private static readonly string A5 = EuroplanRes.EurovalProduct_A5; //"A5"
@@ -2440,5 +2443,26 @@ namespace Europlan.Common {
                 }
             }
         }
-	}
+
+        [XmlIgnore]
+        public Color ProductColor {
+            get { return this.productColor; }
+            set { this.productColor = value; }
+        }
+
+        // Color cannot be serialized!!!
+        // quick workaround to serialize it nevertheless
+        public int ProductColorR {
+            get { return this.productColor.R; }
+            set { this.productColor = Color.FromArgb(value, this.productColor.G, this.productColor.B); }
+        }
+        public int ProductColorG {
+            get { return this.productColor.G; }
+            set { this.productColor = Color.FromArgb(this.productColor.R, value, this.productColor.B); }
+        }
+        public int ProductColorB {
+            get { return this.productColor.B; }
+            set { this.productColor = Color.FromArgb(this.productColor.R, this.productColor.G, value); }
+        }
+    }
 }

@@ -7390,4 +7390,7 @@ Compact
   <data name="Material_JV99" xml:space="preserve">
     <value />
   </data>
+  <data name="PipeProductPlannerForm_Farbe" xml:space="preserve">
+    <value>Farbe des Systems:</value>
+  </data>
 </root>

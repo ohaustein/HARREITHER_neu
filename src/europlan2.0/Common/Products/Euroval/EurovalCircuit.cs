@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using log4net;
+using System.Drawing;
 
 namespace Europlan.Common {
 	public class EurovalCircuit : Circuit {

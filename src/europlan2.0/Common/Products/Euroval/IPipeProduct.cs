@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using WW.Math.Geometry;
 using WW.Math;
+using System.Drawing;
 
 namespace Europlan.Common {
 	public interface IPipeProduct<LayDistanceType, RimType> : IRequiredMaterial where LayDistanceType : struct where RimType : struct {
@@ -673,6 +674,10 @@ namespace Europlan.Common {
         }
 
         string PlannedMaxDurchflussText {
+            get;
+        }
+
+        Color ProductColor {
             get;
         }
 	#endregion

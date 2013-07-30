@@ -183,6 +183,8 @@ namespace Europlan.Common {
 		public void PaintAfterPlanPannel(Graphics g, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl, bool export) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
 
+                Color col = this.product.ProductColor;
+
 				if (!export) {
 					// paint anbindeleitungen and distributors
 					this.connectionDrawer.Paint(g, additionalTransformation);
@@ -225,7 +227,7 @@ namespace Europlan.Common {
 					}
 					fillPath.AddPolygon(array);
 					fillPath.CloseFigure();
-					c = Color.FromArgb(64, Color.Red);
+					c = Color.FromArgb(64, col);
 					b = new SolidBrush(c);
 					g.FillPath(b, fillPath);
 					g.DrawPath(new Pen(b), fillPath);
@@ -244,7 +246,7 @@ namespace Europlan.Common {
 						}
 						path.AddPolygon(array);
 						path.CloseFigure();
-						Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
+						Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, col), Color.FromArgb(0, col));
 						foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
 							float width = this.product.PlannedRimWidth > 0 ? this.product.PlannedRimWidth : 5.0f;
 							Pen pen = new Pen(rzBrush, (float)((width * 2.0 / 100.0) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * Math.Abs(additionalTransformation.M00)));
@@ -308,7 +310,7 @@ namespace Europlan.Common {
 					path.CloseFigure();
 					b = null;
 					if (this.Mode == PipeProductMode.EVM_ADD_AREA) {
-						c = Color.FromArgb(64, Color.Red);
+						c = Color.FromArgb(64, col);
 						b = new SolidBrush(c);
 						g.FillPath(b, path);
 						g.DrawPath(new Pen(b), path);
@@ -1218,7 +1220,9 @@ namespace Europlan.Common {
 
 		internal void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer layer) {
 			if (this.product != null && this.product.AssociatedRoom != null && this.product.AssociatedRoom.RoomCoordinates != null) {
-				EntityColor c = EntityColor.CreateFromRgb(Color.Red.ToArgb());
+                Color col = this.product.ProductColor;
+
+				EntityColor c = EntityColor.CreateFromRgb(col.ToArgb());
 				double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				List<Polygon2D> clip = new List<Polygon2D>();
 
@@ -1252,7 +1256,7 @@ namespace Europlan.Common {
 				}
 
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
-					EntityColor gray = EntityColor.CreateFromRgb(Color.Red.ToArgb());
+					EntityColor gray = EntityColor.CreateFromRgb(col.ToArgb());
 					foreach (List<Point2D> unusedArea in this.product.AssociatedRoom.RoomUnusedAreaCoordinates) {
 						Polygon2D polygon = new Polygon2D(unusedArea);
 						clip.Add(polygon);
@@ -1309,7 +1313,7 @@ namespace Europlan.Common {
 					}
 
 
-					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, Color.Red), Color.FromArgb(0, Color.Red));
+					Brush rzBrush = new HatchBrush(System.Drawing.Drawing2D.HatchStyle.Percent30, Color.FromArgb(255, col), Color.FromArgb(0, col));
 					foreach (Segment2D rimSegment in this.product.PlannedRimSegments) {
 						list1.Clear();
 						list1.Add(product);
