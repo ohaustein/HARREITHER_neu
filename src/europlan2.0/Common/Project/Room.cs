@@ -664,7 +664,6 @@ namespace Europlan.Common {
 			set { planSettingAngle = value; }
 		}
 
-
 		public GraphicalWall GetWallForId(string wallId) {
 			if (this.Walls == null || wallId == null) {
 				return null;
@@ -679,7 +678,25 @@ namespace Europlan.Common {
 			return foundWall;
 		}
 
-		public Nullable<Vector2D> GetWallOffset(GraphicalWall wall) {
+        public GraphicalWall GetNextWall(GraphicalWall wall) {
+            for (int i = 0; i < this.walls.Count - 1; i++) {
+                if (this.walls[i] == wall) {
+                    return this.walls[i + 1];
+                }
+            }
+            return null;
+        }
+
+        public GraphicalWall GetPrevWall(GraphicalWall wall) {
+            for (int i = 1; i < this.walls.Count; i++) {
+                if (this.walls[i] == wall) {
+                    return this.walls[i - 1];
+                }
+            }
+            return null;
+        }
+
+        public Nullable<Vector2D> GetWallOffset(GraphicalWall wall) {
 			if (this.walls == null) {
 				return null;
 			}

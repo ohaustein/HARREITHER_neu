@@ -1092,7 +1092,50 @@ namespace Europlan.Common {
 			}
 			return length / 100.0;
 		}
-	}
+
+        public virtual void FixVerticesAfterWallInsert(double newWallOffset, double newWallWidth) {
+            for (int i = 0; i < this.vertices.Count; i++) {
+                Point2D p = this.vertices[i];
+                if (p.X >= newWallOffset) {
+                    p.X += newWallWidth;
+                    this.vertices[i] = p;
+                }
+            }
+        }
+
+        // returns true if the link could be fixed. if this method returns false, the link should be deleted as the link could not be fixed
+        public virtual bool FixVerticesAfterWallDelete(double oldWallOffset, double nextWallOldOffset, double nextWallNewOffset) {
+            double delta = nextWallOldOffset - nextWallNewOffset;
+            bool deleteCrossing = (oldWallOffset != nextWallNewOffset);
+            bool foundVertexLeft = false;
+            bool foundVertexRight = false;
+            for (int i = 0; i < this.vertices.Count; i++) {
+                Point2D p = this.vertices[i];
+                if (p.X >= oldWallOffset) {
+                    if (deleteCrossing) {
+                        if (foundVertexLeft) {
+                            return false;
+                        }
+                        foundVertexRight = true;
+                    }
+                    if (p.X < nextWallOldOffset) {
+                        return false;
+                    } else {
+                        p.X -= delta;
+                        this.vertices[i] = p;
+                    }
+                } else {
+                    if (deleteCrossing) {
+                        if (foundVertexRight) {
+                            return false;
+                        }
+                        foundVertexLeft = true;
+                    }
+                }
+            }
+            return true;
+        }
+    }
 
 
 	public class InvisibleSegmentAnchor : Anchor {

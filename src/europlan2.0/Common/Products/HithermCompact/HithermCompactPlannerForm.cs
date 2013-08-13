@@ -255,12 +255,36 @@ namespace Europlan.Common {
 						wall.DachSchraege = newWall;
 						newWall.IsDachSchraege = true;
 					}
-
+                    this.FixLinksAfterWallInsert(newWall);
 				}
 				
 			}
 			this.graphicalWallPanel.InvalidateGraphics();
 		}
+
+        private void FixLinksAfterWallInsert(GraphicalWall newWall) {
+            double newWallOffset = this.graphicalWallPanel.Room.GetWallOffset(newWall).Value.X * 100.0;
+            double newWallWidth = newWall.GetWallWidth() * 100.0;
+            foreach (HithermCompactCircuit c in this.hithermCompactPlanner.HithermCompactProduct.PlannedCircuits) {
+                foreach (GraphicalHithermCompactVerbindung link in c.Links) {
+                    link.FixVerticesAfterWallInsert(newWallOffset, newWallWidth);
+                }
+            }
+        }
+
+        private void FixLinksAfterWallDelete(double oldWallOffset, double nextWallOldOffset, double nextWallNewOffset) {
+            List<GraphicalHithermCompactVerbindung> linksToDelete = new List<GraphicalHithermCompactVerbindung>();
+            foreach (HithermCompactCircuit c in this.hithermCompactPlanner.HithermCompactProduct.PlannedCircuits) {
+                foreach (GraphicalHithermCompactVerbindung link in c.Links) {
+                    if (!link.FixVerticesAfterWallDelete(oldWallOffset, nextWallOldOffset, nextWallNewOffset)) {
+                        linksToDelete.Add(link);
+                    }
+                }
+            }
+            foreach (GraphicalHithermCompactVerbindung link in linksToDelete) {
+                this.DeleteVerbindung(link);
+            }
+        }
 
 		private void btnCreateWalls_Click(object sender, EventArgs e) {
 			bool ok = true;
@@ -938,8 +962,13 @@ namespace Europlan.Common {
 		private void DeleteWall() {
 			if (MessageBox.Show(EuroplanRes.HithermPlannerForm_WandLoeschenText, EuroplanRes.HithermPlannerForm_WandLoeschenTitel, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				GraphicalWall wall = SelectedObject as GraphicalWall;
+                double oldWallOffset = this.graphicalWallPanel.Room.GetWallOffset(wall).Value.X * 100.0;
+                GraphicalWall nextWall = this.graphicalWallPanel.Room.GetNextWall(wall);
+                double nextWallOldOffset = (nextWall != null) ? this.graphicalWallPanel.Room.GetWallOffset(nextWall).Value.X * 100.0 : oldWallOffset;
 				graphicalWallPanel.Room.Walls.Remove(wall);
-				wall.RemoveAllRegisters(this.hithermCompactPlanner.HithermCompactProduct);
+                double nextWallNewOffset = (nextWall != null) ? this.graphicalWallPanel.Room.GetWallOffset(nextWall).Value.X * 100.0 : oldWallOffset;
+                wall.RemoveAllRegisters(this.hithermCompactPlanner.HithermCompactProduct);
+                this.FixLinksAfterWallDelete(oldWallOffset, nextWallOldOffset, nextWallNewOffset);
 				this.graphicalWallPanel.SelectedObject = null;
 				UpdateDefineWallsPanel(null);
 				this.graphicalWallPanel.InvalidateGraphics();

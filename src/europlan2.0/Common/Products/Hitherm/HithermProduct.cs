@@ -1113,18 +1113,29 @@ namespace Europlan.Common {
 		internal void RemoveRegisterFromCircuit(HithermRegister register) {
 			if (this.registerCircuits.ContainsKey(register)) {
 				HithermCircuit hc = this.circuitIds[this.registerCircuits[register]];
-				hc.Registers.Remove(register);
+                HithermRegister moveRegisterToNewCircuit = null;
+                hc.Registers.Remove(register);
 				if (hc.Registers.Count == 0) {
 					this.circuits.Remove(hc);
 					this.circuitIds.Remove(this.registerCircuits[register]);
 				} else {
 					// delete connections of the deleted register
 					List<GraphicalHithermVerbindung> linksToDelete = new List<GraphicalHithermVerbindung>();
+                    GraphicalHithermVerbindung linkVorlauf = null;
+                    GraphicalHithermVerbindung linkRuecklauf = null;
 					foreach (GraphicalHithermVerbindung link in hc.Links) {
-						if (link.Start == register || link.End == register) {
-							linksToDelete.Add(link);
-						}
+						if (link.Start == register) {
+                            linkRuecklauf = link;
+                            linksToDelete.Add(link);
+                        }
+                        if (link.End == register) {
+                            linkVorlauf = link;
+                            linksToDelete.Add(link);
+                        }
 					}
+                    if (linkVorlauf.Start != null) {
+                        moveRegisterToNewCircuit = linkRuecklauf.End;
+                    }
 					foreach (GraphicalHithermVerbindung link in linksToDelete) {
 						hc.Links.Remove(link);
 						if (link is GraphicalHithermUnderfloorVerbindung) {
@@ -1142,6 +1153,9 @@ namespace Europlan.Common {
 					}
 				}
 				this.registerCircuits.Remove(register);
+                if (moveRegisterToNewCircuit != null) {
+                    this.MoveRegisterToCircuit(moveRegisterToNewCircuit, GetNewHkId());
+                }
 			}
 		}
 
