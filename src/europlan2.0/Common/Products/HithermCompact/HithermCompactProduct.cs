@@ -1107,14 +1107,51 @@ namespace Europlan.Common {
 		internal void RemoveRegisterFromCircuit(HithermCompactRegister register) {
 			if (this.registerCircuits.ContainsKey(register)) {
 				HithermCompactCircuit hc = this.circuitIds[this.registerCircuits[register]];
-				hc.Registers.Remove(register);
-				if (hc.Registers.Count == 0) {
-					this.circuits.Remove(hc);
-					this.circuitIds.Remove(this.registerCircuits[register]);
-				}
-				this.registerCircuits.Remove(register);
-			}
-		}
+                HithermCompactRegister moveRegisterToNewCircuit = null;
+                hc.Registers.Remove(register);
+                if (hc.Registers.Count == 0) {
+                    this.circuits.Remove(hc);
+                    this.circuitIds.Remove(this.registerCircuits[register]);
+                } else {
+                    // delete connections of the deleted register
+                    List<GraphicalHithermCompactVerbindung> linksToDelete = new List<GraphicalHithermCompactVerbindung>();
+                    GraphicalHithermCompactVerbindung linkVorlauf = null;
+                    GraphicalHithermCompactVerbindung linkRuecklauf = null;
+                    foreach (GraphicalHithermCompactVerbindung link in hc.Links) {
+                        if (link.Start == register) {
+                            linkRuecklauf = link;
+                            linksToDelete.Add(link);
+                        }
+                        if (link.End == register) {
+                            linkVorlauf = link;
+                            linksToDelete.Add(link);
+                        }
+                    }
+                    if (linkVorlauf.Start != null) {
+                        moveRegisterToNewCircuit = linkRuecklauf.End;
+                    }
+                    foreach (GraphicalHithermCompactVerbindung link in linksToDelete) {
+                        hc.Links.Remove(link);
+                        if (link is GraphicalHithermCompactUnderfloorVerbindung) {
+                            if (link.Start != register) {
+                                GraphicalHithermCompactVerbindung subLink = (link as GraphicalHithermCompactUnderfloorVerbindung).StartLink;
+                                subLink.IsPartOfCompound = false;
+                                hc.Links.Add(subLink);
+                            }
+                            if (link.End != register) {
+                                GraphicalHithermCompactVerbindung subLink = (link as GraphicalHithermCompactUnderfloorVerbindung).EndLink;
+                                subLink.IsPartOfCompound = false;
+                                hc.Links.Add(subLink);
+                            }
+                        }
+                    }
+                }
+                this.registerCircuits.Remove(register);
+                if (moveRegisterToNewCircuit != null) {
+                    this.MoveRegisterToCircuit(moveRegisterToNewCircuit, GetNewHkId());
+                }
+            }
+        }
 
 		internal int GetRegisterCircuitId(HithermCompactRegister register) {
 			if (this.registerCircuits.ContainsKey(register)) {

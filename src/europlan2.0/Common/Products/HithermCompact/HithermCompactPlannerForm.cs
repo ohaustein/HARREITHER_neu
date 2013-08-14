@@ -282,7 +282,7 @@ namespace Europlan.Common {
                 }
             }
             foreach (GraphicalHithermCompactVerbindung link in linksToDelete) {
-                this.DeleteVerbindung(link);
+                this.DeleteVerbindung(link, true);
             }
         }
 
@@ -1302,7 +1302,7 @@ namespace Europlan.Common {
 					} else if (SelectedObject is GraphicalHithermCompactRegisterWrapper) {
 						DeleteRegister(SelectedObject as GraphicalHithermCompactRegisterWrapper);
 					} else if (SelectedObject is GraphicalHithermCompactVerbindung) {
-						DeleteVerbindung(SelectedObject as GraphicalHithermCompactVerbindung);
+						DeleteVerbindung(SelectedObject as GraphicalHithermCompactVerbindung, false);
 					} else if (SelectedObject is GraphicalWallSchraege) {
 						DeleteSchraege(SelectedObject as GraphicalWallSchraege);
 					}
@@ -1317,7 +1317,7 @@ namespace Europlan.Common {
 			RestoreSnap();
 		}
 
-		private void DeleteVerbindung(GraphicalHithermCompactVerbindung verbindung) {
+        private void DeleteVerbindung(GraphicalHithermCompactVerbindung verbindung, bool fullDelete) {
 			if (verbindung != null) {
 				foreach (HithermCompactCircuit c in this.hithermCompactPlanner.HithermCompactProduct.PlannedCircuits) {
 					GraphicalHithermCompactVerbindung foundLink = null;
@@ -1332,14 +1332,16 @@ namespace Europlan.Common {
 						bool moveCircuit = foundLink.HasStart && foundLink.HasEnd;
 						c.Links.Remove(foundLink);
 						if (foundLink is GraphicalHithermCompactUnderfloorVerbindung) {
-							if (verbindung != (foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink) {
-								(foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink.IsPartOfCompound = false;
-								c.Links.Add((foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink);
-							}
-							if (verbindung != (foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink) {
-								(foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink.IsPartOfCompound = false;
-								c.Links.Add((foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink);
-							}
+                            if (!fullDelete) {
+                                if (verbindung != (foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink) {
+                                    (foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink.IsPartOfCompound = false;
+                                    c.Links.Add((foundLink as GraphicalHithermCompactUnderfloorVerbindung).StartLink);
+                                }
+                                if (verbindung != (foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink) {
+                                    (foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink.IsPartOfCompound = false;
+                                    c.Links.Add((foundLink as GraphicalHithermCompactUnderfloorVerbindung).EndLink);
+                                }
+                            }
 						}
 						if (verbindung == this.graphicalWallPanel.SelectedObject) {
 							this.graphicalWallPanel.SelectedObject = null;
@@ -1517,7 +1519,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnConnectionDelete_Click(object sender, EventArgs e) {
-			DeleteVerbindung(SelectedObject as GraphicalHithermCompactVerbindung);
+			DeleteVerbindung(SelectedObject as GraphicalHithermCompactVerbindung, false);
 		}
 
 		private void btnConnectionRevert_Click(object sender, EventArgs e) {

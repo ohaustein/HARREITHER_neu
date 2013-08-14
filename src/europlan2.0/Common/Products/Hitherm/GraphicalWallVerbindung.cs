@@ -918,6 +918,11 @@ namespace Europlan.Common {
 			}
 		}
 
+        public virtual void EnsureRegistersAreLoaded() {
+            RegisterType register = this.Start;
+            register = this.End;
+        }
+
 		[XmlIgnore]
 		public override int StartIndex {
 			get {

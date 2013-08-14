@@ -1245,7 +1245,6 @@
     <Content Include="Reporting\QuickDimensioning.lst">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\DataSources\ExportPlanForm.ExportOptionType.datasource" />
     <None Include="Resources\pickUnused.png" />
   </ItemGroup>

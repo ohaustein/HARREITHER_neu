@@ -402,5 +402,28 @@ namespace Europlan.Common {
 			}
 			return length;
 		}
-	}
+
+        public override void FixVerticesAfterWallInsert(double newWallPosition, double newWallWidth) {
+            if (this.startLink != null) {
+                this.startLink.FixVerticesAfterWallInsert(newWallPosition, newWallWidth);
+            }
+            if (this.endLink != null) {
+                this.endLink.FixVerticesAfterWallInsert(newWallPosition, newWallWidth);
+            }
+        }
+
+        public override bool FixVerticesAfterWallDelete(double oldWallOffset, double nextWallOldOffset, double nextWallNewOffset) {
+            if (this.startLink != null) {
+                if (!this.startLink.FixVerticesAfterWallDelete(oldWallOffset, nextWallOldOffset, nextWallNewOffset)) {
+                    return false;
+                }
+            }
+            if (this.endLink != null) {
+                if (!this.endLink.FixVerticesAfterWallDelete(oldWallOffset, nextWallOldOffset, nextWallNewOffset)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 }

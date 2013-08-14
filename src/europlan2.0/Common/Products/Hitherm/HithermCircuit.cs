@@ -441,5 +441,13 @@ namespace Europlan.Common {
 			}
 			return (vorlaufConnected || !checkVorlauf) && (ruecklaufConnected || !checkRuecklauf);
 		}
+
+        internal override void FinalizeLoading() {
+            base.FinalizeLoading();
+
+            foreach (GraphicalHithermVerbindung link in this.links) {
+                link.EnsureRegistersAreLoaded();
+            }
+        }
 	}
 }
