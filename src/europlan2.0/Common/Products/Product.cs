@@ -857,14 +857,14 @@ namespace Europlan.Common {
 		/// The pressure loss for heating at the distributor, based on the current calculation.
 		/// </summary>
 		[XmlIgnore]
-		public double PlannedDeltaRhoDistributorHeat {
+		public double PlannedMaxDruckverlustDistributorVentilHeat {
 			get {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					double druckverlust = c.C_DruckverlustDistributorHeat;
+					double druckverlust = c.C_DruckverlustVentilHeat;
 					if (druckverlust > value) {
 						value = druckverlust;
 					}
@@ -872,6 +872,62 @@ namespace Europlan.Common {
 				return value;
 			}
 		}
+        
+        [XmlIgnore]
+        public double PlannedDeltaRhoInklVentilHeat {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    if (requestedHeatLoad == 0) {
+                        return 0;
+                    }
+                    if (this.incompleteCalculation) {
+                        return 0;
+                    }
+                    double value = 0;
+                    foreach (Circuit c in this.circuits) {
+                        double druckverlust = c.C_DruckverlustHeat;
+                        Circuit.CircuitConnection cc = this.GetCircuitConnected(c.NrOfCircuit);
+                        if (cc != null) {
+                            druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
+                        }
+                        cc = this.GetCircuitInverseConnected(c.NrOfCircuit);
+                        if (cc != null) {
+                            druckverlust += cc.OtherCircuit.C_DruckverlustHeat;
+                        }
+                        druckverlust += c.C_DruckverlustVentilHeat;
+                        if (druckverlust > value) {
+                            value = druckverlust;
+                        }
+                    }
+                    return value;
+                } else {
+                    // return DeltaRho without Ventil of this product is not connected to a distributor
+                    return this.PlannedDeltaRhoHeat;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public double PlannedDeltaRhoInklVentilAndVerteilerHeat {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    return this.PlannedDeltaRhoInklVentilHeat + this.PlannedConnection.Distributor.DruckverlustVerteilerOnlyHeat;
+                } else {
+                    return this.PlannedDeltaRhoHeat;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public double PlannedDeltaRhoVerteilerOnlyHeat {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    return this.PlannedConnection.Distributor.DruckverlustVerteilerOnlyHeat;
+                } else {
+                    return 0;
+                }
+            }
+        }
 
 		/// <summary>
 		/// The pressure loss for cooling, based on the current calculation.
@@ -908,14 +964,14 @@ namespace Europlan.Common {
 		/// The pressure loss for cooling at the distributor, based on the current calculation.
 		/// </summary>
 		[XmlIgnore]
-		public double PlannedDeltaRhoDistributorCool {
+		public double PlannedMaxDruckverlustDistributorVentilCool {
 			get {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
 				double value = 0;
 				foreach (Circuit c in this.circuits) {
-					double druckverlust = c.C_DruckverlustDistributorCool;
+					double druckverlust = c.C_DruckverlustVentilCool;
 					if (druckverlust > value) {
 						value = druckverlust;
 					}
@@ -923,6 +979,62 @@ namespace Europlan.Common {
 				return value;
 			}
 		}
+
+        [XmlIgnore]
+        public double PlannedDeltaRhoInklVentilCool {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    if (requestedCoolLoad == 0) {
+                        return 0;
+                    }
+                    if (this.incompleteCalculation) {
+                        return 0;
+                    }
+                    double value = 0;
+                    foreach (Circuit c in this.circuits) {
+                        double druckverlust = c.C_DruckverlustCool;
+                        Circuit.CircuitConnection cc = this.GetCircuitConnected(c.NrOfCircuit);
+                        if (cc != null) {
+                            druckverlust += cc.OtherCircuit.C_DruckverlustCool;
+                        }
+                        cc = this.GetCircuitInverseConnected(c.NrOfCircuit);
+                        if (cc != null) {
+                            druckverlust += cc.OtherCircuit.C_DruckverlustCool;
+                        }
+                        druckverlust += c.C_DruckverlustVentilCool;
+                        if (druckverlust > value) {
+                            value = druckverlust;
+                        }
+                    }
+                    return value;
+                } else {
+                    // return DeltaRho without Ventil of this product is not connected to a distributor
+                    return this.PlannedDeltaRhoCool;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public double PlannedDeltaRhoInklVentilAndVerteilerCool {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    return this.PlannedDeltaRhoInklVentilCool + this.PlannedConnection.Distributor.DruckverlustVerteilerOnlyCool;
+                } else {
+                    return this.PlannedDeltaRhoCool;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public double PlannedDeltaRhoVerteilerOnlyCool {
+            get {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                    return this.PlannedConnection.Distributor.DruckverlustVerteilerOnlyCool;
+                } else {
+                    return 0;
+                }
+            }
+        }
 
 		[XmlIgnore]
 		public double PlannedMhHeat {

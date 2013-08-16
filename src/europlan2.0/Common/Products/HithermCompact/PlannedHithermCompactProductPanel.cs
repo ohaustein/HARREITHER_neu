@@ -484,10 +484,10 @@ namespace Europlan.Common {
 						lblHk.Text = EuroplanRes.PlannedHithermProductPanel_Heizkreis + " " + selectedCircuit.ToString() + ":";
 						lblAvgqHeat.Text = Math.Round(hc.C_QHeatPerSqm, 2).ToString();
 						lblDurchflussHeat.Text = Math.Round(hc.C_DurchflussHeat, 2).ToString();
-						lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustHeat, 2).ToString();
+                        lblDruckverlustHeat.Text = Math.Round(hc.C_DruckverlustInklVentilHeat, 2).ToString();
 						lblAvgqCool.Text = (-1.0 * Math.Round(hc.C_QCoolPerSqm, 2)).ToString();
 						lblDurchflussCool.Text = Math.Round(hc.C_DurchflussCool, 2).ToString();
-						lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustCool, 2).ToString();
+                        lblDruckverlustCool.Text = Math.Round(hc.C_DruckverlustInklVentilCool, 2).ToString();
 					}
 				} else {
 				}

@@ -81,8 +81,9 @@ namespace Europlan.Common {
 			List<ProjectWarningWrapper> projectNotificationWrapper = new List<ProjectWarningWrapper>();
 			List<FloorOverviewWrapper> floorOverviewWrapper = new List<FloorOverviewWrapper>();
 			List<EurovalAreaOverviewWrapper> eurovalOverviewWrapper = new List<EurovalAreaOverviewWrapper>();
-			List<EcothermAreaOverviewWrapper> ecothermOverviewWrapper = new List<EcothermAreaOverviewWrapper>();
-			List<HithermOverviewWrapper> hithermOverviewWrapper = new List<HithermOverviewWrapper>();
+            List<EcothermAreaOverviewWrapper> ecothermOverviewWrapper = new List<EcothermAreaOverviewWrapper>();
+            List<JumbovalAreaOverviewWrapper> jumbovalOverviewWrapper = new List<JumbovalAreaOverviewWrapper>();
+            List<HithermOverviewWrapper> hithermOverviewWrapper = new List<HithermOverviewWrapper>();
 			List<HithermCompactOverviewWrapper> hithermCompactOverviewWrapper = new List<HithermCompactOverviewWrapper>();
 			List<ModulBodenOverviewWrapper> modulBodenOverviewWrapper = new List<ModulBodenOverviewWrapper>();
 			List<ModulDeckeOverviewWrapper> modulDeckeOverviewWrapper = new List<ModulDeckeOverviewWrapper>();
@@ -92,15 +93,17 @@ namespace Europlan.Common {
 			List<DistributorWrapper> distributorWrapper = new List<DistributorWrapper>();
 			List<RoomOverviewWrapper> roomOverviewWrapper = new List<RoomOverviewWrapper>();
 			List<EurovalWrapper> eurovalAuslegungWrapper = new List<EurovalWrapper>();
-			List<EcothermWrapper> ecothermAuslegungWrapper = new List<EcothermWrapper>();
-			List<HithermWrapper> hithermAuslegungWrapper = new List<HithermWrapper>();
+            List<EcothermWrapper> ecothermAuslegungWrapper = new List<EcothermWrapper>();
+            List<JumbovalWrapper> jumbovalAuslegungWrapper = new List<JumbovalWrapper>();
+            List<HithermWrapper> hithermAuslegungWrapper = new List<HithermWrapper>();
 			List<HithermCompactWrapper> hithermCompactAuslegungWrapper = new List<HithermCompactWrapper>();
 			List<ModulBodenWrapper> modulBodenAuslegungWrapper = new List<ModulBodenWrapper>();
 			List<ModulDeckeWrapper> modulDeckeAuslegungWrapper = new List<ModulDeckeWrapper>();
 			List<ModulDeckeVerlegeDatenWrapper> modulDeckeVerlegeDatenWrapper = new List<ModulDeckeVerlegeDatenWrapper>();
 			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
-			List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
-			List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
+            List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
+            List<BilanzWrapper> jumbovalBilanzWrapper = new List<BilanzWrapper>();
+            List<BilanzWrapper> hithermBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> hithermCompactBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> modulBodenBilanzWrapper = new List<BilanzWrapper>();
 			List<BilanzWrapper> modulDeckeBilanzWrapper = new List<BilanzWrapper>();
@@ -118,6 +121,7 @@ namespace Europlan.Common {
 					floorOverviewWrapper = this.GetFloorOverviewWrapper();
 					eurovalOverviewWrapper = GetEurovalOverviewWrapper();
 					ecothermOverviewWrapper = GetEcothermOverviewWrapper();
+                    jumbovalOverviewWrapper = GetJumbovalOverviewWrapper();
 					hithermOverviewWrapper = GetHithermOverviewWrapper();
 					hithermCompactOverviewWrapper = GetHithermCompactOverviewWrapper();
 					modulBodenOverviewWrapper = GetModulBodenOverviewWrapper();
@@ -134,6 +138,7 @@ namespace Europlan.Common {
 			if (reportOptions.Auslegung || reportOptions.Verlegedaten) {
 				eurovalAuslegungWrapper = GetEurovalWrapper();
 				ecothermAuslegungWrapper = GetEcothermWrapper();
+                jumbovalAuslegungWrapper = GetJumbovalWrapper();
 				hithermAuslegungWrapper = GetHithermWrapper();
 				hithermCompactAuslegungWrapper = GetHithermCompactWrapper();
 				modulBodenAuslegungWrapper = GetModulBodenWrapper();
@@ -143,6 +148,7 @@ namespace Europlan.Common {
 			if (reportOptions.Auslegung && reportOptions.AuslegungBilanz) {
 				eurovalBilanzWrapper = GetEurovalBilanzWrapper();
 				ecothermBilanzWrapper = GetEcothermBilanzWrapper();
+                jumbovalBilanzWrapper = GetJumbovalBilanzWrapper();
 				hithermBilanzWrapper = GetHithermBilanzWrapper();
 				hithermCompactBilanzWrapper = GetHithermCompactBilanzWrapper();
 				modulBodenBilanzWrapper = GetModulBodenBilanzWrapper();
@@ -445,12 +451,20 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 						}
-												
-						deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-						deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+
+                        /*deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoInklVentilHeat ? pp.Product.PlannedDeltaRhoInklVentilHeat : deltaRhoHeatMax;
+                        deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoInklVentilCool ? pp.Product.PlannedDeltaRhoInklVentilCool : deltaRhoCoolMax;*/
+                        /* TODO: DRUCKVERLUST VERTEILER */
+                        //deltaRhoHeatMax = 12345;
+                        //deltaRhoCoolMax = 67890;
+                        /* TODO DONE */
 						wasserInhalt += pp.Product.WasserInhalt;
 					}
 				}
+                foreach (Distributor dist in floor.Distributors) {
+                    deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, dist.MaxDruckverlustVerteilerInklRohrAndVentilHeat);
+                    deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, dist.MaxDruckverlustVerteilerInklRohrAndVentilCool);
+                }
 			}
 
 			BilanzWrapper wrapper = new BilanzWrapper();
@@ -598,8 +612,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -750,8 +764,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -838,7 +852,159 @@ namespace Europlan.Common {
 			return wrapperList;
 		}
 
-		public List<BilanzWrapper> GetHithermBilanzWrapper() {
+        public List<BilanzWrapper> GetJumbovalBilanzWrapper() {
+
+            List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
+
+            double normWaermeBedarf = 0;
+            double normKuehlBedarf = 0;
+            double normWaermeBedarfBereinigt = 0;
+            double normKuehlBedarfBereinigt = 0;
+
+            double roomArea = 0;
+            double estrichArea = 0;
+            double plannedArea = 0;
+
+            double transmissionFloorHeat = 0;
+            double transmissionWallHeat = 0;
+            double transmissionCeilingHeat = 0;
+            double transmissionFloorCool = 0;
+            double transmissionWallCool = 0;
+            double transmissionCeilingCool = 0;
+            double qHeat = 0;
+            double qCool = 0;
+
+            double durchflussHeat = 0;
+            double durchflussCool = 0;
+
+            double deltaRhoHeatMax = 0;
+            double deltaRhoCoolMax = 0;
+            double wasserInhalt = 0;
+
+            bool isProductPlanned = false;
+
+            foreach (Floor floor in project.Floors) {
+                foreach (Room room in floor.Rooms) {
+                    foreach (PlannedProduct pp in room.PlannedProducts) {
+                        if (pp.Product is JumbovalProduct) {
+                            isProductPlanned = true;
+                            normWaermeBedarf += pp.RequestedHeatLoad;
+                            normKuehlBedarf += pp.RequestedCoolLoad;
+                            roomArea += room.Area;
+                            if (pp.Product.HasInsideConstruction) {
+                                if (pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH) ||
+                                    pp.Product.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH)) {
+                                    estrichArea += pp.Product.PlannedFloorArea;
+                                }
+                            }
+                            plannedArea += pp.Product.PlannedFloorArea;
+
+                            normWaermeBedarfBereinigt += pp.Product.PlannedHeizlastBereinigung;
+                            normKuehlBedarfBereinigt += pp.Product.PlannedKuehllastBereinigung;
+
+                            transmissionFloorHeat += pp.Product.TransmissionFloorHeat;
+                            transmissionWallHeat += pp.Product.TransmissionWallHeat;
+                            transmissionCeilingHeat += pp.Product.TransmissionCeilingHeat;
+                            transmissionCeilingHeat += pp.Product.TransmissionRoofHeat;
+                            transmissionFloorCool += pp.Product.TransmissionFloorCool;
+                            transmissionWallCool += pp.Product.TransmissionWallCool;
+                            transmissionCeilingCool += pp.Product.TransmissionCeilingCool;
+                            transmissionCeilingHeat += pp.Product.TransmissionRoofCool;
+                            qHeat += pp.Product.PlannedHeatLoad;
+                            qCool += pp.Product.PlannedCoolLoad;
+
+                            durchflussHeat += pp.Product.PlannedDurchflussHeat;
+                            durchflussCool += pp.Product.PlannedDurchflussCool;
+
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
+
+                            wasserInhalt += pp.Product.WasserInhalt;
+                        }
+                    }
+                }
+            }
+
+            if (isProductPlanned) {
+
+                BilanzWrapper wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_GewuenschterWaermebedarf; //"Gewünschter Wärmebedarf"
+                wrapper.HeatValue = normWaermeBedarf.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapper.CoolValue = normKuehlBedarf.ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_BereinigterWaermebedarf; //"Bereinigter Wärmebedarf"
+                wrapper.HeatValue = (normWaermeBedarf - normWaermeBedarfBereinigt).ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapper.CoolValue = (normKuehlBedarf - normKuehlBedarfBereinigt).ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
+                wrapper.HeatValue = qHeat.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapper.CoolValue = qCool.ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_ZugefuehrteHeizleistung; //"Gesamte zugeführte Heizleistung"
+                wrapper.HeatValue = (transmissionFloorHeat + transmissionWallHeat + transmissionCeilingHeat + qHeat).ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
+                wrapper.HeatValue = durchflussHeat.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
+                wrapper.CoolValue = durchflussCool.ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_LiterProStunde; //"l/h"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_MaximalerDruckverlust; //"Maximaler Druckverlust (inkl. Verteiler)"
+                wrapper.HeatValue = deltaRhoHeatMax.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Mbar; //"mbar"
+                wrapper.CoolValue = deltaRhoCoolMax.ToString("0.##");
+                wrapper.CoolUnit = EuroplanRes.Unit_Mbar; //"mbar"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_Wasserinhalt; //"Wasserinhalt (ab Verteiler)"
+                wrapper.HeatValue = wasserInhalt.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Liter; //"l"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEcotherm; //"Gesamte Raumfläche (Räume mit Ecotherm® Fußbodenheizung)"
+                wrapper.HeatValue = roomArea.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_Estrichflaeche; //"Gesamte Estrichfläche"
+                wrapper.HeatValue = estrichArea.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
+                wrapperList.Add(wrapper);
+
+                wrapper = new BilanzWrapper();
+                wrapper.Description = EuroplanRes.ProjectReport_Heizflaeche; //"Gesamte Heizfläche"
+                wrapper.HeatValue = plannedArea.ToString("0.##");
+                wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
+                wrapperList.Add(wrapper);
+
+            }
+
+            return wrapperList;
+        }
+
+        public List<BilanzWrapper> GetHithermBilanzWrapper() {
 
 			List<BilanzWrapper> wrapperList = new List<BilanzWrapper>();
 
@@ -893,8 +1059,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -1024,8 +1190,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -1160,8 +1326,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -1306,8 +1472,8 @@ namespace Europlan.Common {
 							durchflussHeat += pp.Product.PlannedDurchflussHeat;
 							durchflussCool += pp.Product.PlannedDurchflussCool;
 
-							deltaRhoHeatMax = deltaRhoHeatMax < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeatMax;
-							deltaRhoCoolMax = deltaRhoCoolMax < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCoolMax;
+                            deltaRhoHeatMax = Math.Max(deltaRhoHeatMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerHeat);
+                            deltaRhoCoolMax = Math.Max(deltaRhoCoolMax, pp.Product.PlannedDeltaRhoInklVentilAndVerteilerCool);
 
 							wasserInhalt += pp.Product.WasserInhalt;
 						}
@@ -1606,26 +1772,49 @@ namespace Europlan.Common {
 					foreach (Distributor d in floor.Distributors) {
 						if (d.RegulatorCircuit == rc) {
 							foreach (PlannedProduct pp in d.PlannedConnectedProducts) {
-								if (!pp.Product.PlannedProductIsConnection) {
-									pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-									if (ruecklauf < ruecklaufHeat) {
-										ruecklaufHeat = ruecklauf;
-									}
-									pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-									if (ruecklauf > ruecklaufCool) {
-										ruecklaufCool = ruecklauf;
-									}
-								}
-								durchflussHeat += pp.Product.PlannedDurchflussHeat;
-								durchflussCool += pp.Product.PlannedDurchflussCool;
-								deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
-								deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+                                if (pp.Product.PlannedCalculationComplete) {
+                                    if (!pp.Product.PlannedProductIsConnection) {
+                                        pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+                                        if (ruecklauf < ruecklaufHeat) {
+                                            ruecklaufHeat = ruecklauf;
+                                        }
+                                        pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+                                        if (ruecklauf > ruecklaufCool) {
+                                            ruecklaufCool = ruecklauf;
+                                        }
+                                    }
+                                    durchflussHeat += pp.Product.PlannedDurchflussHeat;
+                                    durchflussCool += pp.Product.PlannedDurchflussCool;
+                                }
 							}
 							foreach (PlannedProduct pp in d.PlannedDirectAndIndirectConnectedProducts) {
 								wasserInhalt += pp.Product.WasserInhalt;
 							}
-						}
+                            deltaRhoHeat = Math.Max(deltaRhoHeat, d.MaxDruckverlustVerteilerInklRohrAndVentilHeat);
+                            deltaRhoCool = Math.Max(deltaRhoCool, d.MaxDruckverlustVerteilerInklRohrAndVentilCool);
+                        }
 					}
+                    foreach (Room r in floor.Rooms) {
+                        foreach (PlannedProduct pp in r.PlannedProducts) {
+                            if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && pp.Product.PlannedConnection.RegulatorCircuit == rc && pp.Product.PlannedCalculationComplete) {
+                                if (!pp.Product.PlannedProductIsConnection) {
+                                    pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+                                    if (ruecklauf < ruecklaufHeat) {
+                                        ruecklaufHeat = ruecklauf;
+                                    }
+                                    pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+                                    if (ruecklauf > ruecklaufCool) {
+                                        ruecklaufCool = ruecklauf;
+                                    }
+                                }
+                                durchflussHeat += pp.Product.PlannedDurchflussHeat;
+                                durchflussCool += pp.Product.PlannedDurchflussCool;
+                                /* TODO */
+                                deltaRhoHeat = Math.Max(deltaRhoHeat, pp.Product.PlannedDeltaRhoHeat);
+                                deltaRhoCool = Math.Max(deltaRhoCool, pp.Product.PlannedDeltaRhoCool);
+                            }
+                        }
+                    }
 				}
 				string anschlussDimensionierung = "";
 				double maxDurchfluss = Math.Max(durchflussHeat, durchflussCool);
@@ -1691,24 +1880,26 @@ namespace Europlan.Common {
 					double deltaRhoCool = 0;
 					double wasserInhalt = 0;
 					foreach (PlannedProduct pp in distributor.PlannedConnectedProducts) {
-						if (!pp.Product.PlannedProductIsConnection) {
-							pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-							if (ruecklauf < ruecklaufHeat) {
-								ruecklaufHeat = ruecklauf;
-							}
-							pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-							if (ruecklauf > ruecklaufCool) {
-								ruecklaufCool = ruecklauf;
-							}
-						}
-						durchflussHeat += pp.Product.PlannedDurchflussHeat;
-						durchflussCool += pp.Product.PlannedDurchflussCool;
-						deltaRhoHeat = deltaRhoHeat < pp.Product.PlannedDeltaRhoHeat ? pp.Product.PlannedDeltaRhoHeat : deltaRhoHeat;
-						deltaRhoCool = deltaRhoCool < pp.Product.PlannedDeltaRhoCool ? pp.Product.PlannedDeltaRhoCool : deltaRhoCool;
+                        if (pp.Product.PlannedCalculationComplete) {
+                            if (!pp.Product.PlannedProductIsConnection) {
+                                pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+                                if (ruecklauf < ruecklaufHeat) {
+                                    ruecklaufHeat = ruecklauf;
+                                }
+                                pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+                                if (ruecklauf > ruecklaufCool) {
+                                    ruecklaufCool = ruecklauf;
+                                }
+                            }
+                            durchflussHeat += pp.Product.PlannedDurchflussHeat;
+                            durchflussCool += pp.Product.PlannedDurchflussCool;
+                        }
 					}
 					foreach (PlannedProduct pp in distributor.PlannedDirectAndIndirectConnectedProducts) {
 						wasserInhalt += pp.Product.WasserInhalt;
 					}
+                    deltaRhoHeat = Math.Max(deltaRhoHeat, distributor.MaxDruckverlustVerteilerInklRohrAndVentilHeat);
+                    deltaRhoCool = Math.Max(deltaRhoCool, distributor.MaxDruckverlustVerteilerInklRohrAndVentilCool);
 
 					string anschlussDimensionierung = "";
 					double maxDurchfluss = Math.Max(durchflussHeat, durchflussCool);
@@ -1845,8 +2036,8 @@ namespace Europlan.Common {
 							wrapperOverview.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
 							wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
-							wrapperOverview.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
-							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+                            wrapperOverview.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                            wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 							wrapperOverview.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -1879,9 +2070,9 @@ namespace Europlan.Common {
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
-								wrapper.DruckverlustRohr = ec.C_DruckverlustHeat;
-								wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorHeat;
-								wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+                                wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+                                wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
+                                wrapper.V = ec.C_FlussGeschwindigkeitHeat;
 
 								if (prevWrapper == null) {
 									prevWrapper = wrapper;
@@ -1943,8 +2134,8 @@ namespace Europlan.Common {
 								wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
-								wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
-								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+                                wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                                wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 								wrapperHeat.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -1994,8 +2185,8 @@ namespace Europlan.Common {
 								wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
 
 								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
-								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoCool;
-								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
+								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilCool;
+								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 								
 								wrapperCool.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -2032,8 +2223,8 @@ namespace Europlan.Common {
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
-										wrapper.DruckverlustRohr = ec.C_DruckverlustHeat;
-										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorHeat;
+										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = ec.C_FlussGeschwindigkeitHeat;
 
 										if (prevWrapper == null) {
@@ -2084,8 +2275,8 @@ namespace Europlan.Common {
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
-										wrapper.DruckverlustRohr = ec.C_DruckverlustCool;
-										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorCool;
+										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = ec.C_FlussGeschwindigkeitCool;
 
 										if (prevWrapper == null) {
@@ -2177,8 +2368,8 @@ namespace Europlan.Common {
 							wrapperOverview.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
 							wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
-							wrapperOverview.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
-							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+                            wrapperOverview.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                            wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 							wrapperOverview.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -2211,8 +2402,8 @@ namespace Europlan.Common {
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
-								wrapper.DruckverlustRohr = ec.C_DruckverlustHeat;
-								wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorHeat;
+								wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+								wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapper.V = ec.C_FlussGeschwindigkeitHeat;
 
 								if (prevWrapper == null) {
@@ -2275,8 +2466,8 @@ namespace Europlan.Common {
 								wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
-								wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoHeat;
-								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+                                wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                                wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 								wrapperHeat.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -2326,8 +2517,8 @@ namespace Europlan.Common {
 								wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
 
 								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
-								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoCool;
-								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
+								wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilCool;
+								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 
 								wrapperCool.UnusedArea = ep.PlannedAreaUnheated;
 
@@ -2364,8 +2555,8 @@ namespace Europlan.Common {
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
-										wrapper.DruckverlustRohr = ec.C_DruckverlustHeat;
-										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorHeat;
+										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = ec.C_FlussGeschwindigkeitHeat;
 
 										if (prevWrapper == null) {
@@ -2416,8 +2607,8 @@ namespace Europlan.Common {
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
-										wrapper.DruckverlustRohr = ec.C_DruckverlustCool;
-										wrapper.DruckverlustVerteiler = ec.C_DruckverlustDistributorCool;
+										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = ec.C_FlussGeschwindigkeitCool;
 
 										if (prevWrapper == null) {
@@ -2457,7 +2648,339 @@ namespace Europlan.Common {
 			return wrapperHeatList;
 		}
 
-		public List<HithermWrapper> GetHithermWrapper() {
+        public List<JumbovalWrapper> GetJumbovalWrapper() {
+            List<JumbovalWrapper> wrapperHeatList = new List<JumbovalWrapper>();
+            List<JumbovalWrapper> wrapperCoolList = new List<JumbovalWrapper>();
+
+            JumbovalWrapper wrapperOverview = null;
+            JumbovalWrapper wrapperHeat = null;
+            JumbovalWrapper wrapperCool = null;
+
+            foreach (Floor floor in project.Floors) {
+                foreach (Room room in floor.Rooms) {
+                    foreach (PlannedProduct pp in room.PlannedProducts) {
+                        wrapperOverview = null;
+                        wrapperHeat = null;
+                        wrapperCool = null;
+                        if (pp.Product is JumbovalProduct) {
+                            JumbovalProduct ep = pp.Product as JumbovalProduct;
+
+                            wrapperOverview = new JumbovalWrapper();
+                            wrapperOverview.HeatOrCool = "overview";
+                            wrapperOverview.FloorId = floor.Id;
+                            wrapperOverview.FloorName = floor.Name;
+
+                            wrapperOverview.RoomId = room.Id;
+                            wrapperOverview.RoomName = room.Name;
+                            wrapperOverview.TeilSystem = pp.InternalName;
+                            if (pp.Product.HasInsideConstruction) {
+                                wrapperOverview.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+                                wrapperOverview.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+                            }
+                            if (pp.Product.HasOutsideConstruction) {
+                                wrapperOverview.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+                                wrapperOverview.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+                            }
+                            wrapperOverview.Circuits = pp.Product.PlannedCircuitCount;
+                            wrapperOverview.RzLayDistance = ep.PlannedRimLayDistance.ToString();
+                            wrapperOverview.RzWidth = ep.PlannedRimWidth;
+                            wrapperOverview.RzArea = ep.PlannedAreaRim;
+                            wrapperOverview.AzLayDistance = ep.PlannedLayDistance.ToString();
+                            wrapperOverview.AzArea = ep.PlannedAreaResidenceHeated;
+                            wrapperOverview.ConnectionArea = ep.PlannedRemoveArea;
+
+                            double v, r;
+                            pp.Product.GetHeatFlow(out v, out r);
+                            wrapperOverview.RoomTemp = room.RoomHeatTemperature;
+                            wrapperOverview.VorlaufTemp = v;
+                            wrapperOverview.RuecklaufTemp = r;
+                            wrapperOverview.QSoll = pp.RequestedHeatLoad;
+                            wrapperOverview.QFBH = pp.PlannedHeatLoad;
+                            wrapperOverview.tFBAz = ep.PlannedFloorTemperatureHeatResidence;
+                            wrapperOverview.tFBRz = ep.PlannedFloorTemperatureHeatRim;
+
+                            wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
+                            wrapperOverview.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                            wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
+
+                            wrapperOverview.UnusedArea = ep.PlannedAreaUnheated;
+
+                            if (ep.PlannedConnection != null) {
+                                if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+                                    wrapperOverview.SubSystem = true;
+                                    wrapperOverview.VorlaufTemp = -1;
+                                    wrapperOverview.RuecklaufTemp = -1;
+                                }
+                            }
+                            if (ep.IsOtherProductConnected) {
+                                wrapperOverview.OtherSystemsConnected = true;
+                            }
+
+                            wrapperHeatList.Add(wrapperOverview);
+
+                            JumbovalWrapper prevWrapper = null;
+                            foreach (JumbovalCircuit ec in ep.PlannedCircuits) {
+                                JumbovalWrapper wrapper = new JumbovalWrapper(wrapperOverview);
+                                wrapper.UsedAsCircuitWrapper = true;
+
+                                wrapper.AzArea = ec.AreaAz;
+                                wrapper.RzArea = ec.RimLength;
+
+                                wrapper.Circuits = ec.NrOfCircuit + 1;
+                                wrapper.CircuitsAsString = wrapper.Circuits.ToString();
+                                wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
+                                wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
+                                wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
+                                wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
+
+                                wrapper.Wassermenge = ec.C_DurchflussHeat;
+                                wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+                                wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
+                                wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                if (prevWrapper == null) {
+                                    prevWrapper = wrapper;
+                                    wrapperHeatList.Add(wrapper);
+                                } else {
+                                    bool ok = true;
+                                    ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+                                    ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
+                                    ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+                                    ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+                                    ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+                                    ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+                                    ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+                                    ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+                                    ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+                                    ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
+
+                                    if (ok) {
+                                        prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+                                    } else {
+                                        prevWrapper = wrapper;
+                                        wrapperHeatList.Add(wrapper);
+                                    }
+                                }
+                            }
+
+                            if (wrapperHeat == null && pp.RequestedHeatLoad != 0) {
+                                wrapperHeat = new JumbovalWrapper();
+                                wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
+                                wrapperHeat.FloorId = floor.Id;
+                                wrapperHeat.FloorName = floor.Name;
+
+                                wrapperHeat.RoomId = room.Id;
+                                wrapperHeat.RoomName = room.Name;
+                                wrapperHeat.TeilSystem = pp.InternalName;
+                                if (pp.Product.HasInsideConstruction) {
+                                    wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+                                    wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+                                }
+                                if (pp.Product.HasOutsideConstruction) {
+                                    wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+                                    wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+                                }
+                                wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+                                wrapperHeat.RzLayDistance = ep.PlannedRimLayDistance.ToString();
+                                wrapperHeat.RzWidth = ep.PlannedRimWidth;
+                                wrapperHeat.RzArea = ep.PlannedAreaRim;
+                                wrapperHeat.AzLayDistance = ep.PlannedLayDistance.ToString();
+                                wrapperHeat.AzArea = ep.PlannedAreaResidenceHeated;
+                                wrapperHeat.ConnectionArea = ep.PlannedRemoveArea;
+
+                                pp.Product.GetHeatFlow(out v, out r);
+                                wrapperHeat.RoomTemp = room.RoomHeatTemperature;
+                                wrapperHeat.VorlaufTemp = v;
+                                wrapperHeat.RuecklaufTemp = r;
+                                wrapperHeat.QSoll = pp.RequestedHeatLoad;
+                                wrapperHeat.QFBH = pp.PlannedHeatLoad;
+                                wrapperHeat.tFBAz = ep.PlannedFloorTemperatureHeatResidence;
+                                wrapperHeat.tFBRz = ep.PlannedFloorTemperatureHeatRim;
+
+                                wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
+                                wrapperHeat.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilHeat;
+                                wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
+
+                                wrapperHeat.UnusedArea = ep.PlannedAreaUnheated;
+
+                                if (ep.PlannedConnection != null) {
+                                    if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+                                        wrapperHeat.SubSystem = true;
+                                        wrapperHeat.VorlaufTemp = -1;
+                                        wrapperHeat.RuecklaufTemp = -1;
+                                    }
+                                }
+                                if (ep.IsOtherProductConnected) {
+                                    wrapperHeat.OtherSystemsConnected = true;
+                                }
+                            }
+                            if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0) {
+                                wrapperCool = new JumbovalWrapper();
+                                wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
+                                wrapperCool.FloorId = floor.Id;
+                                wrapperCool.FloorName = floor.Name;
+
+                                wrapperCool.RoomId = room.Id;
+                                wrapperCool.RoomName = room.Name;
+                                wrapperCool.TeilSystem = pp.InternalName;
+                                if (pp.Product.HasInsideConstruction) {
+                                    wrapperCool.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
+                                    wrapperCool.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
+                                }
+                                if (pp.Product.HasOutsideConstruction) {
+                                    wrapperCool.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
+                                    wrapperCool.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
+                                }
+                                wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
+                                wrapperCool.RzLayDistance = ep.PlannedRimLayDistance.ToString();
+                                wrapperCool.RzWidth = ep.PlannedRimWidth;
+                                wrapperCool.RzArea = ep.PlannedAreaRim;
+                                wrapperCool.AzLayDistance = ep.PlannedLayDistance.ToString();
+                                wrapperCool.AzArea = ep.PlannedAreaResidenceHeated;
+                                wrapperCool.ConnectionArea = ep.PlannedRemoveArea;
+
+                                pp.Product.GetCoolFlow(out v, out r);
+                                wrapperCool.RoomTemp = room.RoomCoolTemperature;
+                                wrapperCool.VorlaufTemp = v;
+                                wrapperCool.RuecklaufTemp = r;
+                                wrapperCool.QSoll = pp.RequestedCoolLoad;
+                                wrapperCool.QFBH = pp.PlannedCoolLoad;
+                                wrapperCool.tFBAz = ep.PlannedFloorTemperatureCoolResidence;
+                                wrapperCool.tFBRz = ep.PlannedFloorTemperatureCoolRim;
+
+                                wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
+                                wrapperCool.DruckverlustRohr = pp.Product.PlannedDeltaRhoInklVentilCool;
+                                wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
+
+                                wrapperCool.UnusedArea = ep.PlannedAreaUnheated;
+
+                                if (ep.PlannedConnection != null) {
+                                    if (ep.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+                                        wrapperCool.SubSystem = true;
+                                        wrapperCool.VorlaufTemp = -1;
+                                        wrapperCool.RuecklaufTemp = -1;
+                                    }
+                                }
+                                if (ep.IsOtherProductConnected) {
+                                    wrapperCool.OtherSystemsConnected = true;
+                                }
+                            }
+                            if (wrapperHeat != null) {
+                                if (ep.PlannedCircuitCount == 0) {
+                                    wrapperHeatList.Add(wrapperHeat);
+                                } else {
+                                    wrapperHeatList.Add(wrapperHeat);
+
+                                    prevWrapper = null;
+                                    foreach (JumbovalCircuit ec in ep.PlannedCircuits) {
+                                        JumbovalWrapper wrapper = new JumbovalWrapper(wrapperHeat);
+                                        wrapper.UsedAsCircuitWrapper = true;
+
+                                        wrapper.AzArea = ec.AreaAz;
+                                        wrapper.RzArea = ec.RimLength;
+
+                                        wrapper.Circuits = ec.NrOfCircuit + 1;
+                                        wrapper.CircuitsAsString = wrapper.Circuits.ToString();
+                                        wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
+                                        wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
+                                        wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
+                                        wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
+
+                                        wrapper.Wassermenge = ec.C_DurchflussHeat;
+                                        wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
+                                        wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
+                                        wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                        if (prevWrapper == null) {
+                                            prevWrapper = wrapper;
+                                            wrapperHeatList.Add(wrapper);
+                                        } else {
+                                            bool ok = true;
+                                            ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+                                            ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+                                            ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+                                            ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+                                            ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+                                            ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
+
+                                            if (ok) {
+                                                prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+                                            } else {
+                                                prevWrapper = wrapper;
+                                                wrapperHeatList.Add(wrapper);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (wrapperCool != null) {
+                                if (ep.PlannedCircuitCount == 0) {
+                                    wrapperCoolList.Add(wrapperCool);
+                                } else {
+                                    wrapperCoolList.Add(wrapperCool);
+
+                                    prevWrapper = null;
+                                    foreach (JumbovalCircuit ec in ep.PlannedCircuits) {
+                                        JumbovalWrapper wrapper = new JumbovalWrapper(wrapperCool);
+                                        wrapper.UsedAsCircuitWrapper = true;
+
+                                        wrapper.AzArea = ec.AreaAz;
+                                        wrapper.RzArea = ec.RimLength;
+
+                                        wrapper.Circuits = ec.NrOfCircuit + 1;
+                                        wrapper.CircuitsAsString = wrapper.Circuits.ToString();
+                                        wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
+                                        wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
+                                        wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
+                                        wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
+
+                                        wrapper.Wassermenge = ec.C_DurchflussCool;
+                                        wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
+                                        wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
+                                        wrapper.V = ec.C_FlussGeschwindigkeitCool;
+
+                                        if (prevWrapper == null) {
+                                            prevWrapper = wrapper;
+                                            wrapperCoolList.Add(wrapper);
+                                        } else {
+                                            bool ok = true;
+                                            ok = ok && Math.Round(prevWrapper.AzArea, 3) == Math.Round(wrapper.AzArea, 3);
+                                            ok = ok && Math.Round(prevWrapper.RzArea, 3) == Math.Round(wrapper.RzArea, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthRzAz, 3) == Math.Round(wrapper.LengthRzAz, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthConnection, 3) == Math.Round(wrapper.LengthConnection, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthCircuitFbh, 3) == Math.Round(wrapper.LengthCircuitFbh, 3);
+                                            ok = ok && Math.Round(prevWrapper.LengthCircuitAll, 3) == Math.Round(wrapper.LengthCircuitAll, 3);
+                                            ok = ok && Math.Round(prevWrapper.Wassermenge, 3) == Math.Round(wrapper.Wassermenge, 3);
+                                            ok = ok && Math.Round(prevWrapper.DruckverlustRohr, 3) == Math.Round(wrapper.DruckverlustRohr, 3);
+                                            ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 3) == Math.Round(wrapper.DruckverlustVerteiler, 3);
+                                            ok = ok && Math.Round(prevWrapper.V, 3) == Math.Round(wrapper.V, 3);
+
+                                            if (ok) {
+                                                prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
+                                            } else {
+                                                prevWrapper = wrapper;
+                                                wrapperCoolList.Add(wrapper);
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            wrapperHeatList.AddRange(wrapperCoolList);
+
+            return wrapperHeatList;
+        }
+
+        public List<HithermWrapper> GetHithermWrapper() {
 			List<HithermWrapper> wrapperHeatList = new List<HithermWrapper>();
 			List<HithermWrapper> wrapperCoolList = new List<HithermWrapper>();
 
@@ -2515,8 +3038,8 @@ namespace Europlan.Common {
 								wrapperOverview.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 								wrapperOverview.Wassermenge = c.C_DurchflussHeat;
-								wrapperOverview.DruckverlustRohr = c.C_DruckverlustHeat;
-								wrapperOverview.DruckverlustVerteiler = c.C_DruckverlustDistributorHeat;
+								wrapperOverview.DruckverlustRohr = c.C_DruckverlustInklVentilHeat;
+								wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapperOverview.V = c.C_FlussGeschwindigkeitHeat;
 
 								if (hp.PlannedConnection != null) {
@@ -2571,8 +3094,8 @@ namespace Europlan.Common {
 									wrapperHeat.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperHeat.Wassermenge = c.C_DurchflussHeat;
-									wrapperHeat.DruckverlustRohr = c.C_DruckverlustHeat;
-									wrapperHeat.DruckverlustVerteiler = c.C_DruckverlustDistributorHeat;
+									wrapperHeat.DruckverlustRohr = c.C_DruckverlustInklVentilHeat;
+									wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 									wrapperHeat.V = c.C_FlussGeschwindigkeitHeat;
 
 									if (hp.PlannedConnection != null) {
@@ -2627,8 +3150,8 @@ namespace Europlan.Common {
 									wrapperCool.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperCool.Wassermenge = c.C_DurchflussCool;
-									wrapperCool.DruckverlustRohr = c.C_DruckverlustCool;
-									wrapperCool.DruckverlustVerteiler = c.C_DruckverlustDistributorCool;
+									wrapperCool.DruckverlustRohr = c.C_DruckverlustInklVentilCool;
+									wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 									wrapperCool.V = c.C_FlussGeschwindigkeitCool;
 
 									if (hp.PlannedConnection != null) {
@@ -2711,8 +3234,8 @@ namespace Europlan.Common {
 								wrapperOverview.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 								wrapperOverview.Wassermenge = c.C_DurchflussHeat;
-								wrapperOverview.DruckverlustRohr = c.C_DruckverlustHeat;
-								wrapperOverview.DruckverlustVerteiler = c.C_DruckverlustDistributorHeat;
+								wrapperOverview.DruckverlustRohr = c.C_DruckverlustInklVentilHeat;
+								wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapperOverview.V = c.C_FlussGeschwindigkeitHeat;
 
 								if (hp.PlannedConnection != null) {
@@ -2764,8 +3287,8 @@ namespace Europlan.Common {
 									wrapperHeat.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperHeat.Wassermenge = c.C_DurchflussHeat;
-									wrapperHeat.DruckverlustRohr = c.C_DruckverlustHeat;
-									wrapperHeat.DruckverlustVerteiler = c.C_DruckverlustDistributorHeat;
+									wrapperHeat.DruckverlustRohr = c.C_DruckverlustInklVentilHeat;
+									wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 									wrapperHeat.V = c.C_FlussGeschwindigkeitHeat;
 
 									if (hp.PlannedConnection != null) {
@@ -2817,8 +3340,8 @@ namespace Europlan.Common {
 									wrapperCool.LengthConnectionRuecklauf = c.PipeLengthRuecklaufWithoutOtherProductTotal;
 
 									wrapperCool.Wassermenge = c.C_DurchflussCool;
-									wrapperCool.DruckverlustRohr = c.C_DruckverlustCool;
-									wrapperCool.DruckverlustVerteiler = c.C_DruckverlustDistributorCool;
+									wrapperCool.DruckverlustRohr = c.C_DruckverlustInklVentilCool;
+									wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 									wrapperCool.V = c.C_FlussGeschwindigkeitCool;
 
 									if (hp.PlannedConnection != null) {
@@ -2893,8 +3416,8 @@ namespace Europlan.Common {
 							wrapperOverview.tFB = mp.PlannedFloorTemperatureHeat;
 
 							wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
-							wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
-							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+							wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
+							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 							wrapperOverview.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -2927,8 +3450,8 @@ namespace Europlan.Common {
 								wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
 
 								wrapper.Wassermenge = mc.C_DurchflussHeat;
-								wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
-								wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
+								wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
+								wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapper.V = mc.C_FlussGeschwindigkeitHeat;
 
 								if (prevWrapper == null) {
@@ -2988,8 +3511,8 @@ namespace Europlan.Common {
 								wrapperHeat.tFB = mp.PlannedFloorTemperatureHeat;
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
-								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
-								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
+								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 								wrapperHeat.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -3036,8 +3559,8 @@ namespace Europlan.Common {
 								wrapperCool.tFB = mp.PlannedFloorTemperatureCool;
 
 								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
-								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoCool;
-								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
+								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilCool;
+								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 
 								wrapperCool.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -3074,8 +3597,8 @@ namespace Europlan.Common {
 										wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
 
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
-										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
-										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = mc.C_FlussGeschwindigkeitHeat;
 
 										if (prevWrapper == null) {
@@ -3126,8 +3649,8 @@ namespace Europlan.Common {
 										wrapper.SonstigeVerbindeleitung = mc.SonstigeVerbindeleitung;
 
 										wrapper.Wassermenge = mc.C_DurchflussCool;
-										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
-										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorCool;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = mc.C_FlussGeschwindigkeitCool;
 
 										if (prevWrapper == null) {
@@ -3229,8 +3752,8 @@ namespace Europlan.Common {
 							wrapperOverview.QFBH = pp.PlannedHeatLoad;
 
 							wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
-							wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
-							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+							wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
+							wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 							wrapperOverview.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -3272,8 +3795,8 @@ namespace Europlan.Common {
 
 								wrapper.TotalArea = mc.CoveredArea;
 								wrapper.Wassermenge = mc.C_DurchflussHeat;
-								wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
-								wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
+								wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
+								wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapper.V = mc.C_FlussGeschwindigkeitHeat;
 
 								if (prevWrapper == null) {
@@ -3353,8 +3876,8 @@ namespace Europlan.Common {
 								wrapperHeat.QFBH = pp.PlannedHeatLoad;
 
 								wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
-								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoHeat;
-								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorHeat;
+								wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
+								wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
 								wrapperHeat.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -3414,8 +3937,8 @@ namespace Europlan.Common {
 								wrapperCool.QFBH = pp.PlannedCoolLoad;
 
 								wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
-								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoCool;
-								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoDistributorCool;
+								wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilCool;
+								wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 
 								wrapperCool.UnusedArea = mp.PlannedAreaUnheated;
 
@@ -3461,8 +3984,8 @@ namespace Europlan.Common {
 
 										wrapper.TotalArea = mc.CoveredArea;
 										wrapper.Wassermenge = mc.C_DurchflussHeat;
-										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustHeat;
-										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorHeat;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = mc.C_FlussGeschwindigkeitHeat;
 
 										if (prevWrapper == null) {
@@ -3529,8 +4052,8 @@ namespace Europlan.Common {
 
 										wrapper.TotalArea = mc.CoveredArea;
 										wrapper.Wassermenge = mc.C_DurchflussCool;
-										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustCool;
-										wrapper.DruckverlustVerteiler = mc.C_DruckverlustDistributorCool;
+										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
+										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = mc.C_FlussGeschwindigkeitCool;
 
 										if (prevWrapper == null) {
@@ -3694,6 +4217,65 @@ namespace Europlan.Common {
 
 			return wrapperList;
 		}
+
+        public List<JumbovalAreaOverviewWrapper> GetJumbovalOverviewWrapper() {
+            List<JumbovalAreaOverviewWrapper> wrapperList = new List<JumbovalAreaOverviewWrapper>();
+
+            JumbovalAreaOverviewWrapper wrapper;
+            JumbovalProduct p = null;
+            Dictionary<JumbovalProduct.JumbovalLayDistance, double> aZAreaPerLayDistance = new Dictionary<JumbovalProduct.JumbovalLayDistance, double>();
+            Dictionary<JumbovalProduct.JumbovalLayDistance, double> rZAreaPerLayDistance = new Dictionary<JumbovalProduct.JumbovalLayDistance, double>();
+            Dictionary<JumbovalProduct.JumbovalLayDistance, double> connectingAreaPerLayDistance = new Dictionary<JumbovalProduct.JumbovalLayDistance, double>();
+
+            bool isProductPlanned = false;
+
+            foreach (Floor floor in project.Floors) {
+                foreach (Room room in floor.Rooms) {
+                    foreach (PlannedProduct pp in room.PlannedProducts) {
+                        if (pp.Product is JumbovalProduct) {
+                            isProductPlanned = true;
+                            p = pp.Product as JumbovalProduct;
+                            if (p.PlannedLayDistance.HasValue) {
+                                if (aZAreaPerLayDistance.ContainsKey(p.PlannedLayDistance.Value)) {
+                                    aZAreaPerLayDistance[p.PlannedLayDistance.Value] += p.PlannedAreaResidenceHeated;
+                                } else {
+                                    aZAreaPerLayDistance.Add(p.PlannedLayDistance.Value, p.PlannedAreaResidenceHeated);
+                                }
+                            }
+                            if (p.PlannedRimLayDistance.HasValue) {
+                                if (rZAreaPerLayDistance.ContainsKey(p.PlannedRimLayDistance.Value)) {
+                                    rZAreaPerLayDistance[p.PlannedRimLayDistance.Value] += p.PlannedAreaRim;
+                                } else {
+                                    rZAreaPerLayDistance.Add(p.PlannedRimLayDistance.Value, p.PlannedAreaRim);
+                                }
+                            }
+                            foreach (ConnectionPipe pipe in p.PlannedConnectionPipes) {
+                                if (connectingAreaPerLayDistance.ContainsKey(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart))) {
+                                    connectingAreaPerLayDistance[ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart)] += pipe.AreaTotal;
+                                } else {
+                                    connectingAreaPerLayDistance.Add(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), pipe.AreaTotal);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (isProductPlanned) {
+                foreach (JumbovalProduct.JumbovalLayDistance distance in Enum.GetValues(typeof(JumbovalProduct.JumbovalLayDistance))) {
+                    if (distance != JumbovalProduct.JumbovalLayDistance.NONE) {
+                        wrapper = new JumbovalAreaOverviewWrapper();
+                        wrapper.LayDistance = distance.ToString();
+                        wrapper.AzArea = aZAreaPerLayDistance.ContainsKey(distance) ? aZAreaPerLayDistance[distance] : 0;
+                        wrapper.RzArea = rZAreaPerLayDistance.ContainsKey(distance) ? rZAreaPerLayDistance[distance] : 0;
+                        wrapper.ConnectingArea = connectingAreaPerLayDistance.ContainsKey(distance) ? connectingAreaPerLayDistance[distance] : 0;
+                        wrapperList.Add(wrapper);
+                    }
+                }
+            }
+
+            return wrapperList;
+        }
 
 		public List<HithermOverviewWrapper> GetHithermOverviewWrapper() {
 			List<HithermOverviewWrapper> wrapperList = new List<HithermOverviewWrapper>();

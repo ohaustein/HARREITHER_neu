@@ -564,32 +564,61 @@ namespace Europlan.Common {
 			return durchfluss * ratio;
 		}
 
-		public double MaxDruckverlustVerteilerHeat {
+        [XmlIgnore]
+		public double MaxDruckverlustVerteilerInklRohrAndVentilHeat {
 			get {
 				double maxDruckverlustInCircuit = 0;
 				double durchfluss = 0;
 				foreach (PlannedProduct pp in PlannedConnectedProducts) {
-					maxDruckverlustInCircuit = maxDruckverlustInCircuit < pp.Product.PlannedDeltaRhoDistributorHeat ? pp.Product.PlannedDeltaRhoDistributorHeat : maxDruckverlustInCircuit;
+                    maxDruckverlustInCircuit = Math.Max(maxDruckverlustInCircuit, pp.Product.PlannedDeltaRhoInklVentilHeat);
 					durchfluss += pp.Product.PlannedMhHeat;
 				}
 				return maxDruckverlustInCircuit + GetDruckverlust(durchfluss);
 			}
 		}
 
-		public double MaxDruckverlustVerteilerCool {
+        [XmlIgnore]
+		public double MaxDruckverlustVerteilerInklRohrAndVentilCool {
 			get {
 				double maxDruckverlustInCircuit = 0;
 				double durchfluss = 0;
 				foreach (PlannedProduct pp in PlannedConnectedProducts) {
-					maxDruckverlustInCircuit = maxDruckverlustInCircuit < pp.Product.PlannedDeltaRhoDistributorCool ? pp.Product.PlannedDeltaRhoDistributorCool : maxDruckverlustInCircuit;
+					maxDruckverlustInCircuit = Math.Max(maxDruckverlustInCircuit, pp.Product.PlannedDeltaRhoInklVentilCool);
 					durchfluss += pp.Product.PlannedMhCool;
 				}
 				return maxDruckverlustInCircuit + GetDruckverlust(durchfluss);
 			}
 		}
 
+        /// <summary>
+        /// Druckverlust vom Verteiler ohne Heizkreise und Ventile
+        /// </summary>
+        [XmlIgnore]
+        public double DruckverlustVerteilerOnlyHeat {
+            get {
+                double durchfluss = 0;
+                foreach (PlannedProduct pp in PlannedConnectedProducts) {
+                    durchfluss += pp.Product.PlannedMhHeat;
+                }
+                return this.GetDruckverlust(durchfluss);
+            }
+        }
 
-		public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+        /// <summary>
+        /// Druckverlust vom Verteiler ohne Heizkreise und Ventile
+        /// </summary>
+        [XmlIgnore]
+        public double DruckverlustVerteilerOnlyCool {
+            get {
+                double durchfluss = 0;
+                foreach (PlannedProduct pp in PlannedConnectedProducts) {
+                    durchfluss += pp.Product.PlannedMhCool;
+                }
+                return this.GetDruckverlust(durchfluss);
+            }
+        }
+
+        public void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			int totalCircuits = PlannedCircuits + AdditionalCircuits;
 			int totalStellantriebe = PlannedStellAntriebe + ZusaetzlicheStellantriebe;
 

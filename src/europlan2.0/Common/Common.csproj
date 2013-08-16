@@ -629,6 +629,8 @@
     <Compile Include="Project\Wrapper\KonstruktionenWrapper.cs" />
     <Compile Include="Project\Wrapper\ProductOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\DistributorWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Jumboval\JumbovalAreaOverviewWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\Jumboval\JumbovalWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulBoden\ModulBodenWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeVerlegeDatenWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeWrapper.cs" />

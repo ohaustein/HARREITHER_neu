@@ -719,8 +719,8 @@ namespace Europlan.Common {
 				this.lblPipeLengthCool.Text = Math.Round(jvProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblMhHeat.Text = Math.Round(jvProduct.PlannedMaxMhHeat, 1).ToString();
 				this.lblMhCool.Text = Math.Round(jvProduct.PlannedMaxMhCool, 1).ToString();
-				this.lblDeltaPHeat.Text = Math.Round(jvProduct.PlannedDeltaRhoHeat, 1).ToString();
-				this.lblDeltaPCool.Text = Math.Round(jvProduct.PlannedDeltaRhoCool, 1).ToString(); ;
+                this.lblDeltaPHeat.Text = Math.Round(jvProduct.PlannedDeltaRhoInklVentilHeat, 1).ToString();
+                this.lblDeltaPCool.Text = Math.Round(jvProduct.PlannedDeltaRhoInklVentilCool, 1).ToString(); ;
 				this.lblSpreizungHeat.Text = Math.Round(jvProduct.PlannedSpreizungHeat, 1).ToString();
 				this.lblSpreizungCool.Text = Math.Round(jvProduct.PlannedSpreizungCool, 1).ToString();
 

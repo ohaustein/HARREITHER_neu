@@ -558,14 +558,14 @@ namespace Europlan.Common {
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QHeatPerSqm, 2).ToString() : "0";
 				lblDurchflussHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussHeat, 2).ToString() : "0";
-				lblDruckverlustHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustHeat, 2).ToString() : "0";
+				lblDruckverlustHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustInklVentilHeat, 2).ToString() : "0";
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_QCoolPerSqm, 2)).ToString() : "0";
 				lblDurchflussCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DurchflussCool, 2).ToString() : "0";
-				lblDruckverlustCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustCool, 2).ToString() : "0";
+                lblDruckverlustCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulDeckeCircuit).C_DruckverlustInklVentilCool, 2).ToString() : "0";
 				if (mdProduct.ModulType == Product.ProductType.DH || mdProduct.ModulType == Product.ProductType.FBH) {
 					double availableArea;
 					if (mdProduct.ModulType == Product.ProductType.DH) {

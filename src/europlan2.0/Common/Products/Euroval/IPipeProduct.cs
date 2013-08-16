@@ -264,7 +264,7 @@ namespace Europlan.Common {
 			get;
 		}
 
-		double PlannedDeltaRhoDistributorHeat {
+        double PlannedMaxDruckverlustDistributorVentilHeat {
 			get;
 		}
 
@@ -272,7 +272,7 @@ namespace Europlan.Common {
 			get;
 		}
 
-		double PlannedDeltaRhoDistributorCool {
+        double PlannedMaxDruckverlustDistributorVentilCool {
 			get;
 		}
 

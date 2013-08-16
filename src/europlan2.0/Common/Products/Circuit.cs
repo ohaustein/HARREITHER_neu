@@ -245,7 +245,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double C_DruckverlustDistributorHeat {
+		public double C_DruckverlustVentilHeat {
 			get {
 				if (c_massenstromHeat > 0) {
 					double druckverlust = Math.Pow((c_massenstromHeat / 1000) / EN1264.KVSValue, 2) * 1000;
@@ -256,6 +256,11 @@ namespace Europlan.Common {
 				return 0;
 			}
 		}
+
+        [XmlIgnore]
+        public double C_DruckverlustInklVentilHeat {
+            get { return this.C_DruckverlustHeat + this.C_DruckverlustVentilHeat; }
+        }
 
 		protected double c_massenstromHeat;
 		[XmlIgnore]
@@ -285,7 +290,7 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double C_DruckverlustDistributorCool {
+		public double C_DruckverlustVentilCool {
 			get {
 				if (c_massenstromCool > 0) {
 					double druckverlust = Math.Pow((c_massenstromCool / 1000) / EN1264.KVSValue, 2) * 1000;
@@ -296,6 +301,11 @@ namespace Europlan.Common {
 				return 0;
 			}
 		}
+
+        [XmlIgnore]
+        public double C_DruckverlustInklVentilCool {
+            get { return this.C_DruckverlustCool + this.C_DruckverlustVentilCool; }
+        }
 
 		protected double c_massenstromCool;
 		[XmlIgnore]

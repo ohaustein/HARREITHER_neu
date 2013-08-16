@@ -447,7 +447,7 @@ namespace Europlan.Common {
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqHeat.Text = Math.Round(mbProduct.PlannedHeatLoadPerSqM, 2).ToString();
 				lblDurchflussHeat.Text = Math.Round(mbProduct.PlannedMaxDurchflussHeat, 2).ToString();
-				lblDruckverlustHeat.Text = Math.Round(mbProduct.PlannedDeltaRhoHeat, 2).ToString();
+                lblDruckverlustHeat.Text = Math.Round(mbProduct.PlannedDeltaRhoInklVentilHeat, 2).ToString();
 				lblTempHeat.Text = Math.Round(mbProduct.PlannedFloorTemperatureHeat, 2).ToString();
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
@@ -455,7 +455,7 @@ namespace Europlan.Common {
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqCool.Text = Math.Round(mbProduct.PlannedCoolLoadPerSqM, 2).ToString();
 				lblDurchflussCool.Text = Math.Round(mbProduct.PlannedMaxDurchflussCool, 2).ToString();
-				lblDruckverlustCool.Text = Math.Round(mbProduct.PlannedDeltaRhoCool, 2).ToString();
+                lblDruckverlustCool.Text = Math.Round(mbProduct.PlannedDeltaRhoInklVentilCool, 2).ToString();
 				lblTempCool.Text = Math.Round(mbProduct.PlannedFloorTemperatureCool, 2).ToString();
 				double availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
 				double coveredArea = Math.Round((this.product.Product as ModulKlimaBodenProduct).CoveredFloorArea, 2);
