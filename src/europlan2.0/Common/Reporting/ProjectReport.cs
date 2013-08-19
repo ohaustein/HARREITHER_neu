@@ -174,6 +174,7 @@ namespace Europlan.Common {
 			DataTable floorOverwiew = ReportHelper.ListToDataTable<FloorOverviewWrapper>(floorOverviewWrapper);
 			DataTable eurovalOverview = ReportHelper.ListToDataTable<EurovalAreaOverviewWrapper>(eurovalOverviewWrapper);
 			DataTable ecothermOverview = ReportHelper.ListToDataTable<EcothermAreaOverviewWrapper>(ecothermOverviewWrapper);
+            DataTable jumbovalOverview = ReportHelper.ListToDataTable<JumbovalAreaOverviewWrapper>(jumbovalOverviewWrapper);
 			DataTable hithermOverview = ReportHelper.ListToDataTable<HithermOverviewWrapper>(hithermOverviewWrapper);
 			DataTable hithermCompactOverview = ReportHelper.ListToDataTable<HithermCompactOverviewWrapper>(hithermCompactOverviewWrapper);
 			DataTable modulBodenOverview = ReportHelper.ListToDataTable<ModulBodenOverviewWrapper>(modulBodenOverviewWrapper);
@@ -184,15 +185,17 @@ namespace Europlan.Common {
 			DataTable distributors = ReportHelper.ListToDataTable<DistributorWrapper>(distributorWrapper);
 			DataTable roomOverview = ReportHelper.ListToDataTable<RoomOverviewWrapper>(roomOverviewWrapper);
 			DataTable eurovalAuslegung = ReportHelper.ListToDataTable<EurovalWrapper>(eurovalAuslegungWrapper);
-			DataTable ecothermAuslegung = ReportHelper.ListToDataTable<EcothermWrapper>(ecothermAuslegungWrapper);
-			DataTable hithermAuslegung = ReportHelper.ListToDataTable<HithermWrapper>(hithermAuslegungWrapper);
+            DataTable ecothermAuslegung = ReportHelper.ListToDataTable<EcothermWrapper>(ecothermAuslegungWrapper);
+            DataTable jumbovalAuslegung = ReportHelper.ListToDataTable<JumbovalWrapper>(jumbovalAuslegungWrapper);
+            DataTable hithermAuslegung = ReportHelper.ListToDataTable<HithermWrapper>(hithermAuslegungWrapper);
 			DataTable hithermCompactAuslegung = ReportHelper.ListToDataTable<HithermCompactWrapper>(hithermCompactAuslegungWrapper);
 			DataTable modulBodenAuslegung = ReportHelper.ListToDataTable<ModulBodenWrapper>(modulBodenAuslegungWrapper);
 			DataTable modulDeckeAuslegung = ReportHelper.ListToDataTable<ModulDeckeWrapper>(modulDeckeAuslegungWrapper);
 			DataTable modulDeckeVerlegeDaten = ReportHelper.ListToDataTable<ModulDeckeVerlegeDatenWrapper>(modulDeckeVerlegeDatenWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
-			DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
-			DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
+            DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
+            DataTable jumbovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(jumbovalBilanzWrapper);
+            DataTable hithermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermBilanzWrapper);
 			DataTable hithermCompactBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(hithermCompactBilanzWrapper);
 			DataTable modulBodenBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulBodenBilanzWrapper);
 			DataTable modulDeckeBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(modulDeckeBilanzWrapper);
@@ -206,6 +209,7 @@ namespace Europlan.Common {
 			floorOverwiew.TableName = "FloorOverview";
 			eurovalOverview.TableName = "EurovalOverview";
 			ecothermOverview.TableName = "EcothermOverview";
+            jumbovalOverview.TableName = "JumbovalOverview";
 			hithermOverview.TableName = "HithermOverview";
 			hithermCompactOverview.TableName = "HithermCompactOverview";
 			modulBodenOverview.TableName = "ModulBodenOverview";
@@ -216,15 +220,17 @@ namespace Europlan.Common {
 			distributors.TableName = "Distributors";
 			roomOverview.TableName = "RoomOverview";
 			eurovalAuslegung.TableName = "EurovalAuslegung";
-			ecothermAuslegung.TableName = "EcothermAuslegung";
-			hithermAuslegung.TableName = "HithermAuslegung";
+            ecothermAuslegung.TableName = "EcothermAuslegung";
+            jumbovalAuslegung.TableName = "JumbovalAuslegung";
+            hithermAuslegung.TableName = "HithermAuslegung";
 			hithermCompactAuslegung.TableName = "HithermCompactAuslegung";
 			modulBodenAuslegung.TableName = "ModulBodenAuslegung";
 			modulDeckeAuslegung.TableName = "ModulDeckeAuslegung";
 			modulDeckeVerlegeDaten.TableName = "ModulDeckeVerlegeDaten";
 			eurovalBilanz.TableName = "EurovalBilanz";
-			ecothermBilanz.TableName = "EcothermBilanz";
-			hithermBilanz.TableName = "HithermBilanz";
+            ecothermBilanz.TableName = "EcothermBilanz";
+            jumbovalBilanz.TableName = "JumbovalBilanz";
+            hithermBilanz.TableName = "HithermBilanz";
 			hithermCompactBilanz.TableName = "HithermCompactBilanz";
 			modulBodenBilanz.TableName = "ModulBodenBilanz";
 			modulDeckeBilanz.TableName = "ModulDeckeBilanz";
@@ -237,8 +243,9 @@ namespace Europlan.Common {
 			reportData.Tables.Add(projectNotification);
 			reportData.Tables.Add(floorOverwiew);
 			reportData.Tables.Add(eurovalOverview);
-			reportData.Tables.Add(ecothermOverview);
-			reportData.Tables.Add(hithermOverview);
+            reportData.Tables.Add(ecothermOverview);
+            reportData.Tables.Add(jumbovalOverview);
+            reportData.Tables.Add(hithermOverview);
 			reportData.Tables.Add(hithermCompactOverview);
 			reportData.Tables.Add(modulBodenOverview);
 			reportData.Tables.Add(modulDeckeOverview);
@@ -248,15 +255,17 @@ namespace Europlan.Common {
 			reportData.Tables.Add(distributors);
 			reportData.Tables.Add(roomOverview);
 			reportData.Tables.Add(eurovalAuslegung);
-			reportData.Tables.Add(ecothermAuslegung);
-			reportData.Tables.Add(hithermAuslegung);
+            reportData.Tables.Add(ecothermAuslegung);
+            reportData.Tables.Add(jumbovalAuslegung);
+            reportData.Tables.Add(hithermAuslegung);
 			reportData.Tables.Add(hithermCompactAuslegung);
 			reportData.Tables.Add(modulBodenAuslegung);
 			reportData.Tables.Add(modulDeckeAuslegung);
 			reportData.Tables.Add(modulDeckeVerlegeDaten);
 			reportData.Tables.Add(eurovalBilanz);
-			reportData.Tables.Add(ecothermBilanz);
-			reportData.Tables.Add(hithermBilanz);
+            reportData.Tables.Add(ecothermBilanz);
+            reportData.Tables.Add(jumbovalBilanz);
+            reportData.Tables.Add(hithermBilanz);
 			reportData.Tables.Add(hithermCompactBilanz);
 			reportData.Tables.Add(modulBodenBilanz);
 			reportData.Tables.Add(modulDeckeBilanz);
@@ -342,7 +351,7 @@ namespace Europlan.Common {
 			try {
 				listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, PathUtil.DataPath);
 				GC.Collect();
-            } catch (Exception) {
+            } catch (Exception e) {
 				DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if (result == DialogResult.OK) {
 					try {
@@ -982,7 +991,7 @@ namespace Europlan.Common {
                 wrapperList.Add(wrapper);
 
                 wrapper = new BilanzWrapper();
-                wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheEcotherm; //"Gesamte Raumfläche (Räume mit Ecotherm® Fußbodenheizung)"
+                wrapper.Description = EuroplanRes.ProjectReport_RaumflaecheJumboval; //"Gesamte Raumfläche (Räume mit Jumboval® Fußbodenheizung)"
                 wrapper.HeatValue = roomArea.ToString("0.##");
                 wrapper.HeatUnit = EuroplanRes.Unit_Quadratmeter; //"m²"
                 wrapperList.Add(wrapper);

@@ -7688,6 +7688,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auslegung Jumboval® Fußbodenheizung - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungJumbovalGeschoss {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungJumbovalGeschoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Jumboval® Fußbodenheizung - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungJumbovalGeschossHeiz {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungJumbovalGeschossHeiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Jumboval® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungJumbovalGeschossKuehl {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungJumbovalGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auslegung Modul Klimaboden.
         /// </summary>
         internal static string LL_Report_AuslegungKlimaboden {
@@ -7915,6 +7942,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bilanz Jumboval® Fußbodenheizung.
+        /// </summary>
+        internal static string LL_Report_BilanzJumboval {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzJumboval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bilanz Modul Klimaboden.
         /// </summary>
         internal static string LL_Report_BilanzKlimaboden {
@@ -7992,6 +8028,15 @@ namespace Europlan.Common {
         internal static string LL_Report_FlaechenuebersichtHithermCompact {
             get {
                 return ResourceManager.GetString("LL_Report_FlaechenuebersichtHithermCompact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flächenübersicht Jumboval® Fußbodenheizung.
+        /// </summary>
+        internal static string LL_Report_FlaechenuebersichtJumboval {
+            get {
+                return ResourceManager.GetString("LL_Report_FlaechenuebersichtJumboval", resourceCulture);
             }
         }
         
@@ -10212,6 +10257,199 @@ namespace Europlan.Common {
         internal static string LL_Report_VerlegedatenHithermWandkonstruktionZeile2 {
             get {
                 return ResourceManager.GetString("LL_Report_VerlegedatenHithermWandkonstruktionZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Jumboval® Fußbodenheizung - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumboval {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumboval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aufenthaltsz..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalAufenthaltszone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalAufenthaltszone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mh/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalDurchflussProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalDurchflussProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK
+        ///l/h.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fläche/
+        ///HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalFlaecheProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalFlaecheProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUnb..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m².
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heiz-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalHeizkreiseZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalHeizkreiseZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kreis(e).
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalHeizkreiseZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalHeizkreiseZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Länge/
+        ///HK.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalLaengeProHk {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalLaengeProHk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randzone.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRandzone {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRandzone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRaumNameZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRaumNameZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raum.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRaumNrZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRaumNrZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRaumNrZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRaumNrZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lRohr/.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HK
+        ///m.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teil-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalTeilsystemZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalTeilsystemZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to system.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalTeilsystemZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalTeilsystemZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VA.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalVerlegeart {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalVerlegeart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WD-.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstr..
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2", resourceCulture);
             }
         }
         
@@ -17639,6 +17877,15 @@ namespace Europlan.Common {
         internal static string ProjectReport_RaumflaecheEuroval {
             get {
                 return ResourceManager.GetString("ProjectReport_RaumflaecheEuroval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamte Raumfläche (Räume mit Jumboval® Fußbodenheizung).
+        /// </summary>
+        internal static string ProjectReport_RaumflaecheJumboval {
+            get {
+                return ResourceManager.GetString("ProjectReport_RaumflaecheJumboval", resourceCulture);
             }
         }
         

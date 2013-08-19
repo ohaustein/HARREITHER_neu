@@ -7393,4 +7393,89 @@ Compact
   <data name="PipeProductPlannerForm_Farbe" xml:space="preserve">
     <value>Farbe des Systems:</value>
   </data>
+  <data name="ProjectReport_RaumflaecheJumboval" xml:space="preserve">
+    <value>Gesamte Raumfläche (Räume mit Jumboval® Fußbodenheizung)</value>
+  </data>
+  <data name="LL_Report_FlaechenuebersichtJumboval" xml:space="preserve">
+    <value>Flächenübersicht Jumboval® Fußbodenheizung</value>
+  </data>
+  <data name="LL_Report_AuslegungJumbovalGeschoss" xml:space="preserve">
+    <value>Auslegung Jumboval® Fußbodenheizung - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungJumbovalGeschossHeiz" xml:space="preserve">
+    <value>Auslegung Jumboval® Fußbodenheizung - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungJumbovalGeschossKuehl" xml:space="preserve">
+    <value>Auslegung Jumboval® Fußbodenheizung - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_BilanzJumboval" xml:space="preserve">
+    <value>Bilanz Jumboval® Fußbodenheizung</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumboval" xml:space="preserve">
+    <value>Verlegedaten Jumboval® Fußbodenheizung - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalAufenthaltszone" xml:space="preserve">
+    <value>Aufenthaltsz.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile1" xml:space="preserve">
+    <value>mh/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2" xml:space="preserve">
+    <value>HK
+l/h</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalFlaecheProHk" xml:space="preserve">
+    <value>Fläche/
+HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile1" xml:space="preserve">
+    <value>AUnb.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile2" xml:space="preserve">
+    <value>m²</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile1" xml:space="preserve">
+    <value>Heiz-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile2" xml:space="preserve">
+    <value>kreis(e)</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalLaengeProHk" xml:space="preserve">
+    <value>Länge/
+HK</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRandzone" xml:space="preserve">
+    <value>Randzone</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRaumNameZeile1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRaumNrZeile1" xml:space="preserve">
+    <value>Raum</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRaumNrZeile2" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile1" xml:space="preserve">
+    <value>lRohr/</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile2" xml:space="preserve">
+    <value>HK
+m</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile1" xml:space="preserve">
+    <value>Teil-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile2" xml:space="preserve">
+    <value>system</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalVerlegeart" xml:space="preserve">
+    <value>VA</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1" xml:space="preserve">
+    <value>WD-</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2" xml:space="preserve">
+    <value>Konstr.</value>
+  </data>
 </root>
