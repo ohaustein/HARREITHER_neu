@@ -4655,7 +4655,278 @@ namespace Europlan.Common {
 							}
 						}
 					}
-				}
+                }
+                foreach (Room room in floor.Rooms) {
+                    foreach (PlannedProduct pp in room.PlannedProducts) {
+                        ProductConnection connection = pp.Product.PlannedConnection;
+                        foreach (Circuit c in pp.Product.PlannedCircuits) {
+                            /*if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
+                                wrapper = new VerlegedatenCircuitWrapper();
+                                wrapper.Name = "";
+                                wrapper.Area = "";
+
+                                wrapper.Distributor = connection.Distributor.Id + " " + connection.Distributor.Name + " " + connection.Distributor.AssociatedFloor.Name;
+                                wrapper.Durchfluss = Math.Max(c.C_DurchflussHeat, c.C_DurchflussCool) / 60;
+
+                                foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+                                    if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+                                        if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+                                            string connStr = EuroplanRes.ProjectReport_AnbindungDurchRaumGedaemmt;
+                                            connStr = connStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            connStr = connStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            connStr = connStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            connStr = connStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            connStr = connStr.Replace("%DAEMMUNG%", new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation));
+                                            wrapper.Name += connStr;
+                                        } else {
+                                            string connStr = EuroplanRes.ProjectReport_AnbindungDurchRaum;
+                                            connStr = connStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            connStr = connStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            connStr = connStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            connStr = connStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            wrapper.Name += connStr;
+                                        }
+                                        wrapper.Name += "\n";
+                                        wrapper.Area += Math.Round(pipe.Vorlauf, 1) + EuroplanRes.Unit_Meter + "\n"; //"m\n"
+                                    }
+                                }
+
+                                if (floor != connection.Distributor.AssociatedFloor) {
+                                    if (pp.Product.PlannedCircuits.Count > 1) {
+                                        string circuit = EuroplanRes.ProjectReport_SystemHeizkreisGeschoss;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%GESCHOSS%", floor.Name);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                        wrapper.Name += circuit;
+                                    } else {
+                                        string circuit = EuroplanRes.ProjectReport_SystemGeschoss;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%GESCHOSS%", floor.Name);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        wrapper.Name += circuit;
+                                    }
+                                } else {
+                                    if (pp.Product.PlannedCircuits.Count > 1) {
+                                        string circuit = EuroplanRes.ProjectReport_SystemHeizkreis;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                        wrapper.Name += circuit;
+                                    } else {
+                                        string circuit = EuroplanRes.ProjectReport_System;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        wrapper.Name += circuit;
+                                    }
+                                }
+
+                                wrapper.Area += Math.Round(c.CircuitArea, 1) + EuroplanRes.Unit_Quadratmeter; //"m²"
+                                if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
+                                    circuitCount.Add(connection.Distributor.Id, 1);
+                                }
+                                wrapper.CircuitNumber = circuitCount[connection.Distributor.Id]++;
+                                if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
+                                    Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
+                                    Product otherProduct = con.OtherProduct;
+                                    if (otherProduct.AssociatedRoom.AssociatedFloor != connection.Distributor.AssociatedFloor) {
+                                        if (pp.Product.PlannedCircuits.Count > 1) {
+                                            string circuit = EuroplanRes.ProjectReport_SystemHeizkreisGeschoss;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%GESCHOSS%", otherProduct.AssociatedRoom.AssociatedFloor.Name);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                            wrapper.Name += "\n" + circuit;
+                                        } else {
+                                            string circuit = EuroplanRes.ProjectReport_SystemGeschoss;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%GESCHOSS%", otherProduct.AssociatedRoom.AssociatedFloor.Name);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            wrapper.Name += "\n" + circuit;
+                                        }
+                                    } else {
+                                        if (pp.Product.PlannedCircuits.Count > 1) {
+                                            string circuit = EuroplanRes.ProjectReport_SystemHeizkreis;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                            wrapper.Name += "\n" + circuit;
+                                        } else {
+                                            string circuit = EuroplanRes.ProjectReport_System;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            wrapper.Name += "\n" + circuit;
+                                        }
+                                    }
+                                    wrapper.Area += "\n" + (otherProduct.PlannedFloorArea + otherProduct.PlannedWallArea + otherProduct.PlannedCeilingArea) + "m²";
+                                }
+                                foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+                                    if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+                                        wrapper.Name += "\n";
+                                        if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+                                            string conStr = EuroplanRes.ProjectReport_AnbindungDurchRaumGedaemmt;
+                                            conStr = conStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            conStr = conStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            conStr = conStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            conStr = conStr.Replace("%DAEMMUNG%", new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation));
+                                            wrapper.Name += conStr;
+                                        } else {
+                                            string conStr = EuroplanRes.ProjectReport_AnbindungDurchRaum;
+                                            conStr = conStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            conStr = conStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            conStr = conStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            wrapper.Name += conStr;
+                                        }
+                                        wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m"
+                                    }
+                                }
+                                wrapperList.Add(wrapper);
+                            } else*/ if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
+                                wrapper = new VerlegedatenCircuitWrapper();
+                                wrapper.Name = "";
+                                wrapper.Area = "";
+
+                                wrapper.Distributor = "Tichelmannverteiler an Regelkreis " + connection.RegulatorCircuit.Id + " " + connection.RegulatorCircuit.Name + " " + pp.Product.AssociatedRoom.AssociatedFloor.Name;
+                                wrapper.Durchfluss = Math.Max(c.C_DurchflussHeat, c.C_DurchflussCool) / 60;
+
+                                foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+                                    if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+                                        if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+                                            string connStr = EuroplanRes.ProjectReport_AnbindungDurchRaumGedaemmt;
+                                            connStr = connStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            connStr = connStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            connStr = connStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            connStr = connStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            connStr = connStr.Replace("%DAEMMUNG%", new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation));
+                                            wrapper.Name += connStr;
+                                        } else {
+                                            string connStr = EuroplanRes.ProjectReport_AnbindungDurchRaum;
+                                            connStr = connStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            connStr = connStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            connStr = connStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            connStr = connStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            wrapper.Name += connStr;
+                                        }
+                                        wrapper.Name += "\n";
+                                        wrapper.Area += Math.Round(pipe.Vorlauf, 1) + EuroplanRes.Unit_Meter + "\n"; //"m\n"
+                                    }
+                                }
+
+                                if (floor != pp.Product.AssociatedRoom.AssociatedFloor) {
+                                    if (pp.Product.PlannedCircuits.Count > 1) {
+                                        string circuit = EuroplanRes.ProjectReport_SystemHeizkreisGeschoss;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%GESCHOSS%", floor.Name);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                        wrapper.Name += circuit;
+                                    } else {
+                                        string circuit = EuroplanRes.ProjectReport_SystemGeschoss;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%GESCHOSS%", floor.Name);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        wrapper.Name += circuit;
+                                    }
+                                } else {
+                                    if (pp.Product.PlannedCircuits.Count > 1) {
+                                        string circuit = EuroplanRes.ProjectReport_SystemHeizkreis;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                        wrapper.Name += circuit;
+                                    } else {
+                                        string circuit = EuroplanRes.ProjectReport_System;
+                                        circuit = circuit.Replace("%SYSTEM%", pp.Product.FullName);
+                                        circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
+                                        circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
+                                        wrapper.Name += circuit;
+                                    }
+                                }
+
+                                wrapper.Area += Math.Round(c.CircuitArea, 1) + EuroplanRes.Unit_Quadratmeter; //"m²"
+#warning TODO was soll hier bei Tichelmann-Verteiler geschehen???
+                                /*if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
+                                    circuitCount.Add(connection.Distributor.Id, 1);
+                                }
+                                wrapper.CircuitNumber = circuitCount[connection.Distributor.Id]++;*/
+                                if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
+                                    Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
+                                    Product otherProduct = con.OtherProduct;
+                                    if (otherProduct.AssociatedRoom.AssociatedFloor != pp.Product.AssociatedRoom.AssociatedFloor) {
+                                        if (pp.Product.PlannedCircuits.Count > 1) {
+                                            string circuit = EuroplanRes.ProjectReport_SystemHeizkreisGeschoss;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%GESCHOSS%", otherProduct.AssociatedRoom.AssociatedFloor.Name);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                            wrapper.Name += "\n" + circuit;
+                                        } else {
+                                            string circuit = EuroplanRes.ProjectReport_SystemGeschoss;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%GESCHOSS%", otherProduct.AssociatedRoom.AssociatedFloor.Name);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            wrapper.Name += "\n" + circuit;
+                                        }
+                                    } else {
+                                        if (pp.Product.PlannedCircuits.Count > 1) {
+                                            string circuit = EuroplanRes.ProjectReport_SystemHeizkreis;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                            wrapper.Name += "\n" + circuit;
+                                        } else {
+                                            string circuit = EuroplanRes.ProjectReport_System;
+                                            circuit = circuit.Replace("%SYSTEM%", otherProduct.FullName);
+                                            circuit = circuit.Replace("%RAUMID%", otherProduct.AssociatedRoom.Id);
+                                            circuit = circuit.Replace("%RAUMNAME%", otherProduct.AssociatedRoom.Name);
+                                            wrapper.Name += "\n" + circuit;
+                                        }
+                                    }
+                                    wrapper.Area += "\n" + (otherProduct.PlannedFloorArea + otherProduct.PlannedWallArea + otherProduct.PlannedCeilingArea) + "m²";
+                                }
+                                foreach (ConnectionPipe pipe in pp.Product.PlannedConnectionPipes) {
+                                    if (pipe.ConnectionThrough != null && pipe.ConnectionThrough.Product.PlannedProductIsConnection && (!pipe.OnlyFirst || c.NrOfCircuit == 0)) {
+                                        wrapper.Name += "\n";
+                                        if (pipe.Verlegeart != ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH && pipe.Insulation != ConnectionPipe.InsulationEnum.IN_NONE) {
+                                            string conStr = EuroplanRes.ProjectReport_AnbindungDurchRaumGedaemmt;
+                                            conStr = conStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            conStr = conStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            conStr = conStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            conStr = conStr.Replace("%DAEMMUNG%", new ConnectionPipe.InsulationEnumConverter().ConvertToString(pipe.Insulation));
+                                            wrapper.Name += conStr;
+                                        } else {
+                                            string conStr = EuroplanRes.ProjectReport_AnbindungDurchRaum;
+                                            conStr = conStr.Replace("%RAUMID%", pipe.ConnectionThrough.Product.AssociatedRoom.Id);
+                                            conStr = conStr.Replace("%RAUMNAME%", pipe.ConnectionThrough.Product.AssociatedRoom.Name);
+                                            conStr = conStr.Replace("%ROHRTYP%", new ConnectionPipe.PipeTypeEnumConverter().ConvertToString(pipe.PipeType));
+                                            conStr = conStr.Replace("%VERLEGEART%", new ConnectionPipe.VerlegeartEnumConverter().ConvertToString(pipe.Verlegeart));
+                                            wrapper.Name += conStr;
+                                        }
+                                        wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m"
+                                    }
+                                }
+                                wrapperList.Add(wrapper);
+                            }
+                        }
+                    }
+                }
 			}
 
 			return wrapperList;
