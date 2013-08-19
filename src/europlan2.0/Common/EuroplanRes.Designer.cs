@@ -7571,7 +7571,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Euroval® Fußbodenheizung - %GESCHOSS%.
+        ///   Looks up a localized string similar to Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS%.
         /// </summary>
         internal static string LL_Report_AuslegungEcothermGeschoss {
             get {

@@ -2004,7 +2004,7 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
     <value>Aufgenommene Leistung</value>
   </data>
   <data name="LL_Report_AuslegungEcothermGeschoss" xml:space="preserve">
-    <value>Auslegung Euroval® Fußbodenheizung - %GESCHOSS%</value>
+    <value>Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS%</value>
   </data>
   <data name="LL_Report_AuslegungEcothermGeschossHeiz" xml:space="preserve">
     <value>Auslegung Ecotherm® Fußbodenheizung - %GESCHOSS% (Heizbetrieb)</value>
