@@ -75,6 +75,9 @@ namespace Europlan.Common {
 						label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
 						TreeNode node = new TreeNode(label);
 						node.Tag = p;
+                        if (p == product) {
+                            node.ForeColor = Color.DarkRed;
+                        }
 						distributorNodes[i].Nodes.Add(node);
 						if (selectNode == null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.OtherProduct == p) {
 							selectNode = node;
@@ -112,7 +115,10 @@ namespace Europlan.Common {
 								}
 								TreeNode node = new TreeNode(label);
 								node.Tag = c;
-								distributorNodes[i].Nodes.Add(node);
+                                if (p == product) {
+                                    node.ForeColor = Color.DarkRed;
+                                }
+                                distributorNodes[i].Nodes.Add(node);
 								node.Checked = true;
 								if (selectNode == null && this.product.Product.PlannedConnection != null &&
 									this.product.Product.PlannedConnection.OtherProduct == p &&
@@ -136,6 +142,67 @@ namespace Europlan.Common {
                         this.nodes.Add(rc, distributorNodes[i]);
                         if (selectNode == null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.RegulatorCircuit == rc) {
                             selectNode = distributorNodes[i];
+                        }
+                        foreach (PlannedProduct p in rc.GetTichelmannConnectedProducts()) {
+                            if (p.Product.PlannedCircuits == null) {
+                                label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+                                label = label.Replace("%SYSTEM%", p.Node.Text);
+                                label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
+                                TreeNode node = new TreeNode(label);
+                                node.Tag = p;
+                                if (p == product) {
+                                    node.ForeColor = Color.DarkRed;
+                                }
+                                distributorNodes[i].Nodes.Add(node);
+                                if (selectNode == null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.OtherProduct == p) {
+                                    selectNode = node;
+                                }
+                            } else {
+                                int j = 0;
+                                foreach (Circuit c in p.Product.PlannedCircuits) {
+                                    if (c.PlannedProduct != null) {
+                                        Circuit.CircuitConnection cc = p.Product.GetCircuitConnected(j);
+                                        j++;
+                                        label = "";
+                                        if (p.Product.PlannedCircuits.Count <= 1) {
+                                            label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+                                            label = label.Replace("%SYSTEM%", p.Node.Text);
+                                            label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
+                                        } else {
+                                            label = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
+                                            label = label.Replace("%SYSTEM%", p.Node.Text);
+                                            label = label.Replace("%HK%", j.ToString());
+                                            label = label.Replace("%RAUM%", p.Product.AssociatedRoom.ToString());
+                                        }
+                                        if (cc != null) {
+                                            string tmp = "";
+                                            if (cc.OtherCircuit.PlannedProduct.Product.PlannedCircuits.Count <= 1) {
+                                                tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum;
+                                                tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
+                                                tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+                                            } else {
+                                                tmp = EuroplanRes.SelectConnectionForProductForm_SystemInRaum2;
+                                                tmp = tmp.Replace("%SYSTEM%", cc.OtherCircuit.PlannedProduct.Node.Text);
+                                                tmp = tmp.Replace("%HK%", cc.OtherCircuit.NrOfCircuit.ToString());
+                                                tmp = tmp.Replace("%RAUM%", cc.OtherCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
+                                            }
+                                            label += ", " + tmp;
+                                        }
+                                        TreeNode node = new TreeNode(label);
+                                        node.Tag = c;
+                                        if (p == product) {
+                                            node.ForeColor = Color.DarkRed;
+                                        }
+                                        distributorNodes[i].Nodes.Add(node);
+                                        node.Checked = true;
+                                        if (selectNode == null && this.product.Product.PlannedConnection != null &&
+                                            this.product.Product.PlannedConnection.OtherProduct == p &&
+                                            cc != null && cc.OtherProduct == this.product.Product) {
+                                            selectNode = node;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         i++;
                     }
@@ -166,6 +233,7 @@ namespace Europlan.Common {
 		private void tvDistributors_AfterSelect(object sender, TreeViewEventArgs e) {
 			lblInfo.Text = "";
 			bool ok = tvDistributors.SelectedNode != null && tvDistributors.SelectedNode.Tag != null;
+            string hk2DataGridViewTextBoxColumnHeaderText = null;
 			bool enable = false;
 			if (ok) {
 				if (tvDistributors.SelectedNode.Tag is Distributor) {
@@ -175,7 +243,10 @@ namespace Europlan.Common {
 					lblInfo.Text = anschluss;
 					ok = true;
 				} else if (tvDistributors.SelectedNode.Tag is Circuit) {
-					if (this.product.Product.ConnectedCircuits.Count > 0) {
+                    if (tvDistributors.SelectedNode.Parent.Tag is RegulatorCircuit) {
+                        lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann;
+                        ok = false;
+                    } else if (this.product.Product.ConnectedCircuits.Count > 0) {
 						lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNurAnVerteiler; //"Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden."
 						ok = false;
 					} else {
@@ -197,16 +268,21 @@ namespace Europlan.Common {
 							string hkIn = EuroplanRes.SelectConnectionForProductForm_HeizkreisIn;
 							hkIn = hkIn.Replace("%SYSTEM%", selectedCircuit.PlannedProduct.InternalName);
 							hkIn = hkIn.Replace("%RAUM%", selectedCircuit.PlannedProduct.Product.AssociatedRoom.ToString());
-							this.hk2DataGridViewTextBoxColumn.HeaderText = hkIn;
+							hk2DataGridViewTextBoxColumnHeaderText = hkIn;
 							enable = ok;
 						}
 					}
                 } else if (tvDistributors.SelectedNode.Tag is RegulatorCircuit) {
-                    string anschluss = EuroplanRes.SelectConnectionForProductForm_AnschlussAnTichelmannverteiler; //"Anschluss über Tichelmannverteiler an %ID%: %NAME%"
-                    anschluss = anschluss.Replace("%ID%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Id);
-                    anschluss = anschluss.Replace("%NAME%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Name);
-                    lblInfo.Text = anschluss;
-                    ok = true;
+                    if (this.product.Product.ConnectedCircuits.Count > 0) {
+                        lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNurAnVerteiler; //"Anschluß nicht möglich. An das Heizsystem ist mindestens ein anderes Teilsystem angeschloßen. Es kann daher nur an einen Verteiler angeschloßen werden."
+                        ok = false;
+                    } else {
+                        string anschluss = EuroplanRes.SelectConnectionForProductForm_AnschlussAnTichelmannverteiler; //"Anschluss über Tichelmannverteiler an %ID%: %NAME%"
+                        anschluss = anschluss.Replace("%ID%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Id);
+                        anschluss = anschluss.Replace("%NAME%", (tvDistributors.SelectedNode.Tag as RegulatorCircuit).Name);
+                        lblInfo.Text = anschluss;
+                        ok = true;
+                    }
                 } else {
 					lblInfo.Text = EuroplanRes.SelectConnectionForProductForm_AnschlussNichtMoeglich; //"Anschluß nicht möglich"
 					ok = false;
@@ -245,7 +321,10 @@ namespace Europlan.Common {
 				this.userDefinedConnectionBindingSource.DataSource = new List<UserDefinedConnection>();
 				this.userDefinedConnectionBindingSource.ResetBindings(false);
 			}
-			this.btnOk.Enabled = ok;
+            if (hk2DataGridViewTextBoxColumnHeaderText != null) {
+                this.hk2DataGridViewTextBoxColumn.HeaderText = hk2DataGridViewTextBoxColumnHeaderText;
+            }
+            this.btnOk.Enabled = ok;
 		}
 
 		private void SelectConnectionForProductForm_Load(object sender, EventArgs e) {
@@ -269,17 +348,16 @@ namespace Europlan.Common {
 
 		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK) {
-				UnconnectProduct(this.product);
-				
-				if (this.tvDistributors.SelectedNode.Tag is Distributor) {
-					Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
+
+                UnconnectProduct(this.product);
+                if (this.tvDistributors.SelectedNode.Tag is Distributor) {
+                    Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
 					ConnectProduct(this.product, dist);
 				} else if (this.tvDistributors.SelectedNode.Tag is Circuit) {
-					PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
+                    PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
 					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked,
 						this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
                 } else if (this.tvDistributors.SelectedNode.Tag is RegulatorCircuit) {
-#warning TODO Überprüfen ob Heizkreise eines anderen Systems an dieses System angeschlossen waren (eventuell auch in den anderen Fällen prüfen!)
                     RegulatorCircuit rc = this.tvDistributors.SelectedNode.Tag as RegulatorCircuit;
                     ConnectProduct(this.product, rc);
                 }
@@ -369,16 +447,18 @@ namespace Europlan.Common {
 		private void gridUserDefinedConnection_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
 			if (this.cbActivateUserDefinedConnection.Checked) {
 				List<UserDefinedConnection> list = this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection>;
-				List<int> circuitsUsed = new List<int>();
-				bool ok = true;
-				foreach (UserDefinedConnection udc in list) {
-					if (circuitsUsed.Contains(udc.Hk2)) {
-						ok = false;
-					} else {
-						circuitsUsed.Add(udc.Hk2);
-					}
-				}
-				this.btnOk.Enabled = ok;
+                if (list != null) {
+                    List<int> circuitsUsed = new List<int>();
+                    bool ok = true;
+                    foreach (UserDefinedConnection udc in list) {
+                        if (circuitsUsed.Contains(udc.Hk2)) {
+                            ok = false;
+                        } else {
+                            circuitsUsed.Add(udc.Hk2);
+                        }
+                    }
+                    this.btnOk.Enabled = ok;
+                }
 			}
 		}
 

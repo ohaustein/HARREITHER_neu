@@ -134,6 +134,11 @@ namespace Europlan.Common {
 		}
 
 		private void cmbCircuit_SelectedIndexChanged(object sender, EventArgs e) {
+            if ((this.cmbCircuit.SelectedItem as RegulatorCircuit).UsedForTichelmann) {
+                MessageBox.Show(EuroplanRes.NewDistributorForm_RegelkreisTichelmannText, EuroplanRes.NewDistributorForm_RegelkreisTichelmannTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
+                return;
+            }
 			distributor.RegulatorCircuit = this.cmbCircuit.SelectedItem as RegulatorCircuit;
 			if (this.projectChanged != null) {
 				this.projectChanged(null);

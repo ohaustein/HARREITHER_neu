@@ -14822,6 +14822,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An diesen Regelkreis kann kein Verteiler angeschlossen werden, da an diesen Regelkreis bereits Heizsysteme per Tichelmannverteiler angeschlossen sind..
+        /// </summary>
+        internal static string NewDistributorForm_RegelkreisTichelmannText {
+            get {
+                return ResourceManager.GetString("NewDistributorForm_RegelkreisTichelmannText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler.
+        /// </summary>
+        internal static string NewDistributorForm_RegelkreisTichelmannTitel {
+            get {
+                return ResourceManager.GetString("NewDistributorForm_RegelkreisTichelmannTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bitte geben Sie eine eindeutige Verteilernummer ein..
         /// </summary>
         internal static string NewDistributorForm_UngueltigeVerteilernummerText {
@@ -20019,6 +20037,15 @@ namespace Europlan.Common {
         internal static string SelectConnectionForProductForm_AnschlussAnSystem {
             get {
                 return ResourceManager.GetString("SelectConnectionForProductForm_AnschlussAnSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anschluß nicht möglich. An Heizsysteme die per Tichelmannverteiler angeschoßen sind, kann kein weiteres System angeschlossen werden..
+        /// </summary>
+        internal static string SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann", resourceCulture);
             }
         }
         

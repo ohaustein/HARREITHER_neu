@@ -73,6 +73,26 @@ namespace Europlan.Common {
 				return distributors;
 			}
 		}
-	}
+
+        public ICollection<PlannedProduct> GetTichelmannConnectedProducts() {
+            List<PlannedProduct> products = new List<PlannedProduct>();
+            foreach (Floor floor in Project.Instance.Floors) {
+                foreach (Room room in floor.Rooms) {
+                    foreach (PlannedProduct pp in room.PlannedProducts) {
+                        if (pp.Product != null && pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && pp.Product.PlannedConnection.RegulatorCircuit == this) {
+                            products.Add(pp);
+                        }
+                    }
+                }
+            }
+            return products;
+        }
+
+        internal bool UsedForTichelmann {
+            get {
+                return this.GetTichelmannConnectedProducts().Count > 0;
+            }
+        }
+    }
 
 }

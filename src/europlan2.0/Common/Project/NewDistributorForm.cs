@@ -58,7 +58,10 @@ namespace Europlan.Common {
 			settings.StoreSize("Size", this.Size);
 			SettingsFile.Update();
 			if (this.DialogResult == DialogResult.OK) {
-				if (txtId.Text == "") {
+                if ((this.cmbCircuit.SelectedItem as RegulatorCircuit).UsedForTichelmann) {
+                    MessageBox.Show(EuroplanRes.NewDistributorForm_RegelkreisTichelmannText, EuroplanRes.NewDistributorForm_RegelkreisTichelmannTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel = true;
+                } else if (txtId.Text == "") {
 					MessageBox.Show(EuroplanRes.NewDistributorForm_UngueltigeVerteilernummerText, EuroplanRes.NewDistributorForm_UngueltigeVerteilernummerTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					e.Cancel = true;
 				} else {
@@ -74,7 +77,7 @@ namespace Europlan.Common {
 						e.Cancel = true;
 					}
 				}
-				if (txtName.Text == "") {
+				if (!e.Cancel && txtName.Text == "") {
 					MessageBox.Show(EuroplanRes.NewDistributorForm_FehlendeBezeichnungText, EuroplanRes.NewDistributorForm_FehlendeBezeichnungTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					e.Cancel = true;
 				}

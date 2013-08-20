@@ -7478,4 +7478,13 @@ m</value>
   <data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2" xml:space="preserve">
     <value>Konstr.</value>
   </data>
+  <data name="NewDistributorForm_RegelkreisTichelmannText" xml:space="preserve">
+    <value>An diesen Regelkreis kann kein Verteiler angeschlossen werden, da an diesen Regelkreis bereits Heizsysteme per Tichelmannverteiler angeschlossen sind.</value>
+  </data>
+  <data name="NewDistributorForm_RegelkreisTichelmannTitel" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann" xml:space="preserve">
+    <value>Anschluß nicht möglich. An Heizsysteme die per Tichelmannverteiler angeschoßen sind, kann kein weiteres System angeschlossen werden.</value>
+  </data>
 </root>
