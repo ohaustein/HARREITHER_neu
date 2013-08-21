@@ -41,6 +41,8 @@ namespace Europlan.Common {
 		private bool subSystem = false;
 		private bool otherSystemsConnected = false;
 
+        private string distributorId;
+
 		public HithermCompactWrapper() {
 		}
 
@@ -234,6 +236,10 @@ namespace Europlan.Common {
 			}
 		}
 
-	}
+        public string DistributorId {
+            get { return distributorId; }
+            set { distributorId = value; }
+        }
+    }
 
 }

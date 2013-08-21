@@ -193,6 +193,8 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -216,6 +218,8 @@ namespace Europlan.Common {
             // 
             this.grpPowerArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpPowerArea.Controls.Add(this.label30);
+            this.grpPowerArea.Controls.Add(this.cmbType);
             this.grpPowerArea.Controls.Add(this.btnRestkaelte);
             this.grpPowerArea.Controls.Add(this.btnRestwaerme);
             this.grpPowerArea.Controls.Add(this.lblAreaUnheated);
@@ -246,7 +250,7 @@ namespace Europlan.Common {
             this.grpPowerArea.Location = new System.Drawing.Point(0, 101);
             this.grpPowerArea.MinimumSize = new System.Drawing.Size(640, 0);
             this.grpPowerArea.Name = "grpPowerArea";
-            this.grpPowerArea.Size = new System.Drawing.Size(884, 146);
+            this.grpPowerArea.Size = new System.Drawing.Size(884, 172);
             this.grpPowerArea.TabIndex = 8;
             this.grpPowerArea.TabStop = false;
             // 
@@ -683,7 +687,7 @@ namespace Europlan.Common {
             this.groupBox1.Controls.Add(this.btnFloorConstruction);
             this.groupBox1.Controls.Add(this.lblFloorConstruction);
             this.groupBox1.Controls.Add(this.txtFloorConstruction);
-            this.groupBox1.Location = new System.Drawing.Point(0, 253);
+            this.groupBox1.Location = new System.Drawing.Point(0, 279);
             this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(884, 119);
@@ -1090,7 +1094,7 @@ namespace Europlan.Common {
             this.groupBox6.Controls.Add(this.label9);
             this.groupBox6.Controls.Add(this.numRim);
             this.groupBox6.Controls.Add(this.label10);
-            this.groupBox6.Location = new System.Drawing.Point(0, 378);
+            this.groupBox6.Location = new System.Drawing.Point(0, 404);
             this.groupBox6.MinimumSize = new System.Drawing.Size(640, 0);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(884, 110);
@@ -2265,6 +2269,24 @@ namespace Europlan.Common {
             this.lblTitle.TabIndex = 81;
             this.lblTitle.Text = "Jumboval®";
             // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(6, 146);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(151, 13);
+            this.label30.TabIndex = 25;
+            this.label30.Text = "Typ:";
+            // 
+            // cmbType
+            // 
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(243, 143);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(109, 21);
+            this.cmbType.TabIndex = 26;
+            this.cmbType.SelectedValueChanged += new System.EventHandler(this.cmbType_SelectedValueChanged);
+            // 
             // PlannedJumbovalProductPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2474,5 +2496,7 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblSchienenabstandUnit;
         private System.Windows.Forms.Label lblSchienenabstand;
         private NumericBox numSchienenabstand;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox cmbType;
 	}
 }

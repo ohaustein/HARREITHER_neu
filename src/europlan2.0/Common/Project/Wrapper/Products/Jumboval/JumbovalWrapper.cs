@@ -50,6 +50,8 @@ namespace Europlan.Common {
 		private bool otherSystemsConnected = false;
 		private bool usedAsCircuitWrapper = false;
 
+        private string distributorId;
+
 		public JumbovalWrapper() {
 		}
 
@@ -96,7 +98,9 @@ namespace Europlan.Common {
 			subSystem = ew.subSystem;
 			otherSystemsConnected = ew.otherSystemsConnected;
 			usedAsCircuitWrapper = ew.usedAsCircuitWrapper;
-		}
+
+            distributorId = ew.distributorId;
+        }
 
 		public string RoomId {
 			get { return roomId; }
@@ -226,20 +230,25 @@ namespace Europlan.Common {
 			get { return circuitsAsString; }
 			set { circuitsAsString = value; }
 		}
-		
-		public double LengthRzAz {
-			get { return lengthRzAz; }
-			set { lengthRzAz = value; }
-		}
-		
-		public double LengthConnection {
-			get { return lengthConnection; }
-			set { lengthConnection = value; }
-		}
+
+        public double LengthRzAz {
+            get { return lengthRzAz; }
+            set {
+                lengthRzAz = value;
+                lengthCircuitFbh = lengthConnection + lengthRzAz;
+            }
+        }
+
+        public double LengthConnection {
+            get { return lengthConnection; }
+            set {
+                lengthConnection = value;
+                lengthCircuitFbh = lengthConnection + lengthRzAz;
+            }
+        }
 		
 		public double LengthCircuitFbh {
 			get { return lengthCircuitFbh; }
-			set { lengthCircuitFbh = value; }
 		}
 		
 		public double LengthCircuitAll {
@@ -287,6 +296,10 @@ namespace Europlan.Common {
 			set { usedAsCircuitWrapper = value; }
 		}
 
-	}
+        public string DistributorId {
+            get { return distributorId; }
+            set { distributorId = value; }
+        }
+    }
 
 }

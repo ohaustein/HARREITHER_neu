@@ -62,7 +62,10 @@ namespace Europlan.Common {
 			InitializeComponent();
 
 			this.SetLanguage();
-		}
+
+            this.cmbType.Items.Add(Product.ProductType.FBH);
+            this.cmbType.Items.Add(Product.ProductType.DH);
+        }
 
 		private void SetLanguage() {
 			this.cmbLayDistance.Items.Clear();
@@ -108,6 +111,7 @@ namespace Europlan.Common {
 			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung"
 			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:"
 
+            this.label30.Text = EuroplanRes.PlannedHithermProductPanel_Typ; //"Typ:"
 			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_UnbeheizteFlaeche; //"unbeheizte/ungekühlte Fläche:"
 			this.lblAreaReducedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_ReduzierteFlaeche; //"Fläche mit red. Heiz-/Kühlleistung:"
 			this.cbSeparateCircuit.Text = EuroplanRes.PlannedEurovalProductPanel_EigenerHeizkreis; //"Eigener Heizkreis für dieses Fußbodenheizsystem"
@@ -216,7 +220,8 @@ namespace Europlan.Common {
 			CORRECTIONS = 131072,
 			LAYOUT_TYPE = 262144,
             ESTRICH_UEBERDECKUNG = 524288,
-            SCHIENENABSTAND = 1048576
+            SCHIENENABSTAND = 1048576,
+            TYPE = 2097152
 		}
 
 		private string errorMsg = null;
@@ -264,6 +269,7 @@ namespace Europlan.Common {
 		private int ignoreCalculationMode = 0;
         private int ignoreEstrichueberdeckung = 0;
         private int ignoreSchienenabstand = 0;
+        private int ignoreType = 0;
 
 		private void UpdateControl(FieldEnum skipFields) {
 			updateOngoing = true;
@@ -291,6 +297,7 @@ namespace Europlan.Common {
 				ignoreCalculationMode++;
                 ignoreEstrichueberdeckung++;
                 ignoreSchienenabstand++;
+                ignoreType++;
 
 				JumbovalProduct jvProduct = this.product.Product as JumbovalProduct;
 
@@ -337,6 +344,10 @@ namespace Europlan.Common {
 						this.rbLayoutTable.Checked = true;
 					}
 				}
+
+                if ((skipFields & FieldEnum.TYPE) == FieldEnum.NONE) {
+                    this.cmbType.SelectedItem = jvProduct.JumbovalType;
+                }
 
 				bool showHeat = this.product.RequestedHeatLoad > 0 && jvProduct.PlannedLayDistance != JumbovalProduct.JumbovalLayDistance.NONE;
 				bool showCool = this.product.RequestedCoolLoad > 0 && jvProduct.PlannedLayDistance != JumbovalProduct.JumbovalLayDistance.NONE;
@@ -455,7 +466,18 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.numArea.MaxValue = (decimal)jvProduct.AvailableFloorArea;
+                switch (jvProduct.JumbovalType) {
+                    case Product.ProductType.FBH:
+                        this.numArea.MaxValue = (decimal)jvProduct.AvailableFloorArea;
+                        this.numAreaPercentage.MaxValue = (decimal)(jvProduct.AvailableFloorArea * 100 / jvProduct.AssociatedRoom.Area);
+                        break;
+                    case Product.ProductType.DH:
+                        this.numArea.MaxValue = (decimal)jvProduct.AvailableCeilingArea;
+                        this.numAreaPercentage.MaxValue = (decimal)(jvProduct.AvailableCeilingArea * 100 / jvProduct.AssociatedRoom.Area);
+                        break;
+                    default:
+                        break;
+                }
 				if (jvProduct.AssociatedRoom.Area > 0) {
 					this.numAreaPercentage.MaxValue = (decimal)(jvProduct.AvailableFloorArea * 100 / jvProduct.AssociatedRoom.Area);
 				} else {
@@ -533,13 +555,22 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.AREA) == FieldEnum.NONE) {
 					this.numArea.Value = Math.Round((decimal)plannedArea, 2);
 				}
-				if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
-					if (jvProduct.AssociatedRoom.Area <= 0) {
-						this.numAreaPercentage.Value = 100;
-					} else {
-						this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / jvProduct.AssociatedRoom.Area), 2);
-					}
-				}
+
+                if ((skipFields & FieldEnum.AREA_PERCENTAGE) == FieldEnum.NONE) {
+                    if (jvProduct.JumbovalType == Product.ProductType.FBH) {
+                        if (jvProduct.AssociatedRoom.Area <= 0) {
+                            this.numAreaPercentage.Value = 100;
+                        } else {
+                            this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / jvProduct.AssociatedRoom.Area), 2);
+                        }
+                    } else if (jvProduct.JumbovalType == Product.ProductType.DH) {
+                        if (jvProduct.AssociatedRoom.Area <= 0) {
+                            this.numAreaPercentage.Value = 100;
+                        } else {
+                            this.numAreaPercentage.Value = Math.Round((decimal)(plannedArea * 100 / jvProduct.AssociatedRoom.Area), 2);
+                        }
+                    }
+                }
 				if ((skipFields & FieldEnum.AREA_REDUCED) == FieldEnum.NONE) {
 					this.numAreaReduced.Value = Math.Round((decimal)jvProduct.PlannedAreaReduced, 2);
 				}
@@ -831,6 +862,7 @@ namespace Europlan.Common {
 				ignoreCalculationMode--;
                 ignoreEstrichueberdeckung--;
                 ignoreSchienenabstand--;
+                ignoreType--;
 			}
 			updateOngoing = false;
 		}
@@ -1487,5 +1519,23 @@ namespace Europlan.Common {
 			form.ShowDialog();
 		}
 
+        private void cmbType_SelectedValueChanged(object sender, EventArgs e) {
+            if (ignoreType == 0) {
+                if (this.cmbType.SelectedItem is Product.ProductType && this.product.Product.Type != (Product.ProductType)this.cmbType.SelectedItem) {
+                    (this.product.Product as JumbovalProduct).JumbovalType = (Product.ProductType)this.cmbType.SelectedItem;
+                    if ((this.product.Product as JumbovalProduct).JumbovalType == Product.ProductType.FBH) {
+                        (this.product.Product as JumbovalProduct).PlannedFloorArea = this.product.Product.AvailableFloorArea;
+                    } else if ((this.product.Product as JumbovalProduct).JumbovalType == Product.ProductType.DH) {
+                        (this.product.Product as JumbovalProduct).PlannedCeilingArea = this.product.Product.AvailableCeilingArea;
+                    }
+                    this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                    this.errorMsg = this.product.Product.LastErrorMessage;
+                    this.UpdateControl(FieldEnum.TYPE);
+                    if (this.projectStructureChanged != null) {
+                        this.projectStructureChanged(this);
+                    }
+                }
+            }
+        }
 	}
 }

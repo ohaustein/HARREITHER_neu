@@ -46,6 +46,8 @@ namespace Europlan.Common {
 		private bool otherSystemsConnected = false;
 		private bool usedAsCircuitWrapper = false;
 
+        private string distributorId;
+
 		public ModulDeckeWrapper() {
 		}
 
@@ -89,7 +91,9 @@ namespace Europlan.Common {
 			subSystem = mw.subSystem;
 			otherSystemsConnected = mw.otherSystemsConnected;
 			usedAsCircuitWrapper = mw.usedAsCircuitWrapper;
-		}
+
+            distributorId = mw.distributorId;
+        }
 
 		public string RoomId {
 			get { return roomId; }
@@ -265,7 +269,11 @@ namespace Europlan.Common {
 			set { sonstigeVerbindeleitung = value; }
 		}
 
-	
+        public string DistributorId {
+            get { return distributorId; }
+            set { distributorId = value; }
+        }
+
 	}
 
 }

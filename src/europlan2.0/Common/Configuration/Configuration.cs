@@ -736,7 +736,8 @@ namespace Europlan.Common {
 							if (attributes.Length > 0) {
 								ProductParameterAttribute ppa = attributes[0] as ProductParameterAttribute;
                                 if (this.Type == ConfigurationType.UserConfiguration && ppa.saveForUser) {
-                                    string valueStr = Configuration.UserTemplate.GetProductParameter(t, info.Name);
+                                    //string valueStr = Configuration.UserTemplate.GetProductParameter(t, info.Name);
+                                    string valueStr = info.GetValue(null, null).ToString();
                                     if (valueStr != null) {
                                         this.AddProductParameter(t, info.Name, valueStr, result);
                                     }

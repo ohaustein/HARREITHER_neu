@@ -104,6 +104,8 @@ namespace Europlan.Common {
 
         private Color productColor = Color.Red;
 
+        private Product.ProductType jumbovalType = ProductType.FBH;
+
 		public class LayDistanceConverter : System.ComponentModel.TypeConverter {
 			private static readonly string JV20 = EuroplanRes.JumbovalProduct_JV20; //"JV20"
 			private static readonly string JV30 = EuroplanRes.JumbovalProduct_JV30; //"JV30"
@@ -827,9 +829,14 @@ namespace Europlan.Common {
 		/// <summary>
 		/// The type of this product
 		/// </summary>
-		public override ProductType Type {
-			get { return ProductType.FBH; }
-		}
+        public override ProductType Type {
+            get { return this.jumbovalType; }
+        }
+
+        public Product.ProductType JumbovalType {
+            get { return this.jumbovalType; }
+            set { this.jumbovalType = value; }
+        }
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
 			get { return ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL; }

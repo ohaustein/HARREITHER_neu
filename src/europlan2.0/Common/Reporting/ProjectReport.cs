@@ -2075,13 +2075,28 @@ namespace Europlan.Common {
 								wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 								wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 								wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-								wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
                                 wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
                                 wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
                                 wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                if (ep.PlannedConnection != null) {
+                                    switch (ep.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
 								if (prevWrapper == null) {
 									prevWrapper = wrapper;
@@ -2228,13 +2243,28 @@ namespace Europlan.Common {
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
 										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;
@@ -2280,13 +2310,28 @@ namespace Europlan.Common {
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
 										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = ec.C_FlussGeschwindigkeitCool;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;
@@ -2407,13 +2452,28 @@ namespace Europlan.Common {
 								wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 								wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 								wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-								wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 								wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 								wrapper.Wassermenge = ec.C_DurchflussHeat;
 								wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
 								wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                if (ep.PlannedConnection != null) {
+                                    switch (ep.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
 								if (prevWrapper == null) {
 									prevWrapper = wrapper;
@@ -2560,13 +2620,28 @@ namespace Europlan.Common {
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussHeat;
 										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;
@@ -2612,13 +2687,28 @@ namespace Europlan.Common {
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 										wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
 										wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-										wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
 										wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
 										wrapper.Wassermenge = ec.C_DurchflussCool;
 										wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = ec.C_FlussGeschwindigkeitCool;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;
@@ -2739,13 +2829,28 @@ namespace Europlan.Common {
                                 wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                 wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
                                 wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-                                wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
                                 wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
                                 wrapper.Wassermenge = ec.C_DurchflussHeat;
                                 wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
                                 wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
                                 wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                if (ep.PlannedConnection != null) {
+                                    switch (ep.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
                                 if (prevWrapper == null) {
                                     prevWrapper = wrapper;
@@ -2892,13 +2997,28 @@ namespace Europlan.Common {
                                         wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                         wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
                                         wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-                                        wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
                                         wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
                                         wrapper.Wassermenge = ec.C_DurchflussHeat;
                                         wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilHeat;
                                         wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
                                         wrapper.V = ec.C_FlussGeschwindigkeitHeat;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
                                         if (prevWrapper == null) {
                                             prevWrapper = wrapper;
@@ -2944,13 +3064,28 @@ namespace Europlan.Common {
                                         wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                         wrapper.LengthRzAz = ec.PipeLengthWithoutConnections;
                                         wrapper.LengthConnection = ec.PipeLengthVorlaufWithoutOtherProductTotal + ec.PipeLengthRuecklaufWithoutOtherProductTotal;
-                                        wrapper.LengthCircuitFbh = ec.PipeLengthWithAllConnections;
                                         wrapper.LengthCircuitAll = ec.PipeLengthWithAllConnections;
 
                                         wrapper.Wassermenge = ec.C_DurchflussCool;
                                         wrapper.DruckverlustRohr = ec.C_DruckverlustInklVentilCool;
                                         wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
                                         wrapper.V = ec.C_FlussGeschwindigkeitCool;
+
+                                        if (ep.PlannedConnection != null) {
+                                            switch (ep.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = ep.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
                                         if (prevWrapper == null) {
                                             prevWrapper = wrapper;
@@ -3051,6 +3186,22 @@ namespace Europlan.Common {
 								wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapperOverview.V = c.C_FlussGeschwindigkeitHeat;
 
+                                if (hp.PlannedConnection != null) {
+                                    switch (hp.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapperOverview.DistributorId = hp.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapperOverview.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapperOverview.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
+
 								if (hp.PlannedConnection != null) {
 									if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 										wrapperOverview.SubSystem = true;
@@ -3107,6 +3258,22 @@ namespace Europlan.Common {
 									wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 									wrapperHeat.V = c.C_FlussGeschwindigkeitHeat;
 
+                                    if (hp.PlannedConnection != null) {
+                                        switch (hp.PlannedConnection.ConnectionType) {
+                                            case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                wrapperHeat.DistributorId = hp.PlannedConnection.DistributorId;
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                wrapperHeat.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                wrapperHeat.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                break;
+                                        }
+                                    }
+
 									if (hp.PlannedConnection != null) {
 										if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 											wrapperHeat.SubSystem = true;
@@ -3162,6 +3329,22 @@ namespace Europlan.Common {
 									wrapperCool.DruckverlustRohr = c.C_DruckverlustInklVentilCool;
 									wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 									wrapperCool.V = c.C_FlussGeschwindigkeitCool;
+
+                                    if (hp.PlannedConnection != null) {
+                                        switch (hp.PlannedConnection.ConnectionType) {
+                                            case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                wrapperCool.DistributorId = hp.PlannedConnection.DistributorId;
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                wrapperCool.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                wrapperCool.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                break;
+                                        }
+                                    }
 
 									if (hp.PlannedConnection != null) {
 										if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
@@ -3247,6 +3430,22 @@ namespace Europlan.Common {
 								wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapperOverview.V = c.C_FlussGeschwindigkeitHeat;
 
+                                if (hp.PlannedConnection != null) {
+                                    switch (hp.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapperOverview.DistributorId = hp.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapperOverview.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapperOverview.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
+
 								if (hp.PlannedConnection != null) {
 									if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 										wrapperOverview.SubSystem = true;
@@ -3300,6 +3499,22 @@ namespace Europlan.Common {
 									wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 									wrapperHeat.V = c.C_FlussGeschwindigkeitHeat;
 
+                                    if (hp.PlannedConnection != null) {
+                                        switch (hp.PlannedConnection.ConnectionType) {
+                                            case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                wrapperHeat.DistributorId = hp.PlannedConnection.DistributorId;
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                wrapperHeat.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                wrapperHeat.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                break;
+                                        }
+                                    }
+
 									if (hp.PlannedConnection != null) {
 										if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
 											wrapperHeat.SubSystem = true;
@@ -3352,6 +3567,22 @@ namespace Europlan.Common {
 									wrapperCool.DruckverlustRohr = c.C_DruckverlustInklVentilCool;
 									wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 									wrapperCool.V = c.C_FlussGeschwindigkeitCool;
+
+                                    if (hp.PlannedConnection != null) {
+                                        switch (hp.PlannedConnection.ConnectionType) {
+                                            case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                wrapperCool.DistributorId = hp.PlannedConnection.DistributorId;
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                wrapperCool.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                break;
+                                            case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                wrapperCool.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                break;
+                                        }
+                                    }
 
 									if (hp.PlannedConnection != null) {
 										if (hp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
@@ -3462,6 +3693,22 @@ namespace Europlan.Common {
 								wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
 								wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 								wrapper.V = mc.C_FlussGeschwindigkeitHeat;
+
+                                if (mp.PlannedConnection != null) {
+                                    switch (mp.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapper.DistributorId = mp.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
 								if (prevWrapper == null) {
 									prevWrapper = wrapper;
@@ -3610,6 +3857,22 @@ namespace Europlan.Common {
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 										wrapper.V = mc.C_FlussGeschwindigkeitHeat;
 
+                                        if (mp.PlannedConnection != null) {
+                                            switch (mp.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = mp.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
+
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;
 											wrapperHeatList.Add(wrapper);
@@ -3661,6 +3924,22 @@ namespace Europlan.Common {
 										wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
 										wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 										wrapper.V = mc.C_FlussGeschwindigkeitCool;
+
+                                        if (mp.PlannedConnection != null) {
+                                            switch (mp.PlannedConnection.ConnectionType) {
+                                                case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                                    wrapper.DistributorId = mp.PlannedConnection.DistributorId;
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                                    wrapper.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                                    break;
+                                                case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                                    wrapper.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                                    break;
+                                            }
+                                        }
 
 										if (prevWrapper == null) {
 											prevWrapper = wrapper;

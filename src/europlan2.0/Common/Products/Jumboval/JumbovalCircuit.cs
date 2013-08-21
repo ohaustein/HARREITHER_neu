@@ -254,8 +254,8 @@ namespace Europlan.Common {
 			double sr0 = JumbovalProduct.ConfigSr0;
 			double sr = JumbovalProduct.ConfigSr;
 			double alpha0 = JumbovalProduct.ConfigAlpha0;
-			double alphaFbh = JumbovalProduct.ConfigAlphaFbh;
-			double alphaFbk = JumbovalProduct.ConfigAlphaFbk;
+			double alphaFbh = this.JumbovalProduct.JumbovalType == Product.ProductType.FBH ? Product.ConfigAlphaBodenHeat : Product.ConfigAlphaDeckeHeat;
+            double alphaFbk = this.JumbovalProduct.JumbovalType == Product.ProductType.FBH ? Product.ConfigAlphaBodenCool : Product.ConfigAlphaDeckeCool;
 			double su0 = JumbovalProduct.ConfigSu0;
             double su = this.JumbovalProduct.Estrichueberdeckung;
 			double lambdaR0 = JumbovalProduct.ConfigLambdaR0;
@@ -265,8 +265,8 @@ namespace Europlan.Common {
             double lambdaE = (this.JumbovalProduct.PlannedFloorConstruction != null && (this.JumbovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_BETON) || this.JumbovalProduct.PlannedFloorConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_BETON))) ? JumbovalProduct.ConfigLambdaEBeton : JumbovalProduct.ConfigLambdaEEstrich;
 			double rLambdaDecke = JumbovalProduct.ConfigRLambdaDecke;
 			double rLambdaPutz = JumbovalProduct.ConfigRLambdaPutz;
-			double rAlphaDeckeFbh = 1 / Product.ConfigAlphaDeckeHeat; /* Wärmeübergang Decke bei Heizung */
-			double rAlphaDeckeFbk = 1 / Product.ConfigAlphaDeckeCool; /* Wärmeübergang Decke bei Kühlung */
+			double rAlphaDeckeFbh = 1 / (this.JumbovalProduct.JumbovalType == Product.ProductType.FBH ? Product.ConfigAlphaDeckeHeat : Product.ConfigAlphaBodenHeat); /* Wärmeübergang Decke bei Heizung */
+			double rAlphaDeckeFbk = 1 / (this.JumbovalProduct.JumbovalType == Product.ProductType.FBH ? Product.ConfigAlphaDeckeCool : Product.ConfigAlphaBodenCool); /* Wärmeübergang Decke bei Kühlung */
 			double rohrAussenD = JumbovalProduct.ConfigRohrAussenD;
 			double rohrInnenD = JumbovalProduct.ConfigRohrInnenD;
 			double rohrInnenA = JumbovalProduct.ConfigRohrInnenA;
