@@ -1805,22 +1805,27 @@ namespace Europlan.Common {
 					}
                     foreach (Room r in floor.Rooms) {
                         foreach (PlannedProduct pp in r.PlannedProducts) {
-                            if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && pp.Product.PlannedConnection.RegulatorCircuit == rc && pp.Product.PlannedCalculationComplete) {
-                                if (!pp.Product.PlannedProductIsConnection) {
-                                    pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
-                                    if (ruecklauf < ruecklaufHeat) {
-                                        ruecklaufHeat = ruecklauf;
+                            if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && pp.Product.PlannedConnection.RegulatorCircuit == rc) {
+                                if (pp.Product.PlannedCalculationComplete) {
+                                    if (!pp.Product.PlannedProductIsConnection) {
+                                        pp.Product.GetHeatFlow(out vorlauf, out ruecklauf);
+                                        if (ruecklauf < ruecklaufHeat) {
+                                            ruecklaufHeat = ruecklauf;
+                                        }
+                                        pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
+                                        if (ruecklauf > ruecklaufCool) {
+                                            ruecklaufCool = ruecklauf;
+                                        }
                                     }
-                                    pp.Product.GetCoolFlow(out vorlauf, out ruecklauf);
-                                    if (ruecklauf > ruecklaufCool) {
-                                        ruecklaufCool = ruecklauf;
-                                    }
+                                    durchflussHeat += pp.Product.PlannedDurchflussHeat;
+                                    durchflussCool += pp.Product.PlannedDurchflussCool;
+                                    /* TODO */
+                                    deltaRhoHeat = Math.Max(deltaRhoHeat, pp.Product.PlannedDeltaRhoHeat);
+                                    deltaRhoCool = Math.Max(deltaRhoCool, pp.Product.PlannedDeltaRhoCool);
                                 }
-                                durchflussHeat += pp.Product.PlannedDurchflussHeat;
-                                durchflussCool += pp.Product.PlannedDurchflussCool;
-                                /* TODO */
-                                deltaRhoHeat = Math.Max(deltaRhoHeat, pp.Product.PlannedDeltaRhoHeat);
-                                deltaRhoCool = Math.Max(deltaRhoCool, pp.Product.PlannedDeltaRhoCool);
+                                wasserInhalt += pp.Product.WasserInhalt;
+                            } else if (pp.Product.PlannedConnection != null && pp.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && pp.Product.PlannedConnection.OtherProduct.Product.PlannedConnection != null && pp.Product.PlannedConnection.OtherProduct.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && pp.Product.PlannedConnection.OtherProduct.Product.PlannedConnection.RegulatorCircuit == rc) {
+                                wasserInhalt += pp.Product.WasserInhalt;
                             }
                         }
                     }
@@ -4012,6 +4017,21 @@ namespace Europlan.Common {
 								wrapperOverview.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
 							}
 							wrapperOverview.Circuits = pp.Product.PlannedCircuitCount;
+                            if (mp.PlannedConnection != null) {
+                                switch (mp.PlannedConnection.ConnectionType) {
+                                    case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                        wrapperOverview.DistributorId = mp.PlannedConnection.DistributorId;
+                                        break;
+                                    case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                        wrapperOverview.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                        break;
+                                    case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                        wrapperOverview.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                        break;
+                                }
+                            }
 
 							foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 								foreach (ModulDeckeSubArea sa in mc.SubAreas) {
@@ -4137,6 +4157,21 @@ namespace Europlan.Common {
 									wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
 								}
 								wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
+                                if (mp.PlannedConnection != null) {
+                                    switch (mp.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapperHeat.DistributorId = mp.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapperHeat.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapperHeat.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
 								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 									foreach (ModulDeckeSubArea sa in mc.SubAreas) {
@@ -4198,6 +4233,21 @@ namespace Europlan.Common {
 									wrapperCool.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
 								}
 								wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
+                                if (mp.PlannedConnection != null) {
+                                    switch (mp.PlannedConnection.ConnectionType) {
+                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
+                                            wrapperCool.DistributorId = mp.PlannedConnection.DistributorId;
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
+                                            wrapperCool.DistributorId = "Sub";
+#warning TODO Uebersetzung
+                                            break;
+                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
+                                            wrapperCool.DistributorId = "Tichelm.";
+#warning TODO Uebersetzung
+                                            break;
+                                    }
+                                }
 
 								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 									foreach (ModulDeckeSubArea sa in mc.SubAreas) {

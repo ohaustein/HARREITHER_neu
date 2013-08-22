@@ -9505,7 +9505,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///l/h.
+        ///l/min.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermDurchflussProHkZeile2 {
             get {
@@ -9652,6 +9652,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEcothermVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEcothermVerteilerZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WD-.
         /// </summary>
         internal static string LL_Report_VerlegedatenEcothermWdKonstruktionZeile1 {
@@ -9698,7 +9716,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///l/h.
+        ///l/min.
         /// </summary>
         internal static string LL_Report_VerlegedatenEurovalDurchflussProHkZeile2 {
             get {
@@ -9850,6 +9868,24 @@ namespace Europlan.Common {
         internal static string LL_Report_VerlegedatenEurovalVerlegeart {
             get {
                 return ResourceManager.GetString("LL_Report_VerlegedatenEurovalVerlegeart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenEurovalVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenEurovalVerteilerZeile2", resourceCulture);
             }
         }
         
@@ -10066,6 +10102,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermCompactVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermCompactVerteilerZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wand-.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile1 {
@@ -10243,6 +10297,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenHithermVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenHithermVerteilerZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wand-.
         /// </summary>
         internal static string LL_Report_VerlegedatenHithermWandkonstruktionZeile1 {
@@ -10289,7 +10361,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///l/h.
+        ///l/min.
         /// </summary>
         internal static string LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2 {
             get {
@@ -10436,6 +10508,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenJumbovalVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenJumbovalVerteilerZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WD-.
         /// </summary>
         internal static string LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1 {
@@ -10491,7 +10581,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to HK
-        ///l/h.
+        ///l/min.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2 {
             get {
@@ -10627,6 +10717,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verteiler.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenVerteilerZeile1 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenVerteilerZeile1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimabodenVerteilerZeile2 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimabodenVerteilerZeile2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WD-.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile1 {
@@ -10674,7 +10782,7 @@ namespace Europlan.Common {
         
         /// <summary>
         ///   Looks up a localized string similar to mh/HK
-        ///l/h.
+        ///l/min.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimadeckeDurchflussProHk {
             get {
@@ -10784,6 +10892,16 @@ namespace Europlan.Common {
         internal static string LL_Report_VerlegedatenKlimadeckeVerbindeleitung {
             get {
                 return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeVerbindeleitung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verteiler
+        ///Nummer.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimadeckeVerteiler {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimadeckeVerteiler", resourceCulture);
             }
         }
         
@@ -20442,6 +20560,15 @@ namespace Europlan.Common {
         internal static string StartingForm_Hinweis {
             get {
                 return ResourceManager.GetString("StartingForm_Hinweis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2.
+        /// </summary>
+        internal static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
             }
         }
         

@@ -2681,7 +2681,7 @@ Nr.</value>
   </data>
   <data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
     <value>HK
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
     <value>Fläche/
@@ -2748,7 +2748,7 @@ m</value>
   </data>
   <data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
     <value>HK
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenEurovalFlaecheProHk" xml:space="preserve">
     <value>Fläche/
@@ -2958,7 +2958,7 @@ cm</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
     <value>HK
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimabodenFlaecheUnbeheiztZeile1" xml:space="preserve">
     <value>AUnb.</value>
@@ -3021,7 +3021,7 @@ Konstr.</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
     <value>mh/HK
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
     <value>AUnb.
@@ -7422,7 +7422,7 @@ Compact
   </data>
   <data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2" xml:space="preserve">
     <value>HK
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenJumbovalFlaecheProHk" xml:space="preserve">
     <value>Fläche/
@@ -7486,5 +7486,48 @@ m</value>
   </data>
   <data name="SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann" xml:space="preserve">
     <value>Anschluß nicht möglich. An Heizsysteme die per Tichelmannverteiler angeschoßen sind, kann kein weiteres System angeschlossen werden.</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEcothermVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenHithermVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenJumbovalVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile1" xml:space="preserve">
+    <value>Verteiler</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile2" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimadeckeVerteiler" xml:space="preserve">
+    <value>Verteiler
+Nummer</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2</value>
   </data>
 </root>

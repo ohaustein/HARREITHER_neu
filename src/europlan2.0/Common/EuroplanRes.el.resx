@@ -2647,15 +2647,11 @@ W/m²</value>
   </data>
   <data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
     <value>ΚΘ
-l/h</value>
-  </data>
-  <data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
-    <value>ΚΘ
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
     <value>ΚΘ
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
     <value>Επιφάνεια/
@@ -2953,7 +2949,7 @@ cm</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
     <value>mh/ΚΘ
-l/h</value>
+l/min</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
     <value>Aχωρίς θέρμ.
@@ -4547,5 +4543,9 @@ Dach ΚΘ</value>
   </data>
   <data name="ModulKlimaDeckePlannerForm_BeplankungAnzeigen" xml:space="preserve">
     <value>Beplankung anzeigen</value>
+  </data>
+  <data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
+    <value>ΚΘ
+l/min</value>
   </data>
 </root>
