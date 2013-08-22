@@ -2093,12 +2093,10 @@ namespace Europlan.Common {
                                             wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }

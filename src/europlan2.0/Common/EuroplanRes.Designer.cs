@@ -18089,6 +18089,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sub.
+        /// </summary>
+        internal static string ProjectReport_VerteileranschlussSub {
+            get {
+                return ResourceManager.GetString("ProjectReport_VerteileranschlussSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tichelm..
+        /// </summary>
+        internal static string ProjectReport_VerteileranschlussTichelmann {
+            get {
+                return ResourceManager.GetString("ProjectReport_VerteileranschlussTichelmann", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WARNUNG %VERTEILERID% (%VERTEILERNAME%): %WARNUNG%.
         /// </summary>
         internal static string ProjectReport_VerteilerWarnung {
@@ -20560,15 +20578,6 @@ namespace Europlan.Common {
         internal static string StartingForm_Hinweis {
             get {
                 return ResourceManager.GetString("StartingForm_Hinweis", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2.
-        /// </summary>
-        internal static string String {
-            get {
-                return ResourceManager.GetString("String", resourceCulture);
             }
         }
         

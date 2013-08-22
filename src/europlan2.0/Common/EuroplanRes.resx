@@ -7527,7 +7527,10 @@ m</value>
     <value>Verteiler
 Nummer</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value>LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2</value>
+  <data name="ProjectReport_VerteileranschlussSub" xml:space="preserve">
+    <value>Sub</value>
+  </data>
+  <data name="ProjectReport_VerteileranschlussTichelmann" xml:space="preserve">
+    <value>Tichelm.</value>
   </data>
 </root>
