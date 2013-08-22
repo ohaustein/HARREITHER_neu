@@ -2159,7 +2159,6 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-#warning TODO Materialbedarf für Jumboval fertig implementieren und bestätigen lassen
 			// Anbindeleitungen
 			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true);
 

@@ -351,7 +351,7 @@ namespace Europlan.Common {
 			try {
 				listLabel1.Print(combit.ListLabel15.LlProject.List, filename, false, combit.ListLabel15.LlPrintMode.PreviewControl, combit.ListLabel15.LlBoxType.None, "", false, PathUtil.DataPath);
 				GC.Collect();
-            } catch (Exception e) {
+            } catch (Exception) {
 				DialogResult result = MessageBox.Show(EuroplanRes.QuickDimensioningPanel_DruckerFehlerText, EuroplanRes.QuickDimensioningPanel_DruckerFehlerTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if (result == DialogResult.OK) {
 					try {
@@ -2259,12 +2259,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -2326,12 +2324,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -2468,12 +2464,10 @@ namespace Europlan.Common {
                                             wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -2636,12 +2630,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -2703,12 +2695,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -2845,12 +2835,10 @@ namespace Europlan.Common {
                                             wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -3013,12 +3001,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -3080,12 +3066,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = ep.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -3195,12 +3179,10 @@ namespace Europlan.Common {
                                             wrapperOverview.DistributorId = hp.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperOverview.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperOverview.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -3267,12 +3249,10 @@ namespace Europlan.Common {
                                                 wrapperHeat.DistributorId = hp.PlannedConnection.DistributorId;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                wrapperHeat.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                wrapperHeat.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                 break;
                                         }
                                     }
@@ -3339,12 +3319,10 @@ namespace Europlan.Common {
                                                 wrapperCool.DistributorId = hp.PlannedConnection.DistributorId;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                wrapperCool.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                wrapperCool.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                 break;
                                         }
                                     }
@@ -3439,12 +3417,10 @@ namespace Europlan.Common {
                                             wrapperOverview.DistributorId = hp.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperOverview.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperOverview.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -3508,12 +3484,10 @@ namespace Europlan.Common {
                                                 wrapperHeat.DistributorId = hp.PlannedConnection.DistributorId;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                wrapperHeat.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                wrapperHeat.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                 break;
                                         }
                                     }
@@ -3577,12 +3551,10 @@ namespace Europlan.Common {
                                                 wrapperCool.DistributorId = hp.PlannedConnection.DistributorId;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                wrapperCool.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                 break;
                                             case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                wrapperCool.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                 break;
                                         }
                                     }
@@ -3703,12 +3675,10 @@ namespace Europlan.Common {
                                             wrapper.DistributorId = mp.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -3866,12 +3836,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = mp.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -3934,12 +3902,10 @@ namespace Europlan.Common {
                                                     wrapper.DistributorId = mp.PlannedConnection.DistributorId;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                                    wrapper.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                                     break;
                                                 case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                                    wrapper.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                                    wrapper.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                                     break;
                                             }
                                         }
@@ -4021,12 +3987,10 @@ namespace Europlan.Common {
                                         wrapperOverview.DistributorId = mp.PlannedConnection.DistributorId;
                                         break;
                                     case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                        wrapperOverview.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                        wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                         break;
                                     case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                        wrapperOverview.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                        wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                         break;
                                 }
                             }
@@ -4161,12 +4125,10 @@ namespace Europlan.Common {
                                             wrapperHeat.DistributorId = mp.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperHeat.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperHeat.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
@@ -4237,12 +4199,10 @@ namespace Europlan.Common {
                                             wrapperCool.DistributorId = mp.PlannedConnection.DistributorId;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperCool.DistributorId = "Sub";
-#warning TODO Uebersetzung
+                                            wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
                                             break;
                                         case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperCool.DistributorId = "Tichelm.";
-#warning TODO Uebersetzung
+                                            wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
                                             break;
                                     }
                                 }
