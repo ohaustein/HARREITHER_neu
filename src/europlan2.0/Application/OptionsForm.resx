@@ -129,6 +129,15 @@
   <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
   </data>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="helpProvider.HelpNamespace" xml:space="preserve">
+    <value>europlan.chm</value>
+  </data>
+  <data name="lblLanguage.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
   </data>
@@ -148,10 +157,13 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="cmbLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 13</value>
+  </data>
+  <data name="cmbLanguage.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cmbLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 21</value>
@@ -169,7 +181,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;cmbLanguage.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -179,6 +191,9 @@
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>614, 3</value>
+  </data>
+  <data name="btnCancel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -210,6 +225,9 @@
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>533, 3</value>
   </data>
+  <data name="btnOk.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
@@ -237,6 +255,9 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 397</value>
   </data>
+  <data name="panel1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>692, 31</value>
   </data>
@@ -255,6 +276,99 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblAutoSaveMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAutoSaveMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAutoSaveMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 218</value>
+  </data>
+  <data name="lblAutoSaveMin.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAutoSaveMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="lblAutoSaveMin.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="lblAutoSaveMin.Text" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveMin.Name" xml:space="preserve">
+    <value>lblAutoSaveMin</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveMin.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveMin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="numAutoSaveInterval.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 215</value>
+  </data>
+  <data name="numAutoSaveInterval.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="numAutoSaveInterval.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="numAutoSaveInterval.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="numAutoSaveInterval.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;numAutoSaveInterval.Name" xml:space="preserve">
+    <value>numAutoSaveInterval</value>
+  </data>
+  <data name="&gt;&gt;numAutoSaveInterval.Type" xml:space="preserve">
+    <value>Europlan.Common.NumericBox, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;numAutoSaveInterval.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;numAutoSaveInterval.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblAutoSaveInterval.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAutoSaveInterval.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAutoSaveInterval.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 218</value>
+  </data>
+  <data name="lblAutoSaveInterval.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAutoSaveInterval.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblAutoSaveInterval.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="lblAutoSaveInterval.Text" xml:space="preserve">
+    <value>Intervall:</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveInterval.Name" xml:space="preserve">
+    <value>lblAutoSaveInterval</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveInterval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveInterval.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;lblAutoSaveInterval.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="cbAutoSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -263,12 +377,6 @@
   </data>
   <data name="cbAutoSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 192</value>
-  </data>
-  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="helpProvider.HelpNamespace" xml:space="preserve">
-    <value>europlan.chm</value>
   </data>
   <data name="cbAutoSave.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,13 +400,19 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;cbAutoSave.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="cbOrthoRasterung.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="cbOrthoRasterung.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cbOrthoRasterung.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 169</value>
+  </data>
+  <data name="cbOrthoRasterung.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cbOrthoRasterung.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 17</value>
@@ -319,10 +433,16 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;cbOrthoRasterung.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
+  </data>
+  <data name="lblPlanUnit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblPlanUnit.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 131</value>
+  </data>
+  <data name="lblPlanUnit.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lblPlanUnit.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 23</value>
@@ -346,10 +466,13 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;lblPlanUnit.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="cmbPlanUnit.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 133</value>
+  </data>
+  <data name="cmbPlanUnit.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cmbPlanUnit.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 21</value>
@@ -367,13 +490,16 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;cmbPlanUnit.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>424, 77</value>
+  </data>
+  <data name="button2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -394,10 +520,16 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>424, 48</value>
+  </data>
+  <data name="button1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -418,13 +550,19 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="pictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 48</value>
+  </data>
+  <data name="pictureBox1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 80</value>
@@ -445,7 +583,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -455,6 +593,9 @@
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 48</value>
+  </data>
+  <data name="label1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -475,13 +616,16 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="tabGeneral.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="tabGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabGeneral.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabGeneral.Size" type="System.Drawing.Size, System.Drawing">
     <value>684, 371</value>
@@ -510,6 +654,9 @@
   <data name="megFloor.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megFloor.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megFloor.Size" type="System.Drawing.Size, System.Drawing">
     <value>664, 333</value>
   </data>
@@ -520,7 +667,7 @@
     <value>megFloor</value>
   </data>
   <data name="&gt;&gt;megFloor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megFloor.Parent" xml:space="preserve">
     <value>tabPageFloor</value>
@@ -533,6 +680,9 @@
   </data>
   <data name="tabPageFloor.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageFloor.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabPageFloor.Size" type="System.Drawing.Size, System.Drawing">
     <value>670, 339</value>
@@ -561,8 +711,11 @@
   <data name="megWall.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megWall.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megWall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 36</value>
+    <value>664, 333</value>
   </data>
   <data name="megWall.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -571,7 +724,7 @@
     <value>megWall</value>
   </data>
   <data name="&gt;&gt;megWall.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megWall.Parent" xml:space="preserve">
     <value>tabPageWall</value>
@@ -585,8 +738,11 @@
   <data name="tabPageWall.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="tabPageWall.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabPageWall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 42</value>
+    <value>670, 339</value>
   </data>
   <data name="tabPageWall.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -612,8 +768,11 @@
   <data name="megCeiling.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megCeiling.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megCeiling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 36</value>
+    <value>664, 333</value>
   </data>
   <data name="megCeiling.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -622,7 +781,7 @@
     <value>megCeiling</value>
   </data>
   <data name="&gt;&gt;megCeiling.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megCeiling.Parent" xml:space="preserve">
     <value>tabPageCeiling</value>
@@ -636,8 +795,11 @@
   <data name="tabPageCeiling.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="tabPageCeiling.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabPageCeiling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 42</value>
+    <value>670, 339</value>
   </data>
   <data name="tabPageCeiling.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -663,8 +825,11 @@
   <data name="megDistributor.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megDistributor.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megDistributor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 36</value>
+    <value>664, 333</value>
   </data>
   <data name="megDistributor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -673,7 +838,7 @@
     <value>megDistributor</value>
   </data>
   <data name="&gt;&gt;megDistributor.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megDistributor.Parent" xml:space="preserve">
     <value>tabPageDistributor</value>
@@ -687,8 +852,11 @@
   <data name="tabPageDistributor.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="tabPageDistributor.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabPageDistributor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 42</value>
+    <value>670, 339</value>
   </data>
   <data name="tabPageDistributor.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -714,8 +882,11 @@
   <data name="megInsulation.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megInsulation.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megInsulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 36</value>
+    <value>664, 333</value>
   </data>
   <data name="megInsulation.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -724,7 +895,7 @@
     <value>megInsulation</value>
   </data>
   <data name="&gt;&gt;megInsulation.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megInsulation.Parent" xml:space="preserve">
     <value>tabPageInsulation</value>
@@ -738,8 +909,11 @@
   <data name="tabPageInsulation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="tabPageInsulation.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabPageInsulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 42</value>
+    <value>670, 339</value>
   </data>
   <data name="tabPageInsulation.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -765,8 +939,11 @@
   <data name="megGeneral.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="megGeneral.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="megGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 36</value>
+    <value>664, 333</value>
   </data>
   <data name="megGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -775,7 +952,7 @@
     <value>megGeneral</value>
   </data>
   <data name="&gt;&gt;megGeneral.Type" xml:space="preserve">
-    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.MaterialEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;megGeneral.Parent" xml:space="preserve">
     <value>tabPageGeneral</value>
@@ -789,8 +966,11 @@
   <data name="tabPageGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="tabPageGeneral.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 42</value>
+    <value>670, 339</value>
   </data>
   <data name="tabPageGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -816,6 +996,9 @@
   <data name="tabs.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="tabs.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tabs.Size" type="System.Drawing.Size, System.Drawing">
     <value>678, 365</value>
   </data>
@@ -839,6 +1022,9 @@
   </data>
   <data name="tabMaterials.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabMaterials.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabMaterials.Size" type="System.Drawing.Size, System.Drawing">
     <value>684, 371</value>
@@ -867,6 +1053,9 @@
   <data name="constructionEditorGrid1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="constructionEditorGrid1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="constructionEditorGrid1.Size" type="System.Drawing.Size, System.Drawing">
     <value>678, 365</value>
   </data>
@@ -877,7 +1066,7 @@
     <value>constructionEditorGrid1</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Type" xml:space="preserve">
-    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.ConstructionEditorGrid, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;constructionEditorGrid1.Parent" xml:space="preserve">
     <value>tabConstructions</value>
@@ -890,6 +1079,9 @@
   </data>
   <data name="tabConstructions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabConstructions.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabConstructions.Size" type="System.Drawing.Size, System.Drawing">
     <value>684, 371</value>
@@ -918,6 +1110,9 @@
   <data name="systemParametersPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
+  <data name="systemParametersPanel.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="systemParametersPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>678, 365</value>
   </data>
@@ -928,7 +1123,7 @@
     <value>systemParametersPanel</value>
   </data>
   <data name="&gt;&gt;systemParametersPanel.Type" xml:space="preserve">
-    <value>Europlan.Common.SystemParametersPanel, Common, Version=3.0.15.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Europlan.Common.SystemParametersPanel, Common, Version=3.0.17.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;systemParametersPanel.Parent" xml:space="preserve">
     <value>tabDefaultSystemParameters</value>
@@ -941,6 +1136,9 @@
   </data>
   <data name="tabDefaultSystemParameters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabDefaultSystemParameters.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabDefaultSystemParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>684, 371</value>
@@ -1004,6 +1202,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>692, 428</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Einstellungen</value>

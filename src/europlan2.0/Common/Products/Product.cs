@@ -60,6 +60,7 @@ namespace Europlan.Common {
         private static bool orthoRasterung = true;
         private static bool showPlanInBackground = true;
         private static bool autoSave = false;
+        private static int autoSaveInterval = 10;
 
 		private static double maxCoolLoadPerSqm = 70.0;
 
@@ -162,6 +163,12 @@ namespace Europlan.Common {
         public static bool ConfigAutoSave {
             get { return autoSave; }
             set { autoSave = value; }
+        }
+
+        [IntProductParameter(10, saveForUser = true, saveInProject = false)]
+        public static int ConfigAutoSaveInterval {
+            get { return autoSaveInterval; }
+            set { autoSaveInterval = value; }
         }
 
         // not (yet) a productparameter

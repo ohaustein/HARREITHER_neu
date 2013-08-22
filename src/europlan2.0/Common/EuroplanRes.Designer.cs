@@ -15372,11 +15372,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Projekt Alle 10 Minuten sichern.
+        ///   Looks up a localized string similar to Projekt automatisch sichern.
         /// </summary>
         internal static string OptionsForm_AutomatischSichern {
             get {
                 return ResourceManager.GetString("OptionsForm_AutomatischSichern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intervall:.
+        /// </summary>
+        internal static string OptionsForm_AutomatischSichernInterval {
+            get {
+                return ResourceManager.GetString("OptionsForm_AutomatischSichernInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minuten.
+        /// </summary>
+        internal static string OptionsForm_AutomatischSichernMin {
+            get {
+                return ResourceManager.GetString("OptionsForm_AutomatischSichernMin", resourceCulture);
             }
         }
         

@@ -67,6 +67,8 @@ namespace Europlan.Application {
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
             cbOrthoRasterung.Text = EuroplanRes.OptionsForm_OrthoRasterung;
             cbAutoSave.Text = EuroplanRes.OptionsForm_AutomatischSichern;
+            lblAutoSaveInterval.Text = EuroplanRes.OptionsForm_AutomatischSichernInterval;
+            lblAutoSaveMin.Text = EuroplanRes.OptionsForm_AutomatischSichernMin;
 
 			this.lblPlanUnit.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
 			this.cmbPlanUnit.Items.Clear();
@@ -113,6 +115,8 @@ namespace Europlan.Application {
 			cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
             cbOrthoRasterung.Checked = Product.ConfigActivateOrthoRasterung;
             cbAutoSave.Checked = Product.ConfigAutoSave;
+            numAutoSaveInterval.Value = Product.ConfigAutoSaveInterval;
+            numAutoSaveInterval.Enabled = cbAutoSave.Checked;
 		}
 
 		private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -135,6 +139,7 @@ namespace Europlan.Application {
 			Product.ConfigPlanMeasure = cmbPlanUnit.SelectedIndex;
             Product.ConfigActivateOrthoRasterung = cbOrthoRasterung.Checked;
             Product.ConfigAutoSave = cbAutoSave.Checked;
+            Product.ConfigAutoSaveInterval = (int)numAutoSaveInterval.Value;
 			Configuration.UserTemplate.Save();
 		}
 
@@ -157,5 +162,9 @@ namespace Europlan.Application {
 			pictureBox1.Image = null;
 			Configuration.UserTemplate.PartnerLogo = "";
 		}
+
+        private void cbAutoSave_CheckedChanged(object sender, EventArgs e) {
+            numAutoSaveInterval.Enabled = cbAutoSave.Checked;
+        }
 	}
 }

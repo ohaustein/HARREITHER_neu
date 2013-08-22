@@ -429,6 +429,16 @@ namespace Europlan.Application {
 					System.Windows.Forms.Application.Restart();
 				}
 			}
+            if (result == DialogResult.OK) {
+                this.autoSaveTimer.Interval = Product.ConfigAutoSaveInterval * 60000;
+                if (Product.ConfigAutoSave) {
+                    if (!this.autoSaveTimer.Enabled) {
+                        this.StartAutoSaveTimer();
+                    }
+                } else {
+                    this.StopAutoSaveTimer();
+                }
+            }
 			options.Dispose();
 		}
 
@@ -948,7 +958,9 @@ namespace Europlan.Application {
 		}
 
         private void autoSaveTimer_Tick(object sender, EventArgs e) {
+            this.StopAutoSaveTimer();
             this.AutoSaveProject();
+            this.StartAutoSaveTimer();
         }
 
         private void StopAutoSaveTimer() {
@@ -959,6 +971,7 @@ namespace Europlan.Application {
 
         private void StartAutoSaveTimer() {
             if (Product.ConfigAutoSave) {
+                autoSaveTimer.Interval = Product.ConfigAutoSaveInterval * 60000;
                 autoSaveTimer.Start();
             }
         }

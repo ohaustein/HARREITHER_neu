@@ -42,22 +42,25 @@ namespace Europlan.Application {
             this.tabMaterials = new System.Windows.Forms.TabPage();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabPageFloor = new System.Windows.Forms.TabPage();
-            this.megFloor = new Europlan.Common.MaterialEditorGrid();
             this.tabPageWall = new System.Windows.Forms.TabPage();
-            this.megWall = new Europlan.Common.MaterialEditorGrid();
             this.tabPageCeiling = new System.Windows.Forms.TabPage();
-            this.megCeiling = new Europlan.Common.MaterialEditorGrid();
             this.tabPageDistributor = new System.Windows.Forms.TabPage();
-            this.megDistributor = new Europlan.Common.MaterialEditorGrid();
             this.tabPageInsulation = new System.Windows.Forms.TabPage();
-            this.megInsulation = new Europlan.Common.MaterialEditorGrid();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
-            this.megGeneral = new Europlan.Common.MaterialEditorGrid();
             this.tabConstructions = new System.Windows.Forms.TabPage();
-            this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
             this.tabDefaultSystemParameters = new System.Windows.Forms.TabPage();
-            this.systemParametersPanel = new Europlan.Common.SystemParametersPanel();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.lblAutoSaveInterval = new System.Windows.Forms.Label();
+            this.lblAutoSaveMin = new System.Windows.Forms.Label();
+            this.numAutoSaveInterval = new Europlan.Common.NumericBox();
+            this.megFloor = new Europlan.Common.MaterialEditorGrid();
+            this.megWall = new Europlan.Common.MaterialEditorGrid();
+            this.megCeiling = new Europlan.Common.MaterialEditorGrid();
+            this.megDistributor = new Europlan.Common.MaterialEditorGrid();
+            this.megInsulation = new Europlan.Common.MaterialEditorGrid();
+            this.megGeneral = new Europlan.Common.MaterialEditorGrid();
+            this.constructionEditorGrid1 = new Europlan.Common.ConstructionEditorGrid();
+            this.systemParametersPanel = new Europlan.Common.SystemParametersPanel();
             this.panel1.SuspendLayout();
             this.tabOptions.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -78,6 +81,7 @@ namespace Europlan.Application {
             // 
             resources.ApplyResources(this.lblLanguage, "lblLanguage");
             this.lblLanguage.Name = "lblLanguage";
+            this.helpProvider.SetShowHelp(this.lblLanguage, ((bool)(resources.GetObject("lblLanguage.ShowHelp"))));
             // 
             // cmbLanguage
             // 
@@ -85,6 +89,7 @@ namespace Europlan.Application {
             this.cmbLanguage.FormattingEnabled = true;
             resources.ApplyResources(this.cmbLanguage, "cmbLanguage");
             this.cmbLanguage.Name = "cmbLanguage";
+            this.helpProvider.SetShowHelp(this.cmbLanguage, ((bool)(resources.GetObject("cmbLanguage.ShowHelp"))));
             this.cmbLanguage.Sorted = true;
             // 
             // btnCancel
@@ -92,6 +97,7 @@ namespace Europlan.Application {
             resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
+            this.helpProvider.SetShowHelp(this.btnCancel, ((bool)(resources.GetObject("btnCancel.ShowHelp"))));
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -100,6 +106,7 @@ namespace Europlan.Application {
             resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Name = "btnOk";
+            this.helpProvider.SetShowHelp(this.btnOk, ((bool)(resources.GetObject("btnOk.ShowHelp"))));
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -109,6 +116,7 @@ namespace Europlan.Application {
             this.panel1.Controls.Add(this.btnOk);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            this.helpProvider.SetShowHelp(this.panel1, ((bool)(resources.GetObject("panel1.ShowHelp"))));
             // 
             // tabOptions
             // 
@@ -125,6 +133,9 @@ namespace Europlan.Application {
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.lblAutoSaveMin);
+            this.tabGeneral.Controls.Add(this.numAutoSaveInterval);
+            this.tabGeneral.Controls.Add(this.lblAutoSaveInterval);
             this.tabGeneral.Controls.Add(this.cbAutoSave);
             this.tabGeneral.Controls.Add(this.cbOrthoRasterung);
             this.tabGeneral.Controls.Add(this.lblPlanUnit);
@@ -137,6 +148,7 @@ namespace Europlan.Application {
             this.tabGeneral.Controls.Add(this.cmbLanguage);
             resources.ApplyResources(this.tabGeneral, "tabGeneral");
             this.tabGeneral.Name = "tabGeneral";
+            this.helpProvider.SetShowHelp(this.tabGeneral, ((bool)(resources.GetObject("tabGeneral.ShowHelp"))));
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
             // cbAutoSave
@@ -145,17 +157,20 @@ namespace Europlan.Application {
             this.cbAutoSave.Name = "cbAutoSave";
             this.helpProvider.SetShowHelp(this.cbAutoSave, ((bool)(resources.GetObject("cbAutoSave.ShowHelp"))));
             this.cbAutoSave.UseVisualStyleBackColor = true;
+            this.cbAutoSave.CheckedChanged += new System.EventHandler(this.cbAutoSave_CheckedChanged);
             // 
             // cbOrthoRasterung
             // 
             resources.ApplyResources(this.cbOrthoRasterung, "cbOrthoRasterung");
             this.cbOrthoRasterung.Name = "cbOrthoRasterung";
+            this.helpProvider.SetShowHelp(this.cbOrthoRasterung, ((bool)(resources.GetObject("cbOrthoRasterung.ShowHelp"))));
             this.cbOrthoRasterung.UseVisualStyleBackColor = true;
             // 
             // lblPlanUnit
             // 
             resources.ApplyResources(this.lblPlanUnit, "lblPlanUnit");
             this.lblPlanUnit.Name = "lblPlanUnit";
+            this.helpProvider.SetShowHelp(this.lblPlanUnit, ((bool)(resources.GetObject("lblPlanUnit.ShowHelp"))));
             // 
             // cmbPlanUnit
             // 
@@ -163,11 +178,13 @@ namespace Europlan.Application {
             this.cmbPlanUnit.FormattingEnabled = true;
             resources.ApplyResources(this.cmbPlanUnit, "cmbPlanUnit");
             this.cmbPlanUnit.Name = "cmbPlanUnit";
+            this.helpProvider.SetShowHelp(this.cmbPlanUnit, ((bool)(resources.GetObject("cmbPlanUnit.ShowHelp"))));
             // 
             // button2
             // 
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
+            this.helpProvider.SetShowHelp(this.button2, ((bool)(resources.GetObject("button2.ShowHelp"))));
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -175,6 +192,7 @@ namespace Europlan.Application {
             // 
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
+            this.helpProvider.SetShowHelp(this.button1, ((bool)(resources.GetObject("button1.ShowHelp"))));
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -183,18 +201,21 @@ namespace Europlan.Application {
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Name = "pictureBox1";
+            this.helpProvider.SetShowHelp(this.pictureBox1, ((bool)(resources.GetObject("pictureBox1.ShowHelp"))));
             this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.helpProvider.SetShowHelp(this.label1, ((bool)(resources.GetObject("label1.ShowHelp"))));
             // 
             // tabMaterials
             // 
             this.tabMaterials.Controls.Add(this.tabs);
             resources.ApplyResources(this.tabMaterials, "tabMaterials");
             this.tabMaterials.Name = "tabMaterials";
+            this.helpProvider.SetShowHelp(this.tabMaterials, ((bool)(resources.GetObject("tabMaterials.ShowHelp"))));
             this.tabMaterials.UseVisualStyleBackColor = true;
             // 
             // tabs
@@ -208,13 +229,114 @@ namespace Europlan.Application {
             resources.ApplyResources(this.tabs, "tabs");
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
+            this.helpProvider.SetShowHelp(this.tabs, ((bool)(resources.GetObject("tabs.ShowHelp"))));
             // 
             // tabPageFloor
             // 
             this.tabPageFloor.Controls.Add(this.megFloor);
             resources.ApplyResources(this.tabPageFloor, "tabPageFloor");
             this.tabPageFloor.Name = "tabPageFloor";
+            this.helpProvider.SetShowHelp(this.tabPageFloor, ((bool)(resources.GetObject("tabPageFloor.ShowHelp"))));
             this.tabPageFloor.UseVisualStyleBackColor = true;
+            // 
+            // tabPageWall
+            // 
+            this.tabPageWall.Controls.Add(this.megWall);
+            resources.ApplyResources(this.tabPageWall, "tabPageWall");
+            this.tabPageWall.Name = "tabPageWall";
+            this.helpProvider.SetShowHelp(this.tabPageWall, ((bool)(resources.GetObject("tabPageWall.ShowHelp"))));
+            this.tabPageWall.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCeiling
+            // 
+            this.tabPageCeiling.Controls.Add(this.megCeiling);
+            resources.ApplyResources(this.tabPageCeiling, "tabPageCeiling");
+            this.tabPageCeiling.Name = "tabPageCeiling";
+            this.helpProvider.SetShowHelp(this.tabPageCeiling, ((bool)(resources.GetObject("tabPageCeiling.ShowHelp"))));
+            this.tabPageCeiling.UseVisualStyleBackColor = true;
+            // 
+            // tabPageDistributor
+            // 
+            this.tabPageDistributor.Controls.Add(this.megDistributor);
+            resources.ApplyResources(this.tabPageDistributor, "tabPageDistributor");
+            this.tabPageDistributor.Name = "tabPageDistributor";
+            this.helpProvider.SetShowHelp(this.tabPageDistributor, ((bool)(resources.GetObject("tabPageDistributor.ShowHelp"))));
+            this.tabPageDistributor.UseVisualStyleBackColor = true;
+            // 
+            // tabPageInsulation
+            // 
+            this.tabPageInsulation.Controls.Add(this.megInsulation);
+            resources.ApplyResources(this.tabPageInsulation, "tabPageInsulation");
+            this.tabPageInsulation.Name = "tabPageInsulation";
+            this.helpProvider.SetShowHelp(this.tabPageInsulation, ((bool)(resources.GetObject("tabPageInsulation.ShowHelp"))));
+            this.tabPageInsulation.UseVisualStyleBackColor = true;
+            // 
+            // tabPageGeneral
+            // 
+            this.tabPageGeneral.Controls.Add(this.megGeneral);
+            resources.ApplyResources(this.tabPageGeneral, "tabPageGeneral");
+            this.tabPageGeneral.Name = "tabPageGeneral";
+            this.helpProvider.SetShowHelp(this.tabPageGeneral, ((bool)(resources.GetObject("tabPageGeneral.ShowHelp"))));
+            this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // tabConstructions
+            // 
+            this.tabConstructions.Controls.Add(this.constructionEditorGrid1);
+            resources.ApplyResources(this.tabConstructions, "tabConstructions");
+            this.tabConstructions.Name = "tabConstructions";
+            this.helpProvider.SetShowHelp(this.tabConstructions, ((bool)(resources.GetObject("tabConstructions.ShowHelp"))));
+            this.tabConstructions.UseVisualStyleBackColor = true;
+            // 
+            // tabDefaultSystemParameters
+            // 
+            this.tabDefaultSystemParameters.Controls.Add(this.systemParametersPanel);
+            resources.ApplyResources(this.tabDefaultSystemParameters, "tabDefaultSystemParameters");
+            this.tabDefaultSystemParameters.Name = "tabDefaultSystemParameters";
+            this.helpProvider.SetShowHelp(this.tabDefaultSystemParameters, ((bool)(resources.GetObject("tabDefaultSystemParameters.ShowHelp"))));
+            this.tabDefaultSystemParameters.UseVisualStyleBackColor = true;
+            // 
+            // helpProvider
+            // 
+            resources.ApplyResources(this.helpProvider, "helpProvider");
+            // 
+            // lblAutoSaveInterval
+            // 
+            resources.ApplyResources(this.lblAutoSaveInterval, "lblAutoSaveInterval");
+            this.lblAutoSaveInterval.Name = "lblAutoSaveInterval";
+            this.helpProvider.SetShowHelp(this.lblAutoSaveInterval, ((bool)(resources.GetObject("lblAutoSaveInterval.ShowHelp"))));
+            // 
+            // lblAutoSaveMin
+            // 
+            resources.ApplyResources(this.lblAutoSaveMin, "lblAutoSaveMin");
+            this.lblAutoSaveMin.Name = "lblAutoSaveMin";
+            this.helpProvider.SetShowHelp(this.lblAutoSaveMin, ((bool)(resources.GetObject("lblAutoSaveMin.ShowHelp"))));
+            // 
+            // numAutoSaveInterval
+            // 
+            this.numAutoSaveInterval.EditType = Europlan.Common.NumericBox.NumericEditType.AUTO_SAVE_INTERVAL;
+            this.numAutoSaveInterval.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            resources.ApplyResources(this.numAutoSaveInterval, "numAutoSaveInterval");
+            this.numAutoSaveInterval.MaxValue = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numAutoSaveInterval.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAutoSaveInterval.Name = "numAutoSaveInterval";
+            this.helpProvider.SetShowHelp(this.numAutoSaveInterval, ((bool)(resources.GetObject("numAutoSaveInterval.ShowHelp"))));
+            this.numAutoSaveInterval.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // megFloor
             // 
@@ -223,14 +345,8 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megFloor, "megFloor");
             this.megFloor.Filter = null;
             this.megFloor.Name = "megFloor";
+            this.helpProvider.SetShowHelp(this.megFloor, ((bool)(resources.GetObject("megFloor.ShowHelp"))));
             this.megFloor.ShowOnlyAdditional = false;
-            // 
-            // tabPageWall
-            // 
-            this.tabPageWall.Controls.Add(this.megWall);
-            resources.ApplyResources(this.tabPageWall, "tabPageWall");
-            this.tabPageWall.Name = "tabPageWall";
-            this.tabPageWall.UseVisualStyleBackColor = true;
             // 
             // megWall
             // 
@@ -239,14 +355,8 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megWall, "megWall");
             this.megWall.Filter = null;
             this.megWall.Name = "megWall";
+            this.helpProvider.SetShowHelp(this.megWall, ((bool)(resources.GetObject("megWall.ShowHelp"))));
             this.megWall.ShowOnlyAdditional = false;
-            // 
-            // tabPageCeiling
-            // 
-            this.tabPageCeiling.Controls.Add(this.megCeiling);
-            resources.ApplyResources(this.tabPageCeiling, "tabPageCeiling");
-            this.tabPageCeiling.Name = "tabPageCeiling";
-            this.tabPageCeiling.UseVisualStyleBackColor = true;
             // 
             // megCeiling
             // 
@@ -255,14 +365,8 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megCeiling, "megCeiling");
             this.megCeiling.Filter = null;
             this.megCeiling.Name = "megCeiling";
+            this.helpProvider.SetShowHelp(this.megCeiling, ((bool)(resources.GetObject("megCeiling.ShowHelp"))));
             this.megCeiling.ShowOnlyAdditional = false;
-            // 
-            // tabPageDistributor
-            // 
-            this.tabPageDistributor.Controls.Add(this.megDistributor);
-            resources.ApplyResources(this.tabPageDistributor, "tabPageDistributor");
-            this.tabPageDistributor.Name = "tabPageDistributor";
-            this.tabPageDistributor.UseVisualStyleBackColor = true;
             // 
             // megDistributor
             // 
@@ -271,14 +375,8 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megDistributor, "megDistributor");
             this.megDistributor.Filter = null;
             this.megDistributor.Name = "megDistributor";
+            this.helpProvider.SetShowHelp(this.megDistributor, ((bool)(resources.GetObject("megDistributor.ShowHelp"))));
             this.megDistributor.ShowOnlyAdditional = false;
-            // 
-            // tabPageInsulation
-            // 
-            this.tabPageInsulation.Controls.Add(this.megInsulation);
-            resources.ApplyResources(this.tabPageInsulation, "tabPageInsulation");
-            this.tabPageInsulation.Name = "tabPageInsulation";
-            this.tabPageInsulation.UseVisualStyleBackColor = true;
             // 
             // megInsulation
             // 
@@ -287,14 +385,8 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megInsulation, "megInsulation");
             this.megInsulation.Filter = null;
             this.megInsulation.Name = "megInsulation";
+            this.helpProvider.SetShowHelp(this.megInsulation, ((bool)(resources.GetObject("megInsulation.ShowHelp"))));
             this.megInsulation.ShowOnlyAdditional = false;
-            // 
-            // tabPageGeneral
-            // 
-            this.tabPageGeneral.Controls.Add(this.megGeneral);
-            resources.ApplyResources(this.tabPageGeneral, "tabPageGeneral");
-            this.tabPageGeneral.Name = "tabPageGeneral";
-            this.tabPageGeneral.UseVisualStyleBackColor = true;
             // 
             // megGeneral
             // 
@@ -303,38 +395,23 @@ namespace Europlan.Application {
             resources.ApplyResources(this.megGeneral, "megGeneral");
             this.megGeneral.Filter = null;
             this.megGeneral.Name = "megGeneral";
+            this.helpProvider.SetShowHelp(this.megGeneral, ((bool)(resources.GetObject("megGeneral.ShowHelp"))));
             this.megGeneral.ShowOnlyAdditional = false;
-            // 
-            // tabConstructions
-            // 
-            this.tabConstructions.Controls.Add(this.constructionEditorGrid1);
-            resources.ApplyResources(this.tabConstructions, "tabConstructions");
-            this.tabConstructions.Name = "tabConstructions";
-            this.tabConstructions.UseVisualStyleBackColor = true;
             // 
             // constructionEditorGrid1
             // 
             resources.ApplyResources(this.constructionEditorGrid1, "constructionEditorGrid1");
             this.constructionEditorGrid1.Filter = Europlan.Common.ConstructionScopeEnum.All;
             this.constructionEditorGrid1.Name = "constructionEditorGrid1";
+            this.helpProvider.SetShowHelp(this.constructionEditorGrid1, ((bool)(resources.GetObject("constructionEditorGrid1.ShowHelp"))));
             this.constructionEditorGrid1.Type = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
-            // 
-            // tabDefaultSystemParameters
-            // 
-            this.tabDefaultSystemParameters.Controls.Add(this.systemParametersPanel);
-            resources.ApplyResources(this.tabDefaultSystemParameters, "tabDefaultSystemParameters");
-            this.tabDefaultSystemParameters.Name = "tabDefaultSystemParameters";
-            this.tabDefaultSystemParameters.UseVisualStyleBackColor = true;
             // 
             // systemParametersPanel
             // 
             this.systemParametersPanel.ConfigurationType = Europlan.Common.Configuration.ConfigurationType.UserConfiguration;
             resources.ApplyResources(this.systemParametersPanel, "systemParametersPanel");
             this.systemParametersPanel.Name = "systemParametersPanel";
-            // 
-            // helpProvider
-            // 
-            resources.ApplyResources(this.helpProvider, "helpProvider");
+            this.helpProvider.SetShowHelp(this.systemParametersPanel, ((bool)(resources.GetObject("systemParametersPanel.ShowHelp"))));
             // 
             // OptionsForm
             // 
@@ -348,6 +425,7 @@ namespace Europlan.Application {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
+            this.helpProvider.SetShowHelp(this, ((bool)(resources.GetObject("$this.ShowHelp"))));
             this.Load += new System.EventHandler(this.OptionsForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.panel1.ResumeLayout(false);
@@ -405,5 +483,8 @@ namespace Europlan.Application {
         private System.Windows.Forms.ComboBox cmbPlanUnit;
         private System.Windows.Forms.CheckBox cbOrthoRasterung;
         private System.Windows.Forms.CheckBox cbAutoSave;
+        private Europlan.Common.NumericBox numAutoSaveInterval;
+        private System.Windows.Forms.Label lblAutoSaveInterval;
+        private System.Windows.Forms.Label lblAutoSaveMin;
 	}
 }

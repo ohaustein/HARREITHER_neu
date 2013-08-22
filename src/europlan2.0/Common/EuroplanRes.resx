@@ -7164,7 +7164,7 @@ Compact
     <value>Rasterung bei eingescannten Plänen aktivieren</value>
   </data>
   <data name="OptionsForm_AutomatischSichern" xml:space="preserve">
-    <value>Projekt Alle 10 Minuten sichern</value>
+    <value>Projekt automatisch sichern</value>
   </data>
   <data name="ModulKlimaDeckePlannerForm_BeplankungAnzeigen" xml:space="preserve">
     <value>Beplankung anzeigen</value>
@@ -7526,6 +7526,12 @@ m</value>
   <data name="LL_Report_VerlegedatenKlimadeckeVerteiler" xml:space="preserve">
     <value>Verteiler
 Nummer</value>
+  </data>
+  <data name="OptionsForm_AutomatischSichernInterval" xml:space="preserve">
+    <value>Intervall:</value>
+  </data>
+  <data name="OptionsForm_AutomatischSichernMin" xml:space="preserve">
+    <value>Minuten</value>
   </data>
   <data name="ProjectReport_VerteileranschlussSub" xml:space="preserve">
     <value>Sub</value>
