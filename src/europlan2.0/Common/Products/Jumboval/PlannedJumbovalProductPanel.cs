@@ -338,6 +338,9 @@ namespace Europlan.Common {
 					}
 				}*/
 
+                this.numSchienenabstand.MinValue = (decimal)JumbovalProduct.ConfigSchienenabstandMin;
+                this.numSchienenabstand.MaxValue = (decimal)JumbovalProduct.ConfigSchienenabstandMax;
+
 				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
 					if (graphicalMode) {
 						this.rbLayoutGraphical.Checked = true;
