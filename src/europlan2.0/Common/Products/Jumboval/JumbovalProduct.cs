@@ -49,9 +49,9 @@ namespace Europlan.Common {
 		private static double rLambdaDecke = 0.11; /* Fuﬂbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
 		private static double rLambdaPutz = 0.02; /* Fuﬂbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 
-        private static double schienenabstandDefault = 0.5;
-        private static double schienenabstandMin = 0.1;
-        private static double schienenabstandMax = 1;
+        private static double schienenabstandDefault = 2;
+        private static double schienenabstandMin = 1;
+        private static double schienenabstandMax = 5;
 
 		private static double faktorTrockenkonstruktion = 0.45;                                         /* TODO */
 
@@ -453,17 +453,17 @@ namespace Europlan.Common {
             set { suDefault = value; }
         }
 
-        [DoubleProductParameter(0.5)]
+        [DoubleProductParameter(2)]
         public static double ConfigSchienenabstandDefault {
             get { return schienenabstandDefault; }
             set { schienenabstandDefault = value; }
         }
-        [DoubleProductParameter(0.1)]
+        [DoubleProductParameter(1)]
         public static double ConfigSchienenabstandMin {
             get { return schienenabstandMin; }
             set { schienenabstandMin = value; }
         }
-        [DoubleProductParameter(1)]
+        [DoubleProductParameter(5)]
         public static double ConfigSchienenabstandMax {
             get { return schienenabstandMax; }
             set { schienenabstandMax = value; }
@@ -1747,6 +1747,8 @@ namespace Europlan.Common {
 				}
 			}
 
+            int maxCircuits = (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) ? 12 : (this.requestedCircuits.HasValue ? this.requestedCircuits.Value : 999);
+
 			double[] vorlaufTotal;
 			double[] vorlaufNotIsolated;
 			double[] ruecklaufTotal;
@@ -1757,7 +1759,7 @@ namespace Europlan.Common {
 			double[] ruecklaufWithoutOtherProductNotIsolated;
 			double longestVorlaufTotal;
 			double longestRuecklaufTotal;
-			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal);
+			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal, maxCircuits);
 
 			Nullable<JumbovalLayDistance> bestLaydistance = null;
 			Nullable<JumbovalRimType> bestRimType = null;
@@ -1796,7 +1798,9 @@ namespace Europlan.Common {
 						}
 					}
 					circuitCount = circuitCount < 1 ? 1 : circuitCount;
-					circuitCount = circuitCount > 12 ? 12 : circuitCount;
+                    if (!this.requestedCircuits.HasValue || (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR)) {
+                        circuitCount = circuitCount > maxCircuits ? maxCircuits : circuitCount;
+                    }
 					while (tryCalc) {
 						this.lastErrorMsg = this.CorrectCircuits(circuitCount, false);
 						if (this.lastErrorMsg != null) {
@@ -1838,7 +1842,7 @@ namespace Europlan.Common {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;
-						tryCalc = tryCalc && circuitCount < 12;
+						tryCalc = tryCalc && circuitCount < maxCircuits;
 						tryCalc = tryCalc && this.PlannedConnectedProducts.Count == 0;
 						if (tryCalc) {
 							circuitCount++;

@@ -170,9 +170,10 @@ namespace Europlan.Common {
             this.cmbRimType.Items.Add(new RimTypeItem(JumbovalProduct.JumbovalRimType.JV20_100, EuroplanRes.JumbovalProduct_JV20_100/*"JV20/100"*/));
 
 			this.cmbCircuits.Items.Add(EuroplanRes.EurovalProduct_Automatisch/*"Automatisch"*/);
-			for (int i = 1; i <= 12; i++) {
+            this.cmbCircuits.Items.Add(EuroplanRes.JumbovalProduct_Manuell);
+			/*for (int i = 1; i <= 12; i++) {
 				this.cmbCircuits.Items.Add(i.ToString());
-			}
+			}*/
 
 			this.rbLayoutTable.Text = EuroplanRes.PlannedProductPanel_Tabellarisch;
 			this.rbLayoutGraphical.Text = EuroplanRes.PlannedProductPanel_Grafisch;
@@ -420,6 +421,8 @@ namespace Europlan.Common {
 				this.cmbRimType.Enabled = this.cmbRimType.Enabled && !jvProduct.PlannedProductIsConnection;
 				this.cmbCircuits.Enabled = !jvProduct.PlannedProductIsConnection;
 
+                this.numCircuits.Enabled = !jvProduct.PlannedProductIsConnection && (!cmbCircuitsContainsAutomatic || cmbCircuits.SelectedIndex > 0);
+
 				bool newCmbCircuitsContainsAutomatic = !jvProduct.ManualMode;
 				bool newCmbLayDistanceContainsAutomatic = !jvProduct.ManualMode;
 				bool newCmbRimTypeContainsAutomatic = !jvProduct.ManualMode && cmbRimType.Enabled;
@@ -614,7 +617,7 @@ namespace Europlan.Common {
 				}
 				if ((skipFields & FieldEnum.CIRCUIT_COUNT) == FieldEnum.NONE) {
 					if (jvProduct.RequestedCircuits != null) {
-						this.cmbCircuits.SelectedIndex = jvProduct.RequestedCircuits.Value - 1 + (this.cmbCircuitsContainsAutomatic ? 1 : 0);
+						this.cmbCircuits.SelectedIndex = (this.cmbCircuitsContainsAutomatic ? 1 : 0);
 					} else {
 						this.cmbCircuits.SelectedIndex = 0;
 					}
@@ -745,7 +748,8 @@ namespace Europlan.Common {
 				// heizkreis
 				this.lblCircuitCountHeat.Text = jvProduct.PlannedCircuitCount.ToString();
 				this.lblCircuitCountCool.Text = jvProduct.PlannedCircuitCount.ToString();
-                this.lblCircuitCount.Text = (complete ? jvProduct.PlannedCircuitCount.ToString() : "--");
+                //this.lblCircuitCount.Text = (complete ? jvProduct.PlannedCircuitCount.ToString() : "--");
+                this.numCircuits.Value = jvProduct.PlannedCircuitCount;
                 this.lblPipeLengthHeat.Text = Math.Round(jvProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblPipeLengthCool.Text = Math.Round(jvProduct.PlannedPipeLengthPerCircuit, 1).ToString();
 				this.lblMhHeat.Text = Math.Round(jvProduct.PlannedMaxMhHeat, 1).ToString();
@@ -825,6 +829,7 @@ namespace Europlan.Common {
 					this.cmbLayDistance.Enabled = false;
 					this.cmbRimType.Enabled = false;
 					this.cmbCircuits.Enabled = false;
+                    this.numCircuits.Enabled = false;
 					this.btnGraphical.Enabled = true;
 				} else {
 					if (!this.tabs.TabPages.Contains(pageCorrections)) {
@@ -1211,11 +1216,16 @@ namespace Europlan.Common {
 						(this.product.Product as JumbovalProduct).PlannedCorrections = false;
 					}
 				}
-				if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
+				/*if (this.cmbCircuits.SelectedIndex >= (this.cmbCircuitsContainsAutomatic ? 1 : 0)) {
 					(this.product.Product as JumbovalProduct).RequestedCircuits = this.cmbCircuits.SelectedIndex + (this.cmbCircuitsContainsAutomatic ? 0 : 1);
 				} else {
 					(this.product.Product as JumbovalProduct).RequestedCircuits = null;
-				}
+				}*/
+                if (this.cmbCircuitsContainsAutomatic) {
+                    (this.product.Product as JumbovalProduct).RequestedCircuits = (this.cmbCircuits.SelectedIndex == 0 ? null : (Nullable<int>)this.numCircuits.Value);
+                } else {
+                    (this.product.Product as JumbovalProduct).RequestedCircuits = (int)this.numCircuits.Value;
+                }
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
@@ -1534,6 +1544,18 @@ namespace Europlan.Common {
                     if (this.projectStructureChanged != null) {
                         this.projectStructureChanged(this);
                     }
+                }
+            }
+        }
+
+        private void numCircuits_ValueChanged(object sender, EventArgs e) {
+            if (this.cmbCircuits.SelectedIndex > 0 || !this.cmbLayDistanceContainsAutomatic) {
+                (this.product.Product as JumbovalProduct).RequestedCircuits = (int)numCircuits.Value;
+                this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                this.errorMsg = this.product.Product.LastErrorMessage;
+                this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
+                if (this.projectChanged != null) {
+                    this.projectChanged(this);
                 }
             }
         }

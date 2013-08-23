@@ -1146,7 +1146,7 @@ namespace Europlan.Common {
 			}
 		}
 
-		protected void CalculateVorlaufRuecklauf(out double[] vorlaufTotal, out double[] vorlaufNotIsolated, out double[] ruecklaufTotal, out double[] ruecklaufNotIsolated, out double[] vorlaufWithoutOtherProductTotal, out double[] vorlaufWithoutOtherProductNotIsolated, out double[] ruecklaufWithoutOtherProductTotal, out double[] ruecklaufWithoutOtherProductNotIsolated, out double longestVorlaufTotal, out double longestRuecklaufTotal) {
+		protected void CalculateVorlaufRuecklauf(out double[] vorlaufTotal, out double[] vorlaufNotIsolated, out double[] ruecklaufTotal, out double[] ruecklaufNotIsolated, out double[] vorlaufWithoutOtherProductTotal, out double[] vorlaufWithoutOtherProductNotIsolated, out double[] ruecklaufWithoutOtherProductTotal, out double[] ruecklaufWithoutOtherProductNotIsolated, out double longestVorlaufTotal, out double longestRuecklaufTotal, int maxHkCount) {
 			// Get Vorlauf and Ruecklauf of the defined connection pipes
 			double vorlaufTotalFirst = 0;
 			double vorlaufNotIsolatedFirst = 0;
@@ -1178,14 +1178,43 @@ namespace Europlan.Common {
 			}
 
 			// add connected products to Vorlauf and Ruecklauf
-			vorlaufTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
+			/*vorlaufTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
 			vorlaufNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
 			ruecklaufTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
 			ruecklaufNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
 			vorlaufWithoutOtherProductTotal = new double[] { vorlaufTotalFirst, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers, vorlaufTotalOthers };
 			vorlaufWithoutOtherProductNotIsolated = new double[] { vorlaufNotIsolatedFirst, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers, vorlaufNotIsolatedOthers };
 			ruecklaufWithoutOtherProductTotal = new double[] { ruecklaufTotalFirst, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers, ruecklaufTotalOthers };
-			ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };
+			ruecklaufWithoutOtherProductNotIsolated = new double[] { ruecklaufNotIsolatedFirst, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers, ruecklaufNotIsolatedOthers };*/
+
+            vorlaufTotal = new double[maxHkCount];
+            vorlaufNotIsolated = new double[maxHkCount];
+            ruecklaufTotal = new double[maxHkCount];
+            ruecklaufNotIsolated = new double[maxHkCount];
+            vorlaufWithoutOtherProductTotal = new double[maxHkCount];
+            vorlaufWithoutOtherProductNotIsolated = new double[maxHkCount];
+            ruecklaufWithoutOtherProductTotal = new double[maxHkCount];
+            ruecklaufWithoutOtherProductNotIsolated = new double[maxHkCount];
+
+            vorlaufTotal[0] = vorlaufTotalFirst;
+            vorlaufNotIsolated[0] = vorlaufNotIsolatedFirst;
+            ruecklaufTotal[0] = ruecklaufTotalFirst;
+            ruecklaufNotIsolated[0] = ruecklaufNotIsolatedFirst;
+            vorlaufWithoutOtherProductTotal[0] = vorlaufTotalFirst;
+            vorlaufWithoutOtherProductNotIsolated[0] = vorlaufNotIsolatedFirst;
+            ruecklaufWithoutOtherProductTotal[0] = ruecklaufTotalFirst;
+            ruecklaufWithoutOtherProductNotIsolated[0] = ruecklaufNotIsolatedFirst;
+
+            for (int i = 1; i < maxHkCount; i++ ) {
+                vorlaufTotal[i] = vorlaufTotalOthers;
+                vorlaufNotIsolated[i] = vorlaufNotIsolatedOthers;
+                ruecklaufTotal[i] = ruecklaufTotalOthers;
+                ruecklaufNotIsolated[i] = ruecklaufNotIsolatedOthers;
+                vorlaufWithoutOtherProductTotal[i] = vorlaufTotalOthers;
+                vorlaufWithoutOtherProductNotIsolated[i] = vorlaufNotIsolatedOthers;
+                ruecklaufWithoutOtherProductTotal[i] = ruecklaufTotalOthers;
+                ruecklaufWithoutOtherProductNotIsolated[i] = ruecklaufNotIsolatedOthers;
+            }
 
 			foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
 				if (kvp.Value != null && kvp.Value.OtherCircuit != null) {
@@ -1217,7 +1246,7 @@ namespace Europlan.Common {
 
 			longestVorlaufTotal = vorlaufTotal[0];
 			longestRuecklaufTotal = ruecklaufTotal[0];
-			for (int i = 1; i < 12; i++) {
+			for (int i = 1; i < maxHkCount; i++) {
 				if (vorlaufTotal[i] > longestVorlaufTotal) {
 					longestVorlaufTotal = vorlaufTotal[i];
 				}
@@ -1663,7 +1692,6 @@ namespace Europlan.Common {
 						ovalMuffeEuroval += pipe.AreaTotal * EurovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetEurovalLayDistance(pipe.Verlegeart));
 					}
                 } else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL) {
-                    #warning TODO Materialbedarf für Jumboval Anbindeleitungen fertig implementieren und bestätigen lassen
                     if (pipe.OnlyFirst) {
                         pipeJumboval += (pipe.Vorlauf + pipe.Ruecklauf);
                     } else {

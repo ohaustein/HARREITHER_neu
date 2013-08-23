@@ -1877,7 +1877,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 140l/h (Serie VOLxx).
+        ///   Looks up a localized string similar to 2,33 l/min (Serie VOLxx).
         /// </summary>
         internal static string Distributor_Type140 {
             get {
@@ -1886,7 +1886,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 240l/h (Serie VOxx).
+        ///   Looks up a localized string similar to 4 l/min (Serie VOxx).
         /// </summary>
         internal static string Distributor_Type240 {
             get {
@@ -1895,7 +1895,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 480l/h (Serie VOHxx).
+        ///   Looks up a localized string similar to 8 l/min (Serie VOHxx).
         /// </summary>
         internal static string Distributor_Type480 {
             get {
@@ -1904,7 +1904,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VOLxx (Maximaldurchfluß: 140 l/h).
+        ///   Looks up a localized string similar to VOLxx (Maximaldurchfluß je Gruppe: 2,33 l/min).
         /// </summary>
         internal static string Distributor_TypeName140 {
             get {
@@ -1913,7 +1913,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VOxx (Maximaldurchfluß: 240 l/h).
+        ///   Looks up a localized string similar to VOxx (Maximaldurchfluß je Gruppe: 4 l/min).
         /// </summary>
         internal static string Distributor_TypeName240 {
             get {
@@ -1922,7 +1922,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VOHxx (Maximaldurchfluß: 480 l/h).
+        ///   Looks up a localized string similar to VOHxx (Maximaldurchfluß je Gruppe: 8 l/min).
         /// </summary>
         internal static string Distributor_TypeName480 {
             get {
@@ -2057,7 +2057,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximaldurchfluß:.
+        ///   Looks up a localized string similar to Maximaldurchfluß je Gruppe:.
         /// </summary>
         internal static string DistributorPanel_Maximaldurchfluss {
             get {
@@ -6579,6 +6579,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manuell.
+        /// </summary>
+        internal static string JumbovalProduct_Manuell {
+            get {
+                return ResourceManager.GetString("JumbovalProduct_Manuell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jumboval-Systeme werden mit veränderten Parametern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
         /// </summary>
         internal static string JumbovalProduct_NotificationParameter {
@@ -6588,7 +6597,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden.
+        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß je Gruppe: 8 l/min) angeschlossen werden.
         /// </summary>
         internal static string JumbovalProduct_NotificationVerteiler {
             get {
@@ -14877,7 +14886,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden.
+        ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß je Gruppe: 8 l/min) angeschlossen werden.
         /// </summary>
         internal static string ModulKlimaDeckeProduct_NotificationVerteiler {
             get {

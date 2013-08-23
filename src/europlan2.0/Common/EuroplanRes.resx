@@ -7197,16 +7197,16 @@ Compact
     <value>Jumboval®</value>
   </data>
   <data name="Distributor_Type140" xml:space="preserve">
-    <value>140l/h (Serie VOLxx)</value>
+    <value>2,33 l/min (Serie VOLxx)</value>
   </data>
   <data name="Distributor_Type240" xml:space="preserve">
-    <value>240l/h (Serie VOxx)</value>
+    <value>4 l/min (Serie VOxx)</value>
   </data>
   <data name="Distributor_Type480" xml:space="preserve">
-    <value>480l/h (Serie VOHxx)</value>
+    <value>8 l/min (Serie VOHxx)</value>
   </data>
   <data name="DistributorPanel_Maximaldurchfluss" xml:space="preserve">
-    <value>Maximaldurchfluß:</value>
+    <value>Maximaldurchfluß je Gruppe:</value>
   </data>
   <data name="JumbovalProduct_JV20_100" xml:space="preserve">
     <value>JV20/100</value>
@@ -7248,7 +7248,7 @@ Compact
     <value>Estrichüberdeckung:</value>
   </data>
   <data name="JumbovalProduct_NotificationVerteiler" xml:space="preserve">
-    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden</value>
+    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß je Gruppe: 8 l/min) angeschlossen werden</value>
   </data>
   <data name="Construction_BET01" xml:space="preserve">
     <value />
@@ -7274,13 +7274,13 @@ Compact
     <value>Stahlbeton</value>
   </data>
   <data name="Distributor_TypeName140" xml:space="preserve">
-    <value>VOLxx (Maximaldurchfluß: 140 l/h)</value>
+    <value>VOLxx (Maximaldurchfluß je Gruppe: 2,33 l/min)</value>
   </data>
   <data name="Distributor_TypeName240" xml:space="preserve">
-    <value>VOxx (Maximaldurchfluß: 240 l/h)</value>
+    <value>VOxx (Maximaldurchfluß je Gruppe: 4 l/min)</value>
   </data>
   <data name="Distributor_TypeName480" xml:space="preserve">
-    <value>VOHxx (Maximaldurchfluß: 480 l/h)</value>
+    <value>VOHxx (Maximaldurchfluß je Gruppe: 8 l/min)</value>
   </data>
   <data name="Material_JV01" xml:space="preserve">
     <value />
@@ -7352,7 +7352,7 @@ Compact
     <value />
   </data>
   <data name="ModulKlimaDeckeProduct_NotificationVerteiler" xml:space="preserve">
-    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß: 480 l/h) angeschlossen werden</value>
+    <value>Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß je Gruppe: 8 l/min) angeschlossen werden</value>
   </data>
   <data name="PlannedProductPanel_Schienenabstand" xml:space="preserve">
     <value>Schienenabstand:</value>
@@ -7538,5 +7538,8 @@ Nummer</value>
   </data>
   <data name="ProjectReport_VerteileranschlussTichelmann" xml:space="preserve">
     <value>Tichelm.</value>
+  </data>
+  <data name="JumbovalProduct_Manuell" xml:space="preserve">
+    <value>Manuell</value>
   </data>
 </root>

@@ -25,6 +25,8 @@ namespace Europlan.Common {
 		private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedJumbovalProductPanel));
             this.grpPowerArea = new System.Windows.Forms.GroupBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.btnRestkaelte = new System.Windows.Forms.Button();
             this.btnRestwaerme = new System.Windows.Forms.Button();
             this.lblAreaUnheated = new System.Windows.Forms.Label();
@@ -105,7 +107,7 @@ namespace Europlan.Common {
             this.lstError = new System.Windows.Forms.ListView();
             this.defaultColumn = new System.Windows.Forms.ColumnHeader();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.lblCircuitCount = new System.Windows.Forms.Label();
+            this.numCircuits = new Europlan.Common.NumericBox();
             this.lblRimVa = new System.Windows.Forms.Label();
             this.lblResidenceVa = new System.Windows.Forms.Label();
             this.cmbCircuits = new System.Windows.Forms.ComboBox();
@@ -193,8 +195,6 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.cmbType = new System.Windows.Forms.ComboBox();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -253,6 +253,24 @@ namespace Europlan.Common {
             this.grpPowerArea.Size = new System.Drawing.Size(884, 172);
             this.grpPowerArea.TabIndex = 8;
             this.grpPowerArea.TabStop = false;
+            // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(6, 146);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(151, 13);
+            this.label30.TabIndex = 25;
+            this.label30.Text = "Typ:";
+            // 
+            // cmbType
+            // 
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(243, 143);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(109, 21);
+            this.cmbType.TabIndex = 26;
+            this.cmbType.SelectedValueChanged += new System.EventHandler(this.cmbType_SelectedValueChanged);
             // 
             // btnRestkaelte
             // 
@@ -698,13 +716,13 @@ namespace Europlan.Common {
             // 
             this.numSchienenabstand.EditType = Europlan.Common.NumericBox.NumericEditType.DIST_M;
             this.numSchienenabstand.InternalValue = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            0});
             this.numSchienenabstand.Location = new System.Drawing.Point(775, 39);
             this.numSchienenabstand.MaxValue = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
@@ -712,17 +730,17 @@ namespace Europlan.Common {
             1,
             0,
             0,
-            65536});
+            0});
             this.numSchienenabstand.Name = "numSchienenabstand";
             this.numSchienenabstand.Size = new System.Drawing.Size(72, 20);
             this.numSchienenabstand.TabIndex = 37;
-            this.numSchienenabstand.Text = "0,5";
+            this.numSchienenabstand.Text = "1";
             this.numSchienenabstand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numSchienenabstand.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
-            65536});
+            0});
             this.numSchienenabstand.ValueChanged += new System.EventHandler(this.numSchienenabstand_ValueChanged);
             // 
             // lblSchienenabstandUnit
@@ -1349,7 +1367,7 @@ namespace Europlan.Common {
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.lblCircuitCount);
+            this.groupBox8.Controls.Add(this.numCircuits);
             this.groupBox8.Controls.Add(this.lblRimVa);
             this.groupBox8.Controls.Add(this.lblResidenceVa);
             this.groupBox8.Controls.Add(this.cmbCircuits);
@@ -1368,14 +1386,36 @@ namespace Europlan.Common {
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "tatsächliche Auslegung";
             // 
-            // lblCircuitCount
+            // numCircuits
             // 
-            this.lblCircuitCount.Location = new System.Drawing.Point(609, 75);
-            this.lblCircuitCount.Name = "lblCircuitCount";
-            this.lblCircuitCount.Size = new System.Drawing.Size(70, 13);
-            this.lblCircuitCount.TabIndex = 75;
-            this.lblCircuitCount.Text = "0";
-            this.lblCircuitCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.numCircuits.EditType = Europlan.Common.NumericBox.NumericEditType.HEIZKREISE;
+            this.numCircuits.InternalValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCircuits.Location = new System.Drawing.Point(612, 72);
+            this.numCircuits.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numCircuits.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCircuits.Name = "numCircuits";
+            this.numCircuits.Size = new System.Drawing.Size(67, 20);
+            this.numCircuits.TabIndex = 76;
+            this.numCircuits.Text = "1";
+            this.numCircuits.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCircuits.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCircuits.ValueChanged += new System.EventHandler(this.numCircuits_ValueChanged);
             // 
             // lblRimVa
             // 
@@ -1603,6 +1643,7 @@ namespace Europlan.Common {
             this.btnGraphical.TabIndex = 43;
             this.btnGraphical.Text = "Grafische Auslegung öffnen";
             this.btnGraphical.UseVisualStyleBackColor = true;
+            this.btnGraphical.Visible = false;
             this.btnGraphical.Click += new System.EventHandler(this.btnGraphical_Click);
             // 
             // btnConnectionPipes
@@ -2269,24 +2310,6 @@ namespace Europlan.Common {
             this.lblTitle.TabIndex = 81;
             this.lblTitle.Text = "Jumboval®";
             // 
-            // label30
-            // 
-            this.label30.Location = new System.Drawing.Point(6, 146);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(151, 13);
-            this.label30.TabIndex = 25;
-            this.label30.Text = "Typ:";
-            // 
-            // cmbType
-            // 
-            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(243, 143);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(109, 21);
-            this.cmbType.TabIndex = 26;
-            this.cmbType.SelectedValueChanged += new System.EventHandler(this.cmbType_SelectedValueChanged);
-            // 
             // PlannedJumbovalProductPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2460,8 +2483,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Button btnDistributor;
 		private System.Windows.Forms.Label lblDistributor;
 		private System.Windows.Forms.TextBox txtDistributor;
-		private System.Windows.Forms.GroupBox groupBox10;
-		private System.Windows.Forms.ComboBox cmbCircuits;
+        private System.Windows.Forms.GroupBox groupBox10;
 		private System.Windows.Forms.Label label29;
 		private ConnectionPipePanel connectionPipePanel;
 		private System.Windows.Forms.Button btnConnectionPipes;
@@ -2471,8 +2493,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.ColumnHeader defaultColumn;
 		private System.Windows.Forms.TabPage pageCorrections;
 		private ExtendedCorrectionsGrid extendedCorrectionsGrid;
-		private System.Windows.Forms.HelpProvider helpProvider;
-        private System.Windows.Forms.Label lblCircuitCount;
+        private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.Label lblRimVa;
         private System.Windows.Forms.Label lblResidenceVa;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -2498,5 +2519,7 @@ namespace Europlan.Common {
         private NumericBox numSchienenabstand;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox cmbType;
+        private NumericBox numCircuits;
+        private System.Windows.Forms.ComboBox cmbCircuits;
 	}
 }
