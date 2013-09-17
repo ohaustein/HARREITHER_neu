@@ -380,6 +380,10 @@ namespace Europlan.Common {
 			return this.plannedProduct.LastErrorMessage;
 		}
 
+        public void StartConfigureProduct(bool variableSpreizung) {
+            this.plannedProduct.StartConfigureProduct(this.RequestedHeatLoad, this.RequestedCoolLoad, this.CalculateHeat, this.CalculateCool, variableSpreizung);
+        }
+
 		#region IGuiRepresentation Members
 
 		public Type AssociatedPanelType {

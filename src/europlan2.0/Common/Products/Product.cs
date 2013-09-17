@@ -6,6 +6,7 @@ using System.Globalization;
 using log4net;
 using WW.Math;
 using WW.Math.Geometry;
+using System.ComponentModel;
 
 namespace Europlan.Common {
 
@@ -1140,7 +1141,49 @@ namespace Europlan.Common {
 
 		public abstract bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung);
 
-		internal virtual void FinalizeLoading(PlannedProduct pp) {
+        private int currentCalculationToken = -1;
+
+        public void StartConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
+            if (currentCalculationToken == -1) {
+                AsyncProductCalculator.Instance.CalculationFinished += new EventHandler<AsyncProductCalculator.ProductCalculationFinishedArgs>(Instance_CalculationFinished);
+            }
+            currentCalculationToken = AsyncProductCalculator.Instance.CalculateProduct(this, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool, variableSpreizung);
+        }
+
+        private void Instance_CalculationFinished(object sender, AsyncProductCalculator.ProductCalculationFinishedArgs e) {
+            if (e.Token == currentCalculationToken) {
+                if (configureProductFinished != null) {
+                    configureProductFinished(this, new ConfigureProductFinishedArgs(e.CalcuationOk));
+                }
+                currentCalculationToken = -1;
+            }
+        }
+
+        public void CancelConfigureProduct() {
+        }
+
+        #region Move To Top
+        public class ConfigureProductFinishedArgs : EventArgs {
+            private bool calculationOk;
+
+            public ConfigureProductFinishedArgs(bool calculationOk) {
+                this.calculationOk = calculationOk;
+            }
+
+            public bool CalucaltionOk {
+                get { return this.calculationOk; }
+            }
+        }
+
+        private event EventHandler<ConfigureProductFinishedArgs> configureProductFinished;
+
+        public event EventHandler<ConfigureProductFinishedArgs> ConfigureProductFinished {
+            add { this.configureProductFinished += value; }
+            remove { this.configureProductFinished -= value; }
+        }
+        #endregion Move To Top
+
+        internal virtual void FinalizeLoading(PlannedProduct pp) {
 			foreach (Circuit c in this.circuits) {
 				c.FinalizeLoading();
 			}
