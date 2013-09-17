@@ -170,6 +170,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EuroplanRes.it.resx</DependentUpon>
     </Compile>
+    <Compile Include="EuroplanRes.sk.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.sk.resx</DependentUpon>
+    </Compile>
     <Compile Include="EuroplanRes.sl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -420,6 +425,7 @@
     <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.Designer.cs">
       <DependentUpon>SelectMoveTargetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\ProductCalculator.cs" />
     <Compile Include="Project\ConnectionDrawer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1180,6 +1186,11 @@
     <EmbeddedResource Include="Controls\ProgressForm.resx">
       <DependentUpon>ProgressForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.sk.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.sk.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\hand.cur" />
     <EmbeddedResource Include="Icons\handGrabbed.cur" />

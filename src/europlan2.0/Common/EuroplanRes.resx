@@ -7542,4 +7542,50 @@ Nummer</value>
   <data name="JumbovalProduct_Manuell" xml:space="preserve">
     <value>Manuell</value>
   </data>
+  <data name="Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b" xml:space="preserve">
+    <value />
+    <comment>Jumboval Fußbodenheizung</comment>
+  </data>
+  <data name="Material_HR58" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HX15" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HX20" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HX30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HX35" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK41" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK42" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK43" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK59" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK60" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlannedJumbovalProductPanel_WarnungGrosserRaum" xml:space="preserve">
+    <value>Bei sehr großen Räumen kann die automatische Auslegung einige Zeit in Anspruch nehmen. Sind Sie sicher, dass Sie zur automatischen Auslegung wechseln wollen?</value>
+  </data>
+  <data name="PlannedJumbovalProductPanel_WarnungGrosserRaumTitel" xml:space="preserve">
+    <value>Achtung</value>
+  </data>
+  <data name="SelectConnectionForProductForm_WarnungGrosserRaum" xml:space="preserve">
+    <value>Bei sehr großen Räumen kann die automatische Auslegung einige Zeit in Anspruch nehmen. Wollen Sie dieses System manuell auslegen?</value>
+  </data>
+  <data name="SelectConnectionForProductForm_WarnungGrosserRaumTitel" xml:space="preserve">
+    <value>Achtung</value>
+  </data>
 </root>

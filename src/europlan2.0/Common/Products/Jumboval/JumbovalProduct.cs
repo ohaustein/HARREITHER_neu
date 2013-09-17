@@ -71,6 +71,8 @@ namespace Europlan.Common {
         private static double spreizungKuehlMin = 2;                                                    /* TODO sollte gleich bleiben */
         private static double spreizungKuehlMax = 5;                                                    /* TODO sollte gleich bleiben */
 
+        private static double automaticCalcWarningArea = 1000.0;
+
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
@@ -642,6 +644,12 @@ namespace Europlan.Common {
 			get { return spreizungKuehlMax; }
 			set { spreizungKuehlMax = value; }
 		}
+
+        [DoubleProductParameter(1000.0)]
+        public static double ConfigAutomaticCalcWarningArea {
+            get { return automaticCalcWarningArea; }
+            set { automaticCalcWarningArea = value; }
+        }
 		#endregion Product Parameters
 
         public double MaxDurchfluss {

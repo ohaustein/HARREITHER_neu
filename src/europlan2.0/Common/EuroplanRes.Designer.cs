@@ -289,6 +289,15 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b {
+            get {
+                return ResourceManager.GetString("Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Category_3da3227a_9ffe_4af4_bcbd_509a159066e1 {
             get {
                 return ResourceManager.GetString("Category_3da3227a_9ffe_4af4_bcbd_509a159066e1", resourceCulture);
@@ -13078,6 +13087,15 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_HR58 {
+            get {
+                return ResourceManager.GetString("Material_HR58", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_HR60 {
             get {
                 return ResourceManager.GetString("Material_HR60", resourceCulture);
@@ -13153,6 +13171,42 @@ namespace Europlan.Common {
         internal static string Material_HR76 {
             get {
                 return ResourceManager.GetString("Material_HR76", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HX15 {
+            get {
+                return ResourceManager.GetString("Material_HX15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HX20 {
+            get {
+                return ResourceManager.GetString("Material_HX20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HX30 {
+            get {
+                return ResourceManager.GetString("Material_HX30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HX35 {
+            get {
+                return ResourceManager.GetString("Material_HX35", resourceCulture);
             }
         }
         
@@ -13474,6 +13528,33 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_MK41 {
+            get {
+                return ResourceManager.GetString("Material_MK41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK42 {
+            get {
+                return ResourceManager.GetString("Material_MK42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK43 {
+            get {
+                return ResourceManager.GetString("Material_MK43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_MK49 {
             get {
                 return ResourceManager.GetString("Material_MK49", resourceCulture);
@@ -13504,6 +13585,24 @@ namespace Europlan.Common {
         internal static string Material_MK52 {
             get {
                 return ResourceManager.GetString("Material_MK52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK59 {
+            get {
+                return ResourceManager.GetString("Material_MK59", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK60 {
+            get {
+                return ResourceManager.GetString("Material_MK60", resourceCulture);
             }
         }
         
@@ -16489,6 +16588,24 @@ namespace Europlan.Common {
         internal static string PlannedHithermProductPanel_ZusaetzlicheInformationen {
             get {
                 return ResourceManager.GetString("PlannedHithermProductPanel_ZusaetzlicheInformationen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bei sehr großen Räumen kann die automatische Auslegung einige Zeit in Anspruch nehmen. Sind Sie sicher, dass Sie zur automatischen Auslegung wechseln wollen?.
+        /// </summary>
+        internal static string PlannedJumbovalProductPanel_WarnungGrosserRaum {
+            get {
+                return ResourceManager.GetString("PlannedJumbovalProductPanel_WarnungGrosserRaum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achtung.
+        /// </summary>
+        internal static string PlannedJumbovalProductPanel_WarnungGrosserRaumTitel {
+            get {
+                return ResourceManager.GetString("PlannedJumbovalProductPanel_WarnungGrosserRaumTitel", resourceCulture);
             }
         }
         
@@ -20362,6 +20479,24 @@ namespace Europlan.Common {
         internal static string SelectConnectionForProductForm_Vorlaufseitig {
             get {
                 return ResourceManager.GetString("SelectConnectionForProductForm_Vorlaufseitig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bei sehr großen Räumen kann die automatische Auslegung einige Zeit in Anspruch nehmen. Wollen Sie dieses System manuell auslegen?.
+        /// </summary>
+        internal static string SelectConnectionForProductForm_WarnungGrosserRaum {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_WarnungGrosserRaum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achtung.
+        /// </summary>
+        internal static string SelectConnectionForProductForm_WarnungGrosserRaumTitel {
+            get {
+                return ResourceManager.GetString("SelectConnectionForProductForm_WarnungGrosserRaumTitel", resourceCulture);
             }
         }
         

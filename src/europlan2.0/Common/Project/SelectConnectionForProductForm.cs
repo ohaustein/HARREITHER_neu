@@ -349,14 +349,37 @@ namespace Europlan.Common {
 		private void SelectConnectionForProductForm_FormClosing(object sender, FormClosingEventArgs e) {
 			if (this.DialogResult == DialogResult.OK) {
 
+                if (this.tvDistributors.SelectedNode.Tag is RegulatorCircuit && this.product.Product is JumbovalProduct) {
+                    JumbovalProduct jvProduct = (JumbovalProduct)this.product.Product;
+                    if (!jvProduct.RequestedCircuits.HasValue && jvProduct.PlannedFloorArea + jvProduct.PlannedCeilingArea > JumbovalProduct.ConfigAutomaticCalcWarningArea) {
+                        DialogResult result = MessageBox.Show(EuroplanRes.SelectConnectionForProductForm_WarnungGrosserRaum, EuroplanRes.SelectConnectionForProductForm_WarnungGrosserRaumTitel, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Cancel) {
+                            e.Cancel = true;
+                            return;
+                        }
+                        if (result == DialogResult.Yes) {
+                            jvProduct.RequestedLayDistance = JumbovalProduct.JumbovalLayDistance.JV50;
+                            jvProduct.RequestedRimType = (jvProduct.PlannedAreaRim > 0) ? (Nullable<JumbovalProduct.JumbovalRimType>)JumbovalProduct.JumbovalRimType.JV20_80 : (Nullable<JumbovalProduct.JumbovalRimType>)null;
+
+                            double pl = 0;
+                            if (jvProduct.RequestedRimType.HasValue) {
+                                pl = (jvProduct.PlannedFloorArea + jvProduct.PlannedCeilingArea - jvProduct.PlannedAreaRim) * JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV50) + jvProduct.PlannedAreaRim * JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV20);
+                            } else {
+                                pl = (jvProduct.PlannedFloorArea + jvProduct.PlannedCeilingArea) * JumbovalProduct.GetPipeLengthPerSqm(JumbovalProduct.JumbovalLayDistance.JV50);
+                            }
+
+                            jvProduct.RequestedCircuits = (int)Math.Ceiling(pl / (JumbovalProduct.ConfigMaxCircuitLength - 10));
+                        }
+                    }
+                }
+
                 UnconnectProduct(this.product);
                 if (this.tvDistributors.SelectedNode.Tag is Distributor) {
                     Distributor dist = this.tvDistributors.SelectedNode.Tag as Distributor;
 					ConnectProduct(this.product, dist);
 				} else if (this.tvDistributors.SelectedNode.Tag is Circuit) {
                     PlannedProduct pp = (this.tvDistributors.SelectedNode.Tag as Circuit).PlannedProduct;
-					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked,
-						this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
+					ConnectProduct(this.product, pp, this.rbRuecklauf.Checked, this.cbActivateUserDefinedConnection.Checked ? this.userDefinedConnectionBindingSource.DataSource as List<UserDefinedConnection> : null);
                 } else if (this.tvDistributors.SelectedNode.Tag is RegulatorCircuit) {
                     RegulatorCircuit rc = this.tvDistributors.SelectedNode.Tag as RegulatorCircuit;
                     ConnectProduct(this.product, rc);
