@@ -1543,7 +1543,7 @@ namespace Europlan.Common {
             this.numEurovalPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numEurovalPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numEurovalPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});
@@ -2221,7 +2221,7 @@ namespace Europlan.Common {
             this.numEcothermPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numEcothermPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numEcothermPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});
@@ -2868,7 +2868,7 @@ namespace Europlan.Common {
             this.numJumbovalPressureMbar.Location = new System.Drawing.Point(463, 71);
             this.numJumbovalPressureMbar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numJumbovalPressureMbar.MaxValue = new decimal(new int[] {
-            250,
+            1000,
             0,
             0,
             0});
@@ -3086,7 +3086,7 @@ namespace Europlan.Common {
             this.numJumbovalPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numJumbovalPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numJumbovalPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            100000,
             0,
             0,
             0});
@@ -3544,7 +3544,7 @@ namespace Europlan.Common {
             this.numHithermPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numHithermPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numHithermPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});
@@ -3934,7 +3934,7 @@ namespace Europlan.Common {
             this.numHithermCompactPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numHithermCompactPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numHithermCompactPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});
@@ -4424,7 +4424,7 @@ namespace Europlan.Common {
             this.numModulBodenPressurePa.Location = new System.Drawing.Point(308, 71);
             this.numModulBodenPressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numModulBodenPressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});
@@ -5142,7 +5142,7 @@ namespace Europlan.Common {
             this.numModulDeckePressurePa.Location = new System.Drawing.Point(308, 71);
             this.numModulDeckePressurePa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
             this.numModulDeckePressurePa.MaxValue = new decimal(new int[] {
-            50000,
+            25000,
             0,
             0,
             0});

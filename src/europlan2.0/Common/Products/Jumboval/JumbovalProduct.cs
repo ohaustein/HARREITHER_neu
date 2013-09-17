@@ -64,7 +64,7 @@ namespace Europlan.Common {
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
 		private static bool useHarreitherNorm = true;
 		private static double maxCircuitLength = 120.0;
-		private static int maxPressureLost = 15000;                                                     /* TODO */
+		private static int maxPressureLost = 30000;                                                     /* TODO */
         private static int maxDurchfluss = 240;                                                         /* TODO: muﬂ in Verteiler ausgelagert werden, da maximaler Durchfluss vom Typ abh‰ngig! */
         private static double spreizungHeizMin = 4;                                                     /* TODO sollte gleich bleiben */
         private static double spreizungHeizMax = 12;                                                    /* TODO sollte gleich bleiben */
@@ -607,7 +607,7 @@ namespace Europlan.Common {
 			set { maxCircuitLength = value; }
 		}
 
-		[IntProductParameter(15000)]
+		[IntProductParameter(30000)]
 		public static int ConfigMaxPressureLost {
 			get { return maxPressureLost; }
 			set { maxPressureLost = value; }
@@ -647,7 +647,7 @@ namespace Europlan.Common {
         public double MaxDurchfluss {
             get {
                 if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE) {
-                    return JumbovalProduct.ConfigMaxDurchfluss;
+                    return double.PositiveInfinity;
                 }
                 Product p = this;
                 while (p != null && p.PlannedConnection != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && p.PlannedConnection.OtherProduct != null) {
@@ -656,11 +656,14 @@ namespace Europlan.Common {
                 if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null) {
                     return p.PlannedConnection.Distributor.MaxDurchfluss;
                 }
-                return JumbovalProduct.ConfigMaxDurchfluss;
+                return double.PositiveInfinity;
             }
         }
         public double MaxMassenstrom {
-            get { return MaxDurchfluss * JumbovalProduct.ConfigRho / 1000; }
+            get {
+                double maxDurchfluss = this.MaxDurchfluss;
+                return maxDurchfluss == double.PositiveInfinity ? double.PositiveInfinity : maxDurchfluss * JumbovalProduct.ConfigRho / 1000;
+            }
         }
         
         /// <summary>
@@ -1792,7 +1795,7 @@ namespace Europlan.Common {
 						} else {
 							pl += this.PlannedAreaRim * JumbovalProduct.GetPipeLengthPerSqm(ld);
 						}
-						circuitCount = (int)Math.Ceiling(pl / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						circuitCount = (int)Math.Ceiling(pl / (JumbovalProduct.ConfigMaxCircuitLength - longestVorlaufTotal - longestRuecklaufTotal));
 						if (this.connectedCircuits.Count > circuitCount) {
 							circuitCount = this.connectedCircuits.Count;
 						}
@@ -1838,7 +1841,7 @@ namespace Europlan.Common {
 						if (this.PlannedMaxMhHeat > MaxMassenstrom) {
 							tryCalc = true;
 						}
-						if (this.PlannedMaxMhCool > MaxMassenstrom) {
+                        if (this.PlannedMaxMhCool > MaxMassenstrom) {
 							tryCalc = true;
 						}
 						tryCalc = tryCalc && !this.requestedCircuits.HasValue;

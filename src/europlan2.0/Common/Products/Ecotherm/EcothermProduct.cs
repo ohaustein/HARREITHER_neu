@@ -1779,7 +1779,7 @@ namespace Europlan.Common {
 						} else {
 							pl += this.PlannedAreaRim * EcothermProduct.GetPipeLengthPerSqm(ld);
 						}
-						circuitCount = (int)Math.Ceiling(pl / (100 - longestVorlaufTotal - longestRuecklaufTotal));
+						circuitCount = (int)Math.Ceiling(pl / (EcothermProduct.ConfigMaxCircuitLength - longestVorlaufTotal - longestRuecklaufTotal));
 						if (this.connectedCircuits.Count > circuitCount) {
 							circuitCount = this.connectedCircuits.Count;
 						}
