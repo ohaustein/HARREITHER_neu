@@ -41,6 +41,27 @@ namespace Europlan.Common {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Product));
 
+        #region events
+        public class ConfigureProductFinishedArgs : EventArgs {
+            private bool calculationOk;
+
+            public ConfigureProductFinishedArgs(bool calculationOk) {
+                this.calculationOk = calculationOk;
+            }
+
+            public bool CalucaltionOk {
+                get { return this.calculationOk; }
+            }
+        }
+
+        private event EventHandler<ConfigureProductFinishedArgs> configureProductFinished;
+
+        public event EventHandler<ConfigureProductFinishedArgs> ConfigureProductFinished {
+            add { this.configureProductFinished += value; }
+            remove { this.configureProductFinished -= value; }
+        }
+        #endregion events
+
 		public static readonly double rundrohr21mmAussenD = 0.021;
 		public static readonly double rundrohr21mmInnenD = 0.0162;
 		public static readonly double rundrohr21mmInnenA = (rundrohr21mmInnenD / 2) * (rundrohr21mmInnenD / 2) * Math.PI;
@@ -1158,30 +1179,6 @@ namespace Europlan.Common {
                 currentCalculationToken = -1;
             }
         }
-
-        public void CancelConfigureProduct() {
-        }
-
-        #region Move To Top
-        public class ConfigureProductFinishedArgs : EventArgs {
-            private bool calculationOk;
-
-            public ConfigureProductFinishedArgs(bool calculationOk) {
-                this.calculationOk = calculationOk;
-            }
-
-            public bool CalucaltionOk {
-                get { return this.calculationOk; }
-            }
-        }
-
-        private event EventHandler<ConfigureProductFinishedArgs> configureProductFinished;
-
-        public event EventHandler<ConfigureProductFinishedArgs> ConfigureProductFinished {
-            add { this.configureProductFinished += value; }
-            remove { this.configureProductFinished -= value; }
-        }
-        #endregion Move To Top
 
         internal virtual void FinalizeLoading(PlannedProduct pp) {
 			foreach (Circuit c in this.circuits) {

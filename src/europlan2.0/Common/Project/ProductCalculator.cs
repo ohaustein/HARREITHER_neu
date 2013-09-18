@@ -7,6 +7,7 @@ namespace Europlan.Common {
     public class AsyncProductCalculator {
 
         private static AsyncProductCalculator instance;
+        private static readonly object instanceLock = new object();
 
         private BackgroundWorker worker;
 
@@ -16,16 +17,18 @@ namespace Europlan.Common {
 
         private AsyncProductCalculator() {
             worker = new BackgroundWorker();
-            worker.WorkerSupportsCancellation = true;
+            worker.WorkerSupportsCancellation = false;
+            worker.WorkerReportsProgress = false;
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
         }
 
         public static AsyncProductCalculator Instance {
             get {
-#warning TODO semaphore
-                if (instance == null) {
-                    instance = new AsyncProductCalculator();
+                lock (instanceLock) {
+                    if (instance == null) {
+                        instance = new AsyncProductCalculator();
+                    }
                 }
                 return instance;
             }
@@ -65,6 +68,7 @@ namespace Europlan.Common {
             private int token;
 
             private static int currentToken = 0;
+            private static object tokenLock = new object();
 
             public CalculationArguments(Product product, double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
                 this.product = product;
@@ -73,8 +77,9 @@ namespace Europlan.Common {
                 this.calculateHeat = calculateHeat;
                 this.calculateCool = calculateCool;
                 this.variableSpreizung = variableSpreizung;
-#warning TODO semaphore
-                this.token = currentToken++;
+                lock (tokenLock) {
+                    this.token = currentToken++;
+                }
             }
 
             public Product Product {
@@ -106,6 +111,30 @@ namespace Europlan.Common {
             }
         }
 
+        private class CalculationResult {
+            private Product product;
+            private int token;
+            private bool calculationOk;
+
+            public CalculationResult(Product product, int token, bool calculationOk) {
+                this.product = product;
+                this.token = token;
+                this.calculationOk = calculationOk;
+            }
+
+            public Product Product {
+                get { return this.product; }
+            }
+
+            public int Token {
+                get { return this.token; }
+            }
+
+            public bool CalculationOk {
+                get { return this.calculationOk; }
+            }
+        }
+
         private event EventHandler<ProductCalculationFinishedArgs> calculationFinished;
 
         public event EventHandler<ProductCalculationFinishedArgs> CalculationFinished {
@@ -114,9 +143,10 @@ namespace Europlan.Common {
         }
 
         public int CalculateProduct(Product product, double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
-#warning TODO semaphore
             CalculationArguments args = new CalculationArguments(product, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool, variableSpreizung);
-            calcStack.Push(args);
+            lock (calcStack) {
+                calcStack.Push(args);
+            }
             if (!worker.IsBusy) {
                 worker.RunWorkerAsync();
             }
@@ -124,18 +154,23 @@ namespace Europlan.Common {
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
-#warning TODO semaphore
-            currentCalculation = calcStack.Pop();
-            if (currentCalculation != null) {
-                currentCalculation.Product.ConfigureProduct(currentCalculation.RequestHeatLoad, currentCalculation.RequestCoolLoad, currentCalculation.CalculateHeat, currentCalculation.CalculateCool, currentCalculation.VariableSpreizung);
+            lock (calcStack) {
+                if (calcStack.Count == 0) {
+                    return;
+                }
+                currentCalculation = calcStack.Pop();
+                // if multiple consecutive calculations for the same product are on the stack skip all but the last one
+                while (calcStack.Count > 0 && calcStack.Peek().Product == currentCalculation.Product) {
+                    currentCalculation = calcStack.Pop();
+                }
             }
-            e.Result = currentCalculation;
+            e.Result = new CalculationResult(currentCalculation.Product, currentCalculation.Token, currentCalculation.Product.ConfigureProduct(currentCalculation.RequestHeatLoad, currentCalculation.RequestCoolLoad, currentCalculation.CalculateHeat, currentCalculation.CalculateCool, currentCalculation.VariableSpreizung));
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (!e.Cancelled) {
-                CalculationArguments args = (CalculationArguments)e.Result;
-                this.OnCalculationFinished(args.Product, true, args.Token);
+                CalculationResult result = (CalculationResult)e.Result;
+                this.OnCalculationFinished(result.Product, result.CalculationOk, result.Token);
             }
             if (calcStack.Count > 0) {
                 worker.RunWorkerAsync();

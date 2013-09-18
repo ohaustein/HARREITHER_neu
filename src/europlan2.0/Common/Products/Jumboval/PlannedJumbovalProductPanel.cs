@@ -233,7 +233,13 @@ namespace Europlan.Common {
 		private bool cmbCircuitsContainsAutomatic = true;
 
 		public void UpdateControl(bool resetUserInterface) {
+            if (this.product != null && this.product.Product != null) {
+                this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(ConfigureProductFinished);
+            }
 			this.product = this.Tag as PlannedProduct;
+            if (this.product != null && this.product.Product != null) {
+                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(ConfigureProductFinished);
+            }
 			if (resetUserInterface) {
 				this.tabs.SelectedTab = this.pageInput;
 			}
@@ -241,16 +247,8 @@ namespace Europlan.Common {
 			this.connectionPipePanel.Update(this.product);
 			this.chkStellAntriebe.Checked = this.product.Product.StellMotore;
             if (this.product != null) {
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(UpdateControl_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
-            } else {
-                this.UpdateControl(FieldEnum.NONE);
             }
-		}
-
-        private void UpdateControl_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(UpdateControl_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
             this.UpdateControl(FieldEnum.NONE);
         }
 
@@ -278,6 +276,56 @@ namespace Europlan.Common {
         private int ignoreEstrichueberdeckung = 0;
         private int ignoreSchienenabstand = 0;
         private int ignoreType = 0;
+
+        private void SmartUpdateControl() {
+            FieldEnum focused = FieldEnum.NONE;
+            if (numHeatLoad.Focused) {
+                focused = FieldEnum.HEAT_LOAD;
+            } else if (numCoolLoad.Focused) {
+                focused = FieldEnum.COOL_LOAD;
+            } else if (numHeatLoadPercentage.Focused) {
+                focused = FieldEnum.HEAT_LOAD_PERCENTAGE;
+            } else if (numCoolLoadPercentage.Focused) {
+                focused = FieldEnum.COOL_LOAD_PERCENTAGE;
+            } else if (numArea.Focused) {
+                focused = FieldEnum.AREA;
+            } else if (numAreaPercentage.Focused) {
+                focused = FieldEnum.AREA_PERCENTAGE;
+            } else if (numAreaReduced.Focused) {
+                focused = FieldEnum.AREA_REDUCED;
+            } else if (numAreaUnheated.Focused) {
+                focused = FieldEnum.AREA_UNHEATED;
+            } else if (numRoomTemperatureBelowHeat.Focused) {
+                focused = FieldEnum.ROOM_TEMERATURE_BELOW_HEAT;
+            } else if (numRoomTemperatureBelowCool.Focused) {
+                focused = FieldEnum.ROOM_TEMERATURE_BELOW_COOL;
+            } else if (numRim.Focused) {
+                focused = FieldEnum.RIM_LENGTH;
+            } else if (numCorners.Focused) {
+                focused = FieldEnum.CORNERS;
+            } else if (cmbLayDistance.Focused) {
+                focused = FieldEnum.LAY_DISTANCE;
+            } else if (cmbRimType.Focused) {
+                focused = FieldEnum.RIM_TYPE;
+            } else if (rbCalculateHeat.Focused || rbCalculateCool.Focused || rbCalculateBoth.Focused) {
+                focused = FieldEnum.CALCULATION_TYPE;
+            } else if (cmbCircuits.Focused) {
+                focused = FieldEnum.CIRCUIT_COUNT;
+            } else if (cbSeparateCircuit.Focused) {
+                focused = FieldEnum.SEPARATE_CIRCUIT;
+            } else if (extendedCorrectionsGrid.Focused) {
+                focused = FieldEnum.CORRECTIONS;
+            } else if (rbLayoutGraphical.Focused || rbLayoutTable.Focused) {
+                focused = FieldEnum.LAYOUT_TYPE;
+            } else if (numEstrichueberdeckung.Focused) {
+                focused = FieldEnum.ESTRICH_UEBERDECKUNG;
+            } else if (numSchienenabstand.Focused) {
+                focused = FieldEnum.SCHIENENABSTAND;
+            } else if (cmbType.Focused) {
+                focused = FieldEnum.TYPE;
+            }
+            this.UpdateControl(focused);
+        }
 
 		private void UpdateControl(FieldEnum skipFields) {
 			updateOngoing = true;
@@ -918,7 +966,6 @@ namespace Europlan.Common {
 				ignoreHeatLoad++;
 				ignoreHeatLoadPercentage++;
 				this.product.CoverHeatLoad = this.chkCoverHeatLoad.Checked;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(ChkCoverHeatLoad_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -927,19 +974,12 @@ namespace Europlan.Common {
 				ignoreHeatLoadPercentage--;
 			}
 		}
-
-        private void ChkCoverHeatLoad_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(ChkCoverHeatLoad_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void chkCoverCoolLoad_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCoverCoolLoad == 0) {
 				ignoreCoolLoad++;
 				ignoreCoolLoadPercentage++;
 				this.product.CoverCoolLoad = this.chkCoverCoolLoad.Checked;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(ChkCoverCoolLoad_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -949,18 +989,11 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void ChkCoverCoolLoad_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(ChkCoverCoolLoad_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
-
 		private void numHeatLoadPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreHeatLoadPercentage == 0) {
 				ignoreHeatLoad++;
 				this.product.RequestedHeatLoadPercentage = (float)this.numHeatLoadPercentage.Value;
 				this.numHeatLoad.Value = (decimal)this.product.RequestedHeatLoad;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumHeatLoadPercentage_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -969,18 +1002,11 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void NumHeatLoadPercentage_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumHeatLoadPercentage_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.HEAT_LOAD_PERCENTAGE);
-        }
-
 		private void numCoolLoadPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreCoolLoadPercentage == 0) {
 				ignoreCoolLoad++;
 				this.product.RequestedCoolLoadPercentage = (float)this.numCoolLoadPercentage.Value;
 				this.numCoolLoad.Value = (decimal)this.product.RequestedCoolLoad;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumCoolLoadPercentage_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -989,18 +1015,11 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void NumCoolLoadPercentage_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumCoolLoadPercentage_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.COOL_LOAD_PERCENTAGE);
-        }
-
 		private void numHeatLoad_ValueChanged(object sender, EventArgs e) {
 			if (ignoreHeatLoad == 0) {
 				ignoreHeatLoadPercentage++;
 				this.product.RequestedHeatLoad = (double)this.numHeatLoad.Value;
 				this.numHeatLoadPercentage.Value = (decimal)this.product.RequestedHeatLoadPercentage;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumHeatLoad_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -1009,18 +1028,11 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void NumHeatLoad_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumHeatLoad_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.HEAT_LOAD);
-        }
-
 		private void numCoolLoad_ValueChanged(object sender, EventArgs e) {
 			if (ignoreCoolLoad == 0) {
 				ignoreCoolLoadPercentage++;
 				this.product.RequestedCoolLoad = (double)this.numCoolLoad.Value;
 				this.numCoolLoadPercentage.Value = (decimal)this.product.RequestedCoolLoadPercentage;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumCoolLoad_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -1028,12 +1040,6 @@ namespace Europlan.Common {
 				ignoreCoolLoadPercentage--;
 			}
 		}
-
-        private void NumCoolLoad_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumCoolLoad_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.COOL_LOAD);
-        }
 
 		private void numAreaPercentage_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaPercentage == 0) {
@@ -1041,19 +1047,12 @@ namespace Europlan.Common {
                 ignoreArea++;
                 this.numArea.Value = (decimal)this.product.PlannedArea;
                 ignoreArea--;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaPercentage_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
                 }
             }
 		}
-
-        private void NumAreaPercentage_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaPercentage_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.AREA_PERCENTAGE);
-        }
 
 		private void numArea_ValueChanged(object sender, EventArgs e) {
 			if (ignoreArea == 0) {
@@ -1061,19 +1060,12 @@ namespace Europlan.Common {
                 ignoreAreaPercentage++;
                 this.numAreaPercentage.Value = (decimal)(this.product.Product as JumbovalProduct).PlannedFloorAreaPercentage;
                 ignoreAreaPercentage--;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumArea_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
                 }
             }
 		}
-
-        private void NumArea_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumArea_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.AREA);
-        }
 
 		private void numAreaReduced_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaReduced == 0) {
@@ -1082,19 +1074,12 @@ namespace Europlan.Common {
 				if (jvProduct.PlannedAreaReduced + jvProduct.PlannedAreaUnheated > jvProduct.PlannedFloorArea) {
 					jvProduct.PlannedAreaUnheated = jvProduct.PlannedFloorArea - jvProduct.PlannedAreaReduced;
 				}
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaReduced_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
                 }
             }
 		}
-
-        private void NumAreaReduced_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaReduced_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.AREA_REDUCED);
-        }
 
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
@@ -1103,7 +1088,6 @@ namespace Europlan.Common {
 				if (jvProduct.PlannedAreaReduced + jvProduct.PlannedAreaUnheated > jvProduct.PlannedFloorArea) {
 					jvProduct.PlannedAreaReduced = jvProduct.PlannedFloorArea - jvProduct.PlannedAreaUnheated;
 				}
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaUnheated_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
@@ -1111,28 +1095,15 @@ namespace Europlan.Common {
             }
 		}
 
-        private void NumAreaUnheated_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumAreaUnheated_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.AREA_UNHEATED);
-        }
-
         private void numEstrichueberdeckung_ValueChanged(object sender, EventArgs e) {
             if (ignoreEstrichueberdeckung == 0) {
                 JumbovalProduct jvProduct = this.product.Product as JumbovalProduct;
                 jvProduct.Estrichueberdeckung = (float)this.numEstrichueberdeckung.Value / 100;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumEstrichueberdeckung_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
                 }
             }
-        }
-
-        private void NumEstrichueberdeckung_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumEstrichueberdeckung_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.ESTRICH_UEBERDECKUNG);
         }
 
         private void numSchienenabstand_ValueChanged(object sender, EventArgs e) {
@@ -1159,7 +1130,6 @@ namespace Europlan.Common {
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as JumbovalProduct).PlannedFloorConstruction = form.SelectedConstruction;
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnFloorConstruction_ConfigureProductFinished);
 					this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				}
 			}
@@ -1169,19 +1139,12 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void BtnFloorConstruction_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnFloorConstruction_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
-
 		private void btnInsulationConstruction_Click(object sender, EventArgs e) {
 			SelectConstructionForm form = new SelectConstructionForm(ConstructionScopeEnum.InsulationConstruction, null);
 			form.SelectedConstruction = (this.product.Product as JumbovalProduct).PlannedInsulationConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
 					(this.product.Product as JumbovalProduct).PlannedInsulationConstruction = form.SelectedConstruction;
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnInsulationConstruction_ConfigureProductFinished);
 					this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					this.product.Product.AssociatedRoom.GetFloor().LastInsulationConstruction = form.SelectedConstruction;
 				}
@@ -1192,101 +1155,59 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void BtnInsulationConstruction_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnInsulationConstruction_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
-
 		private void numRoomTemperatureBelowHeat_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowHeat == 0) {
 				(this.product.Product as JumbovalProduct).PlannedRoomTemperatureBelowHeat = (float)this.numRoomTemperatureBelowHeat.Value;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumroomTemperatureBelowHeat_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void NumroomTemperatureBelowHeat_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumroomTemperatureBelowHeat_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_HEAT);
-        }
 
 		private void numRoomTemperatureBelowCool_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRoomTemperatureBelowCool == 0) {
 				(this.product.Product as JumbovalProduct).PlannedRoomTemperatureBelowCool = (float)this.numRoomTemperatureBelowCool.Value;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumRoomTemperatureBelowCool_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void NumRoomTemperatureBelowCool_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumRoomTemperatureBelowCool_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.ROOM_TEMERATURE_BELOW_COOL);
-        }
 
 		private void numRim_ValueChanged(object sender, EventArgs e) {
 			if (ignoreRim == 0) {
 				(this.product.Product as JumbovalProduct).PlannedRimLength = (float)this.numRim.Value;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumRim_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void NumRim_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumRim_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.RIM_LENGTH);
-        }
 
 		private void numCorners_ValueChanged(object sender, EventArgs e) {
 			if (ignoreCorners == 0) {
 				(this.product.Product as JumbovalProduct).PlannedRimCorners = (int)this.numCorners.Value;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumCorners_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void NumCorners_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumCorners_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CORNERS);
-        }
 
 		private void cmbLayDistance_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreLayDistance == 0) {
 				(this.product.Product as JumbovalProduct).RequestedLayDistance = (this.cmbLayDistance.SelectedItem as LayDistanceItem).layDistance;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(CmbLayDistance_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void CmbLayDistance_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(CmbLayDistance_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.LAY_DISTANCE);
-        }
 
 		private void cmbRimType_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreRimType == 0) {
 				(this.product.Product as JumbovalProduct).RequestedRimType = (this.cmbRimType.SelectedItem as RimTypeItem).rimType;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(CmbRimType_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -1294,12 +1215,6 @@ namespace Europlan.Common {
 			}
 
 		}
-
-        private void CmbRimType_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(CmbRimType_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.RIM_TYPE);
-        }
 
 		private void cmbCircuits_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreCircuits == 0) {
@@ -1326,37 +1241,23 @@ namespace Europlan.Common {
                 } else {
                     (this.product.Product as JumbovalProduct).RequestedCircuits = (int)this.numCircuits.Value;
                 }
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(CmbCircuits_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void CmbCircuits_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(CmbCircuits_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
-        }
 
 		private void rbCalculationType_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCalculationType == 0) {
 				this.product.CalculateHeat = this.rbCalculateHeat.Checked || this.rbCalculateBoth.Checked;
 				this.product.CalculateCool = this.rbCalculateCool.Checked || this.rbCalculateBoth.Checked;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(RbCalculationType_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void RbCalculationType_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(RbCalculationType_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CALCULATION_TYPE);
-        }
 
 		private void numHeatLoad_Leave(object sender, EventArgs e) {
 			if (this.product.RequestedCoolLoad == 0 && !this.rbCalculateHeat.Checked) {
@@ -1384,19 +1285,12 @@ namespace Europlan.Common {
 			SelectConnectionForProductForm form = new SelectConnectionForProductForm(this.product, this.product.Product.AssociatedRoom.AssociatedFloor, true);
 			form.ShowDialog();
 
-            this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnDistributor_ConfigureProductFinished);
 			this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			if (form.DialogResult == DialogResult.OK && this.projectChanged != null) {
 				this.projectChanged(this);
 			}
 			form.Dispose();
 		}
-
-        private void BtnDistributor_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnDistributor_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.COOL_LOAD);
-        }
 
 		private void connectionPipePanel1_GridContentChanged(object sender) {
 			gridContentChanged = true;
@@ -1409,7 +1303,6 @@ namespace Europlan.Common {
 			ConnectionPipesForm form = new ConnectionPipesForm(this.product);
 			form.ShowDialog();
 			if (form.UnsavedChanges) {
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnConnectionPipes_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -1417,12 +1310,6 @@ namespace Europlan.Common {
 			}
 			form.Dispose();
 		}
-
-        private void BtnConnectionPipes_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnConnectionPipes_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void cbSeparateCircuit_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreSeparateCircuit == 0) {
@@ -1477,19 +1364,12 @@ namespace Europlan.Common {
 					}
 				}
 
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(CbSeparateCircuit_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void CbSeparateCircuit_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(CbSeparateCircuit_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.SEPARATE_CIRCUIT);
-        }
 
 		private void chkStellAntriebe_CheckedChanged(object sender, EventArgs e) {
 			this.product.Product.StellMotore = this.chkStellAntriebe.Checked;
@@ -1506,53 +1386,33 @@ namespace Europlan.Common {
 		private void extendedCorrectionsGrid_CorrectionsChanged(object sender, EventArgs e) {
 			if (this.ignoreCorrections == 0) {
 				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(ExtendedCorrectionsGrid_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void ExtendedCorrectionsGrid_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(ExtendedCorrectionsGrid_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CORRECTIONS);
-        }
 
 		private void extendedCorrectionsGrid_CorrectionsEnabledChanged(object sender, EventArgs e) {
 			if (this.ignoreCorrections == 0) {
+#warning TODO update laydistance, rimtype and circuit comboboxes and circuit-text box
 				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(ExtendedCorrectionsGridEnabled_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
 				}
 			}
 		}
-
-        private void ExtendedCorrectionsGridEnabled_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(ExtendedCorrectionsGridEnabled_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CORRECTIONS);
-        }
 
 		private void tabs_Deselecting(object sender, TabControlCancelEventArgs e) {
 			if (e.TabPage == this.pageCorrections) {
 				e.Cancel = !this.extendedCorrectionsGrid.AllowLeave();
 			}
 			if (e.TabPage == this.pageCircuit && gridContentChanged) {
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(tabsDeselecting_ConfigureProductFinished);
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				gridContentChanged = false;
 			}
 		}
-
-        private void tabsDeselecting_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(tabsDeselecting_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void rbHeat_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCalculationMode == 0) {
@@ -1560,7 +1420,6 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT;
 					this.product.CalculateHeat = true;
 					this.product.CalculateCool = false;
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(RbHeat_ConfigureProductFinished);
 					this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					if (this.projectChanged != null) {
 						this.projectChanged(this);
@@ -1568,11 +1427,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-        private void RbHeat_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(RbHeat_ConfigureProductFinished);
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void rbCool_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCalculationMode == 0) {
@@ -1580,7 +1434,6 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.COOL;
 					this.product.CalculateHeat = false;
 					this.product.CalculateCool = true;
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(RbCool_ConfigureProductFinished);
 					this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					if (this.projectChanged != null) {
 						this.projectChanged(this);
@@ -1588,11 +1441,6 @@ namespace Europlan.Common {
 				}
 			}
 		}
-
-        private void RbCool_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(RbCool_ConfigureProductFinished);
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void rbHeatAndCool_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreCalculationMode == 0) {
@@ -1600,7 +1448,6 @@ namespace Europlan.Common {
 					this.product.Product.CalculateMode = Product.CalculateModeEnum.HEAT_AND_COOL;
 					this.product.CalculateHeat = true;
 					this.product.CalculateCool = true;
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(RbHeatAndCool_ConfigureProductFinished);
 					this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 					if (this.projectChanged != null) {
 						this.projectChanged(this);
@@ -1609,38 +1456,21 @@ namespace Europlan.Common {
 			}
 		}
 
-        private void RbHeatAndCool_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(RbHeatAndCool_ConfigureProductFinished);
-            this.UpdateControl(FieldEnum.NONE);
-        }
-
 		private void btnRestwaerme_Click(object sender, EventArgs e) {
 			this.product.RestwaermeUebernehmen();
-            this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnRestwaerme_ConfigureProductFinished);
 			this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			if (this.projectChanged != null) {
 				this.projectChanged(this);
 			}
 		}
-
-        private void BtnRestwaerme_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnRestwaerme_ConfigureProductFinished);
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void btnRestkaelte_Click(object sender, EventArgs e) {
 			this.product.RestkaelteUebernehmen();
-            this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(BtnRestkaelte_ConfigureProductFinished);
 			this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			if (this.projectChanged != null) {
 				this.projectChanged(this);
 			}
 		}
-
-        private void BtnRestkaelte_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(BtnRestkaelte_ConfigureProductFinished);
-            this.UpdateControl(FieldEnum.NONE);
-        }
 
 		private void rbGraphical_CheckedChanged(object sender, EventArgs e) {
 			if (!updateOngoing && (sender as RadioButton).Checked) {
@@ -1703,7 +1533,6 @@ namespace Europlan.Common {
                     } else if ((this.product.Product as JumbovalProduct).JumbovalType == Product.ProductType.DH) {
                         (this.product.Product as JumbovalProduct).PlannedCeilingArea = this.product.Product.AvailableCeilingArea;
                     }
-                    this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(CmbType_ConfigureProductFinished);
                     this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                     if (this.projectStructureChanged != null) {
                         this.projectStructureChanged(this);
@@ -1712,16 +1541,9 @@ namespace Europlan.Common {
             }
         }
 
-        private void CmbType_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(CmbType_ConfigureProductFinished);
-            this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.TYPE);
-        }
-
         private void numCircuits_ValueChanged(object sender, EventArgs e) {
             if (this.cmbCircuits.SelectedIndex > 0 || !this.cmbLayDistanceContainsAutomatic) {
                 (this.product.Product as JumbovalProduct).RequestedCircuits = (int)numCircuits.Value;
-                this.product.Product.ConfigureProductFinished += new EventHandler<Product.ConfigureProductFinishedArgs>(NumCircuits_ConfigureProductFinished);
                 this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
                 if (this.projectChanged != null) {
                     this.projectChanged(this);
@@ -1729,10 +1551,9 @@ namespace Europlan.Common {
             }
         }
 
-        private void NumCircuits_ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
-            this.product.Product.ConfigureProductFinished -= new EventHandler<Product.ConfigureProductFinishedArgs>(NumCircuits_ConfigureProductFinished);
+        private void ConfigureProductFinished(object sender, Product.ConfigureProductFinishedArgs e) {
             this.errorMsg = this.product.Product.LastErrorMessage;
-            this.UpdateControl(FieldEnum.CIRCUIT_COUNT);
+            this.SmartUpdateControl();
         }
-	}
+    }
 }

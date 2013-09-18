@@ -72,6 +72,7 @@ namespace Europlan.Common {
         private static double spreizungKuehlMax = 5;                                                    /* TODO sollte gleich bleiben */
 
         private static double automaticCalcWarningArea = 1000.0;
+        private static int maxAutomaticCircuits = 999;
 
 		protected float plannedArea = 0;
 		private float plannedAreaReduced = 0;
@@ -649,6 +650,12 @@ namespace Europlan.Common {
         public static double ConfigAutomaticCalcWarningArea {
             get { return automaticCalcWarningArea; }
             set { automaticCalcWarningArea = value; }
+        }
+
+        [IntProductParameter(999)]
+        public static int ConfigMaxAutomaticCircuits {
+            get { return maxAutomaticCircuits; }
+            set { maxAutomaticCircuits = value; }
         }
 		#endregion Product Parameters
 
@@ -1758,7 +1765,7 @@ namespace Europlan.Common {
 				}
 			}
 
-            int maxCircuits = (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) ? 12 : (this.requestedCircuits.HasValue ? this.requestedCircuits.Value : 999);
+            int maxCircuits = (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) ? 12 : (this.requestedCircuits.HasValue ? this.requestedCircuits.Value : ConfigMaxAutomaticCircuits);
 
 			double[] vorlaufTotal;
 			double[] vorlaufNotIsolated;
