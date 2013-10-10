@@ -1395,8 +1395,32 @@ namespace Europlan.Common {
 
 		private void extendedCorrectionsGrid_CorrectionsEnabledChanged(object sender, EventArgs e) {
 			if (this.ignoreCorrections == 0) {
-#warning TODO update laydistance, rimtype and circuit comboboxes and circuit-text box
-				this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
+                this.ignoreLayDistance++;
+                this.ignoreRimType++;
+                this.ignoreCircuits++;
+                this.cmbLayDistance.SelectedItem = (this.product.Product as JumbovalProduct).RequestedLayDistance;
+                this.cmbRimType.SelectedItem = (this.product.Product as JumbovalProduct).RequestedRimType;
+                if (this.cmbCircuitsContainsAutomatic) {
+                    if ((this.product.Product as JumbovalProduct).RequestedCircuits.HasValue) {
+                        this.cmbCircuits.SelectedIndex = 1;
+                        this.numCircuits.Value = (this.product.Product as JumbovalProduct).RequestedCircuits.Value;
+                        this.numCircuits.Enabled = true;
+                    } else {
+                        this.cmbCircuits.SelectedIndex = 0;
+                        this.numCircuits.Value = (this.product.Product as JumbovalProduct).PlannedCircuitCount;
+                        this.numCircuits.Enabled = false;
+                    }
+                } else {
+                    this.cmbCircuits.SelectedIndex = 0;
+                    if ((this.product.Product as JumbovalProduct).RequestedCircuits.HasValue) {
+                        this.numCircuits.Value = (this.product.Product as JumbovalProduct).RequestedCircuits.Value;
+                    }
+                    this.numCircuits.Enabled = true;
+                }
+                this.ignoreLayDistance--;
+                this.ignoreRimType--;
+                this.ignoreCircuits--;
+                this.product.Product.PlannedProductIsConnection = !this.cbSeparateCircuit.Checked;
 				this.product.Product.StartConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				if (this.projectChanged != null) {
 					this.projectChanged(this);

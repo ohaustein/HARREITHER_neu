@@ -220,11 +220,14 @@ namespace Europlan.Common {
 
 		private void rbExtendedCorrections_CheckedChanged(object sender, EventArgs e) {
 			if (ignoreRadio == 0) {
-				this.CorrectionsEnabled = rbExtendedCorrections.Checked;
-				this.UpdateControl(false, true);
-				if (this.CorrectionsEnabledChanged != null) {
-					this.CorrectionsEnabledChanged(this, EventArgs.Empty);
-				}
+                lock (this.Product.CalculationLock) {
+                    this.CorrectionsEnabled = rbExtendedCorrections.Checked;
+
+                    this.UpdateControl(false, true);
+                    if (this.CorrectionsEnabledChanged != null) {
+                        this.CorrectionsEnabledChanged(this, EventArgs.Empty);
+                    }
+                }
 			}
 		}
 

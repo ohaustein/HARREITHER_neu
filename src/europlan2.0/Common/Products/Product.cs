@@ -1901,5 +1901,11 @@ namespace Europlan.Common {
 				}
 			}
 		}
+
+        private readonly object calculationLock = new object();
+
+        public virtual object CalculationLock {
+            get { return this.calculationLock; }
+        }
 	}
 }

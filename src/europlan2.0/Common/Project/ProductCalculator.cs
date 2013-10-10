@@ -164,7 +164,10 @@ namespace Europlan.Common {
                     currentCalculation = calcStack.Pop();
                 }
             }
-            e.Result = new CalculationResult(currentCalculation.Product, currentCalculation.Token, currentCalculation.Product.ConfigureProduct(currentCalculation.RequestHeatLoad, currentCalculation.RequestCoolLoad, currentCalculation.CalculateHeat, currentCalculation.CalculateCool, currentCalculation.VariableSpreizung));
+
+            lock (currentCalculation.Product.CalculationLock) {
+                e.Result = new CalculationResult(currentCalculation.Product, currentCalculation.Token, currentCalculation.Product.ConfigureProduct(currentCalculation.RequestHeatLoad, currentCalculation.RequestCoolLoad, currentCalculation.CalculateHeat, currentCalculation.CalculateCool, currentCalculation.VariableSpreizung));
+            }
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
