@@ -7,7 +7,8 @@ namespace Europlan.Common {
 	public class VerlegedatenCircuitWrapper {
 
 		private string distributor;
-		private int circuitNumber;
+        private int startCircuitNumber = 0;
+        private int endCircuitNumber = 0;
 		private string name;
 		private double durchfluss;
 		private string area;
@@ -17,12 +18,27 @@ namespace Europlan.Common {
 			set { distributor = value; }
 		}
 
-		public int CircuitNumber {
-			get { return circuitNumber; }
-			set { circuitNumber = value; }
+		public string CircuitNumber {
+			get {
+                if (startCircuitNumber == endCircuitNumber) {
+                    return startCircuitNumber.ToString();
+                } else {
+                    return startCircuitNumber.ToString() + "-" + endCircuitNumber.ToString();
+                }
+            }
 		}
 
-		public string Name {
+        public int StartCircuitNumber {
+            get { return startCircuitNumber; }
+            set { startCircuitNumber = value; }
+        }
+
+        public int EndCircuitNumber {
+            get { return endCircuitNumber; }
+            set { endCircuitNumber = value; }
+        }
+
+        public string Name {
 			get { return name; }
 			set { name = value; }
 		}

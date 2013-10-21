@@ -4879,7 +4879,8 @@ namespace Europlan.Common {
 								if (!circuitCount.ContainsKey(connection.Distributor.Id)) {
 									circuitCount.Add(connection.Distributor.Id, 1);							
 								} 
-								wrapper.CircuitNumber = circuitCount[connection.Distributor.Id]++;	
+								wrapper.StartCircuitNumber = circuitCount[connection.Distributor.Id]++;
+                                wrapper.EndCircuitNumber = wrapper.StartCircuitNumber;
 								if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
 									Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
 									Product otherProduct = con.OtherProduct;
@@ -4940,7 +4941,7 @@ namespace Europlan.Common {
 										wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m"
 									}
 								}
-								wrapperList.Add(wrapper);
+                                wrapperList.Add(wrapper);
 							}
 						}
 					}
@@ -4951,6 +4952,7 @@ namespace Europlan.Common {
             foreach (RegulatorCircuit rc in project.RegulatorCircuits) {
                 foreach (PlannedProduct pp in rc.GetTichelmannConnectedProducts()) {
                     ProductConnection connection = pp.Product.PlannedConnection;
+                    VerlegedatenCircuitWrapper lastWrapper = null;
                     foreach (Circuit c in pp.Product.PlannedCircuits) {
                         if (connection != null && connection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
                             wrapper = new VerlegedatenCircuitWrapper();
@@ -4989,7 +4991,7 @@ namespace Europlan.Common {
                                 circuit = circuit.Replace("%GESCHOSS%", pp.Product.AssociatedRoom.AssociatedFloor.Name);
                                 circuit = circuit.Replace("%RAUMID%", pp.Product.AssociatedRoom.Id);
                                 circuit = circuit.Replace("%RAUMNAME%", pp.Product.AssociatedRoom.Name);
-                                circuit = circuit.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                                // %HK% will be replaced when no more HKs to add to this wrapper are found
                                 wrapper.Name += circuit;
                             } else {
                                 string circuit = EuroplanRes.ProjectReport_SystemGeschoss;
@@ -5004,7 +5006,8 @@ namespace Europlan.Common {
                             if (!circuitCountTichelmann.ContainsKey(connection.RegulatorCircuit.Id)) {
                                 circuitCountTichelmann.Add(connection.RegulatorCircuit.Id, 1);
                             }
-                            wrapper.CircuitNumber = circuitCountTichelmann[connection.RegulatorCircuit.Id]++;
+                            wrapper.StartCircuitNumber = circuitCountTichelmann[connection.RegulatorCircuit.Id]++;
+                            wrapper.EndCircuitNumber = wrapper.StartCircuitNumber;
                             if (pp.Product.ConnectedCircuits.ContainsKey(c.NrOfCircuit)) {
                                 Circuit.CircuitConnection con = pp.Product.ConnectedCircuits[c.NrOfCircuit];
                                 Product otherProduct = con.OtherProduct;
@@ -5065,8 +5068,23 @@ namespace Europlan.Common {
                                     wrapper.Area += "\n" + Math.Round(pipe.Ruecklauf, 1) + EuroplanRes.Unit_Meter; // "m"
                                 }
                             }
-                            wrapperList.Add(wrapper);
+                            if (lastWrapper != null &&
+                                lastWrapper.Area == wrapper.Area &&
+                                lastWrapper.Distributor == wrapper.Distributor &&
+                                lastWrapper.Durchfluss == wrapper.Durchfluss &&
+                                lastWrapper.Name == wrapper.Name) {
+                                lastWrapper.EndCircuitNumber = wrapper.EndCircuitNumber;
+                            } else {
+                                if (lastWrapper != null) {
+                                    lastWrapper.Name = lastWrapper.Name.Replace("%HK%", lastWrapper.CircuitNumber);
+                                }
+                                wrapperList.Add(wrapper);
+                                lastWrapper = wrapper;
+                            }
                         }
+                    }
+                    if (lastWrapper != null) {
+                        lastWrapper.Name = lastWrapper.Name.Replace("%HK%", lastWrapper.CircuitNumber);
                     }
                 }
             }

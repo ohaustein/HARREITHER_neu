@@ -237,10 +237,14 @@ namespace Europlan.Common {
 
         private void cmbMaximaldurchfluss_SelectedIndexChanged(object sender, EventArgs e) {
             distributor.DistributorType = (Distributor.DistributorTypeEnum)this.cmbMaximaldurchfluss.SelectedItem;
-            numMaxCircuits.Maximum = distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 ? 8 : 12;
-            if (distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 && distributor.MaxCircuits > 8) {
-                distributor.MaxCircuits = 8;
-                numMaxCircuits.Value = 8;
+            if (distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480) {
+                if (distributor.MaxCircuits > 8) {
+                    distributor.MaxCircuits = 8;
+                    numMaxCircuits.Value = 8;
+                }
+                numMaxCircuits.Maximum = 8;
+            } else {
+                numMaxCircuits.Maximum = 12;
             }
 #warning TODO: maybe all products that are connected to this distributor should be recalculated???
             if (this.projectChanged != null) {
