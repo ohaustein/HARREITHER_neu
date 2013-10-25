@@ -60,7 +60,8 @@ namespace Europlan.Common {
 				this.distributor = this.Tag as Distributor;
 				this.lblId.Text = distributor.Id;
 				this.txtName.Text = distributor.Name;
-				this.numMaxCircuits.Value = distributor.MaxCircuits;
+                this.numMaxCircuits.Maximum = distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 ? 8 : 12;
+                this.numMaxCircuits.Value = distributor.MaxCircuits;
 				this.numAdditionalCircuits.Value = distributor.AdditionalCircuits;
 				this.numZusStellantriebe.Value = distributor.ZusaetzlicheStellantriebe;
 				this.chkFlansch.Checked = distributor.FlanschKugelHaehne;
@@ -91,7 +92,6 @@ namespace Europlan.Common {
 				this.lstSystems.Items.Add(EuroplanRes.DistributorPanel_Decke, distributor.UseForCeiling);
 				this.cmbCircuit.SelectedItem = distributor.RegulatorCircuit;
                 this.cmbMaximaldurchfluss.SelectedItem = distributor.DistributorType;
-                this.numMaxCircuits.Maximum = distributor.DistributorType == Distributor.DistributorTypeEnum.DT_480 ? 8 : 12;
 				this.cmbAnschlussHollaender.SelectedItem = distributor.AnschlussHollaender;
 
 				this.btnGraphicalPosition.Enabled = distributor.AssociatedFloor.AssociatedPlanId != null && distributor.AssociatedFloor.AssociatedPlanId != "";
