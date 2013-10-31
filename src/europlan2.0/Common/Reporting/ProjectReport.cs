@@ -1708,6 +1708,8 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					normWaermeBedarf = room.NormalizedHeatLoad;
+                    normWaermeBedarfBereinigt = 0;
+                    qHeat = 0;
 					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						normWaermeBedarfBereinigt += plannedProduct.Product.PlannedHeizlastBereinigung;
 						qHeat += plannedProduct.PlannedHeatLoad;
@@ -1738,7 +1740,9 @@ namespace Europlan.Common {
 			foreach (Floor floor in project.Floors) {
 				foreach (Room room in floor.Rooms) {
 					normKuehlBedarf = room.NormalizedCoolLoad;
-					foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
+                    normKuehlBedarfBereinigt = 0;
+                    qCool = 0;
+                    foreach (PlannedProduct plannedProduct in room.PlannedProducts) {
 						normKuehlBedarfBereinigt += plannedProduct.Product.PlannedKuehllastBereinigung;
 						qCool += plannedProduct.PlannedCoolLoad;
 					}

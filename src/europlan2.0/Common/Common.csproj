@@ -837,6 +837,7 @@
     <Compile Include="Reporting\ReportHelper.cs" />
     <Compile Include="SerializableDictionary.cs" />
     <Compile Include="Settings\SettingsXpress.cs" />
+    <Compile Include="SiUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConstructionEditor\ConstructionEditor.resx">

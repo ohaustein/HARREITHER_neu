@@ -692,16 +692,16 @@ namespace Europlan.Common {
 				}
 
 				// General
-				this.lblQSollHeat.Text = Math.Round(this.product.RequestedHeatLoad, 2).ToString();
-				this.lblQSollCool.Text = Math.Round(this.product.RequestedCoolLoad, 2).ToString();
-				this.lblQkSollHeat.Text = Math.Round(this.product.RequestedHeatLoadPerSqM, 2).ToString();
-				this.lblQkSollCool.Text = this.product.PlannedArea.HasValue ? Math.Round(this.product.RequestedCoolLoad / this.product.PlannedArea.Value, 2).ToString() : "0";
-				this.lblQfbhHeat.Text = Math.Round(this.product.PlannedHeatLoad, 2).ToString();
-				this.lblQfbhCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
+				this.lblQSollHeat.Text = SiUtils.ValueToString(this.product.RequestedHeatLoad, 2, 4);
+                this.lblQSollCool.Text = SiUtils.ValueToString(this.product.RequestedCoolLoad, 2, 4);
+                this.lblQkSollHeat.Text = SiUtils.ValueToString(this.product.RequestedHeatLoadPerSqM, 2, 4);
+                this.lblQkSollCool.Text = this.product.PlannedArea.HasValue ? SiUtils.ValueToString(this.product.RequestedCoolLoad / this.product.PlannedArea.Value, 2, 4) : "0";
+                this.lblQfbhHeat.Text = SiUtils.ValueToString(this.product.PlannedHeatLoad, 2, 4);
+				this.lblQfbhCool.Text = SiUtils.ValueToString(this.product.PlannedCoolLoad, 2, 4);
 				double qRestHeat = this.product.PlannedHeatLoad - this.product.RequestedHeatLoad;
 				double qRestCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
-				this.lblQRestHeat.Text = Math.Round(qRestHeat, 2).ToString("+0.00;-0.00");
-				this.lblQRestCool.Text = Math.Round(qRestCool, 2).ToString("+0.00;-0.00");
+                this.lblQRestHeat.Text = SiUtils.ValueToString(qRestHeat, 2, 4, "+0.0#;-0.0#");
+                this.lblQRestCool.Text = SiUtils.ValueToString(qRestCool, 2, 4, "+0.0#;-0.0#");
 
 				// Randzone
 				if (complete && jvProduct.PlannedRimType.HasValue) {
@@ -736,8 +736,8 @@ namespace Europlan.Common {
 					this.lblRimBCool.Text = jvProduct.PlannedRimWidth.ToString();
 					this.lblRimTfbHeat.Text = Math.Round(jvProduct.PlannedFloorTemperatureHeatRim, 1).ToString();
 					this.lblRimTfbCool.Text = Math.Round(jvProduct.PlannedFloorTemperatureCoolRim, 1).ToString();
-					this.lblRimQHeat.Text = Math.Round(jvProduct.PlannedHeatLoadRim, 0).ToString();
-					this.lblRimQCool.Text = Math.Round(jvProduct.PlannedCoolLoadRim, 0).ToString();
+                    this.lblRimQHeat.Text = SiUtils.ValueToString(jvProduct.PlannedHeatLoadRim, 0, 4);
+                    this.lblRimQCool.Text = SiUtils.ValueToString(jvProduct.PlannedCoolLoadRim, 0, 4);
 				} else {
 					this.lblRimVaHeat.Text = "";
                     this.lblRimVaCool.Text = "";
@@ -783,8 +783,8 @@ namespace Europlan.Common {
 					this.lblResidenceACool.Text = Math.Round(jvProduct.PlannedAreaResidenceHeated, 1).ToString();
 					this.lblResidenceTfbHeat.Text = Math.Round(jvProduct.PlannedFloorTemperatureHeatResidence, 1).ToString();
 					this.lblResidenceTfbCool.Text = Math.Round(jvProduct.PlannedFloorTemperatureCoolResidence, 1).ToString();
-					this.lblResidenceQHeat.Text = Math.Round(jvProduct.PlannedHeatLoadResidence, 0).ToString();
-					this.lblResidenceQCool.Text = Math.Round(jvProduct.PlannedCoolLoadResidence, 0).ToString();
+                    this.lblResidenceQHeat.Text = SiUtils.ValueToString(jvProduct.PlannedHeatLoadResidence, 0, 4);
+                    this.lblResidenceQCool.Text = SiUtils.ValueToString(jvProduct.PlannedCoolLoadResidence, 0, 4);
 				} else {
 					this.lblResidenceVaHeat.Text = "";
 					this.lblResidenceVaCool.Text = "";
@@ -800,8 +800,8 @@ namespace Europlan.Common {
 				// anbindung
 				this.lblConnectionAHeat.Text = Math.Round(jvProduct.PlannedRemoveArea, 1).ToString();
 				this.lblConnectionACool.Text = Math.Round(jvProduct.PlannedRemoveArea, 1).ToString();
-				this.lblConnectionQHeat.Text = Math.Round(jvProduct.PlannedHeatLoadAnbindung, 0).ToString();
-				this.lblConnectionQCool.Text = Math.Round(jvProduct.PlannedCoolLoadAnbindung, 0).ToString();
+                this.lblConnectionQHeat.Text = SiUtils.ValueToString(jvProduct.PlannedHeatLoadAnbindung, 0, 4);
+                this.lblConnectionQCool.Text = SiUtils.ValueToString(jvProduct.PlannedCoolLoadAnbindung, 0, 4);
 
 				// heizkreis
 				this.lblCircuitCountHeat.Text = jvProduct.PlannedCircuitCount.ToString();

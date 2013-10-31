@@ -21401,6 +21401,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to k.
+        /// </summary>
+        internal static string Unit_Prefix_Kilo {
+            get {
+                return ResourceManager.GetString("Unit_Prefix_Kilo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M.
+        /// </summary>
+        internal static string Unit_Prefix_Mega {
+            get {
+                return ResourceManager.GetString("Unit_Prefix_Mega", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to %.
         /// </summary>
         internal static string Unit_Prozent {

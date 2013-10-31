@@ -7588,4 +7588,10 @@ Nummer</value>
   <data name="SelectConnectionForProductForm_WarnungGrosserRaumTitel" xml:space="preserve">
     <value>Achtung</value>
   </data>
+  <data name="Unit_Prefix_Kilo" xml:space="preserve">
+    <value>k</value>
+  </data>
+  <data name="Unit_Prefix_Mega" xml:space="preserve">
+    <value>M</value>
+  </data>
 </root>
