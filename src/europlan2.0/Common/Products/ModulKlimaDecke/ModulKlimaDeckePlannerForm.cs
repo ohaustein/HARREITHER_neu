@@ -840,7 +840,7 @@ namespace Europlan.Common.Products {
 			List<Circuit> circuits = (this.modulKlimaDeckePlanner.Product.ContainsModules ? this.modulKlimaDeckePlanner.Product.PlannedCircuits : new List<Circuit>());
 
 			int dec = this.newVisible ? 1 : 0;
-			this.newVisible = this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA && this.modulKlimaDeckePlanner.Product.PlannedCircuits.Count < 12;
+            this.newVisible = this.modulKlimaDeckePlanner.Mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_LAYOUT_ADD_AREA && (this.modulKlimaDeckePlanner.Product.PlannedCircuits.Count < 12 || (this.modulKlimaDeckePlanner.Product.PlannedConnection != null && this.modulKlimaDeckePlanner.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN));
 			ignoreListChange++;
 
 			if (updateCircuits) {

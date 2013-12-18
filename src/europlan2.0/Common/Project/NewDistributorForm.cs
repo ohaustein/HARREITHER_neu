@@ -32,19 +32,8 @@ namespace Europlan.Common {
 		}
 
 		private void Inititalize() {
-			Project project = Project.Instance;
-			List<string> distributorIds = new List<string>();
-			foreach (Floor floor in project.Floors) {
-				foreach (Distributor distributor in floor.Distributors) {
-					distributorIds.Add(distributor.Id);
-				}
-			}
-			int count = distributorIds.Count + 1;
-			while (distributorIds.Contains("VT" + String.Format("{0:00}", count))) {
-				count++;
-			}
-			txtId.Text = "VT" + String.Format("{0:00}", count);
-			foreach (RegulatorCircuit circuit in project.RegulatorCircuits) {
+			txtId.Text = Distributor.NewDistributorId;
+			foreach (RegulatorCircuit circuit in Project.Instance.RegulatorCircuits) {
 				cmbCircuit.Items.Add(circuit);
 			}
 			if (cmbCircuit.Items.Count > 0) {

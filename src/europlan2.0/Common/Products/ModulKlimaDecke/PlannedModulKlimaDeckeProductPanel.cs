@@ -476,7 +476,7 @@ namespace Europlan.Common {
 						btnAddHk.Enabled = false;
 						btnRemoveHk.Enabled = false;
 					} else {
-						btnAddHk.Enabled = lstCircuits.Items.Count < 12;
+                        btnAddHk.Enabled = lstCircuits.Items.Count < 12 || (this.product != null && this.product.Product != null && this.product.Product.PlannedConnection != null && this.product.Product.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN);
 						btnRemoveHk.Enabled = lstCircuits.Items.Count > 1;
 					}
 				}
@@ -1202,6 +1202,17 @@ namespace Europlan.Common {
 			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, true);
 			form.ShowDialog();
 		}
+
+        private void btnPartitionSystem_Click(object sender, EventArgs e) {
+            PartitionSystemForm form = new PartitionSystemForm(this.product, this.product.Product.PlannedConnection.RegulatorCircuit);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK) {
+                if (this.projectStructureChanged != null) {
+                    this.projectStructureChanged(this);
+                }
+                this.UpdateControl(true);
+            }
+        }
 		
 	}
 }

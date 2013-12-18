@@ -235,13 +235,13 @@ namespace Europlan.Common {
 		[System.Xml.Serialization.XmlIgnore]
 		public float RequestedHeatLoadPercentage {
 			get {
-				if (this.Product.AssociatedRoom.HeatLoad == 0) {
+                if (this.Product.AssociatedRoom.NormalizedHeatLoad == 0) {
 					return 0;
 				}
 				return (float)Math.Round(this.RequestedHeatLoad * 100 / this.Product.AssociatedRoom.NormalizedHeatLoad, 1);
 			}
 			set {
-				if (this.Product.AssociatedRoom.HeatLoad != 0) {
+                if (this.NecessaryHeatLoad != 0) {
 					this.RequestedHeatLoad = this.Product.AssociatedRoom.NormalizedHeatLoad * value / 100;
 				}
 			}
@@ -250,7 +250,7 @@ namespace Europlan.Common {
 		[System.Xml.Serialization.XmlIgnore]
 		public float RequestedCoolLoadPercentage {
 			get {
-				if (this.Product.AssociatedRoom.CoolLoad == 0) {
+                if (this.Product.AssociatedRoom.NormalizedCoolLoad == 0) {
 					return 0;
 				}
 				return (float)Math.Round(this.RequestedCoolLoad * 100 / this.Product.AssociatedRoom.NormalizedCoolLoad, 1);

@@ -169,6 +169,7 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnPartitionSystem = new System.Windows.Forms.Button();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -963,6 +964,7 @@ namespace Europlan.Common {
             // 
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.btnPartitionSystem);
             this.groupBox9.Controls.Add(this.btnGraphicalAnbindleitungen);
             this.groupBox9.Controls.Add(this.chkStellAntriebe);
             this.groupBox9.Controls.Add(this.btnDistributor);
@@ -988,7 +990,7 @@ namespace Europlan.Common {
             // chkStellAntriebe
             // 
             this.chkStellAntriebe.AutoSize = true;
-            this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+            this.chkStellAntriebe.Location = new System.Drawing.Point(401, 15);
             this.chkStellAntriebe.Name = "chkStellAntriebe";
             this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
             this.chkStellAntriebe.TabIndex = 31;
@@ -998,7 +1000,7 @@ namespace Europlan.Common {
             // 
             // btnDistributor
             // 
-            this.btnDistributor.Location = new System.Drawing.Point(388, 13);
+            this.btnDistributor.Location = new System.Drawing.Point(348, 13);
             this.btnDistributor.Name = "btnDistributor";
             this.btnDistributor.Size = new System.Drawing.Size(25, 20);
             this.btnDistributor.TabIndex = 30;
@@ -1010,13 +1012,13 @@ namespace Europlan.Common {
             // 
             this.lblDistributor.Location = new System.Drawing.Point(6, 16);
             this.lblDistributor.Name = "lblDistributor";
-            this.lblDistributor.Size = new System.Drawing.Size(151, 13);
+            this.lblDistributor.Size = new System.Drawing.Size(136, 13);
             this.lblDistributor.TabIndex = 4;
             this.lblDistributor.Text = "Verteileranschluﬂ:";
             // 
             // txtDistributor
             // 
-            this.txtDistributor.Location = new System.Drawing.Point(188, 13);
+            this.txtDistributor.Location = new System.Drawing.Point(148, 13);
             this.txtDistributor.Name = "txtDistributor";
             this.txtDistributor.ReadOnly = true;
             this.txtDistributor.Size = new System.Drawing.Size(194, 20);
@@ -1125,7 +1127,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(704, 33);
+            this.btnGraphical.Location = new System.Drawing.Point(698, 33);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -1148,7 +1150,7 @@ namespace Europlan.Common {
             this.lstError.Location = new System.Drawing.Point(16, 557);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(845, 30);
+            this.lstError.Size = new System.Drawing.Size(839, 30);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1696,7 +1698,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(704, 4);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(698, 4);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -1756,7 +1758,7 @@ namespace Europlan.Common {
             this.dgvModules.Boden = false;
             this.dgvModules.Location = new System.Drawing.Point(340, 43);
             this.dgvModules.Name = "dgvModules";
-            this.dgvModules.Size = new System.Drawing.Size(418, 212);
+            this.dgvModules.Size = new System.Drawing.Size(412, 212);
             this.dgvModules.TabIndex = 44;
             this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
             // 
@@ -1860,6 +1862,17 @@ namespace Europlan.Common {
             this.lblTitle.Size = new System.Drawing.Size(191, 24);
             this.lblTitle.TabIndex = 83;
             this.lblTitle.Text = "Modul Klima-Decke";
+            // 
+            // btnPartitionSystem
+            // 
+            this.btnPartitionSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPartitionSystem.Location = new System.Drawing.Point(560, 12);
+            this.btnPartitionSystem.Name = "btnPartitionSystem";
+            this.btnPartitionSystem.Size = new System.Drawing.Size(157, 23);
+            this.btnPartitionSystem.TabIndex = 40;
+            this.btnPartitionSystem.Text = "auf Verteiler aufteilen";
+            this.btnPartitionSystem.UseVisualStyleBackColor = true;
+            this.btnPartitionSystem.Click += new System.EventHandler(this.btnPartitionSystem_Click);
             // 
             // PlannedModulKlimaDeckeProductPanel
             // 
@@ -2041,5 +2054,6 @@ namespace Europlan.Common {
 		private System.Windows.Forms.RadioButton rbLayoutTable;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.Button btnGraphicalAnbindleitungen;
+        private System.Windows.Forms.Button btnPartitionSystem;
 	}
 }

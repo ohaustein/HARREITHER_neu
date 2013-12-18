@@ -1625,7 +1625,14 @@ namespace Europlan.Common {
 			}
 		}
 
-		bool secondConfig = false;
+		private bool secondConfig = false;
+
+        private bool partitonCalculation = false;
+        [XmlIgnore]
+        public bool PartitionCalculation {
+            get { return this.partitonCalculation; }
+            set { this.partitonCalculation = value; }
+        }
 
 		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
 			this.requestedHeatLoad = requestedHeatLoad;
@@ -1765,7 +1772,7 @@ namespace Europlan.Common {
 				}
 			}
 
-            int maxCircuits = (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) ? 12 : (this.requestedCircuits.HasValue ? this.requestedCircuits.Value : ConfigMaxAutomaticCircuits);
+            int maxCircuits = (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && !this.PartitionCalculation) ? 12 : (this.requestedCircuits.HasValue ? this.requestedCircuits.Value : ConfigMaxAutomaticCircuits);
 
 			double[] vorlaufTotal;
 			double[] vorlaufNotIsolated;

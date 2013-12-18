@@ -15624,6 +15624,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to %SYSTEM% %RAUMNAME% - %NUMBER%/%TOTAL%.
+        /// </summary>
+        internal static string PartitionSystemForm_NewDistributorName {
+            get {
+                return ResourceManager.GetString("PartitionSystemForm_NewDistributorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bereich auswählen.
         /// </summary>
         internal static string PdfRegionPickerForm_Auswaehlen {

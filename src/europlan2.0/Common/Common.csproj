@@ -425,6 +425,12 @@
     <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.Designer.cs">
       <DependentUpon>SelectMoveTargetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\PartitionSystemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\PartitionSystemForm.Designer.cs">
+      <DependentUpon>PartitionSystemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\ProductCalculator.cs" />
     <Compile Include="Project\ConnectionDrawer.cs">
       <SubType>Component</SubType>
@@ -1242,6 +1248,10 @@
     <EmbeddedResource Include="Project\NewGraphicalProductToProductConnection.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewGraphicalProductToProductConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\PartitionSystemForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PartitionSystemForm.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="Icons\default.png" />
     <Content Include="Reporting\Harreither.png">

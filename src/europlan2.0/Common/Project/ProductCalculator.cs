@@ -11,7 +11,8 @@ namespace Europlan.Common {
 
         private BackgroundWorker worker;
 
-        private Stack<CalculationArguments> calcStack = new Stack<CalculationArguments>();
+        //private Stack<CalculationArguments> calcStack = new Stack<CalculationArguments>();
+        private Queue<CalculationArguments> calcQueue = new Queue<CalculationArguments>();
 
         private CalculationArguments currentCalculation = null;
 
@@ -144,28 +145,30 @@ namespace Europlan.Common {
 
         public int CalculateProduct(Product product, double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
             CalculationArguments args = new CalculationArguments(product, requestedHeatLoad, requestedCoolLoad, calculateHeat, calculateCool, variableSpreizung);
-            lock (calcStack) {
-                calcStack.Push(args);
-            }
-            if (!worker.IsBusy) {
-                worker.RunWorkerAsync();
+            lock (calcQueue) {
+                System.Console.WriteLine("adding product to calculate: " + product.FullName + " (" + args.Token + ")");
+                calcQueue.Enqueue(args);
+                if (!worker.IsBusy) {
+                    worker.RunWorkerAsync();
+                }
             }
             return args.Token;
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e) {
-            lock (calcStack) {
-                if (calcStack.Count == 0) {
+            lock (calcQueue) {
+                if (calcQueue.Count == 0) {
                     return;
                 }
-                currentCalculation = calcStack.Pop();
+                currentCalculation = calcQueue.Dequeue();
                 // if multiple consecutive calculations for the same product are on the stack skip all but the last one
-                while (calcStack.Count > 0 && calcStack.Peek().Product == currentCalculation.Product) {
-                    currentCalculation = calcStack.Pop();
+                while (calcQueue.Count > 0 && calcQueue.Peek().Product == currentCalculation.Product) {
+                    currentCalculation = calcQueue.Dequeue();
                 }
             }
 
             lock (currentCalculation.Product.CalculationLock) {
+                System.Console.WriteLine("calculating product: " + currentCalculation.Product.FullName + " (" + currentCalculation.Token + ")");
                 e.Result = new CalculationResult(currentCalculation.Product, currentCalculation.Token, currentCalculation.Product.ConfigureProduct(currentCalculation.RequestHeatLoad, currentCalculation.RequestCoolLoad, currentCalculation.CalculateHeat, currentCalculation.CalculateCool, currentCalculation.VariableSpreizung));
             }
         }
@@ -175,8 +178,16 @@ namespace Europlan.Common {
                 CalculationResult result = (CalculationResult)e.Result;
                 this.OnCalculationFinished(result.Product, result.CalculationOk, result.Token);
             }
-            if (calcStack.Count > 0) {
-                worker.RunWorkerAsync();
+            lock (calcQueue) {
+                System.Console.WriteLine("finished calculation for product: " + ((CalculationResult)e.Result).Product.FullName + " (" + ((CalculationResult)e.Result).Token + ")");
+                if (calcQueue.Count > 0) {
+                    worker = new BackgroundWorker();
+                    worker.WorkerSupportsCancellation = false;
+                    worker.WorkerReportsProgress = false;
+                    worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+                    worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                    worker.RunWorkerAsync();
+                }
             }
         }
 

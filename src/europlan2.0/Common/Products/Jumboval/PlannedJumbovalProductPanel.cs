@@ -1579,5 +1579,16 @@ namespace Europlan.Common {
             this.errorMsg = this.product.Product.LastErrorMessage;
             this.SmartUpdateControl();
         }
+
+        private void btnPartitionSystem_Click(object sender, EventArgs e) {
+            PartitionSystemForm form = new PartitionSystemForm(this.product, this.product.Product.PlannedConnection.RegulatorCircuit);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK) {
+                if (this.projectStructureChanged != null) {
+                    this.projectStructureChanged(this);
+                }
+                this.UpdateControl(true);
+            }
+        }
     }
 }

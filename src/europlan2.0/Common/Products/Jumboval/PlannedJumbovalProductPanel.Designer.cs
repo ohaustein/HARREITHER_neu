@@ -97,6 +97,7 @@ namespace Europlan.Common {
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnPartitionSystem = new System.Windows.Forms.Button();
             this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
             this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
             this.btnDistributor = new System.Windows.Forms.Button();
@@ -1258,6 +1259,7 @@ namespace Europlan.Common {
             // 
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.btnPartitionSystem);
             this.groupBox9.Controls.Add(this.btnGraphicalAnbindleitungen);
             this.groupBox9.Controls.Add(this.chkStellAntriebe);
             this.groupBox9.Controls.Add(this.btnDistributor);
@@ -1268,6 +1270,17 @@ namespace Europlan.Common {
             this.groupBox9.Size = new System.Drawing.Size(886, 41);
             this.groupBox9.TabIndex = 34;
             this.groupBox9.TabStop = false;
+            // 
+            // btnPartitionSystem
+            // 
+            this.btnPartitionSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPartitionSystem.Location = new System.Drawing.Point(560, 12);
+            this.btnPartitionSystem.Name = "btnPartitionSystem";
+            this.btnPartitionSystem.Size = new System.Drawing.Size(157, 23);
+            this.btnPartitionSystem.TabIndex = 39;
+            this.btnPartitionSystem.Text = "auf Verteiler aufteilen";
+            this.btnPartitionSystem.UseVisualStyleBackColor = true;
+            this.btnPartitionSystem.Click += new System.EventHandler(this.btnPartitionSystem_Click);
             // 
             // btnGraphicalAnbindleitungen
             // 
@@ -1283,7 +1296,7 @@ namespace Europlan.Common {
             // chkStellAntriebe
             // 
             this.chkStellAntriebe.AutoSize = true;
-            this.chkStellAntriebe.Location = new System.Drawing.Point(441, 15);
+            this.chkStellAntriebe.Location = new System.Drawing.Point(401, 15);
             this.chkStellAntriebe.Name = "chkStellAntriebe";
             this.chkStellAntriebe.Size = new System.Drawing.Size(146, 17);
             this.chkStellAntriebe.TabIndex = 37;
@@ -1293,7 +1306,7 @@ namespace Europlan.Common {
             // 
             // btnDistributor
             // 
-            this.btnDistributor.Location = new System.Drawing.Point(388, 13);
+            this.btnDistributor.Location = new System.Drawing.Point(348, 13);
             this.btnDistributor.Name = "btnDistributor";
             this.btnDistributor.Size = new System.Drawing.Size(25, 20);
             this.btnDistributor.TabIndex = 36;
@@ -1305,13 +1318,13 @@ namespace Europlan.Common {
             // 
             this.lblDistributor.Location = new System.Drawing.Point(6, 16);
             this.lblDistributor.Name = "lblDistributor";
-            this.lblDistributor.Size = new System.Drawing.Size(151, 13);
+            this.lblDistributor.Size = new System.Drawing.Size(136, 13);
             this.lblDistributor.TabIndex = 4;
             this.lblDistributor.Text = "Verteileranschluﬂ:";
             // 
             // txtDistributor
             // 
-            this.txtDistributor.Location = new System.Drawing.Point(188, 13);
+            this.txtDistributor.Location = new System.Drawing.Point(148, 13);
             this.txtDistributor.Name = "txtDistributor";
             this.txtDistributor.ReadOnly = true;
             this.txtDistributor.Size = new System.Drawing.Size(194, 20);
@@ -2521,5 +2534,6 @@ namespace Europlan.Common {
         private System.Windows.Forms.ComboBox cmbType;
         private NumericBox numCircuits;
         private System.Windows.Forms.ComboBox cmbCircuits;
+        private System.Windows.Forms.Button btnPartitionSystem;
 	}
 }

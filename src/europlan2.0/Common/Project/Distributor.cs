@@ -1130,5 +1130,22 @@ namespace Europlan.Common {
 			}
 		}
 
+        public static string NewDistributorId {
+            get {
+                List<string> distributorIds = new List<string>();
+                foreach (Floor floor in Project.Instance.Floors) {
+                    foreach (Distributor distributor in floor.Distributors) {
+                        distributorIds.Add(distributor.Id);
+                    }
+                }
+                int count = distributorIds.Count + 1;
+                while (distributorIds.Contains("VT" + String.Format("{0:00}", count))) {
+                    count++;
+                }
+                return "VT" + String.Format("{0:00}", count);
+            }
+        }
+
+
 	}
 }
