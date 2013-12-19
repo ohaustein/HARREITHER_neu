@@ -230,8 +230,8 @@ namespace Europlan.Common {
 
                     int circuitsPerSystem = (int)this.numMaxCircuits.Value;
 
-                    float roomTempBelowHeat = this.jvOriginalProduct.PlannedRoomTemperatureBelowHeat;
-                    float roomTempBelowCool = this.jvOriginalProduct.PlannedRoomTemperatureBelowCool;
+                    float roomTempBelowHeat = this.mkdOriginalProduct.PlannedRoomTemperatureBelowHeat;
+                    float roomTempBelowCool = this.mkdOriginalProduct.PlannedRoomTemperatureBelowCool;
 
                     int newSystemCount = (int)Math.Ceiling(((double)circuitsLeft) / ((double)circuitsPerSystem));
                     string distributorNameTemplate = EuroplanRes.PartitionSystemForm_NewDistributorName.Replace("%SYSTEM%", this.mkdOriginalProduct.Name).Replace("%RAUMNAME%", room.Name).Replace("%TOTAL%", newSystemCount.ToString());

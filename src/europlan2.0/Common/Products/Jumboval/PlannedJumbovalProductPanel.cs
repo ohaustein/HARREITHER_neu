@@ -393,6 +393,8 @@ namespace Europlan.Common {
 					}
 				}*/
 
+                this.btnPartitionSystem.Visible = jvProduct.PlannedConnection != null && jvProduct.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && !graphicalMode && !jvProduct.PlannedCorrections;
+
                 this.numSchienenabstand.MinValue = (decimal)JumbovalProduct.ConfigSchienenabstandMin;
                 this.numSchienenabstand.MaxValue = (decimal)JumbovalProduct.ConfigSchienenabstandMax;
 

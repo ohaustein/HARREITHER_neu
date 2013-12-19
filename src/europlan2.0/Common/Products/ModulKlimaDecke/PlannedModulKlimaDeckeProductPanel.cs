@@ -280,6 +280,8 @@ namespace Europlan.Common {
 					}
 				}
 
+                this.btnPartitionSystem.Visible = mdProduct.PlannedConnection != null && mdProduct.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN && !graphicalMode;
+
 				if ((skipFields & FieldEnum.LAYOUT_TYPE) == FieldEnum.NONE) {
 					if (graphicalMode) {
 						this.rbLayoutGraphical.Checked = true;
