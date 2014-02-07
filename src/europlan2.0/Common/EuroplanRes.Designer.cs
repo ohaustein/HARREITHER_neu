@@ -14985,6 +14985,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bei Tichelmann-Verteilung sind Verrohrungen hinsichtlich Durchfluss und Druckverlust manuell zu planen.
+        /// </summary>
+        internal static string ModulKlimaDeckeProduct_NotificationTichelmann {
+            get {
+                return ResourceManager.GetString("ModulKlimaDeckeProduct_NotificationTichelmann", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Das System ist an einen Verteiler der Serie %TYPE% angeschlossen, sollte jedoch an einen Verteiler der Serie VOHxx (Maximaldurchfluß je Gruppe: 8 l/min) angeschlossen werden.
         /// </summary>
         internal static string ModulKlimaDeckeProduct_NotificationVerteiler {

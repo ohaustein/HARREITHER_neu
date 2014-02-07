@@ -1393,6 +1393,14 @@ namespace Europlan.Common {
                         }
                     }
                 }
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
+                    if (notification == null) {
+                        notification = "";
+                    } else {
+                        notification += "\n";
+                    }
+                    notification += EuroplanRes.ModulKlimaDeckeProduct_NotificationTichelmann;
+                }
                 return notification;
 			}
 		}

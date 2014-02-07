@@ -7597,4 +7597,7 @@ Nummer</value>
   <data name="PartitionSystemForm_NewDistributorName" xml:space="preserve">
     <value>%SYSTEM% %RAUMNAME% - %NUMBER%/%TOTAL%</value>
   </data>
+  <data name="ModulKlimaDeckeProduct_NotificationTichelmann" xml:space="preserve">
+    <value>Bei Tichelmann-Verteilung sind Verrohrungen hinsichtlich Durchfluss und Druckverlust manuell zu planen</value>
+  </data>
 </root>
