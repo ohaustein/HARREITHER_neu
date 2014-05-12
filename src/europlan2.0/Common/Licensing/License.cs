@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Europlan.Licensing {
 	[XmlRoot("license")]
-	public class License : AbstractLicense<LicensedModule, LicensedSystem> {
+	public class License : AbstractLicense<LicensedModule, LicensedSystem>, ILicense {
 
 		protected string signature = "";
 
@@ -44,5 +44,24 @@ namespace Europlan.Licensing {
 			XmlSerializer serializer = new XmlSerializer(typeof(License));
 			serializer.Serialize(stream, this);
 		}
-	}
+
+        public License Data {
+            get { return this; }
+        }
+    }
+
+    public class NoLicense : ILicense {
+
+        public bool IsValid {
+            get { return false; }
+        }
+
+        public bool IsModuleEnabled(string moduleName) {
+            return false;
+        }
+
+        public License Data {
+            get { return null; }
+        }
+    }
 }

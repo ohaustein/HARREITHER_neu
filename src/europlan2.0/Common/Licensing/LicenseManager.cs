@@ -37,7 +37,7 @@ namespace Europlan.Licensing {
 			}
 		}
 
-		private License license = null;
+		private ILicense license = null;
 		private string dataDirPath;
 
 		private LicenseManager() {
@@ -50,7 +50,7 @@ namespace Europlan.Licensing {
 			if (File.Exists(licensePath)) {
 				try {
 					using (Stream s = new FileStream(licensePath, FileMode.Open)) {
-						this.license = License.LoadLicense(s);
+						this.license = Licensing.License.LoadLicense(s);
 					}
 				} catch (Exception e) {
 					this.license = null;
@@ -62,10 +62,10 @@ namespace Europlan.Licensing {
 #if DEBUG
 			if (this.license == null) {
 				this.license = new License();
-				this.license.LicensedTo = "Development License";
-				this.license.Header = "";
-				this.license.ValidUntil = DateTime.Today.AddYears(1);
-				this.license.Systems.Add(new LicensedSystem());
+				this.license.Data.LicensedTo = "Development License";
+                this.license.Data.Header = "";
+                this.license.Data.ValidUntil = DateTime.Today.AddYears(1);
+                this.license.Data.Systems.Add(new LicensedSystem());
 			}
 #endif
 		}
@@ -76,7 +76,7 @@ namespace Europlan.Licensing {
 				License newLicense;
 				try {
 					using (Stream s = new FileStream(filename, FileMode.Open)) {
-						newLicense = License.LoadLicense(s);
+                        newLicense = Licensing.License.LoadLicense(s);
 					}
 					if (!newLicense.IsValid) {
 						if (!newLicense.IsSignatureValid) {
@@ -116,12 +116,12 @@ namespace Europlan.Licensing {
 			}
 		}
 
-		public License License {
-			get { return this.license; }
+		public ILicense License {
+			get { return this.license == null ? new NoLicense() : this.license; }
 		}
 
 		public bool LicenseFound {
-			get { return this.license != null; }
+			get { return this.license != null && !(this.license is NoLicense); }
 		}
 
 		public bool LicenseFoundAndValid {

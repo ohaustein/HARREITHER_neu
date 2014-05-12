@@ -14,7 +14,7 @@ namespace Europlan.Common {
 
 			this.SetLanguage();
 
-			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(EurovalProduct)));
 			}

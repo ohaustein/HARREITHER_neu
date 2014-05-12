@@ -8,7 +8,19 @@ using System.Threading;
 using Europlan.Common;
 
 namespace Europlan.Licensing {
-	public abstract class AbstractLicense<ModuleType, SystemType> where ModuleType : AbstractLicensedModule where SystemType : AbstractLicensedSystem {
+    public interface ILicense {
+        bool IsValid {
+            get;
+        }
+
+        bool IsModuleEnabled(string moduleName);
+
+        License Data {
+            get;
+        }
+    }
+
+    public abstract class AbstractLicense<ModuleType, SystemType> where ModuleType : AbstractLicensedModule where SystemType : AbstractLicensedSystem {
 
 		protected string licensedTo = "";
 		protected string header = "";

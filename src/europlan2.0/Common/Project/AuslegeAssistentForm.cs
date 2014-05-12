@@ -13,7 +13,7 @@ namespace Europlan.Common {
 		private bool resizing = false;
 		private bool checkStateUpdating = false;
 		private TreeNode rootNode = null;
-		private Licensing.License license = Licensing.LicenseManager.Instance.License;
+		private Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 
 		public AuslegeAssistentForm() {
 			InitializeComponent();

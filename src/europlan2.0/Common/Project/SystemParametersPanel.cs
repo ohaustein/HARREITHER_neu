@@ -382,7 +382,7 @@ namespace Europlan.Common {
 					this.tabSystemParameters.TabPages.Remove(this.tabEuroval);
 				}
 			} else {
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEuroval)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabEuroval)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabEuroval);
@@ -422,7 +422,7 @@ namespace Europlan.Common {
 					this.tabSystemParameters.TabPages.Remove(this.tabEcotherm);
 				}
 			} else {
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdEcotherm)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabEcotherm)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabEcotherm);
@@ -455,7 +455,7 @@ namespace Europlan.Common {
             }
             else
             {
-                Licensing.License license = Licensing.LicenseManager.Instance.License;
+                Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
                 if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdJumboval))
                 {
                     if (this.tabSystemParameters.TabPages.Contains(this.tabJumboval))
@@ -496,7 +496,7 @@ namespace Europlan.Common {
 				if (this.tabSystemParameters.TabPages.Contains(this.tabHitherm)) {
 					this.tabSystemParameters.TabPages.Remove(this.tabHitherm);
 				}
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabHithermDefault)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabHithermDefault);
@@ -510,7 +510,7 @@ namespace Europlan.Common {
 				if (this.tabSystemParameters.TabPages.Contains(this.tabHithermDefault)) {
 					this.tabSystemParameters.TabPages.Remove(this.tabHithermDefault);
 				}
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabHitherm)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabHitherm);
@@ -535,7 +535,7 @@ namespace Europlan.Common {
 				if (this.tabSystemParameters.TabPages.Contains(this.tabHithermCompact)) {
 					this.tabSystemParameters.TabPages.Remove(this.tabHithermCompact);
 				}
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHitherm)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabHithermCompactDefault)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabHithermCompactDefault);
@@ -549,7 +549,7 @@ namespace Europlan.Common {
 				if (this.tabSystemParameters.TabPages.Contains(this.tabHithermCompactDefault)) {
 					this.tabSystemParameters.TabPages.Remove(this.tabHithermCompactDefault);
 				}
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdHithermCompact)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabHithermCompact)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabHithermCompact);
@@ -575,7 +575,7 @@ namespace Europlan.Common {
 					this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
 				}
 			} else {
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
@@ -597,7 +597,7 @@ namespace Europlan.Common {
 					this.tabSystemParameters.TabPages.Remove(this.tabModulDecke);
 				}
 			} else {
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
+				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
 					if (this.tabSystemParameters.TabPages.Contains(this.tabModulDecke)) {
 						this.tabSystemParameters.TabPages.Remove(this.tabModulDecke);

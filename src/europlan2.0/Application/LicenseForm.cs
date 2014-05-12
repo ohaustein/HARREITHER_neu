@@ -63,22 +63,22 @@ namespace Europlan.Application {
 			this.lblLicenseSystemInvalid.Visible = false;
 			this.lblLicenseInvalidUnknown.Visible = false;
 			if (LicenseManager.Instance.LicenseFound) {
-				this.txtLicensedTo.Text = LicenseManager.Instance.License.LicensedTo;
-				this.txtHeader.Text = LicenseManager.Instance.License.Header;
-				this.txtValidUntil.Text = LicenseManager.Instance.License.ValidUntil.ToShortDateString();
+				this.txtLicensedTo.Text = LicenseManager.Instance.License.Data.LicensedTo;
+				this.txtHeader.Text = LicenseManager.Instance.License.Data.Header;
+                this.txtValidUntil.Text = LicenseManager.Instance.License.Data.ValidUntil.ToShortDateString();
 				this.lstModule.Items.Clear();
-				foreach (LicensedModule module in LicenseManager.Instance.License.Modules) {
+                foreach (LicensedModule module in LicenseManager.Instance.License.Data.Modules) {
 					if (module.Enabled) {
 						this.lstModule.Items.Add(new ListViewItem(module.DisplayName));
 					}
 				}
-				if (!LicenseManager.Instance.License.IsSignatureValid) {
+                if (!LicenseManager.Instance.License.Data.IsSignatureValid) {
 					this.lblLicenseSignatureInvalid.Visible = true;
 					this.Height = this.fullHeight;
-				} else if (!LicenseManager.Instance.License.IsSystemValid) {
+                } else if (!LicenseManager.Instance.License.Data.IsSystemValid) {
 					this.lblLicenseSystemInvalid.Visible = true;
 					this.Height = this.fullHeight;
-				} else if (!LicenseManager.Instance.License.IsDateValid) {
+                } else if (!LicenseManager.Instance.License.Data.IsDateValid) {
 					this.lblLicenseDateInvalid.Visible = true;
 					this.Height = this.fullHeight;
 				} else if (!LicenseManager.Instance.License.IsValid) {

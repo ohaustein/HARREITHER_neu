@@ -297,9 +297,9 @@ namespace Europlan.Common {
 			listLabel1.Variables.Add("@ProjectEditor", project.ProjectEditor);
 			listLabel1.Variables.Add("@CoolingEnabled", project.CalculateCoolLoad);
 
-			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 
-			listLabel1.Variables.Add("@PartnerContact", license.Header.Replace("\r", ""));
+			listLabel1.Variables.Add("@PartnerContact", license.Data.Header.Replace("\r", ""));
 			listLabel1.Variables.Add("@ProgramVersion", project.EuroplanVersion);
 			string filename = Configuration.UserTemplate.PartnerLogo;
 			if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal) && File.Exists(filename)) {

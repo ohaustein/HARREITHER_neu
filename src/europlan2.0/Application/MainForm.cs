@@ -46,7 +46,7 @@ namespace Europlan.Application {
 
 			this.SetLanguage();
 
-			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 			this.updateController.ApplicationId = Program.updateGuid;
 			this.updateController.UpdateLocation = (license != null && license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatBetaUpdates)) ? Program.updateBetaLocation : Program.updateLocation;
 			this.updateController.PublicKeyToken = Program.updatePublicKey;
@@ -244,18 +244,18 @@ namespace Europlan.Application {
 				}
 				license.Dispose();
 			} else {
-				TimeSpan timeLeft = LicenseManager.Instance.License.ValidUntil.Subtract(DateTime.Now);
+                TimeSpan timeLeft = LicenseManager.Instance.License.Data.ValidUntil.Subtract(DateTime.Now);
 				if (timeLeft.Days < 30) {
 					String text = EuroplanRes.License_WarnungGueltigkeit;
 					text = text.Replace("%DAYS%", timeLeft.Days.ToString());
 					ToolStripLabel warning = new ToolStripLabel(text);
 					statusStrip.Items.Add(warning);
 					string hideWarning = settings.GetSetting("HideValidityWarning", "");
-					if (hideWarning != LicenseManager.Instance.License.Signature) {
+                    if (hideWarning != LicenseManager.Instance.License.Data.Signature) {
 						ValidityWarningForm form = new ValidityWarningForm(timeLeft.Days);
 						form.ShowDialog();
 						if (form.DontShowAgain) {
-							settings.StoreSetting("HideValidityWarning", LicenseManager.Instance.License.Signature);
+                            settings.StoreSetting("HideValidityWarning", LicenseManager.Instance.License.Data.Signature);
 							SettingsFile.Update();
 						}
 						form.Dispose();

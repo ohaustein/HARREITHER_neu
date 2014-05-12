@@ -44,7 +44,7 @@ namespace Europlan.Common {
 
 			this.SetLanguage();
 
-			Licensing.License license = Licensing.LicenseManager.Instance.License;
+			Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
 			this.tableLayoutPanel1.Controls.Clear();
 
 			this.tableLayoutPanel1.Controls.Add(this.lblHeat, 1, 0);
@@ -1281,7 +1281,7 @@ namespace Europlan.Common {
 				listLabel1.Variables.Add("@ProjectEditor", Project.Instance.ProjectEditor);
 				listLabel1.Variables.Add("@Comments", comments);
 				listLabel1.Variables.Add("@NrOfProducts", Project.Instance.QuickDimensioning.GetPlannedProducts().Count);
-				listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Header.Replace("\r", ""));
+				listLabel1.Variables.Add("@PartnerContact", Licensing.LicenseManager.Instance.License.Data.Header.Replace("\r", ""));
 				if (this.Heating) {
 					listLabel1.Variables.Add("@tvHeat", Project.Instance.QuickDimensioning.HeatFlowTemperature);
 				} else {
@@ -1304,8 +1304,7 @@ namespace Europlan.Common {
 					listLabel1.Variables.Add("@PartnerLogo", "(NULL)");
 				}
 
-				Licensing.License license = Licensing.LicenseManager.Instance.License;
-				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
+                if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatInternal)) {
 					listLabel1.Variables.Add("@InternalLicense", false);
 				} else {
 					listLabel1.Variables.Add("@InternalLicense", true);
