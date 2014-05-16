@@ -111,7 +111,15 @@ namespace Europlan.Common {
 			this.label13.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_Teilflaechen; //"Teilflächen"
 			this.label14.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen; //"(Pro Winkel zusätzlich 1m Verbindungsleitung)"
 			this.label1.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_ParalleleReihen; //"Parallele Reihen im Heizkreis"
-		}
+
+            this.rbLayoutTable.Text = EuroplanRes.PlannedProductPanel_Tabellarisch;
+            this.rbLayoutGraphical.Text = EuroplanRes.PlannedProductPanel_Grafisch;
+            this.lblLayoutType.Text = EuroplanRes.PlannedProductPanel_Auslegungsart;
+            this.btnGraphicalAnbindleitungen.Text = EuroplanRes.PlannedProductPanel_GrafischeAnbindeleitungen;
+            this.btnGraphical.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
+
+            this.btnPartitionSystem.Text = EuroplanRes.PlannedProductPanel_SystemAufteilen;
+        }
 
 		#region IEditorUserControl Members
         private event ProjectStructureChangedHandler projectStructureChanged;

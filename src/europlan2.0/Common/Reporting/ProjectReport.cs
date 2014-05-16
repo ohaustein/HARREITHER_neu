@@ -288,6 +288,8 @@ namespace Europlan.Common {
 				contact += line + "\n";
 			}
 			projectName = projectName.TrimEnd();
+
+            listLabel1.Variables.Add("@CurrentDateTime", DateTime.Now.ToString("F"));
 			listLabel1.Variables.Add("@ProjectNumber", project.ProjectNumber.TrimEnd());
 			listLabel1.Variables.Add("@ProjectName", projectName);
 			listLabel1.Variables.Add("@ProjectContact", contact);

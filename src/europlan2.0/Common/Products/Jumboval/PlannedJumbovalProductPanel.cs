@@ -180,6 +180,8 @@ namespace Europlan.Common {
 			this.lblLayoutType.Text = EuroplanRes.PlannedProductPanel_Auslegungsart;
 			this.btnGraphicalAnbindleitungen.Text = EuroplanRes.PlannedProductPanel_GrafischeAnbindeleitungen;
 			this.btnGraphical.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
+
+            this.btnPartitionSystem.Text = EuroplanRes.PlannedProductPanel_SystemAufteilen;
 		}
 
 		#region IEditorUserControl Members

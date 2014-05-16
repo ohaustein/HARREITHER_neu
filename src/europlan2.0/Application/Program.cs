@@ -70,6 +70,7 @@ namespace Europlan.Application {
 			SettingsKey settings = SettingsFile.Settings["OptionsForm"];
 			string language = settings.GetSetting("Language", defaultLanguage);
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
+            Thread.CurrentThread.CurrentCulture = GetSpecificCulture(Thread.CurrentThread.CurrentUICulture);
 
 			if (IsApplicationAlreadyRunning()) {
 				string message = EuroplanRes.General_LaeuftBereitsText;
@@ -104,6 +105,50 @@ namespace Europlan.Application {
 #endif
 			}			
 		}
+
+        // A little bit of a hack to get any non neutral culture for the current language, as our language
+        // files only conain neutral cultures, but neutral cultures cannot be used for formatting dates for example.
+        private static CultureInfo GetSpecificCulture(CultureInfo ci) {
+            if (!ci.IsNeutralCulture) {
+                return ci;
+            }
+
+            // Some hardcoded cultures
+            if (new CultureInfo("de").Equals(ci)) {
+                return new CultureInfo("de-DE");
+
+            } else if (new CultureInfo("el").Equals(ci)) {
+                return new CultureInfo("el-GR");
+
+            } else if (new CultureInfo("en").Equals(ci)) {
+                return new CultureInfo("en-US");
+
+            } else if (new CultureInfo("hr").Equals(ci)) {
+                return new CultureInfo("hr-HR");
+
+            } else if (new CultureInfo("hu").Equals(ci)) {
+                return new CultureInfo("hu-HU");
+
+            } else if (new CultureInfo("it").Equals(ci)) {
+                return new CultureInfo("it-IT");
+
+            } else if (new CultureInfo("sk").Equals(ci)) {
+                return new CultureInfo("sk-SK");
+
+            } else if (new CultureInfo("sl").Equals(ci)) {
+                return new CultureInfo("sl-SI");
+            }
+
+            // If we don't have a culture hardcoded, try to find any matching culture
+            foreach (CultureInfo c in CultureInfo.GetCultures(CultureTypes.SpecificCultures)) {
+                if (c.Parent.Equals(ci) && !c.IsNeutralCulture) {
+                    return c;
+                }
+            }
+
+            // If we don't findy any culture that matches at all we just use the current system culture.
+            return Thread.CurrentThread.CurrentCulture;
+        }
 
 		static bool IsApplicationAlreadyRunning() {
 #if DEBUG
