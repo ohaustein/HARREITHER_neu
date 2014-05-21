@@ -7087,4 +7087,157 @@ W</value>
 	<data name="ModulKlimaDeckeProduct_NotificationTichelmann" xml:space="preserve">
 		<value>W układzie Tichelmanna przepływy oraz straty ciśnienia należy liczyć ręcznie.</value>
 	</data>
+	<data name="ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernText" xml:space="preserve">
+		<value>Kierunek przepływu modułów, które zostały połączone z rozdzielaczem nie mogą już być zmienione. Czy chcesz usunąć połączenie rur odpowiednich modułów?</value>
+	</data>
+	<data name="Construction_BET01" xml:space="preserve">
+		<value>bez podłogi</value>
+	</data>
+	<data name="Construction_BET02" xml:space="preserve">
+		<value>ceramika</value>
+	</data>
+	<data name="Construction_BET03" xml:space="preserve">
+		<value>naturalny kamień podłogowy</value>
+	</data>
+	<data name="Construction_STD10" xml:space="preserve">
+		<value>bez podłogi</value>
+	</data>
+	<data name="Construction_WD08" xml:space="preserve">
+		<value>10 cm zawieszenia</value>
+	</data>
+	<data name="Material_JV01" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H)</value>
+	</data>
+	<data name="Material_JV10" xml:space="preserve">
+		<value>Jumboval® mufa owalna</value>
+	</data>
+	<data name="Material_JV15" xml:space="preserve">
+		<value>Jumboval® szyna montażowa</value>
+	</data>
+	<data name="Material_JV20" xml:space="preserve">
+		<value>Jumboval® przyłącza do rozdzielacza 50 cm</value>
+	</data>
+	<data name="Material_JV21" xml:space="preserve">
+		<value>Jumboval® przyłącza do rozdzielacza 100 cm</value>
+	</data>
+	<data name="Material_VOH02" xml:space="preserve">
+		<value>HA rozdzielacz owalny 2 grupy 8l/min</value>
+	</data>
+	<data name="Material_VOH03" xml:space="preserve">
+		<value>HA rozdzielacz owalny 3 grupy 8l/min</value>
+	</data>
+	<data name="Material_VOH04" xml:space="preserve">
+		<value>HA rozdzielacz owalny 4 grupy 8l/min</value>
+	</data>
+	<data name="Material_VOH05" xml:space="preserve">
+		<value>HA rozdzielacz owalny 5 grup 8l/min</value>
+	</data>
+	<data name="Material_VOH06" xml:space="preserve">
+		<value>HA rozdzielacz owalny 6 grup 8l/min</value>
+	</data>
+	<data name="Material_VOH07" xml:space="preserve">
+		<value>HA rozdzielacz owalny 7 grup 8l/min</value>
+	</data>
+	<data name="Material_VOH08" xml:space="preserve">
+		<value>HA rozdzielacz owalny 8 grup 8l/min</value>
+	</data>
+	<data name="Material_VOL02" xml:space="preserve">
+		<value>HA rozdzielacz owalny 2 grupy 2,33l/min</value>
+	</data>
+	<data name="Material_VOL03" xml:space="preserve">
+		<value>HA rozdzielacz owalny 3 grupy 2,33l/min</value>
+	</data>
+	<data name="Material_VOL04" xml:space="preserve">
+		<value>HA rozdzielacz owalny 4 grupy 2,33l/min</value>
+	</data>
+	<data name="Material_VOL05" xml:space="preserve">
+		<value>HA rozdzielacz owalny 5 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL06" xml:space="preserve">
+		<value>HA rozdzielacz owalny 6 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL07" xml:space="preserve">
+		<value>HA rozdzielacz owalny 7 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL08" xml:space="preserve">
+		<value>HA rozdzielacz owalny 8 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL09" xml:space="preserve">
+		<value>HA rozdzielacz owalny 9 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL10" xml:space="preserve">
+		<value>HA rozdzielacz owalny 10 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL11" xml:space="preserve">
+		<value>HA rozdzielacz owalny 11 grup 2,33l/min</value>
+	</data>
+	<data name="Material_VOL12" xml:space="preserve">
+		<value>HA rozdzielacz owalny 12 grup 2,33l/min</value>
+	</data>
+	<data name="Material_EV38" xml:space="preserve">
+		<value>opaska kablowa 3,5 x 200mm</value>
+	</data>
+	<data name="Material_JV02" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H) 21mm</value>
+	</data>
+	<data name="Material_JV03" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H) 32mm</value>
+	</data>
+	<data name="Material_JV11" xml:space="preserve">
+		<value>Jumboval® mufa owal/okrągła 25 mm</value>
+	</data>
+	<data name="Material_JV12" xml:space="preserve">
+		<value>Jumboval® mufa owal/okrągła 32 mm</value>
+	</data>
+	<data name="Material_JV13" xml:space="preserve">
+		<value>Jumboval® kolano przejściowe okrągła/owal 21mm</value>
+	</data>
+	<data name="Material_JV14" xml:space="preserve">
+		<value>Jumboval® kolano przejściowe okrągła/owal 25mm</value>
+	</data>
+	<data name="Material_JV97" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H) zaślepki zamykające (czarne)</value>
+	</data>
+	<data name="Material_JV98" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H) 5 m długości</value>
+	</data>
+	<data name="Material_JV99" xml:space="preserve">
+		<value>Jumboval® rura bezpieczna DD (H) krótka</value>
+	</data>
+	<data name="Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b" xml:space="preserve">
+		<value>Jumbocal ogrzewanie podłogowe</value>
+	</data>
+	<data name="Material_HR58" xml:space="preserve">
+		<value>Hitherm+ zaślepka 21mm</value>
+	</data>
+	<data name="Material_HX15" xml:space="preserve">
+		<value>Hisan mufa przejściowa  21x1/2" GW</value>
+	</data>
+	<data name="Material_HX20" xml:space="preserve">
+		<value>Hisan mufa przejściowa  21x1/2" GZ</value>
+	</data>
+	<data name="Material_HX30" xml:space="preserve">
+		<value>Hisan kolano przejściowe 21x1/2" GW</value>
+	</data>
+	<data name="Material_HX35" xml:space="preserve">
+		<value>Hisan kolano przejściowe 21x1/2" GZ</value>
+	</data>
+	<data name="Material_MK41" xml:space="preserve">
+		<value>Klimamodul 60/60 typ "B"</value>
+	</data>
+	<data name="Material_MK42" xml:space="preserve">
+		<value>Klimamodul 60/60 typ "C"</value>
+	</data>
+	<data name="Material_MK43" xml:space="preserve">
+		<value>Klimamodul 60/60 typ "D"</value>
+	</data>
+	<data name="Material_MK59" xml:space="preserve">
+		<value>rura elastyczna 1/2" 800mm</value>
+	</data>
+	<data name="Material_MK60" xml:space="preserve">
+		<value>rura elastyczna 1/2" 1000mm</value>
+	</data>
+	<data name="PlannedProductPanel_SystemAufteilen" xml:space="preserve">
+		<value>podział rozdzielaczy</value>
+	</data>
 </root>

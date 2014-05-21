@@ -6954,4 +6954,540 @@ open heating circuits</value>
 	<data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
 		<value>Remove Jumboval</value>
 	</data>
+	<data name="Product_JumbovalFullName" xml:space="preserve">
+		<value>Jumboval®  underfloor heating</value>
+	</data>
+	<data name="Product_JumbovalName" xml:space="preserve">
+		<value>Jumboval®</value>
+	</data>
+	<data name="RequiredMaterialGrid_Hinweis2" xml:space="preserve">
+		<value>Note: The quantities determined from the program represent a guideline and must be checked and corrected!</value>
+	</data>
+	<data name="HithermPlannerForm_VL" xml:space="preserve">
+		<value>Inlet</value>
+	</data>
+	<data name="HithermPlannerForm_RL" xml:space="preserve">
+		<value>Return</value>
+	</data>
+	<data name="HithermPlannerForm_AnbindeleitungImBodenImRaum" xml:space="preserve">
+		<value>Connection pipe underfloor in the room</value>
+	</data>
+	<data name="HithermPlannerForm_HK" xml:space="preserve">
+		<value>HC:</value>
+	</data>
+	<data name="HithermPlanner_VerbindungNichtMoeglichText" xml:space="preserve">
+		<value>Connection is not possible.</value>
+	</data>
+	<data name="HithermPlanner_VerbindungNichtMoeglichTitel" xml:space="preserve">
+		<value>Connection is not possible.</value>
+	</data>
+	<data name="PlanExport_Hinweis" xml:space="preserve">
+		<value>
+Note: Principle, no execution plan</value>
+	</data>
+	<data name="LL_Report_BestellvorschlagWarnung" xml:space="preserve">
+		<value>Note: The quantities determined from the program represent a guideline and must be checked and corrected!</value>
+	</data>
+	<data name="LL_Report_MaterialbedarfWarnung" xml:space="preserve">
+		<value>Note: The quantities determined from the program represent a guideline and must be checked and corrected!</value>
+	</data>
+	<data name="ExportPlanForm_BildFehlerText" xml:space="preserve">
+		<value>You need more memory to export the plan.</value>
+	</data>
+	<data name="ExportPlanForm_BildFehlerTitel" xml:space="preserve">
+		<value>plan export error</value>
+	</data>
+	<data name="ImagePlanOptionsForm_WarnungGroesseText" xml:space="preserve">
+		<value>Due to the size of the image, texts from Europlan are maybe not possible to read. If possible, please import this plan into several small parts.</value>
+	</data>
+	<data name="ImagePlanOptionsForm_WarnungGroesseTitel" xml:space="preserve">
+		<value>Warning</value>
+	</data>
+	<data name="PdfRegionPickerForm_BereichAuswaehlen" xml:space="preserve">
+		<value>Select range</value>
+	</data>
+	<data name="RoomSummaryPanel_DeckengemeometrieVerwerfenText" xml:space="preserve">
+		<value>Do you want to reject the defined ceiling geometry? The graphic design of all ceiling systems that have been planned in this room are deleted.</value>
+	</data>
+	<data name="RoomSummaryPanel_DeckengemeometrieVerwerfenTitel" xml:space="preserve">
+		<value>Reject ceiling geometry?</value>
+	</data>
+	<data name="PdfRegionPickerForm_Auswaehlen" xml:space="preserve">
+		<value>Select Range</value>
+	</data>
+	<data name="PdfRegionPickerForm_Bildgroesse" xml:space="preserve">
+		<value>Image size:</value>
+	</data>
+	<data name="PdfRegionPickerForm_Klein" xml:space="preserve">
+		<value>small</value>
+	</data>
+	<data name="PdfRegionPickerForm_Normal" xml:space="preserve">
+		<value>average</value>
+	</data>
+	<data name="PdfRegionPickerForm_Gross" xml:space="preserve">
+		<value>large</value>
+	</data>
+	<data name="ImportedPlansPanel_GrosserPlanText" xml:space="preserve">
+		<value>If you import big plans, the operation of the graphical design can slow! Do you want to import this plan anyway?</value>
+	</data>
+	<data name="ImportedPlansPanel_GrosserPlanTitel" xml:space="preserve">
+		<value>Confirm</value>
+	</data>
+	<data name="PdfRegionPickerForm_GrosserPlanText" xml:space="preserve">
+		<value>If you import big plans, the operation of the graphical design can slow! Do you want to import this part of the  plan anyway?</value>
+	</data>
+	<data name="PdfRegionPickerForm_GrosserPlanTitel" xml:space="preserve">
+		<value>Confirm</value>
+	</data>
+	<data name="PipeProductPlanner_Raum" xml:space="preserve">
+		<value>Room:</value>
+	</data>
+	<data name="SystemParametersPanel_DeckenderHintergrund" xml:space="preserve">
+		<value>background covering</value>
+	</data>
+	<data name="SystemParametersPanel_Textbox" xml:space="preserve">
+		<value>text box for Euroval/Ecotherm</value>
+	</data>
+	<data name="SystemParametersPanel_DefaultFontSize" xml:space="preserve">
+		<value>Standard font size</value>
+	</data>
+	<data name="EcothermPlannerForm_TextboxZuruecksetzen" xml:space="preserve">
+		<value>Reset text box size</value>
+	</data>
+	<data name="OptionsForm_OrthoRasterung" xml:space="preserve">
+		<value>Activate dithering of scanned plans</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichern" xml:space="preserve">
+		<value>save project automatically</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_BeplankungAnzeigen" xml:space="preserve">
+		<value>show covering layer</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_BeplankungVerschieben" xml:space="preserve">
+		<value>Move covering layer</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_PlanAnzeigen" xml:space="preserve">
+		<value>Show plan as background.</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_StaffelnCProfil" xml:space="preserve">
+		<value>wood construction / C- profiles</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_StaffelBreite" xml:space="preserve">
+		<value>width incl. air gap</value>
+	</data>
+	<data name="ProductPlannerForm_PlanImHintergrundAnzeigen" xml:space="preserve">
+		<value>Show plan as background.</value>
+	</data>
+	<data name="PipeProductPlannerForm_TextboxDrehen" xml:space="preserve">
+		<value>rotate text box</value>
+	</data>
+	<data name="ImportedPlansPanel_DwgWarnung" xml:space="preserve">
+		<value>When exporting dwg files could be generated a file that cannot be opened from your CAD program. Please export this plan even before you start planning and try to open it with your CAD program. If problems occur, please convert the dwg file using an external application (eg your CAD program) to a dxf file in order to ensure that you can open the exported file at the end of the planning!</value>
+	</data>
+	<data name="ImportedPlansPanel_DwgWarnungTitel" xml:space="preserve">
+		<value>warning</value>
+	</data>
+	<data name="SystemParametersPanel_Jumboval" xml:space="preserve">
+		<value>Jumboval®</value>
+	</data>
+	<data name="Distributor_Type140" xml:space="preserve">
+		<value>2,33 l/min (series VOLxx)</value>
+	</data>
+	<data name="Distributor_Type240" xml:space="preserve">
+		<value>4 l/min (series VOxx)</value>
+	</data>
+	<data name="Distributor_Type480" xml:space="preserve">
+		<value>8 l/min (series VOHxx)</value>
+	</data>
+	<data name="DistributorPanel_Maximaldurchfluss" xml:space="preserve">
+		<value>max. flow per circuit:</value>
+	</data>
+	<data name="JumbovalProduct_JV20_100" xml:space="preserve">
+		<value>JV20/100</value>
+	</data>
+	<data name="JumbovalProduct_JV20_80" xml:space="preserve">
+		<value>JV20/80</value>
+	</data>
+	<data name="ProductConnection_AnschlussAnTichelmann" xml:space="preserve">
+		<value>%ID%: %NAME% (Tichelmann)</value>
+	</data>
+	<data name="SelectConnectionForProductForm_AnschlussAnTichelmannverteiler" xml:space="preserve">
+		<value>Connection by Tichelmann in %ID%: </value>
+	</data>
+	<data name="SelectConnectionForProductForm_Tichelmannverteiler" xml:space="preserve">
+		<value>Tichelmann in  %ID%: %NAME%</value>
+	</data>
+	<data name="SelectConnectionForProductForm_Verteiler" xml:space="preserve">
+		<value>Manifold %ID%: %NAME%</value>
+	</data>
+	<data name="ConstructionTypeManager_BenutzerBeton" xml:space="preserve">
+		<value>Users reinforced concrete structure</value>
+	</data>
+	<data name="ConstructionTypeManager_StandardBeton" xml:space="preserve">
+		<value>Standard reinforced concrete structure</value>
+	</data>
+	<data name="Distributor_DurchflussZuGrossHeiz" xml:space="preserve">
+		<value>The total flow of all circuits connected to the manifold is too large in heating mode(%VALUE% &gt;%MAXIMUM%)</value>
+	</data>
+	<data name="Distributor_DurchflussZuGrossKuehl" xml:space="preserve">
+		<value>The total flow of all circuits connected to the manifold is too large in cooling mode(%VALUE% &gt;%MAXIMUM%)</value>
+	</data>
+	<data name="ErrorMessage_EstrichueberdeckungZuGross" xml:space="preserve">
+		<value>screed covering too large (%VALUE%cm &gt; %MAXIMUM%cm)</value>
+	</data>
+	<data name="ErrorMessage_EstrichueberdeckungZuKlein" xml:space="preserve">
+		<value>screed covering too small (%VALUE%cm &gt; %MAXIMUM%cm)</value>
+	</data>
+	<data name="PlannedProductPanel_Estrichueberdeckung" xml:space="preserve">
+		<value>screed covering:</value>
+	</data>
+	<data name="JumbovalProduct_NotificationVerteiler" xml:space="preserve">
+		<value>The system is connected to a manifold %TYPE%, but should be connected to a manifold series VOHxx (maximum flow per group: 8 l / min)</value>
+	</data>
+	<data name="Construction_BET01" xml:space="preserve">
+		<value>without floor</value>
+	</data>
+	<data name="Construction_BET02" xml:space="preserve">
+		<value>ceramics</value>
+	</data>
+	<data name="Construction_BET03" xml:space="preserve">
+		<value>natural stone floor</value>
+	</data>
+	<data name="Construction_STD10" xml:space="preserve">
+		<value>without floor</value>
+	</data>
+	<data name="Construction_WD08" xml:space="preserve">
+		<value>10cm suspension</value>
+	</data>
+	<data name="ConstructionEditorGrid_Beton" xml:space="preserve">
+		<value>reinforced concrete</value>
+	</data>
+	<data name="Distributor_TypeName140" xml:space="preserve">
+		<value>VOLxx (maximum flow per circuit: 2,33 l/min)</value>
+	</data>
+	<data name="Distributor_TypeName240" xml:space="preserve">
+		<value>VOxx (maximum flow per circuit: 4 l/min)</value>
+	</data>
+	<data name="Distributor_TypeName480" xml:space="preserve">
+		<value>VOHxx (maximum flow per circuit: 8 l/min)</value>
+	</data>
+	<data name="Material_JV01" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H)</value>
+	</data>
+	<data name="Material_JV10" xml:space="preserve">
+		<value>Jumboval® oval welding sleeve</value>
+	</data>
+	<data name="Material_JV15" xml:space="preserve">
+		<value>Jumboval® clip rail</value>
+	</data>
+	<data name="Material_JV20" xml:space="preserve">
+		<value>Jumboval® manifold connecting piece 50 cm</value>
+	</data>
+	<data name="Material_JV21" xml:space="preserve">
+		<value>Jumboval® manifold connecting piece 100 cm</value>
+	</data>
+	<data name="Material_VOH02" xml:space="preserve">
+		<value>HA oval manifold 2 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH03" xml:space="preserve">
+		<value>HA oval manifold 3 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH04" xml:space="preserve">
+		<value>HA oval manifold 4 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH05" xml:space="preserve">
+		<value>HA oval manifold 5 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH06" xml:space="preserve">
+		<value>HA oval manifold 6 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH07" xml:space="preserve">
+		<value>HA oval manifold 7 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH08" xml:space="preserve">
+		<value>HA oval manifold 8 groups 8l/min</value>
+	</data>
+	<data name="Material_VOL02" xml:space="preserve">
+		<value>HA oval manifold 2 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL03" xml:space="preserve">
+		<value>HA oval manifold 3 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL04" xml:space="preserve">
+		<value>HA oval manifold 4 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL05" xml:space="preserve">
+		<value>HA oval manifold 5 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL06" xml:space="preserve">
+		<value>HA oval manifold 6 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL07" xml:space="preserve">
+		<value>HA oval manifold 7 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL08" xml:space="preserve">
+		<value>HA oval manifold 8 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL09" xml:space="preserve">
+		<value>HA oval manifold 9 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL10" xml:space="preserve">
+		<value>HA oval manifold 10 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL11" xml:space="preserve">
+		<value>HA oval manifold 11 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL12" xml:space="preserve">
+		<value>HA oval manifold 12 groups 2,33 l/min</value>
+	</data>
+	<data name="ModulKlimaDeckeProduct_NotificationVerteiler" xml:space="preserve">
+		<value>The system is connected to a manifold %TYPE%, but should be connected to a manifold series VOHxx (maximum flow per group: 8 l / min)</value>
+	</data>
+	<data name="PlannedProductPanel_Schienenabstand" xml:space="preserve">
+		<value>clip rail distance:</value>
+	</data>
+	<data name="PipeProductPlanner_Durchfluss" xml:space="preserve">
+		<value>flow:</value>
+	</data>
+	<data name="Material_EV38" xml:space="preserve">
+		<value>cable fixer 3,5 x 200mm</value>
+	</data>
+	<data name="Material_JV02" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H) 21mm</value>
+	</data>
+	<data name="Material_JV03" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H) 25mm</value>
+	</data>
+	<data name="Material_JV11" xml:space="preserve">
+		<value>Jumboval® welding sleeve oval/round 25 mm</value>
+	</data>
+	<data name="Material_JV12" xml:space="preserve">
+		<value>Jumboval® welding sleeve oval/round 32mm</value>
+	</data>
+	<data name="Material_JV13" xml:space="preserve">
+		<value>Jumboval® transition elbow (round/oval) 21mm</value>
+	</data>
+	<data name="Material_JV14" xml:space="preserve">
+		<value>Jumboval® transition elbow (round/oval) 25mm</value>
+	</data>
+	<data name="Material_JV97" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H) closing caps (black)</value>
+	</data>
+	<data name="Material_JV98" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H) 5 meter lenghts</value>
+	</data>
+	<data name="Material_JV99" xml:space="preserve">
+		<value>Jumboval® safety pipe DD (H) short length</value>
+	</data>
+	<data name="PipeProductPlannerForm_Farbe" xml:space="preserve">
+		<value>Colour of the system:</value>
+	</data>
+	<data name="ProjectReport_RaumflaecheJumboval" xml:space="preserve">
+		<value>Total room area (rooms with Jumboval® under floor heating)</value>
+	</data>
+	<data name="LL_Report_FlaechenuebersichtJumboval" xml:space="preserve">
+		<value>area overview Jumboval® underfloor heating</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschoss" xml:space="preserve">
+		<value>Calculation Jumboval® underfloor heating - %GESCHOSS%</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschossHeiz" xml:space="preserve">
+		<value>Calculation Jumboval® underfloor heating - %GESCHOSS% (heating mode)</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschossKuehl" xml:space="preserve">
+		<value>Calculation Jumboval® underfloor heating - %GESCHOSS% 8cooling mode)</value>
+	</data>
+	<data name="LL_Report_BilanzJumboval" xml:space="preserve">
+		<value>Balance Jumboval® underfloor heating</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumboval" xml:space="preserve">
+		<value>Installation data Jumboval® underfloor heating  - %GESCHOSS%</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalAufenthaltszone" xml:space="preserve">
+		<value>living zone</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile1" xml:space="preserve">
+		<value>mh/</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2" xml:space="preserve">
+		<value>HC
+l/min</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheProHk" xml:space="preserve">
+		<value>area/
+HC</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile1" xml:space="preserve">
+		<value>A unh.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile2" xml:space="preserve">
+		<value>m²</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile1" xml:space="preserve">
+		<value>Heat-</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile2" xml:space="preserve">
+		<value>circuit(s)</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalLaengeProHk" xml:space="preserve">
+		<value>lenght/
+HC</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRandzone" xml:space="preserve">
+		<value>edge zone</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNameZeile1" xml:space="preserve">
+		<value>Name</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNrZeile1" xml:space="preserve">
+		<value>Room</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNrZeile2" xml:space="preserve">
+		<value>Nr.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile1" xml:space="preserve">
+		<value>lpipe/</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile2" xml:space="preserve">
+		<value>HC
+m</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile1" xml:space="preserve">
+		<value>Part-</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile2" xml:space="preserve">
+		<value>system</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerlegeart" xml:space="preserve">
+		<value>dist.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1" xml:space="preserve">
+		<value>Ins.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2" xml:space="preserve">
+		<value>Constr.</value>
+	</data>
+	<data name="NewDistributorForm_RegelkreisTichelmannText" xml:space="preserve">
+		<value>At this pump group no distributor can be connected, because ther is already connected a Tichelmann system.</value>
+	</data>
+	<data name="NewDistributorForm_RegelkreisTichelmannTitel" xml:space="preserve">
+		<value>error</value>
+	</data>
+	<data name="SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann" xml:space="preserve">
+		<value>Connection is not possible. Heating systems where Tichelmann is used, no other system can be connected.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEcothermVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEcothermVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEurovalVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEurovalVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile1" xml:space="preserve">
+		<value>Manifold</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile2" xml:space="preserve">
+		<value>Number</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimadeckeVerteiler" xml:space="preserve">
+		<value>Manifold number</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichernInterval" xml:space="preserve">
+		<value>Interval:</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichernMin" xml:space="preserve">
+		<value>minutes</value>
+	</data>
+	<data name="ProjectReport_VerteileranschlussSub" xml:space="preserve">
+		<value>Sub</value>
+	</data>
+	<data name="ProjectReport_VerteileranschlussTichelmann" xml:space="preserve">
+		<value>Tichelm.</value>
+	</data>
+	<data name="JumbovalProduct_Manuell" xml:space="preserve">
+		<value>manually</value>
+	</data>
+	<data name="Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b" xml:space="preserve">
+		<value>Jumboval underfloor heating</value>
+	</data>
+	<data name="Material_HR58" xml:space="preserve">
+		<value>Hitherm+ end cap 21mm</value>
+	</data>
+	<data name="Material_HX15" xml:space="preserve">
+		<value>Hisan transition sleeve female 21x1/2"</value>
+	</data>
+	<data name="Material_HX20" xml:space="preserve">
+		<value>Hisan transition sleeve male 21x1/2"</value>
+	</data>
+	<data name="Material_HX30" xml:space="preserve">
+		<value>Hisan transition elbow female 21x1/2"</value>
+	</data>
+	<data name="Material_HX35" xml:space="preserve">
+		<value>Hisan transition elbow male 21x1/2"</value>
+	</data>
+	<data name="Material_MK41" xml:space="preserve">
+		<value>Klimamodul 60/60 type "B"</value>
+	</data>
+	<data name="Material_MK42" xml:space="preserve">
+		<value>Klimamodul 60/60 type "C"</value>
+	</data>
+	<data name="Material_MK43" xml:space="preserve">
+		<value>Klimamodul 60/60 type "D"</value>
+	</data>
+	<data name="Material_MK59" xml:space="preserve">
+		<value>flexible pipe 1/2" 800mm</value>
+	</data>
+	<data name="Material_MK60" xml:space="preserve">
+		<value>flexible pipe 1/2" 1000mm</value>
+	</data>
+	<data name="PlannedJumbovalProductPanel_WarnungGrosserRaum" xml:space="preserve">
+		<value>The automatic calculation may take some time to complete, for very large rooms. Are you sure you want to switch to automatic calculation?</value>
+	</data>
+	<data name="PlannedJumbovalProductPanel_WarnungGrosserRaumTitel" xml:space="preserve">
+		<value>Attention</value>
+	</data>
+	<data name="SelectConnectionForProductForm_WarnungGrosserRaum" xml:space="preserve">
+		<value>The automatic calculation may take some time to complete, for very large rooms. Do you want to calculate this system manually?</value>
+	</data>
+	<data name="SelectConnectionForProductForm_WarnungGrosserRaumTitel" xml:space="preserve">
+		<value>Attention</value>
+	</data>
+	<data name="Unit_Prefix_Kilo" xml:space="preserve">
+		<value>k</value>
+	</data>
+	<data name="Unit_Prefix_Mega" xml:space="preserve">
+		<value>M</value>
+	</data>
+	<data name="PartitionSystemForm_NewDistributorName" xml:space="preserve">
+		<value>%SYSTEM% %RAUMNAME% - %NUMBER%/%TOTAL%</value>
+	</data>
+	<data name="ModulKlimaDeckeProduct_NotificationTichelmann" xml:space="preserve">
+		<value>In Tichelmann systems piping shall be designed manually in terms flow rate and pressure loss.</value>
+	</data>
+	<data name="PlannedProductPanel_SystemAufteilen" xml:space="preserve">
+		<value>split on manifolds</value>
+	</data>
 </root>
