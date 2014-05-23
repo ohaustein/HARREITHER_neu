@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="04e4c63a-a752-4fb3-a8ca-b7be57aed70b" ApplicationName="Europlan 2.0 mit grafischer Auslegung" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0BOqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;9/YrkoKXdOKs5jTOGEINH0KF1g85Obkd2hFGpAKLLZyNW+UUbhtTNR95zTYx2t7lOzAVVAuwXG9R6xg0HUzG6w==&lt;/P&gt;&lt;Q&gt;72A8TLACkRiYFAEzV76J3F/HlPIP0lTKs3QQhyQizlVJoFl9rnJROs/kgiGBN+mhJyyik5/IdslGuxxxoYNShQ==&lt;/Q&gt;&lt;DP&gt;y4zqsefAOzSFKKk6chFuwjWStmli2a7MAaJi8eogpH26UTCZd9W4lYhULZCKlpiZZuAO8iJyUT8U6T/CMDdBpw==&lt;/DP&gt;&lt;DQ&gt;O1e5Oy27RSs6sGLnzo3e8XIRMVydDYCVy80vN8F+m3ZLTWRCIxgWCSV2ucgCl9DkcajAGSbYdJJLZaGUjfzXXQ==&lt;/DQ&gt;&lt;InverseQ&gt;QmXlNg91w0h5dZ7ZihReS4gvZx7Mo1C0iN53VK5JSmhpfadeltCZbUk0ruVFgOFxIC/XOj+/p8BV3E/hH4PbaQ==&lt;/InverseQ&gt;&lt;D&gt;1M/QzKYGph6CrG3HgszFxxpFjI4pS2AW0s5r3RRZZRreyv6RiM26y2JGfXzz9owI/NpZZBYCoJcVOq56xrTY+d2n5z5pF+RHXmIuSMnXhrRTX5jDaZrn2ZnQWC7EPaOxW7hMkzxlB+E5PQlX2HFxUG836XuAQJgVXNy6xGoMl2k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\de" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/de" BuildLocation="updates-ga-de Updates" PublishVersion="3.0.18.7" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.0.18.7\europlan30-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>- Neues Produkt: Jumboval&#xD;
-- Neue Verteileroptionen: VOHxx, VOLxx, "Tichelmann-Verteiler"&#xD;
-- Änderungen am Report&#xD;
-- Behebung eines Fehlers beim Exportieren von CAD-Plänen</CurrentSummary>
+	<Properties ApplicationID="04e4c63a-a752-4fb3-a8ca-b7be57aed70b" ApplicationName="Europlan 2.0 mit grafischer Auslegung" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0BOqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;9/YrkoKXdOKs5jTOGEINH0KF1g85Obkd2hFGpAKLLZyNW+UUbhtTNR95zTYx2t7lOzAVVAuwXG9R6xg0HUzG6w==&lt;/P&gt;&lt;Q&gt;72A8TLACkRiYFAEzV76J3F/HlPIP0lTKs3QQhyQizlVJoFl9rnJROs/kgiGBN+mhJyyik5/IdslGuxxxoYNShQ==&lt;/Q&gt;&lt;DP&gt;y4zqsefAOzSFKKk6chFuwjWStmli2a7MAaJi8eogpH26UTCZd9W4lYhULZCKlpiZZuAO8iJyUT8U6T/CMDdBpw==&lt;/DP&gt;&lt;DQ&gt;O1e5Oy27RSs6sGLnzo3e8XIRMVydDYCVy80vN8F+m3ZLTWRCIxgWCSV2ucgCl9DkcajAGSbYdJJLZaGUjfzXXQ==&lt;/DQ&gt;&lt;InverseQ&gt;QmXlNg91w0h5dZ7ZihReS4gvZx7Mo1C0iN53VK5JSmhpfadeltCZbUk0ruVFgOFxIC/XOj+/p8BV3E/hH4PbaQ==&lt;/InverseQ&gt;&lt;D&gt;1M/QzKYGph6CrG3HgszFxxpFjI4pS2AW0s5r3RRZZRreyv6RiM26y2JGfXzz9owI/NpZZBYCoJcVOq56xrTY+d2n5z5pF+RHXmIuSMnXhrRTX5jDaZrn2ZnQWC7EPaOxW7hMkzxlB+E5PQlX2HFxUG836XuAQJgVXNy6xGoMl2k=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\de" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/de" BuildLocation="updates-ga-de Updates" PublishVersion="3.0.19.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.0.19.0\europlan30-de.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>- Sprachauswahl "Slowakisch" hinzugefügt&#xD;
+- Sprachauswahl "Polnisch" hinzugefügt&#xD;
+- Artikelliste aktualisiert</CurrentSummary>
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -15,6 +14,15 @@
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="04e4c63a-a752-4fb3-a8ca-b7be57aed70b" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="3.0.19.0" postdate="2014-05-23T13:58:19.8603326Z" signature="vn2iUnqdv2Htr2C/zSZghV0Eeyf7UxJw8S1h4eXpKvbxkMLLVUjAiV16J4GiNuA63w/U2RClfsNtk0saxLUJu8RrqFvM1itCU6iLFW5C52SomYI4L0uSSOJ46x1l0ER4pIehTbPmTDpvDDKYVHa3SiHWAf++1TfWs+dBhToAUyA=" fileSize="48856446">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>- Sprachauswahl "Slowakisch" hinzugefügt&#xD;
+- Sprachauswahl "Polnisch" hinzugefügt&#xD;
+- Artikelliste aktualisiert</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="3.0.18.7" postdate="2014-02-10T18:25:34.715329Z" signature="yUmMkkFzkKnvYDrfhf49TPsBYEQ9BtJ5W0ViUNP90LA8iqqO6MunFFrAFOe52N9whpDKEwEsTH828tJnpBPHzlzCoeU3aSca8u0kT1fL85Ik4zWrwuJj9gzLfnlqddzgQv4HxJsCyOVP9f7jIFVXNnjOkpEEaX7wMBJ29PwhyPA=" fileSize="48656967">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
