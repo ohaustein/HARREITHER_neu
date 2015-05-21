@@ -1,0 +1,13 @@
+src/europlan2.0/AdminApplication/bin/
+src/europlan2.0/AdminApplication/obj/
+src/europlan2.0/Application/bin/
+src/europlan2.0/Application/obj/
+src/europlan2.0/Common/bin/
+src/europlan2.0/Common/obj/
+src/europlan2.0/Setup/bin/
+src/europlan2.0/Setup/obj/
+src/europlan2.0/StartSetup/bin/
+src/europlan2.0/StartSetup/obj/
+src/europlan2.0/UnitTest/bin/
+src/europlan2.0/UnitTest/obj/
+*.suo

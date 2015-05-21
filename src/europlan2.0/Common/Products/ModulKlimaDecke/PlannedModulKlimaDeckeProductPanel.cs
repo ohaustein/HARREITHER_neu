@@ -13,7 +13,8 @@ namespace Europlan.Common {
 		private bool gridContentChanged = false;
 		private bool updateOngoing = false;
 
-		public PlannedModulKlimaDeckeProductPanel() {
+        public PlannedModulKlimaDeckeProductPanel()
+        {
 			InitializeComponent();
 
 			this.SetLanguage();

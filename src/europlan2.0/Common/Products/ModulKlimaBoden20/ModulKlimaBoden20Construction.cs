@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Drawing;
+using WW.Math;
+using System.Drawing.Drawing2D;
+using System.Xml.Serialization;
+using System.Windows.Forms;
+using WW.Math.Geometry;
+using WW.Cad.Model;
+using WW.Cad.Model.Tables;
+
+namespace Europlan.Common {
+	[XmlInclude(typeof(ModulKlimaBodenConstructionFrei))]
+	[XmlInclude(typeof(ModulKlimaBodenConstructionStaffeln))]
+	public abstract class ModulKlimaBoden20Construction : IPickableObject, IDragableObject {
+
+		protected double rotation = 0;
+
+		public abstract void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode);
+		public abstract void PaintDxf(DxfModel model, DxfLayer layer);
+
+		#region IPickableObject Members
+		public abstract bool HitTest(Point2D planPoint, Point pointInControl);
+		#endregion
+
+		#region IDragableObject Members
+		public abstract void StartDrag(Point2D planPoint, Point pointInControl);
+		public abstract void MoveDrag(Point2D planPoint, Point pointInControl);
+		public abstract void EndDrag(Point2D planPoint, Point pointInControl);
+		#endregion
+
+		private ModulKlimaBodenPlanner planner;
+
+		[XmlIgnore]
+		public ModulKlimaBodenPlanner Planner {
+			get { return this.planner; }
+			set { this.planner = value; }
+		}
+		
+		[XmlIgnore]
+		public abstract Cursor PickCursor {
+			get;
+		}
+
+		protected Matrix4D AdditionalTransformation {
+			get {
+				if (this.Planner != null && 
+					this.Planner.Product != null && 
+					this.Planner.Product.AssociatedRoom != null && 
+					this.Planner.Product.AssociatedRoom.AssociatedPlan != null &&
+					this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+					return (this.Planner.Product.AssociatedRoom.AssociatedPlan as CadPlan).GdiGraphics3D.To2DTransform;
+				} else {
+					return Matrix4D.Identity;
+				}
+			}
+		}
+
+		public double Rotation {
+			get { return this.rotation; }
+			set {
+				this.rotation = value;
+				this.RecalculateStaffeln();
+			}
+		}
+
+		[XmlIgnore]
+		public virtual double RotationRelativeToPlan {
+			get {
+				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					return this.rotation + (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+					return -this.rotation;
+				}
+				return this.rotation;
+			}
+			set {
+				if (this.Planner.Product.AssociatedRoom.AssociatedPlan is ImagePlan) {
+					this.Rotation = value - (this.Planner.Product.AssociatedRoom.AssociatedPlan as ImagePlan).Rotation;
+				} else if (this.Planner.Product.AssociatedRoom.AssociatedPlan is CadPlan) {
+					this.Rotation = -value;
+				} else {
+					this.Rotation = value;
+				}
+			}
+		}
+
+		public abstract void RecalculateStaffeln();
+
+		[XmlIgnore]
+		public abstract List<Polygon2D> Staffeln {
+			get;
+		}
+
+		[XmlIgnore]
+		public abstract List<Point2D> RoomCoordinates {
+			get;
+		}
+	}
+
+}

@@ -325,8 +325,8 @@ namespace Europlan.Common {
 
 						double left = rotation.Transform(lane.BorderLeft.Origin).X;
 
-						List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
-						foreach (KlimaFlaechenModulWithRowAndCircuit mrc in modules) {
+						List<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+						foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit mrc in modules) {
 							bool highlight = false;
 							if (this.highlightCircuit != null && this.highlightCircuit.ContainsModul(mrc.modul)) {
 								highlight = true;
@@ -764,10 +764,10 @@ namespace Europlan.Common {
 							modul.GraphBottomUp = invertDirection ? !bottomUp : bottomUp;
 							KlimaFlaechenList usedRow = null;
 							if (tryToFindRow) {
-								List<KlimaFlaechenModulWithRowAndCircuit> modulesInLane = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+								List<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> modulesInLane = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
 								double bestPosBefore = double.MinValue;
 								double bestPosAfter = double.MaxValue;
-								foreach (KlimaFlaechenModulWithRowAndCircuit modulInLane in modulesInLane) {
+								foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit modulInLane in modulesInLane) {
 									if (modulInLane.modul.GraphPositionInLan < modul.GraphPositionInLan && modulInLane.modul.GraphPositionInLan > bestPosBefore) {
 										bestPosBefore = modulInLane.modul.GraphPositionInLan;
 										usedRow = modulInLane.row;
@@ -2303,7 +2303,7 @@ namespace Europlan.Common {
 			#endregion
 		}
 
-		public class KlimaFlaechenModuleWithRowAndCircuitComparer : IComparer<KlimaFlaechenModulWithRowAndCircuit> {
+		public class KlimaFlaechenModuleWithRowAndCircuitComparer : IComparer<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> {
 			private bool ascending;
 
 			public KlimaFlaechenModuleWithRowAndCircuitComparer(bool ascending) {
@@ -2311,7 +2311,7 @@ namespace Europlan.Common {
 			}
 
 			#region IComparer<KlimaFlaechenModulWithRowAndCircuit> Members
-			public int Compare(KlimaFlaechenModulWithRowAndCircuit x, KlimaFlaechenModulWithRowAndCircuit y) {
+			public int Compare(Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit x, Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit y) {
 				int result;
 				if (ascending) {
 					result = x.modul.GraphLane.CompareTo(y.modul.GraphLane);
@@ -2406,12 +2406,12 @@ namespace Europlan.Common {
 						}
 						if (this.automaticOrientation) {
 							foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes) {
-								List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+								List<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
 								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(false));
 								Nullable<bool> left = null;
 								bool lastDiagonal = true;
 								KlimaFlaechenList lastRow = null;
-								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
+								foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										bool trueLeft = left.Value;
 										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
@@ -2442,7 +2442,7 @@ namespace Europlan.Common {
 								modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(true));
 								left = null;
 								lastRow = null;
-								foreach (KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
+								foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules) {
 									if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul)) {
 										bool trueLeft = left.Value;
 										if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt) {
@@ -2946,8 +2946,8 @@ namespace Europlan.Common {
 
 						double left = rotation.Transform(lane.BorderLeft.Origin).X;
 
-						List<KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
-						foreach (KlimaFlaechenModulWithRowAndCircuit mrc in modules) {
+						List<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+						foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit mrc in modules) {
 							this.DrawDxfModule(mrc.modul.ModulType, mrc.modul.Orientation, invRotation.Transform(new Point2D(left, mrc.modul.GraphPositionInLan)), additionalTransformation, model, modulLayer, mrc.modul.GraphBottomUp, mrc.circuit.CircuitColor);
 						}
 					}

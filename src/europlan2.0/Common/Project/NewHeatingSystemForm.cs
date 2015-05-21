@@ -32,6 +32,7 @@ namespace Europlan.Common {
 			}
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBodenProduct)));
+                this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaBoden20Product)));
 			}
 			if (license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
 				this.lstHeatingSystems.Items.Add(new HeatingSystemItem(typeof(ModulKlimaDeckeProduct)));
