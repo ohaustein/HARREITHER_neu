@@ -655,6 +655,7 @@ namespace Europlan.Common {
 			HithermCompactRoofProduct.StaticInitialize(this.Config);
 			HithermProduct.StaticInitialize(this.Config);
 			ModulKlimaBodenProduct.StaticInitialize(this.Config);
+            ModulKlimaBoden20Product.StaticInitialize(this.Config);
 			ModulKlimaDeckeProduct.StaticInitialize(this.Config);
 		}
 
