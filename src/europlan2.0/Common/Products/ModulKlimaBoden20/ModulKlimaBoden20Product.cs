@@ -14,19 +14,20 @@ namespace Europlan.Common {
 	public class ModulKlimaBoden20Product : Product, ProductWithInsulationConstruction {
 
 		// quick dimensioning
-		private static int quickDimensioningHeatPowerPerSquareMeter = 80;
-		private static int quickDimensioningCoolPowerPerSquareMeter = 80;
+		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
+		private static int quickDimensioningCoolPowerPerSquareMeter = 50;
 		private static bool canHeat = true;
-		private static bool canCool = true;
+		private static bool canCool = false;
 
 		// planning
 		private static double su0 = 0.045; /* Mindestüberdeckung fix */
 		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
 		private static double lambdaU0 = 1; /* fix */
-		private static double rLambdaDecke = 0.11; /* Deckenschicht 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
-		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
+        private static double rLambdaDecke = 0.11; /* Fußbodenbelag 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
+        private static double rLambdaPutz = 0.02; /* Fußbodenbelag 1.5cm Putz; durch echte Konstruktion ersetzen! */
 		private static double atmt = 1.06; /* Fixwert laut Norm */
 		private static double b = 6.5; /* Fixwert laut Norm */
+
 		private static double leistungsFaktorHeizen = 1.0;
 		private static double leistungsFaktorKuehlen = 1.0;
 
@@ -34,28 +35,32 @@ namespace Europlan.Common {
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
-		private static double[] druckverlustModul_120_30 = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
-		private static double[] druckverlustModul_100_30 = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
-		private static double[] druckverlustModul_80_30 = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
+        private static double[] druckverlustModul_100_40 = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
 
+        private float plannedArea = 0;
+        private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
-		private Construction plannedCeilingConstruction = null;
+		private Construction plannedFloorConstruction = null;
 		private Construction plannedInsulationConstruction = null;
-		private string plannedCeilingConstructionId = null;
+		private string plannedFloorConstructionId = null;
 		private string plannedInsulationConstructionId = null;
 
 		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
 		private static int maxPressureLost = 15000;
 		private static int maxDurchfluss = 240;
 		private static int maxModulesInRow = 20;
-		private static int maxModulesInParallel = 6;
-		private static int maxModulesInCircuit = 45;
+		private static int maxModulesInParallel = 3;
+		private static int maxModulesInCircuit = 40;
 		private static double spreizungHeizMin = 4;
 		private static double spreizungHeizMax = 12;
 		private static double spreizungKuehlMin = 2;
 		private static double spreizungKuehlMax = 5;
 
-		private static double maxCeilingTempHeat = 29.0;
+        //  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
+        private static bool useHarreitherNorm = true;
+        private static double maxFloorTempHarreither = 27;
+        private static double maxFloorTempEn1264 = 29;
+        private static double maxNassraumTemp = 33;
 
 		private ProductType modulType = ProductType.FBH;
 		private float plannedFloorArea = 0;
@@ -92,7 +97,7 @@ namespace Europlan.Common {
 		}
 
 		public override Product.CalculateModeEnum DefaultCalculateMode {
-			get { return CalculateModeEnum.COOL; }
+			get { return CalculateModeEnum.HEAT; }
 		}
 
 		public new static void StaticInitialize(Configuration config) {
@@ -164,7 +169,7 @@ namespace Europlan.Common {
 			get { return canCool; }
 		}
 
-		[IntProductParameter(80)]
+		[IntProductParameter(50)]
 		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 			set { quickDimensioningHeatPowerPerSquareMeter = value; }
@@ -173,7 +178,7 @@ namespace Europlan.Common {
 			get { return quickDimensioningHeatPowerPerSquareMeter; }
 		}
 
-		[IntProductParameter(80)]
+		[IntProductParameter(50)]
 		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
 			get { return quickDimensioningCoolPowerPerSquareMeter; }
 			set { quickDimensioningCoolPowerPerSquareMeter = value; }
@@ -207,9 +212,9 @@ namespace Europlan.Common {
 		}
 
 		[DoubleProductParameter(0)]
-		public static double ConfigRLambdaDach {
-			get { return rLambdaDach; }
-			set { rLambdaDach = value; }
+		public static double ConfigRLambdaPutz {
+			get { return rLambdaPutz; }
+			set { rLambdaPutz = value; }
 		}
 
 		[DoubleProductParameter(1.06)]
@@ -254,13 +259,13 @@ namespace Europlan.Common {
             set { ModulKlimaBoden20Product.maxModulesInRow = value; }
 		}
 
-		[IntProductParameter(6)]
+		[IntProductParameter(3)]
 		public static int ConfigMaxModulesInParallel {
             get { return ModulKlimaBoden20Product.maxModulesInParallel; }
             set { ModulKlimaBoden20Product.maxModulesInParallel = value; }
 		}
 
-		[IntProductParameter(50)]
+		[IntProductParameter(40)]
 		public static int ConfigModulesInCircuit {
             get { return ModulKlimaBoden20Product.maxModulesInCircuit; }
             set { ModulKlimaBoden20Product.maxModulesInCircuit = value; }
@@ -307,62 +312,56 @@ namespace Europlan.Common {
 			set { v = value; }
 		}
 
-		[StringProductParameter("{0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1}")]
-		public static string ConfigDruckverlustModul_120_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_120_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_120_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_120_30 {
-			get { return druckverlustModul_120_30; }
-			set { druckverlustModul_120_30 = value; }
-		}
+        [StringProductParameter("{0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25}")]
+        public static string ConfigDruckverlustModul_100_40String
+        {
+            get
+            {
+                return ConvertArrayToString(druckverlustModul_100_40);
+            }
+            set
+            {
+                double[] array = ConvertStringToArray(value);
+                if (array != null)
+                {
+                    druckverlustModul_100_40 = array;
+                }
+            }
+        }
+        public static double[] ConfigDruckverlustModul_100_40
+        {
+            get { return druckverlustModul_100_40; }
+            set { druckverlustModul_100_40 = value; }
+        }
 
-		[StringProductParameter("{0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3}")]
-		public static string ConfigDruckverlustModul_100_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_100_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_100_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_100_30 {
-			get { return druckverlustModul_100_30; }
-			set { druckverlustModul_100_30 = value; }
-		}
+        [DoubleProductParameter(27)]
+        public static double ConfigMaxFloorTempHarreither
+        {
+            get { return maxFloorTempHarreither; }
+            set { maxFloorTempHarreither = value; }
+        }
 
-		[StringProductParameter("{0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3}")]
-		public static string ConfigDruckverlustModul_80_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_80_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_80_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_80_30 {
-			get { return druckverlustModul_80_30; }
-			set { druckverlustModul_80_30 = value; }
-		}
+        [BoolProductParameter(true)]
+        public static bool ConfigUseHarreitherNorm
+        {
+            get { return useHarreitherNorm; }
+            set { useHarreitherNorm = value; }
+        }
 
-		[DoubleProductParameter(29)]
-		public static double ConfigMaxCeilingTempHeat {
-			get { return maxCeilingTempHeat; }
-			set { maxCeilingTempHeat = value; }
-		}
+        [DoubleProductParameter(29)]
+        public static double ConfigMaxFloorTempEn1264
+        {
+            get { return maxFloorTempEn1264; }
+            set { maxFloorTempEn1264 = value; }
+        }
+
+        [DoubleProductParameter(33)]
+        public static double ConfigMaxNassraumTemp
+        {
+            get { return maxNassraumTemp; }
+            set { maxNassraumTemp = value; }
+        }
+
 		#endregion Product Parameters
 
         public double MaxDurchfluss {
@@ -390,7 +389,7 @@ namespace Europlan.Common {
 
 		public override float GetDefaultQuickDimensioningPlannedArea() {
 			if (this.AssociatedRoom != null) {
-				return this.AssociatedRoom.Area * Project.Instance.QuickDimensioning.CeilingAllocation / 100;
+				return this.AssociatedRoom.Area;
 			}
 			return 0;
 		}
@@ -409,7 +408,7 @@ namespace Europlan.Common {
 		}
 
 		public static string QuickDimensioningNameStatic {
-			get { return "Modul\nKlima\nDecke\n(m²)"; }
+			get { return "Modul\nKlima\nBoden 20\n(m²)"; }
 		}
 
 		public override ProductType Type {
@@ -451,10 +450,10 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
-			if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
+			if (this.PlannedFloorConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
-				if (PlannedCeilingConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fußbodenkonstruktion, "
+				if (PlannedFloorConstruction == null) {
+					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenFussboden + ", "; //"Fußbodenkonstruktion, "
 				}
 				if (PlannedInsulationConstruction == null) {
 					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, "
@@ -703,12 +702,13 @@ namespace Europlan.Common {
 					this.lastErrorMsg += newMsg + "\n";
 				}
 			}
-			if (Math.Round(this.PlannedCeilingTemperatureHeat, 1) > Math.Round(ModulKlimaBoden20Product.ConfigMaxCeilingTempHeat, 1) && this.requestedHeatLoad > 0) {
-				newMsg = EuroplanRes.ErrorMessage_DeckentemperaturHeat;
-				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedCeilingTemperatureHeat, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaBoden20Product.ConfigMaxCeilingTempHeat, 1).ToString());
-				this.lastErrorMsg += newMsg + "\n";
-			}
+            if (Math.Round(this.PlannedFloorTemperatureHeat, 1) > this.MaxFloorTemp && this.requestedHeatLoad > 0)
+            {
+                newMsg = EuroplanRes.ErrorMessage_Oberflaechentemperatur;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedFloorTemperatureHeat, 1).ToString());
+                newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.MaxFloorTemp, 1).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            }			
 			if (this.PlannedRemoveArea > this.AvailableFloorArea) {
 				newMsg = EuroplanRes.ErrorMessage_Anbindeleitung;
 				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRemoveArea, 1).ToString());
@@ -721,6 +721,15 @@ namespace Europlan.Common {
 
 			return true;
 		}
+
+        private double MaxFloorTemp
+        {
+            get
+            {
+                double maxTemp = ConfigUseHarreitherNorm ? ConfigMaxFloorTempHarreither : ConfigMaxFloorTempEn1264;
+                return AssociatedRoom.IsNassraum ? Math.Max(maxTemp, ConfigMaxNassraumTemp) : maxTemp;
+            }
+        }
 
 		[XmlIgnore]
 		public double CoveredArea {
@@ -738,9 +747,9 @@ namespace Europlan.Common {
 		/// The percentage of the total room area that is occupied by the planned area.
 		/// </summary>
 		[XmlIgnore]
-		public float PlannedCeilingAreaPercentage {
-			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedCeilingArea * 100 / this.AssociatedRoom.Area); }
-			set { this.PlannedCeilingArea = (float)(this.AssociatedRoom.Area * value / 100); }
+		public float PlannedFloorAreaPercentage {
+			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedFloorArea * 100 / this.AssociatedRoom.Area); }
+			set { this.PlannedFloorArea = (float)(this.AssociatedRoom.Area * value / 100); }
 		}
 
 		/// <summary>
@@ -751,6 +760,16 @@ namespace Europlan.Common {
 			get { return this.plannedAreaUnheated; }
 			set { this.plannedAreaUnheated = value; }
 		}
+
+        /// <summary>
+        /// The area which is planned reduced (50%).
+        /// Half of this area is subtracted from the planned area for calculation.
+        /// </summary>
+        public float PlannedAreaReduced
+        {
+            get { return this.plannedAreaReduced; }
+            set { this.plannedAreaReduced = value; }
+        }
 
 		public override float PlannedFloorArea {
 			get {
@@ -863,11 +882,11 @@ namespace Europlan.Common {
 		/// <summary>
 		/// The id of the planned ceiling construction for serialization
 		/// </summary>
-		public string PlannedCeilingConstructionId {
-			get { return this.PlannedCeilingConstruction == null ? this.plannedCeilingConstructionId : this.PlannedCeilingConstruction.Id; }
+		public string PlannedFloorConstructionId {
+			get { return this.PlannedFloorConstruction == null ? this.plannedFloorConstructionId : this.PlannedFloorConstruction.Id; }
 			set {
-				this.plannedCeilingConstructionId = value;
-				this.plannedCeilingConstruction = null;
+				this.plannedFloorConstructionId = value;
+				this.plannedFloorConstruction = null;
 			}
 		}
 
@@ -886,17 +905,17 @@ namespace Europlan.Common {
 		/// The planned ceiling contruction
 		/// </summary>
 		[XmlIgnore]
-		public Construction PlannedCeilingConstruction {
+		public Construction PlannedFloorConstruction {
 			get {
-				if (this.plannedCeilingConstructionId != null) {
-					this.plannedCeilingConstruction = Project.Instance.Config.GetConstruction(this.plannedCeilingConstructionId);
-					this.plannedCeilingConstructionId = null;
+				if (this.plannedFloorConstructionId != null) {
+					this.plannedFloorConstruction = Project.Instance.Config.GetConstruction(this.plannedFloorConstructionId);
+					this.plannedFloorConstructionId = null;
 				}
-				return this.plannedCeilingConstruction;
+				return this.plannedFloorConstruction;
 			}
 			set {
-				this.plannedCeilingConstruction = value;
-				this.plannedCeilingConstructionId = null;
+				this.plannedFloorConstruction = value;
+				this.plannedFloorConstructionId = null;
 			}
 		}
 
@@ -922,8 +941,8 @@ namespace Europlan.Common {
 		/// The r-value of the planned ceiling construction
 		/// </summary>
 		[XmlIgnore]
-		public float PlannedCeilingConstructionRValue {
-			get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
+		public float PlannedFloorConstructionRValue {
+			get { return (this.PlannedFloorConstruction == null ? 0 : this.PlannedFloorConstruction.RValue); }
 		}
 
 		/// <summary>
@@ -943,17 +962,17 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public override float PlannedInsideConstructionRValue {
-			get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
+			get { return (this.PlannedFloorConstruction == null ? 0 : this.PlannedFloorConstruction.RValue); }
 		}
 
 		[XmlIgnore]
 		public override bool HasInsideConstruction {
-			get { return this.PlannedCeilingConstruction != null; }
+			get { return this.PlannedFloorConstruction != null; }
 		}
 
 		[XmlIgnore]
 		public override Construction PlannedInsideConstruction {
-			get { return this.PlannedCeilingConstruction; }
+			get { return this.PlannedFloorConstruction; }
 		}
 
 		/// <summary>
@@ -1092,15 +1111,15 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double PlannedCeilingTemperatureHeat {
+		public double PlannedFloorTemperatureHeat {
 			get {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
 				double value = 0;
 				foreach (ModulKlimaBoden20Circuit mc in this.circuits) {
-					if (mc.C_CeilingTempHeat > value) {
-						value = mc.C_CeilingTempHeat;
+					if (mc.C_FloorTempHeat > value) {
+						value = mc.C_FloorTempHeat;
 					}
 				}
 				return value;
@@ -1108,15 +1127,15 @@ namespace Europlan.Common {
 		}
 
 		[XmlIgnore]
-		public double PlannedCeilingTemperatureCool {
+		public double PlannedFloorTemperatureCool {
 			get {
 				if (this.incompleteCalculation) {
 					return 0;
 				}
 				double value = Double.MaxValue;
 				foreach (ModulKlimaBoden20Circuit mc in this.circuits) {
-					if (mc.C_CeilingTempCool < value) {
-						value = mc.C_CeilingTempCool;
+					if (mc.C_FloorTempCool < value) {
+						value = mc.C_FloorTempCool;
 					}
 				}
 				return value;

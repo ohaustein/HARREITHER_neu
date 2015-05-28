@@ -130,18 +130,18 @@ namespace Europlan.Common
             get { return c_qCoolPerSqm; }
         }
 
-        private double c_ceilingTempHeat;
+        private double c_floorTempHeat;
         [XmlIgnore]
-        public double C_CeilingTempHeat
+        public double C_FloorTempHeat
         {
-            get { return this.c_ceilingTempHeat; }
+            get { return this.c_floorTempHeat; }
         }
 
-        private double c_ceilingTempCool;
+        private double c_floorTempCool;
         [XmlIgnore]
-        public double C_CeilingTempCool
+        public double C_FloorTempCool
         {
-            get { return this.c_ceilingTempCool; }
+            get { return this.c_floorTempCool; }
         }
 
         private double c_thetaVHeat;
@@ -239,15 +239,15 @@ namespace Europlan.Common
             double su0 = ModulKlimaBoden20Product.ConfigSu0;
             double lambdaU0 = ModulKlimaBoden20Product.ConfigLambdaU0;
             double rLambdaDecke = ModulKlimaBoden20Product.ConfigRLambdaDecke;
-            double rLambdaDach = ModulKlimaBoden20Product.ConfigRLambdaDach;
+            double rLambdaPutz = ModulKlimaBoden20Product.ConfigRLambdaPutz;
             double rAlphaDeckeDh = 1 / alphaAussenHeat; /* Wärmeübergang Decke bei Heizung */
             double rAlphaDeckeDk = 1 / alphaAussenCool; /* Wärmeübergang Decke bei Kühlung */
 
             double rLambdaB = 0;
             double rLambdaIns = this.ModulKlimaBoden20Product.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedInsulationConstruction.RValue;
 
-            double su = this.ModulKlimaBoden20Product.PlannedCeilingConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedCeilingConstruction.Thickness / 1000;
-            double lambdaE = this.ModulKlimaBoden20Product.PlannedCeilingConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedCeilingConstruction.LambdaValue;
+            double su = this.ModulKlimaBoden20Product.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedFloorConstruction.Thickness / 1000;
+            double lambdaE = this.ModulKlimaBoden20Product.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedFloorConstruction.LambdaValue;
             double lambdaU = lambdaE;
 
             { // Heizlastberechnung
@@ -274,7 +274,7 @@ namespace Europlan.Common
                     double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
                     this.c_qHeatPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-                    double qU = en1264.WaermeverlustAussen(alphaInnenHeat, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qHeatPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowHeat);
+                    double qU = en1264.WaermeverlustAussen(alphaInnenHeat, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qHeatPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowHeat);
 
                     // hydraulische Berechnung
                     this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
@@ -318,7 +318,7 @@ namespace Europlan.Common
                         }
                     }
 
-                    this.c_ceilingTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, alphaInnenHeat, this.ModulKlimaBoden20Product.AssociatedRoom.RoomHeatTemperature);
+                    this.c_floorTempHeat = en1264.OberflaechenTemperatur(this.c_qHeatPerSqm, alphaInnenHeat, this.ModulKlimaBoden20Product.AssociatedRoom.RoomHeatTemperature);
                 }
             }
             { // Kühllastberechnung
@@ -345,7 +345,7 @@ namespace Europlan.Common
                     double ab = en1264.abFlaeche(b, au, atmt, rLambdaB);
                     this.c_qCoolPerSqm = en1264.WaermestromDichteFlaeche(b, ab, atmt, au, dTheta) * leistungsFaktor;
 
-                    double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaDach, this.c_qCoolPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomCoolTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowCool);
+                    double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qCoolPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomCoolTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowCool);
 
                     // hydraulische Berechnung
                     this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
@@ -389,7 +389,7 @@ namespace Europlan.Common
                         }
                     }
 
-                    this.c_ceilingTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, alphaInnenCool, this.ModulKlimaBoden20Product.AssociatedRoom.RoomCoolTemperature);
+                    this.c_floorTempCool = en1264.OberflaechenTemperatur(this.c_qCoolPerSqm, alphaInnenCool, this.ModulKlimaBoden20Product.AssociatedRoom.RoomCoolTemperature);
                 }
             }
         }

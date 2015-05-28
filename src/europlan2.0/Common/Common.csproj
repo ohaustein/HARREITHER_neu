@@ -170,6 +170,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EuroplanRes.it.resx</DependentUpon>
     </Compile>
+    <Compile Include="EuroplanRes.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.pl.resx</DependentUpon>
+    </Compile>
     <Compile Include="EuroplanRes.sk.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1208,6 +1213,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.pl.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.pl.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.sk.resx">
       <SubType>Designer</SubType>

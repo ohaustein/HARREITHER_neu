@@ -18032,7 +18032,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Boden 20.
+        ///   Looks up a localized string similar to Modul Klima-Boden M20.
         /// </summary>
         internal static string Product_ModulKlimBoden20FullName {
             get {
@@ -18041,7 +18041,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Boden 20.
+        ///   Looks up a localized string similar to Modul Klima-Boden M20.
         /// </summary>
         internal static string Product_ModulKlimBoden20Name {
             get {
@@ -18050,7 +18050,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Boden 33.
+        ///   Looks up a localized string similar to Modul Klima-Boden M33.
         /// </summary>
         internal static string Product_ModulKlimBodenFullName {
             get {
@@ -18059,7 +18059,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Boden 33.
+        ///   Looks up a localized string similar to Modul Klima-Boden M33.
         /// </summary>
         internal static string Product_ModulKlimBodenName {
             get {
@@ -21563,11 +21563,20 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Boden.
+        ///   Looks up a localized string similar to Modul Klima-Boden M20.
         /// </summary>
-        internal static string SystemParametersPanel_KlimaBoden {
+        internal static string SystemParametersPanel_KlimaBoden20 {
             get {
-                return ResourceManager.GetString("SystemParametersPanel_KlimaBoden", resourceCulture);
+                return ResourceManager.GetString("SystemParametersPanel_KlimaBoden20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modul Klima-Boden M33.
+        /// </summary>
+        internal static string SystemParametersPanel_KlimaBoden33 {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_KlimaBoden33", resourceCulture);
             }
         }
         

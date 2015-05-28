@@ -4614,10 +4614,10 @@ recht</value>
     <value>Hitherm®</value>
   </data>
   <data name="Product_ModulKlimBodenFullName" xml:space="preserve">
-    <value>Modul Klima-Boden 33</value>
+    <value>Modul Klima-Boden M33</value>
   </data>
   <data name="Product_ModulKlimBodenName" xml:space="preserve">
-    <value>Modul Klima-Boden 33</value>
+    <value>Modul Klima-Boden M33</value>
   </data>
   <data name="Product_ModulKlimDeckeFullName" xml:space="preserve">
     <value>Modul Klima-Decke</value>
@@ -5645,8 +5645,8 @@ fläche
   <data name="SystemParametersPanel_InfoProjectConf" xml:space="preserve">
     <value>Diese Werte betreffen nur das aktuelle Projekt. Um die Standardwerte zu ändern, die verwendet werden, wenn ein neues Projekt angelegt wird, klicken Sie auf "Optionen" &gt; "Einstellungen" &gt; "Standard Systemparameter"</value>
   </data>
-  <data name="SystemParametersPanel_KlimaBoden" xml:space="preserve">
-    <value>Modul Klima-Boden</value>
+  <data name="SystemParametersPanel_KlimaBoden33" xml:space="preserve">
+    <value>Modul Klima-Boden M33</value>
   </data>
   <data name="SystemParametersPanel_KlimaDecke" xml:space="preserve">
     <value>Modul Klima-Decke</value>
@@ -7604,10 +7604,10 @@ Nummer</value>
     <value>auf Verteiler aufteilen</value>
   </data>
   <data name="Product_ModulKlimBoden20FullName" xml:space="preserve">
-    <value>Modul Klima-Boden 20</value>
+    <value>Modul Klima-Boden M20</value>
   </data>
   <data name="Product_ModulKlimBoden20Name" xml:space="preserve">
-    <value>Modul Klima-Boden 20</value>
+    <value>Modul Klima-Boden M20</value>
   </data>
   <data name="ModulKlimaBoden20Form_NeueModule" xml:space="preserve">
     <value>neue Module</value>
@@ -7788,5 +7788,8 @@ Nummer</value>
   </data>
   <data name="PlannedModulKlimaBoden20ProductPanel_Typ" xml:space="preserve">
     <value>Typ:</value>
+  </data>
+  <data name="SystemParametersPanel_KlimaBoden20" xml:space="preserve">
+    <value>Modul Klima-Boden M20</value>
   </data>
 </root>
