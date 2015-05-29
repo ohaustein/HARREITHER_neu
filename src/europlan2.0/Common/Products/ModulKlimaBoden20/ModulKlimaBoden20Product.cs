@@ -136,7 +136,7 @@ namespace Europlan.Common {
 				}
 
 				if (message != null) {
-					message = EuroplanRes.ModulKlimaDeckeProduct_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+					message = EuroplanRes.ModulKlimaBoden20Product_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
 						"\n" + message;
 				}
 
@@ -1060,25 +1060,14 @@ namespace Europlan.Common {
 					} else {
 						notification = notification + "\n" + newNotification;
 					}
-				}
-                if (this.PlannedConnection != null && this.PlannedConnection.DirectOrIndirectDistributor != null) {
-                    if (this.PlannedConnection.DirectOrIndirectDistributor.DistributorType != Distributor.DistributorTypeEnum.DT_480) {
-                        string newMessage = EuroplanRes.ModulKlimaDeckeProduct_NotificationVerteiler;
-                        newMessage = newMessage.Replace("%TYPE%", this.PlannedConnection.DirectOrIndirectDistributor.DistributorTypeName);
-                        if (notification == null) {
-                            notification = newMessage;
-                        } else {
-                            notification += ("\n" + newMessage);
-                        }
-                    }
-                }
+				}                
                 if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
                     if (notification == null) {
                         notification = "";
                     } else {
                         notification += "\n";
                     }
-                    notification += EuroplanRes.ModulKlimaDeckeProduct_NotificationTichelmann;
+                    notification += EuroplanRes.ModulKlimaBoden20Product_NotificationTichelmann;
                 }
                 return notification;
 			}
