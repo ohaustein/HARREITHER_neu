@@ -5,6 +5,7 @@ using System.Text;
 namespace Europlan.Common {
 	public class ModulKlimaBoden20SubArea : ModulDeckeSubArea {
 
+        protected override bool IsFloor { get { return true; } } 
 		
 	}
 }

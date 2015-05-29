@@ -211,7 +211,7 @@ namespace Europlan.Common {
 			set { rLambdaDecke = value; }
 		}
 
-		[DoubleProductParameter(0)]
+		[DoubleProductParameter(0.02)]
 		public static double ConfigRLambdaPutz {
 			get { return rLambdaPutz; }
 			set { rLambdaPutz = value; }

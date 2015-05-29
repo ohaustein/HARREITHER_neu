@@ -243,11 +243,40 @@ namespace Europlan.Common
             double rAlphaDeckeDh = 1 / alphaAussenHeat; /* Wärmeübergang Decke bei Heizung */
             double rAlphaDeckeDk = 1 / alphaAussenCool; /* Wärmeübergang Decke bei Kühlung */
 
-            double rLambdaB = 0;
+            double rLambdaB = this.ModulKlimaBoden20Product.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedFloorConstruction.RValue;           
             double rLambdaIns = this.ModulKlimaBoden20Product.PlannedInsulationConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedInsulationConstruction.RValue;
 
-            double su = this.ModulKlimaBoden20Product.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedFloorConstruction.Thickness / 1000;
-            double lambdaE = this.ModulKlimaBoden20Product.PlannedFloorConstruction == null ? 0 : this.ModulKlimaBoden20Product.PlannedFloorConstruction.LambdaValue;
+            double su = 0.002;
+            double lambdaE = 60;
+            if (this.ModulKlimaBoden20Product.PlannedFloorConstruction != null)
+            {
+                ConstructionTypeManager ctm = ConstructionTypeManager.Instance;
+                ConstructionType ctEstrichS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_ESTRICH);
+                ConstructionType ctEstrichU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_ESTRICH);
+                ConstructionType ctStahlS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL);
+                ConstructionType ctStahlU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL);
+                ConstructionType ctTrkEstrS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TRK_ESTRICH);
+                ConstructionType ctTrkEstrU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH);
+
+                ConstructionType ct = this.ModulKlimaBoden20Product.PlannedFloorConstruction.Type;
+                if (ct == ctEstrichS || ct == ctEstrichU)
+                {
+                    su = 0.03;
+                    lambdaE = 1.2;
+                }
+                else if (ct == ctTrkEstrS || ct == ctTrkEstrU)
+                {
+                    su = 0.02;
+                    lambdaE = 0.33;
+                }
+                else if (ct == ctStahlS || ct == ctStahlU)
+                {
+                    su = 0.002;
+                    lambdaE = 60;
+                }
+
+
+            }
             double lambdaU = lambdaE;
 
             { // Heizlastberechnung

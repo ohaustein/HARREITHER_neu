@@ -29,11 +29,13 @@ namespace Europlan.Common {
 			return druckverlust;
 		}
 
+        protected virtual bool IsFloor { get { return false; } } 
+
 		public double CoveredArea {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenList row in this.rows) {
-					area += row.GetCoveredArea(false);
+					area += row.GetCoveredArea(IsFloor);
 				}
 				return area;
 			}
@@ -43,7 +45,7 @@ namespace Europlan.Common {
 			get {
 				double area = 0;
 				foreach (KlimaFlaechenList row in this.rows) {
-					area += row.GetHeatArea(false);
+					area += row.GetHeatArea(IsFloor);
 				}
 				return area;
 			}
@@ -53,7 +55,7 @@ namespace Europlan.Common {
 			get {
 				double length = 0;
 				foreach (KlimaFlaechenList row in rows) {
-					double rowLength = row.GetEquivalentPipeLength(false);
+					double rowLength = row.GetEquivalentPipeLength(IsFloor);
 					if (rowLength > length) {
 						length = rowLength;
 					}
