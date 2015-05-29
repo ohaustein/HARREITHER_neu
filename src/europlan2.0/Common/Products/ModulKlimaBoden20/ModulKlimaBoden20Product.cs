@@ -229,19 +229,19 @@ namespace Europlan.Common {
 			set { b = value; }
 		}
 
-		[DoubleProductParameter(0.95)]
+		[DoubleProductParameter(1)]
 		public static double ConfigLeistungsFaktorHeizen {
 			get { return leistungsFaktorHeizen; }
 			set { leistungsFaktorHeizen = value; }
 		}
 
-		[DoubleProductParameter(0.95)]
+		[DoubleProductParameter(1)]
 		public static double ConfigLeistungsFaktorKuehlen {
 			get { return leistungsFaktorKuehlen; }
 			set { leistungsFaktorKuehlen = value; }
 		}
 
-		[IntProductParameter(15000)]
+		[IntProductParameter(18000)]
 		public static int ConfigMaxPressureLost {
 			get { return ModulKlimaBoden20Product.maxPressureLost; }
             set { ModulKlimaBoden20Product.maxPressureLost = value; }

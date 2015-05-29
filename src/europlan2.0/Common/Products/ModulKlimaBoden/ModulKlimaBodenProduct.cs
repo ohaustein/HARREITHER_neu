@@ -509,7 +509,7 @@ namespace Europlan.Common {
 			double longestRuecklaufTotal;
 			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal, 12);
 
-			int cCount = this.RequestedCircuits.HasValue ? this.RequestedCircuits.Value : this.RequestedModulesTotal / 40;
+			int cCount = this.RequestedCircuits.HasValue ? this.RequestedCircuits.Value : this.RequestedModulesTotal / 40; // TODO: Warum 40 und nicht die Config-Werte?
 
 			if (this.connectedCircuits.Count > cCount) {
 				cCount = this.connectedCircuits.Count;
