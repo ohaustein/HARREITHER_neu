@@ -743,6 +743,24 @@ namespace Europlan.Common {
 
 		}
 
+        [XmlIgnore]
+        public double PlannedModulArea
+        {
+            get
+            {
+                if (this.incompleteCalculation)
+                {
+                    return 0;
+                }
+                double value = 0;
+                foreach (ModulKlimaBoden20Circuit c in this.circuits)
+                {
+                    value += c.HeatArea;
+                }
+                return value;
+            }
+        }
+
 		/// <summary>
 		/// The percentage of the total room area that is occupied by the planned area.
 		/// </summary>

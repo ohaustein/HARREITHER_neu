@@ -47,17 +47,18 @@ namespace Europlan.Common {
 		public double GetHeatArea(bool floor) {
 			double area = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-				area += modul.GetHeatArea(floor);
+                area += modul.GetHeatArea(floor) ;
 			}
-			return area;
+			return area + (floor ? 0.02 * this.lengthVerbindeleitungen : 0);
 		}
 
 		public double GetCoveredArea(bool floor) {
 			double area = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-				area += modul.GetCoveredArea(floor);
+                area += modul.GetCoveredArea(floor);
+
 			}
-			return area;
+            return area + (floor ? /*this.LangeFittinge * 0.15 +*/ 0.055 * this.lengthVerbindeleitungen : 0);
 		}
 
 		public double GetEquivalentPipeLength(bool floor) {

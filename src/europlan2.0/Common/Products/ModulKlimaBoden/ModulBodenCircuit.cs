@@ -72,7 +72,7 @@ namespace Europlan.Common {
 		/// </summary>
 		[XmlIgnore]
 		public double HeatArea {
-			get { return row.GetHeatArea(true) + 0.02 * this.SonstigeVerbindeleitung; }
+            get { return row.GetHeatArea(true); }
 		}
 
 		[XmlIgnore]
@@ -87,7 +87,7 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		public double CoveredArea {
-			get { return row.GetCoveredArea(true) + this.LangeFittinge * 0.15 + 0.055 * this.SonstigeVerbindeleitung; }
+            get { return row.GetCoveredArea(true) + this.LangeFittinge * 0.15; }
 		}
 		#endregion Area
 

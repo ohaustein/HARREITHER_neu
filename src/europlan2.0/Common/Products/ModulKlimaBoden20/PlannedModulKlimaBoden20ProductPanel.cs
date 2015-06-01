@@ -52,6 +52,7 @@ namespace Europlan.Common {
 			this.lblDurchflussHeatUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblAvgqCoolUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²"
 			this.lblAvgqHeatUnit.Text = EuroplanRes.Unit_WattProQm; //"W/m²"
+            this.lblHeatAreaUnit.Text = EuroplanRes.Unit_Quadratmeter; //"m²"
 
 			this.lblCoolLoadTotal.Text = "(0 " + EuroplanRes.Unit_Watt + ")";
 			this.lblHeatLoadTotal.Text = "(0 " + EuroplanRes.Unit_Watt + ")";
@@ -81,6 +82,7 @@ namespace Europlan.Common {
 			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung"
 			this.btnConnectionPipes.Text = EuroplanRes.PlannedProductPanel_AnbindeleitungenBearbeiten; //"Anbindeleitungen bearbeiten"
 			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:"
+            this.lblHeatAreaDesc.Text = EuroplanRes.PlannedModulProductPanel_FlaecheBeheizt; //"Beheizte Fläche:"
 
 			this.label4.Text = EuroplanRes.PlannedModulProductPanel_Berechnungsergebnisse; //"Berechnungsergebnisse:"
 			this.label9.Text = EuroplanRes.PlannedModulProductPanel_Druckverlust; //"Druckverlust:"
@@ -548,9 +550,11 @@ namespace Europlan.Common {
 						availableArea = Math.Round(this.product.Product.PlannedFloorArea, 2);
 					}
 					double coveredArea = Math.Round((this.product.Product as ModulKlimaBoden20Product).CoveredArea, 2);
+                    double heatArea = Math.Round((this.product.Product as ModulKlimaBoden20Product).PlannedModulArea, 2);
 					double anbArea = Math.Round((this.product.Product as ModulKlimaBoden20Product).PlannedRemoveArea, 2);
 					lblAvailableArea.Text = availableArea.ToString();
 					lblCoveredArea.Text = coveredArea.ToString();
+                    lblHeatArea.Text = heatArea.ToString();
 					lblAnbArea.Text = anbArea.ToString();
 					lblRestArea.Text = Math.Round(availableArea - anbArea - coveredArea, 2).ToString();
 				}
