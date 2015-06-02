@@ -1195,7 +1195,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(662, 87);
+            this.btnGraphical.Location = new System.Drawing.Point(644, 87);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -1218,7 +1218,7 @@ namespace Europlan.Common {
             this.lstError.Location = new System.Drawing.Point(16, 611);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(803, 50);
+            this.lstError.Size = new System.Drawing.Size(785, 80);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1766,7 +1766,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(662, 58);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(644, 58);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -1821,13 +1821,11 @@ namespace Europlan.Common {
             // 
             // dgvModules
             // 
-            this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvModules.Boden = true;
             this.dgvModules.Location = new System.Drawing.Point(340, 97);
             this.dgvModules.Name = "dgvModules";
             this.dgvModules.ShowModulation = true;
-            this.dgvModules.Size = new System.Drawing.Size(376, 212);
+            this.dgvModules.Size = new System.Drawing.Size(487, 212);
             this.dgvModules.TabIndex = 44;
             this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
             // 

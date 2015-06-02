@@ -26,15 +26,15 @@ namespace Europlan.Common {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvModules = new System.Windows.Forms.DataGridView();
-            this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.modulationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAlign = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
+            this.modulTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.orientationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.klimaFlaechenModulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvModules)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -43,8 +43,9 @@ namespace Europlan.Common {
             // 
             this.dgvModules.AllowUserToAddRows = false;
             this.dgvModules.AllowUserToDeleteRows = false;
-            this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvModules.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -62,10 +63,69 @@ namespace Europlan.Common {
             this.dgvModules.DataSource = this.klimaFlaechenModulBindingSource;
             this.dgvModules.Location = new System.Drawing.Point(0, 0);
             this.dgvModules.Name = "dgvModules";
-            this.dgvModules.Size = new System.Drawing.Size(299, 343);
+            this.dgvModules.Size = new System.Drawing.Size(362, 343);
             this.dgvModules.TabIndex = 0;
             this.dgvModules.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModules_CellValueChanged);
             this.dgvModules.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvModules_DataError);
+            // 
+            // modulationDataGridViewTextBoxColumn
+            // 
+            this.modulationDataGridViewTextBoxColumn.DataPropertyName = "ModulationLength";
+            this.modulationDataGridViewTextBoxColumn.HeaderText = "ModulationLength";
+            this.modulationDataGridViewTextBoxColumn.Name = "modulationDataGridViewTextBoxColumn";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Location = new System.Drawing.Point(365, 2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(30, 23);
+            this.btnAdd.TabIndex = 1;
+            this.btnAdd.Text = "+";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Location = new System.Drawing.Point(365, 31);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(32, 23);
+            this.btnRemove.TabIndex = 2;
+            this.btnRemove.Text = "-";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnAlign
+            // 
+            this.btnAlign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAlign.Location = new System.Drawing.Point(365, 60);
+            this.btnAlign.Name = "btnAlign";
+            this.btnAlign.Size = new System.Drawing.Size(88, 43);
+            this.btnAlign.TabIndex = 3;
+            this.btnAlign.Text = "Automatische Ausrichtung";
+            this.btnAlign.UseVisualStyleBackColor = true;
+            this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(365, 326);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Anzahl der Module:";
+            // 
+            // lblCount
+            // 
+            this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCount.AutoSize = true;
+            this.lblCount.Location = new System.Drawing.Point(469, 326);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(13, 13);
+            this.lblCount.TabIndex = 5;
+            this.lblCount.Text = "0";
             // 
             // modulTypeDataGridViewTextBoxColumn
             // 
@@ -82,65 +142,9 @@ namespace Europlan.Common {
             this.orientationDataGridViewTextBoxColumn.Name = "orientationDataGridViewTextBoxColumn";
             this.orientationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // modulationDataGridViewTextBoxColumn
-            // 
-            this.modulationDataGridViewTextBoxColumn.DataPropertyName = "ModulationLength";
-            this.modulationDataGridViewTextBoxColumn.HeaderText = "ModulationLength";
-            this.modulationDataGridViewTextBoxColumn.Name = "modulationDataGridViewTextBoxColumn";
-            // 
             // klimaFlaechenModulBindingSource
             // 
             this.klimaFlaechenModulBindingSource.DataSource = typeof(Europlan.Common.KlimaFlaechenModul);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(305, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(30, 23);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "+";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(305, 32);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(32, 23);
-            this.btnRemove.TabIndex = 2;
-            this.btnRemove.Text = "-";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnAlign
-            // 
-            this.btnAlign.Location = new System.Drawing.Point(305, 61);
-            this.btnAlign.Name = "btnAlign";
-            this.btnAlign.Size = new System.Drawing.Size(88, 43);
-            this.btnAlign.TabIndex = 3;
-            this.btnAlign.Text = "Automatische Ausrichtung";
-            this.btnAlign.UseVisualStyleBackColor = true;
-            this.btnAlign.Click += new System.EventHandler(this.btnAlign_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 327);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Anzahl der Module:";
-            // 
-            // lblCount
-            // 
-            this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCount.AutoSize = true;
-            this.lblCount.Location = new System.Drawing.Point(409, 327);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(13, 13);
-            this.lblCount.TabIndex = 5;
-            this.lblCount.Text = "0";
             // 
             // KlimaFlaechenModulGrid
             // 
@@ -153,7 +157,7 @@ namespace Europlan.Common {
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvModules);
             this.Name = "KlimaFlaechenModulGrid";
-            this.Size = new System.Drawing.Size(435, 343);
+            this.Size = new System.Drawing.Size(487, 343);
             ((System.ComponentModel.ISupportInitialize)(this.dgvModules)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.klimaFlaechenModulBindingSource)).EndInit();
             this.ResumeLayout(false);
