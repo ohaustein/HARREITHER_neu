@@ -415,7 +415,7 @@ namespace Europlan.Common {
 						return "";
 				}
 			}
-		}
+		}        
 
 		[XmlIgnore]
 		public double WasserInhalt {

@@ -89,6 +89,8 @@ namespace Europlan.Common {
             this.txtDistributor = new System.Windows.Forms.TextBox();
             this.pageConstruction = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbRowModulation = new System.Windows.Forms.ComboBox();
+            this.lblRowModulation = new System.Windows.Forms.Label();
             this.lblHeatAreaUnit = new System.Windows.Forms.Label();
             this.lblHeatArea = new System.Windows.Forms.Label();
             this.lblHeatAreaDesc = new System.Windows.Forms.Label();
@@ -1080,6 +1082,8 @@ namespace Europlan.Common {
             // 
             this.panel2.AutoScroll = true;
             this.panel2.AutoScrollMinSize = new System.Drawing.Size(880, 595);
+            this.panel2.Controls.Add(this.cmbRowModulation);
+            this.panel2.Controls.Add(this.lblRowModulation);
             this.panel2.Controls.Add(this.lblHeatAreaUnit);
             this.panel2.Controls.Add(this.lblHeatArea);
             this.panel2.Controls.Add(this.lblHeatAreaDesc);
@@ -1167,9 +1171,27 @@ namespace Europlan.Common {
             this.panel2.Size = new System.Drawing.Size(886, 529);
             this.panel2.TabIndex = 1;
             // 
+            // cmbRowModulation
+            // 
+            this.cmbRowModulation.FormattingEnabled = true;
+            this.cmbRowModulation.Location = new System.Drawing.Point(493, 317);
+            this.cmbRowModulation.Name = "cmbRowModulation";
+            this.cmbRowModulation.Size = new System.Drawing.Size(83, 21);
+            this.cmbRowModulation.TabIndex = 175;
+            this.cmbRowModulation.SelectedValueChanged += new System.EventHandler(this.cmbRowModulation_SelectedValueChanged);
+            // 
+            // lblRowModulation
+            // 
+            this.lblRowModulation.AutoSize = true;
+            this.lblRowModulation.Location = new System.Drawing.Point(337, 320);
+            this.lblRowModulation.Name = "lblRowModulation";
+            this.lblRowModulation.Size = new System.Drawing.Size(109, 13);
+            this.lblRowModulation.TabIndex = 174;
+            this.lblRowModulation.Text = "$Verlegungsart Reihe";
+            // 
             // lblHeatAreaUnit
             // 
-            this.lblHeatAreaUnit.Location = new System.Drawing.Point(672, 457);
+            this.lblHeatAreaUnit.Location = new System.Drawing.Point(672, 475);
             this.lblHeatAreaUnit.Name = "lblHeatAreaUnit";
             this.lblHeatAreaUnit.Size = new System.Drawing.Size(35, 13);
             this.lblHeatAreaUnit.TabIndex = 173;
@@ -1177,7 +1199,7 @@ namespace Europlan.Common {
             // 
             // lblHeatArea
             // 
-            this.lblHeatArea.Location = new System.Drawing.Point(616, 457);
+            this.lblHeatArea.Location = new System.Drawing.Point(616, 475);
             this.lblHeatArea.Name = "lblHeatArea";
             this.lblHeatArea.Size = new System.Drawing.Size(50, 13);
             this.lblHeatArea.TabIndex = 172;
@@ -1186,7 +1208,7 @@ namespace Europlan.Common {
             // 
             // lblHeatAreaDesc
             // 
-            this.lblHeatAreaDesc.Location = new System.Drawing.Point(457, 457);
+            this.lblHeatAreaDesc.Location = new System.Drawing.Point(457, 475);
             this.lblHeatAreaDesc.Name = "lblHeatAreaDesc";
             this.lblHeatAreaDesc.Size = new System.Drawing.Size(147, 13);
             this.lblHeatAreaDesc.TabIndex = 170;
@@ -1195,7 +1217,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(644, 87);
+            this.btnGraphical.Location = new System.Drawing.Point(632, 87);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -1215,10 +1237,10 @@ namespace Europlan.Common {
             this.lstError.FullRowSelect = true;
             this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstError.LabelWrap = false;
-            this.lstError.Location = new System.Drawing.Point(16, 611);
+            this.lstError.Location = new System.Drawing.Point(16, 625);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(785, 80);
+            this.lstError.Size = new System.Drawing.Size(773, 118);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1266,7 +1288,7 @@ namespace Europlan.Common {
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(603, 320);
+            this.label14.Location = new System.Drawing.Point(603, 346);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(224, 13);
             this.label14.TabIndex = 139;
@@ -1274,7 +1296,7 @@ namespace Europlan.Common {
             // 
             // lblQAnbCoolUnit
             // 
-            this.lblQAnbCoolUnit.Location = new System.Drawing.Point(376, 437);
+            this.lblQAnbCoolUnit.Location = new System.Drawing.Point(376, 455);
             this.lblQAnbCoolUnit.Name = "lblQAnbCoolUnit";
             this.lblQAnbCoolUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQAnbCoolUnit.TabIndex = 137;
@@ -1282,7 +1304,7 @@ namespace Europlan.Common {
             // 
             // lblQAnbHeatUnit
             // 
-            this.lblQAnbHeatUnit.Location = new System.Drawing.Point(273, 437);
+            this.lblQAnbHeatUnit.Location = new System.Drawing.Point(273, 455);
             this.lblQAnbHeatUnit.Name = "lblQAnbHeatUnit";
             this.lblQAnbHeatUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQAnbHeatUnit.TabIndex = 136;
@@ -1290,7 +1312,7 @@ namespace Europlan.Common {
             // 
             // lblQAnbCool
             // 
-            this.lblQAnbCool.Location = new System.Drawing.Point(320, 437);
+            this.lblQAnbCool.Location = new System.Drawing.Point(320, 455);
             this.lblQAnbCool.Name = "lblQAnbCool";
             this.lblQAnbCool.Size = new System.Drawing.Size(50, 13);
             this.lblQAnbCool.TabIndex = 135;
@@ -1299,7 +1321,7 @@ namespace Europlan.Common {
             // 
             // lblQAnbHeat
             // 
-            this.lblQAnbHeat.Location = new System.Drawing.Point(217, 437);
+            this.lblQAnbHeat.Location = new System.Drawing.Point(217, 455);
             this.lblQAnbHeat.Name = "lblQAnbHeat";
             this.lblQAnbHeat.Size = new System.Drawing.Size(50, 13);
             this.lblQAnbHeat.TabIndex = 134;
@@ -1308,7 +1330,7 @@ namespace Europlan.Common {
             // 
             // label45
             // 
-            this.label45.Location = new System.Drawing.Point(4, 437);
+            this.label45.Location = new System.Drawing.Point(4, 455);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(200, 13);
             this.label45.TabIndex = 133;
@@ -1316,7 +1338,7 @@ namespace Europlan.Common {
             // 
             // lblRestAreaUnit
             // 
-            this.lblRestAreaUnit.Location = new System.Drawing.Point(672, 497);
+            this.lblRestAreaUnit.Location = new System.Drawing.Point(672, 515);
             this.lblRestAreaUnit.Name = "lblRestAreaUnit";
             this.lblRestAreaUnit.Size = new System.Drawing.Size(35, 13);
             this.lblRestAreaUnit.TabIndex = 132;
@@ -1324,7 +1346,7 @@ namespace Europlan.Common {
             // 
             // lblAnbArea
             // 
-            this.lblAnbArea.Location = new System.Drawing.Point(616, 477);
+            this.lblAnbArea.Location = new System.Drawing.Point(616, 495);
             this.lblAnbArea.Name = "lblAnbArea";
             this.lblAnbArea.Size = new System.Drawing.Size(50, 13);
             this.lblAnbArea.TabIndex = 131;
@@ -1333,7 +1355,7 @@ namespace Europlan.Common {
             // 
             // lblRestAreaText
             // 
-            this.lblRestAreaText.Location = new System.Drawing.Point(457, 497);
+            this.lblRestAreaText.Location = new System.Drawing.Point(457, 515);
             this.lblRestAreaText.Name = "lblRestAreaText";
             this.lblRestAreaText.Size = new System.Drawing.Size(147, 13);
             this.lblRestAreaText.TabIndex = 130;
@@ -1341,7 +1363,7 @@ namespace Europlan.Common {
             // 
             // lblAnbAreaUnit
             // 
-            this.lblAnbAreaUnit.Location = new System.Drawing.Point(672, 477);
+            this.lblAnbAreaUnit.Location = new System.Drawing.Point(672, 495);
             this.lblAnbAreaUnit.Name = "lblAnbAreaUnit";
             this.lblAnbAreaUnit.Size = new System.Drawing.Size(35, 13);
             this.lblAnbAreaUnit.TabIndex = 129;
@@ -1349,7 +1371,7 @@ namespace Europlan.Common {
             // 
             // lblCoveredAreaUnit
             // 
-            this.lblCoveredAreaUnit.Location = new System.Drawing.Point(672, 437);
+            this.lblCoveredAreaUnit.Location = new System.Drawing.Point(672, 455);
             this.lblCoveredAreaUnit.Name = "lblCoveredAreaUnit";
             this.lblCoveredAreaUnit.Size = new System.Drawing.Size(35, 13);
             this.lblCoveredAreaUnit.TabIndex = 128;
@@ -1357,7 +1379,7 @@ namespace Europlan.Common {
             // 
             // lblAvailableAreaUnit
             // 
-            this.lblAvailableAreaUnit.Location = new System.Drawing.Point(672, 417);
+            this.lblAvailableAreaUnit.Location = new System.Drawing.Point(672, 435);
             this.lblAvailableAreaUnit.Name = "lblAvailableAreaUnit";
             this.lblAvailableAreaUnit.Size = new System.Drawing.Size(35, 13);
             this.lblAvailableAreaUnit.TabIndex = 127;
@@ -1365,7 +1387,7 @@ namespace Europlan.Common {
             // 
             // lblRestArea
             // 
-            this.lblRestArea.Location = new System.Drawing.Point(616, 497);
+            this.lblRestArea.Location = new System.Drawing.Point(616, 515);
             this.lblRestArea.Name = "lblRestArea";
             this.lblRestArea.Size = new System.Drawing.Size(50, 13);
             this.lblRestArea.TabIndex = 126;
@@ -1374,7 +1396,7 @@ namespace Europlan.Common {
             // 
             // lblCoveredArea
             // 
-            this.lblCoveredArea.Location = new System.Drawing.Point(616, 437);
+            this.lblCoveredArea.Location = new System.Drawing.Point(616, 455);
             this.lblCoveredArea.Name = "lblCoveredArea";
             this.lblCoveredArea.Size = new System.Drawing.Size(50, 13);
             this.lblCoveredArea.TabIndex = 125;
@@ -1383,7 +1405,7 @@ namespace Europlan.Common {
             // 
             // lblAvailableArea
             // 
-            this.lblAvailableArea.Location = new System.Drawing.Point(616, 417);
+            this.lblAvailableArea.Location = new System.Drawing.Point(616, 435);
             this.lblAvailableArea.Name = "lblAvailableArea";
             this.lblAvailableArea.Size = new System.Drawing.Size(50, 13);
             this.lblAvailableArea.TabIndex = 124;
@@ -1392,7 +1414,7 @@ namespace Europlan.Common {
             // 
             // lblAnbAreaText
             // 
-            this.lblAnbAreaText.Location = new System.Drawing.Point(457, 477);
+            this.lblAnbAreaText.Location = new System.Drawing.Point(457, 495);
             this.lblAnbAreaText.Name = "lblAnbAreaText";
             this.lblAnbAreaText.Size = new System.Drawing.Size(147, 13);
             this.lblAnbAreaText.TabIndex = 123;
@@ -1400,7 +1422,7 @@ namespace Europlan.Common {
             // 
             // lblCoveredAreaText
             // 
-            this.lblCoveredAreaText.Location = new System.Drawing.Point(457, 437);
+            this.lblCoveredAreaText.Location = new System.Drawing.Point(457, 455);
             this.lblCoveredAreaText.Name = "lblCoveredAreaText";
             this.lblCoveredAreaText.Size = new System.Drawing.Size(147, 13);
             this.lblCoveredAreaText.TabIndex = 122;
@@ -1408,7 +1430,7 @@ namespace Europlan.Common {
             // 
             // lblAvailableAreaText
             // 
-            this.lblAvailableAreaText.Location = new System.Drawing.Point(457, 417);
+            this.lblAvailableAreaText.Location = new System.Drawing.Point(457, 435);
             this.lblAvailableAreaText.Name = "lblAvailableAreaText";
             this.lblAvailableAreaText.Size = new System.Drawing.Size(147, 13);
             this.lblAvailableAreaText.TabIndex = 121;
@@ -1416,7 +1438,7 @@ namespace Europlan.Common {
             // 
             // grpAdditionalInfo1
             // 
-            this.grpAdditionalInfo1.Location = new System.Drawing.Point(610, 397);
+            this.grpAdditionalInfo1.Location = new System.Drawing.Point(610, 415);
             this.grpAdditionalInfo1.Name = "grpAdditionalInfo1";
             this.grpAdditionalInfo1.Size = new System.Drawing.Size(2, 100);
             this.grpAdditionalInfo1.TabIndex = 83;
@@ -1424,7 +1446,7 @@ namespace Europlan.Common {
             // 
             // grpAdditionalInfo2
             // 
-            this.grpAdditionalInfo2.Location = new System.Drawing.Point(450, 401);
+            this.grpAdditionalInfo2.Location = new System.Drawing.Point(450, 419);
             this.grpAdditionalInfo2.Name = "grpAdditionalInfo2";
             this.grpAdditionalInfo2.Size = new System.Drawing.Size(250, 2);
             this.grpAdditionalInfo2.TabIndex = 82;
@@ -1433,7 +1455,7 @@ namespace Europlan.Common {
             // lblAdditionalInfo
             // 
             this.lblAdditionalInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdditionalInfo.Location = new System.Drawing.Point(457, 359);
+            this.lblAdditionalInfo.Location = new System.Drawing.Point(457, 377);
             this.lblAdditionalInfo.Name = "lblAdditionalInfo";
             this.lblAdditionalInfo.Size = new System.Drawing.Size(250, 39);
             this.lblAdditionalInfo.TabIndex = 120;
@@ -1442,7 +1464,7 @@ namespace Europlan.Common {
             // 
             // groupBox4
             // 
-            this.groupBox4.Location = new System.Drawing.Point(7, 536);
+            this.groupBox4.Location = new System.Drawing.Point(7, 554);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(390, 2);
             this.groupBox4.TabIndex = 82;
@@ -1450,7 +1472,7 @@ namespace Europlan.Common {
             // 
             // lblDruckverlustCoolUnit
             // 
-            this.lblDruckverlustCoolUnit.Location = new System.Drawing.Point(376, 588);
+            this.lblDruckverlustCoolUnit.Location = new System.Drawing.Point(376, 606);
             this.lblDruckverlustCoolUnit.Name = "lblDruckverlustCoolUnit";
             this.lblDruckverlustCoolUnit.Size = new System.Drawing.Size(35, 13);
             this.lblDruckverlustCoolUnit.TabIndex = 118;
@@ -1458,7 +1480,7 @@ namespace Europlan.Common {
             // 
             // lblDurchflussCoolUnit
             // 
-            this.lblDurchflussCoolUnit.Location = new System.Drawing.Point(376, 568);
+            this.lblDurchflussCoolUnit.Location = new System.Drawing.Point(376, 586);
             this.lblDurchflussCoolUnit.Name = "lblDurchflussCoolUnit";
             this.lblDurchflussCoolUnit.Size = new System.Drawing.Size(35, 13);
             this.lblDurchflussCoolUnit.TabIndex = 117;
@@ -1466,7 +1488,7 @@ namespace Europlan.Common {
             // 
             // lblAvgqCoolUnit
             // 
-            this.lblAvgqCoolUnit.Location = new System.Drawing.Point(376, 548);
+            this.lblAvgqCoolUnit.Location = new System.Drawing.Point(376, 566);
             this.lblAvgqCoolUnit.Name = "lblAvgqCoolUnit";
             this.lblAvgqCoolUnit.Size = new System.Drawing.Size(35, 13);
             this.lblAvgqCoolUnit.TabIndex = 116;
@@ -1474,7 +1496,7 @@ namespace Europlan.Common {
             // 
             // lblQCoolRestUnit
             // 
-            this.lblQCoolRestUnit.Location = new System.Drawing.Point(376, 477);
+            this.lblQCoolRestUnit.Location = new System.Drawing.Point(376, 495);
             this.lblQCoolRestUnit.Name = "lblQCoolRestUnit";
             this.lblQCoolRestUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQCoolRestUnit.TabIndex = 115;
@@ -1482,7 +1504,7 @@ namespace Europlan.Common {
             // 
             // lblQCoolDiffUnit
             // 
-            this.lblQCoolDiffUnit.Location = new System.Drawing.Point(376, 457);
+            this.lblQCoolDiffUnit.Location = new System.Drawing.Point(376, 475);
             this.lblQCoolDiffUnit.Name = "lblQCoolDiffUnit";
             this.lblQCoolDiffUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQCoolDiffUnit.TabIndex = 114;
@@ -1490,7 +1512,7 @@ namespace Europlan.Common {
             // 
             // lblQCoolUnit
             // 
-            this.lblQCoolUnit.Location = new System.Drawing.Point(376, 417);
+            this.lblQCoolUnit.Location = new System.Drawing.Point(376, 435);
             this.lblQCoolUnit.Name = "lblQCoolUnit";
             this.lblQCoolUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQCoolUnit.TabIndex = 113;
@@ -1498,7 +1520,7 @@ namespace Europlan.Common {
             // 
             // lblDruckverlustHeatUnit
             // 
-            this.lblDruckverlustHeatUnit.Location = new System.Drawing.Point(273, 588);
+            this.lblDruckverlustHeatUnit.Location = new System.Drawing.Point(273, 606);
             this.lblDruckverlustHeatUnit.Name = "lblDruckverlustHeatUnit";
             this.lblDruckverlustHeatUnit.Size = new System.Drawing.Size(35, 13);
             this.lblDruckverlustHeatUnit.TabIndex = 111;
@@ -1506,7 +1528,7 @@ namespace Europlan.Common {
             // 
             // lblDurchflussHeatUnit
             // 
-            this.lblDurchflussHeatUnit.Location = new System.Drawing.Point(273, 568);
+            this.lblDurchflussHeatUnit.Location = new System.Drawing.Point(273, 586);
             this.lblDurchflussHeatUnit.Name = "lblDurchflussHeatUnit";
             this.lblDurchflussHeatUnit.Size = new System.Drawing.Size(35, 13);
             this.lblDurchflussHeatUnit.TabIndex = 110;
@@ -1514,7 +1536,7 @@ namespace Europlan.Common {
             // 
             // lblAvgqHeatUnit
             // 
-            this.lblAvgqHeatUnit.Location = new System.Drawing.Point(273, 548);
+            this.lblAvgqHeatUnit.Location = new System.Drawing.Point(273, 566);
             this.lblAvgqHeatUnit.Name = "lblAvgqHeatUnit";
             this.lblAvgqHeatUnit.Size = new System.Drawing.Size(35, 13);
             this.lblAvgqHeatUnit.TabIndex = 109;
@@ -1522,7 +1544,7 @@ namespace Europlan.Common {
             // 
             // lblQHeatRestUnit
             // 
-            this.lblQHeatRestUnit.Location = new System.Drawing.Point(273, 477);
+            this.lblQHeatRestUnit.Location = new System.Drawing.Point(273, 495);
             this.lblQHeatRestUnit.Name = "lblQHeatRestUnit";
             this.lblQHeatRestUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQHeatRestUnit.TabIndex = 108;
@@ -1530,7 +1552,7 @@ namespace Europlan.Common {
             // 
             // lblQHeatDiffUnit
             // 
-            this.lblQHeatDiffUnit.Location = new System.Drawing.Point(273, 457);
+            this.lblQHeatDiffUnit.Location = new System.Drawing.Point(273, 475);
             this.lblQHeatDiffUnit.Name = "lblQHeatDiffUnit";
             this.lblQHeatDiffUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQHeatDiffUnit.TabIndex = 107;
@@ -1538,7 +1560,7 @@ namespace Europlan.Common {
             // 
             // lblQHeatUnit
             // 
-            this.lblQHeatUnit.Location = new System.Drawing.Point(273, 417);
+            this.lblQHeatUnit.Location = new System.Drawing.Point(273, 435);
             this.lblQHeatUnit.Name = "lblQHeatUnit";
             this.lblQHeatUnit.Size = new System.Drawing.Size(35, 13);
             this.lblQHeatUnit.TabIndex = 106;
@@ -1546,7 +1568,7 @@ namespace Europlan.Common {
             // 
             // lblDruckverlustCool
             // 
-            this.lblDruckverlustCool.Location = new System.Drawing.Point(320, 588);
+            this.lblDruckverlustCool.Location = new System.Drawing.Point(320, 606);
             this.lblDruckverlustCool.Name = "lblDruckverlustCool";
             this.lblDruckverlustCool.Size = new System.Drawing.Size(50, 13);
             this.lblDruckverlustCool.TabIndex = 104;
@@ -1555,7 +1577,7 @@ namespace Europlan.Common {
             // 
             // lblDurchflussCool
             // 
-            this.lblDurchflussCool.Location = new System.Drawing.Point(320, 568);
+            this.lblDurchflussCool.Location = new System.Drawing.Point(320, 586);
             this.lblDurchflussCool.Name = "lblDurchflussCool";
             this.lblDurchflussCool.Size = new System.Drawing.Size(50, 13);
             this.lblDurchflussCool.TabIndex = 103;
@@ -1564,7 +1586,7 @@ namespace Europlan.Common {
             // 
             // lblAvgqCool
             // 
-            this.lblAvgqCool.Location = new System.Drawing.Point(320, 548);
+            this.lblAvgqCool.Location = new System.Drawing.Point(320, 566);
             this.lblAvgqCool.Name = "lblAvgqCool";
             this.lblAvgqCool.Size = new System.Drawing.Size(50, 13);
             this.lblAvgqCool.TabIndex = 102;
@@ -1573,7 +1595,7 @@ namespace Europlan.Common {
             // 
             // lblQCoolRest
             // 
-            this.lblQCoolRest.Location = new System.Drawing.Point(320, 477);
+            this.lblQCoolRest.Location = new System.Drawing.Point(320, 495);
             this.lblQCoolRest.Name = "lblQCoolRest";
             this.lblQCoolRest.Size = new System.Drawing.Size(50, 13);
             this.lblQCoolRest.TabIndex = 101;
@@ -1582,7 +1604,7 @@ namespace Europlan.Common {
             // 
             // lblQCoolDiff
             // 
-            this.lblQCoolDiff.Location = new System.Drawing.Point(320, 457);
+            this.lblQCoolDiff.Location = new System.Drawing.Point(320, 475);
             this.lblQCoolDiff.Name = "lblQCoolDiff";
             this.lblQCoolDiff.Size = new System.Drawing.Size(50, 13);
             this.lblQCoolDiff.TabIndex = 100;
@@ -1591,7 +1613,7 @@ namespace Europlan.Common {
             // 
             // lblQCool
             // 
-            this.lblQCool.Location = new System.Drawing.Point(320, 417);
+            this.lblQCool.Location = new System.Drawing.Point(320, 435);
             this.lblQCool.Name = "lblQCool";
             this.lblQCool.Size = new System.Drawing.Size(50, 13);
             this.lblQCool.TabIndex = 99;
@@ -1600,7 +1622,7 @@ namespace Europlan.Common {
             // 
             // lblDruckverlustHeat
             // 
-            this.lblDruckverlustHeat.Location = new System.Drawing.Point(217, 588);
+            this.lblDruckverlustHeat.Location = new System.Drawing.Point(217, 606);
             this.lblDruckverlustHeat.Name = "lblDruckverlustHeat";
             this.lblDruckverlustHeat.Size = new System.Drawing.Size(50, 13);
             this.lblDruckverlustHeat.TabIndex = 97;
@@ -1609,7 +1631,7 @@ namespace Europlan.Common {
             // 
             // lblDurchflussHeat
             // 
-            this.lblDurchflussHeat.Location = new System.Drawing.Point(217, 568);
+            this.lblDurchflussHeat.Location = new System.Drawing.Point(217, 586);
             this.lblDurchflussHeat.Name = "lblDurchflussHeat";
             this.lblDurchflussHeat.Size = new System.Drawing.Size(50, 13);
             this.lblDurchflussHeat.TabIndex = 96;
@@ -1618,7 +1640,7 @@ namespace Europlan.Common {
             // 
             // lblAvgqHeat
             // 
-            this.lblAvgqHeat.Location = new System.Drawing.Point(217, 548);
+            this.lblAvgqHeat.Location = new System.Drawing.Point(217, 566);
             this.lblAvgqHeat.Name = "lblAvgqHeat";
             this.lblAvgqHeat.Size = new System.Drawing.Size(50, 13);
             this.lblAvgqHeat.TabIndex = 95;
@@ -1627,7 +1649,7 @@ namespace Europlan.Common {
             // 
             // lblQHeatRest
             // 
-            this.lblQHeatRest.Location = new System.Drawing.Point(217, 477);
+            this.lblQHeatRest.Location = new System.Drawing.Point(217, 495);
             this.lblQHeatRest.Name = "lblQHeatRest";
             this.lblQHeatRest.Size = new System.Drawing.Size(50, 13);
             this.lblQHeatRest.TabIndex = 94;
@@ -1636,7 +1658,7 @@ namespace Europlan.Common {
             // 
             // lblQHeatDiff
             // 
-            this.lblQHeatDiff.Location = new System.Drawing.Point(217, 457);
+            this.lblQHeatDiff.Location = new System.Drawing.Point(217, 475);
             this.lblQHeatDiff.Name = "lblQHeatDiff";
             this.lblQHeatDiff.Size = new System.Drawing.Size(50, 13);
             this.lblQHeatDiff.TabIndex = 93;
@@ -1645,7 +1667,7 @@ namespace Europlan.Common {
             // 
             // lblQHeat
             // 
-            this.lblQHeat.Location = new System.Drawing.Point(217, 417);
+            this.lblQHeat.Location = new System.Drawing.Point(217, 435);
             this.lblQHeat.Name = "lblQHeat";
             this.lblQHeat.Size = new System.Drawing.Size(50, 13);
             this.lblQHeat.TabIndex = 92;
@@ -1654,7 +1676,7 @@ namespace Europlan.Common {
             // 
             // lblRest
             // 
-            this.lblRest.Location = new System.Drawing.Point(4, 477);
+            this.lblRest.Location = new System.Drawing.Point(4, 495);
             this.lblRest.Name = "lblRest";
             this.lblRest.Size = new System.Drawing.Size(200, 26);
             this.lblRest.TabIndex = 87;
@@ -1662,7 +1684,7 @@ namespace Europlan.Common {
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(4, 457);
+            this.label16.Location = new System.Drawing.Point(4, 475);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(200, 13);
             this.label16.TabIndex = 86;
@@ -1670,7 +1692,7 @@ namespace Europlan.Common {
             // 
             // label17
             // 
-            this.label17.Location = new System.Drawing.Point(4, 417);
+            this.label17.Location = new System.Drawing.Point(4, 435);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(200, 13);
             this.label17.TabIndex = 85;
@@ -1678,7 +1700,7 @@ namespace Europlan.Common {
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(313, 385);
+            this.groupBox3.Location = new System.Drawing.Point(313, 403);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(2, 220);
             this.groupBox3.TabIndex = 83;
@@ -1686,7 +1708,7 @@ namespace Europlan.Common {
             // 
             // groupBox2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(210, 385);
+            this.groupBox2.Location = new System.Drawing.Point(210, 403);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(2, 220);
             this.groupBox2.TabIndex = 82;
@@ -1694,7 +1716,7 @@ namespace Europlan.Common {
             // 
             // groupBox7
             // 
-            this.groupBox7.Location = new System.Drawing.Point(3, 401);
+            this.groupBox7.Location = new System.Drawing.Point(3, 419);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(390, 2);
             this.groupBox7.TabIndex = 81;
@@ -1703,7 +1725,7 @@ namespace Europlan.Common {
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(321, 359);
+            this.label11.Location = new System.Drawing.Point(321, 377);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(92, 39);
             this.label11.TabIndex = 80;
@@ -1713,7 +1735,7 @@ namespace Europlan.Common {
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(216, 359);
+            this.label10.Location = new System.Drawing.Point(216, 377);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(92, 39);
             this.label10.TabIndex = 79;
@@ -1723,7 +1745,7 @@ namespace Europlan.Common {
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(4, 359);
+            this.label4.Location = new System.Drawing.Point(4, 377);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(200, 39);
             this.label4.TabIndex = 78;
@@ -1732,7 +1754,7 @@ namespace Europlan.Common {
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(4, 588);
+            this.label9.Location = new System.Drawing.Point(4, 606);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(200, 13);
             this.label9.TabIndex = 77;
@@ -1740,7 +1762,7 @@ namespace Europlan.Common {
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(4, 568);
+            this.label6.Location = new System.Drawing.Point(4, 586);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(200, 13);
             this.label6.TabIndex = 76;
@@ -1748,7 +1770,7 @@ namespace Europlan.Common {
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(4, 548);
+            this.label5.Location = new System.Drawing.Point(4, 566);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(200, 13);
             this.label5.TabIndex = 75;
@@ -1757,7 +1779,7 @@ namespace Europlan.Common {
             // lblHk
             // 
             this.lblHk.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHk.Location = new System.Drawing.Point(4, 520);
+            this.lblHk.Location = new System.Drawing.Point(4, 538);
             this.lblHk.Name = "lblHk";
             this.lblHk.Size = new System.Drawing.Size(200, 13);
             this.lblHk.TabIndex = 74;
@@ -1766,7 +1788,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(644, 58);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(632, 58);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -1777,7 +1799,7 @@ namespace Europlan.Common {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 320);
+            this.label3.Location = new System.Drawing.Point(582, 346);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 13);
             this.label3.TabIndex = 37;
@@ -1791,7 +1813,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            this.numLength.Location = new System.Drawing.Point(493, 317);
+            this.numLength.Location = new System.Drawing.Point(493, 343);
             this.numLength.MaxValue = null;
             this.numLength.MinValue = new decimal(new int[] {
             0,
@@ -1813,7 +1835,7 @@ namespace Europlan.Common {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(337, 320);
+            this.label2.Location = new System.Drawing.Point(337, 346);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(150, 13);
             this.label2.TabIndex = 35;
@@ -2115,5 +2137,7 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblHeatAreaDesc;
         private System.Windows.Forms.Label lblHeatAreaUnit;
         private System.Windows.Forms.Label lblHeatArea;
+        private System.Windows.Forms.Label lblRowModulation;
+        private System.Windows.Forms.ComboBox cmbRowModulation;
 	}
 }

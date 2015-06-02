@@ -17159,6 +17159,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verlegeart Reihe.
+        /// </summary>
+        internal static string PlannedModulKlimaBoden20ProductPanel_RowModulation {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaBoden20ProductPanel_RowModulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Summe Verbindungsleitungen:.
         /// </summary>
         internal static string PlannedModulKlimaBoden20ProductPanel_SummeVerbindungsleitungen {

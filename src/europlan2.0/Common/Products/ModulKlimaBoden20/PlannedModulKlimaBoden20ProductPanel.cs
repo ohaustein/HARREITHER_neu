@@ -119,6 +119,9 @@ namespace Europlan.Common {
             this.btnGraphical.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
 
             this.btnPartitionSystem.Text = EuroplanRes.PlannedProductPanel_SystemAufteilen;
+            this.lblRowModulation.Text = EuroplanRes.PlannedModulKlimaBoden20ProductPanel_RowModulation;
+            this.cmbRowModulation.Items.Add(KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE);
+            this.cmbRowModulation.Items.Add(KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED);
         }
 
 		#region IEditorUserControl Members
@@ -511,6 +514,7 @@ namespace Europlan.Common {
 					this.lstSubarea.SelectedIndex = 0;
 				}
 				this.selectedRow = this.selectedSubArea.Rows[this.lstRows.SelectedIndex];
+                this.cmbRowModulation.Enabled = this.selectedRow.List.Count > 0;
 				if ((skipFields & FieldEnum.MODULES) == FieldEnum.NONE) {
 					dgvModules.Row = this.selectedRow.List;
 					if (graphicalMode) {
@@ -518,6 +522,7 @@ namespace Europlan.Common {
 					} else {
 						numLength.Enabled = this.selectedRow.List.Count > 0;
 					}
+                    cmbRowModulation.SelectedItem = selectedRow.RowModulation;
 				}
 				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
 					this.numLength.Value = (decimal)this.selectedRow.SonstigeVerbindeleitung;
@@ -996,6 +1001,7 @@ namespace Europlan.Common {
 		}
 
 		private void dgvModules_GridContentChanged(object sender) {
+            this.selectedRow.RowModulation = this.selectedRow.RowModulation; // update row modulation in case of changed content
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA | FieldEnum.ROWS | FieldEnum.MODULES);
@@ -1175,6 +1181,21 @@ namespace Europlan.Common {
                     this.projectStructureChanged(this);
                 }
                 this.UpdateControl(true);
+            }
+        }
+
+        private void cmbRowModulation_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (ignoreModules == 0)
+            {
+                this.selectedRow.RowModulation = (KlimaFlaechenModul.ModulModulationEnum)cmbRowModulation.SelectedItem;
+                this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                this.errorMsg = this.product.Product.LastErrorMessage;
+                this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA | FieldEnum.ROWS | FieldEnum.MODULES | FieldEnum.LENGTH_VERBINDUNGEN);
+                if (this.projectChanged != null)
+                {
+                    this.projectChanged(this);
+                }
             }
         }
 		

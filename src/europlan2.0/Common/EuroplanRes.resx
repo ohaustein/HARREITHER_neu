@@ -7801,4 +7801,7 @@ Nummer</value>
   <data name="KlimaFlaechenModulModulation_Single" xml:space="preserve">
     <value>Modulierend</value>
   </data>
+  <data name="PlannedModulKlimaBoden20ProductPanel_RowModulation" xml:space="preserve">
+    <value>Verlegeart Reihe</value>
+  </data>
 </root>

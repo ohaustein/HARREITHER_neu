@@ -39,6 +39,24 @@ namespace Europlan.Common {
 			set { list = value; }
 		}
 
+        [XmlIgnore]
+        public KlimaFlaechenModul.ModulModulationEnum RowModulation
+        {
+            get 
+            { 
+                return List.Count > 0 ? List[0].ModulationWidth : KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE;
+            }
+
+            set 
+            {
+                foreach (KlimaFlaechenModul modul in List)
+                {
+                    modul.ModulationWidth = value;
+                }
+            }
+        }
+	
+
 		public double Druckverlust(double massenstrom) {
 			double druckverlust = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
@@ -64,9 +82,9 @@ namespace Europlan.Common {
 		public double GetCoveredArea(bool floor) {
 			double area = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-                area += modul.GetCoveredArea(floor) + modul.GetModulationArea() + 0.055 * SonstigeVerbindeleitung;
+                area += modul.GetCoveredArea(floor) + modul.GetModulationArea();
 			}
-            return area;
+            return area + 0.055 * SonstigeVerbindeleitung;
 		}
 
 		public double GetEquivalentPipeLength(bool floor) {
