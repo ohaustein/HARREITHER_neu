@@ -7792,4 +7792,13 @@ Nummer</value>
   <data name="SystemParametersPanel_KlimaBoden20" xml:space="preserve">
     <value>Modul Klima-Boden M20</value>
   </data>
+  <data name="KlimaFlaechenModulGrid_Modulation" xml:space="preserve">
+    <value>Verlegeart</value>
+  </data>
+  <data name="KlimaFlaechenModulModulation_None" xml:space="preserve">
+    <value>Dicht</value>
+  </data>
+  <data name="KlimaFlaechenModulModulation_Single" xml:space="preserve">
+    <value>Modulierend</value>
+  </data>
 </root>

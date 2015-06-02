@@ -6804,11 +6804,38 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verlegeart.
+        /// </summary>
+        internal static string KlimaFlaechenModulGrid_Modulation {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModulGrid_Modulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modultyp.
         /// </summary>
         internal static string KlimaFlaechenModulGrid_Modultype {
             get {
                 return ResourceManager.GetString("KlimaFlaechenModulGrid_Modultype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dicht.
+        /// </summary>
+        internal static string KlimaFlaechenModulModulation_None {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModulModulation_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modulierend.
+        /// </summary>
+        internal static string KlimaFlaechenModulModulation_Single {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModulModulation_Single", resourceCulture);
             }
         }
         

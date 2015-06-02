@@ -31,6 +31,7 @@ namespace Europlan.Common {
 			this.label1.Text = EuroplanRes.KlimaFlaechenModulGrid_AnzahlModule; //"Anzahl der Module:"
 			this.modulTypeDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Modultype; //"Modultyp"
 			this.orientationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Ausrichtung; //"Ausrichtung"
+            this.modulationDataGridViewTextBoxColumn.HeaderText = EuroplanRes.KlimaFlaechenModulGrid_Modulation; // "Verlegeart"
 		}
 
 		public void ResetGrid() {
@@ -50,6 +51,18 @@ namespace Europlan.Common {
 			}
 		}
 
+        private bool showModulation = false;
+
+        public bool ShowModulation
+        {
+            get { return showModulation; }
+            set
+            {
+                showModulation = value;
+                UpdateComboboxValues();
+            }
+        }	
+
 		public bool Boden {
 			get { return boden; }
 			set { 
@@ -59,6 +72,9 @@ namespace Europlan.Common {
 		}
 
 		private void UpdateComboboxValues() {
+            modulationDataGridViewTextBoxColumn.Items.Clear();
+            modulationDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE);
+            modulationDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED);
 			orientationDataGridViewTextBoxColumn.Items.Clear();
 			orientationDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
 			orientationDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT);
@@ -75,6 +91,8 @@ namespace Europlan.Common {
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D);
 				modulTypeDataGridViewTextBoxColumn.Items.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
 			}
+
+            modulationDataGridViewTextBoxColumn.Visible = ShowModulation;
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e) {

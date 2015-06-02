@@ -202,11 +202,69 @@ namespace Europlan.Common {
 			}
 		}
 
+        public class ModulModulationEnumConverter : System.ComponentModel.TypeConverter
+        {
+            private static readonly string none = EuroplanRes.KlimaFlaechenModulModulation_None; //"Dicht"
+            private static readonly string single = EuroplanRes.KlimaFlaechenModulModulation_Single; //"Modulierend"
+
+            private Dictionary<string, ModulModulationEnum> mappingFromString = new Dictionary<string, ModulModulationEnum>();
+            private Dictionary<ModulModulationEnum, string> mappingToString = new Dictionary<ModulModulationEnum, string>();
+
+            public ModulModulationEnumConverter()
+            {
+                mappingFromString.Add(none, ModulModulationEnum.MODULATION_NONE);
+                mappingFromString.Add(single, ModulModulationEnum.MODULATION_SINGLE_MODULATED);
+                mappingToString.Add(ModulModulationEnum.MODULATION_NONE, none);
+                mappingToString.Add(ModulModulationEnum.MODULATION_SINGLE_MODULATED, single);
+            }
+
+            public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
+            {
+                return sourceType == typeof(string);
+            }
+
+            public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
+            {
+                return destinationType == typeof(string);
+            }
+
+            public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+            {
+                if (value is string)
+                {
+                    if (mappingFromString.ContainsKey((string)value))
+                    {
+                        return mappingFromString[(string)value];
+                    }
+                }
+                return base.ConvertFrom(context, culture, value);
+            }
+
+            public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+            {
+                if (value is ModulModulationEnum && destinationType == typeof(string))
+                {
+                    if (mappingToString.ContainsKey((ModulModulationEnum)value))
+                    {
+                        return mappingToString[(ModulModulationEnum)value];
+                    }
+                }
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+        }
+
 		[System.ComponentModel.TypeConverter(typeof(ModulOrientationEnumConverter))]
 		public enum ModulOrientationEnum {
 			ORIENTATION_LEFT,
 			ORIENTATION_RIGHT
 		}
+
+        [System.ComponentModel.TypeConverter(typeof(ModulModulationEnumConverter))]
+        public enum ModulModulationEnum
+        {
+            MODULATION_NONE = 0,
+            MODULATION_SINGLE_MODULATED = 10,
+        }
 
 		private ModulTypeEnum modulType;
 		private ModulOrientationEnum orientation;
@@ -236,6 +294,8 @@ namespace Europlan.Common {
 		public KlimaFlaechenModul(KlimaFlaechenModul other) {
 			this.modulType = other.modulType;
 			this.orientation = other.orientation;
+            this._modulModulationLength = other._modulModulationLength;
+            this._modulModulationWidth = other._modulModulationWidth;
 		}
 
 		public void ClearGraphicalRepresentation() {
@@ -254,6 +314,33 @@ namespace Europlan.Common {
 			get { return this.modulType; }
 			set { this.modulType = value; }
 		}
+
+        private ModulModulationEnum _modulModulationLength;
+        private ModulModulationEnum _modulModulationWidth;
+
+        public ModulModulationEnum ModulationWidth
+        {
+            get { return _modulModulationWidth; }
+            set { _modulModulationWidth = value; }
+        }
+
+        public ModulModulationEnum ModulationLength
+        {
+            get { return _modulModulationLength; }
+            set { _modulModulationLength = value; }
+        }
+
+        [XmlIgnore]
+        public double ModulationWidthValue
+        {
+            get { return ((double) ModulationWidth) / 100; }
+        }
+
+        [XmlIgnore]
+        public double ModulationLengthValue
+        {
+            get { return ((double) ModulationLength) / 100; }
+        }
 
 		[XmlIgnore]
 		public bool DiagonalDurchstroemt {
@@ -405,6 +492,19 @@ namespace Europlan.Common {
 					return 0;
 			}
 		}
+
+        /// <summary>
+        /// Area which is used as free space between the modules based in both directions.
+        /// </summary>
+        /// <returns></returns>
+        public double GetModulationArea()
+        {
+            double areaA = ModulationLengthValue * GetModuleWidth(ModulType);
+            double areaB = ModulationWidthValue * GetModuleHeight(ModulType);
+            double areaC = ModulationWidthValue * ModulationLengthValue;
+
+            return areaA + areaB + areaC;
+        }
 
 		public double Druckverlust(double massenstrom) {
 			switch (this.modulType) {

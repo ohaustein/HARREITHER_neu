@@ -486,7 +486,8 @@ namespace Europlan.Common {
 				this.selectedSubArea = this.selectedCircuit.SubAreas[this.lstSubarea.SelectedIndex];
 				if ((skipFields & FieldEnum.ROWS) == FieldEnum.NONE) {
 					if (this.selectedSubArea.Rows.Count == 0) {
-						this.selectedSubArea.Rows.Add(new KlimaFlaechenList());
+                        KlimaFlaechenList klimaFlaechenList = new KlimaFlaechenList();
+						this.selectedSubArea.Rows.Add(klimaFlaechenList);
 					}
 					this.lstRows.Items.Clear();
 					int count = 1;
@@ -519,7 +520,7 @@ namespace Europlan.Common {
 					}
 				}
 				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
-					this.numLength.Value = (decimal)this.selectedRow.LengthVerbindeleitungen;
+					this.numLength.Value = (decimal)this.selectedRow.SonstigeVerbindeleitung;
 				}
 
 			    // General
@@ -956,11 +957,15 @@ namespace Europlan.Common {
 		}
 
 		private void btnAddRow_Click(object sender, EventArgs e) {
-			if (this.selectedSubArea.Rows.Count > 0) {
-				this.selectedSubArea.Rows.Add(new KlimaFlaechenList(this.selectedSubArea.Rows[0]));
-			} else {
-			this.selectedSubArea.Rows.Add(new KlimaFlaechenList());
-			}
+            if (this.selectedSubArea.Rows.Count > 0)
+            {
+                this.selectedSubArea.Rows.Add(new KlimaFlaechenList(this.selectedSubArea.Rows[0]));
+            }
+            else
+            {
+                KlimaFlaechenList klimaFlaechenList = new KlimaFlaechenList();
+                this.selectedSubArea.Rows.Add(klimaFlaechenList);
+            }
 			this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 			this.errorMsg = this.product.Product.LastErrorMessage;
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA);
@@ -1006,7 +1011,7 @@ namespace Europlan.Common {
 
 		private void numLength_ValueChanged(object sender, EventArgs e) {
 			if (ignoreLengthVerbindungen == 0) {
-				this.selectedRow.LengthVerbindeleitungen = (double)this.numLength.Value;
+				this.selectedRow.SonstigeVerbindeleitung = (double)this.numLength.Value;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA | FieldEnum.ROWS | FieldEnum.MODULES | FieldEnum.LENGTH_VERBINDUNGEN);

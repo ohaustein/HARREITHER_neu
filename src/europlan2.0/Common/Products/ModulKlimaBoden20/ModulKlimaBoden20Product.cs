@@ -542,19 +542,39 @@ namespace Europlan.Common {
 				mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
-				if (graphical) {
-					foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							double verbindeleitung = 0;
-							if (row.Links != null) {
-								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-									verbindeleitung += link.GetLength(measure);
-								}
-							}
-							row.LengthVerbindeleitungen = verbindeleitung;
-						}
-					}
-				}
+                if (graphical)
+                {
+                    foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            double verbindeleitung = 0;
+                            if (row.Links != null)
+                            {
+                                foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                                {
+                                    verbindeleitung += link.GetLength(measure);
+                                }
+                            }
+                            row.LengthVerbindeleitungen = verbindeleitung;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            double interModuleConnectionLength = 0;
+                            foreach (KlimaFlaechenModul modul in row.List)
+                            {
+                                interModuleConnectionLength += modul.ModulationLengthValue;
+                            }
+                            row.LengthVerbindeleitungen = row.SonstigeVerbindeleitung + interModuleConnectionLength;
+                        }
+                    }
+                }
 				mc.Calculate();
 				i++;
 			}
