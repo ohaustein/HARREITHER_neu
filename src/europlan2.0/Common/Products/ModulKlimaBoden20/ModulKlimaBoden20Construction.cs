@@ -11,8 +11,8 @@ using WW.Cad.Model;
 using WW.Cad.Model.Tables;
 
 namespace Europlan.Common {
-	[XmlInclude(typeof(ModulKlimaBodenConstructionFrei))]
-	[XmlInclude(typeof(ModulKlimaBodenConstructionStaffeln))]
+	[XmlInclude(typeof(ModulKlimaBoden20ConstructionFrei))]
+	[XmlInclude(typeof(ModulKlimaBoden20ConstructionStaffeln))]
 	public abstract class ModulKlimaBoden20Construction : IPickableObject, IDragableObject {
 
 		protected double rotation = 0;

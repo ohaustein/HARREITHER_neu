@@ -35,6 +35,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(HithermProduct))]
 	[XmlInclude(typeof(HithermCompactProduct))]
 	[XmlInclude(typeof(ModulKlimaBodenProduct))]
+    [XmlInclude(typeof(ModulKlimaBoden20Product))]
 	[XmlInclude(typeof(ModulKlimaDeckeProduct))]
 	[Serializable()]
 	public abstract class Product : IRequiredMaterial {

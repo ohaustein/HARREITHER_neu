@@ -11,6 +11,7 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulBodenCircuit))]
 	[XmlInclude(typeof(HithermCircuit))]
 	[XmlInclude(typeof(HithermCompactCircuit))]
+    [XmlInclude(typeof(ModulKlimaBoden20Circuit))]
 	public abstract class Circuit {
 
 		public enum CircuitConnectionTypeEnum {
