@@ -538,14 +538,14 @@ namespace Europlan.Common {
 				lblQAnbHeat.Text = Math.Round(this.product.Product.PlannedHeatLoadAnbindung, 0).ToString();
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString("+0;-0");
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
-				lblAvgqHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_QHeatPerSqm, 2).ToString() : "0";
+				lblAvgqHeat.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedHeatLoadPerSqM, 2).ToString();
 				lblDurchflussHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DurchflussHeat, 2).ToString() : "0";
 				lblDruckverlustHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DruckverlustInklVentilHeat, 2).ToString() : "0";
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
-				lblAvgqCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? (-1.0 * Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_QCoolPerSqm, 2)).ToString() : "0";
+				lblAvgqCool.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedCoolLoadPerSqM, 2).ToString();
 				lblDurchflussCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DurchflussCool, 2).ToString() : "0";
                 lblDruckverlustCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DruckverlustInklVentilCool, 2).ToString() : "0";
 				if (mdProduct.ModulType == Product.ProductType.DH || mdProduct.ModulType == Product.ProductType.FBH) {

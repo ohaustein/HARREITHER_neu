@@ -907,13 +907,21 @@ namespace Europlan.Common {
 			}
 		}
 
+        [XmlIgnore]
+        public double PlannedHeatLoadPerSqM
+        {
+            get { return this.PlannedHeatLoad / this.PlannedNetArea; }
+        }
+
+        [XmlIgnore]
+        public double PlannedCoolLoadPerSqM
+        {
+            get { return this.PlannedCoolLoad / this.PlannedNetArea; }
+        }
+
 		public override float PlannedNetArea {
 			get {
-				double area = 0;
-				foreach (ModulKlimaBoden20Circuit hc in this.circuits) {
-					area += hc.CoveredArea;
-				}
-				return (float)area;
+                return this.PlannedFloorArea - this.PlannedAreaUnheated;
 			}
 		}
 
