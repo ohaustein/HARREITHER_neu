@@ -26,28 +26,38 @@ namespace Europlan.Common {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlannedModulKlimaBoden20ProductPanel));
             this.grpPowerArea = new System.Windows.Forms.GroupBox();
             this.lblAreaReducedUnit = new System.Windows.Forms.Label();
+            this.numAreaReduced = new Europlan.Common.NumericBox();
             this.lblAreaReducedText = new System.Windows.Forms.Label();
             this.btnRestkaelte = new System.Windows.Forms.Button();
             this.btnRestwaerme = new System.Windows.Forms.Button();
             this.lblAreaUnheated = new System.Windows.Forms.Label();
+            this.numAreaUnheated = new Europlan.Common.NumericBox();
             this.lblAreaUnheatedTxt = new System.Windows.Forms.Label();
             this.lblAreaPercentage = new System.Windows.Forms.Label();
+            this.numAreaPercentage = new Europlan.Common.NumericBox();
             this.lblAreaUnit = new System.Windows.Forms.Label();
+            this.numArea = new Europlan.Common.NumericBox();
             this.lblAreaTxt = new System.Windows.Forms.Label();
             this.lblCoolLoadTotal = new System.Windows.Forms.Label();
             this.chkCoverCoolLoad = new System.Windows.Forms.CheckBox();
             this.lblCoolLoadPercentage = new System.Windows.Forms.Label();
+            this.numCoolLoadPercentage = new Europlan.Common.NumericBox();
             this.lblCoolLoadUnit = new System.Windows.Forms.Label();
+            this.numCoolLoad = new Europlan.Common.NumericBox();
             this.lblCoolLoadTxt = new System.Windows.Forms.Label();
             this.lblHeatLoadTotal = new System.Windows.Forms.Label();
             this.chkCoverHeatLoad = new System.Windows.Forms.CheckBox();
             this.lblHeatLoadPercentage = new System.Windows.Forms.Label();
+            this.numHeatLoadPercentage = new Europlan.Common.NumericBox();
             this.lblHeatLoadUnit = new System.Windows.Forms.Label();
+            this.numHeatLoad = new Europlan.Common.NumericBox();
             this.lblHeatLoadTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
             this.label28 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.numRoomTemperatureBelowHeat = new Europlan.Common.NumericBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnInsulationConstruction = new System.Windows.Forms.Button();
             this.lblInsulationConstruction = new System.Windows.Forms.Label();
@@ -69,6 +79,7 @@ namespace Europlan.Common {
             this.rbHeat = new System.Windows.Forms.RadioButton();
             this.pageCircuit = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.btnPartitionSystem = new System.Windows.Forms.Button();
             this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
@@ -151,7 +162,9 @@ namespace Europlan.Common {
             this.lblHk = new System.Windows.Forms.Label();
             this.btnConnectionPipes = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.numLength = new Europlan.Common.NumericBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgvModules = new Europlan.Common.KlimaFlaechenModulGrid();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRemoveRow = new System.Windows.Forms.Button();
             this.btnAddRow = new System.Windows.Forms.Button();
@@ -163,19 +176,11 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.numAreaReduced = new Europlan.Common.NumericBox();
-            this.numAreaUnheated = new Europlan.Common.NumericBox();
-            this.numAreaPercentage = new Europlan.Common.NumericBox();
-            this.numArea = new Europlan.Common.NumericBox();
-            this.numCoolLoadPercentage = new Europlan.Common.NumericBox();
-            this.numCoolLoad = new Europlan.Common.NumericBox();
-            this.numHeatLoadPercentage = new Europlan.Common.NumericBox();
-            this.numHeatLoad = new Europlan.Common.NumericBox();
-            this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
-            this.numRoomTemperatureBelowHeat = new Europlan.Common.NumericBox();
-            this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
-            this.numLength = new Europlan.Common.NumericBox();
-            this.dgvModules = new Europlan.Common.KlimaFlaechenModulGrid();
+            this.lblTemperatureText = new System.Windows.Forms.Label();
+            this.lblTempCoolUnit = new System.Windows.Forms.Label();
+            this.lblTempHeatUnit = new System.Windows.Forms.Label();
+            this.lblTempCool = new System.Windows.Forms.Label();
+            this.lblTempHeat = new System.Windows.Forms.Label();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -237,6 +242,32 @@ namespace Europlan.Common {
             this.lblAreaReducedUnit.TabIndex = 31;
             this.lblAreaReducedUnit.Text = "m²";
             // 
+            // numAreaReduced
+            // 
+            this.numAreaReduced.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numAreaReduced.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaReduced.Location = new System.Drawing.Point(243, 91);
+            this.numAreaReduced.MaxValue = null;
+            this.numAreaReduced.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaReduced.Name = "numAreaReduced";
+            this.numAreaReduced.Size = new System.Drawing.Size(109, 20);
+            this.numAreaReduced.TabIndex = 29;
+            this.numAreaReduced.Text = "0";
+            this.numAreaReduced.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAreaReduced.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
             // lblAreaReducedText
             // 
             this.lblAreaReducedText.Location = new System.Drawing.Point(6, 94);
@@ -273,6 +304,33 @@ namespace Europlan.Common {
             this.lblAreaUnheated.TabIndex = 24;
             this.lblAreaUnheated.Text = "m²";
             // 
+            // numAreaUnheated
+            // 
+            this.numAreaUnheated.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numAreaUnheated.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaUnheated.Location = new System.Drawing.Point(243, 117);
+            this.numAreaUnheated.MaxValue = null;
+            this.numAreaUnheated.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaUnheated.Name = "numAreaUnheated";
+            this.numAreaUnheated.Size = new System.Drawing.Size(109, 20);
+            this.numAreaUnheated.TabIndex = 20;
+            this.numAreaUnheated.Text = "0";
+            this.numAreaUnheated.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAreaUnheated.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaUnheated.ValueChanged += new System.EventHandler(this.numAreaUnheated_ValueChanged);
+            // 
             // lblAreaUnheatedTxt
             // 
             this.lblAreaUnheatedTxt.Location = new System.Drawing.Point(6, 120);
@@ -289,6 +347,37 @@ namespace Europlan.Common {
             this.lblAreaPercentage.TabIndex = 18;
             this.lblAreaPercentage.Text = "%";
             // 
+            // numAreaPercentage
+            // 
+            this.numAreaPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numAreaPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.Location = new System.Drawing.Point(383, 65);
+            this.numAreaPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.Name = "numAreaPercentage";
+            this.numAreaPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numAreaPercentage.TabIndex = 19;
+            this.numAreaPercentage.Text = "0";
+            this.numAreaPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numAreaPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numAreaPercentage.ValueChanged += new System.EventHandler(this.numAreaPercentage_ValueChanged);
+            // 
             // lblAreaUnit
             // 
             this.lblAreaUnit.Location = new System.Drawing.Point(358, 68);
@@ -296,6 +385,33 @@ namespace Europlan.Common {
             this.lblAreaUnit.Size = new System.Drawing.Size(19, 13);
             this.lblAreaUnit.TabIndex = 16;
             this.lblAreaUnit.Text = "m²";
+            // 
+            // numArea
+            // 
+            this.numArea.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
+            this.numArea.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.Location = new System.Drawing.Point(243, 65);
+            this.numArea.MaxValue = null;
+            this.numArea.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.Name = "numArea";
+            this.numArea.Size = new System.Drawing.Size(109, 20);
+            this.numArea.TabIndex = 18;
+            this.numArea.Text = "0";
+            this.numArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numArea.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numArea.ValueChanged += new System.EventHandler(this.numArea_ValueChanged);
             // 
             // lblAreaTxt
             // 
@@ -334,6 +450,38 @@ namespace Europlan.Common {
             this.lblCoolLoadPercentage.TabIndex = 11;
             this.lblCoolLoadPercentage.Text = "%";
             // 
+            // numCoolLoadPercentage
+            // 
+            this.numCoolLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numCoolLoadPercentage.Enabled = false;
+            this.numCoolLoadPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.Location = new System.Drawing.Point(383, 39);
+            this.numCoolLoadPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.Name = "numCoolLoadPercentage";
+            this.numCoolLoadPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numCoolLoadPercentage.TabIndex = 14;
+            this.numCoolLoadPercentage.Text = "0";
+            this.numCoolLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCoolLoadPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
+            // 
             // lblCoolLoadUnit
             // 
             this.lblCoolLoadUnit.Location = new System.Drawing.Point(358, 42);
@@ -341,6 +489,38 @@ namespace Europlan.Common {
             this.lblCoolLoadUnit.Size = new System.Drawing.Size(19, 13);
             this.lblCoolLoadUnit.TabIndex = 9;
             this.lblCoolLoadUnit.Text = "W";
+            // 
+            // numCoolLoad
+            // 
+            this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
+            this.numCoolLoad.Enabled = false;
+            this.numCoolLoad.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.Location = new System.Drawing.Point(243, 39);
+            this.numCoolLoad.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numCoolLoad.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.Name = "numCoolLoad";
+            this.numCoolLoad.Size = new System.Drawing.Size(109, 20);
+            this.numCoolLoad.TabIndex = 13;
+            this.numCoolLoad.Text = "0";
+            this.numCoolLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCoolLoad.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
             // 
             // lblCoolLoadTxt
             // 
@@ -380,6 +560,38 @@ namespace Europlan.Common {
             this.lblHeatLoadPercentage.TabIndex = 4;
             this.lblHeatLoadPercentage.Text = "%";
             // 
+            // numHeatLoadPercentage
+            // 
+            this.numHeatLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
+            this.numHeatLoadPercentage.Enabled = false;
+            this.numHeatLoadPercentage.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.Location = new System.Drawing.Point(383, 13);
+            this.numHeatLoadPercentage.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.Name = "numHeatLoadPercentage";
+            this.numHeatLoadPercentage.Size = new System.Drawing.Size(54, 20);
+            this.numHeatLoadPercentage.TabIndex = 10;
+            this.numHeatLoadPercentage.Text = "0";
+            this.numHeatLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numHeatLoadPercentage.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoadPercentage.ValueChanged += new System.EventHandler(this.numHeatLoadPercentage_ValueChanged);
+            // 
             // lblHeatLoadUnit
             // 
             this.lblHeatLoadUnit.Location = new System.Drawing.Point(358, 16);
@@ -387,6 +599,38 @@ namespace Europlan.Common {
             this.lblHeatLoadUnit.Size = new System.Drawing.Size(19, 13);
             this.lblHeatLoadUnit.TabIndex = 2;
             this.lblHeatLoadUnit.Text = "W";
+            // 
+            // numHeatLoad
+            // 
+            this.numHeatLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
+            this.numHeatLoad.Enabled = false;
+            this.numHeatLoad.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.Location = new System.Drawing.Point(243, 13);
+            this.numHeatLoad.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.numHeatLoad.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.Name = "numHeatLoad";
+            this.numHeatLoad.Size = new System.Drawing.Size(109, 20);
+            this.numHeatLoad.TabIndex = 9;
+            this.numHeatLoad.Text = "0";
+            this.numHeatLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numHeatLoad.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numHeatLoad.ValueChanged += new System.EventHandler(this.numHeatLoad_ValueChanged);
             // 
             // lblHeatLoadTxt
             // 
@@ -427,6 +671,37 @@ namespace Europlan.Common {
             this.label27.TabIndex = 30;
             this.label27.Text = "°C";
             // 
+            // numRoomTemperatureBelowCool
+            // 
+            this.numRoomTemperatureBelowCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
+            this.numRoomTemperatureBelowCool.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowCool.Location = new System.Drawing.Point(240, 91);
+            this.numRoomTemperatureBelowCool.MaxValue = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowCool.MinValue = new decimal(new int[] {
+            273,
+            0,
+            0,
+            -2147483648});
+            this.numRoomTemperatureBelowCool.Name = "numRoomTemperatureBelowCool";
+            this.numRoomTemperatureBelowCool.Size = new System.Drawing.Size(109, 20);
+            this.numRoomTemperatureBelowCool.TabIndex = 27;
+            this.numRoomTemperatureBelowCool.Text = "0";
+            this.numRoomTemperatureBelowCool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numRoomTemperatureBelowCool.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowCool.ValueChanged += new System.EventHandler(this.numRoomTemperatureBelowCool_ValueChanged);
+            // 
             // label28
             // 
             this.label28.Location = new System.Drawing.Point(6, 94);
@@ -442,6 +717,37 @@ namespace Europlan.Common {
             this.label7.Size = new System.Drawing.Size(19, 13);
             this.label7.TabIndex = 27;
             this.label7.Text = "°C";
+            // 
+            // numRoomTemperatureBelowHeat
+            // 
+            this.numRoomTemperatureBelowHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
+            this.numRoomTemperatureBelowHeat.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowHeat.Location = new System.Drawing.Point(240, 65);
+            this.numRoomTemperatureBelowHeat.MaxValue = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowHeat.MinValue = new decimal(new int[] {
+            273,
+            0,
+            0,
+            -2147483648});
+            this.numRoomTemperatureBelowHeat.Name = "numRoomTemperatureBelowHeat";
+            this.numRoomTemperatureBelowHeat.Size = new System.Drawing.Size(109, 20);
+            this.numRoomTemperatureBelowHeat.TabIndex = 26;
+            this.numRoomTemperatureBelowHeat.Text = "0";
+            this.numRoomTemperatureBelowHeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numRoomTemperatureBelowHeat.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numRoomTemperatureBelowHeat.ValueChanged += new System.EventHandler(this.numRoomTemperatureBelowHeat_ValueChanged);
             // 
             // label8
             // 
@@ -519,7 +825,7 @@ namespace Europlan.Common {
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.helpProvider.SetShowHelp(this.tabs, true);
-            this.tabs.Size = new System.Drawing.Size(900, 561);
+            this.tabs.Size = new System.Drawing.Size(900, 843);
             this.tabs.TabIndex = 0;
             this.tabs.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabs_Deselecting);
             // 
@@ -531,7 +837,7 @@ namespace Europlan.Common {
             this.pageInput.Location = new System.Drawing.Point(4, 22);
             this.pageInput.Name = "pageInput";
             this.pageInput.Padding = new System.Windows.Forms.Padding(3);
-            this.pageInput.Size = new System.Drawing.Size(892, 535);
+            this.pageInput.Size = new System.Drawing.Size(892, 817);
             this.pageInput.TabIndex = 0;
             this.pageInput.Text = "Eingabedaten";
             this.pageInput.UseVisualStyleBackColor = true;
@@ -546,7 +852,7 @@ namespace Europlan.Common {
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(887, 529);
+            this.panel1.Size = new System.Drawing.Size(887, 811);
             this.panel1.TabIndex = 3;
             // 
             // groupBox11
@@ -662,7 +968,7 @@ namespace Europlan.Common {
             this.pageCircuit.Name = "pageCircuit";
             this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
             this.helpProvider.SetShowHelp(this.pageCircuit, true);
-            this.pageCircuit.Size = new System.Drawing.Size(892, 535);
+            this.pageCircuit.Size = new System.Drawing.Size(892, 767);
             this.pageCircuit.TabIndex = 2;
             this.pageCircuit.Text = "Anbindeleitungen";
             this.pageCircuit.UseVisualStyleBackColor = true;
@@ -679,6 +985,16 @@ namespace Europlan.Common {
             this.groupBox10.TabIndex = 33;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Anbindeleitungen";
+            // 
+            // connectionPipePanel
+            // 
+            this.connectionPipePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.connectionPipePanel.Location = new System.Drawing.Point(3, 16);
+            this.connectionPipePanel.Name = "connectionPipePanel";
+            this.connectionPipePanel.ShowPipesThroughProduct = false;
+            this.connectionPipePanel.Size = new System.Drawing.Size(880, 462);
+            this.connectionPipePanel.TabIndex = 34;
+            this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
             // 
             // groupBox9
             // 
@@ -762,7 +1078,7 @@ namespace Europlan.Common {
             this.pageConstruction.Location = new System.Drawing.Point(4, 22);
             this.pageConstruction.Name = "pageConstruction";
             this.pageConstruction.Padding = new System.Windows.Forms.Padding(3);
-            this.pageConstruction.Size = new System.Drawing.Size(892, 535);
+            this.pageConstruction.Size = new System.Drawing.Size(892, 817);
             this.pageConstruction.TabIndex = 1;
             this.pageConstruction.Text = "Auslegung";
             this.pageConstruction.UseVisualStyleBackColor = true;
@@ -770,7 +1086,12 @@ namespace Europlan.Common {
             // panel2
             // 
             this.panel2.AutoScroll = true;
-            this.panel2.AutoScrollMinSize = new System.Drawing.Size(880, 595);
+            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel2.Controls.Add(this.lblTempCoolUnit);
+            this.panel2.Controls.Add(this.lblTempHeatUnit);
+            this.panel2.Controls.Add(this.lblTempCool);
+            this.panel2.Controls.Add(this.lblTempHeat);
+            this.panel2.Controls.Add(this.lblTemperatureText);
             this.panel2.Controls.Add(this.cmbRowModulation);
             this.panel2.Controls.Add(this.lblRowModulation);
             this.panel2.Controls.Add(this.lblHeatAreaUnit);
@@ -857,7 +1178,7 @@ namespace Europlan.Common {
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(886, 529);
+            this.panel2.Size = new System.Drawing.Size(886, 811);
             this.panel2.TabIndex = 1;
             // 
             // cmbRowModulation
@@ -906,7 +1227,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(632, 87);
+            this.btnGraphical.Location = new System.Drawing.Point(705, 44);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -916,8 +1237,7 @@ namespace Europlan.Common {
             // 
             // lstError
             // 
-            this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.lstError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lstError.BackColor = System.Drawing.SystemColors.Window;
             this.lstError.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -926,10 +1246,10 @@ namespace Europlan.Common {
             this.lstError.FullRowSelect = true;
             this.lstError.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstError.LabelWrap = false;
-            this.lstError.Location = new System.Drawing.Point(16, 625);
+            this.lstError.Location = new System.Drawing.Point(3, 694);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(773, 118);
+            this.lstError.Size = new System.Drawing.Size(876, 114);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1129,7 +1449,7 @@ namespace Europlan.Common {
             // 
             this.grpAdditionalInfo1.Location = new System.Drawing.Point(610, 415);
             this.grpAdditionalInfo1.Name = "grpAdditionalInfo1";
-            this.grpAdditionalInfo1.Size = new System.Drawing.Size(2, 100);
+            this.grpAdditionalInfo1.Size = new System.Drawing.Size(2, 120);
             this.grpAdditionalInfo1.TabIndex = 83;
             this.grpAdditionalInfo1.TabStop = false;
             // 
@@ -1391,7 +1711,7 @@ namespace Europlan.Common {
             // 
             this.groupBox3.Location = new System.Drawing.Point(313, 403);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(2, 220);
+            this.groupBox3.Size = new System.Drawing.Size(2, 240);
             this.groupBox3.TabIndex = 83;
             this.groupBox3.TabStop = false;
             // 
@@ -1399,7 +1719,7 @@ namespace Europlan.Common {
             // 
             this.groupBox2.Location = new System.Drawing.Point(210, 403);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(2, 220);
+            this.groupBox2.Size = new System.Drawing.Size(2, 240);
             this.groupBox2.TabIndex = 82;
             this.groupBox2.TabStop = false;
             // 
@@ -1477,7 +1797,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(632, 58);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(705, 15);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -1494,6 +1814,33 @@ namespace Europlan.Common {
             this.label3.TabIndex = 37;
             this.label3.Text = "m";
             // 
+            // numLength
+            // 
+            this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
+            this.numLength.InternalValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numLength.Location = new System.Drawing.Point(493, 343);
+            this.numLength.MaxValue = null;
+            this.numLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numLength.Name = "numLength";
+            this.numLength.Size = new System.Drawing.Size(83, 20);
+            this.numLength.TabIndex = 45;
+            this.numLength.Text = "0";
+            this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numLength.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -1502,6 +1849,16 @@ namespace Europlan.Common {
             this.label2.Size = new System.Drawing.Size(150, 13);
             this.label2.TabIndex = 35;
             this.label2.Text = "Summe Verbindungsleitungen:";
+            // 
+            // dgvModules
+            // 
+            this.dgvModules.Boden = true;
+            this.dgvModules.Location = new System.Drawing.Point(340, 97);
+            this.dgvModules.Name = "dgvModules";
+            this.dgvModules.ShowModulation = true;
+            this.dgvModules.Size = new System.Drawing.Size(487, 212);
+            this.dgvModules.TabIndex = 44;
+            this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
             // 
             // label1
             // 
@@ -1604,353 +1961,47 @@ namespace Europlan.Common {
             this.lblTitle.TabIndex = 83;
             this.lblTitle.Text = "Modul Klima-Boden M20";
             // 
-            // numAreaReduced
+            // lblTemperatureText
             // 
-            this.numAreaReduced.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-            this.numAreaReduced.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaReduced.Location = new System.Drawing.Point(243, 91);
-            this.numAreaReduced.MaxValue = null;
-            this.numAreaReduced.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaReduced.Name = "numAreaReduced";
-            this.numAreaReduced.Size = new System.Drawing.Size(109, 20);
-            this.numAreaReduced.TabIndex = 29;
-            this.numAreaReduced.Text = "0";
-            this.numAreaReduced.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numAreaReduced.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
+            this.lblTemperatureText.Location = new System.Drawing.Point(4, 626);
+            this.lblTemperatureText.Name = "lblTemperatureText";
+            this.lblTemperatureText.Size = new System.Drawing.Size(200, 13);
+            this.lblTemperatureText.TabIndex = 176;
+            this.lblTemperatureText.Text = "$Bodentemperatur";
             // 
-            // numAreaUnheated
+            // lblTempCoolUnit
             // 
-            this.numAreaUnheated.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-            this.numAreaUnheated.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaUnheated.Location = new System.Drawing.Point(243, 117);
-            this.numAreaUnheated.MaxValue = null;
-            this.numAreaUnheated.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaUnheated.Name = "numAreaUnheated";
-            this.numAreaUnheated.Size = new System.Drawing.Size(109, 20);
-            this.numAreaUnheated.TabIndex = 20;
-            this.numAreaUnheated.Text = "0";
-            this.numAreaUnheated.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numAreaUnheated.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaUnheated.ValueChanged += new System.EventHandler(this.numAreaUnheated_ValueChanged);
+            this.lblTempCoolUnit.Location = new System.Drawing.Point(376, 626);
+            this.lblTempCoolUnit.Name = "lblTempCoolUnit";
+            this.lblTempCoolUnit.Size = new System.Drawing.Size(35, 13);
+            this.lblTempCoolUnit.TabIndex = 180;
+            this.lblTempCoolUnit.Text = "Grad";
             // 
-            // numAreaPercentage
+            // lblTempHeatUnit
             // 
-            this.numAreaPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-            this.numAreaPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaPercentage.Location = new System.Drawing.Point(383, 65);
-            this.numAreaPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numAreaPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaPercentage.Name = "numAreaPercentage";
-            this.numAreaPercentage.Size = new System.Drawing.Size(54, 20);
-            this.numAreaPercentage.TabIndex = 19;
-            this.numAreaPercentage.Text = "0";
-            this.numAreaPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numAreaPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numAreaPercentage.ValueChanged += new System.EventHandler(this.numAreaPercentage_ValueChanged);
+            this.lblTempHeatUnit.Location = new System.Drawing.Point(273, 626);
+            this.lblTempHeatUnit.Name = "lblTempHeatUnit";
+            this.lblTempHeatUnit.Size = new System.Drawing.Size(35, 13);
+            this.lblTempHeatUnit.TabIndex = 179;
+            this.lblTempHeatUnit.Text = "Grad";
             // 
-            // numArea
+            // lblTempCool
             // 
-            this.numArea.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_AREA;
-            this.numArea.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numArea.Location = new System.Drawing.Point(243, 65);
-            this.numArea.MaxValue = null;
-            this.numArea.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numArea.Name = "numArea";
-            this.numArea.Size = new System.Drawing.Size(109, 20);
-            this.numArea.TabIndex = 18;
-            this.numArea.Text = "0";
-            this.numArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numArea.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numArea.ValueChanged += new System.EventHandler(this.numArea_ValueChanged);
+            this.lblTempCool.Location = new System.Drawing.Point(320, 626);
+            this.lblTempCool.Name = "lblTempCool";
+            this.lblTempCool.Size = new System.Drawing.Size(50, 13);
+            this.lblTempCool.TabIndex = 178;
+            this.lblTempCool.Text = "0";
+            this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // numCoolLoadPercentage
+            // lblTempHeat
             // 
-            this.numCoolLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-            this.numCoolLoadPercentage.Enabled = false;
-            this.numCoolLoadPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoadPercentage.Location = new System.Drawing.Point(383, 39);
-            this.numCoolLoadPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numCoolLoadPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoadPercentage.Name = "numCoolLoadPercentage";
-            this.numCoolLoadPercentage.Size = new System.Drawing.Size(54, 20);
-            this.numCoolLoadPercentage.TabIndex = 14;
-            this.numCoolLoadPercentage.Text = "0";
-            this.numCoolLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numCoolLoadPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoadPercentage.ValueChanged += new System.EventHandler(this.numCoolLoadPercentage_ValueChanged);
-            // 
-            // numCoolLoad
-            // 
-            this.numCoolLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_COOL_POWER;
-            this.numCoolLoad.Enabled = false;
-            this.numCoolLoad.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoad.Location = new System.Drawing.Point(243, 39);
-            this.numCoolLoad.MaxValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.numCoolLoad.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoad.Name = "numCoolLoad";
-            this.numCoolLoad.Size = new System.Drawing.Size(109, 20);
-            this.numCoolLoad.TabIndex = 13;
-            this.numCoolLoad.Text = "0";
-            this.numCoolLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numCoolLoad.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numCoolLoad.ValueChanged += new System.EventHandler(this.numCoolLoad_ValueChanged);
-            // 
-            // numHeatLoadPercentage
-            // 
-            this.numHeatLoadPercentage.EditType = Europlan.Common.NumericBox.NumericEditType.PERCENTAGE;
-            this.numHeatLoadPercentage.Enabled = false;
-            this.numHeatLoadPercentage.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoadPercentage.Location = new System.Drawing.Point(383, 13);
-            this.numHeatLoadPercentage.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numHeatLoadPercentage.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoadPercentage.Name = "numHeatLoadPercentage";
-            this.numHeatLoadPercentage.Size = new System.Drawing.Size(54, 20);
-            this.numHeatLoadPercentage.TabIndex = 10;
-            this.numHeatLoadPercentage.Text = "0";
-            this.numHeatLoadPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numHeatLoadPercentage.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoadPercentage.ValueChanged += new System.EventHandler(this.numHeatLoadPercentage_ValueChanged);
-            // 
-            // numHeatLoad
-            // 
-            this.numHeatLoad.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_HEAT_POWER;
-            this.numHeatLoad.Enabled = false;
-            this.numHeatLoad.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoad.Location = new System.Drawing.Point(243, 13);
-            this.numHeatLoad.MaxValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.numHeatLoad.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoad.Name = "numHeatLoad";
-            this.numHeatLoad.Size = new System.Drawing.Size(109, 20);
-            this.numHeatLoad.TabIndex = 9;
-            this.numHeatLoad.Text = "0";
-            this.numHeatLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numHeatLoad.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numHeatLoad.ValueChanged += new System.EventHandler(this.numHeatLoad_ValueChanged);
-            // 
-            // numRoomTemperatureBelowCool
-            // 
-            this.numRoomTemperatureBelowCool.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
-            this.numRoomTemperatureBelowCool.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowCool.Location = new System.Drawing.Point(240, 91);
-            this.numRoomTemperatureBelowCool.MaxValue = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowCool.MinValue = new decimal(new int[] {
-            273,
-            0,
-            0,
-            -2147483648});
-            this.numRoomTemperatureBelowCool.Name = "numRoomTemperatureBelowCool";
-            this.numRoomTemperatureBelowCool.Size = new System.Drawing.Size(109, 20);
-            this.numRoomTemperatureBelowCool.TabIndex = 27;
-            this.numRoomTemperatureBelowCool.Text = "0";
-            this.numRoomTemperatureBelowCool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numRoomTemperatureBelowCool.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowCool.ValueChanged += new System.EventHandler(this.numRoomTemperatureBelowCool_ValueChanged);
-            // 
-            // numRoomTemperatureBelowHeat
-            // 
-            this.numRoomTemperatureBelowHeat.EditType = Europlan.Common.NumericBox.NumericEditType.ROOM_TEMPERATURE;
-            this.numRoomTemperatureBelowHeat.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowHeat.Location = new System.Drawing.Point(240, 65);
-            this.numRoomTemperatureBelowHeat.MaxValue = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowHeat.MinValue = new decimal(new int[] {
-            273,
-            0,
-            0,
-            -2147483648});
-            this.numRoomTemperatureBelowHeat.Name = "numRoomTemperatureBelowHeat";
-            this.numRoomTemperatureBelowHeat.Size = new System.Drawing.Size(109, 20);
-            this.numRoomTemperatureBelowHeat.TabIndex = 26;
-            this.numRoomTemperatureBelowHeat.Text = "0";
-            this.numRoomTemperatureBelowHeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numRoomTemperatureBelowHeat.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numRoomTemperatureBelowHeat.ValueChanged += new System.EventHandler(this.numRoomTemperatureBelowHeat_ValueChanged);
-            // 
-            // connectionPipePanel
-            // 
-            this.connectionPipePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.connectionPipePanel.Location = new System.Drawing.Point(3, 16);
-            this.connectionPipePanel.Name = "connectionPipePanel";
-            this.connectionPipePanel.ShowPipesThroughProduct = false;
-            this.connectionPipePanel.Size = new System.Drawing.Size(880, 462);
-            this.connectionPipePanel.TabIndex = 34;
-            this.connectionPipePanel.GridContentChanged += new Europlan.Common.ConnectionPipePanelContentChangedHandler(this.connectionPipePanel1_GridContentChanged);
-            // 
-            // numLength
-            // 
-            this.numLength.EditType = Europlan.Common.NumericBox.NumericEditType.PIPE_LENGTH;
-            this.numLength.InternalValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numLength.Location = new System.Drawing.Point(493, 343);
-            this.numLength.MaxValue = null;
-            this.numLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numLength.Name = "numLength";
-            this.numLength.Size = new System.Drawing.Size(83, 20);
-            this.numLength.TabIndex = 45;
-            this.numLength.Text = "0";
-            this.numLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numLength.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numLength.ValueChanged += new System.EventHandler(this.numLength_ValueChanged);
-            // 
-            // dgvModules
-            // 
-            this.dgvModules.Boden = true;
-            this.dgvModules.Location = new System.Drawing.Point(340, 97);
-            this.dgvModules.Name = "dgvModules";
-            this.dgvModules.ShowModulation = true;
-            this.dgvModules.Size = new System.Drawing.Size(487, 212);
-            this.dgvModules.TabIndex = 44;
-            this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
+            this.lblTempHeat.Location = new System.Drawing.Point(217, 626);
+            this.lblTempHeat.Name = "lblTempHeat";
+            this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
+            this.lblTempHeat.TabIndex = 177;
+            this.lblTempHeat.Text = "0";
+            this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // PlannedModulKlimaBoden20ProductPanel
             // 
@@ -1960,7 +2011,7 @@ namespace Europlan.Common {
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tabs);
             this.Name = "PlannedModulKlimaBoden20ProductPanel";
-            this.Size = new System.Drawing.Size(900, 600);
+            this.Size = new System.Drawing.Size(900, 882);
             this.grpPowerArea.ResumeLayout(false);
             this.grpPowerArea.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -2139,5 +2190,10 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblHeatArea;
         private System.Windows.Forms.Label lblRowModulation;
         private System.Windows.Forms.ComboBox cmbRowModulation;
+        private System.Windows.Forms.Label lblTempCoolUnit;
+        private System.Windows.Forms.Label lblTempHeatUnit;
+        private System.Windows.Forms.Label lblTempCool;
+        private System.Windows.Forms.Label lblTempHeat;
+        private System.Windows.Forms.Label lblTemperatureText;
 	}
 }

@@ -46,6 +46,8 @@ namespace Europlan.Common {
 			this.lblQHeatUnit.Text = EuroplanRes.Unit_Watt; //"W"
 			this.label27.Text = EuroplanRes.Unit_GradCelsius; //"°C"
 			this.label7.Text = EuroplanRes.Unit_GradCelsius; //"°C"
+            this.lblTempCoolUnit.Text = EuroplanRes.Unit_GradCelsius; //"°C"
+            this.lblTempHeatUnit.Text = EuroplanRes.Unit_GradCelsius; //"°C"
 			this.lblDruckverlustCoolUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblDruckverlustHeatUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblDurchflussCoolUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
@@ -100,6 +102,7 @@ namespace Europlan.Common {
 			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedModulProductPanel_FlaecheUnbeheizt; //"unbeheizte/ungekühlte Fläche:"
             this.lblAreaReducedText.Text = EuroplanRes.PlannedModulProductPanel_FlaecheReduziert; //"Fläche mit red. Heiz-/Kühlleistung:"
 			this.label45.Text = EuroplanRes.PlannedModulProductPanel_LeistungAnbindung; //"Leistung Anbindeleitungen:"
+            this.lblTemperatureText.Text = EuroplanRes.PlannedModulProductPanel_Oberflaechentemperatur; //"Oberflächentemperatur:"
 
 			this.lblCalculateMode.Text = EuroplanRes.PlannedProductPanel_Verwendungszweck;
 			this.rbHeat.Text = EuroplanRes.PlannedProductPanel_Heizen;
@@ -250,6 +253,8 @@ namespace Europlan.Common {
 				lblDurchflussHeatUnit.Visible = showHeat;
 				lblDruckverlustHeat.Visible = showHeat;
 				lblDruckverlustHeatUnit.Visible = showHeat;
+                lblTempHeat.Visible = showHeat;
+                lblTempHeatUnit.Visible = showHeat;
 				lblQCool.Visible = showCool;
 				lblQCoolUnit.Visible = showCool;
 				lblQAnbCool.Visible = showCool;
@@ -264,6 +269,8 @@ namespace Europlan.Common {
 				lblDurchflussCoolUnit.Visible = showCool;
 				lblDruckverlustCool.Visible = showCool;
 				lblDruckverlustCoolUnit.Visible = showCool;
+                lblTempCool.Visible = showCool;
+                lblTempCoolUnit.Visible = showCool;
 
 				if (this.product.Product.AssociatedRoom.AssociatedPlan != null && this.product.Product.AssociatedRoom.CeilingCoordinatesToUse.Count > 0) {
 					this.rbLayoutTable.Enabled = true;
@@ -539,12 +546,14 @@ namespace Europlan.Common {
 				lblQHeatDiff.Text = Math.Round(qDiffHeat, 0).ToString("+0;-0");
 				lblQHeatRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenHeatLoad, 2).ToString("+0.00;-0.00");
 				lblAvgqHeat.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedHeatLoadPerSqM, 2).ToString();
+                lblTempHeat.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedFloorTemperatureHeat, 2).ToString();
 				lblDurchflussHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DurchflussHeat, 2).ToString() : "0";
 				lblDruckverlustHeat.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DruckverlustInklVentilHeat, 2).ToString() : "0";
 				lblQCool.Text = Math.Round(this.product.PlannedCoolLoad, 2).ToString();
 				lblQAnbCool.Text = Math.Round(this.product.Product.PlannedCoolLoadAnbindung, 0).ToString();
 				lblQCoolDiff.Text = Math.Round(qDiffCool, 0).ToString("+0;-0");
 				lblQCoolRest.Text = Math.Round(this.product.Product.AssociatedRoom.OpenCoolLoad, 2).ToString("+0.00;-0.00");
+                lblTempCool.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedFloorTemperatureCool, 2).ToString();
 				lblAvgqCool.Text = Math.Round(((ModulKlimaBoden20Product) this.product.Product).PlannedCoolLoadPerSqM, 2).ToString();
 				lblDurchflussCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DurchflussCool, 2).ToString() : "0";
                 lblDruckverlustCool.Text = this.product.Product.PlannedCircuits.Count > lstCircuits.SelectedIndex ? Math.Round((this.product.Product.PlannedCircuits[lstCircuits.SelectedIndex] as ModulKlimaBoden20Circuit).C_DruckverlustInklVentilCool, 2).ToString() : "0";
