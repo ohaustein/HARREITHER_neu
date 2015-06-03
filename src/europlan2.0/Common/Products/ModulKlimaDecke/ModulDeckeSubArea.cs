@@ -21,7 +21,7 @@ namespace Europlan.Common {
 		public double Druckverlust(double durchfluss) {
 			double druckverlust = 0;
 			foreach (KlimaFlaechenList row in this.rows) {
-				double rowDruckverlust = row.Druckverlust(durchfluss / this.HeatArea * row.GetHeatArea(false));
+				double rowDruckverlust = row.Druckverlust(durchfluss / this.HeatArea * row.GetHeatArea(IsFloor));
 				if (rowDruckverlust > druckverlust) {
 					druckverlust = rowDruckverlust;
 				}
