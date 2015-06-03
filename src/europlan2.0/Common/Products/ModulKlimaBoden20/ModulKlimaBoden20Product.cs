@@ -921,7 +921,8 @@ namespace Europlan.Common {
 
 		public override float PlannedNetArea {
 			get {
-                return this.PlannedFloorArea - this.PlannedAreaUnheated;
+                float area = ModulType == ProductType.FBH ? this.PlannedFloorArea : this.PlannedCeilingArea;
+                return area - this.PlannedAreaUnheated;
 			}
 		}
 

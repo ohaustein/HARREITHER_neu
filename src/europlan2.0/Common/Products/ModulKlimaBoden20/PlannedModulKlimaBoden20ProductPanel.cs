@@ -553,7 +553,7 @@ namespace Europlan.Common {
 					if (mdProduct.ModulType == Product.ProductType.DH) {
 						availableArea = Math.Round(this.product.Product.PlannedCeilingArea, 2);
 					} else {
-						availableArea = Math.Round(this.product.Product.PlannedFloorArea, 2);
+						availableArea = Math.Round(this.product.Product.PlannedNetArea, 2);
 					}
 					double coveredArea = Math.Round((this.product.Product as ModulKlimaBoden20Product).CoveredArea, 2);
                     double heatArea = Math.Round((this.product.Product as ModulKlimaBoden20Product).PlannedModulArea, 2);
