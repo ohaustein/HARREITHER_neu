@@ -542,6 +542,8 @@ namespace Europlan.Common {
 				mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
 				mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+                mc.ReducedArea = this.PlannedAreaReduced / this.circuits.Count;
+
                 if (graphical)
                 {
                     foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)

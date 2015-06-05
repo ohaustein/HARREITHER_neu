@@ -14,6 +14,7 @@ namespace Europlan.Common
         private Color circuitColor = Color.FromArgb(0, 128, 0);
 
         private List<KlimaFlaechenSubAreaVerbindung> verbindungen = new List<KlimaFlaechenSubAreaVerbindung>();
+        private double reducedArea = 0;
 
         private ModulKlimaBoden20Circuit()
         {
@@ -30,6 +31,12 @@ namespace Europlan.Common
         {
             get { return this.subAreas; }
             set { this.subAreas = value; }
+        }
+
+        public double ReducedArea
+        {
+            get { return this.reducedArea; }
+            set { reducedArea = value; }
         }
 
         private ModulKlimaBoden20Product mdProduct = null;
@@ -113,6 +120,20 @@ namespace Europlan.Common
                 return area;
             }
         }
+
+        [XmlIgnore]
+        private double HeatAreaForCalculation
+        {
+            get
+            {
+                if (this.reducedArea > this.HeatArea)
+                {
+                    return this.HeatArea / 2;
+                }
+                return this.HeatArea - this.reducedArea / 2;
+            }
+        }
+
         #endregion Area
 
         private double c_qHeatPerSqm;
@@ -179,13 +200,13 @@ namespace Europlan.Common
         [XmlIgnore]
         public double QHeat
         {
-            get { return this.c_qHeatPerSqm * this.HeatArea; }
+            get { return this.c_qHeatPerSqm * this.HeatAreaForCalculation; }
         }
 
         [XmlIgnore]
         public double QCool
         {
-            get { return -this.c_qCoolPerSqm * this.HeatArea; }
+            get { return -this.c_qCoolPerSqm * this.HeatAreaForCalculation; }
         }
 
         [XmlIgnore]
@@ -306,7 +327,7 @@ namespace Europlan.Common
                     double qU = en1264.WaermeverlustAussen(alphaInnenHeat, rLambdaB, su, lambdaU, rAlphaDeckeDh, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qHeatPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomHeatTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowHeat);
 
                     // hydraulische Berechnung
-                    this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
+                    this.c_Qh2oHeat = (this.c_qHeatPerSqm + qU) * this.HeatAreaForCalculation;            // gesamte aufgenommene Leistung berechnen
                     //                                                                           // gesamten Druckverlust berechnen
 
                     foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes)
@@ -377,7 +398,7 @@ namespace Europlan.Common
                     double qU = en1264.WaermeverlustAussen(alphaInnenCool, rLambdaB, su, lambdaU, rAlphaDeckeDk, rLambdaIns, rLambdaDecke, rLambdaPutz, this.c_qCoolPerSqm, this.ModulKlimaBoden20Product.AssociatedRoom.RoomCoolTemperature, this.ModulKlimaBoden20Product.PlannedRoomTemperatureBelowCool);
 
                     // hydraulische Berechnung
-                    this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatArea;            // gesamte aufgenommene Leistung berechnen
+                    this.c_Qh2oCool = (this.c_qCoolPerSqm + qU) * this.HeatAreaForCalculation;            // gesamte aufgenommene Leistung berechnen
                     //                                                                           // gesamten Druckverlust berechnen
 
                     foreach (ConnectionPipe cp in this.plannedProduct.Product.PlannedConnectionPipes)

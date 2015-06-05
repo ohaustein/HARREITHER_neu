@@ -89,6 +89,11 @@ namespace Europlan.Common {
             this.txtDistributor = new System.Windows.Forms.TextBox();
             this.pageConstruction = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTempCoolUnit = new System.Windows.Forms.Label();
+            this.lblTempHeatUnit = new System.Windows.Forms.Label();
+            this.lblTempCool = new System.Windows.Forms.Label();
+            this.lblTempHeat = new System.Windows.Forms.Label();
+            this.lblTemperatureText = new System.Windows.Forms.Label();
             this.cmbRowModulation = new System.Windows.Forms.ComboBox();
             this.lblRowModulation = new System.Windows.Forms.Label();
             this.lblHeatAreaUnit = new System.Windows.Forms.Label();
@@ -176,11 +181,6 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblTemperatureText = new System.Windows.Forms.Label();
-            this.lblTempCoolUnit = new System.Windows.Forms.Label();
-            this.lblTempHeatUnit = new System.Windows.Forms.Label();
-            this.lblTempCool = new System.Windows.Forms.Label();
-            this.lblTempHeat = new System.Windows.Forms.Label();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -267,6 +267,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
+            this.numAreaReduced.ValueChanged += new System.EventHandler(this.numAreaReduced_ValueChanged);
             // 
             // lblAreaReducedText
             // 
@@ -968,7 +969,7 @@ namespace Europlan.Common {
             this.pageCircuit.Name = "pageCircuit";
             this.pageCircuit.Padding = new System.Windows.Forms.Padding(3);
             this.helpProvider.SetShowHelp(this.pageCircuit, true);
-            this.pageCircuit.Size = new System.Drawing.Size(892, 767);
+            this.pageCircuit.Size = new System.Drawing.Size(892, 817);
             this.pageCircuit.TabIndex = 2;
             this.pageCircuit.Text = "Anbindeleitungen";
             this.pageCircuit.UseVisualStyleBackColor = true;
@@ -1180,6 +1181,48 @@ namespace Europlan.Common {
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(886, 811);
             this.panel2.TabIndex = 1;
+            // 
+            // lblTempCoolUnit
+            // 
+            this.lblTempCoolUnit.Location = new System.Drawing.Point(376, 626);
+            this.lblTempCoolUnit.Name = "lblTempCoolUnit";
+            this.lblTempCoolUnit.Size = new System.Drawing.Size(35, 13);
+            this.lblTempCoolUnit.TabIndex = 180;
+            this.lblTempCoolUnit.Text = "Grad";
+            // 
+            // lblTempHeatUnit
+            // 
+            this.lblTempHeatUnit.Location = new System.Drawing.Point(273, 626);
+            this.lblTempHeatUnit.Name = "lblTempHeatUnit";
+            this.lblTempHeatUnit.Size = new System.Drawing.Size(35, 13);
+            this.lblTempHeatUnit.TabIndex = 179;
+            this.lblTempHeatUnit.Text = "Grad";
+            // 
+            // lblTempCool
+            // 
+            this.lblTempCool.Location = new System.Drawing.Point(320, 626);
+            this.lblTempCool.Name = "lblTempCool";
+            this.lblTempCool.Size = new System.Drawing.Size(50, 13);
+            this.lblTempCool.TabIndex = 178;
+            this.lblTempCool.Text = "0";
+            this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblTempHeat
+            // 
+            this.lblTempHeat.Location = new System.Drawing.Point(217, 626);
+            this.lblTempHeat.Name = "lblTempHeat";
+            this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
+            this.lblTempHeat.TabIndex = 177;
+            this.lblTempHeat.Text = "0";
+            this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblTemperatureText
+            // 
+            this.lblTemperatureText.Location = new System.Drawing.Point(4, 626);
+            this.lblTemperatureText.Name = "lblTemperatureText";
+            this.lblTemperatureText.Size = new System.Drawing.Size(200, 13);
+            this.lblTemperatureText.TabIndex = 176;
+            this.lblTemperatureText.Text = "$Bodentemperatur";
             // 
             // cmbRowModulation
             // 
@@ -1960,48 +2003,6 @@ namespace Europlan.Common {
             this.lblTitle.Size = new System.Drawing.Size(238, 24);
             this.lblTitle.TabIndex = 83;
             this.lblTitle.Text = "Modul Klima-Boden M20";
-            // 
-            // lblTemperatureText
-            // 
-            this.lblTemperatureText.Location = new System.Drawing.Point(4, 626);
-            this.lblTemperatureText.Name = "lblTemperatureText";
-            this.lblTemperatureText.Size = new System.Drawing.Size(200, 13);
-            this.lblTemperatureText.TabIndex = 176;
-            this.lblTemperatureText.Text = "$Bodentemperatur";
-            // 
-            // lblTempCoolUnit
-            // 
-            this.lblTempCoolUnit.Location = new System.Drawing.Point(376, 626);
-            this.lblTempCoolUnit.Name = "lblTempCoolUnit";
-            this.lblTempCoolUnit.Size = new System.Drawing.Size(35, 13);
-            this.lblTempCoolUnit.TabIndex = 180;
-            this.lblTempCoolUnit.Text = "Grad";
-            // 
-            // lblTempHeatUnit
-            // 
-            this.lblTempHeatUnit.Location = new System.Drawing.Point(273, 626);
-            this.lblTempHeatUnit.Name = "lblTempHeatUnit";
-            this.lblTempHeatUnit.Size = new System.Drawing.Size(35, 13);
-            this.lblTempHeatUnit.TabIndex = 179;
-            this.lblTempHeatUnit.Text = "Grad";
-            // 
-            // lblTempCool
-            // 
-            this.lblTempCool.Location = new System.Drawing.Point(320, 626);
-            this.lblTempCool.Name = "lblTempCool";
-            this.lblTempCool.Size = new System.Drawing.Size(50, 13);
-            this.lblTempCool.TabIndex = 178;
-            this.lblTempCool.Text = "0";
-            this.lblTempCool.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblTempHeat
-            // 
-            this.lblTempHeat.Location = new System.Drawing.Point(217, 626);
-            this.lblTempHeat.Name = "lblTempHeat";
-            this.lblTempHeat.Size = new System.Drawing.Size(50, 13);
-            this.lblTempHeat.TabIndex = 177;
-            this.lblTempHeat.Text = "0";
-            this.lblTempHeat.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // PlannedModulKlimaBoden20ProductPanel
             // 

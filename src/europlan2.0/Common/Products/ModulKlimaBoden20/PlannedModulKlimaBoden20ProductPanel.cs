@@ -331,6 +331,7 @@ namespace Europlan.Common {
 				}
 
 				this.numAreaUnheated.MaxValue = (decimal)this.product.PlannedArea;
+                this.numAreaReduced.MaxValue = (decimal)this.product.PlannedArea;
 				this.numHeatLoad.MaxValue = (decimal)this.product.NecessaryHeatLoad;
 				this.numHeatLoadPercentage.MaxValue = (decimal)(mdProduct.AssociatedRoom.NormalizedHeatLoad <= 0 ? 0 : this.product.NecessaryHeatLoad * 100 / mdProduct.AssociatedRoom.NormalizedHeatLoad);
 
@@ -437,6 +438,10 @@ namespace Europlan.Common {
 				if ((skipFields & FieldEnum.AREA_UNHEATED) == FieldEnum.NONE) {
 					this.numAreaUnheated.Value = Math.Round((decimal)mdProduct.PlannedAreaUnheated, 2);
 				}
+                if ((skipFields & FieldEnum.AREA_REDUCED) == FieldEnum.NONE)
+                {
+                    this.numAreaReduced.Value = Math.Round((decimal)mdProduct.PlannedAreaReduced, 2);
+                }
 				this.txtFloorConstruction.Text = (mdProduct.PlannedFloorConstruction == null ? "" : mdProduct.PlannedFloorConstruction.Id + ": " + mdProduct.PlannedFloorConstruction.LocalizedName);
 				this.txtInsulationConstruction.Text = (mdProduct.PlannedInsulationConstruction == null ? "" : mdProduct.PlannedInsulationConstruction.Id + ": " + mdProduct.PlannedInsulationConstruction.LocalizedName);
 				if ((skipFields & FieldEnum.ROOM_TEMERATURE_BELOW_HEAT) == FieldEnum.NONE) {
@@ -786,7 +791,7 @@ namespace Europlan.Common {
 		private void numArea_ValueChanged(object sender, EventArgs e) {
 			if (ignoreArea == 0) {
 				ignoreAreaPercentage++;
-				(this.product.Product as ModulKlimaBoden20Product).PlannedCeilingArea = (float)this.numArea.Value;
+				(this.product.Product as ModulKlimaBoden20Product).PlannedFloorArea = (float)this.numArea.Value;
 				this.numAreaPercentage.Value = (decimal)(this.product.Product as ModulKlimaBoden20Product).PlannedFloorAreaPercentage;
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
@@ -801,8 +806,12 @@ namespace Europlan.Common {
 		private void numAreaUnheated_ValueChanged(object sender, EventArgs e) {
 			if (ignoreAreaUnheated == 0) {
 				ignoreAreaReduced++;
-				ModulKlimaBoden20Product mdProduct = this.product.Product as ModulKlimaBoden20Product;
-				mdProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
+				ModulKlimaBoden20Product mbProduct = this.product.Product as ModulKlimaBoden20Product;
+				mbProduct.PlannedAreaUnheated = (float)this.numAreaUnheated.Value;
+                if (mbProduct.PlannedAreaReduced + mbProduct.PlannedAreaUnheated > mbProduct.PlannedFloorArea)
+                {
+                    mbProduct.PlannedAreaReduced = mbProduct.PlannedFloorArea - mbProduct.PlannedAreaUnheated;
+                }
 				this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
 				this.errorMsg = this.product.Product.LastErrorMessage;
 				this.UpdateControl(FieldEnum.AREA_UNHEATED);
@@ -1205,6 +1214,28 @@ namespace Europlan.Common {
                 {
                     this.projectChanged(this);
                 }
+            }
+        }
+
+        private void numAreaReduced_ValueChanged(object sender, EventArgs e)
+        {
+            if (ignoreAreaReduced == 0)
+            {
+                ignoreAreaUnheated++;
+                ModulKlimaBoden20Product mbProduct = this.product.Product as ModulKlimaBoden20Product;
+                mbProduct.PlannedAreaReduced = (float)this.numAreaReduced.Value;
+                if (mbProduct.PlannedAreaReduced + mbProduct.PlannedAreaUnheated > mbProduct.PlannedFloorArea)
+                {
+                    mbProduct.PlannedAreaUnheated = mbProduct.PlannedFloorArea - mbProduct.PlannedAreaReduced;
+                }
+                this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                this.errorMsg = this.product.Product.LastErrorMessage;
+                this.UpdateControl(FieldEnum.AREA_REDUCED);
+                if (this.projectChanged != null)
+                {
+                    this.projectChanged(this);
+                }
+                ignoreAreaUnheated--;
             }
         }
 		
