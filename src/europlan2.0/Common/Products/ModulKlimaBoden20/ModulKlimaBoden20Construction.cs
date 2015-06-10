@@ -30,10 +30,10 @@ namespace Europlan.Common {
 		public abstract void EndDrag(Point2D planPoint, Point pointInControl);
 		#endregion
 
-		private ModulKlimaBodenPlanner planner;
+		private ModulKlimaBoden20Planner planner;
 
 		[XmlIgnore]
-		public ModulKlimaBodenPlanner Planner {
+		public ModulKlimaBoden20Planner Planner {
 			get { return this.planner; }
 			set { this.planner = value; }
 		}

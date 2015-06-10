@@ -14031,6 +14031,105 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?.
+        /// </summary>
+        internal static string ModulKlimaBoden20Planner_AnbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20Planner_AnbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?.
+        /// </summary>
+        internal static string ModulKlimaBoden20Planner_HeizkreisLoeschenText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20Planner_HeizkreisLoeschenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreis löschen.
+        /// </summary>
+        internal static string ModulKlimaBoden20Planner_HeizkreisLoeschenTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20Planner_HeizkreisLoeschenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neuer Heizkreis.
+        /// </summary>
+        internal static string ModulKlimaBoden20Planner_NeuerHeizkreisTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20Planner_NeuerHeizkreisTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Achsabstand:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Achsabstand {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Achsabstand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle umdrehen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_AlleUmdrehen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_AlleUmdrehen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen ändern.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_AnbindeleitungenAendern {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_AnbindeleitungenAendern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_AnbindeleitungenHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_AnbindeleitungenHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ausgewählte Module.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_AusgewaehlteModule {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_AusgewaehlteModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausgewähltes Modul.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_AusgewaehltesModul {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_AusgewaehltesModul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausrichtung:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Ausrichtung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Ausrichtung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to wenn möglich automatisch ausrichten.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_AutomatischAusrichten {
@@ -14085,6 +14184,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Berechnungsergebnisse {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Berechnungsergebnisse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Berechnungsergebnisse:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Berechnungsergebnisse2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Berechnungsergebnisse2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breite:.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Breite {
@@ -14094,11 +14211,56 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breitseite.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Breitseite {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Breitseite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breitseite:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Breitseite2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Breitseite2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deckenkonstruktion.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Deckenkonstruktion {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Deckenkonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dicht.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Dicht {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Dicht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Differenz zur erwarteten Leistung:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_DifferenzZurErwartetenLeistung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_DifferenzZurErwartetenLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drehung:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Drehung2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Drehung2", resourceCulture);
             }
         }
         
@@ -14121,11 +14283,92 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Durchströmungsrichtung umdrehen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_DurchstroemungsrichtungUmdrehen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_DurchstroemungsrichtungUmdrehen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erreichte Leistung:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ErreichteLeistung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ErreichteLeistung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Farbe des Heizkreises:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_FarbeHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_FarbeHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frei.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Frei {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Frei", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Glatt.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Glatt {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Glatt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizbetrieb.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Heizbetrieb {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Heizbetrieb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreis:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Heizkreis2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Heizkreis2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heizkreise.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Heizkreise {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Heizkreise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Hinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Hinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Holzstaffeln.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Holzstaffeln {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Holzstaffeln", resourceCulture);
             }
         }
         
@@ -14148,11 +14391,83 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to keiner.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_KeinHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KeinHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Modul ausgewählt.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_KeinModul {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KeinModul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Klimamodul Serie.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_KlimamodulSerie {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KlimamodulSerie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_KonstruktionAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KonstruktionAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bestätigen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_KonstruktionAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KonstruktionAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktion einrichten.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_KonstruktionEinrichten {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_KonstruktionEinrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktionsart.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Konstruktionsart {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Konstruktionsart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konstruktionsparameter.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Konstruktionsparameter {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Konstruktionsparameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kühlbetrieb.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Kuehlbetrieb {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Kuehlbetrieb", resourceCulture);
             }
         }
         
@@ -14166,11 +14481,128 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Längsseite.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Laengsseite {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Laengsseite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Längsseite:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Laengsseite2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Laengsseite2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leistung Anbindeleitungen:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_LeistungAnbindeleitungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_LeistungAnbindeleitungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module auslegen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModuleAuslegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModuleAuslegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module auswählen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModuleAuswaehlen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModuleAuswaehlen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModuleHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModuleHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wollen Sie die neu hinzugefügten Module übernehmen?.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModuleUebernehmenText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModuleUebernehmenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module übernehmen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModuleUebernehmenTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModuleUebernehmenTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to modulierend.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Modulierend {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Modulierend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to modulierend - doppelter Abstand.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ModulierendDoppelt {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ModulierendDoppelt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neue Module.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_NeueModule {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_NeueModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neue Module:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_NeueModule2 {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_NeueModule2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to neue Reihen.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_NeueReihen {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_NeueReihen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neuer HK.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_NeuerHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_NeuerHK", resourceCulture);
             }
         }
         
@@ -14220,6 +14652,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Die Orientierung von Modulen an die bereits eine Verbindeleitung angeschlossen ist kann nicht mehr geändert werden. Wollen Sie die Verbindeleitungen der betreffenden Module löschen?.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_OrientierungAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_OrientierungAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitungen löschen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_OrientierungAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_OrientierungAendernTitel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parallele Reihen in der Teilfläche.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_ParalleleReihen {
@@ -14234,6 +14684,15 @@ namespace Europlan.Common {
         internal static string ModulKlimaBoden20PlannerForm_PlanAnzeigen {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_PlanAnzeigen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Pro Winkel zusätzlich 1m Verbindungsleitung).
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ProWinkel1mVerbindungsleitung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ProWinkel1mVerbindungsleitung", resourceCulture);
             }
         }
         
@@ -14256,11 +14715,38 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Referenzmodul für Ausrichtung wählen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_ReferenzmodulFuerAusrichtung {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_ReferenzmodulFuerAusrichtung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reihe:.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Reihe {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Reihe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_RichtungAendernText {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_RichtungAendernText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anbindeleitungen löschen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_RichtungAendernTitel {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_RichtungAendernTitel", resourceCulture);
             }
         }
         
@@ -14292,11 +14778,11 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Breite inkl. Luftspalt.
+        ///   Looks up a localized string similar to Staffelbreite.
         /// </summary>
-        internal static string ModulKlimaBoden20PlannerForm_StaffelBreite {
+        internal static string ModulKlimaBoden20PlannerForm_Staffelbreite {
             get {
-                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_StaffelBreite", resourceCulture);
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Staffelbreite", resourceCulture);
             }
         }
         
@@ -14337,7 +14823,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klima-Decke - grafische Auslegung.
+        ///   Looks up a localized string similar to Modul Klima-Boden - grafische Auslegung.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Titel {
             get {
@@ -14355,11 +14841,56 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unterkonstruktion ausrichten.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_UnterkonstruktionAusrichten {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_UnterkonstruktionAusrichten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unterkonstuktion.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Unterkonstuktion {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Unterkonstuktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitung hinzufügen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_VerbindeleitungHinzufuegen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerbindeleitungHinzufuegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindeleitung löschen.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_VerbindeleitungLoeschen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerbindeleitungLoeschen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbindungen:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_Verbindungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_Verbindungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summe Verbindungsleitungen in Heizkreis:.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_VerbindungsleitungenInHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerbindungsleitungenInHK", resourceCulture);
             }
         }
         
@@ -14373,11 +14904,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Verschiedene Ausrichtungen ausgewählt.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_VerschiedeneAusrichtungen {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerschiedeneAusrichtungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verschiedene Modulgrößen ausgewählt.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_VerschiedeneModulgroessen {
             get {
                 return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerschiedeneModulgroessen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to verschiende.
+        /// </summary>
+        internal static string ModulKlimaBoden20PlannerForm_VerschiendeHK {
+            get {
+                return ResourceManager.GetString("ModulKlimaBoden20PlannerForm_VerschiendeHK", resourceCulture);
             }
         }
         
