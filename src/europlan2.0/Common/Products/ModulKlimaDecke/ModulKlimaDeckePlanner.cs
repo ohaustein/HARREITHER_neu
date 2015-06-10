@@ -1644,8 +1644,8 @@ namespace Europlan.Common {
 								// check if this connection is allowed
 								bool ok = false;
 								if (this.newConnectionStartData.Value.StartAtOutput) {
-									ModulDeckeSubArea subArea = null;
-									List<ModulDeckeSubArea> subAreas = saLink.GetStartSubAreas();
+									ModulSubArea subArea = null;
+									List<ModulSubArea> subAreas = saLink.GetStartSubAreas();
 									if (subAreas != null && subAreas.Count > 0) {
 										subArea = subAreas[0];
 									}
@@ -1656,8 +1656,8 @@ namespace Europlan.Common {
 										ok = true;
 									}
 								} else {
-									ModulDeckeSubArea subArea = null;
-									List<ModulDeckeSubArea> subAreas = saLink.GetEndSubAreas();
+									ModulSubArea subArea = null;
+									List<ModulSubArea> subAreas = saLink.GetEndSubAreas();
 									if (subAreas != null && subAreas.Count > 0) {
 										subArea = subAreas[0];
 									}

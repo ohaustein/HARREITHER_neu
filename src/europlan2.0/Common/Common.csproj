@@ -454,6 +454,7 @@
     <Compile Include="Products\ModulKlimaDecke\SelectMoveTargetForm.Designer.cs">
       <DependentUpon>SelectMoveTargetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\ModulSubArea.cs" />
     <Compile Include="Project\PartitionSystemForm.cs">
       <SubType>Form</SubType>
     </Compile>

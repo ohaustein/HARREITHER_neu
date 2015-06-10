@@ -17,7 +17,7 @@ namespace Europlan.Common {
 
 		protected double rotation = 0;
 
-		public abstract void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode);
+		public abstract void Paint(Graphics g, ModulKlimaBoden20Planner.KlimaBodenMode mode);
 		public abstract void PaintDxf(DxfModel model, DxfLayer layer);
 
 		#region IPickableObject Members
