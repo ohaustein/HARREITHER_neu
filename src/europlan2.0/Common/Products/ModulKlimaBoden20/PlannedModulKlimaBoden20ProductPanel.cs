@@ -1139,7 +1139,7 @@ namespace Europlan.Common {
 
 		private void button1_Click(object sender, EventArgs e) {
 			if (this.product != null) {
-				Europlan.Common.Products.ModulKlimaDeckePlannerForm form = new Europlan.Common.Products.ModulKlimaDeckePlannerForm(this.product);
+                Europlan.Common.Products.ModulKlimaBoden20PlannerForm form = new Europlan.Common.Products.ModulKlimaBoden20PlannerForm(this.product);
 				form.ShowDialog();
 				if (form.Changed && this.projectChanged != null) {
 					this.projectChanged(this);

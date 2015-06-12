@@ -51,7 +51,7 @@ namespace Europlan.Common {
 
 		public event EventHandler<UpdateNewCountArgs> UpdateNewCount;
 
-		public delegate void AddModuleDelegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits);
+		public delegate void AddModuleDelegate(double x, double y, int rowNr, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits);
 
 		public ModulKlimaBoden20Planner() {
 			InitializeComponent();
@@ -74,12 +74,25 @@ namespace Europlan.Common {
 		private VerlegungsAbstand newModulesYDicht = VerlegungsAbstand.VA_MODULIEREND;
 		private double newModulesOffsetX = 0.0;
 		private double newModulesOffsetY = 0.0;
-		private bool newModulesConnectHorizontal = false;
 		private KlimaFlaechenModul.ModulOrientationEnum newModulesStartingOrientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
 		private static double modulierendDistance = 0.1;
 
 		public event EventHandler<EventArgs> ModeChanged;
-		public event EventHandler<EventArgs> ListsNeedUpdate;
+        public event EventHandler<ListNeedsUpdateEventArgs> ListsNeedUpdate;
+
+        public class ListNeedsUpdateEventArgs : EventArgs
+        {
+            public bool selectLastCircuit = false;
+
+            public ListNeedsUpdateEventArgs()
+            {
+            }
+
+            public ListNeedsUpdateEventArgs(bool selectLastCircuit)
+            {
+                this.selectLastCircuit = selectLastCircuit;
+            }
+        }
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -210,7 +223,9 @@ namespace Europlan.Common {
 					}
 				}
 				List<Circuit> emptyCircuits = new List<Circuit>();
-				foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+				foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
+#warning TODO fix
+                    /*
 					foreach (KlimaFlaechenModul kfm in modules) {
 						if (c.Row.List.Contains(kfm)) {
 							KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
@@ -227,6 +242,7 @@ namespace Europlan.Common {
 					if (c.Row.List.Count == 0) {
 						emptyCircuits.Add(c);
 					}
+                     * */
 				}
 				foreach (Circuit emptyCircuit in emptyCircuits) {
 					this.product.PlannedCircuits.Remove(emptyCircuit);
@@ -239,7 +255,7 @@ namespace Europlan.Common {
 				}
 				this.ConnectedPlanPanel.InvalidateGraphics();
 				if (this.ListsNeedUpdate != null) {
-					this.ListsNeedUpdate(this, EventArgs.Empty);
+					this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs());
 				}
 				if (this.projectChanged != null) {
 					this.projectChanged(this);
@@ -310,14 +326,16 @@ namespace Europlan.Common {
 
 					// draw modules that are currently being added
 					int count = 0;
-					this.AddModulesForLayoutArea(delegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits) {
+                    this.AddModulesForLayoutArea(delegate(double x, double y, int rowNr, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits)
+                    {
 						added = this.TryDrawModule(g, additionalTransformation, x, y, rotation, orientation, bottomUp, fits ? Color.Green : Color.FromArgb(63, Color.Red), cadPlan);
 						if (fits) {
 							count++;
 						}
 						addedModul = null;
+                        rowOfAddedModul = null;
 						circuitOfModul = null;
-					}, true, false);
+					}, true);
 					if (this.UpdateNewCount != null) {
 						this.UpdateNewCount(this, new UpdateNewCountArgs(count));
 					}
@@ -1113,18 +1131,6 @@ namespace Europlan.Common {
 
 		[XmlIgnore]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public bool NewModulesConnectHorizontal {
-			get { return newModulesConnectHorizontal; }
-			set {
-				newModulesConnectHorizontal = value;
-				if (this.connectedPlanPanel != null && this.layoutAddArea != null) {
-					this.connectedPlanPanel.InvalidateGraphics();
-				}
-			}
-		}
-
-		[XmlIgnore]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public KlimaFlaechenModul.ModulOrientationEnum NewModulesStartingOrientation {
 			get { return newModulesStartingOrientation; }
 			set { newModulesStartingOrientation = value; }
@@ -1135,8 +1141,11 @@ namespace Europlan.Common {
 			return true;
 		}
 
-		private KlimaFlaechenModul TryAddModule(bool bottomUp, double x, double y, double rotation, ModulKlimaBoden20Circuit circuit, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation) {
+        private bool TryAddModule(bool bottomUp, double x, double y, double rotation, ModulKlimaBoden20Circuit circuit, ModulKlimaBoden20SubArea subArea, KlimaFlaechenList row, KlimaFlaechenModul.ModulOrientationEnum? orientation, bool onlyAddToExistingHks, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul)
+        {
 			KlimaFlaechenModul modul = new KlimaFlaechenModul();
+            addedModul = null;
+            rowOfAddedModul = null;
 			modul.ModulType = KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40;
 			modul.GraphPosX = x;
 			modul.GraphPosY = y;
@@ -1145,12 +1154,48 @@ namespace Europlan.Common {
 				modul.Orientation = orientation.Value;
 			}
 			modul.GraphBottomUp = bottomUp;
-#warning TODO: find row
-			//circuit.Row.List.Add(modul);
-			return modul;
+
+            KlimaFlaechenList usedRow = null;
+            if (row != null)
+            {
+                usedRow = row;
+            }
+            if (usedRow != null || !onlyAddToExistingHks) {
+				if (usedRow == null) {
+					usedRow = new KlimaFlaechenList();
+					subArea.Rows.Add(usedRow);					
+				}
+                usedRow.List.Add(modul);
+				//modulesAdded.Add(modul);
+				addedModul = modul;
+				rowOfAddedModul = usedRow;
+				
+				if (addedModul != lastAddedModul && rowOfAddedModul == rowOfLastAddedModul) {
+					Point2D output1 = lastAddedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+					Point2D input1 = addedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+					Point2D output2 = addedModul.GetOutputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+					Point2D input2 = lastAddedModul.GetInputConnection(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product);
+
+					if ((output1 - input1).GetLength() <= (output2 - input2).GetLength()) {
+						if (rowOfAddedModul.Links == null) {
+							rowOfAddedModul.Links = new List<KlimaFlaechenModulVerbindung>();
+						}
+						rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { output1, input1 }, circuit, Project.Instance.GetPlannedProduct(this.product)));
+					} else {
+						if (rowOfAddedModul.Links == null) {
+							rowOfAddedModul.Links = new List<KlimaFlaechenModulVerbindung>();
+						}
+						rowOfAddedModul.Links.Add(new KlimaFlaechenModulVerbindung(addedModul, lastAddedModul, new Point2D[] { output2, input2 }, circuit, Project.Instance.GetPlannedProduct(this.product)));
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
 		}
 
-		private int AddModulesForLayoutArea(AddModuleDelegate doIt, bool addIncomplete, bool addConnections) {
+		private int AddModulesForLayoutArea(AddModuleDelegate doIt, bool addIncomplete) {
 			if (this.layoutAddArea == null || this.layoutAddArea.Count != 4) {
 				return 0;
 			}
@@ -1251,186 +1296,81 @@ namespace Europlan.Common {
 			double endX = rightToLeft ? left : right;
 			double incX = rightToLeft ? -stepX : stepX;
 
-			if (this.newModulesConnectHorizontal) {
-				bool invertRow = false;
+            int rowNr = 0;
+			for (double x = startX; x >= left && x <= right; x += incX) {
+				orientationLeft = this.newModulesStartingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT; ;
+				KlimaFlaechenModul lastAddedModul = null;
+				KlimaFlaechenModul addedModul = null;
+                KlimaFlaechenList rowOfLastAddedModul = null;
+                KlimaFlaechenList rowOfAddedModul = null;
+				ModulKlimaBoden20Circuit lastCircuitOfModul = null;
+				ModulKlimaBoden20Circuit circuitOfModul = null;
 				for (double y = startY; y >= top && y <= bottom; y += incY) {
-					bool invertDirection = false;
-					orientationLeft = this.newModulesStartingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT; ;
-					KlimaFlaechenModul lastAddedModul = null;
-					KlimaFlaechenModul addedModul = null;
-					ModulKlimaBoden20Circuit lastCircuitOfModul = null;
-					ModulKlimaBoden20Circuit circuitOfModul = null;
-					for (double x = startX; x >= left && x <= right; x += incX) {
-						Point3D xy = xyRotation.Transform(new Point3D(x, y, 0));
-						Matrix4D moduleTransformation = Matrix4D.Identity;
-						moduleTransformation = moduleTransformation * Transformation4D.Translation(xy.X, xy.Y, 0);
-						moduleTransformation = moduleTransformation * Transformation4D.RotateZ(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
+					Point3D xy = xyRotation.Transform(new Point3D(x, y, 0));
+					Matrix4D moduleTransformation = Matrix4D.Identity;
+					moduleTransformation = moduleTransformation * Transformation4D.Translation(xy.X, xy.Y, 0);
+					moduleTransformation = moduleTransformation * Transformation4D.RotateZ(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 
-						Point2D topLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, 0));
-						Point2D topRight2D = moduleTransformation.TransformTo2D(new Point2D(width, 0));
-						Point2D bottomRight2D = moduleTransformation.TransformTo2D(new Point2D(width, height));
-						Point2D bottomLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, height));
+					Point2D topLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, 0));
+					Point2D topRight2D = moduleTransformation.TransformTo2D(new Point2D(width, 0));
+					Point2D bottomRight2D = moduleTransformation.TransformTo2D(new Point2D(width, height));
+					Point2D bottomLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, height));
 
-						Polygon2D newModule = new Polygon2D(new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D });
-						if (newModule.IsClockwise()) {
-							newModule.Reverse();
-						}
-						List<Polygon2D> newModuleList = new List<Polygon2D>();
-						newModuleList.Add(newModule);
+					Polygon2D newModule = new Polygon2D(new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D });
+					if (newModule.IsClockwise()) {
+						newModule.Reverse();
+					}
+					List<Polygon2D> newModuleList = new List<Polygon2D>();
+					newModuleList.Add(newModule);
 
-						bool fits = true;
-						// check if module is inside room coordinates
-						try {
-							List<Polygon2D> difference = Polygon2D.GetDifference(newModuleList, roomList);
-							if (difference != null && difference.Count > 0) {
-								fits = false;
-							}
-						} catch (Exception e) {
-							Console.WriteLine(e);
-						}
-
-						// check if module intersects unused area or another module
-						bool intersectionFound = false;
-						foreach (List<Polygon2D> unused in unusedList) {
-                            List<Polygon2D> intersection = null;
-                            try {
-                                intersection = Polygon2D.GetIntersection(newModuleList, unused);
-                            } catch {
-                                // nothing to do
-                            }
-							if (intersection != null && intersection.Count > 0) {
-								intersectionFound = true;
-								break;
-							}
-						}
-						if (intersectionFound) {
+					bool fits = true;
+					// check if module is inside room coordinates
+					try {
+						List<Polygon2D> difference = Polygon2D.GetDifference(newModuleList, roomList);
+						if (difference != null && difference.Count > 0) {
 							fits = false;
 						}
+					} catch (Exception e) {
+						Console.WriteLine(e);
+					}
 
-						if (addIncomplete || fits) {
-							bool thisModuleBottomUp = ((rightToLeft && !orientationLeft) || (!rightToLeft && orientationLeft));
-							KlimaFlaechenModul.ModulOrientationEnum thisModuleOrientation = (invertRow != orientationLeft) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-							doIt(xy.X, xy.Y, -this.NewModulesRotationInclPlanRotation, out added, thisModuleOrientation, thisModuleBottomUp, out addedModul, out circuitOfModul, fits);
-							if (fits) {
-								orientationLeft = !orientationLeft;
-								invertDirection = true;
-							}
-#warning TODO: rework
-                            /*
-							if (addConnections) {
-                                if (invertYAxis) {
-                                    // invert orientation for connections on dxf plans
-                                    thisModuleOrientation = thisModuleOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
-                                }
-                                // add Verbindeleitung between current and last modul
-								if (lastAddedModul != null && circuitOfModul == lastCircuitOfModul) {
-									if (circuitOfModul.Links == null) {
-										circuitOfModul.Links = new List<KlimaFlaechenModulVerbindung>();
-									}
-									if (((thisModuleBottomUp == (thisModuleOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT)) != rightToLeft) != this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
-										circuitOfModul.Links.Add(new KlimaFlaechenModulVerbindung(addedModul, lastAddedModul, new Point2D[] { addedModul.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product), lastAddedModul.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) }, circuitOfModul, Project.Instance.GetPlannedProduct(this.product)));
-									} else {
-										circuitOfModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { lastAddedModul.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product), addedModul.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) }, circuitOfModul, Project.Instance.GetPlannedProduct(this.product)));
-									}
-								}
-								lastAddedModul = addedModul;
-								lastCircuitOfModul = circuitOfModul;
-							}
-                             * */
+					// check if module intersects unused area or another module
+					bool intersectionFound = false;
+					foreach (List<Polygon2D> unused in unusedList) {
+                        List<Polygon2D> intersection = null;
+                        try {
+                            intersection = Polygon2D.GetIntersection(newModuleList, unused);
+                        } catch {
+                            // nothing to do
+                        }
+						if (intersection != null && intersection.Count > 0) {
+							intersectionFound = true;
+							break;
 						}
 					}
-					if (invertDirection) {
-						invertRow = !invertRow;
+					if (intersectionFound) {
+						fits = false;
 					}
-				}
-			} else {
-				bool invertRow = false;
-				for (double x = startX; x >= left && x <= right; x += incX) {
-					bool invertDirection = false;
-					orientationLeft = this.newModulesStartingOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT; ;
-					KlimaFlaechenModul lastAddedModul = null;
-					KlimaFlaechenModul addedModul = null;
-					ModulKlimaBoden20Circuit lastCircuitOfModul = null;
-					ModulKlimaBoden20Circuit circuitOfModul = null;
-					for (double y = startY; y >= top && y <= bottom; y += incY) {
-						Point3D xy = xyRotation.Transform(new Point3D(x, y, 0));
-						Matrix4D moduleTransformation = Matrix4D.Identity;
-						moduleTransformation = moduleTransformation * Transformation4D.Translation(xy.X, xy.Y, 0);
-						moduleTransformation = moduleTransformation * Transformation4D.RotateZ(-this.NewModulesRotationInclPlanRotation * Math.PI / 180.0);
 
-						Point2D topLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, 0));
-						Point2D topRight2D = moduleTransformation.TransformTo2D(new Point2D(width, 0));
-						Point2D bottomRight2D = moduleTransformation.TransformTo2D(new Point2D(width, height));
-						Point2D bottomLeft2D = moduleTransformation.TransformTo2D(new Point2D(0, height));
-
-						Polygon2D newModule = new Polygon2D(new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D });
-						if (newModule.IsClockwise()) {
-							newModule.Reverse();
+					if (addIncomplete || fits) {
+						bool thisModuleBottomUp = bottomUp;
+						KlimaFlaechenModul.ModulOrientationEnum thisModuleOrientation = (orientationLeft) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+						doIt(xy.X, xy.Y, rowNr, -this.NewModulesRotationInclPlanRotation, out added, thisModuleOrientation, thisModuleBottomUp, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul, out circuitOfModul, fits);
+                        if (added)
+                        {
+                            lastAddedModul = addedModul;                           
+                            rowOfLastAddedModul = rowOfAddedModul;
+                        }
+						if (fits) {
+							orientationLeft = !orientationLeft;
 						}
-						List<Polygon2D> newModuleList = new List<Polygon2D>();
-						newModuleList.Add(newModule);
-
-						bool fits = true;
-						// check if module is inside room coordinates
-						try {
-							List<Polygon2D> difference = Polygon2D.GetDifference(newModuleList, roomList);
-							if (difference != null && difference.Count > 0) {
-								fits = false;
-							}
-						} catch (Exception e) {
-							Console.WriteLine(e);
-						}
-
-						// check if module intersects unused area or another module
-						bool intersectionFound = false;
-						foreach (List<Polygon2D> unused in unusedList) {
-                            List<Polygon2D> intersection = null;
-                            try {
-                                intersection = Polygon2D.GetIntersection(newModuleList, unused);
-                            } catch {
-                                // nothing to do
-                            }
-							if (intersection != null && intersection.Count > 0) {
-								intersectionFound = true;
-								break;
-							}
-						}
-						if (intersectionFound) {
-							fits = false;
-						}
-
-						if (addIncomplete || fits) {
-							bool thisModuleBottomUp = invertRow != bottomUp;
-							KlimaFlaechenModul.ModulOrientationEnum thisModuleOrientation = (invertRow != orientationLeft) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
-							doIt(xy.X, xy.Y, -this.NewModulesRotationInclPlanRotation, out added, thisModuleOrientation, thisModuleBottomUp, out addedModul, out circuitOfModul, fits);
-							if (fits) {
-								orientationLeft = !orientationLeft;
-								invertDirection = true;
-							}
-#warning TODO rework
-                            /*
-							if (addConnections) {
-								// add Verbindeleitung between current and last modul
-								if (lastAddedModul != null && circuitOfModul == lastCircuitOfModul) {
-									if (circuitOfModul.Links == null) {
-										circuitOfModul.Links = new List<KlimaFlaechenModulVerbindung>();
-									}
-									if ((thisModuleBottomUp != bottomUp) != this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
-										circuitOfModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { lastAddedModul.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product), addedModul.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) }, circuitOfModul, Project.Instance.GetPlannedProduct(this.product)));
-									} else {
-										circuitOfModul.Links.Add(new KlimaFlaechenModulVerbindung(addedModul, lastAddedModul, new Point2D[] { addedModul.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product), lastAddedModul.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) }, circuitOfModul, Project.Instance.GetPlannedProduct(this.product)));
-									}
-								}
-								lastAddedModul = addedModul;
-								lastCircuitOfModul = circuitOfModul;
-							}*/
-						}
-					}
-					if (invertDirection) {
-						invertRow = !invertRow;
 					}
 				}
-			}
+                if (rowOfLastAddedModul != null)
+                {
+                    rowNr++;
+                }
+			}			
 
 			return 1;
 		}
@@ -1993,84 +1933,208 @@ namespace Europlan.Common {
 		}
 
 		public ModulKlimaBoden20Circuit ConfirmNewModules() {
-			bool newCircuit = this.highlightCircuit == null;
-			if (newCircuit) {
-				bool productConnected = false;
-				foreach (GraphicalProductConnection conn in this.product.Connections) {
-					if (conn.OtherCircuits) {
-						productConnected = true;
-						break;
-					}
-				}
-				if (productConnected) {
-					if (MessageBox.Show(EuroplanRes.ModulKlimaBoden20Planner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBoden20Planner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
-						this.layoutAddArea = null;
-						this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
-						if (this.connectedPlanPanel != null) {
-							this.connectedPlanPanel.InvalidateGraphics();
-						}
-						return null;
-					}
-					this.product.Connections.Clear();
-					foreach (ModulKlimaBoden20Circuit mbc in this.product.PlannedCircuits) {
-						List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
-#warning TODO: remove
-                        /*
-						foreach (KlimaFlaechenModulVerbindung link in mbc.Links) {
-							if (link.Start == null || link.End == null) {
-								linksToDelete.Add(link);
-							}
-						}
-						foreach (KlimaFlaechenModulVerbindung link in linksToDelete) {
-							mbc.Links.Remove(link);
-						}
-                         */
-					}
-				}
-			}
-			ModulKlimaBoden20Circuit c;
-			if (newCircuit) {
-				c = new ModulKlimaBoden20Circuit(this.product);
-				c.CircuitColor = this.GetNewCircuitColor();
-			} else {
-				c = this.highlightCircuit;
-			}
-			int newModules = this.AddModulesForLayoutArea(delegate(double x, double y, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits) {
-				if (fits) {
-					addedModul = this.TryAddModule(bottomUp, x, y, rotation, c, orientation);
-					circuitOfModul = c;
-					added = addedModul != null;
-				} else {
-					addedModul = null;
-					circuitOfModul = null;
-					added = false;
-				}
-			}, false, true);
-			if (this.UpdateNewCount != null) {
-				this.UpdateNewCount(this, new UpdateNewCountArgs(0));
-			}
-			if (newModules > 0 && newCircuit) {
-				this.product.PlannedCircuits.Add(c);
-			}
-			this.layoutAddArea = null;
-			if (this.connectedPlanPanel != null) {
-				this.connectedPlanPanel.InvalidateGraphics();
-			}
+            ModulKlimaBoden20SubArea newSubArea = null;
+            ModulKlimaBoden20Circuit newCircuit = null;
+            ModulKlimaBoden20SubArea oldSubArea = null;
+            KlimaFlaechenList oldRow = null;
+            ModulKlimaBoden20Circuit circuitToAdd = this.highlightCircuit;
+            bool onlyAddToExisting = false;
+            if (this.highlightCircuit == null && highlightSubArea == null && highlightRow == null)
+            {
+                if (this.product.Connections != null && this.product.Connections.Count > 0)
+                {
+                    if (MessageBox.Show(EuroplanRes.ModulKlimaBoden20Planner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBoden20Planner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    {
+                        onlyAddToExisting = true;
+                    }
+                    else
+                    {
+                        this.product.Connections.Clear();
+                    }
+                }
+                newCircuit = new ModulKlimaBoden20Circuit(this.Product);
+                newCircuit.CircuitColor = this.GetNewCircuitColor();
+                newSubArea = newCircuit.SubAreas[0];
+                newSubArea.Rows.Clear();
+                circuitToAdd = newCircuit;
+            }
+            else if (this.highlightSubArea == null && highlightRow == null)
+            {
+                newSubArea = new ModulKlimaBoden20SubArea();
+                newSubArea.Rows.Clear();
+            }
+            else if (this.highlightRow == null)
+            {
+                oldSubArea = this.highlightSubArea;
+            }
+            else
+            {
+                oldRow = this.highlightRow;
+                int tmp;
+                KlimaFlaechenModul mTmp = oldRow.List[0];
+                oldSubArea = this.product.GetCircuitForModul(mTmp, out tmp).GetSubareaForModul(mTmp, out tmp);              
+            }
 
-			int i = 0;
-			while (i < this.product.PlannedCircuits.Count && this.product.PlannedCircuits.Count > 1) {
-				if ((this.product.PlannedCircuits[i] as ModulKlimaBoden20Circuit).GetAllModules().GetEnumerator().Current != null) {
-					this.product.PlannedCircuits.RemoveAt(i);
-				} else {
-					i++;
-				}
-			}
+            List<KlimaFlaechenModul> modulesAdded = new List<KlimaFlaechenModul>();
 
-			this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
-			if (this.projectChanged != null) {
-				this.projectChanged(this);
-			}
-			return newModules > 0 && newCircuit ? c : null;
+            KlimaFlaechenList rowOfFirstAddedModul = oldRow;
+
+            AddModuleDelegate addModuleDelegate = delegate(double x, double y, int rowNr, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits)
+            {
+                ModulKlimaBoden20SubArea sa = (newSubArea != null ? newSubArea : oldSubArea);
+                KlimaFlaechenList r = rowOfFirstAddedModul;
+                if (rowOfFirstAddedModul != null)
+                {
+                    int lastRowIndex = sa.Rows.IndexOf(rowOfFirstAddedModul);
+                    if (lastRowIndex >= 0 && lastRowIndex + rowNr < sa.Rows.Count)
+                    {
+                        r = sa.Rows[lastRowIndex + rowNr];
+                    }
+                    else
+                    {
+                        r = null;
+                    }
+                }
+                added = this.TryAddModule(this.layoutAddAreaBottomUp, x, y, rotation, circuitToAdd, sa, r, orientation, onlyAddToExisting, out addedModul, out rowOfAddedModul, lastAddedModul, rowOfLastAddedModul);
+                if (rowOfFirstAddedModul == null)
+                {
+                    rowOfFirstAddedModul = rowOfAddedModul;
+                }
+                circuitOfModul = circuitToAdd;
+            };
+
+            int count = this.AddModulesForLayoutArea(addModuleDelegate, false);
+
+            if (this.UpdateNewCount != null)
+            {
+                this.UpdateNewCount(this, new UpdateNewCountArgs(0));
+            }
+
+
+            if (count > 0)
+            {
+                if (!this.product.ContainsModules && newCircuit != null)
+                {
+                    this.product.PlannedCircuits.Clear();
+                }
+                if (newCircuit != null && newCircuit.CountModules() > 0)
+                {
+                    this.product.PlannedCircuits.Add(newCircuit);
+                }
+                else if (newSubArea != null && newSubArea.CountModules() > 0)
+                {
+                    this.highlightCircuit.SubAreas.Add(newSubArea);
+                }
+#warning TODO ?
+                /*
+                if (this.automaticOrientation)
+                {
+                    foreach (PossibleModulLane lane in this.product.GraphConstruction.PossibleLanes)
+                    {
+                        List<Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit> modules = this.product.GetModulesInLaneWithRowAndCircuit(lane.Nr);
+                        modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(false));
+                        Nullable<bool> left = null;
+                        bool lastDiagonal = true;
+                        KlimaFlaechenList lastRow = null;
+                        foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules)
+                        {
+                            if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul))
+                            {
+                                bool trueLeft = left.Value;
+                                if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    trueLeft = !trueLeft;
+                                }
+                                if (!moduleWithRow.modul.DiagonalDurchstroemt && moduleWithRow.modul.GraphBottomUp)
+                                {
+                                    trueLeft = !trueLeft;
+                                }
+                                moduleWithRow.modul.Orientation = trueLeft ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                if (moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    left = !left;
+                                }
+                                lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+                            }
+                            else
+                            {
+                                lastRow = moduleWithRow.row;
+                                lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+                                if (moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                }
+                                else
+                                {
+                                    if (!moduleWithRow.modul.GraphBottomUp)
+                                    {
+                                        left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+                                    }
+                                    else
+                                    {
+                                        left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                    }
+                                }
+                            }
+                        }
+                        modules.Sort(new KlimaFlaechenModuleWithRowAndCircuitComparer(true));
+                        left = null;
+                        lastRow = null;
+                        foreach (Europlan.Common.ModulKlimaDeckeProduct.KlimaFlaechenModulWithRowAndCircuit moduleWithRow in modules)
+                        {
+                            if (left.HasValue && lastRow == moduleWithRow.row && modulesAdded.Contains(moduleWithRow.modul))
+                            {
+                                bool trueLeft = left.Value;
+                                if (lastDiagonal != moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    trueLeft = !trueLeft;
+                                }
+                                if (!moduleWithRow.modul.DiagonalDurchstroemt && !moduleWithRow.modul.GraphBottomUp)
+                                {
+                                    trueLeft = !trueLeft;
+                                }
+                                moduleWithRow.modul.Orientation = trueLeft ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                if (moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    left = !left;
+                                }
+                                lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+                            }
+                            else
+                            {
+                                lastRow = moduleWithRow.row;
+                                lastDiagonal = moduleWithRow.modul.DiagonalDurchstroemt;
+                                if (moduleWithRow.modul.DiagonalDurchstroemt)
+                                {
+                                    left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                }
+                                else
+                                {
+                                    if (moduleWithRow.modul.GraphBottomUp)
+                                    {
+                                        left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+                                    }
+                                    else
+                                    {
+                                        left = moduleWithRow.modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                 * */
+                if (this.projectChanged != null)
+                {
+                    this.projectChanged(this);
+                }
+                if (this.ListsNeedUpdate != null)
+                {
+                    this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(newCircuit != null && newCircuit.CountModules() > 0));
+                }
+            }
+            this.layoutAddArea = null;
+            return count > 0 ? newCircuit : null;
 		}
 
 		private ModulKlimaBoden20Circuit highlightCircuit = null;
@@ -2081,11 +2145,51 @@ namespace Europlan.Common {
 			set {
 				this.highlightCircuit = value;
 				this.highlightModules = null;
+                this.highlightSubArea = null;
+                this.highlightRow = null;
 				if (this.ConnectedPlanPanel != null) {
 					this.ConnectedPlanPanel.InvalidateGraphics();
 				}
 			}
 		}
+
+        private ModulKlimaBoden20SubArea highlightSubArea = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ModulKlimaBoden20SubArea HighlightSubArea
+        {
+            get { return this.highlightSubArea; }
+            set
+            {
+                this.highlightSubArea = value;
+                this.highlightCircuit = null;
+                this.highlightRow = null;
+                this.highlightModules = null;
+                if (this.ConnectedPlanPanel != null)
+                {
+                    this.ConnectedPlanPanel.InvalidateGraphics();
+                }
+            }
+        }
+
+        private KlimaFlaechenList highlightRow = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public KlimaFlaechenList HighlightRow
+        {
+            get { return this.highlightRow; }
+            set
+            {
+                this.highlightRow = value;
+                this.highlightCircuit = null;
+                this.highlightSubArea = null;
+                this.highlightModules = null;
+                if (this.ConnectedPlanPanel != null)
+                {
+                    this.ConnectedPlanPanel.InvalidateGraphics();
+                }
+            }
+        }
 
 		private List<KlimaFlaechenModul> highlightModules = null;
 		[Browsable(false)]
@@ -2093,8 +2197,10 @@ namespace Europlan.Common {
 		public List<KlimaFlaechenModul> HighlightModules {
 			get { return this.highlightModules; }
 			set {
-				this.highlightCircuit = null;
-				this.highlightModules = value;
+                this.highlightRow = null;
+                this.highlightCircuit = null;
+                this.highlightSubArea = null;
+                this.highlightModules = value;
 				if (this.ConnectedPlanPanel != null) {
 					this.ConnectedPlanPanel.InvalidateGraphics();
 				}

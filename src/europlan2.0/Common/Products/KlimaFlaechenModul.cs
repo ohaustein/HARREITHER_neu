@@ -782,7 +782,40 @@ namespace Europlan.Common {
                         }
                     }
                 }
-            } else {
+            }
+            else if (product is ModulKlimaBoden20Product)
+            {
+                Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+                transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double connectionDist = CONNECTION_DISTANCE * measure;
+
+                if (this.graphBottomUp)
+                {
+                    if (orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT)
+                    {
+                        return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+                    }
+                    else
+                    {
+                        return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+                    }
+                }
+                else
+                {
+                    if (orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT)
+                    {
+                        return transformation.Transform(new Point2D(connectionDist, connectionDist));
+                    }
+                    else
+                    {
+                        return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+                    }
+                }              
+            }
+            else
+            {
                 throw new Exception("invalid Product");
             }
         }
@@ -860,7 +893,41 @@ namespace Europlan.Common {
                         }
                     }
                 }
-            } else {
+            }
+            else if (product is ModulKlimaBoden20Product)
+            {
+                Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
+                transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
+
+                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double connectionDist = CONNECTION_DISTANCE * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
+
+                if (this.graphBottomUp)
+                {
+                    if (orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT)
+                    {
+                        return transformation.Transform(new Point2D(connectionDist, connectionDist));
+                    }
+                    else
+                    {
+                        return transformation.Transform(new Point2D(width - connectionDist, connectionDist));
+                    }
+                }
+                else
+                {
+                    if (orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT)
+                    {
+                        return transformation.Transform(new Point2D(width - connectionDist, height - connectionDist));
+                    }
+                    else
+                    {
+                        return transformation.Transform(new Point2D(connectionDist, height - connectionDist));
+                    }
+                }
+            }
+            else
+            {
                 throw new Exception("invalid Product");
             }
         }
