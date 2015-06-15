@@ -671,7 +671,8 @@ namespace Europlan.Common.Products {
 			this.ignoreModuleOrientationChange++;
 
 			if ((this.planPanel.Mode == PlanMode.PM_PLANNER_CLICK || this.planPanel.Mode == PlanMode.PM_PLANNER_DRAG) && this.modulKlimaBodenPlanner.Mode == ModulKlimaBoden20Planner.KlimaBodenMode.KDM_PICK_MODULE) {
-				if (this.modulKlimaBodenPlanner.HighlightCircuit == null) {
+                if (this.modulKlimaBodenPlanner.HighlightCircuit == null && this.modulKlimaBodenPlanner.HighlightSubArea == null && this.modulKlimaBodenPlanner.HighlightRow == null)
+                {
 					this.lstCircuits.SelectedIndex = -1;
 				}
 			}

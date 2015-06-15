@@ -1945,7 +1945,7 @@ namespace Europlan.Common {
                 {
                     if (MessageBox.Show(EuroplanRes.ModulKlimaBoden20Planner_AnbindeleitungLoeschen, EuroplanRes.ModulKlimaBoden20Planner_NeuerHeizkreisTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
-                        onlyAddToExisting = true;
+                        onlyAddToExisting = true;                       
                     }
                     else
                     {
@@ -2134,6 +2134,7 @@ namespace Europlan.Common {
                 }
             }
             this.layoutAddArea = null;
+            this.Mode = KlimaBodenMode.KDM_LAYOUT_ADD_AREA;
             return count > 0 ? newCircuit : null;
 		}
 
@@ -2207,19 +2208,48 @@ namespace Europlan.Common {
 			}
 		}
 
-		public List<KlimaFlaechenModul> GetAllSelectedModules() {
-			List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
-			if (this.HighlightCircuit != null) {
-				foreach (KlimaFlaechenModul modul in this.HighlightCircuit.GetAllModules()) {
-					modules.Add(modul);
-				}
-			} else if (this.HighlightModules != null) {
-				foreach (KlimaFlaechenModul modul in this.HighlightModules) {
-					modules.Add(modul);
-				}
-			}
-			return modules;
-		}
+        public List<KlimaFlaechenModul> GetAllSelectedModules()
+        {
+            List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
+            if (this.HighlightCircuit != null)
+            {
+                foreach (ModulKlimaBoden20SubArea subArea in this.HighlightCircuit.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in subArea.Rows)
+                    {
+                        foreach (KlimaFlaechenModul modul in row.List)
+                        {
+                            modules.Add(modul);
+                        }
+                    }
+                }
+            }
+            else if (this.HighlightSubArea != null)
+            {
+                foreach (KlimaFlaechenList row in this.HighlightSubArea.Rows)
+                {
+                    foreach (KlimaFlaechenModul modul in row.List)
+                    {
+                        modules.Add(modul);
+                    }
+                }
+            }
+            else if (this.HighlightRow != null)
+            {
+                foreach (KlimaFlaechenModul modul in this.HighlightRow.List)
+                {
+                    modules.Add(modul);
+                }
+            }
+            else if (this.HighlightModules != null)
+            {
+                foreach (KlimaFlaechenModul modul in this.HighlightModules)
+                {
+                    modules.Add(modul);
+                }
+            }
+            return modules;
+        }
 
 		public bool ContainsNotConfirmedModules {
 			get {
