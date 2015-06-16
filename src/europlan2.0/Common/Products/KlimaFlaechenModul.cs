@@ -39,6 +39,131 @@ namespace Europlan.Common {
 		private static double module_80_30_area = module_80_30_heatarea;
 		private static double module_60_60_area = module_60_60_heatarea;
 
+        internal enum PossibleConnectionPointType
+        {
+            CONNECTION_PRODUCT,
+            CONNECTION_MODULE,
+            CONNECTION_SUBAREA
+        }
+
+        internal struct PossibleConnectionPoint
+        {
+            private PossibleConnectionPointType connectionType;
+            private GraphicalConnectionAnbindungsPunkt productConnection;
+            private Nullable<Point2D> connectionPoint;
+            private Polygon2D connectionArea;
+            private bool vorlauf;
+            private bool ruecklauf;
+
+            private KlimaFlaechenModul modul;
+            private KlimaFlaechenSubAreaVerbindung verbindung;
+
+            public PossibleConnectionPoint(GraphicalConnectionAnbindungsPunkt productConnection, bool vorlauf, bool ruecklauf)
+            {
+                this.connectionType = PossibleConnectionPointType.CONNECTION_PRODUCT;
+                this.productConnection = productConnection;
+                this.connectionPoint = null;
+                this.connectionArea = null;
+                this.modul = null;
+                this.verbindung = null;
+                this.vorlauf = vorlauf && !ruecklauf;
+                this.ruecklauf = ruecklauf && !vorlauf;
+            }
+
+            public PossibleConnectionPoint(Point2D connectionPoint, Polygon2D connectionArea, KlimaFlaechenModul modul, bool vorlauf, bool ruecklauf)
+            {
+                this.connectionType = PossibleConnectionPointType.CONNECTION_MODULE;
+                this.connectionPoint = connectionPoint;
+                this.connectionArea = connectionArea;
+                this.modul = modul;
+                this.verbindung = null;
+                this.productConnection = null;
+                this.vorlauf = vorlauf && !ruecklauf;
+                this.ruecklauf = ruecklauf && !vorlauf;
+            }
+
+            public PossibleConnectionPoint(Point2D connectionPoint, KlimaFlaechenSubAreaVerbindung verbindung, double measure, bool vorlauf, bool ruecklauf)
+            {
+                this.connectionType = PossibleConnectionPointType.CONNECTION_SUBAREA;
+                this.connectionPoint = connectionPoint;
+                double connSize = 0.05 * measure;
+                this.connectionArea = new Polygon2D(new Point2D[] { connectionPoint + new Vector2D(connSize, connSize), connectionPoint + new Vector2D(connSize, -connSize), connectionPoint + new Vector2D(-connSize, -connSize), connectionPoint + new Vector2D(-connSize, connSize) });
+                this.verbindung = verbindung;
+                this.modul = null;
+                this.productConnection = null;
+                this.vorlauf = vorlauf && !ruecklauf;
+                this.ruecklauf = ruecklauf && !vorlauf;
+            }
+
+            public GraphicalConnectionAnbindungsPunkt ProductConnection
+            {
+                get { return this.productConnection; }
+            }
+
+            public PossibleConnectionPointType ConnectionType
+            {
+                get { return this.connectionType; }
+            }
+
+            public Point2D ConnectionPoint
+            {
+                get
+                {
+                    switch (this.connectionType)
+                    {
+                        case PossibleConnectionPointType.CONNECTION_PRODUCT:
+                            return this.productConnection.Point;
+
+                        case PossibleConnectionPointType.CONNECTION_SUBAREA:
+                        case PossibleConnectionPointType.CONNECTION_MODULE:
+                            return this.connectionPoint.Value;
+
+                        default:
+                            throw new Exception();
+                    }
+                }
+            }
+
+            public Polygon2D ConnectionArea
+            {
+                get
+                {
+                    switch (this.connectionType)
+                    {
+                        case PossibleConnectionPointType.CONNECTION_PRODUCT:
+                            return this.productConnection.Area;
+
+                        case PossibleConnectionPointType.CONNECTION_SUBAREA:
+                        case PossibleConnectionPointType.CONNECTION_MODULE:
+                            return this.connectionArea;
+
+                        default:
+                            throw new Exception();
+                    }
+                }
+            }
+
+            public bool Vorlauf
+            {
+                get { return this.vorlauf; }
+            }
+
+            public bool Ruecklauf
+            {
+                get { return this.ruecklauf; }
+            }
+
+            public KlimaFlaechenModul Modul
+            {
+                get { return this.modul; }
+            }
+
+            public KlimaFlaechenSubAreaVerbindung Verbindung
+            {
+                get { return this.verbindung; }
+            }
+        }
+
 		public class ModulTypeEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string modul_100_40 = EuroplanRes.KlimaFlaechenModul_100_40; //"Modul 100/40"
 			private static readonly string modul_100_30 = EuroplanRes.KlimaFlaechenModul_100_30; //"Modul 100/30"
@@ -649,11 +774,11 @@ namespace Europlan.Common {
             {
                 ModulKlimaBoden20Product mkb = product as ModulKlimaBoden20Product;
 
-                laneRotation = new Matrix3D();
-                moduleRotation = new Matrix3D();
+                laneRotation = Transformation3D.Scaling(1);
+                moduleRotation = Transformation3D.Scaling(1);
 
-                x = 0;
-                y = this.GraphPositionInLan;
+                x = GraphPosX;
+                y = GraphPosY;
             }
             else
             {

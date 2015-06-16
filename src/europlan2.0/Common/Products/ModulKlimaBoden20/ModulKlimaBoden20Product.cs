@@ -37,7 +37,6 @@ namespace Europlan.Common {
 
         private static double[] druckverlustModul_100_40 = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
 
-        private float plannedArea = 0;
         private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
