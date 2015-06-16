@@ -202,9 +202,9 @@ namespace Europlan.Common {
 			if (key == Keys.Delete && modules != null) {
 				if (modules.Count > 0 && this.product.Connections != null && this.product.Connections.Count > 0) {
 					bool ask = false;
-					foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
+					foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
 						bool empty = true;
-						foreach (KlimaFlaechenModul m in c.Row.List) {
+						foreach (KlimaFlaechenModul m in c.GetAllModules()) {
 							if (!modules.Contains(m)) {
 								empty = false;
 								break;
@@ -222,47 +222,85 @@ namespace Europlan.Common {
 						this.product.Connections.Clear();
 					}
 				}
-				List<Circuit> emptyCircuits = new List<Circuit>();
-				foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
-#warning TODO fix
-                    /*
-					foreach (KlimaFlaechenModul kfm in modules) {
-						if (c.Row.List.Contains(kfm)) {
-							KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
-							if (link != null) {
-								c.Links.Remove(link);
-							}
-							link = kfm.GetOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
-							if (link != null) {
-								c.Links.Remove(link);
-							}
-							c.Row.List.Remove(kfm);
-						}
-					}
-					if (c.Row.List.Count == 0) {
-						emptyCircuits.Add(c);
-					}
-                     * */
-				}
-				foreach (Circuit emptyCircuit in emptyCircuits) {
-					this.product.PlannedCircuits.Remove(emptyCircuit);
-				}
-				if (this.projectChanged != null) {
-					this.projectChanged(this);
-				}
-				if (this.ModuleSelected != null) {
-					this.ModuleSelected(this, EventArgs.Empty);
-				}
-				this.ConnectedPlanPanel.InvalidateGraphics();
-				if (this.ListsNeedUpdate != null) {
-					this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs());
-				}
-				if (this.projectChanged != null) {
-					this.projectChanged(this);
-				}
-				return true;
-			}
-			return false;
+                List<KlimaFlaechenList> emptyRows = new List<KlimaFlaechenList>();
+                List<ModulKlimaBoden20SubArea> emptySubAreas = new List<ModulKlimaBoden20SubArea>();
+                List<Circuit> emptyCircuits = new List<Circuit>();
+                foreach (Circuit c in this.product.PlannedCircuits)
+                {
+                    ModulKlimaBoden20Circuit dc = c as ModulKlimaBoden20Circuit;
+                    foreach (ModulKlimaBoden20SubArea sa in dc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList kfl in sa.Rows)
+                        {
+                            foreach (KlimaFlaechenModul kfm in modules)
+                            {
+                                if (kfl.List.Contains(kfm))
+                                {
+                                    KlimaFlaechenModulVerbindung link = kfm.GetInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+                                    if (link != null)
+                                    {
+                                        kfl.Links.Remove(link);
+                                    }
+                                    link = kfm.GetOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+                                    if (link != null)
+                                    {
+                                        kfl.Links.Remove(link);
+                                    }
+                                    KlimaFlaechenSubAreaVerbindung saLink = kfm.GetSubareaInputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+                                    if (saLink != null)
+                                    {
+                                        dc.Links.Remove(saLink);
+                                    }
+                                    saLink = kfm.GetSubareaOutputLink(c, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis);
+                                    if (saLink != null)
+                                    {
+                                        dc.Links.Remove(saLink);
+                                    }
+                                    kfl.List.Remove(kfm);
+                                }
+                            }
+                            if (kfl.List.Count == 0)
+                            {
+                                emptyRows.Add(kfl);
+                            }
+                        }
+                        foreach (KlimaFlaechenList emptyRow in emptyRows)
+                        {
+                            sa.Rows.Remove(emptyRow);
+                        }
+                        emptyRows.Clear();
+                        if (sa.Rows.Count == 0)
+                        {
+                            emptySubAreas.Add(sa);
+                        }
+                    }
+                    foreach (ModulKlimaBoden20SubArea emptySubArea in emptySubAreas)
+                    {
+                        dc.SubAreas.Remove(emptySubArea);
+                    }
+                    emptySubAreas.Clear();
+                    if (dc.SubAreas.Count == 0)
+                    {
+                        emptyCircuits.Add(dc);
+                    }
+                }
+                foreach (Circuit emptyCircuit in emptyCircuits)
+                {
+                    this.product.PlannedCircuits.Remove(emptyCircuit);
+                }
+                if (this.projectChanged != null)
+                {
+                    this.projectChanged(this);
+                }
+                this.ModuleSelected(this, new ModuleSelectedEventArgs());
+                this.ConnectedPlanPanel.InvalidateGraphics();
+                if (this.ListsNeedUpdate != null)
+                {
+                    this.ListsNeedUpdate(this, new ListNeedsUpdateEventArgs(false));
+                }
+                return true;
+            }
+            return false;
 		}
 
 		public void PaintAfterPlanPannel(System.Windows.Forms.PaintEventArgs e, Matrix4D additionalTransformation, Point2D mousePositionInPlan, Point mousePositionInControl) {
@@ -1013,7 +1051,7 @@ namespace Europlan.Common {
 						this.ConnectedPlanPanel.InvalidateGraphics();
 					}
 					if (this.ModuleSelected != null) {
-						this.ModuleSelected(this, EventArgs.Empty);
+						this.ModuleSelected(this, new ModuleSelectedEventArgs());
 					}
 					return true;
 				}
@@ -1040,7 +1078,32 @@ namespace Europlan.Common {
             add { this.projectChanged += value; }
             remove { this.projectChanged -= value; }
         }
-        public event EventHandler ModuleSelected;
+
+        public class ModuleSelectedEventArgs : EventArgs
+        {
+            public KlimaFlaechenModul modul;
+            public List<KlimaFlaechenModul> modules;
+
+            public ModuleSelectedEventArgs()
+            {
+                this.modul = null;
+                this.modules = null;
+            }
+
+            public ModuleSelectedEventArgs(KlimaFlaechenModul modul)
+            {
+                this.modul = modul;
+                this.modules = null;
+            }
+
+            public ModuleSelectedEventArgs(List<KlimaFlaechenModul> modules)
+            {
+                this.modules = modules;
+                this.modul = null;
+            }
+        }
+
+        public event EventHandler<ModuleSelectedEventArgs> ModuleSelected;
 
 		[XmlIgnore]
 		public double NewModulesRotation {

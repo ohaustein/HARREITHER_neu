@@ -770,7 +770,6 @@ namespace Europlan.Common.Products {
 			}
 		}
 
-#warning TODO: probably needs improvement
 		private void cmbSelectedModuleOrientation_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ignoreModuleOrientationChange == 0) {
 				this.changed = true;
@@ -1316,7 +1315,8 @@ namespace Europlan.Common.Products {
 			this.UpdateLists(true, true, true, e.selectLastCircuit);
 		}
 
-		private void modulKlimaBodenPlanner_ModuleSelected(object sender, EventArgs e) {
+        private void modulKlimaBodenPlanner_ModuleSelected(object sender, ModulKlimaBoden20Planner.ModuleSelectedEventArgs e)
+        {
 			this.UpdateSelectedModules();
 		}
 

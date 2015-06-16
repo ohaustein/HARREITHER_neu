@@ -957,7 +957,27 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+            }
+            else if (circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = circuit as ModulKlimaBoden20Circuit;
+                foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in sa.Rows)
+                    {
+                        if (row.Links != null)
+                        {
+                            foreach (KlimaFlaechenModulVerbindung verbindung in row.Links)
+                            {
+                                if (verbindung.End == this)
+                                {
+                                    return verbindung;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 			return link;
 		}
 
@@ -986,7 +1006,27 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+            }
+            else if (circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = circuit as ModulKlimaBoden20Circuit;
+                foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in sa.Rows)
+                    {
+                        if (row.Links != null)
+                        {
+                            foreach (KlimaFlaechenModulVerbindung verbindung in row.Links)
+                            {
+                                if (verbindung.Start == this)
+                                {
+                                    return verbindung;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 			return link;
 		}
 
@@ -1003,7 +1043,22 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+            }
+            else if (circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = circuit as ModulKlimaBoden20Circuit;
+                if (mdc.Links != null)
+                {
+                    foreach (KlimaFlaechenSubAreaVerbindung saLink in mdc.Links)
+                    {
+                        if (saLink.End.Contains(this))
+                        {
+                            link = saLink;
+                            break;
+                        }
+                    }
+                }
+            }
 			return link;
 		}
 
@@ -1020,7 +1075,22 @@ namespace Europlan.Common {
 						}
 					}
 				}
-			}
+            }
+            else if (circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = circuit as ModulKlimaBoden20Circuit;
+                if (mdc.Links != null)
+                {
+                    foreach (KlimaFlaechenSubAreaVerbindung saLink in mdc.Links)
+                    {
+                        if (saLink.Start.Contains(this))
+                        {
+                            link = saLink;
+                            break;
+                        }
+                    }
+                }
+            }
 			return link;
 		}
 
