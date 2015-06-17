@@ -349,7 +349,7 @@ namespace Europlan.Common {
 		}
 
 		public static string QuickDimensioningNameStatic {
-			get { return "Modul\nKlima-\nBoden\n(m²)"; }
+			get { return "Modul\nKlima-\nBoden 30\n(m²)"; }
 		}
 
 		public override ProductType Type {

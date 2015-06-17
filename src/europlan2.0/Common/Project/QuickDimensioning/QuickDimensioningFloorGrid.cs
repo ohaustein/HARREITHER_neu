@@ -162,6 +162,12 @@ namespace Europlan.Common {
 			set { this.SetProductAvailable<ModulKlimaBodenProduct>(value); }
 		}
 
+        public bool ModulKlimaBoden20
+        {
+            get { return this.colModulKlimaBoden20.Visible; }
+            set { this.SetProductAvailable<ModulKlimaBoden20Product>(value); }
+        }
+
 		public bool ModulKlimaDecke {
 			get { return this.colModulKlimaDecke.Visible; }
 			set { this.SetProductAvailable<ModulKlimaDeckeProduct>(value); }
@@ -240,7 +246,19 @@ namespace Europlan.Common {
 					} else if (e.ColumnIndex == this.colModulKlimaBodenCircuits.Index) {
 						// Modul Klimaboden circuits
 						this.ValidateProductCircuits<ModulKlimaBodenProduct>(row);
-					} else if (e.ColumnIndex == this.colModulKlimaDecke.Index) {
+                    }
+                    else if (e.ColumnIndex == this.colModulKlimaBoden20.Index)
+                    {
+                        // Modul Klimaboden
+                        this.ValidateProductArea<ModulKlimaBoden20Product>(row);
+                    }
+                    else if (e.ColumnIndex == this.colModulKlimaBoden20Circuits.Index)
+                    {
+                        // Modul Klimaboden circuits
+                        this.ValidateProductCircuits<ModulKlimaBoden20Product>(row);
+                    }
+                    else if (e.ColumnIndex == this.colModulKlimaDecke.Index)
+                    {
 						// Modul Klimadecke
 						this.ValidateProductArea<ModulKlimaDeckeProduct>(row);
 					} else if (e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) {
@@ -369,6 +387,9 @@ namespace Europlan.Common {
 					// Module Klimaboden
 					this.ShowProduct<ModulKlimaBodenProduct>(row);
 
+                    // Module Klimaboden20
+                    this.ShowProduct<ModulKlimaBoden20Product>(row);
+
 					// Module Klimadecke
 					this.ShowProduct<ModulKlimaDeckeProduct>(row);
 
@@ -429,7 +450,14 @@ namespace Europlan.Common {
 				} else if ((e.ColumnIndex == this.colModulKlimaDecke.Index || e.ColumnIndex == this.colModulKlimaDeckeCircuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaDeckeProduct>() == null) {
 					// Modul Klimaboden
 					this.AddProduct<ModulKlimaDeckeProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
-				} else if (e.ColumnIndex == this.colNrOfServos.Index) {
+                }
+                else if ((e.ColumnIndex == this.colModulKlimaBoden20.Index || e.ColumnIndex == this.colModulKlimaBoden20Circuits.Index) && room.GetProductForQuickDimensioning<ModulKlimaBoden20Product>() == null)
+                {
+                    // Modul Klimaboden20
+                    this.AddProduct<ModulKlimaBodenProduct>(this.quickDimensioningGrid.Rows[e.RowIndex]);
+                }
+                else if (e.ColumnIndex == this.colNrOfServos.Index)
+                {
 					// not editable for now
 				}
 			}
@@ -465,6 +493,7 @@ namespace Europlan.Common {
 				this.productAreaColumns.Add(typeof(HithermCompactProduct), this.colHithermCompact);
 				this.productAreaColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoof);
 				this.productAreaColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBoden);
+                this.productAreaColumns.Add(typeof(ModulKlimaBoden20Product), this.colModulKlimaBoden);
 				this.productAreaColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDecke);
 			}
 
@@ -487,6 +516,7 @@ namespace Europlan.Common {
 				this.productCircuitsColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactCircuits);
 				this.productCircuitsColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofCircuits);
 				this.productCircuitsColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenCircuits);
+                this.productCircuitsColumns.Add(typeof(ModulKlimaBoden20Product), this.colModulKlimaBodenCircuits);
 				this.productCircuitsColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckeCircuits);
 			}
 
@@ -564,6 +594,7 @@ namespace Europlan.Common {
 						col == this.colHithermCompact || col == this.colHithermCompactCircuits ||
 						col == this.colHithermCompactRoof || col == this.colHithermCompactRoofCircuits ||
 						col == this.colModulKlimaBoden || col == this.colModulKlimaBodenCircuits ||
+                        col == this.colModulKlimaBoden20 || col == this.colModulKlimaBoden20Circuits ||
 						col == this.colModulKlimaDecke || col == this.colModulKlimaDeckeCircuits) {
 					e.IsInputKey = false;
 					this.quickDimensioningGrid.BeginEdit(true);
@@ -583,7 +614,13 @@ namespace Europlan.Common {
 						this.ValidateProductArea<HithermCompactRoofProduct>(row);
 					} else if (col == this.colModulKlimaBoden) {
 						this.ValidateProductArea<ModulKlimaBodenProduct>(row);
-					} else if (col == this.colModulKlimaDecke) {
+                    }
+                    else if (col == this.colModulKlimaBoden20)
+                    {
+                        this.ValidateProductArea<ModulKlimaBodenProduct>(row);
+                    }
+                    else if (col == this.colModulKlimaDecke)
+                    {
 						this.ValidateProductArea<ModulKlimaDeckeProduct>(row);
 					} else if (col == this.colNrOfServos) {
 						this.quickDimensioningGrid.BeginEdit(true);
