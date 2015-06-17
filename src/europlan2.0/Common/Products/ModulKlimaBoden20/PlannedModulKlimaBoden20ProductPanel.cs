@@ -1187,7 +1187,7 @@ namespace Europlan.Common {
 		}
 
 		private void btnGraphicalAnbindleitungen_Click(object sender, EventArgs e) {
-			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, true);
+			ConnectionPlannerForm form = new ConnectionPlannerForm(this.product.Product, false);
 			form.ShowDialog();
 		}
 
