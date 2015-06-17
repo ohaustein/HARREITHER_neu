@@ -2011,64 +2011,6 @@ namespace Europlan.Common {
                 {
                     this.ConnectedPlanPanel.InvalidateGraphics();
                 }
-
-#warning TODO: review
-                /*
-				if (this.newConnectionStart != null) {
-					if (!this.newConnectionStartAtOutput) {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, true, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
-					} else {
-						this.possibleAnbindungspunkte = this.product.GetAnbindungsPunkte(this.product.AssociatedRoom.AssociatedPlan.Measure.Value, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, false, this.newConnectionCircuitDistributorIndex, this.newConnectionIgnoreDistributorIndices, planPoint);
-					}
-				}
-
-				Dictionary<KlimaFlaechenModul, Polygon2D> areas = this.GetModuleAreas();
-				KlimaFlaechenModul modul = null;
-				foreach (KeyValuePair<KlimaFlaechenModul, Polygon2D> area in areas) {
-					if (area.Value.IsInside(planPoint)) {
-						modul = area.Key;
-						break;
-					}
-				}
-				int index;
-				ModulKlimaBoden20Circuit currentCircuit = this.product.GetCircuitForModul(modul, out index);
-				if (modul != null && (this.newConnectionStart == null || currentCircuit == this.product.GetCircuitForModul(this.newConnectionStart, out index))) {
-					List<KlimaFlaechenModul> connectedModules;
-					if (this.newConnectionStart != null) {
-						connectedModules = currentCircuit.GetAllLinkedModules(this.newConnectionStart);
-					} else {
-						connectedModules = new List<KlimaFlaechenModul>();
-					}
-					if (!connectedModules.Contains(modul)) {
-						this.hoveredModul = modul;
-						this.hoverInput = (this.newConnectionStart == null || this.newConnectionStartAtOutput) && modul.GetInputLink(currentCircuit, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null;
-						this.hoverOutput = (this.newConnectionStart == null || !this.newConnectionStartAtOutput) && modul.GetOutputLink(currentCircuit, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) == null;
-					} else {
-						this.hoveredModul = null;
-						this.hoverInput = false;
-						this.hoverOutput = false;
-					}
-				} else {
-					this.hoveredModul = null;
-					this.hoverInput = false;
-					this.hoverOutput = false;
-				}
-
-				
-				Point2D lastVertex = this.product.AssociatedRoom.RoomCoordinates[this.product.AssociatedRoom.RoomCoordinates.Count - 1];
-				this.hoverAnbindungen = this.newConnectionStart != null;
-
-				if (this.newConnectionStart != null) {
-					KlimaFlaechenModul tmp;
-					GraphicalConnectionAnbindungsPunkt tmp2;
-					this.nextConnectionPoints = this.GetNextConnectionVerticesInclConnectionPoints(planPoint, out tmp, out tmp2);
-				} else {
-					this.nextConnectionPoints = new List<Point2D>();
-				}
-				if (this.ConnectedPlanPanel != null) {
-					this.ConnectedPlanPanel.InvalidateGraphics();
-				}
-                */
 			}
 			return redraw;
 		}
