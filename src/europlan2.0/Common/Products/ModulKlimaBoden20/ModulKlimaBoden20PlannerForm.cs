@@ -1069,82 +1069,104 @@ namespace Europlan.Common.Products {
 		}
 
 		private void btnInvertDirection_Click(object sender, EventArgs e) {
-			this.changed = true;
-			List<KlimaFlaechenModul> selectedModules = this.modulKlimaBodenPlanner.GetAllSelectedModules();
-			List<KlimaFlaechenModul> modulesToInvert = new List<KlimaFlaechenModul>();
+
+            this.changed = true;
+            List<KlimaFlaechenModul> selectedModules = this.modulKlimaBodenPlanner.GetAllSelectedModules();
+            List<KlimaFlaechenModul> modulesToInvert = new List<KlimaFlaechenModul>();
             List<IKlimaFlaechenVerbindung> linksToInvert = new List<IKlimaFlaechenVerbindung>();
 
             Dictionary<IKlimaFlaechenVerbindung, ModulKlimaBoden20Circuit> anbindungen = new Dictionary<IKlimaFlaechenVerbindung, ModulKlimaBoden20Circuit>();
 
-			foreach (KlimaFlaechenModul m1 in selectedModules) {
-				int tmp;
-				ModulKlimaBoden20Circuit c = this.modulKlimaBodenPlanner.Product.GetCircuitForModul(m1, out tmp);
-#warning TODO improve
+            foreach (KlimaFlaechenModul m1 in selectedModules)
+            {
+                int tmp;
+                ModulKlimaBoden20Circuit c = this.modulKlimaBodenPlanner.Product.GetCircuitForModul(m1, out tmp);
                 IKlimaFlaechenVerbindung link = c.GetNextLink(m1);
-                /*
-				if (link != null) {
-					if (!linksToInvert.Contains(link)) {
-						linksToInvert.Add(link);
-					}
-					if (link.End == null) {
-						anbindungen[link] = c;
-					}
-				}
-				link = c.GetPreviousLink(m1);
-				if (link != null) {
-					if (!linksToInvert.Contains(link)) {
-						linksToInvert.Add(link);
-					}
-					if (link.Start == null) {
-						anbindungen[link] = c;
-					}
-				}
-				foreach (KlimaFlaechenModul m2 in c.GetAllLinkedModules(m1)) {
-					link = c.GetNextLink(m2);
-					if (link != null) {
-						if (!linksToInvert.Contains(link)) {
-							linksToInvert.Add(link);
-						}
-						if (link.End == null) {
-							anbindungen[link] = c;
-						}
-					}
-					link = c.GetPreviousLink(m2);
-					if (link != null) {
-						if (!linksToInvert.Contains(link)) {
-							linksToInvert.Add(link);
-						}
-						if (link.Start == null) {
-							anbindungen[link] = c;
-						}
-					}
-					if (!modulesToInvert.Contains(m2)) {
-						modulesToInvert.Add(m2);
-					}
-				}
-                */
-			}           
+                if (link != null)
+                {
+                    if (!linksToInvert.Contains(link))
+                    {
+                        linksToInvert.Add(link);
+                    }
+                    if (link.EndConnectedToAnbindung)
+                    {
+                        anbindungen[link] = c;
+                    }
+                }
+                link = c.GetPreviousLink(m1);
+                if (link != null)
+                {
+                    if (!linksToInvert.Contains(link))
+                    {
+                        linksToInvert.Add(link);
+                    }
+                    if (link.StartConnectedToAnbindung)
+                    {
+                        anbindungen[link] = c;
+                    }
+                }
+                foreach (KlimaFlaechenModul m2 in c.GetAllLinkedModules(m1))
+                {
+                    link = c.GetNextLink(m2);
+                    if (link != null)
+                    {
+                        if (!linksToInvert.Contains(link))
+                        {
+                            linksToInvert.Add(link);
+                        }
+                        if (link.EndConnectedToAnbindung)
+                        {
+                            anbindungen[link] = c;
+                        }
+                    }
+                    link = c.GetPreviousLink(m2);
+                    if (link != null)
+                    {
+                        if (!linksToInvert.Contains(link))
+                        {
+                            linksToInvert.Add(link);
+                        }
+                        if (link.StartConnectedToAnbindung)
+                        {
+                            anbindungen[link] = c;
+                        }
+                    }
+                    if (!modulesToInvert.Contains(m2))
+                    {
+                        modulesToInvert.Add(m2);
+                    }
+                }
+            }
 
-			if (anbindungen.Count > 0) {
-				if (MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_RichtungAendernText, Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_RichtungAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) {
-					return;
-				}
-#warning TODO
-				foreach (KeyValuePair<IKlimaFlaechenVerbindung, ModulKlimaBoden20Circuit> kvp in anbindungen) {
-					//kvp.Value.Links.Remove(kvp.Key);
-				}
-			}
+            if (anbindungen.Count > 0)
+            {
+                if (MessageBox.Show(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_DurchstroemungsrichtungAendernText, Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_DurchstroemungsrichtungAendernTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                {
+                    return;
+                }
+                foreach (KeyValuePair<IKlimaFlaechenVerbindung, ModulKlimaBoden20Circuit> kvp in anbindungen)
+                {
+                    if (kvp.Key is KlimaFlaechenSubAreaVerbindung)
+                    {
+                        kvp.Value.Links.Remove(kvp.Key as KlimaFlaechenSubAreaVerbindung);
+                    }
+                }
+            }
 
-			foreach (KlimaFlaechenModul modul in modulesToInvert) {
-				modul.GraphBottomUp = !modul.GraphBottomUp;
-			}
-			foreach (KlimaFlaechenModulVerbindung link in linksToInvert) {
-				KlimaFlaechenModul tmp = link.Start;
-				link.Start = link.End;
-				link.End = tmp;
-			}
-			this.UpdateSelectedModules();
-			this.planPanel.InvalidateGraphics();
+            foreach (KlimaFlaechenModul modul in modulesToInvert)
+            {
+                modul.GraphBottomUp = !modul.GraphBottomUp;
+                if (!modul.DiagonalDurchstroemt)
+                {
+                    modul.Orientation = (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT);
+                }
+            }
+            foreach (IKlimaFlaechenVerbindung link in linksToInvert)
+            {
+                link.InvertDirection();
+            }
+            this.UpdateSelectedModules();
+            this.planPanel.InvalidateGraphics();
 		}
 
 		private void btnConstruction_Click(object sender, EventArgs e) {
