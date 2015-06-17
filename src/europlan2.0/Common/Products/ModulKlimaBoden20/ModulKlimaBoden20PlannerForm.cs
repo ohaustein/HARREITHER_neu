@@ -38,15 +38,12 @@ namespace Europlan.Common.Products {
 			this.cmbSelectedModuleOrientation.SelectedIndex = -1;
 			this.cmbSelectedModuleOrientation.Enabled = false;
 
-			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Dicht);
-			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Modulierend);
-			this.cmbHorizontal.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_ModulierendDoppelt);
-			this.cmbHorizontal.SelectedIndex = 0;
-
 			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Dicht);
 			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Modulierend);
-			this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_ModulierendDoppelt);
-			this.cmbVertical.SelectedIndex = 1;
+			//this.cmbVertical.Items.Add(Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_ModulierendDoppelt);
+			this.cmbVertical.SelectedIndex = 0;
+
+            this.modulKlimaBodenPlanner.NewModulesYDicht = ModulKlimaBoden20Planner.VerlegungsAbstand.VA_DICHT;
 
 			ModulKlimaBoden20Product product = plannedProduct.Product as ModulKlimaBoden20Product;
 
@@ -123,7 +120,6 @@ namespace Europlan.Common.Products {
 			this.chkSelectReferenceModule.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_ReferenzmodulFuerAusrichtung;
 			this.btnAdd.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Hinzufuegen;
 			this.lblVertical.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Breitseite2;
-			this.lblHorizontal.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Laengsseite2;
 			this.lblNewRotation.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Drehung2;
 			this.label3.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_Ausrichtung;
 			this.grpSelection.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_AusgewaehltesModul;
@@ -357,7 +353,6 @@ namespace Europlan.Common.Products {
 			this.btnHorizontal.Enabled = enableLayoutPage && !staffeln;
 			this.btnColor.Enabled = enableLayoutPage;
 			this.numLength.Enabled = enableLayoutPage;
-			this.cmbHorizontal.Enabled = enableLayoutPage;
 			this.cmbVertical.Enabled = enableLayoutPage && !staffeln;
 			this.chkSelectReferenceModule.Enabled = enableLayoutPage;
 			this.btnAdd.Enabled = enableLayoutPage;
@@ -1231,10 +1226,6 @@ namespace Europlan.Common.Products {
 			if (newCircuit != null) {
 				this.UpdateLists(true, true, true, true);
 			}
-		}
-
-		private void cmbHorizontal_SelectedIndexChanged(object sender, EventArgs e) {
-			this.modulKlimaBodenPlanner.NewModulesYDicht = (ModulKlimaBoden20Planner.VerlegungsAbstand)cmbHorizontal.SelectedIndex;
 		}
 
 		private void cmbVertical_SelectedIndexChanged(object sender, EventArgs e) {

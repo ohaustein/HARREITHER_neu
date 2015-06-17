@@ -14220,7 +14220,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Breitseite:.
+        ///   Looks up a localized string similar to Verlegeart:.
         /// </summary>
         internal static string ModulKlimaBoden20PlannerForm_Breitseite2 {
             get {

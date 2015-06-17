@@ -7835,7 +7835,7 @@ Nummer</value>
     <value>Breitseite</value>
   </data>
   <data name="ModulKlimaBoden20PlannerForm_Breitseite2" xml:space="preserve">
-    <value>Breitseite:</value>
+    <value>Verlegeart:</value>
   </data>
   <data name="ModulKlimaBoden20PlannerForm_Dicht" xml:space="preserve">
     <value>dicht</value>
