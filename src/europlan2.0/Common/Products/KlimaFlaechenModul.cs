@@ -774,11 +774,13 @@ namespace Europlan.Common {
             {
                 ModulKlimaBoden20Product mkb = product as ModulKlimaBoden20Product;
 
-                laneRotation = Transformation3D.Scaling(1);
-                moduleRotation = Transformation3D.Scaling(1);
+                laneRotation = Transformation3D.Rotate(-this.GraphRotation * Math.PI / 180.0);
+                moduleRotation = Transformation3D.Rotate(this.GraphRotation * Math.PI / 180.0);
 
-                x = GraphPosX;
-                y = GraphPosY;
+                Point2D p = new Point2D(GraphPosX, GraphPosY);
+
+                x = laneRotation.Transform(p).X;
+                y = laneRotation.Transform(p).Y;
             }
             else
             {
