@@ -1013,10 +1013,13 @@ namespace Europlan.Common.Products {
 
 #warning TODO: for each row
 		private void numLength_ValueChanged(object sender, EventArgs e) {
-			if (this.modulKlimaBodenPlanner.HighlightCircuit != null) {
-				//this.modulKlimaBodenPlanner.HighlightCircuit.SonstigeVerbindeleitung = (double)this.numLength.Value;
-				this.CalculateAndUpdate();
-			}
+            // this is already the copied code
+            if (ignoreListChange == 0 && GetSelectedRow() != null)
+            {
+                this.changed = true;
+                GetSelectedRow().LengthVerbindeleitungen = (double)this.numLength.Value;
+                CalculateAndUpdate();
+            }
 		}
 
 		private void modulKlimaBodenPlanner_ProjectChanged(object sender) {
