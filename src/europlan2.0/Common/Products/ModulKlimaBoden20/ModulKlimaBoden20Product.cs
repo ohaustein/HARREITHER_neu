@@ -1080,7 +1080,37 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
+			if (!graphical) {
+				double additional21mm = 0;
+				int nrOfElements = 0;
+
+				int rows = 0;
+				int subAreas = 0;
+				double modulArea = 0;
+				foreach (ModulKlimaBoden20Circuit c in this.circuits) {
+					foreach (ModulKlimaBoden20SubArea subArea in c.SubAreas) {
+						subAreas++;
+						foreach (KlimaFlaechenList row in subArea.Rows) {
+							rows++;
+							additional21mm += row.LengthVerbindeleitungen;
+							additional21mm += 1.4;
+							foreach (KlimaFlaechenModul modul in row.List) {
+								// Modul
+								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+								nrOfElements++;
+								modulArea += modul.GetHeatArea(false);
+							}
+						}
+					}
+				}
+
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
+
+			} else {
+				// TODO graphical 
+			}
 		}
 
 		public override double Dichte {

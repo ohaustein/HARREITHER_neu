@@ -16,12 +16,14 @@ namespace Europlan.Common {
 		private static double module_120_30_height = 1.2;
 		private static double module_80_30_height = 0.8;
 		private static double module_60_60_height = 0.6;
+		private static double module_100_40_20_height = 1.0; // TO BE DEFINED
 
 		private static double module_100_40_width = 0.4;
 		private static double module_100_30_width = 0.3;
 		private static double module_120_30_width = 0.3;
 		private static double module_80_30_width = 0.3;
 		private static double module_60_60_width = 0.6;
+		private static double module_100_40_20_width = 0.4; // TO BE DEFINED
 
 		private static double module_additional_width = 0.03 * 2;
 
@@ -31,6 +33,7 @@ namespace Europlan.Common {
 		private static double module_120_30_heatarea = module_120_30_height * (module_120_30_width + module_additional_width);
 		private static double module_80_30_heatarea = module_80_30_height * (module_80_30_width + module_additional_width);
 		private static double module_60_60_heatarea = module_60_60_height * module_60_60_width;
+		private static double module_100_40_20_heatarea = module_100_40_20_height * module_100_40_20_width; // TO BE DEFINED
 
 		private static double module_100_40_floor_area = module_100_40_floor_heatarea;
 		private static double module_100_40_roof_area = module_100_40_roof_heatarea;
@@ -38,6 +41,7 @@ namespace Europlan.Common {
 		private static double module_120_30_area = module_120_30_heatarea;
 		private static double module_80_30_area = module_80_30_heatarea;
 		private static double module_60_60_area = module_60_60_heatarea;
+		private static double module_100_40_20_area = module_100_40_20_heatarea; // TO BE DEFINED
 
         internal enum PossibleConnectionPointType
         {
@@ -173,6 +177,7 @@ namespace Europlan.Common {
 			private static readonly string modul_60_60B = EuroplanRes.KlimaFlaechenModul_60_60B; //"Modul 60/60 Typ B"
 			private static readonly string modul_60_60C = EuroplanRes.KlimaFlaechenModul_60_60C; //"Modul 60/60 Typ C"
 			private static readonly string modul_60_60D = EuroplanRes.KlimaFlaechenModul_60_60D; //"Modul 60/60 Typ D"
+			private static readonly string modul_100_40_20 = EuroplanRes.KlimaFlaechenModul_100_40_20; //"Modul 100/40 20"
 			private static readonly string modul_100_40_short = EuroplanRes.KlimaFlaechenModul_100_40_Short; //"100/40"
 			private static readonly string modul_100_30_short = EuroplanRes.KlimaFlaechenModul_100_30_Short; //"100/30"
 			private static readonly string modul_120_30_short = EuroplanRes.KlimaFlaechenModul_120_30_Short; //"120/30"
@@ -181,6 +186,7 @@ namespace Europlan.Common {
 			private static readonly string modul_60_60B_short = EuroplanRes.KlimaFlaechenModul_60_60B_Short; //"60/60 B"
 			private static readonly string modul_60_60C_short = EuroplanRes.KlimaFlaechenModul_60_60C_Short; //"60/60 C"
 			private static readonly string modul_60_60D_short = EuroplanRes.KlimaFlaechenModul_60_60D_Short; //"60/60 D"
+			private static readonly string modul_100_40_20_short = EuroplanRes.KlimaFlaechenModul_100_40_20_Short; //"100/40 20"
 
 			private Dictionary<string, ModulTypeEnum> mappingFromString = new Dictionary<string, ModulTypeEnum>();
 			private Dictionary<ModulTypeEnum, string> mappingToString = new Dictionary<ModulTypeEnum, string>();
@@ -207,6 +213,7 @@ namespace Europlan.Common {
 				mappingFromString.Add(modul_60_60B, ModulTypeEnum.MODUL_60_60B);
 				mappingFromString.Add(modul_60_60C, ModulTypeEnum.MODUL_60_60C);
 				mappingFromString.Add(modul_60_60D, ModulTypeEnum.MODUL_60_60D);
+				mappingFromString.Add(modul_100_40_20, ModulTypeEnum.MODUL_100_40_20);
 				mappingToString.Add(ModulTypeEnum.MODUL_100_40, modul_100_40);
 				mappingToString.Add(ModulTypeEnum.MODUL_100_30, modul_100_30);
 				mappingToString.Add(ModulTypeEnum.MODUL_120_30, modul_120_30);
@@ -215,6 +222,7 @@ namespace Europlan.Common {
 				mappingToString.Add(ModulTypeEnum.MODUL_60_60B, modul_60_60B);
 				mappingToString.Add(ModulTypeEnum.MODUL_60_60C, modul_60_60C);
 				mappingToString.Add(ModulTypeEnum.MODUL_60_60D, modul_60_60D);
+				mappingToString.Add(ModulTypeEnum.MODUL_100_40_20, modul_100_40_20);
 				mappingFromShortString.Add(modul_100_40_short, ModulTypeEnum.MODUL_100_40);
 				mappingFromShortString.Add(modul_100_30_short, ModulTypeEnum.MODUL_100_30);
 				mappingFromShortString.Add(modul_120_30_short, ModulTypeEnum.MODUL_120_30);
@@ -223,6 +231,7 @@ namespace Europlan.Common {
 				mappingFromShortString.Add(modul_60_60B_short, ModulTypeEnum.MODUL_60_60B);
 				mappingFromShortString.Add(modul_60_60C_short, ModulTypeEnum.MODUL_60_60C);
 				mappingFromShortString.Add(modul_60_60D_short, ModulTypeEnum.MODUL_60_60D);
+				mappingFromShortString.Add(modul_100_40_20_short, ModulTypeEnum.MODUL_100_40_20);
 				mappingToShortString.Add(ModulTypeEnum.MODUL_100_40, modul_100_40_short);
 				mappingToShortString.Add(ModulTypeEnum.MODUL_100_30, modul_100_30_short);
 				mappingToShortString.Add(ModulTypeEnum.MODUL_120_30, modul_120_30_short);
@@ -231,6 +240,7 @@ namespace Europlan.Common {
 				mappingToShortString.Add(ModulTypeEnum.MODUL_60_60B, modul_60_60B_short);
 				mappingToShortString.Add(ModulTypeEnum.MODUL_60_60C, modul_60_60C_short);
 				mappingToShortString.Add(ModulTypeEnum.MODUL_60_60D, modul_60_60D_short);
+				mappingToShortString.Add(ModulTypeEnum.MODUL_100_40_20, modul_100_40_20_short);
 			}
 
 			public bool ShortNames {
@@ -284,6 +294,7 @@ namespace Europlan.Common {
 			MODUL_60_60B,
 			MODUL_60_60C,
 			MODUL_60_60D,
+			MODUL_100_40_20,
 		}
 
 		public class ModulOrientationEnumConverter : System.ComponentModel.TypeConverter {
@@ -536,6 +547,13 @@ namespace Europlan.Common {
 							return "MK31";
 						}
 
+					case ModulTypeEnum.MODUL_100_40_20:
+						if (orientation == ModulOrientationEnum.ORIENTATION_RIGHT) {
+							return "MK70";
+						} else {
+							return "MK71";
+						}
+
 					default:
 						return "";
 				}
@@ -561,6 +579,9 @@ namespace Europlan.Common {
 
 					case ModulTypeEnum.MODUL_100_30:
 						return 0.75;
+
+					case ModulTypeEnum.MODUL_100_40_20:
+						return 1.0; // TO BE DEFINED
 
 					default:
 						throw new Exception("Unknown Register Type");
@@ -588,6 +609,9 @@ namespace Europlan.Common {
 				case ModulTypeEnum.MODUL_120_30:
 					return KlimaFlaechenModul.module_120_30_heatarea;
 
+				case ModulTypeEnum.MODUL_100_40_20:
+					return KlimaFlaechenModul.module_100_40_20_heatarea; // TO BE DEFINED
+
 				default:
 					return 0;
 			}
@@ -612,6 +636,9 @@ namespace Europlan.Common {
 
 				case ModulTypeEnum.MODUL_120_30:
 					return KlimaFlaechenModul.module_120_30_area;
+
+				case ModulTypeEnum.MODUL_100_40_20:
+					return KlimaFlaechenModul.module_100_40_20_area; // TO BE DEFINED
 
 				default:
 					return 0;
@@ -651,6 +678,9 @@ namespace Europlan.Common {
 				case ModulTypeEnum.MODUL_60_60D:
 					return EN1264.Instance.DruckverlustModul_120_30(1, massenstrom);
 
+				case ModulTypeEnum.MODUL_100_40_20:
+					return EN1264.Instance.DruckverlustModul_100_40_20(1, massenstrom);
+
 				default:
 					return 0;
 			}
@@ -676,6 +706,9 @@ namespace Europlan.Common {
 				case ModulTypeEnum.MODUL_60_60D:
 					return module_60_60_height;
 
+				case ModulTypeEnum.MODUL_100_40_20:
+					return module_100_40_20_height;
+
 				default:
 					return 0;
 			}
@@ -700,6 +733,9 @@ namespace Europlan.Common {
 				case ModulTypeEnum.MODUL_60_60C:
 				case ModulTypeEnum.MODUL_60_60D:
 					return module_60_60_width;
+
+				case ModulTypeEnum.MODUL_100_40_20:
+					return module_100_40_20_width;
 
 				default:
 					return 0;

@@ -7987,4 +7987,37 @@ Nummer</value>
   <data name="ModulKlimaBoden20Planner_NeuerHeizkreisTitel" xml:space="preserve">
     <value>Neuer Heizkreis</value>
   </data>
+  <data name="KlimaFlaechenModul_100_40_20" xml:space="preserve">
+    <value>Modul 100/40 20</value>
+  </data>
+  <data name="KlimaFlaechenModul_100_40_20_Short" xml:space="preserve">
+    <value>100/40 20</value>
+  </data>
+  <data name="Material_HR92" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR93" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK70" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK71" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK73" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK74" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK75" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK76" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK77" xml:space="preserve">
+    <value />
+  </data>
 </root>

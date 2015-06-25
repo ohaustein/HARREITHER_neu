@@ -6642,6 +6642,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modul 100/40 20.
+        /// </summary>
+        internal static string KlimaFlaechenModul_100_40_20 {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_100_40_20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100/40 20.
+        /// </summary>
+        internal static string KlimaFlaechenModul_100_40_20_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_100_40_20_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 100/40.
         /// </summary>
         internal static string KlimaFlaechenModul_100_40_Short {
@@ -13204,6 +13222,24 @@ namespace Europlan.Common {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string Material_HR92 {
+            get {
+                return ResourceManager.GetString("Material_HR92", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_HR93 {
+            get {
+                return ResourceManager.GetString("Material_HR93", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Material_HX15 {
             get {
                 return ResourceManager.GetString("Material_HX15", resourceCulture);
@@ -13630,6 +13666,69 @@ namespace Europlan.Common {
         internal static string Material_MK60 {
             get {
                 return ResourceManager.GetString("Material_MK60", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK70 {
+            get {
+                return ResourceManager.GetString("Material_MK70", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK71 {
+            get {
+                return ResourceManager.GetString("Material_MK71", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK73 {
+            get {
+                return ResourceManager.GetString("Material_MK73", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK74 {
+            get {
+                return ResourceManager.GetString("Material_MK74", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK75 {
+            get {
+                return ResourceManager.GetString("Material_MK75", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK76 {
+            get {
+                return ResourceManager.GetString("Material_MK76", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Material_MK77 {
+            get {
+                return ResourceManager.GetString("Material_MK77", resourceCulture);
             }
         }
         
