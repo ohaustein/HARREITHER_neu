@@ -1094,8 +1094,11 @@ namespace Europlan.Common {
 						subAreas++;
 						foreach (KlimaFlaechenList row in subArea.Rows) {
 							rows++;
+
+							// TO BE CLARIFIED
 							additional21mm += row.LengthVerbindeleitungen;
 							additional21mm += 1.4;
+
 							foreach (KlimaFlaechenModul modul in row.List) {
 								// Modul
 								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);

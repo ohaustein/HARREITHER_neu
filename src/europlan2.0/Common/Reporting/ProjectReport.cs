@@ -494,6 +494,9 @@ namespace Europlan.Common {
 			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
 
+			// to be hidden for the moment
+
+			/*
 			wrapper = new BilanzWrapper();
 			wrapper.Description = EuroplanRes.ProjectReport_GesamteHeizleistung; //"Gesamt-Heizleistung (nach innen)"
 			wrapper.HeatValue = qHeat.ToString("0.##");
@@ -509,6 +512,7 @@ namespace Europlan.Common {
 			wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 			wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 			wrapperList.Add(wrapper);
+			*/
 
 			wrapper = new BilanzWrapper();
 			wrapper.Description = EuroplanRes.ProjectReport_GesamtWassermenge; //"Gesamt-Wassermenge"
@@ -650,6 +654,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -665,6 +672,7 @@ namespace Europlan.Common {
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
+				*/
 
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -802,6 +810,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -818,6 +829,8 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				*/
+				  
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
 				wrapper.HeatValue = durchflussHeat.ToString("0.##");
@@ -954,6 +967,9 @@ namespace Europlan.Common {
                 wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
                 wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
                 wrapper = new BilanzWrapper();
                 wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
                 wrapper.HeatValue = qHeat.ToString("0.##");
@@ -969,6 +985,7 @@ namespace Europlan.Common {
                 wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
                 wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
                 wrapperList.Add(wrapper);
+				*/
 
                 wrapper = new BilanzWrapper();
                 wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -1097,6 +1114,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -1112,6 +1132,7 @@ namespace Europlan.Common {
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
+				*/
 
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -1228,6 +1249,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -1243,6 +1267,7 @@ namespace Europlan.Common {
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
+				*/
 
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -1364,6 +1389,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -1379,6 +1407,7 @@ namespace Europlan.Common {
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
+				*/
 
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -1510,6 +1539,9 @@ namespace Europlan.Common {
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+							
+				/*
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
 				wrapper.HeatValue = qHeat.ToString("0.##");
@@ -1525,6 +1557,7 @@ namespace Europlan.Common {
 				wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
 				wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
 				wrapperList.Add(wrapper);
+				*/
 
 				wrapper = new BilanzWrapper();
 				wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
@@ -1656,6 +1689,9 @@ namespace Europlan.Common {
                 wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
                 wrapperList.Add(wrapper);
 
+				// to be hidden for the moment
+
+				/*
                 wrapper = new BilanzWrapper();
                 wrapper.Description = EuroplanRes.ProjectReport_ErreichteHeizleistung; //"Erreichte Heizleistung nach innen"
                 wrapper.HeatValue = qHeat.ToString("0.##");
@@ -1671,6 +1707,7 @@ namespace Europlan.Common {
                 wrapper.CoolValue = (transmissionFloorCool + transmissionWallCool + transmissionCeilingCool + qCool).ToString("0.##");
                 wrapper.CoolUnit = EuroplanRes.Unit_Watt; //"W"
                 wrapperList.Add(wrapper);
+				*/
 
                 wrapper = new BilanzWrapper();
                 wrapper.Description = EuroplanRes.ProjectReport_Wassermenge; //"Wassermenge"
