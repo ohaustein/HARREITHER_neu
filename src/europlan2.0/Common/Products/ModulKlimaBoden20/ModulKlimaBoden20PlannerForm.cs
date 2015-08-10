@@ -721,31 +721,109 @@ namespace Europlan.Common.Products {
 				this.llHk.Enabled = false;
 				this.llHk.Tag = null;
 				this.llHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_KeinHK;
+                this.llSubarea.Enabled = false;
+                this.llSubarea.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_KeineTeilflaeche;
+                this.llSubarea.Tag = null;
+                this.llReihe.Enabled = false;
+                this.llReihe.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_KeineReihe;
+                this.llReihe.Tag = null;
 			} else {
-				ModulKlimaBoden20Circuit circuit = null;
-				bool circuitOk = true;
-				int circuitIndex = 0;
-				foreach (KlimaFlaechenModul modul in module) {
-					ModulKlimaBoden20Circuit curCircuit = this.modulKlimaBodenPlanner.Product.GetCircuitForModul(modul, out circuitIndex);
-					if (circuit != null && circuit != curCircuit) {
-						circuitOk = false;
-					}
-					if (curCircuit == null) {
-						circuitOk = false;
-					} else {
-						circuit = curCircuit;
-					}
-				}
-				if (circuitOk) {
-					this.llHk.Tag = circuitIndex;
-					circuitIndex++;
-					this.llHk.Text = Europlan.Common.EuroplanRes.PlannedModulKlimaDeckeProductPanel_HeizkreisAbkuerzung + circuitIndex.ToString();
-					this.llHk.Enabled = true;
-				} else {
-					this.llHk.Tag = null;
-					this.llHk.Enabled = false;
-					this.llHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_VerschiendeHK;
-				}
+                ModulKlimaBoden20Circuit circuit = null;
+                bool circuitOk = true;
+                ModulKlimaBoden20SubArea subArea = null;
+                bool subAreaOk = true;
+                KlimaFlaechenList row = null;
+                bool rowOk = true;
+                int circuitIndex = 0;
+                int subAreaIndex = 0;
+                int rowIndex = 0;
+                foreach (KlimaFlaechenModul modul in module)
+                {
+                    ModulKlimaBoden20Circuit curCircuit = this.modulKlimaBodenPlanner.Product.GetCircuitForModul(modul, out circuitIndex);
+                    if (circuit != null && circuit != curCircuit)
+                    {
+                        circuitOk = false;
+                        subAreaOk = false;
+                        rowOk = false;
+                    }
+                    if (curCircuit == null)
+                    {
+                        circuitOk = false;
+                        subAreaOk = false;
+                        rowOk = false;
+                    }
+                    else
+                    {
+                        ModulKlimaBoden20SubArea curSubArea = curCircuit.GetSubareaForModul(modul, out subAreaIndex);
+                        if (subArea != null && subArea != curSubArea)
+                        {
+                            subAreaOk = false;
+                            rowOk = false;
+                        }
+                        if (curSubArea == null)
+                        {
+                            subAreaOk = false;
+                            rowOk = false;
+                        }
+                        else
+                        {
+                            KlimaFlaechenList curRow = curSubArea.GetRowForModul(modul, out rowIndex);
+                            if (row != null && row != curRow)
+                            {
+                                rowOk = false;
+                            }
+                            if (curRow == null)
+                            {
+                                rowOk = false;
+                            }
+                            else
+                            {
+                                row = curRow;
+                            }
+                            subArea = curSubArea;
+                        }
+                        circuit = curCircuit;
+                    }
+                }
+                if (circuitOk)
+                {
+                    this.llHk.Tag = circuitIndex;
+                    circuitIndex++;
+                    this.llHk.Text = Europlan.Common.EuroplanRes.PlannedModulKlimaBoden20ProductPanel_HeizkreisAbkuerzung + circuitIndex.ToString();
+                    this.llHk.Enabled = true;
+                }
+                else
+                {
+                    this.llHk.Tag = null;
+                    this.llHk.Enabled = false;
+                    this.llHk.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_VerschiendeHK;
+                }
+                if (subAreaOk)
+                {
+                    this.llSubarea.Tag = subAreaIndex;
+                    subAreaIndex++;
+                    this.llSubarea.Text = Europlan.Common.EuroplanRes.PlannedModulKlimaBoden20ProductPanel_Teilflaeche + " " + subAreaIndex.ToString();
+                    this.llSubarea.Enabled = true;
+                }
+                else
+                {
+                    this.llSubarea.Tag = null;
+                    this.llSubarea.Enabled = false;
+                    this.llSubarea.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_VerschiendeHK;
+                }
+                if (rowOk)
+                {
+                    this.llReihe.Tag = rowIndex;
+                    rowIndex++;
+                    this.llReihe.Text = Europlan.Common.EuroplanRes.PlannedModulKlimaBoden20ProductPanel_Reihe + " " + rowIndex.ToString();
+                    this.llReihe.Enabled = true;
+                }
+                else
+                {
+                    this.llReihe.Tag = null;
+                    this.llReihe.Enabled = false;
+                    this.llReihe.Text = Europlan.Common.EuroplanRes.ModulKlimaBoden20PlannerForm_VerschiendeHK;
+                }
 			}
 			this.ignoreModuleOrientationChange--;
 		}
@@ -1011,9 +1089,7 @@ namespace Europlan.Common.Products {
 			CalculateAndUpdate();
 		}
 
-#warning TODO: for each row
 		private void numLength_ValueChanged(object sender, EventArgs e) {
-            // this is already the copied code
             if (ignoreListChange == 0 && GetSelectedRow() != null)
             {
                 this.changed = true;
@@ -1419,6 +1495,43 @@ namespace Europlan.Common.Products {
             Product.ShowPlanInBackground = !Product.ShowPlanInBackground;
             this.btnShowPlanBg.Checked = Product.ShowPlanInBackground;
             this.planPanel.InvalidateGraphics();
+        }
+
+        private void llReihe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            object hkTag = llHk.Tag;
+            object saTag = llSubarea.Tag;
+            object rTag = llReihe.Tag;
+
+            if (hkTag != null && this.lstCircuits.Items.Count > (int)hkTag)
+            {
+                this.lstCircuits.SelectedIndex = -1;
+                this.lstCircuits.SelectedIndex = (int)hkTag;
+                if (saTag != null && this.lstSubarea.Items.Count > (int)saTag)
+                {
+                    this.lstSubarea.SelectedIndex = (int)saTag;
+                    if (rTag != null && this.lstRows.Items.Count > (int)rTag)
+                    {
+                        this.lstRows.SelectedIndex = (int)rTag;
+                    }
+                }
+            }
+        }
+
+        private void llSubare_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            object hkTag = llHk.Tag;
+            object saTag = llSubarea.Tag;
+
+            if (hkTag != null && this.lstCircuits.Items.Count > (int)hkTag)
+            {
+                this.lstCircuits.SelectedIndex = -1;
+                this.lstCircuits.SelectedIndex = (int)hkTag;
+                if (saTag != null && this.lstSubarea.Items.Count > (int)saTag)
+                {
+                    this.lstSubarea.SelectedIndex = (int)saTag;
+                }
+            }
         }
 	}
 }
