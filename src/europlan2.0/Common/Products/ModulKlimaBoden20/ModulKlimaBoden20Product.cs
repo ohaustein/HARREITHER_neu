@@ -558,6 +558,7 @@ namespace Europlan.Common {
                                 }
                             }
                             row.LengthVerbindeleitungen = verbindeleitung;
+                            row.SonstigeVerbindeleitung = verbindeleitung;
                         }
                     }
                 }
