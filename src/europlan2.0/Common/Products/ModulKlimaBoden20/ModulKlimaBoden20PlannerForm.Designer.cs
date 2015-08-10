@@ -840,7 +840,7 @@ namespace Europlan.Common.Products {
             this.grpNewModules.Controls.Add(this.lblNewRotation);
             this.grpNewModules.Controls.Add(this.cmbOrientation);
             this.grpNewModules.Controls.Add(this.label3);
-            this.grpNewModules.Location = new System.Drawing.Point(876, 9);
+            this.grpNewModules.Location = new System.Drawing.Point(342, 9);
             this.grpNewModules.Name = "grpNewModules";
             this.grpNewModules.Size = new System.Drawing.Size(647, 105);
             this.grpNewModules.TabIndex = 14;
