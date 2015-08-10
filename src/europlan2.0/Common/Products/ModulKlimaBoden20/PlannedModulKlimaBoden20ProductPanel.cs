@@ -531,13 +531,17 @@ namespace Europlan.Common {
 					dgvModules.Row = this.selectedRow.List;
 					if (graphicalMode) {
 						numLength.Enabled = false;
+                        cmbRowModulation.Visible = false;
+                        lblRowModulation.Visible = false;
 					} else {
 						numLength.Enabled = this.selectedRow.List.Count > 0;
+                        cmbRowModulation.Visible = true;
+                        lblRowModulation.Visible = true;
 					}
                     cmbRowModulation.SelectedItem = selectedRow.RowModulation;
 				}
 				if ((skipFields & FieldEnum.LENGTH_VERBINDUNGEN) == FieldEnum.NONE) {
-					this.numLength.Value = (decimal)this.selectedRow.SonstigeVerbindeleitung;
+					this.numLength.Value = (decimal)this.selectedRow.LengthVerbindeleitungen;
 				}
 
 			    // General
@@ -1025,7 +1029,11 @@ namespace Europlan.Common {
 			this.UpdateControl(FieldEnum.CIRCUITS | FieldEnum.SUBAREA | FieldEnum.ROWS | FieldEnum.MODULES);
 			if (rbLayoutGraphical.Checked) {
 				numLength.Enabled = false;
+                cmbRowModulation.Visible = false;
+                lblRowModulation.Visible = false;
 			} else {
+                cmbRowModulation.Visible = true;
+                lblRowModulation.Visible = true;
 				numLength.Enabled = this.selectedRow.List.Count > 0;
 			}
 			if (this.projectChanged != null) {
