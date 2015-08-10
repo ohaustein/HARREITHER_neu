@@ -15075,7 +15075,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modul Klimadecken-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
+        ///   Looks up a localized string similar to Modul Klimaboden-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:.
         /// </summary>
         internal static string ModulKlimaBoden20Product_NotificationParameter {
             get {

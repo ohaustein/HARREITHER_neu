@@ -7745,7 +7745,7 @@ Nummer</value>
     <value>Kassettendecke</value>
   </data>
   <data name="ModulKlimaBoden20Product_NotificationParameter" xml:space="preserve">
-    <value>Modul Klimadecken-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+    <value>Modul Klimaboden-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
   <data name="ModulKlimaBoden20Product_NotificationTichelmann" xml:space="preserve">
     <value>Bei Tichelmann-Verteilung sind Verrohrungen hinsichtlich Durchfluss und Druckverlust manuell zu planen</value>
