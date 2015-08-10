@@ -158,7 +158,17 @@ namespace Europlan.Common {
 						pp.DrawExpansionGaps = false;
 						pp.HighlightRoomCoordinates = false;
 						productsInFloor.Add(p, pp);
-					} else if (p is EurovalProduct) {
+                    }
+                    if (p is ModulKlimaBoden20Product)
+                    {
+                        ModulKlimaBoden20Planner pp = new ModulKlimaBoden20Planner();
+                        pp.Product = p as ModulKlimaBoden20Product;
+                        pp.ConnectedPlanPanel = this.connectedPlanPanel;
+                        pp.DrawExpansionGaps = false;
+                        pp.HighlightRoomCoordinates = false;
+                        productsInFloor.Add(p, pp);
+                    } 
+                    else if (p is EurovalProduct) {
 						EurovalPlanner pp = new EurovalPlanner();
 						pp.Product = p as EurovalProduct;
 						pp.ConnectedPlanPanel = this.connectedPlanPanel;

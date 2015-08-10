@@ -59,6 +59,10 @@ namespace Europlan.Common {
 			this.lblModulBodenSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulBodenSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulBodenSpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblModulBoden20SpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblModulBoden20SpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblModulBoden20SpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
+            this.lblModulBoden20SpreizungHeizMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulDeckeSpreizungHeizMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulDeckeSpreizungKuehlMaxUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
 			this.lblModulDeckeSpreizungKuehlMinUnit.Text = EuroplanRes.Unit_Kelvin; //"K"
@@ -85,6 +89,7 @@ namespace Europlan.Common {
             this.lblHithermPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblHithermCompactPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblModulBodenPressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
+            this.lblModulBoden20PressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblModulDeckePressureMbarUnit.Text = EuroplanRes.Unit_Mbar; //"mbar"
 			this.lblEurovalDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblEcothermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
@@ -92,6 +97,7 @@ namespace Europlan.Common {
             this.lblHithermDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblHithermCompactDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblModulBodenDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
+            this.lblModulBoden20DurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblModulDeckeDurchflussUnit.Text = EuroplanRes.Unit_LiterProStunde; //"l/h"
 			this.lblEurovalPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblEcothermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
@@ -99,6 +105,7 @@ namespace Europlan.Common {
             this.lblHithermPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblHithermCompactPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblModulBodenPressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
+            this.lblModulBoden20PressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblModulDeckePressurePaUnit.Text = EuroplanRes.General_Pascal; //"Pa"
 			this.lblGeneralAlphaWandUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
 			this.lblGeneralAlphaDeckeUnitHeat.Text = EuroplanRes.Unit_WattProQmKelvin; //"W/(m²K)"
@@ -203,7 +210,7 @@ namespace Europlan.Common {
 			this.lblHithermCompactPressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
 			this.lblHithermCompactDurchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
 
-			this.tabModulBoden.Text = EuroplanRes.SystemParametersPanel_KlimaBoden; //"Modul Klima-Boden"
+			this.tabModulBoden.Text = EuroplanRes.SystemParametersPanel_KlimaBoden33; //"Modul Klima-Boden"
 			this.lblModulBodenSpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
 			this.lblModulBodenSpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
 			this.lblModulBodenNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
@@ -217,6 +224,24 @@ namespace Europlan.Common {
 			this.lblModulBodenSpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
 			this.lblModulBodenSpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
 			this.lblModulBodenSpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+
+            this.tabModulBoden20.Text = EuroplanRes.SystemParametersPanel_KlimaBoden20; //"Modul Klima-Boden 20"
+            this.lblModulBoden20SpreizungKuehlMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+            this.lblModulBoden20SpreizungHeizMax.Text = EuroplanRes.SystemParametersPanel_Max; //"max."
+            this.lblModulBoden20Norm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur; //"Maximale Oberflächentemperatur:"
+            this.lblModulBoden20MaxModulesInCircuit.Text = EuroplanRes.SystemParametersPanel_Modulanzahl; //"Max Modulanzahl pro Heizkreis:"
+            this.lblModulBoden20SpreizungKuehlMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+            this.btnModulBoden20Standard.Text = EuroplanRes.SystemParametersPanel_Ruecksetzen; //"Standardwerte"
+            this.lblModulBoden20Pressure.Text = EuroplanRes.SystemParametersPanel_Druckverlust; //"Max. Druckverlust:"
+            this.lblModulBoden20Durchfluss.Text = EuroplanRes.SystemParametersPanel_Durchfluss; //"Max. Durchflußmenge:"
+            this.rbModulBoden20EN1264.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur29; //"29 °C (EN 1264)"
+            this.rbModulBoden20HarreitherNorm.Text = EuroplanRes.SystemParametersPanel_Oberflaechentemperatur27; //"27 °C (Harreither Werksempfehlung)"
+            this.lblModulBoden20SpreizungHeiz.Text = EuroplanRes.SystemParametersPanel_SpreizungHeiz; //"Spreizung Heizbetrieb:"
+            this.lblModulBoden20SpreizungKuehl.Text = EuroplanRes.SystemParametersPanel_SpreizungKuehl; //"Spreizung Kühlbetrieb:"
+            this.lblModulBoden20SpreizungHeizMin.Text = EuroplanRes.SystemParametersPanel_Min; //"min."
+            this.lblModulBoden20MaxRows.Text = EuroplanRes.SystemParametersPanel_Modulreihen; //"Max Modulreihen parallel:"
+            this.lblModulBoden20MaxModulesInRow.Text = EuroplanRes.SystemParametersPanel_ModuleInSerie; //"Max Modulanzahl in Serie:"
+
 
 			this.tabModulDecke.Text = EuroplanRes.SystemParametersPanel_KlimaDecke; //"Modul Klima-Decke"
 			this.lblModulDeckeLeistungsfaktorCool.Text = EuroplanRes.SystemParametersPanel_LeistungsfaktorKuehl; //"Leistungsfaktor Kühlen:"
@@ -324,6 +349,7 @@ namespace Europlan.Common {
 			InitializeEcothermValues();
             InitializeJumbovalValues();
 			InitializeModulBodenValues();
+            InitializeModulBoden20Values();
 			InitializeModulDeckeValues();
 			InitializeHithermValues();
 			InitializeHithermCompactValues();
@@ -569,27 +595,50 @@ namespace Europlan.Common {
 			}
 		}
 
-		private void InitializeModulBodenPanel() {
-			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
-				if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden)) {
-					this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
-				}
-			} else {
-				Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
-				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden)) {
-					if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden)) {
-						this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
-					}
-				} else {
-					if (!this.tabSystemParameters.TabPages.Contains(this.tabModulBoden)) {
-						this.tabSystemParameters.TabPages.Add(this.tabModulBoden);
-					}
-				}
-				if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin)) {
-					// nothing to do
-				}
-			}
-		}
+        private void InitializeModulBodenPanel()
+        {
+            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration)
+            {
+                if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden))
+                {
+                    this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
+                }
+                if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden20))
+                {
+                    this.tabSystemParameters.TabPages.Remove(this.tabModulBoden20);
+                }
+            }
+            else
+            {
+                Licensing.ILicense license = Licensing.LicenseManager.Instance.License;
+                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaBoden))
+                {
+                    if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden))
+                    {
+                        this.tabSystemParameters.TabPages.Remove(this.tabModulBoden);
+                    }
+                    if (this.tabSystemParameters.TabPages.Contains(this.tabModulBoden20))
+                    {
+                        this.tabSystemParameters.TabPages.Remove(this.tabModulBoden20);
+                    }
+                }
+                else
+                {
+                    if (!this.tabSystemParameters.TabPages.Contains(this.tabModulBoden))
+                    {
+                        this.tabSystemParameters.TabPages.Add(this.tabModulBoden);
+                    }
+                    if (!this.tabSystemParameters.TabPages.Contains(this.tabModulBoden20))
+                    {
+                        this.tabSystemParameters.TabPages.Add(this.tabModulBoden20);
+                    }
+                }
+                if (!license.IsModuleEnabled(Licensing.AbstractLicensedModule.FeatAdmin))
+                {
+                    // nothing to do
+                }
+            }
+        }
 
 		private void InitializeModulDeckePanel() {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
@@ -747,6 +796,28 @@ namespace Europlan.Common {
 				numModulBodenSpreizungKuehlMax.Value = (decimal)ModulKlimaBodenProduct.ConfigSpreizungKuehlMax;
 			}
 		}
+
+        private void InitializeModulBoden20Values()
+        {
+            if (this.configurationType == Configuration.ConfigurationType.UserConfiguration)
+            {
+                // nothing to do yet
+            }
+            else
+            {
+                rbModulBoden20HarreitherNorm.Checked = ModulKlimaBoden20Product.ConfigUseHarreitherNorm;
+                rbModulBoden20EN1264.Checked = !ModulKlimaBoden20Product.ConfigUseHarreitherNorm;
+                numModulBoden20PressurePa.Value = ModulKlimaBoden20Product.ConfigMaxPressureLost;
+                numModulBoden20Durchfluss.Value = ModulKlimaBoden20Product.ConfigMaxDurchfluss;
+                numModulBoden20MaxModulesInCircuit.Value = ModulKlimaBoden20Product.ConfigModulesInCircuit;
+                numModulBoden20SpreizungHeizMin.Value = (decimal)ModulKlimaBoden20Product.ConfigSpreizungHeizMin;
+                numModulBoden20SpreizungHeizMax.Value = (decimal)ModulKlimaBoden20Product.ConfigSpreizungHeizMax;
+                numModulBoden20SpreizungKuehlMin.Value = (decimal)ModulKlimaBoden20Product.ConfigSpreizungKuehlMin;
+                numModulBoden20SpreizungKuehlMax.Value = (decimal)ModulKlimaBoden20Product.ConfigSpreizungKuehlMax;
+                numModulBoden20MaxModulesInRow.Value = (decimal)ModulKlimaBoden20Product.ConfigMaxModulesInRow;
+                numModulBoden20MaxRows.Value = (decimal)ModulKlimaBoden20Product.ConfigMaxModulesInParallel;
+            }
+        }
 
 		private void InitializeModulDeckeValues() {
 			if (this.configurationType == Configuration.ConfigurationType.UserConfiguration) {
@@ -1605,6 +1676,122 @@ namespace Europlan.Common {
             bool fillTextbox = Configuration.AdminTemplate.GetProductParameterAsBool<Product>("ConfigFillBoxBackground");
             Configuration.UserTemplate.AddProductParameter<Product>("ConfigFillBoxBackground", fillTextbox);
             this.InitializeGeneralValues();
+        }
+
+        private void btnModulBoden20Standard_Click(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.StaticInitialize(Configuration.UserTemplate);
+            InitializeModulBoden20Values();
+        }
+
+        private void rbModulBoden20HarreitherNorm_CheckedChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigUseHarreitherNorm = rbModulBoden20HarreitherNorm.Checked;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void rbModulBoden20EN1264_CheckedChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigUseHarreitherNorm = rbModulBoden20HarreitherNorm.Checked;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20MaxModulesInRow_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigMaxModulesInRow = (int)numModulBoden20MaxModulesInRow.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20MaxRows_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigMaxModulesInParallel = (int)numModulBoden20MaxRows.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20MaxModulesInCircuit_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigModulesInCircuit = (int)numModulBoden20MaxModulesInCircuit.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20PressurePa_ValueChanged(object sender, EventArgs e)
+        {
+            numModulBoden20PressureMbar.Value = numModulBoden20PressurePa.Value / 100;
+            ModulKlimaBoden20Product.ConfigMaxPressureLost = (int)numModulBoden20PressurePa.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20PressureMbar_ValueChanged(object sender, EventArgs e)
+        {
+            numModulBoden20PressurePa.Value = numModulBoden20PressureMbar.Value * 100;
+            ModulKlimaBoden20Product.ConfigMaxPressureLost = (int)numModulBoden20PressurePa.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20Durchfluss_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigMaxDurchfluss = (int)numModulBoden20Durchfluss.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20SpreizungHeizMin_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigSpreizungHeizMin = (double)numModulBoden20SpreizungHeizMin.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20SpreizungHeizMax_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigSpreizungHeizMax = (double)numModulBoden20SpreizungHeizMax.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20SpreizungKuehlMin_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigSpreizungKuehlMin = (double)numModulBoden20SpreizungKuehlMin.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
+        }
+
+        private void numModulBoden20SpreizungKuehlMax_ValueChanged(object sender, EventArgs e)
+        {
+            ModulKlimaBoden20Product.ConfigSpreizungKuehlMax = (double)numModulBoden20SpreizungKuehlMax.Value;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(null);
+            }
         }
 	}
 }

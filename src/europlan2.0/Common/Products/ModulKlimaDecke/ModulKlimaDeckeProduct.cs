@@ -1832,17 +1832,18 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
+    
+
+	    public struct KlimaFlaechenModulWithRowAndCircuit {
+		    public KlimaFlaechenModul modul;
+		    public KlimaFlaechenList row;
+		    public ModulDeckeCircuit circuit;
+
+		    public KlimaFlaechenModulWithRowAndCircuit(KlimaFlaechenModul modul, KlimaFlaechenList row, ModulDeckeCircuit circuit) {
+			    this.modul = modul;
+			    this.row = row;
+			    this.circuit = circuit;
+		    }
+	    }
     }
-
-	public struct KlimaFlaechenModulWithRowAndCircuit {
-		public KlimaFlaechenModul modul;
-		public KlimaFlaechenList row;
-		public ModulDeckeCircuit circuit;
-
-		public KlimaFlaechenModulWithRowAndCircuit(KlimaFlaechenModul modul, KlimaFlaechenList row, ModulDeckeCircuit circuit) {
-			this.modul = modul;
-			this.row = row;
-			this.circuit = circuit;
-		}
-	}
 }

@@ -655,6 +655,7 @@ namespace Europlan.Common {
 			HithermCompactRoofProduct.StaticInitialize(this.Config);
 			HithermProduct.StaticInitialize(this.Config);
 			ModulKlimaBodenProduct.StaticInitialize(this.Config);
+            ModulKlimaBoden20Product.StaticInitialize(this.Config);
 			ModulKlimaDeckeProduct.StaticInitialize(this.Config);
 		}
 
@@ -918,6 +919,7 @@ namespace Europlan.Common {
 				bool hitherm = false;
 				bool hithermCompact = false;
 				bool modulBoden = false;
+                bool modulBoden20 = false;
 				bool modulDecke = false;
 				foreach (Floor f in this.floors) {
 					foreach (Room r in f.Rooms) {
@@ -937,6 +939,10 @@ namespace Europlan.Common {
 							if (pp.Product is ModulKlimaBodenProduct) {
 								modulBoden = true;
 							}
+                            if (pp.Product is ModulKlimaBoden20Product)
+                            {
+                                modulBoden20 = true;
+                            }
 							if (pp.Product is ModulKlimaDeckeProduct) {
 								modulDecke = true;
 							}
@@ -975,6 +981,14 @@ namespace Europlan.Common {
 						message += "\n" + add;
 					}
 				}
+                if (modulBoden20)
+                {
+                    add = ModulKlimaBoden20Product.GlobalNotificationMessage;
+                    if (add != null)
+                    {
+                        message += "\n" + add;
+                    }
+                }
 				if (modulDecke) {
 					add = ModulKlimaDeckeProduct.GlobalNotificationMessage;
 					if (add != null) {

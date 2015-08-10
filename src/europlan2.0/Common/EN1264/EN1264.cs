@@ -805,6 +805,18 @@ namespace Europlan.Common {
 			}
 		}
 
+		public double DruckverlustModul_100_40_20(int anzahl, double massenstrom) {
+			double[] x = { 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400};
+			double[] y = ModulKlimaBoden20Product.ConfigDruckverlustModul_100_40_20;
+			double[] c = null;
+			spline3.buildcubicspline(x, y, 24, 0, 0, 0, 0, ref c);
+			if (anzahl > 0 && anzahl <= 40) {
+				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
+			} else {
+				return 0;
+			}
+		}
+
 		/// <summary>
 		/// Berechnet den Druckversult eines Hitherm Registers. Der Durchfluss/Massenstrom muss dieser Methode in kg/h
 		/// uebergeben werden und nicht in l/h wie in der Tabelle im Hitherm Produktkatalog!

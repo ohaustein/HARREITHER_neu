@@ -15,10 +15,19 @@ namespace Europlan.Common {
 
 		public KlimaFlaechenList(KlimaFlaechenList otherList) {
 			this.lengthVerbindeleitungen = otherList.lengthVerbindeleitungen;
+            this._sonstigeVerbindeleitung = otherList._sonstigeVerbindeleitung;
 			foreach (KlimaFlaechenModul module in otherList.list) {
 				this.list.Add(new KlimaFlaechenModul(module));
 			}
 		}
+
+        private double _sonstigeVerbindeleitung;
+
+        public double SonstigeVerbindeleitung
+        {
+            get { return _sonstigeVerbindeleitung; }
+            set { _sonstigeVerbindeleitung = value; }
+        }
 
 		public double LengthVerbindeleitungen {
 			get { return lengthVerbindeleitungen; }
@@ -29,6 +38,24 @@ namespace Europlan.Common {
 			get { return list; }
 			set { list = value; }
 		}
+
+        [XmlIgnore]
+        public KlimaFlaechenModul.ModulModulationEnum RowModulation
+        {
+            get 
+            { 
+                return List.Count > 0 ? List[0].ModulationWidth : KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE;
+            }
+
+            set 
+            {
+                foreach (KlimaFlaechenModul modul in List)
+                {
+                    modul.ModulationWidth = value;
+                }
+            }
+        }
+	
 
 		public double Druckverlust(double massenstrom) {
 			double druckverlust = 0;
@@ -47,17 +74,17 @@ namespace Europlan.Common {
 		public double GetHeatArea(bool floor) {
 			double area = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-				area += modul.GetHeatArea(floor);
+                area += modul.GetHeatArea(floor);
 			}
-			return area;
+			return area + 0.02 * this.SonstigeVerbindeleitung;                   
 		}
 
 		public double GetCoveredArea(bool floor) {
 			double area = 0;
 			foreach (KlimaFlaechenModul modul in this.list) {
-				area += modul.GetCoveredArea(floor);
+                area += modul.GetCoveredArea(floor) + modul.GetModulationArea();
 			}
-			return area;
+            return area + 0.055 * SonstigeVerbindeleitung;
 		}
 
 		public double GetEquivalentPipeLength(bool floor) {

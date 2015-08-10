@@ -80,6 +80,7 @@ namespace Europlan.Common {
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.connectionPipePanel = new Europlan.Common.ConnectionPipePanel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btnPartitionSystem = new System.Windows.Forms.Button();
             this.btnGraphicalAnbindleitungen = new System.Windows.Forms.Button();
             this.chkStellAntriebe = new System.Windows.Forms.CheckBox();
             this.btnDistributor = new System.Windows.Forms.Button();
@@ -169,7 +170,6 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnPartitionSystem = new System.Windows.Forms.Button();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -976,6 +976,17 @@ namespace Europlan.Common {
             this.groupBox9.TabIndex = 28;
             this.groupBox9.TabStop = false;
             // 
+            // btnPartitionSystem
+            // 
+            this.btnPartitionSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPartitionSystem.Location = new System.Drawing.Point(560, 12);
+            this.btnPartitionSystem.Name = "btnPartitionSystem";
+            this.btnPartitionSystem.Size = new System.Drawing.Size(157, 23);
+            this.btnPartitionSystem.TabIndex = 40;
+            this.btnPartitionSystem.Text = "auf Verteiler aufteilen";
+            this.btnPartitionSystem.UseVisualStyleBackColor = true;
+            this.btnPartitionSystem.Click += new System.EventHandler(this.btnPartitionSystem_Click);
+            // 
             // btnGraphicalAnbindleitungen
             // 
             this.btnGraphicalAnbindleitungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1127,7 +1138,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(698, 33);
+            this.btnGraphical.Location = new System.Drawing.Point(686, 33);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -1150,7 +1161,7 @@ namespace Europlan.Common {
             this.lstError.Location = new System.Drawing.Point(16, 557);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(839, 30);
+            this.lstError.Size = new System.Drawing.Size(827, 30);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1698,7 +1709,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(698, 4);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(686, 4);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -1753,12 +1764,11 @@ namespace Europlan.Common {
             // 
             // dgvModules
             // 
-            this.dgvModules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvModules.Boden = false;
             this.dgvModules.Location = new System.Drawing.Point(340, 43);
             this.dgvModules.Name = "dgvModules";
-            this.dgvModules.Size = new System.Drawing.Size(412, 212);
+            this.dgvModules.ShowModulation = false;
+            this.dgvModules.Size = new System.Drawing.Size(385, 212);
             this.dgvModules.TabIndex = 44;
             this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);
             // 
@@ -1862,17 +1872,6 @@ namespace Europlan.Common {
             this.lblTitle.Size = new System.Drawing.Size(191, 24);
             this.lblTitle.TabIndex = 83;
             this.lblTitle.Text = "Modul Klima-Decke";
-            // 
-            // btnPartitionSystem
-            // 
-            this.btnPartitionSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPartitionSystem.Location = new System.Drawing.Point(560, 12);
-            this.btnPartitionSystem.Name = "btnPartitionSystem";
-            this.btnPartitionSystem.Size = new System.Drawing.Size(157, 23);
-            this.btnPartitionSystem.TabIndex = 40;
-            this.btnPartitionSystem.Text = "auf Verteiler aufteilen";
-            this.btnPartitionSystem.UseVisualStyleBackColor = true;
-            this.btnPartitionSystem.Click += new System.EventHandler(this.btnPartitionSystem_Click);
             // 
             // PlannedModulKlimaDeckeProductPanel
             // 

@@ -123,9 +123,19 @@ namespace Europlan.Common {
 			get { return this.GetProductArea<ModulKlimaBodenProduct>(); }
 		}
 
+        public float ModulKlimaBoden20Area
+        {
+            get { return this.GetProductArea<ModulKlimaBoden20Product>(); }
+        }
+
 		public int ModulKlimaBodenCircuits {
 			get { return this.GetProductCircuits<ModulKlimaBodenProduct>(); }
 		}
+
+        public int ModulKlimaBoden20Circuits
+        {
+            get { return this.GetProductCircuits<ModulKlimaBoden20Product>(); }
+        }
 
 		public float ModulKlimaDeckeArea {
 			get { return this.GetProductArea<ModulKlimaDeckeProduct>(); }
