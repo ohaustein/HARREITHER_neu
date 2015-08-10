@@ -835,8 +835,8 @@ namespace Europlan.Common {
                     bool rightToLeft = rotatedTopLeft.X > rotatedTopRight.X;
                     bool bottomUp = rotatedTopLeft.Y > rotatedBottomLeft.Y;
 
-					double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-					double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 
 					double stepX = width;
 					stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
@@ -2193,7 +2193,7 @@ namespace Europlan.Common {
 				if (this.product.GraphConstruction is ModulKlimaBoden20ConstructionStaffeln) {
 					stepX = (this.product.GraphConstruction as ModulKlimaBoden20ConstructionStaffeln).StaffelnAchsabstand * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				} else {
-					stepX = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+					stepX = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 					stepX += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesXDicht;
 				}
 				return stepX;
@@ -2222,7 +2222,7 @@ namespace Europlan.Common {
 		public double NewModulesOffsetY {
 			get { return newModulesOffsetY; }
 			set {
-				double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
+				double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
 				double stepY = height;
 				stepY += modulierendDistance * this.product.AssociatedRoom.AssociatedPlan.Measure.Value * (int)this.newModulesYDicht;
 
@@ -2268,7 +2268,7 @@ namespace Europlan.Common {
 		}
 
         private bool TryDrawModule(Graphics g, Matrix4D additionalTransformation, double x, double y, double rotation, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, Color color, bool cadPlan) {
-			this.DrawModule(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, orientation, new Point2D(x, y), rotation, additionalTransformation, g, bottomUp, true, color, false, false, cadPlan);
+			this.DrawModule(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20, orientation, new Point2D(x, y), rotation, additionalTransformation, g, bottomUp, true, color, false, false, cadPlan);
 			return true;
 		}
 
@@ -2277,7 +2277,7 @@ namespace Europlan.Common {
 			KlimaFlaechenModul modul = new KlimaFlaechenModul();
             addedModul = null;
             rowOfAddedModul = null;
-			modul.ModulType = KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40;
+			modul.ModulType = KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20;
 			modul.GraphPosX = x;
 			modul.GraphPosY = y;
 			modul.GraphRotation = rotation;
@@ -2369,8 +2369,8 @@ namespace Europlan.Common {
 
             bool invertYAxis = this.product.AssociatedRoom.AssociatedPlan.InvertYAxis;
 
-			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
+			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
 
 			double stepX = this.NewModulesStepX;
 			double stepY = height;
@@ -2508,8 +2508,8 @@ namespace Europlan.Common {
 		private Dictionary<KlimaFlaechenModul, Polygon2D> GetModuleAreas() {
 			Dictionary<KlimaFlaechenModul, Polygon2D> moduleAreas = new Dictionary<KlimaFlaechenModul, Polygon2D>();
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
+			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
 			foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
 				foreach (KlimaFlaechenModul modul in c.GetAllModules()) {
 					Matrix3D transformation = Matrix3D.Identity;
@@ -2530,8 +2530,8 @@ namespace Europlan.Common {
 		private Dictionary<KlimaFlaechenModul, Polygon2D> GetModuleInputs() {
 			Dictionary<KlimaFlaechenModul, Polygon2D> inputAreas = new Dictionary<KlimaFlaechenModul, Polygon2D>();
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
+			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
 			Point2D input12D, input22D, input32D, input42D;
 
 			foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
@@ -2582,8 +2582,8 @@ namespace Europlan.Common {
 		private Dictionary<KlimaFlaechenModul, Polygon2D> GetModuleOutputs() {
 			Dictionary<KlimaFlaechenModul, Polygon2D> outputAreas = new Dictionary<KlimaFlaechenModul, Polygon2D>();
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
+			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
 			Point2D output12D, output22D, output32D, output42D;
 
 			foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
@@ -2633,8 +2633,8 @@ namespace Europlan.Common {
 
 		private Polygon2D GetModuleArea(KlimaFlaechenModul modul) {
 			double measure = this.product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
-			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) * measure;
+			double height = KlimaFlaechenModul.GetModuleHeight(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
+			double width = KlimaFlaechenModul.GetModuleWidth(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20) * measure;
 			Matrix3D transformation = Matrix3D.Identity;
 			transformation = transformation * Transformation3D.Translation(modul.GraphPosX, modul.GraphPosY);
 			transformation = transformation * Transformation3D.Rotate(modul.GraphRotation * Math.PI / 180.0);
@@ -2852,6 +2852,9 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40:
 					moduleString = EuroplanRes.KlimaFlaechenModul_100_40_Short;
 					break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_40_20_Short;
+                    break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_120_30_Short;
 					break;
@@ -2987,6 +2990,9 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40:
 					moduleString = EuroplanRes.KlimaFlaechenModul_100_40_Short;
 					break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_40_20_Short;
+                    break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_120_30_Short;
 					break;

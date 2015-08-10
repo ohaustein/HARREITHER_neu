@@ -2749,6 +2749,9 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40:
 					moduleString = EuroplanRes.KlimaFlaechenModul_100_40_Short;
 					break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_40_20_Short;
+                    break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_120_30_Short;
 					break;
@@ -2995,6 +2998,9 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40:
 					moduleString = EuroplanRes.KlimaFlaechenModul_100_40_Short;
 					break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_40_20_Short;
+                    break;
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30:
 					moduleString = EuroplanRes.KlimaFlaechenModul_120_30_Short;
 					break;

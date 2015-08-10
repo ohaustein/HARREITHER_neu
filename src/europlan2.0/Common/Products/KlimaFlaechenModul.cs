@@ -581,7 +581,7 @@ namespace Europlan.Common {
 						return 0.75;
 
 					case ModulTypeEnum.MODUL_100_40_20:
-						return 1.0; // TO BE DEFINED
+						return 1.0;
 
 					default:
 						throw new Exception("Unknown Register Type");
@@ -610,7 +610,7 @@ namespace Europlan.Common {
 					return KlimaFlaechenModul.module_120_30_heatarea;
 
 				case ModulTypeEnum.MODUL_100_40_20:
-					return KlimaFlaechenModul.module_100_40_20_heatarea; // TO BE DEFINED
+					return KlimaFlaechenModul.module_100_40_20_heatarea;
 
 				default:
 					return 0;
@@ -638,7 +638,7 @@ namespace Europlan.Common {
 					return KlimaFlaechenModul.module_120_30_area;
 
 				case ModulTypeEnum.MODUL_100_40_20:
-					return KlimaFlaechenModul.module_100_40_20_area; // TO BE DEFINED
+					return KlimaFlaechenModul.module_100_40_20_area; 
 
 				default:
 					return 0;
