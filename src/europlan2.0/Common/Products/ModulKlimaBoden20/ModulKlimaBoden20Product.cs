@@ -35,7 +35,7 @@ namespace Europlan.Common {
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
-        private static double[] druckverlustModul_100_40 = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+        private static double[] druckverlustModul_100_40_20 = { 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8};
 
         private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
@@ -311,26 +311,26 @@ namespace Europlan.Common {
 			set { v = value; }
 		}
 
-        [StringProductParameter("{0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25}")]
-        public static string ConfigDruckverlustModul_100_40String
+        [StringProductParameter("{ 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8}")]
+        public static string ConfigDruckverlustModul_100_40_20String
         {
             get
             {
-                return ConvertArrayToString(druckverlustModul_100_40);
+                return ConvertArrayToString(druckverlustModul_100_40_20);
             }
             set
             {
                 double[] array = ConvertStringToArray(value);
                 if (array != null)
                 {
-                    druckverlustModul_100_40 = array;
+                    druckverlustModul_100_40_20 = array;
                 }
             }
         }
-        public static double[] ConfigDruckverlustModul_100_40
+        public static double[] ConfigDruckverlustModul_100_40_20
         {
-            get { return druckverlustModul_100_40; }
-            set { druckverlustModul_100_40 = value; }
+            get { return druckverlustModul_100_40_20; }
+            set { druckverlustModul_100_40_20 = value; }
         }
 
         [DoubleProductParameter(27)]

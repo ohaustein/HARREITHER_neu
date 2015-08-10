@@ -805,12 +805,11 @@ namespace Europlan.Common {
 			}
 		}
 
-		// TO BE DEFINED
 		public double DruckverlustModul_100_40_20(int anzahl, double massenstrom) {
-			double[] x = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500 };
-			double[] y = ModulKlimaBodenProduct.ConfigDruckverlustModul_100_40;
+			double[] x = { 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400};
+			double[] y = ModulKlimaBoden20Product.ConfigDruckverlustModul_100_40_20;
 			double[] c = null;
-			spline3.buildcubicspline(x, y, 30, 0, 0, 0, 0, ref c);
+			spline3.buildcubicspline(x, y, 24, 0, 0, 0, 0, ref c);
 			if (anzahl > 0 && anzahl <= 40) {
 				return spline3.splineinterpolation(ref c, massenstrom) * anzahl;
 			} else {
