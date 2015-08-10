@@ -35,9 +35,8 @@ namespace Europlan.Common {
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
-        private static double[] druckverlustModul_100_40 = { 0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25 };
+        private static double[] druckverlustModul_100_40_20 = { 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8};
 
-        private float plannedArea = 0;
         private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
@@ -312,26 +311,26 @@ namespace Europlan.Common {
 			set { v = value; }
 		}
 
-        [StringProductParameter("{0.2, 0.35, 0.65, 0.9, 1.25, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8, 19, 20, 21.5, 23, 25}")]
-        public static string ConfigDruckverlustModul_100_40String
+        [StringProductParameter("{ 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8}")]
+        public static string ConfigDruckverlustModul_100_40_20String
         {
             get
             {
-                return ConvertArrayToString(druckverlustModul_100_40);
+                return ConvertArrayToString(druckverlustModul_100_40_20);
             }
             set
             {
                 double[] array = ConvertStringToArray(value);
                 if (array != null)
                 {
-                    druckverlustModul_100_40 = array;
+                    druckverlustModul_100_40_20 = array;
                 }
             }
         }
-        public static double[] ConfigDruckverlustModul_100_40
+        public static double[] ConfigDruckverlustModul_100_40_20
         {
-            get { return druckverlustModul_100_40; }
-            set { druckverlustModul_100_40 = value; }
+            get { return druckverlustModul_100_40_20; }
+            set { druckverlustModul_100_40_20 = value; }
         }
 
         [DoubleProductParameter(27)]
@@ -559,6 +558,7 @@ namespace Europlan.Common {
                                 }
                             }
                             row.LengthVerbindeleitungen = verbindeleitung;
+                            row.SonstigeVerbindeleitung = verbindeleitung;
                         }
                     }
                 }
@@ -1081,7 +1081,40 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
+			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
+			if (!graphical) {
+				double additional21mm = 0;
+				int nrOfElements = 0;
+
+				int rows = 0;
+				int subAreas = 0;
+				double modulArea = 0;
+				foreach (ModulKlimaBoden20Circuit c in this.circuits) {
+					foreach (ModulKlimaBoden20SubArea subArea in c.SubAreas) {
+						subAreas++;
+						foreach (KlimaFlaechenList row in subArea.Rows) {
+							rows++;
+
+							// TO BE CLARIFIED
+							additional21mm += row.LengthVerbindeleitungen;
+							additional21mm += 1.4;
+
+							foreach (KlimaFlaechenModul modul in row.List) {
+								// Modul
+								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+								nrOfElements++;
+								modulArea += modul.GetHeatArea(false);
+							}
+						}
+					}
+				}
+
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
+
+			} else {
+				// TODO graphical 
+			}
 		}
 
 		public override double Dichte {
@@ -1400,118 +1433,9 @@ namespace Europlan.Common {
 					}
 				}
 			}
-		}
+		}		
 
-		public void MoveRow(KlimaFlaechenList row, ModulKlimaBoden20SubArea target, ModulKlimaBoden20Circuit targetCircuit, System.Drawing.Color newCircuitColor) {
-			ModulKlimaBoden20SubArea oldSa = null;
-			ModulKlimaBoden20Circuit oldCircuit = null;
-			foreach (ModulKlimaBoden20Circuit c in this.PlannedCircuits) {
-				foreach (ModulKlimaBoden20SubArea sa in c.SubAreas) {
-					if (sa.Rows.Contains(row)) {
-						oldSa = sa;
-						oldCircuit = c;
-						break;
-					}
-				}
-				if (oldSa != null) {
-					break;
-				}
-			}
-			if (oldSa == null || oldSa == target) {
-				return;
-			}
-			if (oldCircuit.Links != null) {
-				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
-					if (link.Start != null) {
-						foreach (KlimaFlaechenModul m in link.Start) {
-							if (row.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-					if (link.End != null) {
-						foreach (KlimaFlaechenModul m in link.End) {
-							if (row.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-				}
-				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
-					oldCircuit.Links.Remove(link);
-				}
-			}
-			if (targetCircuit == null) {
-				targetCircuit = new ModulKlimaBoden20Circuit(this);
-				targetCircuit.CircuitColor = newCircuitColor;
-				targetCircuit.SubAreas.Clear();
-				this.PlannedCircuits.Add(targetCircuit);
-			}
-			if (target == null) {
-				target = new ModulKlimaBoden20SubArea();
-				target.Rows.Clear();
-				targetCircuit.SubAreas.Add(target);
-			}
-			oldSa.Rows.Remove(row);
-			if (oldSa.Rows.Count == 0) {
-				oldCircuit.SubAreas.Remove(oldSa);
-			}
-			if (oldCircuit.SubAreas.Count == 0) {
-				this.PlannedCircuits.Remove(oldCircuit);
-			}
-			target.Rows.Add(row);
-		}
-
-		public void MoveSubarea(ModulKlimaBoden20SubArea subArea, ModulKlimaBoden20Circuit target, System.Drawing.Color newCircuitColor) {
-			ModulKlimaBoden20Circuit oldCircuit = null;
-			foreach (ModulKlimaBoden20Circuit c in this.PlannedCircuits) {
-				if (c.SubAreas.Contains(subArea)) {
-					oldCircuit = c;
-					break;
-				}
-			}
-			if (oldCircuit == null || oldCircuit == target) {
-				return;
-			}
-			if (oldCircuit.Links != null) {
-				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
-					if (link.Start != null) {
-						foreach (KlimaFlaechenModul m in link.Start) {
-							if (subArea.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-					if (link.End != null) {
-						foreach (KlimaFlaechenModul m in link.End) {
-							if (subArea.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-				}
-				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
-					oldCircuit.Links.Remove(link);
-				}
-			}
-			if (target == null) {
-				target = new ModulKlimaBoden20Circuit(this);
-				target.SubAreas.Clear();
-				target.CircuitColor = newCircuitColor;
-				this.PlannedCircuits.Add(target);
-			}
-			oldCircuit.SubAreas.Remove(subArea);
-			if (oldCircuit.SubAreas.Count == 0) {
-				this.PlannedCircuits.Remove(oldCircuit);
-			}
-			target.SubAreas.Add(subArea);
-		}
+		
 
 		public override void ClearGraphicalRepresentation() {
 			base.ClearGraphicalRepresentation();

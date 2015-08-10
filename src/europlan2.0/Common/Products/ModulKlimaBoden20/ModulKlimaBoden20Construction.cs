@@ -17,7 +17,7 @@ namespace Europlan.Common {
 
 		protected double rotation = 0;
 
-		public abstract void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode);
+		public abstract void Paint(Graphics g, ModulKlimaBoden20Planner.KlimaBodenMode mode);
 		public abstract void PaintDxf(DxfModel model, DxfLayer layer);
 
 		#region IPickableObject Members
@@ -30,10 +30,10 @@ namespace Europlan.Common {
 		public abstract void EndDrag(Point2D planPoint, Point pointInControl);
 		#endregion
 
-		private ModulKlimaBodenPlanner planner;
+		private ModulKlimaBoden20Planner planner;
 
 		[XmlIgnore]
-		public ModulKlimaBodenPlanner Planner {
+		public ModulKlimaBoden20Planner Planner {
 			get { return this.planner; }
 			set { this.planner = value; }
 		}

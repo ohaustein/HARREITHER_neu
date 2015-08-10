@@ -7699,8 +7699,8 @@ Nummer</value>
   <data name="ModulKlimaBoden20PlannerForm_Serie40" xml:space="preserve">
     <value>Klimamodul Serie 40</value>
   </data>
-  <data name="ModulKlimaBoden20PlannerForm_StaffelBreite" xml:space="preserve">
-    <value>Breite inkl. Luftspalt</value>
+  <data name="ModulKlimaBoden20PlannerForm_Staffelbreite" xml:space="preserve">
+    <value>Staffelbreite</value>
   </data>
   <data name="ModulKlimaBoden20PlannerForm_StaffelnCProfil" xml:space="preserve">
     <value>Staffeln / C-Profil</value>
@@ -7715,7 +7715,7 @@ Nummer</value>
     <value>Teilflächen</value>
   </data>
   <data name="ModulKlimaBoden20PlannerForm_Titel" xml:space="preserve">
-    <value>Modul Klima-Decke - grafische Auslegung</value>
+    <value>Modul Klima-Boden - grafische Auslegung</value>
   </data>
   <data name="ModulKlimaBoden20PlannerForm_Typ" xml:space="preserve">
     <value>Typ:</value>
@@ -7745,7 +7745,7 @@ Nummer</value>
     <value>Kassettendecke</value>
   </data>
   <data name="ModulKlimaBoden20Product_NotificationParameter" xml:space="preserve">
-    <value>Modul Klimadecken-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
+    <value>Modul Klimaboden-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:</value>
   </data>
   <data name="ModulKlimaBoden20Product_NotificationTichelmann" xml:space="preserve">
     <value>Bei Tichelmann-Verteilung sind Verrohrungen hinsichtlich Durchfluss und Druckverlust manuell zu planen</value>
@@ -7803,5 +7803,221 @@ Nummer</value>
   </data>
   <data name="PlannedModulKlimaBoden20ProductPanel_RowModulation" xml:space="preserve">
     <value>Verlegeart Reihe</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Achsabstand" xml:space="preserve">
+    <value>Achsabstand:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_AlleUmdrehen" xml:space="preserve">
+    <value>Alle umdrehen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+    <value>Anbindeleitungen ändern</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+    <value>Anbindeleitungen hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_AusgewaehlteModule" xml:space="preserve">
+    <value>ausgewählte Module</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_AusgewaehltesModul" xml:space="preserve">
+    <value>Ausgewähltes Modul</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Ausrichtung" xml:space="preserve">
+    <value>Ausrichtung:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Berechnungsergebnisse" xml:space="preserve">
+    <value>Berechnungsergebnisse</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Berechnungsergebnisse2" xml:space="preserve">
+    <value>Berechnungsergebnisse:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Breitseite" xml:space="preserve">
+    <value>Breitseite</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Breitseite2" xml:space="preserve">
+    <value>Verlegeart:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Dicht" xml:space="preserve">
+    <value>dicht</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_DifferenzZurErwartetenLeistung" xml:space="preserve">
+    <value>Differenz zur erwarteten Leistung:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Drehung2" xml:space="preserve">
+    <value>Drehung:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_DurchstroemungsrichtungUmdrehen" xml:space="preserve">
+    <value>Durchströmungsrichtung umdrehen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ErreichteLeistung" xml:space="preserve">
+    <value>Erreichte Leistung:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_FarbeHK" xml:space="preserve">
+    <value>Farbe des Heizkreises:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Frei" xml:space="preserve">
+    <value>Frei</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Heizbetrieb" xml:space="preserve">
+    <value>Heizbetrieb</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Heizkreis2" xml:space="preserve">
+    <value>Heizkreis:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Heizkreise" xml:space="preserve">
+    <value>Heizkreise</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Hinzufuegen" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Holzstaffeln" xml:space="preserve">
+    <value>Holzstaffeln</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_KeinHK" xml:space="preserve">
+    <value>keiner</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_KeinModul" xml:space="preserve">
+    <value>Kein Modul ausgewählt</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_KonstruktionAendernText" xml:space="preserve">
+    <value>Wenn Sie die Konstruktion ändern wollen, werden alle bereits verplanten Module gelöscht!</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_KonstruktionAendernTitel" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_KonstruktionEinrichten" xml:space="preserve">
+    <value>Konstruktion einrichten</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Konstruktionsart" xml:space="preserve">
+    <value>Konstruktionsart</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Konstruktionsparameter" xml:space="preserve">
+    <value>Konstruktionsparameter</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Kuehlbetrieb" xml:space="preserve">
+    <value>Kühlbetrieb</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Laengsseite" xml:space="preserve">
+    <value>Längsseite</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Laengsseite2" xml:space="preserve">
+    <value>Längsseite:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_LeistungAnbindeleitungen" xml:space="preserve">
+    <value>Leistung Anbindeleitungen:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModuleAuslegen" xml:space="preserve">
+    <value>Module auslegen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModuleAuswaehlen" xml:space="preserve">
+    <value>Module auswählen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModuleHinzufuegen" xml:space="preserve">
+    <value>Module hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModuleUebernehmenText" xml:space="preserve">
+    <value>Wollen Sie die neu hinzugefügten Module übernehmen?</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModuleUebernehmenTitel" xml:space="preserve">
+    <value>Module übernehmen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Modulierend" xml:space="preserve">
+    <value>modulierend</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ModulierendDoppelt" xml:space="preserve">
+    <value>modulierend - doppelter Abstand</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_NeueModule" xml:space="preserve">
+    <value>neue Module</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_NeueModule2" xml:space="preserve">
+    <value>Neue Module:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_NeuerHK" xml:space="preserve">
+    <value>neuer HK</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_OrientierungAendernText" xml:space="preserve">
+    <value>Die Orientierung von Modulen an die bereits eine Verbindeleitung angeschlossen ist kann nicht mehr geändert werden. Wollen Sie die Verbindeleitungen der betreffenden Module löschen?</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_OrientierungAendernTitel" xml:space="preserve">
+    <value>Verbindeleitungen löschen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ProWinkel1mVerbindungsleitung" xml:space="preserve">
+    <value>(Pro Winkel zusätzlich 1m Verbindungsleitung)</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_ReferenzmodulFuerAusrichtung" xml:space="preserve">
+    <value>Referenzmodul für Ausrichtung wählen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_RichtungAendernText" xml:space="preserve">
+    <value>Die Durchströmungsrichtung von Modulen an die bereits an einen Verteiler angeschlossen sind kann nicht mehr geändert werden. Wollen Sie die Anbindeleitungen der betreffenden Module löschen?</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_RichtungAendernTitel" xml:space="preserve">
+    <value>Anbindeleitungen löschen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_UnterkonstruktionAusrichten" xml:space="preserve">
+    <value>Unterkonstruktion ausrichten</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_VerbindeleitungHinzufuegen" xml:space="preserve">
+    <value>Verbindeleitung hinzufügen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_VerbindeleitungLoeschen" xml:space="preserve">
+    <value>Verbindeleitung löschen</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_Verbindungen" xml:space="preserve">
+    <value>Verbindungen:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_VerbindungsleitungenInHK" xml:space="preserve">
+    <value>Summe Verbindungsleitungen in Heizkreis:</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_VerschiedeneAusrichtungen" xml:space="preserve">
+    <value>Verschiedene Ausrichtungen ausgewählt</value>
+  </data>
+  <data name="ModulKlimaBoden20PlannerForm_VerschiendeHK" xml:space="preserve">
+    <value>verschiende</value>
+  </data>
+  <data name="ModulKlimaBoden20Planner_AnbindeleitungLoeschen" xml:space="preserve">
+    <value>Wenn Sie einen neuen Heizkreis hinzufügen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?</value>
+  </data>
+  <data name="ModulKlimaBoden20Planner_HeizkreisLoeschenText" xml:space="preserve">
+    <value>Wenn Sie einen Heizkreis löschen werden die bestehenden Anbindeleitungen an den Verteiler gelöscht. Wollen Sie die Anbindeleitungen löschen?</value>
+  </data>
+  <data name="ModulKlimaBoden20Planner_HeizkreisLoeschenTitel" xml:space="preserve">
+    <value>Heizkreis löschen</value>
+  </data>
+  <data name="ModulKlimaBoden20Planner_NeuerHeizkreisTitel" xml:space="preserve">
+    <value>Neuer Heizkreis</value>
+  </data>
+  <data name="KlimaFlaechenModul_100_40_20" xml:space="preserve">
+    <value>Modul 100/40 20</value>
+  </data>
+  <data name="KlimaFlaechenModul_100_40_20_Short" xml:space="preserve">
+    <value>100/40 20</value>
+  </data>
+  <data name="Material_HR92" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_HR93" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK70" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK71" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK73" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK74" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK75" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK76" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Material_MK77" xml:space="preserve">
+    <value />
   </data>
 </root>

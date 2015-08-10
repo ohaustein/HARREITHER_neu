@@ -149,6 +149,17 @@ namespace Europlan.Common {
 			set { this.SetPlannedCircuits<ModulKlimaBodenProduct>(value); }
 		}
 
+        // ModulKlimaBoden20
+        public OpenCircuits ModulKlimaBoden20OpenCircuits
+        {
+            get { return this.GetOpenCircuits<ModulKlimaBoden20Product>(); }
+        }
+        public Nullable<int> ModulKlimaBoden20PlannedCircuits
+        {
+            get { return this.GetPlannedCircuits<ModulKlimaBoden20Product>(); }
+            set { this.SetPlannedCircuits<ModulKlimaBoden20Product>(value); }
+        }
+
 		// ModulKlimaDecke
 		public OpenCircuits ModulKlimaDeckeOpenCircuits {
 			get { return this.GetOpenCircuits<ModulKlimaDeckeProduct>(); }

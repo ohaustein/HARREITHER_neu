@@ -1227,7 +1227,7 @@ namespace Europlan.Common {
             // cmbRowModulation
             // 
             this.cmbRowModulation.FormattingEnabled = true;
-            this.cmbRowModulation.Location = new System.Drawing.Point(493, 317);
+            this.cmbRowModulation.Location = new System.Drawing.Point(493, 343);
             this.cmbRowModulation.Name = "cmbRowModulation";
             this.cmbRowModulation.Size = new System.Drawing.Size(83, 21);
             this.cmbRowModulation.TabIndex = 175;
@@ -1236,7 +1236,7 @@ namespace Europlan.Common {
             // lblRowModulation
             // 
             this.lblRowModulation.AutoSize = true;
-            this.lblRowModulation.Location = new System.Drawing.Point(337, 320);
+            this.lblRowModulation.Location = new System.Drawing.Point(337, 346);
             this.lblRowModulation.Name = "lblRowModulation";
             this.lblRowModulation.Size = new System.Drawing.Size(109, 13);
             this.lblRowModulation.TabIndex = 174;
@@ -1340,7 +1340,7 @@ namespace Europlan.Common {
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(603, 346);
+            this.label14.Location = new System.Drawing.Point(603, 320);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(224, 13);
             this.label14.TabIndex = 139;
@@ -1851,7 +1851,7 @@ namespace Europlan.Common {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 346);
+            this.label3.Location = new System.Drawing.Point(582, 320);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 13);
             this.label3.TabIndex = 37;
@@ -1865,7 +1865,7 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            this.numLength.Location = new System.Drawing.Point(493, 343);
+            this.numLength.Location = new System.Drawing.Point(493, 317);
             this.numLength.MaxValue = null;
             this.numLength.MinValue = new decimal(new int[] {
             0,
@@ -1887,7 +1887,7 @@ namespace Europlan.Common {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(337, 346);
+            this.label2.Location = new System.Drawing.Point(337, 320);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(150, 13);
             this.label2.TabIndex = 35;
@@ -1898,7 +1898,7 @@ namespace Europlan.Common {
             this.dgvModules.Boden = true;
             this.dgvModules.Location = new System.Drawing.Point(340, 97);
             this.dgvModules.Name = "dgvModules";
-            this.dgvModules.ShowModulation = true;
+            this.dgvModules.ShowModulation = false;
             this.dgvModules.Size = new System.Drawing.Size(487, 212);
             this.dgvModules.TabIndex = 44;
             this.dgvModules.GridContentChanged += new Europlan.Common.KlimaFlaechenModulGridContentChangedHandler(this.dgvModules_GridContentChanged);

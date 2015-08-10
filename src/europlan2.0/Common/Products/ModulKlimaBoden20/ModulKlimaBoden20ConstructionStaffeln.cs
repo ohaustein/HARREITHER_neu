@@ -195,7 +195,7 @@ namespace Europlan.Common {
 			return staffelnForDrawing;
 		}
 
-		public override void Paint(Graphics g, ModulKlimaBodenPlanner.KlimaBodenMode mode) {
+		public override void Paint(Graphics g, ModulKlimaBoden20Planner.KlimaBodenMode mode) {
 			if (this.Planner == null ||
 				this.Planner.Product == null ||
 				this.Planner.Product.AssociatedRoom == null ||
@@ -225,7 +225,7 @@ namespace Europlan.Common {
 				g.FillPolygon(b, poly);
 			}
 
-			if (mode == ModulKlimaBodenPlanner.KlimaBodenMode.KDM_CONSTRUCTION) {
+			if (mode == ModulKlimaBoden20Planner.KlimaBodenMode.KDM_CONSTRUCTION) {
 				c = System.Drawing.Color.FromArgb(128, 0, 240, 0);
 				p = new Pen(c);
 				b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));

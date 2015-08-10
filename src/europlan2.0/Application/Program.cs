@@ -95,15 +95,25 @@ namespace Europlan.Application {
 
 			startingForm.Close();
 			startingForm.Dispose();
-			try {
-				System.Windows.Forms.Application.Run(mainForm);
+            if (Debugger.IsAttached)
+            {
+                System.Windows.Forms.Application.Run(mainForm);
+            }
+            else
+            {
+                try
+                {
+                    System.Windows.Forms.Application.Run(mainForm);
 #if DEBUG
-			} catch (Exception ex) {
-				MessageBox.Show("Catched unhandled exception: " + ex.StackTrace);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Catched unhandled exception: " + ex.StackTrace);
 #else
-			} catch (Exception) {
+			    } catch (Exception) {
 #endif
-			}			
+                }
+            }
 		}
 
         // A little bit of a hack to get any non neutral culture for the current language, as our language

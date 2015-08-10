@@ -193,7 +193,19 @@ namespace Europlan.Common {
 						this.moduleStartIndices = null;
 						this.rowStartIndices = null;
 						this.subAreaStartIndices = null;
-					}
+                    }
+                    else if (this.Circuit is ModulKlimaBoden20Circuit)
+                    {
+                        ModulKlimaBoden20Circuit mbc = this.Circuit as ModulKlimaBoden20Circuit;
+                        this.start = new List<KlimaFlaechenModul>();
+                        for (int i = 0; i < this.moduleStartIndices.Count; i++)
+                        {
+                            this.start.Add(mbc.SubAreas[this.subAreaStartIndices[i]].Rows[this.rowStartIndices[i]].List[this.moduleStartIndices[i]]);
+                        }
+                        this.moduleStartIndices = null;
+                        this.rowStartIndices = null;
+                        this.subAreaStartIndices = null;
+                    }
 
 				}
 				return this.start;
@@ -215,7 +227,19 @@ namespace Europlan.Common {
 						this.moduleEndIndices = null;
 						this.rowEndIndices = null;
 						this.subAreaEndIndices = null;
-					}
+                    }
+                    else if (this.Circuit is ModulKlimaBoden20Circuit)
+                    {
+                        ModulKlimaBoden20Circuit mbc = this.Circuit as ModulKlimaBoden20Circuit;
+                        this.end = new List<KlimaFlaechenModul>();
+                        for (int i = 0; i < this.moduleEndIndices.Count; i++)
+                        {
+                            this.end.Add(mbc.SubAreas[this.subAreaEndIndices[i]].Rows[this.rowEndIndices[i]].List[this.moduleEndIndices[i]]);
+                        }
+                        this.moduleEndIndices = null;
+                        this.rowEndIndices = null;
+                        this.subAreaEndIndices = null;
+                    }
 				}
 				return this.end;
 			}
@@ -256,7 +280,44 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.Start)
+                    {
+                        bool found = false;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                int i = 0;
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                    i++;
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                }
 				return indices;
 			}
 			set { this.moduleStartIndices = value; }
@@ -297,7 +358,44 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.End)
+                    {
+                        bool found = false;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                int i = 0;
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                    i++;
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                }
 				return indices;
 			}
 			set { this.moduleEndIndices = value; }
@@ -338,7 +436,44 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.Start)
+                    {
+                        bool found = false;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            int i = 0;
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                                i++;
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                }
 				return indices;
 			}
 			set { this.rowStartIndices = value; }
@@ -379,7 +514,44 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.End)
+                    {
+                        bool found = false;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            int i = 0;
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                                i++;
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                } 
 				return indices;
 			}
 			set { this.rowEndIndices = value; }
@@ -409,7 +581,35 @@ namespace Europlan.Common {
 						rows.Add(null);
 					}
 				}
-			}
+            }
+            else if (this.Circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                foreach (KlimaFlaechenModul m in this.Start)
+                {
+                    bool found = false;
+                    foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            if (row.List.Contains(m))
+                            {
+                                rows.Add(row);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        rows.Add(null);
+                    }
+                }
+            }
 			return rows;
 		}
 
@@ -437,7 +637,35 @@ namespace Europlan.Common {
 						rows.Add(null);
 					}
 				}
-			}
+            }
+            else if (this.Circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                foreach (KlimaFlaechenModul m in this.End)
+                {
+                    bool found = false;
+                    foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            if (row.List.Contains(m))
+                            {
+                                rows.Add(row);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        rows.Add(null);
+                    }
+                }
+            }
 			return rows;
 		}
 
@@ -476,7 +704,44 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.Start)
+                    {
+                        bool found = false;
+                        int i = 0;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                }
 				return indices;
 			}
 			set { this.subAreaStartIndices = value; }
@@ -517,14 +782,51 @@ namespace Europlan.Common {
 							indices.Add(-1);
 						}
 					}
-				}
+                }
+                else if (this.Circuit is ModulKlimaBoden20Circuit)
+                {
+                    ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                    foreach (KlimaFlaechenModul m in this.End)
+                    {
+                        bool found = false;
+                        int i = 0;
+                        foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                        {
+                            foreach (KlimaFlaechenList row in sa.Rows)
+                            {
+                                foreach (KlimaFlaechenModul m2 in row.List)
+                                {
+                                    if (m2 == m)
+                                    {
+                                        indices.Add(i);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (found)
+                                {
+                                    break;
+                                }
+                            }
+                            if (found)
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                        if (!found)
+                        {
+                            indices.Add(-1);
+                        }
+                    }
+                }
 				return indices;
 			}
 			set { this.subAreaEndIndices = value; }
 		}
 
-		public List<ModulDeckeSubArea> GetStartSubAreas() {
-			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
+		public List<ModulSubArea> GetStartSubAreas() {
+			List<ModulSubArea> subAreas = new List<ModulSubArea>();
 			if (this.Circuit is ModulBodenCircuit) {
 				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
@@ -549,12 +851,42 @@ namespace Europlan.Common {
 						subAreas.Add(null);
 					}
 				}
-			}
+            }
+            else if (this.Circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                foreach (KlimaFlaechenModul m in this.Start)
+                {
+                    bool found = false;
+                    int i = 0;
+                    foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            if (row.List.Contains(m))
+                            {
+                                subAreas.Add(sa);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                        i++;
+                    }
+                    if (!found)
+                    {
+                        subAreas.Add(null);
+                    }
+                }
+            }
 			return subAreas;
 		}
 
-		public List<ModulDeckeSubArea> GetEndSubAreas() {
-			List<ModulDeckeSubArea> subAreas = new List<ModulDeckeSubArea>();
+		public List<ModulSubArea> GetEndSubAreas() {
+			List<ModulSubArea> subAreas = new List<ModulSubArea>();
 			if (this.Circuit is ModulBodenCircuit) {
 				throw new Exception("modul boden does not support teilflächen");
 			} else if (this.Circuit is ModulDeckeCircuit) {
@@ -579,7 +911,37 @@ namespace Europlan.Common {
 						subAreas.Add(null);
 					}
 				}
-			}
+            }
+            else if (this.Circuit is ModulKlimaBoden20Circuit)
+            {
+                ModulKlimaBoden20Circuit mdc = this.Circuit as ModulKlimaBoden20Circuit;
+                foreach (KlimaFlaechenModul m in this.End)
+                {
+                    bool found = false;
+                    int i = 0;
+                    foreach (ModulKlimaBoden20SubArea sa in mdc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            if (row.List.Contains(m))
+                            {
+                                subAreas.Add(sa);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                        i++;
+                    }
+                    if (!found)
+                    {
+                        subAreas.Add(null);
+                    }
+                }
+            }
 			return subAreas;
 		}
 

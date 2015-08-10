@@ -739,6 +739,20 @@ namespace Europlan.Common
             return false;
         }
 
+        public IEnumerable<KlimaFlaechenModul> GetAllModules()
+        {          
+            foreach (ModulKlimaBoden20SubArea subArea in SubAreas)
+            {
+                foreach (KlimaFlaechenList row in subArea.Rows)
+                {
+                    foreach (KlimaFlaechenModul modul in row.List)
+                    {
+                        yield return modul;
+                    }
+                }
+            }               
+        }
+
         #region Graphical Materials
         public int GetRequiredWinkel(double measure)
         {

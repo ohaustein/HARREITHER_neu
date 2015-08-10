@@ -342,6 +342,7 @@ namespace Europlan.Common {
 					HithermCompactProduct.StaticInitialize(adminTemplate);
 					HithermCompactRoofProduct.StaticInitialize(adminTemplate);
 					ModulKlimaBodenProduct.StaticInitialize(adminTemplate);
+                    ModulKlimaBoden20Product.StaticInitialize(adminTemplate);
 					ModulKlimaDeckeProduct.StaticInitialize(adminTemplate);
 
 				}
@@ -392,6 +393,7 @@ namespace Europlan.Common {
 					HithermCompactProduct.StaticInitialize(userTemplate);
 					HithermCompactRoofProduct.StaticInitialize(userTemplate);
 					ModulKlimaBodenProduct.StaticInitialize(userTemplate);
+                    ModulKlimaBoden20Product.StaticInitialize(userTemplate);
 					ModulKlimaDeckeProduct.StaticInitialize(userTemplate);
 				}
 				return userTemplate;
@@ -628,11 +630,19 @@ namespace Europlan.Common {
 				return new HithermCompactRoofProduct() as P;
 			} else if (typeof(P) == typeof(ModulKlimaBodenProduct)) {
 				return new ModulKlimaBodenProduct() as P;
-			} else if (typeof(P) == typeof(ModulKlimaDeckeProduct)) {
-				return new ModulKlimaDeckeProduct() as P;
-			} else {
-				log.Warn("unknown product");
-			}
+            }
+            else if (typeof(P) == typeof(ModulKlimaDeckeProduct))
+            {
+                return new ModulKlimaDeckeProduct() as P;
+            }
+            else if (typeof(P) == typeof(ModulKlimaBoden20Product))
+            {
+                return new ModulKlimaBoden20Product() as P;
+            }
+            else
+            {
+                log.Warn("unknown product");
+            }
 			return null;
 		}
 

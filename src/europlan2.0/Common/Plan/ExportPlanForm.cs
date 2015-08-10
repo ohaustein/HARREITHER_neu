@@ -264,7 +264,19 @@ namespace Europlan.Common {
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
 											planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
-										} else if (p is EurovalProduct) {
+                                        }
+                                        else if (p is ModulKlimaBoden20Product)
+                                        {
+                                            ModulKlimaBoden20Planner planner = new ModulKlimaBoden20Planner();
+                                            planner.Product = p as ModulKlimaBoden20Product;
+                                            (p as ModulKlimaBoden20Product).GraphConstruction.Planner = planner;
+                                            (p as ModulKlimaBoden20Product).GraphConstruction.RecalculateStaffeln();
+                                            planner.HighlightRoomCoordinates = false;
+                                            planner.DrawExpansionGaps = false;
+                                            planner.PaintAfterPlanPannel(g, Matrix4D.Identity, Point2D.Zero, Point.Empty, true);
+                                        }
+                                        else if (p is EurovalProduct)
+                                        {
 											EurovalPlanner planner = new EurovalPlanner();
 											planner.Product = p as EurovalProduct;
 											planner.HighlightRoomCoordinates = false;
@@ -381,7 +393,19 @@ namespace Europlan.Common {
 											planner.HighlightRoomCoordinates = false;
 											planner.DrawExpansionGaps = false;
 											planner.DrawDxf(model, modulLayer, floorConstructionLayer);
-										} else if (p is EurovalProduct) {
+                                        } else if (p is ModulKlimaBoden20Product)
+                                        {
+                                            DxfLayer modulLayer = GetOrCreateDxfLayer(layers, typeof(ModulKlimaBoden20Product), model);
+                                            ModulKlimaBoden20Planner planner = new ModulKlimaBoden20Planner();
+                                            planner.Product = p as ModulKlimaBoden20Product;
+                                            (p as ModulKlimaBoden20Product).GraphConstruction.Planner = planner;
+                                            (p as ModulKlimaBoden20Product).GraphConstruction.RecalculateStaffeln();
+                                            planner.HighlightRoomCoordinates = false;
+                                            planner.DrawExpansionGaps = false;
+                                            planner.DrawDxf(model, modulLayer, floorConstructionLayer);
+                                        }
+                                        else if (p is EurovalProduct)
+                                        {
 											DxfLayer layer = GetOrCreateDxfLayer(layers, typeof(EurovalProduct), model);
 											EurovalPlanner planner = new EurovalPlanner();
 											planner.Product = p as EurovalProduct;
