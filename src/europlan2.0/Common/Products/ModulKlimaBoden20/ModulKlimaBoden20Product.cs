@@ -692,6 +692,7 @@ namespace Europlan.Common {
 					newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
 					newMsg = newMsg.Replace("%VALUE%", moduleCount.ToString());
 					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaBoden20Product.ConfigModulesInCircuit.ToString());
+                    this.lastErrorMsg += newMsg + "\n";
 				}
 			}
 			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
