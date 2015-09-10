@@ -1082,7 +1082,7 @@ namespace Europlan.Common {
 		}
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
+			bool graphical = this.GraphicalMode ?? false;
 
 			if (!graphical) {
 				double additional21mm = 0;
