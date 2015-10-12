@@ -2196,7 +2196,7 @@ namespace Europlan.Common {
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 
 			// Anbindeleitungen
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true, false);
 
 			// Euroval Rohr
 			double length = 0;

@@ -1006,7 +1006,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true);
+			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true, false);
 
 			// Ovalmuffen
 			double amount = teilflaechen;

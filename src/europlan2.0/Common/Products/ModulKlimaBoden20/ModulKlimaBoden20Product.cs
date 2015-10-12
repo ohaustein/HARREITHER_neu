@@ -1084,23 +1084,42 @@ namespace Europlan.Common {
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			bool graphical = this.GraphicalMode ?? false;
 
-			if (!graphical) {
-				double additional21mm = 0;
-				int nrOfElements = 0;
+            int rowConnectorsSmall = 0;
+            int rowConnectorsLarge = 0;
 
-				int rows = 0;
-				int subAreas = 0;
-				double modulArea = 0;
+            int nrOfElements = 0;
+            int rows = 0;
+            int subAreas = 0;
+            int winkel = 0;
+            double modulArea = 0;
+
+            double additionalPipe = 0;
+
+			if (!graphical) {								
 				foreach (ModulKlimaBoden20Circuit c in this.circuits) {
 					foreach (ModulKlimaBoden20SubArea subArea in c.SubAreas) {
 						subAreas++;
 						foreach (KlimaFlaechenList row in subArea.Rows) {
 							rows++;
 
-							// TO BE CLARIFIED
-							additional21mm += row.LengthVerbindeleitungen;
-							additional21mm += 1.4;
+                            // TODO: additional connection pipe. dont't know why there is 1.4...
+                            additionalPipe += row.LengthVerbindeleitungen;
+                            // zusätzlich für tabellarische Verlegung
+                            additionalPipe += 1.4;
 
+                            // for each subarea there need to be connectors for rows
+                            if (row.List.Count > 0 && row != subArea.Rows[subArea.Rows.Count - 1])
+                            {
+                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                {
+                                    rowConnectorsSmall += 2;
+                                }
+                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                {
+                                    rowConnectorsLarge += 2;
+                                }
+                            }
+                            
 							foreach (KlimaFlaechenModul modul in row.List) {
 								// Modul
 								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
@@ -1111,11 +1130,77 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
+                // Schätzwert an zusätzlichen Winkeln für die Verbindeleitungen tabellarisch
+                winkel = (int) (additionalPipe * 0.8);
 
+                /* Vergleiche: */
+                /* Klimaboden */
+                //this.AddRequiredMaterialForConnections(requiredMaterial, false, graphical ? 0 : this.RequestedSonstigeVerbindeLeitung, !graphical, false);
+                /* Hiterm */
+                //this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true);
+                //this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true)
 			} else {
-				// TODO graphical 
+                double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+
+                foreach (ModulKlimaBoden20Circuit c in this.circuits)
+                {
+                    foreach (ModulKlimaBoden20SubArea subArea in c.SubAreas)
+                    {
+                        subAreas++;
+                        foreach (KlimaFlaechenList row in subArea.Rows)
+                        {
+                            rows++;
+                            foreach (KlimaFlaechenModul modul in row.List)
+                            {
+                                // Modul
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+                                nrOfElements++;
+                                modulArea += modul.GetHeatArea(false);
+
+                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                {
+                                    rowConnectorsSmall += 2;
+                                }
+                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                {
+                                    rowConnectorsLarge += 2;
+                                }
+                            }
+                            foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                            {
+                                additionalPipe += link.GetLength(measure);
+                                winkel += link.GetRequiredWinkel();
+                            }
+                        }
+                    }
+                    foreach (KlimaFlaechenSubAreaVerbindung link in c.Links)
+                    {
+                        additionalPipe += link.GetLength(measure);
+                        winkel += link.GetRequiredWinkel(measure); 
+                    }
+                }
 			}
+
+
+            // Default: Sollte normalerweise Euroval Anbindeleitung sein. Wenn nicht, stimmt die Materialauflistung u.U. nicht.
+            this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, false, true); 
+            // Verbindeleitungen
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", additionalPipe);
+
+
+            //Verteileranschlußbögen
+            if (this.PlannedConnection != null && this.PlannedConnection.Distributor != null)
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "HR69", this.circuits.Count * 2);
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", this.circuits.Count * 2 * (this.PlannedConnection.Distributor.LangeAnschlussboegen ? 1 : 0.5));
+            }
+
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK75", rowConnectorsSmall * (graphical ? -1 : 1));
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", subAreas + winkel);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", subAreas);
+
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
 		}
 
 		public override double Dichte {
