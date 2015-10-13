@@ -1109,7 +1109,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true);
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true, false);
 
 				// Muffe
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
@@ -1223,7 +1223,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, true);
+				this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, true, false);
 
 				if (constrCProfil) {
 					if (serie30) {

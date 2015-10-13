@@ -11,3 +11,4 @@ src/europlan2.0/StartSetup/obj/
 src/europlan2.0/UnitTest/bin/
 src/europlan2.0/UnitTest/obj/
 *.suo
+*.user
