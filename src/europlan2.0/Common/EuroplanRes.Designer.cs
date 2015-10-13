@@ -8699,6 +8699,26 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Beheizt
+        ///m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheBeheizt {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheBeheizt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Belegt
+        ///m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheBelegt {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheBelegt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dicht
         ///m².
         /// </summary>

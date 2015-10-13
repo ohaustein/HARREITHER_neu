@@ -8038,6 +8038,14 @@ Nummer</value>
   <data name="LL_Report_FlaechenuebersichtModulBoden20" xml:space="preserve">
     <value>Flächenübersicht Modul Klimaboden 20</value>
   </data>
+  <data name="LL_Report_KlimabodenFlaecheBeheizt" xml:space="preserve">
+    <value>Beheizt
+m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheBelegt" xml:space="preserve">
+    <value>Belegt
+m²</value>
+  </data>
   <data name="ProjectReport_EurovalRohr" xml:space="preserve">
     <value>Euroval Rohr</value>
   </data>
