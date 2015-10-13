@@ -8104,11 +8104,20 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden.
+        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_FlaechenuebersichtModulBoden {
             get {
                 return ResourceManager.GetString("LL_Report_FlaechenuebersichtModulBoden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_FlaechenuebersichtModulBoden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_FlaechenuebersichtModulBoden20", resourceCulture);
             }
         }
         
@@ -19138,6 +19147,15 @@ namespace Europlan.Common {
         internal static string ProjectReport_Estrichflaeche {
             get {
                 return ResourceManager.GetString("ProjectReport_Estrichflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Euroval Rohr.
+        /// </summary>
+        internal static string ProjectReport_EurovalRohr {
+            get {
+                return ResourceManager.GetString("ProjectReport_EurovalRohr", resourceCulture);
             }
         }
         

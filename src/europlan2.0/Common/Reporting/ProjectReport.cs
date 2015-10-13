@@ -15,6 +15,9 @@ using System.Collections;
 namespace Europlan.Common {
 	public partial class ProjectReport : Form {
 		
+        public class ModulKlimaBoden20OverviewWrapper : ModulBodenOverviewWrapper {
+        }
+
 		private combit.ListLabel15.ListLabel listLabel1;
 		private combit.ListLabel15.ListLabelPreviewControl listLabelPreviewControl1;
 		private Project project;
@@ -86,6 +89,7 @@ namespace Europlan.Common {
             List<HithermOverviewWrapper> hithermOverviewWrapper = new List<HithermOverviewWrapper>();
 			List<HithermCompactOverviewWrapper> hithermCompactOverviewWrapper = new List<HithermCompactOverviewWrapper>();
 			List<ModulBodenOverviewWrapper> modulBodenOverviewWrapper = new List<ModulBodenOverviewWrapper>();
+            List<ModulKlimaBoden20OverviewWrapper> modulBoden20OverviewWrapper = new List<ModulKlimaBoden20OverviewWrapper>();
 			List<ModulDeckeOverviewWrapper> modulDeckeOverviewWrapper = new List<ModulDeckeOverviewWrapper>();
 			List<OpenLoadForRoomWrapper> openHeatLoadWrapper = new List<OpenLoadForRoomWrapper>();
 			List<OpenLoadForRoomWrapper> openCoolLoadWrapper = new List<OpenLoadForRoomWrapper>();
@@ -125,6 +129,7 @@ namespace Europlan.Common {
 					hithermOverviewWrapper = GetHithermOverviewWrapper();
 					hithermCompactOverviewWrapper = GetHithermCompactOverviewWrapper();
 					modulBodenOverviewWrapper = GetModulBodenOverviewWrapper();
+                    modulBoden20OverviewWrapper = GetModulBoden20OverviewWrapper();
 					modulDeckeOverviewWrapper = GetModulDeckeOverviewWrapper();
 				}
 
@@ -178,6 +183,7 @@ namespace Europlan.Common {
 			DataTable hithermOverview = ReportHelper.ListToDataTable<HithermOverviewWrapper>(hithermOverviewWrapper);
 			DataTable hithermCompactOverview = ReportHelper.ListToDataTable<HithermCompactOverviewWrapper>(hithermCompactOverviewWrapper);
 			DataTable modulBodenOverview = ReportHelper.ListToDataTable<ModulBodenOverviewWrapper>(modulBodenOverviewWrapper);
+            DataTable modulBoden20Overview = ReportHelper.ListToDataTable<ModulKlimaBoden20OverviewWrapper>(modulBoden20OverviewWrapper);
 			DataTable modulDeckeOverview = ReportHelper.ListToDataTable<ModulDeckeOverviewWrapper>(modulDeckeOverviewWrapper);
 			DataTable openHeatLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openHeatLoadWrapper);
 			DataTable openCoolLoad = ReportHelper.ListToDataTable<OpenLoadForRoomWrapper>(openCoolLoadWrapper);
@@ -213,6 +219,7 @@ namespace Europlan.Common {
 			hithermOverview.TableName = "HithermOverview";
 			hithermCompactOverview.TableName = "HithermCompactOverview";
 			modulBodenOverview.TableName = "ModulBodenOverview";
+            modulBoden20Overview.TableName = "ModulBoden20Overview";
 			modulDeckeOverview.TableName = "ModulDeckeOverview";
 			openHeatLoad.TableName = "OpenHeatLoad";
 			openCoolLoad.TableName = "OpenCoolLoad";
@@ -248,6 +255,7 @@ namespace Europlan.Common {
             reportData.Tables.Add(hithermOverview);
 			reportData.Tables.Add(hithermCompactOverview);
 			reportData.Tables.Add(modulBodenOverview);
+            reportData.Tables.Add(modulBoden20Overview);
 			reportData.Tables.Add(modulDeckeOverview);
 			reportData.Tables.Add(openHeatLoad);
 			reportData.Tables.Add(openCoolLoad);
@@ -5546,7 +5554,7 @@ namespace Europlan.Common {
 			return wrapperList;
 		}
 #warning TODO implement
-        /*
+        
         public List<ModulKlimaBoden20OverviewWrapper> GetModulBoden20OverviewWrapper()
         {
             List<ModulKlimaBoden20OverviewWrapper> wrapperList = new List<ModulKlimaBoden20OverviewWrapper>();
@@ -5614,7 +5622,7 @@ namespace Europlan.Common {
                 }
 
                 wrapper = new ModulKlimaBoden20OverviewWrapper();
-                wrapper.Text = EuroplanRes.ProjectReport_Rundrohr; //"Rundrohr 21"
+                wrapper.Text = EuroplanRes.ProjectReport_EurovalRohr; //"Euroval Rohr"
                 wrapper.Amount = rohr21Length;
                 wrapper.Unit = EuroplanRes.Unit_Meter; //"m"
                 wrapperList.Add(wrapper);
@@ -5623,8 +5631,6 @@ namespace Europlan.Common {
 
             return wrapperList;
         }
-         * 
-         * */
 
 		public List<VerlegedatenCircuitWrapper> GetVerlegedatenCircuitWrapper() {
 			List<VerlegedatenCircuitWrapper> wrapperList = new List<VerlegedatenCircuitWrapper>();
