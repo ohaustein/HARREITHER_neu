@@ -4343,6 +4343,8 @@ namespace Europlan.Common {
                                 wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
 
                                 wrapperHeat.UnusedArea = mp.PlannedAreaUnheated;
+                                wrapperHeat.TotalArea = mp.PlannedModulArea;
+                                wrapperHeat.CoveredArea = mp.CoveredArea;
 
                                 if (mp.PlannedConnection != null)
                                 {
@@ -4398,6 +4400,8 @@ namespace Europlan.Common {
                                 wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
 
                                 wrapperCool.UnusedArea = mp.PlannedAreaUnheated;
+                                wrapperCool.TotalArea = mp.PlannedModulArea;
+                                wrapperCool.CoveredArea = mp.CoveredArea;
 
                                 if (mp.PlannedConnection != null)
                                 {

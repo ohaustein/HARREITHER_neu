@@ -195,7 +195,6 @@ namespace Europlan.Common {
 		    set { Q_FBH = value; }
 		}
 
-#warning TODO: calculation correct?
 		public double qFBHSqm {
 		    get { return Q_FBH / (CoveredArea + UnusedArea); }
 		}
