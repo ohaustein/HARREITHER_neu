@@ -13,6 +13,22 @@ namespace Europlan.Common {
 	[ProductName("Product_ModulKlimBoden20Name", "Product_ModulKlimBoden20FullName")]
 	public class ModulKlimaBoden20Product : Product, ProductWithInsulationConstruction {
 
+        private struct ModulePosForCalc
+        {
+            public ModulePosForCalc(double x, double y, double height, double width)
+            {
+                this.x = x;
+                this.y = y;
+                this.height = height;
+                this.width = width;
+            }
+
+            public double x;
+            public double y;
+            public double height;
+            public double width;
+        }
+
 		// quick dimensioning
 		private static int quickDimensioningHeatPowerPerSquareMeter = 50;
 		private static int quickDimensioningCoolPowerPerSquareMeter = 50;
@@ -1095,6 +1111,8 @@ namespace Europlan.Common {
 
             double additionalPipe = 0;
 
+            int nrOfModulatingModules = 0;
+
 			if (!graphical) {								
 				foreach (ModulKlimaBoden20Circuit c in this.circuits) {
 					foreach (ModulKlimaBoden20SubArea subArea in c.SubAreas) {
@@ -1117,6 +1135,7 @@ namespace Europlan.Common {
                                 else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
                                 {
                                     rowConnectorsLarge += 2;
+                                    nrOfModulatingModules += row.List.Count;
                                 }
                             }
                             
@@ -1195,12 +1214,188 @@ namespace Europlan.Common {
                 Project.Instance.AddRequiredMaterial(requiredMaterial, "HR51", this.circuits.Count * 2 * (this.PlannedConnection.Distributor.LangeAnschlussboegen ? 1 : 0.5));
             }
 
+            // T-Stücke für Reihen. Bei grafischer Auslegung kann nicht zwischen modulierend und nicht modulierend unterschieden werden -> daher auf rot setzen.
             Project.Instance.AddRequiredMaterial(requiredMaterial, "MK75", rowConnectorsSmall * (graphical ? -1 : 1));
             Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", subAreas + winkel);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", subAreas);
 
+            // Statt modulbögen werden HR92 + Verbindeleitung gerechnet. Verbindelteitung wird schon angegeben 
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
+
+
+
+            // Modulstreifen
+            double streifen = 0;
+            if (graphical && this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue)
+            {
+                double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+                Dictionary<double, List<KlimaFlaechenModul>> moduleByRotation = new Dictionary<double, List<KlimaFlaechenModul>>();
+                foreach (ModulKlimaBoden20Circuit c in this.PlannedCircuits)
+                {
+                    foreach (KlimaFlaechenModul modul in c.GetAllModules())
+                    {
+                        double roundedRotation = Math.Round(modul.GraphRotation, 1);
+                        if (!moduleByRotation.ContainsKey(roundedRotation))
+                        {
+                            moduleByRotation.Add(roundedRotation, new List<KlimaFlaechenModul>());
+                        }
+                        moduleByRotation[roundedRotation].Add(modul);
+                    }
+                }
+                double modulStreifenLength = 0;
+                foreach (KeyValuePair<double, List<KlimaFlaechenModul>> kvp in moduleByRotation)
+                {
+                    List<ModulePosForCalc> modulePos = new List<ModulePosForCalc>();
+                    Matrix3D rotate = Transformation3D.Rotate(-kvp.Key * Math.PI / 180.0);
+                    foreach (KlimaFlaechenModul m in kvp.Value)
+                    {
+                        Point2D rotatedPos = rotate.Transform(new Point2D(m.GraphPosX, m.GraphPosY));
+                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeight(m.ModulType), KlimaFlaechenModul.GetModuleWidth(m.ModulType)));
+                    }
+                    for (int i = 0; i < modulePos.Count - 1; i++)
+                    {
+                        for (int j = i + 1; j < modulePos.Count; j++)
+                        {
+                            int xStreifenWidth = 0;
+                            double xOverlap = 0;
+                            int yStreifenWidth = 0;
+                            double yOverlap = 0;
+
+                            // check distance of these 2 modules in x
+                            if (modulePos[i].x < modulePos[j].x)
+                            {
+                                double distX = modulePos[j].x - modulePos[i].x - modulePos[i].width;
+                                // possible modulstreifen found
+                                if (Math.Abs(distX - 0.1) < 0.005)
+                                {
+                                    xStreifenWidth = 1;
+                                }
+                                else if (Math.Abs(distX - 0.2) < 0.005)
+                                {
+                                    xStreifenWidth = 2;
+                                }
+                                if (xStreifenWidth > 0)
+                                {
+                                    xOverlap = Math.Min(modulePos[i].y + modulePos[i].height, modulePos[j].y + modulePos[j].height) - Math.Max(modulePos[i].y, modulePos[j].y);
+                                }
+                            }
+                            else
+                            {
+                                double distX = modulePos[i].x - modulePos[j].x - modulePos[j].width;
+                                if (Math.Abs(distX - 0.1) < 0.005)
+                                {
+                                    xStreifenWidth = 1;
+                                }
+                                else if (Math.Abs(distX - 0.2) < 0.005)
+                                {
+                                    xStreifenWidth = 2;
+                                }
+                                if (xStreifenWidth > 0)
+                                {
+                                    // possible modulstreifen found
+                                    xOverlap = Math.Min(modulePos[j].y + modulePos[j].height, modulePos[i].y + modulePos[i].height) - Math.Max(modulePos[j].y, modulePos[i].y);
+                                }
+                            }
+
+                            // check distance of these 2 modules in y
+                            if (modulePos[i].y < modulePos[j].y)
+                            {
+                                double distY = modulePos[j].y - modulePos[i].y - modulePos[i].height;
+                                // possible modulstreifen found
+                                if (Math.Abs(distY - 0.1) < 0.005)
+                                {
+                                    yStreifenWidth = 1;
+                                }
+                                else if (Math.Abs(distY - 0.2) < 0.005)
+                                {
+                                    yStreifenWidth = 2;
+                                }
+                                if (yStreifenWidth > 0)
+                                {
+                                    yOverlap = Math.Min(modulePos[i].x + modulePos[i].width, modulePos[j].x + modulePos[j].width) - Math.Max(modulePos[i].x, modulePos[j].x);
+                                }
+                            }
+                            else
+                            {
+                                double distY = modulePos[i].y - modulePos[j].y - modulePos[j].height;
+                                if (Math.Abs(distY - 0.1) < 0.005)
+                                {
+                                    yStreifenWidth = 1;
+                                }
+                                else if (Math.Abs(distY - 0.2) < 0.005)
+                                {
+                                    yStreifenWidth = 2;
+                                }
+                                if (yStreifenWidth > 0)
+                                {
+                                    // possible modulstreifen found
+                                    yOverlap = Math.Min(modulePos[j].x + modulePos[j].width, modulePos[i].x + modulePos[i].width) - Math.Max(modulePos[j].x, modulePos[i].x);
+                                }
+                            }
+
+                            if (xOverlap > 0 && xStreifenWidth > 0)
+                            {
+                                modulStreifenLength += xOverlap * xStreifenWidth;
+                            }
+                            if (yOverlap > 0 && yStreifenWidth > 0)
+                            {
+                                modulStreifenLength += yOverlap * yStreifenWidth;
+                            }
+                            if (xOverlap > 0 && xStreifenWidth > 0 && yOverlap > 0 && yStreifenWidth > 0)
+                            {
+                                modulStreifenLength += xStreifenWidth / 10 * yStreifenWidth;
+                            }
+                        }
+                    }
+                }
+
+                streifen = Math.Ceiling(modulStreifenLength);
+            }
+            else
+            {
+                streifen = Math.Ceiling(nrOfModulatingModules * 1.5);
+            }
+
+            if (streifen == 0)
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK74", double.NegativeInfinity);
+            }
+            else
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK74", -streifen);
+            }
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK77", double.NegativeInfinity);
+
+
+            // nur bei Estrichkonstruktion
+            if (this.HasInsideConstruction)
+            {
+                if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL) ||
+                    this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL))
+                {
+                    // Stahlbleche
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK21", Double.NegativeInfinity);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK22", Double.NegativeInfinity);
+                }
+            }
+
+            // Rohrführungsplatte
+            if (graphical)
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(additionalPipe / 8));
+            }
+            else
+            {
+                if (additionalPipe > 0)
+                {
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(additionalPipe / 8));
+                }
+            }
+
+            // Modulniveauplatten
+            double area = this.PlannedFloorArea - this.PlannedModulArea - (streifen * (0.945 * 0.096));
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK73", -Math.Ceiling(area * 2));
 		}
 
 		public override double Dichte {
