@@ -10681,7 +10681,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden.
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimaboden {
             get {
@@ -10690,11 +10690,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden - %GESCHOSS%.
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 33 - %GESCHOSS%.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimaboden2 {
             get {
                 return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 20 - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden202 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden202", resourceCulture);
             }
         }
         

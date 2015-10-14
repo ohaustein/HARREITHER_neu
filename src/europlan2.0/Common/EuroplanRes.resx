@@ -2945,10 +2945,10 @@ cm</value>
     <value>konstr.</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimaboden" xml:space="preserve">
-    <value>Verlegedaten Modul Klimaboden</value>
+    <value>Verlegedaten Modul Klimaboden 33</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimaboden2" xml:space="preserve">
-    <value>Verlegedaten Modul Klimaboden - %GESCHOSS%</value>
+    <value>Verlegedaten Modul Klimaboden 33 - %GESCHOSS%</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimabodenAnzahlModule" xml:space="preserve">
     <value>Anzahl Module</value>
@@ -8048,5 +8048,11 @@ m²</value>
   </data>
   <data name="ProjectReport_EurovalRohr" xml:space="preserve">
     <value>Euroval Rohr</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden20" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden 20</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden202" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden 20 - %GESCHOSS%</value>
   </data>
 </root>
