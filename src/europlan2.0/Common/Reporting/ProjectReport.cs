@@ -14,8 +14,13 @@ using System.Collections;
 
 namespace Europlan.Common {
 	public partial class ProjectReport : Form {
-		
-        public class ModulKlimaBoden20OverviewWrapper : ModulBodenOverviewWrapper {
+
+        public class ModulKlimaBoden20OverviewWrapper : ModulBodenOverviewWrapper
+        {
+        }
+
+        public class ModulKlimaBoden20VerlegeDatenWrapper : ModulDeckeVerlegeDatenWrapper
+        {
         }
 
 		private combit.ListLabel15.ListLabel listLabel1;
@@ -105,6 +110,7 @@ namespace Europlan.Common {
             List<ModulKlimaBoden20Wrapper> modulBoden20AuslegungWrapper = new List<ModulKlimaBoden20Wrapper>();
 			List<ModulDeckeWrapper> modulDeckeAuslegungWrapper = new List<ModulDeckeWrapper>();
 			List<ModulDeckeVerlegeDatenWrapper> modulDeckeVerlegeDatenWrapper = new List<ModulDeckeVerlegeDatenWrapper>();
+            List<ModulKlimaBoden20VerlegeDatenWrapper> modulBoden20VerlegeDatenWrapper = new List<ModulKlimaBoden20VerlegeDatenWrapper>();
 			List<BilanzWrapper> eurovalBilanzWrapper = new List<BilanzWrapper>();
             List<BilanzWrapper> ecothermBilanzWrapper = new List<BilanzWrapper>();
             List<BilanzWrapper> jumbovalBilanzWrapper = new List<BilanzWrapper>();
@@ -167,6 +173,7 @@ namespace Europlan.Common {
 			if (reportOptions.Verlegedaten) {
 				verlegedatenCircuitWrapper = GetVerlegedatenCircuitWrapper();
 				modulDeckeVerlegeDatenWrapper = GetModulDeckeVerlegeDatenWrapper();
+                modulBoden20VerlegeDatenWrapper = GetModulBoden20VerlegeDatenWrapper();
 			}
 
 			if (reportOptions.Konstruktionen) {
@@ -203,6 +210,7 @@ namespace Europlan.Common {
             DataTable modulBoden20Auslegung = ReportHelper.ListToDataTable<ModulKlimaBoden20Wrapper>(modulBoden20AuslegungWrapper);
 			DataTable modulDeckeAuslegung = ReportHelper.ListToDataTable<ModulDeckeWrapper>(modulDeckeAuslegungWrapper);
 			DataTable modulDeckeVerlegeDaten = ReportHelper.ListToDataTable<ModulDeckeVerlegeDatenWrapper>(modulDeckeVerlegeDatenWrapper);
+            DataTable modulBoden20VerlegeDaten = ReportHelper.ListToDataTable<ModulKlimaBoden20VerlegeDatenWrapper>(modulBoden20VerlegeDatenWrapper);
 			DataTable eurovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(eurovalBilanzWrapper);
             DataTable ecothermBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(ecothermBilanzWrapper);
             DataTable jumbovalBilanz = ReportHelper.ListToDataTable<BilanzWrapper>(jumbovalBilanzWrapper);
@@ -241,6 +249,7 @@ namespace Europlan.Common {
             modulBoden20Auslegung.TableName = "ModulBoden20Auslegung";
 			modulDeckeAuslegung.TableName = "ModulDeckeAuslegung";
 			modulDeckeVerlegeDaten.TableName = "ModulDeckeVerlegeDaten";
+            modulBoden20VerlegeDaten.TableName = "ModulBoden20VerlegeDaten";
 			eurovalBilanz.TableName = "EurovalBilanz";
             ecothermBilanz.TableName = "EcothermBilanz";
             jumbovalBilanz.TableName = "JumbovalBilanz";
@@ -278,6 +287,7 @@ namespace Europlan.Common {
 			reportData.Tables.Add(modulBodenAuslegung);
             reportData.Tables.Add(modulBoden20Auslegung);
 			reportData.Tables.Add(modulDeckeAuslegung);
+            reportData.Tables.Add(modulBoden20VerlegeDaten);
 			reportData.Tables.Add(modulDeckeVerlegeDaten);
 			reportData.Tables.Add(eurovalBilanz);
             reportData.Tables.Add(ecothermBilanz);
@@ -4162,7 +4172,6 @@ namespace Europlan.Common {
 			return wrapperHeatList;
 		}
 
-#warning TODO: implement
         public List<ModulKlimaBoden20Wrapper> GetModulBoden20Wrapper()
         {
             List<ModulKlimaBoden20Wrapper> wrapperHeatList = new List<ModulKlimaBoden20Wrapper>();
@@ -4248,6 +4257,8 @@ namespace Europlan.Common {
                                 wrapper.UsedAsCircuitWrapper = true;
 
                                 wrapper.Circuits = mc.NrOfCircuit + 1;
+                                wrapper.TotalArea = mc.HeatArea;
+                                wrapper.CoveredArea = mc.CoveredArea;
                                 wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                 wrapper.TotalModules = mc.CountModules();
                                 wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
@@ -4510,6 +4521,8 @@ namespace Europlan.Common {
                                         wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                         wrapper.TotalModules = mc.CountModules();
                                         wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+                                        wrapper.TotalArea = mc.HeatArea;
+                                        wrapper.CoveredArea = mc.CoveredArea;
 
                                         wrapper.Wassermenge = mc.C_DurchflussCool;
                                         wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
@@ -5022,566 +5035,6 @@ namespace Europlan.Common {
 
 			return wrapperHeatList;
 		}
-
-#warning TODO implement
-        /*
-        public List<ModulKlimaBoden20Wrapper> GetModulBoden20Wrapper()
-        {
-            List<ModulKlimaBoden20Wrapper> wrapperHeatList = new List<ModulKlimaBoden20Wrapper>();
-            List<ModulKlimaBoden20Wrapper> wrapperCoolList = new List<ModulKlimaBoden20Wrapper>();
-
-            ModulKlimaBoden20Wrapper wrapperOverview = null;
-            ModulKlimaBoden20Wrapper wrapperHeat = null;
-            ModulKlimaBoden20Wrapper wrapperCool = null;
-
-            foreach (Floor floor in project.Floors)
-            {
-                foreach (Room room in floor.Rooms)
-                {
-                    foreach (PlannedProduct pp in room.PlannedProducts)
-                    {
-                        wrapperOverview = null;
-                        wrapperHeat = null;
-                        wrapperCool = null;
-                        if (pp.Product is ModulKlimaBoden20Product)
-                        {
-                            ModulKlimaBoden20Product mp = pp.Product as ModulKlimaBoden20Product;
-
-                            wrapperOverview = new ModulKlimaBoden20Wrapper();
-                            wrapperOverview.HeatOrCool = "overview";
-                            wrapperOverview.FloorId = floor.Id;
-                            wrapperOverview.FloorName = floor.Name;
-
-                            wrapperOverview.RoomId = room.Id;
-                            wrapperOverview.RoomName = room.Name;
-                            wrapperOverview.TeilSystem = pp.InternalName;
-                            if (pp.Product.HasInsideConstruction)
-                            {
-                                wrapperOverview.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
-                                wrapperOverview.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
-                            }
-                            if (pp.Product.HasOutsideConstruction)
-                            {
-                                wrapperOverview.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
-                                wrapperOverview.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
-                            }
-                            wrapperOverview.Circuits = pp.Product.PlannedCircuitCount;
-                            if (mp.PlannedConnection != null)
-                            {
-                                switch (mp.PlannedConnection.ConnectionType)
-                                {
-                                    case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
-                                        wrapperOverview.DistributorId = mp.PlannedConnection.DistributorId;
-                                        break;
-                                    case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                        wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
-                                        break;
-                                    case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                        wrapperOverview.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
-                                        break;
-                                }
-                            }
-
-                            foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                            {
-                                foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                {
-                                    foreach (KlimaFlaechenList ml in sa.Rows)
-                                    {
-                                        foreach (KlimaFlaechenModul modul in ml.List)
-                                        {
-                                            if (!wrapperOverview.Modules.ContainsKey(modul.ModulType))
-                                            {
-                                                wrapperOverview.Modules.Add(modul.ModulType, 1);
-                                            }
-                                            else
-                                            {
-                                                wrapperOverview.Modules[modul.ModulType]++;
-                                            }
-                                        }
-                                        wrapperOverview.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                    }
-                                }
-                            }
-
-                            wrapperOverview.TotalArea = mp.CoveredArea;
-                            wrapperOverview.ConnectionArea = mp.PlannedRemoveArea;
-
-                            double v, r;
-                            pp.Product.GetHeatFlow(out v, out r);
-                            wrapperOverview.RoomTemp = room.RoomHeatTemperature;
-                            wrapperOverview.VorlaufTemp = v;
-                            wrapperOverview.RuecklaufTemp = r;
-                            wrapperOverview.QSoll = pp.RequestedHeatLoad;
-                            wrapperOverview.QFBH = pp.PlannedHeatLoad;
-
-                            wrapperOverview.Wassermenge = pp.Product.PlannedDurchflussHeat;
-                            wrapperOverview.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
-                            wrapperOverview.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
-
-                            wrapperOverview.UnusedArea = mp.PlannedAreaUnheated;
-
-                            if (mp.PlannedConnection != null)
-                            {
-                                if (mp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT)
-                                {
-                                    wrapperOverview.SubSystem = true;
-                                    wrapperOverview.VorlaufTemp = -1;
-                                    wrapperOverview.RuecklaufTemp = -1;
-                                }
-                            }
-                            if (mp.IsOtherProductConnected)
-                            {
-                                wrapperOverview.OtherSystemsConnected = true;
-                            }
-
-                            wrapperHeatList.Add(wrapperOverview);
-
-                            ModulKlimaBoden20Wrapper prevWrapper = null;
-                            foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                            {
-                                ModulKlimaBoden20Wrapper wrapper = new ModulKlimaBoden20Wrapper(wrapperOverview);
-                                wrapper.UsedAsCircuitWrapper = true;
-
-                                wrapper.Circuits = mc.NrOfCircuit + 1;
-                                wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-
-                                foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                {
-                                    foreach (KlimaFlaechenList ml in sa.Rows)
-                                    {
-                                        foreach (KlimaFlaechenModul modul in ml.List)
-                                        {
-                                            if (!wrapper.Modules.ContainsKey(modul.ModulType))
-                                            {
-                                                wrapper.Modules.Add(modul.ModulType, 1);
-                                            }
-                                            else
-                                            {
-                                                wrapper.Modules[modul.ModulType]++;
-                                            }
-                                        }
-                                        wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                    }
-                                }
-
-                                wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
-
-                                wrapper.TotalArea = mc.CoveredArea;
-                                wrapper.Wassermenge = mc.C_DurchflussHeat;
-                                wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
-                                wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
-                                wrapper.V = mc.C_FlussGeschwindigkeitHeat;
-
-                                if (prevWrapper == null)
-                                {
-                                    prevWrapper = wrapper;
-                                    wrapperHeatList.Add(wrapper);
-                                }
-                                else
-                                {
-                                    bool ok = true;
-                                    ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-                                    foreach (KlimaFlaechenModul.ModulTypeEnum item in wrapper.Modules.Keys)
-                                    {
-                                        if (!(prevWrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                        {
-                                            ok = false;
-                                        }
-                                    }
-                                    foreach (KlimaFlaechenModul.ModulTypeEnum item in prevWrapper.Modules.Keys)
-                                    {
-                                        if (!(wrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                        {
-                                            ok = false;
-                                        }
-                                    }
-                                    ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
-                                    ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
-                                    ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
-                                    ok = ok && Math.Round(prevWrapper.DruckverlustHeizkreis, 1) == Math.Round(wrapper.DruckverlustHeizkreis, 1);
-                                    ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 1) == Math.Round(wrapper.DruckverlustVerteiler, 1);
-                                    ok = ok && Math.Round(prevWrapper.V, 1) == Math.Round(wrapper.V, 1);
-
-                                    if (ok)
-                                    {
-                                        prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
-                                    }
-                                    else
-                                    {
-                                        prevWrapper = wrapper;
-                                        wrapperHeatList.Add(wrapper);
-                                    }
-                                }
-                            }
-
-                            if (wrapperHeat == null && pp.RequestedHeatLoad != 0)
-                            {
-                                wrapperHeat = new ModulKlimaBoden20Wrapper();
-                                wrapperHeat.HeatOrCool = EuroplanRes.LL_Report_Heizbetrieb; //"Heizen"
-                                wrapperHeat.FloorId = floor.Id;
-                                wrapperHeat.FloorName = floor.Name;
-
-                                wrapperHeat.RoomId = room.Id;
-                                wrapperHeat.RoomName = room.Name;
-                                wrapperHeat.TeilSystem = pp.InternalName;
-                                if (pp.Product.HasInsideConstruction)
-                                {
-                                    wrapperHeat.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
-                                    wrapperHeat.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
-                                }
-                                if (pp.Product.HasOutsideConstruction)
-                                {
-                                    wrapperHeat.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
-                                    wrapperHeat.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
-                                }
-                                wrapperHeat.Circuits = pp.Product.PlannedCircuitCount;
-                                if (mp.PlannedConnection != null)
-                                {
-                                    switch (mp.PlannedConnection.ConnectionType)
-                                    {
-                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
-                                            wrapperHeat.DistributorId = mp.PlannedConnection.DistributorId;
-                                            break;
-                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
-                                            break;
-                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperHeat.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
-                                            break;
-                                    }
-                                }
-
-                                foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                                {
-                                    foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                    {
-                                        foreach (KlimaFlaechenList ml in sa.Rows)
-                                        {
-                                            foreach (KlimaFlaechenModul modul in ml.List)
-                                            {
-                                                if (!wrapperHeat.Modules.ContainsKey(modul.ModulType))
-                                                {
-                                                    wrapperHeat.Modules.Add(modul.ModulType, 1);
-                                                }
-                                                else
-                                                {
-                                                    wrapperHeat.Modules[modul.ModulType]++;
-                                                }
-                                            }
-                                            wrapperHeat.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                        }
-                                    }
-                                }
-
-                                wrapperHeat.TotalArea = mp.CoveredArea;
-                                wrapperHeat.ConnectionArea = mp.PlannedRemoveArea;
-
-                                pp.Product.GetHeatFlow(out v, out r);
-                                wrapperHeat.RoomTemp = room.RoomHeatTemperature;
-                                wrapperHeat.VorlaufTemp = v;
-                                wrapperHeat.RuecklaufTemp = r;
-                                wrapperHeat.QSoll = pp.RequestedHeatLoad;
-                                wrapperHeat.QFBH = pp.PlannedHeatLoad;
-
-                                wrapperHeat.Wassermenge = pp.Product.PlannedDurchflussHeat;
-                                wrapperHeat.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilHeat;
-                                wrapperHeat.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
-
-                                wrapperHeat.UnusedArea = mp.PlannedAreaUnheated;
-
-                                if (mp.PlannedConnection != null)
-                                {
-                                    if (mp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT)
-                                    {
-                                        wrapperHeat.SubSystem = true;
-                                        wrapperHeat.VorlaufTemp = -1;
-                                        wrapperHeat.RuecklaufTemp = -1;
-                                    }
-                                }
-                                if (mp.IsOtherProductConnected)
-                                {
-                                    wrapperHeat.OtherSystemsConnected = true;
-                                }
-                            }
-                            if (project.CalculateCoolLoad && wrapperCool == null && pp.RequestedCoolLoad != 0)
-                            {
-                                wrapperCool = new ModulKlimaBoden20Wrapper();
-                                wrapperCool.HeatOrCool = EuroplanRes.LL_Report_Kuehlbetrieb; //"Kühlen"
-                                wrapperCool.FloorId = floor.Id;
-                                wrapperCool.FloorName = floor.Name;
-
-                                wrapperCool.RoomId = room.Id;
-                                wrapperCool.RoomName = room.Name;
-                                wrapperCool.TeilSystem = pp.InternalName;
-                                if (pp.Product.HasInsideConstruction)
-                                {
-                                    wrapperCool.InsideConstruction = pp.Product.PlannedInsideConstruction.Id;
-                                    wrapperCool.InsideRValue = pp.Product.PlannedInsideConstructionRValue;
-                                }
-                                if (pp.Product.HasOutsideConstruction)
-                                {
-                                    wrapperCool.OutsideConstruction = pp.Product.PlannedOutsideConstruction.Id;
-                                    wrapperCool.OutsideRValue = pp.Product.PlannedOutsideConstructionRValue;
-                                }
-                                wrapperCool.Circuits = pp.Product.PlannedCircuitCount;
-                                if (mp.PlannedConnection != null)
-                                {
-                                    switch (mp.PlannedConnection.ConnectionType)
-                                    {
-                                        case ProductConnection.ConnectionTypeEnum.DISTRIBUTOR:
-                                            wrapperCool.DistributorId = mp.PlannedConnection.DistributorId;
-                                            break;
-                                        case ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT:
-                                            wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussSub;
-                                            break;
-                                        case ProductConnection.ConnectionTypeEnum.TICHELMANN:
-                                            wrapperCool.DistributorId = EuroplanRes.ProjectReport_VerteileranschlussTichelmann;
-                                            break;
-                                    }
-                                }
-
-                                foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                                {
-                                    foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                    {
-                                        foreach (KlimaFlaechenList ml in sa.Rows)
-                                        {
-                                            foreach (KlimaFlaechenModul modul in ml.List)
-                                            {
-                                                if (!wrapperCool.Modules.ContainsKey(modul.ModulType))
-                                                {
-                                                    wrapperCool.Modules.Add(modul.ModulType, 1);
-                                                }
-                                                else
-                                                {
-                                                    wrapperCool.Modules[modul.ModulType]++;
-                                                }
-                                            }
-                                            wrapperCool.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                        }
-                                    }
-                                }
-
-                                wrapperCool.TotalArea = mp.CoveredArea;
-                                wrapperCool.ConnectionArea = mp.PlannedRemoveArea;
-
-                                pp.Product.GetCoolFlow(out v, out r);
-                                wrapperCool.RoomTemp = room.RoomCoolTemperature;
-                                wrapperCool.VorlaufTemp = v;
-                                wrapperCool.RuecklaufTemp = r;
-                                wrapperCool.QSoll = pp.RequestedCoolLoad;
-                                wrapperCool.QFBH = pp.PlannedCoolLoad;
-
-                                wrapperCool.Wassermenge = pp.Product.PlannedDurchflussCool;
-                                wrapperCool.DruckverlustHeizkreis = pp.Product.PlannedDeltaRhoInklVentilCool;
-                                wrapperCool.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
-
-                                wrapperCool.UnusedArea = mp.PlannedAreaUnheated;
-
-                                if (mp.PlannedConnection != null)
-                                {
-                                    if (mp.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT)
-                                    {
-                                        wrapperCool.SubSystem = true;
-                                        wrapperCool.VorlaufTemp = -1;
-                                        wrapperCool.RuecklaufTemp = -1;
-                                    }
-                                }
-                                if (mp.IsOtherProductConnected)
-                                {
-                                    wrapperCool.OtherSystemsConnected = true;
-                                }
-                            }
-                            if (wrapperHeat != null)
-                            {
-                                if (mp.PlannedCircuitCount == 0)
-                                {
-                                    wrapperHeatList.Add(wrapperHeat);
-                                }
-                                else
-                                {
-                                    wrapperHeatList.Add(wrapperHeat);
-
-                                    prevWrapper = null;
-                                    foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                                    {
-                                        ModulKlimaBoden20Wrapper wrapper = new ModulKlimaBoden20Wrapper(wrapperHeat);
-                                        wrapper.UsedAsCircuitWrapper = true;
-
-                                        wrapper.Circuits = mc.NrOfCircuit + 1;
-                                        wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-
-                                        foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                        {
-                                            foreach (KlimaFlaechenList ml in sa.Rows)
-                                            {
-                                                foreach (KlimaFlaechenModul modul in ml.List)
-                                                {
-                                                    if (!wrapper.Modules.ContainsKey(modul.ModulType))
-                                                    {
-                                                        wrapper.Modules.Add(modul.ModulType, 1);
-                                                    }
-                                                    else
-                                                    {
-                                                        wrapper.Modules[modul.ModulType]++;
-                                                    }
-                                                }
-                                                wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                            }
-                                        }
-
-                                        wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
-
-                                        wrapper.TotalArea = mc.CoveredArea;
-                                        wrapper.Wassermenge = mc.C_DurchflussHeat;
-                                        wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
-                                        wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
-                                        wrapper.V = mc.C_FlussGeschwindigkeitHeat;
-
-                                        if (prevWrapper == null)
-                                        {
-                                            prevWrapper = wrapper;
-                                            wrapperHeatList.Add(wrapper);
-                                        }
-                                        else
-                                        {
-                                            bool ok = true;
-                                            ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-                                            foreach (KlimaFlaechenModul.ModulTypeEnum item in wrapper.Modules.Keys)
-                                            {
-                                                if (!(prevWrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                                {
-                                                    ok = false;
-                                                }
-                                            }
-                                            foreach (KlimaFlaechenModul.ModulTypeEnum item in prevWrapper.Modules.Keys)
-                                            {
-                                                if (!(wrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                                {
-                                                    ok = false;
-                                                }
-                                            }
-                                            ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
-                                            ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
-                                            ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
-                                            ok = ok && Math.Round(prevWrapper.DruckverlustHeizkreis, 1) == Math.Round(wrapper.DruckverlustHeizkreis, 1);
-                                            ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 1) == Math.Round(wrapper.DruckverlustVerteiler, 1);
-                                            ok = ok && Math.Round(prevWrapper.V, 1) == Math.Round(wrapper.V, 1);
-
-                                            if (ok)
-                                            {
-                                                prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
-                                            }
-                                            else
-                                            {
-                                                prevWrapper = wrapper;
-                                                wrapperHeatList.Add(wrapper);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            if (wrapperCool != null)
-                            {
-                                if (mp.PlannedCircuitCount == 0)
-                                {
-                                    wrapperCoolList.Add(wrapperCool);
-                                }
-                                else
-                                {
-                                    wrapperCoolList.Add(wrapperCool);
-
-                                    prevWrapper = null;
-                                    foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
-                                    {
-                                        ModulKlimaBoden20Wrapper wrapper = new ModulKlimaBoden20Wrapper(wrapperCool);
-                                        wrapper.UsedAsCircuitWrapper = true;
-
-                                        wrapper.Circuits = mc.NrOfCircuit + 1;
-                                        wrapper.CircuitsAsString = wrapper.Circuits.ToString();
-
-                                        foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
-                                        {
-                                            foreach (KlimaFlaechenList ml in sa.Rows)
-                                            {
-                                                foreach (KlimaFlaechenModul modul in ml.List)
-                                                {
-                                                    if (!wrapper.Modules.ContainsKey(modul.ModulType))
-                                                    {
-                                                        wrapper.Modules.Add(modul.ModulType, 1);
-                                                    }
-                                                    else
-                                                    {
-                                                        wrapper.Modules[modul.ModulType]++;
-                                                    }
-                                                }
-                                                wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
-                                            }
-                                        }
-
-                                        wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
-
-                                        wrapper.TotalArea = mc.CoveredArea;
-                                        wrapper.Wassermenge = mc.C_DurchflussCool;
-                                        wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
-                                        wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyCool;
-                                        wrapper.V = mc.C_FlussGeschwindigkeitCool;
-
-                                        if (prevWrapper == null)
-                                        {
-                                            prevWrapper = wrapper;
-                                            wrapperCoolList.Add(wrapper);
-                                        }
-                                        else
-                                        {
-                                            bool ok = true;
-                                            ok = ok && prevWrapper.TotalModules == wrapper.TotalModules;
-                                            foreach (KlimaFlaechenModul.ModulTypeEnum item in wrapper.Modules.Keys)
-                                            {
-                                                if (!(prevWrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                                {
-                                                    ok = false;
-                                                }
-                                            }
-                                            foreach (KlimaFlaechenModul.ModulTypeEnum item in prevWrapper.Modules.Keys)
-                                            {
-                                                if (!(wrapper.Modules.ContainsKey(item) && prevWrapper.Modules[item] == wrapper.Modules[item]))
-                                                {
-                                                    ok = false;
-                                                }
-                                            }
-                                            ok = ok && prevWrapper.SonstigeVerbindeleitung == wrapper.SonstigeVerbindeleitung;
-                                            ok = ok && Math.Round(prevWrapper.LengthConnection, 1) == Math.Round(wrapper.LengthConnection, 1);
-                                            ok = ok && Math.Round(prevWrapper.Wassermenge, 1) == Math.Round(wrapper.Wassermenge, 1);
-                                            ok = ok && Math.Round(prevWrapper.DruckverlustHeizkreis, 1) == Math.Round(wrapper.DruckverlustHeizkreis, 1);
-                                            ok = ok && Math.Round(prevWrapper.DruckverlustVerteiler, 1) == Math.Round(wrapper.DruckverlustVerteiler, 1);
-                                            ok = ok && Math.Round(prevWrapper.V, 1) == Math.Round(wrapper.V, 1);
-
-                                            if (ok)
-                                            {
-                                                prevWrapper.CircuitsAsString = prevWrapper.Circuits.ToString() + "-" + wrapper.Circuits.ToString();
-                                            }
-                                            else
-                                            {
-                                                prevWrapper = wrapper;
-                                                wrapperCoolList.Add(wrapper);
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            wrapperHeatList.AddRange(wrapperCoolList);
-
-            return wrapperHeatList;
-        }
-         * */
 
 		public List<EurovalAreaOverviewWrapper> GetEurovalOverviewWrapper() {
 			List<EurovalAreaOverviewWrapper> wrapperList = new List<EurovalAreaOverviewWrapper>();
@@ -6427,15 +5880,15 @@ namespace Europlan.Common {
 		}
 
 #warning TODO implement
-        /*
-        public List<ModulBoden20VerlegeDatenWrapper> GetModulBoden20VerlegeDatenWrapper()
+        
+        public List<ModulKlimaBoden20VerlegeDatenWrapper> GetModulBoden20VerlegeDatenWrapper()
         {
-            List<ModulBoden20VerlegeDatenWrapper> wrapperList = new List<ModulBoden20VerlegeDatenWrapper>();
+            List<ModulKlimaBoden20VerlegeDatenWrapper> wrapperList = new List<ModulKlimaBoden20VerlegeDatenWrapper>();
 
             ModulKlimaBoden20Product p = null;
             int prevCircuit;
             int prevTeilFlaeche;
-            ModulBoden20VerlegeDatenWrapper wrapper;
+            ModulKlimaBoden20VerlegeDatenWrapper wrapper;
             int subAreaCount;
             int rowCount;
 
@@ -6460,7 +5913,7 @@ namespace Europlan.Common {
                                     foreach (KlimaFlaechenList l in a.Rows)
                                     {
                                         rowCount++;
-                                        wrapper = new ModulBoden20VerlegeDatenWrapper();
+                                        wrapper = new ModulKlimaBoden20VerlegeDatenWrapper();
                                         wrapper.FloorId = floor.Id;
                                         wrapper.FloorName = floor.Name;
                                         if (prevCircuit == 0 && prevTeilFlaeche == 0)
@@ -6514,7 +5967,7 @@ namespace Europlan.Common {
             }
 
             return wrapperList;
-        } */
+        } 
 
 		public List<KonstruktionenWrapper> GetKonstruktionenWrapper() {
 			List<KonstruktionenWrapper> wrapperList = new List<KonstruktionenWrapper>();
