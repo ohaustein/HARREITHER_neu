@@ -4218,6 +4218,17 @@ namespace Europlan.Common {
                             wrapperOverview.CoveredArea = mp.CoveredArea;
 
                             wrapperOverview.ConnectionArea = mp.PlannedRemoveArea;
+                            wrapperOverview.SonstigeVerbindeleitung = 0;
+                            foreach (ModulKlimaBoden20Circuit mc in mp.PlannedCircuits)
+                            {
+                                foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                                {
+                                    foreach (KlimaFlaechenList ml in sa.Rows)
+                                    {                                     
+                                        wrapperOverview.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+                                    }
+                                }
+                            }
 
                             double v, r;
                             pp.Product.GetHeatFlow(out v, out r);
@@ -4262,6 +4273,15 @@ namespace Europlan.Common {
                                 wrapper.CircuitsAsString = wrapper.Circuits.ToString();
                                 wrapper.TotalModules = mc.CountModules();
                                 wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
+
+                                wrapper.SonstigeVerbindeleitung = 0;
+                                foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                                {
+                                    foreach (KlimaFlaechenList ml in sa.Rows)
+                                    {
+                                        wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+                                    }
+                                }
 
                                 wrapper.Wassermenge = mc.C_DurchflussHeat;
                                 wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
@@ -4449,6 +4469,15 @@ namespace Europlan.Common {
                                         wrapper.TotalModules = mc.CountModules();
                                         wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
 
+                                        wrapper.SonstigeVerbindeleitung = 0;
+                                        foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                                        {
+                                            foreach (KlimaFlaechenList ml in sa.Rows)
+                                            {
+                                                wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+                                            }
+                                        }
+
                                         wrapper.Wassermenge = mc.C_DurchflussHeat;
                                         wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilHeat;
                                         wrapper.DruckverlustVerteiler = pp.Product.PlannedDeltaRhoVerteilerOnlyHeat;
@@ -4523,6 +4552,15 @@ namespace Europlan.Common {
                                         wrapper.LengthConnection = mc.PipeLengthVorlaufWithoutOtherProductTotal + mc.PipeLengthRuecklaufWithoutOtherProductTotal;
                                         wrapper.TotalArea = mc.HeatArea;
                                         wrapper.CoveredArea = mc.CoveredArea;
+
+                                        wrapper.SonstigeVerbindeleitung = 0;
+                                        foreach (ModulKlimaBoden20SubArea sa in mc.SubAreas)
+                                        {
+                                            foreach (KlimaFlaechenList ml in sa.Rows)
+                                            {
+                                                wrapper.SonstigeVerbindeleitung += ml.LengthVerbindeleitungen;
+                                            }
+                                        }
 
                                         wrapper.Wassermenge = mc.C_DurchflussCool;
                                         wrapper.DruckverlustHeizkreis = mc.C_DruckverlustInklVentilCool;
