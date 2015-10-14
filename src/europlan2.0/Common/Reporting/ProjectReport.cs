@@ -4672,7 +4672,7 @@ namespace Europlan.Common {
                                         break;
                                 }
                             }
-
+                            wrapperOverview.SonstigeVerbindeleitung = 0;
 							foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 								foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 									foreach (KlimaFlaechenList ml in sa.Rows) {
@@ -4726,6 +4726,7 @@ namespace Europlan.Common {
 								wrapper.Circuits = mc.NrOfCircuit + 1;
 								wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 
+                                wrapper.SonstigeVerbindeleitung = 0;
 								foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 									foreach (KlimaFlaechenList ml in sa.Rows) {
 										foreach (KlimaFlaechenModul modul in ml.List) {
@@ -4811,6 +4812,7 @@ namespace Europlan.Common {
                                     }
                                 }
 
+                                wrapperHeat.SonstigeVerbindeleitung = 0;
 								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 									foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 										foreach (KlimaFlaechenList ml in sa.Rows) {
@@ -4885,6 +4887,7 @@ namespace Europlan.Common {
                                     }
                                 }
 
+                                wrapperCool.SonstigeVerbindeleitung = 0;
 								foreach (ModulDeckeCircuit mc in mp.PlannedCircuits) {
 									foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 										foreach (KlimaFlaechenList ml in sa.Rows) {
@@ -4941,6 +4944,7 @@ namespace Europlan.Common {
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 
+                                        wrapper.SonstigeVerbindeleitung = 0;
 										foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 											foreach (KlimaFlaechenList ml in sa.Rows) {
 												foreach (KlimaFlaechenModul modul in ml.List) {
@@ -5009,6 +5013,7 @@ namespace Europlan.Common {
 										wrapper.Circuits = mc.NrOfCircuit + 1;
 										wrapper.CircuitsAsString = wrapper.Circuits.ToString();
 
+                                        wrapper.SonstigeVerbindeleitung = 0;
 										foreach (ModulDeckeSubArea sa in mc.SubAreas) {
 											foreach (KlimaFlaechenList ml in sa.Rows) {
 												foreach (KlimaFlaechenModul modul in ml.List) {
