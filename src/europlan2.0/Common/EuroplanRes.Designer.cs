@@ -7778,7 +7778,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Modul Klimaboden.
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_AuslegungKlimaboden {
             get {
@@ -7787,7 +7787,16 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS%.
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimaboden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimaboden20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 33 - %GESCHOSS%.
         /// </summary>
         internal static string LL_Report_AuslegungKlimabodenGeschoss {
             get {
@@ -7796,7 +7805,16 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS% (Heizbetrieb).
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 20 - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschoss20 {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschoss20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 33 - %GESCHOSS% (Heizbetrieb).
         /// </summary>
         internal static string LL_Report_AuslegungKlimabodenGeschossHeiz {
             get {
@@ -7805,11 +7823,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auslegung Modul Klimaboden - %GESCHOSS% (Kühlbetrieb).
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 20 - %GESCHOSS% (Heizbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschossHeiz20 {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschossHeiz20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 33 - %GESCHOSS% (Kühlbetrieb).
         /// </summary>
         internal static string LL_Report_AuslegungKlimabodenGeschossKuehl {
             get {
                 return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschossKuehl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auslegung Modul Klimaboden 20 - %GESCHOSS% (Kühlbetrieb).
+        /// </summary>
+        internal static string LL_Report_AuslegungKlimabodenGeschossKuehl20 {
+            get {
+                return ResourceManager.GetString("LL_Report_AuslegungKlimabodenGeschossKuehl20", resourceCulture);
             }
         }
         
@@ -8014,11 +8050,20 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bilanz Modul Klimaboden.
+        ///   Looks up a localized string similar to Bilanz Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_BilanzKlimaboden {
             get {
                 return ResourceManager.GetString("LL_Report_BilanzKlimaboden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilanz Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_BilanzKlimaboden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_BilanzKlimaboden20", resourceCulture);
             }
         }
         
@@ -8104,11 +8149,20 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden.
+        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_FlaechenuebersichtModulBoden {
             get {
                 return ResourceManager.GetString("LL_Report_FlaechenuebersichtModulBoden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flächenübersicht Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_FlaechenuebersichtModulBoden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_FlaechenuebersichtModulBoden20", resourceCulture);
             }
         }
         
@@ -8641,6 +8695,26 @@ namespace Europlan.Common {
         internal static string LL_Report_KlimabodenFlaecheAnbindung {
             get {
                 return ResourceManager.GetString("LL_Report_KlimabodenFlaecheAnbindung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beheizt
+        ///m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheBeheizt {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheBeheizt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Belegt
+        ///m².
+        /// </summary>
+        internal static string LL_Report_KlimabodenFlaecheBelegt {
+            get {
+                return ResourceManager.GetString("LL_Report_KlimabodenFlaecheBelegt", resourceCulture);
             }
         }
         
@@ -10607,7 +10681,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden.
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 33.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimaboden {
             get {
@@ -10616,11 +10690,29 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden - %GESCHOSS%.
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 33 - %GESCHOSS%.
         /// </summary>
         internal static string LL_Report_VerlegedatenKlimaboden2 {
             get {
                 return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 20.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden20 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verlegedaten Modul Klimaboden 20 - %GESCHOSS%.
+        /// </summary>
+        internal static string LL_Report_VerlegedatenKlimaboden202 {
+            get {
+                return ResourceManager.GetString("LL_Report_VerlegedatenKlimaboden202", resourceCulture);
             }
         }
         
@@ -19138,6 +19230,15 @@ namespace Europlan.Common {
         internal static string ProjectReport_Estrichflaeche {
             get {
                 return ResourceManager.GetString("ProjectReport_Estrichflaeche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Euroval Rohr.
+        /// </summary>
+        internal static string ProjectReport_EurovalRohr {
+            get {
+                return ResourceManager.GetString("ProjectReport_EurovalRohr", resourceCulture);
             }
         }
         

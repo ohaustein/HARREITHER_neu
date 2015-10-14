@@ -674,6 +674,7 @@
     <Compile Include="Project\Wrapper\Products\Jumboval\JumbovalAreaOverviewWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\Jumboval\JumbovalWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulBoden\ModulBodenWrapper.cs" />
+    <Compile Include="Project\Wrapper\Products\ModulBoden\ModulKlimaBoden20Wrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeVerlegeDatenWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeWrapper.cs" />
     <Compile Include="Project\Wrapper\Products\ModulDecke\ModulDeckeOverviewWrapper.cs" />

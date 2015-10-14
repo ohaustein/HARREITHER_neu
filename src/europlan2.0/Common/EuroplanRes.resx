@@ -2043,16 +2043,16 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
     <value>Auslegung Hitherm Klimawand - %GESCHOSS% (Kühlbetrieb)</value>
   </data>
   <data name="LL_Report_AuslegungKlimaboden" xml:space="preserve">
-    <value>Auslegung Modul Klimaboden</value>
+    <value>Auslegung Modul Klimaboden 33</value>
   </data>
   <data name="LL_Report_AuslegungKlimabodenGeschoss" xml:space="preserve">
-    <value>Auslegung Modul Klimaboden - %GESCHOSS%</value>
+    <value>Auslegung Modul Klimaboden 33 - %GESCHOSS%</value>
   </data>
   <data name="LL_Report_AuslegungKlimabodenGeschossHeiz" xml:space="preserve">
-    <value>Auslegung Modul Klimaboden - %GESCHOSS% (Heizbetrieb)</value>
+    <value>Auslegung Modul Klimaboden 33 - %GESCHOSS% (Heizbetrieb)</value>
   </data>
   <data name="LL_Report_AuslegungKlimabodenGeschossKuehl" xml:space="preserve">
-    <value>Auslegung Modul Klimaboden - %GESCHOSS% (Kühlbetrieb)</value>
+    <value>Auslegung Modul Klimaboden 33 - %GESCHOSS% (Kühlbetrieb)</value>
   </data>
   <data name="LL_Report_AuslegungKlimadecke" xml:space="preserve">
     <value>Auslegung Modul Klimadecke</value>
@@ -2117,7 +2117,7 @@ Bedarf</value>
     <value>Bilanz Hitherm Compact Klimawand</value>
   </data>
   <data name="LL_Report_BilanzKlimaboden" xml:space="preserve">
-    <value>Bilanz Modul Klimaboden</value>
+    <value>Bilanz Modul Klimaboden 33</value>
   </data>
   <data name="LL_Report_BilanzKlimadecke" xml:space="preserve">
     <value>Bilanz Modul Klimadecke</value>
@@ -2144,7 +2144,7 @@ Bedarf</value>
     <value>Flächen- und Längenübersicht Hitherm Compact Klimawand</value>
   </data>
   <data name="LL_Report_FlaechenuebersichtModulBoden" xml:space="preserve">
-    <value>Flächenübersicht Modul Klimaboden</value>
+    <value>Flächenübersicht Modul Klimaboden 33</value>
   </data>
   <data name="LL_Report_FlaechenuebersichtModulDecke" xml:space="preserve">
     <value>Flächenübersicht Modul Klimadecke</value>
@@ -2945,10 +2945,10 @@ cm</value>
     <value>konstr.</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimaboden" xml:space="preserve">
-    <value>Verlegedaten Modul Klimaboden</value>
+    <value>Verlegedaten Modul Klimaboden 33</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimaboden2" xml:space="preserve">
-    <value>Verlegedaten Modul Klimaboden - %GESCHOSS%</value>
+    <value>Verlegedaten Modul Klimaboden 33 - %GESCHOSS%</value>
   </data>
   <data name="LL_Report_VerlegedatenKlimabodenAnzahlModule" xml:space="preserve">
     <value>Anzahl Module</value>
@@ -8019,5 +8019,40 @@ Nummer</value>
   </data>
   <data name="Material_MK77" xml:space="preserve">
     <value />
+  </data>
+  <data name="LL_Report_AuslegungKlimaboden20" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden 20</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschoss20" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden 20 - %GESCHOSS%</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschossHeiz20" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden 20 - %GESCHOSS% (Heizbetrieb)</value>
+  </data>
+  <data name="LL_Report_AuslegungKlimabodenGeschossKuehl20" xml:space="preserve">
+    <value>Auslegung Modul Klimaboden 20 - %GESCHOSS% (Kühlbetrieb)</value>
+  </data>
+  <data name="LL_Report_BilanzKlimaboden20" xml:space="preserve">
+    <value>Bilanz Modul Klimaboden 20</value>
+  </data>
+  <data name="LL_Report_FlaechenuebersichtModulBoden20" xml:space="preserve">
+    <value>Flächenübersicht Modul Klimaboden 20</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheBeheizt" xml:space="preserve">
+    <value>Beheizt
+m²</value>
+  </data>
+  <data name="LL_Report_KlimabodenFlaecheBelegt" xml:space="preserve">
+    <value>Belegt
+m²</value>
+  </data>
+  <data name="ProjectReport_EurovalRohr" xml:space="preserve">
+    <value>Euroval Rohr</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden20" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden 20</value>
+  </data>
+  <data name="LL_Report_VerlegedatenKlimaboden202" xml:space="preserve">
+    <value>Verlegedaten Modul Klimaboden 20 - %GESCHOSS%</value>
   </data>
 </root>

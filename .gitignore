@@ -12,3 +12,6 @@ src/europlan2.0/UnitTest/bin/
 src/europlan2.0/UnitTest/obj/
 *.suo
 *.user
+*.~lst
+*.lsv
+*.lsp
