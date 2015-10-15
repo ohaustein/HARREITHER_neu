@@ -672,25 +672,25 @@ namespace Europlan.Common {
             this.label169 = new System.Windows.Forms.Label();
             this.label170 = new System.Windows.Forms.Label();
             this.button12 = new System.Windows.Forms.Button();
-            this.numericBox75 = new Europlan.Common.NumericBox();
-            this.numericBox76 = new Europlan.Common.NumericBox();
             this.label171 = new System.Windows.Forms.Label();
-            this.numericBox77 = new Europlan.Common.NumericBox();
             this.label172 = new System.Windows.Forms.Label();
             this.label173 = new System.Windows.Forms.Label();
-            this.numericBox78 = new Europlan.Common.NumericBox();
-            this.numericBox79 = new Europlan.Common.NumericBox();
             this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.radioButton18 = new System.Windows.Forms.RadioButton();
-            this.numericBox80 = new Europlan.Common.NumericBox();
-            this.numericBox81 = new Europlan.Common.NumericBox();
-            this.numericBox82 = new Europlan.Common.NumericBox();
             this.label174 = new System.Windows.Forms.Label();
             this.label175 = new System.Windows.Forms.Label();
             this.label176 = new System.Windows.Forms.Label();
             this.label177 = new System.Windows.Forms.Label();
             this.label178 = new System.Windows.Forms.Label();
             this.label179 = new System.Windows.Forms.Label();
+            this.numericBox75 = new Europlan.Common.NumericBox();
+            this.numericBox76 = new Europlan.Common.NumericBox();
+            this.numericBox77 = new Europlan.Common.NumericBox();
+            this.numericBox78 = new Europlan.Common.NumericBox();
+            this.numericBox79 = new Europlan.Common.NumericBox();
+            this.numericBox80 = new Europlan.Common.NumericBox();
+            this.numericBox81 = new Europlan.Common.NumericBox();
+            this.numericBox82 = new Europlan.Common.NumericBox();
             this.tabSystemParameters.SuspendLayout();
             this.tabEuroval.SuspendLayout();
             this.layoutEuroval.SuspendLayout();
@@ -12129,6 +12129,118 @@ namespace Europlan.Common {
             this.button12.Text = "Standardwerte";
             this.button12.UseVisualStyleBackColor = true;
             // 
+            // label171
+            // 
+            this.label171.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label171.Location = new System.Drawing.Point(3, 69);
+            this.label171.Name = "label171";
+            this.label171.Size = new System.Drawing.Size(299, 23);
+            this.label171.TabIndex = 6;
+            this.label171.Text = "Max. Druckverlust:";
+            this.label171.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label172
+            // 
+            this.label172.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label172.Location = new System.Drawing.Point(393, 138);
+            this.label172.Name = "label172";
+            this.label172.Size = new System.Drawing.Size(24, 23);
+            this.label172.TabIndex = 22;
+            this.label172.Text = "K";
+            this.label172.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label173
+            // 
+            this.label173.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label173.Location = new System.Drawing.Point(3, 92);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(299, 23);
+            this.label173.TabIndex = 11;
+            this.label173.Text = "Max. Durchflußmenge:";
+            this.label173.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton17.Location = new System.Drawing.Point(308, 26);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(269, 17);
+            this.radioButton17.TabIndex = 82;
+            this.radioButton17.Text = "29 °C (EN 1264)";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // radioButton18
+            // 
+            this.radioButton18.Checked = true;
+            this.radioButton18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton18.Location = new System.Drawing.Point(308, 3);
+            this.radioButton18.Name = "radioButton18";
+            this.radioButton18.Size = new System.Drawing.Size(269, 17);
+            this.radioButton18.TabIndex = 81;
+            this.radioButton18.TabStop = true;
+            this.radioButton18.Text = "27 °C (Harreither Werksempfehlung)";
+            this.radioButton18.UseVisualStyleBackColor = true;
+            // 
+            // label174
+            // 
+            this.label174.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label174.Location = new System.Drawing.Point(393, 92);
+            this.label174.Name = "label174";
+            this.label174.Size = new System.Drawing.Size(24, 23);
+            this.label174.TabIndex = 13;
+            this.label174.Text = "l/h";
+            this.label174.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label175
+            // 
+            this.label175.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label175.Location = new System.Drawing.Point(393, 115);
+            this.label175.Name = "label175";
+            this.label175.Size = new System.Drawing.Size(24, 23);
+            this.label175.TabIndex = 16;
+            this.label175.Text = "K";
+            this.label175.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label176
+            // 
+            this.label176.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label176.Location = new System.Drawing.Point(393, 69);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(24, 23);
+            this.label176.TabIndex = 8;
+            this.label176.Text = "Pa";
+            this.label176.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label177
+            // 
+            this.label177.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label177.Location = new System.Drawing.Point(3, 115);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(259, 23);
+            this.label177.TabIndex = 14;
+            this.label177.Text = "Spreizung Heizbetrieb:";
+            this.label177.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label178
+            // 
+            this.label178.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label178.Location = new System.Drawing.Point(3, 138);
+            this.label178.Name = "label178";
+            this.label178.Size = new System.Drawing.Size(259, 23);
+            this.label178.TabIndex = 20;
+            this.label178.Text = "Spreizung Kühlbetrieb:";
+            this.label178.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label179
+            // 
+            this.label179.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label179.Location = new System.Drawing.Point(268, 115);
+            this.label179.Name = "label179";
+            this.label179.Size = new System.Drawing.Size(34, 23);
+            this.label179.TabIndex = 19;
+            this.label179.Text = "min.";
+            this.label179.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // numericBox75
             // 
             this.numericBox75.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -12193,16 +12305,6 @@ namespace Europlan.Common {
             0,
             0});
             // 
-            // label171
-            // 
-            this.label171.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label171.Location = new System.Drawing.Point(3, 69);
-            this.label171.Name = "label171";
-            this.label171.Size = new System.Drawing.Size(299, 23);
-            this.label171.TabIndex = 6;
-            this.label171.Text = "Max. Druckverlust:";
-            this.label171.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // numericBox77
             // 
             this.numericBox77.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -12234,26 +12336,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // label172
-            // 
-            this.label172.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label172.Location = new System.Drawing.Point(393, 138);
-            this.label172.Name = "label172";
-            this.label172.Size = new System.Drawing.Size(24, 23);
-            this.label172.TabIndex = 22;
-            this.label172.Text = "K";
-            this.label172.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label173
-            // 
-            this.label173.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label173.Location = new System.Drawing.Point(3, 92);
-            this.label173.Name = "label173";
-            this.label173.Size = new System.Drawing.Size(299, 23);
-            this.label173.TabIndex = 11;
-            this.label173.Text = "Max. Durchflußmenge:";
-            this.label173.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericBox78
             // 
@@ -12318,28 +12400,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // radioButton17
-            // 
-            this.radioButton17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton17.Location = new System.Drawing.Point(308, 26);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(269, 17);
-            this.radioButton17.TabIndex = 82;
-            this.radioButton17.Text = "29 °C (EN 1264)";
-            this.radioButton17.UseVisualStyleBackColor = true;
-            // 
-            // radioButton18
-            // 
-            this.radioButton18.Checked = true;
-            this.radioButton18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton18.Location = new System.Drawing.Point(308, 3);
-            this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(269, 17);
-            this.radioButton18.TabIndex = 81;
-            this.radioButton18.TabStop = true;
-            this.radioButton18.Text = "27 °C (Harreither Werksempfehlung)";
-            this.radioButton18.UseVisualStyleBackColor = true;
             // 
             // numericBox80
             // 
@@ -12436,66 +12496,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // label174
-            // 
-            this.label174.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label174.Location = new System.Drawing.Point(393, 92);
-            this.label174.Name = "label174";
-            this.label174.Size = new System.Drawing.Size(24, 23);
-            this.label174.TabIndex = 13;
-            this.label174.Text = "l/h";
-            this.label174.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label175
-            // 
-            this.label175.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label175.Location = new System.Drawing.Point(393, 115);
-            this.label175.Name = "label175";
-            this.label175.Size = new System.Drawing.Size(24, 23);
-            this.label175.TabIndex = 16;
-            this.label175.Text = "K";
-            this.label175.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label176
-            // 
-            this.label176.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label176.Location = new System.Drawing.Point(393, 69);
-            this.label176.Name = "label176";
-            this.label176.Size = new System.Drawing.Size(24, 23);
-            this.label176.TabIndex = 8;
-            this.label176.Text = "Pa";
-            this.label176.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label177
-            // 
-            this.label177.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label177.Location = new System.Drawing.Point(3, 115);
-            this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(259, 23);
-            this.label177.TabIndex = 14;
-            this.label177.Text = "Spreizung Heizbetrieb:";
-            this.label177.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label178
-            // 
-            this.label178.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label178.Location = new System.Drawing.Point(3, 138);
-            this.label178.Name = "label178";
-            this.label178.Size = new System.Drawing.Size(259, 23);
-            this.label178.TabIndex = 20;
-            this.label178.Text = "Spreizung Kühlbetrieb:";
-            this.label178.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label179
-            // 
-            this.label179.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label179.Location = new System.Drawing.Point(268, 115);
-            this.label179.Name = "label179";
-            this.label179.Size = new System.Drawing.Size(34, 23);
-            this.label179.TabIndex = 19;
-            this.label179.Text = "min.";
-            this.label179.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SystemParametersPanel
             // 

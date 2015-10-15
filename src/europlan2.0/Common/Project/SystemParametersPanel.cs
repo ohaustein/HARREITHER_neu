@@ -1801,7 +1801,27 @@ namespace Europlan.Common {
 
         private void rbViewBelow_CheckedChanged(object sender, EventArgs e)
         {
-            Product.ConfigViewGrundriss = rbViewAbove.Checked;
+            if (!updateOngoing)
+            {
+                // check if there are graphical products
+                foreach (Floor floor in Project.Instance.Floors)
+                {
+                    foreach (Room room in floor.Rooms)
+                    {
+                        foreach (PlannedProduct plannedProduct in room.PlannedProducts)
+                        {
+                            if (plannedProduct.Product.GraphicalMode ?? false)
+                            {
+                                MessageBox.Show(EuroplanRes.SystemParametersPanel_ChangeViewProjectNotEmptyMessage, EuroplanRes.SystemParametersPanel_ChangeViewProjectNotEmptyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                UpdateControl(false);
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                Product.ConfigViewGrundriss = rbViewAbove.Checked;
+            }
         }
 	}
 }

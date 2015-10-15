@@ -22168,6 +22168,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Eine Änderung der Ansicht ist nur möglich, wenn noch keine grafischen Produkte vorhanden sind. Entfernen Sie gegebenenfalls grafisch ausgelegte Produkte, bevor diese Einstellung verändert wird..
+        /// </summary>
+        internal static string SystemParametersPanel_ChangeViewProjectNotEmptyMessage {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ChangeViewProjectNotEmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Änderung der Ansicht nicht möglich..
+        /// </summary>
+        internal static string SystemParametersPanel_ChangeViewProjectNotEmptyTitle {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ChangeViewProjectNotEmptyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deckender Hintergrund:.
         /// </summary>
         internal static string SystemParametersPanel_DeckenderHintergrund {
