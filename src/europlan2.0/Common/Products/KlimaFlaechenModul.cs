@@ -11,19 +11,27 @@ namespace Europlan.Common {
 	public class KlimaFlaechenModul {
 		public static readonly double CONNECTION_DISTANCE = 0.035;  // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 
+        private static List<ModulTypeEnum> modulesGraphicSizeEnabled = new List<ModulTypeEnum>();
+
 		private static double module_100_40_height = 1.0;
 		private static double module_100_30_height = 1.0;
 		private static double module_120_30_height = 1.2;
 		private static double module_80_30_height = 0.8;
 		private static double module_60_60_height = 0.6;
-		private static double module_100_40_20_height = 1.0; // TO BE DEFINED
+		private static double module_100_40_20_height = 1.0;
+
+        private static double module_100_40_20_height_graphical_project = module_100_40_20_height;
+        private static double module_100_40_height_graphical_project = module_100_40_height;
 
 		private static double module_100_40_width = 0.4;
 		private static double module_100_30_width = 0.3;
 		private static double module_120_30_width = 0.3;
 		private static double module_80_30_width = 0.3;
 		private static double module_60_60_width = 0.6;
-		private static double module_100_40_20_width = 0.4; // TO BE DEFINED
+		private static double module_100_40_20_width = 0.4;
+
+        private static double module_100_40_20_width_graphical_project = module_100_40_20_width;
+        private static double module_100_40_width_graphical_project = module_100_40_width;
 
 		private static double module_additional_width = 0.03 * 2;
 
@@ -686,6 +694,7 @@ namespace Europlan.Common {
 			}
 		}
 
+        
 		public static double GetModuleHeight(ModulTypeEnum type) {
 			switch (type) {
 				case ModulTypeEnum.MODUL_100_40:
@@ -742,6 +751,72 @@ namespace Europlan.Common {
 			}
 		}
 
+        public static void SetModuleHeightGraphical(ModulTypeEnum type, double size)
+        {
+            switch (type)
+            {
+                case ModulTypeEnum.MODUL_100_40:
+                    module_100_40_height_graphical_project = size;
+                    break;
+
+                case ModulTypeEnum.MODUL_100_40_20:
+                    module_100_40_20_height_graphical_project = size;
+                    break;
+            }
+        }
+
+        public static void SetModuleWidthGraphical(ModulTypeEnum type, double size)
+        {
+            switch (type)
+            {
+                case ModulTypeEnum.MODUL_100_40:
+                    module_100_40_width_graphical_project = size;
+                    break;
+
+                case ModulTypeEnum.MODUL_100_40_20:
+                    module_100_40_20_width_graphical_project = size;
+                    break;
+            }
+        }
+
+        public static double GetModuleHeightGraphical(ModulTypeEnum type)
+        {
+            if (!modulesGraphicSizeEnabled.Contains(type))
+            {
+                return GetModuleHeight(type);
+            }
+            switch (type)
+            {
+                case ModulTypeEnum.MODUL_100_40:
+                    return module_100_40_height_graphical_project;
+
+                case ModulTypeEnum.MODUL_100_40_20:
+                    return module_100_40_20_height_graphical_project;
+
+                default:
+                    return GetModuleHeight(type);
+            }
+        }
+
+        public static double GetModuleWidthGraphical(ModulTypeEnum type)
+        {
+            if (!modulesGraphicSizeEnabled.Contains(type))
+            {
+                return GetModuleWidth(type);
+            }
+            switch (type)
+            {
+                case ModulTypeEnum.MODUL_100_40:
+                    return module_100_40_width_graphical_project;
+
+                case ModulTypeEnum.MODUL_100_40_20:
+                    return module_100_40_20_width_graphical_project;
+
+                default:
+                    return GetModuleWidth(type);
+            }
+        }
+
 		#region Properties for graphical mode (Klimadecke)
 		public int GraphLane {
 			get { return this.graphLane; }
@@ -759,6 +834,7 @@ namespace Europlan.Common {
 		}
 
 		public double GraphBottomPositionInLane(double measure) {
+            // only used for klimadecke
 			return this.graphPositionInLane + measure * KlimaFlaechenModul.GetModuleHeight(this.modulType);
 		}
 		#endregion
@@ -827,6 +903,14 @@ namespace Europlan.Common {
 			Matrix3D transformation = moduleRotation * Transformation3D.Translation(x, y);
 			double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
 			double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+
+            // graphical different representation is used for Klimaboden products only
+            if (product is ModulKlimaBoden20Product || product is ModulKlimaBodenProduct)
+            {
+                height = KlimaFlaechenModul.GetModuleHeightGraphical(this.ModulType) * measure;
+                width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
+            }
+
 			bool left = ((this.Orientation == ModulOrientationEnum.ORIENTATION_LEFT) != invertYAxis);
 			if (!this.DiagonalDurchstroemt) {
 				if ((this.GraphBottomUp != topConnection) != invertYAxis) {
@@ -889,8 +973,8 @@ namespace Europlan.Common {
                 Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
                 transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
 
-                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double height = KlimaFlaechenModul.GetModuleHeightGraphical(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
                 double connectionDist = CONNECTION_DISTANCE * measure;
 
                 if (this.graphBottomUp) {
@@ -950,8 +1034,8 @@ namespace Europlan.Common {
             {
                 Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
                 transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
-                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double height = KlimaFlaechenModul.GetModuleHeightGraphical(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
                 double connectionDist = CONNECTION_DISTANCE * measure;
 
                 if (this.graphBottomUp)
@@ -1000,8 +1084,8 @@ namespace Europlan.Common {
                 Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
                 transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
 
-                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double height = KlimaFlaechenModul.GetModuleHeightGraphical(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
                 double connectionDist = 0.035 * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 
                 if (this.graphBottomUp) {
@@ -1062,8 +1146,8 @@ namespace Europlan.Common {
                 Matrix3D transformation = Transformation3D.Translation(this.GraphPosX, this.graphPosY);
                 transformation = transformation * Transformation3D.Rotate(this.graphRotation * Math.PI / 180.0);
 
-                double height = KlimaFlaechenModul.GetModuleHeight(this.ModulType) * measure;
-                double width = KlimaFlaechenModul.GetModuleWidth(this.ModulType) * measure;
+                double height = KlimaFlaechenModul.GetModuleHeightGraphical(this.ModulType) * measure;
+                double width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
                 double connectionDist = CONNECTION_DISTANCE * measure; // Abstand der Anschlüsse zum Rand 2.45cm + hälte der breite (2.1cm / 2)
 
                 if (this.graphBottomUp)
@@ -1265,5 +1349,10 @@ namespace Europlan.Common {
 			return this.GetInputLink(circuit, invertYAxis) == null && this.GetSubareaInputLink(circuit, invertYAxis) == null;
 		}
 		#endregion
-	}
+
+        internal static void SetEnabledGraphicSizes(List<ModulTypeEnum> enabledModules)
+        {
+            modulesGraphicSizeEnabled = enabledModules;
+        }
+    }
 }

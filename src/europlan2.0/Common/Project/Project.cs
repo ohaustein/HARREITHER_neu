@@ -32,7 +32,7 @@ namespace Europlan.Common {
 		private string projectFileName;
 
 		// facility details
-		private int normOutsideTemperature;
+        private int normOutsideTemperature;
 		private bool variableSpreizung;
 		private bool calculateCoolLoad;
 		private int outsideTemperatureForCooling;
@@ -66,6 +66,7 @@ namespace Europlan.Common {
 		private List<HithermWall> serializableHithermWalls = new List<HithermWall>();
 		private List<HithermWall> hithermCompactWalls = null;
 		private List<HithermWall> serializableHithermCompactWalls = new List<HithermWall>();
+        private List<KlimaFlaechenModul.ModulTypeEnum> modulesWithGraphicalDimensions = new List<KlimaFlaechenModul.ModulTypeEnum>();
 
 		protected Project() {
 			log.Debug("default constructor called");
@@ -132,6 +133,8 @@ namespace Europlan.Common {
 			outsideTemperatureForCooling = 30;
 			relativeHumidity = 50;
 			insideTemperatureForCooling = 26;
+
+            modulesWithGraphicalDimensions.Clear();
 
 			floors = new FloorList();
 			regulatorCircuits = new List<RegulatorCircuit>();
@@ -280,6 +283,12 @@ namespace Europlan.Common {
 			get { return regulatorCircuits; }
 			set { regulatorCircuits = value; }
 		}
+
+        public List<KlimaFlaechenModul.ModulTypeEnum> ModulesWithGraphicalDimensions
+        {
+            get { return modulesWithGraphicalDimensions; }
+            set { modulesWithGraphicalDimensions = value; }
+        }
 
 		public QuickDimensioning QuickDimensioning {
 			get { return quickDimensioning; }
@@ -640,6 +649,8 @@ namespace Europlan.Common {
 				Instance.InitializeProject();
 				string localized = EuroplanRes.General_Standardregelkreis;
 				Instance.RegulatorCircuits.Add(new RegulatorCircuit(localized));
+                Instance.ModulesWithGraphicalDimensions.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20);
+                Instance.ModulesWithGraphicalDimensions.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
 				Instance.InitializeProductParameters();
 				return Instance;
 			}
@@ -657,6 +668,7 @@ namespace Europlan.Common {
 			ModulKlimaBodenProduct.StaticInitialize(this.Config);
             ModulKlimaBoden20Product.StaticInitialize(this.Config);
 			ModulKlimaDeckeProduct.StaticInitialize(this.Config);
+            KlimaFlaechenModul.SetEnabledGraphicSizes(this.ModulesWithGraphicalDimensions);
 		}
 
 

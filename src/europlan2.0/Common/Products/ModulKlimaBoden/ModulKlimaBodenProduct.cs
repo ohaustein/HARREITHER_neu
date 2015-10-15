@@ -303,6 +303,21 @@ namespace Europlan.Common {
 			get { return druckverlustModul_100_40; }
 			set { druckverlustModul_100_40 = value; }
 		}
+
+        [DoubleProductParameter(0.42)]
+        public static double ModuleWidthGraphical_100_40
+        {
+            get { return KlimaFlaechenModul.GetModuleWidthGraphical(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40); }
+            set { KlimaFlaechenModul.SetModuleWidthGraphical(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, value); }
+        }
+
+        [DoubleProductParameter(1.02)]
+        public static double ModuleHeightGraphical_100_40
+        {
+            get { return KlimaFlaechenModul.GetModuleHeightGraphical(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40); }
+            set { KlimaFlaechenModul.SetModuleHeightGraphical(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40, value); }
+        }
+
 		#endregion Product Parameters
 
         public double MaxDurchfluss {
