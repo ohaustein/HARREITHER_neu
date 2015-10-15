@@ -315,6 +315,9 @@ namespace Europlan.Common {
 			this.label25.Text = EuroplanRes.Unit_WattProQmKelvin;
 			this.label26.Text = EuroplanRes.SystemParametersPanel_ImportiertePlaene;
 			this.label27.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
+            this.lblView.Text = EuroplanRes.SystemParametersPanel_View;
+            this.lblViewAbove.Text = EuroplanRes.SystemParametersPanel_ViewAbove;
+            this.lblViewBelow.Text = EuroplanRes.SystemParametersPanel_ViewBelow;
 		}
 
 		public Configuration.ConfigurationType ConfigurationType {
@@ -892,6 +895,8 @@ namespace Europlan.Common {
 				numGeneralAlphaWandCool.Value = (decimal)Product.ConfigAlphaWandCool;
                 cbGeneralFillTextbox.Checked = Product.ConfigFillBoxBackground;
                 numGeneralTextboxFontSize.Value = (decimal)Product.ConfigBoxFontSize;
+                rbViewAbove.Checked = Product.ConfigViewGrundriss;
+                rbViewBelow.Checked = !Product.ConfigViewGrundriss;
 			}
 		}
 
@@ -1792,6 +1797,11 @@ namespace Europlan.Common {
             {
                 this.projectChanged(null);
             }
+        }
+
+        private void rbViewBelow_CheckedChanged(object sender, EventArgs e)
+        {
+            Product.ConfigViewGrundriss = rbViewAbove.Checked;
         }
 	}
 }

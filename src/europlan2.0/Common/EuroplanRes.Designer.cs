@@ -22663,6 +22663,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ansicht.
+        /// </summary>
+        internal static string SystemParametersPanel_View {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ansicht als Grundriss.
+        /// </summary>
+        internal static string SystemParametersPanel_ViewAbove {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ViewAbove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ansicht von unten.
+        /// </summary>
+        internal static string SystemParametersPanel_ViewBelow {
+            get {
+                return ResourceManager.GetString("SystemParametersPanel_ViewBelow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kinematische Viskosität:.
         /// </summary>
         internal static string SystemParametersPanel_Viskositaet {

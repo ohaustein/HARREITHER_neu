@@ -90,6 +90,8 @@ namespace Europlan.Common {
 		protected double requestedHeatLoad = 0;
 		protected double requestedCoolLoad = 0;
 
+        private static bool viewGrundriss = false;
+
 		#region Product Parameters
 		[DoubleProductParameter(6.5)]
 		public static double ConfigAlphaDeckeHeat {
@@ -138,6 +140,14 @@ namespace Europlan.Common {
             get { return verteilerMaxDurchfluss; }
             set { verteilerMaxDurchfluss = value; }
         }
+
+        [BoolProductParameter(false)]
+        public static bool ConfigViewGrundriss
+        {
+            get { return viewGrundriss; }
+            set { viewGrundriss = value; }
+        }
+	
 
 		public enum PlanMeasureEnum {
 			PM_METER = 0,

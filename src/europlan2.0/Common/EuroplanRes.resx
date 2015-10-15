@@ -8055,4 +8055,13 @@ m²</value>
   <data name="LL_Report_VerlegedatenKlimaboden202" xml:space="preserve">
     <value>Verlegedaten Modul Klimaboden 20 - %GESCHOSS%</value>
   </data>
+  <data name="SystemParametersPanel_View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+  <data name="SystemParametersPanel_ViewAbove" xml:space="preserve">
+    <value>Ansicht als Grundriss</value>
+  </data>
+  <data name="SystemParametersPanel_ViewBelow" xml:space="preserve">
+    <value>Ansicht von unten</value>
+  </data>
 </root>
