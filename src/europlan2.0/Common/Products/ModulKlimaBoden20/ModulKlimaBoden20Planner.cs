@@ -2537,7 +2537,8 @@ namespace Europlan.Common {
 			foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
 				foreach (KlimaFlaechenModul modul in c.GetAllModules()) {
                     KlimaFlaechenModul.ModulOrientationEnum orientationToUse = modul.Orientation;
-                    if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
+                    if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis ^ Europlan.Common.Product.ConfigViewGrundriss)
+                    {
                         orientationToUse = orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
                     }
 					Matrix3D transformation = Matrix3D.Identity;
@@ -2589,7 +2590,8 @@ namespace Europlan.Common {
 			foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits) {
 				foreach (KlimaFlaechenModul modul in c.GetAllModules()) {
                     KlimaFlaechenModul.ModulOrientationEnum orientationToUse = modul.Orientation;
-                    if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
+                    if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis ^ Europlan.Common.Product.ConfigViewGrundriss)
+                    {
                         orientationToUse = orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
                     }
                     Matrix3D transformation = Matrix3D.Identity;
@@ -2654,7 +2656,8 @@ namespace Europlan.Common {
 			}
 
             Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientationForDrawing = orientation;
-            if (cadPlan) {
+            if (cadPlan ^ Europlan.Common.Product.ConfigViewGrundriss)
+            {
                 if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
                     orientationForDrawing = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
                 } else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
@@ -2891,6 +2894,12 @@ namespace Europlan.Common {
 				return;
 			}
 
+            KlimaFlaechenModul.ModulOrientationEnum? orientationForDrawing = orientation;
+            if (Europlan.Common.Product.ConfigViewGrundriss && orientation.HasValue)
+            {
+                orientationForDrawing = (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+            }
+
 			additionalTransformation = additionalTransformation * Transformation4D.Translation(position.X, position.Y, 0);
 			additionalTransformation = additionalTransformation * Transformation4D.RotateZ(rotation * Math.PI / 180.0);
 
@@ -2932,7 +2941,7 @@ namespace Europlan.Common {
 			EntityColor c = EntityColor.CreateFromRgb(circuitColor.ToArgb());
 
 			Point2D[] polygon = null;
-			if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+			if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
 					DxfLine line = new DxfLine(c, bottomLeft2D, middle2D);
@@ -2946,7 +2955,7 @@ namespace Europlan.Common {
 					line.Layer = layer;
 					model.Entities.Add(line);
 				}
-			} else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+			} else if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
 				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
 					DxfLine line = new DxfLine(c, bottomRight2D, middle2D);
@@ -2969,7 +2978,7 @@ namespace Europlan.Common {
 			polyLine.Layer = layer;
 			model.Entities.Add(polyLine);
 
-			if (orientation != null) {
+			if (orientationForDrawing != null) {
 				polygon = new Point2D[] { directionTop12D, directionTop22D, directionTop32D };
 				polyLine = new DxfPolyline2D(c, polygon);
 				polyLine.Closed = true;

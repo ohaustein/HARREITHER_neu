@@ -1389,7 +1389,6 @@ namespace Europlan.Common {
 									if (circuitOfModul.Links == null) {
 										circuitOfModul.Links = new List<KlimaFlaechenModulVerbindung>();
 									}
-                                    // ?
 									if ((thisModuleBottomUp != bottomUp) != this.product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
 										circuitOfModul.Links.Add(new KlimaFlaechenModulVerbindung(lastAddedModul, addedModul, new Point2D[] { lastAddedModul.GetOutputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product), addedModul.GetInputConnection(measure, this.product.AssociatedRoom.AssociatedPlan.InvertYAxis, this.product) }, circuitOfModul, Project.Instance.GetPlannedProduct(this.product)));
 									} else {
@@ -1789,7 +1788,6 @@ namespace Europlan.Common {
 			}
 		}
 
-        // ?
 		private void DrawDxfModule(KlimaFlaechenModul.ModulTypeEnum type, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, Point2D position, Matrix4D additionalTransformation, WW.Cad.Model.DxfModel model, DxfLayer layer, bool bottomUp, Color circuitColor, double rotation) {
 			if (this.product == null || this.product.GraphConstruction == null ||
 						this.product.AssociatedRoom == null || this.product.AssociatedRoom.AssociatedPlan == null ||
@@ -1798,7 +1796,7 @@ namespace Europlan.Common {
 			}
 
             KlimaFlaechenModul.ModulOrientationEnum? drawOrientation = orientation;
-            if (Europlan.Common.Product.ConfigViewGrundriss)
+            if (Europlan.Common.Product.ConfigViewGrundriss && orientation.HasValue)
             {
                 drawOrientation = (drawOrientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
             }
