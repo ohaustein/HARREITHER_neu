@@ -911,7 +911,7 @@ namespace Europlan.Common {
                 width = KlimaFlaechenModul.GetModuleWidthGraphical(this.ModulType) * measure;
             }
 
-			bool left = ((this.Orientation == ModulOrientationEnum.ORIENTATION_LEFT) != invertYAxis);
+			bool left = ((this.Orientation == ModulOrientationEnum.ORIENTATION_LEFT) != (invertYAxis ^ Product.ConfigViewGrundriss));
 			if (!this.DiagonalDurchstroemt) {
 				if ((this.GraphBottomUp != topConnection) != invertYAxis) {
 					left = !left;
@@ -966,7 +966,7 @@ namespace Europlan.Common {
 
         private Point2D InternalGetOutputConnection(double measure, bool invertYAxis, Product product) {
             ModulOrientationEnum orientationToUse = this.orientation;
-            if (invertYAxis && this.DiagonalDurchstroemt) {
+            if ((invertYAxis ^ Product.ConfigViewGrundriss) && this.DiagonalDurchstroemt) {
                 orientationToUse = orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT ? ModulOrientationEnum.ORIENTATION_RIGHT : ModulOrientationEnum.ORIENTATION_LEFT;
             }
             if (product is ModulKlimaBodenProduct) {
@@ -1077,7 +1077,7 @@ namespace Europlan.Common {
 
         public Point2D InternalGetInputConnection(double measure, bool invertYAxis, Product product) {
             ModulOrientationEnum orientationToUse = this.orientation;
-            if (invertYAxis && this.DiagonalDurchstroemt) {
+            if ((invertYAxis ^ Product.ConfigViewGrundriss) && this.DiagonalDurchstroemt) {
                 orientationToUse = orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT ? ModulOrientationEnum.ORIENTATION_RIGHT : ModulOrientationEnum.ORIENTATION_LEFT;
             }
             if (product is ModulKlimaBodenProduct) {
