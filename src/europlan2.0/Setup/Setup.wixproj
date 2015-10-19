@@ -111,7 +111,7 @@ set ERRORLEVEL=0
 
 rem english setup
 copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)en-US\instmsi.exe"
-copy "$(TargetDir)en-US\europlan30.msi" "$(TargetDir)en-US\setup.msi"
+copy "$(TargetDir)en-US\europlan31.msi" "$(TargetDir)en-US\setup.msi"
 echo "blub"
 cd $(ProjectDir)
 7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan31-en.zip" "$(TargetDir)en-US\instmsi.exe" "$(TargetDir)en-US\setup.exe" "$(TargetDir)en-US\setup.msi" || echo Postbuild: warning CS0003: English zip archive was not built
