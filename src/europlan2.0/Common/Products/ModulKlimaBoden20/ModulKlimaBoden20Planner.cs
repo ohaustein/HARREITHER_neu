@@ -3049,19 +3049,35 @@ namespace Europlan.Common {
 					Matrix3D invRotation = rotation.GetInverse();
 
 					List<KlimaFlaechenModul> selectedModules = this.GetAllSelectedModules();
-					foreach (ModulBodenCircuit circuit in this.product.PlannedCircuits) {
-						foreach (KlimaFlaechenModul modul in circuit.Row.List) {
+					foreach (ModulKlimaBoden20Circuit circuit in this.product.PlannedCircuits) {
+						foreach (KlimaFlaechenModul modul in circuit.GetAllModules()) {
 							this.DrawDxfModule(modul.ModulType, modul.Orientation, invRotation.Transform(new Point2D(modul.GraphPosX, modul.GraphPosY)), additionalTransformation, model, modulLayer, modul.GraphBottomUp, circuit.CircuitColor, modul.GraphRotation);
 						}
 					}
 				}
 
-				foreach (ModulBodenCircuit c in this.product.PlannedCircuits) {
-					if (c.Links != null) {
-						foreach (KlimaFlaechenModulVerbindung link in c.Links) {
-							link.DrawDxf(model, modulLayer, c.CircuitColor);
-						}
-					}
+                foreach (ModulKlimaBoden20Circuit c in this.product.PlannedCircuits)
+                {
+                    if (c.Links != null)
+                    {
+                        foreach (KlimaFlaechenSubAreaVerbindung link in c.Links)
+                        {
+                            link.DrawDxf(model, modulLayer, c.CircuitColor);
+                        }
+                    }
+                    foreach (ModulKlimaBoden20SubArea sa in c.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            if (row.Links != null)
+                            {
+                                foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                                {
+                                    link.DrawDxf(model, modulLayer, c.CircuitColor);
+                                }
+                            }
+                        }
+                    }
 				}
 
 				if (this.product.AssociatedRoom.RoomUnusedAreaCoordinates != null) {
