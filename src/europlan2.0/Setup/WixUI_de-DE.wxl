@@ -6,7 +6,7 @@
   <String Id="Setup_Language" Overridable="yes">de</String>
 
   <String Id="LaunchCondition_Admin" Overridable="yes">Der Benutzer muss der Administratorgruppe angehören, um die Installation fortsetzen zu können. Das Setup wird abgebrochen, weil der aktuelle Benutzer nicht der Administratorgruppe angehört.</String>
-  <String Id="LaunchCondition_dotNET" Overridable="yes">Um Europlan 3.0 zu installieren, muss das .NET Framework 2.0 muss installiert sein.</String>
+  <String Id="LaunchCondition_dotNET" Overridable="yes">Um Europlan 3.1 zu installieren, muss das .NET Framework 2.0 muss installiert sein.</String>
   <String Id="LaunchCondition_OS" Overridable="yes">Die Installation dieses Produkts konnte nicht durchgeführt werden, weil dieses Betriebssystem nicht unterstützt wird. Weitere Informationen zu den unterstützten Konfigurationen finden Sie in der Produktdokumentation.</String>
 
   <String Id="Error_NewerVersionFound" Overridable="yes">Eine neuere Version von Europlan mit grafischer Auslegung ist bereits installiert.</String>

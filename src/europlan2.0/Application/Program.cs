@@ -37,7 +37,7 @@ namespace Europlan.Application {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
-			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan3.0");
+			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan3.1");
 			string defaultLanguage = "de";
 			if (key != null) {
 				string val = key.GetValue("SetupLanguage") as string;
