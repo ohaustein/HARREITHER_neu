@@ -338,7 +338,15 @@ namespace Europlan.Common {
 				switch (mdProduct.ModulType) {
 					case Product.ProductType.FBH:
 						this.numArea.MaxValue = (decimal)mdProduct.AvailableFloorArea;
-						this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableFloorArea * 100 / mdProduct.AssociatedRoom.Area);
+
+                        if (mdProduct.AssociatedRoom.Area > 0)
+                        {
+                            this.numAreaPercentage.MaxValue = (decimal)(mdProduct.AvailableFloorArea * 100 / mdProduct.AssociatedRoom.Area);
+                        }
+                        else
+                        {
+                            this.numAreaPercentage.MaxValue = 100;
+                        }
 						break;
 					case Product.ProductType.DH:
 						this.numArea.MaxValue = (decimal)mdProduct.AvailableCeilingArea;
