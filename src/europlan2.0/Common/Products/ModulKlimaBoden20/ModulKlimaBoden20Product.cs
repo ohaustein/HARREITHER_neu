@@ -53,9 +53,6 @@ namespace Europlan.Common {
 
         private static double[] druckverlustModul_100_40_20 = { 0.4, 0.7, 0.9, 1.3, 1.5, 1.8, 2.2, 2.6, 3, 3.6, 4.5, 5.4, 6.3, 7.2, 8.1, 9.1, 10, 11, 12, 13, 14, 15, 16.5, 17.8};
 
-        private static double module_with_graphical_100_40_20 = 0.8;
-        private static double module_height_graphical_100_40_20 = 2.0;
-
         private float plannedAreaReduced = 0;
 		private float plannedAreaUnheated = 0;
 		private Construction plannedFloorConstruction = null;
