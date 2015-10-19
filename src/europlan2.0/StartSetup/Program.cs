@@ -17,7 +17,7 @@ namespace StartSetup {
 				bool found = (Msidll.MsiEnumRelatedProducts("{F33AAB86-9453-478e-A55B-20CAF7047F33}", 0, 0, foundProduct) == 0);
 				Process installProcess = new Process();
 				installProcess.StartInfo.FileName = "msiexec";
-				installProcess.StartInfo.Arguments = "/i \"" + Path.Combine(Application.StartupPath, "setup.msi") + (found ? " /qb+" : ""); //"\" REINSTALL=ALL REINSTALLMODE=vomus" : "\"");
+                installProcess.StartInfo.Arguments = "/i \"" + Path.Combine(Application.StartupPath, "setup.msi") + "\"" + (found ? " /qb+" : ""); //"\" REINSTALL=ALL REINSTALLMODE=vomus" : "\"");
 				installProcess.StartInfo.CreateNoWindow = true;
 
 				installProcess.StartInfo.UseShellExecute = true;
