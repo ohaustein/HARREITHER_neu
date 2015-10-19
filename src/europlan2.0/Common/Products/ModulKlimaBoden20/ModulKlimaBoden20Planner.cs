@@ -660,12 +660,35 @@ namespace Europlan.Common {
 					int count = 0;
                     this.AddModulesForLayoutArea(delegate(double x, double y, int rowNr, double rotation, out bool added, Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientation, bool bottomUp, out KlimaFlaechenModul addedModul, out KlimaFlaechenList rowOfAddedModul, KlimaFlaechenModul lastAddedModul, KlimaFlaechenList rowOfLastAddedModul, out ModulKlimaBoden20Circuit circuitOfModul, bool fits)
                     {
+                        int newRowIndex = 0;
+                        if (this.HighlightSubArea != null && this.HighlightRow == null)
+                        {
+                            newRowIndex = this.HighlightSubArea.Rows.Count;
+                        }
+                        else if (this.HighlightRow != null)
+                        {
+                            ModulKlimaBoden20SubArea oldSubArea = null;
+                            int tmp;
+                            KlimaFlaechenModul mTmp = this.HighlightRow.List[0];
+                            oldSubArea = this.product.GetCircuitForModul(mTmp, out tmp).GetSubareaForModul(mTmp, out tmp);
+
+                            newRowIndex = oldSubArea.Rows.IndexOf(this.HighlightRow);
+                        }
+
+                        fits &= (rowNr + newRowIndex) < ModulKlimaBoden20Product.ConfigMaxModulesInParallel;
 						added = this.TryDrawModule(g, additionalTransformation, x, y, rotation, orientation, bottomUp, fits ? Color.Green : Color.FromArgb(63, Color.Red), cadPlan);
-						if (fits) {
-							count++;
-						}
-						addedModul = null;
-                        rowOfAddedModul = null;
+                        addedModul = null;
+                        rowOfAddedModul = rowOfLastAddedModul;
+                        if (fits)
+                        {
+                            rowOfAddedModul = new KlimaFlaechenList();
+                            count++;
+                        }
+                        else
+                        {
+                            rowOfAddedModul = null;
+                        }
+ 
 						circuitOfModul = null;
 					}, true);
 					if (this.UpdateNewCount != null) {
@@ -2293,6 +2316,10 @@ namespace Europlan.Common {
             }
             if (usedRow != null || !onlyAddToExistingHks) {
 				if (usedRow == null) {
+                    if (subArea.Rows.Count >= ModulKlimaBoden20Product.ConfigMaxModulesInParallel)
+                    {
+                        return false;
+                    }
 					usedRow = new KlimaFlaechenList();
 					subArea.Rows.Add(usedRow);					
 				}
