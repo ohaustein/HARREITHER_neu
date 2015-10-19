@@ -966,7 +966,8 @@ namespace Europlan.Common {
 
         private Point2D InternalGetOutputConnection(double measure, bool invertYAxis, Product product) {
             ModulOrientationEnum orientationToUse = this.orientation;
-            if ((invertYAxis ^ Product.ConfigViewGrundriss) && this.DiagonalDurchstroemt) {
+            if ((invertYAxis && this.DiagonalDurchstroemt) ^ Product.ConfigViewGrundriss)
+            {
                 orientationToUse = orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT ? ModulOrientationEnum.ORIENTATION_RIGHT : ModulOrientationEnum.ORIENTATION_LEFT;
             }
             if (product is ModulKlimaBodenProduct) {
@@ -1077,7 +1078,7 @@ namespace Europlan.Common {
 
         public Point2D InternalGetInputConnection(double measure, bool invertYAxis, Product product) {
             ModulOrientationEnum orientationToUse = this.orientation;
-            if ((invertYAxis ^ Product.ConfigViewGrundriss) && this.DiagonalDurchstroemt) {
+            if ((invertYAxis && this.DiagonalDurchstroemt) ^ Product.ConfigViewGrundriss) {
                 orientationToUse = orientationToUse == ModulOrientationEnum.ORIENTATION_LEFT ? ModulOrientationEnum.ORIENTATION_RIGHT : ModulOrientationEnum.ORIENTATION_LEFT;
             }
             if (product is ModulKlimaBodenProduct) {
