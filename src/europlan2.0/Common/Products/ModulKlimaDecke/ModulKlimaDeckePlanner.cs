@@ -2548,7 +2548,8 @@ namespace Europlan.Common {
 			}
 
             Nullable<KlimaFlaechenModul.ModulOrientationEnum> orientationForDrawing = orientation;
-            if (cadPlan || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+            if ((cadPlan || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) ^ Europlan.Common.Product.ConfigViewGrundriss)
+            {
                 if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
                     orientationForDrawing = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
                 } else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
@@ -2890,7 +2891,9 @@ namespace Europlan.Common {
 			}
 
             Nullable<KlimaFlaechenModul.ModulOrientationEnum> drawOrientation = orientation;
-            if ((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && bottomUp) {
+            // ?
+            if (((type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) && bottomUp) ^ Europlan.Common.Product.ConfigViewGrundriss)
+            {
                 if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
                     drawOrientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
                 } else if (orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
@@ -3059,14 +3062,20 @@ namespace Europlan.Common {
 						height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
 						width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * measure;
 
+                        KlimaFlaechenModul.ModulOrientationEnum orientationToUse = modul.Orientation;
+                        if (Europlan.Common.Product.ConfigViewGrundriss)
+                        {
+                            orientationToUse = (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+                        }
+
 						if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis == modul.GraphBottomUp) {
-							if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 								input12D = transformation.Transform(new Point2D(width, height));
 								input22D = transformation.Transform(new Point2D(width, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input42D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height));
 								inputAreas.Add(modul, new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }));
-							} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							} else if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 								input12D = transformation.Transform(new Point2D(0, height));
 								input22D = transformation.Transform(new Point2D(0, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input32D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
@@ -3074,13 +3083,13 @@ namespace Europlan.Common {
 								inputAreas.Add(modul, new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }));
 							}
 						} else {
-							if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 								input12D = transformation.Transform(new Point2D(0, 0));
 								input22D = transformation.Transform(new Point2D(0, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input32D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input42D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
 								inputAreas.Add(modul, new Polygon2D(new Point2D[] { input12D, input22D, input32D, input42D }));
-							} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							} else if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 								input12D = transformation.Transform(new Point2D(width, 0));
 								input22D = transformation.Transform(new Point2D(width, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								input32D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
@@ -3120,14 +3129,20 @@ namespace Europlan.Common {
 						height = KlimaFlaechenModul.GetModuleHeight(modul.ModulType) * measure;
 						width = KlimaFlaechenModul.GetModuleWidth(modul.ModulType) * measure;
 
+                        KlimaFlaechenModul.ModulOrientationEnum orientationToUse = modul.Orientation;
+                        if (Europlan.Common.Product.ConfigViewGrundriss)
+                        {
+                            orientationToUse = orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT ? KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT : KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT;
+                        }
+
 						if (this.product.AssociatedRoom.AssociatedPlan.InvertYAxis == modul.GraphBottomUp) {
-							if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 								output12D = transformation.Transform(new Point2D(0, 0));
 								output22D = transformation.Transform(new Point2D(0, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output32D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output42D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0));
 								outputAreas.Add(modul, new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }));
-							} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							} else if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 								output12D = transformation.Transform(new Point2D(width, 0));
 								output22D = transformation.Transform(new Point2D(width, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
@@ -3135,13 +3150,13 @@ namespace Europlan.Common {
 								outputAreas.Add(modul, new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }));
 							}
 						} else {
-							if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
+							if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 								output12D = transformation.Transform(new Point2D(width, height));
 								output22D = transformation.Transform(new Point2D(width, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output32D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output42D = transformation.Transform(new Point2D(width - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height));
 								outputAreas.Add(modul, new Polygon2D(new Point2D[] { output12D, output22D, output32D, output42D }));
-							} else if (modul.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
+							} else if (orientationToUse == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 								output12D = transformation.Transform(new Point2D(0, height));
 								output22D = transformation.Transform(new Point2D(0, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));
 								output32D = transformation.Transform(new Point2D(0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value, height - 0.1 * this.product.AssociatedRoom.AssociatedPlan.Measure.Value));

@@ -239,6 +239,10 @@ namespace Europlan.Common {
             this.lblModulBodenSpreizungHeizMin = new System.Windows.Forms.Label();
             this.tabModulBoden20 = new System.Windows.Forms.TabPage();
             this.layoutKlimaBoden20 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblModulBoden20MaxRows = new System.Windows.Forms.Label();
+            this.lblModulBoden20MaxModulesInRow = new System.Windows.Forms.Label();
+            this.numModulBoden20MaxRows = new Europlan.Common.NumericBox();
+            this.numModulBoden20MaxModulesInRow = new Europlan.Common.NumericBox();
             this.lblModulBoden20SpreizungKuehlMax = new System.Windows.Forms.Label();
             this.lblModulBoden20SpreizungHeizMax = new System.Windows.Forms.Label();
             this.lblModulBoden20PressureEquals = new System.Windows.Forms.Label();
@@ -310,6 +314,7 @@ namespace Europlan.Common {
             this.cmbModulDeckeRasterMass = new System.Windows.Forms.ComboBox();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.layoutGeneral = new System.Windows.Forms.TableLayoutPanel();
+            this.lblView = new System.Windows.Forms.Label();
             this.lblGeneralTextbox = new System.Windows.Forms.Label();
             this.lblGeneralFillTextbox = new System.Windows.Forms.Label();
             this.cbGeneralFillTextbox = new System.Windows.Forms.CheckBox();
@@ -337,6 +342,10 @@ namespace Europlan.Common {
             this.lblGeneralTextboxFontSize = new System.Windows.Forms.Label();
             this.lblGeneralTextboxFontSizeUnit = new System.Windows.Forms.Label();
             this.numGeneralTextboxFontSize = new Europlan.Common.NumericBox();
+            this.rbViewBelow = new System.Windows.Forms.RadioButton();
+            this.rbViewAbove = new System.Windows.Forms.RadioButton();
+            this.lblViewBelow = new System.Windows.Forms.Label();
+            this.lblViewAbove = new System.Windows.Forms.Label();
             this.tabHithermDefault = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rbHithermPlusDefault = new System.Windows.Forms.RadioButton();
@@ -663,29 +672,25 @@ namespace Europlan.Common {
             this.label169 = new System.Windows.Forms.Label();
             this.label170 = new System.Windows.Forms.Label();
             this.button12 = new System.Windows.Forms.Button();
-            this.numericBox75 = new Europlan.Common.NumericBox();
-            this.numericBox76 = new Europlan.Common.NumericBox();
             this.label171 = new System.Windows.Forms.Label();
-            this.numericBox77 = new Europlan.Common.NumericBox();
             this.label172 = new System.Windows.Forms.Label();
             this.label173 = new System.Windows.Forms.Label();
-            this.numericBox78 = new Europlan.Common.NumericBox();
-            this.numericBox79 = new Europlan.Common.NumericBox();
             this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.radioButton18 = new System.Windows.Forms.RadioButton();
-            this.numericBox80 = new Europlan.Common.NumericBox();
-            this.numericBox81 = new Europlan.Common.NumericBox();
-            this.numericBox82 = new Europlan.Common.NumericBox();
             this.label174 = new System.Windows.Forms.Label();
             this.label175 = new System.Windows.Forms.Label();
             this.label176 = new System.Windows.Forms.Label();
             this.label177 = new System.Windows.Forms.Label();
             this.label178 = new System.Windows.Forms.Label();
             this.label179 = new System.Windows.Forms.Label();
-            this.lblModulBoden20MaxRows = new System.Windows.Forms.Label();
-            this.lblModulBoden20MaxModulesInRow = new System.Windows.Forms.Label();
-            this.numModulBoden20MaxRows = new Europlan.Common.NumericBox();
-            this.numModulBoden20MaxModulesInRow = new Europlan.Common.NumericBox();
+            this.numericBox75 = new Europlan.Common.NumericBox();
+            this.numericBox76 = new Europlan.Common.NumericBox();
+            this.numericBox77 = new Europlan.Common.NumericBox();
+            this.numericBox78 = new Europlan.Common.NumericBox();
+            this.numericBox79 = new Europlan.Common.NumericBox();
+            this.numericBox80 = new Europlan.Common.NumericBox();
+            this.numericBox81 = new Europlan.Common.NumericBox();
+            this.numericBox82 = new Europlan.Common.NumericBox();
             this.tabSystemParameters.SuspendLayout();
             this.tabEuroval.SuspendLayout();
             this.layoutEuroval.SuspendLayout();
@@ -4677,6 +4682,94 @@ namespace Europlan.Common {
             this.layoutKlimaBoden20.Size = new System.Drawing.Size(580, 253);
             this.layoutKlimaBoden20.TabIndex = 81;
             // 
+            // lblModulBoden20MaxRows
+            // 
+            this.layoutKlimaBoden20.SetColumnSpan(this.lblModulBoden20MaxRows, 2);
+            this.lblModulBoden20MaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblModulBoden20MaxRows.Location = new System.Drawing.Point(3, 69);
+            this.lblModulBoden20MaxRows.Name = "lblModulBoden20MaxRows";
+            this.lblModulBoden20MaxRows.Size = new System.Drawing.Size(299, 23);
+            this.lblModulBoden20MaxRows.TabIndex = 104;
+            this.lblModulBoden20MaxRows.Text = "$Max Modulreihen parallel:";
+            this.lblModulBoden20MaxRows.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblModulBoden20MaxModulesInRow
+            // 
+            this.layoutKlimaBoden20.SetColumnSpan(this.lblModulBoden20MaxModulesInRow, 2);
+            this.lblModulBoden20MaxModulesInRow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblModulBoden20MaxModulesInRow.Location = new System.Drawing.Point(3, 46);
+            this.lblModulBoden20MaxModulesInRow.Name = "lblModulBoden20MaxModulesInRow";
+            this.lblModulBoden20MaxModulesInRow.Size = new System.Drawing.Size(299, 23);
+            this.lblModulBoden20MaxModulesInRow.TabIndex = 103;
+            this.lblModulBoden20MaxModulesInRow.Text = "$Max Modulanzahl in Serie:";
+            this.lblModulBoden20MaxModulesInRow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numModulBoden20MaxRows
+            // 
+            this.numModulBoden20MaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numModulBoden20MaxRows.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+            this.numModulBoden20MaxRows.InternalValue = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxRows.Location = new System.Drawing.Point(308, 71);
+            this.numModulBoden20MaxRows.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numModulBoden20MaxRows.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxRows.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxRows.Name = "numModulBoden20MaxRows";
+            this.numModulBoden20MaxRows.Size = new System.Drawing.Size(79, 20);
+            this.numModulBoden20MaxRows.TabIndex = 106;
+            this.numModulBoden20MaxRows.Text = "6";
+            this.numModulBoden20MaxRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numModulBoden20MaxRows.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxRows.ValueChanged += new System.EventHandler(this.numModulBoden20MaxRows_ValueChanged);
+            // 
+            // numModulBoden20MaxModulesInRow
+            // 
+            this.numModulBoden20MaxModulesInRow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numModulBoden20MaxModulesInRow.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
+            this.numModulBoden20MaxModulesInRow.InternalValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxModulesInRow.Location = new System.Drawing.Point(308, 48);
+            this.numModulBoden20MaxModulesInRow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
+            this.numModulBoden20MaxModulesInRow.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxModulesInRow.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxModulesInRow.Name = "numModulBoden20MaxModulesInRow";
+            this.numModulBoden20MaxModulesInRow.Size = new System.Drawing.Size(79, 20);
+            this.numModulBoden20MaxModulesInRow.TabIndex = 105;
+            this.numModulBoden20MaxModulesInRow.Text = "20";
+            this.numModulBoden20MaxModulesInRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numModulBoden20MaxModulesInRow.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numModulBoden20MaxModulesInRow.ValueChanged += new System.EventHandler(this.numModulBoden20MaxModulesInRow_ValueChanged);
+            // 
             // lblModulBoden20SpreizungKuehlMax
             // 
             this.lblModulBoden20SpreizungKuehlMax.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -5934,10 +6027,11 @@ namespace Europlan.Common {
             this.layoutGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.layoutGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.layoutGeneral.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.layoutGeneral.Controls.Add(this.lblView, 0, 11);
             this.layoutGeneral.Controls.Add(this.lblGeneralTextbox, 0, 0);
             this.layoutGeneral.Controls.Add(this.lblGeneralFillTextbox, 0, 1);
             this.layoutGeneral.Controls.Add(this.cbGeneralFillTextbox, 2, 1);
-            this.layoutGeneral.Controls.Add(this.btnGeneralStandard, 5, 12);
+            this.layoutGeneral.Controls.Add(this.btnGeneralStandard, 5, 15);
             this.layoutGeneral.Controls.Add(this.lblGeneralAlphaWandCool, 0, 10);
             this.layoutGeneral.Controls.Add(this.numGeneralAlphaWandCool, 2, 10);
             this.layoutGeneral.Controls.Add(this.lblGeneralAlphaWandUnitCool, 3, 10);
@@ -5961,9 +6055,13 @@ namespace Europlan.Common {
             this.layoutGeneral.Controls.Add(this.lblGeneralTextboxFontSize, 0, 2);
             this.layoutGeneral.Controls.Add(this.lblGeneralTextboxFontSizeUnit, 3, 2);
             this.layoutGeneral.Controls.Add(this.numGeneralTextboxFontSize, 2, 2);
+            this.layoutGeneral.Controls.Add(this.rbViewBelow, 2, 12);
+            this.layoutGeneral.Controls.Add(this.rbViewAbove, 2, 13);
+            this.layoutGeneral.Controls.Add(this.lblViewBelow, 0, 12);
+            this.layoutGeneral.Controls.Add(this.lblViewAbove, 0, 13);
             this.layoutGeneral.Location = new System.Drawing.Point(3, 5);
             this.layoutGeneral.Name = "layoutGeneral";
-            this.layoutGeneral.RowCount = 13;
+            this.layoutGeneral.RowCount = 16;
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
@@ -5977,8 +6075,22 @@ namespace Europlan.Common {
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.layoutGeneral.Size = new System.Drawing.Size(580, 299);
+            this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.layoutGeneral.Size = new System.Drawing.Size(580, 383);
             this.layoutGeneral.TabIndex = 120;
+            // 
+            // lblView
+            // 
+            this.layoutGeneral.SetColumnSpan(this.lblView, 2);
+            this.lblView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblView.Location = new System.Drawing.Point(3, 253);
+            this.lblView.Name = "lblView";
+            this.lblView.Size = new System.Drawing.Size(174, 23);
+            this.lblView.TabIndex = 135;
+            this.lblView.Text = "[Ansicht]";
+            this.lblView.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblGeneralTextbox
             // 
@@ -6014,7 +6126,7 @@ namespace Europlan.Common {
             // btnGeneralStandard
             // 
             this.layoutGeneral.SetColumnSpan(this.btnGeneralStandard, 2);
-            this.btnGeneralStandard.Location = new System.Drawing.Point(460, 276);
+            this.btnGeneralStandard.Location = new System.Drawing.Point(460, 345);
             this.btnGeneralStandard.Margin = new System.Windows.Forms.Padding(0);
             this.btnGeneralStandard.Name = "btnGeneralStandard";
             this.btnGeneralStandard.Size = new System.Drawing.Size(120, 23);
@@ -6407,6 +6519,47 @@ namespace Europlan.Common {
             0,
             131072});
             this.numGeneralTextboxFontSize.ValueChanged += new System.EventHandler(this.numGeneralTextboxFontSize_ValueChanged);
+            // 
+            // rbViewBelow
+            // 
+            this.rbViewBelow.AutoSize = true;
+            this.rbViewBelow.Location = new System.Drawing.Point(308, 279);
+            this.rbViewBelow.Name = "rbViewBelow";
+            this.rbViewBelow.Size = new System.Drawing.Size(14, 13);
+            this.rbViewBelow.TabIndex = 79;
+            this.rbViewBelow.TabStop = true;
+            this.rbViewBelow.UseVisualStyleBackColor = true;
+            this.rbViewBelow.CheckedChanged += new System.EventHandler(this.rbViewBelow_CheckedChanged);
+            // 
+            // rbViewAbove
+            // 
+            this.rbViewAbove.AutoSize = true;
+            this.rbViewAbove.Location = new System.Drawing.Point(308, 302);
+            this.rbViewAbove.Name = "rbViewAbove";
+            this.rbViewAbove.Size = new System.Drawing.Size(14, 13);
+            this.rbViewAbove.TabIndex = 136;
+            this.rbViewAbove.TabStop = true;
+            this.rbViewAbove.UseVisualStyleBackColor = true;
+            // 
+            // lblViewBelow
+            // 
+            this.layoutGeneral.SetColumnSpan(this.lblViewBelow, 2);
+            this.lblViewBelow.Location = new System.Drawing.Point(3, 276);
+            this.lblViewBelow.Name = "lblViewBelow";
+            this.lblViewBelow.Size = new System.Drawing.Size(174, 23);
+            this.lblViewBelow.TabIndex = 137;
+            this.lblViewBelow.Text = "[Ansicht von unten]";
+            this.lblViewBelow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblViewAbove
+            // 
+            this.layoutGeneral.SetColumnSpan(this.lblViewAbove, 2);
+            this.lblViewAbove.Location = new System.Drawing.Point(3, 299);
+            this.lblViewAbove.Name = "lblViewAbove";
+            this.lblViewAbove.Size = new System.Drawing.Size(174, 23);
+            this.lblViewAbove.TabIndex = 138;
+            this.lblViewAbove.Text = "[Ansicht als Grundriss]";
+            this.lblViewAbove.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabHithermDefault
             // 
@@ -11976,6 +12129,118 @@ namespace Europlan.Common {
             this.button12.Text = "Standardwerte";
             this.button12.UseVisualStyleBackColor = true;
             // 
+            // label171
+            // 
+            this.label171.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label171.Location = new System.Drawing.Point(3, 69);
+            this.label171.Name = "label171";
+            this.label171.Size = new System.Drawing.Size(299, 23);
+            this.label171.TabIndex = 6;
+            this.label171.Text = "Max. Druckverlust:";
+            this.label171.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label172
+            // 
+            this.label172.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label172.Location = new System.Drawing.Point(393, 138);
+            this.label172.Name = "label172";
+            this.label172.Size = new System.Drawing.Size(24, 23);
+            this.label172.TabIndex = 22;
+            this.label172.Text = "K";
+            this.label172.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label173
+            // 
+            this.label173.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label173.Location = new System.Drawing.Point(3, 92);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(299, 23);
+            this.label173.TabIndex = 11;
+            this.label173.Text = "Max. Durchflußmenge:";
+            this.label173.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton17.Location = new System.Drawing.Point(308, 26);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(269, 17);
+            this.radioButton17.TabIndex = 82;
+            this.radioButton17.Text = "29 °C (EN 1264)";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // radioButton18
+            // 
+            this.radioButton18.Checked = true;
+            this.radioButton18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton18.Location = new System.Drawing.Point(308, 3);
+            this.radioButton18.Name = "radioButton18";
+            this.radioButton18.Size = new System.Drawing.Size(269, 17);
+            this.radioButton18.TabIndex = 81;
+            this.radioButton18.TabStop = true;
+            this.radioButton18.Text = "27 °C (Harreither Werksempfehlung)";
+            this.radioButton18.UseVisualStyleBackColor = true;
+            // 
+            // label174
+            // 
+            this.label174.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label174.Location = new System.Drawing.Point(393, 92);
+            this.label174.Name = "label174";
+            this.label174.Size = new System.Drawing.Size(24, 23);
+            this.label174.TabIndex = 13;
+            this.label174.Text = "l/h";
+            this.label174.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label175
+            // 
+            this.label175.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label175.Location = new System.Drawing.Point(393, 115);
+            this.label175.Name = "label175";
+            this.label175.Size = new System.Drawing.Size(24, 23);
+            this.label175.TabIndex = 16;
+            this.label175.Text = "K";
+            this.label175.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label176
+            // 
+            this.label176.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label176.Location = new System.Drawing.Point(393, 69);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(24, 23);
+            this.label176.TabIndex = 8;
+            this.label176.Text = "Pa";
+            this.label176.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label177
+            // 
+            this.label177.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label177.Location = new System.Drawing.Point(3, 115);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(259, 23);
+            this.label177.TabIndex = 14;
+            this.label177.Text = "Spreizung Heizbetrieb:";
+            this.label177.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label178
+            // 
+            this.label178.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label178.Location = new System.Drawing.Point(3, 138);
+            this.label178.Name = "label178";
+            this.label178.Size = new System.Drawing.Size(259, 23);
+            this.label178.TabIndex = 20;
+            this.label178.Text = "Spreizung Kühlbetrieb:";
+            this.label178.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label179
+            // 
+            this.label179.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label179.Location = new System.Drawing.Point(268, 115);
+            this.label179.Name = "label179";
+            this.label179.Size = new System.Drawing.Size(34, 23);
+            this.label179.TabIndex = 19;
+            this.label179.Text = "min.";
+            this.label179.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // numericBox75
             // 
             this.numericBox75.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -12040,16 +12305,6 @@ namespace Europlan.Common {
             0,
             0});
             // 
-            // label171
-            // 
-            this.label171.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label171.Location = new System.Drawing.Point(3, 69);
-            this.label171.Name = "label171";
-            this.label171.Size = new System.Drawing.Size(299, 23);
-            this.label171.TabIndex = 6;
-            this.label171.Text = "Max. Druckverlust:";
-            this.label171.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // numericBox77
             // 
             this.numericBox77.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -12081,26 +12336,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // label172
-            // 
-            this.label172.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label172.Location = new System.Drawing.Point(393, 138);
-            this.label172.Name = "label172";
-            this.label172.Size = new System.Drawing.Size(24, 23);
-            this.label172.TabIndex = 22;
-            this.label172.Text = "K";
-            this.label172.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label173
-            // 
-            this.label173.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label173.Location = new System.Drawing.Point(3, 92);
-            this.label173.Name = "label173";
-            this.label173.Size = new System.Drawing.Size(299, 23);
-            this.label173.TabIndex = 11;
-            this.label173.Text = "Max. Durchflußmenge:";
-            this.label173.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericBox78
             // 
@@ -12165,28 +12400,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // radioButton17
-            // 
-            this.radioButton17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton17.Location = new System.Drawing.Point(308, 26);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(269, 17);
-            this.radioButton17.TabIndex = 82;
-            this.radioButton17.Text = "29 °C (EN 1264)";
-            this.radioButton17.UseVisualStyleBackColor = true;
-            // 
-            // radioButton18
-            // 
-            this.radioButton18.Checked = true;
-            this.radioButton18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton18.Location = new System.Drawing.Point(308, 3);
-            this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(269, 17);
-            this.radioButton18.TabIndex = 81;
-            this.radioButton18.TabStop = true;
-            this.radioButton18.Text = "27 °C (Harreither Werksempfehlung)";
-            this.radioButton18.UseVisualStyleBackColor = true;
             // 
             // numericBox80
             // 
@@ -12283,154 +12496,6 @@ namespace Europlan.Common {
             0,
             0,
             0});
-            // 
-            // label174
-            // 
-            this.label174.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label174.Location = new System.Drawing.Point(393, 92);
-            this.label174.Name = "label174";
-            this.label174.Size = new System.Drawing.Size(24, 23);
-            this.label174.TabIndex = 13;
-            this.label174.Text = "l/h";
-            this.label174.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label175
-            // 
-            this.label175.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label175.Location = new System.Drawing.Point(393, 115);
-            this.label175.Name = "label175";
-            this.label175.Size = new System.Drawing.Size(24, 23);
-            this.label175.TabIndex = 16;
-            this.label175.Text = "K";
-            this.label175.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label176
-            // 
-            this.label176.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label176.Location = new System.Drawing.Point(393, 69);
-            this.label176.Name = "label176";
-            this.label176.Size = new System.Drawing.Size(24, 23);
-            this.label176.TabIndex = 8;
-            this.label176.Text = "Pa";
-            this.label176.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label177
-            // 
-            this.label177.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label177.Location = new System.Drawing.Point(3, 115);
-            this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(259, 23);
-            this.label177.TabIndex = 14;
-            this.label177.Text = "Spreizung Heizbetrieb:";
-            this.label177.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label178
-            // 
-            this.label178.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label178.Location = new System.Drawing.Point(3, 138);
-            this.label178.Name = "label178";
-            this.label178.Size = new System.Drawing.Size(259, 23);
-            this.label178.TabIndex = 20;
-            this.label178.Text = "Spreizung Kühlbetrieb:";
-            this.label178.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label179
-            // 
-            this.label179.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label179.Location = new System.Drawing.Point(268, 115);
-            this.label179.Name = "label179";
-            this.label179.Size = new System.Drawing.Size(34, 23);
-            this.label179.TabIndex = 19;
-            this.label179.Text = "min.";
-            this.label179.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblModulBoden20MaxRows
-            // 
-            this.layoutKlimaBoden20.SetColumnSpan(this.lblModulBoden20MaxRows, 2);
-            this.lblModulBoden20MaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblModulBoden20MaxRows.Location = new System.Drawing.Point(3, 69);
-            this.lblModulBoden20MaxRows.Name = "lblModulBoden20MaxRows";
-            this.lblModulBoden20MaxRows.Size = new System.Drawing.Size(299, 23);
-            this.lblModulBoden20MaxRows.TabIndex = 104;
-            this.lblModulBoden20MaxRows.Text = "$Max Modulreihen parallel:";
-            this.lblModulBoden20MaxRows.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblModulBoden20MaxModulesInRow
-            // 
-            this.layoutKlimaBoden20.SetColumnSpan(this.lblModulBoden20MaxModulesInRow, 2);
-            this.lblModulBoden20MaxModulesInRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblModulBoden20MaxModulesInRow.Location = new System.Drawing.Point(3, 46);
-            this.lblModulBoden20MaxModulesInRow.Name = "lblModulBoden20MaxModulesInRow";
-            this.lblModulBoden20MaxModulesInRow.Size = new System.Drawing.Size(299, 23);
-            this.lblModulBoden20MaxModulesInRow.TabIndex = 103;
-            this.lblModulBoden20MaxModulesInRow.Text = "$Max Modulanzahl in Serie:";
-            this.lblModulBoden20MaxModulesInRow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numModulBoden20MaxRows
-            // 
-            this.numModulBoden20MaxRows.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numModulBoden20MaxRows.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-            this.numModulBoden20MaxRows.InternalValue = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxRows.Location = new System.Drawing.Point(308, 71);
-            this.numModulBoden20MaxRows.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-            this.numModulBoden20MaxRows.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxRows.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxRows.Name = "numModulBoden20MaxRows";
-            this.numModulBoden20MaxRows.Size = new System.Drawing.Size(79, 20);
-            this.numModulBoden20MaxRows.TabIndex = 106;
-            this.numModulBoden20MaxRows.Text = "6";
-            this.numModulBoden20MaxRows.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numModulBoden20MaxRows.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxRows.ValueChanged += new System.EventHandler(this.numModulBoden20MaxRows_ValueChanged);
-            // 
-            // numModulBoden20MaxModulesInRow
-            // 
-            this.numModulBoden20MaxModulesInRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numModulBoden20MaxModulesInRow.EditType = Europlan.Common.NumericBox.NumericEditType.DEFAULT;
-            this.numModulBoden20MaxModulesInRow.InternalValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxModulesInRow.Location = new System.Drawing.Point(308, 48);
-            this.numModulBoden20MaxModulesInRow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 1);
-            this.numModulBoden20MaxModulesInRow.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxModulesInRow.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxModulesInRow.Name = "numModulBoden20MaxModulesInRow";
-            this.numModulBoden20MaxModulesInRow.Size = new System.Drawing.Size(79, 20);
-            this.numModulBoden20MaxModulesInRow.TabIndex = 105;
-            this.numModulBoden20MaxModulesInRow.Text = "20";
-            this.numModulBoden20MaxModulesInRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numModulBoden20MaxModulesInRow.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numModulBoden20MaxModulesInRow.ValueChanged += new System.EventHandler(this.numModulBoden20MaxModulesInRow_ValueChanged);
             // 
             // SystemParametersPanel
             // 
@@ -13178,5 +13243,10 @@ namespace Europlan.Common {
         private System.Windows.Forms.Label lblModulBoden20MaxModulesInRow;
         private NumericBox numModulBoden20MaxRows;
         private NumericBox numModulBoden20MaxModulesInRow;
+        private System.Windows.Forms.Label lblView;
+        private System.Windows.Forms.RadioButton rbViewBelow;
+        private System.Windows.Forms.RadioButton rbViewAbove;
+        private System.Windows.Forms.Label lblViewBelow;
+        private System.Windows.Forms.Label lblViewAbove;
 	}
 }

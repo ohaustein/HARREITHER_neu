@@ -8055,4 +8055,19 @@ m²</value>
   <data name="LL_Report_VerlegedatenKlimaboden202" xml:space="preserve">
     <value>Verlegedaten Modul Klimaboden 20 - %GESCHOSS%</value>
   </data>
+  <data name="SystemParametersPanel_ChangeViewProjectNotEmptyMessage" xml:space="preserve">
+    <value>Eine Änderung der Ansicht ist nur möglich, wenn noch keine grafischen Produkte vorhanden sind. Entfernen Sie gegebenenfalls grafisch ausgelegte Produkte, bevor diese Einstellung verändert wird.</value>
+  </data>
+  <data name="SystemParametersPanel_ChangeViewProjectNotEmptyTitle" xml:space="preserve">
+    <value>Änderung der Ansicht nicht möglich.</value>
+  </data>
+  <data name="SystemParametersPanel_View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+  <data name="SystemParametersPanel_ViewAbove" xml:space="preserve">
+    <value>Ansicht als Grundriss</value>
+  </data>
+  <data name="SystemParametersPanel_ViewBelow" xml:space="preserve">
+    <value>Ansicht von unten</value>
+  </data>
 </root>

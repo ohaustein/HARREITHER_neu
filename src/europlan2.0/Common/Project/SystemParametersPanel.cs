@@ -315,6 +315,9 @@ namespace Europlan.Common {
 			this.label25.Text = EuroplanRes.Unit_WattProQmKelvin;
 			this.label26.Text = EuroplanRes.SystemParametersPanel_ImportiertePlaene;
 			this.label27.Text = EuroplanRes.SystemParametersPanel_PlaeneEinheit;
+            this.lblView.Text = EuroplanRes.SystemParametersPanel_View;
+            this.lblViewAbove.Text = EuroplanRes.SystemParametersPanel_ViewAbove;
+            this.lblViewBelow.Text = EuroplanRes.SystemParametersPanel_ViewBelow;
 		}
 
 		public Configuration.ConfigurationType ConfigurationType {
@@ -892,6 +895,8 @@ namespace Europlan.Common {
 				numGeneralAlphaWandCool.Value = (decimal)Product.ConfigAlphaWandCool;
                 cbGeneralFillTextbox.Checked = Product.ConfigFillBoxBackground;
                 numGeneralTextboxFontSize.Value = (decimal)Product.ConfigBoxFontSize;
+                rbViewAbove.Checked = Product.ConfigViewGrundriss;
+                rbViewBelow.Checked = !Product.ConfigViewGrundriss;
 			}
 		}
 
@@ -1791,6 +1796,31 @@ namespace Europlan.Common {
             if (this.projectChanged != null)
             {
                 this.projectChanged(null);
+            }
+        }
+
+        private void rbViewBelow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!updateOngoing)
+            {
+                // check if there are graphical products
+                foreach (Floor floor in Project.Instance.Floors)
+                {
+                    foreach (Room room in floor.Rooms)
+                    {
+                        foreach (PlannedProduct plannedProduct in room.PlannedProducts)
+                        {
+                            if (plannedProduct.Product.GraphicalMode ?? false)
+                            {
+                                MessageBox.Show(EuroplanRes.SystemParametersPanel_ChangeViewProjectNotEmptyMessage, EuroplanRes.SystemParametersPanel_ChangeViewProjectNotEmptyTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                UpdateControl(false);
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                Product.ConfigViewGrundriss = rbViewAbove.Checked;
             }
         }
 	}
