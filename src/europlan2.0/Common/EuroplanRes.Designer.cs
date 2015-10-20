@@ -1571,6 +1571,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compact Platten.
+        /// </summary>
+        internal static string ConstructionEditorGrid_CompactPlatten {
+            get {
+                return ResourceManager.GetString("ConstructionEditorGrid_CompactPlatten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WD.
         /// </summary>
         internal static string ConstructionEditorGrid_DaemmKurz {
@@ -1688,6 +1697,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Benutzer Modul Compact Platte.
+        /// </summary>
+        internal static string ConstructionTypeManager_BenutzerCompactPlatte {
+            get {
+                return ResourceManager.GetString("ConstructionTypeManager_BenutzerCompactPlatte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Benutzer Wärmedämmkonstruktion.
         /// </summary>
         internal static string ConstructionTypeManager_BenutzerDaemm {
@@ -1756,6 +1774,15 @@ namespace Europlan.Common {
         internal static string ConstructionTypeManager_StandardBeton {
             get {
                 return ResourceManager.GetString("ConstructionTypeManager_StandardBeton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Modul Compact Platte.
+        /// </summary>
+        internal static string ConstructionTypeManager_StandardCompactPlatte {
+            get {
+                return ResourceManager.GetString("ConstructionTypeManager_StandardCompactPlatte", resourceCulture);
             }
         }
         
