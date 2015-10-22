@@ -1314,7 +1314,16 @@ namespace Europlan.Common {
 					// Stahlbleche
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK21", Double.NegativeInfinity);
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK22", Double.NegativeInfinity);
-				}
+				} else if (this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_COMPACT_PLATTE) ||
+                           this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_COMPACT_PLATTE)) 
+                {
+                    double floorArea = this.PlannedFloorArea;
+                    double numberOfPlatten = Math.Ceiling(floorArea / (1.22 * 0.75));
+                    double numberOfGlue = Math.Ceiling(floorArea / 5);
+                    // MK 25 Modul Compact Platte Abmaß 1,22mx 0,725m; MK26: Modul Compact Kleber 1 Kartusche pro 5m²
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK25", -numberOfPlatten);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK26", -numberOfGlue);
+                }
 			}
 
 			// Rohrführungsplatte
