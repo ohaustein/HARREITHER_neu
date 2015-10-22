@@ -40,6 +40,7 @@ namespace Europlan.Common {
 			this.tsmiNewWallConstruction.Text = EuroplanRes.ConstructionEditorForm_Wand; //"Wandkonstruktion"
 			this.tsmiNewFloorConstructionScreedAdmin.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Estrich + ")"; //"Fuﬂbodenkonstruktion (Estrich)"
 			this.tsmiNewFloorConstructionDryAdmin.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_Trocken + ")"; //"Fuﬂbodenkonstruktion (Trocken)"
+            this.tsmiNewFloorConstructionCompactPlatten.Text = EuroplanRes.ConstructionEditorForm_Fussboden + "(" + EuroplanRes.ConstructionEditorGrid_CompactPlatten + ")"; // "Fuﬂbodenkonstruction (Compact Platten"
 			this.tsmiNewInsulationConstructionAdmin.Text = EuroplanRes.ConstructionEditorForm_Daemm; //"W‰rmed‰mmkonstruktion"
 			this.tsmiNewCeilingConstructionAdmin.Text = EuroplanRes.ConstructionEditorForm_Decke; //"Deckenkonstruktion"
 			this.colId.HeaderText = EuroplanRes.General_NummerCol; //"Nr."
@@ -177,6 +178,11 @@ namespace Europlan.Common {
             } else if (sender == this.tsmiNewFloorConstructionBeton) {
                 c = new FloorConstruction();
                 c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_BETON : ConstructionTypeManager.CT_USER_BETON);
+            }
+            else if (sender == this.tsmiNewFloorConstructionCompactPlatten)
+            {
+                c = new FloorConstruction();
+                c.Type = ConstructionTypeManager.Instance.GetConstructionTypeById(this.adminMode ? ConstructionTypeManager.CT_STD_COMPACT_PLATTE : ConstructionTypeManager.CT_USER_COMPACT_PLATTE);
             }
 			if (c != null) {
 				ConstructionEditorForm form = new ConstructionEditorForm(c);

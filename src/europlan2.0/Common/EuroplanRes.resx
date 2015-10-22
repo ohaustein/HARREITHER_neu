@@ -8070,4 +8070,13 @@ m²</value>
   <data name="SystemParametersPanel_ViewBelow" xml:space="preserve">
     <value>Ansicht von unten</value>
   </data>
+  <data name="ConstructionTypeManager_BenutzerCompactPlatte" xml:space="preserve">
+    <value>Benutzer Modul Compact Platte</value>
+  </data>
+  <data name="ConstructionTypeManager_StandardCompactPlatte" xml:space="preserve">
+    <value>Standard Modul Compact Platte</value>
+  </data>
+  <data name="ConstructionEditorGrid_CompactPlatten" xml:space="preserve">
+    <value>Compact Platten</value>
+  </data>
 </root>

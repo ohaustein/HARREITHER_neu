@@ -183,18 +183,30 @@ namespace Europlan.Common {
 				ConstructionType ctStahlU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL);
 				ConstructionType ctTrkEstrS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TRK_ESTRICH);
 				ConstructionType ctTrkEstrU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH);
+                ConstructionType ctCompactPlatteS = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_STD_COMPACT_PLATTE);
+                ConstructionType ctCompactPlatteU = ctm.GetConstructionTypeById(ConstructionTypeManager.CT_USER_COMPACT_PLATTE);
 
 				ConstructionType ct = this.ModulKlimaBodenProduct.PlannedFloorConstruction.Type;
-				if (ct == ctEstrichS || ct == ctEstrichU) {
-					su = 0.03;
-					lambdaE = 1.2;
-				} else if (ct == ctTrkEstrS || ct == ctTrkEstrU) {
-					su = 0.02;
-					lambdaE = 0.33;
-				} else if (ct == ctStahlS || ct == ctStahlU) {
-					su = 0.002;
-					lambdaE = 60;
-				}
+                if (ct == ctEstrichS || ct == ctEstrichU)
+                {
+                    su = 0.03;
+                    lambdaE = 1.2;
+                }
+                else if (ct == ctTrkEstrS || ct == ctTrkEstrU)
+                {
+                    su = 0.02;
+                    lambdaE = 0.33;
+                }
+                else if (ct == ctStahlS || ct == ctStahlU)
+                {
+                    su = 0.002;
+                    lambdaE = 60;
+                }
+                else if (ct == ctCompactPlatteS || ct == ctCompactPlatteU)
+                {
+                    su = 0.01;
+                    lambdaE = 0.5;
+                }
 
 			
 			}

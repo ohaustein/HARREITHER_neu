@@ -49,6 +49,7 @@ namespace Europlan.Common {
             this.tsmiNewFloorConstructionTrocken = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewFloorConstructionStahl = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewFloorConstructionTrockenEstrich = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionBeton = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewInsulationConstruction = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewCeilingConstruction = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewWallConstruction = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,7 @@ namespace Europlan.Common {
             this.tsmiNewFloorConstructionDryAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewInsulationConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewCeilingConstructionAdmin = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiNewFloorConstructionBeton = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewFloorConstructionCompactPlatten = new System.Windows.Forms.ToolStripMenuItem();
             this.panBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridConstructions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.constructionsWrapperBindingSource)).BeginInit();
@@ -267,58 +268,66 @@ namespace Europlan.Common {
             this.tsmiNewFloorConstructionStahl,
             this.tsmiNewFloorConstructionTrockenEstrich,
             this.tsmiNewFloorConstructionBeton,
+            this.tsmiNewFloorConstructionCompactPlatten,
             this.tsmiNewInsulationConstruction,
             this.tsmiNewCeilingConstruction,
             this.tsmiNewWallConstruction});
             this.cmsNew.Name = "cmsNew";
-            this.cmsNew.Size = new System.Drawing.Size(285, 202);
+            this.cmsNew.Size = new System.Drawing.Size(304, 224);
             // 
             // tsmiNewFloorConstructionEstrich
             // 
             this.tsmiNewFloorConstructionEstrich.Name = "tsmiNewFloorConstructionEstrich";
-            this.tsmiNewFloorConstructionEstrich.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionEstrich.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewFloorConstructionEstrich.Text = "Fuﬂbodenkonstruktion (Estrich)";
             this.tsmiNewFloorConstructionEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewFloorConstructionTrocken
             // 
             this.tsmiNewFloorConstructionTrocken.Name = "tsmiNewFloorConstructionTrocken";
-            this.tsmiNewFloorConstructionTrocken.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionTrocken.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewFloorConstructionTrocken.Text = "Fuﬂbodenkonstruktion (Trocken)";
             this.tsmiNewFloorConstructionTrocken.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewFloorConstructionStahl
             // 
             this.tsmiNewFloorConstructionStahl.Name = "tsmiNewFloorConstructionStahl";
-            this.tsmiNewFloorConstructionStahl.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionStahl.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewFloorConstructionStahl.Text = "Fuﬂbodenkonstruktion (Stahlblech)";
             this.tsmiNewFloorConstructionStahl.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewFloorConstructionTrockenEstrich
             // 
             this.tsmiNewFloorConstructionTrockenEstrich.Name = "tsmiNewFloorConstructionTrockenEstrich";
-            this.tsmiNewFloorConstructionTrockenEstrich.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewFloorConstructionTrockenEstrich.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewFloorConstructionTrockenEstrich.Text = "Fuﬂbodenkonstruktion (Trockenestrich)";
             this.tsmiNewFloorConstructionTrockenEstrich.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            // 
+            // tsmiNewFloorConstructionBeton
+            // 
+            this.tsmiNewFloorConstructionBeton.Name = "tsmiNewFloorConstructionBeton";
+            this.tsmiNewFloorConstructionBeton.Size = new System.Drawing.Size(303, 22);
+            this.tsmiNewFloorConstructionBeton.Text = "Fuﬂbodenkonstruktion (Stahlbeton)";
+            this.tsmiNewFloorConstructionBeton.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewInsulationConstruction
             // 
             this.tsmiNewInsulationConstruction.Name = "tsmiNewInsulationConstruction";
-            this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewInsulationConstruction.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewInsulationConstruction.Text = "W‰rmed‰mmkonstruktion";
             this.tsmiNewInsulationConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewCeilingConstruction
             // 
             this.tsmiNewCeilingConstruction.Name = "tsmiNewCeilingConstruction";
-            this.tsmiNewCeilingConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewCeilingConstruction.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewCeilingConstruction.Text = "Deckenkonstruktion";
             this.tsmiNewCeilingConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // tsmiNewWallConstruction
             // 
             this.tsmiNewWallConstruction.Name = "tsmiNewWallConstruction";
-            this.tsmiNewWallConstruction.Size = new System.Drawing.Size(284, 22);
+            this.tsmiNewWallConstruction.Size = new System.Drawing.Size(303, 22);
             this.tsmiNewWallConstruction.Text = "Wandkonstruktion";
             this.tsmiNewWallConstruction.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
@@ -360,12 +369,12 @@ namespace Europlan.Common {
             this.tsmiNewCeilingConstructionAdmin.Text = "Deckenkonstruktion";
             this.tsmiNewCeilingConstructionAdmin.Click += new System.EventHandler(this.tsmiNewConstructionAdmin_Click);
             // 
-            // tsmiNewFloorConstructionBeton
+            // tsmiNewFloorConstructionCompactPlatten
             // 
-            this.tsmiNewFloorConstructionBeton.Name = "tsmiNewFloorConstructionBeton";
-            this.tsmiNewFloorConstructionBeton.Size = new System.Drawing.Size(284, 22);
-            this.tsmiNewFloorConstructionBeton.Text = "Fuﬂbodenkonstruktion (Stahlbeton)";
-            this.tsmiNewFloorConstructionBeton.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
+            this.tsmiNewFloorConstructionCompactPlatten.Name = "tsmiNewFloorConstructionCompactPlatten";
+            this.tsmiNewFloorConstructionCompactPlatten.Size = new System.Drawing.Size(303, 22);
+            this.tsmiNewFloorConstructionCompactPlatten.Text = "(Fuﬂbodenkonstruktion (Compact Platten))";
+            this.tsmiNewFloorConstructionCompactPlatten.Click += new System.EventHandler(this.tsmiNewConstruction_Click);
             // 
             // ConstructionEditorGrid
             // 
@@ -418,6 +427,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.DataGridViewButtonColumn colEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstructionBeton;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewFloorConstructionCompactPlatten;
 
 	}
 }

@@ -745,7 +745,9 @@ namespace Europlan.Common {
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_STAHL),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_STAHL),
 					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_TRK_ESTRICH),
-					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH) }));
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_TRK_ESTRICH),
+                    ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_STD_COMPACT_PLATTE),
+					ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_COMPACT_PLATTE)}));
 			form.SelectedConstruction = (this.product.Product as ModulKlimaBodenProduct).PlannedFloorConstruction;
 			if (form.ShowDialog() == DialogResult.OK) {
 				if (form.SelectedConstruction != null) {
