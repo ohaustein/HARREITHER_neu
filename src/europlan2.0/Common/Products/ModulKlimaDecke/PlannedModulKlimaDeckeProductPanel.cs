@@ -21,6 +21,10 @@ namespace Europlan.Common {
 
 			this.cmbType.Items.Add(Product.ProductType.WH);
 			this.cmbType.Items.Add(Product.ProductType.DH);
+
+            this.cmbDeckenTyp.Items.Add(ModulKlimaDeckeProduct.DeckenTyp.CLOSED);
+            this.cmbDeckenTyp.Items.Add(ModulKlimaDeckeProduct.DeckenTyp.OPEN);
+            this.cmbDeckenTyp.Items.Add(ModulKlimaDeckeProduct.DeckenTyp.OPEN_BORDER_JOINT_5);
 		}
 
 		private void SetLanguage() {
@@ -120,6 +124,8 @@ namespace Europlan.Common {
             this.btnGraphical.Text = EuroplanRes.PlannedProductPanel_GrafischeAuslegung;
 
             this.btnPartitionSystem.Text = EuroplanRes.PlannedProductPanel_SystemAufteilen;
+
+            this.lblDeckenTyp.Text = EuroplanRes.PlannedProductPanel_DeckenTyp;
         }
 
 		#region IEditorUserControl Members
@@ -327,6 +333,7 @@ namespace Europlan.Common {
 
 				if ((skipFields & FieldEnum.TYPE) == FieldEnum.NONE) {
 					this.cmbType.SelectedItem = mdProduct.ModulType;
+                    this.cmbDeckenTyp.SelectedItem = mdProduct.CeilingType;
 				}
 
 				bool showArea = mdProduct.ModulType == Product.ProductType.DH || mdProduct.ModulType == Product.ProductType.FBH;
@@ -1222,6 +1229,24 @@ namespace Europlan.Common {
                     this.projectStructureChanged(this);
                 }
                 this.UpdateControl(true);
+            }
+        }
+
+        private void cmbDeckenTyp_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (ignoreType == 0)
+            {
+                ModulKlimaDeckeProduct deckenProdukt = (ModulKlimaDeckeProduct) this.product.Product;
+                if (this.cmbDeckenTyp.SelectedItem is ModulKlimaDeckeProduct.DeckenTyp && deckenProdukt.CeilingType != (ModulKlimaDeckeProduct.DeckenTyp) this.cmbDeckenTyp.SelectedItem)
+                {
+                    deckenProdukt.CeilingType = (ModulKlimaDeckeProduct.DeckenTyp)this.cmbDeckenTyp.SelectedItem;
+
+                    (this.product.Product as ModulKlimaDeckeProduct).ModulType = (Product.ProductType)this.cmbType.SelectedItem;
+      
+                    this.product.Product.ConfigureProduct(this.product.RequestedHeatLoad, this.product.RequestedCoolLoad, this.product.CalculateHeat, this.product.CalculateCool, false);
+                    this.errorMsg = this.product.Product.LastErrorMessage;
+                    this.UpdateControl(FieldEnum.TYPE);
+                }
             }
         }
 		

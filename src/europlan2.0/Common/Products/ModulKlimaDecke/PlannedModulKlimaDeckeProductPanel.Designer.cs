@@ -52,6 +52,8 @@ namespace Europlan.Common {
             this.numHeatLoad = new Europlan.Common.NumericBox();
             this.lblHeatLoadTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbDeckenTyp = new System.Windows.Forms.ComboBox();
+            this.lblDeckenTyp = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.numRoomTemperatureBelowCool = new Europlan.Common.NumericBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -608,6 +610,8 @@ namespace Europlan.Common {
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cmbDeckenTyp);
+            this.groupBox1.Controls.Add(this.lblDeckenTyp);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Controls.Add(this.numRoomTemperatureBelowCool);
             this.groupBox1.Controls.Add(this.label28);
@@ -623,9 +627,27 @@ namespace Europlan.Common {
             this.groupBox1.Location = new System.Drawing.Point(0, 252);
             this.groupBox1.MinimumSize = new System.Drawing.Size(640, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(887, 119);
+            this.groupBox1.Size = new System.Drawing.Size(887, 150);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
+            // 
+            // cmbDeckenTyp
+            // 
+            this.cmbDeckenTyp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDeckenTyp.FormattingEnabled = true;
+            this.cmbDeckenTyp.Location = new System.Drawing.Point(240, 117);
+            this.cmbDeckenTyp.Name = "cmbDeckenTyp";
+            this.cmbDeckenTyp.Size = new System.Drawing.Size(197, 21);
+            this.cmbDeckenTyp.TabIndex = 32;
+            this.cmbDeckenTyp.SelectedValueChanged += new System.EventHandler(this.cmbDeckenTyp_SelectedValueChanged);
+            // 
+            // lblDeckenTyp
+            // 
+            this.lblDeckenTyp.Location = new System.Drawing.Point(6, 120);
+            this.lblDeckenTyp.Name = "lblDeckenTyp";
+            this.lblDeckenTyp.Size = new System.Drawing.Size(181, 13);
+            this.lblDeckenTyp.TabIndex = 31;
+            this.lblDeckenTyp.Text = "[Decke]:";
             // 
             // label27
             // 
@@ -1138,7 +1160,7 @@ namespace Europlan.Common {
             // btnGraphical
             // 
             this.btnGraphical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraphical.Location = new System.Drawing.Point(686, 33);
+            this.btnGraphical.Location = new System.Drawing.Point(674, 33);
             this.btnGraphical.Name = "btnGraphical";
             this.btnGraphical.Size = new System.Drawing.Size(167, 23);
             this.btnGraphical.TabIndex = 47;
@@ -1161,7 +1183,7 @@ namespace Europlan.Common {
             this.lstError.Location = new System.Drawing.Point(16, 557);
             this.lstError.Name = "lstError";
             this.lstError.ShowGroups = false;
-            this.lstError.Size = new System.Drawing.Size(827, 30);
+            this.lstError.Size = new System.Drawing.Size(815, 30);
             this.lstError.TabIndex = 168;
             this.lstError.UseCompatibleStateImageBehavior = false;
             this.lstError.View = System.Windows.Forms.View.Details;
@@ -1709,7 +1731,7 @@ namespace Europlan.Common {
             // btnConnectionPipes
             // 
             this.btnConnectionPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnectionPipes.Location = new System.Drawing.Point(686, 4);
+            this.btnConnectionPipes.Location = new System.Drawing.Point(674, 4);
             this.btnConnectionPipes.Name = "btnConnectionPipes";
             this.btnConnectionPipes.Size = new System.Drawing.Size(167, 23);
             this.btnConnectionPipes.TabIndex = 46;
@@ -2054,5 +2076,7 @@ namespace Europlan.Common {
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.Button btnGraphicalAnbindleitungen;
         private System.Windows.Forms.Button btnPartitionSystem;
+        private System.Windows.Forms.Label lblDeckenTyp;
+        private System.Windows.Forms.ComboBox cmbDeckenTyp;
 	}
 }
