@@ -585,6 +585,7 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
+
 			if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedCeilingConstruction == null) {
@@ -748,6 +749,11 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
+            if (PlannedCeilingArea >= 50 && CeilingType == DeckenTyp.OPEN_BORDER_JOINT_5)
+            {
+                newMsg = EuroplanRes.ErrorMessage_DeckenTypNotPossible;
+                this.lastErrorMsg += newMsg + "\n";
+            }
 			foreach (ModulDeckeCircuit c in circuits) {
 				int saNr = 1;
 				int longestRow = 0;

@@ -2909,6 +2909,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Der gewählte Deckentyp kann nur verwendet werden, wenn die Raumgröße weniger als 50 m² beträgt..
+        /// </summary>
+        internal static string ErrorMessage_DeckenTypNotPossible {
+            get {
+                return ResourceManager.GetString("ErrorMessage_DeckenTypNotPossible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Druckverlust bei Heizung zu groß (%VALUE%mbar &gt; %MAXIMUM%mbar).
         /// </summary>
         internal static string ErrorMessage_DruckverlustHeiz {
