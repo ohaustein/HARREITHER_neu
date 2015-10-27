@@ -8079,4 +8079,19 @@ m²</value>
   <data name="ConstructionEditorGrid_CompactPlatten" xml:space="preserve">
     <value>Compact Platten</value>
   </data>
+  <data name="DeckenTyp_Closed" xml:space="preserve">
+    <value>geschlossene Decke</value>
+  </data>
+  <data name="DeckenTyp_Open" xml:space="preserve">
+    <value>offene Decke</value>
+  </data>
+  <data name="DeckenTyp_OpenBorderJoint5" xml:space="preserve">
+    <value>offene Randfuge mit ca. 5 cm</value>
+  </data>
+  <data name="ErrorMessage_DeckenTypNotPossible" xml:space="preserve">
+    <value>Der gewählte Deckentyp kann nur verwendet werden, wenn die Raumgröße weniger als 50 m² beträgt.</value>
+  </data>
+  <data name="PlannedProductPanel_DeckenTyp" xml:space="preserve">
+    <value>Decke:</value>
+  </data>
 </root>

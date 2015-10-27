@@ -13,6 +13,68 @@ namespace Europlan.Common {
 	[ProductName("Product_ModulKlimDeckeName", "Product_ModulKlimDeckeFullName")]
 	public class ModulKlimaDeckeProduct : Product, ProductWithInsulationConstruction {
 
+        public class DeckenTypEnumConverter : System.ComponentModel.TypeConverter
+        {
+            private static readonly string open = EuroplanRes.DeckenTyp_Open;
+            private static readonly string closed = EuroplanRes.DeckenTyp_Closed;
+            private static readonly string open_border_joint_5 = EuroplanRes.DeckenTyp_OpenBorderJoint5;
+
+            private Dictionary<string, DeckenTyp> mappingFromString = new Dictionary<string, DeckenTyp>();
+            private Dictionary<DeckenTyp, string> mappingToString = new Dictionary<DeckenTyp, string>();
+
+            public DeckenTypEnumConverter()
+            {
+                mappingFromString.Add(open, DeckenTyp.OPEN);
+                mappingFromString.Add(closed, DeckenTyp.CLOSED);
+                mappingFromString.Add(open_border_joint_5, DeckenTyp.OPEN_BORDER_JOINT_5);
+                mappingToString.Add(DeckenTyp.OPEN, open);
+                mappingToString.Add(DeckenTyp.CLOSED, closed);
+                mappingToString.Add(DeckenTyp.OPEN_BORDER_JOINT_5, open_border_joint_5);
+            }
+
+            public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
+            {
+                return sourceType == typeof(string);
+            }
+
+            public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
+            {
+                return destinationType == typeof(string);
+            }
+
+            public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+            {
+                if (value is string)
+                {
+                    if (mappingFromString.ContainsKey((string)value))
+                    {
+                        return mappingFromString[(string)value];
+                    }
+                }
+                return base.ConvertFrom(context, culture, value);
+            }
+
+            public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+            {
+                if (value is DeckenTyp && destinationType == typeof(string))
+                {
+                    if (mappingToString.ContainsKey((DeckenTyp)value))
+                    {
+                        return mappingToString[(DeckenTyp)value];
+                    }
+                }
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+        }
+
+        [System.ComponentModel.TypeConverter(typeof(DeckenTypEnumConverter))]
+        public enum DeckenTyp
+        {
+            CLOSED,
+            OPEN,
+            OPEN_BORDER_JOINT_5,
+        }
+
 		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {
 			private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke"
 			private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil"
@@ -114,6 +176,8 @@ namespace Europlan.Common {
 		private float plannedFloorArea = 0;
 		private float plannedCeilingArea = 0;
 		private float plannedFloorOrCeilingArea = 0;
+
+        private DeckenTyp ceilingType = DeckenTyp.CLOSED;
 
 		private ModulKlimaDeckeConstruction graphConstruction = null;
 
@@ -484,6 +548,13 @@ namespace Europlan.Common {
 			set { this.modulType = value; }
 		}
 
+        public DeckenTyp CeilingType
+        {
+            get { return ceilingType; }
+            set { ceilingType = value; }
+        }
+	
+
 		public override void CalculateHeatAndCoolFlow() {
 			base.CalculateHeatAndCoolFlow();
 			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
@@ -514,6 +585,7 @@ namespace Europlan.Common {
 			this.requestedHeatLoad = requestedHeatLoad;
 			this.requestedCoolLoad = requestedCoolLoad;
 			this.incompleteCalculation = false;
+
 			if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
 				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
 				if (PlannedCeilingConstruction == null) {
@@ -677,6 +749,11 @@ namespace Europlan.Common {
 				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
 				this.lastErrorMsg += newMsg + "\n";
 			}
+            if (PlannedCeilingArea >= 50 && CeilingType == DeckenTyp.OPEN_BORDER_JOINT_5)
+            {
+                newMsg = EuroplanRes.ErrorMessage_DeckenTypNotPossible;
+                this.lastErrorMsg += newMsg + "\n";
+            }
 			foreach (ModulDeckeCircuit c in circuits) {
 				int saNr = 1;
 				int longestRow = 0;

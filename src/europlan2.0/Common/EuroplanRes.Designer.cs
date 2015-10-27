@@ -1868,6 +1868,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to geschlossene Decke.
+        /// </summary>
+        internal static string DeckenTyp_Closed {
+            get {
+                return ResourceManager.GetString("DeckenTyp_Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to offene Decke.
+        /// </summary>
+        internal static string DeckenTyp_Open {
+            get {
+                return ResourceManager.GetString("DeckenTyp_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to offene Randfuge mit ca. 5 cm.
+        /// </summary>
+        internal static string DeckenTyp_OpenBorderJoint5 {
+            get {
+                return ResourceManager.GetString("DeckenTyp_OpenBorderJoint5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Der gesamte Durchfluss aller an diesen Verteiler angeschlossenen Kreise ist im Heizbetrieb zu groß (%VALUE% &gt;%MAXIMUM%).
         /// </summary>
         internal static string Distributor_DurchflussZuGrossHeiz {
@@ -2878,6 +2905,15 @@ namespace Europlan.Common {
         internal static string ErrorMessage_DeckentemperaturHeat {
             get {
                 return ResourceManager.GetString("ErrorMessage_DeckentemperaturHeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Der gewählte Deckentyp kann nur verwendet werden, wenn die Raumgröße weniger als 50 m² beträgt..
+        /// </summary>
+        internal static string ErrorMessage_DeckenTypNotPossible {
+            get {
+                return ResourceManager.GetString("ErrorMessage_DeckenTypNotPossible", resourceCulture);
             }
         }
         
@@ -18390,6 +18426,15 @@ namespace Europlan.Common {
         internal static string PlannedProductPanel_Deckenkonstruktion {
             get {
                 return ResourceManager.GetString("PlannedProductPanel_Deckenkonstruktion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decke:.
+        /// </summary>
+        internal static string PlannedProductPanel_DeckenTyp {
+            get {
+                return ResourceManager.GetString("PlannedProductPanel_DeckenTyp", resourceCulture);
             }
         }
         

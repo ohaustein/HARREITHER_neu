@@ -165,6 +165,38 @@ namespace Europlan.Common {
 			get { return this.QCool; }
 		}
 
+        private static double LeistungsFaktorDeckenTyp(ModulKlimaDeckeProduct.DeckenTyp deckenTyp, double roomArea)
+        {
+            switch (deckenTyp)
+            {
+                case ModulKlimaDeckeProduct.DeckenTyp.CLOSED:
+                    return 1.0;
+                case ModulKlimaDeckeProduct.DeckenTyp.OPEN_BORDER_JOINT_5:
+                    return 1.12;
+                case ModulKlimaDeckeProduct.DeckenTyp.OPEN:
+                    {
+                        if (roomArea < 15)
+                        {
+                            return 1.12;
+                        }
+                        else if (roomArea < 25)
+                        {
+                            return 1.1;
+                        }
+                        else if (roomArea <= 50)
+                        {
+                            return 1.09;
+                        }
+                        else
+                        {
+                            return 1.075;
+                        }
+                    }
+                default:
+                    return 1.0;
+            }
+        }
+
 		public void Calculate() {
 			EN1264 en1264 = EN1264.Instance;
 
@@ -215,6 +247,10 @@ namespace Europlan.Common {
 
 			{ // Heizlastberechnung
 				double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorHeizen;
+
+                // deckentyp berücksichtigen
+                leistungsFaktor = leistungsFaktor * LeistungsFaktorDeckenTyp(this.ModulKlimaDeckeProduct.CeilingType, this.ModulKlimaDeckeProduct.PlannedCeilingArea);
+
 				double distributorVorlaufTemp;
 				double distributorRuecklaufTemp;
 				this.ModulKlimaDeckeProduct.GetHeatFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
@@ -276,6 +312,10 @@ namespace Europlan.Common {
 			}
 			{ // Kühllastberechnung
 				double leistungsFaktor = ModulKlimaDeckeProduct.ConfigLeistungsFaktorKuehlen;
+
+                // deckentyp berücksichtigen
+                leistungsFaktor = leistungsFaktor * LeistungsFaktorDeckenTyp(this.ModulKlimaDeckeProduct.CeilingType, this.ModulKlimaDeckeProduct.PlannedCeilingArea);
+
 				double distributorVorlaufTemp;
 				double distributorRuecklaufTemp;
 				this.ModulKlimaDeckeProduct.GetCoolFlow(out distributorVorlaufTemp, out distributorRuecklaufTemp);
