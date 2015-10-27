@@ -1035,7 +1035,7 @@ namespace Europlan.Common {
 		}
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
-			get { return ConnectionPipe.PipeTypeEnum.PT_EUROVAL; }
+			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
 		}
 
 		/// <summary>
@@ -1219,7 +1219,7 @@ namespace Europlan.Common {
             // Default: Sollte normalerweise Euroval Anbindeleitung sein. Wenn nicht, stimmt die Materialauflistung u.U. nicht.
             this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, false, true); 
             // Verbindeleitungen
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV01", additionalPipe);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", additionalPipe); // EV10?
 
 
             //Verteileranschlußbögen
@@ -1245,6 +1245,7 @@ namespace Europlan.Common {
 
             // Statt modulbögen werden HR92 + Verbindeleitung gerechnet. Verbindelteitung wird schon angegeben 
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", nrOfElements * 2); // Verbindungen zwischen den modulen
 
 
 
@@ -1274,7 +1275,7 @@ namespace Europlan.Common {
                     foreach (KlimaFlaechenModul m in kvp.Value)
                     {
                         Point2D rotatedPos = rotate.Transform(new Point2D(m.GraphPosX, m.GraphPosY));
-                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeight(m.ModulType), KlimaFlaechenModul.GetModuleWidth(m.ModulType)));
+                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeightGraphical(m.ModulType), KlimaFlaechenModul.GetModuleWidthGraphical(m.ModulType)));
                     }
                     for (int i = 0; i < modulePos.Count - 1; i++)
                     {

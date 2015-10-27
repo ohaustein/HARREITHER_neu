@@ -1224,7 +1224,7 @@ namespace Europlan.Common {
                     Matrix3D rotate = Transformation3D.Rotate(-kvp.Key * Math.PI / 180.0);
                     foreach (KlimaFlaechenModul m in kvp.Value) {
                         Point2D rotatedPos = rotate.Transform(new Point2D(m.GraphPosX, m.GraphPosY));
-                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeight(m.ModulType), KlimaFlaechenModul.GetModuleWidth(m.ModulType)));
+                        modulePos.Add(new ModulePosForCalc(rotatedPos.X / measure, rotatedPos.Y / measure, KlimaFlaechenModul.GetModuleHeightGraphical(m.ModulType), KlimaFlaechenModul.GetModuleWidthGraphical(m.ModulType)));
                     }
                     for (int i = 0; i < modulePos.Count - 1; i++) {
                         for (int j = i + 1; j < modulePos.Count; j++) {
