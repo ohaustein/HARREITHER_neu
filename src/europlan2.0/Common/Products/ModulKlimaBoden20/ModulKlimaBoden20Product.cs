@@ -1183,6 +1183,15 @@ namespace Europlan.Common {
                         subAreas++;
                         foreach (KlimaFlaechenList row in subArea.Rows)
                         {
+                            if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                            {
+                                rowConnectorsSmall += 2;
+                            }
+                            else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                            {
+                                rowConnectorsLarge += 2;
+                            }
+
                             rows++;
                             foreach (KlimaFlaechenModul modul in row.List)
                             {
@@ -1190,15 +1199,6 @@ namespace Europlan.Common {
                                 Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
                                 nrOfElements++;
                                 modulArea += modul.GetHeatArea(false);
-
-                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
-                                {
-                                    rowConnectorsSmall += 2;
-                                }
-                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
-                                {
-                                    rowConnectorsLarge += 2;
-                                }
                             }
                             foreach (KlimaFlaechenModulVerbindung link in row.Links)
                             {
@@ -1231,7 +1231,15 @@ namespace Europlan.Common {
 
             // T-Stücke für Reihen. Bei grafischer Auslegung kann nicht zwischen modulierend und nicht modulierend unterschieden werden -> daher auf rot setzen.
             Project.Instance.AddRequiredMaterial(requiredMaterial, "MK75", rowConnectorsSmall * (graphical ? -1 : 1));
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
+            
+            if (rowConnectorsSmall > 0 && rowConnectorsLarge == 0 && graphical)
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", Double.NegativeInfinity);
+            }
+            else
+            {
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
+            }
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", subAreas + winkel);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", subAreas);
 
