@@ -1408,9 +1408,9 @@ namespace Europlan.Common {
                     double floorArea = this.PlannedFloorArea;
                     double numberOfPlatten = Math.Ceiling(floorArea / (1.22 * 0.75));
                     double numberOfGlue = Math.Ceiling(floorArea / 5);
-                    // MK 25 Modul Compact Platte Abmaﬂ 1,22mx 0,725m; MK26: Modul Compact Kleber 1 Kartusche pro 5m≤
+                    // MK 25 Modul Compact Platte Abmaﬂ 1,22mx 0,725m; MK28: Modul Compact Kleber 1 Kartusche pro 5m≤
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "MK25", -numberOfPlatten);
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK26", -numberOfGlue);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK28", -numberOfGlue);
                 }
             }
 
