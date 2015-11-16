@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Product
+  xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper"
+  ProductCode="Microsoft.ReportViewer.8.0"
+>
+    <RelatedProducts>
+        <DependsOnProduct Code="Microsoft.Net.Framework.2.0" />
+    </RelatedProducts>
+
+    <PackageFiles CopyAllPackageFiles="false">
+        <PackageFile Name="ReportViewer.exe" HomeSite="ReportViewerExe" PublicKey="3082010A0282010100CF38F7E1A4275EF8F0CCAACEFB3ADE3B6231460546BBF5B6051AD3B3ACC29F0F4C670828C44310F53B75797F6A91F4D633C861BFFA9190007AF0791D5D6870F690B29877B5031D2F9B9D9B75892F4A01417C9E7CCB87439BF49674999E98C1CF40575816F6C0D59216E52485718F9949ED557C65C91F380023C53EAB11D6296CC69EA0705B7DD537D4677720C306CE85F84E3480A035C41C53320157EFB128BD6C01E3AD40BC80A90949DB36E337F41D49AA2AA76BD019D3CC8E9DD686467A134AD64519A553B3E2782F2E35976B4CC6E81AB0D3D1249069ABCEFC696E3E4CFB024162DC07985D7E5CA74C27316B564CE198D8E0D11D718D3D2AC07F714DFFCF0203010001"/>
+        <PackageFile Name="ReportViewerChk.exe"/>
+    </PackageFiles>
+
+    <InstallChecks>
+        <ExternalCheck Property="ReportViewerInstalled" PackageFile="ReportViewerChk.exe"/>
+    </InstallChecks>
+
+    <Commands Reboot="Defer">
+        <Command PackageFile="ReportViewer.exe" 
+             Arguments=' /q:a /c:"install /q /l"' 
+             EstimatedInstalledBytes="5000000" 
+             EstimatedInstallSeconds="300">
+
+            <!-- These checks determine whether the package is to be installed -->
+            <InstallConditions>
+                <BypassIf Property="ReportViewerInstalled" Compare="ValueNotEqualTo" Value="0"/>
+
+                <!-- Block install if user does not have admin privileges -->
+                <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+            </InstallConditions>
+
+            <ExitCodes>
+                <ExitCode Value="0" Result="Success"/>
+                <ExitCode Value="3010" Result="SuccessReboot"/>
+                <ExitCode Value="4097" Result="Fail" String="AdminRequired"/>
+                <ExitCode Value="4098" Result="Fail" String="WindowsInstallerComponentFailure"/>
+                <ExitCode Value="4099" Result="Fail" String="WindowsInstallerImproperInstall"/>
+                <ExitCode Value="4101" Result="Fail" String="AnotherInstanceRunning"/>
+                <ExitCode Value="4113" Result="Fail" String="BetaProductFailure"/>
+                <ExitCode Value="4115" Result="Fail" String="TempDirectoryTooLong"/>
+                <ExitCode Value="4116" Result="Fail" String="SourceDirectoryTooLong"/>
+                <DefaultExitCode Result="Fail" FormatMessageFromSystem="true" String="GeneralFailure" />
+            </ExitCodes>
+
+        </Command>
+    </Commands>
+</Product>
