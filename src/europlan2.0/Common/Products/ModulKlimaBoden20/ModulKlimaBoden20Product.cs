@@ -1141,15 +1141,21 @@ namespace Europlan.Common {
                             additionalPipe += 1.4;
 
                             // for each subarea there need to be connectors for rows
-                            if (row.List.Count > 0 && row != subArea.Rows[subArea.Rows.Count - 1])
+                            if (row.List.Count > 0)
                             {
-                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                if (row != subArea.Rows[subArea.Rows.Count - 1])
                                 {
-                                    rowConnectorsSmall += 2;
+                                    if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                    {
+                                        rowConnectorsSmall += 2;
+                                    }
+                                    else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                    {
+                                        rowConnectorsLarge += 2;
+                                    }
                                 }
-                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
                                 {
-                                    rowConnectorsLarge += 2;
                                     nrOfModulatingModules += row.List.Count;
                                 }
                             }
@@ -1183,13 +1189,16 @@ namespace Europlan.Common {
                         subAreas++;
                         foreach (KlimaFlaechenList row in subArea.Rows)
                         {
-                            if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                            if (row != subArea.Rows[subArea.Rows.Count - 1])
                             {
-                                rowConnectorsSmall += 2;
-                            }
-                            else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
-                            {
-                                rowConnectorsLarge += 2;
+                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                {
+                                    rowConnectorsSmall += 2;
+                                }
+                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                {
+                                    rowConnectorsLarge += 2;
+                                }
                             }
 
                             rows++;
@@ -1219,7 +1228,7 @@ namespace Europlan.Common {
             // Default: Sollte normalerweise Euroval Anbindeleitung sein. Wenn nicht, stimmt die Materialauflistung u.U. nicht.
             this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, false, true); 
             // Verbindeleitungen
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", additionalPipe); // EV10?
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", additionalPipe);
 
 
             //Verteileranschlußbögen
@@ -1245,7 +1254,7 @@ namespace Europlan.Common {
 
             // Statt modulbögen werden HR92 + Verbindeleitung gerechnet. Verbindelteitung wird schon angegeben 
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", nrOfElements * 2); // Verbindungen zwischen den modulen
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", nrOfElements - rows * 2); // Verbindungen zwischen den modulen
 
 
 
@@ -1378,7 +1387,7 @@ namespace Europlan.Common {
             }
             else
             {
-                streifen = Math.Ceiling(nrOfModulatingModules * 1.5);
+                streifen = Math.Ceiling(nrOfModulatingModules * 1.0);
             }
 
             if (streifen == 0)
@@ -1406,7 +1415,7 @@ namespace Europlan.Common {
                            this.PlannedInsideConstruction.Type == ConstructionTypeManager.Instance.GetConstructionTypeById(ConstructionTypeManager.CT_USER_COMPACT_PLATTE))
                 {
                     double floorArea = this.PlannedFloorArea;
-                    double numberOfPlatten = Math.Ceiling(floorArea / (1.22 * 0.75));
+                    double numberOfPlatten = Math.Ceiling(floorArea / (1.22 * 0.725));
                     double numberOfGlue = Math.Ceiling(floorArea / 5);
                     // MK 25 Modul Compact Platte Abmaß 1,22mx 0,725m; MK28: Modul Compact Kleber 1 Kartusche pro 5m²
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "MK25", -numberOfPlatten);
