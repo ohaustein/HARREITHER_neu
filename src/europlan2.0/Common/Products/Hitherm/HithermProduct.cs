@@ -25,6 +25,7 @@ namespace Europlan.Common {
 		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
 		private static double verbindeLeitungInnenquerschnitt = 0.000179071;
 		private static double verbindeLeitungInnendurchmesser = 0.015099678;
+        private static double verbindeLeitungAussendurchmesser = 0.0206505;
 		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
 		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
@@ -294,6 +295,13 @@ namespace Europlan.Common {
 			get { return verbindeLeitungInnendurchmesser; }
 			set { verbindeLeitungInnendurchmesser = value; }
 		}
+
+        [DoubleProductParameter(0.0206505)]
+        public static double ConfigVerbindeLeitungAussendurchmesser
+        {
+            get { return verbindeLeitungAussendurchmesser; }
+            set { verbindeLeitungAussendurchmesser = value; }
+        }
 
 		[DoubleProductParameter(0.000179071)]
 		public static double ConfigVerbindeLeitungInnenquerschnitt {

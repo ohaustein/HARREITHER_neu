@@ -194,7 +194,13 @@ namespace Europlan.Common {
 							pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
                         } else if (connectionOf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL) {
                             pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL));
-						} else {
+                        }
+                        else if (connectionOf.Product.DefaultPipeType == ConnectionPipe.PipeTypeEnum.PT_HITHERM)
+                        {
+                            pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_HITHERM));
+                        }
+                        else
+                        {
 							pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_ECOTHERM));
 							pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_EUROVAL));
 							pipeTypeCombo.Items.Add(conv.ConvertToString(ConnectionPipe.PipeTypeEnum.PT_21MM));
@@ -217,7 +223,8 @@ namespace Europlan.Common {
 					ConnectionPipe.VerlegeartEnumConverter conv = new ConnectionPipe.VerlegeartEnumConverter();
 					verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_UNTER_ESTRICH));
 					if ((ConnectionPipe.PipeTypeEnum.PT_EUROVAL.Equals(pipeTypeCell.Value) ||
-						ConnectionPipe.PipeTypeEnum.PT_ECOTHERM.Equals(pipeTypeCell.Value))) {
+						ConnectionPipe.PipeTypeEnum.PT_ECOTHERM.Equals(pipeTypeCell.Value) ||
+                        ConnectionPipe.PipeTypeEnum.PT_HITHERM.Equals(pipeTypeCell.Value))) {
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV35));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV30));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV25));
@@ -226,7 +233,9 @@ namespace Europlan.Common {
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV10));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_EV5));
 						verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_A5));
-					} else if (ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL.Equals(pipeTypeCell.Value)) {
+                    }
+                    else if (ConnectionPipe.PipeTypeEnum.PT_JUMBOVAL.Equals(pipeTypeCell.Value))
+                    {
                         verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_JV50));
                         verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_JV40));
                         verlegeartCombo.Items.Add(conv.ConvertToString(ConnectionPipe.VerlegeartEnum.VA_JV30));

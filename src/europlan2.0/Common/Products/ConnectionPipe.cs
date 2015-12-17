@@ -12,6 +12,7 @@ namespace Europlan.Common {
 			private static readonly string rundrohr = EuroplanRes.ConnectionPipe_Rundrohr; //"21mm Rundrohr"
 			private static readonly string ecotherm = EuroplanRes.ConnectionPipe_Ecotherm; //"Ecotherm FBH"
 			private static readonly string jumboval = EuroplanRes.ConnectionPipe_Jumboval; //"Jumboval FBH"
+            private static readonly string hitherm = EuroplanRes.ConnectionPipe_Hitherm; // "Hitherm+"
 
 			private Dictionary<string, PipeTypeEnum> mappingFromString = new Dictionary<string, PipeTypeEnum>();
 			private Dictionary<PipeTypeEnum, string> mappingToString = new Dictionary<PipeTypeEnum, string>();
@@ -21,10 +22,12 @@ namespace Europlan.Common {
 				mappingFromString.Add(rundrohr, PipeTypeEnum.PT_21MM);
 				mappingFromString.Add(ecotherm, PipeTypeEnum.PT_ECOTHERM);
 				mappingFromString.Add(jumboval, PipeTypeEnum.PT_JUMBOVAL);
+                mappingFromString.Add(hitherm, PipeTypeEnum.PT_HITHERM);
 				mappingToString.Add(PipeTypeEnum.PT_EUROVAL, euroval);
 				mappingToString.Add(PipeTypeEnum.PT_21MM, rundrohr);
 				mappingToString.Add(PipeTypeEnum.PT_ECOTHERM, ecotherm);
 				mappingToString.Add(PipeTypeEnum.PT_JUMBOVAL, jumboval);
+                mappingToString.Add(PipeTypeEnum.PT_HITHERM, hitherm);
 			}
 
 			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -59,7 +62,8 @@ namespace Europlan.Common {
 			PT_EUROVAL,
 			PT_21MM,
 			PT_ECOTHERM,
-			PT_JUMBOVAL
+			PT_JUMBOVAL,
+            PT_HITHERM,
 		}
 
 		public class VerlegeartEnumConverter : System.ComponentModel.TypeConverter {
@@ -533,6 +537,7 @@ namespace Europlan.Common {
             switch (pipeType) {
                 case PipeTypeEnum.PT_EUROVAL:
                 case PipeTypeEnum.PT_ECOTHERM:
+                case PipeTypeEnum.PT_HITHERM:
                     return (verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH ||
                         verlegeart == VerlegeartEnum.VA_EV35 ||
                         verlegeart == VerlegeartEnum.VA_EV30 ||
@@ -549,7 +554,7 @@ namespace Europlan.Common {
                         verlegeart == VerlegeartEnum.VA_JV40 ||
                         verlegeart == VerlegeartEnum.VA_JV30 ||
                         verlegeart == VerlegeartEnum.VA_JV20);
-                case PipeTypeEnum.PT_21MM:
+                case PipeTypeEnum.PT_21MM:                
                 default:
                     return verlegeart == VerlegeartEnum.VA_UNTER_ESTRICH;
             }
@@ -578,12 +583,13 @@ namespace Europlan.Common {
 
         public static VerlegeartEnum GetDefaultVerlegeart(PipeTypeEnum pipeType) {
             switch (pipeType) {
+                case PipeTypeEnum.PT_HITHERM:
                 case PipeTypeEnum.PT_EUROVAL:
                 case PipeTypeEnum.PT_ECOTHERM:
                     return VerlegeartEnum.VA_EV5;
                 case PipeTypeEnum.PT_JUMBOVAL:
                     return VerlegeartEnum.VA_JV20;
-                case PipeTypeEnum.PT_21MM:
+                case PipeTypeEnum.PT_21MM:                
                 default:
                     return VerlegeartEnum.VA_UNTER_ESTRICH;
             }
@@ -591,12 +597,13 @@ namespace Europlan.Common {
 
         public static InsulationEnum GetDefaultInsulation(PipeTypeEnum pipeType) {
             switch (pipeType) {
+                case PipeTypeEnum.PT_HITHERM:
                 case PipeTypeEnum.PT_EUROVAL:
                 case PipeTypeEnum.PT_ECOTHERM:
                     return InsulationEnum.IN_NONE;
                 case PipeTypeEnum.PT_JUMBOVAL:
                     return InsulationEnum.IN_NONE;
-                case PipeTypeEnum.PT_21MM:
+                case PipeTypeEnum.PT_21MM:              
                 default:
                     return InsulationEnum.IN_VL_RL;
             }
@@ -611,6 +618,8 @@ namespace Europlan.Common {
 					return EcothermProduct.ConfigRohrAussenD;
 				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
 					return JumbovalProduct.ConfigRohrAussenD;
+                } else if (this.pipeType == PipeTypeEnum.PT_HITHERM) {
+                    return HithermProduct.ConfigVerbindeLeitungAussendurchmesser;
 				} else {
 					return Product.rundrohr21mmAussenD;
 				}
@@ -626,7 +635,13 @@ namespace Europlan.Common {
 					return EcothermProduct.ConfigRohrInnenD;
 				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
 					return JumbovalProduct.ConfigRohrInnenD;
-				} else {
+                }
+                else if (this.pipeType == PipeTypeEnum.PT_HITHERM)
+                {
+                    return HithermProduct.ConfigVerbindeLeitungInnendurchmesser;
+                }
+                else
+                {
 					return Product.rundrohr21mmInnenD;
 				}
 			}
@@ -641,7 +656,12 @@ namespace Europlan.Common {
 					return EcothermProduct.ConfigRohrInnenA;
 				} else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL) {
 					return JumbovalProduct.ConfigRohrInnenA;
-				} else {
+                }
+                else if (this.pipeType == PipeTypeEnum.PT_HITHERM)
+                {
+                    return HithermProduct.ConfigVerbindeLeitungInnenquerschnitt;
+                }
+                else {
 					return Product.rundrohr21mmInnenA;
 				}
 			}
@@ -654,7 +674,13 @@ namespace Europlan.Common {
 					return EurovalProduct.ConfigAg;
                 } else if (this.pipeType == PipeTypeEnum.PT_JUMBOVAL && JumbovalProduct.ConfigAgActivated) {
                     return JumbovalProduct.ConfigAg;
-				} else {
+                }
+                else if (this.pipeType == PipeTypeEnum.PT_HITHERM)
+                {
+                    return 1;
+                }
+                else
+                {
 					return 1;
 				}
 			}

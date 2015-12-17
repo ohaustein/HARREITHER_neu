@@ -495,6 +495,15 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hitherm+.
+        /// </summary>
+        internal static string ConnectionPipe_Hitherm {
+            get {
+                return ResourceManager.GetString("ConnectionPipe_Hitherm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jumboval FBH.
         /// </summary>
         internal static string ConnectionPipe_Jumboval {

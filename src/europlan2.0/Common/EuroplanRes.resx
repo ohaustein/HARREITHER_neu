@@ -8094,4 +8094,7 @@ m²</value>
   <data name="PlannedProductPanel_DeckenTyp" xml:space="preserve">
     <value>Decke:</value>
   </data>
+  <data name="ConnectionPipe_Hitherm" xml:space="preserve">
+    <value>Hitherm+</value>
+  </data>
 </root>

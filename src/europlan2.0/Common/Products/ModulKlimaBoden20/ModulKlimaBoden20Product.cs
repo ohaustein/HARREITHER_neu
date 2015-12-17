@@ -1035,7 +1035,7 @@ namespace Europlan.Common {
 		}
 
 		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
-			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
+			get { return ConnectionPipe.PipeTypeEnum.PT_HITHERM; }
 		}
 
 		/// <summary>
