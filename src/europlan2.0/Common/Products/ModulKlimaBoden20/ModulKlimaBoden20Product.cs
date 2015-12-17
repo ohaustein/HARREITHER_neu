@@ -1134,11 +1134,7 @@ namespace Europlan.Common {
 						subAreas++;
 						foreach (KlimaFlaechenList row in subArea.Rows) {
 							rows++;
-
-                            // TODO: additional connection pipe. dont't know why there is 1.4...
                             additionalPipe += row.LengthVerbindeleitungen;
-                            // zusätzlich für tabellarische Verlegung
-                            additionalPipe += 1.4;
 
                             // for each subarea there need to be connectors for rows
                             if (row.List.Count > 0)
@@ -1249,12 +1245,15 @@ namespace Europlan.Common {
             {
                 Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
             }
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", subAreas + winkel);
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", subAreas);
+            // sind in Leitungen enthalten
+            //Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", -1 * subAreas);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", winkel);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", -2 * subAreas); // Hr. Harreither schlägt vor, 2 pro Fläche zu verwenden und manuell zu planen
 
             // Statt modulbögen werden HR92 + Verbindeleitung gerechnet. Verbindelteitung wird schon angegeben 
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", nrOfElements - rows * 2); // Verbindungen zwischen den modulen
+            // Lt. Herrn Harreither sind diese Verbindngen schon beim Modul dabei (Längsseite) und würden nur bei breitseitiger Verbindung anfallen. Diese kommt aber defacto nicht vor.
+            //Project.Instance.AddRequiredMaterial(requiredMaterial, "HR92", nrOfElements * 2);
+            //Project.Instance.AddRequiredMaterial(requiredMaterial, "EV10", nrOfElements - rows * 2); // Verbindungen zwischen den modulen
 
 
 
@@ -1423,22 +1422,9 @@ namespace Europlan.Common {
                 }
             }
 
-            // Rohrführungsplatte
-            if (graphical)
-            {
-                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(additionalPipe / 8));
-            }
-            else
-            {
-                if (additionalPipe > 0)
-                {
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK05", Math.Ceiling(additionalPipe / 8));
-                }
-            }
-
             // Modulniveauplatten
             double area = this.PlannedFloorArea - this.PlannedModulArea - (streifen * (0.945 * 0.096));
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK73", -Math.Ceiling(area * 2));
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK73", -Math.Ceiling(area * 2.1)); // +10% Verschnitt
 		}
 
 		public override double Dichte {
