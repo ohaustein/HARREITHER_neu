@@ -1006,7 +1006,7 @@ namespace Europlan.Common {
 				}
 			}
 
-			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, true, false);
+			this.AddRequiredMaterialForConnections(requiredMaterial, ConfigUsePlus, verbindeLengthBoden, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
 
 			// Ovalmuffen
 			double amount = teilflaechen;

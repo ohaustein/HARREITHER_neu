@@ -1145,7 +1145,7 @@ namespace Europlan.Common {
 			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
 			// Anbindeleitungen
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, graphical ? 0 : this.RequestedSonstigeVerbindeLeitung, !graphical, false);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, graphical ? 0 : this.RequestedSonstigeVerbindeLeitung, ConnectionPipe.PipeTypeEnum.PT_21MM, !graphical);
 
 			double graphVerbindung = 0;
 			int graphWinkel = 0;

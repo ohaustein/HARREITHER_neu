@@ -1166,9 +1166,6 @@ namespace Europlan.Common {
 					}
 				}
 
-                // Schätzwert an zusätzlichen Winkeln für die Verbindeleitungen tabellarisch
-                winkel = (int) (additionalPipe * 0.8);
-
                 /* Vergleiche: */
                 /* Klimaboden */
                 //this.AddRequiredMaterialForConnections(requiredMaterial, false, graphical ? 0 : this.RequestedSonstigeVerbindeLeitung, !graphical, false);
@@ -1220,11 +1217,7 @@ namespace Europlan.Common {
                 }
 			}
 
-
-            // Default: Sollte normalerweise Euroval Anbindeleitung sein. Wenn nicht, stimmt die Materialauflistung u.U. nicht.
-            this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, false, true); 
-            // Verbindeleitungen
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", additionalPipe);
+            this.AddRequiredMaterialForConnections(requiredMaterial, true, additionalPipe, ConnectionPipe.PipeTypeEnum.PT_HITHERM, !graphical); 
 
 
             //Verteileranschlußbögen
@@ -1246,7 +1239,12 @@ namespace Europlan.Common {
                 Project.Instance.AddRequiredMaterial(requiredMaterial, "MK76", rowConnectorsLarge * (graphical ? -1 : 1));
             }
             // sind in Leitungen enthalten
-            //Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", -1 * subAreas);
+
+            if (graphical)
+            {
+                // für den grafischen Modus werden alle Winkel als HR66 gerechnet. Hier werden die HR93 winkel von den HR66 abgezogen.
+                winkel -= 2 * subAreas;
+            }
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", winkel);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", -2 * subAreas); // Hr. Harreither schlägt vor, 2 pro Fläche zu verwenden und manuell zu planen
 

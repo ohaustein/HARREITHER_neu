@@ -1186,7 +1186,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, true, false);
+                this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
 
 				// Muffe
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
@@ -1300,7 +1300,7 @@ namespace Europlan.Common {
 					}
 				}
 
-				this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, true, false);
+                this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
 
 				if (constrCProfil) {
 					if (serie30) {

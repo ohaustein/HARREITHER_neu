@@ -2189,7 +2189,7 @@ namespace Europlan.Common {
 
 		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
 			// Anbindeleitungen
-			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, true, false);
+			this.AddRequiredMaterialForConnections(requiredMaterial, false, 0, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
 
 			// Jumboval Rohr
 			double length = 0;

@@ -1659,10 +1659,10 @@ namespace Europlan.Common {
 			}
 		}
 
-		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additional21mm, bool addWinkelForAdditional21mm, bool useWandWinkelForAnbindeLeitung) {
+		protected void AddRequiredMaterialForConnections(SerializableDictionary<string, double> requiredMaterial, bool usePlus, double additionalPipe, ConnectionPipe.PipeTypeEnum additionalPipeType, bool addWinkelForAdditionalPipes) {
 			// Euroval Anbindung
 			// 21mm Anbindung
-			double pipe21mm = additional21mm;
+			double pipe21mm = additionalPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM ? additionalPipe : 0;         
 			double circuit21mmFirstLength = 0;
 			double circuit21mmOthersLength = 0;
 
@@ -1679,6 +1679,9 @@ namespace Europlan.Common {
             double clipschieneJumboval = 0;
             double ovalMuffeJumboval = 0;
 
+            // Klimaboden20 Anbindeleitung
+            double pipeHitherm = additionalPipeType == ConnectionPipe.PipeTypeEnum.PT_HITHERM ? additionalPipe : 0;
+
 			foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
 				if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
 					if (pipe.OnlyFirst) {
@@ -1690,7 +1693,20 @@ namespace Europlan.Common {
 						circuit21mmOthersLength += (pipe.Vorlauf + pipe.Ruecklauf);
 					}
 
-				} else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM) {
+                }
+                else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_HITHERM)
+                {
+                    if (pipe.OnlyFirst)
+                    {
+                        pipeHitherm += (pipe.Vorlauf + pipe.Ruecklauf);
+                    }
+                    else
+                    {
+                        pipeHitherm += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+                    }                  
+                }
+                else if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_ECOTHERM)
+                {
 					if (pipe.OnlyFirst) {
 						pipeEcotherm += (pipe.Vorlauf + pipe.Ruecklauf);
 					} else {
@@ -1768,6 +1784,9 @@ namespace Europlan.Common {
 
 			// materials for 21mm pipe
 			// Muffe
+
+            ovalMuffeEuroval += pipeHitherm * 0.3;
+
 			if (usePlus) {
 				Project.Instance.AddRequiredMaterial(requiredMaterial, "HR55", pipe21mm * 0.3);
 			} else {
@@ -1776,15 +1795,15 @@ namespace Europlan.Common {
 
 			// Winkel 90°
 			double winkelPipe = pipe21mm;
-            double winkelPipeEuroval = pipeEuroval;
+            double winkelOval = pipeHitherm;
 
-			if (!addWinkelForAdditional21mm) {
-				winkelPipe -= additional21mm;
+			if (!addWinkelForAdditionalPipes) {
+				winkelPipe -= additionalPipeType == ConnectionPipe.PipeTypeEnum.PT_21MM ? additionalPipe : 0;
+                winkelOval -= additionalPipeType == ConnectionPipe.PipeTypeEnum.PT_HITHERM ? additionalPipe : 0;
 			}
-            if (useWandWinkelForAnbindeLeitung)
-            {
-                Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", winkelPipeEuroval * 0.8);
-            }
+
+            // hier wird immer plus verwendet
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", winkelOval * 0.8);          
 
             if (usePlus)
             {
@@ -1826,6 +1845,9 @@ namespace Europlan.Common {
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV01", pipeJumboval);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV15", clipschieneJumboval);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV10", ovalMuffeJumboval);
+
+            // materials for hittherm pipe
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR60", pipeHitherm);
         }
 
 		// for 21mm pipes
