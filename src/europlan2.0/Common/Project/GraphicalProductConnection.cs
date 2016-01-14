@@ -107,7 +107,7 @@ namespace Europlan.Common {
 			get { return this.NrOfCircuits * 0.055 - 0.005; }
 		}
 
-		private void CalculateVerticesForDrawing(double measure) {
+		private void CalculateVerticesForDrawing(double measure, bool invert) {
 			this.vorlaufVerticesForDrawing = new List<List<Point2D>>();
 			this.ruecklaufVerticesForDrawing = new List<List<Point2D>>();
 			double factor = CalculateFactor();
@@ -245,6 +245,12 @@ namespace Europlan.Common {
 				this.vorlaufVerticesForDrawing.Add(vl);
 				this.ruecklaufVerticesForDrawing.Add(rl);
 			}
+            if (invert)
+            {
+                List<List<Point2D>> tmp = this.vorlaufVerticesForDrawing;
+                this.vorlaufVerticesForDrawing = this.ruecklaufVerticesForDrawing;
+                this.ruecklaufVerticesForDrawing = tmp;
+            }
 		}
 
 		private double CalculateFactor() {
@@ -261,8 +267,14 @@ namespace Europlan.Common {
 				return;
 			}
 
+            bool invert = this.Product.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+            if (!Project.Instance.ProjectSupportsDxfConnectionInvert)
+            {
+                invert = false;
+            }
+
 			if (this.vorlaufVerticesForDrawing == null || this.ruecklaufVerticesForDrawing == null) {
-				this.CalculateVerticesForDrawing(measure);
+				this.CalculateVerticesForDrawing(measure, invert);
 			}
 			Color c = selected ? Color.Green : (gray ? Color.FromArgb(100, 0, 0) : Color.Red);
 			foreach (List<Point2D> singleConnection in this.vorlaufVerticesForDrawing) {
@@ -274,13 +286,20 @@ namespace Europlan.Common {
 			}
 		}
 
-		public virtual void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, double measure) {
+        public virtual void DrawDxf(WW.Cad.Model.DxfModel model, DxfLayer connectionLayer, double measure)
+        {
 			if (this.vertices.Count < 2) {
 				return;
 			}
 
+            bool invert = this.Product.Product.AssociatedRoom.AssociatedPlan.InvertYAxis;
+            if (!Project.Instance.ProjectSupportsDxfConnectionInvert)
+            {
+                invert = false;
+            }
+
 			if (this.vorlaufVerticesForDrawing == null || this.ruecklaufVerticesForDrawing == null) {
-				this.CalculateVerticesForDrawing(measure);
+				this.CalculateVerticesForDrawing(measure, invert);
 			}
 			foreach (List<Point2D> singleConnection in this.vorlaufVerticesForDrawing) {
 				this.DrawDxfSingleConnection(model, connectionLayer, singleConnection, Color.Red);
@@ -732,6 +751,12 @@ namespace Europlan.Common {
 			if (this.CalculateFactor() < 0) {
 				input = !input;
 			}
+            if (this.Product.Product.AssociatedRoom.AssociatedPlan.InvertYAxis) {
+                if (Project.Instance.ProjectSupportsDxfConnectionInvert)
+                {
+                    input = !input;
+                }               
+            }
 			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
 			if ((input && this.vorlauf) || (!input && this.ruecklauf)) {
 				Vector2D startVector = this.Vertices[1] - this.Vertices[0];

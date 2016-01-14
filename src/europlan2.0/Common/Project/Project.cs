@@ -30,6 +30,9 @@ namespace Europlan.Common {
 		private DateTime projectLastChanged;
 		private string projectEditor;
 		private string projectFileName;
+        private bool projectSupportsDxfConnectionInvert; // added in version 3.1.0.3: with DXF plans the product connects were inverted and has been fixed. Older projects 
+                                                         // should still keep the error or else the connections are switched. New projects created with this version 
+                                                         // should apply this fix.
 
 		// facility details
         private int normOutsideTemperature;
@@ -133,6 +136,7 @@ namespace Europlan.Common {
 			outsideTemperatureForCooling = 30;
 			relativeHumidity = 50;
 			insideTemperatureForCooling = 26;
+            projectSupportsDxfConnectionInvert = false; // default value for old projects
 
             modulesWithGraphicalDimensions.Clear();
 
@@ -243,6 +247,12 @@ namespace Europlan.Common {
 			get { return normOutsideTemperature; }
 			set { normOutsideTemperature = value; }
 		}
+
+        public bool ProjectSupportsDxfConnectionInvert
+        {
+            get { return projectSupportsDxfConnectionInvert; }
+            set { projectSupportsDxfConnectionInvert = value; }
+        }
 
 		public bool VariableSpreizung {
 			get { return variableSpreizung; }
@@ -652,6 +662,7 @@ namespace Europlan.Common {
                 Instance.ModulesWithGraphicalDimensions.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40_20);
                 Instance.ModulesWithGraphicalDimensions.Add(KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40);
 				Instance.InitializeProductParameters();
+                instance.ProjectSupportsDxfConnectionInvert = true; // new projects support it
 				return Instance;
 			}
 		}
