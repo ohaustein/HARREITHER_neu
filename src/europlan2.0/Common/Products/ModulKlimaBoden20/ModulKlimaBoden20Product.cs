@@ -1247,6 +1247,7 @@ namespace Europlan.Common {
             }
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR66", winkel);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HR93", -2 * subAreas); // Hr. Harreither schlägt vor, 2 pro Fläche zu verwenden und manuell zu planen
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HR91", Double.NegativeInfinity);
 
             // Statt modulbögen werden HR92 + Verbindeleitung gerechnet. Verbindelteitung wird schon angegeben 
             // Lt. Herrn Harreither sind diese Verbindngen schon beim Modul dabei (Längsseite) und würden nur bei breitseitiger Verbindung anfallen. Diese kommt aber defacto nicht vor.
