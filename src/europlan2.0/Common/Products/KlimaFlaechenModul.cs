@@ -422,8 +422,6 @@ namespace Europlan.Common {
 		private double graphPosX = double.NaN;
 		private double graphPosY = double.NaN;
 		private double graphRotation = 0;
-		private bool graphModulierendX = false;
-		private bool graphModulierendY = false;
 
 		public KlimaFlaechenModul() {
 			this.modulType = ModulTypeEnum.MODUL_100_40;
@@ -450,8 +448,6 @@ namespace Europlan.Common {
 			graphPosX = double.NaN;
 			graphPosY = double.NaN;
 			graphRotation = 0;
-			graphModulierendX = false;
-			graphModulierendY = false;
 		}
 
 		public ModulTypeEnum ModulType {
@@ -472,6 +468,21 @@ namespace Europlan.Common {
         {
             get { return _modulModulationLength; }
             set { _modulModulationLength = value; }
+        }
+
+        private ModulModulationEnum _modulGraphModulationLength;
+        private ModulModulationEnum _modulGraphModulationWidth;
+
+        public ModulModulationEnum GraphModulationWidth
+        {
+            get { return _modulGraphModulationWidth; }
+            set { _modulGraphModulationWidth = value; }
+        }
+
+        public ModulModulationEnum GraphModulationLength
+        {
+            get { return _modulGraphModulationLength; }
+            set { _modulGraphModulationLength = value; }
         }
 
         [XmlIgnore]
@@ -853,16 +864,6 @@ namespace Europlan.Common {
 		public double GraphRotation {
 			get { return this.graphRotation; }
 			set { this.graphRotation = value; }
-		}
-
-		public bool GraphModulierendX {
-			get { return this.graphModulierendX; }
-			set { this.graphModulierendX = value; }
-		}
-
-		public bool GraphModulierendY {
-			get { return this.graphModulierendY; }
-			set { this.graphModulierendY = value; }
 		}
 
 		private Polygon2D GetConnectionArea(double measure, bool invertYAxis, Product product, bool topConnection) {

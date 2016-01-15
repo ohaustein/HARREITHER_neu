@@ -2308,7 +2308,8 @@ namespace Europlan.Common {
 				modul.Orientation = orientation.Value;
 			}
 			modul.GraphBottomUp = bottomUp;
-
+            modul.GraphModulationLength = (KlimaFlaechenModul.ModulModulationEnum) ((int) this.NewModulesYDicht * 10);
+            modul.GraphModulationWidth = (KlimaFlaechenModul.ModulModulationEnum) ((int) this.NewModulesXDicht * 10);
             KlimaFlaechenList usedRow = null;
             if (row != null)
             {

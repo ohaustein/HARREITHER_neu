@@ -1184,11 +1184,11 @@ namespace Europlan.Common {
                         {
                             if (row != subArea.Rows[subArea.Rows.Count - 1])
                             {
-                                if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
+                                if (row.List[0].GraphModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_NONE)
                                 {
                                     rowConnectorsSmall += 2;
                                 }
-                                else if (row.List[0].ModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
+                                else if (row.List[0].GraphModulationWidth == KlimaFlaechenModul.ModulModulationEnum.MODULATION_SINGLE_MODULATED)
                                 {
                                     rowConnectorsLarge += 2;
                                 }
