@@ -1343,7 +1343,7 @@ namespace Europlan.Common {
 
                         IList<Polygon2D> clippedPolygons = null;
                         try {
-                            clippedPolygons = Polygon2D.GetIntersection(list1, list2);
+                            clippedPolygons = Polygon2D.GetIntersection(list1, list2, 1e-6);
                         } catch {
                             clippedPolygons = new List<Polygon2D>();
                         }
@@ -1371,7 +1371,7 @@ namespace Europlan.Common {
 								list2.Add(poly);
                                 IList<Polygon2D> clipped = null;
                                 try {
-                                    clipped = Polygon2D.GetIntersection(list1, list2);
+                                    clipped = Polygon2D.GetIntersection(list1, list2, 1e-6);
                                 } catch {
                                     clipped = new List<Polygon2D>();
                                 }
