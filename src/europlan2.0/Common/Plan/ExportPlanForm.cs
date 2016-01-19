@@ -364,6 +364,7 @@ namespace Europlan.Common {
 									text.Style = model.TextStyles["HarreitherStyle"];
 									text.HorizontalAlignment = TextHorizontalAlignment.Center;
 									text.VerticalAlignment = TextVerticalAlignment.Middle;
+                                    text.AlignmentPoint2 = text.AlignmentPoint1;
 									text.Layer = wandLayer;
 									text.Color = white;
 									model.Entities.Add(text);
