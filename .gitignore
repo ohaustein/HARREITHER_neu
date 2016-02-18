@@ -15,3 +15,5 @@ src/europlan2.0/UnitTest/obj/
 *.~lst
 *.lsv
 *.lsp
+src/europlan2.0/updates/updates-ga-beta-de Updates/
+src/europlan2.0/updates/updates-ga-beta-en Updates/

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\www.top-contact.at\EuroplanUpdates\grafisch\beta\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en" BuildLocation="updates-ga-beta-en Updates" PublishVersion="3.0.19.0" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.0.19.0\europlan30-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>- Added language option "Slovak"</CurrentSummary>
+	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\helios.bluesource.at\Inetpub\wwwroot\EuroplanUpdates\grafisch\beta\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en" BuildLocation="updates-ga-beta-en Updates" PublishVersion="3.1.0.3" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.1.0.3\europlan31-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>- Added new module Klimaboden 20</CurrentSummary>
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -12,6 +12,13 @@
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="77e24619-79f7-43da-bcb3-df6e1bb86c8a" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="3.1.0.3" postdate="2016-02-18T10:42:08.7662232Z" signature="ZHBKrPgxRB8x5BM5aj53Ut2sMZffU5OEaS7fd4dKsGcUtFTD2feThURbPEeXa8XTsa/+Q/hB7DpaII506PyU3AV3jTvLZawB2Krb+jACQwqXQ1lUq1Mpjt3+OQr/o5ju83bsxbhEzBCDLtdt2Yty9MRgLuLIcy6FV8XxKTc4Az4=" fileSize="49007548">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>- Added new module Klimaboden 20</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="3.0.19.0" postdate="2014-05-23T13:55:29.7753326Z" signature="UHaU5dpqNn7z/WE1YJBb+Kog54KJUxIUw419pHDkBPUZq/AmcDqaEbXJU5K0itFWPRJKC9i9eiVdcKXIHrjyUfbK28WTyXf2MOdNv7FSH1O3UcwEEHJj31F4GNMopSmKm0aLyvIIuSzDgXe4JfgFa9fYSTWM0chMzE8i/QAiIQ4=" fileSize="48855975">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
