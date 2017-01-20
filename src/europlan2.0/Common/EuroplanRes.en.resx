@@ -4819,7 +4819,7 @@ desired heating system in the project hierarchy.</value>
     <value>Graphic positioning</value>
   </data>
 	<data name="ErrorMessage_Anbindeleitung" xml:space="preserve">
-    <value>The area used by link pipes is too larger as the available area (%VALUE%m² &gt; %MAXIMUM%m²)</value>
+    <value>The area used by link pipes is larger than the available area (%VALUE%m² &gt; %MAXIMUM%m²)</value>
   </data>
 	<data name="ExportOption_DH" xml:space="preserve">
     <value>Ceiling</value>

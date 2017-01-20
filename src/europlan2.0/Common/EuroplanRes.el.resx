@@ -121,7 +121,7 @@
     <value>νέα άδεια</value>
   </data>
 	<data name="AbstractLicensedModule_Adminmodus" xml:space="preserve">
-    <value>Adminmodus</value>
+    <value>Λειτουργία Διαχειριστή</value>
   </data>
 	<data name="AbstractLicensedModule_BKA" xml:space="preserve">
     <value>Ενεργοποίηση πυρήνα σκυροδέματος</value>
@@ -245,22 +245,27 @@
   </data>
 	<data name="AuslegeAssistentForm_Tv" xml:space="preserve">
     <value>tv
+
 °C</value>
   </data>
 	<data name="LL_Report_FussbodenVorlauftemperaur" xml:space="preserve">
     <value>tv
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
     <value>tv
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
     <value>tv
+
 °C</value>
   </data>
 	<data name="LL_Report_WandVorlauftemperaur" xml:space="preserve">
     <value>tv
+
 °C</value>
   </data>
 	<data name="Category_Allgemein" xml:space="preserve">
@@ -337,7 +342,9 @@
   </data>
 	<data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
     <value>μέσω του
+
 χώρου
+
 αριθ.</value>
   </data>
 	<data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
@@ -351,10 +358,12 @@
   </data>
 	<data name="ConnectionPipePanel_HeizleistungCol" xml:space="preserve">
     <value>Θερμαντική
+
 ισχύς</value>
   </data>
 	<data name="LL_Report_Heizleistung" xml:space="preserve">
     <value>Θερμαντική
+
 ισχύς</value>
   </data>
 	<data name="ConnectionPipePanel_HkAnzahlCol" xml:space="preserve">
@@ -362,15 +371,19 @@
   </data>
 	<data name="ConnectionPipePanel_KuehlleistungCol" xml:space="preserve">
     <value>Ψυκτική
+
 ισχύς</value>
   </data>
 	<data name="LL_Report_Kuehlleistung" xml:space="preserve">
     <value>Ψυκτική
+
 ισχύς</value>
   </data>
 	<data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
     <value>μόνο 
+
 πρώτος
+
 ΚΘ</value>
   </data>
 	<data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
@@ -399,11 +412,14 @@
   </data>
 	<data name="ConnectionPipePanel_RohrsystemCol" xml:space="preserve">
     <value>Σύστημα
+
 σωληνώσεων</value>
   </data>
 	<data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
     <value>Μήκος
+
 επιστροφής
+
 (m)</value>
   </data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
@@ -411,16 +427,21 @@
   </data>
 	<data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
     <value>Τύπος
+
 τοποθέτησης</value>
   </data>
 	<data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
     <value>Εκτύπωση
+
 δεδομένων
+
 τοποθέτησης</value>
   </data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
     <value>Μήκος
+
 προσαγωγής
+
 (m)</value>
   </data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
@@ -547,16 +568,16 @@
     <value>Προβαλλόμενες κατασκευές</value>
   </data>
 	<data name="ConstructionEditorGrid_DaemmKurz" xml:space="preserve">
-    <value>ΘΜΚ</value>
+    <value>Κατασκευή θερμικής μόνωσης</value>
   </data>
 	<data name="ConstructionEditorGrid_DeckeKurz" xml:space="preserve">
-    <value>ΚΟ</value>
+    <value>Κατασκευή Οροφής</value>
   </data>
 	<data name="ConstructionEditorGrid_Estrich" xml:space="preserve">
     <value>Δάπεδο</value>
   </data>
 	<data name="ConstructionEditorGrid_FussbodenKurz" xml:space="preserve">
-    <value>ΚΔ</value>
+    <value>Κατασκευή Δαπέδου</value>
   </data>
 	<data name="ConstructionEditorGrid_NeueKonstruktion" xml:space="preserve">
     <value>Νέα κατασκευή</value>
@@ -589,7 +610,7 @@
     <value>Τύπος</value>
   </data>
 	<data name="ConstructionEditorGrid_WandKurz" xml:space="preserve">
-    <value>ΚΤ</value>
+    <value>Κατασκευή Τοίχου</value>
   </data>
 	<data name="ConstructionTypeManager_BenutzerDaemm" xml:space="preserve">
     <value>Χρήστης θερμομονωτικής κατασκευής</value>
@@ -947,18 +968,22 @@
   </data>
 	<data name="ExtendedCorrectionsGrid_AnbindungAktivieren" xml:space="preserve">
     <value>Προ-
+
 επιλογή</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_FlaecheAktivieren" xml:space="preserve">
     <value>Προ-
+
 επιλογή</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_RandzoneAktivieren" xml:space="preserve">
     <value>Προ-
+
 επιλογή</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_AnbindungProzent" xml:space="preserve">
     <value>Επιφάνεια
+
 %</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_Deaktivieren" xml:space="preserve">
@@ -984,19 +1009,24 @@
   </data>
 	<data name="ExtendedCorrectionsGrid_FlaecheProzent" xml:space="preserve">
     <value>%
+
 </value>
   </data>
 	<data name="ExtendedCorrectionsGrid_RandzoneProzent" xml:space="preserve">
     <value>%
+
 </value>
   </data>
 	<data name="ExtendedCorrectionsGrid_FlaecheWert" xml:space="preserve">
     <value>m²
+
 </value>
   </data>
 	<data name="ExtendedCorrectionsGrid_HeizkreisCol" xml:space="preserve">
     <value>Αριθ.
+
 κυκλώματος
+
 θέρμανσης</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_Randzone" xml:space="preserve">
@@ -1004,10 +1034,12 @@
   </data>
 	<data name="ExtendedCorrectionsGrid_RandzoneEcken" xml:space="preserve">
     <value>Αριθμός
+
 γωνιών</value>
   </data>
 	<data name="ExtendedCorrectionsGrid_RandzoneWert" xml:space="preserve">
     <value>m
+
 </value>
   </data>
 	<data name="FacilityDetailsSummaryPanel_Anlagedaten" xml:space="preserve">
@@ -1108,10 +1140,12 @@
   </data>
 	<data name="FloorSummaryPanel_Bearbeiten" xml:space="preserve">
     <value>Επεξεργασία
+
 </value>
   </data>
 	<data name="FloorSummaryPanel_Bezeichnung" xml:space="preserve">
     <value>Χαρακτηρισμός
+
 </value>
   </data>
 	<data name="FloorSummaryPanel_BezeichnungLang" xml:space="preserve">
@@ -1119,6 +1153,7 @@
   </data>
 	<data name="FloorSummaryPanel_Flaeche" xml:space="preserve">
     <value>A
+
 (m²)</value>
   </data>
 	<data name="FloorSummaryPanel_FlaecheLang" xml:space="preserve">
@@ -1126,6 +1161,7 @@
   </data>
 	<data name="FloorSummaryPanel_Fremdwaermeleistung" xml:space="preserve">
     <value>Qεξ.
+
 (W)</value>
   </data>
 	<data name="FloorSummaryPanel_FremdwaermeleistungLang" xml:space="preserve">
@@ -1133,6 +1169,7 @@
   </data>
 	<data name="FloorSummaryPanel_Fussbodentransmissionen" xml:space="preserve">
     <value>Qδαπ.
+
 (W)</value>
   </data>
 	<data name="FloorSummaryPanel_FussbodentransmissionenLang" xml:space="preserve">
@@ -1179,6 +1216,7 @@
   </data>
 	<data name="FloorSummaryPanel_Kuehlleistung" xml:space="preserve">
     <value>Qψύξη
+
 (W)</value>
   </data>
 	<data name="FloorSummaryPanel_KuehlleistungLang" xml:space="preserve">
@@ -1186,6 +1224,7 @@
   </data>
 	<data name="FloorSummaryPanel_Luftfeuchtigkeit" xml:space="preserve">
     <value>ΣΑΥ
+
 (%)</value>
   </data>
 	<data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
@@ -1196,6 +1235,7 @@
   </data>
 	<data name="FloorSummaryPanel_Nummer" xml:space="preserve">
     <value>Αριθ.
+
 </value>
   </data>
 	<data name="FloorSummaryPanel_NummerLang" xml:space="preserve">
@@ -1209,10 +1249,12 @@
   </data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeiz" xml:space="preserve">
     <value>Ti
+
 (°C)</value>
   </data>
 	<data name="FloorSummaryPanel_RaumtemperaturKuehl" xml:space="preserve">
     <value>Ti
+
 (°C)</value>
   </data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeizLang" xml:space="preserve">
@@ -1238,6 +1280,7 @@
   </data>
 	<data name="FloorSummaryPanel_Waermebedarf" xml:space="preserve">
     <value>QN
+
 (W)</value>
   </data>
 	<data name="FloorSummaryPanel_WaermebedarfLang" xml:space="preserve">
@@ -1245,7 +1288,9 @@
   </data>
 	<data name="FloorSummaryPanel_WieGehtsWeiterText" xml:space="preserve">
     <value>Κάνετε κλικ σε ένα από τα κουμπιά στη στήλη
+
 'Επεξεργασία' για να ανοίξετε τον αντίστοιχο χώρο ή
+
 κάνετε κλικ στον επιθυμητό χώρο στην ιεραρχία έργου.</value>
   </data>
 	<data name="General_Abbrechen" xml:space="preserve">
@@ -1301,6 +1346,7 @@
   </data>
 	<data name="General_NeustartErforderlichText" xml:space="preserve">
     <value>Απαιτείται επανεκκίνηση λόγω αλλαγών στις ρυθμίσεις.
+
 Πατήστε OK για να επανεκκινήσετε αμέσως την εφαρμογή.</value>
   </data>
 	<data name="General_NeustartErforderlichTitel" xml:space="preserve">
@@ -1524,11 +1570,14 @@
   </data>
 	<data name="HithermWallGrid_Basiskonstruktion" xml:space="preserve">
     <value>Βασική
+
 κατασκ.</value>
   </data>
 	<data name="HithermWallGrid_Deckschicht" xml:space="preserve">
     <value>Στρώση επικάλ.
+
 R
+
 (m²K/W)</value>
   </data>
 	<data name="HithermWallGrid_NeueWandkonstruktion" xml:space="preserve">
@@ -1536,26 +1585,35 @@ R
   </data>
 	<data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
     <value>Θερμ.
+
 θέρμανσης
+
 (°C)</value>
   </data>
 	<data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
     <value>Θερμ.
+
 ψύξης
+
 (°C)</value>
   </data>
 	<data name="HithermWallGrid_UWert" xml:space="preserve">
     <value>Τιμή U
+
 (W/m²K)</value>
   </data>
 	<data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
     <value>Προσαρμογή
+
 θερμικών
+
 αναγκών</value>
   </data>
 	<data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
     <value>πρόσθ. μόνωση
+
 R
+
 (m²K/W)</value>
   </data>
 	<data name="KlimaFlaechenModul_100_30" xml:space="preserve">
@@ -1632,6 +1690,7 @@ R
   </data>
 	<data name="LengthAssistentForm_FlaecheZuGrossText" xml:space="preserve">
     <value>Η επιλεγμένη επιφάνεια σύνδεσης είναι μεγαλύτερη από τη διαθέσιμη επιφάνεια.
+
 Θέλετε να συνεχίσετε παρ' όλα αυτά;</value>
   </data>
 	<data name="License_BereitsAbgelaufenText" xml:space="preserve">
@@ -1744,6 +1803,7 @@ R
   </data>
 	<data name="LL_QuickDimensioning_HinweisText" xml:space="preserve">
     <value>Το πλάνο επιφανειών αποτελεί κατά προσέγγιση υπολογισμό για την εκτίμηση του κόστους των υλικών. Πριν από την εκτέλεση πρέπει σε κάθε περίπτωση να γίνει ακριβής σχεδιασμός.
+
 Κατά τη διαδικασία αυτή ενδέχεται να προκύψουν αλλαγές έναντι του πλάνου επιφανειών.</value>
   </data>
 	<data name="LL_QuickDimensioning_HinweisTitel" xml:space="preserve">
@@ -1925,10 +1985,12 @@ R
   </data>
 	<data name="LL_Report_BereingterBedarfHeiz" xml:space="preserve">
     <value>Υπολ.
+
 Απαιτήσεις</value>
   </data>
 	<data name="LL_Report_BereingterBedarfKuehl" xml:space="preserve">
     <value>Υπολ.
+
 Απαιτήσεις</value>
   </data>
 	<data name="LL_Report_Bestellvorschlag" xml:space="preserve">
@@ -2001,7 +2063,7 @@ R
     <value>Europlan %VERSION%</value>
   </data>
 	<data name="LL_Report_FlaecheFbh" xml:space="preserve">
-    <value>Επιφάνεια ΕΘ</value>
+    <value>Επιφάνεια ενδοδαπέδιας θέρμανσης</value>
   </data>
 	<data name="LL_Report_FlaechenuebersichtEcotherm" xml:space="preserve">
     <value>Επισκόπηση επιφανείας ενδοδαπέδιας θέρμανσης Ecotherm®</value>
@@ -2026,10 +2088,12 @@ R
   </data>
 	<data name="LL_Report_FussbodenBreite" xml:space="preserve">
     <value>Π
+
 cm</value>
   </data>
 	<data name="PlannedEurovalProductPanel_B" xml:space="preserve">
     <value>Π
+
 cm</value>
   </data>
 	<data name="LL_Report_FussbodenDruckverlust" xml:space="preserve">
@@ -2046,38 +2110,47 @@ cm</value>
   </data>
 	<data name="LL_Report_FussbodenDruckverlustRohr" xml:space="preserve">
     <value>Σωλήνας
+
 mbar</value>
   </data>
 	<data name="LL_Report_WandDruckverlustRohr" xml:space="preserve">
     <value>Σωλήνας
+
 mbar</value>
   </data>
 	<data name="LL_Report_FussbodenDruckverlustVerteiler" xml:space="preserve">
     <value>Διανομέας
+
 mbar</value>
   </data>
 	<data name="LL_Report_KlimabodenDruckverlustVerteiler" xml:space="preserve">
     <value>Διανομέας
+
 mbar</value>
   </data>
 	<data name="LL_Report_KlimadeckeDruckverlustVerteiler" xml:space="preserve">
     <value>Διανομέας
+
 mbar</value>
   </data>
 	<data name="LL_Report_WandDruckverlustVerteiler" xml:space="preserve">
     <value>Διανομέας
+
 mbar</value>
   </data>
 	<data name="LL_Report_FussbodenFbKonstruktion" xml:space="preserve">
     <value>Κατασκ. δαπ.
+
 ΜΣ,Π</value>
   </data>
 	<data name="LL_Report_FussbodenFlaeche" xml:space="preserve">
     <value>A
+
 m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_A" xml:space="preserve">
     <value>A
+
 m²</value>
   </data>
 	<data name="LL_Report_FussbodenFlussgeschwindigkeit" xml:space="preserve">
@@ -2094,38 +2167,47 @@ m²</value>
   </data>
 	<data name="LL_Report_FussbodenHeizkreise" xml:space="preserve">
     <value>Κυκλώματα
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_KlimabodenHeizkreise" xml:space="preserve">
     <value>Κυκλώματα
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_KlimadeckeHeizkreise" xml:space="preserve">
     <value>Κυκλώματα
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_FussbodenHeizkreise2" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_KlimabodenHeizkreise2" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_KlimadeckeHeizkreise2" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeHeizkreise" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_WandHeizkreise" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="ProductOverviewForm_Heizkreise" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)
+
 θέρμανσης</value>
   </data>
 	<data name="LL_Report_FussbodenHinweisHintereinandergeschaltet" xml:space="preserve">
@@ -2147,31 +2229,38 @@ m²</value>
     <value>Αναφέρονται τα υδραυλικά στοιχεία για το συνολικό κύκλωμα θέρμανσης, επειδή είναι συνδεδεμένα πολλά συστήματα σε σειρά.</value>
   </data>
 	<data name="LL_Report_FussbodenLeistung" xml:space="preserve">
-    <value>QΕΘ
+    <value>QΕνδοδαπέδιας Θέρμανσης W
+
 W</value>
   </data>
 	<data name="LL_Report_KlimabodenLeistung" xml:space="preserve">
-    <value>QΕΘ
+    <value>QΕνδοδαπέδιας Θέρμανσησς W
+
 W</value>
   </data>
 	<data name="PlannedEurovalProductPanel_QFbh" xml:space="preserve">
     <value>QΕΘ
+
 W</value>
   </data>
 	<data name="LL_Report_FussbodenLeistungProQm" xml:space="preserve">
-    <value>qΕΘ
+    <value>qΕνδοδαπέδιας Θέρμανσης W/m2
+
 W/m²</value>
   </data>
 	<data name="LL_Report_KlimabodenLeistungProQm" xml:space="preserve">
     <value>qΕΘ
+
 W/m²</value>
   </data>
 	<data name="LL_Report_FussbodenOberflaechenTempAz" xml:space="preserve">
     <value>tΔ,ΚΖ
+
 °C</value>
   </data>
 	<data name="LL_Report_FussbodenOberflaechenTempRz" xml:space="preserve">
     <value>tΔ,ΠΖ
+
 °C</value>
   </data>
 	<data name="LL_Report_FussbodenRaumName" xml:space="preserve">
@@ -2221,46 +2310,57 @@ W/m²</value>
   </data>
 	<data name="LL_Report_FussbodenRaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_KlimabodenRaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_KlimadeckeRaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_RaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeRaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_WandRaumNr" xml:space="preserve">
     <value>Αριθ.
+
 Χώρου</value>
   </data>
 	<data name="LL_Report_FussbodenRaumtemperatur" xml:space="preserve">
     <value>ti
+
 °C</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtRaumtemperatur" xml:space="preserve">
     <value>ti
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimabodenRaumtemperatur" xml:space="preserve">
     <value>ti
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimadeckeRaumtemperatur" xml:space="preserve">
     <value>ti
+
 °C</value>
   </data>
 	<data name="LL_Report_WandRaumtemperatur" xml:space="preserve">
     <value>ti
+
 °C</value>
   </data>
 	<data name="LL_Report_FussbodenRohrlaenge" xml:space="preserve">
@@ -2271,82 +2371,102 @@ W/m²</value>
   </data>
 	<data name="LL_Report_FussbodenRohrlaengeAnbindung" xml:space="preserve">
     <value>Αγωγός
+
 σύνδ. m</value>
   </data>
 	<data name="LL_Report_WandRohrlaengeAnbindung" xml:space="preserve">
     <value>Αγωγός
+
 σύνδ. m</value>
   </data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreis" xml:space="preserve">
     <value>Κύκλ. θέρμ.
+
 (ΕΘ) m</value>
   </data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreisGesamt" xml:space="preserve">
     <value>Κύκλ. θέρμ.
+
 (συν.) m</value>
   </data>
 	<data name="LL_Report_WandRohrlaengeHeizkreisGesamt" xml:space="preserve">
     <value>Κύκλ. θέρμ.
+
 (συν.) m</value>
   </data>
 	<data name="LL_Report_FussbodenRohrlaengeRzAz" xml:space="preserve">
     <value>ΠZ + ΚZ
+
 m</value>
   </data>
 	<data name="LL_Report_FussbodenRücklauftemperaur" xml:space="preserve">
     <value>tr
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimabodenRuecklauftemperaur" xml:space="preserve">
     <value>tr
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimadeckeRuecklauftemperaur" xml:space="preserve">
     <value>tr
+
 °C</value>
   </data>
 	<data name="LL_Report_WandRuecklauftemperaur" xml:space="preserve">
     <value>tr
+
 °C</value>
   </data>
 	<data name="LL_Report_FussbodenSollLeistung" xml:space="preserve">
     <value>Qονομ.
+
 (υπολ.) W</value>
   </data>
 	<data name="LL_Report_KlimabodenSollLeistung" xml:space="preserve">
     <value>Qονομ.
+
 (υπολ.) W</value>
   </data>
 	<data name="LL_Report_KlimadeckeSollLeistung" xml:space="preserve">
     <value>Qονομ.
+
 (υπολ.) W</value>
   </data>
 	<data name="LL_Report_WandSollLeistung" xml:space="preserve">
     <value>Qονομ.
+
 (υπολ.) W</value>
   </data>
 	<data name="LL_Report_FussbodenTeilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="LL_Report_KlimabodenTeilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="LL_Report_KlimadeckeTeilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeTeilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="LL_Report_WandTeilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="ProductOverviewForm_Teilsystem" xml:space="preserve">
     <value>Τμηματικό
+
 σύστημα</value>
   </data>
 	<data name="LL_Report_FussbodenVerlegeabstand" xml:space="preserve">
@@ -2363,22 +2483,27 @@ m</value>
   </data>
 	<data name="LL_Report_FussbodenWassermenge" xml:space="preserve">
     <value>Ποσότητα
+
 νερού</value>
   </data>
 	<data name="LL_Report_KlimabodenWassermenge" xml:space="preserve">
     <value>Ποσότητα
+
 νερού</value>
   </data>
 	<data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
     <value>Ποσότητα
+
 νερού</value>
   </data>
 	<data name="LL_Report_WandWassermenge" xml:space="preserve">
     <value>Ποσότητα
+
 νερού</value>
   </data>
 	<data name="LL_Report_FussbodenWdKonstruktion" xml:space="preserve">
     <value>Θερμομον. κατασκ.
+
 Ru</value>
   </data>
 	<data name="LL_Report_Geschoss" xml:space="preserve">
@@ -2389,18 +2514,22 @@ Ru</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtBereinigterBedarf" xml:space="preserve">
     <value>Qυπολ.
+
 W</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtFlaecheEinheit" xml:space="preserve">
     <value>
+
 m²</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtHeizleistung" xml:space="preserve">
     <value>Qθ
+
 W</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtKuehlleistung" xml:space="preserve">
     <value>Qψ
+
 W</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtRaumNr" xml:space="preserve">
@@ -2408,10 +2537,12 @@ W</value>
   </data>
 	<data name="LL_Report_GeschossuebersichtRestleistung" xml:space="preserve">
     <value>Qυπολ.
+
 W</value>
   </data>
 	<data name="PlannedEurovalProductPanel_QRest" xml:space="preserve">
     <value>Qυπολ.
+
 W</value>
   </data>
 	<data name="LL_Report_Hinweise" xml:space="preserve">
@@ -2419,55 +2550,69 @@ W</value>
   </data>
 	<data name="LL_Report_KlimabodenAnbindeleitung" xml:space="preserve">
     <value>Αγωγός σύνδ.
+
 m</value>
   </data>
 	<data name="LL_Report_KlimadeckeAnbindeleitung" xml:space="preserve">
     <value>Αγωγός σύνδ.
+
 m</value>
   </data>
 	<data name="LL_Report_KlimabodenAnzahlModule" xml:space="preserve">
     <value>Αριθμός
+
 μονάδων</value>
   </data>
 	<data name="LL_Report_KlimabodenDruckverlustHeizkreis" xml:space="preserve">
     <value>ΚΘ
+
 mbar</value>
   </data>
 	<data name="LL_Report_KlimadeckeDruckverlustHeizkreis" xml:space="preserve">
     <value>ΚΘ
+
 mbar</value>
   </data>
 	<data name="LL_Report_KlimabodenFbKonstruktion" xml:space="preserve">
     <value>Κατασκ. δαπ.
+
 RL,B
+
 m²K/W</value>
   </data>
 	<data name="LL_Report_KlimabodenFlaecheAnbindung" xml:space="preserve">
     <value>Σύνδ.
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimadeckeFlaecheAnbindung" xml:space="preserve">
     <value>Σύνδ.
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimabodenFlaecheDicht" xml:space="preserve">
     <value>Πυκνή διάταξη
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimabodenFlaecheModulierend" xml:space="preserve">
     <value>Ρυθμιστικά
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimabodenFlaecheSonstige" xml:space="preserve">
     <value>Λοιπά
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimabodenOberflaechenTemp" xml:space="preserve">
     <value>tfb
+
 °C</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Tfb" xml:space="preserve">
     <value>tfb
+
 °C</value>
   </data>
 	<data name="LL_Report_KlimabodenSystemkomponenten" xml:space="preserve">
@@ -2478,12 +2623,16 @@ m²</value>
   </data>
 	<data name="LL_Report_KlimabodenWdKonstruktion" xml:space="preserve">
     <value>Θερμομον. κατασκ.
+
 Ru
+
 m²K/W</value>
   </data>
 	<data name="LL_Report_KlimadeckeWdKonstruktion" xml:space="preserve">
     <value>Θερμομον. κατασκ.
+
 Ru
+
 m²K/W</value>
   </data>
 	<data name="LL_Report_KlimadeckeAnzahlModule" xml:space="preserve">
@@ -2491,19 +2640,24 @@ m²K/W</value>
   </data>
 	<data name="LL_Report_KlimadeckeDeckenKonstruktion" xml:space="preserve">
     <value>Κατασκ. οροφής
+
 RL,B
+
 m²K/W</value>
   </data>
 	<data name="LL_Report_KlimadeckeFlaecheModule" xml:space="preserve">
     <value>Επιφάνεια μονάδας
+
 m²</value>
   </data>
 	<data name="LL_Report_KlimadeckeLeistung" xml:space="preserve">
     <value>QΘΟ
+
 W</value>
   </data>
 	<data name="LL_Report_KlimadeckeLeistungProQm" xml:space="preserve">
     <value>qΘΟ
+
 W/m²</value>
   </data>
 	<data name="LL_Report_Kontaktadresse" xml:space="preserve">
@@ -2511,6 +2665,7 @@ W/m²</value>
   </data>
 	<data name="LL_Report_Kuehllast" xml:space="preserve">
     <value>Ψυκτικό
+
 φορτίο</value>
   </data>
 	<data name="LL_Report_LeistungNachInnen" xml:space="preserve">
@@ -2595,7 +2750,7 @@ W/m²</value>
     <value>Υπολειμματικό</value>
   </data>
 	<data name="LL_Report_Sachbearbeiter" xml:space="preserve">
-    <value>Sachbearbeiter</value>
+    <value>Υπεύθυνος υπάλληλος</value>
   </data>
 	<data name="LL_Report_Subsystem" xml:space="preserve">
     <value>(sub)</value>
@@ -2647,18 +2802,22 @@ W/m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
     <value>ΚΘ
+
 l/min</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenDurchflussProHkZeile2" xml:space="preserve">
     <value>ΚΘ
+
 l/min</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
     <value>Επιφάνεια/
+
 ΚΘ</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalFlaecheProHk" xml:space="preserve">
     <value>Επιφάνεια/
+
 ΚΘ</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1" xml:space="preserve">
@@ -2686,7 +2845,7 @@ l/min</value>
     <value>m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile1" xml:space="preserve">
-    <value>Κύκλωμα (κυκλώματα)</value>
+    <value>Θέρμανσης</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalHeizkreiseZeile1" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)</value>
@@ -2695,29 +2854,31 @@ l/min</value>
     <value>Κύκλωμα (κυκλώματα)</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermHeizkreisZeile1" xml:space="preserve">
-    <value>Κύκλωμα (κυκλώματα)</value>
+    <value>Θέρμανση</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenHeizkreiseZeile1" xml:space="preserve">
-    <value>Κύκλωμα (κυκλώματα)</value>
+    <value>Θέρμανσης</value>
   </data>
 	<data name="LL_Report_WandHeizkreisZeile1" xml:space="preserve">
     <value>Κύκλωμα (κυκλώματα)</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile2" xml:space="preserve">
-    <value>θέρμανσης</value>
+    <value>Κύκλωμα (κυκλώματα)</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalHeizkreiseZeile2" xml:space="preserve">
     <value>θέρμανσης</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenHeizkreiseZeile2" xml:space="preserve">
-    <value>θέρμανσης</value>
+    <value>Κύκλωμα (κυκλώματα)</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermLaengeProHk" xml:space="preserve">
     <value>Μήκος/
+
 ΚΘ</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalLaengeProHk" xml:space="preserve">
     <value>Μήκος/
+
 ΚΘ</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1" xml:space="preserve">
@@ -2728,10 +2889,12 @@ l/min</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2" xml:space="preserve">
     <value>ΚΘ
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalRohrlaengeProHkZeile2" xml:space="preserve">
     <value>ΚΘ
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermTeilsystemZeile1" xml:space="preserve">
@@ -2780,31 +2943,31 @@ m</value>
     <value>Σύστημα</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermWdKonstruktionZeile1" xml:space="preserve">
-    <value>Κατασκ.</value>
+    <value>Θερμική μόνωση</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalWdKonstruktionZeile1" xml:space="preserve">
-    <value>Κατασκ.</value>
+    <value>Θερμική μόνωση</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile1" xml:space="preserve">
-    <value>Κατασκ.</value>
+    <value>Θερμική μόνωση</value>
   </data>
 	<data name="LL_Report_VerlegedatenEcothermWdKonstruktionZeile2" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalWdKonstruktionZeile2" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile2" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermWandkonstruktionZeile2" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenWdKonstruktionZeile2" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="PlannedHithermProductPanel_Konstruktion" xml:space="preserve">
-    <value>τοίχου</value>
+    <value>κατασκευή</value>
   </data>
 	<data name="LL_Report_VerlegedatenEuroval" xml:space="preserve">
     <value>Στοιχεία τοποθέτησης ενδοδαπέδιας θέρμανσης Euroval® - %GESCHOSS%</value>
@@ -2835,10 +2998,12 @@ m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2" xml:space="preserve">
     <value>Επιφάνεια
+
 m²</value>
   </data>
 	<data name="ProductOverviewForm_Flaeche" xml:space="preserve">
     <value>Επιφάνεια
+
 m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile2" xml:space="preserve">
@@ -2852,34 +3017,42 @@ m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeRuecklauf" xml:space="preserve">
     <value>Επιστροφή
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermLaengeRuecklauf" xml:space="preserve">
     <value>Επιστροφή
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeVorlauf" xml:space="preserve">
     <value>Προσαγωγή
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermLaengeVorlauf" xml:space="preserve">
     <value>Προσαγωγή
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeWand" xml:space="preserve">
     <value>Τοίχος
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermLaengeWand" xml:space="preserve">
     <value>Τοίχος
+
 m</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactRegisterAnzahl" xml:space="preserve">
     <value>Αριθμός
+
 στοιχ.</value>
   </data>
 	<data name="PlannedHithermCompactProductPanel_AnzahlRegister" xml:space="preserve">
     <value>Αριθμός
+
 στοιχ.</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactRegisterflaechen" xml:space="preserve">
@@ -2889,17 +3062,19 @@ m</value>
     <value>Επιφάνειες στοιχείων</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermCompactWandkonstruktionZeile1" xml:space="preserve">
-    <value>Κατασκ.</value>
+    <value>Τοίχος</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermWandkonstruktionZeile1" xml:space="preserve">
-    <value>Κατασκ.</value>
+    <value>Τοίχος</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa10" xml:space="preserve">
     <value>RA10
+
 m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermFlaecheRa5" xml:space="preserve">
     <value>RA 5
+
 m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermGesamtflaeche" xml:space="preserve">
@@ -2907,6 +3082,7 @@ m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermRegisterBreite" xml:space="preserve">
     <value>Πλάτος
+
 cm</value>
   </data>
 	<data name="LL_Report_VerlegedatenHithermRegisterRohre" xml:space="preserve">
@@ -2935,6 +3111,7 @@ cm</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2" xml:space="preserve">
     <value>Αγωγός
+
 σύνδ. m</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadecke" xml:space="preserve">
@@ -2945,14 +3122,17 @@ cm</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion" xml:space="preserve">
     <value>Κατασκ.
+
 οροφής</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
     <value>mh/ΚΘ
+
 l/min</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
     <value>Aχωρίς θέρμ.
+
 m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeKonstruktion" xml:space="preserve">
@@ -2975,6 +3155,7 @@ m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeModulflaeche" xml:space="preserve">
     <value>Επιφάνεια
+
 μονάδας m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeReihe" xml:space="preserve">
@@ -2985,6 +3166,7 @@ m²</value>
   </data>
 	<data name="LL_Report_VerlegedatenKlimadeckeVerbindeleitung" xml:space="preserve">
     <value>Λοιποί αγωγοί
+
 σύνδ. m</value>
   </data>
 	<data name="LL_Report_VerlegedatenVerteiler" xml:space="preserve">
@@ -3001,14 +3183,17 @@ m²</value>
   </data>
 	<data name="LL_Report_Waermebedarf" xml:space="preserve">
     <value>Θερμικές
+
 ανάγκες</value>
   </data>
 	<data name="LL_Report_WandAnbindeleitungSenkrecht" xml:space="preserve">
     <value>κάθ.
+
 m</value>
   </data>
 	<data name="LL_Report_WandAnbindeleitungWaagrecht" xml:space="preserve">
     <value>οριζ.
+
 m</value>
   </data>
 	<data name="LL_Report_WandAnzahlRegister" xml:space="preserve">
@@ -3016,6 +3201,7 @@ m</value>
   </data>
 	<data name="LL_Report_WandBereinigungLeistung" xml:space="preserve">
     <value>QDelta
+
 W</value>
   </data>
 	<data name="LL_Report_WandFlaecheZeile1" xml:space="preserve">
@@ -3023,14 +3209,17 @@ W</value>
   </data>
 	<data name="LL_Report_WandLeistung" xml:space="preserve">
     <value>QΕΤ
+
 W</value>
   </data>
 	<data name="LL_Report_WandLeistungProQm" xml:space="preserve">
     <value>qΕΤ
+
 W/m²</value>
   </data>
 	<data name="LL_Report_WandRohrlaengeInWand" xml:space="preserve">
     <value>Ενδοτοίχια
+
 m</value>
   </data>
 	<data name="LL_Report_WarnungenUndFehler" xml:space="preserve">
@@ -3155,6 +3344,7 @@ m</value>
   </data>
 	<data name="MaterialEditorGrid_VerpackungseinheitCol" xml:space="preserve">
     <value>Μονάδα
+
 συσκευασίας</value>
   </data>
 	<data name="ModulKlimaDeckeProduct_CProfil" xml:space="preserve">
@@ -3197,7 +3387,7 @@ m</value>
     <value>Σφάλμα</value>
   </data>
 	<data name="RoomSummaryPanel_EingabefehlerTitel" xml:space="preserve">
-    <value>Σφάλμα</value>
+    <value>Σφάλμα μορφότυπου καταχώρησης</value>
   </data>
 	<data name="SelectConstructionForm_KeineKonstruktionTitel" xml:space="preserve">
     <value>Σφάλμα</value>
@@ -3273,6 +3463,7 @@ m</value>
   </data>
 	<data name="PlannedEurovalProductPanel_AAnb" xml:space="preserve">
     <value>Aσύνδ.
+
 m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Anhydritestrich" xml:space="preserve">
@@ -3289,6 +3480,7 @@ m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_AnzahlHK" xml:space="preserve">
     <value>Αριθμός
+
 ΚΘ</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Berechnungsergebnisse" xml:space="preserve">
@@ -3299,6 +3491,7 @@ m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_DeltaP" xml:space="preserve">
     <value>DeltaP
+
 mbar</value>
   </data>
 	<data name="PlannedEurovalProductPanel_EckenErklaerung" xml:space="preserve">
@@ -3336,6 +3529,7 @@ mbar</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Mg" xml:space="preserve">
     <value>mh
+
 kg/h</value>
   </data>
 	<data name="PlannedEurovalProductPanel_NachHeizbetrieb" xml:space="preserve">
@@ -3349,18 +3543,22 @@ kg/h</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Q" xml:space="preserve">
     <value>Q
+
 W</value>
   </data>
 	<data name="PlannedEurovalProductPanel_QAnb" xml:space="preserve">
     <value>Qσύνδ.b
+
 W</value>
   </data>
 	<data name="PlannedEurovalProductPanel_QSoll" xml:space="preserve">
     <value>Qονομ.
+
 W</value>
   </data>
 	<data name="PlannedEurovalProductPanel_QSollProQuadratmeter" xml:space="preserve">
     <value>qονομ.
+
 W/m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_ReduzierteFlaeche" xml:space="preserve">
@@ -3371,10 +3569,12 @@ W/m²</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
     <value>Μήκος σωλ.
+
 m</value>
   </data>
 	<data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
     <value>Διαφορά θερμοκρασίας
+
 K</value>
   </data>
 	<data name="PlannedEurovalProductPanel_TatsaechlicheAuslegung" xml:space="preserve">
@@ -3415,6 +3615,7 @@ K</value>
   </data>
 	<data name="PlannedHithermProductPanel_Breite" xml:space="preserve">
     <value>Πλάτος
+
 (cm)</value>
   </data>
 	<data name="PlannedHithermProductPanel_DifferenzLeistung" xml:space="preserve">
@@ -3455,16 +3656,21 @@ K</value>
   </data>
 	<data name="PlannedHithermProductPanel_LeitungSenkrecht" xml:space="preserve">
     <value>Αγωγός
+
 κάθ.
+
 (m)</value>
   </data>
 	<data name="PlannedHithermProductPanel_LeitungWaagrecht" xml:space="preserve">
     <value>Αγωγός
+
 οριζ.
+
 (m)</value>
   </data>
 	<data name="PlannedHithermProductPanel_RegisterTyp" xml:space="preserve">
     <value>Τύπος
+
 στοιχείου</value>
   </data>
 	<data name="PlannedHithermProductPanel_UebrigeFlaeche" xml:space="preserve">
@@ -3480,7 +3686,8 @@ K</value>
     <value>Διαθέσιμη επιφάνεια:</value>
   </data>
 	<data name="PlannedHithermProductPanel_Waagrecht" xml:space="preserve">
-    <value>ορι-
+    <value>οριζόντια
+
 ζόντια</value>
   </data>
 	<data name="PlannedHithermProductPanel_Wassermenge" xml:space="preserve">
@@ -3583,7 +3790,7 @@ K</value>
     <value>Θερμοκρασία άνω (λειτουργία θέρμανσης):</value>
   </data>
 	<data name="PlannedProductPanel_TemperaturOberhalbKuehl" xml:space="preserve">
-    <value>Θερμοκρασία άνω (λειτουργία ψύξης):</value>
+    <value>Θερμοκρασία κάτω (λειτουργία ψύξης):</value>
   </data>
 	<data name="PlannedProductPanel_TemperaturUnterhalbHeiz" xml:space="preserve">
     <value>Θερμοκρασία κάτω (λειτουργία θέρμανσης):</value>
@@ -3620,18 +3827,22 @@ K</value>
   </data>
 	<data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
     <value>Απώλεια πίεσης
+
 mbar</value>
   </data>
 	<data name="ProductOverviewForm_DruckverlustKuehl" xml:space="preserve">
     <value>Απώλεια πίεσης
+
 mbar</value>
   </data>
 	<data name="ProductOverviewForm_Kuehllast" xml:space="preserve">
     <value>Ψυκτικό φορτίο
+
 W</value>
   </data>
 	<data name="ProductOverviewForm_Normwaerme" xml:space="preserve">
     <value>Πρότυπη θερμότητα
+
 W</value>
   </data>
 	<data name="ProductOverviewForm_Ok" xml:space="preserve">
@@ -3645,14 +3856,17 @@ W</value>
   </data>
 	<data name="ProductOverviewForm_Restkuellast" xml:space="preserve">
     <value>Υπολειμ. θερμ.
+
 W</value>
   </data>
 	<data name="ProductOverviewForm_Restwaerme" xml:space="preserve">
     <value>Υπολειμματική θερμότητα
+
 W</value>
   </data>
 	<data name="ProductOverviewForm_Rohrlaenge" xml:space="preserve">
     <value>Μήκος σωλήνα
+
 m</value>
   </data>
 	<data name="ProductOverviewForm_Titel" xml:space="preserve">
@@ -3660,10 +3874,12 @@ m</value>
   </data>
 	<data name="ProductOverviewForm_VerlegeabstandAz" xml:space="preserve">
     <value>Απόσταση τοποθέτησης
+
 ΚZ</value>
   </data>
 	<data name="ProductOverviewForm_VerlegeabstandRz" xml:space="preserve">
     <value>Απόσταση τοποθέτησης
+
 ΠZ</value>
   </data>
 	<data name="ProjectReport_AnbindungDurchRaum" xml:space="preserve">
@@ -3854,22 +4070,30 @@ m</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_BkaAngeschlossen" xml:space="preserve">
     <value>ΕΠΣ
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_BkaOffen" xml:space="preserve">
     <value>ΕΠΣ
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_EurovalAngeschlossen" xml:space="preserve">
     <value>Euroval®
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_EurovalOffen" xml:space="preserve">
     <value>Euroval®
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_Geschoss" xml:space="preserve">
@@ -3877,56 +4101,77 @@ m</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermAngschlossen" xml:space="preserve">
     <value>Hitherm®
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen" xml:space="preserve">
     <value>Hitherm® Co
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen" xml:space="preserve">
     <value>Hitherm® Co
+
 Dach συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactDachOffen" xml:space="preserve">
     <value>Hitherm® Co
+
 Dach ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactOffen" xml:space="preserve">
     <value>Hitherm® Co
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_HithermOffen" xml:space="preserve">
     <value>Hitherm®
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen" xml:space="preserve">
     <value>Klima-Boden
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaBodenOffen" xml:space="preserve">
     <value>Klima-Boden
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen" xml:space="preserve">
     <value>Klima-Decke
+
 συνδ.
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaDeckeOffen" xml:space="preserve">
     <value>Klima-Decke
+
 ανοικτά
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningDistributorsGrid_RaumNr" xml:space="preserve">
     <value>Αριθ.
+
 χώρου</value>
   </data>
 	<data name="QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant" xml:space="preserve">
@@ -3943,22 +4188,27 @@ Dach ανοικτά
   </data>
 	<data name="QuickDimensioningFloorGrid_BkaFlaeche" xml:space="preserve">
     <value>ΕΠΣ
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_BkaHeizkreise" xml:space="preserve">
     <value>ΕΠΣ
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_EurovalFlaeche" xml:space="preserve">
     <value>Euroval®
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_EurovalHeizkreise" xml:space="preserve">
     <value>Euroval®
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_Heizlast" xml:space="preserve">
     <value>Θερμικό φορτίο
+
 (W)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HeizlastFehler" xml:space="preserve">
@@ -3969,46 +4219,57 @@ Dach ανοικτά
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachFlaeche" xml:space="preserve">
     <value>Hitherm® Co
+
 Dach (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachHeizkreise" xml:space="preserve">
     <value>Hitherm® Co
+
 Dach ΚΘ</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactFlaeche" xml:space="preserve">
     <value>Hitherm® Co
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactHeizkreise" xml:space="preserve">
     <value>Hitherm® Co
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermFlaeche" xml:space="preserve">
     <value>Hitherm®
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_HithermHeizkreise" xml:space="preserve">
     <value>Hitherm®
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
     <value>Klima-Boden
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
     <value>Klima-Boden
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
     <value>Klima-Decke
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
     <value>Klima-Decke
+
 κυκλώματα θέρμανσης</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
     <value>Ψυκτικό φορτίο
+
 (W)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_KuehllastFehler" xml:space="preserve">
@@ -4019,10 +4280,12 @@ Dach ΚΘ</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_RaumController" xml:space="preserve">
     <value>Ελεγκτής
+
 χώρου</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_Raumflaeche" xml:space="preserve">
     <value>Επιφ. χώρου
+
 (m²)</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_RC" xml:space="preserve">
@@ -4039,10 +4302,12 @@ Dach ΚΘ</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_Stellmotore" xml:space="preserve">
     <value>Ενεργο-
+
 ποιητές</value>
   </data>
 	<data name="QuickDimensioningFloorGrid_Temperatur" xml:space="preserve">
     <value>Θερμ.
+
 (°C)</value>
   </data>
 	<data name="QuickDimensioningFloorGridFlaecheFehler" xml:space="preserve">
@@ -4076,7 +4341,7 @@ Dach ΚΘ</value>
     <value>Θέλετε πράγματι να καταργήσετε το προϊόν Euroval από το πλάνο επιφανειών;</value>
   </data>
 	<data name="QuickDimensioningPanel_EurovalEntfernenTitel" xml:space="preserve">
-    <value>Κατάργηση Euroval</value>
+    <value>Κατάργηση Euroval®</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermCompactDachEntfernenText" xml:space="preserve">
     <value>Θέλετε πράγματι να καταργήσετε το προϊόν Hitherm Compact σοφίτας από το πλάνο επιφανειών;</value>
@@ -4119,10 +4384,12 @@ Dach ΚΘ</value>
   </data>
 	<data name="QuickDimensioningPanel_VorlauftemperaturHeizen" xml:space="preserve">
     <value>Θερμοκρασία προσαγωγής
+
 (θέρμανση)</value>
   </data>
 	<data name="QuickDimensioningPanel_VorlauftemperaturKuehlen" xml:space="preserve">
     <value>Θερμοκρασία προσαγωγής
+
 (ψύξη)</value>
   </data>
 	<data name="QuickDimensioningPanel_Zuruecksetzen" xml:space="preserve">
@@ -4169,7 +4436,9 @@ Dach ΚΘ</value>
   </data>
 	<data name="RoomSummaryPanel_FbhFlaeche" xml:space="preserve">
     <value>Επιφάνεια
+
 ΕΘ
+
 (m²)</value>
   </data>
 	<data name="RoomSummaryPanel_Flaeche" xml:space="preserve">
@@ -4177,7 +4446,9 @@ Dach ΚΘ</value>
   </data>
 	<data name="RoomSummaryPanel_Heizflaeche" xml:space="preserve">
     <value>Επιφάνεια
+
 θέρμανσης
+
 (m²)</value>
   </data>
 	<data name="RoomSummaryPanel_Heizlast" xml:space="preserve">
@@ -4188,6 +4459,7 @@ Dach ΚΘ</value>
   </data>
 	<data name="RoomSummaryPanel_Heizleistung" xml:space="preserve">
     <value>PΘέρμανση
+
 (W)</value>
   </data>
 	<data name="RoomSummaryPanel_Heizsysteme" xml:space="preserve">
@@ -4204,6 +4476,7 @@ Dach ΚΘ</value>
   </data>
 	<data name="RoomSummaryPanel_Kuehlleistung" xml:space="preserve">
     <value>PΨύξη
+
 (W)</value>
   </data>
 	<data name="RoomSummaryPanel_LoeschenBestaetigenText" xml:space="preserve">
@@ -4223,7 +4496,9 @@ Dach ΚΘ</value>
   </data>
 	<data name="RoomSummaryPanel_WieGehtsWeiterText" xml:space="preserve">
     <value>Κάνετε κλικ σε ένα από τα κουμπιά στη στήλη
+
 'Επεξεργασία' για να ανοίξετε το αντίστοιχο σύστημα θέρμανσης ή
+
  κάνετε κλικ στο επιθυμητό σύστημα θέρμανσης στην ιεραρχία έργου.</value>
   </data>
 	<data name="RoomTypeGrid_Heizlast" xml:space="preserve">
@@ -4524,7 +4799,7 @@ Dach ΚΘ</value>
     <value>60/60 D</value>
   </data>
 	<data name="Construction_DK06" xml:space="preserve">
-    <value></value>
+    <value>Ακουστική οροφή με μεμβράνη </value>
   </data>
 	<data name="KlimaFlaechenModul_60_60B" xml:space="preserve">
     <value>Modul 60/60 B</value>
@@ -4536,16 +4811,2974 @@ Dach ΚΘ</value>
     <value>Modul 60/60 D</value>
   </data>
 	<data name="Material_EV01" xml:space="preserve">
-    <value></value>
+    <value>Euroval® σωλήνα ασφαλείας DD (H)</value>
   </data>
 	<data name="Material_HG11" xml:space="preserve">
-    <value></value>
+    <value>Hitherm® Compact 625x1500x12,5 χιλιοστά κλίση οροφής γυψοσανίδα</value>
   </data>
 	<data name="ModulKlimaDeckePlannerForm_BeplankungAnzeigen" xml:space="preserve">
-    <value>Beplankung anzeigen</value>
+    <value>Εμφάνιση στρώμα κάλυψης </value>
   </data>
 	<data name="LL_Report_VerlegedatenEurovalDurchflussProHkZeile2" xml:space="preserve">
     <value>ΚΘ
+
 l/min</value>
   </data>
+	<data name="AbstractLicensedModule_BetaUpdates" xml:space="preserve">
+		<value>Κατεβάστε beta-ενημερώσεις </value>
+	</data>
+	<data name="AbstractLicensedModule_Jumboval" xml:space="preserve">
+		<value>Jumboval® Ενδοδαπέδια θέρμανση</value>
+	</data>
+	<data name="CadPlanOptionsForm_Titel" xml:space="preserve">
+		<value>Επιλογές</value>
+	</data>
+	<data name="Category_12d2b721_99c0_4d72_905d_2f218abd26f7" xml:space="preserve">
+		<value>Επιπτώσεις ηχητικής μόνωσης </value>
+	</data>
+	<data name="Category_3757b0af_4891_4d6a_911c_bf2c0bc18ebc" xml:space="preserve">
+		<value>Κλιματιζόμενο δάπεδο Modul</value>
+	</data>
+	<data name="Category_3da3227a_9ffe_4af4_bcbd_509a159066e1" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση γενικά</value>
+	</data>
+	<data name="Category_47dcf857_a316_40c5_992e_f5913fd643dd" xml:space="preserve">
+		<value>Θερμική μόνωση</value>
+	</data>
+	<data name="Category_6d414984_2bc3_41ed_83a0_5a085911689b" xml:space="preserve">
+		<value>Hitherm Compact</value>
+	</data>
+	<data name="Category_6ee36a0d_5077_4ac7_bba3_fb7dcde87a05" xml:space="preserve">
+		<value>Κλιματιζόμενος τοίχος Hitherm</value>
+	</data>
+	<data name="Category_733a961b_265b_4119_aa6d_64f29cc6aee3" xml:space="preserve">
+		<value>Πρόσθετος εξοπλισμός διανομέα</value>
+	</data>
+	<data name="Category_74215bac_568f_4685_9c97_6c880fcdd5f3" xml:space="preserve">
+		<value>Σωλήνες θέρμανσης τοίχου και εξαρτήματα</value>
+	</data>
+	<data name="Category_763da832_711a_41af_ad59_3d3527be6131" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Euroval</value>
+	</data>
+	<data name="Category_785616e8_757a_4442_ba9f_b7deed7d03ce" xml:space="preserve">
+		<value>Γενικά</value>
+	</data>
+	<data name="Category_92fea213_58a1_405a_ba72_17e4e851848c" xml:space="preserve">
+		<value>Γενική θέρμανση τοίχου</value>
+	</data>
+	<data name="Category_98bf6ba8_cec1_4d99_be2e_5f1836dde18a" xml:space="preserve">
+		<value>Κλιματιζόμενη οροφή Modul</value>
+	</data>
+	<data name="Category_a8824ebb_19ac_4ff8_90c1_320b1a15225b" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Ecotherm</value>
+	</data>
+	<data name="Category_e76a2892_0065_45d0_8fb5_914fffbda956" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="ConnectionPipe_Jumboval" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Jumboval®</value>
+	</data>
+	<data name="ConnectionPipePanel_UngueltigeProduktNrText" xml:space="preserve">
+		<value>Ο εισαγόμενος κωδικός συστήματος δεν είναι έγκυρος. Παρακαλώ εισάγετε το σωστό κωδικό συστήματος!</value>
+	</data>
+	<data name="ConnectionPipePanel_UngueltigeProduktNrTitel" xml:space="preserve">
+		<value>σφάλμα</value>
+	</data>
+	<data name="ConnectionPipePanel_UngueltigeRaumNrText" xml:space="preserve">
+		<value>Ο εισαγόμενος αριθμός δωματίου δεν είναι έγκυρος. Παρακαλώ εισάγετε το σωστό αριθμό δωματίου!</value>
+	</data>
+	<data name="ConnectionPipePanel_UngueltigeRaumNrTitel" xml:space="preserve">
+		<value>σφάλμα </value>
+	</data>
+	<data name="Construction_DK01" xml:space="preserve">
+		<value>Μεταλλική οροφή</value>
+	</data>
+	<data name="Construction_DK02" xml:space="preserve">
+		<value>Οροφή γυψοσανίδας</value>
+	</data>
+	<data name="Construction_DK03" xml:space="preserve">
+		<value>Οροφή ινών γύψου</value>
+	</data>
+	<data name="Construction_DK04" xml:space="preserve">
+		<value>Οροφή γύψο-γραφίτη</value>
+	</data>
+	<data name="Construction_DK05" xml:space="preserve">
+		<value>Ακουστική οροφή</value>
+	</data>
+	<data name="Construction_SCW01" xml:space="preserve">
+		<value>Fermacell 10 χιλιοστά</value>
+	</data>
+	<data name="Construction_SCW02" xml:space="preserve">
+		<value>Fermacell 12.5 χιλιοστά</value>
+	</data>
+	<data name="Construction_SCW03" xml:space="preserve">
+		<value>Fermacell 15 χιλιοστά</value>
+	</data>
+	<data name="Construction_SCW05" xml:space="preserve">
+		<value>Γυψοσανίδα 12.5 χιλιοστά</value>
+	</data>
+	<data name="Construction_SCW06" xml:space="preserve">
+		<value>Γυψοσανίδα 15 χιλιοστά</value>
+	</data>
+	<data name="Construction_STB01" xml:space="preserve">
+		<value>Κεραμικός</value>
+	</data>
+	<data name="Construction_STB02" xml:space="preserve">
+		<value>Φυσική πέτρα</value>
+	</data>
+	<data name="Construction_STB03" xml:space="preserve">
+		<value>PVC δάπεδο</value>
+	</data>
+	<data name="Construction_STB04" xml:space="preserve">
+		<value>Κολλητό παρκέ 10 χιλιοστά</value>
+	</data>
+	<data name="Construction_STB05" xml:space="preserve">
+		<value>Κολλητό παρκέ 15 χιλιοστά</value>
+	</data>
+	<data name="Construction_STB06" xml:space="preserve">
+		<value>Κολλητό παρκέ 22 χιλιοστά</value>
+	</data>
+	<data name="Construction_STB07" xml:space="preserve">
+		<value>Χαλί αφρού 2 χιλιοστά</value>
+	</data>
+	<data name="Construction_STB08" xml:space="preserve">
+		<value>Χαλί αφρού 4 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD01" xml:space="preserve">
+		<value>Κεραμικός</value>
+	</data>
+	<data name="Construction_STD02" xml:space="preserve">
+		<value>Φυσική πέτρα</value>
+	</data>
+	<data name="Construction_STD03" xml:space="preserve">
+		<value>PVC δάπεδο</value>
+	</data>
+	<data name="Construction_STD04" xml:space="preserve">
+		<value>Κολλητό παρκέ 10 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD05" xml:space="preserve">
+		<value>Κολλητό παρκέ 15 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD06" xml:space="preserve">
+		<value>Κολλητό παρκέ 22 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD07" xml:space="preserve">
+		<value>Προφινιρισμένο παρκέ 13 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD08" xml:space="preserve">
+		<value>Χαλί αφρού 2 χιλιοστά</value>
+	</data>
+	<data name="Construction_STD09" xml:space="preserve">
+		<value>Χαλί αφρού 4 χιλιοστά</value>
+	</data>
+	<data name="Construction_STW01" xml:space="preserve">
+		<value>Σοβάς Hitherm® </value>
+	</data>
+	<data name="Construction_STW02" xml:space="preserve">
+		<value>Μηχάνημα σοβά</value>
+	</data>
+	<data name="Construction_STW03" xml:space="preserve">
+		<value>Σοβάς από πηλό</value>
+	</data>
+	<data name="Construction_STW04" xml:space="preserve">
+		<value>Κοιλότητα με γυψοσανίδες</value>
+	</data>
+	<data name="Construction_STW05" xml:space="preserve">
+		<value>Κοιλότητα με ξύλινη επένδυση </value>
+	</data>
+	<data name="Construction_TRE01" xml:space="preserve">
+		<value>Κεραμικός</value>
+	</data>
+	<data name="Construction_TRE02" xml:space="preserve">
+		<value>Φυσική πέτρα</value>
+	</data>
+	<data name="Construction_TRE03" xml:space="preserve">
+		<value>PVC δάπεδο</value>
+	</data>
+	<data name="Construction_TRE04" xml:space="preserve">
+		<value>Κολλητό παρκέ 10 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRE05" xml:space="preserve">
+		<value>Κολλητό παρκέ 15 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRE06" xml:space="preserve">
+		<value>Κολλητό παρκέ 22 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRE07" xml:space="preserve">
+		<value>Προφινιρισμένο παρκέ 13 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRE08" xml:space="preserve">
+		<value>Στρώμα αφρού 2 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRE09" xml:space="preserve">
+		<value>Στρώμα αφρού 4 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRK01" xml:space="preserve">
+		<value>Πατώματα παρκέ 15-18 χιλιοστά</value>
+	</data>
+	<data name="Construction_TRK02" xml:space="preserve">
+		<value>Παρκέ σε ομοιόμορφα κατανεμημένα πάνελ από ξύλο</value>
+	</data>
+	<data name="Construction_TRK03" xml:space="preserve">
+		<value>Δάπεδο σανίδων 20-22 χιλιστά</value>
+	</data>
+	<data name="Construction_WD00" xml:space="preserve">
+		<value>Όχι μόνωση </value>
+	</data>
+	<data name="Construction_WD01" xml:space="preserve">
+		<value>PST 20mm</value>
+	</data>
+	<data name="Construction_WD02" xml:space="preserve">
+		<value>PST 30mm</value>
+	</data>
+	<data name="Construction_WD03" xml:space="preserve">
+		<value>PS 20mm + PST 20mm</value>
+	</data>
+	<data name="Construction_WD04" xml:space="preserve">
+		<value>PS 30mm + PST 20mm</value>
+	</data>
+	<data name="Construction_WD05" xml:space="preserve">
+		<value>PS 30mm + PST 30mm</value>
+	</data>
+	<data name="Construction_WD06" xml:space="preserve">
+		<value>PS 50mm + PST 30mm</value>
+	</data>
+	<data name="Construction_WD07" xml:space="preserve">
+		<value>Μόνωση κελύφους Modul</value>
+	</data>
+	<data name="DistributorPanel_GraphicalPosition" xml:space="preserve">
+		<value>Γραφική τοποθέτηση</value>
+	</data>
+	<data name="ErrorMessage_Anbindeleitung" xml:space="preserve">
+		<value>Η έκταση που χρησιμοποιείται από τους σωλήνες σύνδεσης είναι μεγαλύτερη από το διαθέσιμο χώρο (%VALUE%m² &gt; %MAXIMUM%m²)</value>
+	</data>
+	<data name="JumbovalProduct_JV20" xml:space="preserve">
+		<value>JV20</value>
+	</data>
+	<data name="JumbovalProduct_JV30" xml:space="preserve">
+		<value>JV30</value>
+	</data>
+	<data name="JumbovalProduct_JV40" xml:space="preserve">
+		<value>JV40</value>
+	</data>
+	<data name="JumbovalProduct_JV50" xml:space="preserve">
+		<value>JV50</value>
+	</data>
+	<data name="JumbovalProduct_NotificationParameter" xml:space="preserve">
+		<value>Τα συστήματα Jumboval υπολογίζονται με τροποποιημένες παραμέτρους. Οι ακόλουθες παράμετροι αποκλίνουν από τις πρότυπες τιμές:</value>
+	</data>
+	<data name="ExportOption_DH" xml:space="preserve">
+		<value>Οροφή</value>
+	</data>
+	<data name="ExportOption_DH_FBH" xml:space="preserve">
+		<value>Δάπεδο και οροφή</value>
+	</data>
+	<data name="ExportOption_FBH" xml:space="preserve">
+		<value>Δάπεδο</value>
+	</data>
+	<data name="ExportPlanForm_Abbrechen" xml:space="preserve">
+		<value>Ακυρώνω</value>
+	</data>
+	<data name="ExportPlanForm_Dateipfad" xml:space="preserve">
+		<value>Διαδρομή αρχείου</value>
+	</data>
+	<data name="ExportPlanForm_Exportieren" xml:space="preserve">
+		<value>Εξαγωγή</value>
+	</data>
+	<data name="ExportPlanForm_Exportumfang" xml:space="preserve">
+		<value>Εξαγωγή πεδίου</value>
+	</data>
+	<data name="ExportPlanForm_Titel" xml:space="preserve">
+		<value>Εξαγωγή σχεδίου</value>
+	</data>
+	<data name="FacilityDetailsSummaryPanel_Allgemein" xml:space="preserve">
+		<value>Γενικά</value>
+	</data>
+	<data name="FloorSummaryPanel_ChangePlanCaption" xml:space="preserve">
+		<value>Αλλαγή σχεδίου</value>
+	</data>
+	<data name="FloorSummaryPanel_ChangePlanText" xml:space="preserve">
+		<value>Για το επιλεγμένο σχέδιο, τα δωμάτια έχουν ήδη οριστεί. Επιλέγοντας ένα διαφορετικό σχέδιο εξασφαλίζει ότι όλες οι ορισμένες γεωμετρίες και γραφικά σχεδιασμένα συστήματα θα χαθούν. Σας αρέσει πραγματικά να επιλέξετε ένα διαφορετικό σχέδιο;</value>
+	</data>
+	<data name="FloorSummaryPanel_PlanVorhanden" xml:space="preserve">
+		<value>Υπάρχει ήδη σχέδιο για το δάπεδο</value>
+	</data>
+	<data name="FloorSummaryPanel_RemovePlanCaption" xml:space="preserve">
+		<value>Διαγραφή σχεδίου;</value>
+	</data>
+	<data name="FloorSummaryPanel_RemovePlanText" xml:space="preserve">
+		<value>Για το επιλεγμένο σχέδιο, τα δωμάτια έχουν ήδη οριστεί. Η αφαίρεση ενός σχεδίου σημαίνει ότι θα χάσετε όλες τις ήδη ορισμένες γεωμετρίες δωματίων και γραφικά συστήματα που έχουν σχεδιαστεί σε αυτό. Θέλετε πραγματικά να αφαιρέσετε το σχέδιο;</value>
+	</data>
+	<data name="General_ImportiertePlaene" xml:space="preserve">
+		<value>Διαχείρηση σχεδίου</value>
+	</data>
+	<data name="General_ProjektSpeichernText" xml:space="preserve">
+		<value>Το έργο πρέπει να αποθηκευτεί για να μπορέσετε να εκτελέσετε αυτή την ενέργεια. Θέλετε να αποθηκεύσετε το έργο τώρα;</value>
+	</data>
+	<data name="General_ProjektSpeichernTitel" xml:space="preserve">
+		<value>Αποθήκευση έργου;</value>
+	</data>
+	<data name="GraphicalWallObstacle_Door" xml:space="preserve">
+		<value>Πόρτα</value>
+	</data>
+	<data name="GraphicalWallObstacle_Other" xml:space="preserve">
+		<value>Άλλο</value>
+	</data>
+	<data name="GraphicalWallObstacle_Window" xml:space="preserve">
+		<value>Παράθυρο</value>
+	</data>
+	<data name="GraphicalWallObstacle_WindowTriangleLeft" xml:space="preserve">
+		<value>Τριγωνικό παράθυρο αριστερά</value>
+	</data>
+	<data name="GraphicalWallObstacle_WindowTriangleRight" xml:space="preserve">
+		<value>Τριγωνικό παράθυρο δεξιά</value>
+	</data>
+	<data name="ImagePlanOptionsForm_RasterAus" xml:space="preserve">
+		<value>Εκτός δικτύου</value>
+	</data>
+	<data name="ImagePlanOptionsForm_RasterEin" xml:space="preserve">
+		<value>Εντός δικτύου</value>
+	</data>
+	<data name="ImagePlanOptionsForm_Titel" xml:space="preserve">
+		<value>Επιλογές</value>
+	</data>
+	<data name="ImagePlanRoomPickerForm_Titel" xml:space="preserve">
+		<value>Ορίστε δωμάτιο</value>
+	</data>
+	<data name="ImportedPlansPanel_DateiPfad" xml:space="preserve">
+		<value>Διαδρομή</value>
+	</data>
+	<data name="ImportedPlansPanel_DxfFilter" xml:space="preserve">
+		<value>Σχέδιο CAD (*.dxf, *.dwg)</value>
+	</data>
+	<data name="ImportedPlansPanel_ImageFilter" xml:space="preserve">
+		<value>Σαρωμένο  σχέδιο (*.jpg, *.png, *.bmp)</value>
+	</data>
+	<data name="ImportedPlansPanel_ImportiertePlaene" xml:space="preserve">
+		<value>Διαχείρηση σχεδίου</value>
+	</data>
+	<data name="ImportedPlansPanel_Optionen" xml:space="preserve">
+		<value>Επιλογές</value>
+	</data>
+	<data name="ImportedPlansPanel_PdfFilter" xml:space="preserve">
+		<value>PDF (*.pdf)</value>
+	</data>
+	<data name="ImportedPlansPanel_PlanEntfernen" xml:space="preserve">
+		<value>Διαγραφή σχεδίου</value>
+	</data>
+	<data name="ImportedPlansPanel_PlanExportieren" xml:space="preserve">
+		<value>Εξαγωγή σχεδίου</value>
+	</data>
+	<data name="ImportedPlansPanel_PlanImportieren" xml:space="preserve">
+		<value>Εισαγωγή σχεδίου</value>
+	</data>
+	<data name="ImportedPlansPanel_PlanName" xml:space="preserve">
+		<value>Όνομα</value>
+	</data>
+	<data name="ImportedPlansPanel_PlanSchonVorhanden" xml:space="preserve">
+		<value>Αυτό το σχέδιο έχει ήδη εισαχθεί.</value>
+	</data>
+	<data name="ImportedPlansPanel_WirklichLoeschenMessage" xml:space="preserve">
+		<value>Αυτό το σχέδιο χρησιμοποιείται για το έργο. Αν αφαιρέσετε το σχέδιο, όλα τα συνδεδεμένα δεδομένα χάνονται. Θέλετε πραγματικά να αφαιρέσετε το σχέδιο;</value>
+	</data>
+	<data name="ImportedPlansPanel_WirklichLoeschenTitle" xml:space="preserve">
+		<value>Πραγματικά αφαίρεση σχεδίου;</value>
+	</data>
+	<data name="License_NichtMehrZeigen" xml:space="preserve">
+		<value>Μην εμφανίζεις πια αυτή την υπόδειξη</value>
+	</data>
+	<data name="License_WarnungGueltigkeit" xml:space="preserve">
+		<value>Η Europlan άδειά σας ισχύει μόνο για για %TAGE% μέρες. Παρακαλείστε να ζητήσετε νέα άδεια στο office@harreither.com ή στο +43-7353-6660.</value>
+	</data>
+	<data name="License_WarnungGueltigkeitCaption" xml:space="preserve">
+		<value>Παρακαλείστε να ανανεώσετε την άδειά σας.</value>
+	</data>
+	<data name="LicenseForm_GueltigkeitAbgelaufen" xml:space="preserve">
+		<value>Η άδειά σας δεν είναι πια έγκυρη. Παρακαλείστε να ζητήσετε νέα άδεια στο office@harreither.com ή στο +43-7353-6660.</value>
+	</data>
+	<data name="LicenseForm_KeineLizenzGefunden" xml:space="preserve">
+		<value>Δεν βρέθηκε άδεια. Αν έχετε ήδη μια έγκυρη άδεια χρήσης, παρακαλείστε να την εισάγετε χρησιμοποιώντας το κουμπί "εισαγωγή αδείας". Αν δεν έχετε έγκυρη άδεια ακόμα, παρακαλείστε να ζητήσετε καινούγια άδεια στο office@harreither.com ή στο +43-7353-6660. Για να ζητήσετε μια άδεια, θα πρέπει να αναφέρεται το αναγνωριστικό του υλικού που αναφέρεται εδώ.</value>
+	</data>
+	<data name="LicenseForm_LizenzModifiziert" xml:space="preserve">
+		<value>Η άδειά σας δεν είναι έγκυρη διότι τροποποιήθηκε από μη εξουσιοδοτημένο άτομο. Παρακαλείστε να χρησιμοποιήσετε την αρχική άδεια χρήσης σας ή να ζητήσετε νέα άδεια στο office@harreither.com ή στο +43-7353-6660.</value>
+	</data>
+	<data name="LicenseForm_NichtGueltig" xml:space="preserve">
+		<value>Η άδειά σας δεν είναι έγκυρη. Αν έχετε ήδη μια έγκυρη άδεια χρήσης, παρακαλείστε να την εισάγετε χρησιμοποιώντας το κουμπί "εισαγωγή αδείας". Αν δεν έχετε έγκυρη άδεια ακόμα, παρακαλείστε να ζητήσετε καινούγια άδεια στο office@harreither.com ή στο +43-7353-6660. Για να ζητήσετε μια άδεια, θα πρέπει να αναφέρεται το αναγνωριστικό του υλικού που αναφέρεται εδώ.</value>
+	</data>
+	<data name="LicenseForm_RechnerNichtGueltig" xml:space="preserve">
+		<value>Η άδειά σας δεν είναι ισχύει για το τρέχον υπολογιστή που χρησιμοποιείται. Παρακαλείστε να ζητήσετε καινούγια άδεια για αυτό τον υπολογιστή στο office@harreither.com ή στο +43-7353-6660. Για να ζητήσετε μια άδεια, θα πρέπει να αναφέρεται το αναγνωριστικό του υλικού που αναφέρεται εδώ.</value>
+	</data>
+	<data name="LL_Report_AnschlussDimensionierung" xml:space="preserve">
+		<value>Διαστ. Συνδ.</value>
+	</data>
+	<data name="LL_Report_Preis" xml:space="preserve">
+		<value>Κόστη</value>
+	</data>
+	<data name="LL_Report_PreisArtikel" xml:space="preserve">
+		<value>Είδος</value>
+	</data>
+	<data name="LL_Report_PreisBestellnummer" xml:space="preserve">
+		<value>Αριθμός παραγγελίας</value>
+	</data>
+	<data name="LL_Report_Preise" xml:space="preserve">
+		<value>Τιμή</value>
+	</data>
+	<data name="LL_Report_PreisGesamt" xml:space="preserve">
+		<value>Σύνολο</value>
+	</data>
+	<data name="LL_Report_PreisKategorie" xml:space="preserve">
+		<value>τιμές %KATEGORIE%</value>
+	</data>
+	<data name="MainForm_ProjektAnsehen" xml:space="preserve">
+		<value>Προβολή έργου</value>
+	</data>
+	<data name="Material_1a29f733_ab7b_41fd_a0df_926d64a8526d" xml:space="preserve">
+		<value>Θερμική μόνωση EPS-W 20, 40 χιλιοστά</value>
+	</data>
+	<data name="Material_648b5196_3bb6_4e3d_856c_a569315f56f2" xml:space="preserve">
+		<value>Επιπτώσεις ηχομόνωσης EPS-T 23/20, 20 χιλιοστά</value>
+	</data>
+	<data name="Material_a2fbf91c_12a0_43af_ad0e_5a26a0431a00" xml:space="preserve">
+		<value>Επιπτώσεις ηχομόνωσης EPS-T 23/20, 30 χιλιοστά</value>
+	</data>
+	<data name="Material_a834583d_750c_4695_ba45_7e346108551f" xml:space="preserve">
+		<value>Θερμική μόνωση EPS-W 20, 30 χιλιοστά</value>
+	</data>
+	<data name="Material_ac14b03f_63f2_420a_9134_424348bbc3ee" xml:space="preserve">
+		<value>Θερμική μόνωση EPS-W 20, 20 χιλιοστά</value>
+	</data>
+	<data name="Material_b75adb45_8e48_4f91_b0dd_ebe853df344f" xml:space="preserve">
+		<value>Θερμική μόνωση EPS-W 20, 50 χιλιοστά</value>
+	</data>
+	<data name="Material_d3e1298f_6755_4fc8_9097_bd9b47d2c1c5" xml:space="preserve">
+		<value>Επιπτώσεις ηχομόνωσης EPS-T 50/50, 50 χιλιοστά</value>
+	</data>
+	<data name="Material_EC01" xml:space="preserve">
+		<value>Ecotherm® σωλήνα ενδοδαπέδιας θέρμανσης PP-R 17x2 χιλιοστά</value>
+	</data>
+	<data name="Material_EC02" xml:space="preserve">
+		<value>Ecotherm® κουμπωτή ράγα με κολλητική ταινία </value>
+	</data>
+	<data name="Material_EC04" xml:space="preserve">
+		<value>Ecotherm® γωνιακός διανομέας σύνδεσης 17x2 χιλιοστά 50 εκατοστά ύψος</value>
+	</data>
+	<data name="Material_EC05" xml:space="preserve">
+		<value>Ecotherm® γωνιακός διανομέας σύνδεσης 17x2 χιλιοστά 100 εκατοστά ύψος </value>
+	</data>
+	<data name="Material_EC06" xml:space="preserve">
+		<value>Ecotherm® μούφα 17 χιλιοστά</value>
+	</data>
+	<data name="Material_EC08" xml:space="preserve">
+		<value>Ecotherm® συστατικό διάστρωσης EZ 70</value>
+	</data>
+	<data name="Material_EV10" xml:space="preserve">
+		<value>Euroval® (and Hitherm® +) οβάλ μούφα συγκόλλησης </value>
+	</data>
+	<data name="Material_EV11" xml:space="preserve">
+		<value>Euroval® μούφα μετάβασης (μέσα - έξω)</value>
+	</data>
+	<data name="Material_EV12" xml:space="preserve">
+		<value>Euroval® γωνιά μετάβασης ( στογγυλή/οβάλ)</value>
+	</data>
+	<data name="Material_EV15" xml:space="preserve">
+		<value>Euroval® κουμπωτή ράγα με γάντζους 1000 χιλιαστά</value>
+	</data>
+	<data name="Material_EV16" xml:space="preserve">
+		<value>Euroval® κουμπωτή ράγα με κολλητική ταινία 1000 χιλιοστά</value>
+	</data>
+	<data name="Material_EV20" xml:space="preserve">
+		<value>Euroval® συνδετικό κομμάτι διανομέα 50 εκατοστά</value>
+	</data>
+	<data name="Material_EV21" xml:space="preserve">
+		<value>Euroval® συνδετικό κομμάτι διανομέα 100 εκατοστά</value>
+	</data>
+	<data name="Material_EV30" xml:space="preserve">
+		<value>Euroval® λωρίδες ασφαλείας περιφερειακής μόνωσης</value>
+	</data>
+	<data name="Material_EV31" xml:space="preserve">
+		<value>Euroval® φύλλο πολυαιθυλενίου</value>
+	</data>
+	<data name="Material_EV34" xml:space="preserve">
+		<value>Euroval® συστατικό διάστρωσης ECO 30 </value>
+	</data>
+	<data name="Material_f2532e64_771a_4013_9d18_e90c1ad2ddd8" xml:space="preserve">
+		<value>Επιπτώσεις ηχομόνωσης EPS-T 45/40, 40 χιλιοστά</value>
+	</data>
+	<data name="Material_HC06" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC08" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC10" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC11" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC12" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x10 χιλιοστά κλίση οροφής </value>
+	</data>
+	<data name="Material_HC15" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC16" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC17" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC20" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC21" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC22" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC25" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC27" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC41" xml:space="preserve">
+		<value>Fermacell κοινή κόλλα</value>
+	</data>
+	<data name="Material_HC42" xml:space="preserve">
+		<value>Fermacell βίδες γυψοσανίδας 30 χιλιστά Ποσότητα: 250 τεμάχια</value>
+	</data>
+	<data name="Material_HC43" xml:space="preserve">
+		<value>Fermacell βίδες γυψοσανίδας 30 χιλιστά Ποσότητα: 1000 τεμάχια</value>
+	</data>
+	<data name="Material_HC44" xml:space="preserve">
+		<value>Fermacell βίδες γυψοσανίδας 45 χιλιστά Ποσότητα: 1000 τεμάχια</value>
+	</data>
+	<data name="Material_HC56plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x620x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC58plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x620x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC60plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1000x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC61plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1000x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC62plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1000x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC65plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1500x10 χιλιοστά </value>
+	</data>
+	<data name="Material_HC66plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1500x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC67plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x1500x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC70plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x2000x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC71plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x2000x10 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HC72plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x2000x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HC75plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x2500x10 χιλιοστά</value>
+	</data>
+	<data name="Material_HC77plus" xml:space="preserve">
+		<value>Hitherm®+ Compact 625x2500x10 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF01" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF02" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF03" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF04" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF05" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF06" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF07" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF08" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF11" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF12" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF13" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF21" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x620x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF22" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1000x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF23" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1500x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF24" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x2000x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF25" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x2500x12,5 χιλιοστά</value>
+	</data>
+	<data name="Material_HF26" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1000x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF27" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1500x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF28" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x2000x12,5 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF29" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1000x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF30" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x1500x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF31" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x2000x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF32" xml:space="preserve">
+		<value>Hitherm® Compact+ 625x2500x12,5 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF50" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x15 χιλιοστά</value>
+	</data>
+	<data name="Material_HF51" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x15 χιλιοστά</value>
+	</data>
+	<data name="Material_HF52" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά</value>
+	</data>
+	<data name="Material_HF53" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά</value>
+	</data>
+	<data name="Material_HF54" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x15 χιλιοστά</value>
+	</data>
+	<data name="Material_HF55" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x15 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF56" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF57" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά στηθαίο</value>
+	</data>
+	<data name="Material_HF59" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x15 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF60" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF61" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HF62" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x15 χιλιοστά κλίση οροφής</value>
+	</data>
+	<data name="Material_HG01" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x12,5 χιλιοστά γυψοσανίδας</value>
+	</data>
+	<data name="Material_HG02" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x12,5 χιλιοστά γυψοσανίδας</value>
+	</data>
+	<data name="Material_HG03" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x12,5 χιλιοστά γυψοσανίδας</value>
+	</data>
+	<data name="Material_HG04" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά γυψοσανίδας</value>
+	</data>
+	<data name="Material_HG05" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x12,5 χιλιοστά γυψοσανίδας</value>
+	</data>
+	<data name="Material_HG06" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x12,5 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG07" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x12,5 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG08" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG12" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x12,5 χιλιοστά κλίση οροφής γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG13" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x12,5 χιλιοστά κλίση οροφής γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG50" xml:space="preserve">
+		<value>Hitherm® Compact 625x620x15 χιλιοστά γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG51" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x15 χιλιοστά γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG52" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG53" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG54" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x15 χιλιοστά γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG55" xml:space="preserve">
+		<value>Hitherm® Compact 625x1000x15 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG56" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG57" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά στηθαίο γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG60" xml:space="preserve">
+		<value>Hitherm® Compact 625x1500x15 χιλιοστά κλίση οροφής γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG61" xml:space="preserve">
+		<value>Hitherm® Compact 625x2000x15 χιλιοστά κλίση οροφής γυψοσανίδα</value>
+	</data>
+	<data name="Material_HG62" xml:space="preserve">
+		<value>Hitherm® Compact 625x2500x15 χιλιοστά κλίση οροφής γυψοσανίδα</value>
+	</data>
+	<data name="Material_HI05" xml:space="preserve">
+		<value>Hitherm® Εγγραφή υψηλής χωρητικότητας 500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI06" xml:space="preserve">
+		<value>Hitherm® Κανονική εγγραφή 500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI10" xml:space="preserve">
+		<value>Hitherm® Εγγραφή υψηλής χωρητικότητας 1000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI11" xml:space="preserve">
+		<value>Hitherm® Κανονική εγγραφή 1000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI15" xml:space="preserve">
+		<value>Hitherm® Eγγραφή υψηλής χωρητικότητας 1500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI16" xml:space="preserve">
+		<value>Hitherm® Kανονική εγγραφή 1500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI20" xml:space="preserve">
+		<value>Hitherm® Εγγραφή υψηλής χωρητικότητας 2000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI21" xml:space="preserve">
+		<value>Hitherm® Κανονική εγγραφή 2000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI25" xml:space="preserve">
+		<value>Hitherm® Εγγραφή υψηλής χωρητικότητας 2500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI26" xml:space="preserve">
+		<value>Hitherm® Κανονική εγγραφή 2500 χιλιοστά</value>
+	</data>
+	<data name="Material_HI30" xml:space="preserve">
+		<value>Hitherm® Εγγραφή υψηλής χωρητικότητας 3000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI31" xml:space="preserve">
+		<value>Hitherm® Κανονική εγγραφή 3000 χιλιοστά</value>
+	</data>
+	<data name="Material_HI40" xml:space="preserve">
+		<value>Μονόπλευρος γάντζος επίστρωσης</value>
+	</data>
+	<data name="Material_HI41" xml:space="preserve">
+		<value>Ταινία ενίσχυσης</value>
+	</data>
+	<data name="Material_HI42" xml:space="preserve">
+		<value>Harreither κλιματικό συτσατικό κονιάματος τοίχου</value>
+	</data>
+	<data name="Material_HI51" xml:space="preserve">
+		<value>PP-R σωλήα ασγαλείας ø 21 x 2.4 χιλιοστά</value>
+	</data>
+	<data name="Material_HI52" xml:space="preserve">
+		<value>PP-R σωλήνα ασφαλείας ø 21 x 2.4 χιλιοστά  σε ρολό των 200 μέτρων</value>
+	</data>
+	<data name="Material_HI54" xml:space="preserve">
+		<value>PP-R μούφα συγκόλλησης ø 10 χιλιοστά</value>
+	</data>
+	<data name="Material_HI55" xml:space="preserve">
+		<value>PP-R μούφα συγκόλλησης ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI56" xml:space="preserve">
+		<value>PP-R γωνιά συγκόλλησης 90°, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI57" xml:space="preserve">
+		<value>PP-R γωνιά συγκόλλησης 45°, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI58" xml:space="preserve">
+		<value>PP-R τάπα συγκόλλησης, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI60" xml:space="preserve">
+		<value>Hitherm® PP-R σωλήνα ασφαλείας 24 / 17x 3 / 2.4 χιλιοστά γκρί</value>
+	</data>
+	<data name="Material_HI65" xml:space="preserve">
+		<value>Hitherm® PP-R οβάλ τάπα 24 x 17 χιλιοστά</value>
+	</data>
+	<data name="Material_HI66" xml:space="preserve">
+		<value>Hitherm® PP-R επιτοίχια γωνιά 24 x 17 χιλιοστά</value>
+	</data>
+	<data name="Material_HI67" xml:space="preserve">
+		<value>Hitherm® PP-R γωνιακή γωνιά 24 x 17 χιλιοστά</value>
+	</data>
+	<data name="Material_HI68" xml:space="preserve">
+		<value>Hitherm® PP-R επιδαπέδια γωνιά 24 x 17 / ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI69" xml:space="preserve">
+		<value>Hitherm® PP-R οβάλ μούφα 24 x 17 χιλιοστά</value>
+	</data>
+	<data name="Material_HI70" xml:space="preserve">
+		<value>Hitherm® PP-R μούφα μετάβασης 24 x 17/ ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HI71" xml:space="preserve">
+		<value>Hitherm® PP-R γωνιά μετάβασης 90° 24 x 17 / ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HP05" xml:space="preserve">
+		<value>Hitherm®+ Εγγραφή υψηλής χωρητικότητας 500 χιλιοστά</value>
+	</data>
+	<data name="Material_HP10" xml:space="preserve">
+		<value>Hitherm®+ εγγραφή υψηλής χωρητικότητας 1000 χιλιοστά</value>
+	</data>
+	<data name="Material_HP15" xml:space="preserve">
+		<value>Hitherm®+ Εγγραφή υψηλής χωρητικότητας 1500 χιλιοστά</value>
+	</data>
+	<data name="Material_HP20" xml:space="preserve">
+		<value>Hitherm®+ Εγγραφή υψηλής χωρητικότητας 2000 χιλιοστά</value>
+	</data>
+	<data name="Material_HP25" xml:space="preserve">
+		<value>Hitherm®+ Εγγραφή υψηλής χωρητικότητας 2500 χιλιοστά</value>
+	</data>
+	<data name="Material_HP30" xml:space="preserve">
+		<value>Hitherm®+ Εγγραφή υψηλής χωρητικότητας 3000 χιλιοστά</value>
+	</data>
+	<data name="Material_HR51" xml:space="preserve">
+		<value>Hitherm®+ σωλήνα ασφαλείας ø 21 x 2.4 χιλιοστά</value>
+	</data>
+	<data name="Material_HR55" xml:space="preserve">
+		<value>Hitherm®+ (and Euroval® ) μούφα συγκόλλησης 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HR56" xml:space="preserve">
+		<value>Hitherm®+ γωνιά 90° 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HR57" xml:space="preserve">
+		<value>Hitherm®+ γωνιά 135°, 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HR60" xml:space="preserve">
+		<value>Hitherm®+ οβάλ σωλήνα ασφαλείας</value>
+	</data>
+	<data name="Material_HR65" xml:space="preserve">
+		<value>Hitherm®+ οβάλ τάπα</value>
+	</data>
+	<data name="Material_HR66" xml:space="preserve">
+		<value>Hitherm®+ επιτοίχια γωνιά 90° οβάλ/οβάλ</value>
+	</data>
+	<data name="Material_HR67" xml:space="preserve">
+		<value>Hitherm®+ γωνιακή γωνιά 90° οβάλ/οβάλ</value>
+	</data>
+	<data name="Material_HR68" xml:space="preserve">
+		<value>Hitherm®+ γωνιά 135° οβάλ/οβάλ κάθετη</value>
+	</data>
+	<data name="Material_HR69" xml:space="preserve">
+		<value>Hitherm®+ γωνιά μετάβασης 90° στογγυλή/οβάλ κάθετη (επιδαπέδια γωνιά)</value>
+	</data>
+	<data name="Material_HR70" xml:space="preserve">
+		<value>Hitherm®+ (and Euroval®) μούφα μετάβασης (εσωτερική-εσωτερική)</value>
+	</data>
+	<data name="Material_HR75" xml:space="preserve">
+		<value>Hitherm®+ μούφα 10 mm, στογγυλή/στρογγυλή</value>
+	</data>
+	<data name="Material_HR76" xml:space="preserve">
+		<value>Hitherm®+ τάπα 10 mm</value>
+	</data>
+	<data name="Material_MK01" xml:space="preserve">
+		<value>Klimamodul δεξιό με μονωτικό κέλυφος</value>
+	</data>
+	<data name="Material_MK02" xml:space="preserve">
+		<value>Klimamodul αριστερό με μονωτικό κέλυφος</value>
+	</data>
+	<data name="Material_MK03" xml:space="preserve">
+		<value>MODUL πλάκα εξομάλυνσης (για μη θερμαινόμενους χώρους) (0,5m² / τεμ.)</value>
+	</data>
+	<data name="Material_MK04" xml:space="preserve">
+		<value>MODUL λωρίδες</value>
+	</data>
+	<data name="Material_MK05" xml:space="preserve">
+		<value>MODUL πλάκα του οδηγού σωλήνα (για 8μ σωλήνες)</value>
+	</data>
+	<data name="Material_MK10" xml:space="preserve">
+		<value>MODUL κοντή στροφή, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_MK11" xml:space="preserve">
+		<value>MODUL μακριά στροφή, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_MK12" xml:space="preserve">
+		<value>MODUL στροφή W105, ø 21 χιλιοστά χωρίς μόνωση</value>
+	</data>
+	<data name="Material_MK13" xml:space="preserve">
+		<value>MODUL στροφή W90, ø 21 χιλιοστά χωρίς μόνωση</value>
+	</data>
+	<data name="Material_MK15" xml:space="preserve">
+		<value>Moduplan ZE πρόσθετο διάστρωσης</value>
+	</data>
+	<data name="Material_MK20" xml:space="preserve">
+		<value>MODUL T-κομμάτι, ø 21 χιλιοστά</value>
+	</data>
+	<data name="Material_MK21" xml:space="preserve">
+		<value>MODUL πλάκες θερμικής αγωγιμότητας 300 x 1000 x 1 χιλιοστά</value>
+	</data>
+	<data name="Material_MK22" xml:space="preserve">
+		<value>MODUL thermal πλάκες θερμικής αγωγιμότητας 600 x 1000 x 1 χιλιοστά</value>
+	</data>
+	<data name="Material_MK23" xml:space="preserve">
+		<value>Κολλητική ταινία διπλής όψεως</value>
+	</data>
+	<data name="Material_MK30" xml:space="preserve">
+		<value>Klimamodul δεξιό 120/30</value>
+	</data>
+	<data name="Material_MK31" xml:space="preserve">
+		<value>Klimamodul αριστερό 120/30</value>
+	</data>
+	<data name="Material_MK32" xml:space="preserve">
+		<value>Klimamodul δεξιό 100/30</value>
+	</data>
+	<data name="Material_MK33" xml:space="preserve">
+		<value>Klimamodul αριστερό 100/30</value>
+	</data>
+	<data name="Material_MK34" xml:space="preserve">
+		<value>Klimamodul δεξιό 80/30</value>
+	</data>
+	<data name="Material_MK35" xml:space="preserve">
+		<value>Klimamodul αριστερό 80/30</value>
+	</data>
+	<data name="Material_MK40" xml:space="preserve">
+		<value>Klimamodul 60/60 Τύπου A</value>
+	</data>
+	<data name="Material_MK49" xml:space="preserve">
+		<value>Modul βραχίονας στήριξης για Klimamodul 60/60</value>
+	</data>
+	<data name="Material_MK50" xml:space="preserve">
+		<value>Modul βραχίονας στήριξης για Klimamodul (30)</value>
+	</data>
+	<data name="Material_MK51" xml:space="preserve">
+		<value>Ξύλινη υποστήριξη για Klimamodul 40x60</value>
+	</data>
+	<data name="Material_MK52" xml:space="preserve">
+		<value>Ξύλινη υποστήριξη για Klimamodul 30x60</value>
+	</data>
+	<data name="Material_VO02" xml:space="preserve">
+		<value>HA οβάλ διανομέας 2 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO03" xml:space="preserve">
+		<value>HA οβάλ διανομέας 3 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO04" xml:space="preserve">
+		<value>HA οβάλ διανομέας 4 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO05" xml:space="preserve">
+		<value>HA οβάλ διανομέας 5 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO06" xml:space="preserve">
+		<value>HA οβάλ διανομέας 6 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO07" xml:space="preserve">
+		<value>HA οβάλ διανομέας 7 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO08" xml:space="preserve">
+		<value>HA οβάλ διανομέας 8 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO09" xml:space="preserve">
+		<value>HA οβάλ διανομέας 9 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO10" xml:space="preserve">
+		<value>HA οβάλ διανομέας 10 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO11" xml:space="preserve">
+		<value>HA οβάλ διανομέας 11 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO12" xml:space="preserve">
+		<value>HA οβάλ διανομέας 12 συμπλεγμάτων</value>
+	</data>
+	<data name="Material_VO44" xml:space="preserve">
+		<value>Ενεργοποιητής 230 V, κανονικά κλειστός</value>
+	</data>
+	<data name="Material_VO60" xml:space="preserve">
+		<value>Ενσωματομένο ντουλάπι για μέχρι 4 κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="Material_VO61" xml:space="preserve">
+		<value>Ενσωματομένο ντουλάπι για μέχρι 9 κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="Material_VO62" xml:space="preserve">
+		<value>Ενσωματομένο ντουλάπι για μέχρι 12 κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="Material_VT20" xml:space="preserve">
+		<value>Holländer σύνδεσμος ορείχαλκος 1", FT</value>
+	</data>
+	<data name="Material_VT21" xml:space="preserve">
+		<value>Holländer  σύνδεσμος PP-Rl, da 32 mm</value>
+	</data>
+	<data name="Material_VT35" xml:space="preserve">
+		<value>Στεγανοποιημένη βαλβίδα μπάλα</value>
+	</data>
+	<data name="Material_WZ13" xml:space="preserve">
+		<value>Hitherm® επιφάνεια σετ οβάλ</value>
+	</data>
+	<data name="Material_WZ14" xml:space="preserve">
+		<value>Hitherm® επιφάνεια σετ 21 χιλιοστά</value>
+	</data>
+	<data name="NewPlanForm_Bezeichnung" xml:space="preserve">
+		<value>Περιγραφή</value>
+	</data>
+	<data name="NewPlanForm_KeinBezeichnerText" xml:space="preserve">
+		<value>Παρακαλείστε να εισάγεται περιγραφή</value>
+	</data>
+	<data name="NewPlanForm_KeinBezeichnerTitel" xml:space="preserve">
+		<value>Χωρίς περιγραφή</value>
+	</data>
+	<data name="NewPlanForm_PlanImportieren" xml:space="preserve">
+		<value>Εισαγωγή σχεδίου</value>
+	</data>
+	<data name="OptionsForm_StandardSystemparameter" xml:space="preserve">
+		<value>Τυπική παράμετρος του συστήματος</value>
+	</data>
+	<data name="PicturePanel_DeleteUnusedCaption" xml:space="preserve">
+		<value>Διαγραφή χώρου;</value>
+	</data>
+	<data name="PicturePanel_DeleteUnusedText" xml:space="preserve">
+		<value>Θέλετε να διαγράψετε αυτό το χώρο;</value>
+	</data>
+	<data name="PlannedEurovalProductPanel_Auslegung_Aendern_Grafisch" xml:space="preserve">
+		<value>Θέλετε πραγματικά να αλλάξετε από το γραφικό σχεδιασμό στον πινακοειδή σχεδιασμό; Παρακαλώ σημειώστε πως ο σχεδιασμός θα αποθηκευτεί αλλά δε θα είναι δυνατό να επιστρέψετε στο γραφικό σχεδιασμό. Θέλετε να συνεχίσετε ανεξάρητα;</value>
+	</data>
+	<data name="PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch" xml:space="preserve">
+		<value>Θέλετε πραγματικά να αλλάξετε από τον πινακοειδή στο γραφικό σχεδιασμό; Παρακαλώ σημειώστε πως ο σχεδιασμός που δημιουργήθηκε από εσάς θα χαθεί. Θέλετε να συνεχίσετε ανεξάρητα;</value>
+	</data>
+	<data name="PlannedEurovalProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
+		<value>Αλλαγή τύπου σχεδίου;</value>
+	</data>
+	<data name="PlannedHithermCompactProductPanel_TypAendernTextDh" xml:space="preserve">
+		<value>Εάν τροποποιήσετε τον τύπο σε οροφή, θα διαγραφούν όλα τα μητρώα στον υπολογισμό της οροφής.</value>
+	</data>
+	<data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Grafisch" xml:space="preserve">
+		<value>Θέλετε πραγματικά να αλλάξετε από το γραφικό σχεδιασμό στον πινακοειδή σχεδιασμό; Παρακαλώ σημειώστε πως οι ενότητες που δημιρουργήθηκαν θα αποθηκευτούν αλλά δε θα είναι δυνατό να επιστρέψετε στο γραφικό σχεδιασμό. Θέλετε να συνεχίσετε ανεξάρητα;</value>
+	</data>
+	<data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Tabellarisch" xml:space="preserve">
+		<value>Θέλετε πραγματικά να αλλάξετε από τον πινακοειδή στο γραφικό σχεδιασμό; Παρακαλώ σημειώστε πως οι ενότητες που δημιουργήθηκαν θα χαθούν. Θέλετε να συνεχίσετε ανεξάρητα;</value>
+	</data>
+	<data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
+		<value>Αλλαγή τύπου σχεδίου;</value>
+	</data>
+	<data name="PlannedProductPanel_Heizen" xml:space="preserve">
+		<value>θέρμανση</value>
+	</data>
+	<data name="PlannedProductPanel_HeizenUndKuehlen" xml:space="preserve">
+		<value>θέρμανση και κλιματισμός</value>
+	</data>
+	<data name="PlannedProductPanel_Kuehlen" xml:space="preserve">
+		<value>κλιματισμός</value>
+	</data>
+	<data name="PlannedProductPanel_RestkaelteUebernehmen" xml:space="preserve">
+		<value>υιοθέτηση ελλειπής ψυκτικής ισχύς</value>
+	</data>
+	<data name="PlannedProductPanel_RestwaermeUebernehmen" xml:space="preserve">
+		<value>υιοθέτηση ελλειπής θερμικής ισχύς </value>
+	</data>
+	<data name="PlannedProductPanel_Verwendungszweck" xml:space="preserve">
+		<value>Εφαρμογή</value>
+	</data>
+	<data name="PlanOptionsForm_KeinMaßstabText" xml:space="preserve">
+		<value>Δεν έχετε ορίσει κλίμακα για αυτό το σχέδιο ακόμα. Δεν είναι δυνατόν να χρησιμοποιηθεί το σχέδιο χωρίς κλίμακα. Κάντε κλικ στο Ναι για να ορίσετε την κλίμακα ή στο Όχι για να απορρίψετε τις αλλαγές και να διαγράψετε το σχέδιο.</value>
+	</data>
+	<data name="PlanOptionsForm_KeinMaßstabTitel" xml:space="preserve">
+		<value>Δεν έχει οριστεί κλίμακα.</value>
+	</data>
+	<data name="PlanOptionsForm_Leange" xml:space="preserve">
+		<value>Μήκος</value>
+	</data>
+	<data name="PlanSetMeasureForm_KeinMassstab" xml:space="preserve">
+		<value>Δεν έχει οριστεί κλίμακα για αυτό το σχέδιο ακόμα. Παρακαλείσθε να εισάγετε το μήκος της επιλεγμένης γραμμής.</value>
+	</data>
+	<data name="PlanSetMeasureForm_Massstab" xml:space="preserve">
+		<value>Με τη κλίμακα που έχει οριστεί, το μήκος των %LAENGE%%EINHEIT% προκύπτει για την επιλεγμένη γραμμή.  Εάν αυτό δεν είναι σωστό, παρακαλείσθε να εισάγετε το σωστό μήκος.</value>
+	</data>
+	<data name="Product_JumbovalFullName" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Jumboval® </value>
+	</data>
+	<data name="Product_JumbovalName" xml:space="preserve">
+		<value>Jumboval®</value>
+	</data>
+	<data name="ProductConnection_AnschlussAn" xml:space="preserve">
+		<value>Σύνδεση σε %SYSTEM% σε %RAUMID%: %RAUMNAME%</value>
+	</data>
+	<data name="ProjectLoad_FehlerText" xml:space="preserve">
+		<value>Το έργο δεν μπορεί να φορτωθεί, εξαιτίας ενός σφάλματος.</value>
+	</data>
+	<data name="ProjectLoad_FehlerTitel" xml:space="preserve">
+		<value>Σφάλμα φόρτωσης</value>
+	</data>
+	<data name="ProjectLoad_VersionNichtKompatibelText" xml:space="preserve">
+		<value>Η χρησιμοποιούμενη έκδοση του Europlan 3 είναι μεγαλύτερη από την αποθηκευμένη έκδοση του έργου. Ίσως θα υπάρξουν προβλήματα με την εμφάνιση και την επεξεργασία του έργου. Εξακολουθείτε να θέλετε να συνεχίσετε;</value>
+	</data>
+	<data name="ProjectLoad_VersionNichtKompatibelTitel" xml:space="preserve">
+		<value>Μη συμβατή έκδοση</value>
+	</data>
+	<data name="ProjectReportOptions_Prices" xml:space="preserve">
+		<value>Τιμές</value>
+	</data>
+	<data name="QuickDimensioningDistributorsGrid_JumbovalAngeschlossen" xml:space="preserve">
+		<value>Συνδεδεμένα κυκλώματα θέρμανσης Jumboval® </value>
+	</data>
+	<data name="QuickDimensioningDistributorsGrid_JumbovalOffen" xml:space="preserve">
+		<value>Ανοιχτάι κυκλώματα θέρμανσης Jumboval® </value>
+	</data>
+	<data name="QuickDimensioningPanel_Jumboval" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Jumboval®</value>
+	</data>
+	<data name="QuickDimensioningPanel_JumbovalEntfernenText" xml:space="preserve">
+		<value>Θέλετε πράγματι να καταργήσετε το προϊόν Jumboval από το πλάνο επιφανειών;</value>
+	</data>
+	<data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
+		<value>Κατάργηση Jumboval® </value>
+	</data>
+	<data name="RegulatoryCircuitSummaryPanel_VerteilerLoeschenText" xml:space="preserve">
+		<value>Ένας ή περισσότεροι διανομείς έχουν ήδη συνδεθεί μέχρι αυτό το κύκλωμα ελέγχου. Εάν διαγράψετε αυτό το κύκλωμα ελέγχου, θα διαγραφούν επίσης οι συνδεδεμένοι διανομείς!</value>
+	</data>
+	<data name="RegulatoryCircuitSummaryPanel_VerteilerLoeschenTitel" xml:space="preserve">
+		<value>Επιβεβαίωση</value>
+	</data>
+	<data name="RoomSummaryPanel_Deckengeometrie_Erfassen" xml:space="preserve">
+		<value>Σύλληψη γεωμετρίας οροφής</value>
+	</data>
+	<data name="RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen" xml:space="preserve">
+		<value>Σύλληψη γεωμετρίας οροφής ξεχωριστά</value>
+	</data>
+	<data name="RoomSummaryPanel_MeasureCaption" xml:space="preserve">
+		<value>Χωρίς κλίμακα</value>
+	</data>
+	<data name="RoomSummaryPanel_MeasureTitle" xml:space="preserve">
+		<value>Δεν έχει οριστεί κλίμακα ακόμα για το επιλεγμένο σχέδιο. Παρακαλώ πηγαίνετε στην επιλογή "εισαγγόμενο σχέδιο» και ορίστε μια κλίμακα για το σχέδιο.</value>
+	</data>
+	<data name="RoomSummaryPanel_Raumgeometrie_Erfassen" xml:space="preserve">
+		<value>Σύλληψη γεωμετρίας του δωματίου</value>
+	</data>
+	<data name="SystemParametersPanel_ChangeConstructionCaption" xml:space="preserve">
+		<value>Αλλαγή βασικής κατασκευής;</value>
+	</data>
+	<data name="SystemParametersPanel_ChangeConstructionText" xml:space="preserve">
+		<value>Προϊόντα που χρησιμοποιούν μια διαφορετική υποδομή έχουν ήδη προγραμματιστεί στο γραφικό σχέδιο. Εάν αλλάξετε την υποδομή, τα προϊόντα που σχεδιάζονται στο γραφικό σχέδιο θα χαθούν. Θέλετε πραγματικά να αλλάξει την υποδομή;</value>
+	</data>
+	<data name="SystemParametersPanel_InfoCustomConf" xml:space="preserve">
+		<value>Οι τιμές δεν χρησιμοποιούνται για το τρέχον έργο, αυτές είναι προκαθορισμένες τιμές, οι οποίες χρησιμοποιούνται όταν ξεκινάτε ένα νέο έργο!</value>
+	</data>
+	<data name="SystemParametersPanel_InfoProjectConf" xml:space="preserve">
+		<value>Οι τιμές αυτές χρησιμοποιούνται μόνο στο τρέχον έργο. Για να αλλάξετε τις προεπιλεγμένες τιμές για περαιτέρω νέα έργα, παρακαλώ κάντε κλικ στο "Επιλογές", "Ρυθμίσεις"&gt; "πρότυποι παράμετροι του συστήματος"</value>
+	</data>
+	<data name="SystemParametersPanel_PlaeneEinheit" xml:space="preserve">
+		<value>Μονάδα μέτρησης</value>
+	</data>
+	<data name="SystemParametersPanel_PlaeneEinheitCM" xml:space="preserve">
+		<value>Εκατοστό</value>
+	</data>
+	<data name="SystemParametersPanel_PlaeneEinheitM" xml:space="preserve">
+		<value>Μέτρο</value>
+	</data>
+	<data name="SystemParametersPanel_PlaeneEinheitMM" xml:space="preserve">
+		<value>Χιλιοστό</value>
+	</data>
+	<data name="SystemParametersPanel_RasterMass" xml:space="preserve">
+		<value>Πρότυπη τιμή πλέγματος</value>
+	</data>
+	<data name="SystemParametersPanel_Ruecksetzen" xml:space="preserve">
+		<value>επαναφορά</value>
+	</data>
+	<data name="Warning_SystemsConnectedButNoSeparateCircuitText" xml:space="preserve">
+		<value>Υπάρχουν και άλλα συστήματα που είναι συνδεδεμένα (είσοδος ή επιστροφής) με το ισχύον σύστημα. Εάν αλλάξετε το κύκλωμα θέρμανσης, τα συνδεδεμένα συστήματα θα πρέπει να συνδεθούν κατευθείαν στον διανομέα.</value>
+	</data>
+	<data name="Warning_SystemsConnectedButNoSeparateCircuitTitel" xml:space="preserve">
+		<value>Επιβεβαίωση</value>
+	</data>
+	<data name="Plan_Heranzoomen" xml:space="preserve">
+		<value>Μεγέθυνση</value>
+	</data>
+	<data name="Plan_Herauszoomen" xml:space="preserve">
+		<value>Σμίκρυνση</value>
+	</data>
+	<data name="Plan_Verschieben" xml:space="preserve">
+		<value>Μετακίνηση σχεδίου</value>
+	</data>
+	<data name="Plan_Massstab" xml:space="preserve">
+		<value>Κλίμακα</value>
+	</data>
+	<data name="General_Uebernehmen" xml:space="preserve">
+		<value>Αποδοχή</value>
+	</data>
+	<data name="CadPlanOptionsForm_Raumtypen" xml:space="preserve">
+		<value>Τύποι δωματίου</value>
+	</data>
+	<data name="DistributorPositionerForm_Titel" xml:space="preserve">
+		<value>Θέση διανομέα</value>
+	</data>
+	<data name="DistributorPositionerForm_Positionieren" xml:space="preserve">
+		<value>Θέση διανομέα</value>
+	</data>
+	<data name="DistributorPositionerForm_Ausrichtung" xml:space="preserve">
+		<value>Προσανατολισμός</value>
+	</data>
+	<data name="EdgeDistanceForm_Titel" xml:space="preserve">
+		<value>Απόσταση ασφαλείας</value>
+	</data>
+	<data name="EdgeDistanceForm_Randabstand" xml:space="preserve">
+		<value>Παρακαλώ εισάγετε την απόσταση της άκρης του αντικειμένου:</value>
+	</data>
+	<data name="Unit_Zentimeter" xml:space="preserve">
+		<value>εκατοστό</value>
+	</data>
+	<data name="ExportPlanForm_Wandnummerierung" xml:space="preserve">
+		<value>Εξαγωγή των αριθμών του τοίχου</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Titel" xml:space="preserve">
+		<value>Καθορίστε τους τοίχους</value>
+	</data>
+	<data name="GraphicalWallModifierForm_WandWaehlen" xml:space="preserve">
+		<value>Επιλέξτε τους τοίχους</value>
+	</data>
+	<data name="GraphicalWallModifierForm_FensterTueren" xml:space="preserve">
+		<value>Παράθυρα και πόρτες</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Groesse" xml:space="preserve">
+		<value>Μέγεθος</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Senkrecht" xml:space="preserve">
+		<value>Κάθετα:</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Waagrecht" xml:space="preserve">
+		<value>Οριζόντια:</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Konstruktion" xml:space="preserve">
+		<value>Κατασκευή:</value>
+	</data>
+	<data name="GraphicalWallModifierForm_ErsteWand" xml:space="preserve">
+		<value>Χρησιμοποίηση σαν πρώτος τοίχος</value>
+	</data>
+	<data name="GraphicalWallModifierForm_Erzeugen" xml:space="preserve">
+		<value>Δημιουργήσατε τοίχους;</value>
+	</data>
+	<data name="ImagePlanOptions_RotateCCWLarge" xml:space="preserve">
+		<value>5° αριστερόστραφα</value>
+	</data>
+	<data name="ImagePlanOptions_RotateCCWSmall" xml:space="preserve">
+		<value>0.1° αριστερόστροφα</value>
+	</data>
+	<data name="ImagePlanOptions_RotateCWSmall" xml:space="preserve">
+		<value>0.1° δεξιόστροφα</value>
+	</data>
+	<data name="ImagePlanOptions_RotateCWLarge" xml:space="preserve">
+		<value>5° δεξιόστροφα</value>
+	</data>
+	<data name="NewObstacleForm_Titel" xml:space="preserve">
+		<value>Προσθέστε παράθυρο/πόρτα</value>
+	</data>
+	<data name="NewObstacleForm_Parapethoehe" xml:space="preserve">
+		<value>Ύψος στηθαίου</value>
+	</data>
+	<data name="NewObstacleForm_Hoehe" xml:space="preserve">
+		<value>Ύψος:</value>
+	</data>
+	<data name="NewObstacleForm_Breite" xml:space="preserve">
+		<value>Πλάτος:</value>
+	</data>
+	<data name="NewObstacleForm_Typ" xml:space="preserve">
+		<value>Τύπος:</value>
+	</data>
+	<data name="NewPlanForm_Seite" xml:space="preserve">
+		<value>PDF σελίδα:</value>
+	</data>
+	<data name="NewWallForm_Titel" xml:space="preserve">
+		<value>Προσθέστε τοίχο</value>
+	</data>
+	<data name="NewWallForm_Konstruktion" xml:space="preserve">
+		<value>Κατασκευή:</value>
+	</data>
+	<data name="NewWallForm_Breite" xml:space="preserve">
+		<value>Πλάτος:</value>
+	</data>
+	<data name="NewWallForm_Hoehe" xml:space="preserve">
+		<value>Ύψος:</value>
+	</data>
+	<data name="NewWallForm_Position" xml:space="preserve">
+		<value>Θέση</value>
+	</data>
+	<data name="NewWallForm_Schraege" xml:space="preserve">
+		<value>Σαν κλίση για τον τρέχον τοίχο</value>
+	</data>
+	<data name="NewWallForm_NachWandNr" xml:space="preserve">
+		<value>Μετά το τοίχο νούμ.</value>
+	</data>
+	<data name="NewWallForm_NachWand" xml:space="preserve">
+		<value>Μετά τον τρέχον τοίχο</value>
+	</data>
+	<data name="NewWallForm_VorWand" xml:space="preserve">
+		<value>Πρίν τον τρέχον τοίχο</value>
+	</data>
+	<data name="PlanSetMeasureForm_MassstabSetzen" xml:space="preserve">
+		<value>Ορίστε κλίμακα</value>
+	</data>
+	<data name="RoomPickerForm_Titel" xml:space="preserve">
+		<value>Γεωμετρία δωματίου</value>
+	</data>
+	<data name="RoomPickerForm_Definieren" xml:space="preserve">
+		<value>Καθορίστε γεωμετρία δωματίου</value>
+	</data>
+	<data name="RoomPickerForm_UnbeheizteDefinieren" xml:space="preserve">
+		<value>Καθορίστε μη θερμαινόμενες επιφάνειες</value>
+	</data>
+	<data name="RoomPickerForm_UnbeheizteLoeschen" xml:space="preserve">
+		<value>Αφαιρέστε μη θερμαινόμενες επιφάνειες</value>
+	</data>
+	<data name="RoomPickerForm_DehnfugeHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε αρμό διαστολή</value>
+	</data>
+	<data name="RoomPickerForm_DehnfugeLoeschen" xml:space="preserve">
+		<value>Αφαιρέστε αρμό διαστολής</value>
+	</data>
+	<data name="RoomPickerForm_FlaecheEingeben" xml:space="preserve">
+		<value>Εισάγετε επιφάνεια χώρου</value>
+	</data>
+	<data name="RoomPickerForm_FlaecheHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε επιφάνεια χώρου</value>
+	</data>
+	<data name="RoomPickerForm_Groesse" xml:space="preserve">
+		<value>Μέγεθος</value>
+	</data>
+	<data name="RoomPickerForm_Hoehe" xml:space="preserve">
+		<value>Ύψος:</value>
+	</data>
+	<data name="RoomPickerForm_Breite" xml:space="preserve">
+		<value>Πλάτος:</value>
+	</data>
+	<data name="RoomPickerForm_Abstand" xml:space="preserve">
+		<value>Απόσταση μέχρι το σημείο αναφοράς</value>
+	</data>
+	<data name="RoomPickerForm_AbstandVertikal" xml:space="preserve">
+		<value>Κάθετη απόσταση:</value>
+	</data>
+	<data name="RoomPickerForm_AbstandHorizontal" xml:space="preserve">
+		<value>Οριζόντια απόσταση:</value>
+	</data>
+	<data name="RoomPickerForm_Referenzpunkt" xml:space="preserve">
+		<value>Καθορίστε σημείο αναφοράς</value>
+	</data>
+	<data name="RoomPickerForm_GroesseEingeben" xml:space="preserve">
+		<value>Εισάγετε μέγεθος</value>
+	</data>
+	<data name="RoomPickerForm_GrafischFestlegen" xml:space="preserve">
+		<value>Καθορίστε τη λειτουργία γραφικών </value>
+	</data>
+	<data name="RoomPickerForm_NeueUnbeheizteFlaeche" xml:space="preserve">
+		<value>Νέα μη θερμαινόμενη επιφάνεια χώρου</value>
+	</data>
+	<data name="WallHelpLinesForm_Titel" xml:space="preserve">
+		<value>Βοηθητικές γραμμές</value>
+	</data>
+	<data name="WallHelpLinesForm_Modus" xml:space="preserve">
+		<value>Επεξεργασία λειτουργίας</value>
+	</data>
+	<data name="WallHelpLinesForm_Individuelle" xml:space="preserve">
+		<value>Επεξεργαστείτε μεμονωμένες βοηθητικές γραμμές για τον τρέχον τοίχο</value>
+	</data>
+	<data name="WallHelpLinesForm_Globale" xml:space="preserve">
+		<value>Επεξεργαστείτε τις γενικές βοηθητικές γραμμές για ολόκληρο το δωμάτιο.</value>
+	</data>
+	<data name="WallHelpLinesForm_Eigenschaften" xml:space="preserve">
+		<value>Χαρακτηριστικά του τοίχου</value>
+	</data>
+	<data name="WallHelpLinesForm_GlobaleAktivieren" xml:space="preserve">
+		<value>Ενεργοποίηση των γενικών βοηθητικών γραμμών</value>
+	</data>
+	<data name="WallHelpLinesForm_Positionen" xml:space="preserve">
+		<value>Θέση των βοηθητικών γραμμών</value>
+	</data>
+	<data name="WallHelpLinesForm_Loeschen" xml:space="preserve">
+		<value>Διαγραφή</value>
+	</data>
+	<data name="WallHelpLinesForm_Hinzufuegen" xml:space="preserve">
+		<value>Προσθήκη</value>
+	</data>
+	<data name="DistributorPositionerForm_AnbindungenLoeschenText" xml:space="preserve">
+		<value>Γραφικά, οι συνδετικοί σωλήνες έχουν ήδη συνδεθεί με αυτό τον διανομέα. Αν θέλετε να αλλάξετε τη θέση του διανομέα, αυτοί οι σωλήνες σύνδεσης θα διαγραφούν!</value>
+	</data>
+	<data name="DistributorPositionerForm_AnbindungenLoeschenTitel" xml:space="preserve">
+		<value>Αφαιρέστε τους συνδετικούς σωλήνες</value>
+	</data>
+	<data name="ExportPlanForm_LayerBeplankung" xml:space="preserve">
+		<value>Επίστρωση</value>
+	</data>
+	<data name="ExportPlanForm_LayerDehnfugen" xml:space="preserve">
+		<value>Αρμό διαστολής</value>
+	</data>
+	<data name="ExportPlanForm_LayerWandnumerierungen" xml:space="preserve">
+		<value>Αρίθμηση τοίχου</value>
+	</data>
+	<data name="ExportPlanForm_LayerVerteiler" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="ExportPlanForm_LayerAnbindeleitungen" xml:space="preserve">
+		<value>Συνδετικοί σωλήνες</value>
+	</data>
+	<data name="ExportPlanForm_KeineProdukteText" xml:space="preserve">
+		<value>Δεν υπάρχουν διαθέσιμα προϊόντα που θα μπορούσαν να εξαχθούν.</value>
+	</data>
+	<data name="GraphicalWallModifierForm_WaendeUebernehmenText" xml:space="preserve">
+		<value>Θέλετε να αναλάβετε τους καθορισμένους τοίχους;</value>
+	</data>
+	<data name="GraphicalWallModifierForm_WaendeUebernehmenTitel" xml:space="preserve">
+		<value>Ανάληψη τοίχων;</value>
+	</data>
+	<data name="GraphicalWallModifierForm_ErsteWandText" xml:space="preserve">
+		<value>Για να ορίσετε έναν άλλο τοίχο ως «πρώτο τοίχο», επιλέξτε τον επιθυμητό τοίχο και ρυθμίστε την επιλογή εκεί.</value>
+	</data>
+	<data name="Unit_Millimeter" xml:space="preserve">
+		<value>χιλιοστά</value>
+	</data>
+	<data name="ImagePlanOptionsForm_LaengeCm" xml:space="preserve">
+		<value>Μήκος σε εκατοστά:</value>
+	</data>
+	<data name="ImagePlanOptionsForm_LaengeMm" xml:space="preserve">
+		<value>Μήκος σε χιλιοστά:</value>
+	</data>
+	<data name="ImagePlanOptionsForm_LaengeM" xml:space="preserve">
+		<value>Μήκος σε μέτρα:</value>
+	</data>
+	<data name="ImportedPlansPanel_AlleFilter" xml:space="preserve">
+		<value>Όλα τα σχέδια</value>
+	</data>
+	<data name="ImportedPlansPanel_CadFehlerText" xml:space="preserve">
+		<value>Δυστυχώς παρουσιάστηκε ένα σφάλμα κατά τη φόρτωση του σχεδίου. Εάν είναι δυνατόν, δοκιμάστε να αποθηκεύσετε ξανά το σχέδιο χρησιμοποιώντας ένα πρόγραμμα CAD και έπειτα προπαθήστε εκ νέου εισαγωγή του.</value>
+	</data>
+	<data name="ImportedPlansPanel_CadFehlerTitel" xml:space="preserve">
+		<value>Σφάλμα κατά τη φόρτωση</value>
+	</data>
+	<data name="NewPlanForm_Seiten" xml:space="preserve">
+		<value>Πλευρές:</value>
+	</data>
+	<data name="NewWallForm_WandZuSchmalText" xml:space="preserve">
+		<value>Παρακαλώ εισάγετε μια έγκυρη τιμή για το πλάτος (ελάχ. 10 εκατοστά).</value>
+	</data>
+	<data name="NewWallForm_WandZuSchmalTextTitel" xml:space="preserve">
+		<value>Τοίχος πολύ στενός</value>
+	</data>
+	<data name="PlanSetMeasureForm_LaengeCm" xml:space="preserve">
+		<value>Μήκος σε εκατοστά:</value>
+	</data>
+	<data name="PlanSetMeasureForm_LaengeMm" xml:space="preserve">
+		<value>Μήκος σε χιλιοστά:</value>
+	</data>
+	<data name="PlanSetMeasureForm_LaengeM" xml:space="preserve">
+		<value>Μήκος σε μέτρα:</value>
+	</data>
+	<data name="RoomPicker_NeueRaumgeometrieText" xml:space="preserve">
+		<value>Θέλετε να απορρίψετε την καθορισμένη γεωμετρία του δωματίου και να ορίσετε ένα νέο; Το γραφικό σχέδιο όλων των συστημάτων που έχουν ήδη προγραμματιστεί για αυτό το δωμάτιο θα διαγραφούν.</value>
+	</data>
+	<data name="RoomPicker_NeueRaumgeometrieTitel" xml:space="preserve">
+		<value>Απόρριψη και καθορισμού ενός νέου;</value>
+	</data>
+	<data name="RoomPicker_RaumgeometrieAbbrechenText" xml:space="preserve">
+		<value>Θέλετε να ακυρώσετε τον καθορισμό της γεωμετρίας του δωματίου;</value>
+	</data>
+	<data name="RoomPicker_RaumgeometrieAbbrechenTitel" xml:space="preserve">
+		<value>Ακύρωση;</value>
+	</data>
+	<data name="RoomPicker_FlaecheAbbrechenText" xml:space="preserve">
+		<value>Θέλετε να ακυρώσετε τον καθορισμό του χώρου;</value>
+	</data>
+	<data name="RoomPicker_FlaecheAbbrechenTitel" xml:space="preserve">
+		<value>Ακύρωση;</value>
+	</data>
+	<data name="RoomPickerForm_KeinReferenzpunktText" xml:space="preserve">
+		<value>Προκειμένου να καθορίστε περιοχές χωρίς θέρμανση της επιφάνειας, θα πρέπει να επιλέξετε ένα σημείο αναφοράς.</value>
+	</data>
+	<data name="RoomPickerForm_KeinReferenzpunktTitel" xml:space="preserve">
+		<value>Δεν έχει επιλεχθεί σημείο αναφοράς</value>
+	</data>
+	<data name="EcothermPlanerForm_AnbindeleitungLoeschenText" xml:space="preserve">
+		<value>Ο αριθμός των κυκλωμάτων θέρμανσης του συστήματος που έχουν ήδη συνδεθεί με ένα διανομέα δεν μπορεί πλέον να αλλάξει. Θέλετε να διαγράψετε τους συνδετικούς σωλήνες του συστήματος;</value>
+	</data>
+	<data name="EcothermPlanerForm_AnbindeleitungLoeschenTitel" xml:space="preserve">
+		<value>Αφαίρεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenText" xml:space="preserve">
+		<value>Γραφικά οι σωλήνες σύνδεσης έχουν ήδη σχεδιαστεί για αυτό το προϊόν. Εάν αλλάξετε τη σύνδεση του διανομέα, θα διαγραφούν γραφικά οι σωλήνες σύνδεσης.</value>
+	</data>
+	<data name="PlannedEcothermProductPanel_GrafischeAnbindeleitungLoeschenTitel" xml:space="preserve">
+		<value>Γραφική αφαίρεση των σωλήνων σύνδεσης</value>
+	</data>
+	<data name="PipeProductPlaner_FlaecheAbbrechenText" xml:space="preserve">
+		<value>Θέλετε να ακυρώσετε τον καθορισμός της περιοχής;</value>
+	</data>
+	<data name="PipeProductPlaner_FlaecheAbbrechenTitel" xml:space="preserve">
+		<value>Ακύρωση;</value>
+	</data>
+	<data name="PipeProductPlanner_AZ" xml:space="preserve">
+		<value>LZ:</value>
+	</data>
+	<data name="PipeProductPlanner_RZ" xml:space="preserve">
+		<value>EZ:</value>
+	</data>
+	<data name="PipeProductPlanner_HK" xml:space="preserve">
+		<value>HC:</value>
+	</data>
+	<data name="PipeProductPlanner_Rohrlaenge" xml:space="preserve">
+		<value>Σωλήνα I.:</value>
+	</data>
+	<data name="PipeProductPlanner_Name" xml:space="preserve">
+		<value>Όνομα:</value>
+	</data>
+	<data name="PipeProductPlanner_FlaecheUebernehmenText" xml:space="preserve">
+		<value>Η οριοθετημένη περιοχή επιφάνειας είναι% FLAECHE% m². Θέλετε να αναλάβετε αυτή την επιφάνεια;</value>
+	</data>
+	<data name="PipeProductPlanner_FlaecheUebernehmenTitel" xml:space="preserve">
+		<value>Ανάληψη της επιφάνειας;</value>
+	</data>
+	<data name="PipeProductPlanner_Neu2Text" xml:space="preserve">
+		<value>Θέλετε να απορρίψετε τις καθορισμένες επιφάνειας χώρου και τις υπάρχουσες σωλήνες σύνδεσης και να ορίσετε νέα;</value>
+	</data>
+	<data name="PipeProductPlanner_Neu1Text" xml:space="preserve">
+		<value>Θέλετε να απορρίψετε την καθορισμένη επιφάνεια χώρου και να ορίσετε νέα;</value>
+	</data>
+	<data name="PipeProductPlanner_NeuTitel" xml:space="preserve">
+		<value>Ακύρωση και ορισμός νέας;</value>
+	</data>
+	<data name="EcothermPlannerForm_Titel" xml:space="preserve">
+		<value>Ecotherm® - γραφικό σχέδιο</value>
+	</data>
+	<data name="EcothermPlannerForm_FlaecheDefinieren" xml:space="preserve">
+		<value>Ορίστε επιφάνεια χώρου</value>
+	</data>
+	<data name="EcothermPlannerForm_RandzoneHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε περιφεριακή ζώνη</value>
+	</data>
+	<data name="EcothermPlannerForm_RandzoneLoeschen" xml:space="preserve">
+		<value>Αφαίρεση της περιφεριακής ζώνης</value>
+	</data>
+	<data name="EcothermPlannerForm_RedFlaecheHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε επιφάνεια χώρου με κόκκινο θέρμανσης / ψύξης ισχύος</value>
+	</data>
+	<data name="EcothermPlannerForm_RedFlaecheLoeschen" xml:space="preserve">
+		<value>Αφαιρέστε επιφάνεια χώρου με κόκκινο θέρμανσης / ψύξης ισχύος</value>
+	</data>
+	<data name="EcothermPlannerForm_TextboxPositionieren" xml:space="preserve">
+		<value>Θέση πλαισίου κειμένου</value>
+	</data>
+	<data name="EcothermPlannerForm_TextboxVergroessern" xml:space="preserve">
+		<value>Μεγέθυνση πλαισίου κειμένου</value>
+	</data>
+	<data name="EcothermPlannerForm_TextboxVerkleinern" xml:space="preserve">
+		<value>Σμίκρυνση πλαισίου κειμένου</value>
+	</data>
+	<data name="EcothermPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε συνδετικούς σωλήνες</value>
+	</data>
+	<data name="EcothermPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+		<value>Επεξεργασία συνδετικών σωλήνων</value>
+	</data>
+	<data name="EcothermPlannerForm_Auslegung" xml:space="preserve">
+		<value>Σχέδιο</value>
+	</data>
+	<data name="EcothermPlannerForm_EckenErklaerung" xml:space="preserve">
+		<value>(Θετικές γωνίες αυξάνουν, αρνητικές μειώνουν το μέγεθος της περιφεριακής ζώνης)</value>
+	</data>
+	<data name="EcothermPlannerForm_AnzahlEcken" xml:space="preserve">
+		<value>Αριθμός ακμών:</value>
+	</data>
+	<data name="EcothermPlannerForm_LaengeRandzone" xml:space="preserve">
+		<value>Μήκος περιφεριακής ζώνης:</value>
+	</data>
+	<data name="EcothermPlannerForm_AnzahlHeizkreise" xml:space="preserve">
+		<value>Αριθμός κυκλωμάτων θέρμανσης:</value>
+	</data>
+	<data name="EcothermPlannerForm_NachHeizUndKuehlbetrieb" xml:space="preserve">
+		<value>Μετά από λειτουργία θέρμανσης και ψύξης</value>
+	</data>
+	<data name="EcothermPlannerForm_NachKuehlbetrieb" xml:space="preserve">
+		<value>Μετά από λειτουργία ψύξης</value>
+	</data>
+	<data name="EcothermPlannerForm_NachHeizbetrieb" xml:space="preserve">
+		<value>Μετά από λειτουργία θέρμανσης</value>
+	</data>
+	<data name="EcothermPlannerForm_VerlegeartRZ" xml:space="preserve">
+		<value>Καθορισμός τύπου περιφεριακής ζώνης:</value>
+	</data>
+	<data name="EcothermPlannerForm_VerlegeartAZ" xml:space="preserve">
+		<value>Καθορισμός τύπου γώνης διαβίωσης:</value>
+	</data>
+	<data name="EcothermPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+		<value>Υπολογισμένα αποτελέσματα</value>
+	</data>
+	<data name="EcothermPlannerForm_Spreizung" xml:space="preserve">
+		<value>Διαφορά θερμοκρασίας K</value>
+	</data>
+	<data name="EcothermPlannerForm_Kuehlen" xml:space="preserve">
+		<value>Ψύξη:</value>
+	</data>
+	<data name="EcothermPlannerForm_DeltaP" xml:space="preserve">
+		<value>DeltaP mbar</value>
+	</data>
+	<data name="EcothermPlannerForm_Mh" xml:space="preserve">
+		<value>mh kg/h</value>
+	</data>
+	<data name="EcothermPlannerForm_Rohrlaenge" xml:space="preserve">
+		<value>Σωλήνα I. m</value>
+	</data>
+	<data name="EcothermPlannerForm_AnzahlHK" xml:space="preserve">
+		<value>Αριθμός HC</value>
+	</data>
+	<data name="EcothermPlannerForm_Heizen" xml:space="preserve">
+		<value>Θέρμανση:</value>
+	</data>
+	<data name="EcothermPlannerForm_AZ" xml:space="preserve">
+		<value>Ζώνη διαβίωσης</value>
+	</data>
+	<data name="EcothermPlannerForm_RZ" xml:space="preserve">
+		<value>Περιφεριακή ζώνη</value>
+	</data>
+	<data name="EcothermPlannerForm_Q" xml:space="preserve">
+		<value>Q
+
+W</value>
+	</data>
+	<data name="EcothermPlannerForm_Tfb" xml:space="preserve">
+		<value>tfb
+
+°C</value>
+	</data>
+	<data name="EcothermPlannerForm_Flaeche" xml:space="preserve">
+		<value>A
+
+m²</value>
+	</data>
+	<data name="EcothermPlannerForm_VA" xml:space="preserve">
+		<value>VA</value>
+	</data>
+	<data name="EcothermPlannerForm_QAnb" xml:space="preserve">
+		<value>QAnb
+
+W</value>
+	</data>
+	<data name="EcothermPlannerForm_AAnb" xml:space="preserve">
+		<value>AAnb
+
+m²</value>
+	</data>
+	<data name="EcothermPlannerForm_Breite" xml:space="preserve">
+		<value>B
+
+cm</value>
+	</data>
+	<data name="EcothermPlannerForm_QRest" xml:space="preserve">
+		<value>QRest
+
+W</value>
+	</data>
+	<data name="EcothermPlannerForm_QFBH" xml:space="preserve">
+		<value>QFBH
+
+W</value>
+	</data>
+	<data name="EcothermPlannerForm_QSollProQuadratmeter" xml:space="preserve">
+		<value>qSoll
+
+W/m²</value>
+	</data>
+	<data name="EcothermPlannerForm_QSoll" xml:space="preserve">
+		<value>QSoll
+
+W</value>
+	</data>
+	<data name="EurovalPlannerForm_Titel" xml:space="preserve">
+		<value>Euroval® - γραφικό σχέδιο</value>
+	</data>
+	<data name="PlannedProductPanel_Tabellarisch" xml:space="preserve">
+		<value>Πινακοειδής</value>
+	</data>
+	<data name="PlannedProductPanel_Grafisch" xml:space="preserve">
+		<value>Γραφικό</value>
+	</data>
+	<data name="PlannedProductPanel_Auslegungsart" xml:space="preserve">
+		<value>Τύπος σχεδίου</value>
+	</data>
+	<data name="PlannedProductPanel_GrafischeAnbindeleitungen" xml:space="preserve">
+		<value>Γραφικά συνδετικοί σωλήνες</value>
+	</data>
+	<data name="PlannedProductPanel_GrafischeAuslegung" xml:space="preserve">
+		<value>Άνοιγμα γραφικού σχεδίου</value>
+	</data>
+	<data name="HithermPlannerForm_Titel" xml:space="preserve">
+		<value>Hitherm® - γραφικό σχέδιο</value>
+	</data>
+	<data name="HithermPlannerForm_Exportieren" xml:space="preserve">
+		<value>Εξαγωγή σχεδίου</value>
+	</data>
+	<data name="HithermPlannerForm_Verschieben" xml:space="preserve">
+		<value>Μετακίνηση διακοπής</value>
+	</data>
+	<data name="HithermPlannerForm_ObjekteBearbeiten" xml:space="preserve">
+		<value>Επεξεργασία αντικειμένων</value>
+	</data>
+	<data name="HithermPlannerForm_Waende" xml:space="preserve">
+		<value>Τοίχοι</value>
+	</data>
+	<data name="HithermPlannerForm_FensterTueren" xml:space="preserve">
+		<value>Παράθυρα και πόρτες</value>
+	</data>
+	<data name="HithermPlannerForm_Schraegen" xml:space="preserve">
+		<value>Κλίσεις</value>
+	</data>
+	<data name="HithermPlannerForm_Waermeregister" xml:space="preserve">
+		<value>Στοιχείο θέρμανσης</value>
+	</data>
+	<data name="HithermPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+		<value>Πρόσθεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="HithermPlannerForm_AnHilfslinineAusrichten" xml:space="preserve">
+		<value>Ευθυγράμμιση με τη βοηθητική γραμμή </value>
+	</data>
+	<data name="HithermPlannerForm_Anbindeleitungen" xml:space="preserve">
+		<value>Συνδετικοί σωλήνες</value>
+	</data>
+	<data name="HithermPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+		<value>Επεξεργασία συνδετικών σωλήνων</value>
+	</data>
+	<data name="HithermPlannerForm_Tuer" xml:space="preserve">
+		<value>Πόρτα</value>
+	</data>
+	<data name="HithermPlannerForm_Fenster" xml:space="preserve">
+		<value>Παράθυρο</value>
+	</data>
+	<data name="HithermPlannerForm_DreieckfensterLinks" xml:space="preserve">
+		<value>Τριγωνικό αριστερό παράθυρο</value>
+	</data>
+	<data name="HithermPlannerForm_DreiecksfensterRechts" xml:space="preserve">
+		<value>Τριγωνικό δεξιό παράθυρο</value>
+	</data>
+	<data name="HithermPlannerForm_Sonstiges" xml:space="preserve">
+		<value>Άλλο</value>
+	</data>
+	<data name="HithermPlannerForm_WaermeregisterSenkrecht" xml:space="preserve">
+		<value>Κάθετο στοιχείο θέρμανσης</value>
+	</data>
+	<data name="HithermPlannerForm_WaermeregisterWaagrecht" xml:space="preserve">
+		<value>Οριζόντιο στοιχείο θέρμανσης</value>
+	</data>
+	<data name="HithermPlannerForm_ManuellVerbinden" xml:space="preserve">
+		<value>Συνδέστε χειροκίνητα</value>
+	</data>
+	<data name="HithermPlannerForm_AutomatischVerbinden" xml:space="preserve">
+		<value>Συνδέστε αυτόματα</value>
+	</data>
+	<data name="HithermPlannerForm_HeizkreiseVerbinden" xml:space="preserve">
+		<value>Συνδέστε κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="HithermPlannerForm_RechtwinkeligVerbinden" xml:space="preserve">
+		<value>Συνδέστε στη σωστή γωνία</value>
+	</data>
+	<data name="HithermPlannerForm_DirektVerbinden" xml:space="preserve">
+		<value>Συνδέστε απευθείας</value>
+	</data>
+	<data name="HithermPlannerForm_SchraegeLinks" xml:space="preserve">
+		<value>Αριστερή κλίση</value>
+	</data>
+	<data name="HithermPlannerForm_SchraegeRechts" xml:space="preserve">
+		<value>Δεξιά κλίση</value>
+	</data>
+	<data name="HithermPlannerForm_KeineSchraege" xml:space="preserve">
+		<value>Δεν επιλεχθεί κλίση</value>
+	</data>
+	<data name="HithermPlannerForm_SchraegeLoeschen" xml:space="preserve">
+		<value>Διαγραφή κλίσης</value>
+	</data>
+	<data name="HithermPlannerForm_AenderungenVerwerfen" xml:space="preserve">
+		<value>Απορρίψτε τις αλλαγές</value>
+	</data>
+	<data name="HithermPlannerForm_AenderungenSpeichern" xml:space="preserve">
+		<value>Αποθηκεύστε τις αλλαγές</value>
+	</data>
+	<data name="HithermPlannerForm_Position" xml:space="preserve">
+		<value>Θέση</value>
+	</data>
+	<data name="HithermPlannerForm_Links" xml:space="preserve">
+		<value>Αριστερά</value>
+	</data>
+	<data name="HithermPlannerForm_Rechts" xml:space="preserve">
+		<value>Δεξιά</value>
+	</data>
+	<data name="HithermPlannerForm_Groesse" xml:space="preserve">
+		<value>Μέγεθος</value>
+	</data>
+	<data name="HithermPlannerForm_Vertikal" xml:space="preserve">
+		<value>Κάθετα:</value>
+	</data>
+	<data name="HithermPlannerForm_Horizontal" xml:space="preserve">
+		<value>Οριζόντια:</value>
+	</data>
+	<data name="HithermPlannerForm_AnbindeleitungLoeschen" xml:space="preserve">
+		<value>Αφαίρεση συνδετικού σωλήνα</value>
+	</data>
+	<data name="HithermPlannerForm_MittelmassHor" xml:space="preserve">
+		<value>Μέση hor.</value>
+	</data>
+	<data name="HithermPlannerForm_AbstandHor" xml:space="preserve">
+		<value>Απόσταση hor.</value>
+	</data>
+	<data name="HithermPlannerForm_PositionHor" xml:space="preserve">
+		<value>Θέση hor.</value>
+	</data>
+	<data name="HithermPlannerForm_KeinObjekt" xml:space="preserve">
+		<value>Δεν έχει επιλεχθεί αντικείμενο</value>
+	</data>
+	<data name="HithermPlannerForm_PositionVert" xml:space="preserve">
+		<value>Κάθετη θέση.</value>
+	</data>
+	<data name="HithermPlannerForm_RandabstandAendern" xml:space="preserve">
+		<value>Αλλαγή απόστασης άκρης</value>
+	</data>
+	<data name="HithermPlannerForm_ObjektLoeschen" xml:space="preserve">
+		<value>Αφαίρεση αντικειμένου</value>
+	</data>
+	<data name="HithermPlannerForm_HilfslinienEinrichten" xml:space="preserve">
+		<value>Τακτοποιήστε βοηθητικές γραμμές </value>
+	</data>
+	<data name="HithermPlannerForm_WandNachLinksVerschieben" xml:space="preserve">
+		<value>Μετακίνηση τοίχου προς τα αριστερά</value>
+	</data>
+	<data name="HithermPlannerForm_WandNachRechtsVerschieben" xml:space="preserve">
+		<value>Μετακίνηση τοίχου προς τα δεξιά</value>
+	</data>
+	<data name="HithermPlannerForm_Konstruktion" xml:space="preserve">
+		<value>Κατασκευή</value>
+	</data>
+	<data name="HithermPlannerForm_KeineWand" xml:space="preserve">
+		<value>Δεν έχει επιλεχθεί τοίχος</value>
+	</data>
+	<data name="HithermPlannerForm_WaendeErzeugen" xml:space="preserve">
+		<value>Δημιουργήστε τοίχους από τη γεωμετρία του δωματίου</value>
+	</data>
+	<data name="HithermPlannerForm_Senkrecht" xml:space="preserve">
+		<value>Κάθετα:</value>
+	</data>
+	<data name="HithermPlannerForm_Waagrecht" xml:space="preserve">
+		<value>Οριζόντια:</value>
+	</data>
+	<data name="HithermPlannerForm_NeueWand" xml:space="preserve">
+		<value>Δημιουργήστε καινούργιο τοίχο</value>
+	</data>
+	<data name="HithermPlannerForm_WandLoeschen" xml:space="preserve">
+		<value>Αφαίρεση τοίχου</value>
+	</data>
+	<data name="HithermPlannerForm_NurGanzeRegister" xml:space="preserve">
+		<value>Μόνο ολοκληρωμένα στοιχεία</value>
+	</data>
+	<data name="HithermPlannerForm_AnHilfslinienAusrichten" xml:space="preserve">
+		<value>Ευθυγράμμιση με τις βοηθητικές γραμμές </value>
+	</data>
+	<data name="HithermPlannerForm_RegisterVerbinden" xml:space="preserve">
+		<value>Συνδέστε στοιχείο</value>
+	</data>
+	<data name="HithermPlannerForm_RegisterLoeschen" xml:space="preserve">
+		<value>Αφαιρέστε στοιχείο</value>
+	</data>
+	<data name="HithermPlannerForm_Rohrabstand" xml:space="preserve">
+		<value>Απόσταση σωλήνα</value>
+	</data>
+	<data name="HithermPlannerForm_RohrabstandStandard" xml:space="preserve">
+		<value>10 εκατοστά (πρότυπο στοιχείο)</value>
+	</data>
+	<data name="HithermPlannerForm_RohrabstandHochleistung" xml:space="preserve">
+		<value>5 εκατοστά (στοιχείο υψηλής ισχύος)</value>
+	</data>
+	<data name="HithermPlannerForm_Vorlauf" xml:space="preserve">
+		<value>Σωλήνα τροφοδοσίας</value>
+	</data>
+	<data name="HithermPlannerForm_VorlaufRechtsUnten" xml:space="preserve">
+		<value>Κάτω δεξιά (std.)</value>
+	</data>
+	<data name="HithermPlannerForm_VorlaufLinksUnten" xml:space="preserve">
+		<value>Κάτω αριστερά</value>
+	</data>
+	<data name="HithermPlannerForm_KeinRegister" xml:space="preserve">
+		<value>Δεν έχει επιλεχθεί στοιχείο</value>
+	</data>
+	<data name="HithermPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+		<value>Υπολογισμένα αποτελέσματα:</value>
+	</data>
+	<data name="HithermPlannerForm_Heizbetrieb" xml:space="preserve">
+		<value>Λειτουργία θέρμανσης</value>
+	</data>
+	<data name="HithermPlannerForm_Kuehlbetrieb" xml:space="preserve">
+		<value>Λειτουργία ψύξης</value>
+	</data>
+	<data name="HithermPlannerForm_ErreichteLeistung" xml:space="preserve">
+		<value>Επιτυγχανόμενη ισχύς:</value>
+	</data>
+	<data name="HithermPlannerForm_DifferenzZurErwartetenLeistung" xml:space="preserve">
+		<value>Διαφορά από την αναμενόμενη ισχύ:</value>
+	</data>
+	<data name="HithermPlannerForm_ZusInformationen" xml:space="preserve">
+		<value>Προσθέστε πληροφορίες: </value>
+	</data>
+	<data name="HithermPlannerForm_BelegteFlaeche" xml:space="preserve">
+		<value>Κατειλημμένη επιφάνεια χώρου:</value>
+	</data>
+	<data name="HithermPlannerForm_BenoetigteWaermestromdichte" xml:space="preserve">
+		<value>Απαιτούμενη ροή θερμότητας d.:</value>
+	</data>
+	<data name="HithermPlannerForm_BenoetigteFlaeche" xml:space="preserve">
+		<value>Απαιτούμενη επιφάνεια χώρου:</value>
+	</data>
+	<data name="HithermPlannerForm_VerfuegbareFlaeche" xml:space="preserve">
+		<value>Διαθέσιμη επιφάνεια χώρου:</value>
+	</data>
+	<data name="HithermPlannerForm_UebrigeFlaeche" xml:space="preserve">
+		<value>Παραμένων χώρος:</value>
+	</data>
+	<data name="HithermPlanner_VerbindenFehlerText" xml:space="preserve">
+		<value>Αυτά τα δύο στοιχεία δεν μπορούν να συνδεθούν</value>
+	</data>
+	<data name="HithermPlanner_VerbindenFehlerTitel" xml:space="preserve">
+		<value>Σφάλμα</value>
+	</data>
+	<data name="HithermPlannerForm_WaendeVorhandenText" xml:space="preserve">
+		<value>Υπάρχουν ήδη διαθέσιμοι τοίχοι. Θέλετε πραγματικά να διαγράψετε όλους τους υπάρχοντες τοίχους και να δημιουργήσετε αυτόματα;</value>
+	</data>
+	<data name="HithermPlannerForm_WaendeVorhandenTitel" xml:space="preserve">
+		<value>Διαθέσιμοι τοίχοι</value>
+	</data>
+	<data name="HithermPlannerForm_RegisterText" xml:space="preserve">
+		<value>Hitherm Klimawand  %ANZAHL% μονάδες Hitherm %TYP% %HOEHE%cm (%ROHRE%)</value>
+	</data>
+	<data name="HithermPlannerForm_Hochleistungsregister" xml:space="preserve">
+		<value>Στοιχείο υψηλής απόδοσης</value>
+	</data>
+	<data name="HithermPlannerForm_Standardregister" xml:space="preserve">
+		<value>Πρότυπο στοιχείο</value>
+	</data>
+	<data name="HithermPlannerForm_WandText" xml:space="preserve">
+		<value>Τοίχος νούμερο: %WAND%</value>
+	</data>
+	<data name="HithermPlannerForm_ObjektText" xml:space="preserve">
+		<value>Τύπος: %OBJEKT% %BREITE%cm x %HOEHE%cm</value>
+	</data>
+	<data name="HithermPlannerForm_SchraegeText" xml:space="preserve">
+		<value>Κλίση %AUSRICHTUNG%: %BREITE%cm x %HOEHE%cm</value>
+	</data>
+	<data name="HithermPlannerForm_Links2" xml:space="preserve">
+		<value>Αριστερά</value>
+	</data>
+	<data name="HithermPlannerForm_Rechts2" xml:space="preserve">
+		<value>Δεξιά</value>
+	</data>
+	<data name="HithermPlannerForm_WandManuellText" xml:space="preserve">
+		<value>Οι ορισμοί των τοίχων δημιουργήθηκαν αυτόματα. Αν θέλετε να κάνετε αλλαγές, γραφικό σχεδιασμό των αγωγών σύνδεσης δεν θα είναι πλέον δυνατή. Είστε σίγουροι ότι θέλετε να συνεχίσετε;</value>
+	</data>
+	<data name="HithermPlannerForm_WandManuellTitel" xml:space="preserve">
+		<value>Ρύθμιση του ορισμό του τοίχου χειροκίνητα;</value>
+	</data>
+	<data name="HithermPlannerForm_WandLoeschenText" xml:space="preserve">
+		<value>Θέλετε πραγματικά να διαγράψετε τον τρέχον τοίχο;</value>
+	</data>
+	<data name="HithermPlannerForm_WandLoeschenTitel" xml:space="preserve">
+		<value>Διαγραφή τοίχου;</value>
+	</data>
+	<data name="HithermPlannerForm_FilterBild" xml:space="preserve">
+		<value>Εικόνα</value>
+	</data>
+	<data name="HithermPlannerForm_KeineWaendeText" xml:space="preserve">
+		<value>Δεν υπάρχουν τοίχοι που μπορούν να εξαχθούν.</value>
+	</data>
+	<data name="HithermProduct_ZuvieleHeizkreise" xml:space="preserve">
+		<value>Υπάρχουν πολλά κυκλώματα θέρμανσης σε αυτό το προϊόν.</value>
+	</data>
+	<data name="HithermCompactPlannerForm_RegisterText" xml:space="preserve">
+		<value>Hitherm ελεγχόμενα κλιματιζόμενος τοίχος   %ANZAHL% μονάδες Hitherm-Compact %TYP% %HOEHE% %TYPABK</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Parapetelement" xml:space="preserve">
+		<value>Στοιχείο στηθαίου</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Par" xml:space="preserve">
+		<value>Παρ</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Dachschraegenelemente" xml:space="preserve">
+		<value>Στοιχεία σοφίτας</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Ds" xml:space="preserve">
+		<value>Ατ</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Wandelemente" xml:space="preserve">
+		<value>Στοιχεία τοίχου</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Std" xml:space="preserve">
+		<value>Std</value>
+	</data>
+	<data name="HithermCompactDachschraege_Flaechenaufstellung" xml:space="preserve">
+		<value>Hitherm® Compact σοφίτα (m²)</value>
+	</data>
+	<data name="HithermCompactProduct_Flaechenaufstellung" xml:space="preserve">
+		<value>Hitherm® Compact (m²)</value>
+	</data>
+	<data name="ModulKlimaBodenPlanner_AnbindeleitungLoeschen" xml:space="preserve">
+		<value>Εάν προσθέσετε ένα νέο κύκλωμα θέρμανσης, οι υπάρχοντες σωλήνες σύνδεσης στον διανομέα θα διαγραφούν. Θέλετε να διαγράψετε τους σωλήνες σύνδεσης;</value>
+	</data>
+	<data name="ModulKlimaBodenPlanner_NeuerHeizkreisTitel" xml:space="preserve">
+		<value>Καινούργιο κύκλωμα θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlanner_HeizkreisLoeschenText" xml:space="preserve">
+		<value>Αν διαγράψετε ένα κύκλωμα θέρμανσης, οι υπάρχοντες σωλήνες σύνδεσης στον διανομέα θα διαγραφούν. Θέλετε να διαγράψετε τους σωλήνες σύνδεσης;</value>
+	</data>
+	<data name="ModulKlimaBodenPlanner_HeizkreisLoeschenTitel" xml:space="preserve">
+		<value>Διαγραφή κυκλώματος θέρμανσης;</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Dicht" xml:space="preserve">
+		<value>Στεγανότητα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Modulierend" xml:space="preserve">
+		<value>Διαμόρφωση</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModulierendDoppelt" xml:space="preserve">
+		<value>Διαμόρφωση - διπλή απόσταση</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Laengsseite" xml:space="preserve">
+		<value>Μακριά πλευρά</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Breitseite" xml:space="preserve">
+		<value>Πλατιά πλευρά</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModuleUebernehmenText" xml:space="preserve">
+		<value>Θέλετε να αναλάβετε τα πρόσφατα προστηθέντα Modules;</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModuleUebernehmenTitel" xml:space="preserve">
+		<value>Ανάληψη των Modules</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_NeuerHK" xml:space="preserve">
+		<value>Καινούργιο κύκλωμα θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_KonstruktionAendernText" xml:space="preserve">
+		<value>Αν θέλετε να αλλάξετε τη δομή, όλες οι μονάδες που έχουν ήδη προγραμματιστεί θα διαγραφούν!</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_KonstruktionAendernTitel" xml:space="preserve">
+		<value>Επιβεβαίωση</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_VerschiedeneAusrichtungen" xml:space="preserve">
+		<value>Διαφορετικές ευθυγραμμίσεις έχουν επιλεχθεί</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_AlleUmdrehen" xml:space="preserve">
+		<value>Μετατρέψτε όλο</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_KeinModul" xml:space="preserve">
+		<value>Δεν έχουν επιλεχθεί Modules</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_KeinHK" xml:space="preserve">
+		<value>Κανένα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_VerschiendeHK" xml:space="preserve">
+		<value>Διαφορετικά</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_OrientierungAendernText" xml:space="preserve">
+		<value>Ο προσανατολισμός των Modules για τα οποία έχει ήδη συνδεθεί ένας σύνδεσμος σωλήνων δεν μπορεί πλέον να αλλάξει. Θέλετε να διαγράψετε τα σύνδεση σωλήνων των αντίστοιχων μονάδων;</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_OrientierungAendernTitel" xml:space="preserve">
+		<value>Αφαίρεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_RichtungAendernText" xml:space="preserve">
+		<value>Η κατεύθυνση της ροής των Modules στα οποία έχει ήδη συνδεθεί ένας διανομέας δεν μπορεί πλέον να αλλάξει. Θέλετε να διαγράψετε τους συνδετικούς σωλήνες των αντίστοιχων μονάδων;</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_RichtungAendernTitel" xml:space="preserve">
+		<value>Αφαίρεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_NeueModule" xml:space="preserve">
+		<value>Καινούργια Modules</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NeueTeilflaeche" xml:space="preserve">
+		<value>Νέα επιμέρους επιφάνεια χώρου</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NeueReihen" xml:space="preserve">
+		<value>Καινούργιες σειρές</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_VerschiedeneModulgroessen" xml:space="preserve">
+		<value>Επιλέχθηκαν διαφορετικά μεγέθη Modules</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_KeineTeilflaeche" xml:space="preserve">
+		<value>Κανένα</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_KeineReihe" xml:space="preserve">
+		<value>Κανένα</value>
+	</data>
+	<data name="SelectMoveTargetForm_TeilflaecheWaehlen" xml:space="preserve">
+		<value>Παρακαλώ επιλέξτε μια επιμέρους επιφάνεια στην οποία η επιλεγμένη σειρά είναι να μετακινηθεί.</value>
+	</data>
+	<data name="SelectMoveTargetForm_HeizkreisWaehlen" xml:space="preserve">
+		<value>Επιλέξτε ένα κύκλωμα θέρμανσης στο οποίο η επιλεγμένη επιφάνεια χώρου πρόκειται να μετακινηθεί.</value>
+	</data>
+	<data name="ConcreteActivationProduct_Schnellauslegung" xml:space="preserve">
+		<value>BKA (m²)</value>
+	</data>
+	<data name="ProductType_Decke" xml:space="preserve">
+		<value>Οροφή</value>
+	</data>
+	<data name="ProductType_Boden" xml:space="preserve">
+		<value>Δάπεδο</value>
+	</data>
+	<data name="ProductType_Rest" xml:space="preserve">
+		<value>Παραμένων χώρος:</value>
+	</data>
+	<data name="ProductType_Wand" xml:space="preserve">
+		<value>Τοίχος</value>
+	</data>
+	<data name="ProductType_Dachschraege" xml:space="preserve">
+		<value>Σοφίτα</value>
+	</data>
+	<data name="WandNachLinksVerschienben" xml:space="preserve">
+		<value>Μετακίνηση τοίχου προς τα αριστερά</value>
+	</data>
+	<data name="HithermPlannerForm_Links3" xml:space="preserve">
+		<value>Αριστερά:</value>
+	</data>
+	<data name="HithermCompactPlannerForm_Titel" xml:space="preserve">
+		<value>Hitherm Compact - γραφικό σχέδιο</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten" xml:space="preserve">
+		<value>Ευθυγράμμιση υποδομής</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModuleHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε Modules</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModuleAuswaehlen" xml:space="preserve">
+		<value>Επιλέξτε Modules</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_VerbindeleitungHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε συνδετικό σωλήνα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_VerbindeleitungLoeschen" xml:space="preserve">
+		<value>Αφαίρεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_AnbindeleitungenHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε συνδετικούς σωλήνες</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+		<value>Επεξεργασία συνδετικών σωλήνων</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_KonstruktionEinrichten" xml:space="preserve">
+		<value>Τακτοποιήστε τη δομή</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Konstruktionsart" xml:space="preserve">
+		<value>Τύπος κατασκευής</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Holzstaffeln" xml:space="preserve">
+		<value>Ξύλινα στηρίγματα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Frei" xml:space="preserve">
+		<value>Ελεύθερο</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Konstruktionsparameter" xml:space="preserve">
+		<value>Κατασκευαστικοί παράμετροι</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Achsabstand" xml:space="preserve">
+		<value>Κεντρική απόσταση:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Staffelbreite" xml:space="preserve">
+		<value>Πλάτος υποστήριξης:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Ausrichtung" xml:space="preserve">
+		<value>Ευθυγράμμιση</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ModuleAuslegen" xml:space="preserve">
+		<value>Σχεδιαστικές ενότητες</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_FarbeHK" xml:space="preserve">
+		<value>Χρώμα από το κύκλωμα θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ProWinkel1mVerbindungsleitung" xml:space="preserve">
+		<value>(Επιπλέον 1 μέτρο σωλήνα σύνδεσης ανά γωνία)</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_VerbindungsleitungenInHK" xml:space="preserve">
+		<value>Συνολικό ποσό των συνδετικών σωλήνων του κυκλώματος θέρμανσης:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Heizkreise" xml:space="preserve">
+		<value>Κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_NeueModule2" xml:space="preserve">
+		<value>Καινούργια Modules</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ReferenzmodulFuerAusrichtung" xml:space="preserve">
+		<value>Επιλέξτε μονάδα αναφοράς για την ευθυγράμμιση</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Verbindungen" xml:space="preserve">
+		<value>Συνδέσεις</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Hinzufuegen" xml:space="preserve">
+		<value>Προσθέστε</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Breitseite2" xml:space="preserve">
+		<value>Πλατιά πλευρά</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Laengsseite2" xml:space="preserve">
+		<value>Μακριά πλευρά</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Drehung2" xml:space="preserve">
+		<value>Περιστροφή</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_AusgewaehltesModul" xml:space="preserve">
+		<value>Επιλεγμένη ενότητα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Heizkreis2" xml:space="preserve">
+		<value>Κύκλωμα θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_AusgewaehlteModule" xml:space="preserve">
+		<value>Επιλεγμένες ενότητες</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_DurchstroemungsrichtungUmdrehen" xml:space="preserve">
+		<value>Αντιστρέψτε τη ροή της κατεύθυνσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Berechnungsergebnisse" xml:space="preserve">
+		<value>Υπολογισμένα αποτελέσματα</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_LeistungAnbindeleitungen" xml:space="preserve">
+		<value>Συνδετικοί σωλήνες εξόδου</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_DifferenzZurErwartetenLeistung" xml:space="preserve">
+		<value>Διαφορά από την αναμενόμενη ισχύ:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_ErreichteLeistung" xml:space="preserve">
+		<value>Επιτυγχανόμενη ισχύς:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Kuehlbetrieb" xml:space="preserve">
+		<value>Λειτουργία ψύξης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Heizbetrieb" xml:space="preserve">
+		<value>Λειτουργία θέρμανσης</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Berechnungsergebnisse2" xml:space="preserve">
+		<value>Υπολογισμένα αποτελέσματα:</value>
+	</data>
+	<data name="ModulKlimaBodenPlannerForm_Titel" xml:space="preserve">
+		<value>Modul climate-control floor - γραφικό σχέδιο</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Beplankung" xml:space="preserve">
+		<value>Κάλλυμα</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Unterkonstuktion" xml:space="preserve">
+		<value>Υποδομή</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Breite" xml:space="preserve">
+		<value>Πλάτος:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Laenge" xml:space="preserve">
+		<value>Μήκος:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_BeplankungBekannt" xml:space="preserve">
+		<value>Γνωστό κάλλυμα</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Deckenkonstruktion" xml:space="preserve">
+		<value>Κατασκευή οροφής</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_AkustikdeckeRandfries" xml:space="preserve">
+		<value>Ακουστική οροφή με χύτευση στην άκρη</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Glatt" xml:space="preserve">
+		<value>Λείος</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Randfries" xml:space="preserve">
+		<value>Άκρη των Module:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_KlimamodulSerie" xml:space="preserve">
+		<value>Klimamodul series</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Serie40" xml:space="preserve">
+		<value>Klimamodul series 40</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Serie30" xml:space="preserve">
+		<value>Klimamodul series 30</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Rastermass" xml:space="preserve">
+		<value>Πλέγμα αξίας</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_SummeVerbindungsleitungen" xml:space="preserve">
+		<value>Συνολικό ποσό των συνδετικών σωλήνων σε σειρά:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Teilflaechen" xml:space="preserve">
+		<value>Επιμέρους επιφάνεις χώρων</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_ParalleleReihen" xml:space="preserve">
+		<value>Παράλληλες σειρές στην επιμέρους επιφάνεια χώρου</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Typ" xml:space="preserve">
+		<value>Τύπος:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Verschieben" xml:space="preserve">
+		<value>Μετακίνηση </value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Reihe" xml:space="preserve">
+		<value>Σειρά:</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Teilflaeche" xml:space="preserve">
+		<value>Επιμέρους επιφάνεια χώρου</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_AutomatischeAnpassungen" xml:space="preserve">
+		<value>Αυτόματες ρυθμίσεις</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_VorhandeneReihenNutzen" xml:space="preserve">
+		<value>Αν είναι δυνατόν, να προσθέσετε στις υπάρχουσες γραμμές</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_AutomatischAusrichten" xml:space="preserve">
+		<value>Αν είναι δυνατόν, αυτόματη ευθυγράμμιση</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_VorlaufFlexibel" xml:space="preserve">
+		<value>Εύκαμπτη σωλήνα παροχής</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_RuecklaufFlexibel" xml:space="preserve">
+		<value>Εύκαμπτη σωλήνα επιστροφής</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_Titel" xml:space="preserve">
+		<value>Modul climate-control floor - γραφικό σχέδιο</value>
+	</data>
+	<data name="ConnectionPlanner_Vorlauf" xml:space="preserve">
+		<value>Σωλήνα τροφοδοσίας</value>
+	</data>
+	<data name="ConnectionPlanner_Ruecklauf" xml:space="preserve">
+		<value>Σωλήνα επιστροφής</value>
+	</data>
+	<data name="Project_PlanFehltTitel" xml:space="preserve">
+		<value>Πρόβλημα κατά τη διάρκεια φόρτωσης</value>
+	</data>
+	<data name="Project_FehlerBeimSpeichernText" xml:space="preserve">
+		<value>Δυστυχώς, το έργο δεν θα μπορούσε να σωθεί επειδή υπήρξε ένα σφάλμα κατά την αποθήκευση!</value>
+	</data>
+	<data name="Project_FehlerBeimSpeichernTitel" xml:space="preserve">
+		<value>Σφάλμα κατά τη διάρκεια αποθήκευσης</value>
+	</data>
+	<data name="SystemParametersPanel_FuerProjektVerwendenText" xml:space="preserve">
+		<value>Θέλετε να χρησιμοποιήσετε αυτή τη ρύθμιση για το τρέχον έργο;</value>
+	</data>
+	<data name="SystemParametersPanel_FuerProjektVerwendenTitel" xml:space="preserve">
+		<value>Χρήση ως τρέχον έγο</value>
+	</data>
+	<data name="RoomPicker_RaumgroesseText" xml:space="preserve">
+		<value>Η οριοθετημένη περιοχή επιφάνειας είναι% FLAECHE% m². Μικρές ανακρίβειες του υπολογισμού επιφάνειας μπορεί να αλλάξει χειροκίνητα αργότερα. Θέλετε να αναλάβετε αυτή τη γεωμετρία του δωματίου;</value>
+	</data>
+	<data name="RoomPicker_RaumgroesseTitel" xml:space="preserve">
+		<value>Ανάληψη της γεωμετρίας του δωματίου;</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NichtGenugPlatzText" xml:space="preserve">
+		<value>Δεν θα μπορούσαν να αλλάξουν τα Modules, επειδή δεν υπάρχει αρκετός χώρος</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NichtGenugPlatzTitel" xml:space="preserve">
+		<value>Πληροφορία</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NichtGenugPlatz2Text" xml:space="preserve">
+		<value>Δεν μπορούν να αλλάξουν όλες τις ενότητες, επειδή δεν υπάρχει αρκετός χώρος</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_NichtGenugPlatz2Titel" xml:space="preserve">
+		<value>Πληροφορία</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernText" xml:space="preserve">
+		<value>Η κατεύθυνση της ροής των μονάδων που έχουν ήδη συνδεθεί με το διανομέα δεν μπορεί πλέον να αλλάξει. Θέλετε να διαγράψετε τους συνδετικούς σωλήνες των αντίστοιχων μονάδων;</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_DurchstroemungsrichtungAendernTitel" xml:space="preserve">
+		<value>Αφαίρεση συνδετικών σωλήνων</value>
+	</data>
+	<data name="ModulKlimaDeckeForm_NeueModule" xml:space="preserve">
+		<value>Καινούργια Modules</value>
+	</data>
+	<data name="ConnectionPlannerForm_Boden" xml:space="preserve">
+		<value>Δάπεδο</value>
+	</data>
+	<data name="ConnectionPlannerForm_Decke" xml:space="preserve">
+		<value>Οροφή</value>
+	</data>
+	<data name="ConnectionPlannerForm_ErsterHeizkreis" xml:space="preserve">
+		<value>Πρώτο κύκλωμα θέρμανσης</value>
+	</data>
+	<data name="ConnectionPlannerForm_RestlicheHeizkreise" xml:space="preserve">
+		<value>Υπόλοιπα κυκλώματα θέρμανσης</value>
+	</data>
+	<data name="ConnectionPlannerForm_AnbindeleitungHinzufuegen" xml:space="preserve">
+		<value>Προσθέστε συνδετικό σωλήνα</value>
+	</data>
+	<data name="ConnectionPlannerForm_AnbindeleitungLoeschen" xml:space="preserve">
+		<value>Αφαιρέστε συνδετικό σωλήνα</value>
+	</data>
+	<data name="ConnectionPlannerForm_AnbindeleitungenAendern" xml:space="preserve">
+		<value>Επεξεργασία συνδετικών σωλήνων</value>
+	</data>
+	<data name="ConnectionPlannerForm_Titel" xml:space="preserve">
+		<value>Συνδετικοί σωλήνες - γραφικό σχέδιο</value>
+	</data>
+	<data name="FloorSummaryPanel_Raumhoehe" xml:space="preserve">
+		<value>Ύψος δωματίου για αυτό τον όροφο:</value>
+	</data>
+	<data name="NewGraphicalProductToProductConnection_WieAnschliessen" xml:space="preserve">
+		<value>Θέλετε να συνδέσετε το σύστημα από την πλευρά του σωλήνα τροφοδοσίας ή την πλευρά του σωλήνα επιστροφής;</value>
+	</data>
+	<data name="NewGraphicalProductToProductConnection_Vorlaufseitig" xml:space="preserve">
+		<value>Πλευρά σωλήνα τροφοδοσίας</value>
+	</data>
+	<data name="NewGraphicalProductToProductConnection_Ruecklaufseitig" xml:space="preserve">
+		<value>Πλευρά σωλήνα επιστροφής</value>
+	</data>
+	<data name="NewGraphicalProductToProductConnection_Titel" xml:space="preserve">
+		<value>Συνδέστε σύστημα</value>
+	</data>
+	<data name="SelectPlannedProductForm_Name" xml:space="preserve">
+		<value>Όνομα</value>
+	</data>
+	<data name="SelectRoomForm_Name" xml:space="preserve">
+		<value>Όνομα</value>
+	</data>
+	<data name="SystemParametersPanel_ImportiertePlaene" xml:space="preserve">
+		<value>Εισαγόμενα σχέδια</value>
+	</data>
+	<data name="RoomSummaryPanel_DifferenzZuGrossText" xml:space="preserve">
+		<value>Η διαφορά μεταξύ της επιφάνειας προσδιορίζεται στο γραφικό τρόπο και το εμβαδόν επιφανείας διορθώνεται χειροκίνητα μπορεί να είναι max. %MAXIMUM%.</value>
+	</data>
+	<data name="RoomSummaryPanel_DifferenzZuGrossTitel" xml:space="preserve">
+		<value>Η διαφορά με την επιφάνεια που καθορίζεται στην γραφική κατάσταση είναι πάρα πολύ μεγάλη</value>
+	</data>
+	<data name="RequiredMaterialGrid_Hinweis2" xml:space="preserve">
+		<value>Σημείωση: Οι ποσότητες που προσδιορίζονται από το πρόγραμμα, αντιπροσωπεύουν μια κατευθυντήρια γραμμή και πρέπει να ελέγχονται και να διορθώνονται!</value>
+	</data>
+	<data name="HithermPlannerForm_VL" xml:space="preserve">
+		<value>Είσοδος</value>
+	</data>
+	<data name="HithermPlannerForm_RL" xml:space="preserve">
+		<value>Επιστροφή </value>
+	</data>
+	<data name="HithermPlannerForm_AnbindeleitungImBodenImRaum" xml:space="preserve">
+		<value>Ενδοδαπέδια σωλήνα σύνδεσης μέσα στο δωμάτιο</value>
+	</data>
+	<data name="HithermPlannerForm_HK" xml:space="preserve">
+		<value>HC:</value>
+	</data>
+	<data name="HithermPlanner_VerbindungNichtMoeglichText" xml:space="preserve">
+		<value>Η σύνδεση δεν είναι εφικτή</value>
+	</data>
+	<data name="HithermPlanner_VerbindungNichtMoeglichTitel" xml:space="preserve">
+		<value>Η σύνδεση δεν είναι εφικτή</value>
+	</data>
+	<data name="PlanExport_Hinweis" xml:space="preserve">
+		<value>Σημείωση: Αρχικά, δεν υπάρχει σχέδιο εκτέλεσης</value>
+	</data>
+	<data name="LL_Report_BestellvorschlagWarnung" xml:space="preserve">
+		<value>Σημείωση: Οι ποσότητες που προσδιορίζονται από το πρόγραμμα, αντιπροσωπεύουν μια κατευθυντήρια γραμμή και πρέπει να ελέγχονται και να διορθώνονται!</value>
+	</data>
+	<data name="LL_Report_MaterialbedarfWarnung" xml:space="preserve">
+		<value>Σημείωση: Οι ποσότητες που προσδιορίζονται από το πρόγραμμα, αντιπροσωπεύουν μια κατευθυντήρια γραμμή και πρέπει να ελέγχονται και να διορθώνονται!</value>
+	</data>
+	<data name="ExportPlanForm_BildFehlerText" xml:space="preserve">
+		<value>Χρειάζεται περισσότερη μνήμη για να εξάγετε το σχέδιο.</value>
+	</data>
+	<data name="ExportPlanForm_BildFehlerTitel" xml:space="preserve">
+		<value>Σφάλμα εξαγωγής σχεδίου</value>
+	</data>
+	<data name="ImagePlanOptionsForm_WarnungGroesseText" xml:space="preserve">
+		<value>Λόγω του μεγέθους της εικόνας, κείμενα από το Europlan ίσως δεν είναι δυνατό να διαβαστούν. Εάν είναι δυνατόν, παρακαλούμε να εισάγετε αυτό το σχέδιο σε πολλά μικρά μέρη.</value>
+	</data>
+	<data name="ImagePlanOptionsForm_WarnungGroesseTitel" xml:space="preserve">
+		<value>Προειδοποίηση</value>
+	</data>
+	<data name="PdfRegionPickerForm_BereichAuswaehlen" xml:space="preserve">
+		<value>Επιλέξτε εύρος</value>
+	</data>
+	<data name="RoomSummaryPanel_DeckengemeometrieVerwerfenText" xml:space="preserve">
+		<value>Θέλετε να απορρίψει την καθορισμένη γεωμετρία οροφής; Το γραφικό σχέδιο όλων των συστημάτων οροφής που έχουν προγραμματιστεί σε αυτό το δωμάτιο διαγράφονται.</value>
+	</data>
+	<data name="RoomSummaryPanel_DeckengemeometrieVerwerfenTitel" xml:space="preserve">
+		<value>Απόρριψη γεωμετρίας οροφής;</value>
+	</data>
+	<data name="PdfRegionPickerForm_Auswaehlen" xml:space="preserve">
+		<value>Επιλέξτε εύρος</value>
+	</data>
+	<data name="PdfRegionPickerForm_Bildgroesse" xml:space="preserve">
+		<value>Μέγεθος εικόνας:</value>
+	</data>
+	<data name="PdfRegionPickerForm_Klein" xml:space="preserve">
+		<value>μικρό</value>
+	</data>
+	<data name="PdfRegionPickerForm_Normal" xml:space="preserve">
+		<value>μεσαίο</value>
+	</data>
+	<data name="PdfRegionPickerForm_Gross" xml:space="preserve">
+		<value>μεγάλο</value>
+	</data>
+	<data name="ImportedPlansPanel_GrosserPlanText" xml:space="preserve">
+		<value>Εάν εισάγετε μεγάλα σχέδια, η λειτουργία του γραφικού σχεδίου μπορεί να επιβραδυνθεί! Θέλετε να εισαγάγετε αυτό το σχέδιο ούτως ή άλλως;</value>
+	</data>
+	<data name="ImportedPlansPanel_GrosserPlanTitel" xml:space="preserve">
+		<value>Επιβεβαίωση</value>
+	</data>
+	<data name="PdfRegionPickerForm_GrosserPlanText" xml:space="preserve">
+		<value>Εάν εισάγετε μεγάλα σχέδια, η λειτουργία του γραφικού σχεδιασμού μπορεί να επιβραδυνθεί! Θέλετε να εισαγάγετε αυτό το μέρος του σχεδίου ούτως ή άλλως;</value>
+	</data>
+	<data name="PdfRegionPickerForm_GrosserPlanTitel" xml:space="preserve">
+		<value>Επιβεβαίωση</value>
+	</data>
+	<data name="PipeProductPlanner_Raum" xml:space="preserve">
+		<value>Δωμάτιο:</value>
+	</data>
+	<data name="SystemParametersPanel_DeckenderHintergrund" xml:space="preserve">
+		<value>κάλυψη υπόβαθρου</value>
+	</data>
+	<data name="SystemParametersPanel_Textbox" xml:space="preserve">
+		<value>πλαίσιο κειμένου για Euroval/Ecotherm</value>
+	</data>
+	<data name="SystemParametersPanel_DefaultFontSize" xml:space="preserve">
+		<value>Τυπικό μέγεθος γραμματοσειράς</value>
+	</data>
+	<data name="EcothermPlannerForm_TextboxZuruecksetzen" xml:space="preserve">
+		<value>Επαναφορά μεγέθους κουτί κειμένου</value>
+	</data>
+	<data name="OptionsForm_OrthoRasterung" xml:space="preserve">
+		<value>Ενεργοποιήστε των σαρωμένων σχεδίων</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichern" xml:space="preserve">
+		<value>Αυτόματη αποθήκευση έργου</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_BeplankungVerschieben" xml:space="preserve">
+		<value>Μετακίνηση στρώμα κάλυψης </value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_PlanAnzeigen" xml:space="preserve">
+		<value>Παρουσίαση σχεδίου ως φόντο.</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_StaffelnCProfil" xml:space="preserve">
+		<value>ξύλινη κατασκευή / C - προφίλ</value>
+	</data>
+	<data name="ModulKlimaDeckePlannerForm_StaffelBreite" xml:space="preserve">
+		<value>πλάτος συμπεριλαμβανομένου κενό αέρος</value>
+	</data>
+	<data name="ProductPlannerForm_PlanImHintergrundAnzeigen" xml:space="preserve">
+		<value>Παρουσίαση σχεδίου ως φόντο.</value>
+	</data>
+	<data name="PipeProductPlannerForm_TextboxDrehen" xml:space="preserve">
+		<value>Περιστροφή κουτί κειμένου</value>
+	</data>
+	<data name="ImportedPlansPanel_DwgWarnung" xml:space="preserve">
+		<value>Κατά την εξαγωγή dwg αρχείων θα μπορούσε να δημιουργηθεί ένα αρχείο που δεν μπορεί να ανοίξει από το πρόγραμμα CAD σας. Παρακαλείστε να εξάγετε αυτό το σχέδιο, ακόμη και πριν ξεκινήσετε τον προγραμματισμό και να προσπαθήσετε να το ανοίξετε με το πρόγραμμα CAD σας. Εάν προκύψουν προβλήματα, παρακαλούμε να μετατρέψετε το αρχείο dwg χρησιμοποιώντας μια από τις εξωτερικές εφαρμογές (π.χ. πρόγραμμα CAD σας) σε ένα αρχείο dxf, προκειμένου να εξασφαλιστεί ότι μπορείτε να ανοίξετε το αρχείο που έχει εξαχθεί στο τέλος του σχεδιασμού!</value>
+	</data>
+	<data name="ImportedPlansPanel_DwgWarnungTitel" xml:space="preserve">
+		<value>προειδοποίηση</value>
+	</data>
+	<data name="SystemParametersPanel_Jumboval" xml:space="preserve">
+		<value>Jumboval®</value>
+	</data>
+	<data name="Distributor_Type140" xml:space="preserve">
+		<value>2,33 l/min (σειρά VOLxx)</value>
+	</data>
+	<data name="Distributor_Type240" xml:space="preserve">
+		<value>4 l/min (σειρά VOxx)</value>
+	</data>
+	<data name="Distributor_Type480" xml:space="preserve">
+		<value>8 l/min (σειρά VOHxx)</value>
+	</data>
+	<data name="DistributorPanel_Maximaldurchfluss" xml:space="preserve">
+		<value>μέγιστη ροή ανά κύκλωμα:</value>
+	</data>
+	<data name="JumbovalProduct_JV20_100" xml:space="preserve">
+		<value>JV20/100</value>
+	</data>
+	<data name="JumbovalProduct_JV20_80" xml:space="preserve">
+		<value>JV20/80</value>
+	</data>
+	<data name="ProductConnection_AnschlussAnTichelmann" xml:space="preserve">
+		<value>%ID%: %NAME% (Tichelmann)</value>
+	</data>
+	<data name="SelectConnectionForProductForm_AnschlussAnTichelmannverteiler" xml:space="preserve">
+		<value>Σύνδεση με Tichelmann σε %ID%: </value>
+	</data>
+	<data name="SelectConnectionForProductForm_Tichelmannverteiler" xml:space="preserve">
+		<value>Tichelmann σε  %ID%: %NAME%</value>
+	</data>
+	<data name="SelectConnectionForProductForm_Verteiler" xml:space="preserve">
+		<value>Διανομέας %ID%: %NAME%</value>
+	</data>
+	<data name="ConstructionTypeManager_BenutzerBeton" xml:space="preserve">
+		<value>Χρήστες να ενισχύσουν το σκυρόδεμα</value>
+	</data>
+	<data name="ConstructionTypeManager_StandardBeton" xml:space="preserve">
+		<value>Πρότυπο οπλισμένο σκυρόδεμα</value>
+	</data>
+	<data name="Distributor_DurchflussZuGrossHeiz" xml:space="preserve">
+		<value>Η συνολική ροή όλων των κυκλωμάτων που συνδέονται με το διανομέα είναι πολύ μεγάλη σε λειτουργία θέρμανσης (%VALUE%&gt;% MAXIMUM%)</value>
+	</data>
+	<data name="Distributor_DurchflussZuGrossKuehl" xml:space="preserve">
+		<value>Η συνολική ροή όλων των κυκλωμάτων που συνδέονται με το διανομέα είναι πολύ μεγάλη σε λειτουργία ψύξης (%VALUE%&gt;% MAXIMUM%)</value>
+	</data>
+	<data name="ErrorMessage_EstrichueberdeckungZuGross" xml:space="preserve">
+		<value>η κάλυψη της διάστρωσης είναι πολύ μεγάλη (%VALUE%cm &gt; %MAXIMUM%cm)</value>
+	</data>
+	<data name="ErrorMessage_EstrichueberdeckungZuKlein" xml:space="preserve">
+		<value>η κάλυψη της διάστρωσης είναι πολύ μικρή (%VALUE%cm &gt; %MAXIMUM%cm)</value>
+	</data>
+	<data name="PlannedProductPanel_Estrichueberdeckung" xml:space="preserve">
+		<value>κάλυψη διάστρωσης</value>
+	</data>
+	<data name="JumbovalProduct_NotificationVerteiler" xml:space="preserve">
+		<value>Το σύστημα είναι συνδεδεμένο με ένα διανομέα % TYPE%, αλλά θα πρέπει να συνδεθεί με έναν διανομέα σειράς VOHxx (μέγιστη ροή ανά ομάδα: 8 l / min)</value>
+	</data>
+	<data name="Construction_BET01" xml:space="preserve">
+		<value>χωρίς δάπεδο</value>
+	</data>
+	<data name="Construction_BET02" xml:space="preserve">
+		<value>κεραμικά</value>
+	</data>
+	<data name="Construction_BET03" xml:space="preserve">
+		<value>δάπεδο φυσικής πέτρας</value>
+	</data>
+	<data name="Construction_STD10" xml:space="preserve">
+		<value>χωρίς δάπεδο</value>
+	</data>
+	<data name="Construction_WD08" xml:space="preserve">
+		<value>αναστολή 10 εκατοστών</value>
+	</data>
+	<data name="ConstructionEditorGrid_Beton" xml:space="preserve">
+		<value>οπλισμένο σκυρόδεμα</value>
+	</data>
+	<data name="Distributor_TypeName140" xml:space="preserve">
+		<value>VOLxx (μέγιστη ροή ανά κύκλωμα: 2,33 l/min)</value>
+	</data>
+	<data name="Distributor_TypeName240" xml:space="preserve">
+		<value>VOxx (μέγιστη ροή ανά κύκλωμα: 4 l/min)</value>
+	</data>
+	<data name="Distributor_TypeName480" xml:space="preserve">
+		<value>VOHxx (μέγιστη ροή ανά κύκλωμα: 8 /min)</value>
+	</data>
+	<data name="Material_JV01" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H)</value>
+	</data>
+	<data name="Material_JV10" xml:space="preserve">
+		<value>Jumboval® οβάλ μούφα συγκόλλησης</value>
+	</data>
+	<data name="Material_JV15" xml:space="preserve">
+		<value>Jumboval® κουμπωτή ράγα</value>
+	</data>
+	<data name="Material_JV20" xml:space="preserve">
+		<value>Jumboval® σωλήνα σύνδεσης διανομέα 50 εκατοστά</value>
+	</data>
+	<data name="Material_JV21" xml:space="preserve">
+		<value>Jumboval® σωλήνα σύνδεσης διανομέα 100 εκατοστά</value>
+	</data>
+	<data name="Material_VOH02" xml:space="preserve">
+		<value>HA οβάλ διανομέας 2 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH03" xml:space="preserve">
+		<value>HA οβάλ διανομέας 3 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH04" xml:space="preserve">
+		<value>HA οβάλ διανομέας 4 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH05" xml:space="preserve">
+		<value>HA οβάλ διανομέας 5 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH06" xml:space="preserve">
+		<value>HA οβάλ διανομέας 6 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH07" xml:space="preserve">
+		<value>HA οβάλ διανομέας 7 groups 8l/min</value>
+	</data>
+	<data name="Material_VOH08" xml:space="preserve">
+		<value>HA οβάλ διανομέας 8 groups 8l/min</value>
+	</data>
+	<data name="Material_VOL02" xml:space="preserve">
+		<value>HA οβάλ διανομέας 2 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL03" xml:space="preserve">
+		<value>HA οβάλ διανομέας 3 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL04" xml:space="preserve">
+		<value>HA οβάλ διανομέας 4 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL05" xml:space="preserve">
+		<value>HA οβάλ διανομέας 5 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL06" xml:space="preserve">
+		<value>HA οβάλ διανομέας 6 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL07" xml:space="preserve">
+		<value>HA οβάλ διανομέας 7 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL08" xml:space="preserve">
+		<value>HA οβάλ διανομέας 8 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL09" xml:space="preserve">
+		<value>HA οβάλ διανομέας 9 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL10" xml:space="preserve">
+		<value>HA οβάλ διανομέας 10 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL11" xml:space="preserve">
+		<value>HA οβάλ διανομέας 11 groups 2,33 l/min</value>
+	</data>
+	<data name="Material_VOL12" xml:space="preserve">
+		<value>HA οβάλ διανομέας 12 groups 2,33 l/min</value>
+	</data>
+	<data name="ModulKlimaDeckeProduct_NotificationVerteiler" xml:space="preserve">
+		<value>Το σύστημα είναι συνδεδεμένο με ένα διανομέα % TYPE%, αλλά θα πρέπει να συνδεθεί με ένα διανομέα σειράς VOxx (μέγιστη ροή ανά ομάδα: 8 l / min)</value>
+	</data>
+	<data name="PlannedProductPanel_Schienenabstand" xml:space="preserve">
+		<value>απόσταση κουμπωτής ράγας:</value>
+	</data>
+	<data name="PipeProductPlanner_Durchfluss" xml:space="preserve">
+		<value>ροή:</value>
+	</data>
+	<data name="Material_EV38" xml:space="preserve">
+		<value>καλώδιο fixer 3,5 x 200 χιλιοστά</value>
+	</data>
+	<data name="Material_JV02" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H) 21 χιλιοστά</value>
+	</data>
+	<data name="Material_JV03" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H) 25 χιλιοστά</value>
+	</data>
+	<data name="Material_JV11" xml:space="preserve">
+		<value>Jumboval® μούφα συγκόλλησης οβάλ/στρογγυλή 25 χιλιοστά</value>
+	</data>
+	<data name="Material_JV12" xml:space="preserve">
+		<value>Jumboval® μούφα συγκόλλησης οβάλ/στρογγυλή 32 χιλιοστά</value>
+	</data>
+	<data name="Material_JV13" xml:space="preserve">
+		<value>Jumboval® γωνία μεταφοράς (στρογγυλό/οβάλ) 21 χιλιοστά</value>
+	</data>
+	<data name="Material_JV14" xml:space="preserve">
+		<value>Jumboval® γωνία μεταφοράς (στρογγυλό/οβάλ) 25 χιλιοστά</value>
+	</data>
+	<data name="Material_JV97" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H) τάπες κλεισίματος (μαύρες)</value>
+	</data>
+	<data name="Material_JV98" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H) 5 μέτρα μήκος</value>
+	</data>
+	<data name="Material_JV99" xml:space="preserve">
+		<value>Jumboval® σωλήνα ασφαλείας DD (H) μικρού μήκους</value>
+	</data>
+	<data name="PipeProductPlannerForm_Farbe" xml:space="preserve">
+		<value>Χρώμα κυκλώματος:</value>
+	</data>
+	<data name="ProjectReport_RaumflaecheJumboval" xml:space="preserve">
+		<value>Συνολική έκταση δωμάτιου (δωμάτια με Jumboval® ενδοδαπέδια θέρμανση)</value>
+	</data>
+	<data name="LL_Report_FlaechenuebersichtJumboval" xml:space="preserve">
+		<value>Επισκόπηση χώρου Jumboval® ενδοδαπέδια θέρμανση</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschoss" xml:space="preserve">
+		<value>Υπολογισμός Jumboval® ενδοδαπέδιας θέρμανσης - %GESCHOSS%</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschossHeiz" xml:space="preserve">
+		<value>Υπολογισμός Jumboval® ενδοδαπέδιας θέρμανσης - %GESCHOSS% (λειτουργία θέρμανσης)</value>
+	</data>
+	<data name="LL_Report_AuslegungJumbovalGeschossKuehl" xml:space="preserve">
+		<value>Υπολογισμός Jumboval® ενδοδαπέδιας θέρμανσης - %GESCHOSS% (λειτουργία ψύξης)</value>
+	</data>
+	<data name="LL_Report_BilanzJumboval" xml:space="preserve">
+		<value>Ισσοροπία Jumboval® ενδοδαπέδιας θέρμανσης</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumboval" xml:space="preserve">
+		<value>Δεδομένα εγκατάστασης Jumboval® ενδοδαπέδιας θέρμανσης  - %GESCHOSS%</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalAufenthaltszone" xml:space="preserve">
+		<value>ζώνη διαβίωσης</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile1" xml:space="preserve">
+		<value>mh/</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalDurchflussProHkZeile2" xml:space="preserve">
+		<value>HC μήκος/λεπτό</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheProHk" xml:space="preserve">
+		<value>χώρος/ HC</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile1" xml:space="preserve">
+		<value>A unh.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalFlaecheUnbeheiztZeile2" xml:space="preserve">
+		<value>m²</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile1" xml:space="preserve">
+		<value>Θερμότητα-</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalHeizkreiseZeile2" xml:space="preserve">
+		<value>κυκλώματα  </value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalLaengeProHk" xml:space="preserve">
+		<value>μήκος/ HC</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRandzone" xml:space="preserve">
+		<value>περιφεριακή ζώνη</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNameZeile1" xml:space="preserve">
+		<value>Όνομα</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNrZeile1" xml:space="preserve">
+		<value>Δωμάτιο</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRaumNrZeile2" xml:space="preserve">
+		<value>Νουμ.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile1" xml:space="preserve">
+		<value>Ισωλήνα/</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalRohrlaengeProHkZeile2" xml:space="preserve">
+		<value>HC μέτρο</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile1" xml:space="preserve">
+		<value>Εξάρτημα-</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalTeilsystemZeile2" xml:space="preserve">
+		<value>σύστημα</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerlegeart" xml:space="preserve">
+		<value>απόστ.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile1" xml:space="preserve">
+		<value>lns.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalWdKonstruktionZeile2" xml:space="preserve">
+		<value>Κασκευή</value>
+	</data>
+	<data name="NewDistributorForm_RegelkreisTichelmannText" xml:space="preserve">
+		<value>Σε αυτή την ομάδα αντλίας κανένας διανομέας δεν μπορεί να συνδεθεί, γιατί εκεί είναι ήδη συνδεδεμένο ένα σύστημα Tichelmann.</value>
+	</data>
+	<data name="NewDistributorForm_RegelkreisTichelmannTitel" xml:space="preserve">
+		<value>Σφάλμα</value>
+	</data>
+	<data name="SelectConnectionForProductForm_AnschlussAnSystemAnTichelmann" xml:space="preserve">
+		<value>Η σύνδεση δεν ήταν εφικτή. Τα συστήματα θέρμανσης όπου χρησιμοποιείται Tichelmann, κανένα άλλο σύστημα δεν μπορεί να συνδεθεί.</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEcothermVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEcothermVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEurovalVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenEurovalVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermCompactVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenHithermVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenJumbovalVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile1" xml:space="preserve">
+		<value>Διανομέας</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimabodenVerteilerZeile2" xml:space="preserve">
+		<value>Αριθμός</value>
+	</data>
+	<data name="LL_Report_VerlegedatenKlimadeckeVerteiler" xml:space="preserve">
+		<value>Αριθμός διανομέα</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichernInterval" xml:space="preserve">
+		<value>Διάστημα:</value>
+	</data>
+	<data name="OptionsForm_AutomatischSichernMin" xml:space="preserve">
+		<value>λεπτά</value>
+	</data>
+	<data name="ProjectReport_VerteileranschlussSub" xml:space="preserve">
+		<value>Υπό</value>
+	</data>
+	<data name="ProjectReport_VerteileranschlussTichelmann" xml:space="preserve">
+		<value>Tichelm.</value>
+	</data>
+	<data name="JumbovalProduct_Manuell" xml:space="preserve">
+		<value>χειροκίνητα</value>
+	</data>
+	<data name="Category_3cc2d6ca_e0eb_48e0_9c4d_a72651ccb01b" xml:space="preserve">
+		<value>Ενδοδαπέδια θέρμανση Jumboval</value>
+	</data>
+	<data name="Material_HR58" xml:space="preserve">
+		<value>Hitherm®+ τάπα 21 χιλιοστά</value>
+	</data>
+	<data name="Material_HX15" xml:space="preserve">
+		<value>Hisan μούφα μετάβασης θυληκό 21x1/2"</value>
+	</data>
+	<data name="Material_HX20" xml:space="preserve">
+		<value>Hisan μούφα μετάβασης αρσενικό 21x1/2"</value>
+	</data>
+	<data name="Material_HX30" xml:space="preserve">
+		<value>Hisan γωνιά μετάβασης θυληκό 21x1/2"</value>
+	</data>
+	<data name="Material_HX35" xml:space="preserve">
+		<value>Hisan γωνιά μετάβασης αρσενικό 21x1/2"</value>
+	</data>
+	<data name="Material_MK41" xml:space="preserve">
+		<value>Klimamodul 60/60 type "B"</value>
+	</data>
+	<data name="Material_MK42" xml:space="preserve">
+		<value>Klimamodul 60/60 type "C"</value>
+	</data>
+	<data name="Material_MK43" xml:space="preserve">
+		<value>Klimamodul 60/60 type "D"</value>
+	</data>
+	<data name="Material_MK59" xml:space="preserve">
+		<value>εύκαμπτος σωλήνας 1/2" 800mm</value>
+	</data>
+	<data name="Material_MK60" xml:space="preserve">
+		<value>εύκαμπτος σωλήνας 1/2" 1000mm</value>
+	</data>
+	<data name="PlannedJumbovalProductPanel_WarnungGrosserRaum" xml:space="preserve">
+		<value>Ο αυτόματος υπολογισμός μπορεί να πάρει κάποιο χρόνο για να ολοκληρωθεί, για τα πολύ μεγάλα δωμάτια. Είστε βέβαιοι ότι θέλετε να μεταβείτε σε αυτόματο υπολογισμό;</value>
+	</data>
+	<data name="PlannedJumbovalProductPanel_WarnungGrosserRaumTitel" xml:space="preserve">
+		<value>Προσοχή</value>
+	</data>
+	<data name="SelectConnectionForProductForm_WarnungGrosserRaum" xml:space="preserve">
+		<value>Ο αυτόματος υπολογισμός μπορεί να πάρει κάποιο χρόνο για να ολοκληρωθεί, για τα πολύ μεγάλα δωμάτια. Θέλετε να υπολογίσετε αυτό το σύστημα χειροκίνητα;</value>
+	</data>
+	<data name="SelectConnectionForProductForm_WarnungGrosserRaumTitel" xml:space="preserve">
+		<value>Προσοχή</value>
+	</data>
+	<data name="Unit_Prefix_Kilo" xml:space="preserve">
+		<value>k</value>
+	</data>
+	<data name="Unit_Prefix_Mega" xml:space="preserve">
+		<value>M</value>
+	</data>
+	<data name="PartitionSystemForm_NewDistributorName" xml:space="preserve">
+		<value>%SYSTEM% %RAUMNAME% - %NUMBER%/%TOTAL%</value>
+	</data>
+	<data name="ModulKlimaDeckeProduct_NotificationTichelmann" xml:space="preserve">
+		<value>Σε Tichelmann συστήματα σωληνώσεων πρέπει να είναι σχεδιασμένα με το χέρι από την άποψη της ταχύτητας ροής και απώλεια πίεσης.</value>
+	</data>
+	<data name="PlannedProductPanel_SystemAufteilen" xml:space="preserve">
+		<value>διάσπαση σε διανομείς</value>
+	</data>
 </root>

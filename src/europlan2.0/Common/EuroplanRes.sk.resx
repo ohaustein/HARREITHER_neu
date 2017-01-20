@@ -107,7 +107,7 @@
 		<value>Stiahni beta-aktualizácie</value>
 	</data>
 	<data name="AbstractLicensedModule_Jumboval" xml:space="preserve">
-		<value>Modul Jumboval®</value>
+		<value>Jumboval® Podlahové kúrenie</value>
 	</data>
 	<data name="AbstractLicensedModule_BKA" xml:space="preserve">
 		<value>Aktivácia betónového jadra</value>
@@ -128,10 +128,10 @@
 		<value>Interná licencia</value>
 	</data>
 	<data name="AbstractLicensedModule_ModulBoden" xml:space="preserve">
-		<value>Modul Klimaboden</value>
+		<value>Modul Klima-Boden (podl.)</value>
 	</data>
 	<data name="AbstractLicensedModule_ModulDecke" xml:space="preserve">
-		<value>Modul Klimadecke</value>
+		<value>Modul Klima-Decke (Strop)</value>
 	</data>
 	<data name="AuslegeAssistentForm_Aufenthaltszone" xml:space="preserve">
 		<value>Aktívna zóna</value>
@@ -140,13 +140,13 @@
 		<value>Pomoc pri dimenzovaní</value>
 	</data>
 	<data name="AuslegeAssistentForm_Beschreibung" xml:space="preserve">
-		<value>Dve schémy znázorňujú potrebné typy inštalácie pri rôznych teplotách na prítoku.</value>
+		<value>Dva grafy znázorňujú potrebné typy inštalácie pri rôznych teplotách na prítoku.</value>
 	</data>
 	<data name="AuslegeAssistentForm_Ecotherm" xml:space="preserve">
-		<value>Ecotherm®</value>
+		<value>Ecotherm</value>
 	</data>
 	<data name="AuslegeAssistentForm_Euroval" xml:space="preserve">
-		<value>Euroval®</value>
+		<value>Euroval</value>
 	</data>
 	<data name="AuslegeAssistentForm_Ev" xml:space="preserve">
 		<value>EV</value>
@@ -155,7 +155,7 @@
 		<value>Okrajová zóna</value>
 	</data>
 	<data name="AuslegeAssistentForm_SystemInRaum" xml:space="preserve">
-		<value>%SYSTEM% in %RAUMID% (%RAUMNAME%)</value>
+		<value>%SYSTEM% v %RAUMID% (%RAUMNAME%)</value>
 	</data>
 	<data name="AuslegeAssistentForm_Tv" xml:space="preserve">
 		<value>Tpr°C</value>
@@ -176,10 +176,10 @@
 		<value>Tepelná izolácia</value>
 	</data>
 	<data name="Category_6d414984_2bc3_41ed_83a0_5a085911689b" xml:space="preserve">
-		<value>Hitherm® Compact klimatizovaná stena</value>
+		<value>Hitherm Compact</value>
 	</data>
 	<data name="Category_6ee36a0d_5077_4ac7_bba3_fb7dcde87a05" xml:space="preserve">
-		<value>Hitherm® klimatizovaná stena</value>
+		<value>Hitherm klimatizovaná stena</value>
 	</data>
 	<data name="Category_733a961b_265b_4119_aa6d_64f29cc6aee3" xml:space="preserve">
 		<value>Rozvádzač - príslušenstvo</value>
@@ -188,10 +188,10 @@
 		<value>Rúry a tvarovky pre stenové vykurovanie</value>
 	</data>
 	<data name="Category_763da832_711a_41af_ad59_3d3527be6131" xml:space="preserve">
-		<value>Euroval® podlahové kúrenie</value>
+		<value>Euroval podlahové kúrenie</value>
 	</data>
 	<data name="Category_785616e8_757a_4442_ba9f_b7deed7d03ce" xml:space="preserve">
-		<value>Všeobecné</value>
+		<value>Všeobecne</value>
 	</data>
 	<data name="Category_92fea213_58a1_405a_ba72_17e4e851848c" xml:space="preserve">
 		<value>Stenové kúrenie všeobecne</value>
@@ -200,7 +200,7 @@
 		<value>Modulový klimatizovaný strop</value>
 	</data>
 	<data name="Category_a8824ebb_19ac_4ff8_90c1_320b1a15225b" xml:space="preserve">
-		<value>Ecotherm® podlahové kúrenie</value>
+		<value>Ecotherm podlahové kúrenie</value>
 	</data>
 	<data name="Category_Daemmung" xml:space="preserve">
 		<value>Izolácia</value>
@@ -218,7 +218,7 @@
 		<value>Stenové kúrenie</value>
 	</data>
 	<data name="ConnectionPipe_Euroval" xml:space="preserve">
-		<value>Euroval FBH 24/17</value>
+		<value>Euroval Podl.Kur. 24/17</value>
 	</data>
 	<data name="ConnectionPipe_Gedaemmt" xml:space="preserve">
 		<value>PR+SP</value>
@@ -236,7 +236,9 @@
 		<value>PR </value>
 	</data>
 	<data name="ConnectionPipePanel_DurchRaumCol" xml:space="preserve">
-		<value>cez miestnosť č.</value>
+		<value>cez
+Miestn.
+č.</value>
 	</data>
 	<data name="ConnectionPipePanel_FlaecheCol" xml:space="preserve">
 		<value>Plocha</value>
@@ -248,22 +250,28 @@
 		<value>Číslo</value>
 	</data>
 	<data name="ConnectionPipePanel_KuehlleistungCol" xml:space="preserve">
-		<value>Chladiaci výkon</value>
+		<value>Chlad.
+Výkon</value>
 	</data>
 	<data name="ConnectionPipePanel_NurErsterHkCol" xml:space="preserve">
-		<value>Iba prvý VO</value>
+		<value>Iba
+prvý
+VO</value>
 	</data>
 	<data name="ConnectionPipePanel_RaumCol" xml:space="preserve">
-		<value>Miestnosť</value>
+		<value>Miestn.</value>
 	</data>
 	<data name="ConnectionPipePanel_RohrsystemCol" xml:space="preserve">
-		<value>Potrubný systém</value>
+		<value>Rúrový-
+system</value>
 	</data>
 	<data name="ConnectionPipePanel_RuecklaufCol" xml:space="preserve">
-		<value>Dĺžka spiatočky (m)</value>
+		<value>Dĺžka
+Spiatočky
+(m)</value>
 	</data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
-		<value>Podsystém</value>
+		<value>Podsys.</value>
 	</data>
 	<data name="ConnectionPipePanel_UngueltigeProduktNrText" xml:space="preserve">
 		<value>Zadaný systémový kód je neplatný. Zadajte správny systémový kód!</value>
@@ -272,16 +280,21 @@
 		<value>Chyba</value>
 	</data>
 	<data name="ConnectionPipePanel_UngueltigeRaumNrText" xml:space="preserve">
-		<value>Zadané číslo miestnosti je neplatné. Zadajte správne číslo miestnosti!</value>
+		<value>Zadané číslo miestnosti je nesprávne. Zadajte správne číslo miestnosti!</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegeartCol" xml:space="preserve">
-		<value>Typ ukladania</value>
+		<value>Typ-
+ukladania</value>
 	</data>
 	<data name="ConnectionPipePanel_VerlegedatenDruckenCol" xml:space="preserve">
-		<value>Tlač údaje pre ukladanie</value>
+		<value>Tlačiť-
+údaje
+ukladania</value>
 	</data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-		<value>Dĺžka prítoku (m)</value>
+		<value>Dĺžka
+prítoku
+(m)</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
 		<value>Plocha pokrytá pripájacím potrubím</value>
@@ -416,7 +429,7 @@
 		<value>Izolačná doska 50mm + Polystyrén 30mm</value>
 	</data>
 	<data name="Construction_WD07" xml:space="preserve">
-		<value>Škrupina izolácie modulu</value>
+		<value>Výlisok izolácie modulu</value>
 	</data>
 	<data name="ConstructionEditor_DickeCol" xml:space="preserve">
 		<value>hr (mm)</value>
@@ -467,7 +480,7 @@
 		<value>všetko</value>
 	</data>
 	<data name="ConstructionEditorGrid_AngezeigteKonstruktionen" xml:space="preserve">
-		<value>Zobrazené konštrukcie</value>
+		<value>Uvedenéné konštrukcie</value>
 	</data>
 	<data name="ConstructionEditorGrid_Estrich" xml:space="preserve">
 		<value>Poter</value>
@@ -509,22 +522,22 @@
 		<value>Štandardná skladba tepelnej izolácie </value>
 	</data>
 	<data name="ConstructionTypeManager_StandardDecke" xml:space="preserve">
-		<value>Štandardná skladba stropu podľa užívateľa</value>
+		<value>Štandardná skladba stropu</value>
 	</data>
 	<data name="ConstructionTypeManager_StandardEstrich" xml:space="preserve">
-		<value>Štandardná skladba poteru podľa užívateľa</value>
+		<value>Štandardná skladba poteru</value>
 	</data>
 	<data name="ConstructionTypeManager_StandardStahlblech" xml:space="preserve">
-		<value>Štandardná skladba z oceľového plechu podľa užívateľa</value>
+		<value>Štandardná skladba z oceľového plechu</value>
 	</data>
 	<data name="ConstructionTypeManager_StandardTrocken" xml:space="preserve">
-		<value>Štandardná suchá skladba podľa užívateľa</value>
+		<value>Štandardná suchá skladba</value>
 	</data>
 	<data name="ConstructionTypeManager_StandardTrockenestrich" xml:space="preserve">
-		<value>Štandardná skladba zo suchým poterom podľa užívateľa</value>
+		<value>Štandardná skladba zo suchým poterom</value>
 	</data>
 	<data name="ConstructionTypeManager_StandardWand" xml:space="preserve">
-		<value>Štandardná skladba steny podľa užívateľa</value>
+		<value>Štandardná skladba steny</value>
 	</data>
 	<data name="DataImportManager_SyncCaption" xml:space="preserve">
 		<value>Synchronizovať?</value>
@@ -533,13 +546,13 @@
 		<value>Podlahy alebo miestosti sú už vytvorené. Zvoľte 'áno' pre synchronizáciu údajov, alebo 'nie' pre nahradenie existujúcich údajov importovanými údajmi.</value>
 	</data>
 	<data name="Distributor_Hollaender32mm" xml:space="preserve">
-		<value>Spojka Hollander Ø 32 mm s vonkajším závitom</value>
+		<value>Pripájací Hollander Ø 32 mm PPR</value>
 	</data>
 	<data name="Distributor_HollaenderIg" xml:space="preserve">
-		<value>Spojka Hollander 1" s vnútorným závitom</value>
+		<value>Pripájací Hollander 1" s vnútorným závitom MS</value>
 	</data>
 	<data name="Distributor_KeinHollaender" xml:space="preserve">
-		<value>Žiadna spojka Hollander</value>
+		<value>Bez Hollandera</value>
 	</data>
 	<data name="Distributor_Unbenannt" xml:space="preserve">
 		<value>nemoznačený</value>
@@ -554,7 +567,7 @@
 		<value>%VALUE% (aktívny)</value>
 	</data>
 	<data name="DistributorPanel_Anschlusshollaender" xml:space="preserve">
-		<value>Spojka Hollander:</value>
+		<value>Pripájací Hollander:</value>
 	</data>
 	<data name="DistributorPanel_Bezeichnung" xml:space="preserve">
 		<value>Označenie:</value>
@@ -584,7 +597,7 @@
 		<value>Max. vykurovacie okruhy:</value>
 	</data>
 	<data name="DistributorPanel_Nummer" xml:space="preserve">
-		<value>Číslo</value>
+		<value>Číslo:</value>
 	</data>
 	<data name="DistributorPanel_Regelkreis" xml:space="preserve">
 		<value>Riadiaci okruh:</value>
@@ -605,7 +618,7 @@
 		<value>Priradené vykurovacie okruhy:</value>
 	</data>
 	<data name="DistributorPanel_Zusaetzlich" xml:space="preserve">
-		<value>+ %VALUE% (additional) = %SUM%</value>
+		<value>+ %VALUE% (ďalšie) = %SUM%</value>
 	</data>
 	<data name="DistributorPanel_ZusaetzlicheHeizkreise" xml:space="preserve">
 		<value>Ďalšie vykurovacie okruhy:</value>
@@ -704,7 +717,7 @@
 		<value>Žiadne automatické dimenzovanie nie je možné</value>
 	</data>
 	<data name="ErrorMessage_ModulAnzahl" xml:space="preserve">
-		<value>Vykurovací okruh HK%HK% obsahuje príliš veľa modulov (%VALUE% &gt; %MAXIMUM%)</value>
+		<value>Vykurovací okruh VO%VO% obsahuje príliš veľa modulov (%VALUE% &gt; %MAXIMUM%)</value>
 	</data>
 	<data name="ErrorMessage_ModulBelegung" xml:space="preserve">
 		<value>Moduly boli priradené na viac než 75% celkovej plochy (%VALUE% &gt; %MAXIMUM%)</value>
@@ -713,13 +726,13 @@
 		<value>Pridelené moduly vyžadujú viac priestoru, než je k dispozícii pre tento systém (%VALUE%m² &gt; %MAXIMUM%m²)</value>
 	</data>
 	<data name="ErrorMessage_ModulReiheLaenge" xml:space="preserve">
-		<value>Vykurovací okruh HK%HK% obsahuje príliš veľa modulov zapojených v sérii (%VALUE% &gt; %MAXIMUM%)</value>
+		<value>Vykurovací okruh VO%VO% obsahuje príliš veľa modulov zapojených v sérii (%VALUE% &gt; %MAXIMUM%)</value>
 	</data>
 	<data name="ErrorMessage_ModulReihen" xml:space="preserve">
-		<value>Čiastková plocha %TEILFL% vo vykurovacom okruhu HK%HK% obsahuje príliš veľa paralerných radov (%VALUE% &gt; %MAXIMUM%)</value>
+		<value>Čiastková plocha %TEILFL% vo vykurovacom okruhu VO%VO% obsahuje príliš veľa paralerných radov (%VALUE% &gt; %MAXIMUM%)</value>
 	</data>
 	<data name="ErrorMessage_ModulReiheUnterschied" xml:space="preserve">
-		<value>Rad %REIHELANG% v čiastkovej ploche %TEILFL% vo vykurovacom okruhu HK%HK% je dlhší o viac než jeden modul než rad %REIHEKURZ% (%VALUELANG%, %VALUEKURZ%)</value>
+		<value>Rad %REIHELANG% v čiastkovej ploche %TEILFL% vo vykurovacom okruhu VO%VO% je dlhší o viac než jeden modul než rad %REIHEKURZ% (%VALUELANG%, %VALUEKURZ%)</value>
 	</data>
 	<data name="ErrorMessage_Registerflaeche" xml:space="preserve">
 		<value>Plocha modulov vo vykurovacom okruhu %HK% je príliš veľká (%VALUE%m² &gt; %MAXIMUM%m²)</value>
@@ -812,10 +825,12 @@
 		<value>Aktivovať pokročilé opravy</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_AnbindungAktivieren" xml:space="preserve">
-		<value>Pred-volené</value>
+		<value>Pred-
+volené</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_AnbindungProzent" xml:space="preserve">
-		<value>Plocha%</value>
+		<value>Plocha
+%</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_Deaktivieren" xml:space="preserve">
 		<value>Používať iba štandardné opravy (žiadne pokročilé opravy)</value>
@@ -836,7 +851,7 @@
 		<value>Celkový súčet podielov okrajové zóny musí tvoriť 100% z celkovej plochy</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_Flaeche" xml:space="preserve">
-		<value>Podiel celkovej plochy</value>
+		<value>Podiel z celkovej plochy</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_FlaecheProzent" xml:space="preserve">
 		<value>%
@@ -850,7 +865,7 @@
 		<value>Číslo vykurovacieho okruhu</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_Randzone" xml:space="preserve">
-		<value>Zdieľať okrajovú zónu</value>
+		<value>Podiel okrajovej zóny</value>
 	</data>
 	<data name="ExtendedCorrectionsGrid_RandzoneEcken" xml:space="preserve">
 		<value>Počet rohov</value>
@@ -930,7 +945,7 @@
 (m²)</value>
 	</data>
 	<data name="FloorSummaryPanel_FlaecheLang" xml:space="preserve">
-		<value>Plocha</value>
+		<value>Plocha miestnosti</value>
 	</data>
 	<data name="FloorSummaryPanel_Fremdwaermeleistung" xml:space="preserve">
 		<value>QEx
@@ -953,7 +968,7 @@
 		<value>Režim kúrenia</value>
 	</data>
 	<data name="FloorSummaryPanel_KeinRegelkreisText" xml:space="preserve">
-		<value>Rozvádzač vyžaduje riadiaci obvod, ku ktorému môže byť pripojený. Vytvorte aspoň jeden riadiaci obvod pod "Riadiace obvody"</value>
+		<value>Rozvádzač vyžaduje riadiaci obvod, ku ktorému môže byť pripojený. Vytvorte aspoň jeden riadiaci okruh pod "Riadiace okruhy"</value>
 	</data>
 	<data name="FloorSummaryPanel_KeinRegelkreisTitel" xml:space="preserve">
 		<value>Riadiaci okruh nie je dostupný</value>
@@ -969,23 +984,25 @@
 		<value>Požadovaný chladiaci výkon podľa výpočtu výkonu chladenia</value>
 	</data>
 	<data name="FloorSummaryPanel_Luftfeuchtigkeit" xml:space="preserve">
-		<value>RH
+		<value>RV
 (%)</value>
 	</data>
 	<data name="FloorSummaryPanel_LuftfeuchtigkeitLang" xml:space="preserve">
 		<value>Relatívna vlhkosť vzduchu pre chladenie</value>
 	</data>
 	<data name="FloorSummaryPanel_Nassraum" xml:space="preserve">
-		<value>Kúpeľňa </value>
+		<value>Vlhká-
+miestn.</value>
 	</data>
 	<data name="FloorSummaryPanel_Nummer" xml:space="preserve">
-		<value>Číslo</value>
+		<value>Číslo
+</value>
 	</data>
 	<data name="FloorSummaryPanel_NummerLang" xml:space="preserve">
 		<value>identifikačné číslo miestnosti</value>
 	</data>
 	<data name="FloorSummaryPanel_PlanVorhanden" xml:space="preserve">
-		<value>Plán pre podlahu už existuje</value>
+		<value>Plán pre podlahu existuje</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumflaecheZuKleinText" xml:space="preserve">
 		<value>Plán tejto miestnosti už obsahuje systémy vyžadujúce plochu %SYSTEME%m², ale nová plocha miestnosti je iba %RAUM%m². Ak prevezmete novú plochu miestnosti, plochy systémov v pláne sa zmenšia.</value>
@@ -994,7 +1011,7 @@
 		<value>Prevziať novú plochu pre miestnosť?</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeiz" xml:space="preserve">
-		<value>Ti(°C)</value>
+		<value>Tv(°C)</value>
 	</data>
 	<data name="FloorSummaryPanel_RaumtemperaturHeizLang" xml:space="preserve">
 		<value>Štandardná vnútorná teplota podľa výpočtu potreby tepla </value>
@@ -1031,7 +1048,7 @@
 		<value>Pre otvorenie požadovanej miestnosti kliknite na jedno z tlačidiel v stĺpci "Upraviť", alebo kliknite na požadovanú mestnosť v hierarchii projektu.</value>
 	</data>
 	<data name="General_Abbrechen" xml:space="preserve">
-		<value>Kliknite na požadovaný izbu v hierarchii projektu. "</value>
+		<value>&amp;Zrušiť</value>
 	</data>
 	<data name="General_AenderungenSpeichernText" xml:space="preserve">
 		<value>Uložiť zmeny?</value>
@@ -1103,7 +1120,7 @@
 		<value>&amp;Zatvoriť</value>
 	</data>
 	<data name="General_Standardregelkreis" xml:space="preserve">
-		<value>Štandardný riadiaci obvod</value>
+		<value>Štandardný riadiaci okruh</value>
 	</data>
 	<data name="General_Systemparameter" xml:space="preserve">
 		<value>Systémové parametre</value>
@@ -1295,7 +1312,8 @@
 		<value>Vertikálny</value>
 	</data>
 	<data name="HithermWallGrid_Basiskonstruktion" xml:space="preserve">
-		<value>Základná konštrukcia</value>
+		<value>Základná-
+Konstr.</value>
 	</data>
 	<data name="HithermWallGrid_Deckschicht" xml:space="preserve">
 		<value>Krycia vrstva
@@ -1306,19 +1324,23 @@ R
 		<value>Nová stenová konštrukcia</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturHeiz" xml:space="preserve">
-		<value>Teplota kúrenia(°C)</value>
+		<value>Tep.
+Vyk.
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_TemperaturKuehl" xml:space="preserve">
-		<value>Teplota chladenia(°C)</value>
+		<value>Tep.
+Chlad.
+(°C)</value>
 	</data>
 	<data name="HithermWallGrid_UWert" xml:space="preserve">
 		<value>U-factor
 (W/m²K)</value>
 	</data>
 	<data name="HithermWallGrid_WaermebedarfBereinigen" xml:space="preserve">
-		<value>Nastav
+		<value>Nastav.
 Požad.
-Teplotu</value>
+Teplota</value>
 	</data>
 	<data name="HithermWallGrid_ZusaetzlicheDaemmung" xml:space="preserve">
 		<value>Pridaná izol.
@@ -1341,7 +1363,7 @@ R
 		<value>CAD Plan (*.dxf, *.dwg)</value>
 	</data>
 	<data name="ImportedPlansPanel_ImageFilter" xml:space="preserve">
-		<value>Eingescannter Plan (*.jpg, *.png, *.bmp)</value>
+		<value>Naskenovaný plán (*.jpg, *.png, *.bmp)</value>
 	</data>
 	<data name="ImportedPlansPanel_PdfFilter" xml:space="preserve">
 		<value>PDF (*.pdf)</value>
@@ -1561,7 +1583,7 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Vyk.okr.</value>
 	</data>
 	<data name="LL_QuickDimensioning_Heizlast" xml:space="preserve">
-		<value>Vykurovacia záťaž (W)</value>
+		<value>Kúrenie zaťaženie (W)</value>
 	</data>
 	<data name="LL_QuickDimensioning_HinweisText" xml:space="preserve">
 		<value>Záznam o ploche je hrubý výpočet pre odhad nákladov na materiál. Pred realizáciov je nutné vykonať presne plánovanie. To môže spôsobiť zmeny oproti záznamu o ploche . </value>
@@ -1570,7 +1592,7 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Tipy</value>
 	</data>
 	<data name="LL_QuickDimensioning_Kuehllast" xml:space="preserve">
-		<value>Chladiaca záťaž (W)</value>
+		<value>Chladenie zaťaženie (W)</value>
 	</data>
 	<data name="LL_QuickDimensioning_Nr" xml:space="preserve">
 		<value>Číslo</value>
@@ -1597,7 +1619,7 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Plocha (m²)</value>
 	</data>
 	<data name="LL_QuickDimensioning_Raumnr" xml:space="preserve">
-		<value>Miestnosť č.</value>
+		<value>Miestn.č.</value>
 	</data>
 	<data name="LL_QuickDimensioning_Raumtemperatur" xml:space="preserve">
 		<value>T (°C)</value>
@@ -1606,7 +1628,7 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Typ miestnosti</value>
 	</data>
 	<data name="LL_QuickDimensioning_RaumtypHeizlastKuehllast" xml:space="preserve">
-		<value>Typ miestnosti: chladiaci výkon - chladiaci výkon</value>
+		<value>Typ miestnosti: vykurovací výkon - chladiaci výkon</value>
 	</data>
 	<data name="LL_QuickDimensioning_RcFunk" xml:space="preserve">
 		<value>RC-diaľkové ovládanie</value>
@@ -1645,13 +1667,13 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Prip.</value>
 	</data>
 	<data name="LL_Report_AnschlussDimensionierung" xml:space="preserve">
-		<value>Roz. prip.</value>
+		<value>Dimez.prip.</value>
 	</data>
 	<data name="LL_Report_AnteilHeiz" xml:space="preserve">
-		<value>Zdieľať</value>
+		<value>Podiel</value>
 	</data>
 	<data name="LL_Report_AufenthaltszoneKurz" xml:space="preserve">
-		<value>LZ:</value>
+		<value>AZ:</value>
 	</data>
 	<data name="LL_Report_AufgenommeneLeistung" xml:space="preserve">
 		<value>Príkon</value>
@@ -1744,22 +1766,22 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Množstvo</value>
 	</data>
 	<data name="LL_Report_BilanzEcotherm" xml:space="preserve">
-		<value>Zostatok Ecotherm® podlahové kúrenie</value>
+		<value>Bilancia Ecotherm® podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_BilanzEuroval" xml:space="preserve">
-		<value>Zostatok Euroval® podlahové kúrenie</value>
+		<value>Bilancia Euroval® podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_BilanzHitherm" xml:space="preserve">
-		<value>Zostatok Hitherm klimatizovaná stena</value>
+		<value>Bilancia Hitherm klimatizovaná stena</value>
 	</data>
 	<data name="LL_Report_BilanzHithermCompact" xml:space="preserve">
-		<value>Zostatok Hitherm Compact klimatizovaná stena</value>
+		<value>Bilancia Hitherm Compact klimatizovaná stena</value>
 	</data>
 	<data name="LL_Report_BilanzKlimaboden" xml:space="preserve">
-		<value>Zostatok Modul Klimaboden</value>
+		<value>Bilancia Modul Klimaboden</value>
 	</data>
 	<data name="LL_Report_BilanzKlimadecke" xml:space="preserve">
-		<value>Zostatok Modul Klimadecke</value>
+		<value>Bilancia Modul Klimadecke</value>
 	</data>
 	<data name="LL_Report_Erstellungsdatum" xml:space="preserve">
 		<value>Dátum vytvorenia</value>
@@ -1771,16 +1793,16 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Plocha podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_FlaechenuebersichtEcotherm" xml:space="preserve">
-		<value>Náhlad plochy Ecotherm® underfloor heating</value>
+		<value>Náhlad plochy Ecotherm® podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_FlaechenuebersichtEuroval" xml:space="preserve">
-		<value>Náhlad plochy Euroval® underfloor heating</value>
+		<value>Náhlad plochy Euroval® podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_FlaechenuebersichtHitherm" xml:space="preserve">
-		<value>Náhlad plochy a dĺžky Hitherm klimatizovaná stena</value>
+		<value>Náhlad plochy- a dĺžky Hitherm klimatizovaná stena</value>
 	</data>
 	<data name="LL_Report_FlaechenuebersichtHithermCompact" xml:space="preserve">
-		<value>Náhlad plochy a dĺžky Hitherm Compact klimatizovaná stena</value>
+		<value>Náhlad plochy- a dĺžky Hitherm Compact klimatizovaná stena</value>
 	</data>
 	<data name="LL_Report_FlaechenuebersichtModulBoden" xml:space="preserve">
 		<value>Náhlad plochy Modul Klimaboden</value>
@@ -1792,7 +1814,7 @@ Chcete napriek tomu pokračovať? "</value>
 		<value>Prip.</value>
 	</data>
 	<data name="LL_Report_FussbodenBreite" xml:space="preserve">
-		<value>W
+		<value>Š
 cm</value>
 	</data>
 	<data name="LL_Report_FussbodenDruckverlust" xml:space="preserve">
@@ -1807,7 +1829,8 @@ mbar</value>
 mbar</value>
 	</data>
 	<data name="LL_Report_FussbodenFbKonstruktion" xml:space="preserve">
-		<value>Skladba podlahovej konštrukcie.RL,B</value>
+		<value>Podl.-Konštr.
+RL,B</value>
 	</data>
 	<data name="LL_Report_FussbodenFlaeche" xml:space="preserve">
 		<value>A
@@ -1817,10 +1840,12 @@ m²</value>
 		<value>v</value>
 	</data>
 	<data name="LL_Report_FussbodenHeizkreise" xml:space="preserve">
-		<value>Vykurovacie okruhy</value>
+		<value>Vykur.
+Okruh</value>
 	</data>
 	<data name="LL_Report_FussbodenHeizkreise2" xml:space="preserve">
-		<value>Vykurovaci(e) okruh(y)</value>
+		<value>Vykur.
+okruh(y)</value>
 	</data>
 	<data name="LL_Report_FussbodenHinweisHintereinandergeschaltet" xml:space="preserve">
 		<value>Teplota na prítoku a spiatočke na rozvádzači je indikovaná, pretože viac systémov je zapojených do série</value>
@@ -1829,11 +1854,11 @@ m²</value>
 		<value>Hydraulické údaje sú pre celý vykurovací okruh, pretože viac systémov je zapojených do série.</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistung" xml:space="preserve">
-		<value>Qpodlahového vykurovania
+		<value>QPodl. kur.
 W</value>
 	</data>
 	<data name="LL_Report_FussbodenLeistungProQm" xml:space="preserve">
-		<value>qPodlahového vykurovania
+		<value>qPodl. kur.
 W/m²</value>
 	</data>
 	<data name="LL_Report_FussbodenOberflaechenTempAz" xml:space="preserve">
@@ -1845,23 +1870,27 @@ W/m²</value>
 °C</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumNr" xml:space="preserve">
-		<value>Miestnosťč.</value>
+		<value>Miestn.
+Č.</value>
 	</data>
 	<data name="LL_Report_FussbodenRaumtemperatur" xml:space="preserve">
-		<value>ti
+		<value>tvn
 °C</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaenge" xml:space="preserve">
 		<value>Dĺžka rúry</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeAnbindung" xml:space="preserve">
-		<value>Pripájacie potrubie m</value>
+		<value>Prip.
+potr. m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreis" xml:space="preserve">
-		<value>Vykurovací okruh(podlahové kúrenie) m</value>
+		<value>Vyk.okr.
+(POK) m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeHeizkreisGesamt" xml:space="preserve">
-		<value>Vykurovací okruh(spolu) m</value>
+		<value>Vyk.okr.
+(spolu) m</value>
 	</data>
 	<data name="LL_Report_FussbodenRohrlaengeRzAz" xml:space="preserve">
 		<value>OZ + AZ
@@ -1872,17 +1901,17 @@ m</value>
 °C</value>
 	</data>
 	<data name="LL_Report_FussbodenSollLeistung" xml:space="preserve">
-		<value>QPotrebná
+		<value>Qpotrebná
 (rátaná) W</value>
 	</data>
 	<data name="LL_Report_FussbodenTeilsystem" xml:space="preserve">
-		<value>Podsystém</value>
+		<value>Podsys.</value>
 	</data>
 	<data name="LL_Report_FussbodenVerlegeabstand" xml:space="preserve">
-		<value>Typ pokládky</value>
+		<value>Typ pokl.</value>
 	</data>
 	<data name="LL_Report_FussbodenWassermenge" xml:space="preserve">
-		<value>Voda-
+		<value>Voda
 množstvo</value>
 	</data>
 	<data name="LL_Report_FussbodenWdKonstruktion" xml:space="preserve">
@@ -1897,6 +1926,7 @@ Ru</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtBereinigterBedarf" xml:space="preserve">
 		<value>QRátaná
+  
 W</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtFlaecheEinheit" xml:space="preserve">
@@ -1916,21 +1946,24 @@ W</value>
 W</value>
 	</data>
 	<data name="LL_Report_Heizleistung" xml:space="preserve">
-		<value>Vykur-
+		<value>Vykur
 výkon</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnbindeleitung" xml:space="preserve">
-		<value>Pripájacie potr.
+		<value>Prip. potr.
 M</value>
 	</data>
 	<data name="LL_Report_KlimabodenAnzahlModule" xml:space="preserve">
-		<value>Početmodulov</value>
+		<value>Počet
+Modulov</value>
 	</data>
 	<data name="LL_Report_KlimabodenDruckverlustHeizkreis" xml:space="preserve">
-		<value>VOmbar</value>
+		<value>VO
+mbar</value>
 	</data>
 	<data name="LL_Report_KlimabodenFbKonstruktion" xml:space="preserve">
-		<value>Skladba podlahovej konštrukcieRL,B
+		<value>Podl.-Konstr.
+RL,B
 m²K/W</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheAnbindung" xml:space="preserve">
@@ -1939,10 +1972,11 @@ m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheDicht" xml:space="preserve">
 		<value>Tesný
+ 
 m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheModulierend" xml:space="preserve">
-		<value>Modulačný
+		<value>Modulačný 
 m²</value>
 	</data>
 	<data name="LL_Report_KlimabodenFlaecheSonstige" xml:space="preserve">
@@ -1965,7 +1999,7 @@ m²K/W</value>
 		<value>Počet Modulov (ks.)</value>
 	</data>
 	<data name="LL_Report_KlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>Stropná konštrukcia
+		<value>Stropná konštr.
 RL,B
 m²K/W</value>
 	</data>
@@ -1974,26 +2008,26 @@ m²K/W</value>
 m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeLeistung" xml:space="preserve">
-		<value>QSH
+		<value>QDH
 W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeLeistungProQm" xml:space="preserve">
-		<value>qSH
+		<value>qDH
 W/m²</value>
 	</data>
 	<data name="LL_Report_KlimadeckeWassermenge" xml:space="preserve">
-		<value>Voda-
+		<value>Voda
 množstvo</value>
 	</data>
 	<data name="LL_Report_Kontaktadresse" xml:space="preserve">
 		<value>Kontaktná adresa</value>
 	</data>
 	<data name="LL_Report_Kuehllast" xml:space="preserve">
-		<value>Chladiaca-
+		<value>Chladiaca
 záťaž</value>
 	</data>
 	<data name="LL_Report_Kuehlleistung" xml:space="preserve">
-		<value>Chladiaci-
+		<value>Chladiaci
 výkon</value>
 	</data>
 	<data name="LL_Report_LeistungNachInnen" xml:space="preserve">
@@ -2015,7 +2049,7 @@ výkon</value>
 		<value>Cena %KATEGORIE%</value>
 	</data>
 	<data name="LL_Report_Projektbilanz" xml:space="preserve">
-		<value>Stav projektu</value>
+		<value>Bilancia projektu</value>
 	</data>
 	<data name="LL_Report_Projektinformation" xml:space="preserve">
 		<value>Informácie o projekte</value>
@@ -2078,7 +2112,7 @@ výkon</value>
 		<value>Prehľad poschodia (%ART%)</value>
 	</data>
 	<data name="LL_Report_UebersichtRegelkreise" xml:space="preserve">
-		<value>Prehľad riadiace obvody %ART%</value>
+		<value>Prehľad riadiace okruhy %ART%</value>
 	</data>
 	<data name="LL_Report_UebersichtVerteiler" xml:space="preserve">
 		<value>Prehľad rozvádzač %ART%</value>
@@ -2099,31 +2133,35 @@ výkon</value>
 		<value>mh/</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermDurchflussProHkZeile2" xml:space="preserve">
-		<value>VO l/min</value>
+		<value>VO
+l/min</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheProHk" xml:space="preserve">
-		<value>Plocha/VO</value>
+		<value>Plocha/
+VO</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile1" xml:space="preserve">
-		<value>AUnb.</value>
+		<value>ANevyk.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermFlaecheUnbeheiztZeile2" xml:space="preserve">
 		<value>m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile1" xml:space="preserve">
-		<value>Vykurovacie </value>
+		<value>Kurenie </value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermHeizkreiseZeile2" xml:space="preserve">
-		<value>okruhy</value>
+		<value>okruh(y)</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermLaengeProHk" xml:space="preserve">
-		<value>Dĺžka/VO</value>
+		<value>Dĺžka/
+VO</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile1" xml:space="preserve">
 		<value>lRúra/</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRohrlaengeProHkZeile2" xml:space="preserve">
-		<value>VOm</value>
+		<value>VO
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermTeilsystemZeile1" xml:space="preserve">
 		<value>Časť</value>
@@ -2132,7 +2170,7 @@ výkon</value>
 		<value>Systém</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermWdKonstruktionZeile2" xml:space="preserve">
-		<value>Skladba</value>
+		<value>Konštr.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEuroval" xml:space="preserve">
 		<value>Údaje o pokládke Euroval® podlahové kúrenie - %GESCHOSS%</value>
@@ -2141,7 +2179,7 @@ výkon</value>
 		<value>Údaje o pokládke podlahové kúrenie</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHeizkreis" xml:space="preserve">
-		<value>Vykurovací okruh</value>
+		<value>Vyk. okruh</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHitherm" xml:space="preserve">
 		<value>Údaje o pokládke Hitherm klimatizovaná stena - %GESCHOSS%</value>
@@ -2153,7 +2191,8 @@ výkon</value>
 		<value>Údaje o pokládke Hitherm Compact klimatizovaná stena - %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactGesamtflaecheZeile2" xml:space="preserve">
-		<value>Plocham²</value>
+		<value>plocha
+m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactHeizkreisZeile2" xml:space="preserve">
 		<value>okruh</value>
@@ -2167,7 +2206,8 @@ m</value>
 m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactLaengeWand" xml:space="preserve">
-		<value>Stena m</value>
+		<value>Stena
+m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenHithermCompactRegisterAnzahl" xml:space="preserve">
 		<value>Počet
@@ -2210,7 +2250,8 @@ cm</value>
 		<value>Modulačný</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimabodenVerbindeleitungZeile2" xml:space="preserve">
-		<value>Pripájacie potrubie m</value>
+		<value>Prip.
+potr. m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadecke" xml:space="preserve">
 		<value>Údaje o pokládke Modul Klimadecke</value>
@@ -2219,14 +2260,15 @@ cm</value>
 		<value>Údaje o pokládke Modul Klimadecke - %GESCHOSS%</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDeckenKonstruktion" xml:space="preserve">
-		<value>Skladba stropnej konštrukcie</value>
+		<value>Stropná 
+Konštr.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeDurchflussProHk" xml:space="preserve">
 		<value>mh/VO
 l/min</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeFlaecheUnbeheizt" xml:space="preserve">
-		<value>AUnb.
+		<value>ANevyk.
 m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeKonstruktion" xml:space="preserve">
@@ -2239,13 +2281,15 @@ m²</value>
 		<value>Moduly</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeModulflaeche" xml:space="preserve">
-		<value>Modul-plocha m²</value>
+		<value>Plocha-
+modulov m²</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeReihe" xml:space="preserve">
 		<value>Rad</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeVerbindeleitung" xml:space="preserve">
-		<value>Ďalšie pripájacie potrubia m</value>
+		<value>Ďalšie Prip. 
+potr. m</value>
 	</data>
 	<data name="LL_Report_VerlegedatenVerteiler" xml:space="preserve">
 		<value>Údaje o pokládke pre rozvádzač %VERTEILER%</value>
@@ -2254,25 +2298,28 @@ m²</value>
 		<value>Údaje o pokládke stenové kúrenie </value>
 	</data>
 	<data name="LL_Report_VerteilerAnzahlGruppen" xml:space="preserve">
-		<value>Skupiny</value>
+		<value>Okr.</value>
 	</data>
 	<data name="LL_Report_VerteilerRegelkreis" xml:space="preserve">
-		<value>Ovládací okruh</value>
+		<value>Reg. okruh</value>
 	</data>
 	<data name="LL_Report_Waehrung" xml:space="preserve">
 		<value>€</value>
 	</data>
 	<data name="LL_Report_Waermebedarf" xml:space="preserve">
-		<value>Potrebatepla</value>
+		<value>Potreda
+tepla</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungSenkrecht" xml:space="preserve">
-		<value>vertikálnym</value>
+		<value>vertikal.
+m</value>
 	</data>
 	<data name="LL_Report_WandAnbindeleitungWaagrecht" xml:space="preserve">
-		<value>horizontálnym</value>
+		<value>horizontal.
+m</value>
 	</data>
 	<data name="LL_Report_WandAnzahlRegister" xml:space="preserve">
-		<value>Počet vykurovacích prvkov (ks)</value>
+		<value>Počet vykurovacích registrov (ks)</value>
 	</data>
 	<data name="LL_Report_WandBereinigungLeistung" xml:space="preserve">
 		<value>QDelta
@@ -2387,7 +2434,7 @@ m</value>
 		<value>Náhľad - chladenie</value>
 	</data>
 	<data name="MainForm_WaermeUndKuehlbedarf" xml:space="preserve">
-		<value>&amp;potreba tepla/chladu</value>
+		<value>&amp;Potreba tepla/chladu</value>
 	</data>
 	<data name="Material_1a29f733_ab7b_41fd_a0df_926d64a8526d" xml:space="preserve">
 		<value>Tepelná izolácia EPS-W 20, 40 mm</value>
@@ -2399,13 +2446,13 @@ m</value>
 		<value>Kročajová zvuková izolácia EPS-T 34/30, 30 mm</value>
 	</data>
 	<data name="Material_a834583d_750c_4695_ba45_7e346108551f" xml:space="preserve">
-		<value>Termálna izolácia EPS-W 20, 30 mm</value>
+		<value>Tepelná izolácia EPS-W 20, 30 mm</value>
 	</data>
 	<data name="Material_ac14b03f_63f2_420a_9134_424348bbc3ee" xml:space="preserve">
-		<value>Termálna izolácia EPS-W 20, 20 mm</value>
+		<value>Tepelná izolácia EPS-W 20, 20 mm</value>
 	</data>
 	<data name="Material_b75adb45_8e48_4f91_b0dd_ebe853df344f" xml:space="preserve">
-		<value>Termálna izolácia EPS-W 20, 50 mm</value>
+		<value>Tepelná izolácia EPS-W 20, 50 mm</value>
 	</data>
 	<data name="Material_d3e1298f_6755_4fc8_9097_bd9b47d2c1c5" xml:space="preserve">
 		<value>Kročajová zvuková izolácia EPS-T 55/50, 50 mm</value>
@@ -2432,15 +2479,15 @@ m</value>
 		<value>Euroval® bezpečnostná rúra DD (H)</value>
 	</data>
 	<data name="Material_EV10" xml:space="preserve">
-		<value>Euroval® (and Hitherm® +) oválna objímka na zváranie</value>
+		<value>Euroval® (and Hitherm® +) oválna vsuvka na zváranie</value>
 	</data>
 	<data name="Material_EV11" xml:space="preserve">
 		<value>Euroval® (and Hitherm® Plus)
-prechodová objímka (vnútorná - vonkajšia)</value>
+prechodová spojka (vnútorná - vonkajšia)</value>
 	</data>
 	<data name="Material_EV12" xml:space="preserve">
 		<value>Euroval® (and Hitherm® Plus)
-prechodová objímka (kruh/ovál)</value>
+prechodová spojka (kruh/ovál)</value>
 	</data>
 	<data name="Material_EV15" xml:space="preserve">
 		<value>Euroval® montážna lišta s háčikmi 1000 mm</value>
@@ -2455,7 +2502,7 @@ prechodová objímka (kruh/ovál)</value>
 		<value>Euroval® pripájaci kus pre rozvádzač 100cm</value>
 	</data>
 	<data name="Material_EV30" xml:space="preserve">
-		<value>Euroval® izolačné pásy pre bezpečnostný okraj</value>
+		<value>Euroval® dilatačný okrajový pás</value>
 	</data>
 	<data name="Material_EV31" xml:space="preserve">
 		<value>Euroval® PE folia</value>
@@ -2728,43 +2775,43 @@ prechodová objímka (kruh/ovál)</value>
 		<value>Hitherm® Compact 625x2500x15 mm strešná šikmina sádrový panel</value>
 	</data>
 	<data name="Material_HI05" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 500 mm</value>
+		<value>Hitherm® vysokovýkonný register 500 mm</value>
 	</data>
 	<data name="Material_HI06" xml:space="preserve">
 		<value>Hitherm® štandardný register 500 mm</value>
 	</data>
 	<data name="Material_HI10" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 1000 mm</value>
+		<value>Hitherm® vysokovýkonný register 1000 mm</value>
 	</data>
 	<data name="Material_HI11" xml:space="preserve">
 		<value>Hitherm® štandardný register 1000 mm</value>
 	</data>
 	<data name="Material_HI15" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 1500 mm</value>
+		<value>Hitherm® vysokovýkonný register 1500 mm</value>
 	</data>
 	<data name="Material_HI16" xml:space="preserve">
 		<value>Hitherm® štandardný register 1500 mm</value>
 	</data>
 	<data name="Material_HI20" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 2000 mm</value>
+		<value>Hitherm® vysokovýkonný register 2000 mm</value>
 	</data>
 	<data name="Material_HI21" xml:space="preserve">
 		<value>Hitherm® štandardný register 2000 mm</value>
 	</data>
 	<data name="Material_HI25" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 2500 mm</value>
+		<value>Hitherm® vysokovýkonný register 2500 mm</value>
 	</data>
 	<data name="Material_HI26" xml:space="preserve">
 		<value>Hitherm® štandardný register 2500 mm</value>
 	</data>
 	<data name="Material_HI30" xml:space="preserve">
-		<value>Hitherm® vysokokapacitný register 3000 mm</value>
+		<value>Hitherm® vysokovýkonný register 3000 mm</value>
 	</data>
 	<data name="Material_HI31" xml:space="preserve">
 		<value>Hitherm® štandardný register 3000 mm</value>
 	</data>
 	<data name="Material_HI40" xml:space="preserve">
-		<value>Upevňovacie zatĺkací háčik, jednostranný</value>
+		<value>Upevňovací zatĺkací háčik, jednostranný</value>
 	</data>
 	<data name="Material_HI41" xml:space="preserve">
 		<value>Armovacia páska</value>
@@ -2818,22 +2865,22 @@ prechodová objímka (kruh/ovál)</value>
 		<value>Hitherm® PP-R prechodové koleno 90° 24 x 17 / ø 21 mm</value>
 	</data>
 	<data name="Material_HP05" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 500 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 500 mm</value>
 	</data>
 	<data name="Material_HP10" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 1000 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 1000 mm</value>
 	</data>
 	<data name="Material_HP15" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 1500 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 1500 mm</value>
 	</data>
 	<data name="Material_HP20" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 2000 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 2000 mm</value>
 	</data>
 	<data name="Material_HP25" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 2500 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 2500 mm</value>
 	</data>
 	<data name="Material_HP30" xml:space="preserve">
-		<value>Hitherm®+ vysokokapacitný register 3000 mm</value>
+		<value>Hitherm®+ vysokovýkonný register 3000 mm</value>
 	</data>
 	<data name="Material_HR51" xml:space="preserve">
 		<value>Hitherm®+ bezpečnostná rúra ø 21 x 2.4 mm</value>
@@ -2985,7 +3032,7 @@ prechodová objímka (kruh/ovál)</value>
 		<value>HA oválny rozvádzač 12 okruhov</value>
 	</data>
 	<data name="Material_VO44" xml:space="preserve">
-		<value>Servo motor 230 V, normálne uzatvorený</value>
+		<value>Servo motor 230 V, bez napätia uzatvorený</value>
 	</data>
 	<data name="Material_VO60" xml:space="preserve">
 		<value>Vstavaná skriňa pre max. 4 vykurovacie okruhy</value>
@@ -3021,7 +3068,8 @@ prechodová objímka (kruh/ovál)</value>
 		<value>Jednotková cena</value>
 	</data>
 	<data name="MaterialEditorGrid_VerpackungseinheitCol" xml:space="preserve">
-		<value>Cena za balenie</value>
+		<value>Cena za
+balenie</value>
 	</data>
 	<data name="ModulKlimaDeckeProduct_CProfil" xml:space="preserve">
 		<value>C-Profil</value>
@@ -3146,7 +3194,7 @@ VO</value>
 		<value>Naozaj chcete prejsť z grafického do tabuľkového spôsobu projektovania? Vezmite prosím na vedomie, že vzhľad zostane zachovaný, ale žiadne nové zmeny späť do grafického módu nie sú možné. Chcete napriek tomu pokračovať?</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Auslegung_Aendern_Tabellarisch" xml:space="preserve">
-		<value>Chcete skutočne zmeniť spôsob projktovania z tabulkového do grafického? Vezmite prosím na vedomie, že pôvodný grafický návrh bude zmazaný. Chcete napriek tomu pokračovať?</value>
+		<value>Chcete skutočne zmeniť spôsob projektovania z tabuľkového do grafického? Vezmite prosím na vedomie, že pôvodný grafický návrh bude zmazaný. Chcete napriek tomu pokračovať?</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
 		<value>Zmeniť spôsob projektovania?</value>
@@ -3180,7 +3228,7 @@ mbar</value>
 		<value>Potvrdiť</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_KeinEigenerHK" xml:space="preserve">
-		<value>Žiadny samostatný vykurovací okruh</value>
+		<value>žiadny samostatný vykurovací okruh</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Kuehlen" xml:space="preserve">
 		<value>Chladenie:</value>
@@ -3221,7 +3269,7 @@ W/m²</value>
 		<value>Plochy z redukovaným vyk./chlad. Výkonom</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Rohrlaenge" xml:space="preserve">
-		<value>Dl.rúry
+		<value>Dĺ.rúry
 m</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Spreizung" xml:space="preserve">
@@ -3259,7 +3307,8 @@ K</value>
 		<value>Výsledky výpočtu:</value>
 	</data>
 	<data name="PlannedHithermProductPanel_Breite" xml:space="preserve">
-		<value>Šírka(cm)</value>
+		<value>Šírka
+(cm)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_DifferenzLeistung" xml:space="preserve">
 		<value>Rozdiel od očakávaného výkonu:</value>
@@ -3277,13 +3326,18 @@ K</value>
 		<value>VO</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungSenkrecht" xml:space="preserve">
-		<value>Potrubie vertikálne (m)</value>
+		<value>Vertikal.
+potr.
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_LeitungWaagrecht" xml:space="preserve">
-		<value>Potrubie horizontálne (m)</value>
+		<value>Horizont.
+potr.
+(m)</value>
 	</data>
 	<data name="PlannedHithermProductPanel_RegisterTyp" xml:space="preserve">
-		<value>Typ registra</value>
+		<value>Typ
+Registra</value>
 	</data>
 	<data name="PlannedHithermProductPanel_VerfuegbareFlaeche" xml:space="preserve">
 		<value>Disponibilná plocha:</value>
@@ -3298,10 +3352,10 @@ K</value>
 		<value>Ďalšie informácie:</value>
 	</data>
 	<data name="PlannedModulKlimaBodenProductPanel_DichteModule" xml:space="preserve">
-		<value>Moduly v tesnej konfigurácii:</value>
+		<value>Moduly v tesnej skladbe:</value>
 	</data>
 	<data name="PlannedModulKlimaBodenProductPanel_ModulierendeModule" xml:space="preserve">
-		<value>Moduly v modulačnej konfigurácii:</value>
+		<value>Moduly v modulačnej skladbe:</value>
 	</data>
 	<data name="PlannedModulKlimaBodenProductPanel_SonstigeAnbindeleitung" xml:space="preserve">
 		<value>Pripájacie potrubie ďalších modulov:</value>
@@ -3316,16 +3370,16 @@ K</value>
 		<value>Naozaj chcete prepnúť z tabuľkového režimu na grafický? Upozorňujeme, že dôjde k strate už vytvorených modulov. Chcete napriek tomu pokračovať?</value>
 	</data>
 	<data name="PlannedModulKlimaDeckeProductPanel_Auslegung_Aendern_Titel" xml:space="preserve">
-		<value>Zmeniť typ dizajnu?</value>
+		<value>Zmeniť typ skladby?</value>
 	</data>
 	<data name="PlannedModulKlimaDeckeProductPanel_ErklaerungVerbindeleitungen" xml:space="preserve">
 		<value>(Navyše 1 m pripíjacieho potrubia na uhol)</value>
 	</data>
 	<data name="PlannedModulKlimaDeckeProductPanel_ParalleleReihen" xml:space="preserve">
-		<value>Súbežné rady vo vykurovacom okruhu</value>
+		<value>Paralelné rady vo vykurovacom okruhu</value>
 	</data>
 	<data name="PlannedModulKlimaDeckeProductPanel_SummeVerbindungsleitungen" xml:space="preserve">
-		<value>Súčet spájacích prípojok: </value>
+		<value>Súčet spájacích potrubý: </value>
 	</data>
 	<data name="PlannedModulKlimaDeckeProductPanel_Teilflaeche" xml:space="preserve">
 		<value>Čiasková plocha</value>
@@ -3391,7 +3445,7 @@ K</value>
 		<value>Chladenie</value>
 	</data>
 	<data name="PlannedProductPanel_KuehllastDecken" xml:space="preserve">
-		<value>Cover cooling load</value>
+		<value>Krytie potreby chladu</value>
 	</data>
 	<data name="PlannedProductPanel_RestkaelteUebernehmen" xml:space="preserve">
 		<value>Prebrať chýbajúci chladiaci výkon </value>
@@ -3418,10 +3472,10 @@ K</value>
 		<value>Použitie</value>
 	</data>
 	<data name="PlannedProductPanel_WaermebedarfDecken" xml:space="preserve">
-		<value>Potreba tepla stropy</value>
+		<value>Pokrytie potreby tepla</value>
 	</data>
 	<data name="PlanOptionsForm_KeinMaßstabText" xml:space="preserve">
-		<value>Nezadali mierku pre tento plán. Bez mierky, plán nemožno použiť. Kliknutím na tlačidlo Áno zadajte mierku alebo Nie pre zrušenie plánu.</value>
+		<value>Nezadali ste mierku pre tento plán. Bez mierky, plán nemožno použiť. Kliknutím na tlačidlo Áno zadajte mierku alebo Nie pre zrušenie plánu.</value>
 	</data>
 	<data name="PlanOptionsForm_KeinMaßstabTitel" xml:space="preserve">
 		<value>Žiadna zadaná mierka </value>
@@ -3448,10 +3502,12 @@ K</value>
 		<value>Pripojenie k %SYSTEM% v %RAUMID%: %RAUMNAME%</value>
 	</data>
 	<data name="ProductOverviewForm_DruckverlustHeiz" xml:space="preserve">
-		<value>Pokles tlakumbar</value>
+		<value>Pokles tlaku
+mbar</value>
 	</data>
 	<data name="ProductOverviewForm_Kuehllast" xml:space="preserve">
-		<value>Chladiaci výkon W</value>
+		<value>Chladiaca záťaž
+W</value>
 	</data>
 	<data name="ProductOverviewForm_Normwaerme" xml:space="preserve">
 		<value>Štandartná teplota
@@ -3494,7 +3550,7 @@ OZ</value>
 		<value>Prepojenie cez miestnosť %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%</value>
 	</data>
 	<data name="ProjectReport_AnbindungDurchRaumGedaemmt" xml:space="preserve">
-		<value>Prepojenie cez miestnosť %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%, %DAEMMUNG% insulated</value>
+		<value>Prepojenie cez miestnosť %RAUMID% (%RAUMNAME%), %ROHRTYP%, %VERLEGEART%, %DAEMMUNG% izolované</value>
 	</data>
 	<data name="ProjectReport_BeheizteFlaeche" xml:space="preserve">
 		<value>Celková vykurovaná plocha</value>
@@ -3506,7 +3562,7 @@ OZ</value>
 		<value>Upravená potreba tepla</value>
 	</data>
 	<data name="ProjectReport_ErreichteHeizleistung" xml:space="preserve">
-		<value>Vnútri dosiahnutý vykurovací výkon</value>
+		<value>Dosiahnutý vykurovací výkon vo vnútri</value>
 	</data>
 	<data name="ProjectReport_Estrichflaeche" xml:space="preserve">
 		<value>Celková plocha poteru</value>
@@ -3518,7 +3574,7 @@ OZ</value>
 		<value>Plocha s %MODUL%</value>
 	</data>
 	<data name="ProjectReport_FlaecheRa10" xml:space="preserve">
-		<value>Plocha s rozostupom rúr RRA10</value>
+		<value>Plocha s rozostupom rúr RA10</value>
 	</data>
 	<data name="ProjectReport_FlaecheRa5" xml:space="preserve">
 		<value>Plocha s rozostupom rúr RA5</value>
@@ -3560,7 +3616,7 @@ OZ</value>
 		<value>Požadovaná teplota</value>
 	</data>
 	<data name="ProjectReport_Heizflaeche" xml:space="preserve">
-		<value>Celá vykurovacia plocha</value>
+		<value>Celková vykurovacia plocha</value>
 	</data>
 	<data name="ProjectReport_HeizflaecheGesamt" xml:space="preserve">
 		<value>Vykurovancia plocha celkom</value>
@@ -3620,13 +3676,13 @@ OZ</value>
 		<value>Voda</value>
 	</data>
 	<data name="ProjectReport_Wasserinhalt" xml:space="preserve">
-		<value>Objem vody (o rozvádzača)</value>
+		<value>Objem vody (od rozvádzača)</value>
 	</data>
 	<data name="ProjectReport_ZugefuehrteHeizleistung" xml:space="preserve">
 		<value>Celkový dodaný vykurovací výkon</value>
 	</data>
 	<data name="ProjectReportOptions_Bilanz" xml:space="preserve">
-		<value>Zostatok</value>
+		<value>Bilancia</value>
 	</data>
 	<data name="ProjectReportOptions_DruckbereicheWaehlen" xml:space="preserve">
 		<value>Zvoľte požadovaný rozsah tlaku</value>
@@ -3641,7 +3697,7 @@ OZ</value>
 		<value>Rozsah tlaku</value>
 	</data>
 	<data name="ProjectSummaryPanel_Bauvorhaben" xml:space="preserve">
-		<value>Konštrukčný projekt:</value>
+		<value>Stavba:</value>
 	</data>
 	<data name="ProjectSummaryPanel_Bemerkungen" xml:space="preserve">
 		<value>Poznámka:</value>
@@ -3668,61 +3724,83 @@ OZ</value>
 		<value>Rozvádzač nemožno odstrániť, pretože musí byť aspoň jeden rozvádzač pre záznam o ploche.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_BkaAngeschlossen" xml:space="preserve">
-		<value>Aktivácia betónového jadra
- pripojené vykurovacie okruhy</value>
+		<value>ABJ
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_BkaOffen" xml:space="preserve">
-		<value>Aktivácia betónového jadra
- otvorené vykurovacie okruhy</value>
+		<value>ABJ
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_EurovalAngeschlossen" xml:space="preserve">
 		<value>Euroval®
- pripojené vykurovacie okruhy</value>
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_EurovalOffen" xml:space="preserve">
 		<value>Euroval®
- otvorené vykurovacie okruhy</value>
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_Geschoss" xml:space="preserve">
 		<value>Podlažie</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermAngschlossen" xml:space="preserve">
 		<value>Hitherm®
- pripojené
- vykurovacie okruhy</value>
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactAngeschlossen" xml:space="preserve">
-		<value>Hitherm® Co pripojené vykurovacie okruhy</value>
+		<value>Hitherm® Co
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactDachAngeschlossen" xml:space="preserve">
-		<value>Hitherm® CoDach pripojené vykurovacie okruhy</value>
+		<value>Hitherm® Co
+Krov pripoj.
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactDachOffen" xml:space="preserve">
-		<value>Hitherm® CoDach otvorené vykurovacie okruhy</value>
+		<value>Hitherm® Co
+Krov otvor.
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermCompactOffen" xml:space="preserve">
-		<value>Hitherm® Co otvorené vykurovacie okruhy</value>
+		<value>Hitherm® Co
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_HithermOffen" xml:space="preserve">
-		<value>Hitherm® otvorené vykurovacie okruhy</value>
+		<value>Hitherm®
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaBodenAngschlossen" xml:space="preserve">
-		<value>Klimaboden pripojené vykurovacie okruhy</value>
+		<value>Klima-Boden
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaBodenOffen" xml:space="preserve">
-		<value>Klimaboden otvorené vykurovacie okruhy</value>
+		<value>Klima-Boden
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaDeckeAngeschlossen" xml:space="preserve">
-		<value>Klimadecke pripojené vykurovacie okruhy</value>
+		<value>Klima-Decke
+pripojené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsGrid_KlimaDeckeOffen" xml:space="preserve">
-		<value>Klimadecke otvorené vykurovacie okruhy</value>
+		<value>Klima-Decke
+otvorené
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant" xml:space="preserve">
 		<value>Všetky pripojenia rozvádzača sú priradené</value>
 	</data>
 	<data name="QuickDimensioningDistributorsSummary_VerplanteAnschluesse" xml:space="preserve">
-		<value>Alokované pripojnia:</value>
+		<value>Plánované pripojenia:</value>
 	</data>
 	<data name="QuickDimensioningDistributorsSummary_Verteiler" xml:space="preserve">
 		<value>Rozvádzač:</value>
@@ -3731,11 +3809,12 @@ OZ</value>
 		<value>Na rozvádzač je priradených priveľa vykurovacích okruhov </value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaFlaeche" xml:space="preserve">
-		<value>Aktivácia betónového jadra 
+		<value>ABJ
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_BkaHeizkreise" xml:space="preserve">
-		<value>Aktivácia betónového jadravy kurovacie okruhy</value>
+		<value>ABJ
+vykur.okruhy</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalFlaeche" xml:space="preserve">
 		<value>Euroval®
@@ -3743,10 +3822,11 @@ OZ</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_EurovalHeizkreise" xml:space="preserve">
 		<value>Euroval®
- vykurovacie okruhy</value>
+vykur.okruhy</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Heizlast" xml:space="preserve">
-		<value>Chladiaci výkon (W)</value>
+		<value>Vykur.výkon
+(W)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HeizlastFehler" xml:space="preserve">
 		<value>Chladiaci výkon nepokrytý</value>
@@ -3756,11 +3836,11 @@ OZ</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachFlaeche" xml:space="preserve">
 		<value>Hitherm® Co
-Dach (m²)</value>
+Krov (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactDachHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co
-Dach vykurovací obvod</value>
+Krov vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactFlaeche" xml:space="preserve">
 		<value>Hitherm® Co
@@ -3768,31 +3848,35 @@ Dach vykurovací obvod</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermCompactHeizkreise" xml:space="preserve">
 		<value>Hitherm® Co
- vykurovacie okruhy</value>
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermFlaeche" xml:space="preserve">
 		<value>Hitherm®
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_HithermHeizkreise" xml:space="preserve">
-		<value>Hitherm® vykurovacie okruhy</value>
+		<value>Hitherm®
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
 		<value>Klima-Boden
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
-		<value>Klimaboden® vykurovacie okruhy</value>
+		<value>Klima-Boden
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeFlaeche" xml:space="preserve">
 		<value>Klima-Decke
 (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaDeckeHeizkreise" xml:space="preserve">
-		<value>Klimadecke® vykurovacie okruhy</value>
+		<value>Klima-Decke
+vykur.okr.</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Kuehllast" xml:space="preserve">
-		<value>Chladiaci výkon (W)</value>
+		<value>Chlad. výkon
+(W)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KuehllastFehler" xml:space="preserve">
 		<value>Vykurovací výkon nepokrytý</value>
@@ -3801,10 +3885,12 @@ Dach vykurovací obvod</value>
 		<value>&lt;Nový/Upraviť&gt;</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_RaumController" xml:space="preserve">
-		<value>Priestorový termostat</value>
+		<value>Priestorový
+termostat</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Raumflaeche" xml:space="preserve">
-		<value>Plocha miestnosti (m²)</value>
+		<value>Plocha miestn.
+(m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_RC" xml:space="preserve">
 		<value>RC</value>
@@ -3822,10 +3908,11 @@ Dach vykurovací obvod</value>
 		<value>Servo motory</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Temperatur" xml:space="preserve">
-		<value>Teplota (°C)</value>
+		<value>Teplota
+(°C)</value>
 	</data>
 	<data name="QuickDimensioningFloorGridFlaecheFehler" xml:space="preserve">
-		<value>Plánované plocha je väčšia ako max. disponibilná plocha</value>
+		<value>Plánovaná plocha je väčšia ako max. disponibilná plocha</value>
 	</data>
 	<data name="QuickDimensioningPanel_Belegefaktor" xml:space="preserve">
 		<value>Faktor ukladania</value>
@@ -3852,13 +3939,13 @@ Dach vykurovací obvod</value>
 		<value>Naozaj chcete odobrať produkt Euroval zo záznamu o ploche?</value>
 	</data>
 	<data name="QuickDimensioningPanel_EurovalEntfernenTitel" xml:space="preserve">
-		<value>Odobrať Hitherm® Compact podkrovie</value>
+		<value>Odobrať Euroval</value>
 	</data>
 	<data name="QuickDimensioningPanel_HithermCompactDachEntfernenText" xml:space="preserve">
-		<value>Naozaj chcete odobrať produkt Hitherm Compact podkrovie zo záznamu o ploche?</value>
+		<value>Naozaj chcete odobrať produkt Hitherm Compact šikmina podkrovia zo záznamu o ploche?</value>
 	</data>
 	<data name="QuickDimensioningPanel_HithermCompactDachEntfernenTitel" xml:space="preserve">
-		<value>Odobrať Hitherm® Compact podkrovie</value>
+		<value>Odobrať Hitherm® Compact šikmina podkrovia</value>
 	</data>
 	<data name="QuickDimensioningPanel_HithermCompactEntfernenText" xml:space="preserve">
 		<value>Naozaj chcete odobrať produkt Hitherm Compact zo záznamu o ploche?</value>
@@ -3944,16 +4031,20 @@ Dach vykurovací obvod</value>
 		<value>Zachytiť geometriu stropu</value>
 	</data>
 	<data name="RoomSummaryPanel_Deckengeometrie_Gesondert_Erfassen" xml:space="preserve">
-		<value>Zachytiť geometriu stropu oddelene</value>
+		<value>Zachytiť geometriu stropu samostatne</value>
 	</data>
 	<data name="RoomSummaryPanel_FbhFlaeche" xml:space="preserve">
-		<value>Plocha podlahového kúrenia (m²)</value>
+		<value>Podl.kúr.
+plocha
+(m²)</value>
 	</data>
 	<data name="RoomSummaryPanel_Flaeche" xml:space="preserve">
 		<value>Plocha:</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizflaeche" xml:space="preserve">
-		<value>Vykurovaná plocha (m²)</value>
+		<value>Vykur.
+plocha
+(m²)</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizlast" xml:space="preserve">
 		<value>Tepelný výkon:</value>
@@ -4030,13 +4121,13 @@ Dach vykurovací obvod</value>
 		<value>Pripojenie nie je možné</value>
 	</data>
 	<data name="SelectConnectionForProductForm_AnschlussNurAnVerteiler" xml:space="preserve">
-		<value>Pripojenie nie je možné. K vykurovaciemu systému je pripojený najmenej jeden ďalší podsystém. Následne môže byť pripojený iba k jedému rozvádzaču.</value>
+		<value>Pripojenie nie je možné. K vykurovaciemu systému je pripojený najmenej jeden ďalší podsystém. Dôsledku toho môže byť pripojený iba k jedému z rozvádzačov.</value>
 	</data>
 	<data name="SelectConnectionForProductForm_Benutzerdefiniert" xml:space="preserve">
 		<value>Užívateľom definované priradenie (len pre pripojenie k inému vykurovaciemu okruhu)</value>
 	</data>
 	<data name="SelectConnectionForProductForm_BenutzerdefiniertAktivieren" xml:space="preserve">
-		<value>Aktivovať užívateľom definované priradenie vykurovacieho okruhu</value>
+		<value>Povoliť užívateľom definované priradenie vykurovacieho okruhu</value>
 	</data>
 	<data name="SelectConnectionForProductForm_Heizkreisanschluss" xml:space="preserve">
 		<value>Pripojenie vykurovacieho okruhu (len pre pripojenie k iným vykurovacím okruhom)</value>
@@ -4048,7 +4139,7 @@ Dach vykurovací obvod</value>
 		<value>Informácie</value>
 	</data>
 	<data name="SelectConnectionForProductForm_Ruecklaufseitig" xml:space="preserve">
-		<value>spiatočka</value>
+		<value>strana spiatočky</value>
 	</data>
 	<data name="SelectConnectionForProductForm_SystemInRaum" xml:space="preserve">
 		<value>%SYSTEM% v %RAUM%</value>
@@ -4075,7 +4166,7 @@ Dach vykurovací obvod</value>
 		<value>Zvoliť rozvádzač</value>
 	</data>
 	<data name="SelectHithermWallConstructionForm_KeineKonstruktionGewaehltText" xml:space="preserve">
-		<value>Zvoľte základnú konštrukciu.</value>
+		<value>Zvoľte jednu zo základných konštrukcií.</value>
 	</data>
 	<data name="SelectHithermWallConstructionForm_KonstruktionWaehlen" xml:space="preserve">
 		<value>Zvoľte základnú konštrukciu!</value>
@@ -4090,7 +4181,7 @@ Dach vykurovací obvod</value>
 		<value>Zvoľte požadovaný podsystém.</value>
 	</data>
 	<data name="SelectRoomForm_KeinRaumText" xml:space="preserve">
-		<value>Zvoľte miestnosť.</value>
+		<value>Zvoľte jednu miestností.</value>
 	</data>
 	<data name="SelectRoomForm_Titel" xml:space="preserve">
 		<value>Zvoľte žiadanú miestnosť.</value>
@@ -4108,7 +4199,7 @@ Dach vykurovací obvod</value>
 		<value>Alpha stena:</value>
 	</data>
 	<data name="SystemParametersPanel_ChangeConstructionCaption" xml:space="preserve">
-		<value>Zmeniť záklanú konštrukciu?</value>
+		<value>Zmeniť podkonštrukciu?</value>
 	</data>
 	<data name="SystemParametersPanel_ChangeConstructionText" xml:space="preserve">
 		<value>Produkty využívajúce inú podkonštrukciu už boli naplánované v grafickom režime. Ak zmeníte podkonštrukciu, dôjde k strate produktov plánovaných v grafickom režime. Naozaj chcete zmeniť podkonštrukciu?</value>
@@ -4123,10 +4214,10 @@ Dach vykurovací obvod</value>
 		<value>Max. prietok:</value>
 	</data>
 	<data name="SystemParametersPanel_Estrichueberdeckung" xml:space="preserve">
-		<value>Prekrývanie poteru:</value>
+		<value>Prekrytie poteru:</value>
 	</data>
 	<data name="SystemParametersPanel_Geometriefaktor" xml:space="preserve">
-		<value>Činiteľ tvaru:</value>
+		<value>Faktor tvaru:</value>
 	</data>
 	<data name="SystemParametersPanel_GeometriefaktorAktiviert" xml:space="preserve">
 		<value>aktivovaný</value>
@@ -4162,7 +4253,7 @@ Dach vykurovací obvod</value>
 		<value>Max. počet modulov na vykurovací okruh:</value>
 	</data>
 	<data name="SystemParametersPanel_ModuleInSerie" xml:space="preserve">
-		<value>Max. počet modulov v rade:</value>
+		<value>Max. počet modulov v sérii:</value>
 	</data>
 	<data name="SystemParametersPanel_Modulreihen" xml:space="preserve">
 		<value>Max. radov modulov paralelne:</value>
@@ -4195,7 +4286,7 @@ Dach vykurovací obvod</value>
 		<value>Maximálna dĺžka potrubia na vykurovací okruh:</value>
 	</data>
 	<data name="SystemParametersPanel_Ruecksetzen" xml:space="preserve">
-		<value>resetovať</value>
+		<value>Resetovať</value>
 	</data>
 	<data name="SystemParametersPanel_SpreizungHeiz" xml:space="preserve">
 		<value>Teplotný rozdiel režim kúrenia:</value>
@@ -4285,7 +4376,7 @@ Dach vykurovací obvod</value>
 		<value>Zmenšiť</value>
 	</data>
 	<data name="Plan_Verschieben" xml:space="preserve">
-		<value>Presunúť plán</value>
+		<value>Posunúť plán</value>
 	</data>
 	<data name="Plan_Massstab" xml:space="preserve">
 		<value>Mierka</value>
@@ -4372,7 +4463,7 @@ Dach vykurovací obvod</value>
 		<value>Pozícia</value>
 	</data>
 	<data name="NewWallForm_Schraege" xml:space="preserve">
-		<value>aká šikmina pre aktuálnu stenu</value>
+		<value>Ako šikmina pre aktuálnu stenu</value>
 	</data>
 	<data name="NewWallForm_NachWandNr" xml:space="preserve">
 		<value>Po stene č.</value>
@@ -4420,7 +4511,7 @@ Dach vykurovací obvod</value>
 		<value>Horizontálna vzdialenosť:</value>
 	</data>
 	<data name="RoomPickerForm_Referenzpunkt" xml:space="preserve">
-		<value>Opraviť referenčný bod</value>
+		<value>Nastaviť referenčný bod</value>
 	</data>
 	<data name="RoomPickerForm_GroesseEingeben" xml:space="preserve">
 		<value>Vložiť veľkosť</value>
@@ -4480,7 +4571,7 @@ Dach vykurovací obvod</value>
 		<value>Prevziať steny?</value>
 	</data>
 	<data name="GraphicalWallModifierForm_ErsteWandText" xml:space="preserve">
-		<value>Ak chcete definovať inú stenu ako "prvý múr", vyberte prosím požadovanú stenu a zadajte možnosti.</value>
+		<value>Ak chcete definovať inú stenu ako "prvá stena", vyberte prosím požadovanú stenu a zadajte možnosti.</value>
 	</data>
 	<data name="Unit_Millimeter" xml:space="preserve">
 		<value>mm</value>
@@ -4552,13 +4643,13 @@ Dach vykurovací obvod</value>
 		<value>VO:</value>
 	</data>
 	<data name="PipeProductPlanner_Rohrlaenge" xml:space="preserve">
-		<value>Potrbie l.: </value>
+		<value>Dĺžka potr.: </value>
 	</data>
 	<data name="PipeProductPlanner_Name" xml:space="preserve">
 		<value>Názov:</value>
 	</data>
 	<data name="PipeProductPlanner_FlaecheUebernehmenText" xml:space="preserve">
-		<value>Vymedzená plocha je %FLAECHE%m². Chcete prevziať túto plochu?</value>
+		<value>Definovaná plocha je %FLAECHE%m². Chcete prevziať túto plochu?</value>
 	</data>
 	<data name="PipeProductPlanner_FlaecheUebernehmenTitel" xml:space="preserve">
 		<value>Prevziať plochu?</value>
@@ -4627,7 +4718,7 @@ Dach vykurovací obvod</value>
 		<value>Výsledky výpočtu</value>
 	</data>
 	<data name="EcothermPlannerForm_Rohrlaenge" xml:space="preserve">
-		<value>Potrubie I. m</value>
+		<value>Dĺžka potr. m</value>
 	</data>
 	<data name="EcothermPlannerForm_AnzahlHK" xml:space="preserve">
 		<value>Počet VO</value>
@@ -4652,7 +4743,7 @@ cm</value>
 W</value>
 	</data>
 	<data name="EcothermPlannerForm_QFBH" xml:space="preserve">
-		<value>Qpodl.
+		<value>Qpodl.kur.
 W</value>
 	</data>
 	<data name="EcothermPlannerForm_QSollProQuadratmeter" xml:space="preserve">
@@ -4660,7 +4751,7 @@ W</value>
 W/m²</value>
 	</data>
 	<data name="EcothermPlannerForm_QSoll" xml:space="preserve">
-		<value>Qpotr.
+		<value>QPotr.
 W</value>
 	</data>
 	<data name="EurovalPlannerForm_Titel" xml:space="preserve">
@@ -4673,7 +4764,7 @@ W</value>
 		<value>Grafický</value>
 	</data>
 	<data name="PlannedProductPanel_Auslegungsart" xml:space="preserve">
-		<value>Typ dizajnu:</value>
+		<value>Konštrukčný typ:</value>
 	</data>
 	<data name="PlannedProductPanel_GrafischeAnbindeleitungen" xml:space="preserve">
 		<value>Grafické pripájacie potrubia</value>
@@ -4685,7 +4776,7 @@ W</value>
 		<value>Hitherm - grafický návrh</value>
 	</data>
 	<data name="HithermPlannerForm_Exportieren" xml:space="preserve">
-		<value>Exportovať dizajn</value>
+		<value>Exportovať skladbu</value>
 	</data>
 	<data name="HithermPlannerForm_Verschieben" xml:space="preserve">
 		<value>Presunúť výrez</value>
@@ -4805,13 +4896,13 @@ W</value>
 		<value>Rozostup potrubia</value>
 	</data>
 	<data name="HithermPlannerForm_RohrabstandHochleistung" xml:space="preserve">
-		<value>5 cm (vysoko výkonný prvok)</value>
+		<value>5 cm (vysoko výkonný reg.)</value>
 	</data>
 	<data name="HithermPlannerForm_Vorlauf" xml:space="preserve">
 		<value>Prívodové potrubie</value>
 	</data>
 	<data name="HithermPlannerForm_VorlaufRechtsUnten" xml:space="preserve">
-		<value>Vpravo dole (Std.)</value>
+		<value>Vpravo dole (Štan.)</value>
 	</data>
 	<data name="HithermPlannerForm_VorlaufLinksUnten" xml:space="preserve">
 		<value>Vľavo dole</value>
@@ -4859,7 +4950,7 @@ W</value>
 		<value>Steny k dispozícii</value>
 	</data>
 	<data name="HithermPlannerForm_RegisterText" xml:space="preserve">
-		<value>Hitherm Klimawand  %ANZAHL% jednotky Hitherm %TYP% %HOEHE%cm (%ROHRE%)</value>
+		<value>Hitherm Klimawand  %ANZAHL% kusov Hitherm %TYP% %HOEHE%cm (%ROHRE%)</value>
 	</data>
 	<data name="HithermPlannerForm_Hochleistungsregister" xml:space="preserve">
 		<value>Vysoko výkonný register</value>
@@ -4880,7 +4971,7 @@ W</value>
 		<value>Definície stien boli vytvorené automaticky. Ak chcete vykonať zmeny, grafické plánovanie pripájacích potrubí už nebude možné. Naozaj chcete pokračovať?</value>
 	</data>
 	<data name="HithermPlannerForm_WandManuellTitel" xml:space="preserve">
-		<value>Upraviť vymedzenie steny manuálne?</value>
+		<value>Upraviť definovanie steny manuálne?</value>
 	</data>
 	<data name="HithermPlannerForm_WandLoeschenText" xml:space="preserve">
 		<value>Naozaj chcete odstrániť danú stenu?</value>
@@ -4895,7 +4986,7 @@ W</value>
 		<value>V produkte je priveľa vykurovacích okruhov </value>
 	</data>
 	<data name="HithermCompactPlannerForm_RegisterText" xml:space="preserve">
-		<value>Hitherm Klimawand   %ANZAHL% Kusov Hitherm-Compact %TYP% %HOEHE% %TYPABK</value>
+		<value>Hitherm Klimawand   %ANZAHL% kusov Hitherm-Compact %TYP% %HOEHE% %TYPABK</value>
 	</data>
 	<data name="HithermCompactPlannerForm_Parapetelement" xml:space="preserve">
 		<value>Parapet</value>
@@ -4904,10 +4995,10 @@ W</value>
 		<value>Par</value>
 	</data>
 	<data name="HithermCompactPlannerForm_Dachschraegenelemente" xml:space="preserve">
-		<value>Prvok (prvky) podkrovia</value>
+		<value>Prvok (prvky) šikminy podkrovia</value>
 	</data>
 	<data name="HithermCompactPlannerForm_Ds" xml:space="preserve">
-		<value>Po</value>
+		<value>Šikm.podkr.</value>
 	</data>
 	<data name="HithermCompactPlannerForm_Wandelemente" xml:space="preserve">
 		<value>Stenový prvok (prvky)</value>
@@ -4917,8 +5008,9 @@ W</value>
 	</data>
 	<data name="HithermCompactDachschraege_Flaechenaufstellung" xml:space="preserve">
 		<value>Hitherm®
- Compact
- podkrovie (m²)</value>
+Compact
+Šikm.podkr.
+(m²)</value>
 	</data>
 	<data name="HithermCompactProduct_Flaechenaufstellung" xml:space="preserve">
 		<value>Hitherm®
@@ -4941,7 +5033,7 @@ Compact
 		<value>tesný</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_ModulierendDoppelt" xml:space="preserve">
-		<value>modulačné - dvojitá vzdialenosť</value>
+		<value>modulačný - dvojitá vzdialenosť</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_Laengsseite" xml:space="preserve">
 		<value>Dlhá strana</value>
@@ -4956,7 +5048,7 @@ Compact
 		<value>Prevziať moduly</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_NeuerHK" xml:space="preserve">
-		<value>Nový VO</value>
+		<value>nový VO</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_KonstruktionAendernText" xml:space="preserve">
 		<value>Ak chcete zmeniť konštrukciu, všetky už naplánované moduly budú odstránené!</value>
@@ -4971,10 +5063,10 @@ Compact
 		<value>Nezvolený žiadny modul </value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_KeinHK" xml:space="preserve">
-		<value>Žiaden</value>
+		<value>žiaden</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_VerschiendeHK" xml:space="preserve">
-		<value>Rôzne</value>
+		<value>rôzne</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_OrientierungAendernText" xml:space="preserve">
 		<value>Orientácia modulov, na ktoré už sú pripojené pripájacie potrubia už nemožno meniť. Chcete odstrániť pripájacie potrubia príslušných modulov?</value>
@@ -4995,26 +5087,26 @@ Compact
 		<value>Zvolené rozdielne veľkosti modulov</value>
 	</data>
 	<data name="SelectMoveTargetForm_TeilflaecheWaehlen" xml:space="preserve">
-		<value>Prosím zvoľte čiastočnúú plochu, do ktorej sa má presunúť zvlolený rad.</value>
+		<value>Prosím zvoľte čiastočnú plochu, do ktorej sa má presunúť zvlolený rad.</value>
 	</data>
 	<data name="SelectMoveTargetForm_HeizkreisWaehlen" xml:space="preserve">
 		<value>Zvoľte vykurovací okruh, do ktorého má byť premiestnená zvolená čiastkovová plocha.</value>
 	</data>
 	<data name="ConcreteActivationProduct_Schnellauslegung" xml:space="preserve">
-		<value>BKA
+		<value>ABJ
 (m²)</value>
 	</data>
 	<data name="ProductType_Dachschraege" xml:space="preserve">
-		<value>Podkrovie</value>
+		<value>Šikmina podkrovia</value>
 	</data>
 	<data name="HithermPlannerForm_Links3" xml:space="preserve">
-		<value>Vľavo</value>
+		<value>Vľavo:</value>
 	</data>
 	<data name="HithermCompactPlannerForm_Titel" xml:space="preserve">
 		<value>Hither Compact - grafický návrh</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_UnterkonstruktionAusrichten" xml:space="preserve">
-		<value>Zarovnať pod-konštrukciu</value>
+		<value>Zarovnať podkonštrukciu</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_ModuleHinzufuegen" xml:space="preserve">
 		<value>Pridať moduly</value>
@@ -5038,13 +5130,13 @@ Compact
 		<value>Voľný</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_Konstruktionsparameter" xml:space="preserve">
-		<value>Konštrukčný parameter</value>
+		<value>Konštrukčné parametre</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_Achsabstand" xml:space="preserve">
 		<value>Rozstup:</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_Staffelbreite" xml:space="preserve">
-		<value>Šírka podpory:</value>
+		<value>Šírka podpory</value>
 	</data>
 	<data name="ModulKlimaBodenPlannerForm_Ausrichtung" xml:space="preserve">
 		<value>Orientácia:</value>
@@ -5098,7 +5190,7 @@ Compact
 		<value>Modul Klimaboden - grafický návrh</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_BeplankungBekannt" xml:space="preserve">
-		<value>Známy záklop</value>
+		<value>Plánovaný záklop</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_AkustikdeckeRandfries" xml:space="preserve">
 		<value>Akustický stropný podhľad s okrajovým vlysom</value>
@@ -5110,13 +5202,13 @@ Compact
 		<value>Okrajový vlys:</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_KlimamodulSerie" xml:space="preserve">
-		<value>Rada Klimamodul </value>
+		<value>Klimamodul Serie</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_Serie40" xml:space="preserve">
-		<value>Klimamodul rada 40</value>
+		<value>Klimamodul Seria 40</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_Serie30" xml:space="preserve">
-		<value>Klimamodul rada 30</value>
+		<value>Klimamodul Seria 30</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_Rastermass" xml:space="preserve">
 		<value>Miera rastra</value>
@@ -5128,7 +5220,7 @@ Compact
 		<value>Čiastková plocha</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_ParalleleReihen" xml:space="preserve">
-		<value>Súbežné rady v čiastkovej ploche</value>
+		<value>Paralelné rady v čiastkovej ploche</value>
 	</data>
 	<data name="ModulKlimaDeckePlannerForm_Verschieben" xml:space="preserve">
 		<value>Presunúť</value>
@@ -5158,7 +5250,7 @@ Compact
 		<value>Modul Klimadecke - grafický návrh</value>
 	</data>
 	<data name="ConnectionPlanner_Ruecklauf" xml:space="preserve">
-		<value>Spiatočka / Rúra spiatočky / potrubie spiatočky???</value>
+		<value>Spiatočka</value>
 	</data>
 	<data name="Project_PlanFehltText" xml:space="preserve">
 		<value>Pri otváraní nebol nájdený nasledujúci plán: '%PLANNAME%' (%FILENAME%) Ak bol plán odstránený z adresára, alebo omylom premiestnený, môžete ho znova importovať. Ak chcete znova importovať plán, kliknite ÁNO, ak kliknete NIE, dôjde k strate produktov, ktoré už boli navrhnuté v grafickom režime. Znova importovať?</value>
@@ -5179,7 +5271,7 @@ Compact
 		<value>Použiť pre aktuálny projekt</value>
 	</data>
 	<data name="RoomPicker_RaumgroesseText" xml:space="preserve">
-		<value>Vymedzená plocha je %FLAECHE%m². Drobné nepresnosti výpočtu plochy možno neskôr zmeniť manuálne. Chcete prevziať geometriu miestnosti?</value>
+		<value>Definovaná plocha je %AREA%m². Drobné nepresnosti výpočtu plochy možno neskôr zmeniť manuálne. Chcete prevziať geometriu miestnosti?</value>
 	</data>
 	<data name="RoomPicker_RaumgroesseTitel" xml:space="preserve">
 		<value>Prevziať geometriu miestnosti?</value>
@@ -5230,13 +5322,13 @@ Compact
 		<value>Poznámka: množstvá stanovené programom sú orientačné a ich správnosť musí byť skontrolovaná podľa plánu!</value>
 	</data>
 	<data name="HithermPlannerForm_VL" xml:space="preserve">
-		<value>Prív:</value>
+		<value>PR:</value>
 	</data>
 	<data name="HithermPlannerForm_RL" xml:space="preserve">
-		<value>Spát:</value>
+		<value>SP:</value>
 	</data>
 	<data name="HithermPlannerForm_AnbindeleitungImBodenImRaum" xml:space="preserve">
-		<value>Podlahové pripájacie potrubie v miestnosti</value>
+		<value>Pripájacie potrubie v podlahe v miestnosti</value>
 	</data>
 	<data name="HithermPlannerForm_HK" xml:space="preserve">
 		<value>VO:</value>
@@ -5257,6 +5349,9 @@ Compact
 		<value>Upozornenie</value>
 	</data>
 	<data name="PdfRegionPickerForm_BereichAuswaehlen" xml:space="preserve">
-		<value>Zvolená plocha</value>
+		<value>Vybrať oblasť</value>
+	</data>
+	<data name="General_ProjektSpeichernText" xml:space="preserve">
+		<value>Ak chcete vykonať túto akciu, musíte uložiť projekt. Chcete uložiť projekt teraz?</value>
 	</data>
 </root>
