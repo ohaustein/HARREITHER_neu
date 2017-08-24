@@ -539,7 +539,7 @@ namespace Europlan.Common {
                                             foreach (ModulDeckeSubArea subarea in circuit.SubAreas) {
                                                 foreach (KlimaFlaechenList row in subarea.Rows) {
                                                     foreach (KlimaFlaechenModul m in row.List) {
-                                                        if (m.ModulType != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 && m.ModulType != KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+                                                        if (m.DiagonalDurchstroemt) {
                                                             if (m.Orientation == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
                                                                 m.Orientation = KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT;
                                                             } else {
