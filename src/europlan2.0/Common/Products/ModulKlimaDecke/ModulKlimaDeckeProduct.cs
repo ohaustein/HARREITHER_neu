@@ -1217,10 +1217,7 @@ namespace Europlan.Common {
 				if (this.Type == ProductType.WH) {
 					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
 				}
-
-                // Schweißwinkel
-                Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", Double.NegativeInfinity);
-            } else {
+			} else {
 				bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
 				bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
 				bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
@@ -1319,10 +1316,7 @@ namespace Europlan.Common {
 						// Muffe
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
-
-                        // Schweißwinkel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", Double.NegativeInfinity);
-				} else if (serie40) {
+					} else if (serie40) {
 						// Einhängebügel
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
 
@@ -1348,10 +1342,7 @@ namespace Europlan.Common {
 						// Holzstaffeln
 						ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
-
-                        // Schweißwinkel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", Double.NegativeInfinity);
-                    } else if (serie40) {
+					} else if (serie40) {
 						// T-Stück
 						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
 

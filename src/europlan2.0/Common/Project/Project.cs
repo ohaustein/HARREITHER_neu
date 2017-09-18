@@ -790,6 +790,8 @@ namespace Europlan.Common {
 			requiredMaterialCalculated = new SerializableDictionary<string, double>();
 			bool klimaBodenPlanned = false;
 			bool hithermCompactPlanned = false;
+            bool anyProductPlanned = false;
+
 			foreach (Floor floor in this.floors) {
 				// distributors
 				foreach (Distributor distributor in floor.Distributors) {
@@ -798,6 +800,7 @@ namespace Europlan.Common {
 				foreach (Room room in floor.Rooms) {
 					// products
 					foreach (PlannedProduct product in room.PlannedProducts) {
+                        anyProductPlanned = true;
 						product.Product.CalculateRequiredMaterial(requiredMaterialCalculated);
 						if (product.Product is ModulKlimaBodenProduct) {
 							klimaBodenPlanned = true;
@@ -808,6 +811,11 @@ namespace Europlan.Common {
 					}
 				}
 			}
+
+            if (anyProductPlanned) {
+                // Always add HI59 (Schweiﬂwinkel) to the material accoridng to the mail from thomas Harreither to Christina Aigner at 7. Sept 2017 17:24
+                this.AddRequiredMaterial(requiredMaterialCalculated, "HI59", Double.NegativeInfinity);
+            }
 
 			if (klimaBodenPlanned) {
 				ModulKlimaBodenProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
