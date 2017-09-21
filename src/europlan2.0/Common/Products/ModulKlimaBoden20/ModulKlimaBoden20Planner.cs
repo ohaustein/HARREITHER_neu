@@ -2813,17 +2813,17 @@ namespace Europlan.Common {
 			Brush b = new SolidBrush(Color.FromArgb(c.A / 2, c));
             if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
-					g.DrawLines(p, new PointF[] { topRight, bottomRight, bottomLeft, topLeft, topRight, middle, bottomRight });
-				} else {
+				if (KlimaFlaechenModul.IsDiagonalDurchstroemt(type)) {
 					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, topRight });
+				} else {
+					g.DrawLines(p, new PointF[] { topRight, bottomRight, bottomLeft, topLeft, topRight, middle, bottomRight });
 				}
             } else if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
-				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
-					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
-				} else {
+				if (KlimaFlaechenModul.IsDiagonalDurchstroemt(type)) {
 					g.DrawLines(p, new PointF[] { topLeft, topRight, bottomRight, bottomLeft, topLeft, bottomRight });
+				} else {
+					g.DrawLines(p, new PointF[] { bottomLeft, topLeft, topRight, bottomRight, bottomLeft, middle, topLeft });
 				}
 			} else {
 				g.FillPolygon(b, new PointF[] { topLeft, topRight, bottomRight, bottomLeft });
@@ -2901,10 +2901,19 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
 					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
 					break;
-				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
-					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
-					break;
-			}
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_80_30U_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_30U_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_120_30U_Short;
+                    break;
+            }
 
 			if (this.product.AssociatedRoom.AssociatedPlan is CadPlan) {
 				g.DrawString(moduleString, new Font("Arial", 5.0f / g.DpiX * Math.Abs((float)additionalTransformation.M22) * this.product.AssociatedRoom.AssociatedPlan.Measure.Value), new SolidBrush(Color.FromArgb(circuitColor.A, c)), bottomLeft);
@@ -2971,29 +2980,29 @@ namespace Europlan.Common {
 			Point2D[] polygon = null;
 			if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_LEFT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
-				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
+				if (KlimaFlaechenModul.IsDiagonalDurchstroemt(type)) {
+					DxfLine line = new DxfLine(c, topRight2D, bottomLeft2D);
+					line.Layer = layer;
+					model.Entities.Add(line);
+				} else {
 					DxfLine line = new DxfLine(c, bottomLeft2D, middle2D);
 					line.Layer = layer;
 					model.Entities.Add(line);
 					line = new DxfLine(c, middle2D, topLeft2D);
 					line.Layer = layer;
 					model.Entities.Add(line);
-				} else {
-					DxfLine line = new DxfLine(c, topRight2D, bottomLeft2D);
-					line.Layer = layer;
-					model.Entities.Add(line);
 				}
 			} else if (orientationForDrawing == KlimaFlaechenModul.ModulOrientationEnum.ORIENTATION_RIGHT) {
 				polygon = new Point2D[] { topLeft2D, topRight2D, bottomRight2D, bottomLeft2D };
-				if (type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 || type == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B) {
-					DxfLine line = new DxfLine(c, bottomRight2D, middle2D);
-					line.Layer = layer;
-					model.Entities.Add(line);
-					line = new DxfLine(c, middle2D, topRight2D);
+				if (KlimaFlaechenModul.IsDiagonalDurchstroemt(type)) {
+					DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
 					line.Layer = layer;
 					model.Entities.Add(line);
 				} else {
-					DxfLine line = new DxfLine(c, topLeft2D, bottomRight2D);
+                    DxfLine line = new DxfLine(c, bottomRight2D, middle2D);
+                    line.Layer = layer;
+					model.Entities.Add(line);
+					line = new DxfLine(c, middle2D, topRight2D);
 					line.Layer = layer;
 					model.Entities.Add(line);
 				}
@@ -3045,10 +3054,19 @@ namespace Europlan.Common {
 				case KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D:
 					moduleString = EuroplanRes.KlimaFlaechenModul_60_60D_Short;
 					break;
-				case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
-					moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
-					break;
-			}
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_80_30_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_80_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_80_30U_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_100_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_100_30U_Short;
+                    break;
+                case KlimaFlaechenModul.ModulTypeEnum.MODUL_120_30U:
+                    moduleString = EuroplanRes.KlimaFlaechenModul_120_30U_Short;
+                    break;
+            }
 
 			if (!model.TextStyles.Contains("HarreitherStyle")) {
 				DxfTextStyle textStyle = new DxfTextStyle("HarreitherStyle", "Arial.ttf");

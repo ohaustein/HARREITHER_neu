@@ -8097,4 +8097,22 @@ m²</value>
   <data name="ConnectionPipe_Hitherm" xml:space="preserve">
     <value>Hitherm+</value>
   </data>
+  <data name="KlimaFlaechenModul_100_30U" xml:space="preserve">
+    <value>Modul 100/30 Universal</value>
+  </data>
+  <data name="KlimaFlaechenModul_100_30U_Short" xml:space="preserve">
+    <value>100/30 U</value>
+  </data>
+  <data name="KlimaFlaechenModul_120_30U" xml:space="preserve">
+    <value>Modul 120/30 Universal</value>
+  </data>
+  <data name="KlimaFlaechenModul_120_30U_Short" xml:space="preserve">
+    <value>120/30 U</value>
+  </data>
+  <data name="KlimaFlaechenModul_80_30U" xml:space="preserve">
+    <value>Modul 80/30 Universal</value>
+  </data>
+  <data name="KlimaFlaechenModul_80_30U_Short" xml:space="preserve">
+    <value>80/30 U</value>
+  </data>
 </root>
