@@ -52,9 +52,9 @@ namespace Europlan.Common {
 					}
 				}
 				lblRemainingLabel.Visible = true;
-				if (count < 12) {
+				if (count < distributor.MaxCircuits) {
 					lblPlanned.Text = "" + count;
-				} else if (count == 12) {
+				} else if (count == distributor.MaxCircuits) {
 					lblPlanned.Text = EuroplanRes.QuickDimensioningDistributorsSummary_AlleAnschluesseVerplant;
 				} else  {
 					lblPlanned.Text = EuroplanRes.QuickDimensioningDistributorsSummary_ZuVieleHeizkreise;

@@ -16,6 +16,11 @@ namespace Europlan.Common {
 			get { return this.distributor.ToString(); }
 		}
 
+        public int MaxCircuits
+        {
+            get { return this.distributor.MaxCircuits; }
+        }	
+
 		public string RoomId {
 			get { return this.product.AssociatedRoom.Id; }
 		}

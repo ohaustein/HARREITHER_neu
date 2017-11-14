@@ -155,7 +155,6 @@ namespace Europlan.Common {
 				this.EnableProductInRoom<HithermCompactProduct>(row);
 				this.EnableProductInRoom<HithermCompactRoofProduct>(row);
 				this.EnableProductInRoom<ModulKlimaBodenProduct>(row);
-                this.EnableProductInRoom<ModulKlimaBoden20Product>(row);
 				this.EnableProductInRoom<ModulKlimaDeckeProduct>(row);
 			}
 		}
@@ -171,7 +170,6 @@ namespace Europlan.Common {
 				this.productOpenColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactOpenCircuits);
 				this.productOpenColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofOpenCircuits);
 				this.productOpenColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenOpenCircuits);
-                this.productOpenColumns.Add(typeof(ModulKlimaBoden20Product), this.colModulKlimaBodenOpenCircuits);
 				this.productOpenColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckeOpenCircuits);
 			}
 
@@ -194,7 +192,6 @@ namespace Europlan.Common {
 				this.productPlannedColumns.Add(typeof(HithermCompactProduct), this.colHithermCompactPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(HithermCompactRoofProduct), this.colHithermCompactRoofPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(ModulKlimaBodenProduct), this.colModulKlimaBodenPlannedCircuits);
-                this.productPlannedColumns.Add(typeof(ModulKlimaBoden20Product), this.colModulKlimaBodenPlannedCircuits);
 				this.productPlannedColumns.Add(typeof(ModulKlimaDeckeProduct), this.colModulKlimaDeckePlannedCircuits);
 			}
 
@@ -240,7 +237,7 @@ namespace Europlan.Common {
 							}
 						}
 					}
-					cell.Value = (count >= 12 ? 0 : (count + cell.Maximum > 12 ? 12 - count : (int)cell.Maximum));
+                    cell.Value = (count >= this.distributor.MaxCircuits ? 0 : (count + cell.Maximum > this.distributor.MaxCircuits ? this.distributor.MaxCircuits - count : (int)cell.Maximum));
 				}
 			}
 		}
