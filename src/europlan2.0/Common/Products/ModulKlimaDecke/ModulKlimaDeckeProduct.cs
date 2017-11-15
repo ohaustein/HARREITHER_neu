@@ -1909,7 +1909,19 @@ namespace Europlan.Common {
 			}
 			return null;
 		}
-    
+
+        public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial)
+        {            
+            /* Mail vom 29.10.2017:
+             * 3.)	
+             * Im Materialbedarf sind einige Artikel rot zu hinterlegen. zB HI59: hier sind generell ein paar 
+             * Stk. (zB 10 Stk.) bei jeder Modul Klimadecken Planung in einem Projekt zu hinterlegen.
+             * Also 10 Stk. pro Projekt in Summe, wenn Modul Klimaecke geplant wird. Zu einem späteren Zeitpunkt müssen wir 
+             * noch einen anteiligen Berechnungsschlüssel finden. zB 1/3 von HI56 sind HI59 in der Modul Fläche.
+             */
+
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", -10);            
+        }
 
 	    public struct KlimaFlaechenModulWithRowAndCircuit {
 		    public KlimaFlaechenModul modul;

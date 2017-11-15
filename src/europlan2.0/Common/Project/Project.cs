@@ -791,6 +791,7 @@ namespace Europlan.Common {
 			bool klimaBodenPlanned = false;
 			bool hithermCompactPlanned = false;
             bool anyProductPlanned = false;
+            bool klimaDeckePlanned = false;
 
 			foreach (Floor floor in this.floors) {
 				// distributors
@@ -808,6 +809,10 @@ namespace Europlan.Common {
 						if (product.Product is HithermCompactProduct) {
 							hithermCompactPlanned = true;
 						}
+                        if (product.Product is ModulKlimaDeckeProduct)
+                        {
+                            klimaDeckePlanned = true;
+                        }
 					}
 				}
 			}
@@ -823,6 +828,10 @@ namespace Europlan.Common {
 			if (hithermCompactPlanned) {
 				HithermCompactProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
 			}
+            if (klimaDeckePlanned)
+            {
+                ModulKlimaDeckeProduct.ReviseRequiredMaterial(requiredMaterialCalculated);
+            }
 		}
 
 		public void AddRequiredMaterial(SerializableDictionary<string, double> requiredMaterial, string materialId, double amount) {
