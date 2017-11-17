@@ -13,6 +13,7 @@ namespace Europlan.Common {
 		private static readonly string distributor = EuroplanRes.Category_Verteiler; //"Verteiler"
 		private static readonly string insulation = EuroplanRes.Category_Daemmung; //"Dämmung"
 		private static readonly string general = EuroplanRes.Category_Allgemein; //"Allgemein"
+        private static readonly string connections = EuroplanRes.Category_Connection; // "Anbindematerial"
 
 		private Dictionary<string, CategoryType> mappingFromString = new Dictionary<string, CategoryType>();
 		private Dictionary<CategoryType, string> mappingToString = new Dictionary<CategoryType, string>();
@@ -24,12 +25,14 @@ namespace Europlan.Common {
 			mappingFromString.Add(distributor, CategoryType.Distributor);
 			mappingFromString.Add(insulation, CategoryType.Insulation);
 			mappingFromString.Add(general, CategoryType.General);
+            mappingFromString.Add(connections, CategoryType.Connectors);
 			mappingToString.Add(CategoryType.Floor, floor);
 			mappingToString.Add(CategoryType.Wall, wall);
 			mappingToString.Add(CategoryType.Ceiling, ceiling);
 			mappingToString.Add(CategoryType.Distributor, distributor);
 			mappingToString.Add(CategoryType.Insulation, insulation);
 			mappingToString.Add(CategoryType.General, general);
+            mappingToString.Add(CategoryType.Connectors, connections);
 		}
 
 		public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
@@ -65,8 +68,9 @@ namespace Europlan.Common {
 		Wall,
 		Ceiling,
 		Distributor,
-		Insulation,
-		General
+		Insulation,        
+        General,
+        Connectors,
 	}
 
 	public class Category : IComparable {
