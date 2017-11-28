@@ -901,7 +901,7 @@ namespace Europlan.Common {
 			}
 
 			Dictionary<int, Point2D> possibleStarts = new Dictionary<int, Point2D>();
-			for (int i = 0; i < this.maxCircuits - nrOfCircuits; i++) {
+			for (int i = 0; i < this.maxCircuits - nrOfCircuits + 1; i++) {
 				bool ok = true;
 				for (int j = i; j < i + nrOfCircuits; j++) {
 					if (output && !openOutputs.Contains(j)) {
