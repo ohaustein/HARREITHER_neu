@@ -35,6 +35,7 @@ namespace Europlan.Common {
 			this.requiredMaterialGridDistributor.CategoryType = Europlan.Common.CategoryType.Distributor;
 			this.requiredMaterialGridInsulation.CategoryType = Europlan.Common.CategoryType.Insulation;
 			this.requiredMaterialGridGeneral.CategoryType = Europlan.Common.CategoryType.General;
+            this.requiredMaterialConnectors.CategoryType = Europlan.Common.CategoryType.Connectors;
 
 			this.SetLanguage();
 
@@ -49,6 +50,7 @@ namespace Europlan.Common {
 			this.tabDistributor.Text = EuroplanRes.RequiredMaterialPanel_Verteiler; //"Verteiler"
 			this.tabInsulation.Text = EuroplanRes.RequiredMaterialPanel_Daemmung; //"Dämmung"
 			this.tabGeneral.Text = EuroplanRes.RequiredMaterialPanel_Allgemein; //"Allgemein
+            this.tabConnector.Text = EuroplanRes.RequiredMaterialPanel_AnbindeMaterial; // "AnbindeMaterial"
 		}
 
 		public void UpdateControl(bool resetUserInterface) {
@@ -59,6 +61,7 @@ namespace Europlan.Common {
 			requiredMaterialGridDistributor.UpdateControl(true);
 			requiredMaterialGridInsulation.UpdateControl(true);
 			requiredMaterialGridGeneral.UpdateControl(true);
+            requiredMaterialConnectors.UpdateControl(true);
 		}
 
 		public bool AllowLeave() {

@@ -24,6 +24,7 @@ namespace Europlan.Application {
 			this.megGeneral.Filter = CategoryType.General;
 			this.megInsulation.Filter = CategoryType.Insulation;
 			this.megWall.Filter = CategoryType.Wall;
+            this.megConnectors.Filter = CategoryType.Connectors;
 
 			this.SetLanguague();
             this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
@@ -38,6 +39,7 @@ namespace Europlan.Application {
 			this.megGeneral.Filter = CategoryType.General;
 			this.megInsulation.Filter = CategoryType.Insulation;
 			this.megWall.Filter = CategoryType.Wall;
+            this.megConnectors.Filter = CategoryType.Connectors;
 
 			this.SetLanguague();
 			this.cmbPlanUnit.SelectedIndex = Product.ConfigPlanMeasure;
@@ -64,6 +66,7 @@ namespace Europlan.Application {
 			tabPageGeneral.Text = EuroplanRes.OptionsForm_Allgmein; //"Allgemein"
 			tabPageInsulation.Text = EuroplanRes.OptionsForm_Daemmung; //"Dämmung"
 			tabPageWall.Text = EuroplanRes.OptionsForm_Wand; //"Wand"
+            tabPageConnectors.Text = EuroplanRes.OptionsForm_AnbindeMaterial; // "Anbindematerial"
 			tabDefaultSystemParameters.Text = EuroplanRes.OptionsForm_StandardSystemparameter;
             cbOrthoRasterung.Text = EuroplanRes.OptionsForm_OrthoRasterung;
             cbAutoSave.Text = EuroplanRes.OptionsForm_AutomatischSichern;
