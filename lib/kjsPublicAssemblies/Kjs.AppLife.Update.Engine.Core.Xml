@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Kjs.AppLife.Update.Engine.Core</name>
+  </assembly>
+  <members>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute">
+            <summary>
+            Specifies the class used to implement UI and project management services for an action.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.Default">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> class and sets the type to the default.
+            This field is read-only. 
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.#ctor">
+            <summary>
+            Initializes a new default instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> class.
+            </summary>
+            <param name="builderTypeName">The concatenation of the fully qualified name of the
+            type that provides UI and project management services for the action this attribute
+            is bound to, and the name of the assembly this type resides in.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> class.
+            </summary>
+            <param name="builderType">A <see cref="T:System.Type" /> that represents the class that
+            provides UI and project management services for the action this attribute is
+            bound to.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.IsDefaultAttribute">
+            <summary>
+            Indicates whether the value of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> is the default
+            value for <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" />.
+            </summary>
+            <returns>
+            <see langword="null" /> if the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> is the default
+            attribute for the class; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object.
+            </summary>
+            <param name="obj">An <see cref="T:System.Object"></see> to compare with this instance or null.</param>
+            <returns>
+            true if obj equals the type and value of this instance; otherwise, false.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute.BuilderTypeName">
+            <summary>
+            Gets the name of the builder type associated with the builder attribute.
+            </summary>
+            <value>The name of the builder type associated with the builder attribute.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute">
+            <summary>
+            Specifies the class used to provide information about an action's representation
+            in a palette.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.Default">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> class and sets the type to the default.
+            This field is read-only. 
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> class and specifies
+            whether to use a default value or disable action palette support.
+            </summary>
+            <param name="defaultType"><see langword="true" /> to create an action palette item attribute
+            for a default palette item; <see langword="false" /> to associate no palette support for the
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> this attribute is applied to.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> class.
+            </summary>
+            <param name="actionPaletteItemTypeName">The concatenation of the fully qualified name of the
+            type that provides information about the representation in a palette of the action this attribute
+            is bound to, and the name of the assembly this type resides in.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> class.
+            </summary>
+            <param name="actionPaletteItemType">Type of the class that provides information
+            about the representation in a palette of the action this attribute is bound to.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.IsDefaultAttribute">
+            <summary>
+            Indicates whether the value of the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> is the default
+            value for <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" />.
+            </summary>
+            <returns>
+            <see langword="null" /> if the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> is the default
+            attribute for the class; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object.
+            </summary>
+            <param name="obj">An <see cref="T:System.Object"></see> to compare with this instance or null.</param>
+            <returns>
+            true if obj equals the type and value of this instance; otherwise, false.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute.ActionPaletteItemTypeName">
+            <summary>
+            Gets the name of the action palette item type.
+            </summary>
+            <value>The name of the action palette item type.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.IUpdateLog">
+            <summary>
+            Provides properties and methods to log actions.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.IUpdateLog.WriteLine(System.String)">
+            <summary>
+            Writes the specified text to the update log, followed by line terminator.
+            </summary>
+            <param name="content">The text to write.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.IUpdateLog.Indent">
+            <summary>
+            Increases <see cref="P:Kjs.AppLife.Update.Engine.Core.IUpdateLog.IndentLevel" /> by one.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.IUpdateLog.Unindent">
+            <summary>
+            Decreases <see cref="P:Kjs.AppLife.Update.Engine.Core.IUpdateLog.IndentLevel" /> by one.
+            </summary>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.IUpdateLog.IndentLevel">
+            <summary>
+            Gets or sets the indent level of the log.
+            </summary>
+            <value>The indent level of the log.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.UpdateAction">
+             <summary>
+             Provides the base implementation for all actions that are performed in an
+             AppLife Update action list update.
+             </summary>
+             <remarks>
+             <para>To create a custom action, inherit from <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, provide
+             a public parameterless constructor and implementations for <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />
+             and <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+             <para>For storage in projects and in update packages, actions are serialized using
+             an <see cref="T:System.Xml.Serialization.XmlSerializer" />. In general, public read-write properties and fields
+             will be automatically serialized. See the <see cref="T:System.Xml.Serialization.XmlSerializer" /> documentation
+             for more information on serialization.</para>
+             <para>When an update is performed, the following steps are taken in order:
+             <list type="number">
+             <item>All actions are deserialized.</item>
+             <item><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> is called on every action in order.</item>
+             <item><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> is called on every action in order.</item>
+             <item><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> is called on every action in order.</item>
+             </list></para>
+             <para>If any error occurs when calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />
+             is called on all actions that completed <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> in reverse order.</para>
+             <para>If any error occurs when calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />
+             is called on all actions that completed <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> in reverse order, then
+             <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> is called on all actions in reverse order.</para>
+             <para>Errors in <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> are ignored.</para>
+             <para><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should contain the primary task performed by the action,
+             and <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should reverse the effect of that task.</para>
+             <para><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should contain any preparation that needs to be performed
+             before any actions execute, and can throw an exception to abort the update before
+             any changes are made. <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should reverse the effect of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+             <para><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should perform nonessential cleanup that cannot be performed
+             until the update has succeeded.</para>
+             <para>All five of these methods can optionally call <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> to report
+             progress from 0 to 100 percent. If no progress events are raised in this way, AppLife Update
+             will automatically report 100% progress for each method when it returns.</para>
+             <para>Custom actions will appear in the action palette automatically when an assembly that
+             they reside in is added in the AppLife update creation application. The default editor
+             for custom actions uses a <see cref="T:System.Windows.Forms.PropertyGrid" /> and so only public
+             read-write properties can be edited. To use a custom editor for an action, provide an
+             <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> on the action and specify the type of
+             <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />
+             to use. An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> can also perform
+             work when building the update package (such as copying files to go with the update) and
+             customize the action's appearance in the action list.</para>
+             <para>To customize an action's appearance in the action palette, you can provide an
+             <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> on the action and specify the type of
+             <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> to use.
+             Alternatively, you can specify one or more of the following attributes on the action,
+             which will be automatically used by the default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />:
+             <list type="table">
+             <listheader>
+             <term>Attribute</term>
+             <description>Effect</description>
+             </listheader>
+             <item>
+             <term><see cref="T:System.ComponentModel.DisplayNameAttribute" /></term>
+             <description>Specifies the name of the action as it will appear in the palette. Unless
+             a different name is specified by an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />,
+             this name will also be used in the action list</description>
+             </item>
+             <item>
+             <term><see cref="T:System.ComponentModel.CategoryAttribute" /></term>
+             <description>Specifies the palette category of the action.</description>
+             </item>
+             <item>
+             <term><see cref="T:System.ComponentModel.DescriptionAttribute" /></term>
+             <description>Specifies the action's tooltip in the palette.</description>
+             </item>
+             <item>
+             <term><see cref="T:System.Drawing.ToolboxBitmapAttribute" /></term>
+             <description>Specifies the image that will be used for the action in the palette. Unless
+             a different image is specified by an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />,
+             this image will also be used in the action list.</description>
+             </item>
+             </list>
+             To prevent an action from appearing in the palette, provide an
+             <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" />, specifying <see langword="false" /> in its
+             constructor.</para>
+             </remarks>
+             <example>
+             An action with two properties:
+             <code language="cs">
+             using Kjs.AppLife.Update.Engine.Core;
+             
+             public class MyAction : UpdateAction {
+            	  private int mNumber;
+            	  private string mText;
+             
+            	  public MyAction() { }
+             
+            	  public int Number {
+            	    get { return mNumber; }
+            	    set { mNumber = value; }
+            	  }
+             
+            	  public string Text {
+            	    get { return mText; }
+            	    set { mText = value; }
+            	  }
+             
+            	  public override void Execute(UpdateContext context) {
+            	    return;
+            	  }
+             
+            	  public override void RollbackExecute(UpdateContext context) {
+            	    return;
+            	  }
+             }
+             </code>
+             <code language="vb">
+             Imports Kjs.AppLife.Update.Engine.Core
+            
+             Public Class MyAction
+               Inherits UpdateAction
+            
+               Dim mNumber As Integer
+               Dim mText As String
+            
+               Public Sub New()
+               End Sub
+            
+               Public Property Number() As Integer
+                 Get
+                   Return mNumber
+                 End Get
+                 Set(ByVal value As Integer)
+                   mNumber = value
+                 End Set
+               End Property
+            
+               Public Property Text() As String
+                 Get
+                   Return mText
+                 End Get
+                 Set(ByVal value As String)
+                   mText = value
+                 End Set
+               End Property
+            
+               Public Overrides Sub Execute(ByVal context As UpdateContext)
+               End Sub
+            
+               Public Overrides Sub RollbackExecute(ByVal context As UpdateContext)
+               End Sub
+             End Class
+             </code>
+             An action with a customized display name:
+             <code language="cs">
+             using Kjs.AppLife.Update.Engine.Core;
+             
+             [System.ComponentModel.DisplayName("My other action")]
+             public class MyOtherAction : UpdateAction {
+            	  public MyOtherAction() { }
+             
+            	  public override void Execute(UpdateContext context) {
+            	    return;
+            	  }
+             
+            	  public override void RollbackExecute(UpdateContext context) {
+            	    return;
+            	  }
+             }
+             </code>
+             <code language="vb">
+             Imports Kjs.AppLife.Update.Engine.Core
+            
+             &lt;System.ComponentModel.DisplayName("My other action")&gt; _
+             Public Class MyOtherAction
+               Inherits UpdateAction
+             
+               Public Sub New()
+               End Sub
+            
+               Public Overrides Sub Execute(ByVal context As UpdateContext)
+               End Sub
+            
+               Public Overrides Sub RollbackExecute(ByVal context As UpdateContext)
+               End Sub
+             End Class
+             </code>
+             </example>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> class.
+            </summary>
+            <remarks>
+            In order for a class to be used as a custom action, it must inherit from
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> and have a public constructor that takes no
+            parameters.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Executes the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, updating the target application.
+            </summary>
+            <param name="context">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> representing the current state
+            of the update process.</param>
+            <remarks>
+            <para>Use <paramref name="context" /> to obtain information about the update and log
+            the action's effects. See <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> for more information.</para>
+            <para>You can call the <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> method to report progress
+            from 0 to 100 percent during the course of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Prepares the target application, performing any tasks needed before <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />
+            can be called.
+            </summary>
+            <param name="context">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> representing the current state
+            of the update process.</param>
+            <remarks>
+            <para>Use <paramref name="context" /> to obtain information about the update and log
+            the action's effects. See <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> for more information.</para>
+            <para>You can call the <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> method to report progress
+            from 0 to 100 percent during the course of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Performs any cleanup work needed by the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> after the target
+            application has been completely updated.
+            </summary>
+            <param name="context">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> representing the current state
+            of the update process.</param>
+            <remarks>
+            <para>Use <paramref name="context" /> to obtain information about the update and log
+            the action's effects. See <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> for more information.</para>
+            <para>You can call the <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> method to report progress
+            from 0 to 100 percent during the course of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+            <para><see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" /> should not contain any essential work, as it may not be called
+            and an error will not cause the update to roll back or terminate.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Rolls back any work performed in <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+            <param name="context">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> representing the current state
+            of the update process.</param>
+            <remarks>
+            <para>Use <paramref name="context" /> to obtain information about the update and log
+            the action's effects. See <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> for more information.</para>
+            <para>You can call the <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> method to report progress
+            from 0 to 100 percent during the course of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Rolls back any work performed in <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+            <param name="context">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> representing the current state
+            of the update process.</param>
+            <remarks>
+            <para>Use <paramref name="context" /> to obtain information about the update and log
+            the action's effects. See <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> for more information.</para>
+            <para>You can call the <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)" /> method to report progress
+            from 0 to 100 percent during the course of <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.OnProgressChanged(Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.UpdateAction.ProgressChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs" />
+            instance containing the event data.</param>
+            <remarks>
+            Use this method to report progress (from 0 to 100 percent) in <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />,
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, and
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.UpdateAction.ProgressChanged">
+            <summary>
+            Occurs when progress is made during <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />,
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, or <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.UpdateContext">
+            <summary>
+            Describes the current state of an update in progress.
+            </summary>
+            <remarks>
+            An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> is provided to each <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> during
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />,
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />, <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />,
+            and <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.#ctor(Kjs.AppLife.Update.Engine.Core.UpdateState,Kjs.AppLife.Update.Engine.Core.IUpdateLog,System.String,System.String,System.Security.Principal.WindowsIdentity,System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> class.
+            </summary>
+            <param name="state">The current state of the update in progress.</param>
+            <param name="log">An <see cref="T:Kjs.AppLife.Update.Engine.Core.IUpdateLog" /> that can be used to log update activity.</param>
+            <param name="applicationDirectory">The directory where the application being updated resides.</param>
+            <param name="updatePackageDirectory">The directory where the update package being used to
+            update the target application resides.</param>
+            <param name="targetApplicationIdentity">A <see cref="T:System.Security.Principal.WindowsIdentity" /> representing the user
+            who ran the application being updated.</param>
+            <param name="sharedProperties">An <see cref="T:System.Collections.IDictionary" /> containing properties that
+            can be shared between actions.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.ExpandSharedProperties(System.String)">
+            <summary>
+            Expands any shared properties (delimited by $) to their values
+            in the specified text. Use $$ to indicate a $ outside a shared
+            property name.
+            </summary>
+            <param name="input">Text to expand shared properties in.</param>
+            <returns>The expanded text.</returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>
+            true if obj and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>
+            A 32-bit signed integer that is the hash code for this instance.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.op_Equality(Kjs.AppLife.Update.Engine.Core.UpdateContext,Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Determines whether two specified instances of <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> are equal. 
+            </summary>
+            <param name="context1">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" />.</param>
+            <param name="context2">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" />.</param>
+            <returns><see langword="true" /> if <paramref name="context1" /> and <paramref name="context2" />
+            represent the same update context; otherwise, <see langword="false" />.</returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateContext.op_Inequality(Kjs.AppLife.Update.Engine.Core.UpdateContext,Kjs.AppLife.Update.Engine.Core.UpdateContext)">
+            <summary>
+            Determines whether two specified instances of <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" /> are not equal. 
+            </summary>
+            <param name="context1">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" />.</param>
+            <param name="context2">An <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateContext" />.</param>
+            <returns><see langword="true" /> if <paramref name="context1" /> and <paramref name="context2" />
+            do not represent the same update context; otherwise, <see langword="false" />.</returns>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.State">
+            <summary>
+            Gets the current state of the update in progress.
+            </summary>
+            <value>One of the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateState" /> values representing the state
+            of the update in progress.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.Log">
+            <summary>
+            Gets the update log.
+            </summary>
+            <value>An <see cref="T:Kjs.AppLife.Update.Engine.Core.IUpdateLog" /> that can be used to log actions.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.ApplicationDirectory">
+            <summary>
+            Gets the path to the application being updated.
+            </summary>
+            <value>The path to the application being updated.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.UpdatePackageDirectory">
+            <summary>
+            Gets the path to the update package being used to update the application.
+            </summary>
+            <value>The path to the update package being used to update the application.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.TargetApplicationIdentity">
+            <summary>
+            Gets a <see cref="T:System.Security.Principal.WindowsIdentity" /> that represents the identity of the user
+            who ran the application being updated.
+            </summary>
+            <value>A <see cref="T:System.Security.Principal.WindowsIdentity" /> that represents the identity of the user
+            who ran the application being updated.</value>
+            <remarks>
+            This identity must be used when performing user-specific update tasks in an elevated
+            update.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.SharedProperties">
+            <summary>
+            Gets an <see cref="T:System.Collections.IDictionary" /> containing properties that
+            can be shared between actions.
+            </summary>
+            <value>An <see cref="T:System.Collections.IDictionary" /> containing properties that
+            can be shared between actions.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs">
+            <summary>
+            Provides event data for the <see cref="E:Kjs.AppLife.Update.Engine.Core.UpdateAction.ProgressChanged" /> event.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs" /> class.
+            </summary>
+            <param name="progressPercentage">The percentage of a task that has been completed.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs" /> class.
+            </summary>
+            <param name="progressPercentage">The percentage of a task that has been completed.</param>
+            <param name="progressDescription">Text describing the current state of the task.</param>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs.ProgressPercentage">
+            <summary>
+            Gets the task progress percentage.
+            </summary>
+            <value>
+            A percentage value indicating the task progress.
+            </value>
+            <remarks>
+            A value of 0 indicates that none of the task has been completed, and a value
+            of 100 indicates that the task is fully complete.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.UpdateProgressChangedEventArgs.ProgressDescription">
+            <summary>
+            Gets text describing the current state of the task.
+            </summary>
+            <value>Text describing the current state of the task.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.UpdateState">
+            <summary>
+            Defines the possible states for an update in progress.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.UpdateState.Prepare">
+            <summary>
+            The update is preparing actions by calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Prepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.UpdateState.Execute">
+            <summary>
+            The update is executing actions by calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Execute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.UpdateState.Cleanup">
+            <summary>
+            The update is cleaning up actions by calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.Cleanup(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.UpdateState.RollbackPrepare">
+            <summary>
+            The update is finishing rollbacks by calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackPrepare(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Engine.Core.UpdateState.RollbackExecute">
+            <summary>
+            The update is rolling back by calling <see cref="M:Kjs.AppLife.Update.Engine.Core.UpdateAction.RollbackExecute(Kjs.AppLife.Update.Engine.Core.UpdateContext)" />.
+            </summary>
+        </member>
+  </members>
+</doc>

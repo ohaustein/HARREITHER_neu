@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Kjs.AppLife.Update.Engine.Core.Design</name>
+  </assembly>
+  <members>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder">
+            <summary>
+            Provides UI and project management services for an update action.
+            </summary>
+            <remarks>
+            <para>An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> can provide the following for an <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />:
+            <list type="bullet">
+            <item>A custom editor.</item>
+            <item>Validation that is performed before an update is built.</item>
+            <item>Pre- and post-build actions that can extend the capabilities of an action by, for example,
+            copying files to be included in an update.</item>
+            <item>Initialization after creation or loading.</item>
+            <item>Customizion of the action's appearance to the user.</item>
+            </list>
+            </para>
+            <para>To create a custom <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />, inherit from this class and provide
+            a public parameterless constructor. To link an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> to an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, provide an <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> on the
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, specifying the type of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />. If
+            the type specified in the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionBuilderAttribute" /> cannot be found, does not
+            inherit from <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />, or does not have a public, parameterless constructor,
+            the default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> will be used instead.</para>
+            <para>To specify a custom editor, override the <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.StartEditingAction(System.IServiceProvider)" /> method and
+            use the provided <see cref="T:System.IServiceProvider" /> to to present your custom editor. Note that
+            any custom action editor must ensure that <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.SetActionDirty" /> and <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" />
+            are called as needed.</para>
+            <para>To provide validation for an action, override <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateActionCore(Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection)" /> and
+            add any validation errors to the provided collection.</para>
+            <para>To provide initialization, override <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeNewAction" /> to initialize newly
+            created actions and <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeExistingAction" /> to initialize loaded actions.</para>
+            <para>To customize the action's appearance, set the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" /> and <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Image" />
+            properties.</para>
+            </remarks>
+            <example>
+            An action and its associated builder:
+            <code language="cs">
+            using Kjs.AppLife.Update.Engine.Core;
+            using Kjs.AppLife.Update.Engine.Core.Design;
+            
+            [ActionBuilder(typeof(DelayActionBuilder))]
+            public class DelayAction : UpdateAction {
+            	private int mSeconds;
+            
+            	public DelayAction() { }
+            
+            	public int Seconds {
+            		get { return this.mSeconds; }
+            		set { this.mSeconds = value; }
+            	}
+            
+            	public override void Execute(UpdateContext context) {
+            		System.Threading.Thread.Sleep(mSeconds * 1000);
+            	}
+            
+            	public override void RollbackExecute(UpdateContext context) { }
+            }
+            
+            public class DelayActionBuilder : ActionBuilder {
+            	public DelayActionBuilder() { }
+            
+            	private new DelayAction Action {
+            		get { return (DelayAction)base.Action; }
+            	}
+            
+            	protected override void ValidateActionCore(ValidationErrorCollection errors) {
+            		if(this.Action.Seconds &lt; 0) {
+            			errors.AddError("Seconds cannot be less than 0.");
+            		}
+            	}
+            }
+            </code>
+            <code language="vb">
+            Imports Kjs.AppLife.Update.Engine.Core
+            Imports Kjs.AppLife.Update.Engine.Core.Design
+            
+            &lt;ActionBuilder(GetType(DelayActionBuilder))&gt; _
+            Public Class DelayAction
+            	Inherits UpdateAction
+            
+            	Dim mSeconds As Integer
+            
+            	Public Sub New()
+            	End Sub
+            
+            	Public Property Seconds() As Integer
+            		Get
+            			Return mSeconds
+            		End Get
+            		Set(ByVal value As Integer)
+            			mSeconds = value
+            		End Set
+            	End Property
+            
+            	Public Overrides Sub Execute(ByVal context As UpdateContext)
+            		System.Threading.Thread.Sleep(mSeconds * 1000)
+            	End Sub
+            
+            	Public Overrides Sub RollbackExecute(ByVal context As UpdateContext)
+            	End Sub
+            End Class
+            
+            Public Class DelayActionBuilder
+            	Inherits ActionBuilder
+            
+            	Public Sub New()
+            	End Sub
+            
+            	Public Overloads ReadOnly Property Action() As DelayAction
+            		Get
+            			Return CType(MyBase.Action, DelayAction)
+            		End Get
+            	End Property
+            
+            	Protected Overrides Sub ValidateActionCore(ByVal errors As ValidationErrorCollection)
+            		If Me.Action.Seconds &lt; 0 Then
+            			errors.AddError("Seconds cannot be less than 0.")
+            		End If
+            	End Sub
+            End Class
+            </code>
+            </example>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> class.
+            </summary>
+            <remarks>
+            In order for a class to be used as a custom action builder, it must inherit from
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> and have a public constructor that takes no
+            parameters.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Initialize(Kjs.AppLife.Update.Engine.Core.UpdateAction,System.Boolean)">
+            <summary>
+            Prepares the builder to work with an action.
+            </summary>
+            <param name="action">The action that the builder will work with.</param>
+            <param name="actionIsNew"><see langword="true" /> if <paramref name="action" />
+            is newly created; otherwise, <see langword="false" />.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action" /> is
+            <see langword="null" />.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Initialize(Kjs.AppLife.Update.Engine.Core.UpdateAction,System.Boolean)" /> has
+            already been called.</exception>
+            <remarks>
+            This method is called by the AppLife update creation system after an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> is created.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeNewAction">
+            <summary>
+            Initializes the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> and its action
+            after <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> has been set to a newly created
+            action.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeExistingAction">
+            <summary>
+            Initializes the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> and its action
+            after <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> has been set to an action that has been loaded.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction">
+            <summary>
+            Checks the state of <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to ensure that it is valid.
+            </summary>
+            <remarks>
+            If you use a custom editor, any change made to the action that may cause
+            its validation state to change should be followed by a call to <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" />
+            to ensure that the user interface stays up-to-date.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateActionCore(Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection)">
+            <summary>
+            Performs the work of checking the state of <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to ensure that
+            it is valid.
+            </summary>
+            <param name="errors">A <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection" /> into which errors can be added.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.PrepareForBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)">
+            <summary>
+            Performs any work needed to prepare <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> for building.
+            </summary>
+            <param name="context">A <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> representing the current state
+            of the build process.</param>
+            <remarks>
+            The provided <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> can be used to log the builder's actions.
+            It also provides a <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.BuildDirectory" /> property that represents
+            the folder where the update package is being created. Any files placed in this folder
+            will be included in the build package. If the builder's action requires additional
+            files, they should be copied to the build path in <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.PrepareForBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)" />; they
+            can then be found by the action by looking in
+            <see cref="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.UpdatePackageDirectory" />.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.CleanupAfterBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)">
+            <summary>
+            Performs any work needed after building the project.
+            </summary>
+            <param name="context">A <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> representing the current state
+            of the build process.</param>
+            <remarks>
+            Any changes made to <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> during <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.PrepareForBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)" /> should
+            be reversed in <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.CleanupAfterBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)" />.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.SetActionDirty">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ActionChanged" /> event, causing the action to be
+            considered dirty, or changed, by the project it belongs to.
+            </summary>
+            <remarks>
+            This method should be called by a custom editor any time <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" />
+            changes.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.StartEditingAction(System.IServiceProvider)">
+             <summary>
+             Starts editing the builder's action.
+             </summary>
+             <param name="provider">An <see cref="T:System.IServiceProvider" /> that the builder
+             can use to obtain services.</param>
+             <remarks>
+             <para>A service provider is provided so that the builder can obtain any services needed to start
+             editing.</para>
+             <para>Currently, the only service provided to edit actions is the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.IWindowsFormsActionEditorService" />.
+             This service can be used to display a <see cref="T:System.Windows.Forms.Control" />. To create a custom editor, create a
+             class that inherits from <see cref="T:System.Windows.Forms.Control" /> or <see cref="T:System.Windows.Forms.UserControl" /> to be used as
+             the editor, then in <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.StartEditingAction(System.IServiceProvider)" />, obtain a <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.IWindowsFormsActionEditorService" />
+             and use it to display an instance of your editing control. The control will remain shown
+             until it is destroyed by the service, and should update <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> itself as changes
+             are made.</para>
+             <para>Whenever a change is made to action, the editor should call <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.SetActionDirty" />
+             to ensure that the UI is notified that the action has changed. It should also call
+             <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" /> whenever a change is made to the action that might change its
+             validation state.</para>
+             </remarks>
+             <example>
+             The following example demonstrates an implementation of <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.StartEditingAction(System.IServiceProvider)" /> that uses
+             the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.IWindowsFormsActionEditorService" /> to edit its action.
+             <code language="cs">
+             public override void StartEditingAction(System.IServiceProvider provider) {
+               IWindowsFormsActionEditorService editorService =
+                 (IWindowsFormsActionEditorService)provider.GetService(typeof(IWindowsFormsActionEditorService));
+             
+               if(editorService != null) {
+                 // MyActionEditorControl has an ActionBuilder property that it uses to call
+                 // SetActionDirty() and ValidateAction() and to connect to the action that it
+                 // edits.
+                 MyActionEditorControl myControl = new MyActionEditorControl();
+                 myControl.ActionBuilder = this;
+             
+                 editorService.ShowControl(myControl);
+               }
+             }
+             </code>
+             <code language="vb">
+             Public Overrides Sub StartEditingAction(ByVal provider As System.IServiceProvider)
+               Dim editorService As IWindowsFormsActionEditorService = _
+                CType(provider.GetService(GetType(IWindowsFormsActionEditorService)), IWindowsFormsActionEditorService)
+            
+               If Not (editorService Is Nothing) Then
+                 ' MyActionEditorControl has an ActionBuilder property that it uses to call
+                 ' SetActionDirty() and ValidateAction() and to connect to the action that it
+                 ' edits.
+                 Dim myControl As New MyActionEditorControl()
+                 myControl.ActionBuilder = Me
+            
+                 editorService.ShowControl(myControl)
+               End If
+             End Sub
+             </code>
+             </example>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnDescriptionChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DescriptionChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnDisplayTextChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayTextChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnImageChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ImageChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnIsValidChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.IsValidChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnValidationErrorsChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidationErrorsChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.OnActionChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ActionChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description">
+            <summary>
+            Gets or sets a description of the action.
+            </summary>
+            <value>A description of the action.</value>
+            <remarks>
+            <para>If the value of <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> is not blank, it will
+            be shown to the user instead of <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" />.</para>
+            <para>If both <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> and <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" />
+            are blank, the palette display text (specified by either a <see cref="T:System.ComponentModel.DisplayNameAttribute" />,
+            a custom <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />, or the name of the action's type)
+            will be shown to the user.</para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText">
+            <summary>
+            Gets or sets the text used to represent the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to the user
+            when <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> is blank.
+            </summary>
+            <value>The text used to represent the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to the user
+            when <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> is blank.</value>
+            <remarks>
+            <para>If <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> is not blank, it will be shown to the user instead
+            of <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" />.</para>
+            <para>If both <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> and <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" />
+            are blank, the palette display text (specified by either a <see cref="T:System.ComponentModel.DisplayNameAttribute" />,
+            an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />, or the name of the action's type)
+            will be shown to the user.</para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Image">
+            <summary>
+            Gets or sets the image used to represent the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to the user.
+            </summary>
+            <value>The image used to represent the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> to the user.</value>
+            <remarks>
+            If <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Image" /> is <see langword="null" />, the palette image (specified by either a
+            <see cref="T:System.Drawing.ToolboxBitmapAttribute" /> or an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />) will be
+            shown to the user.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.IsValid">
+            <summary>
+            Gets a value indicating whether the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> is valid.
+            </summary>
+            <value>
+            <see langword="true" /> if the builder's <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" /> is valid;
+            otherwise, <see langword="false" />.
+            </value>
+            <remarks>
+            Calling <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" /> can change the value of this property.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidationErrors">
+            <summary>
+            Gets a <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection" /> containing any validation errors for the action.
+            </summary>
+            <value>A <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection" /> containing any validation errors for the action.</value>
+            <remarks>
+            This collection is filled during <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" />. If <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.IsValid" /> is
+            <see langword="true" />, it will contain at least one item; otherwise, it will be empty.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action">
+            <summary>
+            Gets the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> associated with the builder.
+            </summary>
+            <value>The <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> associated with the builder.</value>
+            <remarks>
+            This value is <see langword="null" /> until <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeNewAction" /> or
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.InitializeExistingAction" /> is called.
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DescriptionChanged">
+            <summary>
+            Occurs when the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Description" /> property value changes.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayTextChanged">
+            <summary>
+            Occurs when the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.DisplayText" /> property value changes.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ImageChanged">
+            <summary>
+            Occurs when the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Image" /> property value changes.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.IsValidChanged">
+            <summary>
+            Occurs when the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.IsValid" /> property value changes.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidationErrorsChanged">
+            <summary>
+            Occurs when the contents of the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidationErrors" /> property value changes.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ActionChanged">
+            <summary>
+            Occurs when <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.Action" />'s data changes.
+            </summary>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem">
+            <summary>
+            Provides the default implementation for an action palette item.
+            </summary>
+            <remarks>
+            <para>To create a custom <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />, inherit from this class and provide
+            a public parameterless constructor.</para>
+            <para>Each <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> describes the appearance of an <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />
+            in the action palette. The <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.DisplayName" /> property contains the name of the action
+            in the palette. The <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Description" /> property contains the tooltip for the action.
+            The <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Image" /> property contains the image shown next to the action's name,
+            and the <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Category" /> property contains the category under which the action
+            appears.</para>
+            <para>
+            The values of these properties are taken from the following attributes, which can be placed on an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />:
+            <list type="table">
+            <listheader>
+            <term>Attribute</term>
+            <description>Effect</description>
+            </listheader>
+            <item>
+            <term><see cref="T:System.ComponentModel.DisplayNameAttribute" /></term>
+            <description>Specifies <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.DisplayName" />. Unless
+            a different name is specified by an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />,
+            this name will also be used in the action list</description>
+            </item>
+            <item>
+            <term><see cref="T:System.ComponentModel.CategoryAttribute" /></term>
+            <description>Specifies <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Category" />.</description>
+            </item>
+            <item>
+            <term><see cref="T:System.ComponentModel.DescriptionAttribute" /></term>
+            <description>Specifies <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Description" />.</description>
+            </item>
+            <item>
+            <term><see cref="T:System.Drawing.ToolboxBitmapAttribute" /></term>
+            <description>Specifies <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Image" />. Unless
+            a different image is specified by an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />,
+            this image will also be used in the action list.</description>
+            </item>
+            </list>
+            </para>
+            <para>A custom <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> can override the default behavior
+            of these properties.</para>
+            <para> To link an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> to an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, provide an <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> on the
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, specifying the type of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />. If
+            the type specified in the <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> cannot be found, does not
+            inherit from <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />, or does not have a public, parameterless constructor,
+            the default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> will be used instead.</para>
+            <para>To specify that an action should not appear in the palette, provide an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> on the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, specifying
+            <see langword="false" /> for the <paramref name="defaultType" /> parameter in the constructor:</para>
+            <code language="cs">[ActionPaletteItem(false)]</code>
+            <code language="vb">&lt;ActionPaletteItem(false)&gt;</code>
+            <para>To explicitly specify that an action should use the default palette item, provide an
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.ActionPaletteItemAttribute" /> on the <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, specifying
+            <see langword="true" /> for the <paramref name="defaultType" /> parameter in the constructor:</para>
+            <code language="cs">[ActionPaletteItem(true)]</code>
+            <code language="vb">&lt;ActionPaletteItem(true)&gt;</code>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> class.
+            </summary>
+            <remarks>
+            In order for a class to be used as a custom action palette item, it must inherit from
+            <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> and have a public constructor that takes no
+            parameters.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Initialize(System.Type)">
+            <summary>
+            Initializes the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> with the specified action
+            type's information.
+            </summary>
+            <param name="actionType">Type of action the palette item represents.</param>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.DisplayName">
+            <summary>
+            Gets the name for the action displayed in the action palette.
+            </summary>
+            <value>The name for the action displayed in the action palette.</value>
+            <remarks>
+            The default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> uses the value of the
+            <see cref="P:System.ComponentModel.DisplayNameAttribute.DisplayName" /> property from the <see cref="T:System.ComponentModel.DisplayNameAttribute" />
+            on the palette item's <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> for the value of this property, or
+            the name of the action's type if no <see cref="T:System.ComponentModel.DisplayNameAttribute" /> is present.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Category">
+            <summary>
+            Gets the palette category of the action.
+            </summary>
+            <value>The palette category of the action.</value>
+            <remarks>
+            The default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> uses the value of the
+            <see cref="P:System.ComponentModel.CategoryAttribute.Category" /> property from the <see cref="T:System.ComponentModel.CategoryAttribute" />
+            on the palette item's <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> for the value of this property, or
+            the default category ("Misc") if no <see cref="T:System.ComponentModel.CategoryAttribute" /> is present.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Description">
+            <summary>
+            Gets the palette description of the action.
+            </summary>
+            <value>The palette description of the action.</value>
+            <remarks>
+            The default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> uses the value of the
+            <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> property from the <see cref="T:System.ComponentModel.DescriptionAttribute" />
+            on the palette item's <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> for the value of this property, or
+            an empty string if no <see cref="T:System.ComponentModel.DescriptionAttribute" /> is present.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.Image">
+            <summary>
+            Gets the image displayed in the action palette for the action.
+            </summary>
+            <value>The image displayed in the action palette for the action.</value>
+            <remarks>
+            The default <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" /> uses the result of calling
+            <see cref="M:System.Drawing.ToolboxBitmapAttribute.GetImage(System.Type)" /> on the <see cref="T:System.Drawing.ToolboxBitmapAttribute" />
+            on the palette item's <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" />, specifying <see cref="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.ActionType" />,
+            for the value of this property, or the the default image (a gear) if no
+            <see cref="T:System.Drawing.ToolboxBitmapAttribute" /> is present.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem.ActionType">
+            <summary>
+            Gets the type of action associated with the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />.
+            </summary>
+            <value>The type of action associated with the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionPaletteItem" />.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext">
+            <summary>
+            Describes the current state of a project build in progress.
+            </summary>
+            <remarks>
+            A <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> is provided to each <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> during
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.PrepareForBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)" /> and <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.CleanupAfterBuild(Kjs.AppLife.Update.Engine.Core.Design.BuildContext)" />.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.#ctor(System.String,Kjs.AppLife.Update.Engine.Core.IUpdateLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> class.
+            </summary>
+            <param name="buildDirectory">The path to the directory where the update
+            package is being built.</param>
+            <param name="log">An <see cref="T:Kjs.AppLife.Update.Engine.Core.IUpdateLog" /> that can be used to log activity.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>
+            true if obj and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>
+            A 32-bit signed integer that is the hash code for this instance.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.op_Equality(Kjs.AppLife.Update.Engine.Core.Design.BuildContext,Kjs.AppLife.Update.Engine.Core.Design.BuildContext)">
+            <summary>
+            Determines whether two specified instances of <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> are equal. 
+            </summary>
+            <param name="context1">An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" />.</param>
+            <param name="context2">An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" />.</param>
+            <returns><see langword="true" /> if <paramref name="context1" /> and <paramref name="context2" />
+            represent the same update context; otherwise, <see langword="false" />.</returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.op_Inequality(Kjs.AppLife.Update.Engine.Core.Design.BuildContext,Kjs.AppLife.Update.Engine.Core.Design.BuildContext)">
+            <summary>
+            Determines whether two specified instances of <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" /> are not equal. 
+            </summary>
+            <param name="context1">An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" />.</param>
+            <param name="context2">An <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.BuildContext" />.</param>
+            <returns><see langword="true" /> if <paramref name="context1" /> and <paramref name="context2" />
+            do not represent the same update context; otherwise, <see langword="false" />.</returns>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.Log">
+            <summary>
+            Gets the build log.
+            </summary>
+            <value>An <see cref="T:Kjs.AppLife.Update.Engine.Core.IUpdateLog" /> that can be used to log actions.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.BuildContext.BuildDirectory">
+            <summary>
+            Gets the path to the directory where the update package is being built.
+            </summary>
+            <value>The path to the directory where the update package is being built.</value>
+            <remarks>
+            All files in this directory will be included in the update package. They can be
+            accessed by <see cref="T:Kjs.AppLife.Update.Engine.Core.UpdateAction" /> instances when the update is applied
+            by checking the <see cref="P:Kjs.AppLife.Update.Engine.Core.UpdateContext.UpdatePackageDirectory" />.
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.IWindowsFormsActionEditorService">
+            <summary>
+            Provides an interface for an <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" /> to display a control
+            to edit its action.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.IWindowsFormsActionEditorService.ShowControl(System.Windows.Forms.Control)">
+            <summary>
+            Displays a control to be used as an editor for an action.
+            </summary>
+            <param name="editor">The control that will be used as an editor, or
+            <see langword="null" /> to show no control.</param>
+            <remarks>
+            The control will be displayed until it is destroyed by the UI. Any time the control
+            changes the action, it should call <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.SetActionDirty" />
+            to ensure the UI is notified of the change, and any time it changes the
+            action in such a way that its validation state might change, it should call
+            <see cref="M:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder.ValidateAction" /> on the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ActionBuilder" />
+            that displayed it.
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError">
+            <summary>
+            Represents an error in the state of an action.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationError.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError" /> class.
+            </summary>
+            <param name="errorText">A description of the error.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationError.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"></see> is equal to the current <see cref="T:System.Object"></see>.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"></see> to compare with the current <see cref="T:System.Object"></see>.</param>
+            <returns>
+            true if the specified <see cref="T:System.Object"></see> is equal to the current <see cref="T:System.Object"></see>; otherwise, false.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationError.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. <see cref="M:System.Object.GetHashCode"></see> is suitable for use in hashing algorithms and data structures like a hash table.
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object"></see>.
+            </returns>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Engine.Core.Design.ValidationError.ErrorText">
+            <summary>
+            Gets a description of the error.
+            </summary>
+            <value>A description of the error.</value>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection">
+            <summary>
+            Represents a collection of <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError" />s.
+            </summary>
+            <remarks>
+            <see langword="null" /> values are not supported.
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection.AddError(System.String)">
+            <summary>
+            Adds a new <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError" /> to the collection with the specified error text.
+            </summary>
+            <param name="errorText">Text to use for the <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError" />.</param>
+            <returns>The new <see cref="T:Kjs.AppLife.Update.Engine.Core.Design.ValidationError" />.</returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection.InsertItem(System.Int32,Kjs.AppLife.Update.Engine.Core.Design.ValidationError)">
+            <summary>
+            Inserts an element into the <see cref="T:System.Collections.ObjectModel.Collection`1"></see> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which item should be inserted.</param>
+            <param name="item">The object to insert. The value can be null for reference types.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than zero.-or-index is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"></see>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item" /> is <see langword="null" />.</exception>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Engine.Core.Design.ValidationErrorCollection.SetItem(System.Int32,Kjs.AppLife.Update.Engine.Core.Design.ValidationError)">
+            <summary>
+            Replaces the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to replace.</param>
+            <param name="item">The new value for the element at the specified index. The value can be null for reference types.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than zero.-or-index is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"></see>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item" /> is <see langword="null" />.</exception>
+        </member>
+  </members>
+</doc>

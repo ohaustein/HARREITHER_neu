@@ -1,0 +1,1985 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Kjs.AppLife.Update.Controller</name>
+  </assembly>
+  <members>
+    <member name="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions">
+            <summary>
+            Defines options available when applying an update. 
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.None">
+            <summary>
+            No options are specified; the update window will be shown, the user must click
+            the Close button when the update is complete, and the application will be restarted
+            after the update window is closed.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoRestart">
+            <summary>
+            The application will not be restarted after the update is complete, regardless of whether
+            it succeeded. This option applies to all update types.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoUpdateWindow">
+            <summary>
+            No update window will be shown. This option cannot be specified in combination with
+            <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.AutoClose" />; since no update window is shown, the update process
+            will end once the update is finished, regardless of whether it succeeded. If the update
+            fails, an entry will be added to the event log describing the failure. This option only
+            applies to Action List updates.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoShutdown">
+            <summary>
+            The application will not be shutdown prior to initating the udpate process. The <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" /> will be
+            raised on multiple instances, but no instances will be shutdown.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.AutoClose">
+            <summary>
+            When the update completes successfully or is canceled, the update window will be
+            automatically closed. This option cannot be specified in combination with
+            <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoUpdateWindow" />, since that option removes the update window entirely.
+            This option only applies to Action List updates.
+            </summary>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.AvailableUpdateCollection">
+            <summary>
+            Represents a read-only collection of <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" />.
+            </summary>
+            <remarks>
+            This class is used in the <see cref="T:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs" /> class to contain
+            the updates that are available to be applied to the application.
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs">
+            <summary>
+            Provides event data for the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.
+            </summary>
+            <remarks>
+            Instances of this class are passed to the <see cref="T:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventHandler" />.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.AvailableUpdates">
+            <summary>
+            Gets a collection containing an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> for each update that
+            is available to be applied to the application.
+            </summary>
+            <value>A collection containing an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> for each update that
+            is available to be applied to the application.</value>
+            <remarks>
+            Only updates that can be applied to the controller's <see cref="T:System.Version" /> appear in this
+            collection.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate">
+            <summary>
+            Gets the update that has been selected as the current update available for download.
+            This property may be <see langword="null" />.
+            </summary>
+            <value>The update selected as the current update available for download, or <see langword="null" />
+            if no update is available for download.</value>
+            <remarks>
+            <para>
+            If no updates are available, or no update has been selected (by handling the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" />
+            event), <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" /> will be <see langword="null" />.
+            </para>
+            <para>
+            By default, the controller selects the update with the highest <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.Version" />
+            to be applied. However, by adding a handler to the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event,
+            you can select any update from <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.AvailableUpdates" /> for <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" />.
+            </para>
+            <para>
+            By default, if <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" /> is <see langword="null" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.DialogSummaryText" />
+            will be set to the value of the <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary" /> property of
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" />.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.NoUpdateDisplayText">
+            <summary>
+            Gets text from the update server to display if no update is available.
+            </summary>
+            <value>The text to display if no update is available.</value>
+            <remarks>
+            By default, <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.DialogSummaryText" /> will be set to the value of this property if
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" /> is <see langword="null" />.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.DialogSummaryText">
+            <summary>
+            Gets or sets the summary text to be displayed in the dialog.
+            </summary>
+            <value>The text to be displayed in the dialog.</value>
+            <remarks>
+            <para>By default, this property is set to the <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">HistoricalSummary</see>
+            of <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" /> if <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.CurrentUpdate" /> is not <see langword="null" />, or
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs.NoUpdateDisplayText" /> otherwise.</para>
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventHandler">
+            <summary>
+            Represents the method that will handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing">UpdateDialogShowing</see>
+            event of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">An <see cref="T:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs" /> that contains the event data.</param>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.
+            </summary>
+            <remarks>
+            Instances of this class are passed to the <see cref="T:Kjs.AppLife.Update.Controller.UpdateFoundEventHandler" />.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.AvailableUpdates">
+            <summary>
+            Gets a collection containing an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> for each update that
+            is available to be applied to the application.
+            </summary>
+            <value>A collection containing an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> for each update that
+            is available to be applied to the application.</value>
+            <remarks>
+            <para>The collection contains only updates that can be applied to the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />'s
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />.</para>
+            <para>Only items from this collection can be specified for <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate" />.</para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate">
+            <summary>
+            Gets or sets the update that will be selected as the current update available for download.
+            If this property is set to <see langword="null" />, no update will be available.
+            </summary>
+            <value>The update selected as the current update available for download, or <see langword="null" />
+            if no update is available for download.</value>
+            <exception cref="T:System.ArgumentException">The property is set to an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> instance
+            that is not present in <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.AvailableUpdates" />.</exception>
+            <remarks>
+            <para>By default, <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate" /> is set to the update with the highest
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.Version">Version</see> from <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.AvailableUpdates" />.</para>
+            <para>If <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate" /> is set to <see langword="null" />, the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />
+            will indicate that no update is available for download.</para>
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel">
+            <summary>
+            Defines the available levels of error display in an update dialog.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage">
+            <summary>
+            The <see cref="P:System.Exception.Message">Message</see> property of the exception
+            and any <see cref="P:System.Exception.InnerException">InnerException</see>s can
+            be seen by clicking the "Show details" button.
+            </summary>
+        </member>
+    <member name="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.HideAllDetails">
+            <summary>
+            No details of the exception can be seen and the "Show details" button is hidden.
+            </summary>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateInformation">
+            <summary>
+            Contains information about an update available for download or installation.
+            </summary>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.Version">
+            <summary>
+            Gets the version of the available update.
+            </summary>
+            <value>The version of the available update.</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.PostedDate">
+            <summary>
+            Gets the date and time the update was posted in local time.
+            </summary>
+            <value>
+            The date and time the update was posted in local time.
+            </value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.PostedDateUtc">
+            <summary>
+            Gets the date and time the update was posted in coordinated universal time (UTC).
+            </summary>
+            <value>The date and time the update was posted in coordinated universal time (UTC).</value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.SimpleSummary">
+            <summary>
+            Gets the summary text for the update.
+            </summary>
+            <value>The summary text for the update.</value>
+            <remarks>
+            This property contains only the summary text entered for the update itself.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">
+            <summary>
+            Gets the historical summary text for the update, including summaries
+            for all updates between the current version and the update's version.
+            </summary>
+            <value>The historical summary text for the update.</value>
+            <remarks>
+            This property is created by appending all summaries from updates between
+            the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />'s <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />
+            and this update's <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.Version" /> together, separated by blank lines.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.CustomData">
+            <summary>
+            Gets custom data for the update.
+            </summary>
+            <value>The update's custom data.</value>
+            <remarks>
+            Custom data is not displayed to the user.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.IsDownloaded">
+            <summary>
+            Gets a value indicating whether the update has been downloaded.
+            </summary>
+            <value>
+            <see langword="true" /> if the update has been downloaded; otherwise, <see langword="false" />.
+            </value>
+            <remarks>
+            This value will only be true for the <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> returned by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate">UpdateController.CurrentUpdate</see> after calling
+            the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />,
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />, or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" /> methods.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateInformation.FileSize">
+            <summary>
+            Gets the size in bytes of the update package file
+            </summary>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs">
+            <summary>
+            Contains event data for the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted" /> event of an
+            <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />.
+            </summary>
+            <remarks>
+            Instances of this class are passed to the <see cref="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventHandler" />.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result">
+            <summary>
+            Gets a value indicating whether an available update was found.
+            </summary>
+            <value>
+            <see langword="true" /> if an available update was found; otherwise, <see langword="false" />.
+            </value>
+            <exception cref="T:System.Reflection.TargetInvocationException"><see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error">Error</see>
+            is not <see langword="null" />. The <see cref="P:System.Exception.InnerException">InnerException</see>
+            property holds a reference to <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error">Error</see>.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled">Cancelled</see>
+            is <see langword="true" />.</exception>
+            <remarks>
+            Your <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted">CheckForUpdateCompleted</see> event
+            handler should always check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error">Error</see> and
+            <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled">Cancelled</see> properties before accessing the
+            <see cref="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result" /> property. If an exception was raised or if the operation was canceled,
+            accessing the <see cref="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result" /> property raises an exception. 
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventHandler">
+            <summary>
+            Represents the method that will handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted">CheckForUpdateCompleted</see>
+            event of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs" /> that contains the event data.</param>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateException">
+            <summary>
+            The exception that is thrown when an update can't be applied.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateException" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateException" /> class with a specified
+            error message.
+            </summary>
+            <param name="message">The message the describes the error.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateException" /> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="inner">The exception that is the cause of the current exception. If the <paramref name="innerException" />
+            parameter is not <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"></see> is zero (0). </exception>
+            <exception cref="T:System.ArgumentNullException">The info parameter is null. </exception>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateFoundEventHandler">
+            <summary>
+            Represents the method that will handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound">UpdateFound</see>
+            event of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">An <see cref="T:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs" /> that contains the event data.</param>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.ValidationException">
+            <summary>
+            The exception that is thrown when update validation fails.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.ValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.ValidationException" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.ValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.ValidationException" /> class with a specified
+            error message.
+            </summary>
+            <param name="message">The message the describes the error.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.ValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.ValidationException" /> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="inner">The exception that is the cause of the current exception. If the <paramref name="innerException" />
+            parameter is not <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.ValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.ValidationException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"></see> is zero (0). </exception>
+            <exception cref="T:System.ArgumentNullException">The info parameter is null. </exception>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.DownloadException">
+            <summary>
+            The exception that is thrown when a download fails.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.DownloadException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.DownloadException" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.DownloadException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.DownloadException" /> class with a specified
+            error message.
+            </summary>
+            <param name="message">The message the describes the error.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.DownloadException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.DownloadException" /> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="inner">The exception that is the cause of the current exception. If the <paramref name="innerException" />
+            parameter is not <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.DownloadException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.DownloadException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"></see> is zero (0). </exception>
+            <exception cref="T:System.ArgumentNullException">The info parameter is null. </exception>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs">
+            <summary>
+            Contains event data for the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged" /> event.
+            </summary>
+            <remarks>
+            Instances of this class are passed to the <see cref="T:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventHandler" />.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs.DownloadedBytes">
+            <summary>
+            Gets the number of bytes that have been downloaded.
+            </summary>
+            <value>The number of bytes that have been downloaded.</value>
+            <remarks>
+            To determine what percentage of the download has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            property.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs.TotalBytes">
+            <summary>
+            Gets the total number of bytes to be downloaded, or -1 if the total is unknown.
+            </summary>
+            <value>The total number of bytes to be downloaded, or -1 if the total is unknown.</value>
+            <remarks>
+            To determine what percentage of the download has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            property. Note that is <see cref="P:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs.TotalBytes" /> is -1, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            will always be 0.
+            </remarks>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventHandler">
+            <summary>
+            Represents the method that will handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged">DownloadUpdateProgressChanged</see>
+            event of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs" /> that contains the event data.</param>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.InstanceShutdownException">
+            <summary>
+            The exception that is thrown when all instances of the application are not shut down
+            when applying an update.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.InstanceShutdownException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.InstanceShutdownException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException" /> class with a specified
+            error message.
+            </summary>
+            <param name="message">The message the describes the error.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.InstanceShutdownException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException" /> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="ex">The exception that is the cause of the current exception. If the <paramref name="innerException" />
+            parameter is not <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.InstanceShutdownException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"></see> is zero (0). </exception>
+            <exception cref="T:System.ArgumentNullException">The info parameter is null. </exception>
+        </member>
+    <member name="T:Kjs.AppLife.Update.Controller.UpdateController">
+             <summary>
+             The <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> forms the core of the AppLife Update
+             system in the application that will be updated. It enables the application
+             to communicate with an update server and download, validate, and apply updates. 
+             </summary>
+             <remarks>
+             <para>
+             To use an <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />, you must first initialize it with
+             information about the update server and the application being updated. The
+             <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" /> properties link
+             the controller to an update server, and the <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken" />
+             property allows it to validate updates. These three properties must be set
+             before the controller can be used to download and apply updates.
+             </para>
+             <para>
+             In order to determine what updates are available, the controller needs to know
+             the application's version. This information is stored in the <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />
+             property. If the <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UseHostAssemblyVersion" /> property is <see langword="true" />,
+             <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" /> will automatically be set to the version of the current
+             application.
+             </para>
+             <para>
+             If the controller may be working through a proxy to download updates, you can use
+             the <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyAddress" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyDomain" />,
+             <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUserName" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyPassword" />,
+             and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.BypassProxyOnLocal" /> properties to configure proxy settings.
+             </para>
+             <para>
+             Once the controller is configured, the easiest way to update your application is to use
+             one of the <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />
+             methods. These methods use the controller's built-in dialogs to guide the user through the
+             entire update process. Note that since the user might choose to update the application
+             from these methods, the application might shut down before they return. Handle
+             the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" /> event to perform work needed before the application
+             shuts down.
+             <code language="cs">
+             using System;
+             using System.Windows.Forms;
+             using Kjs.AppLife.Update.Controller;
+            
+             class UpdatableForm : Form {
+               [STAThread]
+               static void Main() {
+                 Application.EnableVisualStyles();
+                 Application.SetCompatibleTextRenderingDefault(false);
+                 Application.Run(new UpdatableForm());
+               }
+            
+               private UpdateController mController;
+            
+               public UpdatableForm() {
+                 Button updateButton = new Button();
+                 updateButton.Text = "Update!";
+                 updateButton.Click += new EventHandler(updateButton_Click);
+                 this.Controls.Add(updateButton);
+            
+                 this.mController = new UpdateController();
+            	    // These settings do not represent a real update server.
+                 this.mController.UpdateLocation = "my-update-server/updates";
+                 this.mController.ApplicationId = new Guid("01234567-89AB-CDEF-0123-456789ABCDEF");
+                 this.mController.PublicKeyToken = "&lt;RSAKeyValue&gt;&lt;Modulus&gt;25yO48pjp1EWrE/kCAfjtXpX" +
+            	      "1q/s1iS0stCFqPSJ0IkftbieP80gBitULM2cdR6kMEde/bZ/zwESOCqo2us6aLnKHam5B3o3g94jYf" +
+            	      "jYWC4KE/fm7qDZx0MkVhmwSfqCZXQdouOmfQVe7Uf48Qg/R3x45alcdDHUAYoNVK8Hn88=&lt;/Modulu" +
+            	      "s&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;/RSAKeyValue&gt;";
+               }
+            
+               void updateButton_Click(object sender, EventArgs e) {
+                 this.mController.UpdateInteractive(this);
+               }
+             }
+             </code>
+             <code language="vb">
+             Imports Kjs.AppLife.Update.Controller
+             
+             Public Class UpdatableForm
+               Dim mController As UpdateController
+            
+               Public Sub New()
+                 Dim updateButton As New Button()
+                 updateButton.Text = "Update!"
+                 AddHandler updateButton.Click, AddressOf updateButton_Click
+                 Me.Controls.Add(updateButton)
+            
+                 Me.mController = New UpdateController()
+                 ' These settings do not represent a real update server.
+                 Me.mController.UpdateLocation = "my-update-server/updates"
+                 Me.mController.ApplicationId = New Guid("01234567-89AB-CDEF-0123-456789ABCDEF")
+                 Me.mController.PublicKeyToken = "&lt;RSAKeyValue&gt;&lt;Modulus&gt;25yO48pjp1EWrE/kCAfjtXpX" &amp; _
+                  "1q/s1iS0stCFqPSJ0IkftbieP80gBitULM2cdR6kMEde/bZ/zwESOCqo2us6aLnKHam5B3o3g94jYf" &amp; _
+                  "jYWC4KE/fm7qDZx0MkVhmwSfqCZXQdouOmfQVe7Uf48Qg/R3x45alcdDHUAYoNVK8Hn88=&lt;/Modulu" &amp; _
+                  "s&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;/RSAKeyValue&gt;"
+               End Sub
+            
+               Private Sub updateButton_Click(ByVal sender As Object, ByVal e As EventArgs)
+                 Me.mController.UpdateInteractive(Me)
+               End Sub
+             End Class
+             </code>
+             </para>
+             <para>
+             The controller can also be used to perform each step of the update process
+             separately. To only contact the update server and find what update (if any) is available,
+             use the <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />,
+             <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />, or
+             <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" /> methods. Each of these methods fills in the
+             <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> properties with information
+             from the update server. To download the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />,
+             use the <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />,
+             <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />, or
+             <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" /> methods. Once an update has been successfully downloaded, the
+             <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.IsDownloaded">IsDownloaded</see> property of <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />
+             will be set to <see langword="true" />. To validate a downloaded update, use the
+             <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate" /> method. To apply a downloaded update, use the
+             <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> method. Like
+             <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />,
+             <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> can shut down the application.
+             </para>
+             <para>
+             When checking for an update, the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> will analyze the updates it
+             finds on the update server and choose the highest update that can be applied to <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />.
+             You can handle the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event to further filter updates based on custom
+             criteria.
+             </para>
+             </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class.
+            </summary>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> class with the specified container.
+            </summary>
+            <param name="container">An <see cref="T:System.ComponentModel.IContainer" /> that represents the container for the
+            <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> component.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing"><see langword="true" /> if managed resources should be disposed;
+            otherwise, <see langword="false" />.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that occurs
+            when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a message will be shown to the
+            user. The user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive(Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process, showing
+            the specified amount of information about any error that occurs.
+            </summary>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that occurs
+            when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a simple message will be shown
+            to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process. The dialogs
+            will be shown in front of the specified object.
+            </summary>
+            <param name="dialogOwner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that
+            occurs when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a message will be shown to the
+            user. The user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive(Kjs.AppLife.Update.Controller.ApplyUpdateOptions)">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process. The dialogs
+            will be shown in front of the specified object.
+            </summary>
+            <param name="options">A combination of <see cref="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions" /> values that specifies
+            the behavior of the update process.</param>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that
+            occurs when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a message will be shown to the
+            user. The user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive(System.Windows.Forms.IWin32Window,Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process, showing
+            the specified amount of information about any error that occurs. The dialogs
+            will be shown in front of the specified object.
+            </summary>
+            <param name="dialogOwner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that occurs
+            when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a simple message will be shown
+            to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive(System.Windows.Forms.IWin32Window,Kjs.AppLife.Update.Controller.ErrorDisplayLevel,Kjs.AppLife.Update.Controller.ApplyUpdateOptions)">
+            <summary>
+            Uses built-in dialogs to walk the user through an entire update process, showing
+            the specified amount of information about any error that occurs. The dialogs
+            will be shown in front of the specified object.
+            </summary>
+            <param name="dialogOwner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <param name="options">A combination of <see cref="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions" /> values that specifies
+            the behavior of the update process.</param>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+            <para><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.
+            </para>
+            <para>-or-</para>
+            <para><paramref name="options" /> represents
+            a combination of flags not defined in the <see cref="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions" /> enumeration.</para>
+            </exception>
+            <exception cref="T:System.ArgumentException"><paramref name="options" /> contains both the
+            <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoUpdateWindow" /> and <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.AutoClose" />
+            values.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method combines the functionality of
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />
+            and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            and adds a step to automatically attempt to apply the update and display any error that occurs
+            when doing so to the user.</para>
+            <para>This method displays a "Check for updates" dialog. If an update is
+            found and the user chooses to get it, this method will automatically download it
+            and display a progress dialog. If the download succeeds and is not cancelled by the
+            user, this method will apply the update. If the update is successfully applied, the
+            application will shut down.</para>
+            <para>If an exception is thrown during any of these steps, a simple message will be shown
+            to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog">
+            <summary>
+            Searches for an available update while showing a modal dialog to the user.
+            </summary>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if an update was found and the user clicked the
+            "Get update" button; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. This method blocks while the dialog is displayed. To check for
+            updates and continue executing while waiting for the check to complete, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />. To check for updates without showing a dialog, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />.</para>
+            <para>If an update is found, the dialog will allow the user to choose to either get
+            the update or cancel the operation. If the user chooses to get the update, this method
+            returns <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>, but the update is not automatically downloaded;
+            you must call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            to download the update.</para>
+            <para>If an exception is thrown while checking for an update, the dialog will display an error message
+            to the user. The user can click view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs, the user cancels the check, no update is found, or the dialog is closed
+            without the user clicking the "Get update" button, this method returns <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            <para>If an update is found, the dialog shows the update's
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">HistoricalSummaryText</see> by default. If no update
+            is found, the dialog shows <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> by default. To change the text displayed
+            in the dialog, add an event handler to the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as indicated by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog(Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Searches for an available update while showing a modal dialog to the user that
+            can show the specified amount of error information.
+            </summary>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if an update was found and the user clicked the
+            "Get update" button; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. This method blocks while the dialog is displayed. To check for
+            updates and continue executing while waiting for the check to complete, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />. To check for updates without showing a dialog, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />.</para>
+            <para>If an update is found, the dialog will allow the user to choose to either get
+            the update or cancel the operation. If the user chooses to get the update, this method
+            returns <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>, but the update is not automatically downloaded;
+            you must call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            to download the update.</para>
+            <para>If an exception is thrown while checking for an update, the dialog will display a simple error
+            message to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs, the user cancels the check, no update is found, or the dialog is closed
+            without the user clicking the "Get update" button, this method returns <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            <para>If an update is found, the dialog shows the update's
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">HistoricalSummaryText</see> by default. If no update
+            is found, the dialog shows <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> by default. To change the text displayed
+            in the dialog, add an event handler to the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as indicated by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Searches for an available update while showing a modal dialog to the user in
+            front of the specified object.
+            </summary>
+            <param name="owner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if an update was found and the user clicked the
+            "Get update" button; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. This method blocks while the dialog is displayed. To check for
+            updates and continue executing while waiting for the check to complete, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />. To check for updates without showing a dialog, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />.</para>
+            <para>If an update is found, the dialog will allow the user to choose to either get
+            the update or cancel the operation. If the user chooses to get the update, this method
+            returns <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>, but the update is not automatically downloaded;
+            you must call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            to download the update.</para>
+            <para>If an exception is thrown while checking for an update, the dialog will display an error message
+            to the user. The user can click view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs, the user cancels the check, no update is found, or the dialog is closed
+            without the user clicking the "Get update" button, this method returns <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            <para>If an update is found, the dialog shows the update's
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">HistoricalSummaryText</see> by default. If no update
+            is found, the dialog shows <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> by default. To change the text displayed
+            in the dialog, add an event handler to the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as indicated by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog(System.Windows.Forms.IWin32Window,Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Searches for an available update while showing a modal dialog to the user that
+            can show the specified amount of error information in front of the specified object.
+            </summary>
+            <param name="owner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if an update was found and the user clicked the
+            "Get update" button; otherwise, <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. This method blocks while the dialog is displayed. To check for
+            updates and continue executing while waiting for the check to complete, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />. To check for updates without showing a dialog, use
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />.</para>
+            <para>If an update is found, the dialog will allow the user to choose to either get
+            the update or cancel the operation. If the user chooses to get the update, this method
+            returns <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>, but the update is not automatically downloaded;
+            you must call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />
+            to download the update.</para>
+            <para>If an exception is thrown while checking for an update, the dialog will display a simple error
+            message to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs, the user cancels the check, no update is found, or the dialog is closed
+            without the user clicking the "Get update" button, this method returns <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            <para>If an update is found, the dialog shows the update's
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.HistoricalSummary">HistoricalSummaryText</see> by default. If no update
+            is found, the dialog shows <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> by default. To change the text displayed
+            in the dialog, add an event handler to the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as indicated by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> while showing a modal
+            dialog to the user.
+            </summary>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if the update was successfuly downloaded; otherwise,
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            This method blocks while the dialog is displayed. To download an
+            update and continue executing while waiting for the download to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            To download the update without showing a dialog, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />.</para>
+            <para>If the update is successfully downloaded, the dialog will close automatically and
+            this method will return <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>. The update is not automatically applied;
+            you must call <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> to apply the update.</para>
+            <para>If an exception is thrown while downloading the update, the dialog will display an error message
+            to the user. The user can click view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs or the user cancels the download, this method returns
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog(Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> while showing a modal
+            dialog to the user that can show the specified amount of error information.
+            </summary>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if the update was successfuly downloaded; otherwise,
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            This method blocks while the dialog is displayed. To download an
+            update and continue executing while waiting for the download to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            To download the update without showing a dialog, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />.</para>
+            <para>If the update is successfully downloaded, the dialog will close automatically and
+            this method will return <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>. The update is not automatically applies;
+            you must call <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> to apply the update.</para>
+            <para>If an exception is thrown while downloading the update, the dialog will display a simple error
+            message to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs or the user cancels the download, this method returns
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> while showing a modal
+            dialog to the user in front of the specified object.
+            </summary>
+            <param name="owner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if the update was successfuly downloaded; otherwise,
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            This method blocks while the dialog is displayed. To download an
+            update and continue executing while waiting for the download to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            To download the update without showing a dialog, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />.</para>
+            <para>If the update is successfully downloaded, the dialog will close automatically and
+            this method will return <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>. The update is not automatically applies;
+            you must call <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> to apply the update.</para>
+            <para>If an exception is thrown while downloading the update, the dialog will display an error message
+            to the user. The user can click view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs or the user cancels the download, this method returns
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog(System.Windows.Forms.IWin32Window,Kjs.AppLife.Update.Controller.ErrorDisplayLevel)">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> while showing a modal
+            dialog to the user that can show the specified amount of error information in front
+            of the specified object.
+            </summary>
+            <param name="owner">An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will
+            own the modal dialog.</param>
+            <param name="errorDisplayLevel">One of the <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" />
+            values indicating how much error detail can be shown to the user.</param>
+            <returns>
+            <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see> if the update was successfuly downloaded; otherwise,
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.
+            </returns>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="errorDisplayLevel" /> is
+            not a valid <see cref="T:Kjs.AppLife.Update.Controller.ErrorDisplayLevel" /> value.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            This method blocks while the dialog is displayed. To download an
+            update and continue executing while waiting for the download to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            To download the update without showing a dialog, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />.</para>
+            <para>If the update is successfully downloaded, the dialog will close automatically and
+            this method will return <see cref="F:System.Windows.Forms.DialogResult.OK">DialogResult.OK</see>. The update is not automatically applies;
+            you must call <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> to apply the update.</para>
+            <para>If an exception is thrown while downloading the update, the dialog will display a simple error
+            message to the user. If <paramref name="errorDisplayLevel" /> is <see cref="F:Kjs.AppLife.Update.Controller.ErrorDisplayLevel.ShowExceptionMessage" />,
+            the user can click a button to view the message of the exception and any inner exceptions
+            by clicking a "Show details" button.</para>
+            <para>If an error occurs or the user cancels the download, this method returns
+            <see cref="F:System.Windows.Forms.DialogResult.Cancel">DialogResult.Cancel</see>.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate">
+            <summary>
+            Searches for an available update. If an update is found, its information can
+            be retrieved from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            </summary>
+            <returns>
+            <see langword="true" /> if an update is found; otherwise, <see langword="false" />.
+            </returns>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.DownloadException">
+            <para>An error occurres while downloading director.xml.</para>
+            <para>-or-</para>
+            <para>The downloaded director.xml file cannot be read.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.ValidationException">
+            <para>The downloaded director.xml file is not valid.</para>
+            <para>-or-</para>
+            <para>The downloaded director.xml file's application ID does not match <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" />.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. This method blocks while checking for updates. To check for
+            updates and continue executing while waiting for the check to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />.
+            To check for updates using a default dialog, use
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as specified by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            <para>If <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" /> returns <see langword="true" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />
+            will contain a reference to an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> class containing information about
+            the selected update; if <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" /> returns <see langword="false" />,
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> will be <see langword="null" />. Either way, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" />
+            will contain the text specified on the update server for display if no update is available.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync">
+            <summary>
+            Searches for an available update. If an update is found, its information can
+            be retrieved from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. This method does not block the calling thread.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.DownloadException">
+            <para>An error occurres while downloading director.xml.</para>
+            <para>-or-</para>
+            <para>The downloaded director.xml file cannot be read.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.ValidationException">
+            <para>The downloaded director.xml file is not valid.</para>
+            <para>-or-</para>
+            <para>The downloaded director.xml file's application ID does not match <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" />.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <remarks>
+            <para>This method downloads director.xml from <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /> and scans
+            it for an available update. The work is done asynchronously using thread resources that
+            are automatically allocated from the thread pool. To receive notification when the
+            check is complete, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted" />
+            event.</para>
+            <para>This method does not block the calling thread while the check is being performed. To
+            block while checking for updates, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" /> or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            <para>You can use the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CancelAsync" /> method to cancel asynchronous operations that
+            have not been completed.</para>
+            <para>The highest-versioned update that can be applied to the current application version (as specified by
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />) will be selected by default. To filter updates, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.</para>
+            <para>When the check is complete, the <see cref="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs" /> passed to
+            handlers of the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted" />
+            event will have its <see cref="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result" /> set to the result of
+            the check. If <see cref="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result" /> is <see langword="true" />,
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> will contain a reference to an <see cref="T:Kjs.AppLife.Update.Controller.UpdateInformation" /> class
+            containing information about the selected update; if <see cref="P:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs.Result" />
+            is <see langword="false" />, <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> will be <see langword="null" />. Either way,
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText" /> will contain the text specified on the update server for display
+            if no update is available.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.DownloadException"><para>An error occurs while downloading the update.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para></exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            This method blocks while downloading the update. To download an
+            update and continue executing while waiting for the download to complete, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            To download the update using a default dialog, use
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync">
+            <summary>
+            Downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. This method does
+            not block the calling thread.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.
+            To set <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.DownloadException"><para>An error occurs while downloading the update.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para></exception>
+            <remarks>
+            <para>This method downloads the update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            To find an update to download, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.
+            The work is done asynchronously using thread resources that
+            are automatically allocated from the thread pool. To receive notification when the
+            download is complete, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateCompleted" />
+            event. To receive notifications as the download progresses, add an event handler to the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged" /> event.</para>
+            <para>This method does not block the calling thread while the download is being performed. To
+            block while downloading the update, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" /> or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />.</para>
+            <para>You can use the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CancelAsync" /> method to cancel asynchronous operations that
+            have not been completed.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.CancelAsync">
+            <summary>
+            Cancels a pending asynchronous operation that was started by <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />
+            or <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />.
+            </summary>
+            <remarks>
+            <para>When you call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CancelAsync" />, your application still receives the completion
+            event associated with the operation. For example, when you call <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CancelAsync" />
+            to cancel a <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" /> operation, if you have specified an event
+            handler for the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateCompleted" /> event,
+            your event handler receives notification that the operation has ended. To learn whether the
+            operation completed successfully, check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled">Cancelled</see>
+            property on the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" /> in the event data object passed to the
+            event handler.</para>
+            <para>If no asynchronous operation is in progress, this method does nothing.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate">
+            <summary>
+            Validates the downloaded update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> is <see langword="null" />.
+            To set <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            <para>-or-</para>
+            <para>The value of <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.IsDownloaded">IsDownloaded</see> is
+            <see langword="false" /> for <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. This value is set to <see langword="true" /> after
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />, or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" /> completes.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is <see langword="true" />.</para>
+            </exception>
+            <remarks>
+            <para>This method checks the downloaded update against the signature that was obtained
+            from director.xml and the key specified in <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken" />. The update
+            must have already been downloaded using <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />.</para>
+            </remarks>
+            <returns>
+            <see langword="true" /> if the downloaded update is valid; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate">
+            <summary>
+            Applies the downloaded update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. If the update is
+            applied, the application will shut down.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> was <see langword="null" />.
+            To set <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            <para>-or-</para>
+            <para>The value of <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.IsDownloaded">IsDownloaded</see> was
+            <see langword="false" /> for <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. This value is set after
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />, or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" /> completes.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> was <see langword="true" />.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.ValidationException">
+            <para>The update could not be validated.</para>
+            <para>-or-</para>
+            <para>The update was not valid according to its signature obtained from director.xml
+            and the key specified in <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken" />.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.UpdateException">
+            <para>The update could not be applied.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException">
+            <para>One or more running instances of the application did not respond to the controller's
+            request to shut down (<see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />).</para>
+            <para>-or-</para>
+            <para>All instances responded to the request to shut down, but at least one besides the
+            current instance remains open and current instance is not running with administrative
+            privileges.</para>
+            </exception>
+            <returns>
+            <see langword="false" /> if one or more running instances of the application cancelled the
+            shutdown request; otherwise, this method calls <see cref="M:System.Environment.Exit(System.Int32)">Environment.Exit</see>
+            and does not return.
+            </returns>
+            <remarks>
+            <para>This method applies an update that has already been downloaded. Internally, it calls
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate" /> before applying the update. The update
+            must have already been downloaded using <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />.</para>
+            <para>This method raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />
+            event on the controllers in all running instances of the application. If any of these events are
+            cancelled, this method returns <see langword="false" /> and the update is not applied.</para>
+            <para>If the update process is started successfully, this method calls <see cref="M:System.Environment.Exit(System.Int32)">Environment.Exit</see>
+            and does not return.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate(Kjs.AppLife.Update.Controller.ApplyUpdateOptions)">
+            <summary>
+            Applies the downloaded update represented by <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. If the update is
+            applied, the application will shut down.
+            </summary>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="options" /> represents
+            a combination of flags not defined in the <see cref="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions" /> enumeration.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="options" /> contains both the
+            <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoUpdateWindow" /> and <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.AutoClose" />
+            values.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" /> was <see langword="null" />.
+            To set <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />, use <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />.</para>
+            <para>-or-</para>
+            <para>The value of <see cref="P:Kjs.AppLife.Update.Controller.UpdateInformation.IsDownloaded">IsDownloaded</see> was
+            <see langword="false" /> for <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate" />. This value is set after
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />, or
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" /> completes.</para>
+            <para>-or-</para>
+            <para><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> was <see langword="true" />.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.ValidationException">
+            <para>The update could not be validated.</para>
+            <para>-or-</para>
+            <para>The update was not valid according to its signature obtained from director.xml
+            and the key specified in <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken" />.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.UpdateException">
+            <para>The update could not be applied.</para>
+            <para>Check <see cref="P:System.Exception.InnerException">InnerException</see> for the error that
+            occurred.</para>
+            </exception>
+            <exception cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException">
+            <para>One or more running instances of the application did not respond to the controller's
+            request to shut down (<see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />).</para>
+            <para>-or-</para>
+            <para>All instances responded to the request to shut down, but at least one besides the
+            current instance remains open and current instance is not running with administrative
+            privileges.</para>
+            </exception>
+            <returns>
+            <see langword="false" /> if one or more running instances of the application cancelled the
+            shutdown request; otherwise, this method calls <see cref="M:System.Environment.Exit(System.Int32)">Environment.Exit</see>
+            and does not return.  To prevent exiting, use the <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoShutdown" /> flag.
+            </returns>
+            <param name="options">A combination of <see cref="T:Kjs.AppLife.Update.Controller.ApplyUpdateOptions" /> values that specifies
+            the behavior of the update process.</param>
+            <remarks>
+            <para>This method applies an update that has already been downloaded. Internally, it calls
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate" /> before applying the update. The update
+            must have already been downloaded using <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" />.</para>
+            <para>This method raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />
+            event on the controllers in all running instances of the application. If any of these events are
+            cancelled, this method returns <see langword="false" /> and the update is not applied.</para>
+            <para>If the update process is started successfully, this method calls <see cref="M:System.Environment.Exit(System.Int32)">Environment.Exit</see>
+            and does not return.</para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OverrideHostProcessInfo(System.String,System.String)">
+            <summary>
+            Overrides the host process information to allow the controller to apply updates on behalf of another application
+            </summary>
+            <param name="processName">The Process Name of the application that is to be updated.  If configured to shutdwon,
+            this is the Process that the controller will attempt to shutdown when ApplyUpdate is called.</param>
+            <param name="assemblyLocation">The complete location of the host application assembly.  If configured to restart
+            after an update, this is the assembly that will be restarted.</param>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateProgressChanged(Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateProgressChanged(Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateProgressChanged(Kjs.AppLife.Update.Controller.DownloadUpdateProgressChangedEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnCheckForUpdateCompleted(Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnCheckForUpdateCompleted(Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnCheckForUpdateCompleted(Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateCompleted(System.ComponentModel.AsyncCompletedEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateCompleted" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateCompleted" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnDownloadUpdateCompleted(System.ComponentModel.AsyncCompletedEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnShutdownRequested(System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.ComponentModel.CancelEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnShutdownRequested(System.ComponentModel.CancelEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnShutdownRequested(System.ComponentModel.CancelEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateFound(Kjs.AppLife.Update.Controller.UpdateFoundEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateFound(Kjs.AppLife.Update.Controller.UpdateFoundEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateFound(Kjs.AppLife.Update.Controller.UpdateFoundEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateDialogShowing(Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs)">
+            <summary>
+            Raises the <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs" /> instance containing the event data.</param>
+            <remarks>
+            <para>
+            Derived classes can override this method to handle the
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing" />
+            event without attaching a delegate.
+            </para>
+            <para>
+            When overriding <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateDialogShowing(Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs)" />, be sure to call the base class's
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OnUpdateDialogShowing(Kjs.AppLife.Update.Controller.UpdateDialogShowingEventArgs)" /> method so that the event is raised.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy">
+            <summary>
+            Gets or sets a value that specifies whether the controller will automatically detect proxy settings.
+            </summary>
+            <value>
+            <see langword="true" /> if the controller will use automatic proxy detection; otherwise, <see langword="false" />.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.AddCredentialsToAutoDetectProxy">
+            <summary>
+            Gets or sets a value that specifies whether the controller will add default network credentials to the application's
+            default web proxy.
+            </summary>
+            <value>
+            <see langword="true" /> if the controller will pass default network credentials while using automatic proxy detection; otherwise, <see langword="false" />.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyAddress">
+            <summary>
+            Gets or sets the address of the proxy server the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> will
+            use when connecting to the update location.
+            </summary>
+            <value>
+            The address of the proxy server the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> will use when
+            connecting to the update location.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /> is
+            <see langword="true" />, the value of this property is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.BypassProxyOnLocal">
+            <summary>
+            Gets or sets a value that specifies whether to bypass using a proxy server for local addresses.
+            </summary>
+            <value>
+            <see langword="true" /> if the proxy server should not be used when connecting to a local address;
+            otherwise, <see langword="false" />.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" /> is
+            <see langword="true" />, the value of this property is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials">
+            <summary>
+            Gets or sets a value that specifies whether the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> will use the
+            credentials of the currently logged on user when accessing the proxy server.
+            </summary>
+            <value>
+            <see langword="true" /> if the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> should use the credentials
+            of the currently logged on user to access the proxy server; otherwise, <see langword="false" />.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /> is <see langword="true" />, the value of this property
+            is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUserName">
+            <summary>
+            Gets or sets the user name used for authentication on the proxy server.
+            </summary>
+            <value>
+            The user name used for authentication on the proxy server.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If either <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /> or <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" /> are
+            <see langword="true" />, the value of this property is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyPassword">
+            <summary>
+            Gets or sets the password used for authentication on the proxy server.
+            </summary>
+            <value>
+            The password used for authentication on the proxy server.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If either <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /> or <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" /> are
+            <see langword="true" />, the value of this property is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyDomain">
+            <summary>
+            Gets or sets the domain used for authentication on the proxy server.
+            </summary>
+            <value>
+            The domain used for authentication on the proxy server.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            If either <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /> or <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" /> are
+            <see langword="true" />, the value of this property is ignored.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken">
+            <summary>
+            Gets or sets the public key token of the strong name key used to create the
+            updates that will be downloaded and applied by the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" />.
+            If an update cannot be validated using this key, it will not be applied.
+            </summary>
+            <value>
+            The public key token of the strong name key used to create the updates that
+            will be downloaded and applied by the controller.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            <para>
+            The value of this property must match the public key token of the AppLife Update project
+            used to create the updates that the controller will download. When an update is built, it
+            is signed with the corresponding private key, and the controller uses this public key to
+            verify that it has not been altered.
+            </para>
+            <para>
+            Verification is performed during calls to <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate" />,
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" />, and
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.AllowElevatedPrivileges">
+            <summary>
+            Gets or sets a value that specifies whether to allow updates to be applied
+            using a Windows service with administrative privileges. The service must be
+            installed before it can be used to apply an update.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <value><see langword="true" /> if the update service should be used when the
+            current user is not an administrator; otherwise, <see langword="false" />.</value>
+            <remarks>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ControlledRolloutEnabled">
+            <summary>
+            Gets or sets a value that specifies whether controlled rollouts are enabled for
+            updates received by the controller. When controlled rollouts are enabled, clients
+            are updated over the amount of time specified in the <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ControlledRolloutHours" /> property.
+            </summary>
+            <value>
+            <see langword="true" /> if controlled rollouts are enabled; otherwise, <see langword="false" />.
+            </value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ControlledRolloutHours">
+            <summary>
+            Gets or sets the period of time over which clients will be updated when controlled rollouts are enabled.
+            </summary>
+            <value>
+            The number of hours from the time updates are published until all clients are allowed to download them.
+            </value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.PreferredDownloadPath">
+            <summary>
+            Gets or sets your preferred local download path.  If not set, the current users temp directory is used.
+            </summary>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId">
+            <summary>
+            Gets or sets a <see cref="T:System.Guid" /> that is used to uniquely identify the application
+            that is being updated.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid" /> that uniquely identifies the application.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            All controllers that share the same <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" /> can download the same
+            updates and they all receive
+            <see cref="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested" />
+            events (and shut down their hosting applications) when one starts to apply an update.
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation">
+            <summary>
+            Gets or sets the network location of the updates for the application. Any
+            UNC, HTTP, or FTP location can be specified.
+            </summary>
+            <value>
+            The location where the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> will check for update information
+            and download updates from.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <remarks>
+            This property is usually the same as the update project's publish location. When
+            an update project is published, the update package and a file containing information
+            about all available updates are placed here so that deployed applications can check
+            for and download updates.
+            </remarks>
+            <example>
+            <c>
+            http://kineticjump.com/product/updates/<br />
+            ftp://kineticjump.com/product/updates/<br />
+            \\network-server\product\updates\
+            </c>
+            </example>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocationUserName">
+            <summary>
+            Gets or sets a user name to use to log in to access the location specified in
+            UpdateLocation.
+            </summary>
+            <value>
+            A user name to use to log in to access updates at UpdateLocation.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocationPassword">
+            <summary>
+            Gets or sets a password to use to log in to access the location specified in
+            UpdateLocation.
+            </summary>
+            <value>
+            A password to use to log in to access updates at UpdateLocation.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocationDomain">
+            <summary>
+            Gets or sets a domain user name to use to log in to access the location specified in
+            UpdateLocation.
+            </summary>
+            <value>
+            A domain to use to log in to access updates at UpdateLocation.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.UseHostAssemblyVersion">
+            <summary>
+            Gets or sets a value that specifies whether the controller will use the hosting assembly's
+            version as the value for <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />.
+            </summary>
+            <value>
+            <see langword="true" /> if <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" /> should always return the hosting assembly's
+            version; <see langword="false" /> if it will be set manually.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.Version">
+            <summary>
+            Gets or sets the current version number of the application used for update purposes.
+            </summary>
+            <value>
+            The current version of the application used for update purposes.
+            </value>
+            <exception cref="T:System.InvalidOperationException">The property is set and <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" /> is
+            <see langword="true" />.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is <see langword="null" />.
+            </exception>
+            <remarks>
+            <para>
+            Each published update has a list of versions that it can be applied to. When the
+            <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> checks for an available update, it compares the
+            value of <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" /> to each update's list and only allows updates that
+            apply to <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />.
+            </para>
+            <para>
+            When <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UseHostAssemblyVersion" /> is <see langword="true" />, this property
+            will always return the version of the assembly returned by
+            <see cref="M:System.Reflection.Assembly.GetEntryAssembly">Assembly.GetEntryAssembly</see>.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.AutoCopyCommandLine">
+            <summary>
+            Gets or sets a value that indicates whether the command line arguments
+            passed to the application should be automatically passed to it again when
+            it is restarted after an update.
+            </summary>
+            <value>
+            <see langword="true" /> if the command line arguments
+            passed to the application should be automatically passed to it again when
+            it is restarted after an update; otherwise, <see langword="false" />.
+            </value>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.CurrentUpdate">
+            <summary>
+            Gets information about the currently available update, or <see langword="null" /> if
+            no update information has been retrieved.
+            </summary>
+            <value>
+            Information about the currently available update, or <see langword="null" />
+            if no update is available or the controller has not yet checked for an available
+            update.
+            </value>
+            <remarks>
+            <para>
+            This property can be filled by calling any method that checks for an available update:
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" /> if the
+            user cancels the update process after an update is found. However, if no update is
+            available, it will remain <see langword="null" />.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.NoUpdateDisplayText">
+            <summary>
+            Gets text retrieved from the update server that should be shown when no updates are
+            available, or <see langword="null" /> if no update information has been retrieved.
+            </summary>
+            <value>
+            Text specified on the update server that should be displayed when no updates
+            are available, or <see langword="null" /> if the controller has not yet checked for
+            an available update.
+            </value>
+            <remarks>
+            <para>
+            This property can be filled by calling any method that checks for an available update:
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />, <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />,
+            or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" /> if the
+            user cancels the update process after an update is found. Regardless of whether an update
+            is found, if the controller is able to perform the check, this property will be filled.
+            </para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy">
+            <summary>
+            Gets a value indicating whether an asynchronous operation is currently in progress.
+            </summary>
+            <value>
+            <see langword="true" /> if an asynchronous operation is currently in progress;
+            otherwise, <see langword="false" />.
+            </value>
+            <remarks>
+            <para>Setting any of these properties or calling any of these methods while <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.IsBusy" />
+            is <see langword="true" /> will cause an <see cref="T:System.InvalidOperationException" /> to be thrown.</para>
+            <para>Properties:
+            <list type="bullet">
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AllowElevatedPrivileges" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.AutoDetectProxy" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.BypassProxyOnLocal" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ControlledRolloutEnabled" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ControlledRolloutHours" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyAddress" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyDomain" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyPassword" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUseDefaultCredentials" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ProxyUserName" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.PublicKeyToken" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UpdateLocation" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.UseHostAssemblyVersion" /></item>
+            <item><see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" /></item>
+            </list>
+            Methods:
+            <list type="bullet">
+            <item><see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /></item>
+            <item><see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" /></item>
+            <item><see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" /></item>
+            <item><see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdate" /></item>
+            <item><see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" /></item>
+            <item><see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" /></item>
+            <item><see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowDownloadUpdateDialog" /></item>
+            <item><see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" /></item>
+            <item><see cref="M:Kjs.AppLife.Update.Controller.UpdateController.ValidateUpdate" /></item>
+            </list></para>
+            </remarks>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.HostAssemblyLocation">
+            <summary>
+            Gets the Entry Assembly location.  To override the host assembly information use the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OverrideHostProcessInfo(System.String,System.String)">OverrideHostProcessInfo</see> method.  
+            </summary>
+        </member>
+    <member name="P:Kjs.AppLife.Update.Controller.UpdateController.HostProcessName">
+            <summary>
+            Gets the Host Assembly Process Name.  To override the host assembly information use the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.OverrideHostProcessInfo(System.String,System.String)">OverrideHostProcessInfo</see> method.
+            </summary>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateProgressChanged">
+            <summary>
+            Occurs during when an asynchronous update download operation successfully transfers
+            some or all of the data.
+            </summary>
+            <remarks>
+            <para>This event is raised each time an asynchronous update download makes progress.
+            This event is raised when an update download is started using the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />
+            method.</para>
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateCompleted">
+            <summary>
+            Occurs when an asynchronous update check operation completes.
+            </summary>
+            <remarks>
+            <para>This event is raised each time an asynchronous update check operation completes.
+            Asynchronous update checks are started by calling the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />
+            method.</para>
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateCompleted">
+            <summary>
+            Occurs when an asynchronous update download operation completes.
+            </summary>
+            <remarks>
+            <para>This event is raised each time an asynchronous update download operation completes.
+            Asynchronous update downloads are started by calling the <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.DownloadUpdateAsync" />
+            method.</para>
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.ShutdownRequested">
+            <summary>
+            Occurs when applying an update requires the application to terminate.
+            </summary>
+            <remarks>
+            <para>This event is raised whenever the controller needs to shut down its hosting
+            application in order to apply an update. The hosting application is shut down during
+            a call to <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> or <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />.
+            This event is raised from all <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> instances that share the
+            <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.ApplicationId" /> of the <see cref="T:Kjs.AppLife.Update.Controller.UpdateController" /> on which <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" />
+            was called.</para>
+            <para>If a handler for this event sets <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> to <see langword="true" />,
+            the update will not be applied and <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> will return false. If any other controller takes
+            too long to respond, <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ApplyUpdate" /> will throw an <see cref="T:Kjs.AppLife.Update.Controller.InstanceShutdownException" />
+            and the update will not be applied. When calling <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />,
+            an exception will not be thrown, but the update will not be applied and an error message will be shown
+            to the user.</para>
+            <para>This method is raised last from the controller that will apply the update, and only if
+            all other controllers did not time out or cancel the event.</para>
+            <para>When an update is applied using the <see cref="F:Kjs.AppLife.Update.Controller.ApplyUpdateOptions.NoShutdown" /> option, this event is still
+            raised on all instances, but no processes will be automatically shutdown. The update process can still be cancelled by this event. </para>
+            
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateFound">
+            <summary>
+            Occurs when one or more updates have been found.
+            </summary>
+            <remarks>
+            <para>This event is raised whenever the controller has found an update that can be
+            applied to its <see cref="P:Kjs.AppLife.Update.Controller.UpdateController.Version" />. Updates are found during calls to <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdate" />,
+            <see cref="M:Kjs.AppLife.Update.Controller.UpdateController.CheckForUpdateAsync" />,
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" />, and
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />.
+            When multiple updates are found, the controller will
+            select the one with the highest version. Handlers of the event can check information about all
+            of the updates that have been found and use custom criteria to select the one to be shown
+            to the user, downloaded, and applied.</para>
+            <para>The event may be raised on a thread-pool worker thread.</para>
+            <para>The <see cref="T:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs" /> class provides
+            data for the event; handlers can check all applicable updates with the <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.AvailableUpdates" />
+            property and choose the update to be applied by setting <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate" />.
+            If <see cref="P:Kjs.AppLife.Update.Controller.UpdateFoundEventArgs.SelectedUpdate" /> is set to <see langword="null" />,
+            the controller will indicate that no update is available.</para>
+            </remarks>
+        </member>
+    <member name="E:Kjs.AppLife.Update.Controller.UpdateController.UpdateDialogShowing">
+            <summary>
+            Occurs before the built-in update information dialog displays information about
+            the current update available for download.
+            </summary>
+            <remarks>
+            <para> The built-in update information dialog is shown from the
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.ShowCheckForUpdateDialog" /> and
+            <see cref="O:Kjs.AppLife.Update.Controller.UpdateController.UpdateInteractive" />
+            methods. Handlers of the event can change the summary text shown in the dialog.</para>
+            </remarks>
+        </member>
+  </members>
+</doc>
