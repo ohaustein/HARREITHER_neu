@@ -442,11 +442,11 @@ namespace Europlan.Common {
 				}
 				this.offsetY = value;
 				double increment = this.beplankung.Value.Y;
-				while (this.offset >= increment) {
-					this.offset -= increment;
+				while (this.offsetY >= increment) {
+					this.offsetY -= increment;
 				}
-				while (this.offset < 0) {
-					this.offset += increment;
+				while (this.offsetY < 0) {
+					this.offsetY += increment;
 				}
                 this.RecalculateSchienen();
             }
