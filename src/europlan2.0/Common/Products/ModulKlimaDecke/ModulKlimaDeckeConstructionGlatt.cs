@@ -744,7 +744,36 @@ namespace Europlan.Common {
 			    }
 			    double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
                 Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
-                this.BeplankungXShift = (int)Math.Round((move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value) / (this.SchienenAbstand + this.SchienenBreite));
+
+                int currentXShift = this.BeplankungXShift;
+
+                int maxBeplankungsLanesCeil = (int)Math.Ceiling(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand));
+                int maxBeplankungsLanesFloor = (int)Math.Floor(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand));
+
+                double increment = this.SchienenAbstand + this.SchienenBreite;
+
+                int leftXShift = (currentXShift - 1);
+                double leftDistance = (leftXShift < 0 ? this.Beplankung.Value.X - maxBeplankungsLanesCeil * increment : -increment) * measure;
+
+                int rightXShift = (currentXShift + 1);
+                double rightDistance = (rightXShift > maxBeplankungsLanesFloor ? this.Beplankung.Value.X - maxBeplankungsLanesFloor * increment : increment) * measure;
+
+                while (move.X <= leftDistance)
+                {
+                    this.BeplankungXShift -= 1;
+                    Vector2D v = Transformation3D.Rotate(this.Rotation * Math.PI / 180.0).Transform(new Vector2D(leftDistance, 0));
+                    startPlanPoint += v;
+                    move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
+                }
+
+                while (move.X >= rightDistance)
+                {
+                    this.BeplankungXShift += 1;
+                    Vector2D v = Transformation3D.Rotate(this.Rotation * Math.PI / 180.0).Transform(new Vector2D(rightDistance, 0));
+                    startPlanPoint += v;
+                    move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
+                }
+
                 this.OffsetY = startOffsetY + (move.Y / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
             }
 			if (this.PlanPanel != null) {
