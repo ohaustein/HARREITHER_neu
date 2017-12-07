@@ -553,6 +553,10 @@ namespace Europlan.Common {
 			}
 
 			if (drawBeplankung && this.beplankung.HasValue && this.beplankungStart.HasValue && this.beplankungEnd.HasValue) {
+                if (Mode == ConstructionModifyMode.MOVE_BEPLANKUNG)
+                {                    
+                    p = new Pen(System.Drawing.Color.Red);
+                }
 				Matrix3D matrix = Transformation3D.Rotate(this.Rotation * Math.PI / 180.0);
 				for (double beplankungX = this.beplankungStart.Value.X; beplankungX < this.beplankungEnd.Value.X; beplankungX += beplankung.Value.X * measure) {
 					for (double beplankungY = this.beplankungStart.Value.Y; beplankungY < this.beplankungEnd.Value.Y; beplankungY += beplankung.Value.Y * measure) {
