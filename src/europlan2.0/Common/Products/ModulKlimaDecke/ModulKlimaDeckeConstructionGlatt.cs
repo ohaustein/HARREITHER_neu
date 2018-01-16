@@ -14,6 +14,26 @@ using Europlan.Common.Products.ModulKlimaDecke;
 
 namespace Europlan.Common {
 	public class ModulKlimaDeckeConstructionGlatt : ModulKlimaDeckeConstruction {
+
+        public class LaneGap
+        {
+            public LaneGap()
+            {
+            }
+
+            public LaneGap(int panelPositon, int shift)
+            {
+                this.PanelPosition = panelPositon;
+                this.Shift = shift;
+            }
+
+            private int _panelPosition;
+            public int PanelPosition { get { return _panelPosition; } set { _panelPosition = value; } }
+
+            private int _shift;
+            public int Shift { get { return _shift; } set { _shift = value; } }
+        }
+
 		private Nullable<double> schienenBreite = null; // meter
 		private double schienenAbstand = 0.3; // meter
 		private double offset = 0; // meter
@@ -30,7 +50,8 @@ namespace Europlan.Common {
 
         public enum ConstructionModifyMode {
             MOVE_SCHIENEN,
-            MOVE_BEPLANKUNG
+            MOVE_BEPLANKUNG,
+            MOVE_INDIVIDUAL_GAP,
         }
 
 		public ModulKlimaDeckeConstructionGlatt() {
@@ -59,6 +80,15 @@ namespace Europlan.Common {
 				return p1.X.CompareTo(p2.X);
 			}
 		}
+
+        private List<LaneGap> _gaps = new List<LaneGap>();
+
+        public List<LaneGap> Gaps
+        {
+            get { return _gaps; }
+            set { _gaps = value; }
+        }
+	
 
 		public double GetStaffelnLength(double measure) {
 			if (this.schienen == null) {
@@ -108,6 +138,36 @@ namespace Europlan.Common {
             }
         }
 
+        private LaneGap DefaultGap(int panel)
+        {
+            return new LaneGap(panel, (int)Math.Floor(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand)) - this.BeplankungXShift);
+        }
+
+        public LaneGap FindGap(int panel)
+        {
+            foreach (LaneGap g in Gaps)
+            {
+                if (g.PanelPosition == panel)
+                {
+                    return g;
+                }
+            }
+            return DefaultGap(panel);
+        }
+
+        private void AdjustGaps(int offset)
+        {
+            foreach (LaneGap gap in Gaps)
+            {
+                gap.PanelPosition += offset;
+            }
+        }
+
+        private void ClearGaps()
+        {
+            Gaps.Clear();
+        }
+
 		public override void RecalculateSchienen() {
 			if (this.Product == null ||
 				this.Product.AssociatedRoom == null ||
@@ -148,25 +208,45 @@ namespace Europlan.Common {
 			this.possibleLanes.Clear();
 
 			double measure = this.Product.AssociatedRoom.AssociatedPlan.Measure.Value;
-			double increment = (SchienenBreite + schienenAbstand) * measure;
-			double curPos = (minX + maxX - SchienenBreite * measure) / 2.0 + (offset * measure);
+			double increment = (SchienenBreite + schienenAbstand) * measure; // increment between two lanes
+            double zeroOffsetStart = (minX + maxX - SchienenBreite * measure) / 2.0;            
+            double curPos = zeroOffsetStart + (offset * measure); // start in the middle of the floor
+                            
 			double curYPos = (minY + maxY) / 2.0 + (offsetY * measure);
-			double curBeplankungsPos = 0;
-			if (beplankung.HasValue) {
+            double curBeplankungsPos = 0; // this value is independent of beplankungStart. It marks the position of the lane in a plane (not corrected by measure)
+            int curBeplankung = 0; // number of current lane inside a plank
+
+            int startPlaneOffset = 0;
+
+			if (beplankung.HasValue) {                
+                // move to the left until the staring point is less than the floor boundary. beplankung is the panel size
 				double beplankungsIncrement = beplankung.Value.X * measure;
-				while (curPos > minX) {
-					curPos -= beplankungsIncrement;
-				}
+                int startZeroOffset = (int)Math.Ceiling((zeroOffsetStart - minX) / beplankungsIncrement);
+                int startCurPosOffset = (int)Math.Ceiling((curPos - minX) / beplankungsIncrement);
+
+                startPlaneOffset = startZeroOffset - startCurPosOffset;
+				
+				curPos -= beplankungsIncrement * startCurPosOffset;
+				
 				double beplankungsYIncrement = beplankung.Value.Y * measure;
 				while (curYPos > minY) {
 					curYPos -= beplankungsYIncrement;
 				}
-                this.beplankungStart = new Size2D(curPos + SchienenBreite / 2.0 * measure + this.BeplankungXShift * (SchienenAbstand + SchienenBreite) * measure - this.beplankung.Value.X * measure, curYPos);
+                // determine where beplankung starts, this is the current schiene plus the xshift
+                // if ther eis no shift, this means, that the start is the middle of a "schiene"
+                this.beplankungStart = new Size2D(curPos + SchienenBreite / 2.0 * measure + this.BeplankungXShift * (SchienenAbstand + SchienenBreite) * measure -beplankungsIncrement, curYPos); 
+                // - beplankungsIncrement, weil BeplankungsXShift ein positiver Modulo Wert. Damit wird der tats�chliche start weit genug nach links verschoben.
+                // end of beplankung is the floor end
 				this.beplankungEnd = new Size2D(maxX, maxY);
-				while (curPos + increment < minX) {
-					curPos += increment;
-					curBeplankungsPos += SchienenBreite + schienenAbstand;
-				}
+
+                // we increment the start of the beplankung until we reach the floor boundary so that the first schiene is still outside
+                // while incrementing, we also inclrement plank positions and count
+                while (curPos + increment < minX)
+                {
+                    curPos += increment;
+                    curBeplankungsPos += (SchienenBreite + schienenAbstand);
+                    curBeplankung++;
+                }
 			} else {
 				while (curPos > minX) {
 					curPos -= increment;
@@ -186,13 +266,27 @@ namespace Europlan.Common {
 				this.schienen.Add(schiene);
 				curBeplankungsPos += (SchienenBreite + schienenAbstand);
 				curPos += increment;
-				if (beplankung.HasValue && curBeplankungsPos >= beplankung.Value.X) {
-					if (curBeplankungsPos > beplankung.Value.X) {
-						curPos -= (curBeplankungsPos - beplankung.Value.X) * measure;
-						ignoreLanes.Add(this.schienen.Count - 1);
-					}
-					curBeplankungsPos = 0;
-				}
+
+                int lanesPerPanel = (int) Math.Ceiling(this.Beplankung.Value.X / (SchienenBreite + SchienenAbstand)); // full lanes needed to cover the plank
+                int laneInPanel = (curBeplankung - this.BeplankungXShift + lanesPerPanel) % lanesPerPanel;
+                int curPanel = startPlaneOffset + (curBeplankung - this.BeplankungXShift) / lanesPerPanel + 1;              
+                
+                // find the current gap. a gap is indicated by it's positon (the beplankung) and the shift (the lane position where the gap occurs).
+                // default value is that the gap occurs at the last lane of the plank - corrected by the overall shift
+                LaneGap gap = FindGap(curPanel);
+
+
+                if (gap.Shift == laneInPanel)
+                {
+                    // gap distance is calucalted by taking the total width and the value of full lanes required to fill the complete plank distance.
+                    // in case we add the gap we ignore the current lane and move backwards the gap distance
+                    double spaltbreite = Math.Ceiling(beplankung.Value.X / (SchienenAbstand + SchienenBreite)) * (SchienenAbstand + SchienenBreite) - beplankung.Value.X;
+                    curPos -= spaltbreite * measure;
+                    curBeplankungsPos -= spaltbreite;
+                    ignoreLanes.Add(this.schienen.Count - 1);
+                }
+
+                curBeplankung++;
 			}
 
 			Polygon2D room = new Polygon2D(ceilingCoordinates);
@@ -425,9 +519,13 @@ namespace Europlan.Common {
 				double increment = this.beplankung.HasValue ? this.beplankung.Value.X : this.SchienenBreite + this.schienenAbstand;
 				while (this.offset >= increment) {
 					this.offset -= increment;
+                    this.startOffset -= increment;
+                    AdjustGaps(1);
 				}
 				while (this.offset < 0) {
 					this.offset += increment;
+                    this.startOffset += increment;
+                    AdjustGaps(-1);
 				}
 				this.RecalculateSchienen();
 			}
@@ -567,6 +665,12 @@ namespace Europlan.Common {
 						g.DrawPolygon(p, new PointF[] { new PointF((float)p1.X, (float)p1.Y), new PointF((float)p2.X, (float)p2.Y), new PointF((float)p3.X, (float)p3.Y), new PointF((float)p4.X, (float)p4.Y) });
 					}
 				}
+
+                // draw gaps
+                c = System.Drawing.Color.FromArgb(128, 240, 0, 0);
+                b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));
+                
+
 			}
 
 			if (mode == ModulKlimaDeckePlanner.KlimaDeckeMode.KDM_CONSTRUCTION && this.mode == ConstructionModifyMode.MOVE_SCHIENEN) {
@@ -737,7 +841,7 @@ namespace Europlan.Common {
             if (this.mode == ConstructionModifyMode.MOVE_SCHIENEN) {
                 Vector2D move = Transformation3D.Rotate(-this.Rotation * Math.PI / 180.0).Transform(planPoint - startPlanPoint);
                 this.Offset = startOffset + (move.X / this.Product.AssociatedRoom.AssociatedPlan.Measure.Value);
-            } else {
+            } else if (this.mode == ConstructionModifyMode.MOVE_BEPLANKUNG){
 			    if (this.Product == null ||
 				    this.Product.AssociatedRoom == null ||
 				    this.CeilingCoordinates == null ||
