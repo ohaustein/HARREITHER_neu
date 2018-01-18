@@ -759,6 +759,7 @@ namespace Europlan.Common {
                 c = System.Drawing.Color.FromArgb(0, 128, 240, 0);
                 p = new Pen(c);
                 b = new SolidBrush(System.Drawing.Color.FromArgb(64, c));
+                g.Clip = new Region(roomPath);
 
                 foreach (Polygon2D gap in this.GetGaps(true))
                 {
