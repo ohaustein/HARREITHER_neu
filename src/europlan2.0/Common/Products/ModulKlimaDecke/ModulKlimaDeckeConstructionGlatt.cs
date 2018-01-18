@@ -261,16 +261,17 @@ namespace Europlan.Common {
 			List<int> ignoreLanes = new List<int>();
 
             bool firstGapConsidered = false;
-            int defaultShift = DefaultGap(0).Shift;
-            double spaltbreite = Math.Ceiling(beplankung.Value.X / (SchienenAbstand + SchienenBreite)) * (SchienenAbstand + SchienenBreite) - beplankung.Value.X;
 
 			while (curPos < maxX) {
                 int lanesPerPanel = 0;
                 int laneInPanel = 0;
                 int curPanel = 0;
                 LaneGap gap = null;
+                double spaltbreite = 0;
                 if (this.Beplankung.HasValue)
                 {
+                    int defaultShift = DefaultGap(0).Shift;
+                    spaltbreite = Math.Ceiling(beplankung.Value.X / (SchienenAbstand + SchienenBreite)) * (SchienenAbstand + SchienenBreite) - beplankung.Value.X;
                     lanesPerPanel = (int)Math.Ceiling(this.Beplankung.Value.X / (SchienenBreite + SchienenAbstand)); // full lanes needed to cover the plank
                     laneInPanel = (curBeplankung - this.BeplankungXShift + lanesPerPanel) % lanesPerPanel;
                     curPanel = startPlaneOffset + (curBeplankung - this.BeplankungXShift) / lanesPerPanel + 1;
