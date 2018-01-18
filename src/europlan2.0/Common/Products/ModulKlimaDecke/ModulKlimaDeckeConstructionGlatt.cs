@@ -124,6 +124,16 @@ namespace Europlan.Common {
             return new LaneGap(panel, (int)Math.Floor(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand)) - this.BeplankungXShift);
         }
 
+        private void FixGaps()
+        {
+            int maxLane = (int)Math.Floor(this.Beplankung.Value.X / (this.SchienenBreite + this.SchienenAbstand));
+
+            foreach (LaneGap gap in _gaps)
+            {
+                gap.Shift = Math.Min(gap.Shift, maxLane);
+            }
+        }
+
         public LaneGap FindGap(int panel)
         {
             foreach (LaneGap g in Gaps)
@@ -202,7 +212,8 @@ namespace Europlan.Common {
             double schieneStartY = minY - measure * 0.1;
             double schieneEndY = maxY + measure * 0.1;
 
-			if (beplankung.HasValue) {                
+			if (beplankung.HasValue) {
+                FixGaps();
                 // move to the left until the staring point is less than the floor boundary. beplankung is the panel size
 				double beplankungsIncrement = beplankung.Value.X * measure;
                 int startZeroOffset = (int)Math.Ceiling((zeroOffsetStart - minX) / beplankungsIncrement);
