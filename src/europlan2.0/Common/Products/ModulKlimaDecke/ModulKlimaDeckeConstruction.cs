@@ -16,8 +16,36 @@ namespace Europlan.Common {
 	[XmlInclude(typeof(ModulKlimaDeckeConstructionKassette))]
 	public abstract class ModulKlimaDeckeConstruction : IPickableObject, IDragableObject {
 
+        public class LaneGap
+        {
+            public LaneGap()
+            {
+            }
+
+            public LaneGap(int panelPositon, int shift)
+            {
+                this.PanelPosition = panelPositon;
+                this.Shift = shift;
+            }
+
+            private int _panelPosition;
+            public int PanelPosition { get { return _panelPosition; } set { _panelPosition = value; } }
+
+            private int _shift;
+            public int Shift { get { return _shift; } set { _shift = value; } }
+
+            private Polygon2D _visual;
+
+            public Polygon2D Visual
+            {
+                get { return _visual; }
+                set { _visual = value; }
+            }
+        }
+
 		protected double rotation = 0;
 		protected List<Polygon2D> schienen = new List<Polygon2D>();
+        protected List<LaneGap> visualGaps = new List<LaneGap>();
 		protected List<PossibleModulLane> possibleLanes = new List<PossibleModulLane>();
 
 		public abstract void Paint(Graphics g, ModulKlimaDeckePlanner.KlimaDeckeMode mode, bool drawBeplankung);
