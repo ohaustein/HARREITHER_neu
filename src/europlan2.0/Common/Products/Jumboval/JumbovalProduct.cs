@@ -2201,7 +2201,7 @@ namespace Europlan.Common {
 			double amount = 0;
 
 			// Clipschiene
-            string clipschiene = "JV15";
+            string clipschiene = "JV17";
 			if (this.PlannedLayDistance.HasValue) {
 				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, CheckedSchienenabstand);
 			}

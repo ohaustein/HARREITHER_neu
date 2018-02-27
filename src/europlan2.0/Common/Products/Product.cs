@@ -1677,6 +1677,7 @@ namespace Europlan.Common {
 
             double pipeJumboval = 0;
             double clipschieneJumboval = 0;
+            double clipschieneKlebebandJumboval = 0;
             double ovalMuffeJumboval = 0;
 
             // Klimaboden20 Anbindeleitung
@@ -1776,6 +1777,22 @@ namespace Europlan.Common {
                                 anhydritEstrich = (pipe.ConnectionThrough.Product as JumbovalProduct).UseAnhydritEstrich;
                             }
                         }
+                        bool clipschieneKlebeband = false;
+                        if (pipe.ConnectionOf != null)
+                        {
+                            if (pipe.ConnectionOf.Product is JumbovalProduct)
+                            {
+                                clipschieneKlebeband = (pipe.ConnectionOf.Product as JumbovalProduct).UseClipSchieneKlebeband;
+                            }
+                        }
+                        if (clipschieneKlebeband)
+                        {
+                            clipschieneKlebebandJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), JumbovalProduct.ConfigSchienenabstandDefault);
+                        }
+                        else
+                        {
+                            clipschieneJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), JumbovalProduct.ConfigSchienenabstandDefault);
+                        }
                         clipschieneJumboval += pipe.AreaTotal * JumbovalProduct.GetClipschienePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart), JumbovalProduct.ConfigSchienenabstandDefault);
                         ovalMuffeJumboval += pipe.AreaTotal * JumbovalProduct.GetOvalmuffePerSqm(ConnectionPipe.GetJumbovalLayDistance(pipe.Verlegeart));
                     }
@@ -1843,7 +1860,8 @@ namespace Europlan.Common {
 
             // materials for jumboval pipe
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV01", pipeJumboval);
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV15", clipschieneJumboval);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV17", clipschieneJumboval);
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "JV16", clipschieneKlebebandJumboval);
             Project.Instance.AddRequiredMaterial(requiredMaterial, "JV10", ovalMuffeJumboval);
 
             // materials for hittherm pipe
