@@ -110,6 +110,7 @@ namespace Europlan.Common {
 			this.chkStellAntriebe.Text = EuroplanRes.PlannedProductPanel_Stellantriebe; //"Stellantrieb(e) verwenden"
 			this.pageConstruction.Text = EuroplanRes.PlannedProductPanel_AuslegungSeite; //"Auslegung"
 			this.lblAreaTxt.Text = EuroplanRes.PlannedProductPanel_GesamteFlaeche; //"gesamte Fläche:"
+            this.chkClip.Text = EuroplanRes.PlannedEurovalProductPanel_Clipschiene; //"Clipschiene mit Klebeband"
 
             this.label30.Text = EuroplanRes.PlannedHithermProductPanel_Typ; //"Typ:"
 			this.lblAreaUnheatedTxt.Text = EuroplanRes.PlannedEurovalProductPanel_UnbeheizteFlaeche; //"unbeheizte/ungekühlte Fläche:"
@@ -706,6 +707,8 @@ namespace Europlan.Common {
 				double qRestCool = this.product.PlannedCoolLoad - this.product.RequestedCoolLoad;
                 this.lblQRestHeat.Text = SiUtils.ValueToString(qRestHeat, 2, 4, "+0.0#;-0.0#");
                 this.lblQRestCool.Text = SiUtils.ValueToString(qRestCool, 2, 4, "+0.0#;-0.0#");
+
+                this.chkClip.Checked = jvProduct.UseClipSchieneKlebeband;
 
 				// Randzone
 				if (complete && jvProduct.PlannedRimType.HasValue) {
@@ -1592,6 +1595,15 @@ namespace Europlan.Common {
                     this.projectStructureChanged(this);
                 }
                 this.UpdateControl(true);
+            }
+        }
+
+        private void chkClip_CheckedChanged(object sender, EventArgs e)
+        {
+            (this.product.Product as JumbovalProduct).UseClipSchieneKlebeband = chkClip.Checked;
+            if (this.projectChanged != null)
+            {
+                this.projectChanged(this);
             }
         }
     }

@@ -196,6 +196,7 @@ namespace Europlan.Common {
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.chkClip = new System.Windows.Forms.CheckBox();
             this.grpPowerArea.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabs.SuspendLayout();
@@ -688,6 +689,7 @@ namespace Europlan.Common {
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.chkClip);
             this.groupBox1.Controls.Add(this.numSchienenabstand);
             this.groupBox1.Controls.Add(this.lblSchienenabstandUnit);
             this.groupBox1.Controls.Add(this.lblSchienenabstand);
@@ -2323,6 +2325,17 @@ namespace Europlan.Common {
             this.lblTitle.TabIndex = 81;
             this.lblTitle.Text = "Jumboval®";
             // 
+            // chkClip
+            // 
+            this.chkClip.AutoSize = true;
+            this.chkClip.Location = new System.Drawing.Point(604, 68);
+            this.chkClip.Name = "chkClip";
+            this.chkClip.Size = new System.Drawing.Size(150, 17);
+            this.chkClip.TabIndex = 38;
+            this.chkClip.Text = "Clipschiene mit Klebeband";
+            this.chkClip.UseVisualStyleBackColor = true;
+            this.chkClip.CheckedChanged += new System.EventHandler(this.chkClip_CheckedChanged);
+            // 
             // PlannedJumbovalProductPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2535,5 +2548,6 @@ namespace Europlan.Common {
         private NumericBox numCircuits;
         private System.Windows.Forms.ComboBox cmbCircuits;
         private System.Windows.Forms.Button btnPartitionSystem;
+        private System.Windows.Forms.CheckBox chkClip;
 	}
 }

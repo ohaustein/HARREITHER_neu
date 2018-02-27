@@ -807,10 +807,9 @@ namespace Europlan.Common {
 			}
 		}
 
-        [XmlIgnore]
 		public bool UseClipSchieneKlebeband {
 			get { return clipSchieneKlebeband; }
-			set { /*clipSchieneKlebeband = value;*/ }
+			set { clipSchieneKlebeband = value; }
 		}
 
         [XmlIgnore]
@@ -2202,13 +2201,14 @@ namespace Europlan.Common {
 
 			// Clipschiene
             string clipschiene = "JV17";
+            string clipschieneKlebeband = "JV16";
 			if (this.PlannedLayDistance.HasValue) {
 				amount += this.PlannedAreaResidenceHeated * GetClipschienePerSqm(this.PlannedLayDistance.Value, CheckedSchienenabstand);
 			}
 			if (this.PlannedRimType.HasValue) {
                 amount += this.PlannedAreaRim * GetClipschienePerSqm(GetRimLayDistance(this.PlannedRimType.Value), CheckedSchienenabstand);
 			}
-			Project.Instance.AddRequiredMaterial(requiredMaterial, clipschiene, amount);
+			Project.Instance.AddRequiredMaterial(requiredMaterial, this.UseClipSchieneKlebeband ? clipschieneKlebeband : clipschiene, amount);
 			 
 			// Ovalmuffe
 			amount = 0;
