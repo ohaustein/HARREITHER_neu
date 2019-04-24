@@ -104,8 +104,8 @@ copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)de-DE\instmsi.
 copy "$(TargetDir)de-DE\europlan31.msi" "$(TargetDir)de-DE\setup.msi"
 cd $(ProjectDir)
 for /F "tokens=1,2,3,4,5 delims=/.: " %%a in (%27utils\datetime%27) do set SUFFIX=%%c-%%b-%%a_%%d%%e
-mkdir $(TargetDir)\setup-%SUFFIX%
-mkdir $(TargetDir)\latest_setup
+mkdir "$(TargetDir)\setup-%SUFFIX%"
+mkdir "$(TargetDir)\latest_setup"
 7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan31-de.zip" "$(TargetDir)de-DE\instmsi.exe" "$(TargetDir)de-DE\setup.exe" "$(TargetDir)de-DE\setup.msi" || echo Postbuild: warning CS0003: German zip archive was not built
 del "$(TargetDir)de-DE\setup.msi"
 ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-de.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan31-de.exe" "$(TargetDir)setup-%SUFFIX%\europlan31-de.zip" || echo Postbuild: warning CS0004: German setup exe was not built
