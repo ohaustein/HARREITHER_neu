@@ -102,7 +102,7 @@
 
 copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)de-DE\instmsi.exe"
 copy "$(TargetDir)de-DE\europlan31.msi" "$(TargetDir)de-DE\setup.msi"
-cd "$(ProjectDir)"
+cd $(ProjectDir)
 for /F "tokens=1,2,3,4,5 delims=/.: " %%a in (%27utils\datetime%27) do set SUFFIX=%%c-%%b-%%a_%%d%%e
 mkdir "$(TargetDir)\setup-%SUFFIX%"
 mkdir "$(TargetDir)\latest_setup"
@@ -115,11 +115,11 @@ rem english setup
 copy "$(SolutionDir)StartSetup\$(OutDir)instmsi.exe" "$(TargetDir)en-US\instmsi.exe"
 copy "$(TargetDir)en-US\europlan31.msi" "$(TargetDir)en-US\setup.msi"
 echo "blub"
-cd "$(ProjectDir)"
+cd $(ProjectDir)
 7z.exe a "$(TargetDir)setup-%SUFFIX%\europlan31-en.zip" "$(TargetDir)en-US\instmsi.exe" "$(TargetDir)en-US\setup.exe" "$(TargetDir)en-US\setup.msi" || echo Postbuild: warning CS0003: English zip archive was not built
 del "$(TargetDir)en-US\setup.msi"
 ChilkatZipSE.exe -u BLUESOSFX_7WD8XKDznOuG -cfg chilkat-settings-en.xml -exe "$(TargetDir)setup-%SUFFIX%\europlan31-en.exe" "$(TargetDir)setup-%SUFFIX%\europlan31-en.zip" || echo Postbuild: warning CS0004: English setup exe was not built
-copy /y "$(TargetDir)\setup-%SUFFIX%\%2a.exe" "$(TargetDir)\latest_setup"
+copy /y $(TargetDir)\setup-%SUFFIX%\%2a.exe $(TargetDir)\latest_setup
 set ERRORLEVEL=0</PostBuildEvent>
   </PropertyGroup>
 </Project>
