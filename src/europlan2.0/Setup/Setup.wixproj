@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>europlan31</OutputName>
     <OutputType>Package</OutputType>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <Name>Setup</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -70,8 +70,8 @@
 	</Target>
 	-->
   <ItemGroup>
-    <BootstrapperFile Include="Microsoft.Net.Framework.2.0">
-      <ProductName>Microsoft .NET Framework 2.0</ProductName>
+    <BootstrapperFile Include="Microsoft.Net.Framework.3.5 SP1">
+      <ProductName>Microsoft.Net.Framework.3.5.SP1</ProductName>
     </BootstrapperFile>
     <BootstrapperFile Include="Microsoft.Windows.Installer.3.1">
       <ProductName>Microsoft Windows Installer 3.1</ProductName>
@@ -83,7 +83,7 @@
   <Target Name="BootstrapperEN" Inputs="$(OutDir)$(TargetFileName)" Outputs="$(OutDir)\Setup.exe" Condition=" '$(OutputType)'=='package' ">
     <GenerateBootstrapper ApplicationName="Europlan 2.0" ApplicationFile="instmsi.exe" BootstrapperItems="@(BootstrapperFile)" ComponentsLocation="HomeSite" OutputPath="$(OutputPath)\en-US\" Culture="en-US" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets" />
   <PropertyGroup>
     <CoreBuildDependsOn>
       BuildOnlySettings;

@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,6 +10,14 @@
     <RootNamespace>Europlan.Application</RootNamespace>
     <AssemblyName>Europlan</AssemblyName>
     <ApplicationIcon>Harreither.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Kjs.AppLife.Update.Controller, Version=1.0.0.12, Culture=neutral, PublicKeyToken=28aeef7cc998407d, processorArchitecture=MSIL">
@@ -171,7 +181,9 @@
   </Target>
   -->
   <PropertyGroup>
+    <!--
     <PreBuildEvent>IF EXIST C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\ldr64.exe C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\ldr64.exe setwow</PreBuildEvent>
     <PostBuildEvent>IF EXIST C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\ldr64.exe C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\ldr64.exe set64</PostBuildEvent>
+    -->
   </PropertyGroup>
 </Project>
