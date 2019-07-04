@@ -8124,4 +8124,10 @@ m²</value>
   <data name="RequiredMaterialPanel_AnbindeMaterial" xml:space="preserve">
     <value>Anbindematerial</value>
   </data>
+  <data name="KlimaFlaechenModul_160_30U" xml:space="preserve">
+    <value>Modul 160/30 Universal</value>
+  </data>
+  <data name="KlimaFlaechenModul_160_30U_Short" xml:space="preserve">
+    <value>160/30 U</value>
+  </data>
 </root>

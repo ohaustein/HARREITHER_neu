@@ -6804,6 +6804,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modul 160/30 Universal.
+        /// </summary>
+        internal static string KlimaFlaechenModul_160_30U {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_160_30U", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 160/30 U.
+        /// </summary>
+        internal static string KlimaFlaechenModul_160_30U_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_160_30U_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul 60/60 Typ A.
         /// </summary>
         internal static string KlimaFlaechenModul_60_60 {
