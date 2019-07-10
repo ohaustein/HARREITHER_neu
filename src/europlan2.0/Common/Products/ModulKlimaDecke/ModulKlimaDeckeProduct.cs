@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
@@ -1417,6 +1418,7 @@ namespace Europlan.Common
         {
             bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
+            // Tabellarisch
             if (!graphical)
             {
                 double additional21mm = 0;
@@ -1454,13 +1456,13 @@ namespace Europlan.Common
                     }
                 }
 
-                this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
+
 
                 // Muffe
                 Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
 
                 // T-Stück
-                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+                int mk20 = (rows - subAreas) * 2;
 
                 if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL)
                 {
@@ -1475,6 +1477,40 @@ namespace Europlan.Common
                 }
                 else
                 {
+                    // detect if there is only the 30 series present
+                    bool only30Series = (from ModulDeckeCircuit circuit in circuits
+                                         from ModulDeckeSubArea area in circuit.SubAreas
+                                         from row in area.Rows
+                                         from module in row.List
+                                         select KlimaFlaechenModul.GetModuleWidth(module.ModulType)).All(width => width == 0.3);
+
+                    // wir nehmen in dieser Konstellation eine C-Profilbreite von 6.5cm mit Luftspalt an
+                    if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.C_PROFIL && only30Series)
+                    {
+                        // replace material with MK 80 and MK 81
+
+                        // entferne T-Stücke
+                        mk20 -= (rows - subAreas) * 2;
+
+                        var rowCounts = from ModulDeckeCircuit circuit in circuits
+                                        from ModulDeckeSubArea area in circuit.SubAreas
+                                        where area.Rows.Count > 0
+                                        select area.Rows.Count;
+
+                        // entferne rohr
+                        additional21mm -= 0.73 * (rows - subAreas);
+
+                        // füge T-Stücke hinzu
+                        foreach (var rowCount in rowCounts)
+                        {
+                            var mk81 = ((rowCount - 1) / 2) * 2;
+                            var mk80 = ((rowCount - 1) % 2) * 2;
+
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK80", mk80);
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK81", mk81);
+                        }
+
+                    }
                     // Winkel 90°
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + subAreas) * 2);
 
@@ -1486,12 +1522,16 @@ namespace Europlan.Common
                     }
                 }
 
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", mk20);
+                this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
+
                 // Winkel 45° in Wand
                 if (this.Type == ProductType.WH)
                 {
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
                 }
             }
+            // Grafisch
             else
             {
                 bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
@@ -1600,8 +1640,6 @@ namespace Europlan.Common
                     }
                 }
 
-                this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
-
                 if (constrCProfil)
                 {
                     if (serie30)
@@ -1611,9 +1649,35 @@ namespace Europlan.Common
 
                         // Winkel 90°
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+                        if ((GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenBreite == 0.065)
+                        {
+                            var rowCounts = from ModulDeckeCircuit circuit in circuits
+                                            from ModulDeckeSubArea area in circuit.SubAreas
+                                            where area.Rows.Count > 0
+                                            select area.Rows.Count;
 
-                        // T-Stück
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+                            // entferne rohr
+                            var includedInTStueck = 0.73 * (rows - subAreas);
+                            if (verbindeLength > includedInTStueck)
+                            {
+                                verbindeLength -= includedInTStueck;
+                            }
+
+                            // füge T-Stücke hinzu
+                            foreach (var rowCount in rowCounts)
+                            {
+                                var mk81 = ((rowCount - 1) / 2) * 2;
+                                var mk80 = ((rowCount - 1) % 2) * 2;
+
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK80", mk80);
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK81", mk81);
+                            }
+                        }
+                        else
+                        {
+                            // T-Stück
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+                        }
 
                         // Muffe
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
@@ -1751,6 +1815,7 @@ namespace Europlan.Common
                         }
                     }
                 }
+                this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
             }
         }
 
