@@ -382,6 +382,9 @@ namespace Europlan.Common.Products
             this.lblSchienenBreite.Text = Europlan.Common.EuroplanRes.ModulKlimaDeckePlannerForm_StaffelBreite;
             this.lblSchienenBreiteUnit.Text = Europlan.Common.EuroplanRes.Unit_Zentimeter;
             this.btnShowPlanBg.Text = Europlan.Common.EuroplanRes.ProductPlannerForm_PlanImHintergrundAnzeigen;
+            this.grpWinkelTyp.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_WinkelType;
+            this.cbIAVorlauf.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_WinkelVorlauf;
+            this.cbIARücklauf.Text = EuroplanRes.PlannedModulKlimaDeckeProductPanel_WinkelRücklauf;
         }
 
         private void UpdateControls()
@@ -963,7 +966,10 @@ namespace Europlan.Common.Products
                     else
                     {
                         this.modulKlimaDeckePlanner.Product.PlannedCircuits.Clear();
-                        this.modulKlimaDeckePlanner.Product.PlannedCircuits.Add(new ModulDeckeCircuit(this.modulKlimaDeckePlanner.Product));
+                        this.modulKlimaDeckePlanner.Product.PlannedCircuits.Add(new ModulDeckeCircuit(this.modulKlimaDeckePlanner.Product)
+                        {
+                            UseAIWinkelVorlauf = true
+                        });
                     }
                 }
             }
@@ -1232,17 +1238,23 @@ namespace Europlan.Common.Products
                     {
                         btnColor.BackColor = circuit.CircuitColor;
                         btnColor.Enabled = true;
+                        grpWinkelTyp.Visible = true;
+
+                        cbIAVorlauf.Checked = circuit.UseAIWinkelVorlauf;
+                        cbIARücklauf.Checked = circuit.UseAIWinkelRücklauf;
                     }
                     else
                     {
                         btnColor.BackColor = Color.Transparent;
                         btnColor.Enabled = false;
+                        grpWinkelTyp.Visible = false;
                     }
                 }
                 else
                 {
                     btnColor.BackColor = Color.Transparent;
                     btnColor.Enabled = false;
+                    grpWinkelTyp.Visible = false;
                 }
 
                 this.ignoreListChange--;
@@ -2480,6 +2492,26 @@ namespace Europlan.Common.Products
                     glatt.SchienenBreite = (double)this.numSchienenBreite.Value / 100;
                     this.planPanel.InvalidateGraphics();
                 }
+            }
+        }
+
+        private void cbIAVorlauf_CheckedChanged(object sender, EventArgs e)
+        {
+            var selectedCircuit = this.GetSelectedCircuit();
+            if (selectedCircuit != null)
+            {
+                selectedCircuit.UseAIWinkelVorlauf = cbIAVorlauf.Checked;
+                this.changed = true;
+            }
+        }
+
+        private void cbIARücklauf_CheckedChanged(object sender, EventArgs e)
+        {
+            var selectedCircuit = this.GetSelectedCircuit();
+            if (selectedCircuit != null)
+            {
+                selectedCircuit.UseAIWinkelRücklauf = cbIARücklauf.Checked;
+                this.changed = true;
             }
         }
     }

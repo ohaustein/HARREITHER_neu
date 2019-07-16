@@ -211,7 +211,10 @@ namespace Europlan.Common
 
         public override void InitializeNewProduct()
         {
-            this.PlannedCircuits.Add(new ModulDeckeCircuit(this));
+            this.PlannedCircuits.Add(new ModulDeckeCircuit(this)
+            {
+                UseAIWinkelVorlauf = true
+            });
         }
 
         public override void Initialize()

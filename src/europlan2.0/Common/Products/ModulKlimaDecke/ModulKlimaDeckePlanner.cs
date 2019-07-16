@@ -2900,7 +2900,11 @@ namespace Europlan.Common
                                 this.product.Connections.Clear();
                             }
                         }
-                        newCircuit = new ModulDeckeCircuit(this.Product);
+                        newCircuit = new ModulDeckeCircuit(this.Product)
+                        {
+                            UseAIWinkelVorlauf = true
+                        };
+                        
                         newCircuit.CircuitColor = this.GetNewCircuitColor();
                         newSubArea = newCircuit.SubAreas[0];
                         newSubArea.Rows.Clear();

@@ -18277,6 +18277,33 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I/A Winkel für Rücklauf verwenden.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelRücklauf {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelRücklauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anschlusswinkel für Teilflächen.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelType {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/A Winkel für Vorlauf verwenden.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelVorlauf {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelVorlauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Berechnungsergebnisse:.
         /// </summary>
         internal static string PlannedModulProductPanel_Berechnungsergebnisse {
