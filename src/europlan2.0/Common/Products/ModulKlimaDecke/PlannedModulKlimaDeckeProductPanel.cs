@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static Europlan.Common.ModulKlimaDeckeProduct;
 
 namespace Europlan.Common
 {
@@ -589,6 +590,9 @@ namespace Europlan.Common
                 this.selectedCircuit = mdProduct.PlannedCircuits[this.lstCircuits.SelectedIndex] as ModulDeckeCircuit;
                 cbIAVorlauf.Checked = selectedCircuit.UseAIWinkelVorlauf;
                 cbIARücklauf.Checked = selectedCircuit.UseAIWinkelRücklauf;
+
+                bool constrHolzstaffeln = mdProduct.GraphicalMode.HasValue && mdProduct.GraphicalMode.Value && (mdProduct.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (mdProduct.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
+                grpWinkelTyp.Visible = !constrHolzstaffeln;
                 if ((skipFields & FieldEnum.SUBAREA) == FieldEnum.NONE)
                 {
                     if (this.selectedCircuit.SubAreas.Count == 0)

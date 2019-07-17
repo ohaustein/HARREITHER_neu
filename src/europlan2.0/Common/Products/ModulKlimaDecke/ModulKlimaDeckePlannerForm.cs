@@ -396,6 +396,7 @@ namespace Europlan.Common.Products
                 this.grpCeilingContruction.Visible = false;
                 this.grpBeplankung.Enabled = false;
                 this.grpSchienenBreite.Visible = false;
+                grpWinkelTyp.Visible = true;
             }
             else if (this.modulKlimaDeckePlanner.Product.GraphConstruction.CeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.C_PROFIL)
             {
@@ -403,6 +404,7 @@ namespace Europlan.Common.Products
                 this.grpCeilingContruction.Visible = true;
                 this.grpBeplankung.Enabled = true;
                 this.grpSchienenBreite.Visible = true;
+                grpWinkelTyp.Visible = true;
             }
             else if (this.modulKlimaDeckePlanner.Product.GraphConstruction.CeilingConstruction == ModulKlimaDeckeProduct.ModulCeilingConstructionEnum.HOLZSTAFFEL)
             {
@@ -410,6 +412,7 @@ namespace Europlan.Common.Products
                 this.grpCeilingContruction.Visible = true;
                 this.grpBeplankung.Enabled = true;
                 this.grpSchienenBreite.Visible = true;
+                grpWinkelTyp.Visible = false;
             }
             if (this.modulKlimaDeckePlanner.Product.GraphConstruction is ModulKlimaDeckeConstructionAkustik)
             {
