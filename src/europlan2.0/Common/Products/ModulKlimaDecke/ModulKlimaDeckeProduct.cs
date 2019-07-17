@@ -1515,7 +1515,30 @@ namespace Europlan.Common
 
                     }
                     // Winkel 90°
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + subAreas) * 2);
+
+                    int hi56Count = (rows + subAreas) * 2;
+                    int hi59Count = 0;
+
+                    foreach (ModulDeckeCircuit circuit in circuits)
+                    {
+                        var rowsInCircuit = (from area in circuit.SubAreas
+                                             select area.Rows.Count).Sum();
+
+                        if (circuit.UseAIWinkelVorlauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+
+                        if (circuit.UseAIWinkelRücklauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+                    }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
 
                     // Einhängebügel
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
@@ -1559,6 +1582,39 @@ namespace Europlan.Common
                 int flexibleAnschluesseRandWinkel = 0;
                 int flexibleAnschluesseInnerhalb = 0;
 
+                var faInnenByCircuit = from ModulDeckeCircuit c in circuits
+                                       from subArea in c.SubAreas
+                                       from row in subArea.Rows
+                                       from link in row.Links
+                                       where link.IsFlexible
+                                       group link by c into circuits
+                                       select circuits;
+
+                flexibleAnschluesseInnerhalb = faInnenByCircuit.SelectMany(circuits => circuits).Count();
+
+                var faRandByCircuit = from ModulDeckeCircuit c in circuits
+                                      from link in c.Links
+                                      let flexibleEndRows = (from endConnection in link.FlexibleEndConnections
+                                                             where endConnection
+                                                             select 1).Sum()
+                                      let nonFlexibleEndRows = (from endConnection in link.FlexibleEndConnections
+                                                                where !endConnection
+                                                                select 1).Sum()
+                                      let flexibleStartRows = (from startConnection in link.FlexibleStartConnections
+                                                               where startConnection
+                                                               select 1).Sum()
+                                      let nonFlexibleStartRows = (from startConnection in link.FlexibleStartConnections
+                                                                  where !startConnection
+                                                                  select 1).Sum()
+                                      let fARW = (nonFlexibleEndRows == 0 ? 1 : 0) + (nonFlexibleEndRows == 0 ? 1 : 0)
+                                      let fARTS = flexibleStartRows + flexibleEndRows - fARW
+                                      let value = new { flexibleAnschluesseRandTStueck = fARTS, flexibleAnschluesseRandWinkel = fARW }
+                                      group value by c into circuits
+                                      select circuits;
+
+                flexibleAnschluesseRandTStueck = faRandByCircuit.SelectMany(circuit => circuit).Sum(v => v.flexibleAnschluesseRandTStueck);
+                flexibleAnschluesseRandWinkel = faRandByCircuit.SelectMany(circuit => circuit).Sum(v => v.flexibleAnschluesseRandWinkel);
+
                 foreach (ModulDeckeCircuit c in this.circuits)
                 {
                     foreach (ModulDeckeSubArea subArea in c.SubAreas)
@@ -1585,10 +1641,6 @@ namespace Europlan.Common
                                 {
                                     nichtDichteVerbindung++;
                                 }
-                                if (link.IsFlexible)
-                                {
-                                    flexibleAnschluesseInnerhalb++;
-                                }
                             }
                         }
                     }
@@ -1596,62 +1648,21 @@ namespace Europlan.Common
                     {
                         verbindeLength += link.GetLength(measure);
                         winkel90 += link.GetRequiredWinkel(measure);
-                        int flexibleRow = 0;
-                        int nonFlexibleRow = 0;
-                        for (int i = 0; i < link.FlexibleEndConnections.Length; i++)
-                        {
-                            if (link.FlexibleEndConnections[i])
-                            {
-                                flexibleRow++;
-                            }
-                            else
-                            {
-                                nonFlexibleRow++;
-                            }
-                        }
-                        if (nonFlexibleRow == 0)
-                        {
-                            flexibleAnschluesseRandTStueck += flexibleRow - 1;
-                            flexibleAnschluesseRandWinkel++;
-                        }
-                        else
-                        {
-                            flexibleAnschluesseRandTStueck += flexibleRow;
-                        }
-                        flexibleRow = 0;
-                        nonFlexibleRow = 0;
-                        for (int i = 0; i < link.FlexibleStartConnections.Length; i++)
-                        {
-                            if (link.FlexibleStartConnections[i])
-                            {
-                                flexibleRow++;
-                            }
-                            else
-                            {
-                                nonFlexibleRow++;
-                            }
-                        }
-                        if (nonFlexibleRow == 0)
-                        {
-                            flexibleAnschluesseRandTStueck += flexibleRow - 1;
-                            flexibleAnschluesseRandWinkel++;
-                        }
-                        else
-                        {
-                            flexibleAnschluesseRandTStueck += flexibleRow;
-                        }
                     }
                 }
 
                 if (constrCProfil)
                 {
+                    int hi56Count = 0;
+                    int hi59Count = 0;
+
                     if (serie30)
                     {
                         // Einhängebügel
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
 
                         // Winkel 90°
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+                        hi56Count = rows * 2;
                         if ((GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenBreite == 0.065)
                         {
                             var rowCounts = from ModulDeckeCircuit circuit in circuits
@@ -1692,7 +1703,7 @@ namespace Europlan.Common
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
 
                         // Winkel 90°
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+                        hi56Count = rows * 2;
 
                         // T-Stück
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
@@ -1701,6 +1712,27 @@ namespace Europlan.Common
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
                     }
+
+                    foreach (ModulDeckeCircuit circuit in circuits)
+                    {
+                        var rowsInCircuit = (from area in circuit.SubAreas
+                                             select area.Rows.Count).Sum();
+
+                        if (circuit.UseAIWinkelVorlauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+
+                        if (circuit.UseAIWinkelRücklauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+                    }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
                 }
                 else if (constrHolzstaffeln)
                 {
@@ -1748,13 +1780,16 @@ namespace Europlan.Common
                         }
                     }
 
+                    int hi56Count = 0;
+                    int hi59Count = 0;
+
                     if (raster105_45)
                     {
                         // Einhängebügel
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", -modules * 4);
 
-                        // Winkel 90°
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2);
+                        // Winkel 90°  
+                        hi56Count = rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2;
 
                         // T-Stück
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2 - flexibleAnschluesseRandTStueck);
@@ -1782,6 +1817,29 @@ namespace Europlan.Common
                         {
                             Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
                         }
+
+                        var faRandDict = faRandByCircuit.ToDictionary(g => g.Key);
+
+                        foreach (ModulDeckeCircuit circuit in circuits)
+                        {
+                            var rowsInCircuit = (from area in circuit.SubAreas
+                                                 select area.Rows.Count).Sum();
+
+                            var flexibleAnschluesseRandTStueckInCircuit = faRandDict[circuit].Sum(v => v.flexibleAnschluesseRandTStueck);
+                            var flexibleAnschluesseRandWinkelInCircuit = faRandDict[circuit].Sum(v => v.flexibleAnschluesseRandWinkel);
+
+                            if (circuit.UseAIWinkelVorlauf)
+                            {
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
+                            }
+
+                            if (circuit.UseAIWinkelRücklauf)
+                            {
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
+                            }
+                        }
                     }
                     else if (raster60)
                     {
@@ -1789,7 +1847,7 @@ namespace Europlan.Common
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", modules * 4 - sharedBuegel);
 
                         // Winkel 90°
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+                        hi56Count = rows * 2;
 
                         // T-Stück
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
@@ -1816,7 +1874,28 @@ namespace Europlan.Common
                         {
                             Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
                         }
+
+                        foreach (ModulDeckeCircuit circuit in circuits)
+                        {
+                            var rowsInCircuit = (from area in circuit.SubAreas
+                                                 select area.Rows.Count).Sum();
+
+                            if (circuit.UseAIWinkelVorlauf)
+                            {
+                                hi56Count -= rowsInCircuit;
+                                hi59Count += rowsInCircuit;
+                            }
+
+                            if (circuit.UseAIWinkelRücklauf)
+                            {
+                                hi56Count -= rowsInCircuit;
+                                hi59Count += rowsInCircuit;
+                            }
+                        }
                     }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
                 }
                 this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
             }
