@@ -970,6 +970,7 @@ namespace Europlan.Common.Products
                         {
                             UseAIWinkelVorlauf = true
                         });
+                        UpdateLists(true, true, true, true);
                     }
                 }
             }
