@@ -10,7 +10,7 @@
     <RootNamespace>Europlan.Application</RootNamespace>
     <AssemblyName>Europlan</AssemblyName>
     <ApplicationIcon>Harreither.ico</ApplicationIcon>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

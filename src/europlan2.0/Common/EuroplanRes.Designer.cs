@@ -6804,6 +6804,24 @@ namespace Europlan.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modul 160/30 Universal.
+        /// </summary>
+        internal static string KlimaFlaechenModul_160_30U {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_160_30U", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 160/30 U.
+        /// </summary>
+        internal static string KlimaFlaechenModul_160_30U_Short {
+            get {
+                return ResourceManager.GetString("KlimaFlaechenModul_160_30U_Short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modul 60/60 Typ A.
         /// </summary>
         internal static string KlimaFlaechenModul_60_60 {
@@ -18255,6 +18273,33 @@ namespace Europlan.Common {
         internal static string PlannedModulKlimaDeckeProductPanel_Typ {
             get {
                 return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_Typ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/A Winkel für Rücklauf verwenden.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelRücklauf {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelRücklauf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anschlusswinkel für Teilflächen.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelType {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I/A Winkel für Vorlauf verwenden.
+        /// </summary>
+        internal static string PlannedModulKlimaDeckeProductPanel_WinkelVorlauf {
+            get {
+                return ResourceManager.GetString("PlannedModulKlimaDeckeProductPanel_WinkelVorlauf", resourceCulture);
             }
         }
         

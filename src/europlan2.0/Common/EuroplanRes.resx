@@ -8124,4 +8124,19 @@ m²</value>
   <data name="RequiredMaterialPanel_AnbindeMaterial" xml:space="preserve">
     <value>Anbindematerial</value>
   </data>
+  <data name="KlimaFlaechenModul_160_30U" xml:space="preserve">
+    <value>Modul 160/30 Universal</value>
+  </data>
+  <data name="KlimaFlaechenModul_160_30U_Short" xml:space="preserve">
+    <value>160/30 U</value>
+  </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_WinkelRücklauf" xml:space="preserve">
+    <value>I/A Winkel für Rücklauf verwenden</value>
+  </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_WinkelType" xml:space="preserve">
+    <value>Anschlusswinkel für Teilflächen</value>
+  </data>
+  <data name="PlannedModulKlimaDeckeProductPanel_WinkelVorlauf" xml:space="preserve">
+    <value>I/A Winkel für Vorlauf verwenden</value>
+  </data>
 </root>

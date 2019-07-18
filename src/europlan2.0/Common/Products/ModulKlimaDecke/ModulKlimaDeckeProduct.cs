@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Xml.Serialization;
 using System.Threading;
+using System.Xml.Serialization;
 using Europlan.Licensing;
-using WW.Math.Geometry;
 using WW.Math;
+using WW.Math.Geometry;
 
-namespace Europlan.Common {
+namespace Europlan.Common
+{
 
-	[Serializable()]
-	[ProductName("Product_ModulKlimDeckeName", "Product_ModulKlimDeckeFullName")]
-	public class ModulKlimaDeckeProduct : Product, ProductWithInsulationConstruction {
+    [Serializable()]
+    [ProductName("Product_ModulKlimDeckeName", "Product_ModulKlimDeckeFullName")]
+    public class ModulKlimaDeckeProduct : Product, ProductWithInsulationConstruction
+    {
 
         public class DeckenTypEnumConverter : System.ComponentModel.TypeConverter
         {
@@ -75,1843 +78,2446 @@ namespace Europlan.Common {
             OPEN_BORDER_JOINT_5,
         }
 
-		public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter {
-			private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke"
-			private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil"
-			private static readonly string holzStaffel = EuroplanRes.ModulKlimaDeckeProduct_Holzstaffel; //"Holzstaffel"
+        public class ModulCeilingConstructionEnumConverter : System.ComponentModel.TypeConverter
+        {
+            private static readonly string kassettenDecke = EuroplanRes.ModulKlimaDeckeProduct_Kassettendecke; //"Kassettendecke"
+            private static readonly string c_profil = EuroplanRes.ModulKlimaDeckeProduct_CProfil; //"C-Profil"
+            private static readonly string holzStaffel = EuroplanRes.ModulKlimaDeckeProduct_Holzstaffel; //"Holzstaffel"
 
-			private Dictionary<string, ModulCeilingConstructionEnum> mappingFromString = new Dictionary<string, ModulCeilingConstructionEnum>();
-			private Dictionary<ModulCeilingConstructionEnum, string> mappingToString = new Dictionary<ModulCeilingConstructionEnum, string>();
+            private Dictionary<string, ModulCeilingConstructionEnum> mappingFromString = new Dictionary<string, ModulCeilingConstructionEnum>();
+            private Dictionary<ModulCeilingConstructionEnum, string> mappingToString = new Dictionary<ModulCeilingConstructionEnum, string>();
 
-			public ModulCeilingConstructionEnumConverter() {
-				mappingFromString.Add(kassettenDecke, ModulCeilingConstructionEnum.KASSETTENDECKE);
-				mappingFromString.Add(c_profil, ModulCeilingConstructionEnum.C_PROFIL);
-				mappingFromString.Add(holzStaffel, ModulCeilingConstructionEnum.HOLZSTAFFEL);
-				mappingToString.Add(ModulCeilingConstructionEnum.KASSETTENDECKE, kassettenDecke);
-				mappingToString.Add(ModulCeilingConstructionEnum.C_PROFIL, c_profil);
-				mappingToString.Add(ModulCeilingConstructionEnum.HOLZSTAFFEL, holzStaffel);
-			}
+            public ModulCeilingConstructionEnumConverter()
+            {
+                mappingFromString.Add(kassettenDecke, ModulCeilingConstructionEnum.KASSETTENDECKE);
+                mappingFromString.Add(c_profil, ModulCeilingConstructionEnum.C_PROFIL);
+                mappingFromString.Add(holzStaffel, ModulCeilingConstructionEnum.HOLZSTAFFEL);
+                mappingToString.Add(ModulCeilingConstructionEnum.KASSETTENDECKE, kassettenDecke);
+                mappingToString.Add(ModulCeilingConstructionEnum.C_PROFIL, c_profil);
+                mappingToString.Add(ModulCeilingConstructionEnum.HOLZSTAFFEL, holzStaffel);
+            }
 
-			public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType) {
-				return sourceType == typeof(string);
-			}
+            public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
+            {
+                return sourceType == typeof(string);
+            }
 
-			public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType) {
-				return destinationType == typeof(string);
-			}
+            public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
+            {
+                return destinationType == typeof(string);
+            }
 
-			public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-				if (value is string) {
-					if (mappingFromString.ContainsKey((string)value)) {
-						return mappingFromString[(string)value];
-					}
-				}
-				return base.ConvertFrom(context, culture, value);
-			}
+            public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+            {
+                if (value is string)
+                {
+                    if (mappingFromString.ContainsKey((string)value))
+                    {
+                        return mappingFromString[(string)value];
+                    }
+                }
+                return base.ConvertFrom(context, culture, value);
+            }
 
-			public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (value is ModulCeilingConstructionEnum && destinationType == typeof(string)) {
-					if (mappingToString.ContainsKey((ModulCeilingConstructionEnum)value)) {
-						return mappingToString[(ModulCeilingConstructionEnum)value];
-					}
-				}
-				return base.ConvertTo(context, culture, value, destinationType);
-			}
-		}
+            public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+            {
+                if (value is ModulCeilingConstructionEnum && destinationType == typeof(string))
+                {
+                    if (mappingToString.ContainsKey((ModulCeilingConstructionEnum)value))
+                    {
+                        return mappingToString[(ModulCeilingConstructionEnum)value];
+                    }
+                }
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+        }
 
-		[System.ComponentModel.TypeConverter(typeof(ModulCeilingConstructionEnumConverter))]
-		public enum ModulCeilingConstructionEnum {
-			KASSETTENDECKE,
-			C_PROFIL,
-			HOLZSTAFFEL
-		}
+        [System.ComponentModel.TypeConverter(typeof(ModulCeilingConstructionEnumConverter))]
+        public enum ModulCeilingConstructionEnum
+        {
+            KASSETTENDECKE,
+            C_PROFIL,
+            HOLZSTAFFEL
+        }
 
-		// quick dimensioning
-		private static int quickDimensioningHeatPowerPerSquareMeter = 80;
-		private static int quickDimensioningCoolPowerPerSquareMeter = 80;
-		private static bool canHeat = true;
-		private static bool canCool = true;
+        // quick dimensioning
+        private static int quickDimensioningHeatPowerPerSquareMeter = 80;
+        private static int quickDimensioningCoolPowerPerSquareMeter = 80;
+        private static bool canHeat = true;
+        private static bool canCool = true;
 
-		// planning
-		private static double su0 = 0.045; /* Mindestüberdeckung fix */
-		private static double alpha0 = 10.8; /* Fixwert für FBH fix */
-		private static double lambdaU0 = 1; /* fix */
-		private static double rLambdaDecke = 0.11; /* Deckenschicht 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
-		private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
-		private static double atmt = 1.06; /* Fixwert laut Norm */
-		private static double b = 6.5; /* Fixwert laut Norm */
-		private static double leistungsFaktorHeizen = 1.0;
-		private static double leistungsFaktorKuehlen = 1.0;
+        // planning
+        private static double su0 = 0.045; /* Mindestüberdeckung fix */
+        private static double alpha0 = 10.8; /* Fixwert für FBH fix */
+        private static double lambdaU0 = 1; /* fix */
+        private static double rLambdaDecke = 0.11; /* Deckenschicht 25cm Stahlbeton; durch echte Konstruktion ersetzen! */
+        private static double rLambdaDach = 0.0; /* Deckenschicht; durch echte Konstruktion ersetzen! */
+        private static double atmt = 1.06; /* Fixwert laut Norm */
+        private static double b = 6.5; /* Fixwert laut Norm */
+        private static double leistungsFaktorHeizen = 1.0;
+        private static double leistungsFaktorKuehlen = 1.0;
 
-		private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
-		private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
-		private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
+        private static double c = 4.19; /* kJ/(kg*K) ... spezifische Wärmekapazität des Mediums */
+        private static double rho = 1000; /* kg/m³ ... Dichte des Mediums */
+        private static double v = 0.00000101; /* m²/s ... kinematische Viskosität */
 
-		private static double[] druckverlustModul_120_30 = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
-		private static double[] druckverlustModul_100_30 = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
-		private static double[] druckverlustModul_80_30 = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
+        private static double[] druckverlustModul_160_30 = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+        private static double[] druckverlustModul_120_30 = { 0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1 };
+        private static double[] druckverlustModul_100_30 = { 0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3 };
+        private static double[] druckverlustModul_80_30 = { 0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3 };
 
-		private float plannedAreaUnheated = 0;
-		private Construction plannedCeilingConstruction = null;
-		private Construction plannedInsulationConstruction = null;
-		private string plannedCeilingConstructionId = null;
-		private string plannedInsulationConstructionId = null;
+        private float plannedAreaUnheated = 0;
+        private Construction plannedCeilingConstruction = null;
+        private Construction plannedInsulationConstruction = null;
+        private string plannedCeilingConstructionId = null;
+        private string plannedInsulationConstructionId = null;
 
-		//  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
-		private static int maxPressureLost = 15000;
-		private static int maxDurchfluss = 240;
-		private static int maxModulesInRow = 20;
-		private static int maxModulesInParallel = 6;
-		private static int maxModulesInCircuit = 45;
-		private static double spreizungHeizMin = 4;
-		private static double spreizungHeizMax = 12;
-		private static double spreizungKuehlMin = 2;
-		private static double spreizungKuehlMax = 5;
-		private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
-		private static ModulKlimaDeckeConstructionKassette.RasterMass rasterMass = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450;
+        //  !!!!!!!!!!! changes must be also applied in SystemParametersPanel.cs !!!!!!!!!!!
+        private static int maxPressureLost = 15000;
+        private static int maxDurchfluss = 240;
+        private static int maxModulesInRow = 20;
+        private static int maxModulesInParallel = 6;
+        private static int maxModulesInCircuit = 45;
+        private static double spreizungHeizMin = 4;
+        private static double spreizungHeizMax = 12;
+        private static double spreizungKuehlMin = 2;
+        private static double spreizungKuehlMax = 5;
+        private static ModulCeilingConstructionEnum construction = ModulCeilingConstructionEnum.C_PROFIL;
+        private static ModulKlimaDeckeConstructionKassette.RasterMass rasterMass = ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450;
 
-		private static double maxCeilingTempHeat = 29.0;
+        private static double maxCeilingTempHeat = 29.0;
 
-		private ProductType modulType = ProductType.DH;
-		private float plannedFloorArea = 0;
-		private float plannedCeilingArea = 0;
-		private float plannedFloorOrCeilingArea = 0;
+        private ProductType modulType = ProductType.DH;
+        private float plannedFloorArea = 0;
+        private float plannedCeilingArea = 0;
+        private float plannedFloorOrCeilingArea = 0;
 
         private DeckenTyp ceilingType = DeckenTyp.CLOSED;
 
-		private ModulKlimaDeckeConstruction graphConstruction = null;
+        private ModulKlimaDeckeConstruction graphConstruction = null;
 
-		public ModulKlimaDeckeProduct() {
-			if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke)) {
-				throw new ProductNotLicensedException(this.GetType());
-			}
-		}
+        public ModulKlimaDeckeProduct()
+        {
+            if (!Licensing.LicenseManager.Instance.License.IsModuleEnabled(Licensing.AbstractLicensedModule.ProdModulKlimaDecke))
+            {
+                throw new ProductNotLicensedException(this.GetType());
+            }
+        }
 
-		protected ModulKlimaDeckeProduct(ModulKlimaDeckeProduct product) : base(product) {
+        protected ModulKlimaDeckeProduct(ModulKlimaDeckeProduct product) : base(product)
+        {
 
-		}
+        }
 
-		public override void InitializeNewProduct() {
-			this.PlannedCircuits.Add(new ModulDeckeCircuit(this));
-		}
+        public override void InitializeNewProduct()
+        {
+            this.PlannedCircuits.Add(new ModulDeckeCircuit(this)
+            {
+                UseAIWinkelVorlauf = true
+            });
+        }
 
-		public override void Initialize() {
-		}
+        public override void Initialize()
+        {
+        }
 
-		public override string ImageKey {
+        public override string ImageKey
+        {
             get { return "Klimadecke.png"; }
-		}
+        }
 
-		public override string SelectedImageKey {
+        public override string SelectedImageKey
+        {
             get { return "Klimadecke.png"; }
-		}
+        }
 
-		public override Product.CalculateModeEnum DefaultCalculateMode {
-			get { return CalculateModeEnum.COOL; }
-		}
+        public override Product.CalculateModeEnum DefaultCalculateMode
+        {
+            get { return CalculateModeEnum.COOL; }
+        }
 
-		public new static void StaticInitialize(Configuration config) {
-			Product.StaticInitialize<ModulKlimaDeckeProduct>(config);
-		}
+        public new static void StaticInitialize(Configuration config)
+        {
+            Product.StaticInitialize<ModulKlimaDeckeProduct>(config);
+        }
 
-		public static string GlobalNotificationMessage {
-			get {
-				string message = null;
-				Configuration userConfig = Configuration.UserTemplate;
+        public static string GlobalNotificationMessage
+        {
+            get
+            {
+                string message = null;
+                Configuration userConfig = Configuration.UserTemplate;
 
-				double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen");
-				if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen) {
-					if (message == null) {
-						message = "";
-					} else {
-						message += "\n";
-					}
-					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorHeizen;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorHeizen, 3).ToString());
-					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorHeizen, 3).ToString());
-					message += newMsg;
-				}
+                double defaultLeistungsFaktorHeizen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorHeizen");
+                if (leistungsFaktorHeizen != defaultLeistungsFaktorHeizen)
+                {
+                    if (message == null)
+                    {
+                        message = "";
+                    }
+                    else
+                    {
+                        message += "\n";
+                    }
+                    string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorHeizen;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorHeizen, 3).ToString());
+                    newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorHeizen, 3).ToString());
+                    message += newMsg;
+                }
 
-				double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen");
-				if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen) {
-					if (message == null) {
-						message = "";
-					} else {
-						message += "\n";
-					}
-					string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorKuehlen;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorKuehlen, 3).ToString());
-					newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString());
-					message += newMsg;
-				}
+                double defaultLeistungsFaktorKuehlen = userConfig.GetProductParameterAsDouble<ModulKlimaDeckeProduct>("ConfigLeistungsFaktorKuehlen");
+                if (leistungsFaktorKuehlen != defaultLeistungsFaktorKuehlen)
+                {
+                    if (message == null)
+                    {
+                        message = "";
+                    }
+                    else
+                    {
+                        message += "\n";
+                    }
+                    string newMsg = EuroplanRes.NotificationMessage_LeistungsfaktorKuehlen;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(leistungsFaktorKuehlen, 3).ToString());
+                    newMsg = newMsg.Replace("%DEFAULT%", Math.Round(defaultLeistungsFaktorKuehlen, 3).ToString());
+                    message += newMsg;
+                }
 
-				if (message != null) {
-					message = EuroplanRes.ModulKlimaDeckeProduct_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
-						"\n" + message;
-				}
+                if (message != null)
+                {
+                    message = EuroplanRes.ModulKlimaDeckeProduct_NotificationParameter + /*"Hitherm-Systeme werden mit veränderten Paramtern berechnet. Folgende Parameter weichen von den Standardwerten ab:\n" */
+                        "\n" + message;
+                }
 
-				return message;
-			}
-		}
+                return message;
+            }
+        }
 
-		public override Product Clone(Room room) {
-			ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(this);
-			product.AssociatedRoom = room;
-			return product;
-		}
+        public override Product Clone(Room room)
+        {
+            ModulKlimaDeckeProduct product = new ModulKlimaDeckeProduct(this);
+            product.AssociatedRoom = room;
+            return product;
+        }
 
-		#region Product Parameters
-		[BoolProductParameter(true)]
-		public static bool ConfigQuickDimensioningCanHeat {
-			get { return canHeat; }
-			set { canHeat = value; }
-		}
-		public override bool QuickDimensioningCanHeat {
-			get { return canHeat; }
-		}
+        #region Product Parameters
+        [BoolProductParameter(true)]
+        public static bool ConfigQuickDimensioningCanHeat
+        {
+            get { return canHeat; }
+            set { canHeat = value; }
+        }
+        public override bool QuickDimensioningCanHeat
+        {
+            get { return canHeat; }
+        }
 
-		[BoolProductParameter(true)]
-		public static bool ConfigQuickDimensioningCanCool {
-			get { return canCool; }
-			set { canCool = value; }
-		}
-		public override bool QuickDimensioningCanCool {
-			get { return canCool; }
-		}
+        [BoolProductParameter(true)]
+        public static bool ConfigQuickDimensioningCanCool
+        {
+            get { return canCool; }
+            set { canCool = value; }
+        }
+        public override bool QuickDimensioningCanCool
+        {
+            get { return canCool; }
+        }
 
-		[IntProductParameter(80)]
-		public static int ConfigQuickDimensioningHeatPowerPerSquareMeter {
-			get { return quickDimensioningHeatPowerPerSquareMeter; }
-			set { quickDimensioningHeatPowerPerSquareMeter = value; }
-		}
-		public override int QuickDimensioningHeatPowerPerSquareMeter {
-			get { return quickDimensioningHeatPowerPerSquareMeter; }
-		}
+        [IntProductParameter(80)]
+        public static int ConfigQuickDimensioningHeatPowerPerSquareMeter
+        {
+            get { return quickDimensioningHeatPowerPerSquareMeter; }
+            set { quickDimensioningHeatPowerPerSquareMeter = value; }
+        }
+        public override int QuickDimensioningHeatPowerPerSquareMeter
+        {
+            get { return quickDimensioningHeatPowerPerSquareMeter; }
+        }
 
-		[IntProductParameter(80)]
-		public static int ConfigQuickDimensioningCoolPowerPerSquareMeter {
-			get { return quickDimensioningCoolPowerPerSquareMeter; }
-			set { quickDimensioningCoolPowerPerSquareMeter = value; }
-		}
-		public override int QuickDimensioningCoolPowerPerSquareMeter {
-			get { return quickDimensioningCoolPowerPerSquareMeter; }
-		}
+        [IntProductParameter(80)]
+        public static int ConfigQuickDimensioningCoolPowerPerSquareMeter
+        {
+            get { return quickDimensioningCoolPowerPerSquareMeter; }
+            set { quickDimensioningCoolPowerPerSquareMeter = value; }
+        }
+        public override int QuickDimensioningCoolPowerPerSquareMeter
+        {
+            get { return quickDimensioningCoolPowerPerSquareMeter; }
+        }
 
-		[DoubleProductParameter(0.045)]
-		public static double ConfigSu0 {
-			get { return su0; }
-			set { su0 = value; }
-		}
+        [DoubleProductParameter(0.045)]
+        public static double ConfigSu0
+        {
+            get { return su0; }
+            set { su0 = value; }
+        }
 
-		[DoubleProductParameter(10.8)]
-		public static double ConfigAlpha0 {
-			get { return alpha0; }
-			set { alpha0 = value; }
-		}
+        [DoubleProductParameter(10.8)]
+        public static double ConfigAlpha0
+        {
+            get { return alpha0; }
+            set { alpha0 = value; }
+        }
 
-		[DoubleProductParameter(1)]
-		public static double ConfigLambdaU0 {
-			get { return lambdaU0; }
-			set { lambdaU0 = value; }
-		}
+        [DoubleProductParameter(1)]
+        public static double ConfigLambdaU0
+        {
+            get { return lambdaU0; }
+            set { lambdaU0 = value; }
+        }
 
-		[DoubleProductParameter(0.11)]
-		public static double ConfigRLambdaDecke {
-			get { return rLambdaDecke; }
-			set { rLambdaDecke = value; }
-		}
+        [DoubleProductParameter(0.11)]
+        public static double ConfigRLambdaDecke
+        {
+            get { return rLambdaDecke; }
+            set { rLambdaDecke = value; }
+        }
 
-		[DoubleProductParameter(0)]
-		public static double ConfigRLambdaDach {
-			get { return rLambdaDach; }
-			set { rLambdaDach = value; }
-		}
+        [DoubleProductParameter(0)]
+        public static double ConfigRLambdaDach
+        {
+            get { return rLambdaDach; }
+            set { rLambdaDach = value; }
+        }
 
-		[DoubleProductParameter(1.06)]
-		public static double ConfigAtmt {
-			get { return atmt; }
-			set { atmt = value; }
-		}
+        [DoubleProductParameter(1.06)]
+        public static double ConfigAtmt
+        {
+            get { return atmt; }
+            set { atmt = value; }
+        }
 
-		[DoubleProductParameter(6.5)]
-		public static double ConfigB {
-			get { return b; }
-			set { b = value; }
-		}
+        [DoubleProductParameter(6.5)]
+        public static double ConfigB
+        {
+            get { return b; }
+            set { b = value; }
+        }
 
-		[DoubleProductParameter(0.95)]
-		public static double ConfigLeistungsFaktorHeizen {
-			get { return leistungsFaktorHeizen; }
-			set { leistungsFaktorHeizen = value; }
-		}
+        [DoubleProductParameter(0.95)]
+        public static double ConfigLeistungsFaktorHeizen
+        {
+            get { return leistungsFaktorHeizen; }
+            set { leistungsFaktorHeizen = value; }
+        }
 
-		[DoubleProductParameter(0.95)]
-		public static double ConfigLeistungsFaktorKuehlen {
-			get { return leistungsFaktorKuehlen; }
-			set { leistungsFaktorKuehlen = value; }
-		}
+        [DoubleProductParameter(0.95)]
+        public static double ConfigLeistungsFaktorKuehlen
+        {
+            get { return leistungsFaktorKuehlen; }
+            set { leistungsFaktorKuehlen = value; }
+        }
 
-		[IntProductParameter(15000)]
-		public static int ConfigMaxPressureLost {
-			get { return ModulKlimaDeckeProduct.maxPressureLost; }
-			set { ModulKlimaDeckeProduct.maxPressureLost = value; }
-		}
+        [IntProductParameter(15000)]
+        public static int ConfigMaxPressureLost
+        {
+            get { return ModulKlimaDeckeProduct.maxPressureLost; }
+            set { ModulKlimaDeckeProduct.maxPressureLost = value; }
+        }
 
-		[IntProductParameter(240)]
-		public static int ConfigMaxDurchfluss {
-			get { return ModulKlimaDeckeProduct.maxDurchfluss; }
-			set { ModulKlimaDeckeProduct.maxDurchfluss = value; }
-		}
+        [IntProductParameter(240)]
+        public static int ConfigMaxDurchfluss
+        {
+            get { return ModulKlimaDeckeProduct.maxDurchfluss; }
+            set { ModulKlimaDeckeProduct.maxDurchfluss = value; }
+        }
 
-		[IntProductParameter(20)]
-		public static int ConfigMaxModulesInRow {
-			get { return ModulKlimaDeckeProduct.maxModulesInRow; }
-			set { ModulKlimaDeckeProduct.maxModulesInRow = value; }
-		}
+        [IntProductParameter(20)]
+        public static int ConfigMaxModulesInRow
+        {
+            get { return ModulKlimaDeckeProduct.maxModulesInRow; }
+            set { ModulKlimaDeckeProduct.maxModulesInRow = value; }
+        }
 
-		[IntProductParameter(6)]
-		public static int ConfigMaxModulesInParallel {
-			get { return ModulKlimaDeckeProduct.maxModulesInParallel; }
-			set { ModulKlimaDeckeProduct.maxModulesInParallel = value; }
-		}
+        [IntProductParameter(6)]
+        public static int ConfigMaxModulesInParallel
+        {
+            get { return ModulKlimaDeckeProduct.maxModulesInParallel; }
+            set { ModulKlimaDeckeProduct.maxModulesInParallel = value; }
+        }
 
-		[IntProductParameter(50)]
-		public static int ConfigModulesInCircuit {
-			get { return ModulKlimaDeckeProduct.maxModulesInCircuit; }
-			set { ModulKlimaDeckeProduct.maxModulesInCircuit = value; }
-		}
-		[DoubleProductParameter(4)]
-		public static double ConfigSpreizungHeizMin {
-			get { return spreizungHeizMin; }
-			set { spreizungHeizMin = value; }
-		}
+        [IntProductParameter(50)]
+        public static int ConfigModulesInCircuit
+        {
+            get { return ModulKlimaDeckeProduct.maxModulesInCircuit; }
+            set { ModulKlimaDeckeProduct.maxModulesInCircuit = value; }
+        }
+        [DoubleProductParameter(4)]
+        public static double ConfigSpreizungHeizMin
+        {
+            get { return spreizungHeizMin; }
+            set { spreizungHeizMin = value; }
+        }
 
-		[DoubleProductParameter(12)]
-		public static double ConfigSpreizungHeizMax {
-			get { return spreizungHeizMax; }
-			set { spreizungHeizMax = value; }
-		}
+        [DoubleProductParameter(12)]
+        public static double ConfigSpreizungHeizMax
+        {
+            get { return spreizungHeizMax; }
+            set { spreizungHeizMax = value; }
+        }
 
-		[DoubleProductParameter(2)]
-		public static double ConfigSpreizungKuehlMin {
-			get { return spreizungKuehlMin; }
-			set { spreizungKuehlMin = value; }
-		}
+        [DoubleProductParameter(2)]
+        public static double ConfigSpreizungKuehlMin
+        {
+            get { return spreizungKuehlMin; }
+            set { spreizungKuehlMin = value; }
+        }
 
-		[DoubleProductParameter(5)]
-		public static double ConfigSpreizungKuehlMax {
-			get { return spreizungKuehlMax; }
-			set { spreizungKuehlMax = value; }
-		}
+        [DoubleProductParameter(5)]
+        public static double ConfigSpreizungKuehlMax
+        {
+            get { return spreizungKuehlMax; }
+            set { spreizungKuehlMax = value; }
+        }
 
-		[IntProductParameter(1)]
-		public static int ConfigModulCeilingConstruction {
-			get { return (int)ModulKlimaDeckeProduct.construction; }
-			set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
-		}
+        [IntProductParameter(1)]
+        public static int ConfigModulCeilingConstruction
+        {
+            get { return (int)ModulKlimaDeckeProduct.construction; }
+            set { ModulKlimaDeckeProduct.construction = (ModulCeilingConstructionEnum)value; }
+        }
 
-		[IntProductParameter(0)]
-		public static int ConfigModulCeilingConstructionKassetteRasterMass {
-			get { return (int)ModulKlimaDeckeProduct.rasterMass; }
-			set { ModulKlimaDeckeProduct.rasterMass = (ModulKlimaDeckeConstructionKassette.RasterMass)value; }
-		}
+        [IntProductParameter(0)]
+        public static int ConfigModulCeilingConstructionKassetteRasterMass
+        {
+            get { return (int)ModulKlimaDeckeProduct.rasterMass; }
+            set { ModulKlimaDeckeProduct.rasterMass = (ModulKlimaDeckeConstructionKassette.RasterMass)value; }
+        }
 
-		[DoubleProductParameter(1000)]
-		public static double ConfigRho {
-			get { return rho; }
-			set { rho = value; }
-		}
+        [DoubleProductParameter(1000)]
+        public static double ConfigRho
+        {
+            get { return rho; }
+            set { rho = value; }
+        }
 
-		[DoubleProductParameter(4.19)]
-		public static double ConfigC {
-			get { return c; }
-			set { c = value; }
-		}
+        [DoubleProductParameter(4.19)]
+        public static double ConfigC
+        {
+            get { return c; }
+            set { c = value; }
+        }
 
-		[DoubleProductParameter(0.00000101)]
-		public static double ConfigV {
-			get { return v; }
-			set { v = value; }
-		}
+        [DoubleProductParameter(0.00000101)]
+        public static double ConfigV
+        {
+            get { return v; }
+            set { v = value; }
+        }
 
-		[StringProductParameter("{0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1}")]
-		public static string ConfigDruckverlustModul_120_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_120_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_120_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_120_30 {
-			get { return druckverlustModul_120_30; }
-			set { druckverlustModul_120_30 = value; }
-		}
+        [StringProductParameter("{0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1}")]
+        public static string ConfigDruckverlustModul_120_30String
+        {
+            get
+            {
+                return ConvertArrayToString(druckverlustModul_120_30);
+            }
+            set
+            {
+                double[] array = ConvertStringToArray(value);
+                if (array != null)
+                {
+                    druckverlustModul_120_30 = array;
+                }
+            }
+        }
+        public static double[] ConfigDruckverlustModul_120_30
+        {
+            get { return druckverlustModul_120_30; }
+            set { druckverlustModul_120_30 = value; }
+        }
 
-		[StringProductParameter("{0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3}")]
-		public static string ConfigDruckverlustModul_100_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_100_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_100_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_100_30 {
-			get { return druckverlustModul_100_30; }
-			set { druckverlustModul_100_30 = value; }
-		}
+        [StringProductParameter("{0.23, 0.47, 0.82, 1.05, 1.5, 1.75, 2.1, 2.6, 3, 3.5, 4.2, 5.25, 6.3, 7.3, 8.4, 9.4, 10.6, 11.7, 12.8, 14, 15.1, 16.3, 17.5, 19.2, 20.7, 22.1, 23.3, 25, 26.8, 29.1}")]
+        public static string ConfigDruckverlustModul_160_30String
+        {
+            get
+            {
+                return ConvertArrayToString(druckverlustModul_160_30);
+            }
+            set
+            {
+                double[] array = ConvertStringToArray(value);
+                if (array != null)
+                {
+                    druckverlustModul_160_30 = array;
+                }
+            }
+        }
+        public static double[] ConfigDruckverlustModul_160_30
+        {
+            get { return druckverlustModul_160_30; }
+            set { druckverlustModul_160_30 = value; }
+        }
 
-		[StringProductParameter("{0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3}")]
-		public static string ConfigDruckverlustModul_80_30String {
-			get {
-				return ConvertArrayToString(druckverlustModul_80_30);
-			}
-			set {
-				double[] array = ConvertStringToArray(value);
-				if (array != null) {
-					druckverlustModul_80_30 = array;
-				}
-			}
-		}
-		public static double[] ConfigDruckverlustModul_80_30 {
-			get { return druckverlustModul_80_30; }
-			set { druckverlustModul_80_30 = value; }
-		}
+        [StringProductParameter("{0.19, 0.37, 0.65, 0.84, 1.2, 1.4, 1.7, 2.1, 2.4, 2.8, 3.3, 4.2, 5, 5.9, 7, 7.5, 8.5, 9.3, 10.3, 11.2, 12.1, 13, 14, 15.4, 16.6, 17.7, 18.6, 20, 21.4, 23.3}")]
+        public static string ConfigDruckverlustModul_100_30String
+        {
+            get
+            {
+                return ConvertArrayToString(druckverlustModul_100_30);
+            }
+            set
+            {
+                double[] array = ConvertStringToArray(value);
+                if (array != null)
+                {
+                    druckverlustModul_100_30 = array;
+                }
+            }
+        }
+        public static double[] ConfigDruckverlustModul_100_30
+        {
+            get { return druckverlustModul_100_30; }
+            set { druckverlustModul_100_30 = value; }
+        }
 
-		[DoubleProductParameter(29)]
-		public static double ConfigMaxCeilingTempHeat {
-			get { return maxCeilingTempHeat; }
-			set { maxCeilingTempHeat = value; }
-		}
-		#endregion Product Parameters
+        [StringProductParameter("{0.17, 0.34, 0.6, 0.77, 1.1, 1.3, 1.5, 1.9, 2.2, 2.6, 3.1, 3.8, 4.6, 5.4, 6.1, 6.9, 7.7, 8.5, 9.4, 10.2, 11.1, 11.9, 12.8, 14, 15.1, 16.2, 17, 18.3, 19.6, 21.3}")]
+        public static string ConfigDruckverlustModul_80_30String
+        {
+            get
+            {
+                return ConvertArrayToString(druckverlustModul_80_30);
+            }
+            set
+            {
+                double[] array = ConvertStringToArray(value);
+                if (array != null)
+                {
+                    druckverlustModul_80_30 = array;
+                }
+            }
+        }
+        public static double[] ConfigDruckverlustModul_80_30
+        {
+            get { return druckverlustModul_80_30; }
+            set { druckverlustModul_80_30 = value; }
+        }
 
-        public double MaxDurchfluss {
-            get {
-                if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE) {
+        [DoubleProductParameter(29)]
+        public static double ConfigMaxCeilingTempHeat
+        {
+            get { return maxCeilingTempHeat; }
+            set { maxCeilingTempHeat = value; }
+        }
+        #endregion Product Parameters
+
+        public double MaxDurchfluss
+        {
+            get
+            {
+                if (this.PlannedConnection == null || this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.NONE)
+                {
                     return ModulKlimaDeckeProduct.ConfigMaxDurchfluss;
                 }
                 Product p = this;
-                while (p != null && p.PlannedConnection != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && p.PlannedConnection.OtherProduct != null) {
+                while (p != null && p.PlannedConnection != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT && p.PlannedConnection.OtherProduct != null)
+                {
                     p = p.PlannedConnection.OtherProduct.Product;
                 }
-                if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null) {
+                if (p != null && p.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR && p.PlannedConnection.Distributor != null)
+                {
                     return p.PlannedConnection.Distributor.MaxDurchfluss;
                 }
                 return ModulKlimaDeckeProduct.ConfigMaxDurchfluss;
             }
         }
-        public double MaxMassenstrom {
+        public double MaxMassenstrom
+        {
             get { return MaxDurchfluss * ModulKlimaDeckeProduct.ConfigRho / 1000; }
         }
 
-        public override int GetDefaultQuickDimensioningCircuits() {
-			return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
-		}
+        public override int GetDefaultQuickDimensioningCircuits()
+        {
+            return (int)Math.Ceiling(quickDimensioningPlannedArea / 18);
+        }
 
-		public override float GetDefaultQuickDimensioningPlannedArea() {
-			if (this.AssociatedRoom != null) {
-				return this.AssociatedRoom.Area * Project.Instance.QuickDimensioning.CeilingAllocation / 100;
-			}
-			return 0;
-		}
+        public override float GetDefaultQuickDimensioningPlannedArea()
+        {
+            if (this.AssociatedRoom != null)
+            {
+                return this.AssociatedRoom.Area * Project.Instance.QuickDimensioning.CeilingAllocation / 100;
+            }
+            return 0;
+        }
 
-		public override float QuickDimensioningMaximumArea {
-			get {
-				if (this.AssociatedRoom != null) {
-					return this.AssociatedRoom.Area;
-				}
-				return 0;
-			}
-		}
+        public override float QuickDimensioningMaximumArea
+        {
+            get
+            {
+                if (this.AssociatedRoom != null)
+                {
+                    return this.AssociatedRoom.Area;
+                }
+                return 0;
+            }
+        }
 
-		public override string QuickDimensioningName {
-			get { return QuickDimensioningNameStatic; }
-		}
+        public override string QuickDimensioningName
+        {
+            get { return QuickDimensioningNameStatic; }
+        }
 
-		public static string QuickDimensioningNameStatic {
-			get { return "Modul\nKlima\nDecke\n(m²)"; }
-		}
+        public static string QuickDimensioningNameStatic
+        {
+            get { return "Modul\nKlima\nDecke\n(m²)"; }
+        }
 
-		public override ProductType Type {
-			get { return this.modulType; }
-		}
+        public override ProductType Type
+        {
+            get { return this.modulType; }
+        }
 
-		public ProductType ModulType {
-			get { return this.modulType; }
-			set { this.modulType = value; }
-		}
+        public ProductType ModulType
+        {
+            get { return this.modulType; }
+            set { this.modulType = value; }
+        }
 
         public DeckenTyp CeilingType
         {
             get { return ceilingType; }
             set { ceilingType = value; }
         }
-	
 
-		public override void CalculateHeatAndCoolFlow() {
-			base.CalculateHeatAndCoolFlow();
-			double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
-			double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
-			if (spreizungHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMax) {
-				spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
-			}
-			if (spreizungHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMin) {
-				spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
-			}
-			if (spreizungCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax) {
-				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax;
-			}
-			if (spreizungCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin) {
-				spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin;
-			}
-			this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
-			this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
-			if (this.plannedRuecklaufTempHeat - this.associatedRoom.RoomHeatTemperature < 3) {
-				this.plannedRuecklaufTempHeat = this.associatedRoom.RoomHeatTemperature + 3;
-			}
-			if (this.associatedRoom.RoomCoolTemperature - this.plannedRuecklaufTempCool < 3) {
-				this.plannedRuecklaufTempCool = this.associatedRoom.RoomCoolTemperature - 3;
-			}
-		}
 
-		public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung) {
-			this.requestedHeatLoad = requestedHeatLoad;
-			this.requestedCoolLoad = requestedCoolLoad;
-			this.incompleteCalculation = false;
+        public override void CalculateHeatAndCoolFlow()
+        {
+            base.CalculateHeatAndCoolFlow();
+            double spreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+            double spreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+            if (spreizungHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMax)
+            {
+                spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMax;
+            }
+            if (spreizungHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMin)
+            {
+                spreizungHeat = ModulKlimaDeckeProduct.ConfigSpreizungHeizMin;
+            }
+            if (spreizungCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax)
+            {
+                spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax;
+            }
+            if (spreizungCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin)
+            {
+                spreizungCool = ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin;
+            }
+            this.plannedRuecklaufTempHeat = this.plannedVorlaufTempHeat - spreizungHeat;
+            this.plannedRuecklaufTempCool = this.plannedVorlaufTempCool + spreizungCool;
+            if (this.plannedRuecklaufTempHeat - this.associatedRoom.RoomHeatTemperature < 3)
+            {
+                this.plannedRuecklaufTempHeat = this.associatedRoom.RoomHeatTemperature + 3;
+            }
+            if (this.associatedRoom.RoomCoolTemperature - this.plannedRuecklaufTempCool < 3)
+            {
+                this.plannedRuecklaufTempCool = this.associatedRoom.RoomCoolTemperature - 3;
+            }
+        }
 
-			if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null) {
-				this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
-				if (PlannedCeilingConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fußbodenkonstruktion, "
-				}
-				if (PlannedInsulationConstruction == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, "
-				}
-				if (PlannedConnection == null) {
-					this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, "
-				}
-				this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
-				this.incompleteCalculation = true;
-				return false;
-			}
+        public override bool ConfigureProduct(double requestedHeatLoad, double requestedCoolLoad, bool calculateHeat, bool calculateCool, bool variableSpreizung)
+        {
+            this.requestedHeatLoad = requestedHeatLoad;
+            this.requestedCoolLoad = requestedCoolLoad;
+            this.incompleteCalculation = false;
 
-			if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT) {
+            if (this.PlannedCeilingConstruction == null || this.PlannedInsulationConstruction == null || this.PlannedConnection == null)
+            {
+                this.lastErrorMsg = EuroplanRes.ErrorMessage_FehlendeEingaben + " "; //"Fehlende Eingaben: "
+                if (PlannedCeilingConstruction == null)
+                {
+                    this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDecke + ", "; //"Fußbodenkonstruktion, "
+                }
+                if (PlannedInsulationConstruction == null)
+                {
+                    this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenDaemmung + ", "; //"Wärmedämmkonstruktion, "
+                }
+                if (PlannedConnection == null)
+                {
+                    this.lastErrorMsg += EuroplanRes.ErrorMessage_FehlendeEingabenHkAnschluss + ", "; //"Heizkreisanschluß, "
+                }
+                this.lastErrorMsg = this.lastErrorMsg.Substring(0, this.lastErrorMsg.Length - 2);
+                this.incompleteCalculation = true;
+                return false;
+            }
 
-				int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
-				foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values) {
-					if (cc.OtherProduct == this) {
-						c++;
-					}
-				}
-				if (c < this.circuits.Count) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen"
-					this.incompleteCalculation = true;
-					return false;
-				}
-				bool userDefinedOk = true;
-				foreach (Circuit.CircuitConnection cc in this.inverseConnectedCircuits.Values) {
-					if (cc.OtherCircuit == null) {
-						userDefinedOk = false;
-					}
-				}
-				if (!userDefinedOk) {
-					this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen"
-					this.incompleteCalculation = true;
-					return false;
-				}
-			}
+            if (this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.OTHER_PRODUCT)
+            {
 
-			double areaRemovedDueConnection = 0;
-			double heatLoadRemovedDueConnection = 0;
-			double coolLoadRemovedDueConnection = 0;
-			List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
-			foreach (Floor f in Project.Instance.Floors) {
-				foreach (Room r in f.Rooms) {
-					foreach (PlannedProduct pp in r.PlannedProducts) {
-						foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes) {
-							if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this) {
-								connectionPipes.Add(cp);
-								areaRemovedDueConnection += cp.AreaTotal;
-								heatLoadRemovedDueConnection += cp.HeatLoadTotal;
-								coolLoadRemovedDueConnection += cp.CoolLoadTotal;
-							}
-						}
-					}
-				}
-			}
+                int c = this.PlannedConnection.OtherProduct.Product.PlannedCircuits.Count - this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Count;
+                foreach (Circuit.CircuitConnection cc in this.PlannedConnection.OtherProduct.Product.ConnectedCircuits.Values)
+                {
+                    if (cc.OtherProduct == this)
+                    {
+                        c++;
+                    }
+                }
+                if (c < this.circuits.Count)
+                {
+                    this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen"
+                    this.incompleteCalculation = true;
+                    return false;
+                }
+                bool userDefinedOk = true;
+                foreach (Circuit.CircuitConnection cc in this.inverseConnectedCircuits.Values)
+                {
+                    if (cc.OtherCircuit == null)
+                    {
+                        userDefinedOk = false;
+                    }
+                }
+                if (!userDefinedOk)
+                {
+                    this.lastErrorMsg = EuroplanRes.ErrorMessage_HkAnschluss; //"Es sind nicht alle Heizkreise dieses Systems angeschloßen"
+                    this.incompleteCalculation = true;
+                    return false;
+                }
+            }
 
-			double[] vorlaufTotal;
-			double[] vorlaufNotIsolated;
-			double[] ruecklaufTotal;
-			double[] ruecklaufNotIsolated;
-			double[] vorlaufWithoutOtherProductTotal;
-			double[] vorlaufWithoutOtherProductNotIsolated;
-			double[] ruecklaufWithoutOtherProductTotal;
-			double[] ruecklaufWithoutOtherProductNotIsolated;
-			double longestVorlaufTotal;
-			double longestRuecklaufTotal;
-			this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal, Math.Max(PlannedCircuitCount, 12));
+            double areaRemovedDueConnection = 0;
+            double heatLoadRemovedDueConnection = 0;
+            double coolLoadRemovedDueConnection = 0;
+            List<ConnectionPipe> connectionPipes = new List<ConnectionPipe>();
+            foreach (Floor f in Project.Instance.Floors)
+            {
+                foreach (Room r in f.Rooms)
+                {
+                    foreach (PlannedProduct pp in r.PlannedProducts)
+                    {
+                        foreach (ConnectionPipe cp in pp.Product.PlannedConnectionPipes)
+                        {
+                            if (cp != null && cp.ConnectionThrough != null && cp.ConnectionThrough.Product == this)
+                            {
+                                connectionPipes.Add(cp);
+                                areaRemovedDueConnection += cp.AreaTotal;
+                                heatLoadRemovedDueConnection += cp.HeatLoadTotal;
+                                coolLoadRemovedDueConnection += cp.CoolLoadTotal;
+                            }
+                        }
+                    }
+                }
+            }
 
-			this.CalculateHeatAndCoolFlow();
-			bool graphical = (this.GraphicalMode.HasValue && this.GraphicalMode.Value);
-			double measure = 1;
-			if (this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue) {
-				measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
-			}
+            double[] vorlaufTotal;
+            double[] vorlaufNotIsolated;
+            double[] ruecklaufTotal;
+            double[] ruecklaufNotIsolated;
+            double[] vorlaufWithoutOtherProductTotal;
+            double[] vorlaufWithoutOtherProductNotIsolated;
+            double[] ruecklaufWithoutOtherProductTotal;
+            double[] ruecklaufWithoutOtherProductNotIsolated;
+            double longestVorlaufTotal;
+            double longestRuecklaufTotal;
+            this.CalculateVorlaufRuecklauf(out vorlaufTotal, out vorlaufNotIsolated, out ruecklaufTotal, out ruecklaufNotIsolated, out vorlaufWithoutOtherProductTotal, out vorlaufWithoutOtherProductNotIsolated, out ruecklaufWithoutOtherProductTotal, out ruecklaufWithoutOtherProductNotIsolated, out longestVorlaufTotal, out longestRuecklaufTotal, Math.Max(PlannedCircuitCount, 12));
 
-			int i = 0;
-			foreach (ModulDeckeCircuit mc in this.circuits) {
-				mc.NrOfCircuit = i;
-				mc.ModulKlimaDeckeProduct = this;
-				mc.PipeLengthVorlaufTotal = vorlaufTotal[i];
-				mc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
-				mc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
-				mc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
-				mc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
-				mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
-				mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
-				mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
-				if (graphical) {
-					foreach (ModulDeckeSubArea sa in mc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							double verbindeleitung = 0;
-							if (row.Links != null) {
-								foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-									verbindeleitung += link.GetLength(measure);
-								}
-							}
-							row.LengthVerbindeleitungen = verbindeleitung;
-						}
-					}
-				}
-				mc.Calculate();
-				i++;
-			}
+            this.CalculateHeatAndCoolFlow();
+            bool graphical = (this.GraphicalMode.HasValue && this.GraphicalMode.Value);
+            double measure = 1;
+            if (this.AssociatedRoom != null && this.AssociatedRoom.AssociatedPlan != null && this.AssociatedRoom.AssociatedPlan.Measure.HasValue)
+            {
+                measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+            }
 
-			if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR) {
-				double defSpreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
-				double defSpreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
-				// Heizleistung veringern
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad && this.PlannedSpreizungHeat < 1.2 * defSpreizungHeat) {
-					this.plannedRuecklaufTempHeat -= 0.1;
-					foreach (ModulDeckeCircuit c in this.circuits) {
-						c.Calculate();
-					}
-				}
-				this.plannedRuecklaufTempHeat += 0.1;
-				// Heizleistung erhöhen
-				while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < MaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat) {
-					this.plannedRuecklaufTempHeat += 0.1;
-					foreach (ModulDeckeCircuit c in this.circuits) {
-						c.Calculate();
-					}
-				}
-				// Kühlleistung verringern
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad && this.PlannedSpreizungCool < 1.2 * defSpreizungCool) {
-					this.plannedRuecklaufTempCool += 0.1;
-					foreach (ModulDeckeCircuit c in this.circuits) {
-						c.Calculate();
-					}
-				}
-				this.plannedRuecklaufTempCool -= 0.1;
-				// Kühlleistung erhöhen
-				while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < MaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool) {
-					this.plannedRuecklaufTempCool -= 0.1;
-					foreach (ModulDeckeCircuit c in this.circuits) {
-						c.Calculate();
-					}
-				}
+            int i = 0;
+            foreach (ModulDeckeCircuit mc in this.circuits)
+            {
+                mc.NrOfCircuit = i;
+                mc.ModulKlimaDeckeProduct = this;
+                mc.PipeLengthVorlaufTotal = vorlaufTotal[i];
+                mc.PipeLengthVorlaufNotIsolated = vorlaufNotIsolated[i];
+                mc.PipeLengthRuecklaufTotal = ruecklaufTotal[i];
+                mc.PipeLengthRuecklaufNotIsolated = ruecklaufNotIsolated[i];
+                mc.PipeLengthVorlaufWithoutOtherProductTotal = vorlaufWithoutOtherProductTotal[i];
+                mc.PipeLengthVorlaufWithoutOtherProductNotIsolated = vorlaufWithoutOtherProductNotIsolated[i];
+                mc.PipeLengthRuecklaufWithoutOtherProductTotal = ruecklaufWithoutOtherProductTotal[i];
+                mc.PipeLengthRuecklaufWithoutOtherProductNotIsolated = ruecklaufWithoutOtherProductNotIsolated[i];
+                if (graphical)
+                {
+                    foreach (ModulDeckeSubArea sa in mc.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            double verbindeleitung = 0;
+                            if (row.Links != null)
+                            {
+                                foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                                {
+                                    verbindeleitung += link.GetLength(measure);
+                                }
+                            }
+                            row.LengthVerbindeleitungen = verbindeleitung;
+                        }
+                    }
+                }
+                mc.Calculate();
+                i++;
+            }
 
-				// Calculate variable spreizung for connected products
-				foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits) {
-					if (kvp.Value != null) {
-						kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
-						PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
-						if (pp != null) {
-							pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, true);
-						}
-					}
-				}
-			}
+            if (variableSpreizung && this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.DISTRIBUTOR)
+            {
+                double defSpreizungHeat = this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat;
+                double defSpreizungCool = this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool;
+                // Heizleistung veringern
+                while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat < ModulKlimaDeckeProduct.ConfigSpreizungHeizMax && this.PlannedHeatLoad > requestedHeatLoad && this.PlannedSpreizungHeat < 1.2 * defSpreizungHeat)
+                {
+                    this.plannedRuecklaufTempHeat -= 0.1;
+                    foreach (ModulDeckeCircuit c in this.circuits)
+                    {
+                        c.Calculate();
+                    }
+                }
+                this.plannedRuecklaufTempHeat += 0.1;
+                // Heizleistung erhöhen
+                while (this.plannedVorlaufTempHeat - this.plannedRuecklaufTempHeat > ModulKlimaDeckeProduct.ConfigSpreizungHeizMin && this.PlannedHeatLoad < requestedHeatLoad && this.PlannedDeltaRhoHeat < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhHeat < MaxMassenstrom && this.PlannedSpreizungHeat > 0.8 * defSpreizungHeat)
+                {
+                    this.plannedRuecklaufTempHeat += 0.1;
+                    foreach (ModulDeckeCircuit c in this.circuits)
+                    {
+                        c.Calculate();
+                    }
+                }
+                // Kühlleistung verringern
+                while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool < ModulKlimaDeckeProduct.ConfigSpreizungKuehlMax && this.PlannedCoolLoad > requestedCoolLoad && this.PlannedSpreizungCool < 1.2 * defSpreizungCool)
+                {
+                    this.plannedRuecklaufTempCool += 0.1;
+                    foreach (ModulDeckeCircuit c in this.circuits)
+                    {
+                        c.Calculate();
+                    }
+                }
+                this.plannedRuecklaufTempCool -= 0.1;
+                // Kühlleistung erhöhen
+                while (this.plannedRuecklaufTempCool - this.plannedVorlaufTempCool > ModulKlimaDeckeProduct.ConfigSpreizungKuehlMin && this.PlannedCoolLoad < requestedCoolLoad && this.PlannedDeltaRhoCool < ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0 && this.PlannedMaxMhCool < MaxMassenstrom && this.PlannedSpreizungCool > 0.8 * defSpreizungCool)
+                {
+                    this.plannedRuecklaufTempCool -= 0.1;
+                    foreach (ModulDeckeCircuit c in this.circuits)
+                    {
+                        c.Calculate();
+                    }
+                }
 
-			this.lastErrorMsg = "";
-			string newMsg;
-			if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea, 1)) {
-				newMsg = EuroplanRes.ErrorMessage_Modulflaeche;
-				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
-				this.lastErrorMsg += newMsg + "\n";
-			}
+                // Calculate variable spreizung for connected products
+                foreach (KeyValuePair<int, Circuit.CircuitConnection> kvp in this.connectedCircuits)
+                {
+                    if (kvp.Value != null)
+                    {
+                        kvp.Value.OtherProduct.CalculateHeatAndCoolFlow();
+                        PlannedProduct pp = Project.Instance.GetPlannedProduct(kvp.Value.OtherProduct);
+                        if (pp != null)
+                        {
+                            pp.Product.ConfigureProduct(pp.RequestedHeatLoad, pp.RequestedCoolLoad, pp.CalculateHeat, pp.CalculateCool, true);
+                        }
+                    }
+                }
+            }
+
+            this.lastErrorMsg = "";
+            string newMsg;
+            if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea, 1))
+            {
+                newMsg = EuroplanRes.ErrorMessage_Modulflaeche;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
+                newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea, 1).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            }
             if (PlannedCeilingArea >= 50 && CeilingType == DeckenTyp.OPEN_BORDER_JOINT_5)
             {
                 newMsg = EuroplanRes.ErrorMessage_DeckenTypNotPossible;
                 this.lastErrorMsg += newMsg + "\n";
             }
-			foreach (ModulDeckeCircuit c in circuits) {
-				int saNr = 1;
-				int longestRow = 0;
-				int moduleCount = 0;
-				foreach (ModulDeckeSubArea sa in c.SubAreas) {
-					if (sa.Rows.Count > 0) {
-						if (sa.Rows.Count > ModulKlimaDeckeProduct.ConfigMaxModulesInParallel) {
-							newMsg = EuroplanRes.ErrorMessage_ModulReihen;
-							newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
-							newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
-							newMsg = newMsg.Replace("%VALUE%", sa.Rows.Count.ToString());
-							newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
-							this.lastErrorMsg += newMsg + "\n";
-						}
-						int maxModules = 0;
-						int maxRowNr = 0;
-						int minModules = Int32.MaxValue;
-						int minRowNr = 0;
-						int curRowNr = 1;
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							moduleCount += row.List.Count;
-							if (row.List.Count > maxModules) {
-								maxModules = row.List.Count;
-								maxRowNr = curRowNr;
-							}
-							if (row.List.Count < minModules) {
-								minModules = row.List.Count;
-								minRowNr = curRowNr;
-							}
-							curRowNr++;
-						}
-						if (maxModules > minModules + 1) {
-							newMsg = EuroplanRes.ErrorMessage_ModulReiheUnterschied;
-							newMsg = newMsg.Replace("%REIHELANG%", maxRowNr.ToString());
-							newMsg = newMsg.Replace("%REIHEKURZ%", maxRowNr.ToString());
-							newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
-							newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
-							newMsg = newMsg.Replace("%VALUELANG%", sa.Rows.Count.ToString());
-							newMsg = newMsg.Replace("%VALUEKURZ%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
-							this.lastErrorMsg += newMsg + "\n";
-						}
-						longestRow += maxModules;
-					}
-					saNr++;
-				}
-				if (longestRow > ModulKlimaDeckeProduct.ConfigMaxModulesInRow) {
-					newMsg = EuroplanRes.ErrorMessage_ModulReiheLaenge;
-					newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
-					newMsg = newMsg.Replace("%VALUE%", longestRow.ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInRow.ToString());
-					this.lastErrorMsg += newMsg + "\n";
-				}
-				if (moduleCount > ModulKlimaDeckeProduct.ConfigModulesInCircuit) {
-					newMsg = EuroplanRes.ErrorMessage_ModulAnzahl;
-					newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
-					newMsg = newMsg.Replace("%VALUE%", moduleCount.ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigModulesInCircuit.ToString());
-				}
-			}
-			if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhHeat, 1) > MaxMassenstrom) {
-					newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
-					this.lastErrorMsg += newMsg + "\n";
-				}
-			} else if (this.requestedCoolLoad > 0) {
-				if (Math.Round(this.PlannedMaxMhCool, 1) > MaxMassenstrom) {
-					newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
-					this.lastErrorMsg += newMsg + "\n";
-				}
-			}
-			if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool && this.requestedHeatLoad > 0) {
-				if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
-					this.lastErrorMsg += newMsg + "\n";
-				}
-			} else if (this.requestedCoolLoad > 0) {
-				if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2)) {
-					newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
-					newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
-					newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
-					this.lastErrorMsg += newMsg + "\n";
-				}
-			}
-			if (Math.Round(this.PlannedCeilingTemperatureHeat, 1) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxCeilingTempHeat, 1) && this.requestedHeatLoad > 0) {
-				newMsg = EuroplanRes.ErrorMessage_DeckentemperaturHeat;
-				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedCeilingTemperatureHeat, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxCeilingTempHeat, 1).ToString());
-				this.lastErrorMsg += newMsg + "\n";
-			}
-			if (this.PlannedRemoveArea > this.AvailableFloorArea) {
-				newMsg = EuroplanRes.ErrorMessage_Anbindeleitung;
-				newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRemoveArea, 1).ToString());
-				newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.AvailableFloorArea, 1).ToString());
-				this.lastErrorMsg += newMsg + "\n";
-			}
-			if (this.lastErrorMsg.Length == 0) {
-				this.lastErrorMsg = null;
-			}
+            foreach (ModulDeckeCircuit c in circuits)
+            {
+                int saNr = 1;
+                int longestRow = 0;
+                int moduleCount = 0;
+                foreach (ModulDeckeSubArea sa in c.SubAreas)
+                {
+                    if (sa.Rows.Count > 0)
+                    {
+                        if (sa.Rows.Count > ModulKlimaDeckeProduct.ConfigMaxModulesInParallel)
+                        {
+                            newMsg = EuroplanRes.ErrorMessage_ModulReihen;
+                            newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
+                            newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                            newMsg = newMsg.Replace("%VALUE%", sa.Rows.Count.ToString());
+                            newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
+                            this.lastErrorMsg += newMsg + "\n";
+                        }
+                        int maxModules = 0;
+                        int maxRowNr = 0;
+                        int minModules = Int32.MaxValue;
+                        int minRowNr = 0;
+                        int curRowNr = 1;
+                        foreach (KlimaFlaechenList row in sa.Rows)
+                        {
+                            moduleCount += row.List.Count;
+                            if (row.List.Count > maxModules)
+                            {
+                                maxModules = row.List.Count;
+                                maxRowNr = curRowNr;
+                            }
+                            if (row.List.Count < minModules)
+                            {
+                                minModules = row.List.Count;
+                                minRowNr = curRowNr;
+                            }
+                            curRowNr++;
+                        }
+                        if (maxModules > minModules + 1)
+                        {
+                            newMsg = EuroplanRes.ErrorMessage_ModulReiheUnterschied;
+                            newMsg = newMsg.Replace("%REIHELANG%", maxRowNr.ToString());
+                            newMsg = newMsg.Replace("%REIHEKURZ%", maxRowNr.ToString());
+                            newMsg = newMsg.Replace("%TEILFL%", saNr.ToString());
+                            newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                            newMsg = newMsg.Replace("%VALUELANG%", sa.Rows.Count.ToString());
+                            newMsg = newMsg.Replace("%VALUEKURZ%", ModulKlimaDeckeProduct.ConfigMaxModulesInParallel.ToString());
+                            this.lastErrorMsg += newMsg + "\n";
+                        }
+                        longestRow += maxModules;
+                    }
+                    saNr++;
+                }
+                if (longestRow > ModulKlimaDeckeProduct.ConfigMaxModulesInRow)
+                {
+                    newMsg = EuroplanRes.ErrorMessage_ModulReiheLaenge;
+                    newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                    newMsg = newMsg.Replace("%VALUE%", longestRow.ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigMaxModulesInRow.ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+                if (moduleCount > ModulKlimaDeckeProduct.ConfigModulesInCircuit)
+                {
+                    newMsg = EuroplanRes.ErrorMessage_ModulAnzahl;
+                    newMsg = newMsg.Replace("%HK%", (c.NrOfCircuit + 1).ToString());
+                    newMsg = newMsg.Replace("%VALUE%", moduleCount.ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", ModulKlimaDeckeProduct.ConfigModulesInCircuit.ToString());
+                }
+            }
+            if (this.PlannedMaxMhHeat >= this.PlannedMaxMhCool && this.requestedHeatLoad > 0)
+            {
+                if (Math.Round(this.PlannedMaxMhHeat, 1) > MaxMassenstrom)
+                {
+                    newMsg = EuroplanRes.ErrorMessage_DurchflussHeiz;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhHeat, 1).ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+            }
+            else if (this.requestedCoolLoad > 0)
+            {
+                if (Math.Round(this.PlannedMaxMhCool, 1) > MaxMassenstrom)
+                {
+                    newMsg = EuroplanRes.ErrorMessage_DurchflussKuehl;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedMaxMhCool, 1).ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", MaxMassenstrom.ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+            }
+            if (this.PlannedDeltaRhoHeat >= this.PlannedDeltaRhoCool && this.requestedHeatLoad > 0)
+            {
+                if (Math.Round(this.PlannedDeltaRhoHeat, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2))
+                {
+                    newMsg = EuroplanRes.ErrorMessage_DruckverlustHeiz;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoHeat, 2).ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+            }
+            else if (this.requestedCoolLoad > 0)
+            {
+                if (Math.Round(this.PlannedDeltaRhoCool, 2) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2))
+                {
+                    newMsg = EuroplanRes.ErrorMessage_DruckverlustKuehl;
+                    newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedDeltaRhoCool, 2).ToString());
+                    newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxPressureLost / 100.0, 2).ToString());
+                    this.lastErrorMsg += newMsg + "\n";
+                }
+            }
+            if (Math.Round(this.PlannedCeilingTemperatureHeat, 1) > Math.Round(ModulKlimaDeckeProduct.ConfigMaxCeilingTempHeat, 1) && this.requestedHeatLoad > 0)
+            {
+                newMsg = EuroplanRes.ErrorMessage_DeckentemperaturHeat;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedCeilingTemperatureHeat, 1).ToString());
+                newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(ModulKlimaDeckeProduct.ConfigMaxCeilingTempHeat, 1).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            }
+            if (this.PlannedRemoveArea > this.AvailableFloorArea)
+            {
+                newMsg = EuroplanRes.ErrorMessage_Anbindeleitung;
+                newMsg = newMsg.Replace("%VALUE%", Math.Round(this.PlannedRemoveArea, 1).ToString());
+                newMsg = newMsg.Replace("%MAXIMUM%", Math.Round(this.AvailableFloorArea, 1).ToString());
+                this.lastErrorMsg += newMsg + "\n";
+            }
+            if (this.lastErrorMsg.Length == 0)
+            {
+                this.lastErrorMsg = null;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		[XmlIgnore]
-		public double CoveredArea {
-			get {
-				double area = 0;
-				foreach (ModulDeckeCircuit mc in this.circuits) {
-					area += mc.CoveredArea;
-				}
-				return area;
-			}
+        [XmlIgnore]
+        public double CoveredArea
+        {
+            get
+            {
+                double area = 0;
+                foreach (ModulDeckeCircuit mc in this.circuits)
+                {
+                    area += mc.CoveredArea;
+                }
+                return area;
+            }
 
-		}
+        }
 
-		/// <summary>
-		/// The percentage of the total room area that is occupied by the planned area.
-		/// </summary>
-		[XmlIgnore]
-		public float PlannedCeilingAreaPercentage {
-			get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedCeilingArea * 100 / this.AssociatedRoom.Area); }
-			set { this.PlannedCeilingArea = (float)(this.AssociatedRoom.Area * value / 100); }
-		}
+        /// <summary>
+        /// The percentage of the total room area that is occupied by the planned area.
+        /// </summary>
+        [XmlIgnore]
+        public float PlannedCeilingAreaPercentage
+        {
+            get { return (this.AssociatedRoom.Area <= 0 ? 100 : this.PlannedCeilingArea * 100 / this.AssociatedRoom.Area); }
+            set { this.PlannedCeilingArea = this.AssociatedRoom.Area * value / 100; }
+        }
 
-		/// <summary>
-		/// The area which is planned unheated.
-		/// This area is subtracted from the planned area for calculation.
-		/// </summary>
-		public float PlannedAreaUnheated {
-			get { return this.plannedAreaUnheated; }
-			set { this.plannedAreaUnheated = value; }
-		}
+        /// <summary>
+        /// The area which is planned unheated.
+        /// This area is subtracted from the planned area for calculation.
+        /// </summary>
+        public float PlannedAreaUnheated
+        {
+            get { return this.plannedAreaUnheated; }
+            set { this.plannedAreaUnheated = value; }
+        }
 
-		public override float PlannedFloorArea {
-			get {
-				if (this.modulType == ProductType.FBH) {
-					return this.plannedFloorArea;
-				}
-				return 0;
-			}
-			set {
-				if (this.modulType == ProductType.FBH) {
-					this.plannedFloorArea = value;
-				}
-			}
-		}
+        public override float PlannedFloorArea
+        {
+            get
+            {
+                if (this.modulType == ProductType.FBH)
+                {
+                    return this.plannedFloorArea;
+                }
+                return 0;
+            }
+            set
+            {
+                if (this.modulType == ProductType.FBH)
+                {
+                    this.plannedFloorArea = value;
+                }
+            }
+        }
 
-		public override float PlannedWallArea {
-			get {
-				if (this.modulType == ProductType.WH) {
-					return this.PlannedNetArea;
-				}
-				return 0;
-			}
-			set { }
-		}
+        public override float PlannedWallArea
+        {
+            get
+            {
+                if (this.modulType == ProductType.WH)
+                {
+                    return this.PlannedNetArea;
+                }
+                return 0;
+            }
+            set { }
+        }
 
-		public override float PlannedCeilingArea {
-			get {
-				if (this.modulType == ProductType.DH) {
-					return this.plannedCeilingArea;
-				}
-				return 0;
-			}
-			set {
-				if (this.modulType == ProductType.DH) {
-					this.plannedCeilingArea = value;
-				}
-			}
-		}
+        public override float PlannedCeilingArea
+        {
+            get
+            {
+                if (this.modulType == ProductType.DH)
+                {
+                    return this.plannedCeilingArea;
+                }
+                return 0;
+            }
+            set
+            {
+                if (this.modulType == ProductType.DH)
+                {
+                    this.plannedCeilingArea = value;
+                }
+            }
+        }
 
-		public override float PlannedRoofArea {
-			get { return 0; }
-			set { }
-		}
+        public override float PlannedRoofArea
+        {
+            get { return 0; }
+            set { }
+        }
 
-		// Not to be used in code! This property is only intended to be used for (de)serializing
-		public float PlannedFloorOrCeilingArea {
-			get {
-				if (this.modulType == ProductType.DH) {
-					return this.plannedCeilingArea;
-				}
-				if (this.modulType == ProductType.FBH) {
-					return this.plannedFloorArea;
-				}
-				return 0;
-			}
-			set {
-				this.plannedFloorOrCeilingArea = value;
-			}
-		}
+        // Not to be used in code! This property is only intended to be used for (de)serializing
+        public float PlannedFloorOrCeilingArea
+        {
+            get
+            {
+                if (this.modulType == ProductType.DH)
+                {
+                    return this.plannedCeilingArea;
+                }
+                if (this.modulType == ProductType.FBH)
+                {
+                    return this.plannedFloorArea;
+                }
+                return 0;
+            }
+            set
+            {
+                this.plannedFloorOrCeilingArea = value;
+            }
+        }
 
 
-		/// <summary>
-		/// The total cool load that is emmited in the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public override double PlannedCoolLoad {
-			get {
-				if (this.incompleteCalculation || this.requestedCoolLoad == 0) {
-					return 0;
-				}
-				double value = 0;
-				foreach (ModulDeckeCircuit mbc in this.circuits) {
-					if (!mbc.QFbhTotalCool.Equals(double.NaN)) {
-						value += mbc.QFbhTotalCool;
-					}
-				}
-				return value;
-			}
-		}
+        /// <summary>
+        /// The total cool load that is emmited in the room, based on the current calculation.
+        /// </summary>
+        [XmlIgnore]
+        public override double PlannedCoolLoad
+        {
+            get
+            {
+                if (this.incompleteCalculation || this.requestedCoolLoad == 0)
+                {
+                    return 0;
+                }
+                double value = 0;
+                foreach (ModulDeckeCircuit mbc in this.circuits)
+                {
+                    if (!mbc.QFbhTotalCool.Equals(double.NaN))
+                    {
+                        value += mbc.QFbhTotalCool;
+                    }
+                }
+                return value;
+            }
+        }
 
-		/// <summary>
-		/// The total heat load that is emmited in the room, based on the current calculation.
-		/// </summary>
-		[XmlIgnore]
-		public override double PlannedHeatLoad {
-			get {
-				if (this.incompleteCalculation || this.requestedHeatLoad == 0) {
-					return 0;
-				}
-				double value = 0;
-				foreach (ModulDeckeCircuit c in this.circuits) {
-					if (!c.QFbhTotalHeat.Equals(double.NaN)) {
-						value += c.QFbhTotalHeat;
-					}
-				}
-				return value;
-			}
-		}
+        /// <summary>
+        /// The total heat load that is emmited in the room, based on the current calculation.
+        /// </summary>
+        [XmlIgnore]
+        public override double PlannedHeatLoad
+        {
+            get
+            {
+                if (this.incompleteCalculation || this.requestedHeatLoad == 0)
+                {
+                    return 0;
+                }
+                double value = 0;
+                foreach (ModulDeckeCircuit c in this.circuits)
+                {
+                    if (!c.QFbhTotalHeat.Equals(double.NaN))
+                    {
+                        value += c.QFbhTotalHeat;
+                    }
+                }
+                return value;
+            }
+        }
 
-		public override float PlannedNetArea {
-			get {
-				double area = 0;
-				foreach (ModulDeckeCircuit hc in this.circuits) {
-					area += hc.CoveredArea;
-				}
-				return (float)area;
-			}
-		}
+        public override float PlannedNetArea
+        {
+            get
+            {
+                double area = 0;
+                foreach (ModulDeckeCircuit hc in this.circuits)
+                {
+                    area += hc.CoveredArea;
+                }
+                return (float)area;
+            }
+        }
 
-		/// <summary>
-		/// The id of the planned ceiling construction for serialization
-		/// </summary>
-		public string PlannedCeilingConstructionId {
-			get { return this.PlannedCeilingConstruction == null ? this.plannedCeilingConstructionId : this.PlannedCeilingConstruction.Id; }
-			set {
-				this.plannedCeilingConstructionId = value;
-				this.plannedCeilingConstruction = null;
-			}
-		}
+        /// <summary>
+        /// The id of the planned ceiling construction for serialization
+        /// </summary>
+        public string PlannedCeilingConstructionId
+        {
+            get { return this.PlannedCeilingConstruction == null ? this.plannedCeilingConstructionId : this.PlannedCeilingConstruction.Id; }
+            set
+            {
+                this.plannedCeilingConstructionId = value;
+                this.plannedCeilingConstruction = null;
+            }
+        }
 
-		/// <summary>
-		/// The id of the planned insulation construction for serialization
-		/// </summary>
-		public string PlannedInsulationConstructionId {
-			get { return this.PlannedInsulationConstruction == null ? this.plannedInsulationConstructionId : this.PlannedInsulationConstruction.Id; }
-			set {
-				this.plannedInsulationConstructionId = value;
-				this.plannedInsulationConstruction = null;
-			}
-		}
+        /// <summary>
+        /// The id of the planned insulation construction for serialization
+        /// </summary>
+        public string PlannedInsulationConstructionId
+        {
+            get { return this.PlannedInsulationConstruction == null ? this.plannedInsulationConstructionId : this.PlannedInsulationConstruction.Id; }
+            set
+            {
+                this.plannedInsulationConstructionId = value;
+                this.plannedInsulationConstruction = null;
+            }
+        }
 
-		/// <summary>
-		/// The planned ceiling contruction
-		/// </summary>
-		[XmlIgnore]
-		public Construction PlannedCeilingConstruction {
-			get {
-				if (this.plannedCeilingConstructionId != null) {
-					this.plannedCeilingConstruction = Project.Instance.Config.GetConstruction(this.plannedCeilingConstructionId);
-					this.plannedCeilingConstructionId = null;
-				}
-				return this.plannedCeilingConstruction;
-			}
-			set {
-				this.plannedCeilingConstruction = value;
-				this.plannedCeilingConstructionId = null;
-			}
-		}
+        /// <summary>
+        /// The planned ceiling contruction
+        /// </summary>
+        [XmlIgnore]
+        public Construction PlannedCeilingConstruction
+        {
+            get
+            {
+                if (this.plannedCeilingConstructionId != null)
+                {
+                    this.plannedCeilingConstruction = Project.Instance.Config.GetConstruction(this.plannedCeilingConstructionId);
+                    this.plannedCeilingConstructionId = null;
+                }
+                return this.plannedCeilingConstruction;
+            }
+            set
+            {
+                this.plannedCeilingConstruction = value;
+                this.plannedCeilingConstructionId = null;
+            }
+        }
 
-		/// <summary>
-		/// The planned insulation construction
-		/// </summary>
-		[XmlIgnore]
-		public Construction PlannedInsulationConstruction {
-			get {
-				if (this.plannedInsulationConstructionId != null) {
-					this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(this.plannedInsulationConstructionId);
-					this.plannedInsulationConstructionId = null;
-				}
-				return this.plannedInsulationConstruction;
-			}
-			set {
-				this.plannedInsulationConstruction = value;
-				this.plannedInsulationConstructionId = null;
-			}
-		}
+        /// <summary>
+        /// The planned insulation construction
+        /// </summary>
+        [XmlIgnore]
+        public Construction PlannedInsulationConstruction
+        {
+            get
+            {
+                if (this.plannedInsulationConstructionId != null)
+                {
+                    this.plannedInsulationConstruction = Project.Instance.Config.GetConstruction(this.plannedInsulationConstructionId);
+                    this.plannedInsulationConstructionId = null;
+                }
+                return this.plannedInsulationConstruction;
+            }
+            set
+            {
+                this.plannedInsulationConstruction = value;
+                this.plannedInsulationConstructionId = null;
+            }
+        }
 
-		/// <summary>
-		/// The r-value of the planned ceiling construction
-		/// </summary>
-		[XmlIgnore]
-		public float PlannedCeilingConstructionRValue {
-			get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
-		}
+        /// <summary>
+        /// The r-value of the planned ceiling construction
+        /// </summary>
+        [XmlIgnore]
+        public float PlannedCeilingConstructionRValue
+        {
+            get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
+        }
 
-		/// <summary>
-		/// The r-value of the planned insulation construction
-		/// </summary>
-		[XmlIgnore]
-		public float PlannedInsulationConstructionRValue {
-			get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
-		}
+        /// <summary>
+        /// The r-value of the planned insulation construction
+        /// </summary>
+        [XmlIgnore]
+        public float PlannedInsulationConstructionRValue
+        {
+            get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
+        }
 
-		public override ConnectionPipe.PipeTypeEnum DefaultPipeType {
-			get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
-		}
+        public override ConnectionPipe.PipeTypeEnum DefaultPipeType
+        {
+            get { return ConnectionPipe.PipeTypeEnum.PT_21MM; }
+        }
 
-		/// <summary>
-		/// The r-value of the planned ceiling construction
-		/// </summary>
-		[XmlIgnore]
-		public override float PlannedInsideConstructionRValue {
-			get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
-		}
+        /// <summary>
+        /// The r-value of the planned ceiling construction
+        /// </summary>
+        [XmlIgnore]
+        public override float PlannedInsideConstructionRValue
+        {
+            get { return (this.PlannedCeilingConstruction == null ? 0 : this.PlannedCeilingConstruction.RValue); }
+        }
 
-		[XmlIgnore]
-		public override bool HasInsideConstruction {
-			get { return this.PlannedCeilingConstruction != null; }
-		}
+        [XmlIgnore]
+        public override bool HasInsideConstruction
+        {
+            get { return this.PlannedCeilingConstruction != null; }
+        }
 
-		[XmlIgnore]
-		public override Construction PlannedInsideConstruction {
-			get { return this.PlannedCeilingConstruction; }
-		}
+        [XmlIgnore]
+        public override Construction PlannedInsideConstruction
+        {
+            get { return this.PlannedCeilingConstruction; }
+        }
 
-		/// <summary>
-		/// The r-value of the planned insulation construction
-		/// </summary>
-		[XmlIgnore]
-		public override float PlannedOutsideConstructionRValue {
-			get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
-		}
+        /// <summary>
+        /// The r-value of the planned insulation construction
+        /// </summary>
+        [XmlIgnore]
+        public override float PlannedOutsideConstructionRValue
+        {
+            get { return (this.PlannedInsulationConstruction == null ? 0 : this.PlannedInsulationConstruction.RValue); }
+        }
 
-		[XmlIgnore]
-		public override bool HasOutsideConstruction {
-			get { return this.PlannedInsulationConstruction != null; }
-		}
+        [XmlIgnore]
+        public override bool HasOutsideConstruction
+        {
+            get { return this.PlannedInsulationConstruction != null; }
+        }
 
-		[XmlIgnore]
-		public override Construction PlannedOutsideConstruction {
-			get { return this.PlannedInsulationConstruction; }
-		}
+        [XmlIgnore]
+        public override Construction PlannedOutsideConstruction
+        {
+            get { return this.PlannedInsulationConstruction; }
+        }
 
-		[XmlIgnore]
-		public override double WasserInhalt {
-			get {
-				// Euroval Anbindung
-				// 21mm Anbindung
-				double pipeEurovalLength = 0;
-				double pipe21mmLength = 0;
-				foreach (ConnectionPipe pipe in this.PlannedConnectionPipes) {
-					if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM) {
-						if (pipe.OnlyFirst) {
-							pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
-						} else {
-							pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-						}
-					} else {
-						if (pipe.OnlyFirst) {
-							pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
-						} else {
-							pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
-						}
-					}
-				}
+        [XmlIgnore]
+        public override double WasserInhalt
+        {
+            get
+            {
+                // Euroval Anbindung
+                // 21mm Anbindung
+                double pipeEurovalLength = 0;
+                double pipe21mmLength = 0;
+                foreach (ConnectionPipe pipe in this.PlannedConnectionPipes)
+                {
+                    if (pipe.PipeType == ConnectionPipe.PipeTypeEnum.PT_21MM)
+                    {
+                        if (pipe.OnlyFirst)
+                        {
+                            pipe21mmLength += (pipe.Vorlauf + pipe.Ruecklauf);
+                        }
+                        else
+                        {
+                            pipe21mmLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+                        }
+                    }
+                    else
+                    {
+                        if (pipe.OnlyFirst)
+                        {
+                            pipeEurovalLength += (pipe.Vorlauf + pipe.Ruecklauf);
+                        }
+                        else
+                        {
+                            pipeEurovalLength += ((pipe.Vorlauf + pipe.Ruecklauf) * this.PlannedCircuitCount);
+                        }
+                    }
+                }
 
-				double wasserInhalt = 0;
-				foreach (ModulDeckeCircuit c in this.circuits) {
-					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-						foreach (KlimaFlaechenList row in subArea.Rows) {
-							foreach (KlimaFlaechenModul modul in row.List) {
-								wasserInhalt += modul.WasserInhalt;
-							}
-						}
-					}
-				}
+                double wasserInhalt = 0;
+                foreach (ModulDeckeCircuit c in this.circuits)
+                {
+                    foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in subArea.Rows)
+                        {
+                            foreach (KlimaFlaechenModul modul in row.List)
+                            {
+                                wasserInhalt += modul.WasserInhalt;
+                            }
+                        }
+                    }
+                }
 
-				return wasserInhalt + (pipeEurovalLength * EurovalProduct.rohrInnenA * 1000) + (pipe21mmLength * Product.rundrohr21mmInnenA * 1000);
-			}
-		}
+                return wasserInhalt + (pipeEurovalLength * EurovalProduct.rohrInnenA * 1000) + (pipe21mmLength * Product.rundrohr21mmInnenA * 1000);
+            }
+        }
 
-		public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial) {
-			bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
+        public override void CalculateRequiredMaterial(SerializableDictionary<string, double> requiredMaterial)
+        {
+            bool graphical = this.GraphicalMode.HasValue && this.GraphicalMode.Value;
 
-			if (!graphical) {
-				double additional21mm = 0;
-				int nrOfElements = 0;
-				int nrOfOtherElements = 0;
-				int rows = 0;
-				int subAreas = 0;
-				double modulArea = 0;
-				foreach (ModulDeckeCircuit c in this.circuits) {
-					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-						subAreas++;
-						foreach (KlimaFlaechenList row in subArea.Rows) {
-							rows++;
-							additional21mm += row.LengthVerbindeleitungen;
-							additional21mm += 1.4;
-							foreach (KlimaFlaechenModul modul in row.List) {
-								// Modul
-								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
-								nrOfElements++;
-								modulArea += modul.GetHeatArea(false);
-								if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
-									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
-									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
-									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D ||
-									modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40) {
-									nrOfOtherElements++;
-								}
-							}
-						}
-					}
-				}
+            // Tabellarisch
+            if (!graphical)
+            {
+                double additional21mm = 0;
+                int nrOfElements = 0;
+                int nrOfOtherElements = 0;
+                int rows = 0;
+                int subAreas = 0;
+                double modulArea = 0;
+                foreach (ModulDeckeCircuit c in this.circuits)
+                {
+                    foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                    {
+                        subAreas++;
+                        foreach (KlimaFlaechenList row in subArea.Rows)
+                        {
+                            rows++;
+                            additional21mm += row.LengthVerbindeleitungen;
+                            additional21mm += 1.4;
+                            foreach (KlimaFlaechenModul modul in row.List)
+                            {
+                                // Modul
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+                                nrOfElements++;
+                                modulArea += modul.GetHeatArea(false);
+                                if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60 ||
+                                    modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60B ||
+                                    modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60C ||
+                                    modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_60_60D ||
+                                    modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40)
+                                {
+                                    nrOfOtherElements++;
+                                }
+                            }
+                        }
+                    }
+                }
 
+
+
+                // Muffe
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+
+                // T-Stück
+                int mk20 = (rows - subAreas) * 2;
+
+                if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL)
+                {
+                    // Winkel 90°
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
+
+                    // Holzstaffel
+                    if (modulArea > 0)
+                    {
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
+                    }
+                }
+                else
+                {
+                    // detect if there is only the 30 series present
+                    bool only30Series = (from ModulDeckeCircuit circuit in circuits
+                                         from ModulDeckeSubArea area in circuit.SubAreas
+                                         from row in area.Rows
+                                         from module in row.List
+                                         select KlimaFlaechenModul.GetModuleWidth(module.ModulType)).All(width => width == 0.3);
+
+                    // wir nehmen in dieser Konstellation eine C-Profilbreite von 6.5cm mit Luftspalt an
+                    if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.C_PROFIL && only30Series)
+                    {
+                        // replace material with MK 80 and MK 81
+
+                        // entferne T-Stücke
+                        mk20 -= (rows - subAreas) * 2;
+
+                        var rowCounts = from ModulDeckeCircuit circuit in circuits
+                                        from ModulDeckeSubArea area in circuit.SubAreas
+                                        where area.Rows.Count > 0
+                                        select area.Rows.Count;
+
+                        // entferne rohr
+                        additional21mm -= 0.73 * (rows - subAreas);
+
+                        // füge T-Stücke hinzu
+                        foreach (var rowCount in rowCounts)
+                        {
+                            var mk81 = ((rowCount - 1) / 2) * 2;
+                            var mk80 = ((rowCount - 1) % 2) * 2;
+
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK80", mk80);
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK81", mk81);
+                        }
+
+                    }
+                    // Winkel 90°
+
+                    int hi56Count = (rows + subAreas) * 2;
+                    int hi59Count = 0;
+
+                    foreach (ModulDeckeCircuit circuit in circuits)
+                    {
+                        var rowsInCircuit = (from area in circuit.SubAreas
+                                             select area.Rows.Count).Sum();
+
+                        if (circuit.UseAIWinkelVorlauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+
+                        if (circuit.UseAIWinkelRücklauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+                    }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
+
+                    // Einhängebügel
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+                    if (nrOfOtherElements > 0)
+                    {
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
+                    }
+                }
+
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", mk20);
                 this.AddRequiredMaterialForConnections(requiredMaterial, false, additional21mm, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
 
-				// Muffe
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", subAreas + rows);
+                // Winkel 45° in Wand
+                if (this.Type == ProductType.WH)
+                {
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
+                }
+            }
+            // Grafisch
+            else
+            {
+                bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
+                bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
+                bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
+                bool serie30 = ((constrCProfil || constrHolzstaffeln) && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) == 0.3);
+                bool serie40 = ((constrCProfil || constrHolzstaffeln) && !serie30);
+                bool raster105_45 = (constrKassetten && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450);
+                bool raster60 = (constrKassetten && !raster105_45);
 
-				// T-Stück
-				Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+                bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
+                double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
 
-				if (ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.HOLZSTAFFEL) {
-					// Winkel 90°
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", subAreas * 2);
+                int subAreas = 0;
+                int rows = 0;
+                int modules = 0;
+                int dichteVerbindung = 0;
+                int nichtDichteVerbindung = 0;
+                double verbindeLength = 0;
+                int winkel90 = 0;
+                int flexibleAnschluesseRandTStueck = 0;
+                int flexibleAnschluesseRandWinkel = 0;
+                int flexibleAnschluesseInnerhalb = 0;
 
-					// Holzstaffel
-					if (modulArea > 0) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", modulArea * 3);
-					}
-				} else {
-					// Winkel 90°
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (rows + subAreas) * 2);
+                var faInnenByCircuit = from ModulDeckeCircuit c in circuits
+                                       from subArea in c.SubAreas
+                                       from row in subArea.Rows
+                                       from link in row.Links
+                                       where link.IsFlexible
+                                       group link by c into circuits
+                                       select circuits;
 
-					// Einhängebügel
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
-					if (nrOfOtherElements > 0) {
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
-					}
-				}
+                flexibleAnschluesseInnerhalb = faInnenByCircuit.SelectMany(circuits => circuits).Count();
 
-				// Winkel 45° in Wand
-				if (this.Type == ProductType.WH) {
-					Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", nrOfElements * 2);
-				}
-			} else {
-				bool constrCProfil = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.C_PROFIL);
-				bool constrHolzstaffeln = (this.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).ContructionType == ModulCeilingConstructionEnum.HOLZSTAFFEL);
-				bool constrKassetten = this.GraphConstruction is ModulKlimaDeckeConstructionKassette;
-				bool serie30 = ((constrCProfil || constrHolzstaffeln) && Math.Round((this.GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenAbstand, 2) == 0.3);
-				bool serie40 = ((constrCProfil || constrHolzstaffeln) && !serie30);
-				bool raster105_45 = (constrKassetten && (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).Raster == ModulKlimaDeckeConstructionKassette.RasterMass.Raster_1050_450);
-				bool raster60 = (constrKassetten && !raster105_45);
+                var faRandByCircuit = from ModulDeckeCircuit c in circuits
+                                      from link in c.Links
+                                      let flexibleEndRows = (from endConnection in link.FlexibleEndConnections
+                                                             where endConnection
+                                                             select 1).Sum()
+                                      let nonFlexibleEndRows = (from endConnection in link.FlexibleEndConnections
+                                                                where !endConnection
+                                                                select 1).Sum()
+                                      let flexibleStartRows = (from startConnection in link.FlexibleStartConnections
+                                                               where startConnection
+                                                               select 1).Sum()
+                                      let nonFlexibleStartRows = (from startConnection in link.FlexibleStartConnections
+                                                                  where !startConnection
+                                                                  select 1).Sum()
+                                      let fARW = (nonFlexibleEndRows == 0 ? 1 : 0) + (nonFlexibleEndRows == 0 ? 1 : 0)
+                                      let fARTS = flexibleStartRows + flexibleEndRows - fARW
+                                      let value = new { flexibleAnschluesseRandTStueck = fARTS, flexibleAnschluesseRandWinkel = fARW }
+                                      group value by c into circuits
+                                      select circuits;
 
-				bool invertYAxis = (this.AssociatedRoom == null || this.AssociatedRoom.AssociatedPlan == null) ? false : this.AssociatedRoom.AssociatedPlan.InvertYAxis;
-				double measure = this.AssociatedRoom.AssociatedPlan.Measure.Value;
+                flexibleAnschluesseRandTStueck = faRandByCircuit.SelectMany(circuit => circuit).Sum(v => v.flexibleAnschluesseRandTStueck);
+                flexibleAnschluesseRandWinkel = faRandByCircuit.SelectMany(circuit => circuit).Sum(v => v.flexibleAnschluesseRandWinkel);
 
-				int subAreas = 0;
-				int rows = 0;
-				int modules = 0;
-				int dichteVerbindung = 0;
-				int nichtDichteVerbindung = 0;
-				double verbindeLength = 0;
-				int winkel90 = 0;
-				int flexibleAnschluesseRandTStueck = 0;
-				int flexibleAnschluesseRandWinkel = 0;
-				int flexibleAnschluesseInnerhalb = 0;
+                foreach (ModulDeckeCircuit c in this.circuits)
+                {
+                    foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                    {
+                        subAreas++;
+                        foreach (KlimaFlaechenList row in subArea.Rows)
+                        {
+                            rows++;
+                            foreach (KlimaFlaechenModul modul in row.List)
+                            {
+                                // Modul
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
+                                modules++;
+                            }
+                            foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                            {
+                                verbindeLength += link.GetLength(measure);
+                                winkel90 += link.GetRequiredWinkel();
+                                if (link.IsKurzerFitting(measure))
+                                {
+                                    dichteVerbindung++;
+                                }
+                                else
+                                {
+                                    nichtDichteVerbindung++;
+                                }
+                            }
+                        }
+                    }
+                    foreach (KlimaFlaechenSubAreaVerbindung link in c.Links)
+                    {
+                        verbindeLength += link.GetLength(measure);
+                        winkel90 += link.GetRequiredWinkel(measure);
+                    }
+                }
 
-				foreach (ModulDeckeCircuit c in this.circuits) {
-					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-						subAreas++;
-						foreach (KlimaFlaechenList row in subArea.Rows) {
-							rows++;
-							foreach (KlimaFlaechenModul modul in row.List) {
-								// Modul
-								Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
-								modules++;
-							}
-							foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-								verbindeLength += link.GetLength(measure);
-								winkel90 += link.GetRequiredWinkel();
-								if (link.IsKurzerFitting(measure)) {
-									dichteVerbindung++;
-								} else {
-									nichtDichteVerbindung++;
-								}
-								if (link.IsFlexible) {
-									flexibleAnschluesseInnerhalb++;
-								}
-							}
-						}
-					}
-					foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
-						verbindeLength += link.GetLength(measure);
-						winkel90 += link.GetRequiredWinkel(measure);
-						int flexibleRow = 0;
-						int nonFlexibleRow = 0;
-						for (int i = 0; i < link.FlexibleEndConnections.Length; i++) {
-							if (link.FlexibleEndConnections[i]) {
-								flexibleRow++;
-							} else {
-								nonFlexibleRow++;
-							}
-						}
-						if (nonFlexibleRow == 0) {
-							flexibleAnschluesseRandTStueck += flexibleRow - 1;
-							flexibleAnschluesseRandWinkel++;
-						} else {
-							flexibleAnschluesseRandTStueck += flexibleRow;
-						}
-						flexibleRow = 0;
-						nonFlexibleRow = 0;
-						for (int i = 0; i < link.FlexibleStartConnections.Length; i++) {
-							if (link.FlexibleStartConnections[i]) {
-								flexibleRow++;
-							} else {
-								nonFlexibleRow++;
-							}
-						}
-						if (nonFlexibleRow == 0) {
-							flexibleAnschluesseRandTStueck += flexibleRow - 1;
-							flexibleAnschluesseRandWinkel++;
-						} else {
-							flexibleAnschluesseRandTStueck += flexibleRow;
-						}
-					}
-				}
+                if (constrCProfil)
+                {
+                    int hi56Count = 0;
+                    int hi59Count = 0;
 
+                    if (serie30)
+                    {
+                        // Einhängebügel
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+
+                        // Winkel 90°
+                        hi56Count = rows * 2;
+                        if ((GraphConstruction as ModulKlimaDeckeConstructionGlatt).SchienenBreite == 0.065)
+                        {
+                            var rowCounts = from ModulDeckeCircuit circuit in circuits
+                                            from ModulDeckeSubArea area in circuit.SubAreas
+                                            where area.Rows.Count > 0
+                                            select area.Rows.Count;
+
+                            // entferne rohr
+                            var includedInTStueck = 0.73 * (rows - subAreas);
+                            if (verbindeLength > includedInTStueck)
+                            {
+                                verbindeLength -= includedInTStueck;
+                            }
+
+                            // füge T-Stücke hinzu
+                            foreach (var rowCount in rowCounts)
+                            {
+                                var mk81 = ((rowCount - 1) / 2) * 2;
+                                var mk80 = ((rowCount - 1) % 2) * 2;
+
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK80", mk80);
+                                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK81", mk81);
+                            }
+                        }
+                        else
+                        {
+                            // T-Stück
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+                        }
+
+                        // Muffe
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
+                    }
+                    else if (serie40)
+                    {
+                        // Einhängebügel
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+
+                        // Winkel 90°
+                        hi56Count = rows * 2;
+
+                        // T-Stück
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+                        // Winkel 45° + Verbindungstück Rohr
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
+                    }
+
+                    foreach (ModulDeckeCircuit circuit in circuits)
+                    {
+                        var rowsInCircuit = (from area in circuit.SubAreas
+                                             select area.Rows.Count).Sum();
+
+                        if (circuit.UseAIWinkelVorlauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+
+                        if (circuit.UseAIWinkelRücklauf)
+                        {
+                            hi56Count -= rowsInCircuit;
+                            hi59Count += rowsInCircuit;
+                        }
+                    }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
+                }
+                else if (constrHolzstaffeln)
+                {
+                    if (serie30)
+                    {
+                        // T-Stück
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+                        // Muffe
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
+
+                        // Holzstaffeln
+                        ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
+                    }
+                    else if (serie40)
+                    {
+                        // T-Stück
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+                        // Winkel 45° + Verbindungstück Rohr
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
+
+                        // Holzstaffeln
+                        ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
+                    }
+                }
+                else if (constrKassetten)
+                {
+                    int lanes = (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).PossibleLanes.Count;
+                    List<KlimaFlaechenModul> modulesInLane;
+                    int sharedBuegel = 0;
+                    for (int i = 0; i < lanes; i++)
+                    {
+                        modulesInLane = this.GetModulesInLane(i);
+                        foreach (KlimaFlaechenModul m in modulesInLane)
+                        {
+                            if (this.GetModuleAtPos(i + 1, m.GraphPositionInLan, measure, 0.05) != null)
+                            {
+                                sharedBuegel += 2;
+                            }
+                        }
+                    }
+
+                    int hi56Count = 0;
+                    int hi59Count = 0;
+
+                    if (raster105_45)
+                    {
+                        // Einhängebügel
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", -modules * 4);
+
+                        // Winkel 90°  
+                        hi56Count = rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2;
+
+                        // T-Stück
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2 - flexibleAnschluesseRandTStueck);
+
+                        // Verbindung der Module: 2 * Winkel 45° + 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", -modules * 2);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows - flexibleAnschluesseInnerhalb) * 4);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
+
+                        // Flexible Anschlüsse innerhalb der Reihen
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
+
+                        // Flexible Anschlüsse an Rand
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
+
+                        if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0)
+                        {
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
+                        }
+                        if (flexibleAnschluesseRandTStueck > 0)
+                        {
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
+                        }
+
+                        var faRandDict = faRandByCircuit.ToDictionary(g => g.Key);
+
+                        foreach (ModulDeckeCircuit circuit in circuits)
+                        {
+                            var rowsInCircuit = (from area in circuit.SubAreas
+                                                 select area.Rows.Count).Sum();
+
+                            var flexibleAnschluesseRandTStueckInCircuit = faRandDict[circuit].Sum(v => v.flexibleAnschluesseRandTStueck);
+                            var flexibleAnschluesseRandWinkelInCircuit = faRandDict[circuit].Sum(v => v.flexibleAnschluesseRandWinkel);
+
+                            if (circuit.UseAIWinkelVorlauf)
+                            {
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
+                            }
+
+                            if (circuit.UseAIWinkelRücklauf)
+                            {
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
+                            }
+                        }
+                    }
+                    else if (raster60)
+                    {
+                        // Einhängebügel
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", modules * 4 - sharedBuegel);
+
+                        // Winkel 90°
+                        hi56Count = rows * 2;
+
+                        // T-Stück
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+
+                        // Verbindung der Module: 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4 - flexibleAnschluesseInnerhalb * 2);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
+
+                        // Flexible Anschlüsse innerhalb der Reihen
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
+
+                        // Flexible Anschlüsse an Rand
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
+
+                        if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0)
+                        {
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
+                        }
+                        if (flexibleAnschluesseRandTStueck > 0)
+                        {
+                            Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
+                        }
+
+                        foreach (ModulDeckeCircuit circuit in circuits)
+                        {
+                            var rowsInCircuit = (from area in circuit.SubAreas
+                                                 select area.Rows.Count).Sum();
+
+                            if (circuit.UseAIWinkelVorlauf)
+                            {
+                                hi56Count -= rowsInCircuit;
+                                hi59Count += rowsInCircuit;
+                            }
+
+                            if (circuit.UseAIWinkelRücklauf)
+                            {
+                                hi56Count -= rowsInCircuit;
+                                hi59Count += rowsInCircuit;
+                            }
+                        }
+                    }
+
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", hi56Count);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
+                }
                 this.AddRequiredMaterialForConnections(requiredMaterial, false, verbindeLength, ConnectionPipe.PipeTypeEnum.PT_21MM, true);
+            }
+        }
 
-				if (constrCProfil) {
-					if (serie30) {
-						// Einhängebügel
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+        public override double Dichte
+        {
+            get { return ModulKlimaDeckeProduct.ConfigRho; }
+        }
 
-						// Winkel 90°
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
+        public override double Waermekapazitaet
+        {
+            get { return ModulKlimaDeckeProduct.ConfigC; }
+        }
 
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
+        public override double Viskositaet
+        {
+            get { return ModulKlimaDeckeProduct.ConfigV; }
+        }
 
-						// Muffe
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
-					} else if (serie40) {
-						// Einhängebügel
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+        public override string NotificationMessage
+        {
+            get
+            {
+                string notification = base.NotificationMessage;
+                if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredArea, 1) <= Math.Round(this.PlannedCeilingArea, 1))
+                {
+                    string newNotification = EuroplanRes.ErrorMessage_ModulBelegung;
+                    newNotification = newNotification.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
+                    newNotification = newNotification.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString());
+                    if (notification == null)
+                    {
+                        notification = newNotification;
 
-						// Winkel 90°
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
-
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
-
-						// Winkel 45° + Verbindungstück Rohr
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
-					}
-				} else if (constrHolzstaffeln) {
-					if (serie30) {
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
-
-						// Muffe
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", rows);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI55", (modules - rows) - dichteVerbindung);
-
-						// Holzstaffeln
-						ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
-					} else if (serie40) {
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
-
-						// Winkel 45° + Verbindungstück Rohr
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", modules * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", modules * 0.1);
-
-						// Holzstaffeln
-						ModulKlimaDeckeConstructionGlatt constr = this.GraphConstruction as ModulKlimaDeckeConstructionGlatt;
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK51", Math.Ceiling(constr.GetStaffelnLength(measure)));
-					}
-				} else if (constrKassetten) {
-					int lanes = (this.GraphConstruction as ModulKlimaDeckeConstructionKassette).PossibleLanes.Count;
-					List<KlimaFlaechenModul> modulesInLane;
-					int sharedBuegel = 0;
-					for (int i = 0; i < lanes; i++) {
-						modulesInLane = this.GetModulesInLane(i);
-						foreach (KlimaFlaechenModul m in modulesInLane) {
-							if (this.GetModuleAtPos(i + 1, m.GraphPositionInLan, measure, 0.05) != null) {
-								sharedBuegel += 2;
-							}
-						}
-					}
-
-					if (raster105_45) {
-						// Einhängebügel
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", -modules * 4);
-
-						// Winkel 90°
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2);
-
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2 - flexibleAnschluesseRandTStueck);
-
-						// Verbindung der Module: 2 * Winkel 45° + 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI57", -modules * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows - flexibleAnschluesseInnerhalb) * 4);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
-
-						// Flexible Anschlüsse innerhalb der Reihen
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
-
-						// Flexible Anschlüsse an Rand
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
-
-						if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0) {
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
-						}
-						if (flexibleAnschluesseRandTStueck > 0) {
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
-						}
-					} else if (raster60) {
-						// Einhängebügel
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", modules * 4 - sharedBuegel);
-
-						// Winkel 90°
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", rows * 2);
-
-						// T-Stück
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", (rows - subAreas) * 2);
-
-						// Verbindung der Module: 4 * Winkel 90° + Verbindungsstück Rohr (10cm horizontal, 2 * 5cm vertikal)
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI56", (modules - rows) * 4 - flexibleAnschluesseInnerhalb * 2);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HI51", (modules - rows) * 0.2);
-
-						// Flexible Anschlüsse innerhalb der Reihen
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -2 * flexibleAnschluesseInnerhalb);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -flexibleAnschluesseInnerhalb);
-
-						// Flexible Anschlüsse an Rand
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX35", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel * 2));
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "HX20", -flexibleAnschluesseRandTStueck);
-						Project.Instance.AddRequiredMaterial(requiredMaterial, "MK60", -(flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel));
-
-						if (flexibleAnschluesseInnerhalb + flexibleAnschluesseRandTStueck + flexibleAnschluesseRandWinkel > 0) {
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX30", double.NegativeInfinity);
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "MK59", double.NegativeInfinity);
-						}
-						if (flexibleAnschluesseRandTStueck > 0) {
-							Project.Instance.AddRequiredMaterial(requiredMaterial, "HX15", double.NegativeInfinity);
-						}
-					}
-				}
-			}
-		}
-
-		public override double Dichte {
-			get { return ModulKlimaDeckeProduct.ConfigRho; }
-		}
-
-		public override double Waermekapazitaet {
-			get { return ModulKlimaDeckeProduct.ConfigC; }
-		}
-
-		public override double Viskositaet {
-			get { return ModulKlimaDeckeProduct.ConfigV; }
-		}
-
-		public override string NotificationMessage {
-			get {
-				string notification = base.NotificationMessage;
-				if (this.ModulType == ProductType.DH && Math.Round(this.CoveredArea, 1) > Math.Round(this.PlannedCeilingArea * 3 / 4, 1) && Math.Round(this.CoveredArea, 1) <= Math.Round(this.PlannedCeilingArea, 1)) {
-					string newNotification = EuroplanRes.ErrorMessage_ModulBelegung;
-					newNotification = newNotification.Replace("%VALUE%", Math.Round(this.CoveredArea, 1).ToString());
-					newNotification = newNotification.Replace("%MAXIMUM%", Math.Round(this.PlannedCeilingArea * 3 / 4, 1).ToString());
-					if (notification == null) {
-						notification = newNotification;
-
-					} else {
-						notification = notification + "\n" + newNotification;
-					}
-				}
-                if (this.PlannedConnection != null && this.PlannedConnection.DirectOrIndirectDistributor != null) {
-                    if (this.PlannedConnection.DirectOrIndirectDistributor.DistributorType != Distributor.DistributorTypeEnum.DT_480) {
+                    }
+                    else
+                    {
+                        notification = notification + "\n" + newNotification;
+                    }
+                }
+                if (this.PlannedConnection != null && this.PlannedConnection.DirectOrIndirectDistributor != null)
+                {
+                    if (this.PlannedConnection.DirectOrIndirectDistributor.DistributorType != Distributor.DistributorTypeEnum.DT_480)
+                    {
                         string newMessage = EuroplanRes.ModulKlimaDeckeProduct_NotificationVerteiler;
                         newMessage = newMessage.Replace("%TYPE%", this.PlannedConnection.DirectOrIndirectDistributor.DistributorTypeName);
-                        if (notification == null) {
+                        if (notification == null)
+                        {
                             notification = newMessage;
-                        } else {
+                        }
+                        else
+                        {
                             notification += ("\n" + newMessage);
                         }
                     }
                 }
-                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN) {
-                    if (notification == null) {
+                if (this.PlannedConnection != null && this.PlannedConnection.ConnectionType == ProductConnection.ConnectionTypeEnum.TICHELMANN)
+                {
+                    if (notification == null)
+                    {
                         notification = "";
-                    } else {
+                    }
+                    else
+                    {
                         notification += "\n";
                     }
                     notification += EuroplanRes.ModulKlimaDeckeProduct_NotificationTichelmann;
                 }
                 return notification;
-			}
-		}
+            }
+        }
 
-		internal override void FinalizeLoading(PlannedProduct pp) {
-			base.FinalizeLoading(pp);
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				c.ModulKlimaDeckeProduct = this;
-			}
-			switch (this.modulType) {
-				case ProductType.FBH:
-					this.plannedFloorArea = this.plannedFloorOrCeilingArea;
-					this.plannedFloorOrCeilingArea = 0;
-					this.plannedCeilingArea = 0;
-					break;
+        internal override void FinalizeLoading(PlannedProduct pp)
+        {
+            base.FinalizeLoading(pp);
+            foreach (ModulDeckeCircuit c in this.circuits)
+            {
+                c.ModulKlimaDeckeProduct = this;
+            }
+            switch (this.modulType)
+            {
+                case ProductType.FBH:
+                    this.plannedFloorArea = this.plannedFloorOrCeilingArea;
+                    this.plannedFloorOrCeilingArea = 0;
+                    this.plannedCeilingArea = 0;
+                    break;
 
-				case ProductType.DH:
-					this.plannedCeilingArea = this.plannedFloorOrCeilingArea;
-					this.plannedFloorOrCeilingArea = 0;
-					this.plannedFloorArea = 0;
-					break;
+                case ProductType.DH:
+                    this.plannedCeilingArea = this.plannedFloorOrCeilingArea;
+                    this.plannedFloorOrCeilingArea = 0;
+                    this.plannedFloorArea = 0;
+                    break;
 
-				default:
-					this.plannedCeilingArea = 0;
-					this.plannedFloorOrCeilingArea = 0;
-					this.plannedFloorArea = 0;
-					break;
-			}
-			if (this.graphConstruction != null && this.GraphicalMode.HasValue && this.GraphicalMode.Value) {
-				this.graphConstruction.Product = this;
-				this.graphConstruction.RecalculateSchienen();
-			}
-		}
+                default:
+                    this.plannedCeilingArea = 0;
+                    this.plannedFloorOrCeilingArea = 0;
+                    this.plannedFloorArea = 0;
+                    break;
+            }
+            if (this.graphConstruction != null && this.GraphicalMode.HasValue && this.GraphicalMode.Value)
+            {
+                this.graphConstruction.Product = this;
+                this.graphConstruction.RecalculateSchienen();
+            }
+        }
 
-		[XmlIgnore]
-		public double PlannedCeilingTemperatureHeat {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = 0;
-				foreach (ModulDeckeCircuit mc in this.circuits) {
-					if (mc.C_CeilingTempHeat > value) {
-						value = mc.C_CeilingTempHeat;
-					}
-				}
-				return value;
-			}
-		}
+        [XmlIgnore]
+        public double PlannedCeilingTemperatureHeat
+        {
+            get
+            {
+                if (this.incompleteCalculation)
+                {
+                    return 0;
+                }
+                double value = 0;
+                foreach (ModulDeckeCircuit mc in this.circuits)
+                {
+                    if (mc.C_CeilingTempHeat > value)
+                    {
+                        value = mc.C_CeilingTempHeat;
+                    }
+                }
+                return value;
+            }
+        }
 
-		[XmlIgnore]
-		public double PlannedCeilingTemperatureCool {
-			get {
-				if (this.incompleteCalculation) {
-					return 0;
-				}
-				double value = Double.MaxValue;
-				foreach (ModulDeckeCircuit mc in this.circuits) {
-					if (mc.C_CeilingTempCool < value) {
-						value = mc.C_CeilingTempCool;
-					}
-				}
-				return value;
-			}
-		}
+        [XmlIgnore]
+        public double PlannedCeilingTemperatureCool
+        {
+            get
+            {
+                if (this.incompleteCalculation)
+                {
+                    return 0;
+                }
+                double value = Double.MaxValue;
+                foreach (ModulDeckeCircuit mc in this.circuits)
+                {
+                    if (mc.C_CeilingTempCool < value)
+                    {
+                        value = mc.C_CeilingTempCool;
+                    }
+                }
+                return value;
+            }
+        }
 
-		public ModulKlimaDeckeConstruction GraphConstruction {
-			get { return this.graphConstruction; }
-			set { this.graphConstruction = value; }
-		}
+        public ModulKlimaDeckeConstruction GraphConstruction
+        {
+            get { return this.graphConstruction; }
+            set { this.graphConstruction = value; }
+        }
 
-		[XmlIgnore]
-		public override bool AllowToSwitchMode {
-			get { return !this.ContainsModules; }
-		}
+        [XmlIgnore]
+        public override bool AllowToSwitchMode
+        {
+            get { return !this.ContainsModules; }
+        }
 
-		[XmlIgnore]
-		public bool ContainsModules {
-			get {
-				foreach (ModulDeckeCircuit c in this.circuits) {
-					foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-						foreach (KlimaFlaechenList row in subArea.Rows) {
-							if (row.List.Count > 0) {
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-			}
-		}
+        [XmlIgnore]
+        public bool ContainsModules
+        {
+            get
+            {
+                foreach (ModulDeckeCircuit c in this.circuits)
+                {
+                    foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                    {
+                        foreach (KlimaFlaechenList row in subArea.Rows)
+                        {
+                            if (row.List.Count > 0)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+        }
 
-		public List<KlimaFlaechenModul> GetModulesInLane(int lane) {
-			List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-					foreach (KlimaFlaechenList row in subArea.Rows) {
-						foreach (KlimaFlaechenModul modul in row.List) {
-							if (modul.GraphLane == lane) {
-								modules.Add(modul);
-							}
-						}
-					}
-				}
-			}
-			return modules;
-		}
+        public List<KlimaFlaechenModul> GetModulesInLane(int lane)
+        {
+            List<KlimaFlaechenModul> modules = new List<KlimaFlaechenModul>();
+            foreach (ModulDeckeCircuit c in this.circuits)
+            {
+                foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in subArea.Rows)
+                    {
+                        foreach (KlimaFlaechenModul modul in row.List)
+                        {
+                            if (modul.GraphLane == lane)
+                            {
+                                modules.Add(modul);
+                            }
+                        }
+                    }
+                }
+            }
+            return modules;
+        }
 
-		public List<KlimaFlaechenModulWithRowAndCircuit> GetModulesInLaneWithRowAndCircuit(int lane) {
-			List<KlimaFlaechenModulWithRowAndCircuit> modules = new List<KlimaFlaechenModulWithRowAndCircuit>();
-			foreach (ModulDeckeCircuit circuit in this.circuits) {
-				foreach (ModulDeckeSubArea subArea in circuit.SubAreas) {
-					foreach (KlimaFlaechenList row in subArea.Rows) {
-						foreach (KlimaFlaechenModul modul in row.List) {
-							if (modul.GraphLane == lane) {
-								modules.Add(new KlimaFlaechenModulWithRowAndCircuit(modul, row, circuit));
-							}
-						}
-					}
-				}
-			}
-			return modules;
-		}
+        public List<KlimaFlaechenModulWithRowAndCircuit> GetModulesInLaneWithRowAndCircuit(int lane)
+        {
+            List<KlimaFlaechenModulWithRowAndCircuit> modules = new List<KlimaFlaechenModulWithRowAndCircuit>();
+            foreach (ModulDeckeCircuit circuit in this.circuits)
+            {
+                foreach (ModulDeckeSubArea subArea in circuit.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in subArea.Rows)
+                    {
+                        foreach (KlimaFlaechenModul modul in row.List)
+                        {
+                            if (modul.GraphLane == lane)
+                            {
+                                modules.Add(new KlimaFlaechenModulWithRowAndCircuit(modul, row, circuit));
+                            }
+                        }
+                    }
+                }
+            }
+            return modules;
+        }
 
-		public int CountModules() {
-			int count = 0;
-			foreach (ModulDeckeCircuit circuit in this.circuits) {
-				count += circuit.CountModules();
-			}
-			return count;
-		}
+        public int CountModules()
+        {
+            int count = 0;
+            foreach (ModulDeckeCircuit circuit in this.circuits)
+            {
+                count += circuit.CountModules();
+            }
+            return count;
+        }
 
-		public ModulDeckeCircuit GetCircuitForModul(KlimaFlaechenModul modul, out int index) {
-			index = 0;
-			foreach (ModulDeckeCircuit c in this.circuits) {
-				if (c.ContainsModul(modul)) {
-					return c;
-				}
-				index++;
-			}
-			index = -1;
-			return null;
-		}
+        public ModulDeckeCircuit GetCircuitForModul(KlimaFlaechenModul modul, out int index)
+        {
+            index = 0;
+            foreach (ModulDeckeCircuit c in this.circuits)
+            {
+                if (c.ContainsModul(modul))
+                {
+                    return c;
+                }
+                index++;
+            }
+            index = -1;
+            return null;
+        }
 
-		public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint) {
-			if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1) {
-				return null;
-			}
+        public override PossibleProductConnection GetPossibleProductConnection(bool input, bool output, bool firstCircuit, bool otherCircuits, double measure, bool invertYAxis, Point2D currentMousePoint)
+        {
+            if (this.AssociatedRoom.RoomCoordinates.Count < 3 || !Polygon2D.IsInside(currentMousePoint, this.AssociatedRoom.RoomCoordinates) || (!firstCircuit && !otherCircuits) || (!input && !output) || this.circuits == null || this.circuits.Count < 1)
+            {
+                return null;
+            }
 
-			PossibleProductConnection possibleConnection = null;
+            PossibleProductConnection possibleConnection = null;
 
-			foreach (GraphicalProductConnection connection in this.Connections) {
-				if (connection.FirstCircuit && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
-					firstCircuit = false;
-				}
-				if (connection.OtherCircuits && ((input && connection.Vorlauf) || (output && connection.Ruecklauf))) {
-					otherCircuits = false;
-				}
-			}
+            foreach (GraphicalProductConnection connection in this.Connections)
+            {
+                if (connection.FirstCircuit && ((input && connection.Vorlauf) || (output && connection.Ruecklauf)))
+                {
+                    firstCircuit = false;
+                }
+                if (connection.OtherCircuits && ((input && connection.Vorlauf) || (output && connection.Ruecklauf)))
+                {
+                    otherCircuits = false;
+                }
+            }
 
 
-			int connectionsCount = 0;
-			if (firstCircuit) {
-				connectionsCount++;
-			}
-			if (otherCircuits) {
-				connectionsCount += this.circuits.Count - 1;
-			}
-			if (input && output) {
-				connectionsCount = connectionsCount * 2;
-			}
+            int connectionsCount = 0;
+            if (firstCircuit)
+            {
+                connectionsCount++;
+            }
+            if (otherCircuits)
+            {
+                connectionsCount += this.circuits.Count - 1;
+            }
+            if (input && output)
+            {
+                connectionsCount = connectionsCount * 2;
+            }
 
-			if (connectionsCount == 0) {
-				return null;
-			}
+            if (connectionsCount == 0)
+            {
+                return null;
+            }
 
-			double width = connectionsCount * 0.05 * measure;
+            double width = connectionsCount * 0.05 * measure;
 
-			Segment2D segment;
-			double bestDistance = double.MaxValue;
-			Segment2D bestSegment = new Segment2D();
-			Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
-			if (room.IsClockwise()) {
-				room.Reverse();
-			}
-			Point2D lastPoint = room[room.Count - 1];
-			Point2D bestConnectionPoint = new Point2D();
-			foreach (Point2D point in room) {
-				segment = new Segment2D(lastPoint, point);
-				if (segment.GetLength() >= width) {
-					Point2D newConnectionPoint = segment.GetClosestPoint(currentMousePoint);
-					if ((segment.Start - newConnectionPoint).GetLength() < width / 2) {
-						Vector2D v = segment.End - segment.Start;
-						v.Normalize();
-						newConnectionPoint = segment.Start + v * (width / 2);
-					}
-					if ((segment.End - newConnectionPoint).GetLength() < width / 2) {
-						Vector2D v = (segment.Start - segment.End);
-						v.Normalize();
-						newConnectionPoint = segment.End + v * (width / 2);
-					}
-					double distance = segment.GetDistance(currentMousePoint);
-					if (distance < bestDistance) {
-						bestDistance = distance;
-						bestSegment = segment;
-						bestConnectionPoint = newConnectionPoint;
-					}
-				}
-				lastPoint = point;
-			}
-			if (bestDistance < 10) {
-				Polygon2D polygon = new Polygon2D();
-				Vector2D v = bestSegment.End - bestSegment.Start;
-				v.Normalize();
-				Vector2D v2 = new Vector2D(-v.Y, v.X);
-				polygon.Add(bestConnectionPoint + (v * width / 2));
-				polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.1 * measure));
-				polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.1 * measure));
-				polygon.Add(bestConnectionPoint - (v * width / 2));
+            Segment2D segment;
+            double bestDistance = double.MaxValue;
+            Segment2D bestSegment = new Segment2D();
+            Polygon2D room = new Polygon2D(this.AssociatedRoom.RoomCoordinates);
+            if (room.IsClockwise())
+            {
+                room.Reverse();
+            }
+            Point2D lastPoint = room[room.Count - 1];
+            Point2D bestConnectionPoint = new Point2D();
+            foreach (Point2D point in room)
+            {
+                segment = new Segment2D(lastPoint, point);
+                if (segment.GetLength() >= width)
+                {
+                    Point2D newConnectionPoint = segment.GetClosestPoint(currentMousePoint);
+                    if ((segment.Start - newConnectionPoint).GetLength() < width / 2)
+                    {
+                        Vector2D v = segment.End - segment.Start;
+                        v.Normalize();
+                        newConnectionPoint = segment.Start + v * (width / 2);
+                    }
+                    if ((segment.End - newConnectionPoint).GetLength() < width / 2)
+                    {
+                        Vector2D v = (segment.Start - segment.End);
+                        v.Normalize();
+                        newConnectionPoint = segment.End + v * (width / 2);
+                    }
+                    double distance = segment.GetDistance(currentMousePoint);
+                    if (distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        bestSegment = segment;
+                        bestConnectionPoint = newConnectionPoint;
+                    }
+                }
+                lastPoint = point;
+            }
+            if (bestDistance < 10)
+            {
+                Polygon2D polygon = new Polygon2D();
+                Vector2D v = bestSegment.End - bestSegment.Start;
+                v.Normalize();
+                Vector2D v2 = new Vector2D(-v.Y, v.X);
+                polygon.Add(bestConnectionPoint + (v * width / 2));
+                polygon.Add(bestConnectionPoint + (v * width / 2) + (v2 * 0.1 * measure));
+                polygon.Add(bestConnectionPoint - (v * width / 2) + (v2 * 0.1 * measure));
+                polygon.Add(bestConnectionPoint - (v * width / 2));
 
-				double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
+                double angle = -Math.Atan2(v.X, v.Y) * 180.0 / Math.PI;
 
-				possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
-			}
-			return possibleConnection;
-		}
+                possibleConnection = new PossibleProductConnection(bestConnectionPoint, polygon, input, output, angle, this, firstCircuit, otherCircuits);
+            }
+            return possibleConnection;
+        }
 
-		public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool invertYAxis, bool input, int distributorIndex, List<int> ignoreDistributorIndices, Nullable<Point2D> mousePoint) {
-			List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
-			if (this.connections != null) {
-				foreach (GraphicalProductConnection connection in this.connections) {
-					anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, distributorIndex, ignoreDistributorIndices, false));
-				}
-			}
-			if (mousePoint.HasValue && (this.connections == null || this.connections.Count == 0)) {
-				double planRotation = this.associatedRoom.AssociatedPlan.Rotation;
-				foreach (Distributor d in this.associatedRoom.AssociatedFloor.GetAllAvailableDistributors(true)) {
-					if (d.IsInsideProduct(this)) {
-						if (d.IsPointInside(mousePoint.Value, this.AssociatedRoom.AssociatedFloor, measure, invertYAxis)) {
-							PossibleProductConnection ppc = d.GetPossibleProductConnections(true, true, measure, invertYAxis, mousePoint.Value, this, this.AssociatedRoom.AssociatedFloor, this.PlannedCircuitCount, true, input ? -0.055 / 4.0 : 0.055 / 4.0);
-							Vector2D vector = new Vector2D(0.01 * measure * Math.Sin((-ppc.Rotation + 0) * Math.PI / 180.0), 0.01 * measure * Math.Cos((-ppc.Rotation + 0) * Math.PI / 180.0));
-							Point2D firstPoint = ppc.ConnectionPoint + vector;
-							Point2D secondPoint = ppc.ConnectionPoint - vector;
-							if (ppc != null) {
-								GraphicalProductConnection gpc = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this), d, new Point2D[] { firstPoint, secondPoint }, true, true, ppc.DistributorStartPosition, true, true, ProductType.DH);
-								gpc.Automatic = true;
-								anbindungsPunkte.AddRange(gpc.GetAnbindungsPunkte(measure, input, ppc.DistributorStartPosition, ignoreDistributorIndices, true));
-							}
-						}
-					}
-				}
-			}
-			return anbindungsPunkte;
-		}
+        public List<GraphicalConnectionAnbindungsPunkt> GetAnbindungsPunkte(double measure, bool invertYAxis, bool input, int distributorIndex, List<int> ignoreDistributorIndices, Nullable<Point2D> mousePoint)
+        {
+            List<GraphicalConnectionAnbindungsPunkt> anbindungsPunkte = new List<GraphicalConnectionAnbindungsPunkt>();
+            if (this.connections != null)
+            {
+                foreach (GraphicalProductConnection connection in this.connections)
+                {
+                    anbindungsPunkte.AddRange(connection.GetAnbindungsPunkte(measure, input, distributorIndex, ignoreDistributorIndices, false));
+                }
+            }
+            if (mousePoint.HasValue && (this.connections == null || this.connections.Count == 0))
+            {
+                double planRotation = this.associatedRoom.AssociatedPlan.Rotation;
+                foreach (Distributor d in this.associatedRoom.AssociatedFloor.GetAllAvailableDistributors(true))
+                {
+                    if (d.IsInsideProduct(this))
+                    {
+                        if (d.IsPointInside(mousePoint.Value, this.AssociatedRoom.AssociatedFloor, measure, invertYAxis))
+                        {
+                            PossibleProductConnection ppc = d.GetPossibleProductConnections(true, true, measure, invertYAxis, mousePoint.Value, this, this.AssociatedRoom.AssociatedFloor, this.PlannedCircuitCount, true, input ? -0.055 / 4.0 : 0.055 / 4.0);
+                            Vector2D vector = new Vector2D(0.01 * measure * Math.Sin((-ppc.Rotation + 0) * Math.PI / 180.0), 0.01 * measure * Math.Cos((-ppc.Rotation + 0) * Math.PI / 180.0));
+                            Point2D firstPoint = ppc.ConnectionPoint + vector;
+                            Point2D secondPoint = ppc.ConnectionPoint - vector;
+                            if (ppc != null)
+                            {
+                                GraphicalProductConnection gpc = new GraphicalProductConnection(Project.Instance.GetPlannedProduct(this), d, new Point2D[] { firstPoint, secondPoint }, true, true, ppc.DistributorStartPosition, true, true, ProductType.DH);
+                                gpc.Automatic = true;
+                                anbindungsPunkte.AddRange(gpc.GetAnbindungsPunkte(measure, input, ppc.DistributorStartPosition, ignoreDistributorIndices, true));
+                            }
+                        }
+                    }
+                }
+            }
+            return anbindungsPunkte;
+        }
 
-		[XmlIgnore]
-		public override WW.Math.Geometry.Polygon2D GraphicalArea {
-			get { return (this.GraphicalMode.HasValue && this.GraphicalMode.Value == true) ? new Polygon2D(this.AssociatedRoom.CeilingCoordinatesToUse) : null; }
-		}
+        [XmlIgnore]
+        public override WW.Math.Geometry.Polygon2D GraphicalArea
+        {
+            get { return (this.GraphicalMode.HasValue && this.GraphicalMode.Value == true) ? new Polygon2D(this.AssociatedRoom.CeilingCoordinatesToUse) : null; }
+        }
 
-		public override void DeleteConnection(GraphicalProductConnection connection) {
-			base.DeleteConnection(connection);
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				List<KlimaFlaechenSubAreaVerbindung> saLinksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (KlimaFlaechenSubAreaVerbindung link in c.Links) {
-					if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
-						saLinksToDelete.Add(link);
-					}
-				}
-				foreach (KlimaFlaechenSubAreaVerbindung link in saLinksToDelete) {
-					c.Links.Remove(link);
-				}
-				foreach (ModulDeckeSubArea sa in c.SubAreas) {
-					foreach (KlimaFlaechenList row in sa.Rows) {
-						List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
-						foreach (KlimaFlaechenModulVerbindung link in row.Links) {
-							if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung) {
-								linksToDelete.Add(link);
-							}
-						}
-						foreach (KlimaFlaechenModulVerbindung link in linksToDelete) {
-							row.Links.Remove(link);
-						}
-					}
-				}
-			}
-		}
+        public override void DeleteConnection(GraphicalProductConnection connection)
+        {
+            base.DeleteConnection(connection);
+            foreach (ModulDeckeCircuit c in this.PlannedCircuits)
+            {
+                List<KlimaFlaechenSubAreaVerbindung> saLinksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+                foreach (KlimaFlaechenSubAreaVerbindung link in c.Links)
+                {
+                    if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung)
+                    {
+                        saLinksToDelete.Add(link);
+                    }
+                }
+                foreach (KlimaFlaechenSubAreaVerbindung link in saLinksToDelete)
+                {
+                    c.Links.Remove(link);
+                }
+                foreach (ModulDeckeSubArea sa in c.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in sa.Rows)
+                    {
+                        List<KlimaFlaechenModulVerbindung> linksToDelete = new List<KlimaFlaechenModulVerbindung>();
+                        foreach (KlimaFlaechenModulVerbindung link in row.Links)
+                        {
+                            if (link.EndConnectedToAnbindung || link.StartConnectedToAnbindung)
+                            {
+                                linksToDelete.Add(link);
+                            }
+                        }
+                        foreach (KlimaFlaechenModulVerbindung link in linksToDelete)
+                        {
+                            row.Links.Remove(link);
+                        }
+                    }
+                }
+            }
+        }
 
-		public void MoveRow(KlimaFlaechenList row, ModulDeckeSubArea target, ModulDeckeCircuit targetCircuit, System.Drawing.Color newCircuitColor) {
-			ModulDeckeSubArea oldSa = null;
-			ModulDeckeCircuit oldCircuit = null;
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				foreach (ModulDeckeSubArea sa in c.SubAreas) {
-					if (sa.Rows.Contains(row)) {
-						oldSa = sa;
-						oldCircuit = c;
-						break;
-					}
-				}
-				if (oldSa != null) {
-					break;
-				}
-			}
-			if (oldSa == null || oldSa == target) {
-				return;
-			}
-			if (oldCircuit.Links != null) {
-				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
-					if (link.Start != null) {
-						foreach (KlimaFlaechenModul m in link.Start) {
-							if (row.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-					if (link.End != null) {
-						foreach (KlimaFlaechenModul m in link.End) {
-							if (row.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-				}
-				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
-					oldCircuit.Links.Remove(link);
-				}
-			}
-			if (targetCircuit == null) {
-				targetCircuit = new ModulDeckeCircuit(this);
-				targetCircuit.CircuitColor = newCircuitColor;
-				targetCircuit.SubAreas.Clear();
-				this.PlannedCircuits.Add(targetCircuit);
-			}
-			if (target == null) {
-				target = new ModulDeckeSubArea();
-				target.Rows.Clear();
-				targetCircuit.SubAreas.Add(target);
-			}
-			oldSa.Rows.Remove(row);
-			if (oldSa.Rows.Count == 0) {
-				oldCircuit.SubAreas.Remove(oldSa);
-			}
-			if (oldCircuit.SubAreas.Count == 0) {
-				this.PlannedCircuits.Remove(oldCircuit);
-			}
-			target.Rows.Add(row);
-		}
+        public void MoveRow(KlimaFlaechenList row, ModulDeckeSubArea target, ModulDeckeCircuit targetCircuit, System.Drawing.Color newCircuitColor)
+        {
+            ModulDeckeSubArea oldSa = null;
+            ModulDeckeCircuit oldCircuit = null;
+            foreach (ModulDeckeCircuit c in this.PlannedCircuits)
+            {
+                foreach (ModulDeckeSubArea sa in c.SubAreas)
+                {
+                    if (sa.Rows.Contains(row))
+                    {
+                        oldSa = sa;
+                        oldCircuit = c;
+                        break;
+                    }
+                }
+                if (oldSa != null)
+                {
+                    break;
+                }
+            }
+            if (oldSa == null || oldSa == target)
+            {
+                return;
+            }
+            if (oldCircuit.Links != null)
+            {
+                List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+                foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links)
+                {
+                    if (link.Start != null)
+                    {
+                        foreach (KlimaFlaechenModul m in link.Start)
+                        {
+                            if (row.ContainsModul(m))
+                            {
+                                linksToDelete.Add(link);
+                                break;
+                            }
+                        }
+                    }
+                    if (link.End != null)
+                    {
+                        foreach (KlimaFlaechenModul m in link.End)
+                        {
+                            if (row.ContainsModul(m))
+                            {
+                                linksToDelete.Add(link);
+                                break;
+                            }
+                        }
+                    }
+                }
+                foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete)
+                {
+                    oldCircuit.Links.Remove(link);
+                }
+            }
+            if (targetCircuit == null)
+            {
+                targetCircuit = new ModulDeckeCircuit(this);
+                targetCircuit.CircuitColor = newCircuitColor;
+                targetCircuit.SubAreas.Clear();
+                this.PlannedCircuits.Add(targetCircuit);
+            }
+            if (target == null)
+            {
+                target = new ModulDeckeSubArea();
+                target.Rows.Clear();
+                targetCircuit.SubAreas.Add(target);
+            }
+            oldSa.Rows.Remove(row);
+            if (oldSa.Rows.Count == 0)
+            {
+                oldCircuit.SubAreas.Remove(oldSa);
+            }
+            if (oldCircuit.SubAreas.Count == 0)
+            {
+                this.PlannedCircuits.Remove(oldCircuit);
+            }
+            target.Rows.Add(row);
+        }
 
-		public void MoveSubarea(ModulDeckeSubArea subArea, ModulDeckeCircuit target, System.Drawing.Color newCircuitColor) {
-			ModulDeckeCircuit oldCircuit = null;
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				if (c.SubAreas.Contains(subArea)) {
-					oldCircuit = c;
-					break;
-				}
-			}
-			if (oldCircuit == null || oldCircuit == target) {
-				return;
-			}
-			if (oldCircuit.Links != null) {
-				List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links) {
-					if (link.Start != null) {
-						foreach (KlimaFlaechenModul m in link.Start) {
-							if (subArea.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-					if (link.End != null) {
-						foreach (KlimaFlaechenModul m in link.End) {
-							if (subArea.ContainsModul(m)) {
-								linksToDelete.Add(link);
-								break;
-							}
-						}
-					}
-				}
-				foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete) {
-					oldCircuit.Links.Remove(link);
-				}
-			}
-			if (target == null) {
-				target = new ModulDeckeCircuit(this);
-				target.SubAreas.Clear();
-				target.CircuitColor = newCircuitColor;
-				this.PlannedCircuits.Add(target);
-			}
-			oldCircuit.SubAreas.Remove(subArea);
-			if (oldCircuit.SubAreas.Count == 0) {
-				this.PlannedCircuits.Remove(oldCircuit);
-			}
-			target.SubAreas.Add(subArea);
-		}
+        public void MoveSubarea(ModulDeckeSubArea subArea, ModulDeckeCircuit target, System.Drawing.Color newCircuitColor)
+        {
+            ModulDeckeCircuit oldCircuit = null;
+            foreach (ModulDeckeCircuit c in this.PlannedCircuits)
+            {
+                if (c.SubAreas.Contains(subArea))
+                {
+                    oldCircuit = c;
+                    break;
+                }
+            }
+            if (oldCircuit == null || oldCircuit == target)
+            {
+                return;
+            }
+            if (oldCircuit.Links != null)
+            {
+                List<KlimaFlaechenSubAreaVerbindung> linksToDelete = new List<KlimaFlaechenSubAreaVerbindung>();
+                foreach (KlimaFlaechenSubAreaVerbindung link in oldCircuit.Links)
+                {
+                    if (link.Start != null)
+                    {
+                        foreach (KlimaFlaechenModul m in link.Start)
+                        {
+                            if (subArea.ContainsModul(m))
+                            {
+                                linksToDelete.Add(link);
+                                break;
+                            }
+                        }
+                    }
+                    if (link.End != null)
+                    {
+                        foreach (KlimaFlaechenModul m in link.End)
+                        {
+                            if (subArea.ContainsModul(m))
+                            {
+                                linksToDelete.Add(link);
+                                break;
+                            }
+                        }
+                    }
+                }
+                foreach (KlimaFlaechenSubAreaVerbindung link in linksToDelete)
+                {
+                    oldCircuit.Links.Remove(link);
+                }
+            }
+            if (target == null)
+            {
+                target = new ModulDeckeCircuit(this);
+                target.SubAreas.Clear();
+                target.CircuitColor = newCircuitColor;
+                this.PlannedCircuits.Add(target);
+            }
+            oldCircuit.SubAreas.Remove(subArea);
+            if (oldCircuit.SubAreas.Count == 0)
+            {
+                this.PlannedCircuits.Remove(oldCircuit);
+            }
+            target.SubAreas.Add(subArea);
+        }
 
-		public override void ClearGraphicalRepresentation() {
-			base.ClearGraphicalRepresentation();
-			this.GraphConstruction = null;
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				c.Links = new List<KlimaFlaechenSubAreaVerbindung>();
-				foreach (ModulDeckeSubArea subArea in c.SubAreas) {
-					foreach (KlimaFlaechenList list in subArea.Rows) {
-						list.Links = new List<KlimaFlaechenModulVerbindung>();
-						foreach (KlimaFlaechenModul modul in list.List) {
-							modul.ClearGraphicalRepresentation();
-						}
-					}
-				}
-			}
-		}
+        public override void ClearGraphicalRepresentation()
+        {
+            base.ClearGraphicalRepresentation();
+            this.GraphConstruction = null;
+            foreach (ModulDeckeCircuit c in this.PlannedCircuits)
+            {
+                c.Links = new List<KlimaFlaechenSubAreaVerbindung>();
+                foreach (ModulDeckeSubArea subArea in c.SubAreas)
+                {
+                    foreach (KlimaFlaechenList list in subArea.Rows)
+                    {
+                        list.Links = new List<KlimaFlaechenModulVerbindung>();
+                        foreach (KlimaFlaechenModul modul in list.List)
+                        {
+                            modul.ClearGraphicalRepresentation();
+                        }
+                    }
+                }
+            }
+        }
 
-		public KlimaFlaechenModul GetModuleAtPos(int lane, double posInLane, double measure, double tolerance) {
-			foreach (ModulDeckeCircuit c in this.PlannedCircuits) {
-				foreach (ModulDeckeSubArea sa in c.SubAreas) {
-					foreach (KlimaFlaechenList row in sa.Rows) {
-						foreach (KlimaFlaechenModul m in row.List) {
-							if (m.GraphLane == lane) {
-								if (Math.Abs(posInLane - m.GraphPositionInLan) / measure < tolerance) {
-									return m;
-								}
-							}
-						}
-					}
-				}
-			}
-			return null;
-		}
+        public KlimaFlaechenModul GetModuleAtPos(int lane, double posInLane, double measure, double tolerance)
+        {
+            foreach (ModulDeckeCircuit c in this.PlannedCircuits)
+            {
+                foreach (ModulDeckeSubArea sa in c.SubAreas)
+                {
+                    foreach (KlimaFlaechenList row in sa.Rows)
+                    {
+                        foreach (KlimaFlaechenModul m in row.List)
+                        {
+                            if (m.GraphLane == lane)
+                            {
+                                if (Math.Abs(posInLane - m.GraphPositionInLan) / measure < tolerance)
+                                {
+                                    return m;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
 
         public static void ReviseRequiredMaterial(SerializableDictionary<string, double> requiredMaterial)
-        {            
+        {
             /* Mail vom 29.10.2017:
              * 3.)	
              * Im Materialbedarf sind einige Artikel rot zu hinterlegen. zB HI59: hier sind generell ein paar 
@@ -1920,19 +2526,21 @@ namespace Europlan.Common {
              * noch einen anteiligen Berechnungsschlüssel finden. zB 1/3 von HI56 sind HI59 in der Modul Fläche.
              */
 
-            Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", -10);            
+            Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", -10);
         }
 
-	    public struct KlimaFlaechenModulWithRowAndCircuit {
-		    public KlimaFlaechenModul modul;
-		    public KlimaFlaechenList row;
-		    public ModulDeckeCircuit circuit;
+        public struct KlimaFlaechenModulWithRowAndCircuit
+        {
+            public KlimaFlaechenModul modul;
+            public KlimaFlaechenList row;
+            public ModulDeckeCircuit circuit;
 
-		    public KlimaFlaechenModulWithRowAndCircuit(KlimaFlaechenModul modul, KlimaFlaechenList row, ModulDeckeCircuit circuit) {
-			    this.modul = modul;
-			    this.row = row;
-			    this.circuit = circuit;
-		    }
-	    }
+            public KlimaFlaechenModulWithRowAndCircuit(KlimaFlaechenModul modul, KlimaFlaechenList row, ModulDeckeCircuit circuit)
+            {
+                this.modul = modul;
+                this.row = row;
+                this.circuit = circuit;
+            }
+        }
     }
 }
