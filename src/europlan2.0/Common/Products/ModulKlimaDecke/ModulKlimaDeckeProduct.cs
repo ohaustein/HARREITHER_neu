@@ -1427,6 +1427,7 @@ namespace Europlan.Common
                 double additional21mm = 0;
                 int nrOfElements = 0;
                 int nrOfOtherElements = 0;
+                int nrOfLargeModuleElements = 0;
                 int rows = 0;
                 int subAreas = 0;
                 double modulArea = 0;
@@ -1453,6 +1454,10 @@ namespace Europlan.Common
                                     modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_100_40)
                                 {
                                     nrOfOtherElements++;
+                                }
+                                else if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_160_30U)
+                                {
+                                    nrOfLargeModuleElements++;
                                 }
                             }
                         }
@@ -1541,7 +1546,8 @@ namespace Europlan.Common
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
 
                     // Einhängebügel
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements) * 4);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements - nrOfLargeModuleElements) * 4);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", nrOfLargeModuleElements * 6);
                     if (nrOfOtherElements > 0)
                     {
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
@@ -1574,6 +1580,7 @@ namespace Europlan.Common
                 int subAreas = 0;
                 int rows = 0;
                 int modules = 0;
+                int largeModules = 0;
                 int dichteVerbindung = 0;
                 int nichtDichteVerbindung = 0;
                 double verbindeLength = 0;
@@ -1628,6 +1635,10 @@ namespace Europlan.Common
                                 // Modul
                                 Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
                                 modules++;
+                                if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_160_30U)
+                                {
+                                    largeModules++;
+                                }
                             }
                             foreach (KlimaFlaechenModulVerbindung link in row.Links)
                             {
@@ -1659,7 +1670,7 @@ namespace Europlan.Common
                     if (serie30)
                     {
                         // Einhängebügel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (modules - largeModules) * 4 + largeModules * 6);
 
                         // Winkel 90°
                         hi56Count = rows * 2;
@@ -1830,13 +1841,13 @@ namespace Europlan.Common
 
                             if (circuit.UseAIWinkelVorlauf)
                             {
-                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1 / 2);
                                 hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
                             }
 
                             if (circuit.UseAIWinkelRücklauf)
                             {
-                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1/ 2);
+                                hi56Count -= rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit + 1 / 2);
                                 hi59Count += rowsInCircuit - flexibleAnschluesseRandWinkelInCircuit - (flexibleAnschluesseRandWinkelInCircuit / 2);
                             }
                         }
