@@ -1580,6 +1580,7 @@ namespace Europlan.Common
                 int subAreas = 0;
                 int rows = 0;
                 int modules = 0;
+                int largeModules = 0;
                 int dichteVerbindung = 0;
                 int nichtDichteVerbindung = 0;
                 double verbindeLength = 0;
@@ -1634,6 +1635,10 @@ namespace Europlan.Common
                                 // Modul
                                 Project.Instance.AddRequiredMaterial(requiredMaterial, modul.PartNumber, 1);
                                 modules++;
+                                if (modul.ModulType == KlimaFlaechenModul.ModulTypeEnum.MODUL_160_30U)
+                                {
+                                    largeModules++;
+                                }
                             }
                             foreach (KlimaFlaechenModulVerbindung link in row.Links)
                             {
@@ -1665,7 +1670,7 @@ namespace Europlan.Common
                     if (serie30)
                     {
                         // Einhängebügel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (modules - largeModules) * 4 + largeModules * 6);
 
                         // Winkel 90°
                         hi56Count = rows * 2;
