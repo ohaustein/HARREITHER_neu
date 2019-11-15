@@ -1499,8 +1499,6 @@ namespace Europlan.Common
 
                         // entferne T-Stücke
                         mk20 -= (rows - subAreas) * 2;
-                        // Es werden fix 10 Stück hinterlegt
-                        mk20 += 10;
 
                         var rowCounts = from ModulDeckeCircuit circuit in circuits
                                         from ModulDeckeSubArea area in circuit.SubAreas
@@ -1699,8 +1697,6 @@ namespace Europlan.Common
                                 Project.Instance.AddRequiredMaterial(requiredMaterial, "MK80", mk80);
                                 Project.Instance.AddRequiredMaterial(requiredMaterial, "MK81", mk81);
                             }
-                            // Es werden fix 10 Stück hinterlegt
-                            Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", 10);
                         }
                         else
                         {
@@ -2542,6 +2538,26 @@ namespace Europlan.Common
              */
 
             Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", -10);
+
+            var plannedProducts = from floor in Project.Instance.Floors
+                                  from room in floor.Rooms
+                                  from plannedProduct in room.PlannedProducts
+                                  select plannedProduct.Product;
+
+            var klimaDeckeProducts = from ModulKlimaDeckeProduct product in plannedProducts.Where(p => p is ModulKlimaDeckeProduct)
+                                     select product;
+
+            var cProfileUsage = from product in klimaDeckeProducts
+                                where (product.GraphConstruction is ModulKlimaDeckeConstructionGlatt && (product.GraphConstruction as ModulKlimaDeckeConstructionGlatt)?.ContructionType == ModulCeilingConstructionEnum.C_PROFIL) ||
+                                (!(product.GraphicalMode.HasValue && product.GraphicalMode.Value) && ConfigModulCeilingConstruction == (int)ModulCeilingConstructionEnum.C_PROFIL)
+                                select product;
+
+
+            if (cProfileUsage.Any())
+            {
+                // Es werden fix 10 Stück hinterlegt
+                Project.Instance.AddRequiredMaterial(requiredMaterial, "MK20", 10);
+            }
         }
 
         public struct KlimaFlaechenModulWithRowAndCircuit
