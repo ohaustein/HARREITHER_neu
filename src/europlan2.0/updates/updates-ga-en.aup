@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UpdateProject BuilderVersion="1.3.0.23" SchemaVersion="1.1" xmlns="http://www.kineticjump.com/AppLifeUpdate/ProjectSchema">
-	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\sph\EuroplanUpdates\grafisch\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/en" BuildLocation="updates-ga-en Updates" PublishVersion="3.1.3.2" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.1.3.2\europlan31-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
-	<CurrentSummary>- new modules and parts</CurrentSummary>
+	<Properties ApplicationID="77e24619-79f7-43da-bcb3-df6e1bb86c8a" ApplicationName="Europlan 2.0 with grafical dimensioning" KeyPair="&lt;RSAKeyValue&gt;&lt;Modulus&gt;vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;P&gt;4FBBfB/1mW6O/M9UE0FgZ6yA34/hE4bmn+Tn0YQ7FdQZxORNiQ7CTd3p6zCQfxge2Zq26SUne+DR2Oww6x8Bvw==&lt;/P&gt;&lt;Q&gt;2HJVf1gxD4LB/HPgNQBiRwN62K4dA/7hKmq761PJuczIxJ2J67uHQz7Huq8X1By9h2h6HWeRggc69LvedeaDQw==&lt;/Q&gt;&lt;DP&gt;Z/Gotr0UkRnjVpE4k4erBb+xJGfG08aiXhuztKoCuzXDDzMAHu/g6DZaLCsf+lUSDqIb+mPGLShb9ZpVfM6sfw==&lt;/DP&gt;&lt;DQ&gt;1SWyoFce6SFhGtSZpFgeb8Qzg5HirP6gif7V0+aNLtVFmKlzGptvln8KfQLUOmObGO9/4dkN57hrDHq9lelMtQ==&lt;/DQ&gt;&lt;InverseQ&gt;rYpxn5aOVrsWAQeCL3PuoxDqukO1sm0vaCW88UVfn9VqGju1UFRsdjEsNWHopPAjYgKFjT9vJKLkI/6MJ+WkRw==&lt;/InverseQ&gt;&lt;D&gt;ry+9Heo+CnF9qar0J9B+miIr8ukiyDWzcobgDBOPIlLhIr9UmyvEpDzJHeEkwV8rt6uQew4j/jtdQ5gb5mrMLK7EwYY4AL/yfp8154IZZ+b/MQMqZC442bbkwUmNwYL7bUvwJGjxsvslgiXvp7SJU8H3f1eOYvc0Mus4Uu2TEx0=&lt;/D&gt;&lt;/RSAKeyValue&gt;" PublishLocation="\\wsh\helios\EuroplanUpdates\grafisch\en" UpdateLocation="http://helios.bluesource.at/EuroplanUpdates/grafisch/en" BuildLocation="updates-ga-en Updates" PublishVersion="3.1.4.1" IsTest="false" UpdateType="WindowsInstaller" CustomUpdaterFileName="\\fsh\Daten\Share\Software\europlan\versions_ga\v3.1.4.1\europlan31-en.msi" CustomUpdaterArguments="/i &quot;&lt;package&gt;&quot; /qb+" />
+	<CurrentSummary>Updated price information 2020</CurrentSummary>
 	<CurrentCustomData />
 	<NoUpdateDisplayText />
 	<AssemblyReferences />
@@ -12,6 +12,13 @@
 		<AppLifeUpdate BuilderVersion="1.3.0.23" type="full" xmlns="http://www.kineticjump.com/AppLifeUpdate/DirectorSchema">
 			<Application AppId="77e24619-79f7-43da-bcb3-df6e1bb86c8a" NoUpdateDisplayText="">
 				<Versions>
+					<Version number="3.1.4.1" postdate="2020-06-23T15:19:41.979334Z" signature="g+4pumq8WFFqEtURwYQb5LgkuhFMp/jzMlD1HixAo7n/es+LaHa/47hYj/Ad5Vr+azfpHqVbdxVKK7cx63D5AAycsv/v53avNd36kLHCTMoJiofx/OSFBFGXMsSrgm2UvQHuOOjcrWMyE4KqZvG7xWU/ig5wkSrMfoJ4wua/hUQ=" fileSize="49082174">
+						<Targets>
+							<Target number="0.0.0.0" includeAllGreater="false" />
+						</Targets>
+						<Summary>Updated price information 2020</Summary>
+						<CustomData></CustomData>
+					</Version>
 					<Version number="3.1.3.2" postdate="2019-11-15T11:23:19.9661114Z" signature="f1oOLeI90M5Hs0B9rHuAvsCd3z0uvMyPFmWM5UydOPD/Tz8PM40on63ZyvkKMNfZdR0wBPXcg3tvN+IvfhtMX0tZTZq97acDI6/QaIF/at7QoZw0XpWNBHcD9VouBWWzZDxLD6CUCVYHKHyFmsWpcg+J8eEj1lV7qlOvFkfURG8=" fileSize="49074462">
 						<Targets>
 							<Target number="0.0.0.0" includeAllGreater="false" />
