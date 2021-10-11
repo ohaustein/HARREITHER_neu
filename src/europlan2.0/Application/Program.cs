@@ -1,31 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using log4net;
-using System.Diagnostics;
-using Star.SettingsXpress;
-using System.Threading;
-using System.Globalization;
-using Europlan.Licensing;
-using System.IO;
-using Microsoft.Win32;
 using Europlan.Common;
-using System.Reflection;
+using log4net;
+using Star.SettingsXpress;
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
+using System.Windows.Forms;
 
-namespace Europlan.Application {
-	
-	static class Program {
+namespace Europlan.Application
+{
+
+    static class Program {
 
 		private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
-		public static Guid updateGuid = new Guid();
-		public static string updateLocation = null;
-		public static string updateBetaLocation = null;
-		public static string updatePublicKey = null;
-
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
 		[STAThread]
 		static void Main(string[] args) {
 			System.Windows.Forms.Application.EnableVisualStyles();
@@ -37,36 +25,10 @@ namespace Europlan.Application {
 			log4net.Config.XmlConfigurator.Configure();
 			log.Debug("Starting Application");
 
-			RegistryKey key = Registry.LocalMachine.OpenSubKey("Software\\bluesource\\Europlan3.1");
-			string defaultLanguage = "de";
-			if (key != null) {
-				string val = key.GetValue("SetupLanguage") as string;
-				if (val != null) {
-					if (val.Equals("en", StringComparison.InvariantCultureIgnoreCase)) {
-						defaultLanguage = "en";
-						Program.updateGuid = new System.Guid("77e24619-79f7-43da-bcb3-df6e1bb86c8a");
-						Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/en";
-                        Program.updateBetaLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/en";
-						Program.updatePublicKey = "<RSAKeyValue><Modulus>vafl6B8Su3p8+ZZlrlPMzv7Yi6Pi9lBWcCH6DMLK/+2cXhFcXR7DjI8tNo6" +
-							"diL0RDvIiZDEZ3F2BaP6j8fAaJ9Gj3l+EV7J1YWfXA1ADHWEqRbVoBR9uO+3x8lghZcSvG4whg8xARnu" +
-							"+9Y1NqzFmxUc1lEWfEtxm90FLaEOcMf0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
-							"e>";
-					}
-				}
-			}
-			if (Program.updateLocation == null) {
-				Program.updateGuid = new System.Guid("04e4c63a-a752-4fb3-a8ca-b7be57aed70b");
-				Program.updateLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/de";
-                Program.updateBetaLocation = "http://helios.bluesource.at/EuroplanUpdates/grafisch/beta/de";
-				Program.updatePublicKey = "<RSAKeyValue><Modulus>59wJZhijX3EKxFb0XOFOJiQMrWXNfXIuGlCS7PTFW1f64kmV1O/A/BFjg0B" +
-					"OqY9lzp8IRVmm2gy3Md04HATIPx0MlpXD2GpJtPiy4BXRlRamdcOBNUr+2WeqR+y5b0Hm2UlI0ADzgrt" +
-					"2pinPX0GfK7DaiCBux7vK6ksNlGXbnhc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValu" +
-					"e>";
-			}
-
 			// using a customized class of SettingsFile which does not consider the assembly version for storing the settings
 			SettingsFile.Create();
 
+			string defaultLanguage = "de";
 			SettingsKey settings = SettingsFile.Settings["OptionsForm"];
 			string language = settings.GetSetting("Language", defaultLanguage);
 			Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);

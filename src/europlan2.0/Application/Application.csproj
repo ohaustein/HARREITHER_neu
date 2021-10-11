@@ -10,7 +10,7 @@
     <RootNamespace>Europlan.Application</RootNamespace>
     <AssemblyName>Europlan</AssemblyName>
     <ApplicationIcon>Harreither.ico</ApplicationIcon>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -42,10 +42,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kjs.AppLife.Update.Controller, Version=1.0.0.12, Culture=neutral, PublicKeyToken=28aeef7cc998407d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\kjsPublicAssemblies\Kjs.AppLife.Update.Controller.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\log4net.dll</HintPath>
@@ -60,6 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\ExtensionBinaryReaderWriter.cs" />
+    <Compile Include="General\ExtensionSecureString_ToUnsecureString.cs" />
+    <Compile Include="General\ExtensionString_ToSecureString.cs" />
+    <Compile Include="General\FormException.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General\FormException.designer.cs">
+      <DependentUpon>FormException.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +84,9 @@
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <EmbeddedResource Include="General\FormException.resx">
+      <DependentUpon>FormException.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicenseForm.de.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LicenseForm.cs</DependentUpon>
@@ -132,6 +140,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="..\..\..\..\EuroplanUpdater\UpdateSourceCreator\Updater.sources">
+      <Link>Updater.sources</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="europlan.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -150,12 +162,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="General\ClassEmbeddedResources.cs" />
     <Compile Include="StartingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StartingForm.designer.cs">
       <DependentUpon>StartingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Updater\ClassUpdateInfo.cs" />
+    <Compile Include="Updater\Controller_1_Check.cs" />
+    <Compile Include="Updater\Controller_2_Download.cs" />
+    <Compile Include="Updater\FileSystemHelper.cs" />
+    <Compile Include="Updater\UpdateSource.cs" />
+    <Compile Include="Updater\UpdateSourceCollection.cs" />
+    <Compile Include="Updater\UpdateSourceCollection_2_InvalidTypeCodeException.cs" />
+    <Compile Include="Updater\UpdateSourceCollection_2_UpdateSourceFileNotFoundException.cs" />
+    <Compile Include="Updater\UpdateSource+FileSystem.cs" />
+    <Compile Include="Updater\UpdateSource+Ftp.cs" />
+    <Compile Include="Updater\UpdateSource+Http.cs" />
+    <Compile Include="Updater\UpdateSource_Downloader.cs" />
+    <Compile Include="Updater\Version.cs" />
+    <Compile Include="Updater\Version_1_VersionComparer.cs" />
+    <Compile Include="Updater\Version_2_InvalidVersionNumberException.cs" />
+    <Compile Include="Updater\Version_2_VersionParsingException.cs" />
     <Compile Include="ValidityWarningForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +200,9 @@
       <Project>{849BE2F8-4D35-43DA-A075-FD8672B8A687}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
