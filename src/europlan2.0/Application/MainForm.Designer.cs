@@ -54,12 +54,17 @@ namespace Europlan.Application {
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menUpdateInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.menUpdateSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menUpdateNow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menUpdateLater = new System.Windows.Forms.ToolStripMenuItem();
+            this.menUpdateSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menUpdateSave = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inhaltToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateController = new Kjs.AppLife.Update.Controller.UpdateController(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -79,6 +84,8 @@ namespace Europlan.Application {
             this.openGlobalConfDialog = new System.Windows.Forms.OpenFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.autoSaveTimer = new System.Windows.Forms.Timer(this.components);
+            this.bgwUpdateCheck = new System.ComponentModel.BackgroundWorker();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.mainMenu.SuspendLayout();
@@ -112,8 +119,8 @@ namespace Europlan.Application {
             this.projectTree.ImageList = this.imageList;
             this.projectTree.Name = "projectTree";
             this.helpProvider.SetShowHelp(this.projectTree, ((bool)(resources.GetObject("projectTree.ShowHelp"))));
-            this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
             this.projectTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.projectTree_BeforeSelect);
+            this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
             // 
             // imageList
             // 
@@ -144,6 +151,7 @@ namespace Europlan.Application {
             this.editToolStripMenuItem,
             this.projektToolStripMenuItem,
             this.optionsToolStripMenuItem,
+            this.menUpdate,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Name = "mainMenu";
@@ -314,13 +322,60 @@ namespace Europlan.Application {
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
+            // menUpdate
+            // 
+            this.menUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.menUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menUpdateInfo,
+            this.menUpdateSeparator1,
+            this.menUpdateNow,
+            this.menUpdateLater,
+            this.menUpdateSeparator2,
+            this.menUpdateSave});
+            resources.ApplyResources(this.menUpdate, "menUpdate");
+            this.menUpdate.Name = "menUpdate";
+            this.menUpdate.Click += new System.EventHandler(this.MenuUpdate_Click);
+            // 
+            // menUpdateInfo
+            // 
+            this.menUpdateInfo.Name = "menUpdateInfo";
+            resources.ApplyResources(this.menUpdateInfo, "menUpdateInfo");
+            this.menUpdateInfo.Click += new System.EventHandler(this.menUpdateInfo_Click);
+            // 
+            // menUpdateSeparator1
+            // 
+            this.menUpdateSeparator1.Name = "menUpdateSeparator1";
+            resources.ApplyResources(this.menUpdateSeparator1, "menUpdateSeparator1");
+            // 
+            // menUpdateNow
+            // 
+            this.menUpdateNow.Name = "menUpdateNow";
+            resources.ApplyResources(this.menUpdateNow, "menUpdateNow");
+            this.menUpdateNow.Click += new System.EventHandler(this.menUpdateNow_Click);
+            // 
+            // menUpdateLater
+            // 
+            this.menUpdateLater.Name = "menUpdateLater";
+            resources.ApplyResources(this.menUpdateLater, "menUpdateLater");
+            this.menUpdateLater.Click += new System.EventHandler(this.menUpdateLater_Click);
+            // 
+            // menUpdateSeparator2
+            // 
+            this.menUpdateSeparator2.Name = "menUpdateSeparator2";
+            resources.ApplyResources(this.menUpdateSeparator2, "menUpdateSeparator2");
+            // 
+            // menUpdateSave
+            // 
+            this.menUpdateSave.Name = "menUpdateSave";
+            resources.ApplyResources(this.menUpdateSave, "menUpdateSave");
+            this.menUpdateSave.Click += new System.EventHandler(this.menUpdateSave_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inhaltToolStripMenuItem,
             this.tutorialToolStripMenuItem,
-            this.infoToolStripMenuItem,
-            this.updateToolStripMenuItem});
+            this.infoToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
@@ -340,21 +395,6 @@ namespace Europlan.Application {
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             resources.ApplyResources(this.infoToolStripMenuItem, "infoToolStripMenuItem");
-            // 
-            // updateToolStripMenuItem
-            // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            resources.ApplyResources(this.updateToolStripMenuItem, "updateToolStripMenuItem");
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
-            // 
-            // updateController
-            // 
-            this.updateController.ApplicationId = new System.Guid("1f24573e-033c-448d-8e15-9f396e67e44e");
-            this.updateController.BypassProxyOnLocal = true;
-            this.updateController.UpdateLocation = "http://helios.bluesource.at/EuroplanUpdates/";
-            this.updateController.UseHostAssemblyVersion = true;
-            this.updateController.Version = ((System.Version)(resources.GetObject("updateController.Version")));
-            this.updateController.CheckForUpdateCompleted += new Kjs.AppLife.Update.Controller.CheckForUpdateCompletedEventHandler(this.updateController_CheckForUpdateCompleted);
             // 
             // toolStrip1
             // 
@@ -484,6 +524,11 @@ namespace Europlan.Application {
             this.autoSaveTimer.Interval = 600000;
             this.autoSaveTimer.Tick += new System.EventHandler(this.autoSaveTimer_Tick);
             // 
+            // bgwUpdateCheck
+            // 
+            this.bgwUpdateCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwUpdateCheck_DoWork);
+            this.bgwUpdateCheck.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwUpdateCheck_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -496,9 +541,12 @@ namespace Europlan.Application {
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.helpProvider.SetShowHelp(this, ((bool)(resources.GetObject("$this.ShowHelp"))));
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.Form_Shown);
             this.splitContainer.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
@@ -516,10 +564,8 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-		private Kjs.AppLife.Update.Controller.UpdateController updateController;
 		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -565,7 +611,14 @@ namespace Europlan.Application {
 		private System.Windows.Forms.ToolStripMenuItem tutorialToolStripMenuItem;
 		private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.Timer autoSaveTimer;
-
-	}
+        private System.Windows.Forms.ToolStripMenuItem menUpdate;
+        private System.ComponentModel.BackgroundWorker bgwUpdateCheck;
+        private System.Windows.Forms.ToolStripMenuItem menUpdateInfo;
+        private System.Windows.Forms.ToolStripSeparator menUpdateSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menUpdateSave;
+        private System.Windows.Forms.ToolStripMenuItem menUpdateNow;
+        private System.Windows.Forms.ToolStripMenuItem menUpdateLater;
+        private System.Windows.Forms.ToolStripSeparator menUpdateSeparator2;
+    }
 }
 
