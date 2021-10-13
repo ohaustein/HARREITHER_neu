@@ -140,10 +140,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="..\..\..\..\EuroplanUpdater\UpdateSourceCreator\Updater.sources">
-      <Link>Updater.sources</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="europlan.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -191,6 +187,7 @@
     <Compile Include="ValidityWarningForm.Designer.cs">
       <DependentUpon>ValidityWarningForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Updater.sources" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Harreither.ico" />
