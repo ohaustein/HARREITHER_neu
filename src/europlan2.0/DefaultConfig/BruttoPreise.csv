@@ -620,7 +620,14 @@ MK23;Klebeband - doppelseitig(Rolle zu 50lfm);31,3;Stk;50;für die Verklebung der
 MK40;KLIMAMODUL 60/60, Typ A;77,5;Stk;10;Module 60/60 (593 x 593 mm),10 mm dick für KassettendeckeRaster 60/60 oder 62,5/62,5 sowohl für Gips-beplankung als auch für MetalkassettendeckenMaterial: PP-RTyp A -  abklappbar;;;Klimadodul 60/60;Stk;;;;;
 MK49;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (60/60);0,83;Stk;100;zum Einhängen in Montageprofil 60/27VPE: 200 Stk;;For supporting in mounting profile 60/27PU: 100 pieces.;Modul support bracket for Klimamodul 60/;Stk;;;;;
 MK50B;MODUL-EINHÄNGEBÜGEL KLIMAMODUL aus PA-unmanteltem Edelstahl;0,83;Stk;150;schwarz beschichtet;;;;Stk;;;;;
-MK50R;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (R);0,83;Stk;150;zum Einhängen in Montageprofil 60/27VPE: 150 Stk;;;;Stk;;;;;
+MK50BK;MODUL-EINHÄNGEBÜGEL KLIMAMODUL KURZ PA-unmanteltem Edelstahl;;;200;;;;;Stk;;;;;
+MK50BS1;Modul Aufhängehaken oben (schwarz);;;200;;;;;Stk;;;;;
+MK50BS2;Modul Stützhacken unten (Schwarz);;;200;;;;;Stk;;;;;
+MK50CD;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL für CD-Profil 400;;;150;;;;;Stk;;;;;
+MK50F;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (30) MIT FEDER;;;200;aus rostfreien Edelstahldraht;;;;Stk;;;;;
+MK50I;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (30) ITALIEN;;;200;;;;;Stk;;;;;
+MK50N;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (30) NIRO;2,65;Stk;200;;;;;Stk;;;;;
+MK50R;MODUL-EINHÄNGEBÜGEL FÜR KLIMAMODUL (R);0,83;Stk;150;zum Einhängen in Montageprofil 60/27VPE: 150 Stk;;For supporting in mounting profile 60/27PU: 150 pieces.;Modul support bracket for Klimamodul;Stk;;;;;
 MK51;HOLZSTAFFEL GEFALZT 40x53 FÜR KLIMAMODUL;7,68;lfm;1;Länge: 5000 mm;;;;lfm;;;;;
 MK52;HOLZSTAFFEL GEFALZT 30x53 FÜR KLIMAMODUL;7,68;lfm;1;;;;;lfm;;;;;
 MK53;Dämmplatte für Modul Kühldecke 160 (EPS20);4,39;Stk;100;;;;;Stk;;;;;
