@@ -1546,8 +1546,8 @@ namespace Europlan.Common
                     Project.Instance.AddRequiredMaterial(requiredMaterial, "HI59", hi59Count);
 
                     // Einhängebügel
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (nrOfElements - nrOfOtherElements - nrOfLargeModuleElements) * 4);
-                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", nrOfLargeModuleElements * 6);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50R", (nrOfElements - nrOfOtherElements - nrOfLargeModuleElements) * 4);
+                    Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50R", nrOfLargeModuleElements * 6);
                     if (nrOfOtherElements > 0)
                     {
                         Project.Instance.AddRequiredMaterial(requiredMaterial, "MK49", nrOfOtherElements * 4);
@@ -1670,7 +1670,7 @@ namespace Europlan.Common
                     if (serie30)
                     {
                         // Einhängebügel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", (modules - largeModules) * 4 + largeModules * 6);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50R", (modules - largeModules) * 4 + largeModules * 6);
 
                         // Winkel 90°. Pro Reihe je vorne und hnten "nach oben", sowie pro Fläche je ein Eck vorne und hinten für die letzte Reie
                         hi56Count = rows * 2 + subAreas * 2;
@@ -1711,7 +1711,7 @@ namespace Europlan.Common
                     else if (serie40)
                     {
                         // Einhängebügel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", modules * 4);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50R", modules * 4);
 
                         // Winkel 90°. Pro Reihe je vorne und hnten "nach oben", sowie pro Fläche je ein Eck vorne und hinten für die letzte Reie
                         hi56Count = rows * 2 + subAreas * 2;
@@ -1797,7 +1797,7 @@ namespace Europlan.Common
                     if (raster105_45)
                     {
                         // Einhängebügel
-                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50", -modules * 4);
+                        Project.Instance.AddRequiredMaterial(requiredMaterial, "MK50R", -modules * 4);
 
                         // Winkel 90°  
                         hi56Count = rows * 2 - flexibleAnschluesseRandTStueck - flexibleAnschluesseRandWinkel * 2;
