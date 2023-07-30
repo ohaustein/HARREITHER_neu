@@ -190,6 +190,7 @@ namespace Europlan.Common {
 			return true;
 		}
 
+		[Obsolete]
 		private List<SolidFramework.Pdf.Plumbing.PdfPage> GetPdfPages(string filename) {
 			List<SolidFramework.Pdf.Plumbing.PdfPage> pageList = null;
 			SolidFramework.Pdf.Catalog catalog = null;
