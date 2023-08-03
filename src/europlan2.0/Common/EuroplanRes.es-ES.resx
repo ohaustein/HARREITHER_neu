@@ -253,7 +253,7 @@
 		<value>Longitud tubo retorno (m)</value>
 	</data>
 	<data name="ConnectionPipePanel_TeilsystemCol" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="ConnectionPipePanel_UngueltigeProduktNrText" xml:space="preserve">
 		<value>El número de sistema introducido no es válido. Por favor, introduzca un número de sistema válido.</value>
@@ -271,7 +271,7 @@
 		<value>Imprimir datos de disposición</value>
 	</data>
 	<data name="ConnectionPipePanel_VorlaufCol" xml:space="preserve">
-		<value>Longitud impulsión (m)</value>
+		<value>Longitud tubo impulsión (m)</value>
 	</data>
 	<data name="ConnectionPipesForm_Anbindeflaeche" xml:space="preserve">
 		<value>Superficie asignada a tuberías de conexión:</value>
@@ -466,7 +466,7 @@
 		<value>Válvulas de bola bridadas</value>
 	</data>
 	<data name="DistributorPanel_Fussboden" xml:space="preserve">
-		<value>Estructura del suelo</value>
+		<value>Suelo</value>
 	</data>
 	<data name="DistributorPanel_Geschosse" xml:space="preserve">
 		<value>Plantas que también pueden utilizar este colector:</value>
@@ -1781,7 +1781,7 @@
 (calc) W</value>
 	</data>
 	<data name="LL_Report_FussbodenTeilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="LL_Report_FussbodenVerlegeabstand" xml:space="preserve">
 		<value>Tipo de colocación</value>
@@ -2190,7 +2190,7 @@ W/m²</value>
 		<value>Ver </value>
 	</data>
 	<data name="MainForm_Artikelstamm" xml:space="preserve">
-		<value>Artículo principal</value>
+		<value>Datos de artículos</value>
 	</data>
 	<data name="MainForm_ArtikelUndKonstruktionen" xml:space="preserve">
 		<value>Artículos y estructuras</value>
@@ -2650,7 +2650,7 @@ W/m²</value>
 		<value>Cubrir la carga de refrigeración</value>
 	</data>
 	<data name="PlannedProductPanel_RestkaelteUebernehmen" xml:space="preserve">
-		<value>Tomar la potencia de refrigeración que falta</value>
+		<value>Tomar la potencia de refr.</value>
 	</data>
 	<data name="PlannedProductPanel_RestwaermeUebernehmen" xml:space="preserve">
 		<value>Tomar la potencia calorífica que falta</value>
@@ -2902,13 +2902,13 @@ W/m²</value>
 		<value>Registro</value>
 	</data>
 	<data name="ProjectReportOptions_DruckbereicheWaehlen" xml:space="preserve">
-		<value>Por favor, seleccione los rangos de presión deseados</value>
+		<value>Por favor, seleccione lo que desea imprimir</value>
 	</data>
 	<data name="ProjectReportOptions_Flaechenuebersicht" xml:space="preserve">
 		<value>Resumen de las superficies</value>
 	</data>
 	<data name="ProjectReportOptions_Titel" xml:space="preserve">
-		<value>Rango de presión</value>
+		<value>Impresión</value>
 	</data>
 	<data name="ProjectSummaryPanel_Bauvorhaben" xml:space="preserve">
 		<value>Proyecto de construcción:</value>
@@ -3045,7 +3045,7 @@ W/m²</value>
 		<value>Hitherm®circuitos de calefacción</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenFlaeche" xml:space="preserve">
-		<value>panel de suelo Modul</value>
+		<value>panel de suelo Modul (m²)</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_KlimaBodenHeizkreise" xml:space="preserve">
 		<value>panel de suelo Modulcircuitos de calefacción</value>
@@ -3235,7 +3235,7 @@ W/m²</value>
 		<value>Superficie de calefacción(m²)</value>
 	</data>
 	<data name="RoomSummaryPanel_Heizlast" xml:space="preserve">
-		<value>Carga de calefacción:</value>
+		<value>Carga de cal.:</value>
 	</data>
 	<data name="RoomSummaryPanel_HeizlastBereinigt" xml:space="preserve">
 		<value>Carga de calefacción (ajustada):</value>
@@ -3253,7 +3253,7 @@ W/m²</value>
 		<value>Carga de refrigeración:</value>
 	</data>
 	<data name="RoomSummaryPanel_KuehllastBereinigt" xml:space="preserve">
-		<value>Carga de refrigeración (ajustada)</value>
+		<value>Carga de ref.:</value>
 	</data>
 	<data name="RoomSummaryPanel_Kuehlleistung" xml:space="preserve">
 		<value>PRefrigeración(W)</value>
@@ -3418,7 +3418,7 @@ W/m²</value>
 		<value>Los valores no se utilizan para el proyecto real, son valores por defecto, que se utilizan cuando se inicia un nuevo proyecto.</value>
 	</data>
 	<data name="SystemParametersPanel_InfoProjectConf" xml:space="preserve">
-		<value>Estos valores sólo se utilizan en el proyecto real. Para cambiar los valores por defecto para otros proyectos nuevos, haga clic en "opciones", "ajustes" &gt; "parámetros estándar del sistema".</value>
+		<value>Estos valores sólo se utilizan en el proyecto real. Para cambiar los valores por defecto para otros proyectos nuevos, haga clic en "opciones", "configuración" &gt; "parámetros estándar del sistema".</value>
 	</data>
 	<data name="SystemParametersPanel_LeistungsfaktorHeiz" xml:space="preserve">
 		<value>Factor de potencia de calefacción:</value>
@@ -4931,7 +4931,7 @@ Compact
 		<value>Opciones</value>
 	</data>
 	<data name="ImportedPlansPanel_ImportiertePlaene" xml:space="preserve">
-		<value>Administración del plan</value>
+		<value>Gestión de planos</value>
 	</data>
 	<data name="ImportedPlansPanel_PlanExportieren" xml:space="preserve">
 		<value>Exportar plan</value>
@@ -5015,7 +5015,7 @@ W/m²</value>
 (calc) W</value>
 	</data>
 	<data name="LL_Report_KlimabodenTeilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="LL_Report_KlimabodenVorlauftemperaur" xml:space="preserve">
 		<value>timpulsión
@@ -5220,7 +5220,7 @@ mbar</value>
 		<value>Importar plano</value>
 	</data>
 	<data name="OptionsForm_Fussboden" xml:space="preserve">
-		<value>Estructura del suelo</value>
+		<value>Suelo</value>
 	</data>
 	<data name="OptionsForm_Konstruktionen" xml:space="preserve">
 		<value>Estructuras</value>
@@ -5329,7 +5329,7 @@ elementos</value>
 		<value>Hitherm®</value>
 	</data>
 	<data name="Product_ModulKlimBodenName" xml:space="preserve">
-		<value>Panel de suelo Modul  </value>
+		<value>Panel de suelo Modul  M33</value>
 	</data>
 	<data name="Product_ModulKlimDeckeFullName" xml:space="preserve">
 		<value>Panel de techo Modul</value>
@@ -5390,7 +5390,7 @@ mbar</value>
 		<value>Registro de superficie</value>
 	</data>
 	<data name="QuickDimensioningPanel_KlimaBoden" xml:space="preserve">
-		<value>Panel de suelo Modul</value>
+		<value>Panel de suelo Modul M33</value>
 	</data>
 	<data name="RegulatoryCircuitSummaryPanel_Regelkreise" xml:space="preserve">
 		<value>Circuitos de control</value>
@@ -5897,7 +5897,7 @@ W</value>
 		<value>Nuevo circuito de calefacción</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaBoden" xml:space="preserve">
-		<value>Panel de suelo Modul</value>
+		<value>Panel de suelo Modul M33</value>
 	</data>
 	<data name="General_WieGehtsWeiter" xml:space="preserve">
 		<value>¿Cómo continuar?</value>
@@ -5918,7 +5918,7 @@ W</value>
 		<value>error al importar</value>
 	</data>
 	<data name="LL_Report_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="LL_Report_GeschossuebersichtFlaeche" xml:space="preserve">
 		<value>Superficie</value>
@@ -5957,7 +5957,7 @@ mbar</value>
 (calc) W</value>
 	</data>
 	<data name="LL_Report_KlimadeckeTeilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="LL_Report_KlimadeckeVorlauftemperaur" xml:space="preserve">
 		<value>timpulsión
@@ -5976,7 +5976,7 @@ mbar</value>
 		<value>Nombre</value>
 	</data>
 	<data name="LL_Report_VerlegedatenBezeichung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="LL_Report_VerlegedatenEcothermRandzone" xml:space="preserve">
 		<value>Zona perimetral</value>
@@ -6091,7 +6091,7 @@ l/min</value>
 		<value>Estancianúm.</value>
 	</data>
 	<data name="LL_Report_VerlegedatenKlimadeckeTeilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parciall</value>
 	</data>
 	<data name="LL_Report_VerlegedatenMenge" xml:space="preserve">
 		<value>Cantidad</value>
@@ -6152,7 +6152,7 @@ mbar</value>
 (calc) W</value>
 	</data>
 	<data name="LL_Report_WandTeilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="LL_Report_WandTeilsystemZeile1" xml:space="preserve">
 		<value>Parcial</value>
@@ -6171,7 +6171,7 @@ mbar</value>
 		<value>Volumen</value>
 	</data>
 	<data name="NewDistributorForm_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="NewDistributorForm_Nummer" xml:space="preserve">
 		<value>Número:</value>
@@ -6180,7 +6180,7 @@ mbar</value>
 		<value>error</value>
 	</data>
 	<data name="NewPlanForm_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="OptionsForm_Allgemein" xml:space="preserve">
 		<value>General</value>
@@ -6253,7 +6253,7 @@ W</value>
 		<value>Circuito(s) de calefacción</value>
 	</data>
 	<data name="ProductOverviewForm_Teilsystem" xml:space="preserve">
-		<value>Sistema parcial</value>
+		<value>Zona parcial</value>
 	</data>
 	<data name="ProjectReport_Heizbetrieb" xml:space="preserve">
 		<value>Modo de calefacción</value>
@@ -6274,7 +6274,7 @@ W</value>
 		<value>Nombre</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="QuickDimensioningFloorGrid_Nr" xml:space="preserve">
 		<value>Núm.</value>
@@ -6313,7 +6313,7 @@ W</value>
 		<value>Total</value>
 	</data>
 	<data name="RegulatoryCircuitSummaryPanel_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="RegulatoryCircuitSummaryPanel_Nummer" xml:space="preserve">
 		<value>Núm.</value>
@@ -6322,7 +6322,7 @@ W</value>
 		<value>Confirme</value>
 	</data>
 	<data name="RequiredMaterialGrid_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="RequiredMaterialGrid_Menge" xml:space="preserve">
 		<value>Cantidad</value>
@@ -6337,7 +6337,7 @@ W</value>
 		<value>Techo</value>
 	</data>
 	<data name="RequiredMaterialPanel_Fussboden" xml:space="preserve">
-		<value>Estructura del suelo</value>
+		<value>Suelo</value>
 	</data>
 	<data name="RequiredMaterialPanel_Materialbedarf" xml:space="preserve">
 		<value>Material necesario</value>
@@ -6358,10 +6358,10 @@ W</value>
 		<value>¿Cómo continuar?</value>
 	</data>
 	<data name="RoomTypeGrid_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="SelectConstructionForm_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="SelectConstructionForm_KeineKonstruktionTitel" xml:space="preserve">
 		<value>error</value>
@@ -6373,7 +6373,7 @@ W</value>
 		<value>Tipo</value>
 	</data>
 	<data name="SelectDistributorForm_Bezeichnung" xml:space="preserve">
-		<value>Designación</value>
+		<value>Descripción</value>
 	</data>
 	<data name="SelectDistributorForm_Nummer" xml:space="preserve">
 		<value>Núm.</value>
@@ -6403,7 +6403,7 @@ W</value>
 		<value>Hitherm® Compact</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaBoden33" xml:space="preserve">
-		<value>Panel de suelo Modul  </value>
+		<value>Panel de suelo Modul  M33</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaDecke" xml:space="preserve">
 		<value>Panel de techo Modul</value>
@@ -6737,7 +6737,7 @@ m</value>
 		<value>Tipo</value>
 	</data>
 	<data name="SystemParametersPanel_KlimaBoden20" xml:space="preserve">
-		<value>Panel de suelo Modul M21</value>
+		<value>Panel de suelo Modul M20</value>
 	</data>
 	<data name="ModulKlimaBoden20PlannerForm_Ausrichtung" xml:space="preserve">
 		<value>Alineación:</value>
@@ -6794,7 +6794,7 @@ m</value>
 		<value>número de artículo</value>
 	</data>
 	<data name="OptionsForm_Artikelstamm" xml:space="preserve">
-		<value>maestro de artículos</value>
+		<value>Datos de artículos</value>
 	</data>
 	<data name="PlannedEurovalProductPanel_Aufenthaltszone" xml:space="preserve">
 		<value>sala de estar</value>
