@@ -915,6 +915,7 @@
       <LastGenOutput>EuroplanRes.en.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="EuroplanRes.es-ES.resx" />
     <EmbeddedResource Include="EuroplanRes.hr.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
