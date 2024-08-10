@@ -239,6 +239,7 @@
     <Compile Include="MaterialEditor\MaterialEditorGrid.Designer.cs">
       <DependentUpon>MaterialEditorGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="PDF\PdfHelper.cs" />
     <Compile Include="Plan\CadPanelOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
