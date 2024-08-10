@@ -60,9 +60,6 @@
     <Reference Include="Patagames.Pdf.WinForms, Version=4.27.18.472, Culture=neutral, PublicKeyToken=60fd6cf9b15941cf, processorArchitecture=MSIL">
       <HintPath>..\packages\Pdfium.Net.SDK.4.91.2704\lib\net472\Patagames.Pdf.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="SolidFramework, Version=7.1.1606.0, Culture=neutral, PublicKeyToken=d16bc61c9431f4ad, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\SolidFramework.dll</HintPath>
     <Reference Include="Patagames.Pdf.Wpf, Version=4.27.20.472, Culture=neutral, PublicKeyToken=60fd6cf9b15941cf, processorArchitecture=MSIL">
       <HintPath>..\packages\Pdfium.Net.SDK.4.91.2704\lib\net472\Patagames.Pdf.Wpf.dll</HintPath>
     </Reference>
