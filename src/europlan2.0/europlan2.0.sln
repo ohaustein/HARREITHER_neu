@@ -5,12 +5,6 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{D3AF6D30-7320-4358-BF73-FF4E96AE22A2}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{7E186967-4E4B-46E5-BFB6-35F416C7023C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8F022916-5734-48BF-9468-7019DDF5C748} = {8F022916-5734-48BF-9468-7019DDF5C748}
-		{D3AF6D30-7320-4358-BF73-FF4E96AE22A2} = {D3AF6D30-7320-4358-BF73-FF4E96AE22A2}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{9A2C3D9F-7B0E-415D-8092-01EF5C213A3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartSetup", "StartSetup\StartSetup.csproj", "{8F022916-5734-48BF-9468-7019DDF5C748}"
@@ -50,19 +44,6 @@ Global
 		{D3AF6D30-7320-4358-BF73-FF4E96AE22A2}.UnitTest|Mixed Platforms.Build.0 = Release|Any CPU
 		{D3AF6D30-7320-4358-BF73-FF4E96AE22A2}.UnitTest|x86.ActiveCfg = Release|Any CPU
 		{D3AF6D30-7320-4358-BF73-FF4E96AE22A2}.UnitTest|x86.Build.0 = Release|Any CPU
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Debug|x86.ActiveCfg = Debug|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Release|Any CPU.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Release|Mixed Platforms.Build.0 = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.Release|x86.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|Any CPU.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|Any CPU.Build.0 = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|Mixed Platforms.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|Mixed Platforms.Build.0 = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|x86.ActiveCfg = Release|x86
-		{7E186967-4E4B-46E5-BFB6-35F416C7023C}.UnitTest|x86.Build.0 = Release|x86
 		{9A2C3D9F-7B0E-415D-8092-01EF5C213A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A2C3D9F-7B0E-415D-8092-01EF5C213A3F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{9A2C3D9F-7B0E-415D-8092-01EF5C213A3F}.Debug|x86.ActiveCfg = Debug|Any CPU
