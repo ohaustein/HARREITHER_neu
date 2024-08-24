@@ -1,0 +1,92 @@
+Licenčné podmienky softvéru Harreither-Europlan
+(od októbra 2011)
+
+
+1. Základy, predmet zmluvy
+
+Tieto licenčné podmienky platia ako doplnok k Všeobecným obchodným podmienkam (AGB Harreither GesmbH).
+Pred inštaláciou, stiahnutím a/alebo použitím softvéru si pozorne prečítajte tieto licenčné podmienky.
+Softvér je chránený autorským právom.
+Uzatvorením zmluvy na dodávku/stiahnutie softvéru (bez ohľadu na pamäťové médium) vzniká zákazníkovi neprenosné a nevýhradné právo na používanie zmluvného softvéru, ktoré je obmedzené na nižšie popísané použitie.
+Všetky práva na používanie, ktoré tam nie sú výslovne uvedené, zostávajú spoločnosti Harreither Ges.m.b.H. ako vlastník všetkých autorských práv a práv duševného vlastníctva.
+Je potrebné poznamenať, že nie je možné vytvoriť softvér tak, aby fungoval bezchybne za všetkých mysliteľných podmienok.
+Europlan je softvér na podporu plánovania, detailné a správne plánovanie musí vykonať plánovač.
+
+Europlan bol vyvinutý pre Windows 7.
+Upozorňujeme, že schopnosť spustiť softvér môže byť v jednotlivých prípadoch narušená softvérom tretích strán, ktorý už bol nainštalovaný.
+Problémy s kompatibilitou, ktoré sa vyskytnú v dôsledku iného operačného systému alebo iných softvérových produktov, nepredstavujú chybu.
+
+
+2. Rozsah užívacích práv
+
+2.1 Táto Licencia vám umožňuje používať Softvér na jednom počítači za predpokladu, že Softvér sa vždy používa iba na jednom počítači.
+Ak ste si zakúpili viacero licencií na softvér, môžete použiť maximálne toľko kópií, koľko je zakúpených licencií.
+
+2.2 Zákazník nie je oprávnený robiť kópie softvéru alebo užívateľskej dokumentácie.
+
+2.3 Zákazník nesmie postúpiť softvér tretím osobám.
+
+2.4 Súbežné používanie starej a novej (aktualizácie) verzie softvéru v rámci siete alebo iného viacužívateľského počítačového systému u zákazníka je povolené len vtedy, ak tým nevzniká možnosť súčasného viacnásobného používania novej a starej verzie nad dohodnutý rozsah. udelenie práv na používanie (individuálna alebo kancelárska licencia) na pôvodnú verziu softvéru.
+
+
+3. Aktualizácie
+
+3.1 Aktualizácie môžu zahŕňať ďalší vývoj obsahu alebo kvality softvéru.
+Zákazník dostane najnovšie verzie softvéru buď na dátovom médiu
+alebo prostredníctvom diaľkového prenosu dát (sťahovanie) z internetu.
+
+3.2 Harreither je podľa vlastného uváženia, pokiaľ ide o intervaly, v ktorých sa nové verzie vyvíjajú a ponúkajú.
+Je tiež na rozhodnutí spoločnosti Harreither, či sa funkcie a moduly softvéru zachovajú, zmenia, upravia, zredukujú alebo rozšíria.
+
+3.3 Harreither upozorňuje, že zákazník musí pred inštaláciou aktualizácií vykonať úplnú zálohu údajov, aby sa predišlo strate údajov, najmä údajov vytvorených pomocou softvéru.
+
+
+4. Obmedzenie licencie
+
+4.1 Písomné materiály patriace k softvéru sú chránené autorským právom. Nesmie sa reprodukovať ani distribuovať.
+
+4.2 Nadobúdateľ licencie nie je oprávnený odovzdať softvér alebo súvisiace písomné materiály tretím osobám alebo ich inak sprístupniť tretím osobám bez predchádzajúceho písomného súhlasu poskytovateľa licencie.
+
+
+5. Povinnosti zákazníka
+
+5.1 Zákazník je povinný prijať vhodné opatrenia, aby zabránil neoprávnenému prístupu tretích osôb k softvéru.
+Originály dátových nosičov, záložné kópie a licenčné kľúče musia byť uložené na mieste zabezpečenom proti neoprávnenému prístupu.
+sú zamestnancami zákazníka
+o podrobnostiach týchto podmienok a právach spoločnosti Harreither podľa
+vyučovať autorské právo.
+
+5.2 Zákazník sa musí zdržať akýchkoľvek zmien v softvéri, pokiaľ neslúžia na odstránenie chýb v softvéri a spoločnosť Harreither je v omeškaní s odstránením vád.
+
+5.3 Zákazníkovi je zakázané opätovne prekladať poskytnutý programový kód do iných foriem kódu (dekompilácia).
+
+5.4 Zákazníkovi je zakázané odstraňovať upozornenia o autorských právach alebo funkcie softvéru, ktoré slúžia na zamedzenie výroby pirátskych kópií.
+
+5.5 Vzhľadom na to, že vzhľadom na širokú škálu aplikácií nie je možné zaručiť úplnú bezchybnosť softvéru, je zákazník povinný vykonávať aspoň raz denne kompletné zálohovanie dát, aby sa predišlo strate dát.
+
+
+6. Povinnosť kontrolovať a hlásiť reklamácie
+
+6.1 Zákazník má možnosť počas 30-dňovej lehoty podrobne preskúmať softvér vrátane užívateľskej dokumentácie.
+Zákazník musí zjavné vady (najmä kompletnosť softvéru a užívateľskej dokumentácie, funkčnosť základných funkcií programu) nahlásiť do šiestich týždňov od začiatku používania softvéru v textovej forme s výpovedným popisom vady.
+
+6.2 Vady, ktoré nie sú zrejmé, musia byť oznámené v textovej forme do šiestich týždňov od ich zistenia.
+
+6.3 Ak dôjde k porušeniu povinnosti skontrolovať alebo oznámiť chyby, softvér sa považuje za nezávadný vzhľadom na predmetnú chybu.
+
+
+7. Záručné podmienky
+
+Aj keď bol softvér rozsiahlo testovaný, nie je možné uplatniť žiadne nároky na záruku alebo zodpovednosť z dôvodu rôznych hardvérových a softvérových prostredí, v ktorých je možné softvér používať.
+Europlan je softvér na podporu plánovania, detailné a správne plánovanie musí vykonať plánovač.
+Výpočty a ich výsledky sa musia kontrolovať samostatne pre každú aplikáciu a musia sa podrobne písomne ​​zdokumentovať.
+
+
+8. Záverečné ustanovenia
+
+8.1 Rakúske právo sa vzťahuje výlučne na spory vyplývajúce zo zmlúv alebo v súvislosti so zmluvami týkajúcimi sa nákupu a používania softvéru od spoločnosti Harreither.
+Miestom súdu je Weyer.
+
+8.2 Ak budú jednotlivé ustanovenia týchto obchodných podmienok neúčinné alebo neúčinné
+vzhľadom na okolnosť, ktorá nastane neskôr, zostáva platnosť obchodných podmienok zachovaná
+nedotknuté.

@@ -1,0 +1,91 @@
+Harreither-Europlan software license terms
+(as of October 2011)
+
+
+1. Basics, subject matter of the contract
+
+These license terms apply in addition to the general terms and conditions (GTC Harreither GesmbH).
+Please read these license terms carefully before installing, downloading and/or using the software.
+The software is protected by copyright.
+When the contract for the delivery/download of software (regardless of the storage medium) is concluded, the customer is granted the non-transferable and non-exclusive right to use the software that is the subject of the contract, which is limited to the use described below.
+All rights of use not expressly listed there remain with Harreither Ges.m.b.H. as the owner of all copyrights and protective rights.
+It should be noted that it is not possible to create software in such a way that it works error-free under all conceivable conditions.
+Europlan is planning support software; detailed and correct planning must be carried out manually by the planner.
+
+Europlan was developed for Windows 7.
+It should be noted that the operability of the software may in individual cases be impaired by third-party software that has already been installed.
+Compatibility problems that arise due to a different operating system or other software products do not constitute a defect.
+
+
+2. Scope of usage rights
+
+2.1 This license allows you to use the software on a single computer, provided that the software is only used on a single computer at any time.
+If you have purchased multiple licenses for the software, you may only use as many copies as the number of licenses you have purchased.
+
+2.2 The customer is not authorized to make copies of the software or the user documentation.
+
+2.3 The customer may not pass the software on to third parties.
+
+2.4 The parallel use of old and new (updates) software versions within a network or other multi-user computer system at the customer's is only permitted if this does not create the possibility of simultaneous multiple use of the new and old versions that goes beyond the agreed scope of the granting of usage rights (individual license or office license) for the original version of the software.
+
+
+3. Updates
+
+3.1 The updates can be further developments in the content or quality of the software.
+The customer receives the latest versions of the software either on a data carrier
+or via remote data transmission (download) from the Internet.
+
+3.2 It is at Harreither's discretion at what intervals new versions are developed and offered.
+It is also at Harreither's discretion whether functionalities and modules of the software are retained, changed, modified, reduced or expanded.
+
+3.3 Harreither points out that the customer must make a complete data backup before installing updates to avoid data loss, especially for the data created with the software.
+
+
+4. Limitation of the license
+
+4.1 Written material belonging to the software is protected by copyright. It may not be copied or distributed.
+
+4.2 The licensee is not entitled to hand over the software or associated written material to third parties or otherwise make it accessible without the prior written consent of the licensor.
+
+
+5. Customer obligations
+
+5.1 The customer is obliged to prevent unauthorized access to the software by third parties by taking appropriate precautions.
+Original data carriers, backup copies and license keys must be stored in a location secured against unauthorized access.
+Customer employees must be instructed on the details of these terms and Harreither's rights under the Copyright Act.
+
+5.2 The customer must refrain from making any changes to the software unless they serve to remedy defects in the software and Harreither is in default with the remedy of defects.
+
+5.3 The customer is prohibited from retranslating the program code provided into other code forms (decompilation).
+
+5.4 The customer is prohibited from removing copyright notices or functions of the software that serve to prevent the production of pirated copies.
+
+5.5 Since the software cannot be guaranteed to be completely free of defects due to the wide range of applications, the customer is required to carry out a complete data backup at least daily to prevent data loss.
+
+
+6. Inspection and complaint obligation
+
+6.1 The customer has the opportunity to examine the software including user documentation in detail during the 30-day phase.
+
+The customer must report obvious defects (in particular completeness of software and user documentation, functionality of basic program functions) in writing within six weeks of starting to use the software, with a meaningful description of the defect.
+
+6.2 Non-obvious defects must be reported in writing within six weeks of their discovery.
+
+6.3 If the inspection or complaint obligation is violated, the software is deemed to be free of complaint with regard to the defect in question.
+
+
+7. Warranty provisions
+
+Although the software has been extensively tested, no warranty or liability claims can be made due to the wide variety of hardware and software environments in which the software can be used.
+
+Europlan is planning support software; detailed and correct planning must be carried out manually by the planner.
+Calculations and their results must be checked separately for each application and documented in detail in writing.
+
+
+8. Final provisions
+
+8.1 Austrian law applies exclusively to disputes arising from or in connection with contracts for the purchase and use of software from Harreither.
+The place of jurisdiction is Weyer.
+
+8.2 Should individual provisions of these terms and conditions be invalid or lose their validity due to
+a circumstance occurring later, the validity of the remaining terms and conditions remains unaffected.

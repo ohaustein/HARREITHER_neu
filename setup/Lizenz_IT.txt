@@ -1,0 +1,92 @@
+Termini di licenza del software Harreither-Europlan
+(a partire da ottobre 2011)
+
+
+1. Nozioni di base, oggetto del contratto
+
+Le presenti condizioni di licenza valgono in aggiunta alle Condizioni Generali (AGB Harreither GesmbH).
+Si prega di leggere attentamente le presenti Condizioni di licenza prima di installare, scaricare e/o utilizzare il Software.
+Il software è protetto da copyright.
+Con la conclusione del contratto per la fornitura/download del software (indipendentemente dal supporto di memorizzazione) al cliente viene concesso il diritto non trasferibile e non esclusivo di utilizzare il software contrattuale, limitato all'uso descritto di seguito.
+Tutti i diritti di utilizzo non espressamente elencati rimangono di Harreither Ges.m.b.H. in qualità di titolare di tutti i diritti d'autore e di proprietà intellettuale.
+Va notato che non è possibile creare un software in modo che funzioni senza errori in tutte le condizioni immaginabili.
+Europlan è un software di supporto alla progettazione; la pianificazione dettagliata e corretta deve essere effettuata manualmente dal progettista.
+
+Europlan è stato sviluppato per Windows 7.
+Si tenga presente che in singoli casi la funzionalità del software può essere compromessa da software di terzi già installato.
+I problemi di compatibilità che si verificano a causa di un diverso sistema operativo o di altri prodotti software non costituiscono un difetto.
+
+
+2. Ambito dei diritti di utilizzo
+
+2.1 La presente Licenza consente di utilizzare il Software su un singolo computer, a condizione che il Software venga utilizzato solo su un singolo computer alla volta.
+Se hai acquistato più licenze per il software, puoi utilizzare solo un numero massimo di copie pari al numero di licenze acquistate.
+
+2.2 Il cliente non è autorizzato a fare copie del software o della documentazione per l'utente.
+
+2.3 Il cliente non può cedere il software a terzi.
+
+2.4 L'utilizzo parallelo di versioni software vecchie e nuove (aggiornamenti) all'interno di una rete o di un altro sistema informatico multiutente presso il cliente è consentito solo se ciò non crea la possibilità di un utilizzo multiplo simultaneo delle nuove e vecchie versioni oltre l'ambito concordato la concessione dei diritti di utilizzo (licenza individuale o licenza Office) sulla versione iniziale del software.
+
+
+3. Aggiornamenti
+
+3.1 Gli aggiornamenti possono comportare ulteriori sviluppi nel contenuto o nella qualità del software.
+Il cliente riceve le ultime versioni del software su supporto dati
+oppure tramite trasmissione remota dei dati (download) da Internet.
+
+3.2 Harreither è a sua discrezione per quanto riguarda gli intervalli con cui vengono sviluppate e offerte le nuove versioni.
+È inoltre a discrezione di Harreither se le funzionalità e i moduli del software vengono mantenuti, modificati, modificati, ridotti o ampliati.
+
+3.3 Harreither sottolinea che il cliente deve effettuare un backup completo dei dati prima di installare gli aggiornamenti per evitare perdite di dati, soprattutto per i dati creati con il software.
+
+
+4. Limitazione della licenza
+
+4.1 Il materiale scritto appartenente al software è protetto da copyright. Non può essere riprodotto o distribuito.
+
+4.2 Il licenziatario non è autorizzato a cedere a terzi il software o il relativo materiale scritto o a renderli altrimenti accessibili a terzi senza il previo consenso scritto del concessore di licenza.
+
+
+5. Obblighi del Cliente
+
+5.1 Il cliente è tenuto ad adottare le misure adeguate per impedire l'accesso non autorizzato al software da parte di terzi.
+I supporti dati originali, le copie di backup e le chiavi di licenza devono essere conservati in un luogo protetto da accessi non autorizzati.
+sono dipendenti del cliente
+sui dettagli di queste condizioni e sui diritti di Harreither ai sensi del
+insegnare il diritto d'autore.
+
+5.2 Il cliente è tenuto ad astenersi da qualsiasi modifica al software, a meno che non serva ad eliminare difetti del software e Harreither sia in mora con l'eliminazione dei difetti.
+
+5.3 Al cliente è vietato tradurre nuovamente il codice del programma fornito in altre forme di codice (decompilazione).
+
+5.4 Al cliente è vietato rimuovere avvisi di copyright o funzioni del software che servono a impedire la produzione di copie piratate.
+
+5.5 Poiché a causa dell'ampia gamma di applicazioni non è possibile garantire che il software sia completamente privo di difetti, il cliente è tenuto ad effettuare almeno quotidianamente un backup completo dei dati per evitare la perdita di dati.
+
+
+6. Obbligo di ispezione e di segnalazione dei reclami
+
+6.1 Il cliente ha la possibilità di esaminare dettagliatamente il software, inclusa la documentazione per l'utente, durante il periodo di 30 giorni.
+Il cliente è tenuto a segnalare i difetti evidenti (in particolare la completezza del software e della documentazione per l'utente, la funzionalità delle funzioni di base del programma) entro sei settimane dall'inizio dell'utilizzo del software in forma testuale con una descrizione significativa del difetto.
+
+6.2 I difetti non evidenti devono essere denunciati per iscritto entro sei settimane dalla loro scoperta.
+
+6.3 Se viene violato l'obbligo di controllo o di denuncia dei difetti, il software è considerato ineccepibile per quanto riguarda il difetto in questione.
+
+
+7. Condizioni di garanzia
+
+Sebbene il software sia stato ampiamente testato, non è possibile avanzare alcuna garanzia o richiesta di responsabilità a causa dei diversi ambienti hardware e software in cui il software può essere utilizzato.
+Europlan è un software di supporto alla progettazione; la pianificazione dettagliata e corretta deve essere effettuata manualmente dal progettista.
+I calcoli e i relativi risultati devono essere verificati separatamente per ciascuna domanda e documentati dettagliatamente per iscritto.
+
+
+8. Disposizioni finali
+
+8.1 Per le controversie derivanti da o in relazione ai contratti riguardanti l'acquisizione e l'utilizzo di software di Harreither si applica esclusivamente il diritto austriaco.
+Il foro competente è Weyer.
+
+8.2 Qualora singole disposizioni di questi termini e condizioni siano inefficaci o siano inefficaci
+a causa di una circostanza che si verifica successivamente, la validità dei termini e delle condizioni rimane
+intatto.

@@ -1,0 +1,92 @@
+Warunki licencji na oprogramowanie Harreither-Europlan
+(stan na pazdziernik 2011 r.)
+
+
+1. Podstawy, przedmiot umowy
+
+Niniejsze warunki licencji obowiazuja jako uzupelnienie Ogólnych Warunków Handlowych (AGB Harreither GesmbH).
+Przed instalacja, pobraniem i/lub uzywaniem Oprogramowania prosimy o uwazne przeczytanie niniejszych Warunków licencyjnych.
+Oprogramowanie jest chronione prawem autorskim.
+Z chwila zawarcia umowy na dostawe/pobranie oprogramowania (niezaleznie od nosnika) Klientowi zostaje przyznane niezbywalne i niewylaczne prawo do korzystania z objetego umowa oprogramowania, ograniczone do wykorzystania opisanego ponizej.
+Wszelkie prawa do uzytkowania, które nie sa tam wyraznie wymienione, pozostaja wlasnoscia Harreither Ges.m.b.H. jako wlasciciel wszelkich praw autorskich i praw wlasnosci intelektualnej.
+Nalezy zaznaczyc, ze nie jest mozliwe stworzenie oprogramowania, które dzialaloby bezblednie we wszystkich mozliwych warunkach.
+Europlan to oprogramowanie wspomagajace planowanie; szczególowe i prawidlowe planowanie musi zostac przeprowadzone recznie przez planiste.
+
+Europaplan zostal opracowany dla systemu Windows 7.
+Nalezy pamietac, ze w indywidualnych przypadkach mozliwosc uruchomienia oprogramowania moze zostac ograniczona przez zainstalowane juz oprogramowanie innych firm.
+Problemy ze zgodnoscia, które wynikaja z innego systemu operacyjnego lub innego oprogramowania, nie stanowia wady.
+
+
+2. Zakres praw do korzystania
+
+2.1 Niniejsza Licencja umozliwia korzystanie z Oprogramowania na jednym komputerze, pod warunkiem, ze Oprogramowanie bedzie uzywane w danym momencie tylko na jednym komputerze.
+Jesli zakupiles wiele licencji na oprogramowanie, mozesz wykorzystac maksymalnie tyle kopii, ile jest zakupionych licencji.
+
+2.2 Klient nie jest uprawniony do wykonywania kopii oprogramowania ani dokumentacji uzytkownika.
+
+2.3 Klientowi nie wolno przekazywac oprogramowania osobom trzecim.
+
+2.4 Równolegle uzywanie starych i nowych (aktualizacji) wersji oprogramowania w sieci lub innym systemie komputerowym dla wielu uzytkowników u Klienta jest dozwolone tylko wtedy, gdy nie stwarza to mozliwosci jednoczesnego wielokrotnego korzystania z nowych i starych wersji poza uzgodnionym zakresem przyznanie praw do korzystania (licencja indywidualna lub licencja biurowa) z wersji poczatkowej oprogramowania.
+
+
+3. Aktualizacje
+
+3.1 Aktualizacje moga obejmowac dalszy rozwój tresci lub jakosci oprogramowania.
+Klient otrzymuje najnowsze wersje oprogramowania albo na nosniku danych
+lub poprzez zdalna transmisje danych (pobieranie) z Internetu.
+
+3.2 Harreither wedlug wlasnego uznania okresla czestotliwosc opracowywania i oferowania nowych wersji.
+Harreither decyduje takze o tym, czy funkcjonalnosci i moduly oprogramowania maja zostac zachowane, zmienione, zmodyfikowane, zredukowane lub rozszerzone.
+
+3.3 Harreither zwraca uwage, ze klient musi wykonac pelna kopie zapasowa danych przed zainstalowaniem aktualizacji, aby uniknac utraty danych, zwlaszcza danych utworzonych za pomoca oprogramowania.
+
+
+4. Ograniczenie Licencji
+
+4.1 Materialy pisemne nalezace do oprogramowania sa chronione prawem autorskim. Nie moze byc powielana ani rozpowszechniana.
+
+4.2 Licencjobiorca nie jest uprawniony do przekazywania oprogramowania lub powiazanych materialów pisemnych osobom trzecim ani udostepniania ich w inny sposób osobom trzecim bez uprzedniej pisemnej zgody licencjodawcy.
+
+
+5. Obowiazki Klienta
+
+5.1 Klient zobowiazany jest podjac odpowiednie srodki ostroznosci, aby zapobiec nieuprawnionemu dostepowi osób trzecich do oprogramowania.
+Oryginalne nosniki danych, kopie zapasowe i klucze licencyjne nalezy przechowywac w miejscu zabezpieczonym przed nieuprawnionym dostepem.
+sa pracownikami Klienta
+o szczególach tych warunków i prawach Harreither wynikajacych z
+uczyc prawa autorskiego.
+
+5.2 Klient ma obowiazek powstrzymac sie od dokonywania jakichkolwiek zmian w oprogramowaniu, chyba ze sluza one usunieciu wad oprogramowania, a Harreither zalega z usunieciem wad.
+
+5.3 Klientowi zabrania sie ponownego tlumaczenia dostarczonego kodu programu na inne formy kodu (dekompilacja).
+
+5.4 Klientowi zabrania sie usuwania informacji o prawach autorskich lub funkcji oprogramowania, które sluza zapobieganiu tworzeniu pirackich kopii.
+
+5.5 Poniewaz ze wzgledu na szeroki zakres zastosowan nie mozna zagwarantowac, ze oprogramowanie bedzie calkowicie wolne od wad, Klient jest zobowiazany do wykonywania pelnej kopii zapasowej danych przynajmniej raz dziennie, aby zapobiec utracie danych.
+
+
+6. Obowiazek rozpatrywania i zglaszania reklamacji
+
+6.1 Klient ma mozliwosc szczególowego sprawdzenia oprogramowania, w tym dokumentacji uzytkownika, w okresie 30 dni.
+Klient ma obowiazek zglosic oczywiste wady (w szczególnosci kompletnosc oprogramowania i dokumentacji uzytkownika, funkcjonalnosc podstawowych funkcji programu) w terminie szesciu tygodni od rozpoczecia korzystania z oprogramowania w formie tekstowej wraz ze szczególowym opisem wady.
+
+6.2 Wady nieoczywiste nalezy zglosic pisemnie w ciagu szesciu tygodni od ich wykrycia.
+
+6.3 W przypadku naruszenia obowiazku sprawdzenia lub zgloszenia wad, oprogramowanie uwaza sie za nie budzace zastrzezen ze wzgledu na dana wade.
+
+
+7. Warunki gwarancji
+
+Chociaz oprogramowanie zostalo szeroko przetestowane, nie mozna zglaszac zadnych roszczen z tytulu gwarancji ani odpowiedzialnosci ze wzgledu na róznorodne srodowiska sprzetowe i programowe, w których mozna uzywac oprogramowania.
+Europlan to oprogramowanie wspomagajace planowanie; szczególowe i prawidlowe planowanie musi zostac przeprowadzone recznie przez planiste.
+Obliczenia i ich wyniki nalezy sprawdzic oddzielnie dla kazdego zastosowania i szczególowo udokumentowac na pismie.
+
+
+8. Postanowienia koncowe
+
+8.1 Prawo austriackie ma zastosowanie wylacznie do sporów wynikajacych lub zwiazanych z umowami dotyczacymi nabycia i uzytkowania oprogramowania firmy Harreither.
+Miejscem jurysdykcji jest Weyer.
+
+8.2 Jezeli poszczególne postanowienia niniejszego regulaminu okaza sie nieskuteczne lub beda nieskuteczne
+z uwagi na okolicznosc, która nastapi pózniej, niniejsze warunki zachowuja waznosc
+nietkniety.

@@ -1,0 +1,92 @@
+Harreither-Europlan szoftver licencfeltételei
+(2011 októberétől)
+
+
+1. Alapok, a szerződés tárgya
+
+Ezek a licencfeltételek az Általános Szerződési Feltételek (AGB Harreither GesmbH) mellett érvényesek.
+Kérjük, figyelmesen olvassa el ezeket a licencfeltételeket, mielőtt telepíti, letölti és/vagy használja a szoftvert.
+A szoftver szerzői jogvédelem alatt áll.
+A szoftver szállítására/letöltésére vonatkozó szerződés megkötésével (függetlenül az adathordozótól) a megrendelőt át nem ruházható és nem kizárólagos használati jog illeti meg a szerződéses szoftver használatára, amely az alábbiakban leírt felhasználásra korlátozódik.
+Az ott kifejezetten fel nem sorolt ​​összes használati jog a Harreither Ges.m.b.H. mint minden szerzői jog és szellemi tulajdonjog tulajdonosa.
+Megjegyzendő, hogy nem lehet olyan szoftvert létrehozni, amely minden elképzelhető körülmény között hibamentesen működjön.
+Az Europlan egy tervezést támogató szoftver, amelyet a tervezőnek manuálisan kell elvégeznie.
+
+Az Europlant Windows 7 rendszerre fejlesztették ki.
+Kérjük, vegye figyelembe, hogy a szoftver futtatásának képességét egyes esetekben ronthatja a harmadik féltől származó, már telepített szoftver.
+Az eltérő operációs rendszer vagy más szoftvertermékek miatt fellépő kompatibilitási problémák nem minősülnek hibának.
+
+
+2. A használati jogok köre
+
+2.1 Ez a Licenc lehetővé teszi a Szoftver egyetlen számítógépen történő használatát, feltéve, hogy a Szoftvert bármikor csak egyetlen számítógépen használja.
+Ha több licencet vásárolt a szoftverhez, akkor legfeljebb annyi példányt használhat fel, ahány licencet vásárolt.
+
+2.2 Az ügyfél nem jogosult másolatot készíteni a szoftverről vagy a felhasználói dokumentációról.
+
+2.3 Az ügyfél nem adhatja át a szoftvert harmadik félnek.
+
+2.4 A régi és új (frissítések) szoftververziók párhuzamos használata hálózaton vagy más többfelhasználós számítógépes rendszeren belül az ügyfélnél csak akkor megengedett, ha ez nem teremti meg a lehetőséget az új és a régi verziók egyidejű többszöri használatára a megállapodás szerinti kereteken túl. használati jogok (egyedi licenc vagy irodai licenc) megadása a szoftver kezdeti verziójához.
+
+
+3. Frissítések
+
+3.1 A frissítések a szoftver tartalmának vagy minőségének további fejlesztését vonhatják maguk után.
+Az ügyfél a szoftver legújabb verzióit vagy adathordozón kapja meg
+vagy távoli adatátvitellel (letöltéssel) az internetről.
+
+3.2 A Harreither saját belátása szerint dönti el, hogy milyen időközönként fejleszti és kínálja fel az új verziókat.
+A Harreither belátása szerint a szoftver funkcióit és moduljait megtartja, módosítja, módosítja, csökkenti vagy bővíti.
+
+3.3 Harreither felhívja a figyelmet arra, hogy az ügyfélnek teljes adatmentést kell készítenie a frissítések telepítése előtt az adatvesztés elkerülése érdekében, különösen a szoftverrel létrehozott adatok esetében.
+
+
+4. A licenc korlátozása
+
+4.1 A szoftverhez tartozó írott anyagok szerzői jogvédelem alatt állnak. Nem reprodukálható vagy terjeszthető.
+
+4.2 Az engedélyes nem jogosult a szoftvert vagy a kapcsolódó írásos anyagokat harmadik félnek átadni, vagy más módon harmadik fél számára hozzáférhetővé tenni a licencadó előzetes írásbeli hozzájárulása nélkül.
+
+
+5. Ügyfél kötelezettségei
+
+5.1 Az ügyfél köteles megtenni a megfelelő óvintézkedéseket annak megakadályozására, hogy harmadik felek illetéktelenül hozzáférjenek a szoftverhez.
+Az eredeti adathordozókat, biztonsági másolatokat és licenckulcsokat illetéktelen hozzáférés ellen védett helyen kell tárolni.
+az ügyfél alkalmazottai
+e feltételek részleteiről és Harreither jogairól a
+szerzői jogot tanítani.
+
+5.2 Az ügyfélnek tartózkodnia kell a szoftver bármilyen módosításától, kivéve, ha az a szoftver hibáinak megszüntetését szolgálja, és a Harreither késedelembe esik a hibák kijavításával.
+
+5.3 Az ügyfélnek tilos a megadott programkódot más kódformákra újra lefordítani (dekompiláció).
+
+5.4 Az ügyfélnek tilos eltávolítania a szerzői jogi megjegyzéseket vagy a szoftver azon funkcióit, amelyek a kalózmásolatok előállításának megakadályozását szolgálják.
+
+5.5 Mivel az alkalmazások széles köre miatt nem garantálható, hogy a szoftver teljesen hibamentes legyen, ezért az adatvesztés megelőzése érdekében az ügyfélnek legalább naponta teljes körű adatmentést kell végeznie.
+
+
+6. A panaszok vizsgálati és bejelentési kötelezettsége
+
+6.1 Az ügyfélnek lehetősége van a 30 napos időtartam alatt részletesen megvizsgálni a szoftvert, beleértve a felhasználói dokumentációt is.
+A vásárlónak a nyilvánvaló hibákat (különösen a szoftver és a felhasználói dokumentáció hiánytalanságát, a program alapvető funkcióinak működőképességét) a szoftver használatának megkezdését követő hat héten belül szöveges formában, a hiba érdemi leírásával kell jelentenie.
+
+6.2 A nem nyilvánvaló hibákat a felfedezésüket követő hat héten belül szöveges formában jelenteni kell.
+
+6.3 Az ellenőrzési vagy hibabejelentési kötelezettség megsértése esetén a szoftver a kérdéses hiba tekintetében kifogásolhatatlannak minősül.
+
+
+7. Garanciális feltételek
+
+Bár a szoftvert alaposan tesztelték, a szoftver használatának változatos hardver- és szoftverkörnyezetei miatt garanciális vagy felelősségi igény nem érvényesíthető.
+Az Europlan egy tervezést támogató szoftver, amelyet a tervezőnek manuálisan kell elvégeznie.
+A számításokat és azok eredményeit pályázatonként külön kell ellenőrizni, és írásban részletesen dokumentálni.
+
+
+8. Záró rendelkezések
+
+8.1 Az osztrák jog kizárólag a Harreithertől származó szoftverek beszerzésére és használatára vonatkozó szerződésekből eredő vagy azokkal kapcsolatos vitákra vonatkozik.
+A joghatóság helye Weyer.
+
+8.2 Ha a jelen feltételek egyes rendelkezései hatástalanok vagy hatástalanok
+később bekövetkező körülmény miatt a szerződési feltételek érvényben maradnak
+érintetlen.

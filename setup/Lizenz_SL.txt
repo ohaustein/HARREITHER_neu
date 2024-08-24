@@ -1,0 +1,92 @@
+Licenčni pogoji programske opreme Harreither-Europlan
+(od oktobra 2011)
+
+
+1. Osnove, predmet pogodbe
+
+Ti licenčni pogoji veljajo poleg splošnih pogojev (AGB Harreither GesmbH).
+Pred namestitvijo, prenosom in/ali uporabo programske opreme natančno preberite te licenčne pogoje.
+Programska oprema je zaščitena z avtorskimi pravicami.
+Ob sklenitvi pogodbe o dobavi/prenosu programske opreme (ne glede na pomnilniški medij) je kupcu podeljena neprenosljiva in neizključna pravica do uporabe pogodbene programske opreme, ki je omejena na spodaj opisano uporabo.
+Vse pravice uporabe, ki tam niso izrecno navedene, ostanejo pri Harreither Ges.m.b.H. kot imetnik vseh avtorskih pravic in pravic intelektualne lastnine.
+Upoštevati je treba, da programske opreme ni mogoče ustvariti tako, da bi delovala brez napak v vseh možnih pogojih.
+Europlan je program za podporo načrtovanju; natančno in pravilno načrtovanje mora načrtovalec izvesti ročno.
+
+Europlan je bil razvit za Windows 7.
+Upoštevajte, da lahko zmožnost zagona programske opreme v posameznih primerih zmanjša programska oprema tretjih oseb, ki je že nameščena.
+Težave z združljivostjo, ki se pojavijo zaradi drugega operacijskega sistema ali drugih izdelkov programske opreme, ne predstavljajo napake.
+
+
+2. Obseg pravic uporabe
+
+2.1 Ta licenca vam dovoljuje uporabo programske opreme na enem računalniku, pod pogojem, da se programska oprema kadar koli uporablja samo na enem računalniku.
+Če ste kupili več licenc za programsko opremo, lahko uporabite največ toliko kopij, kot je število licenc, ki ste jih kupili.
+
+2.2 Stranka ni upravičena do izdelave kopij programske opreme ali uporabniške dokumentacije.
+
+2.3 Stranka programske opreme ne sme posredovati tretjim osebam.
+
+2.4 Vzporedna uporaba stare in nove (posodobitve) različic programske opreme v omrežju ali drugem večuporabniškem računalniškem sistemu pri naročniku je dovoljena le, če se s tem ne ustvari možnost hkratne večkratne uporabe nove in stare različice izven dogovorjenega obsega. podelitev pravic uporabe (posamezna licenca ali pisarniška licenca) za prvotno različico programske opreme.
+
+
+3. Posodobitve
+
+3.1 Posodobitve lahko vključujejo nadaljnji razvoj vsebine ali kakovosti programske opreme.
+Stranka prejme najnovejše različice programske opreme bodisi na podatkovnem mediju
+ali preko oddaljenega prenosa podatkov (download) iz interneta.
+
+3.2 Harreither je po lastni presoji glede intervalov, v katerih se razvijajo in ponujajo nove različice.
+Harreitherjeva presoja je tudi, ali bodo funkcionalnosti in moduli programske opreme obdržani, spremenjeni, spremenjeni, zmanjšani ali razširjeni.
+
+3.3 Harreither poudarja, da mora stranka pred namestitvijo posodobitev narediti popolno varnostno kopijo podatkov, da prepreči izgubo podatkov, zlasti podatkov, ustvarjenih s programsko opremo.
+
+
+4. Omejitev licence
+
+4.1 Pisno gradivo, ki pripada programski opremi, je zaščiteno z avtorskimi pravicami. Prepovedano je reproducirati ali distribuirati.
+
+4.2 Pridobitelj licence nima pravice predati programske opreme ali povezanega pisnega gradiva tretjim osebam ali kako drugače omogočiti dostopa tretjim osebam brez predhodnega pisnega soglasja dajalca licence.
+
+
+5. Obveznosti stranke
+
+5.1 Stranka je dolžna sprejeti ustrezne varnostne ukrepe za preprečitev nepooblaščenega dostopa tretjih oseb do programske opreme.
+Izvirni nosilci podatkov, varnostne kopije in licenčni ključi morajo biti shranjeni na mestu, zaščitenem pred nepooblaščenim dostopom.
+so zaposleni pri naročniku
+o podrobnostih teh pogojev in Harreitherjevih pravicah po
+poučevati avtorsko pravo.
+
+5.2 Stranka se mora vzdržati kakršnih koli sprememb programske opreme, razen če je namenjena odpravljanju napak v programski opremi in Harreither zamuja z odpravo napak.
+
+5.3 Stranki je prepovedano ponovno prevajanje posredovane programske kode v druge kodne oblike (dekompilacija).
+
+5.4 Stranki je prepovedano odstraniti obvestila o avtorskih pravicah ali funkcije programske opreme, ki preprečujejo izdelavo piratskih kopij.
+
+5.5 Ker zaradi širokega nabora aplikacij ni mogoče zagotoviti popolne brezhibnosti programske opreme, mora stranka vsaj vsak dan narediti popolno varnostno kopijo podatkov, da prepreči izgubo podatkov.
+
+
+6. Obveznost pregleda in prijave reklamacij
+
+6.1 Stranka ima možnost v 30-dnevnem obdobju podrobno pregledati programsko opremo, vključno z uporabniško dokumentacijo.
+Očitne napake (zlasti popolnost programske in uporabniške dokumentacije, funkcionalnost osnovnih programskih funkcij) mora stranka prijaviti v roku šestih tednov od začetka uporabe programske opreme v besedilni obliki s smiselnim opisom napake.
+
+6.2 O neočitnih napakah je treba poročati v besedilni obliki v šestih tednih po njihovem odkritju.
+
+6.3 Če je obveznost pregledovanja ali obveščanja o napakah kršena, se šteje, da je programska oprema nesporna glede zadevne napake.
+
+
+7. Garancijski pogoji
+
+Čeprav je bila programska oprema obsežno preizkušena, ni mogoče uveljavljati nobenih zahtevkov glede garancije ali odgovornosti zaradi različnih okolij strojne in programske opreme, v katerih se lahko uporablja programska oprema.
+Europlan je program za podporo načrtovanju; natančno in pravilno načrtovanje mora načrtovalec izvesti ročno.
+Izračune in njihove rezultate je treba preveriti za vsako prijavo posebej in podrobno pisno dokumentirati.
+
+
+8. Končne določbe
+
+8.1 Avstrijsko pravo se uporablja izključno za spore, ki izhajajo iz ali v zvezi s pogodbami o nakupu in uporabi programske opreme družbe Harreither.
+Kraj pristojnosti je Weyer.
+
+8.2 Če so posamezne določbe teh pogojev neučinkovite ali neučinkovite
+zaradi okoliščine, ki nastopi pozneje, veljavnost pogojev ostane
+nedotaknjen.

@@ -1,0 +1,92 @@
+Términos de la licencia del software Harreither-Europlan
+(a octubre de 2011)
+
+
+1. Conceptos básicos, objeto del contrato
+
+Estas condiciones de licencia se aplican además de los Términos y condiciones generales (AGB Harreither GesmbH).
+Lea atentamente estos Términos de licencia antes de instalar, descargar y/o utilizar el Software.
+El software está protegido por derechos de autor.
+Tras la celebración del contrato para la entrega/descarga de software (independientemente del medio de almacenamiento), se concede al cliente el derecho intransferible y no exclusivo de utilizar el software contractual, que se limita al uso que se describe a continuación.
+Todos los derechos de uso no mencionados allí expresamente pertenecen a Harreither Ges.m.b.H. como propietario de todos los derechos de autor y derechos de propiedad intelectual.
+Cabe señalar que no es posible crear un software que funcione sin errores en todas las condiciones imaginables.
+Europlan es un software de apoyo a la planificación; el planificador debe realizar manualmente una planificación detallada y correcta.
+
+Europlan fue desarrollado para Windows 7.
+Tenga en cuenta que, en casos individuales, la capacidad de ejecutar el software puede verse afectada por software de terceros que ya esté instalado.
+Los problemas de compatibilidad que ocurren debido a un sistema operativo diferente u otros productos de software no constituyen un defecto.
+
+
+2. Alcance de los derechos de uso
+
+2.1 Esta Licencia le permite utilizar el Software en una sola computadora, siempre que el Software solo se use en una sola computadora en cualquier momento.
+Si ha adquirido varias licencias para el software, solo podrá utilizar un máximo de tantas copias como licencias haya adquirido.
+
+2.2 El cliente no tiene derecho a realizar copias del software o de la documentación del usuario.
+
+2.3 El cliente no podrá ceder el software a terceros.
+
+2.4 El uso paralelo de versiones de software antiguas y nuevas (actualizaciones) dentro de una red u otro sistema informático multiusuario del cliente solo está permitido si esto no crea la posibilidad de un uso múltiple simultáneo de las versiones nuevas y antiguas más allá del alcance acordado. la concesión de derechos de uso (licencia individual o licencia de oficina) sobre la versión inicial del software.
+
+
+3. Actualizaciones
+
+3.1 Las actualizaciones pueden implicar mayores novedades en el contenido o la calidad del software.
+El cliente recibe las últimas versiones del software en un soporte de datos
+o mediante transmisión remota de datos (descarga) desde Internet.
+
+3.2 Harreither queda a su discreción en cuanto a los intervalos en los que se desarrollan y ofrecen nuevas versiones.
+También queda a discreción de Harreither si se conservan, cambian, modifican, reducen o amplían las funcionalidades y módulos del software.
+
+3.3 Harreither señala que el cliente debe realizar una copia de seguridad completa de los datos antes de instalar las actualizaciones para evitar la pérdida de datos, especialmente los datos creados con el software.
+
+
+4. Limitación de la licencia
+
+4.1 El material escrito que pertenece al software está protegido por derechos de autor. No puede ser reproducido ni distribuido.
+
+4.2 El licenciatario no tiene derecho a entregar el software o el material escrito asociado a terceros ni a hacerlos accesibles a terceros sin el consentimiento previo por escrito del licenciante.
+
+
+5. Obligaciones del cliente
+
+5.1 El cliente está obligado a tomar las precauciones adecuadas para evitar el acceso de terceros no autorizados al software.
+Los soportes de datos originales, las copias de seguridad y las claves de licencia deben guardarse en un lugar protegido contra el acceso no autorizado.
+son empleados del cliente
+sobre los detalles de estas condiciones y los derechos de Harreither bajo el
+para enseñar derecho de autor.
+
+5.2 El cliente debe abstenerse de realizar cambios en el software a menos que sirva para eliminar defectos en el software y Harreither esté en mora con la eliminación de defectos.
+
+5.3 El cliente tiene prohibido volver a traducir el código del programa proporcionado a otras formas de código (descompilación).
+
+5.4 El cliente tiene prohibido eliminar avisos de derechos de autor o funciones del software que sirvan para evitar la producción de copias pirateadas.
+
+5.5 Dado que no se puede garantizar que el software esté completamente libre de defectos debido a la amplia gama de aplicaciones, el cliente debe realizar una copia de seguridad completa de los datos al menos una vez al día para evitar la pérdida de datos.
+
+
+6. Obligación de inspeccionar y comunicar denuncias
+
+6.1 El cliente tiene la oportunidad de examinar el software, incluida la documentación del usuario, en detalle durante el período de 30 días.
+El cliente debe informar los defectos evidentes (en particular, la integridad del software y la documentación del usuario, la funcionalidad de las funciones básicas del programa) en un plazo de seis semanas desde el inicio de la utilización del software en forma de texto con una descripción significativa del defecto.
+
+6.2 Los defectos no evidentes deben notificarse por escrito en un plazo de seis semanas desde su descubrimiento.
+
+6.3 Si se infringe la obligación de inspeccionar o notificar defectos, el software se considerará inobjetable con respecto al defecto en cuestión.
+
+
+7. Condiciones de garantía
+
+Aunque el software ha sido probado exhaustivamente, no se pueden realizar reclamaciones de garantía o responsabilidad debido a los diversos entornos de hardware y software en los que se puede utilizar el software.
+Europlan es un software de apoyo a la planificación; el planificador debe realizar manualmente una planificación detallada y correcta.
+Los cálculos y sus resultados deberán comprobarse por separado para cada aplicación y documentarse detalladamente por escrito.
+
+
+8. Disposiciones finales
+
+8.1 La ley austriaca se aplica exclusivamente a disputas que surjan de o en conexión con contratos relacionados con la adquisición y uso de software de Harreither.
+El lugar de jurisdicción es Weyer.
+
+8.2 En caso de que las disposiciones individuales de estos términos y condiciones sean ineficaces o sean ineficaces
+debido a una circunstancia que ocurre posteriormente, la validez de los términos y condiciones permanece
+intacto.

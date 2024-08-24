@@ -1,0 +1,92 @@
+Harreither-Europlan-Software-Lizenzbestimmungen
+(Stand Oktober 2011)
+
+
+1. Grundsätzliches, Vertragsgegenstand
+
+Diese Lizenzbedingungen gelten ergänzend zu den Allgemeinen Geschäftsbedingungen (AGB Harreither GesmbH). 
+Bitte lesen Sie diese Lizenzbedingungen sorgfältig durch, bevor Sie die Software installieren, herunterladen und/oder benutzen.
+Die Software ist urheberrechtlich geschützt. 
+Mit Vertragsabschluss über die Lieferung/den Download von Software (unabhängig vom Speichermedium) wird dem Kunden das nicht übertragbare und nicht ausschließliche Nutzungsrecht an der vertragsgegenständlichen Software eingeräumt, das auf die nachfolgend beschriebene Nutzung beschränkt ist. 
+Alle dort nicht ausdrücklich aufgeführten Nutzungsrechte verbleiben bei der Harreither Ges.m.b.H. als Inhaber aller Urheber- und Schutzrechte.
+Es wird darauf hingewiesen, dass es nicht möglich ist, Software so zu erstellen, dass sie unter allen denkbaren Bedingungen fehlerfrei arbeitet.
+Europlan ist eine Planungsunterstützungssoftware, eine ausführliche und korrekte Planung muss manuell vom Planenden durchgeführt werden.
+
+Europlan wurde für Windows 7 entwickelt. 
+Es wird darauf hingewiesen, dass die Lauffähigkeit der Software im Einzelfall durch bereits installierte Software von Drittanbietern beeinträchtigt werden kann.
+Kompatibilitätsprobleme, auf Grund eines anderen Betriebsystems bzw. anderen Softwareprodukten auftreten stellen keinen Mangel dar.
+
+
+2. Umfang der Nutzungsrechte
+
+2.1 Diese Lizenz erlaubt Ihnen die Benutzung der Software auf einem Einzelcomputer unter der Voraussetzung, dass die Software zu jeder Zeit nur auf einem einzigen Computer verwendet wird.
+Wenn Sie Mehrfachlizenzen für die Software erworben haben, dürfen Sie immer nur höchstens so viele Kopien in Benutzung haben, wie Lizenzen von Ihnen erworben wurden. 
+
+2.2 Der Kunde ist nicht berechtigt Kopien von der Software oder der Benutzerdokumentation anzufertigen.
+
+2.3 Der Kunde darf die Software nicht an Dritte weitergeben.
+
+2.4 Die parallele Nutzung alter und neuer (Updates) Software-Versionen innerhalb eines Netzwerkes oder eines sonstigen Mehrplatz-Rechner-Systems beim Kunden ist nur zulässig, wenn damit nicht die Möglichkeit zeitgleicher Mehrfachnutzung der neuen und alten Versionen geschaffen wird, die über den vereinbarten Umfang der Einräumung von Nutzungsrechten (Einzellizenz oder Bürolizenz) an der Ausgangsversion der Software hinausgeht.
+
+
+3. Updates
+
+3.1 Bei den Updates kann es sich um inhaltliche oder qualitative Weiterentwicklungen der Software handeln. 
+Der Kunde erhält die aktuellsten Versionen der Software entweder auf einem Datenträger
+oder per Datenfernübertragung (Download) aus dem Internet.
+
+3.2 Es steht im Ermessen von Harreither, in welchen zeitlichen Abständen neue Versionen entwickelt und angeboten werden. 
+Ebenso steht es im Ermessen von Harreither, ob Funktionalitäten und Module der Software beibehalten, geändert, modifiziert, reduziert oder erweitert werden.
+
+3.3 Harreither weist darauf hin, dass der Kunde vor Installation von Updates zur Vermeidung eines Datenverlusts eine vollständige Datensicherung vorzunehmen hat, insbesondere für die mit der Software erstellten Daten.
+
+
+4. Beschränkung der Lizenz
+
+4.1 Zur Software gehörendes Schriftmaterial ist urheberrechtlich geschützt. Es darf weder vervielfältigt noch verbreitet werden.
+
+4.2 Der Lizenznehmer ist nicht berechtigt, ohne vorherige schriftliche Einwilligung des Lizenzgebers die Software oder zugehöriges schriftliches Material an Dritte zu übergeben oder sonstwie zugänglich zu machen.
+
+
+5. Pflichten des Kunden
+
+5.1 Der Kunde ist verpflichtet, unbefugten Zugriff Dritter auf die Software durch geeignete Vorkehrungen zu verhindern. 
+Originaldatenträger, Sicherungskopien und Lizenzschlüssel sind an einem gegen unberechtigten Zugriff gesicherten Ort aufzubewahren. 
+Mitarbeiter des Kunden sind
+über die Einzelheiten dieser Bedingungen und die Rechte von Harreither nach dem
+Urheberrechtsgesetz zu belehren.
+
+5.2 Der Kunde hat jede Änderung der Software zu unterlassen, soweit es nicht der Mängelbeseitigung der Software dient und Harreither mit der Mängelbeseitigung im Verzug ist.
+
+5.3 Dem Kunden ist die Rückübersetzung des überlassenen Programmcodes in andere Codeformen(Dekompilierung) untersagt.
+
+5.4 Dem Kunden ist es untersagt, Urheberrechtsvermerke oder Funktionen der Software, die der Verhinderung der Herstellung von Raubkopien dienen, zu entfernen.
+
+5.5 Da eine völlige Mängelfreiheit der Software aufgrund der vielfältigen Einsatzfälle nicht zugesichert werden kann, ist der Kunde gehalten, mindestens täglich, eine vollständige Datensicherung durchzuführen, um Datenverluste zu verhindern.
+
+
+6. Untersuchungs- und Rügepflicht
+
+6.1 Der Kunde hat Gelegenheit, die Software einschließlich Benutzerdokumentation während der 30-tägigen Phase ausführlich zu untersuchen. 
+Offensichtliche Mängel (insb. Vollständigkeit von Software und Benutzerdokumentation, Funktionsfähigkeit grundlegender Programmfunktionen) hat der Kunde binnen sechs Wochen nach Beginn der Nutzung der Software in Textform unter aussagekräftiger Mängelbeschreibung mitzuteilen.
+
+6.2 Nicht offensichtliche Mängel müssen innerhalb sechs Woche nach ihrer Entdeckung in Textform mitgeteilt werden.
+
+6.3 Bei Verletzung der Untersuchungs- oder Rügepflicht gilt die Software hinsichtlich des betreffenden Mangels als unbeanstandet.
+
+
+7. Garantiebestimmungen
+
+Obwohl die Software ausgiebig getestet worden ist, können auf Grund der vielfältigen Hardware- und Softwareumgebungen, in denen die Software benutzt werden kann, keinerlei Garantie- oder Haftungsansprüche geltend gemacht werden.
+Europlan ist eine Planungsunterstützungssoftware, eine ausführliche und korrekte Planung muss manuell vom Planenden durchgeführt werden. 
+Berechnungen sowie deren Ergebnisse sind bei jeder Anwendung separat nachzuprüfen und ausführlich schriftlich zu dokumentieren.
+
+
+8. Schlussbestimmungen
+
+8.1 Für Streitigkeiten aus oder im Zusammenhang mit Verträgen über den Erwerb und die Nutzung von Software von Harreither gilt ausschließlich österreichisches Recht. 
+Gerichtsstand ist Weyer.
+
+8.2 Sollten einzelne Bestimmungen dieser Bedingungen unwirksam sein oder die Wirksamkeit durch
+einen später eintretenden Umstand verlieren, bleibt die Wirksamkeit der Bedingungen im Übrigen
+unberührt.

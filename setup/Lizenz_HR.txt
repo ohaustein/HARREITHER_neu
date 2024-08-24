@@ -1,0 +1,92 @@
+Uvjeti licenciranja softvera Harreither-Europlan
+(od listopada 2011.)
+
+
+1. Osnove, predmet ugovora
+
+Ovi licencni uvjeti vrijede uz Opće uvjete i odredbe (AGB Harreither GesmbH).
+Pažljivo pročitajte ove Licencne uvjete prije instaliranja, preuzimanja i/ili korištenja softvera.
+Softver je zaštićen autorskim pravima.
+Prilikom sklapanja ugovora o isporuci/preuzimanja softvera (bez obzira na medij za pohranu), kupcu se daje neprenosivo i neisključivo pravo korištenja ugovorenog softvera, koje je ograničeno na korištenje opisano u nastavku.
+Sva prava korištenja koja nisu izričito navedena ostaju u vlasništvu Harreither Ges.m.b.H. kao nositelj svih autorskih prava i prava intelektualnog vlasništva.
+Treba napomenuti da nije moguće izraditi softver tako da radi bez grešaka u svim zamislivim uvjetima.
+Europlan je softver za podršku planiranju; detaljno i ispravno planiranje mora provesti ručno planer.
+
+Europlan je razvijen za Windows 7.
+Imajte na umu da mogućnost pokretanja softvera može biti smanjena u pojedinačnim slučajevima zbog softvera treće strane koji je već instaliran.
+Problemi s kompatibilnošću koji se javljaju zbog drugog operativnog sustava ili drugih softverskih proizvoda ne predstavljaju nedostatak.
+
+
+2. Opseg prava korištenja
+
+2.1 Ova licenca vam dopušta korištenje softvera na jednom računalu, pod uvjetom da se softver u bilo kojem trenutku koristi samo na jednom računalu.
+Ako ste kupili više licenci za softver, možete koristiti najviše onoliko kopija koliko ste licenci kupili.
+
+2.2 Kupac nema pravo na izradu kopija softvera ili korisničke dokumentacije.
+
+2.3 Kupac ne smije proslijediti softver trećim stranama.
+
+2.4 Paralelno korištenje stare i nove (nadogradnje) verzije softvera unutar mreže ili drugog višekorisničkog računalnog sustava kod kupca dopušteno je samo ako se time ne stvara mogućnost istovremenog višestrukog korištenja nove i stare verzije izvan dogovorenog opsega. dodjela prava korištenja (individualna licenca ili uredska licenca) početne verzije softvera.
+
+
+3. Ažuriranja
+
+3.1 Ažuriranja mogu uključivati ​​daljnji razvoj sadržaja ili kvalitete softvera.
+Kupac dobiva najnovije verzije softvera ili na mediju podataka
+ili putem daljinskog prijenosa podataka (download) s interneta.
+
+3.2 Harreither odlučuje o intervalima u kojima se razvijaju i nude nove verzije.
+Harreither također odlučuje hoće li se funkcionalnosti i moduli softvera zadržati, promijeniti, modificirati, smanjiti ili proširiti.
+
+3.3 Harreither ističe da korisnik mora napraviti potpunu sigurnosnu kopiju podataka prije instaliranja ažuriranja kako bi se izbjegao gubitak podataka, posebno za podatke stvorene pomoću softvera.
+
+
+4. Ograničenje licence
+
+4.1 Pisani materijal koji pripada softveru zaštićen je autorskim pravom. Ne smije se reproducirati ili distribuirati.
+
+4.2 Vlasnik licence nema pravo predati softver ili povezani pisani materijal trećim stranama ili ih na drugi način učiniti dostupnima trećim stranama bez prethodnog pisanog pristanka davatelja licence.
+
+
+5. Obveze kupca
+
+5.1 Kupac je dužan poduzeti odgovarajuće mjere opreza kako bi spriječio neovlašteni pristup treće strane softveru.
+Izvorni nosači podataka, sigurnosne kopije i licencni ključevi moraju biti pohranjeni na mjestu zaštićenom od neovlaštenog pristupa.
+su zaposlenici kupca
+o detaljima ovih uvjeta i Harreitherovim pravima prema
+predavati autorsko pravo.
+
+5.2 Kupac se mora suzdržati od bilo kakvih promjena na softveru osim ako one služe za uklanjanje nedostataka u softveru i Harreither kasni s otklanjanjem nedostataka.
+
+5.3 Kupcu je zabranjeno ponovno prevođenje dostavljenog programskog koda u druge oblike koda (dekompilacija).
+
+5.4 Kupcu je zabranjeno uklanjati obavijesti o autorskim pravima ili funkcije softvera koje služe za sprječavanje proizvodnje piratskih kopija.
+
+5.5 Budući da se ne može jamčiti da je softver u potpunosti bez nedostataka zbog širokog raspona aplikacija, kupac je dužan napraviti potpunu sigurnosnu kopiju podataka najmanje jednom dnevno kako bi se spriječio gubitak podataka.
+
+
+6. Obveza pregleda i prijave reklamacija
+
+6.1 Kupac ima priliku detaljno pregledati softver, uključujući korisničku dokumentaciju, tijekom razdoblja od 30 dana.
+Kupac mora prijaviti očite nedostatke (osobito cjelovitost softvera i korisničke dokumentacije, funkcionalnost osnovnih programskih funkcija) u roku od šest tjedana od početka korištenja softvera u tekstualnom obliku sa smislenim opisom kvara.
+
+6.2 Neočiti nedostaci moraju se prijaviti u tekstualnom obliku u roku od šest tjedana od njihovog otkrivanja.
+
+6.3 Ako se prekrši obveza provjere ili davanja obavijesti o nedostacima, smatra se da softver nema prigovora u pogledu dotičnog nedostatka.
+
+
+7. Uvjeti jamstva
+
+Iako je softver opsežno testiran, ne mogu se podnijeti zahtjevi za jamstvo ili odgovornost zbog različitih hardverskih i softverskih okruženja u kojima se softver može koristiti.
+Europlan je softver za podršku planiranju; detaljno i ispravno planiranje mora provesti ručno planer.
+Izračune i njihove rezultate potrebno je posebno provjeriti za svaku prijavu i detaljno dokumentirati u pisanom obliku.
+
+
+8. Završne odredbe
+
+8.1 Austrijski zakon primjenjuje se isključivo na sporove koji proizlaze iz ili u vezi s ugovorima u vezi s nabavom i korištenjem softvera od Harreithera.
+Mjesto jurisdikcije je Weyer.
+
+8.2 Trebaju li pojedine odredbe ovih uvjeta i odredbi biti neučinkovite ili neučinkovite
+zbog okolnosti koje se kasnije pojave, valjanost odredbi i uvjeta ostaje na snazi
+netaknuta.
