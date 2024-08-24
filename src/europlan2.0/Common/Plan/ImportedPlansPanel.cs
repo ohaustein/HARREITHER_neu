@@ -225,21 +225,11 @@ namespace Europlan.Common {
 
                     NewPlanForm newPlanForm = null;
 
-#if PDF
-#if !DEBUG
-					// Solid Framework license
-					SolidFramework.LicenseCollection.Instance.Clear();
-					SolidFramework.License.Import("Christian Neudorfer", "christian.neudorfer@bluesource.at", "bluesource - mobile solutions gmbh", "CXZC");
-#endif
-
-					List<SolidFramework.Pdf.Plumbing.PdfPage> pages = null;
-#endif
-
 					if (isPdf(extension)) {
 #if PDF
-						pages = this.GetPdfPages(dialog.FileName);
+                        var pageCount = PDF.PdfHelper.GetPageCount(dialog.FileName);
                         newPlanForm = new NewPlanForm(true);
-						newPlanForm.NumOfPages = pages.Count;
+						newPlanForm.NumOfPages = pageCount;
 #endif
 					} else {
                         newPlanForm = new NewPlanForm(false);
@@ -434,6 +424,7 @@ namespace Europlan.Common {
         }
 
         private bool isCad(string extension)
+        { 
             return string.Compare(".dxf", extension, true) == 0 ||
                 string.Compare(".dwg", extension, true) == 0;
         }
