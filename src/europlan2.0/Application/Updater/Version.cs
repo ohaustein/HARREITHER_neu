@@ -132,8 +132,8 @@ namespace Europlan.Application
 
         public static Int32 Compare(Version item1, Version item2)
         {
-            if (ReferenceEquals(item1, null)) throw new ArgumentNullException("item1"); // TODO nameof
-            if (ReferenceEquals(item2, null)) throw new ArgumentNullException("item2"); // TODO nameof
+            if (ReferenceEquals(item1, null)) throw new ArgumentNullException(nameof(item1));
+            if (ReferenceEquals(item2, null)) throw new ArgumentNullException(nameof(item2));
             if (ReferenceEquals(item1, item2)) return 0;
             var comparisonResultGeneration = item1.Generation.CompareTo(item2.Generation);
             if (comparisonResultGeneration == 0)
@@ -167,8 +167,8 @@ namespace Europlan.Application
 
         public static Int32 Compare(Version item1, System.Version item2)
         {
-            if (ReferenceEquals(item1, null)) throw new ArgumentNullException("item1"); // TODO nameof
-            if (ReferenceEquals(item2, null)) throw new ArgumentNullException("item2"); // TODO nameof
+            if (ReferenceEquals(item1, null)) throw new ArgumentNullException(nameof(item1));
+            if (ReferenceEquals(item2, null)) throw new ArgumentNullException(nameof(item2));
             if (ReferenceEquals(item1, item2)) return 0;
             var comparisonResultGeneration = item1.Generation.CompareTo(item2.Major);
             if (comparisonResultGeneration == 0)
@@ -219,7 +219,7 @@ namespace Europlan.Application
 
         public static Boolean TryParse(String text, out Version version)
         {
-            if (text == null) throw new ArgumentNullException("text"); // TODO nameof
+            if (text == null) throw new ArgumentNullException(nameof(text));
             try
             {
                 var match = Regex.Match(text, PARSING_REGEX_PATTERN);
@@ -280,7 +280,7 @@ namespace Europlan.Application
 
         public static String ToLongString(Version version)
         {
-            if (ReferenceEquals(version, null)) throw new ArgumentNullException("version"); // TODO nameof
+            if (ReferenceEquals(version, null)) throw new ArgumentNullException(nameof(version));
             if (version.HasComment)
             {
                 var result = String.Format(LONG_VERSION_FORMAT_WITH_COMMENT, version.Generation, version.MajorVersion, version.MinorVersion, version.Release.GetValueOrDefault(0), version.Comment);
@@ -295,14 +295,14 @@ namespace Europlan.Application
 
         public static String ToShortString(Version version)
         {
-            if (ReferenceEquals(version, null)) throw new ArgumentNullException("version"); // TODO nameof
+            if (ReferenceEquals(version, null)) throw new ArgumentNullException(nameof(version));
             var result = String.Format(SHORT_VERSION_FORMAT, version.Generation, version.MajorVersion, version.MinorVersion, version.Release.GetValueOrDefault(0));
             return result;
         }
 
         public static String ToUserFriendlyString(Version version)
         {
-            if (ReferenceEquals(version, null)) throw new ArgumentNullException("version"); // TODO nameof
+            if (ReferenceEquals(version, null)) throw new ArgumentNullException(nameof(version));
             var versionStringBuilder = new StringBuilder();
             var versionSuffixList = new List<String>();
 
@@ -459,7 +459,7 @@ namespace Europlan.Application
 
         public Int32 CompareTo(Version other)
         {
-            if (ReferenceEquals(other, null)) throw new ArgumentNullException("other"); // TODO nameof
+            if (ReferenceEquals(other, null)) throw new ArgumentNullException(nameof(other));
             return Compare(this, other);
         }
 
