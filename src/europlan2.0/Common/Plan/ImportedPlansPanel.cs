@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using log4net;
 
-namespace Europlan.Common {
-	public partial class ImportedPlansPanel : UserControl, IEditorUserControl, ISaveRequest {
+namespace Europlan.Common
+{
+    public partial class ImportedPlansPanel : UserControl, IEditorUserControl, ISaveRequest
+    {
+
+
+        internal const Int32 PDF_PREVIEW_DPI = 72;
+        internal const Int32 PDF_PT_PER_INCH = 72;
+
+
 
 #if PDF
-		private class PreviewConverterArguments {
+        private class PreviewConverterArguments
+        {
             private ProgressForm progressForm;
             private NewPlanForm newPlanForm;
             private string fileName;
@@ -22,7 +32,8 @@ namespace Europlan.Common {
             private string extension;
             private string tmpFileName;
 
-			public PreviewConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, /*List<SolidFramework.Pdf.Plumbing.PdfPage> Pages,*/ string dir, string subDir, string extension) {
+            public PreviewConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, /*List<SolidFramework.Pdf.Plumbing.PdfPage> Pages,*/ string dir, string subDir, string extension)
+            {
                 this.progressForm = progressForm;
                 this.newPlanForm = newPlanform;
                 this.fileName = fileName;
@@ -31,37 +42,45 @@ namespace Europlan.Common {
                 this.extension = extension;
             }
 
-			public ProgressForm ProgressForm {
+            public ProgressForm ProgressForm
+            {
                 get { return this.progressForm; }
             }
 
-			public NewPlanForm NewPlanForm {
+            public NewPlanForm NewPlanForm
+            {
                 get { return this.newPlanForm; }
             }
 
-			public string FileName {
+            public string FileName
+            {
                 get { return this.fileName; }
             }
 
-			public string Dir {
+            public string Dir
+            {
                 get { return this.dir; }
             }
 
-			public string SubDir {
+            public string SubDir
+            {
                 get { return this.subDir; }
             }
 
-			public string Extension {
+            public string Extension
+            {
                 get { return this.extension; }
             }
 
-			public string TmpFileName {
+            public string TmpFileName
+            {
                 get { return this.tmpFileName; }
                 set { this.tmpFileName = value; }
             }
         }
 
-		private class FinalConverterArguments {
+        private class FinalConverterArguments
+        {
             private ProgressForm progressForm;
             private NewPlanForm newPlanForm;
             private string fileName;
@@ -71,7 +90,8 @@ namespace Europlan.Common {
             private double top, left, bottom, right;
             private int dpi;
 
-			public FinalConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, string dir, string subDir, string extension, double top, double left, double bottom, double right, int dpi) {
+            public FinalConverterArguments(ProgressForm progressForm, NewPlanForm newPlanform, string fileName, string dir, string subDir, string extension, double top, double left, double bottom, double right, int dpi)
+            {
                 this.progressForm = progressForm;
                 this.newPlanForm = newPlanform;
                 this.fileName = fileName;
@@ -85,47 +105,58 @@ namespace Europlan.Common {
                 this.dpi = dpi;
             }
 
-			public ProgressForm ProgressForm {
+            public ProgressForm ProgressForm
+            {
                 get { return this.progressForm; }
             }
 
-			public NewPlanForm NewPlanForm {
+            public NewPlanForm NewPlanForm
+            {
                 get { return this.newPlanForm; }
             }
 
-			public string FileName {
+            public string FileName
+            {
                 get { return this.fileName; }
             }
 
-			public string Dir {
+            public string Dir
+            {
                 get { return this.dir; }
             }
 
-			public string SubDir {
+            public string SubDir
+            {
                 get { return this.subDir; }
             }
 
-			public string Extension {
+            public string Extension
+            {
                 get { return this.extension; }
             }
 
-			public double Top {
+            public double Top
+            {
                 get { return this.top; }
             }
 
-			public double Left {
+            public double Left
+            {
                 get { return this.left; }
             }
 
-			public double Bottom {
+            public double Bottom
+            {
                 get { return this.bottom; }
             }
 
-			public double Right {
+            public double Right
+            {
                 get { return this.right; }
             }
 
-			public int Dpi {
+            public int Dpi
+            {
                 get { return this.dpi; }
             }
         }
@@ -134,41 +165,58 @@ namespace Europlan.Common {
         private static readonly ILog log = LogManager.GetLogger(typeof(ImportedPlansPanel));
 
         private event ProjectStructureChangedHandler projectStructureChanged;
-        public event ProjectStructureChangedHandler ProjectStructureChanged {
+        public event ProjectStructureChangedHandler ProjectStructureChanged
+        {
             add { this.projectStructureChanged += value; }
             remove { this.projectStructureChanged -= value; }
         }
         private event ProjectChangedHandler projectChanged;
-        public event ProjectChangedHandler ProjectChanged {
+        public event ProjectChangedHandler ProjectChanged
+        {
             add { this.projectChanged += value; }
             remove { this.projectChanged -= value; }
         }
         private event TreeSelectionRequestedHandler treeSelectionRequested;
-        public event TreeSelectionRequestedHandler TreeSelectionRequested {
+        public event TreeSelectionRequestedHandler TreeSelectionRequested
+        {
             add { this.treeSelectionRequested += value; }
             remove { this.treeSelectionRequested -= value; }
         }
         public event ProjectSaveRequestHandler ProjectSaveRequest;
 
-#if PDF
-        private System.ComponentModel.BackgroundWorker backgroundSaver;
-        private System.ComponentModel.BackgroundWorker backgroundSaver2;
-#endif
 
-		public ImportedPlansPanel() {
+        public ImportedPlansPanel()
+        {
             InitializeComponent();
-#if PDF
-            this.backgroundSaver = new BackgroundWorker();
-            this.backgroundSaver.DoWork += new DoWorkEventHandler(backgroundSaver_DoWork);
-            this.backgroundSaver.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundSaver_RunWorkerCompleted);
-            this.backgroundSaver2 = new BackgroundWorker();
-            this.backgroundSaver2.DoWork += new DoWorkEventHandler(backgroundSaver2_DoWork);
-            this.backgroundSaver2.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundSaver2_RunWorkerCompleted);
-#endif
             this.SetLanguage();
         }
 
-		private void SetLanguage() {
+
+        private Rectangle GetPlanRegion(PDF.PdfHelper pdfHelper, Int32 pageIndex, WW.Math.Point2D? pointTopLeft, WW.Math.Point2D? pointBottomRight)
+        {
+            if (pointTopLeft.HasValue && pointBottomRight.HasValue)
+            {
+                var top = Convert.ToInt32(pointTopLeft.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI);
+                var left = Convert.ToInt32(pointTopLeft.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI);
+                var bottom = Convert.ToInt32(pointBottomRight.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI);
+                var right = Convert.ToInt32(pointBottomRight.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI);
+                var width = right - left;
+                var height = bottom - top;
+                var rectangle = new Rectangle(left, top, width, height);
+                return rectangle;
+            }
+            else
+            {
+                var pageTrimBox = pdfHelper.GetPageTrimBox(pageIndex);
+                var width = pageTrimBox.Right - pageTrimBox.Left;
+                var height = pageTrimBox.Bottom - pageTrimBox.Top;
+                var rectangle = new Rectangle(pageTrimBox.Left, pageTrimBox.Top, width, height);
+                return rectangle;
+            }
+        }
+
+        private void SetLanguage()
+        {
             this.lblImportedPlans.Text = EuroplanRes.ImportedPlansPanel_ImportiertePlaene; //"Planverwaltung"
             this.btnImport.Text = EuroplanRes.ImportedPlansPanel_PlanImportieren; //"Plan importieren"
             this.btnDelete.Text = EuroplanRes.ImportedPlansPanel_PlanEntfernen; //"Plan entfernen"
@@ -179,311 +227,85 @@ namespace Europlan.Common {
             this.colOptions.HeaderText = EuroplanRes.ImportedPlansPanel_Optionen; //"Optionen"
         }
 
-		public void UpdateControl(bool resetUserInterface) {
+        public void UpdateControl(bool resetUserInterface)
+        {
             btnDelete.Enabled = Project.Instance.ImportedPlans.Count > 0;
             btnExport.Enabled = Project.Instance.ImportedPlans.Count > 0;
             planSource.DataSource = Project.Instance.ImportedPlans;
             planSource.ResetBindings(false);
         }
 
-		public bool AllowLeave() {
+        public bool AllowLeave()
+        {
             return true;
         }
 
-		private void btnImport_Click(object sender, EventArgs e) {
-            bool saved = true;
-			if (ProjectSaveRequest != null) {
-                ProjectSaveRequest(this, true, out saved);
-            }
-			if (saved) {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.CheckFileExists = true;
-                dialog.CheckPathExists = true;
-                dialog.DefaultExt = "dxf";
-#if PDF
-                dialog.Filter = EuroplanRes.ImportedPlansPanel_AlleFilter + "|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp";
-#else
-				dialog.Filter = EuroplanRes.ImportedPlansPanel_AlleFilter + "|*.dxf;*.dwg;*.jpg;*.png;*.bmp";
-#endif
-                dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg";
-#if PDF
-                dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_PdfFilter + "|*.pdf";
-#endif
-                dialog.Filter += "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp";
-                dialog.Multiselect = false;
-                DialogResult result = dialog.ShowDialog();
-				if (result == DialogResult.OK) {
-                    List<Plan> plans = Project.Instance.ImportedPlans;
-                    string extension = Path.GetExtension(dialog.FileName);
-                    string file = isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName);
-					foreach (Plan plan in plans) {
-						if (Path.GetFileName(plan.RelativeFileName).Equals(file)) {
-                            result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden);
-                            return;
-                        }
-                    }
-
-                    NewPlanForm newPlanForm = null;
-
-					if (isPdf(extension)) {
-#if PDF
-                        var pageCount = PDF.PdfHelper.GetPageCount(dialog.FileName);
-                        newPlanForm = new NewPlanForm(true);
-						newPlanForm.NumOfPages = pageCount;
-#endif
-					} else {
-                        newPlanForm = new NewPlanForm(false);
-                    }
-                    result = newPlanForm.ShowDialog();
-					if (result == DialogResult.OK) {
-                        Plan plan = null;
-                        string dir = Path.GetDirectoryName(Project.Instance.ProjectFileName);
-                        string subDir = Path.GetFileNameWithoutExtension(Project.Instance.ProjectFileName) + "_plans";
-                        dir = Path.Combine(dir, subDir);
-						if (!Directory.Exists(dir)) {
-                            Directory.CreateDirectory(dir);
-                        }
-
-						if (isPdf(extension)) {
-#if PDF
-                            previewSemaphore = new Semaphore(0, 1);
-                            ProgressForm progressForm = new ProgressForm(previewSemaphore);
-                            PreviewConverterArguments args = new PreviewConverterArguments(progressForm, newPlanForm, dialog.FileName, /*pages,*/ dir, subDir, extension);
-                            this.backgroundSaver.RunWorkerAsync(args);
-
-                            progressForm.ShowDialog();
-                            dialog.Dispose();
-#endif
-						} else {
-							if (isImage(extension)) {
-                                plan = new ImagePlan();
-							} else if (isCad(extension)) {
-                                plan = new CadPlan();
-                            }
-
-
-                            string newFileName = Path.Combine(dir, Path.GetFileName(dialog.FileName));
-							if (!dialog.FileName.Equals(newFileName)) {
-                                File.Copy(dialog.FileName, newFileName, true);
-                            }
-
-                            plan.Name = newPlanForm.PlanName;
-                            plan.RelativeFileName = Path.Combine(subDir, isPdf(extension) ? Path.GetFileNameWithoutExtension(dialog.FileName) + ".png" : Path.GetFileName(dialog.FileName));
-                            bool import = true;
-                            if (isDwg(extension)) {
-                                MessageBox.Show(EuroplanRes.ImportedPlansPanel_DwgWarnung, EuroplanRes.ImportedPlansPanel_DwgWarnungTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-							if (plan.IsLargePlan) {
-                                import = MessageBox.Show(EuroplanRes.ImportedPlansPanel_GrosserPlanText, EuroplanRes.ImportedPlansPanel_GrosserPlanTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-                            }
-							if (import) {
-                                plans.Add(plan);
-								if (projectChanged != null) {
-                                    projectChanged(this);
-                                }
-                                UpdateControl(false);
-                            }
-
-                            newPlanForm.Dispose();
-                            dialog.Dispose();
-							if (import) {
-                                openPlanOptions(plan);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private static readonly int PDF_PREVIEW_DPI = 72;
-        public static readonly int PDF_PT_PER_INCH = 72;
-
-        private static Semaphore previewSemaphore;
-        private static Semaphore finalSemaphore;
-
-#if PDF
-        private void backgroundSaver_DoWork(object sender, DoWorkEventArgs e)
+        private void CheckIfPlanAlreadyImported(OpenFileDialogResult openFileDialogResult)
         {
-            if (e.Argument is PreviewConverterArguments)
+            var fileNameToLookFor = openFileDialogResult.FileNameWithoutExtension + (openFileDialogResult.IsPdf ? ".png" : openFileDialogResult.Extension);
+            var isPlanAlreadyImported = Project.Instance.ImportedPlans
+                    .Select(plan => Path.GetFileName(plan.RelativeFileName))
+                    .Any(planFileName => String.Equals(fileNameToLookFor, planFileName, StringComparison.OrdinalIgnoreCase));
+            if (isPlanAlreadyImported)
             {
-                var previewConverterArguments = e.Argument as PreviewConverterArguments;
-                var pageIndex = previewConverterArguments.NewPlanForm.PageNumber - 1;
-                var pageBitmap = PDF.PdfHelper.GetPageBitmap(previewConverterArguments.FileName, pageIndex);
-                previewConverterArguments.TmpFileName = Path.GetTempFileName();
-                if (File.Exists(previewConverterArguments.TmpFileName))
+                if (openFileDialogResult.IsPdf)
                 {
-                    File.Delete(previewConverterArguments.TmpFileName);
+                    // Bei einem PDF erhält der Nutzer einen Hinweis darauf und kann wählen, ob er abermals importieren möchte. Grund dafür ist, dass man ggf. mehrere Teile aus einem PDF importieren möchte
+                    var dialogResult = MessageBox.Show(EuroplanRes.ImportedPlansPanel_PdfSchonImportiertMeldung, EuroplanRes.ImportedPlansPanel_PdfSchonImportiertTitel, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        throw new ExceptionImportAborted();
+                    }
                 }
-                pageBitmap.Save(previewConverterArguments.TmpFileName, System.Drawing.Imaging.ImageFormat.Png);
-                pageBitmap.Dispose();
-                e.Result = previewConverterArguments;
+                else
+                {
+                    MessageBox.Show(EuroplanRes.ImportedPlansPanel_PlanSchonVorhanden, String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throw new ExceptionImportAborted();
+                }
             }
         }
 
-        private void backgroundSaver_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void CopyFileToPlans(OpenFileDialogResult openFileDialogResult, String plansDirectoryName)
         {
-            previewSemaphore.WaitOne();
-            PreviewConverterArguments args = e.Result as PreviewConverterArguments;
-            args.ProgressForm.Close();
-            TempImagePlan plan = new TempImagePlan();
-            plan.Name = args.NewPlanForm.PlanName;
-            plan.SetAbsoluteFilename(args.TmpFileName);
-
-            PdfRegionPickerForm regionPickerForm = new PdfRegionPickerForm(plan);
-            DialogResult dr = regionPickerForm.ShowDialog();
-			if (dr == DialogResult.Cancel) {
-                return;
-            }
-            int dpi = regionPickerForm.Dpi;
-
-            double top = 0, left = 0, bottom = 0, right = 0;
-
-            if (regionPickerForm.TopLeft.HasValue && regionPickerForm.BottomRight.HasValue)
+            if (!Directory.Exists(plansDirectoryName))
             {
-                top = regionPickerForm.TopLeft.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-                left = regionPickerForm.TopLeft.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-                bottom = regionPickerForm.BottomRight.Value.Y * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
-                right = regionPickerForm.BottomRight.Value.X * PDF_PT_PER_INCH / PDF_PREVIEW_DPI;
+                Directory.CreateDirectory(plansDirectoryName);
+            }
+            var newFilePath = Path.Combine(plansDirectoryName, openFileDialogResult.FileName);
+            if (!String.Equals(openFileDialogResult.FilePath, newFilePath, StringComparison.OrdinalIgnoreCase))
+            {
+                File.Copy(openFileDialogResult.FilePath, newFilePath, overwrite: true);
+            }
+        }
+
+        private Plan CreatePlanInstance(OpenFileDialogResult openFileDialogResult)
+        {
+            if (openFileDialogResult.IsImage) return new ImagePlan();
+            if (openFileDialogResult.IsCad) return new CadPlan();
+            throw new ExceptionInvalidExtension(openFileDialogResult.Extension);
+        }
+
+        private OpenFileDialogResult DetermineFileToImport()
+        {
+            var fileDialog = new OpenFileDialog()
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "dxf",
+                Filter = EuroplanRes.ImportedPlansPanel_AlleFilter + "|*.dxf;*.dwg;*.pdf;*.jpg;*.png;*.bmp" +
+                        "|" + EuroplanRes.ImportedPlansPanel_DxfFilter + "|*.dxf;*.dwg" +
+                        "|" + EuroplanRes.ImportedPlansPanel_PdfFilter + "|*.pdf" +
+                        "|" + EuroplanRes.ImportedPlansPanel_ImageFilter + "|*.jpg;*.png;*.bmp",
+                Multiselect = false
+            };
+            var dialogResult = fileDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                return new OpenFileDialogResult(fileDialog);
             }
             else
             {
-                var pageIndex = args.NewPlanForm.PageNumber - 1;
-                var pageTrimBox = PDF.PdfHelper.GetPageTrimBox(args.FileName, pageIndex);
-                bottom = pageTrimBox.Bottom - pageTrimBox.Top;
-                right = pageTrimBox.Right - pageTrimBox.Left;
-            }
-
-            finalSemaphore = new Semaphore(0, 1);
-            ProgressForm progressForm = new ProgressForm(finalSemaphore);
-            FinalConverterArguments fArgs = new FinalConverterArguments(progressForm, args.NewPlanForm, args.FileName, args.Dir, args.SubDir, args.Extension, top, left, bottom, right, dpi);
-            this.backgroundSaver2.RunWorkerAsync(fArgs);
-            progressForm.ShowDialog();
-        }
-
-		private void backgroundSaver2_DoWork(object sender, DoWorkEventArgs e) {
-            FinalConverterArguments args = e.Argument as FinalConverterArguments;
-
-            double dpi = args.Dpi;
-
-            double width = args.Right - args.Left;
-            double height = args.Bottom - args.Top;
-
-            Bitmap bm = new Bitmap((int)(width * dpi / PDF_PT_PER_INCH), (int)(height * dpi / PDF_PT_PER_INCH));
-            Graphics g = Graphics.FromImage(bm);
-            System.Drawing.Drawing2D.Matrix m = new System.Drawing.Drawing2D.Matrix();
-            m.Translate((float)(-args.Left * dpi / PDF_PT_PER_INCH), (float)(-args.Top * dpi / PDF_PT_PER_INCH));
-            m.Scale((float)(dpi / PDF_PT_PER_INCH), (float)(dpi / PDF_PT_PER_INCH));
-            g.Transform = m;
-            var pageIndex = args.NewPlanForm.PageNumber - 1;
-            PDF.PdfHelper.DrawToHDC(args.FileName, pageIndex, g);
-
-            // Setup the filename.
-            string newFileName = Path.Combine(args.Dir, Path.GetFileNameWithoutExtension(args.FileName) + ".png");
-
-            // If the file exits already, delete it. I.E. Overwrite it.
-            if (File.Exists(newFileName))
-                File.Delete(newFileName);
-
-            // Save the file.
-            bm.Save(newFileName, System.Drawing.Imaging.ImageFormat.Png);
-
-            // Cleanup.
-            bm.Dispose();
-
-            e.Result = args;
-
-        }
-
-		private void backgroundSaver2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            finalSemaphore.WaitOne();
-
-            FinalConverterArguments args = e.Result as FinalConverterArguments;
-
-            args.ProgressForm.Close();
-            ImagePlan plan = new ImagePlan();
-            plan.Name = args.NewPlanForm.PlanName;
-            plan.RelativeFileName = Path.Combine(args.SubDir, isPdf(args.Extension) ? Path.GetFileNameWithoutExtension(args.FileName) + ".png" : Path.GetFileName(args.FileName));
-
-            Project.Instance.ImportedPlans.Add(plan);
-            if (this.projectChanged != null) {
-                this.projectChanged(this);
-            }
-            UpdateControl(false);
-
-            args.NewPlanForm.Dispose();
-            openPlanOptions(plan);
-        }
-
-#endif
-
-        private bool isImage(string extension)
-        {
-            return string.Compare(".jpg", extension, true) == 0 ||
-                string.Compare(".bmp", extension, true) == 0 ||
-                string.Compare(".png", extension, true) == 0;
-        }
-
-        private bool isCad(string extension)
-        { 
-            return string.Compare(".dxf", extension, true) == 0 ||
-                string.Compare(".dwg", extension, true) == 0;
-        }
-
-        private bool isPdf(string extension)
-        {
-            return string.Compare(".pdf", extension, true) == 0;
-        }
-
-        private bool isDwg(string extension)
-        {
-            return string.Compare(".dwg", extension, true) == 0;
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            // check if plan is already used
-            // if (alreadyused) { ....
-            DialogResult result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_WirklichLoeschenMessage, EuroplanRes.ImportedPlansPanel_WirklichLoeschenTitle, MessageBoxButtons.YesNo);
-            if (result.Equals(DialogResult.Yes))
-            {
-                if (dgvPlans.SelectedRows[0] != null)
-                {
-                    Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
-                    deletePlan(plan);
-                }
-            }
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            if (dgvPlans.SelectedRows[0] != null)
-            {
-                Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
-                ExportPlanForm form = new ExportPlanForm(plan);
-                form.ShowDialog();
-                form.Dispose();
-            }
-        }
-
-        private void dgvPlans_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (projectChanged != null)
-            {
-                projectChanged(this);
-            }
-        }
-
-        private void dgvPlans_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && e.ColumnIndex < this.dgvPlans.Columns.Count &&
-                this.dgvPlans.Columns[e.ColumnIndex] == this.colOptions &&
-                e.RowIndex >= 0 && e.RowIndex < this.dgvPlans.Rows.Count)
-            {
-                Plan plan = this.dgvPlans.Rows[e.RowIndex].DataBoundItem as Plan;
-                if (plan != null)
-                {
-                    openPlanOptions(plan);
-                }
+                return null;
             }
         }
 
@@ -558,7 +380,203 @@ namespace Europlan.Common {
                 UpdateControl(false);
             }
         }
-         
+
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ob das Projekt gespeichert ist, wird über ein Ereignis ausgelöst; dieses liefert im out-Parameter auch zurück, ob das Projekt gespeichert wurde
+                var isProjectSaved = true;
+                ProjectSaveRequest?.Invoke(this, true, out isProjectSaved);
+
+                if (isProjectSaved)
+                {
+                    var openFileDialogResult = DetermineFileToImport();
+                    if (openFileDialogResult != null)
+                    {
+                        try
+                        {
+                            CheckIfPlanAlreadyImported(openFileDialogResult);
+                            var projectPlansDirectoryName = Project.Instance.GetProjectPlansDirectoryName();
+                            var projectPlansSubdirectoryName = Project.Instance.GetProjectPlansSubdirectoryName();
+
+                            using (var newPlanForm = new NewPlanForm(false))
+                            {
+                                if (newPlanForm.ShowDialog() == DialogResult.OK)
+                                {
+                                    if (openFileDialogResult.IsPdf)
+                                    {
+                                        var pdfHelper = new PDF.PdfHelper(openFileDialogResult.FilePath);
+                                        using (var pdfRegionPicketForm = new PdfRegionPickerForm(pdfHelper))
+                                        {
+                                            if (pdfRegionPicketForm.ShowDialog() == DialogResult.OK)
+                                            {
+                                                if (pdfRegionPicketForm.SelectedPageIndex.HasValue)
+                                                {
+                                                    var selectedPageIndex = pdfRegionPicketForm.SelectedPageIndex.Value;
+                                                    var planRegion = GetPlanRegion(pdfHelper, selectedPageIndex, pdfRegionPicketForm.TopLeft, pdfRegionPicketForm.BottomRight);
+                                                    var newPlanAbsolutPath = Path.Combine(projectPlansDirectoryName, openFileDialogResult.FileNameWithoutExtension + ".png");
+                                                    var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, openFileDialogResult.FileNameWithoutExtension + ".png");
+                                                    pdfHelper.SaveToPng(pdfRegionPicketForm.SelectedPageIndex.Value, newPlanAbsolutPath, planRegion, pdfRegionPicketForm.Dpi);
+
+                                                    var newPlan = new ImagePlan();
+                                                    newPlan.Name = newPlanForm.PlanName;
+                                                    newPlan.RelativeFileName = newPlanRelativePath;
+                                                    Project.Instance.ImportedPlans.Add(newPlan);
+                                                    if (this.projectChanged != null) this.projectChanged(this);
+                                                    UpdateControl(false);
+                                                    openPlanOptions(newPlan);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        CopyFileToPlans(openFileDialogResult, projectPlansDirectoryName);
+
+                                        var newPlanAbsolutPath = Path.Combine(projectPlansDirectoryName, openFileDialogResult.FileName);
+                                        var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, openFileDialogResult.FileName);
+                                        var newPlan = CreatePlanInstance(openFileDialogResult);
+                                        newPlan.Name = newPlanForm.PlanName;
+                                        newPlan.RelativeFileName = newPlanRelativePath;
+
+                                        var import = true;
+                                        if (openFileDialogResult.IsDwg)
+                                        {
+                                            MessageBox.Show(EuroplanRes.ImportedPlansPanel_DwgWarnung, EuroplanRes.ImportedPlansPanel_DwgWarnungTitel, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        }
+                                        if (newPlan.IsLargePlan)
+                                        {
+                                            import = MessageBox.Show(EuroplanRes.ImportedPlansPanel_GrosserPlanText, EuroplanRes.ImportedPlansPanel_GrosserPlanTitel, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                                        }
+                                        if (import)
+                                        {
+                                            Project.Instance.ImportedPlans.Add(newPlan);
+                                            if (projectChanged != null) projectChanged(this);
+                                            UpdateControl(false);
+                                            openPlanOptions(newPlan);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (ExceptionImportAborted) { return; }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // check if plan is already used
+            // if (alreadyused) { ....
+            DialogResult result = MessageBox.Show(EuroplanRes.ImportedPlansPanel_WirklichLoeschenMessage, EuroplanRes.ImportedPlansPanel_WirklichLoeschenTitle, MessageBoxButtons.YesNo);
+            if (result.Equals(DialogResult.Yes))
+            {
+                if (dgvPlans.SelectedRows[0] != null)
+                {
+                    Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
+                    deletePlan(plan);
+                }
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (dgvPlans.SelectedRows[0] != null)
+            {
+                Plan plan = dgvPlans.SelectedRows[0].DataBoundItem as Plan;
+                ExportPlanForm form = new ExportPlanForm(plan);
+                form.ShowDialog();
+                form.Dispose();
+            }
+        }
+
+        private void dgvPlans_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (projectChanged != null)
+            {
+                projectChanged(this);
+            }
+        }
+
+        private void dgvPlans_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.ColumnIndex < this.dgvPlans.Columns.Count &&
+                this.dgvPlans.Columns[e.ColumnIndex] == this.colOptions &&
+                e.RowIndex >= 0 && e.RowIndex < this.dgvPlans.Rows.Count)
+            {
+                Plan plan = this.dgvPlans.Rows[e.RowIndex].DataBoundItem as Plan;
+                if (plan != null)
+                {
+                    openPlanOptions(plan);
+                }
+            }
+        }
+
+
+        private class OpenFileDialogResult
+        {
+
+            private readonly String[] EXTENSION_FOR_CAD = { "DWG", "DXF" };
+            private readonly String[] EXTENSION_FOR_DWG = { "DWG" };
+            private readonly String[] EXTENSION_FOR_IMG = { "BMP", "JPG", "PNG" };
+            private readonly String[] EXTENSION_FOR_PDF = { "PDF" };
+
+
+            public String Extension { get; private set; }
+
+            public String FileName { get; private set; }
+
+            public String FileNameWithoutExtension { get; private set; }
+
+            public String FilePath { get; private set; }
+
+            public Boolean IsCad { get; private set; }
+
+            public Boolean IsDwg { get; private set; }
+
+            public Boolean IsImage { get; private set; }
+
+            public Boolean IsPdf { get; private set; }
+
+
+            internal OpenFileDialogResult(OpenFileDialog openFileDialog)
+            {
+                Extension = Path.GetExtension(openFileDialog.FileName);
+                FilePath = openFileDialog.FileName;
+                FileName = Path.GetFileName(openFileDialog.FileName);
+                FileNameWithoutExtension = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                IsImage = EXTENSION_FOR_IMG.Any(extension => String.Equals(extension, Extension.TrimStart('.'), StringComparison.OrdinalIgnoreCase));
+                IsCad = EXTENSION_FOR_CAD.Any(extension => String.Equals(extension, Extension.TrimStart('.'), StringComparison.OrdinalIgnoreCase));
+                IsPdf = EXTENSION_FOR_PDF.Any(extension => String.Equals(extension, Extension.TrimStart('.'), StringComparison.OrdinalIgnoreCase));
+                IsDwg = EXTENSION_FOR_DWG.Any(extension => String.Equals(extension, Extension.TrimStart('.'), StringComparison.OrdinalIgnoreCase));
+            }
+
+        }
+
+
+        private class ExceptionImportAborted : Exception { }
+
+        private class ExceptionInvalidExtension : Exception
+        {
+
+            private const String MESSAGE = "Diese Datei kann nicht importiert werden.";
+
+            public String Extension { get; private set; }
+
+            internal ExceptionInvalidExtension(String extension)
+            : base(MESSAGE)
+            {
+                Extension = extension;
+            }
+
+        }
 
     }
 }

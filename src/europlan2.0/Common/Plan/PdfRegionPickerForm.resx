@@ -112,53 +112,53 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnZoomIn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACZSURBVDhPzVPRDoAgCHTOL29+WfOzXNaVNETAHmtzLTju
-        AK8QxJO33FJMw0FM4tRvKpRJKz7gALrVj9rqdfDmAOpMVX7b7sUAaaokMpEggSCUKemNYxKgbblASURi
-        0/xSWRLxvNkBT0zKfTy1A23DnIBuxFwibV0zDIrLXp4r7ss2TbUyUoogWbjSszIRLEk83/+P5NNf6oFO
-        ASyMScWuxbIAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACZSURBVDhPzZLhCoAgDIQlfPLoycLHksqznU2bCv3qg1Hb
+        vNuwXMu2bqdffBWoSXsMBZIWevUKTvJHPGMKPKWV4WaS1pS1RYyaNZVDJH3gQYqBZQCsWiliAwrbyAcT
+        +r3QHrBC2nMD8hKqu8kFjXXD2kCLzUsEvSbEYQ/3J26GvNBTNaz7BSaTv5KTdHAzGkxNRvzPRNKvOHcB
+        ASyMSTccUewAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnZoomOut.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACMSURBVDhPzVLRCsAgCIzoy0efHWu7yLFMPfa2ICK1u9Mu
-        JbXqUXvJZdmI6TrzLg910osvdSga7Gfr7d443wWizGR+ZM/Hnlwh2fJIIAhm1qvUbvIRgGw9QN1/CDBA
-        1A98BnD7n+2ZCsIJz9ZEnesJb8LynYxkKGdGKhkuJa6MrCwAFCTywv9AmHNp/gKLiIC49pjtsAAAAABJ
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACMSURBVDhPzZLdCoAgDIVFfPLwsSNzco6pzQ266oOR+zsb
+        o7CSj1xSTJNJDGkbNsDt7OITnJSus5zV5ItUg5vBnelroxnhFxwC94HKVjNRt2BQNmibKNYKK+O7sxZo
+        hrQvsINHVWvNC1fGZvWIwi7JZm9IQwq0IsZTFBHnr+Sk0bgZBVwRi/+JwP1KCDeLiIC4/09mZQAAAABJ
         RU5ErkJggg==
 </value>
   </data>
   <data name="btnSelectRegion.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAsSURBVDhPY2AYRqCB4T8DKRjD6xDN9UTi/5hBN2oAAzQG
-        hkEgEp+Yhk8eAgAnmYuJqZ1XBgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAiSURBVDhPYxhOoIHhP0kYA0Ak6onEowYMbwOIx8MFMDAA
+        ACeZi4ncsGv7AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnMove.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABxSURBVDhPpZOBCgAhCEP7/5+uPNLzpNnshCCqPU1ma3n0
-        eS2rFCrqGgtCwT4iDwgwWBELgNVQgKyaK4Av5w4gKu20EcBG3sUvbLOeQC7pS2REqIEV7fN259ASBFmc
-        gmTz8RsgHk8hzHSaJ8IU+nMbpgHAJinzBojJWwAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB0SURBVDhPlYwBDoAgDAP5/6eR2lZRYIxLGie7rmyoyhEu
+        VdO/tYSowpL5zxBXSNsecAakxQcM5pYPWp0deAZ8TXZu4YN+7jmid9SZX88wHDjBZaPnPOiw+qJVDvis
+        fdE6Bh71ESkx8KjPkTYHe2prLEURpVzAJinz3WXPCwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="pdfRegionPicker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="pdfRegionPicker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>115, 17</value>
+  </metadata>
+  <metadata name="BackgroundWorkerPdfLoading.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>246, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

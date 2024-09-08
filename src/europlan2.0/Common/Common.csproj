@@ -172,6 +172,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EuroplanRes.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="EuroplanRes.es-ES.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EuroplanRes.es-ES.resx</DependentUpon>
+    </Compile>
     <Compile Include="EuroplanRes.hr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -256,18 +261,18 @@
     <Compile Include="Plan\CadPlanOptionsForm.Designer.cs">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\PdfRegionPickerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\PdfRegionPickerForm.Designer.cs">
+      <DependentUpon>PdfRegionPickerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plan\TempImagePlan.cs" />
     <Compile Include="Plan\PdfRegionPicker.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Plan\PdfRegionPicker.Designer.cs">
       <DependentUpon>PdfRegionPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Plan\PdfRegionPickerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Plan\PdfRegionPickerForm.Designer.cs">
-      <DependentUpon>PdfRegionPickerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plan\GraphicalWallSchraege.cs" />
     <Compile Include="Plan\WallHelpLinesForm.cs">
@@ -917,7 +922,10 @@
       <LastGenOutput>EuroplanRes.en.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="EuroplanRes.es-ES.resx" />
+    <EmbeddedResource Include="EuroplanRes.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EuroplanRes.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="EuroplanRes.hr.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -962,6 +970,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\CadPlanOptionsForm.resx">
       <DependentUpon>CadPlanOptionsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\PdfRegionPickerForm.resx">
+      <DependentUpon>PdfRegionPickerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plan\WallHelpLinesForm.resx">
@@ -1270,10 +1282,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Icons\hand.cur" />
     <EmbeddedResource Include="Icons\handGrabbed.cur" />
-    <EmbeddedResource Include="Plan\PdfRegionPickerForm.resx">
-      <DependentUpon>PdfRegionPickerForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Products\Ecotherm\EcothermPlannerForm.resx">
       <DependentUpon>EcothermPlannerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
