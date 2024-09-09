@@ -267,6 +267,7 @@
     <Compile Include="Plan\PdfRegionPickerForm.Designer.cs">
       <DependentUpon>PdfRegionPickerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plan\PlanFileHandling.cs" />
     <Compile Include="Plan\TempImagePlan.cs" />
     <Compile Include="Plan\PdfRegionPicker.cs">
       <SubType>Component</SubType>

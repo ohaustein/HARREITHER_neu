@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
-using System.Threading;
+using System.Linq;
+using System.Windows.Forms;
 using log4net;
 
 namespace Europlan.Common
@@ -265,19 +260,6 @@ namespace Europlan.Common
             }
         }
 
-        private void CopyFileToPlans(OpenFileDialogResult openFileDialogResult, String plansDirectoryName)
-        {
-            if (!Directory.Exists(plansDirectoryName))
-            {
-                Directory.CreateDirectory(plansDirectoryName);
-            }
-            var newFilePath = Path.Combine(plansDirectoryName, openFileDialogResult.FileName);
-            if (!String.Equals(openFileDialogResult.FilePath, newFilePath, StringComparison.OrdinalIgnoreCase))
-            {
-                File.Copy(openFileDialogResult.FilePath, newFilePath, overwrite: true);
-            }
-        }
-
         private Plan CreatePlanInstance(OpenFileDialogResult openFileDialogResult)
         {
             if (openFileDialogResult.IsImage) return new ImagePlan();
@@ -400,6 +382,10 @@ namespace Europlan.Common
                             CheckIfPlanAlreadyImported(openFileDialogResult);
                             var projectPlansDirectoryName = Project.Instance.GetProjectPlansDirectoryName();
                             var projectPlansSubdirectoryName = Project.Instance.GetProjectPlansSubdirectoryName();
+                            if (!Directory.Exists(projectPlansDirectoryName))
+                            {
+                                Directory.CreateDirectory(projectPlansDirectoryName);
+                            }
 
                             using (var newPlanForm = new NewPlanForm(false))
                             {
@@ -416,8 +402,8 @@ namespace Europlan.Common
                                                 {
                                                     var selectedPageIndex = pdfRegionPicketForm.SelectedPageIndex.Value;
                                                     var planRegion = GetPlanRegion(pdfHelper, selectedPageIndex, pdfRegionPicketForm.TopLeft, pdfRegionPicketForm.BottomRight);
-                                                    var newPlanAbsolutPath = Path.Combine(projectPlansDirectoryName, openFileDialogResult.FileNameWithoutExtension + ".png");
-                                                    var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, openFileDialogResult.FileNameWithoutExtension + ".png");
+                                                    var newPlanAbsolutPath = PlanFileHandling.Default.GetLocalFilePath(openFileDialogResult.FilePath, projectPlansDirectoryName, isPdf: true);
+                                                    var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, Path.GetFileName(newPlanAbsolutPath));
                                                     pdfHelper.SaveToPng(pdfRegionPicketForm.SelectedPageIndex.Value, newPlanAbsolutPath, planRegion, pdfRegionPicketForm.Dpi);
 
                                                     var newPlan = new ImagePlan();
@@ -433,13 +419,15 @@ namespace Europlan.Common
                                     }
                                     else
                                     {
-                                        CopyFileToPlans(openFileDialogResult, projectPlansDirectoryName);
-
-                                        var newPlanAbsolutPath = Path.Combine(projectPlansDirectoryName, openFileDialogResult.FileName);
-                                        var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, openFileDialogResult.FileName);
+                                        var newPlanAbsolutPath = PlanFileHandling.Default.GetLocalFilePath(openFileDialogResult.FilePath, projectPlansDirectoryName, isPdf: false);
+                                        var newPlanRelativePath = Path.Combine(projectPlansSubdirectoryName, Path.GetFileName(newPlanAbsolutPath));
                                         var newPlan = CreatePlanInstance(openFileDialogResult);
                                         newPlan.Name = newPlanForm.PlanName;
                                         newPlan.RelativeFileName = newPlanRelativePath;
+                                        if (!String.Equals(openFileDialogResult.FilePath, newPlanAbsolutPath, StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            File.Copy(openFileDialogResult.FilePath, newPlanAbsolutPath, overwrite: true);
+                                        }
 
                                         var import = true;
                                         if (openFileDialogResult.IsDwg)
