@@ -1,5 +1,6 @@
 ﻿using System;
-using Patagames.Pdf.Net;
+using System.Drawing;
+using PdfiumViewer;
 
 namespace Europlan.Common.PDF
 {
@@ -7,40 +8,27 @@ namespace Europlan.Common.PDF
     {
 
 
-        internal static void DrawToHDC(String pdfFilePath, Int32 pageIndex,System.Drawing.Graphics graphics)
+        internal static void DrawToHDC(String pdfFilePath, Int32 pageIndex, Graphics graphics, Int32 dpi)
         {
             try
             {
                 using (var pdfDocument = PdfDocument.Load(pdfFilePath))
                 {
-                    var pdfPage = pdfDocument.Pages[pageIndex];
-                    var pdfPageWidth = Convert.ToInt32(pdfPage.Width);
-                    var pdfPageHeight = Convert.ToInt32(pdfPage.Height);
-                    var bitmap = new System.Drawing.Bitmap(pdfPageWidth, pdfPageHeight);
-                    var rect = new System.Drawing.Rectangle(0, 0, pdfPageWidth, pdfPageHeight);
-                    var rotate = Patagames.Pdf.Enums.PageRotate.Normal;
-                    var renderFlags = Patagames.Pdf.Enums.RenderFlags.FPDF_NONE;
-                    pdfPage.Render(graphics, rect, rotate, renderFlags);
+                    var image = pdfDocument.Render(pageIndex, dpi, dpi, PdfRenderFlags.None);
+                    graphics.DrawImage(image, 0, 0);
                 }
             }
-            catch (Exception ex) { throw new __ex3(ex, pdfFilePath, pageIndex); }
+            catch (Exception ex) { throw new ExceptionPdfHelperDrawToHDC(ex, pdfFilePath, pageIndex); }
         }
 
-        internal static System.Drawing.Bitmap GetPageBitmap(String pdfFilePath, Int32 pageIndex)
+        internal static System.Drawing.Bitmap GetPageBitmap(String pdfFilePath, Int32 pageIndex, Int32 dpi)
         {
             try
             {
                 using (var pdfDocument = PdfDocument.Load(pdfFilePath))
                 {
-                    var pdfPage = pdfDocument.Pages[pageIndex];
-                    var pdfPageWidth = Convert.ToInt32(pdfPage.Width);
-                    var pdfPageHeight = Convert.ToInt32(pdfPage.Height);
-                    var bitmap = new System.Drawing.Bitmap(pdfPageWidth, pdfPageHeight);
-                    var rect = new System.Drawing.Rectangle(0, 0, pdfPageWidth, pdfPageHeight);
-                    var graphics = System.Drawing.Graphics.FromImage(bitmap);
-                    var rotate = Patagames.Pdf.Enums.PageRotate.Normal;
-                    var renderFlags = Patagames.Pdf.Enums.RenderFlags.FPDF_NONE;
-                    pdfPage.Render(graphics, rect, rotate, renderFlags);
+                    var image = pdfDocument.Render(pageIndex, dpi, dpi, PdfRenderFlags.None);
+                    var bitmap = new Bitmap(image);
                     return bitmap;
                 }
             }
@@ -53,22 +41,22 @@ namespace Europlan.Common.PDF
             {
                 using (var pdfDocument = PdfDocument.Load(pdfFilePath))
                 {
-                    var pageCount = pdfDocument.Pages.Count;
+                    var pageCount = pdfDocument.PageCount;
                     return pageCount;
                 }
             }
             catch (Exception ex) { throw new ExceptionPdfHelperGetPageCount(ex, pdfFilePath); }
         }
 
-        internal static System.Drawing.Rectangle GetPageTrimBox(String pdfFilePath, Int32 pageIndex)
+        internal static Rectangle GetPageTrimBox(String pdfFilePath, Int32 pageIndex)
         {
+
             try
             {
                 using (var pdfDocument = PdfDocument.Load(pdfFilePath))
                 {
-                    var pdfPage = pdfDocument.Pages[pageIndex];
-                    var pdfTrimBox = pdfPage.TrimBox;
-                    var rectangle = new System.Drawing.Rectangle(Convert.ToInt32(pdfTrimBox.left), Convert.ToInt32(pdfTrimBox.top), Convert.ToInt32(pdfTrimBox.Width), Convert.ToInt32(pdfTrimBox.Height));
+                    var pdfPageSize = pdfDocument.PageSizes[pageIndex];
+                    var rectangle = new Rectangle(0, 0, Convert.ToInt32(pdfPageSize.Width), Convert.ToInt32(pdfPageSize.Height));
                     return rectangle;
                 }
             }
@@ -134,12 +122,12 @@ namespace Europlan.Common.PDF
 
         }
 
-        internal class __ex3 : ExceptionPdfHelperPage
+        internal class ExceptionPdfHelperDrawToHDC : ExceptionPdfHelperPage
         {
 
             private const String MESSAGE_TEMPLATE = "Beim Übertragen der PDF-Seite {0} in eine Grafik ist ein Fehler aufgetreten";
 
-            internal __ex3(Exception innerException, String pdfFilePath, Int32 pageIndex)
+            internal ExceptionPdfHelperDrawToHDC(Exception innerException, String pdfFilePath, Int32 pageIndex)
                 : base(innerException, pdfFilePath, pageIndex, String.Format(MESSAGE_TEMPLATE, pageIndex + 1), innerException)
             {
             }

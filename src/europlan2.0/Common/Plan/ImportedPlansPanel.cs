@@ -308,7 +308,7 @@ namespace Europlan.Common {
             {
                 var previewConverterArguments = e.Argument as PreviewConverterArguments;
                 var pageIndex = previewConverterArguments.NewPlanForm.PageNumber - 1;
-                var pageBitmap = PDF.PdfHelper.GetPageBitmap(previewConverterArguments.FileName, pageIndex);
+                var pageBitmap = PDF.PdfHelper.GetPageBitmap(previewConverterArguments.FileName, pageIndex, PDF_PREVIEW_DPI);
                 previewConverterArguments.TmpFileName = Path.GetTempFileName();
                 if (File.Exists(previewConverterArguments.TmpFileName))
                 {
@@ -375,7 +375,7 @@ namespace Europlan.Common {
             m.Scale((float)(dpi / PDF_PT_PER_INCH), (float)(dpi / PDF_PT_PER_INCH));
             g.Transform = m;
             var pageIndex = args.NewPlanForm.PageNumber - 1;
-            PDF.PdfHelper.DrawToHDC(args.FileName, pageIndex, g);
+            PDF.PdfHelper.DrawToHDC(args.FileName, pageIndex, g, Convert.ToInt32(dpi));
 
             // Setup the filename.
             string newFileName = Path.Combine(args.Dir, Path.GetFileNameWithoutExtension(args.FileName) + ".png");

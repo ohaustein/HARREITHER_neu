@@ -1,4 +1,6 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <Import Project="..\packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props" Condition="Exists('..\packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props')" />
+  <Import Project="..\packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props" Condition="Exists('..\packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -53,6 +55,9 @@
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
+      <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -1334,6 +1339,13 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props'))" />
+    <Error Condition="!Exists('..\packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
