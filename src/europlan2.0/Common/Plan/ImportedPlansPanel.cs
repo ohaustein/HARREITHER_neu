@@ -202,10 +202,10 @@ namespace Europlan.Common
             }
             else
             {
-                var pageTrimBox = pdfHelper.GetPageTrimBox(pageIndex);
-                var width = pageTrimBox.Right - pageTrimBox.Left;
-                var height = pageTrimBox.Bottom - pageTrimBox.Top;
-                var rectangle = new Rectangle(pageTrimBox.Left, pageTrimBox.Top, width, height);
+                var pageSize = pdfHelper.GetPageSize(pageIndex);
+                var width = pageSize.Right - pageSize.Left;
+                var height = pageSize.Bottom - pageSize.Top;
+                var rectangle = new Rectangle(pageSize.Left, pageSize.Top, width, height);
                 return rectangle;
             }
         }

@@ -88,7 +88,7 @@ namespace Europlan.Common
                 TempImagePlan plan = new TempImagePlan();
                 plan.Name = "(neu)";
                 var tempPath = System.IO.Path.GetTempFileName();
-                using (var pageBitmap = PdfHelper.GetPageBitmap(SelectedPageIndex.Value))
+                using (var pageBitmap = PdfHelper.GetPageBitmap(SelectedPageIndex.Value, dpi: 150))
                 {
                     pageBitmap.Save(tempPath, System.Drawing.Imaging.ImageFormat.Png);
                     plan.SetAbsoluteFilename(tempPath);
@@ -183,7 +183,7 @@ namespace Europlan.Common
                             var pageScale = 200.0 / originalPageWidth;
                             var previewWidth = Convert.ToInt32(pageSize.Width * pageScale);
                             var previewHeight = Convert.ToInt32(pageSize.Height * pageScale);
-                            var previreBitmap = PdfHelper.GetPageBitmap(pageIndex, previewWidth, previewHeight);
+                            var previreBitmap = PdfHelper.GetPageBitmap(pageIndex, previewWidth, previewHeight, dpi: 72);
                             var pictureBoxPreview = new PictureBox()
                             {
                                 BorderStyle = BorderStyle.FixedSingle,
