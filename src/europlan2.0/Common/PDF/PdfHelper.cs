@@ -138,25 +138,17 @@ namespace Europlan.Common.PDF
 
         internal void SaveToPng(Int32 pageIndex, String filePath, Rectangle region, Int32 dpi)
         {
-            var bitmapWidth = Convert.ToInt32(region.Width * dpi / PDF_PT_PER_INCH);
-            var bitmapheight = Convert.ToInt32(region.Height * dpi / PDF_PT_PER_INCH);
-            using (var bitmap = new Bitmap(bitmapWidth, bitmapheight))
+            var originalBitmap = PdfDocument.Render(pageIndex, dpi, dpi, PdfRenderFlags.CorrectFromDpi);
+            var transformedRegionLeft = Convert.ToInt32(region.Left * dpi / PDF_PT_PER_INCH);
+            var transformedRegionTop = Convert.ToInt32(region.Top * dpi / PDF_PT_PER_INCH);
+            var transformedRegionWidth = Convert.ToInt32(region.Width * dpi / PDF_PT_PER_INCH);
+            var transformedRegionHeight = Convert.ToInt32(region.Height * dpi / PDF_PT_PER_INCH);
+            var transformedRegion = new Rectangle(transformedRegionLeft, transformedRegionTop, transformedRegionWidth, transformedRegionHeight);
+            using (var transformedBitmap = new Bitmap(transformedRegion.Width, transformedRegion.Height))
             {
-                using (var graphics = Graphics.FromImage(bitmap))
+                using (var graphics = Graphics.FromImage(transformedBitmap))
                 {
-                    var matrix = new System.Drawing.Drawing2D.Matrix();
-                    var offsetX = Convert.ToSingle(-region.Left * dpi / PDF_PT_PER_INCH);
-                    var offsetY = Convert.ToSingle(-region.Top * dpi / PDF_PT_PER_INCH);
-                    var scaleX = Convert.ToSingle(dpi / PDF_PT_PER_INCH);
-                    var scaleY = Convert.ToSingle(dpi / PDF_PT_PER_INCH);
-                    matrix.Translate(offsetX, offsetY);
-                    matrix.Scale(scaleX, scaleY);
-                    graphics.Transform = matrix;
-                    var pdfPage = PdfDocument.PageSizes[pageIndex];
-                    var pdfPageWidth = Convert.ToInt32(pdfPage.Width);
-                    var pdfPageHeight = Convert.ToInt32(pdfPage.Height);
-                    var rectangle = new Rectangle(0, 0, pdfPageWidth, pdfPageHeight);
-                    PdfDocument.Render(pageIndex, graphics, dpi, dpi, rectangle, PdfRenderFlags.None);
+                    graphics.DrawImage(originalBitmap, 0, 0, transformedRegion, GraphicsUnit.Pixel);
                     if (File.Exists(filePath))
                     {
                         File.Delete(filePath);
@@ -166,11 +158,10 @@ namespace Europlan.Common.PDF
                     {
                         Directory.CreateDirectory(directoryName);
                     }
-                    bitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+                    transformedBitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
                 }
             }
         }
-
 
 
         internal abstract class ExceptionPdfHelper : Exception
