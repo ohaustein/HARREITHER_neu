@@ -387,7 +387,7 @@ namespace Europlan.Common
                                 Directory.CreateDirectory(projectPlansDirectoryName);
                             }
 
-                            using (var newPlanForm = new NewPlanForm(false))
+                            using (var newPlanForm = new NewPlanForm())
                             {
                                 if (newPlanForm.ShowDialog() == DialogResult.OK)
                                 {
