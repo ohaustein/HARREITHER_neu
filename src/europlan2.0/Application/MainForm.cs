@@ -1364,8 +1364,8 @@ namespace Europlan.Application
         {
             var executableVersion = Controller.GetExecutableVersion();
             var setupLanguage = GetSetupLanguage();
-            var updateSources = UpdateSourceCollection.LoadFromEmbeddedResource();
-            var checkResultCollection = Controller.RunCheck(updateSources, executableVersion, setupLanguage);
+            var updateSourceCollection = UpdateSourceCollection.LoadFromEmbeddedResource();
+            var checkResultCollection = Controller.RunCheck(updateSourceCollection, executableVersion, setupLanguage);
             var checkResultCount = checkResultCollection.Count();
             if (checkResultCount > 0)
             {

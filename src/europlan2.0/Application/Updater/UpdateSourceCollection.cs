@@ -4,53 +4,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
+using Haustein.Extensions;
+using System.Collections;
 
 namespace Europlan.Application
 {
-    public partial class UpdateSourceCollection
+    public partial class UpdateSourceCollection : IEnumerable<UpdateSource>
     {
 
 
-        private const String UPDATER_SOURCES_DEFAULT_FILENAME = "Updater.sources";
+        private const String UPDATER_SOURCES_DEFAULT_FILENAME = "UpdateSources.xml";
+        private const String XMLNAME_UPDATESOURCE = "UpdateSource";
+        private const String XMLNAME_UPDATESOURCE_CAPTION = "Caption";
+        private const String XMLNAME_UPDATESOURCE_DOWNLOADURL= "DownloadURL";
+        private const String XMLNAME_UPDATESOURCE_VERSIONSURL = "VersionsURL";
 
 
-        private static IEnumerable<UpdateSource> LoadFromStream(Stream stream)
-        {
-            var updateSourceList = new List<UpdateSource>();
-            var sourceCounter = 0;
-            using (var binaryReader = new BinaryReader(stream))
-            {
-                while (stream.Position < stream.Length)
-                {
-                    var typeCode = binaryReader.ReadChar();
-                    sourceCounter++;
-                    switch (typeCode)
-                    {
-                        case 'F':
-                            var updateSourceFtp = UpdateSourceFtp.Load(binaryReader);
-                            updateSourceList.Add(updateSourceFtp);
-                            break;
-                        case 'H':
-                            var updateSourceHttp = UpdateSourceHttp.Load(binaryReader);
-                            updateSourceList.Add(updateSourceHttp);
-                            break;
-                        case 'Y':
-                            var updateSourceFileSystem = UpdateSourceFileSystem.Load(binaryReader);
-                            updateSourceList.Add(updateSourceFileSystem);
-                            break;
-                        default:
-                            throw new InvalidTypeCodeException(sourceCounter, typeCode);
-                    }
-                }
-            }
-            return updateSourceList.AsEnumerable();
-        }
-
-        public static IEnumerable<UpdateSource> Load(String updateSourceFilePath)
+        public static UpdateSourceCollection Load(String updateSourceFilePath)
         {
             if (File.Exists(updateSourceFilePath))
             {
-                var updateSourceList = new List<UpdateSource>();
                 using (var inputStream = new FileStream(updateSourceFilePath, FileMode.Open, FileAccess.Read))
                 {
                     return LoadFromStream(inputStream);
@@ -62,13 +36,13 @@ namespace Europlan.Application
             }
         }
 
-        public static IEnumerable<UpdateSource> LoadFromFileInDirectory(String directoryName)
+        public static UpdateSourceCollection LoadFromFileInDirectory(String directoryName)
         {
             var sourcesFilePath = Path.Combine(directoryName, UPDATER_SOURCES_DEFAULT_FILENAME);
             return Load(sourcesFilePath);
         }
 
-        public static IEnumerable<UpdateSource> LoadFromFileInApplicationDirectory()
+        public static UpdateSourceCollection LoadFromFileInApplicationDirectory()
         {
             var entryAssembly = Assembly.GetEntryAssembly();
             var entryAssemblyLocation = entryAssembly.Location;
@@ -76,9 +50,8 @@ namespace Europlan.Application
             return LoadFromFileInDirectory(entryAssemblyDirectoryName);
         }
 
-        public static IEnumerable<UpdateSource> LoadFromEmbeddedResource()
+        public static UpdateSourceCollection LoadFromEmbeddedResource()
         {
-            var entryAssembly = Assembly.GetEntryAssembly();
             var embeddedResources = EmbeddedResources.CreateFromEntryAssembly();
             using (var stream = embeddedResources.GetMemoryStream(UPDATER_SOURCES_DEFAULT_FILENAME))
             {
@@ -86,19 +59,44 @@ namespace Europlan.Application
             }
         }
 
-        public static void Save(IEnumerable<UpdateSource> updateSourceCollection, String filePath)
+        private static UpdateSourceCollection LoadFromStream(Stream stream)
         {
-            // TODO 
-            using (var outputStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                using (var binaryWriter = new BinaryWriter(outputStream))
-                {
-                    foreach (var updateSource in updateSourceCollection)
-                    {
-                        updateSource.Save(binaryWriter);
-                    }
-                }
-            }
+
+            var xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+
+            var updateSourceArray = xmlDocument.DocumentElement.GetChildNodesArray(XMLNAME_UPDATESOURCE, ReadUpdateSource);
+
+            var result = new UpdateSourceCollection(updateSourceArray);
+            return result;
+        }
+
+
+        private static UpdateSource ReadUpdateSource(XmlNode xmlNode)
+        {
+            var caption = xmlNode.GetAttributeValue<String>(XMLNAME_UPDATESOURCE_CAPTION, attributeMustExist: true, attributeMustHaveValue :true);
+            var versionsUrl = xmlNode.GetChildNodeValue<String>(XMLNAME_UPDATESOURCE_VERSIONSURL, childNodeMustExist: true, childNodeMustHaveValue: true);
+            var downloadUrlTemplate = xmlNode.GetChildNodeValue<String>(XMLNAME_UPDATESOURCE_DOWNLOADURL, childNodeMustExist: true, childNodeMustHaveValue: true);
+            var updateSource = new UpdateSourceHttp(caption, versionsUrl, downloadUrlTemplate);
+            return updateSource;
+        }
+
+        public IEnumerator<UpdateSource> GetEnumerator()
+        {
+            return ((IEnumerable<UpdateSource>)UpdateSourceArray).GetEnumerator();
+        }
+
+          IEnumerator IEnumerable.GetEnumerator()
+        {
+            return UpdateSourceArray.GetEnumerator();
+        }
+
+        private readonly UpdateSource[] UpdateSourceArray;
+
+
+        private UpdateSourceCollection(IEnumerable<UpdateSource> updateSourceCollection)
+        {
+            UpdateSourceArray = updateSourceCollection.ToArray();
         }
 
 

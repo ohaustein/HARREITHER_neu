@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using EuroplanVersion = Europlan.Application.Version;
 
 namespace Europlan.Application
 {
@@ -20,7 +21,6 @@ namespace Europlan.Application
             Caption = caption;
         }
 
-
         internal Downloader CreateDownloader(String filename, String destinationFilePath)
         {
             if (ReferenceEquals(filename, null)) throw new ArgumentNullException("filename"); // TODO nameof
@@ -30,14 +30,14 @@ namespace Europlan.Application
             return downloader;
         }
 
-        protected Version CreateVersionFromFilename(String filename)
+        protected EuroplanVersion CreateVersionFromFilename(String filename)
         {
             var extension = Path.GetExtension(filename);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
             try
             {
-                Version version;
-                if (Version.TryParse(fileNameWithoutExtension, out version))
+                EuroplanVersion version;
+                if (EuroplanVersion.TryParse(fileNameWithoutExtension, out version))
                 {
                     return version;
                 }
@@ -46,17 +46,17 @@ namespace Europlan.Application
                     return null;
                 }
             }
-            catch (Version.VersionParsingException) { return null; }
+            catch (EuroplanVersion.VersionParsingException) { return null; }
         }
 
         protected abstract void DownloadUpdateFromSource(String filename, String destinationFilePath, Action<Int64, Int64> progressReporter);
 
         protected abstract IEnumerable<String> GetAvailableFilenames();
 
-        internal IEnumerable<Tuple<Version, String>> GetAvailableUpdates()
+        internal IEnumerable<Tuple<EuroplanVersion, String>> GetAvailableUpdates()
         {
             var filenameArray = GetAvailableFilenames().ToArray();
-            var updateList = new List<Tuple<Version, String>>();
+            var updateList = new List<Tuple<EuroplanVersion, String>>();
             foreach (var filename in filenameArray)
             {
                 var version = CreateVersionFromFilename(filename);
@@ -65,8 +65,6 @@ namespace Europlan.Application
             }
             return updateList.AsEnumerable();
         }
-
-        internal protected abstract void Save(BinaryWriter binaryWriter);
 
 
     }

@@ -173,8 +173,6 @@
     <Compile Include="Updater\UpdateSourceCollection.cs" />
     <Compile Include="Updater\UpdateSourceCollection_2_InvalidTypeCodeException.cs" />
     <Compile Include="Updater\UpdateSourceCollection_2_UpdateSourceFileNotFoundException.cs" />
-    <Compile Include="Updater\UpdateSource+FileSystem.cs" />
-    <Compile Include="Updater\UpdateSource+Ftp.cs" />
     <Compile Include="Updater\UpdateSource+Http.cs" />
     <Compile Include="Updater\UpdateSource_Downloader.cs" />
     <Compile Include="Updater\Version.cs" />
@@ -191,11 +189,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Harreither.ico" />
+    <EmbeddedResource Include="UpdateSources.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{849BE2F8-4D35-43DA-A075-FD8672B8A687}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\[lib] Extensions\Extensions_XML\[lib] Extensions_XML.vbproj">
+      <Project>{bc1fd58d-3559-4546-920b-4d1be7ce375b}</Project>
+      <Name>[lib] Extensions_XML</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

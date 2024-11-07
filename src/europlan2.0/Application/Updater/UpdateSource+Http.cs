@@ -12,22 +12,14 @@ namespace Europlan.Application
 
         private const String FILENAME_VERSION_INFO = "versions";
 
+        private readonly String DownloadUrlTemplate;
+        private readonly String VersionsUrl;
 
-        public static UpdateSourceHttp Load(BinaryReader binaryReader)
+
+        internal UpdateSourceHttp(String caption, String versionsUrl, String downloadUrlTemplate) : base(caption)
         {
-            var caption = binaryReader.ReadDecodedString();
-            var url = binaryReader.ReadDecodedString();
-            return new UpdateSourceHttp(caption, url);
-        }
-
-
-        private String URL { get; set; }
-
-
-        public UpdateSourceHttp(String caption, String url)
-            : base(caption)
-        {
-            URL = url;
+            DownloadUrlTemplate = downloadUrlTemplate;
+            VersionsUrl = versionsUrl;
         }
 
 
@@ -35,14 +27,13 @@ namespace Europlan.Application
         {
             using (var webClient = new WebClient())
             {
-                var uri = new Uri(URL);
-                var address = new Uri(uri, filename);
+                var uri = new Uri(String.Format(DownloadUrlTemplate, filename));
                 webClient.DownloadProgressChanged +=
-                    delegate(Object sender, DownloadProgressChangedEventArgs e)
+                    delegate (Object sender, DownloadProgressChangedEventArgs e)
                     {
                         progressReporter.Invoke(e.BytesReceived, e.TotalBytesToReceive);
                     };
-                var downloadTask = webClient.DownloadFileTaskAsync(address, destinationFilePath);
+                var downloadTask = webClient.DownloadFileTaskAsync(uri, destinationFilePath);
                 downloadTask.Wait();
             }
         }
@@ -53,9 +44,8 @@ namespace Europlan.Application
             {
                 using (var webClient = new WebClient())
                 {
-                    var uri = new Uri(URL);
-                    var address = new Uri(uri, FILENAME_VERSION_INFO);
-                    var versionsString = webClient.DownloadString(address);
+                    var uri = new Uri(VersionsUrl);
+                    var versionsString = webClient.DownloadString(uri);
                     var versions = versionsString.Split(new String[] { Environment.NewLine, "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
                     return versions.AsEnumerable();
                 }
@@ -64,13 +54,6 @@ namespace Europlan.Application
             {
                 return new String[] { };
             }
-        }
-
-        protected internal override void Save(BinaryWriter binaryWriter)
-        {
-            binaryWriter.Write('H');
-            binaryWriter.WriteEncodedString(Caption);
-            binaryWriter.WriteEncodedString(URL);
         }
 
 

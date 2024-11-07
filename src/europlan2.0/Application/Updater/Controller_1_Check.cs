@@ -11,7 +11,7 @@ namespace Europlan.Application
     {
 
 
-        public static IEnumerable<CheckResult> RunCheck(IEnumerable<UpdateSource> updateSources, Version executableVersion, String language)
+        public static IEnumerable<CheckResult> RunCheck(UpdateSourceCollection updateSources, Version executableVersion, String language)
         {
             var task = Task.Run(
                     delegate ()
