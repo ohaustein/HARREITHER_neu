@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <UpdateSources>
+  <UpdateSource Caption="my.do.de ohaustein.de">
+    <VersionsURL>http://update.ohaustein.de/harreither/europlan/versions.php</VersionsURL>
+    <DownloadURL>http://update.ohaustein.de/harreither/europlan/{0}</DownloadURL>
+  </UpdateSource>
 </UpdateSources>
