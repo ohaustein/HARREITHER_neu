@@ -1333,6 +1333,12 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HybridHelp\HybridHelp.csproj">
+      <Project>{29080570-F6AE-4BB6-9679-FB092FF7C60D}</Project>
+      <Name>HybridHelp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
