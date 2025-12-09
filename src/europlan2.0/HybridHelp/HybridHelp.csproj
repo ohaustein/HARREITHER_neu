@@ -55,11 +55,11 @@
     <Compile Include="HelpCaller.Designer.cs">
       <DependentUpon>HelpCaller.cs</DependentUpon>
     </Compile>
-    <Compile Include="HybridHelpConnector.cs">
+    <Compile Include="HelpConnector.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HybridHelpConnector.Designer.cs">
-      <DependentUpon>HybridHelpConnector.cs</DependentUpon>
+    <Compile Include="HelpConnector.Designer.cs">
+      <DependentUpon>HelpConnector.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -75,10 +75,12 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\HelpIcon128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

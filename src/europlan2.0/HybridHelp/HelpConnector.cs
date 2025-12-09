@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HybridHelp
 {
-    public partial class HybridHelpConnector : Component
+    public partial class HelpConnector : Component
     {
 
 
@@ -18,12 +18,12 @@ namespace HybridHelp
         public String Host { get; set; }
 
 
-        public HybridHelpConnector()
+        public HelpConnector()
         {
             InitializeComponent();
         }
 
-        public HybridHelpConnector(IContainer container)
+        public HelpConnector(IContainer container)
         {
             container.Add(this);
             InitializeComponent();
