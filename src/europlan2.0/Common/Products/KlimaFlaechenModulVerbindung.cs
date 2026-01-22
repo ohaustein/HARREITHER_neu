@@ -521,11 +521,6 @@ namespace Europlan.Common {
 			}
 			set { this.endSubarea = value; }
 		}
-				}
-				return index;
-			}
-			set { this.endSubarea = value; }
-		}
 
 		[XmlIgnore]
 		public Circuit Circuit {
