@@ -40,11 +40,11 @@ namespace Europlan.Common
 
         public void ResetGrid()
         {
-            klimaFlaechenModulBindingSource.DataSource = this.modules;
-            klimaFlaechenModulBindingSource.ResetBindings(false);
-            lblCount.Text = modules.Count.ToString();
             if (modules != null)
             {
+                klimaFlaechenModulBindingSource.DataSource = this.modules;
+                klimaFlaechenModulBindingSource.ResetBindings(false);
+                lblCount.Text = modules.Count.ToString();
                 btnRemove.Enabled = modules.Count > 0;
                 btnAlign.Enabled = modules.Count > 1;
             }
@@ -115,6 +115,11 @@ namespace Europlan.Common
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (modules == null)
+            {
+                return;
+            }
+            
             KlimaFlaechenModul modul = new KlimaFlaechenModul();
             if (modules.Count > 0)
             {

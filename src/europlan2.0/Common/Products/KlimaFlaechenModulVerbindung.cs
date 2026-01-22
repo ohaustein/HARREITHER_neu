@@ -129,6 +129,9 @@ namespace Europlan.Common {
 		}
 
 		public void Draw(Graphics g, Matrix4D additionalTransformation, Color c, double measure) {
+			if (this.vertices == null || this.vertices.Count < 2) {
+				return;
+			}
 			if (this.StartConnectedToAnbindung) {
 				c = Color.Red;
 			} else if (this.EndConnectedToAnbindung) {
@@ -213,12 +216,18 @@ namespace Europlan.Common {
 				if (this.startIndex >= 0) {
 					if (this.Circuit is ModulBodenCircuit) {
 						ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
-						this.start = mbc.Row.List[this.startIndex];
+						if (mbc.Row != null && mbc.Row.List != null && this.startIndex < mbc.Row.List.Count) {
+							this.start = mbc.Row.List[this.startIndex];
+						}
 						this.startIndex = -1;
 					} else if (this.Circuit is ModulDeckeCircuit) {
 						if (this.startRow >= 0 && this.startSubarea >= 0) {
 							ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-							this.start = mdc.SubAreas[this.startSubarea].Rows[this.startRow].List[this.startIndex];
+							if (mdc.SubAreas != null && this.startSubarea < mdc.SubAreas.Count &&
+							    mdc.SubAreas[this.startSubarea].Rows != null && this.startRow < mdc.SubAreas[this.startSubarea].Rows.Count &&
+							    mdc.SubAreas[this.startSubarea].Rows[this.startRow].List != null && this.startIndex < mdc.SubAreas[this.startSubarea].Rows[this.startRow].List.Count) {
+								this.start = mdc.SubAreas[this.startSubarea].Rows[this.startRow].List[this.startIndex];
+							}
 							this.startIndex = -1;
 							this.startRow = -1;
 							this.startSubarea = -1;
@@ -239,12 +248,18 @@ namespace Europlan.Common {
 				if (this.endIndex >= 0) {
 					if (this.Circuit is ModulBodenCircuit) {
 						ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
-						this.end = mbc.Row.List[this.endIndex];
+						if (mbc.Row != null && mbc.Row.List != null && this.endIndex < mbc.Row.List.Count) {
+							this.end = mbc.Row.List[this.endIndex];
+						}
 						this.endIndex = -1;
 					} else if (this.Circuit is ModulDeckeCircuit) {
 						if (this.endRow >= 0 && this.endSubarea >= 0) {
 							ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-							this.end = mdc.SubAreas[this.endSubarea].Rows[this.endRow].List[this.endIndex];
+							if (mdc.SubAreas != null && this.endSubarea < mdc.SubAreas.Count &&
+							    mdc.SubAreas[this.endSubarea].Rows != null && this.endRow < mdc.SubAreas[this.endSubarea].Rows.Count &&
+							    mdc.SubAreas[this.endSubarea].Rows[this.endRow].List != null && this.endIndex < mdc.SubAreas[this.endSubarea].Rows[this.endRow].List.Count) {
+								this.end = mdc.SubAreas[this.endSubarea].Rows[this.endRow].List[this.endIndex];
+							}
 							this.endIndex = -1;
 							this.endRow = -1;
 							this.endSubarea = -1;
@@ -268,31 +283,39 @@ namespace Europlan.Common {
 				if (this.Circuit is ModulBodenCircuit) {
 					ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
 					int i = 0;
-					foreach (KlimaFlaechenModul m in mbc.Row.List) {
-						if (m == this.start) {
-							index = i;
-							break;
+					if (mbc.Row != null && mbc.Row.List != null) {
+						foreach (KlimaFlaechenModul m in mbc.Row.List) {
+							if (m == this.start) {
+								index = i;
+								break;
+							}
+							i++;
 						}
-						i++;
 					}
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							int i = 0;
-							foreach (KlimaFlaechenModul m in row.List) {
-								if (m == this.start) {
-									index = i;
-									break;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									int i = 0;
+									if (row.List != null) {
+										foreach (KlimaFlaechenModul m in row.List) {
+											if (m == this.start) {
+												index = i;
+												break;
+											}
+											i++;
+										}
+									}
+									if (index >= 0) {
+										break;
+									}
 								}
-								i++;
 							}
 							if (index >= 0) {
 								break;
 							}
-						}
-						if (index >= 0) {
-							break;
 						}
 					}
 				}
@@ -310,31 +333,39 @@ namespace Europlan.Common {
 				if (this.Circuit is ModulBodenCircuit) {
 					ModulBodenCircuit mbc = this.Circuit as ModulBodenCircuit;
 					int i = 0;
-					foreach (KlimaFlaechenModul m in mbc.Row.List) {
-						if (m == this.end) {
-							index = i;
-							break;
+					if (mbc.Row != null && mbc.Row.List != null) {
+						foreach (KlimaFlaechenModul m in mbc.Row.List) {
+							if (m == this.end) {
+								index = i;
+								break;
+							}
+							i++;
 						}
-						i++;
 					}
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							int i = 0;
-							foreach (KlimaFlaechenModul m in row.List) {
-								if (m == this.end) {
-									index = i;
-									break;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									int i = 0;
+									if (row.List != null) {
+										foreach (KlimaFlaechenModul m in row.List) {
+											if (m == this.end) {
+												index = i;
+												break;
+											}
+											i++;
+										}
+									}
+									if (index >= 0) {
+										break;
+									}
 								}
-								i++;
 							}
 							if (index >= 0) {
 								break;
 							}
-						}
-						if (index >= 0) {
-							break;
 						}
 					}
 				}
@@ -357,17 +388,21 @@ namespace Europlan.Common {
 					index = 0;
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						int i = 0;
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							if (row.List.Contains(this.start)) {
-								index = i;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							int i = 0;
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									if (row.List != null && row.List.Contains(this.start)) {
+										index = i;
+										break;
+									}
+									i++;
+								}
+							}
+							if (index >= 0) {
 								break;
 							}
-							i++;
-						}
-						if (index >= 0) {
-							break;
 						}
 					}
 				}
@@ -390,17 +425,21 @@ namespace Europlan.Common {
 					index = 0;
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						int i = 0;
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							if (row.List.Contains(this.end)) {
-								index = i;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							int i = 0;
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									if (row.List != null && row.List.Contains(this.end)) {
+										index = i;
+										break;
+									}
+									i++;
+								}
+							}
+							if (index >= 0) {
 								break;
 							}
-							i++;
-						}
-						if (index >= 0) {
-							break;
 						}
 					}
 				}
@@ -424,17 +463,21 @@ namespace Europlan.Common {
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					int i = 0;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							if (row.List.Contains(this.start)) {
-								index = i;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									if (row.List != null && row.List.Contains(this.start)) {
+										index = i;
+										break;
+									}
+								}
+							}
+							if (index >= 0) {
 								break;
 							}
+							i++;
 						}
-						if (index >= 0) {
-							break;
-						}
-						i++;
 					}
 				}
 				return index;
@@ -457,18 +500,27 @@ namespace Europlan.Common {
 				} else if (this.Circuit is ModulDeckeCircuit) {
 					ModulDeckeCircuit mdc = this.Circuit as ModulDeckeCircuit;
 					int i = 0;
-					foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
-						foreach (KlimaFlaechenList row in sa.Rows) {
-							if (row.List.Contains(this.end)) {
-								index = i;
+					if (mdc.SubAreas != null) {
+						foreach (ModulDeckeSubArea sa in mdc.SubAreas) {
+							if (sa.Rows != null) {
+								foreach (KlimaFlaechenList row in sa.Rows) {
+									if (row.List != null && row.List.Contains(this.end)) {
+										index = i;
+										break;
+									}
+								}
+							}
+							if (index >= 0) {
 								break;
 							}
+							i++;
 						}
-						if (index >= 0) {
-							break;
-						}
-						i++;
 					}
+				}
+				return index;
+			}
+			set { this.endSubarea = value; }
+		}
 				}
 				return index;
 			}
@@ -479,7 +531,11 @@ namespace Europlan.Common {
 		public Circuit Circuit {
 			get {
 				if (this.circuitIndex >= 0) {
-					this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex];
+					if (this.Product != null && this.Product.Product != null && 
+					    this.Product.Product.PlannedCircuits != null && 
+					    this.circuitIndex < this.Product.Product.PlannedCircuits.Count) {
+						this.circuit = this.Product.Product.PlannedCircuits[this.circuitIndex];
+					}
 					this.circuitIndex = -1;
 				}
 				return this.circuit;
@@ -493,12 +549,14 @@ namespace Europlan.Common {
 				}
 				int index = -1;
 				int i = 0;
-				foreach (Circuit c in this.Product.Product.PlannedCircuits) {
-					if (c == this.circuit) {
-						index = i;
-						break;
+				if (this.Product != null && this.Product.Product != null && this.Product.Product.PlannedCircuits != null) {
+					foreach (Circuit c in this.Product.Product.PlannedCircuits) {
+						if (c == this.circuit) {
+							index = i;
+							break;
+						}
+						i++;
 					}
-					i++;
 				}
 				return index;
 			}
@@ -510,21 +568,27 @@ namespace Europlan.Common {
 			get {
 				if (this.productGuid != null) {
 					this.product = null;
-					foreach (Floor f in Project.Instance.Floors) {
-						foreach (Room r in f.Rooms) {
-							foreach (PlannedProduct pp in r.PlannedProducts) {
-								if (pp.Id == this.productGuid) {
-									this.product = pp;
-									this.productGuid = null;
-									break;
+					if (Project.Instance != null && Project.Instance.Floors != null) {
+						foreach (Floor f in Project.Instance.Floors) {
+							if (f.Rooms != null) {
+								foreach (Room r in f.Rooms) {
+									if (r.PlannedProducts != null) {
+										foreach (PlannedProduct pp in r.PlannedProducts) {
+											if (pp.Id == this.productGuid) {
+												this.product = pp;
+												this.productGuid = null;
+												break;
+											}
+										}
+									}
+									if (this.productGuid == null) {
+										break;
+									}
 								}
 							}
 							if (this.productGuid == null) {
 								break;
 							}
-						}
-						if (this.productGuid == null) {
-							break;
 						}
 					}
 					this.productGuid = null;
