@@ -4182,7 +4182,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Flächenaufstellung verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Beton verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen? ähnelt.
         /// </summary>
         internal static string FloorSummaryPanel_VerteilerLoeschenText {
             get {
@@ -4311,7 +4311,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Flächenaufstellung ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beton ähnelt.
         /// </summary>
         internal static string General_Flaechenausfstellung {
             get {
@@ -7489,8 +7489,8 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
-        ///Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Die Beton ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
+        ///Dabei können sich Änderungen gegenüber der Beton ergeben. ähnelt.
         /// </summary>
         internal static string LL_QuickDimensioning_HinweisText {
             get {
@@ -7679,7 +7679,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Flächenaufstellung %PROJEKTNR% ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beton %PROJEKTNR% ähnelt.
         /// </summary>
         internal static string LL_QuickDimensioning_Titel {
             get {
@@ -20044,7 +20044,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Der Verteiler kann nicht gelöscht werden, da für die Flächenaufstellung mindestens ein Verteiler vorhanden sein muss. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Verteiler kann nicht gelöscht werden, da für die Beton mindestens ein Verteiler vorhanden sein muss. ähnelt.
         /// </summary>
         internal static string QuickDimensioningDistributorGrid_LetzterVerteilerFehlerText {
             get {
@@ -20664,7 +20664,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Betonkernaktivierung wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Betonkernaktivierung wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_BkaEntfernenText {
             get {
@@ -20727,7 +20727,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Ergebnis Flächenaufstellung ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ergebnis Beton ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_Ergebnis {
             get {
@@ -20745,7 +20745,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Euroval wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_EurovalEntfernenText {
             get {
@@ -20763,7 +20763,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Flächenaufstellung ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beton ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_Flaechenaufstellung {
             get {
@@ -20808,7 +20808,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_HithermCompactDachEntfernenText {
             get {
@@ -20826,7 +20826,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm Compact wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_HithermCompactEntfernenText {
             get {
@@ -20844,7 +20844,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Hitherm wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_HithermEntfernenText {
             get {
@@ -20871,7 +20871,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Jumboval wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Jumboval wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_JumbovalEntfernenText {
             get {
@@ -20898,7 +20898,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Modul Klimaboden wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_KlimaBodenEntfernenText {
             get {
@@ -20925,7 +20925,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen sie das Produkt Modul Klimadecke wirklich aus der Beton entfernen? ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_KlimaDeckeEntfernenText {
             get {
@@ -20952,7 +20952,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte wählen Sie jene Harreither-Produkte aus, welche in der Beton zur Verfügung stehen sollen: ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_ProdukteWaehlen {
             get {
@@ -21008,7 +21008,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Flächenaufstellung zurücksetzen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beton zurücksetzen ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_Zuruecksetzen {
             get {
@@ -21017,7 +21017,7 @@ namespace Europlan.Common {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen Sie die Flächenaufstellung wirklich zurücksetzen? Alle Daten, die Sie in der Flächenaufstellung bereits eingegeben haben, gehen dadurch verloren. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wollen Sie die Beton wirklich zurücksetzen? Alle Daten, die Sie in der Beton bereits eingegeben haben, gehen dadurch verloren. ähnelt.
         /// </summary>
         internal static string QuickDimensioningPanel_ZuruecksetzenBestaetigungText {
             get {

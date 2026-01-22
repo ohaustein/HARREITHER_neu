@@ -1013,7 +1013,7 @@ raum</value>
     <value>Verteiler löschen</value>
   </data>
 	<data name="FloorSummaryPanel_VerteilerLoeschenText" xml:space="preserve">
-    <value>Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Flächenaufstellung verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen?</value>
+    <value>Die Zuordnung von Heizkreisen and diesen Verteiler geht in der Beton verloren, wenn der Verteiler gelöscht wird. Trotzdem löschen?</value>
   </data>
 	<data name="FloorSummaryPanel_VerteilerLoeschenTitel" xml:space="preserve">
     <value>Verteiler löschen?</value>
@@ -1058,7 +1058,7 @@ klicken Sie in der Projekthierarchie auf den gewünschten Raum.</value>
     <value>Bezeichnung</value>
   </data>
 	<data name="General_Flaechenausfstellung" xml:space="preserve">
-    <value>Flächenaufstellung</value>
+    <value>Beton</value>
   </data>
 	<data name="General_Geschosse" xml:space="preserve">
     <value>Geschoße</value>
@@ -1636,8 +1636,8 @@ Wollen Sie trotzdem fortfahren?</value>
     <value>Heizlast (W)</value>
   </data>
 	<data name="LL_QuickDimensioning_HinweisText" xml:space="preserve">
-    <value>Die Flächenaufstellung ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
-Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</value>
+    <value>Die Beton ist eine überschlägige Berechnung zur Abschätzung der Materialkosten. Vor der Ausführung muss in jedem Fall eine exakte Planung durchgeführt werden.
+Dabei können sich Änderungen gegenüber der Beton ergeben.</value>
   </data>
 	<data name="LL_QuickDimensioning_HinweisTitel" xml:space="preserve">
     <value>Hinweis</value>
@@ -1700,7 +1700,7 @@ Dabei können sich Änderungen gegenüber der Flächenaufstellung ergeben.</valu
     <value>Summe %GESCHOSS%</value>
   </data>
 	<data name="LL_QuickDimensioning_Titel" xml:space="preserve">
-    <value>Flächenaufstellung %PROJEKTNR%</value>
+    <value>Beton %PROJEKTNR%</value>
   </data>
 	<data name="LL_QuickDimensioning_Verteileranschlussdaten" xml:space="preserve">
     <value>Verteileranschlussdaten %PROJEKTNR%</value>
@@ -4637,7 +4637,7 @@ RZ</value>
     <value>Sachbearbeiter:</value>
   </data>
 	<data name="QuickDimensioningDistributorGrid_LetzterVerteilerFehlerText" xml:space="preserve">
-    <value>Der Verteiler kann nicht gelöscht werden, da für die Flächenaufstellung mindestens ein Verteiler vorhanden sein muss.</value>
+    <value>Der Verteiler kann nicht gelöscht werden, da für die Beton mindestens ein Verteiler vorhanden sein muss.</value>
   </data>
 	<data name="QuickDimensioningDistributorGrid_LetzterVerteilerFehlerTitel" xml:space="preserve">
     <value>Fehler</value>
@@ -4879,7 +4879,7 @@ motore</value>
     <value>Betonkernaktivierung</value>
   </data>
 	<data name="QuickDimensioningPanel_BkaEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Betonkernaktivierung wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Betonkernaktivierung wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_BkaEntfernenTitel" xml:space="preserve">
     <value>Betonkernaktivierung entfernen</value>
@@ -4900,7 +4900,7 @@ motore</value>
     <value>Einstellungen</value>
   </data>
 	<data name="QuickDimensioningPanel_Ergebnis" xml:space="preserve">
-    <value>Ergebnis Flächenaufstellung</value>
+    <value>Ergebnis Beton</value>
   </data>
 	<data name="QuickDimensioningPanel_Euroval" xml:space="preserve">
     <value>Euroval® Fußbodenheizung</value>
@@ -4909,19 +4909,19 @@ motore</value>
     <value>Jumboval® Fußbodenheizung</value>
   </data>
 	<data name="QuickDimensioningPanel_EurovalEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Euroval wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Euroval wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_EurovalEntfernenTitel" xml:space="preserve">
     <value>Euroval entfernen</value>
   </data>
 	<data name="QuickDimensioningPanel_JumbovalEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Jumboval wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Jumboval wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_JumbovalEntfernenTitel" xml:space="preserve">
     <value>Jumboval entfernen</value>
   </data>
 	<data name="QuickDimensioningPanel_Flaechenaufstellung" xml:space="preserve">
-    <value>Flächenaufstellung</value>
+    <value>Beton</value>
   </data>
 	<data name="QuickDimensioningPanel_Heizen" xml:space="preserve">
     <value>Heizen</value>
@@ -4936,19 +4936,19 @@ motore</value>
     <value>Hitherm® Compact Dachschräge</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermCompactDachEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Hitherm Compact Dachschräge wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermCompactDachEntfernenTitel" xml:space="preserve">
     <value>Hitherm Compact Dachschräge entfernen</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermCompactEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Hitherm Compact wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Hitherm Compact wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermCompactEntfernenTitel" xml:space="preserve">
     <value>Hitherm Compact entfernen</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Hitherm wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Hitherm wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_HithermEntfernenTitel" xml:space="preserve">
     <value>Hitherm entfernen</value>
@@ -4957,7 +4957,7 @@ motore</value>
     <value>Modul Klima-Boden</value>
   </data>
 	<data name="QuickDimensioningPanel_KlimaBodenEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Modul Klimaboden wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Modul Klimaboden wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_KlimaBodenEntfernenTitel" xml:space="preserve">
     <value>Modul Klimaboden entfernen</value>
@@ -4966,7 +4966,7 @@ motore</value>
     <value>Modul Klima-Decke</value>
   </data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenText" xml:space="preserve">
-    <value>Wollen sie das Produkt Modul Klimadecke wirklich aus der Flächenaufstellung entfernen?</value>
+    <value>Wollen sie das Produkt Modul Klimadecke wirklich aus der Beton entfernen?</value>
   </data>
 	<data name="QuickDimensioningPanel_KlimaDeckeEntfernenTitel" xml:space="preserve">
     <value>Modul Klimadecke entfernen</value>
@@ -4975,7 +4975,7 @@ motore</value>
     <value>Kühlen</value>
   </data>
 	<data name="QuickDimensioningPanel_ProdukteWaehlen" xml:space="preserve">
-    <value>Bitte wählen Sie jene Harreither-Produkte aus, welche in der Flächenaufstellung zur Verfügung stehen sollen:</value>
+    <value>Bitte wählen Sie jene Harreither-Produkte aus, welche in der Beton zur Verfügung stehen sollen:</value>
   </data>
 	<data name="QuickDimensioningPanel_Tv" xml:space="preserve">
     <value>°C (Tv)</value>
@@ -4995,10 +4995,10 @@ motore</value>
 (Kühlen)</value>
   </data>
 	<data name="QuickDimensioningPanel_Zuruecksetzen" xml:space="preserve">
-    <value>Flächenaufstellung zurücksetzen</value>
+    <value>Beton zurücksetzen</value>
   </data>
 	<data name="QuickDimensioningPanel_ZuruecksetzenBestaetigungText" xml:space="preserve">
-    <value>Wollen Sie die Flächenaufstellung wirklich zurücksetzen? Alle Daten, die Sie in der Flächenaufstellung bereits eingegeben haben, gehen dadurch verloren.</value>
+    <value>Wollen Sie die Beton wirklich zurücksetzen? Alle Daten, die Sie in der Beton bereits eingegeben haben, gehen dadurch verloren.</value>
   </data>
 	<data name="QuickDimensioningPanel_ZuruecksetzenBestaetigungTitel" xml:space="preserve">
     <value>Wirklich Zurücksetzen?</value>
