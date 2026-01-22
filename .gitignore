@@ -22,4 +22,8 @@ src/europlan2.0/updates/updates-ga-en Updates/
 src/europlan2.0/Backup/
 src/europlan2.0/.vs/
 pub/
-src/
+*/bin/*
+*\bin\*
+src/europlan2.0/HybridHelp/bin/
+src/europlan2.0/HybridHelp/obj/
+src/europlan2.0/packages/
