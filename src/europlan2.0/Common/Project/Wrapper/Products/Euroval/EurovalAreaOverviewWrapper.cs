@@ -60,13 +60,6 @@ namespace Europlan.Common {
 				errors.Add("Verbindungsfläche (ConnectingArea) darf nicht negativ sein: " + connectingArea);
 			}
 
-			// Prüfung: TotalArea muss konsistent sein
-			double calculatedTotal = azArea + rzArea + connectingArea;
-			double tolerance = 0.001; // Toleranz für Rundungsfehler
-			if (Math.Abs(TotalArea - calculatedTotal) > tolerance) {
-				errors.Add("Gesamtfläche (TotalArea) stimmt nicht mit der Summe der Einzelflächen überein. Erwartet: " + calculatedTotal + ", Tatsächlich: " + TotalArea);
-			}
-
 			return errors;
 		}
 
